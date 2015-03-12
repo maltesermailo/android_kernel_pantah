@@ -5974,6 +5974,10 @@ int tcp_conn_request(struct request_sock_ops *rsk_ops,
 
 	tmp_opt.tstamp_ok = tmp_opt.saw_tstamp;
 	tcp_openreq_init(req, &tmp_opt, skb, sk);
+#ifdef CONFIG_NET_NS
+	inet_rsk(req)->ireq_net = sock_net(sk);
+#endif
+	atomic64_set(&inet_rsk(req)->ir_cookie, 0);
 
 	af_ops->init_req(req, sk, skb);
 
