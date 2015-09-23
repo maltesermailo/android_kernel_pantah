@@ -25,6 +25,7 @@
 #include <asm/opcodes-virt.h>
 #include <asm/asm-offsets.h>
 #include <asm/page.h>
+#include <asm/pgtable.h>
 #include <asm/thread_info.h>
 
 #define IOMEM(x)	(x)
@@ -512,6 +513,47 @@ THUMB(	orr	\reg , \reg , #PSR_T_BIT	)
 	.macro	uaccess_restore
 	ldr	r0, [sp, #SVC_DACR]
 	mcr	p15, 0, r0, c3, c0, 0
+	.endm
+
+#elif defined(CONFIG_CPU_TTBR0_PAN)
+
+	.macro	uaccess_disable, tmp, isb=1
+	/*
+	 * Disable TTBR0 page table walks (EDP0 = 1), use the reserved ASID
+	 * from TTBR1 (A1 = 1) and enable TTBR1 page table walks for kernel
+	 * addresses by reducing TTBR0 range to 32MB (T0SZ = 7).
+	 */
+	mrc	p15, 0, \tmp, c2, c0, 2
+	orr	\tmp, \tmp, #TTBCR_EPD0 | TTBCR_T0SZ_MASK
+	orr	\tmp, \tmp, #TTBCR_A1
+	mcr	p15, 0, \tmp, c2, c0, 2
+	.if	\isb
+	instr_sync
+	.endif
+	.endm
+
+	.macro	uaccess_enable, tmp, isb=1
+	/*
+	 * Enable TTBR0 page table walks (T0SZ = 0, EDP0 = 0) and ASID from
+	 * TTBR0 (A1 = 0).
+	 */
+	mrc	p15, 0, \tmp, c2, c0, 2
+	bic	\tmp, \tmp, #TTBCR_EPD0 | TTBCR_T0SZ_MASK
+	bic	\tmp, \tmp, #TTBCR_A1
+	mcr	p15, 0, \tmp, c2, c0, 2
+	.if	\isb
+	instr_sync
+	.endif
+	.endm
+
+	.macro	uaccess_save, tmp
+	mrc	p15, 0, \tmp, c2, c0, 2
+	str	\tmp, [sp, #SVC_DACR]
+	.endm
+
+	.macro	uaccess_restore
+	ldr	r0, [sp, #SVC_DACR]
+	mcr	p15, 0, r0, c2, c0, 2
 	.endm
 
 #else

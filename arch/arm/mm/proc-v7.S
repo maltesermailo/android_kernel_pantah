@@ -173,7 +173,13 @@ ENTRY(cpu_v7_do_resume)
 	mcr	p15, 0, r1, c2, c0, 0	@ TTB 0
 	mcr	p15, 0, r7, c2, c0, 1	@ TTB 1
 #endif
+#ifdef CONFIG_CPU_TTBR0_PAN
+	bic	r4, r11, #TTBCR_EPD0 | TTBCR_T0SZ_MASK
+	bic	r4, r4, #TTBCR_A1
+	mcr	p15, 0, r4, c2, c0, 2	@ TTB control register
+#else
 	mcr	p15, 0, r11, c2, c0, 2	@ TTB control register
+#endif
 	ldr	r4, =PRRR		@ PRRR
 	ldr	r5, =NMRR		@ NMRR
 	mcr	p15, 0, r4, c10, c2, 0	@ write PRRR

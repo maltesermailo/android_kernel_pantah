@@ -288,6 +288,16 @@ do_page_fault(unsigned long addr, unsigned int fsr, struct pt_regs *regs)
 	if (fsr & FSR_WRITE)
 		flags |= FAULT_FLAG_WRITE;
 
+#ifdef CONFIG_CPU_TTBR0_PAN
+	/*
+	 * Privileged access aborts with CONFIG_CPU_TTBR0_PAN enabled are
+	 * routed via the translation fault mechanism. Check whether uaccess
+	 * is disabled while in kernel mode.
+	 */
+	if (!user_mode(regs) && uaccess_disabled(regs))
+		goto no_context;
+#endif
+
 	/*
 	 * As per x86, we may deadlock here.  However, since the kernel only
 	 * validly references user space from well defined areas of the code,

@@ -14,6 +14,8 @@
 #include <linux/string.h>
 #include <asm/memory.h>
 #include <asm/domain.h>
+#include <asm/pgtable.h>
+#include <asm/proc-fns.h>
 #include <asm/unified.h>
 #include <asm/compiler.h>
 
@@ -44,6 +46,35 @@ static inline void uaccess_restore(unsigned int flags)
 	set_domain(flags);
 }
 
+#elif defined(CONFIG_CPU_TTBR0_PAN)
+
+static inline unsigned int uaccess_save_and_enable(void)
+{
+	unsigned int old_ttbcr = cpu_get_ttbcr();
+
+	/*
+	 * Enable TTBR0 page table walks (T0SZ = 0, EDP0 = 0) and ASID from
+	 * TTBR0 (A1 = 0).
+	 */
+	cpu_set_ttbcr(old_ttbcr & ~(TTBCR_A1 | TTBCR_EPD0 | TTBCR_T0SZ_MASK));
+	isb();
+
+	return old_ttbcr;
+}
+
+static inline void uaccess_restore(unsigned int flags)
+{
+	cpu_set_ttbcr(flags);
+	isb();
+}
+
+static inline bool uaccess_disabled(struct pt_regs *regs)
+{
+	/* uaccess state saved above pt_regs on SVC exception entry */
+	unsigned int ttbcr = to_svc_pt_regs(regs)->dacr;
+
+	return ttbcr & TTBCR_EPD0;
+}
 
 #else
 
@@ -54,11 +85,6 @@ static inline unsigned int uaccess_save_and_enable(void)
 
 static inline void uaccess_restore(unsigned int flags)
 {
-}
-
-static inline bool uaccess_disabled(struct pt_regs *regs)
-{
-	return false;
 }
 
 #endif

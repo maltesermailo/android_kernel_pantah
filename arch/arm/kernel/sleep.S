@@ -112,6 +112,10 @@ ENTRY(cpu_resume_mmu)
 ENDPROC(cpu_resume_mmu)
 	.popsection
 cpu_resume_after_mmu:
+#ifdef CONFIG_CPU_TTBR0_PAN
+	mcr	p15, 0, r11, c2, c0, 2	@ Override TTB control register
+	instr_sync
+#endif
 	bl	cpu_init		@ restore the und/abt/irq banked regs
 	mov	r0, #0			@ return zero on success
 	ldmfd	sp!, {r4 - r11, pc}
