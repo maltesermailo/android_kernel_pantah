@@ -478,8 +478,9 @@ THUMB(	orr	\reg , \reg , #PSR_T_BIT	)
 #endif
 	.endm
 
+#if defined(CONFIG_CPU_SW_DOMAIN_PAN)
+
 	.macro	uaccess_disable, tmp, isb=1
-#ifdef CONFIG_CPU_SW_DOMAIN_PAN
 	/*
 	 * Whenever we re-enter userspace, the domains should always be
 	 * set appropriately.
@@ -489,11 +490,9 @@ THUMB(	orr	\reg , \reg , #PSR_T_BIT	)
 	.if	\isb
 	instr_sync
 	.endif
-#endif
 	.endm
 
 	.macro	uaccess_enable, tmp, isb=1
-#ifdef CONFIG_CPU_SW_DOMAIN_PAN
 	/*
 	 * Whenever we re-enter userspace, the domains should always be
 	 * set appropriately.
@@ -503,22 +502,33 @@ THUMB(	orr	\reg , \reg , #PSR_T_BIT	)
 	.if	\isb
 	instr_sync
 	.endif
-#endif
 	.endm
 
 	.macro	uaccess_save, tmp
-#ifdef CONFIG_CPU_SW_DOMAIN_PAN
 	mrc	p15, 0, \tmp, c3, c0, 0
 	str	\tmp, [sp, #SVC_DACR]
-#endif
 	.endm
 
 	.macro	uaccess_restore
-#ifdef CONFIG_CPU_SW_DOMAIN_PAN
 	ldr	r0, [sp, #SVC_DACR]
 	mcr	p15, 0, r0, c3, c0, 0
-#endif
 	.endm
+
+#else
+
+	.macro	uaccess_disable, tmp, isb=1
+	.endm
+
+	.macro	uaccess_enable, tmp, isb=1
+	.endm
+
+	.macro	uaccess_save, tmp
+	.endm
+
+	.macro	uaccess_restore
+	.endm
+
+#endif
 
 	.irp	c,,eq,ne,cs,cc,mi,pl,vs,vc,hi,ls,ge,lt,gt,le,hs,lo
 	.macro	ret\c, reg
