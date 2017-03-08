@@ -9571,9 +9571,8 @@ static inline bool nohz_kick_needed(struct rq *rq)
 	if (time_before(now, nohz.next_balance))
 		return false;
 
-	if (rq->nr_running >= 2 &&
-	    (!energy_aware() || cpu_overutilized(cpu)))
-		return true;
+	if (energy_aware())
+		return rq->nr_running >= 2 && cpu_overutilized(cpu);
 
 	rcu_read_lock();
 	sd = rcu_dereference(per_cpu(sd_busy, cpu));
