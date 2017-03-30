@@ -154,6 +154,14 @@ static noinline void key_gc_unused_keys(struct list_head *keys)
 		if (test_bit(KEY_FLAG_INSTANTIATED, &key->flags))
 			atomic_dec(&key->user->nikeys);
 
+<<<<<<< HEAD   (f9fdfd Merge 3.18.4 into android-3.18)
+		key_user_put(key->user);
+=======
+		/* now throw away the key memory */
+		if (key->type->destroy)
+			key->type->destroy(key);
+>>>>>>> BRANCH (c2d659 Linux 3.18.5)
+
 		key_user_put(key->user);
 
 		kfree(key->description);

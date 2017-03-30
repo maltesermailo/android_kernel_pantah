@@ -321,12 +321,19 @@ replay:
 		nlh = nlmsg_hdr(skb);
 		err = 0;
 
+<<<<<<< HEAD   (f9fdfd Merge 3.18.4 into android-3.18)
 		if (nlh->nlmsg_len < NLMSG_HDRLEN ||
 		    skb->len < nlh->nlmsg_len ||
 		    nlmsg_len(nlh) < sizeof(struct nfgenmsg)) {
 			nfnl_err_reset(&err_list);
 			success = false;
 			goto done;
+=======
+		if (nlmsg_len(nlh) < sizeof(struct nfgenmsg) ||
+		    skb->len < nlh->nlmsg_len) {
+			err = -EINVAL;
+			goto ack;
+>>>>>>> BRANCH (c2d659 Linux 3.18.5)
 		}
 
 		/* Only requests are handled by the kernel */
@@ -472,7 +479,7 @@ static int nfnetlink_bind(int group)
 	int type;
 
 	if (group <= NFNLGRP_NONE || group > NFNLGRP_MAX)
-		return -EINVAL;
+		return 0;
 
 	type = nfnl_group2type[group];
 
