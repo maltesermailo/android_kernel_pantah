@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a1f77137_de7248f5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1105434
+      },
+      "writtenOn": "2017-03-30T20:21:41Z",
+      "side": 1,
+      "message": "Fixed. Will put in a reference to the associated larger bug (partition alignment) in the commit message.",
+      "parentUuid": "79a9ab06_29ecebc5",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "d7c39a9b086020571c29b18b6c9c61278efe82e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0da1ea91_b306fdca",
         "filename": "drivers/scsi/ufs/ufshcd.c",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "07c33fae_076200f5",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2704,
+      "author": {
+        "id": 1105434
+      },
+      "writtenOn": "2017-03-30T20:21:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0da1ea91_b306fdca",
+      "range": {
+        "startLine": 2704,
+        "startChar": 2,
+        "endLine": 2704,
+        "endChar": 17
+      },
+      "revId": "d7c39a9b086020571c29b18b6c9c61278efe82e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e11ee0bd_d95d5016",
         "filename": "drivers/scsi/ufs/ufshcd.c",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2017-03-30T19:59:31Z",
       "side": 1,
       "message": "There can never be a negative return from this function as this gets cast and down-reved to a u8.\n\nif (ret \u003c 0)\n    return ret;\nreturn blk_size;",
+      "range": {
+        "startLine": 2719,
+        "startChar": 0,
+        "endLine": 2720,
+        "endChar": 17
+      },
+      "revId": "d7c39a9b086020571c29b18b6c9c61278efe82e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b1adc5f_6e7e1ad6",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2720,
+      "author": {
+        "id": 1105434
+      },
+      "writtenOn": "2017-03-30T20:21:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e11ee0bd_d95d5016",
       "range": {
         "startLine": 2719,
         "startChar": 0,
@@ -130,6 +202,30 @@
       "side": 1,
       "message": "This line is \u003e80 characters, wrap the string to line up with \"buf,\"",
       "parentUuid": "1e18323a_1f2d0014",
+      "range": {
+        "startLine": 5370,
+        "startChar": 36,
+        "endLine": 5370,
+        "endChar": 68
+      },
+      "revId": "d7c39a9b086020571c29b18b6c9c61278efe82e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f1e38f4_12a824a5",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5370,
+      "author": {
+        "id": 1105434
+      },
+      "writtenOn": "2017-03-30T20:21:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a15cf124_1ecf1859",
       "range": {
         "startLine": 5370,
         "startChar": 36,
@@ -223,6 +319,30 @@
       "writtenOn": "2017-03-30T19:59:31Z",
       "side": 1,
       "message": "Linux coding standards requires octal permissions. ie: 0644",
+      "range": {
+        "startLine": 5374,
+        "startChar": 34,
+        "endLine": 5374,
+        "endChar": 51
+      },
+      "revId": "d7c39a9b086020571c29b18b6c9c61278efe82e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d03fdddb_f2593653",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5374,
+      "author": {
+        "id": 1105434
+      },
+      "writtenOn": "2017-03-30T20:21:41Z",
+      "side": 1,
+      "message": "Removing S_IWUSR, since this is ro, S_IRUGO covers it, per Jin\u0027s comment.",
+      "parentUuid": "79db844e_9c0c75ad",
       "range": {
         "startLine": 5374,
         "startChar": 34,
@@ -340,6 +460,30 @@
       "side": 1,
       "message": "octal permissions preferred over symbolic. ie this one is 0644",
       "parentUuid": "5641aa89_1583fce3",
+      "range": {
+        "startLine": 5405,
+        "startChar": 46,
+        "endLine": 5405,
+        "endChar": 53
+      },
+      "revId": "d7c39a9b086020571c29b18b6c9c61278efe82e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "19412fb4_37e6d958",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5405,
+      "author": {
+        "id": 1105434
+      },
+      "writtenOn": "2017-03-30T20:21:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d087fdd_937ee859",
       "range": {
         "startLine": 5405,
         "startChar": 46,
