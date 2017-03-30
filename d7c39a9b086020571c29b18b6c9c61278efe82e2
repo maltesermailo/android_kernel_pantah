@@ -2,6 +2,75 @@
   "comments": [
     {
       "key": {
+        "uuid": "79a9ab06_29ecebc5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-03-30T19:59:31Z",
+      "side": 1,
+      "message": "Always place Change-Id: as last footer line (checkpatch.pl requires it).\n\nIs there an associated bug?",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 52
+      },
+      "revId": "d7c39a9b086020571c29b18b6c9c61278efe82e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0da1ea91_b306fdca",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2704,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-03-30T19:59:31Z",
+      "side": 1,
+      "message": "ditto, never negative return ...",
+      "range": {
+        "startLine": 2704,
+        "startChar": 2,
+        "endLine": 2704,
+        "endChar": 17
+      },
+      "revId": "d7c39a9b086020571c29b18b6c9c61278efe82e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e11ee0bd_d95d5016",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2720,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-03-30T19:59:31Z",
+      "side": 1,
+      "message": "There can never be a negative return from this function as this gets cast and down-reved to a u8.\n\nif (ret \u003c 0)\n    return ret;\nreturn blk_size;",
+      "range": {
+        "startLine": 2719,
+        "startChar": 0,
+        "endLine": 2720,
+        "endChar": 17
+      },
+      "revId": "d7c39a9b086020571c29b18b6c9c61278efe82e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cf48dafd_9545051b",
         "filename": "drivers/scsi/ufs/ufshcd.c",
         "patchSetId": 1
@@ -42,6 +111,53 @@
         "startChar": 36,
         "endLine": 5370,
         "endChar": 68
+      },
+      "revId": "d7c39a9b086020571c29b18b6c9c61278efe82e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a15cf124_1ecf1859",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5370,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-03-30T19:59:31Z",
+      "side": 1,
+      "message": "This line is \u003e80 characters, wrap the string to line up with \"buf,\"",
+      "parentUuid": "1e18323a_1f2d0014",
+      "range": {
+        "startLine": 5370,
+        "startChar": 36,
+        "endLine": 5370,
+        "endChar": 68
+      },
+      "revId": "d7c39a9b086020571c29b18b6c9c61278efe82e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2f73dbd6_4c4148ac",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5371,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-03-30T19:59:31Z",
+      "side": 1,
+      "message": "see below KISS adjustment.",
+      "range": {
+        "startLine": 5367,
+        "startChar": 0,
+        "endLine": 5371,
+        "endChar": 20
       },
       "revId": "d7c39a9b086020571c29b18b6c9c61278efe82e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
@@ -96,6 +212,75 @@
     },
     {
       "key": {
+        "uuid": "79db844e_9c0c75ad",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5374,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-03-30T19:59:31Z",
+      "side": 1,
+      "message": "Linux coding standards requires octal permissions. ie: 0644",
+      "range": {
+        "startLine": 5374,
+        "startChar": 34,
+        "endLine": 5374,
+        "endChar": 51
+      },
+      "revId": "d7c39a9b086020571c29b18b6c9c61278efe82e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "020057de_1377ad34",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5401,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-03-30T19:59:31Z",
+      "side": 1,
+      "message": "\u003e 80 character, wrap to line up with \"buf,\"",
+      "range": {
+        "startLine": 5401,
+        "startChar": 2,
+        "endLine": 5401,
+        "endChar": 74
+      },
+      "revId": "d7c39a9b086020571c29b18b6c9c61278efe82e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe46adee_c3ce965b",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5402,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-03-30T19:59:31Z",
+      "side": 1,
+      "message": "just an idea, no action required, but in this case it is appropriate to have KISS:\n\nreturn scnprintf(buf, PAGE_SIZE, (logical_blksize \u003e 0) ?\n                 \"%d\\n\" :\n                 \"Could not get logical blksize (%d)\\n\",\n                 logical_blksize);",
+      "range": {
+        "startLine": 5398,
+        "startChar": 0,
+        "endLine": 5402,
+        "endChar": 22
+      },
+      "revId": "d7c39a9b086020571c29b18b6c9c61278efe82e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "76c18908_70ebdf7a",
         "filename": "drivers/scsi/ufs/ufshcd.c",
         "patchSetId": 1
@@ -131,6 +316,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "76c18908_70ebdf7a",
+      "range": {
+        "startLine": 5405,
+        "startChar": 46,
+        "endLine": 5405,
+        "endChar": 53
+      },
+      "revId": "d7c39a9b086020571c29b18b6c9c61278efe82e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4d087fdd_937ee859",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5405,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-03-30T19:59:31Z",
+      "side": 1,
+      "message": "octal permissions preferred over symbolic. ie this one is 0644",
+      "parentUuid": "5641aa89_1583fce3",
       "range": {
         "startLine": 5405,
         "startChar": 46,
