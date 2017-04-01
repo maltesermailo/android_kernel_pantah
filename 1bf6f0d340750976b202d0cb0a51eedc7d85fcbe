@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df4b8e91_8b842d3f",
+        "filename": "Documentation/ABI/testing/sysfs-devices-ufs",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-04-01T08:27:48Z",
+      "side": 1,
+      "message": "doesn\u0027t match up with the kernel code, but will after you make the changes I suggest :)",
+      "range": {
+        "startLine": 7,
+        "startChar": 39,
+        "endLine": 7,
+        "endChar": 61
+      },
+      "revId": "1bf6f0d340750976b202d0cb0a51eedc7d85fcbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "93adc4f3_5f811637",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5364,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-04-01T08:27:48Z",
+      "side": 1,
+      "message": "minor nit, sysfs never needs scnprintf() and the like for printing data as you \"know\" this is always a page size, and your single value number will never go over the memory size here.\n\nNot a big issue here, but for future stuff, consider just using sprintf().",
+      "range": {
+        "startLine": 5364,
+        "startChar": 9,
+        "endLine": 5364,
+        "endChar": 18
+      },
+      "revId": "1bf6f0d340750976b202d0cb0a51eedc7d85fcbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "75366c35_3c400b79",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5366,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-04-01T08:27:48Z",
+      "side": 1,
+      "message": "no, return an error value (-ESOMETHING), don\u0027t return a valid string saying \"ERROR\", that\u0027s not helpful and makes userspace\u0027s job harder.",
+      "range": {
+        "startLine": 5366,
+        "startChar": 9,
+        "endLine": 5366,
+        "endChar": 18
+      },
+      "revId": "1bf6f0d340750976b202d0cb0a51eedc7d85fcbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "43ad457c_34c20ee5",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 5397,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-04-01T08:27:48Z",
+      "side": 1,
+      "message": "same error comment here as above.  Just return the error given to you.",
+      "range": {
+        "startLine": 5397,
+        "startChar": 9,
+        "endLine": 5397,
+        "endChar": 18
+      },
+      "revId": "1bf6f0d340750976b202d0cb0a51eedc7d85fcbe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
