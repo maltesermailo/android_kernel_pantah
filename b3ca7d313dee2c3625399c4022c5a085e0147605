@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "94f67851_b9d39fb4",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2703,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-04-03T18:06:14Z",
+      "side": 1,
+      "message": "spell it out as a \"real\" if statement please, this is impossible to easily read and see what is happening, don\u0027t you agree?\n\nif (ret)\n   return ret;\nreturn blk_size\n\nis much easier to read by a human, which is what matters here.",
+      "range": {
+        "startLine": 2703,
+        "startChar": 8,
+        "endLine": 2703,
+        "endChar": 36
+      },
+      "revId": "b3ca7d313dee2c3625399c4022c5a085e0147605",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56c2851c_1edc8d5b",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 5362,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-04-03T18:06:14Z",
+      "side": 1,
+      "message": "you lost the error checking???\n\nreturn the negative error value if there is an error.\n\nSame for the other sysfs files, like your documentation states.",
+      "range": {
+        "startLine": 5362,
+        "startChar": 1,
+        "endLine": 5362,
+        "endChar": 14
+      },
+      "revId": "b3ca7d313dee2c3625399c4022c5a085e0147605",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
