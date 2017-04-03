@@ -45,6 +45,30 @@
       "revId": "b3ca7d313dee2c3625399c4022c5a085e0147605",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fef4cec0_b0251dbb",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 5362,
+      "author": {
+        "id": 1105434
+      },
+      "writtenOn": "2017-04-03T19:00:11Z",
+      "side": 1,
+      "message": "ufshcd_get_erase_block_size() returns (\u003e 0) if the command returned successfully, and (\u003c 0) in case of an error. And we just print out the return value from that function. -ve values for errors.  So no checking is needed here.",
+      "parentUuid": "56c2851c_1edc8d5b",
+      "range": {
+        "startLine": 5362,
+        "startChar": 1,
+        "endLine": 5362,
+        "endChar": 14
+      },
+      "revId": "b3ca7d313dee2c3625399c4022c5a085e0147605",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
