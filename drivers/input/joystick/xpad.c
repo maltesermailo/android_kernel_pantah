@@ -1106,6 +1106,29 @@ static int xpad_init_input(struct usb_xpad *xpad)
 	struct input_dev *input_dev;
 	int i, error;
 
+<<<<<<< HEAD   (bc69ef Merge 3.18.38 into android-3.18)
+=======
+	if (intf->cur_altsetting->desc.bNumEndpoints != 2)
+		return -ENODEV;
+
+	for (i = 0; xpad_device[i].idVendor; i++) {
+		if ((le16_to_cpu(udev->descriptor.idVendor) == xpad_device[i].idVendor) &&
+		    (le16_to_cpu(udev->descriptor.idProduct) == xpad_device[i].idProduct))
+			break;
+	}
+
+	if (xpad_device[i].xtype == XTYPE_XBOXONE &&
+	    intf->cur_altsetting->desc.bInterfaceNumber != 0) {
+		/*
+		 * The Xbox One controller lists three interfaces all with the
+		 * same interface class, subclass and protocol. Differentiate by
+		 * interface number.
+		 */
+		return -ENODEV;
+	}
+
+	xpad = kzalloc(sizeof(struct usb_xpad), GFP_KERNEL);
+>>>>>>> BRANCH (6e0f62 Linux 3.18.39)
 	input_dev = input_allocate_device();
 	if (!input_dev)
 		return -ENOMEM;
