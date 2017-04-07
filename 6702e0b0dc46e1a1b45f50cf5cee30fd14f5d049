@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ee08de54_f6baed6a",
+        "filename": "security/selinux/ss/services.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2025,
+      "author": {
+        "id": 1010111
+      },
+      "writtenOn": "2017-04-07T17:34:45Z",
+      "side": 1,
+      "message": "We can get rid of oldpolicydb and newpolicydb too in this case, and in general can move their allocation later and have the initial policy load code just return immediately rather than jumping to the out path.  Seems that b5495b4217d3fa64deac479db83dbede149af7d8 didn\u0027t scope them properly when converting them from stack to heap allocation.",
+      "revId": "6702e0b0dc46e1a1b45f50cf5cee30fd14f5d049",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ac994896_ae45dbef",
+        "filename": "security/selinux/ss/services.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2081,
+      "author": {
+        "id": 1010111
+      },
+      "writtenOn": "2017-04-07T17:34:45Z",
+      "side": 1,
+      "message": "This reads strangely, especially right before the #if 0...#endif (which likely should go away).  With the above change, you can just return -EPERM and be done with it.",
+      "revId": "6702e0b0dc46e1a1b45f50cf5cee30fd14f5d049",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
