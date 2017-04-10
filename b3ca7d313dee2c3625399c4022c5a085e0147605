@@ -69,6 +69,99 @@
       "revId": "b3ca7d313dee2c3625399c4022c5a085e0147605",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed2ba93d_00c1c984",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 5362,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-04-10T14:55:15Z",
+      "side": 1,
+      "message": "No, you need to return the error code, from the show function, you don\u0027t return a negative number in the string itself, that\u0027s not how sysfs interfaces should work at all.",
+      "parentUuid": "fef4cec0_b0251dbb",
+      "range": {
+        "startLine": 5362,
+        "startChar": 1,
+        "endLine": 5362,
+        "endChar": 14
+      },
+      "revId": "b3ca7d313dee2c3625399c4022c5a085e0147605",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7ccbf8e3_c2f93b55",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 5368,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-04-10T14:55:15Z",
+      "side": 1,
+      "message": "no returning the error value of this call if there is one?  Why are you \"eating\" it?",
+      "range": {
+        "startLine": 5368,
+        "startChar": 7,
+        "endLine": 5368,
+        "endChar": 11
+      },
+      "revId": "b3ca7d313dee2c3625399c4022c5a085e0147605",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed38bfe3_59ddb7ba",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 5403,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-04-10T14:55:15Z",
+      "side": 1,
+      "message": "same here, return the error given you if there is one.",
+      "range": {
+        "startLine": 5403,
+        "startChar": 7,
+        "endLine": 5403,
+        "endChar": 11
+      },
+      "revId": "b3ca7d313dee2c3625399c4022c5a085e0147605",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b6a854df_8e21b93a",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 5717,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-04-10T14:55:15Z",
+      "side": 1,
+      "message": "why not just use a simple attribute group, that way you don\u0027t have to set up, and tear down, each individual sysfs file (hint, you are not handling error values as it is, which isn\u0027t ok...)",
+      "range": {
+        "startLine": 5717,
+        "startChar": 1,
+        "endLine": 5717,
+        "endChar": 28
+      },
+      "revId": "b3ca7d313dee2c3625399c4022c5a085e0147605",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
