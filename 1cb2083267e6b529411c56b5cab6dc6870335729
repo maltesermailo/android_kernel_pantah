@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "579fc74f_e4dfd3f9",
+        "filename": "fs/sdcardfs/lookup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1015340
+      },
+      "writtenOn": "2017-04-24T20:37:50Z",
+      "side": 1,
+      "message": "d_hash() can return an error and/or leave the hash unchanged.  See d_hash_and_lookup(). \n\nBetter yet, can you just replace the open-coded hash + d_lookup code with d_hash_and_lookup()?",
+      "range": {
+        "startLine": 373,
+        "startChar": 1,
+        "endLine": 376,
+        "endChar": 53
+      },
+      "revId": "1cb2083267e6b529411c56b5cab6dc6870335729",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
