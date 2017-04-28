@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "33e54837_94c24c72",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4953,
+      "author": {
+        "id": 1113735
+      },
+      "writtenOn": "2017-04-28T18:54:47Z",
+      "side": 1,
+      "message": "If the vector provided is too small, lets just do the same check and WARN but earlier at initialization time?\n\nand then in this function, replace `return state` below with, `return min(state, sge-\u003enr_idle_states - 1)` ?",
+      "range": {
+        "startLine": 4952,
+        "startChar": 0,
+        "endLine": 4953,
+        "endChar": 46
+      },
+      "revId": "2fc66c3a7bff67c4a7b1135e2cef90d13e3c3f3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
