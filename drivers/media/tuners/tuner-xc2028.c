@@ -1407,10 +1407,15 @@ static int xc2028_set_config(struct dvb_frontend *fe, void *priv_cfg)
 	memcpy(&priv->ctrl, p, sizeof(priv->ctrl));
 	if (p->fname) {
 		priv->ctrl.fname = kstrdup(p->fname, GFP_KERNEL);
+<<<<<<< HEAD   (90d787 ANDROID: uid_sys_stats: fix access of task_uid(task))
 		if (priv->ctrl.fname == NULL) {
 			rc = -ENOMEM;
 			goto unlock;
 		}
+=======
+		if (priv->ctrl.fname == NULL)
+			return -ENOMEM;
+>>>>>>> BRANCH (418b99 Linux 4.4.65)
 	}
 
 	/*
