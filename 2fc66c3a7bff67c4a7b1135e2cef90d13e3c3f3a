@@ -22,6 +22,30 @@
       "revId": "2fc66c3a7bff67c4a7b1135e2cef90d13e3c3f3a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e901959_39f3f5f9",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4953,
+      "author": {
+        "id": 1124443
+      },
+      "writtenOn": "2017-05-02T13:23:55Z",
+      "side": 1,
+      "message": "We can\u0027t easily do it at initialisation time because cpuidle isn\u0027t up yet so we don\u0027t know max possible value of rq-\u003eidle_state. I was thinking the clean solution would be to have a notifier for a new cpuidle device, so we could do the check in a notifier callback when cpuidle comes up but it seemed like too much work for a WARNing.",
+      "parentUuid": "33e54837_94c24c72",
+      "range": {
+        "startLine": 4952,
+        "startChar": 0,
+        "endLine": 4953,
+        "endChar": 46
+      },
+      "revId": "2fc66c3a7bff67c4a7b1135e2cef90d13e3c3f3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
