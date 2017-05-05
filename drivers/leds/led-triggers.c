@@ -138,7 +138,7 @@ void led_trigger_set(struct led_classdev *led_cdev, struct led_trigger *trig)
 			trig->activate(led_cdev);
 	}
 
-	if (event) {
+	if (event && (NULL != trig)) {
 		envp[0] = event;
 		envp[1] = NULL;
 		if (kobject_uevent_env(&led_cdev->dev->kobj, KOBJ_CHANGE, envp))
