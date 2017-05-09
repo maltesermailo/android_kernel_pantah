@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6741ed09_10c3b8cc",
+        "filename": "fs/sdcardfs/main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1133869
+      },
+      "writtenOn": "2017-05-09T14:41:43Z",
+      "side": 1,
+      "message": "__ means that \"__sdcardfs_fill_super\" only needs by mount_nodev for internal use (which only used in this specific case).",
+      "parentUuid": "ac5517b2_62e672ad",
+      "range": {
+        "startLine": 373,
+        "startChar": 11,
+        "endLine": 373,
+        "endChar": 13
+      },
+      "revId": "8ebd6cccca97f33d32d2070b9a75574f7a7fd572",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e5f0d99d_8ce8b5de",
         "filename": "fs/sdcardfs/main.c",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "19114ac8_d5c5740b",
+        "filename": "fs/sdcardfs/main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1133869
+      },
+      "writtenOn": "2017-05-09T14:41:43Z",
+      "side": 1,
+      "message": "oh...that is my fault.",
+      "parentUuid": "e5f0d99d_8ce8b5de",
+      "range": {
+        "startLine": 378,
+        "startChar": 2,
+        "endLine": 378,
+        "endChar": 35
+      },
+      "revId": "8ebd6cccca97f33d32d2070b9a75574f7a7fd572",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "60982759_6d5309c0",
         "filename": "fs/sdcardfs/main.c",
         "patchSetId": 2
@@ -59,6 +107,24 @@
       "writtenOn": "2017-05-09T14:20:16Z",
       "side": 1,
       "message": "blank line please.  Always run your patches through checkpatch.pl before submitting them.",
+      "revId": "8ebd6cccca97f33d32d2070b9a75574f7a7fd572",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0fd8270f_02e6bbb6",
+        "filename": "fs/sdcardfs/main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1133869
+      },
+      "writtenOn": "2017-05-09T14:41:43Z",
+      "side": 1,
+      "message": "will fix, yet no checkpatch hint for this line.\n\nWARNING: line over 80 characters\n#76: FILE: fs/sdcardfs/main.c:393:\n+       return mount_nodev(fs_type, flags, (void *)\u0026priv, __sdcardfs_fill_super);\n\ntotal: 0 errors, 1 warnings, 68 lines checked",
+      "parentUuid": "60982759_6d5309c0",
       "revId": "8ebd6cccca97f33d32d2070b9a75574f7a7fd572",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
