@@ -237,19 +237,13 @@ static int sdcardfs_open(struct inode *inode, struct file *file)
 	path_put(&lower_path);
 	if (IS_ERR(lower_file)) {
 		err = PTR_ERR(lower_file);
-		lower_file = sdcardfs_lower_file(file);
-		if (lower_file) {
-			sdcardfs_set_lower_file(file, NULL);
-			fput(lower_file); /* fput calls dput for lower_dentry */
-		}
+
+		kfree(SDCARDFS_F(file));
+		file->private_data = NULL;
 	} else {
 		sdcardfs_set_lower_file(file, lower_file);
-	}
-
-	if (err)
-		kfree(SDCARDFS_F(file));
-	else
 		sdcardfs_copy_and_fix_attrs(inode, sdcardfs_lower_inode(inode));
+	}
 
 out_revert_cred:
 	REVERT_CRED(saved_cred);
