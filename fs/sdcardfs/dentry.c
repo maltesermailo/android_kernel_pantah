@@ -34,6 +34,8 @@ static int sdcardfs_d_revalidate(struct dentry *dentry, unsigned int flags)
 	struct dentry *parent_lower_dentry = NULL;
 	struct dentry *lower_cur_parent_dentry = NULL;
 	struct dentry *lower_dentry = NULL;
+	struct inode *inode;
+	struct sdcardfs_inode_data *data;
 
 	if (flags & LOOKUP_RCU)
 		return -ECHILD;
@@ -94,6 +96,7 @@ static int sdcardfs_d_revalidate(struct dentry *dentry, unsigned int flags)
 	if (!qstr_case_eq(&dentry->d_name, &lower_dentry->d_name)) {
 		__d_drop(dentry);
 		err = 0;
+		goto out;
 	}
 
 	if (dentry < lower_dentry) {
@@ -102,6 +105,17 @@ static int sdcardfs_d_revalidate(struct dentry *dentry, unsigned int flags)
 	} else {
 		spin_unlock(&dentry->d_lock);
 		spin_unlock(&lower_dentry->d_lock);
+	}
+
+	/* If our top's inode is gone, we may be out of date */
+	inode = dentry->d_inode;
+	if (inode) {
+		data = grab_top(SDCARDFS_I(inode));
+		if (data->abandoned) {
+			d_drop(dentry);
+			err = 0;
+		}
+		release_data(data);
 	}
 
 out:
