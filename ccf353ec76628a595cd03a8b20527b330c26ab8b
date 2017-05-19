@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "250434bb_20c9b487",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1121354
+      },
+      "writtenOn": "2017-05-19T18:38:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1dd6565f_8ed91772",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 21
+      },
+      "revId": "ccf353ec76628a595cd03a8b20527b330c26ab8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "19c677df_928228cb",
         "filename": "include/uapi/linux/bpf.h",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2017-05-19T17:43:42Z",
       "side": 1,
       "message": "Is this a compatibility break, this is referenced by an unique index.\n\nWhat about the \u0027hole\u0027 of missing function helpers:\n\nget_numa_node_id\nskp_change_head\nxdp_adjust_head\nprobe_read_str\n\nAFAIK either you have to add these in the series if they represent a minor impact, or supply dummy entries with appropriate error return codes that the applications can deal with.",
+      "range": {
+        "startLine": 447,
+        "startChar": 0,
+        "endLine": 454,
+        "endChar": 28
+      },
+      "revId": "ccf353ec76628a595cd03a8b20527b330c26ab8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "20f2035e_3612dded",
+        "filename": "include/uapi/linux/bpf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1121354
+      },
+      "writtenOn": "2017-05-19T18:38:20Z",
+      "side": 1,
+      "message": "I added these missing help headers in another patch in this series. But I didn\u0027t copy the comment of them, is it fine?",
+      "parentUuid": "19c677df_928228cb",
       "range": {
         "startLine": 447,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "8b6abcb6_32acd5c5",
+        "filename": "net/core/filter.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2631,
+      "author": {
+        "id": 1121354
+      },
+      "writtenOn": "2017-05-19T18:38:20Z",
+      "side": 1,
+      "message": "This switch case will fall back to sk_filter_func_proto(func_id) so adding bpf_get_socket_cookie_proto to sk_filter_func_proto should be enough. The upstream kernel no longer have the same implementation as this one so I modified a little.",
+      "parentUuid": "808b08e1_8b4746d3",
+      "range": {
+        "startLine": 2631,
+        "startChar": 36,
+        "endLine": 2631,
+        "endChar": 37
+      },
+      "revId": "ccf353ec76628a595cd03a8b20527b330c26ab8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d4d330ab_93c56dcc",
         "filename": "tools/include/uapi/linux/bpf.h",
         "patchSetId": 3
@@ -82,6 +154,30 @@
       "writtenOn": "2017-05-19T17:43:42Z",
       "side": 1,
       "message": "Compatibility?\n\nMissing (dummy or real) entries for:\n\nBPF_FUNC_current_task_under_cgroup,\nBPF_FUNC_skb_change_tail,\nBPF_FUNC_skb_pull_data,\nBPF_FUNC_csum_update,\nBPF_FUNC_set_hash_invalid,\nBPF_FUNC_get_numa_node_id,\nBPF_FUNC_skb_change_head,\nBPF_FUNC_xdp_adjust_head,\nBPF_FUNC_probe_read_str,",
+      "range": {
+        "startLine": 377,
+        "startChar": 1,
+        "endLine": 377,
+        "endChar": 28
+      },
+      "revId": "ccf353ec76628a595cd03a8b20527b330c26ab8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d306de1b_ab47a55e",
+        "filename": "tools/include/uapi/linux/bpf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1121354
+      },
+      "writtenOn": "2017-05-19T18:38:20Z",
+      "side": 1,
+      "message": "will add them as a separate patch",
+      "parentUuid": "d4d330ab_93c56dcc",
       "range": {
         "startLine": 377,
         "startChar": 1,
