@@ -191,6 +191,7 @@ extern void swsusp_show_speed(ktime_t, ktime_t, unsigned int, char *);
 /* kernel/power/suspend.c */
 extern const char *pm_labels[];
 extern const char *pm_states[];
+extern void pm_suspend_marker(const char *annotation);
 
 extern int suspend_devices_and_enter(suspend_state_t state);
 #else /* !CONFIG_SUSPEND */
