@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3f2a1398_cfc30b50",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5308,
+      "author": {
+        "id": 1124443
+      },
+      "writtenOn": "2017-06-09T18:07:27Z",
+      "side": 0,
+      "message": "If we want to keep this aligned with the EAS upstreaming effort then this struct cannot leave fair.c. You said this is to make the tracepoint easier but I (and PeterZ [1]) don\u0027t think that justifies exposing internal structures in include/linux/. Maybe we could solve it with a macro in fair.c\n\nAlso if we do move this to sched.h, I think that should be in the tracepoint patch.\n\n[1] https://lkml.org/lkml/2017/3/28/953",
+      "revId": "7794f20b91e487618b354414ab2e3d2419fce5ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c13a6709_b1716caa",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5674,
+      "author": {
+        "id": 1124443
+      },
+      "writtenOn": "2017-06-09T18:07:27Z",
+      "side": 0,
+      "message": "I think this should be a separate patch.",
+      "revId": "7794f20b91e487618b354414ab2e3d2419fce5ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}

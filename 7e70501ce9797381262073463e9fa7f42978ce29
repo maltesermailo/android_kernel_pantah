@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d90c7f04_7246e866",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5554,
+      "author": {
+        "id": 1124443
+      },
+      "writtenOn": "2017-06-09T18:07:27Z",
+      "side": 1,
+      "message": "I like this change but either it should go in another commit or this commit\u0027s message should be changed to \"refactor energy estimation code\" and updated to reflect the changes.",
+      "revId": "7e70501ce9797381262073463e9fa7f42978ce29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "162eca2d_eb0e01bb",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5557,
+      "author": {
+        "id": 1124443
+      },
+      "writtenOn": "2017-06-09T18:07:27Z",
+      "side": 1,
+      "message": "Also this change (putting the before \u0026 after into sched_group_energy) is definitely something that deserves its own commit message.",
+      "revId": "7e70501ce9797381262073463e9fa7f42978ce29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "13db5061_58e9aa12",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5567,
+      "author": {
+        "id": 1124443
+      },
+      "writtenOn": "2017-06-09T18:07:27Z",
+      "side": 1,
+      "message": "While refactoring this.. seems this gating doesn\u0027t really belong here semantically, the caller should do it.\n\nBTW, pet peev: these shifts are throughout the kernel so maybe I\u0027m missing something but can we change this to a division?\n\nI\u0027d be really suprised if it hasn\u0027t compiled to the same instruction on every arch/compiler since like 1991.",
+      "revId": "7e70501ce9797381262073463e9fa7f42978ce29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
