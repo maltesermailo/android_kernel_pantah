@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "4be84836_681efad9",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5308,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-06-12T12:55:27Z",
+      "side": 0,
+      "message": "Yes, that can be done better. I don\u0027t like the idea to use a macro just to hide an ugly looking tracepoint.\n\nIt seems that a forward declaration in include/kernel/sched.h while the struct definition lives in kernel/sched/sched.h should make the job. It compiles and it should limit the leakages of internal structures. There are already opaques types declared in include/kernel/sched.h (e.g. cfs_rq).",
+      "parentUuid": "3f2a1398_cfc30b50",
+      "revId": "7794f20b91e487618b354414ab2e3d2419fce5ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c13a6709_b1716caa",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2017-06-09T18:07:27Z",
       "side": 0,
       "message": "I think this should be a separate patch.",
+      "revId": "7794f20b91e487618b354414ab2e3d2419fce5ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5536ebaa_5702a3f7",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5674,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-06-12T12:55:27Z",
+      "side": 0,
+      "message": "Ok, I can add a preliminary patch which removes the old tracepoint format.",
+      "parentUuid": "c13a6709_b1716caa",
       "revId": "7794f20b91e487618b354414ab2e3d2419fce5ca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false

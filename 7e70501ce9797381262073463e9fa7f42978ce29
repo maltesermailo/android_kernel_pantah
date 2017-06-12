@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "251b608c_7e76ca92",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5446,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-06-12T12:55:27Z",
+      "side": 1,
+      "message": "Regarding your response comment.\n\nGoto is used 77 times just in fair.c and in code paths way more complicated than this one. Maybe we can find a better solution but still note that here we just need to do two times (before and after) the almost same operations.\n\nLoop unrolling does not seems to payoff, for/while will be useful just to add an indentation which likely cross the 80 cols threshold.\n\nMaybe function call, this can be done but it should likely be\ninlined and thus will end up trading-off space for \"improved readability\" in a critical path.\n\nOther proposals?",
+      "revId": "7e70501ce9797381262073463e9fa7f42978ce29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0e26a215_4fbcda45",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5493,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-06-12T12:55:27Z",
+      "side": 1,
+      "message": "Referring to @brendan \"I don\u0027t understand the check for the group_weight of sg_shared_cap\", here it works that way:\n\n- line 5481: if we are at MC level (one single CPU), then we keep track of the above SD in sg_shared_cap, since this defines the set of CPUs which shares their capacity\n\nNOTE: here we have already many hardcoded assumption, like we have only MC and DIE level and the frequency domains match the SGs at DIE level.\nNOTE2: goal of this patch is NOT to make the code more generic, but just more easy to understand and more efficient at run-time. Further optimizations IMO should be done in a second step.\n\n- line 5484: visit SD bottom-up, from MC (each CPU) to DIE (each cluster)\n\n- line 5488: that\u0027s a bottom-up visit required check, since we scan all the CPUs (line 4751) we will end up visiting the DIE SG for each CPU in a cluster multiple times... this check enfore the evaluation of the cluster energy just one time.\n\nNOTE: the top-down approach I proposed in the past does not have this \"issue\" but there was potentially other problems.\n\nFinally:\n\n- line 5493: if this SG\u0027s does not contain the same number of CPUs of the sg_shared_cap we cached at line 5481, than this means we are at looking at a CPU at MC level. Thus, we need to update the sg_cap pointer to reference the topmost SG (DIE level) which will be used to compute the SG\u0027s capacity from one of the following functions:\n\n   sched_group_energy()\n      -\u003ebefore_after_energy()\n         -\u003efind_new_capacity()\n            -\u003egroup_max_util()\n\nwhich ultimately computes the maximum utilization of all the CPUs in the shared capacity domain. This value is what defines the OPP to consider for the energy contribution of the current CPU.",
+      "range": {
+        "startLine": 5493,
+        "startChar": 8,
+        "endLine": 5493,
+        "endChar": 72
+      },
+      "revId": "7e70501ce9797381262073463e9fa7f42978ce29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d90c7f04_7246e866",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 2
@@ -13,6 +53,24 @@
       "writtenOn": "2017-06-09T18:07:27Z",
       "side": 1,
       "message": "I like this change but either it should go in another commit or this commit\u0027s message should be changed to \"refactor energy estimation code\" and updated to reflect the changes.",
+      "revId": "7e70501ce9797381262073463e9fa7f42978ce29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "459ba87c_26f3c51d",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5554,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-06-12T12:55:27Z",
+      "side": 1,
+      "message": "A separate set of commits could make sense just for Android, since we have pre-existing code... not for our integration/mainline strategy, where we will need to present a single patch with the most appropriate implementation (i.e.no refactoring patches for mainline posting).\n\nBeing this a complex refactoring it probably makes more sense to compare the with vs without code just to convince ourself if the new implementation is more readable.\n\nHowever, although most of these changes are correlated, I can probably split out few chunks and move them in separate patches... and you are right, this is a good candidate.\n\nWill split it out for the next posting.",
+      "parentUuid": "d90c7f04_7246e866",
       "revId": "7e70501ce9797381262073463e9fa7f42978ce29",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
@@ -36,6 +94,24 @@
     },
     {
       "key": {
+        "uuid": "90bb772a_442e82ab",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5557,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-06-12T12:55:27Z",
+      "side": 1,
+      "message": "ok",
+      "parentUuid": "162eca2d_eb0e01bb",
+      "revId": "7e70501ce9797381262073463e9fa7f42978ce29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "13db5061_58e9aa12",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 2
@@ -47,6 +123,24 @@
       "writtenOn": "2017-06-09T18:07:27Z",
       "side": 1,
       "message": "While refactoring this.. seems this gating doesn\u0027t really belong here semantically, the caller should do it.\n\nBTW, pet peev: these shifts are throughout the kernel so maybe I\u0027m missing something but can we change this to a division?\n\nI\u0027d be really suprised if it hasn\u0027t compiled to the same instruction on every arch/compiler since like 1991.",
+      "revId": "7e70501ce9797381262073463e9fa7f42978ce29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8be1325f_b262e44f",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5567,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-06-12T12:55:27Z",
+      "side": 1,
+      "message": "Well, depends how you read the energy_diff function. If you start by considering that we do A LOT of assumptions and approximations in computing the energy with this function ... then perhaps having a filtering function on the computed result which prune out some noise that\u0027s not something you expect the caller to do.\n\nI think the idea here is: if we return a non zero number, we likely trust it\u0027s interesting for the caller.\n\nHowever, a further patch which introduces SchedTune filtering makes this check unused (when SchedTune is compiled in), but still we do a similar check before returning the energy_diff.\n\nThese other bits probably should be done on a different function, instead of using always energy_diff we should use a power_perf_diff() function.\nEventually we can move these filtering in such a function.\n\nWhat do you think?",
+      "parentUuid": "13db5061_58e9aa12",
       "revId": "7e70501ce9797381262073463e9fa7f42978ce29",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
