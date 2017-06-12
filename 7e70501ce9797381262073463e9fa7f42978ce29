@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "849827f9_4dd8ba4f",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5446,
+      "author": {
+        "id": 1191469
+      },
+      "writtenOn": "2017-06-12T14:59:56Z",
+      "side": 1,
+      "message": "I found the goto a bit confusing. Since most of the function is actually covered between the goto and the goto label, why not just call the function twice?\nThat way its purpose is quite clear: computing the group energy. Hence I would propose to call sched_group_energy().\nYou would move the tiny bit of bookkeeping (summing up the energy results, and setting/restoring util_delta) to the parent function, but in terms of LOC it shouldn\u0027t be a massive change.\nSince the parent function is already called sched_group_energy() I would propose to call it h_sched_group_energy() as it is basically just traversing the sched_domain hierarchy to compute the hierarchical energy.",
+      "parentUuid": "251b608c_7e76ca92",
+      "revId": "7e70501ce9797381262073463e9fa7f42978ce29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e26a215_4fbcda45",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 2
