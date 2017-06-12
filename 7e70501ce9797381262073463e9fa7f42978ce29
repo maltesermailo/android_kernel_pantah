@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "144b1186_06094113",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5446,
+      "author": {
+        "id": 1124443
+      },
+      "writtenOn": "2017-06-12T13:18:04Z",
+      "side": 1,
+      "message": "Yeah I was thinking of function calls but you are probably right about the space tradeoff. If we do go ahead and merge this I\u0027ll try to rework it with an inline function and see how smart GCC is.. maybe it will treat it as a loop.",
+      "parentUuid": "251b608c_7e76ca92",
+      "revId": "7e70501ce9797381262073463e9fa7f42978ce29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e26a215_4fbcda45",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 2
@@ -141,6 +159,24 @@
       "side": 1,
       "message": "Well, depends how you read the energy_diff function. If you start by considering that we do A LOT of assumptions and approximations in computing the energy with this function ... then perhaps having a filtering function on the computed result which prune out some noise that\u0027s not something you expect the caller to do.\n\nI think the idea here is: if we return a non zero number, we likely trust it\u0027s interesting for the caller.\n\nHowever, a further patch which introduces SchedTune filtering makes this check unused (when SchedTune is compiled in), but still we do a similar check before returning the energy_diff.\n\nThese other bits probably should be done on a different function, instead of using always energy_diff we should use a power_perf_diff() function.\nEventually we can move these filtering in such a function.\n\nWhat do you think?",
       "parentUuid": "13db5061_58e9aa12",
+      "revId": "7e70501ce9797381262073463e9fa7f42978ce29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1554fb9d_52f412d2",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5567,
+      "author": {
+        "id": 1124443
+      },
+      "writtenOn": "2017-06-12T13:18:04Z",
+      "side": 1,
+      "message": "Yeah I think that all makes sense. I guess you could argue for having in the caller or callee but in the end it doesn\u0027t matter very much :P",
+      "parentUuid": "8be1325f_b262e44f",
       "revId": "7e70501ce9797381262073463e9fa7f42978ce29",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
