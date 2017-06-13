@@ -55,6 +55,42 @@
     },
     {
       "key": {
+        "uuid": "452cab56_66f49dfc",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5446,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-06-13T11:46:55Z",
+      "side": 1,
+      "message": "We can give it a try before merging... that\u0027s the purpose of the review ;-)",
+      "parentUuid": "144b1186_06094113",
+      "revId": "7e70501ce9797381262073463e9fa7f42978ce29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bb10c4b2_a8c5cc11",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5446,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-06-13T11:46:55Z",
+      "side": 1,
+      "message": "I don\u0027t like the \"h_sched_group_energy()\" name... what about just \"_sched_group_energy()\"?\n\nOr otherwise, since the parent call now is computing both the before and the after energies, we should rename that function and use sched_group_energy for the inner-most.\n\nWhat about something like\n\n energy_diff(eenv) // compute the energy diff\n   -\u003e compute_energy(eenv) // compute the energy for different confs (i.e. with and without util_delta)\n      -\u003e sched_group_energy(eenv) // compute the energy for one conf\n\nBut for the rest, as I was proposing to Brenda, I can try to have most of the code in an inline function while moving the bookkeeping the parent as you propose.",
+      "parentUuid": "849827f9_4dd8ba4f",
+      "revId": "7e70501ce9797381262073463e9fa7f42978ce29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e26a215_4fbcda45",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 2
