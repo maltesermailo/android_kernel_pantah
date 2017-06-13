@@ -22,6 +22,30 @@
       "revId": "8304c55c6be0d6a2b6d322f162d66841488f5f3e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7c1409d5_303a995e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-06-13T08:51:10Z",
+      "side": 1,
+      "message": "Yes, I think you are right, this commit message is a bit confusing.\n\nThe util_est of a sleeping task is 0 from the RQ standpoint, since we completely remove it\u0027s util_est from the RQ\u0027s util_est at dequeue time.\n\nDefinitively, here I have to better distinguish between Tasks and RQs. Will update for the next posting.",
+      "parentUuid": "48864312_5bb3eff4",
+      "range": {
+        "startLine": 18,
+        "startChar": 3,
+        "endLine": 18,
+        "endChar": 17
+      },
+      "revId": "8304c55c6be0d6a2b6d322f162d66841488f5f3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
