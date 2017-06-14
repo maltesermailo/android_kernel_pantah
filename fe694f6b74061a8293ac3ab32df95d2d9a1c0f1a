@@ -25,6 +25,29 @@
     },
     {
       "key": {
+        "uuid": "2b38b9ff_c55ea2fb",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 6619,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2017-06-14T17:08:16Z",
+      "side": 1,
+      "message": "This is called from 2 places.\n1. build_sched_domains, which uses rcu_update_pointer inside an rcu read critical section just beforehand, and we have already exited the rcu critical section when we call this.\n2. sched_feat_set which holds a mutex protecting updates but has no rcu.\n\nYou are probably right Brendan, we should enter an rcu read critical section here and exit it when we return. This would protect both users. I\u0027m not sure of the impact if we don\u0027t have it - I suspect we would be very unlucky to get a stale pointer - but it\u0027s probably correct to have it.",
+      "range": {
+        "startLine": 6607,
+        "startChar": 0,
+        "endLine": 6619,
+        "endChar": 0
+      },
+      "revId": "fe694f6b74061a8293ac3ab32df95d2d9a1c0f1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9d982cb6_27942d13",
         "filename": "kernel/sched/core.c",
         "patchSetId": 5
