@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c5242991_e92dcb9b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-23T23:36:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffe2f0cb_4741422e",
+      "revId": "886c963b3bdfa78cdc8e5a984fe2649ce0e17831",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "49e7b8ac_387e226f",
         "filename": "drivers/android/binder.c",
         "patchSetId": 13
@@ -30,6 +48,24 @@
       "writtenOn": "2017-06-23T23:12:51Z",
       "side": 1,
       "message": "shouldn\u0027t this be done for SCHED_RR too? use is_rt_policy()?",
+      "revId": "886c963b3bdfa78cdc8e5a984fe2649ce0e17831",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7436332_ef7d73c6",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1173,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-06-23T23:36:15Z",
+      "side": 1,
+      "message": "This is a somewhat weird case; the normal check for higher priority is to have a lower prio value; this will automatically include RT prios, since those are mapped at [0..99] vs the nice values at [100..140].\n\nBut, if both threads have the same prio, and one thread is SCHED_FIFO and the other is SCHED_RR, which do you consider the higher prio? Since SCHED_FIFO can run unbounded and SCHED_RR can\u0027t, SCHED_FIFO is considered higher here. I\u0027ll add a comment to clarify.",
+      "parentUuid": "49e7b8ac_387e226f",
       "revId": "886c963b3bdfa78cdc8e5a984fe2649ce0e17831",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
