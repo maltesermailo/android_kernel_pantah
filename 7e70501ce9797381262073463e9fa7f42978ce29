@@ -109,6 +109,24 @@
     },
     {
       "key": {
+        "uuid": "0a064c92_b02c9706",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5446,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-06-28T09:49:56Z",
+      "side": 1,
+      "message": "Is not that what we do right now?\n\nMain purpose here is to remove the double walking of the SDs hierarchy, which is where we get most of the speedup.",
+      "parentUuid": "762d86fa_614130c7",
+      "revId": "7e70501ce9797381262073463e9fa7f42978ce29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e26a215_4fbcda45",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 2
