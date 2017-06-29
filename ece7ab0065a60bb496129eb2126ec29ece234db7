@@ -42,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "b3d9c03c_96af29b5",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5308,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-06-29T10:44:10Z",
+      "side": 1,
+      "message": "Because I need to stick in other values in a following patch.\nOk, I can use a single member here and than refactor again the struct once I add the SchedTune metrics... this will change all the usages as well, making the following patch more complex than what\u0027s now.\n\nI would say that we can keep it as it is if we consider the first 7 patches (topic: fix_performance_index) as a single series which achieve a specific goal: fix the performance index definitions... thus this can be easily considered a ground preparation patch.",
+      "parentUuid": "8f50cf85_0e53893b",
+      "revId": "ece7ab0065a60bb496129eb2126ec29ece234db7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a4039239_6bf9ff39",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 3
@@ -53,6 +71,24 @@
       "writtenOn": "2017-06-29T10:00:43Z",
       "side": 1,
       "message": "Is it not possible to make everything from `compute_after` to here a function that returns total_energy?",
+      "revId": "ece7ab0065a60bb496129eb2126ec29ece234db7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6c4e7e35_80abd3dc",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5456,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-06-29T10:44:10Z",
+      "side": 1,
+      "message": "As per previous comment, the following SchedTune patches needs to compute another couple of metrics here, they need to track the capacity and the group_util, thus it will not be possible to use a function returning a single value... unless I extend even further the usage of eenv to cache these values.\n\nWill check one more time if I can use an inline for just these few bits... however, we will still have to goto, thus I don\u0027t see it as a big improvement.",
+      "parentUuid": "a4039239_6bf9ff39",
       "revId": "ece7ab0065a60bb496129eb2126ec29ece234db7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
