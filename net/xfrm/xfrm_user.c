@@ -867,6 +867,11 @@ static int copy_to_user_state_extra(struct xfrm_state *x,
 		goto out;
 	if (x->security)
 		ret = copy_sec_ctx(x->security, skb);
+	if (x->props.tmpl_mark) {
+		ret = nla_put_u32(skb, XFRMA_TMPL_MARK, x->props.tmpl_mark);
+		if (ret)
+			goto out;
+	}
 out:
 	return ret;
 }
@@ -1350,7 +1355,7 @@ static int copy_from_user_sec_ctx(struct xfrm_policy *pol, struct nlattr **attrs
 }
 
 static void copy_templates(struct xfrm_policy *xp, struct xfrm_user_tmpl *ut,
-			   int nr)
+			   int nr, u32 mark)
 {
 	int i;
 
@@ -1371,6 +1376,7 @@ static void copy_templates(struct xfrm_policy *xp, struct xfrm_user_tmpl *ut,
 		/* If all masks are ~0, then we allow all algorithms. */
 		t->allalgs = !~(t->aalgos & t->ealgos & t->calgos);
 		t->encap_family = ut->family;
+		t->mark = mark;
 	}
 }
 
@@ -1410,6 +1416,7 @@ static int validate_tmpl(int nr, struct xfrm_user_tmpl *ut, u16 family)
 static int copy_from_user_tmpl(struct xfrm_policy *pol, struct nlattr **attrs)
 {
 	struct nlattr *rt = attrs[XFRMA_TMPL];
+	u32 mark = attrs[XFRMA_TMPL_MARK] ? *attrs[XFRMA_TMPL_MARK] : 0;
 
 	if (!rt) {
 		pol->xfrm_nr = 0;
@@ -1422,7 +1429,7 @@ static int copy_from_user_tmpl(struct xfrm_policy *pol, struct nlattr **attrs)
 		if (err)
 			return err;
 
-		copy_templates(pol, utmpl, nr);
+		copy_templates(pol, utmpl, nr, mark);
 	}
 	return 0;
 }
@@ -1574,6 +1581,8 @@ static int copy_to_user_tmpl(struct xfrm_policy *xp, struct sk_buff *skb)
 		up->ealgos = kp->ealgos;
 		up->calgos = kp->calgos;
 	}
+
+	// XXX what about XFRMA_TMPL_MARK?
 
 	return nla_put(skb, XFRMA_TMPL,
 		       sizeof(struct xfrm_user_tmpl) * xp->xfrm_nr, vec);
@@ -2406,6 +2415,7 @@ static const struct nla_policy xfrma_policy[XFRMA_MAX+1] = {
 	[XFRMA_SA_EXTRA_FLAGS]	= { .type = NLA_U32 },
 	[XFRMA_PROTO]		= { .type = NLA_U8 },
 	[XFRMA_ADDRESS_FILTER]	= { .len = sizeof(struct xfrm_address_filter) },
+	[XFRMA_TMPL_MARK]	= { .len = NLA_U32 },
 };
 
 static const struct nla_policy xfrma_spd_policy[XFRMA_SPD_MAX+1] = {
@@ -2622,6 +2632,8 @@ static inline size_t xfrm_sa_len(struct xfrm_state *x)
 		l += nla_total_size(sizeof(*x->coaddr));
 	if (x->props.extra_flags)
 		l += nla_total_size(sizeof(x->props.extra_flags));
+	if (x->props.tmpl_mark)
+		l += nla_total_size(sizeof(x->props.tmpl_mark));
 
 	/* Must count x->lastused as it may become non-zero behind our back. */
 	l += nla_total_size(sizeof(u64));
@@ -2827,7 +2839,7 @@ static struct xfrm_policy *xfrm_compile_policy(struct sock *sk, int opt,
 
 	copy_from_user_policy(xp, p);
 	xp->type = XFRM_POLICY_TYPE_MAIN;
-	copy_templates(xp, ut, nr);
+	copy_templates(xp, ut, nr, sk->sk_mark);  // XXX what if the mark changes?
 
 	*dir = p->dir;
 
