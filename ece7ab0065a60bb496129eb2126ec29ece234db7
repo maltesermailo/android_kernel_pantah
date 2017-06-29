@@ -60,6 +60,29 @@
     },
     {
       "key": {
+        "uuid": "3d8643f5_73890404",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5425,
+      "author": {
+        "id": 1191469
+      },
+      "writtenOn": "2017-06-29T11:03:19Z",
+      "side": 1,
+      "message": "I still don\u0027t like the name of this function. I would prefer if it somehow indicated that it is computing the energy for just a sched_group (and not any child groups).",
+      "range": {
+        "startLine": 5425,
+        "startChar": 12,
+        "endLine": 5425,
+        "endChar": 31
+      },
+      "revId": "ece7ab0065a60bb496129eb2126ec29ece234db7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a4039239_6bf9ff39",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 3
@@ -95,6 +118,24 @@
     },
     {
       "key": {
+        "uuid": "839329ce_cb01b70f",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5456,
+      "author": {
+        "id": 1191469
+      },
+      "writtenOn": "2017-06-29T11:03:19Z",
+      "side": 1,
+      "message": "+1 That is what I was trying to propose earlier. It would be much easier to understand two function calls instead of the goto construct.",
+      "parentUuid": "a4039239_6bf9ff39",
+      "revId": "ece7ab0065a60bb496129eb2126ec29ece234db7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "95394c7a_c68e11f4",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 3
@@ -106,6 +147,30 @@
       "writtenOn": "2017-06-29T09:20:01Z",
       "side": 1,
       "message": "This has been renamed from sched_group_energy to compute_energy because:\n\n1. it better represents what the function does, we are not computing a SG energy but instead the for two possible scheduling candidate\n\n2. it resolve the ambiguity of \"sched_group_energy\", which is already used to name a struct.",
+      "range": {
+        "startLine": 5481,
+        "startChar": 11,
+        "endLine": 5481,
+        "endChar": 25
+      },
+      "revId": "ece7ab0065a60bb496129eb2126ec29ece234db7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "225847ba_d7c11368",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5481,
+      "author": {
+        "id": 1191469
+      },
+      "writtenOn": "2017-06-29T11:03:19Z",
+      "side": 1,
+      "message": "I think sched_group_energy() was more to the point on the scope of the energy computation. It is still compute the sched_group energy. The only difference is that it does it for two different scenarios, where it only did one before.",
+      "parentUuid": "95394c7a_c68e11f4",
       "range": {
         "startLine": 5481,
         "startChar": 11,
