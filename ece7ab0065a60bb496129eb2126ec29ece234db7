@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3188bd12_e7647537",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5291,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-06-29T09:20:01Z",
+      "side": 1,
+      "message": "As Brendan suggested, I\u0027ve avoided the definition of this struct in the public API defined by include/linux/sched.h.\n\nWe keep it local to fair.c while it will be moved into kernel/sched/sched.h, with just a forward declaration in the public API, once tracepoints are added by one of the following patches.",
+      "range": {
+        "startLine": 5291,
+        "startChar": 7,
+        "endLine": 5291,
+        "endChar": 17
+      },
+      "revId": "ece7ab0065a60bb496129eb2126ec29ece234db7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "95394c7a_c68e11f4",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5481,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-06-29T09:20:01Z",
+      "side": 1,
+      "message": "This has been renamed from sched_group_energy to compute_energy because:\n\n1. it better represents what the function does, we are not computing a SG energy but instead the for two possible scheduling candidate\n\n2. it resolve the ambiguity of \"sched_group_energy\", which is already used to name a struct.",
+      "range": {
+        "startLine": 5481,
+        "startChar": 11,
+        "endLine": 5481,
+        "endChar": 25
+      },
+      "revId": "ece7ab0065a60bb496129eb2126ec29ece234db7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e3f8c6a_82e396a6",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5518,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-06-29T09:20:01Z",
+      "side": 1,
+      "message": "This has not been inlined, as Morten suggested, because such a solution would have required an additional refactoring and a much more complex code once the SchedTune bits are going to be added by the following patches.\n\nI\u0027ve come up the first time with the energy_diff refactoring because I needed to compute more metrics (e.g. utilization and capacity variations) while walking the SDs. That\u0027s why a fundamental bit was the use eenv to carry on and compute multiple metrics in the same function.\n\nThe current version, at least to me, it\u0027s a sufficiently clean way to achieve these goals with still a reasonably readable code.",
+      "range": {
+        "startLine": 5518,
+        "startChar": 4,
+        "endLine": 5518,
+        "endChar": 23
+      },
+      "revId": "ece7ab0065a60bb496129eb2126ec29ece234db7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}

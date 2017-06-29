@@ -127,6 +127,24 @@
     },
     {
       "key": {
+        "uuid": "f5a71dd8_81aac246",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5446,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-06-29T09:20:01Z",
+      "side": 1,
+      "message": "Just noticed that s/sched_group_energy/compute_energy/ allows also to solve the ambiguity of \"sched_group_energy\", which is a name currently used both for a function and a struct.\n\nRegarding the inlining instead, despite it can simplify the current code, it is also not suitable for a clean integration of the following patches. Indeed, SchedTune needs to compute performance variations as well as energy variations. The current code structure, where we call a before_after_energy, allows to easily plug in the computation of these additional metrics into the existing code.\n\nThe same would not be as straightforward if we do the updates suggested by Morten. Thus for the time being I would still prefer to keep the single call we have now.",
+      "parentUuid": "bb10c4b2_a8c5cc11",
+      "revId": "7e70501ce9797381262073463e9fa7f42978ce29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0e26a215_4fbcda45",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 2
@@ -185,6 +203,24 @@
     },
     {
       "key": {
+        "uuid": "5d6b0686_7158599f",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5554,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-06-29T09:20:01Z",
+      "side": 1,
+      "message": "I did not factored out these bits because it would have implied yet another refactoring of the original energy_diff, just to do a small \"improvement\" (i.e. a Boolean reordering and one less indentation level.\n\nSince here we are already trying to refactor energy_diff in a more fundamental way, I preferred to avoid the useless pain to review a useless refactoring.\n\nMoreover, comparing the new code vs the old implementation, instead of looking at this diff, is definitively the way to go to evaluate the proposed refactoring.",
+      "parentUuid": "459ba87c_26f3c51d",
+      "revId": "7e70501ce9797381262073463e9fa7f42978ce29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "162eca2d_eb0e01bb",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 2
@@ -231,6 +267,30 @@
       "writtenOn": "2017-06-28T09:53:41Z",
       "side": 1,
       "message": "This results on positive energy diff when migrating from big core to small ones and should probably be calculated in the same order it was previously (after-before).",
+      "range": {
+        "startLine": 5562,
+        "startChar": 1,
+        "endLine": 5562,
+        "endChar": 60
+      },
+      "revId": "7e70501ce9797381262073463e9fa7f42978ce29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4f934874_cf5ca7e9",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5562,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-06-29T09:20:01Z",
+      "side": 1,
+      "message": "Absolutely true, when SchedTune is not compiled-in this results in inverted energy diff, good catch, thanks!",
+      "parentUuid": "8f3baef4_8932fc67",
       "range": {
         "startLine": 5562,
         "startChar": 1,
