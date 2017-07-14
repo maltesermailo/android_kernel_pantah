@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "e03b3da1_d8bf6f55",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6201,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2017-07-14T11:12:08Z",
+      "side": 1,
+      "message": "They are complementary really, the other patch avoids us getting into the situation where the heuristic does not allow us to compare energy for task placement. There is little point including the previous CPU in this list, because we will always calculate the energy for that CPU (or we are placing a task for which we don\u0027t care about energy).\n\nThis patch adds the ability for us to avoid the situation where the heuristic chooses a CPU which we then reject for energy consumption reasons. That actually happens a lot with ordinary periodic tasks (such as the synthetic tests) but since we often skip energy calcs for prefer_idle tasks (because we want to just go to an idle CPU asap) it doesn\u0027t impact the top-app tasks.\n\nThe expectation here is that we improve the chances for the system to save energy for background tasks, which was a problem that the tests exposed.",
+      "parentUuid": "26cd4c2b_5cd9b322",
+      "range": {
+        "startLine": 6199,
+        "startChar": 0,
+        "endLine": 6201,
+        "endChar": 38
+      },
+      "revId": "57751c4c173991aae94246711e1032268c18ec15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2d3ec01e_13b226c8",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-07-13T03:37:54Z",
       "side": 1,
       "message": "better to add it to here too?",
+      "range": {
+        "startLine": 6490,
+        "startChar": 0,
+        "endLine": 6493,
+        "endChar": 21
+      },
+      "revId": "57751c4c173991aae94246711e1032268c18ec15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3e3d370a_cb65402b",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6493,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2017-07-14T11:12:08Z",
+      "side": 1,
+      "message": "Maybe, but the backup CPU is either best_active or best_idle, depending upon the prefer_idle status of the task. All the info is there, so I think its OK.",
+      "parentUuid": "2d3ec01e_13b226c8",
       "range": {
         "startLine": 6490,
         "startChar": 0,
@@ -68,6 +116,53 @@
       "revId": "57751c4c173991aae94246711e1032268c18ec15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb2f6973_b544259c",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6558,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2017-07-14T11:12:08Z",
+      "side": 1,
+      "message": "No, mine doesn\u0027t complain about this.",
+      "parentUuid": "3e64d4f9_7fd16c9e",
+      "range": {
+        "startLine": 6558,
+        "startChar": 4,
+        "endLine": 6558,
+        "endChar": 10
+      },
+      "revId": "57751c4c173991aae94246711e1032268c18ec15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1115f7e1_b974e2b2",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6593,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2017-07-14T11:12:08Z",
+      "side": 1,
+      "message": "However, checkpatch does complain that these lines are \u003e 80 chars.",
+      "range": {
+        "startLine": 6591,
+        "startChar": 0,
+        "endLine": 6593,
+        "endChar": 0
+      },
+      "revId": "57751c4c173991aae94246711e1032268c18ec15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
