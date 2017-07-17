@@ -15,16 +15,6 @@ typedef union {
 	__be32		a6[4];
 } xfrm_address_t;
 
-/* Ident of a specific xfrm_state. It is used on input to lookup
- * the state by (spi,daddr,ah/esp) or to store information about
- * spi, protocol and tunnel address on output.
- */
-struct xfrm_id {
-	xfrm_address_t	daddr;
-	__be32		spi;
-	__u8		proto;
-};
-
 struct xfrm_sec_ctx {
 	__u8	ctx_doi;
 	__u8	ctx_alg;
