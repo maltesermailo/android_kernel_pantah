@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a39bfbc2_554591b2",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 5336,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-07-19T10:35:08Z",
+      "side": 1,
+      "message": "This fixes a real EAS \"issue\" but it does it in a WALT centri way by also adding yet another CONFIG_SCHED_WALT guard in fair.c.\n\nA better solution would be to make a better usage of the cpu_util_wake() both in group_max_util() and group_norm_util().\nIndeed, cpu_util_wake() already knows about WALT not accouting for blocked load, and using its returned value it becomes easier to just add back the task_util to the src or dst CPU, depending whether we are in the before or the after case.\n\nWe already have a couple of patches which implements this more generic solution, which is thus worth to post for review as a possible alternative to this one.",
+      "revId": "8661be339228c26e889673c8f5186a4d770b959d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8b23c46a_4da507f9",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 5361,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-07-19T10:35:08Z",
+      "side": 1,
+      "message": "This function is used only in the wakeup path, starting from energy_diff, to compute either the normalized or the maximum utilization during energy model computations.\n\nThus, the load-balancing case referred here is not necessary, it can never happen.",
+      "range": {
+        "startLine": 5360,
+        "startChar": 48,
+        "endLine": 5361,
+        "endChar": 28
+      },
+      "revId": "8661be339228c26e889673c8f5186a4d770b959d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}

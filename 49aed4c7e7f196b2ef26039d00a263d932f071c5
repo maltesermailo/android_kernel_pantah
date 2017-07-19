@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aa3d455d_b813241f",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5361,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-07-19T10:35:08Z",
+      "side": 1,
+      "message": "This function is used only in the wakeup path, starting from energy_diff, to compute either the normalized or the maximum utilization for energy model computations. Thus, the load-balancing case is not necessary code, it can never happen.",
+      "revId": "49aed4c7e7f196b2ef26039d00a263d932f071c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
