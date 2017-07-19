@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d53c5d04_3cad9f0e",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 6636,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-07-19T13:06:33Z",
+      "side": 1,
+      "message": "This does break PELT since the task utilization is already accounted in the blocked load, thus with this patch we are double accounting it.\n\nMoreover, the variable naming \"task_util_boosted\" is misleading and confusing, since in the PELT case we are adding the _non_ boosted utilization (line 6622 above).\n\nFinally, even in the WALT case, why should we use the boosted task utilization?\nSchedTune boost has never been used to define a CPU overvaluation just because it does not make sense.\n\nOverutilization is defined by the actual CPU bandwidth _without_ considering the boost margin. This allows for example to run a small task at the max OPP without (correctly) considering that CPU as overutilized.",
+      "revId": "38fa4054de7603846168e1cf727cafe0fcf0cf7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
