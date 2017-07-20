@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3dc54ab8_171e30f2",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 5336,
+      "author": {
+        "id": 1209348
+      },
+      "writtenOn": "2017-07-20T17:54:11Z",
+      "side": 1,
+      "message": "Unfortunately the baseline initially I was on didn\u0027t have cpu_util_wake().  I\u0027m happy to review the alternative.",
+      "parentUuid": "a39bfbc2_554591b2",
+      "revId": "8661be339228c26e889673c8f5186a4d770b959d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8b23c46a_4da507f9",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 4
@@ -30,6 +48,30 @@
       "writtenOn": "2017-07-19T10:35:08Z",
       "side": 1,
       "message": "This function is used only in the wakeup path, starting from energy_diff, to compute either the normalized or the maximum utilization during energy model computations.\n\nThus, the load-balancing case referred here is not necessary, it can never happen.",
+      "range": {
+        "startLine": 5360,
+        "startChar": 48,
+        "endLine": 5361,
+        "endChar": 28
+      },
+      "revId": "8661be339228c26e889673c8f5186a4d770b959d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9a556a_474b958a",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 5361,
+      "author": {
+        "id": 1209348
+      },
+      "writtenOn": "2017-07-20T17:54:11Z",
+      "side": 1,
+      "message": "One of improvement patch \u0027sched: EAS: upmigrate misfit current task\u0027 made change to call this by calling select_energy_cpu_brute() for active load balancer.\nI was referring that.",
+      "parentUuid": "8b23c46a_4da507f9",
       "range": {
         "startLine": 5360,
         "startChar": 48,
