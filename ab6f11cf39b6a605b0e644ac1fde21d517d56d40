@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af5795a3_55826c4b",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-07-28T17:52:35Z",
+      "side": 1,
+      "message": "administrivia: hashes are notoriously very fragile when not protected by a lock. Who is protecting this? I assume rt_mutex_lock(\u0026uid_lock), but will let you tell me ;-\u003e. The comment for the synchronization primitive needs to be updated to list this as protected, unless it is protecting this entire uid_entry structure. Am I right to assume this is the case?\n\nThankfully uid_lock is global, otherwise my concern would be that this list could be unprotected (even momentarily) because each pid (tgid) and tid can set its own uid individually/asynchronously.",
+      "range": {
+        "startLine": 76,
+        "startChar": 1,
+        "endLine": 76,
+        "endChar": 48
+      },
+      "revId": "ab6f11cf39b6a605b0e644ac1fde21d517d56d40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6e57706e_98285c67",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2017-07-28T17:52:35Z",
+      "side": 1,
+      "message": "if trailing spaces an issue, what about squashing multiple spaces as well when copying cmdline over? If squashed in the loop above, then there would be only _one_ trailing space possible.\n\nAlso, if _nothing_ transferred here, then we could possibly remove trailing spaces forced in the TASK_COMM_LEN arena. Would this damage the expectations? (appears not).",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 6
+      },
+      "revId": "ab6f11cf39b6a605b0e644ac1fde21d517d56d40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
