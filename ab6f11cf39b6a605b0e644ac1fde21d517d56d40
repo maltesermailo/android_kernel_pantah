@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "00b37caf_8ffb0017",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1200068
+      },
+      "writtenOn": "2017-07-28T19:32:49Z",
+      "side": 1,
+      "message": "Thanks for the comment! Currently all read/write on task_entries are followed immediately after a read/write on the uid_entry it belongs to, since the invariant is each field of the tids, such as wchar rchar etc, needs to add up to the same value as the matching field in uid. So the sequence of read/write is: uid1, tid1.1, tid1.2, tid1.3, and/or uid2, tid2.1, tid2.2, ... Since each uid_entry struct is protected, task_entry structs should also be. I also checked each task_entries hash table to make sure that it lies inside the uid_lock.",
+      "parentUuid": "af5795a3_55826c4b",
+      "range": {
+        "startLine": 76,
+        "startChar": 1,
+        "endLine": 76,
+        "endChar": 48
+      },
+      "revId": "ab6f11cf39b6a605b0e644ac1fde21d517d56d40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6e57706e_98285c67",
         "filename": "drivers/misc/uid_sys_stats.c",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2017-07-28T17:52:35Z",
       "side": 1,
       "message": "if trailing spaces an issue, what about squashing multiple spaces as well when copying cmdline over? If squashed in the loop above, then there would be only _one_ trailing space possible.\n\nAlso, if _nothing_ transferred here, then we could possibly remove trailing spaces forced in the TASK_COMM_LEN arena. Would this damage the expectations? (appears not).",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 6
+      },
+      "revId": "ab6f11cf39b6a605b0e644ac1fde21d517d56d40",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff2dc676_ce59be7c",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1200068
+      },
+      "writtenOn": "2017-07-28T19:32:49Z",
+      "side": 1,
+      "message": "so reason there could be trailing spaces is because cmdline arguments could be set to null bytes in https://googleplex-android-review.git.corp.google.com/#/c/544666/ In the AndroidRuntime.cpp file, in the function setArgv0, argv0 is set entirely to zero at first and then the first several bytes are set to a readable name. And in the previous loop every null byte is converted to whitespace. So multiple unreasonable whitespaces could only appear at the end of args. The content before the multiple spaces should be intentionally written that way, for example \"system_server\".\n\nIf nothing is available except for the first at most TASK_COMM_LEN bytes for thread name. Variable i would be TASK_COMM_LEN at the start of this loop. And we would remove the trailing spaces forced in TASK_COMM_LEN as well :)",
+      "parentUuid": "6e57706e_98285c67",
       "range": {
         "startLine": 168,
         "startChar": 0,
