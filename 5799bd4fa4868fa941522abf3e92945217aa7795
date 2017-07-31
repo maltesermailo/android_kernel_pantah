@@ -52,6 +52,24 @@
       "revId": "5799bd4fa4868fa941522abf3e92945217aa7795",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "34e4be41_3d717348",
+        "filename": "kernel/sched/cpufreq_sched.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1209348
+      },
+      "writtenOn": "2017-07-31T17:17:10Z",
+      "side": 1,
+      "message": "This should be good - untested\n\ndiff --git a/kernel/sched/cpufreq_sched.c b/kernel/sched/cpufreq_sched.c\nindex f10d9f7..0bfa0b2 100644\n--- a/kernel/sched/cpufreq_sched.c\n+++ b/kernel/sched/cpufreq_sched.c\n@@ -245,7 +245,12 @@ void update_cpu_capacity_request(int cpu, bool request)\n \n        scr \u003d \u0026per_cpu(cpu_sched_capacity_reqs, cpu);\n \n-       new_capacity \u003d scr-\u003ecfs + scr-\u003ert;\n+#ifdef CONFIG_SCHED_WALT\n+       if (!walt_disabled \u0026\u0026 sysctl_sched_use_walt_cpu_util)\n+               new_capacity \u003d scr-\u003ecfs;\n+       else\n+#endif\n+               new_capacity \u003d scr-\u003ecfs + scr-\u003ert;\n        new_capacity \u003d new_capacity * capacity_margin\n                / SCHED_CAPACITY_SCALE;\n        new_capacity +\u003d scr-\u003edl;",
+      "parentUuid": "e014bde2_4f09c8aa",
+      "revId": "5799bd4fa4868fa941522abf3e92945217aa7795",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
