@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a31b0624_112a40ed",
+        "filename": "kernel/sched/cpufreq_sched.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-07-31T09:44:33Z",
+      "side": 1,
+      "message": "As a general comment, why not trying to factorize into an inline wrapper method these WALT specific bits. IMO, something like this:\n\n#ifdef CONFIG_SCHED_WALT\nstatic inline int\nrequested_capacity(struct sched_capacity_reqs *scr)\n{\n        if (!walt_disabled \u0026\u0026 sysctl_sched_use_walt_cpu_util)\n                return scr-\u003ecfs;\n        return scr-\u003ecfs + scr-\u003ert;\n}\n#else\n#define requested_capacity(scr) (scr-\u003ecfs + scr-\u003ert)\n#endif\n\nit helps in keeping a more streamlined code at the caller side with the previous #ifdef/if/else \"confusing\" code becoming just a simpler:\n\n        new_capacity \u003d requested_capacity(scr);\n\nThus making a bit less confusing the definition of update_cpu_capacity_request()",
+      "range": {
+        "startLine": 248,
+        "startChar": 0,
+        "endLine": 253,
+        "endChar": 36
+      },
+      "revId": "d2cae9ca0be8e156b5adb1a981cd95d77e1f3f1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
