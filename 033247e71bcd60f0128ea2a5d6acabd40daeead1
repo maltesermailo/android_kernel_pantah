@@ -16,6 +16,24 @@
       "revId": "033247e71bcd60f0128ea2a5d6acabd40daeead1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "88121c5b_0ab0624e",
+        "filename": "arch/arm64/kernel/topology.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1093953
+      },
+      "writtenOn": "2017-08-03T02:18:36Z",
+      "side": 1,
+      "message": "You\u0027re right about the capacity-dmips-mhz property. Actually this patch is kind of strange since it doesn\u0027t account for speed-bins (so different max OPPs even though same DT). capacity-dmips-mhz has the same problem. I think that things have been okay because we really just use the efficiency part in WALT.\n\nHaving said that Joonwoo and I took a second look and there doesn\u0027t seem to be a reason to carry this patch anymore. We only use efficiency in scale_exec_time, and the invariance there can be replaced with capacity_curr_of. I\u0027ll upload a patch to do that and then we can abandon this change.",
+      "parentUuid": "2bc1546e_467c823b",
+      "revId": "033247e71bcd60f0128ea2a5d6acabd40daeead1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
