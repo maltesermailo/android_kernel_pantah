@@ -2035,6 +2035,7 @@ static inline u64 irq_time_read(int cpu)
 }
 #endif /* CONFIG_64BIT */
 #endif /* CONFIG_IRQ_TIME_ACCOUNTING */
+<<<<<<< HEAD   (7eeebc ANDROID: binder: Don't BUG_ON(!spin_is_locked()).)
 
 static inline void account_reset_rq(struct rq *rq)
 {
@@ -2100,3 +2101,5 @@ static inline void cpufreq_update_this_cpu(struct rq *rq, unsigned int flags) {}
 #else /* arch_scale_freq_capacity */
 #define arch_scale_freq_invariant()     (false)
 #endif
+=======
+>>>>>>> BRANCH (09e696 Linux 4.4.80)
