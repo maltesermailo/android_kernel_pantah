@@ -6428,7 +6428,6 @@ static inline int find_best_target(struct task_struct *p, int *backup_cpu,
 				best_idle_min_cap_orig = capacity_orig;
 				best_idle_cstate = idle_idx;
 				best_idle_cpu = i;
-				continue;
 			}
 
 			/*
