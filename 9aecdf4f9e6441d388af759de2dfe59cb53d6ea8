@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c5b0f13_133ee75f",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6243,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-08-10T08:52:43Z",
+      "side": 1,
+      "message": "This \"else\" can be removed and I would also suggest to layout the code to return the min_cap CPUs as a default, e.g:\n\n---8\u003c---\n\nif (min_cap * 1024 \u003c min_util * capacity_margin)\n        return rd-\u003emax_cap_orig_cpu;\n\nreturn rd-\u003emin_cap_orig_cpu;\n\n---8\u003c---",
+      "revId": "9aecdf4f9e6441d388af759de2dfe59cb53d6ea8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
