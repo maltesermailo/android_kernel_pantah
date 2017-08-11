@@ -145,6 +145,24 @@
       "revId": "09c339096a04122c752d792a499d907dbd574a29",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0c43c2b5_bd25a4a1",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6512,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2017-08-11T20:25:11Z",
+      "side": 1,
+      "message": "Yeah, I think its a good idea too. I think if we can limit it to choices within the same cluster and choose such that we keep overall cluster frequency low, then we can save power by spreading a bit more within the same cluster.\n\nSo maybe if we can pass information about the previous CPU to this function, then we can bias more towards choosing idle CPU belong in in the cluster to keep overall cluster frequency lower. Feel free to poke holes into my comment",
+      "parentUuid": "7ec35729_4b6432cb",
+      "revId": "09c339096a04122c752d792a499d907dbd574a29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
