@@ -155,6 +155,30 @@
     },
     {
       "key": {
+        "uuid": "bb78969e_87389732",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6511,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2017-08-11T21:55:06Z",
+      "side": 1,
+      "message": "Ahh you\u0027re right.. Got it. So perhaps it can augmented with logic to understand if you\u0027re crossing an OPP boundary?\nIf new_util causes OPP to jump from X-\u003eY, then prefer the other CPU. However if OPP stays the same, then prefer the best_idle. would that work?",
+      "parentUuid": "2fcda8a0_bbeef277",
+      "range": {
+        "startLine": 6511,
+        "startChar": 1,
+        "endLine": 6511,
+        "endChar": 44
+      },
+      "revId": "09c339096a04122c752d792a499d907dbd574a29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ec35729_4b6432cb",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 1
