@@ -37,6 +37,52 @@
     },
     {
       "key": {
+        "uuid": "6d30cf02_83eb6a27",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6477,
+      "author": {
+        "id": 1209348
+      },
+      "writtenOn": "2017-08-11T19:57:35Z",
+      "side": 1,
+      "message": "This function can be quite expensive depending on number of frequency steps.  We can do binary search if it\u0027s necessary though.",
+      "range": {
+        "startLine": 6477,
+        "startChar": 24,
+        "endLine": 6477,
+        "endChar": 61
+      },
+      "revId": "09c339096a04122c752d792a499d907dbd574a29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6e98a5c_b34c18a0",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6511,
+      "author": {
+        "id": 1209348
+      },
+      "writtenOn": "2017-08-11T19:57:35Z",
+      "side": 1,
+      "message": "I\u0027m not sure if this is right assumption to do.\n\nFirst off this compares between two different cluster.  \nSo we will wake up big cluster idle CPU rather than packing on a little CPU.\n\nAlso, even if best_idle_cpu and target_cpu are in the same cluster, if target_cpu is driving frequency to X index already, placing new task on the the idle CPU won\u0027t drop the frequency.\nInstead, the best_idle CPU will be on X index once the task placed with target_cpu on X.\nIn that case we\u0027re better to pack tasks on target_cpu and keep idle cpu in idle.\n\nIf we want this kind of logic in task placement, algorithm should get with and without cap_idx and go for idle CPU *only* when cap_idx increases when target_cpu is used under *a big assumption* that such decision is always accepted by energy model.\nI\u0027m not sure if such assumption is right thing to do either.\n\nMy patch at [1] is slightly different because of these reasons.  \nSo it compares only between idle cpus in the same cluster.\n\nFYI, all energy_diff() and cap_idx calculation are broken with WALT.  So for any of these with WALT, we should have [2] and [3].\n\n[1] : https://android-review.googlesource.com/#/c/kernel/common/+/454647/\n[2] : https://android-review.googlesource.com/#/c/kernel/common/+/454644/\n[3] : https://android-review.googlesource.com/#/c/kernel/common/+/454645/",
+      "range": {
+        "startLine": 6511,
+        "startChar": 1,
+        "endLine": 6511,
+        "endChar": 44
+      },
+      "revId": "09c339096a04122c752d792a499d907dbd574a29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ec35729_4b6432cb",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 1
