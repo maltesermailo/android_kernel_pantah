@@ -107,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "5b1491d2_6232f65e",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6511,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2017-08-11T20:19:21Z",
+      "side": 1,
+      "message": "\u003e Also, even if best_idle_cpu and target_cpu are in the same cluster, if target_cpu is driving frequency to X index already, placing new task on the the idle CPU won\u0027t drop the frequency.\nInstead, the best_idle CPU will be on X index once the task placed with target_cpu on X.\nIn that case we\u0027re better to pack tasks on target_cpu and keep idle cpu in idle.\n\nAbout this point, I\u0027m not too sure (or maybe I missed something). Placing task on target_cpu (which already has X) will increase its frequency from X to Y. Instead placing it on an idle CPU in the same cluster will make the overall cluster frequency to be lower, than it would have been if you did task packing onto the active target CPU.",
+      "parentUuid": "f6e98a5c_b34c18a0",
+      "range": {
+        "startLine": 6511,
+        "startChar": 1,
+        "endLine": 6511,
+        "endChar": 44
+      },
+      "revId": "09c339096a04122c752d792a499d907dbd574a29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ec35729_4b6432cb",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 1
