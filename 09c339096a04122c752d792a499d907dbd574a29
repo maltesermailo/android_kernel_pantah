@@ -16,6 +16,24 @@
       "revId": "09c339096a04122c752d792a499d907dbd574a29",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ee1654ad_8e8f73a6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1118600
+      },
+      "writtenOn": "2017-08-11T00:00:07Z",
+      "side": 1,
+      "message": "\u003e With less CPU idleness though, do we know the actual impact on power usage?\n\nYes, this change can save power 20mW ~ 30mW. You also could review the frequency pictures before opt and after opt: https://docs.google.com/a/linaro.org/document/d/1LBgQGnHWAYWSKAVvz1vLaT_PSP_7ATQFeFwZEr_CsdY/edit?usp\u003dsharing\n\n\u003e Wouldn\u0027t this change depend on were in the energy model curve we are?\n\nYes, this patch is try to find lower OPP for one CPU, the underlying meaning is to keep voltage as low as possible. The voltage is fatal for power. When the CPU frequency increases, the power efficiency will get worse due to voltage increasing.\n\nOne corner case is the continuous two OPPs use the same voltage level. In this case, we may get benefit from CPU idleness when run at higher OPP. \n\n\n\u003e meaning at the higher end increasing the freq\n \u003e is likely more costly but not at lower end?\n\nExactly, the voltage is the main reason.",
+      "parentUuid": "e6201944_6f0585a8",
+      "revId": "09c339096a04122c752d792a499d907dbd574a29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
