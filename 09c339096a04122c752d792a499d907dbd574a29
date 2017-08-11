@@ -275,6 +275,30 @@
     },
     {
       "key": {
+        "uuid": "4eb9be9e_f66825fd",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6511,
+      "author": {
+        "id": 1209348
+      },
+      "writtenOn": "2017-08-11T22:40:03Z",
+      "side": 1,
+      "message": "\u003e Ahh you\u0027re right.. Got it. So perhaps it can augmented with logic\n \u003e to understand if you\u0027re crossing an OPP boundary?\n \u003e If new_util causes OPP to jump from X-\u003eY, then prefer the other\n \u003e CPU. However if OPP stays the same, then prefer the best_idle.\n \u003e would that work?\n\nIt will be better but still not sure it will be always right thing to do like I said in earlier comment - \n\"target_cpu is used under *the big assumption* that such decision is always accepted by energy model.\"\n\nOne energy model can say \u0027using 1 cpu at idx X is better than using 2 cpus at idx-1\u0027 vice versa.\n\nSuch thing will vary depending on the frequency too in the same system.  CPU at high freq will have more impact when it brings another CPU out of idle compare to lower frequency.  It will be tricky to handle all the cases unless we prefer idle CPUs for better latency at cost of power...\n\nThus, I think in order to make this thing work in generic, we will be looking energy_diff() for all the CPUs like Joel mentioned below.",
+      "parentUuid": "bb78969e_87389732",
+      "range": {
+        "startLine": 6511,
+        "startChar": 1,
+        "endLine": 6511,
+        "endChar": 44
+      },
+      "revId": "09c339096a04122c752d792a499d907dbd574a29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ec35729_4b6432cb",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 1
