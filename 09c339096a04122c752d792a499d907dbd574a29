@@ -251,6 +251,30 @@
     },
     {
       "key": {
+        "uuid": "ea25f21f_3ae02dac",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6511,
+      "author": {
+        "id": 1118133
+      },
+      "writtenOn": "2017-08-11T22:29:40Z",
+      "side": 1,
+      "message": "as it is, I think this is not generic enough as we have mentioned comparing different clusters cap_idx is not correct.",
+      "parentUuid": "1190b167_9e1696ae",
+      "range": {
+        "startLine": 6511,
+        "startChar": 1,
+        "endLine": 6511,
+        "endChar": 44
+      },
+      "revId": "09c339096a04122c752d792a499d907dbd574a29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ec35729_4b6432cb",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 1
@@ -316,6 +340,24 @@
       "side": 1,
       "message": "Yeah.\n(just thinking out loud...) I believe if we could do energy diff on all CPUs during target selection, then we wouldn\u0027t have this issue? Doesn\u0027t this stem from that? EM would tell us if its more energy eff. or not?\n\nso if !(boosted \u0026\u0026 prefer_idle), we should do ediff on all CPUs, find out what\u0027s the best option and choose that as the target. Instead we do it the other way now, we choose the target first, and then do the energy diff..",
       "parentUuid": "1b6adb3a_d6190035",
+      "revId": "09c339096a04122c752d792a499d907dbd574a29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d556ed5b_58bd1f29",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6512,
+      "author": {
+        "id": 1118133
+      },
+      "writtenOn": "2017-08-11T22:29:40Z",
+      "side": 1,
+      "message": "I understand that we don\u0027t do energy diff on all cpus due to performance, but yes you are right if we actually checked energy for all cpus then this problem goes away",
+      "parentUuid": "27a63ae3_21533b3f",
       "revId": "09c339096a04122c752d792a499d907dbd574a29",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
