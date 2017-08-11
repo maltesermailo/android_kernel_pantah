@@ -131,6 +131,30 @@
     },
     {
       "key": {
+        "uuid": "2fcda8a0_bbeef277",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6511,
+      "author": {
+        "id": 1209348
+      },
+      "writtenOn": "2017-08-11T21:07:39Z",
+      "side": 1,
+      "message": "\u003e About this point, I\u0027m not too sure (or maybe I missed something).\n \u003e Placing task on target_cpu (which already has X) will increase its\n \u003e frequency from X to Y.\n\nThis isn\u0027t always true.  The target cpu\u0027s load could be already high enough to drive Y without new task\u0027s load.\nFor example, we have idle CPU 0 and loaded CPU 1.  Say CPU 1 is at idx 2.  If the new task is small enough, placing the new task on CPU 1 won\u0027t change idx.\nThis change doesn\u0027t consider such index difference caused by new task.  \nRather, in above case it will wake up CPU 0 which will be running at idx 2 actually because load at CPU 1 even though calculated cap_idx of best_idle_cpu (CPU 0) was 0.\nConsequently we will be running 2 CPUs at idx 2.",
+      "parentUuid": "5b1491d2_6232f65e",
+      "range": {
+        "startLine": 6511,
+        "startChar": 1,
+        "endLine": 6511,
+        "endChar": 44
+      },
+      "revId": "09c339096a04122c752d792a499d907dbd574a29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ec35729_4b6432cb",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 1
