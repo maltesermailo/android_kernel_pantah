@@ -22,6 +22,30 @@
       "revId": "9a6570637d2fb551044e2f1581bdc36e02701f45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7220b176_d934b693",
+        "filename": "kernel/sched/walt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1118133
+      },
+      "writtenOn": "2017-08-12T03:53:25Z",
+      "side": 1,
+      "message": "Joel, can you elaborate on why would HZ 250 not be handled with this patch?  set_walt_ravg_window and here both round to tick, and early_param uses early_param(\"walt_ravg_window\", set_walt_ravg_window);\nalso don\u0027t we depend on associativity elsewhere?",
+      "parentUuid": "2bb83796_e1086618",
+      "range": {
+        "startLine": 75,
+        "startChar": 27,
+        "endLine": 75,
+        "endChar": 79
+      },
+      "revId": "9a6570637d2fb551044e2f1581bdc36e02701f45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
