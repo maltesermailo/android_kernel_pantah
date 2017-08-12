@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2bb83796_e1086618",
+        "filename": "kernel/sched/walt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2017-08-12T03:23:09Z",
+      "side": 1,
+      "message": "Cool we should take this fix but now that we\u0027re on this topic, I think we discussed one issue by email where if tick is 4ms (HZ is 250), then it can cause rounding errors of upto 2ms say for a 10ms window? Especially because WALT is configurable through early_param, we wouldn\u0027t have proper control of the value. Not sure if anything better we can do here except print a message of the WALT window size at boot, or something.\n\nAlso, can you add angle brackets around the divides to not have to depend on the associativity? thanks",
+      "range": {
+        "startLine": 75,
+        "startChar": 27,
+        "endLine": 75,
+        "endChar": 79
+      },
+      "revId": "9a6570637d2fb551044e2f1581bdc36e02701f45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
