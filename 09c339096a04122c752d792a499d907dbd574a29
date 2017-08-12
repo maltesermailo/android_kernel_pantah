@@ -299,6 +299,30 @@
     },
     {
       "key": {
+        "uuid": "9ef99f16_ac788f98",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6511,
+      "author": {
+        "id": 1118600
+      },
+      "writtenOn": "2017-08-12T00:52:57Z",
+      "side": 1,
+      "message": "\u003e I\u0027m not sure if this is right assumption to do.\n \u003e \n \u003e First off this compares between two different cluster.\n \u003e So we will wake up big cluster idle CPU rather than packing on a\n \u003e little CPU.\n\nAgree. This patch is to keep the frequency lower, it\u0027s good for CPUs within the same cluster; actually I am testing one sequential patch: https://android-review.googlesource.com/#/c/kernel/common/+/456921/ (sorry for the patch doesn\u0027t have good format but I\u0027d like use it to demonstrate the idea more clear).\n\nThe brief idea is to use heuristic method (in find_best_target()) to find CPU _ONLY_ for one cluster and use energy_diff() to compare CPUs from different clusters. This can let find_best_target() to be implemented more easier, at the end the find_best_target() can only consider the CPUs with same power characters.\n\n \u003e Also, even if best_idle_cpu and target_cpu are in the same cluster,\n \u003e if target_cpu is driving frequency to X index already, placing new\n \u003e task on the the idle CPU won\u0027t drop the frequency.\n \u003e Instead, the best_idle CPU will be on X index once the task placed\n \u003e with target_cpu on X.\n \u003e In that case we\u0027re better to pack tasks on target_cpu and keep idle\n \u003e cpu in idle.\n\nAgree. But below are two reasons for this patch to more aggressively choose idle CPU:\n\n1. In scheduler we can predict the CPU frequency, the prediction is based on current task/CPU util metrics; if later the task runs on the CPU to accumulate the workload it\u0027s more easier to trigger higher frequency;\n\n2. I found this patch has side effect is: it\u0027s more friendly to \"prefer_idle\" tasks; if other \"prefer_idle\" tasks have occupied CPU then this patch can give more chance to choose other IDLE CPUs.\n\nThis patch logic is not clear enough. I will spin new one.\n\n \u003e If we want this kind of logic in task placement, algorithm should\n \u003e get with and without cap_idx and go for idle CPU *only* when\n \u003e cap_idx increases when target_cpu is used under *a big assumption*\n \u003e that such decision is always accepted by energy model.\n \u003e I\u0027m not sure if such assumption is right thing to do either.\n\n Yeah, I will try this. Thanks for the suggestion.\n\n \u003e My patch at [1] is slightly different because of these reasons.\n \u003e So it compares only between idle cpus in the same cluster.\n \u003e \n \u003e FYI, all energy_diff() and cap_idx calculation are broken with\n \u003e WALT.  So for any of these with WALT, we should have [2] and [3].\n\nAh! Yes, I found the energy model is not reliable with WALT, especially after apply patch: https://android-review.googlesource.com/#/c/kernel/common/+/456921/; this patch increases much chance to compare energy between two clusters. I can get better result with PELT, but it\u0027s broken with WALT. Thanks a lot for sharing this!\n \n \u003e [1] : https://android-review.googlesource.com/#/c/kernel/common/+/454647/\n \u003e [2] : https://android-review.googlesource.com/#/c/kernel/common/+/454644/\n \u003e [3] : https://android-review.googlesource.com/#/c/kernel/common/+/454645/",
+      "parentUuid": "f6e98a5c_b34c18a0",
+      "range": {
+        "startLine": 6511,
+        "startChar": 1,
+        "endLine": 6511,
+        "endChar": 44
+      },
+      "revId": "09c339096a04122c752d792a499d907dbd574a29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7ec35729_4b6432cb",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 1
