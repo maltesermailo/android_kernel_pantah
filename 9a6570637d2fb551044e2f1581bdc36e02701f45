@@ -46,6 +46,30 @@
       "revId": "9a6570637d2fb551044e2f1581bdc36e02701f45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "17938a82_8f006bdf",
+        "filename": "kernel/sched/walt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2017-08-13T04:00:59Z",
+      "side": 1,
+      "message": "\u003e Joel, can you elaborate on why would HZ 250 not be handled with this patch?\n\nWith HZ\u003d300 and window size of 20ms, the rounding error is small (3.33 * 6 \u003d~ 19.98).\n\nWith HZ\u003d250 and say window size of 10ms, the rounding error is bigger, so window size becomes:\n(10 / 4) * 4 \u003d (2) * 4 \u003d 8ms (so the rounding error is now 2ms, 8ms is no where close to 10ms). So I was just saying that since the rounding error is large, it should be made obvious by printing say during boot that the window size is 8ms. since its not clear otherwise to the designer and the person setting the early param what the window size actually ended up being, that\u0027s all I was saying :)\n\n\u003e also don\u0027t we depend on associativity elsewhere?\n\nAbout the associativity, its a bit confusing to me because initially when reading the code, I thought it is\n20000000 / (TICK_NSEC * TICK_NSEC) , where as what we really intend here is (20000000 / TICK_NSEC) * TICK_NSEC.\n\nIn C the associaitivty of / and * is left-to-right but in my mind multiply is always first, I guess I am wired that way. Anyway I thought its clearer to have brackets to be explicit.\n\nI agree that in other parts of the code this may be the case, but I thought its good to do that here while Vikram is already fixing this issue. Do you agree?",
+      "parentUuid": "7220b176_d934b693",
+      "range": {
+        "startLine": 75,
+        "startChar": 27,
+        "endLine": 75,
+        "endChar": 79
+      },
+      "revId": "9a6570637d2fb551044e2f1581bdc36e02701f45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
