@@ -94,6 +94,30 @@
       "revId": "9a6570637d2fb551044e2f1581bdc36e02701f45",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "89701ebd_d1d348d8",
+        "filename": "kernel/sched/walt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1093953
+      },
+      "writtenOn": "2017-08-14T16:50:51Z",
+      "side": 1,
+      "message": "Most compilers warn about expressions with ambiguous operator priorities, but given that this is slightly counter-intuitive to the usual multiply-then-divide integer math in the scheduler, I\u0027ll add the parentheses.\n\nThe warning is a fair idea, given that I think we\u0027ll be trying out different window sizes in the near future it seems... I\u0027ll place it in set_walt_ravg_window",
+      "parentUuid": "33a6ac3e_09b771f7",
+      "range": {
+        "startLine": 75,
+        "startChar": 27,
+        "endLine": 75,
+        "endChar": 79
+      },
+      "revId": "9a6570637d2fb551044e2f1581bdc36e02701f45",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
