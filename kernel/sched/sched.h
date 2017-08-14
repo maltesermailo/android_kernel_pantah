@@ -1674,6 +1674,25 @@ static inline void set_dl_cpu_capacity(int cpu, bool request,
 		update_cpu_capacity_request(cpu, request);
 	}
 }
+
+static inline unsigned long get_cfs_cpu_capacity(int cpu)
+{
+	struct sched_capacity_reqs *scr = &per_cpu(cpu_sched_capacity_reqs, cpu);
+	return scr->cfs;
+}
+
+static inline unsigned long get_rt_cpu_capacity(int cpu)
+{
+	struct sched_capacity_reqs *scr = &per_cpu(cpu_sched_capacity_reqs, cpu);
+	return scr->rt;
+}
+
+static inline unsigned long get_dl_cpu_capacity(int cpu)
+{
+	struct sched_capacity_reqs *scr = &per_cpu(cpu_sched_capacity_reqs, cpu);
+	return scr->dl;
+}
+
 #else
 static inline bool sched_freq(void) { return false; }
 static inline void set_cfs_cpu_capacity(int cpu, bool request,
@@ -1685,6 +1704,10 @@ static inline void set_rt_cpu_capacity(int cpu, bool request,
 static inline void set_dl_cpu_capacity(int cpu, bool request,
 				       unsigned long capacity)
 { }
+static inline unsigned long get_cfs_cpu_capacity(int cpu) { return 0; }
+static inline unsigned long get_rt_cpu_capacity(int cpu) { return 0; }
+static inline unsigned long get_dl_cpu_capacity(int cpu) { return 0; }
+
 #endif
 
 static inline void sched_rt_avg_update(struct rq *rq, u64 rt_delta)
