@@ -5340,6 +5340,40 @@ static int calc_util_delta(struct energy_env *eenv, int cpu)
 	return 0;
 }
 
+static long schedtune_margin(unsigned long signal, long boost);
+
+static unsigned long calc_total_util(int cpu, struct task_struct *p,
+				     unsigned long cpu_util,
+				     unsigned long tsk_util)
+{
+	unsigned long cfs_util, rt_util, dl_util, total;
+	int boost;
+	int tsk_boost = p ? schedtune_task_boost(p) : 0;
+	int cpu_boost = schedtune_cpu_boost(cpu);
+
+	/*
+	 * Estimate cfs utilization with maiximum boost value from
+	 * CPU and task
+	 */
+	boost = max(tsk_boost, cpu_boost);
+	cfs_util = schedtune_margin(cpu_util + tsk_util, boost);
+
+	/*
+	 * Convert rt class utilization with CPU capacity
+	 */
+	rt_util = get_rt_cpu_capacity(cpu) * capacity_orig_of(cpu);
+	rt_util = rt_util / SCHED_CAPACITY_SCALE;
+
+	/*
+	 * Convert dl class utilization with CPU capacity
+	 */
+	dl_util = get_dl_cpu_capacity(cpu) * capacity_orig_of(cpu);
+	dl_util = dl_util / SCHED_CAPACITY_SCALE;
+
+	total = cfs_util + rt_util + dl_util;
+	return total;
+}
+
 static
 unsigned long group_max_util(struct energy_env *eenv)
 {
