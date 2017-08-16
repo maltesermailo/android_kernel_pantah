@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c98a6102_e6673cb3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2017-08-16T20:24:25Z",
+      "side": 1,
+      "message": "thus, probably load_avg is better choice than until to calculate the \"relative load\" for the delay idx?",
+      "range": {
+        "startLine": 56,
+        "startChar": 12,
+        "endLine": 56,
+        "endChar": 57
+      },
+      "revId": "458fa46b6e3ac59c97b8b6cbb38db3eee99df57e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "81330505_e61f0ae6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2017-08-16T20:24:25Z",
+      "side": 1,
+      "message": "It feels like the perf idx metric tries to find the \"spare\" cpu bandwidth (higher opp) that the task is taking advantage of while it very well could have been running at a lower OPP and would have been just fine. Is that right?\n\nAlso could there be cases where the perf_idx is 0 even though the task is running at higher opp? Say for example you have 2 tasks, each with 50% util and total cpu util is 100%, then each task will run at the highest opp, however in this case the task is running at the highest OPP however, the perf_idx will be \u003d 0 (speedup \u003d 50%, delay \u003d 50%). Is that right?",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 33
+      },
+      "revId": "458fa46b6e3ac59c97b8b6cbb38db3eee99df57e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
