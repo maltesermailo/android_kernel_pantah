@@ -2,6 +2,92 @@
   "comments": [
     {
       "key": {
+        "uuid": "afe82762_8ef23f5a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2017-08-17T19:46:54Z",
+      "side": 1,
+      "message": "add LSM hooks for eBPF functionality",
+      "range": {
+        "startLine": 7,
+        "startChar": 5,
+        "endLine": 7,
+        "endChar": 47
+      },
+      "revId": "1068446183aa820f0609c369a0c967171b331fe3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e9bee0b2_fa53679e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2017-08-17T19:46:54Z",
+      "side": 1,
+      "message": "let\u0027s move the focus from \"syscalls\" to \"functionality\". We\u0027re not interested in blocking syscalls, but restricting access to kernel functionality. We need to keep in mind that this functionality may be accessible via other paths (e.g. does seccomp use ebpf?).",
+      "range": {
+        "startLine": 10,
+        "startChar": 5,
+        "endLine": 10,
+        "endChar": 13
+      },
+      "revId": "1068446183aa820f0609c369a0c967171b331fe3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "466608d3_6183b117",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2017-08-17T19:46:54Z",
+      "side": 1,
+      "message": "Let\u0027s provide better justification here. Particularly arguing about the need for more granular permissions. e.g. currently all processes with CAP_SYS_ADMIN may create and load eBPF programs into the kernel. Allowing unprivileged processes access requires allowing all processes access. Neither of these states results in principle of least privilege.\n\n1. We don\u0027t need (or want) all CAP_SYS_ADMIN processes to have access\n2. We don\u0027t want to grant access to all processes\n3. we don\u0027t want to give previously unprivileged processes CAP_SYS_ADMIN in order to access eBPF functionality.\n\nIdeally we should be able to restrict access on a per-process basis. LSM hooks give us the flexibility to do that without changing the existing behavior when an LSM is not used, or when the existing LSM doesn\u0027t use the eBPF hooks.",
+      "revId": "1068446183aa820f0609c369a0c967171b331fe3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1626d77e_344f7a79",
+        "filename": "include/linux/lsm_hooks.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1332,
+      "author": {
+        "id": 1054468
+      },
+      "writtenOn": "2017-08-17T19:46:54Z",
+      "side": 1,
+      "message": "Is there a good security reason to hook each of these functions, or are you just hooking all eBPF syscalls?",
+      "range": {
+        "startLine": 1332,
+        "startChar": 3,
+        "endLine": 1332,
+        "endChar": 35
+      },
+      "revId": "1068446183aa820f0609c369a0c967171b331fe3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b047c055_0703b6db",
         "filename": "include/linux/lsm_hooks.h",
         "patchSetId": 2
