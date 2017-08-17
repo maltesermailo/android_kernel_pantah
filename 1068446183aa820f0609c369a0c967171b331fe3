@@ -135,6 +135,30 @@
     },
     {
       "key": {
+        "uuid": "f57eb85b_41fd4689",
+        "filename": "include/linux/lsm_hooks.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1332,
+      "author": {
+        "id": 1082649
+      },
+      "writtenOn": "2017-08-17T21:51:55Z",
+      "side": 1,
+      "message": "Normally LSM hooks are added to manage _objects_, not syscalls. So, something like map creation and usage (i.e. one hook for creation, one hook for usage). The usage hook would be called during map_lookup_elem, map_update_elem, map_delete_elem, map_get_next_key, etc.",
+      "parentUuid": "89a1fa24_524a388a",
+      "range": {
+        "startLine": 1332,
+        "startChar": 3,
+        "endLine": 1332,
+        "endChar": 35
+      },
+      "revId": "1068446183aa820f0609c369a0c967171b331fe3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b047c055_0703b6db",
         "filename": "include/linux/lsm_hooks.h",
         "patchSetId": 2
