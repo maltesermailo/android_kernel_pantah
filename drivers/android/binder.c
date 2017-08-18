@@ -67,6 +67,7 @@
 #include <linux/sched.h>
 #include <linux/seq_file.h>
 #include <linux/uaccess.h>
+#include <linux/ipc_namespace.h>
 #include <linux/pid_namespace.h>
 #include <linux/security.h>
 #include <linux/spinlock.h>
@@ -92,6 +93,8 @@ static DEFINE_SPINLOCK(binder_dead_nodes_lock);
 static struct dentry *binder_debugfs_dir_entry_root;
 static struct dentry *binder_debugfs_dir_entry_proc;
 static atomic_t binder_last_id;
+static int binder_device_count;
+static int ipc_priv_token;
 
 #define BINDER_DEBUG_ENTRY(name) \
 static int binder_##name##_open(struct inode *inode, struct file *file) \
@@ -269,12 +272,28 @@ struct binder_context {
 
 	kuid_t binder_context_mgr_uid;
 	const char *name;
+	/* Convenience pointer to the ns we are in. */
+	struct binder_namespace *binder_ns;
+};
+
+/**
+ * struct binder_namespace - Holds per namespace data.
+ * @kref: Used for reference counting the namespace.
+ * @contexts: Array of &binder_context entries for each registered device.
+ *
+ * This struct stores all the binder device contexts in binder_namespace.
+ * The entries of &binder_contexts are considered to be a dynamically
+ * allocated array, with the index being the &binder_device.device_id.
+ */
+struct binder_namespace {
+	struct kref kref;
+	struct binder_context *contexts;
 };
 
 struct binder_device {
 	struct hlist_node hlist;
 	struct miscdevice miscdev;
-	struct binder_context context;
+	int device_id;
 };
 
 /**
@@ -900,6 +919,102 @@ binder_defer_work(struct binder_proc *proc, enum binder_deferred_state defer);
 static void binder_free_thread(struct binder_thread *thread);
 static void binder_free_proc(struct binder_proc *proc);
 static void binder_inc_node_tmpref_ilocked(struct binder_node *node);
+
+static void free_binder_ns(struct kref *kref)
+{
+	struct binder_namespace *binder_ns;
+
+	binder_ns = container_of(kref, struct binder_namespace, kref);
+
+	kfree(binder_ns->contexts);
+	kfree(binder_ns);
+}
+
+static void get_binder_ns(struct binder_namespace *binder_ns)
+{
+	kref_get(&binder_ns->kref);
+}
+
+static void put_binder_ns(struct binder_namespace *binder_ns)
+{
+	kref_put(&binder_ns->kref, free_binder_ns);
+}
+
+static struct binder_namespace *current_binder_ns(void)
+{
+	return ipc_access_generic(current->nsproxy->ipc_ns, ipc_priv_token);
+}
+
+static struct binder_context *create_ns_contexts(
+	struct binder_namespace *binder_ns)
+{
+	struct binder_device *device;
+	struct binder_context *contexts;
+	int device_id;
+
+	/*
+	 * Keep this a simple malloc for now, perhaps use another data
+	 * structure to impove lookup of the context.
+	 */
+	contexts = kcalloc(binder_device_count, sizeof(struct binder_context),
+			   GFP_KERNEL);
+	if (contexts) {
+		hlist_for_each_entry(device, &binder_devices, hlist) {
+			device_id = device->device_id;
+			contexts[device_id].binder_context_mgr_uid =
+				INVALID_UID;
+			contexts[device_id].name = device->miscdev.name;
+			contexts[device_id].binder_ns = binder_ns;
+			mutex_init(&contexts[device_id].context_mgr_node_lock);
+		}
+	}
+
+	return contexts;
+}
+
+static struct binder_namespace *create_binder_ns(void)
+{
+	struct binder_namespace *binder_ns =
+		kzalloc(sizeof(struct binder_namespace), GFP_KERNEL);
+	if (binder_ns) {
+		kref_init(&binder_ns->kref);
+		/* Create new contexts for each device */
+		binder_ns->contexts = create_ns_contexts(binder_ns);
+		if (!binder_ns->contexts) {
+			kfree(binder_ns);
+			return NULL;
+		}
+	}
+	return binder_ns;
+}
+
+int binder_init_ns(struct ipc_namespace *ipcns, int token)
+{
+	struct binder_namespace *binder_ns;
+	int ret = -ENOMEM;
+
+	binder_ns = create_binder_ns();
+	if (binder_ns) {
+		ipc_assign_generic_locked(ipcns, binder_ns, token);
+		ret = 0;
+	}
+
+	return ret;
+}
+
+void binder_exit_ns(struct ipc_namespace *ipcns, int token)
+{
+	struct binder_namespace *binder_ns;
+
+	binder_ns = ipc_access_generic_locked(ipcns, token);
+	if (binder_ns)
+		put_binder_ns(binder_ns);
+}
+
+struct ipc_priv_ops binder_peripc_ops = {
+	.init = binder_init_ns,
+	.exit = binder_exit_ns,
+};
 
 static int task_get_unused_fd_flags(struct binder_proc *proc, int flags)
 {
@@ -4329,6 +4444,7 @@ static void binder_free_proc(struct binder_proc *proc)
 	BUG_ON(!list_empty(&proc->todo));
 	BUG_ON(!list_empty(&proc->delivered_death));
 	binder_alloc_deferred_release(&proc->alloc);
+	put_binder_ns(proc->context->binder_ns);
 	put_task_struct(proc->tsk);
 	binder_stats_deleted(BINDER_STAT_PROC);
 	kfree(proc);
@@ -4747,6 +4863,7 @@ static int binder_open(struct inode *nodp, struct file *filp)
 {
 	struct binder_proc *proc;
 	struct binder_device *binder_dev;
+	struct binder_namespace *binder_ns;
 
 	binder_debug(BINDER_DEBUG_OPEN_CLOSE, "binder_open: %d:%d\n",
 		     current->group_leader->pid, current->pid);
@@ -4769,7 +4886,10 @@ static int binder_open(struct inode *nodp, struct file *filp)
 
 	binder_dev = container_of(filp->private_data, struct binder_device,
 				  miscdev);
-	proc->context = &binder_dev->context;
+	binder_ns = current_binder_ns();
+	get_binder_ns(binder_ns);
+	proc->context = &binder_ns->contexts[binder_dev->device_id];
+
 	binder_alloc_init(&proc->alloc);
 
 	binder_stats_created(BINDER_STAT_PROC);
@@ -5469,8 +5589,10 @@ static int binder_state_show(struct seq_file *m, void *unused)
 		binder_put_node(last_node);
 
 	mutex_lock(&binder_procs_lock);
-	hlist_for_each_entry(proc, &binder_procs, proc_node)
-		print_binder_proc(m, proc, 1);
+	hlist_for_each_entry(proc, &binder_procs, proc_node) {
+		if (proc->context->binder_ns == current_binder_ns())
+			print_binder_proc(m, proc, 1);
+	}
 	mutex_unlock(&binder_procs_lock);
 
 	return 0;
@@ -5485,8 +5607,10 @@ static int binder_stats_show(struct seq_file *m, void *unused)
 	print_binder_stats(m, "", &binder_stats);
 
 	mutex_lock(&binder_procs_lock);
-	hlist_for_each_entry(proc, &binder_procs, proc_node)
-		print_binder_proc_stats(m, proc);
+	hlist_for_each_entry(proc, &binder_procs, proc_node) {
+		if (proc->context->binder_ns == current_binder_ns())
+			print_binder_proc_stats(m, proc);
+	}
 	mutex_unlock(&binder_procs_lock);
 
 	return 0;
@@ -5498,8 +5622,10 @@ static int binder_transactions_show(struct seq_file *m, void *unused)
 
 	seq_puts(m, "binder transactions:\n");
 	mutex_lock(&binder_procs_lock);
-	hlist_for_each_entry(proc, &binder_procs, proc_node)
-		print_binder_proc(m, proc, 0);
+	hlist_for_each_entry(proc, &binder_procs, proc_node) {
+		if (proc->context->binder_ns == current_binder_ns())
+			print_binder_proc(m, proc, 0);
+	}
 	mutex_unlock(&binder_procs_lock);
 
 	return 0;
@@ -5512,7 +5638,8 @@ static int binder_proc_show(struct seq_file *m, void *unused)
 
 	mutex_lock(&binder_procs_lock);
 	hlist_for_each_entry(itr, &binder_procs, proc_node) {
-		if (itr->pid == pid) {
+		if (itr->pid == pid &&
+			itr->context->binder_ns == current_binder_ns()) {
 			seq_puts(m, "binder proc state:\n");
 			print_binder_proc(m, itr, 1);
 		}
@@ -5598,16 +5725,13 @@ static int __init init_binder_device(const char *name)
 	binder_device->miscdev.minor = MISC_DYNAMIC_MINOR;
 	binder_device->miscdev.name = name;
 
-	binder_device->context.binder_context_mgr_uid = INVALID_UID;
-	binder_device->context.name = name;
-	mutex_init(&binder_device->context.context_mgr_node_lock);
-
 	ret = misc_register(&binder_device->miscdev);
 	if (ret < 0) {
 		kfree(binder_device);
 		return ret;
 	}
 
+	binder_device->device_id = binder_device_count++;
 	hlist_add_head(&binder_device->hlist, &binder_devices);
 
 	return ret;
@@ -5622,6 +5746,7 @@ static int __init binder_init(void)
 
 	atomic_set(&binder_transaction_log.cur, ~0U);
 	atomic_set(&binder_transaction_log_failed.cur, ~0U);
+	ipc_priv_token = -1;
 
 	binder_debugfs_dir_entry_root = debugfs_create_dir("binder", NULL);
 	if (binder_debugfs_dir_entry_root)
@@ -5673,8 +5798,19 @@ static int __init binder_init(void)
 			goto err_init_binder_device_failed;
 	}
 
-	return ret;
+	/*
+	 * Register the binder driver with the peripc ops for ipc namespaces.
+	 * Note that the first time this is called, a binder namespace will
+	 * get initialized with the registered devices.
+	 */
+	ret = register_ipc_priv_ops(&binder_peripc_ops);
+	if (ret < 0)
+		goto err_register_ipc_priv_ops_failed;
+	ipc_priv_token = ret;
 
+	return 0;
+
+err_register_ipc_priv_ops_failed:
 err_init_binder_device_failed:
 	hlist_for_each_entry_safe(device, tmp, &binder_devices, hlist) {
 		misc_deregister(&device->miscdev);
