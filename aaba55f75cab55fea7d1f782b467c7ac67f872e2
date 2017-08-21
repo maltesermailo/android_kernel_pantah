@@ -22,6 +22,30 @@
       "revId": "aaba55f75cab55fea7d1f782b467c7ac67f872e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30c17b76_f4e11580",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 5636,
+      "author": {
+        "id": 1200908
+      },
+      "writtenOn": "2017-08-21T08:41:38Z",
+      "side": 1,
+      "message": "I think we need to climb the sched domain hierarchy to account for cluster-level energy. That way the scheduler is aware that waking up a CPU in an idle cluster is expensive (probably more than in a busy cluster, although this might depend on OPP alterations and the actual energy model)",
+      "parentUuid": "8dc9aeba_db109992",
+      "range": {
+        "startLine": 5636,
+        "startChar": 0,
+        "endLine": 5636,
+        "endChar": 28
+      },
+      "revId": "aaba55f75cab55fea7d1f782b467c7ac67f872e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
