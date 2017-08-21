@@ -46,6 +46,30 @@
       "revId": "aaba55f75cab55fea7d1f782b467c7ac67f872e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72eb5ebf_18b10cd5",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 5636,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2017-08-21T19:37:25Z",
+      "side": 1,
+      "message": "Ok that makes sense, so correct me if I\u0027m wrong but for a hierarchy like so:\n\n    DIE\n |------|\n |      |\n MC1    MC2\n |      |\n (4 cpus for each MC)\n\nSay CPU 1 is the one we want to calculate energy for, then the flow is:\nCalculate group energy for All CPUs in MC1 (this is the CPU energy cost). Then, calculate the cluster energy cost at the DIE level, and add it up. Is that right?\n\nIf the 2 candidate CPUs are within the same parent domain (say MC1) then I feel the domain walk is still not needed. Because the before/after cost will effectively cancel out the cluster power. I Can see it useful in a scenario where the candidate CPUs (previous, next) are across MC1 and MC2. Do you agree? \n\nAlso I feel that both MC1 and MC2 should be considered even when calculating the group energy (whether the candidates are across CPUs or not), this is because of the possible difference in group_max_util across MC1 and MC2. What do you think?\n\nLastly I feel that this comment is misleading:\n\n /* Has this sched_domain already been visited? */\n           if (sd-\u003echild \u0026\u0026 group_first_cpu(sg) !\u003d cpu)\n                            break;\n\nMay be it should be:\n /* Skip group that this CPU doesn\u0027t belong to in the hierarchy */ ?\n\nAccording to me, say for example we are walking CPU 0, then we would ONLY traverse MC1 and DIE, and skip MC2 (because we don\u0027t care about it according to the above check). Do you agree?",
+      "parentUuid": "30c17b76_f4e11580",
+      "range": {
+        "startLine": 5636,
+        "startChar": 0,
+        "endLine": 5636,
+        "endChar": 28
+      },
+      "revId": "aaba55f75cab55fea7d1f782b467c7ac67f872e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
