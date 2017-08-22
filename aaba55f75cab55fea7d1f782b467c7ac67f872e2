@@ -94,6 +94,30 @@
       "revId": "aaba55f75cab55fea7d1f782b467c7ac67f872e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "000c71d8_20570524",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 5636,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2017-08-22T22:37:49Z",
+      "side": 1,
+      "message": "Quentin, Thanks a lot for your replies, we are on the same page about all the points and it makes sense now, this one I understood differently.\n\n/* Has this sched_domain already been visited? */\nif (sd-\u003echild \u0026\u0026 group_first_cpu(sg) !\u003d cpu)\nbreak;\n\n\u003e So this is obviously something we can discuss but I am not particularly unhappy with this one. In my understanding, this condition is here to ensure that if we climb the sd hierarchy a second time we wont re-account for the energy of higher level sd that was already visited. Do you understand that differently ?\n\nThe way I understand is we skip groups that aren\u0027t in the direct path between CPU -\u003e root.\n\nSo in the above diagram for CPU1 (in MC1), we would calc energy for all CPUs in MC1 group, then we would calc cluster energy for MC1 itself. The condition essentially skips MC2 since its not in the path. After much discussion with Andres, I conclude that\u0027s the intended behavior. Do you agree?\n\nAlso this is a bit confusing:\n  if (cpumask_equal(sched_group_cpus(sg), \n         sched_group_cpus(eenv-\u003esg_top)))\n         goto next_cpu;\n\nThat tells me that at the MC1 stage, we would clear all visit_cpus after going to the next_cpu label. While I feel that it doesn\u0027t hurt to do, isn\u0027t that also unnecessarry as we are anyway clearing visit_cpus here:\n  if (!sd-\u003echild)\n     cpumask_xor(\u0026visit_cpus, \u0026visit_cpus, sched_group_cpus(sg));\n\n(Infact this xor is a bit odd because what if there are bit positions in visit_cpus that are 0 but are 1 in sched_group_cpus, wouldn\u0027t that end up setting those bits?)\n\nLast comment I had, we seem to be doing __cpu_util twice, once for each CPU in the MC and then once again at the group MC level for cluster. That means we\u0027re doing more divisions than needed versus if we just calculated __cpu_util once and cached it early for use later during the cluster group_util, that would be faster I feel. Thanks!!",
+      "parentUuid": "50d88701_a6edf293",
+      "range": {
+        "startLine": 5636,
+        "startChar": 0,
+        "endLine": 5636,
+        "endChar": 28
+      },
+      "revId": "aaba55f75cab55fea7d1f782b467c7ac67f872e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
