@@ -70,6 +70,30 @@
       "revId": "aaba55f75cab55fea7d1f782b467c7ac67f872e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "50d88701_a6edf293",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 5636,
+      "author": {
+        "id": 1200908
+      },
+      "writtenOn": "2017-08-22T14:05:14Z",
+      "side": 1,
+      "message": "\u003e Say CPU 1 is the one we want to calculate energy for, then the flow\n\nI assume you meant MC1 and not CPU1 here right? I mean, in your example here you are talking about using an eenv-\u003esg_top that spans over all CPUs of MC1 is that correct ?\n\n\u003e Calculate group energy for All CPUs in MC1 (this is the CPU energy cost). Then, calculate the cluster energy cost at the DIE level, and add it up. Is that right?\n\nAssuming that you meant MC1 above, then yes, this is correct. With the refactoring introduced in this patch you will actually do that calculation \"in parallel\" for all candidate CPUs.\n\n\u003e If the 2 candidate CPUs are within the same parent domain (say MC1) then I feel the domain walk is still not needed. Because the before/after cost will effectively cancel out the cluster power. I Can see it useful in a scenario where the candidate CPUs (previous, next) are across MC1 and MC2. Do you agree?\n\nHmmm, I see your point but I am not 100% sure. Depending on the utilisation of the target CPU under consideration, then you may or may not need to raise the cluster\u0027s OPP. Indeed, group_max_util is re-evaluated for all candidate CPUs in find_new_capacity and the cluster energy for each CPU candidate will be computed accordingly. So, unless the cluster energy is the same for all OPPs in the energy model (very unusual I think) the cluster energy before and after migration can differ for different CPU candidates, even if they all belong to the same cluster.\n\n\u003e Also I feel that both MC1 and MC2 should be considered even when calculating the group energy (whether the candidates are across CPUs or not), this is because of the possible difference in group_max_util across MC1 and MC2. What do you think?\n\nI\u0027m sorry but I\u0027m not sure to understand that one correctly. Are you suggesting to evaluate the energy of all sched_group at DIE level systematically ? \n\n\u003e Lastly I feel that this comment is misleading:\n\u003e /* Has this sched_domain already been visited? */\n\u003e if (sd-\u003echild \u0026\u0026 group_first_cpu(sg) !\u003d cpu)\n\u003e break;\n\nSo this is obviously something we can discuss but I am not particularly unhappy with this one. In my understanding, this condition is here to ensure that if we climb the sd hierarchy a second time we wont re-account for the energy of higher level sd that was already visited. Do you understand that differently ?\n\n\u003e May be it should be:\n\u003e /* Skip group that this CPU doesn\u0027t belong to in the hierarchy */ ? \n\u003e According to me, say for example we are walking CPU 0, then we\n\u003e would ONLY traverse MC1 and DIE, and skip MC2 (because we don\u0027t\n\u003e care about it according to the above check). Do you agree?",
+      "parentUuid": "72eb5ebf_18b10cd5",
+      "range": {
+        "startLine": 5636,
+        "startChar": 0,
+        "endLine": 5636,
+        "endChar": 28
+      },
+      "revId": "aaba55f75cab55fea7d1f782b467c7ac67f872e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
