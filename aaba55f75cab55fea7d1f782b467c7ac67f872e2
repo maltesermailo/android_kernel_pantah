@@ -118,6 +118,30 @@
       "revId": "aaba55f75cab55fea7d1f782b467c7ac67f872e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ab29813f_03abcac5",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 5636,
+      "author": {
+        "id": 1200908
+      },
+      "writtenOn": "2017-08-23T14:54:40Z",
+      "side": 1,
+      "message": "\u003e Quentin, Thanks a lot for your replies, we are on the same page about all the points and it makes sense now\n\nNo worries, it\u0027s a very interesting topic and it\u0027s always good to clarify things :)\n\n\u003e So in the above diagram for CPU1 (in MC1), we would calc energy for all CPUs in MC1 group, then we would calc cluster energy for MC1 itself. The condition essentially skips MC2 since its not in the path. After much discussion with Andres, I conclude that\u0027s the intended behavior. Do you agree?\n\nIf all candidate CPUs belong to the same cluster, let\u0027s say MC1, you are right, we shouldn\u0027t do any energy-related computation for the other cluster, MC2 in your example. However, I think this behaviour is rather enforced by the condition at line 5723 (line 5635 before). compute_energy() simply isn\u0027t called with a sg_top that doesn\u0027t span over at least one CPU candidate. And compute_energy doesn\u0027t consider CPUs outside of sg_top.\n\n\u003e if (cpumask_equal(sched_group_cpus(sg), sched_group_cpus(eenv-\u003esg_top)))\n\u003e        goto next_cpu;\n\u003e That tells me that at the MC1 stage, we would clear all visit_cpus after going to the next_cpu label. \n\nThis condition should be true only once you\u0027ve climbed the sd hierarchy high enough to reach the sd that has sg_top. Typically, when you reach this point, you\u0027ve already visited lower sched domains and sched groups and hence the CPUs they represent should have been cleared from visit_cpus by the xor below. If all CPUs spanned by sg_top have been visited, you will then exit the outer while loop after the first goto next_cpu (that\u0027s the typical case for us I think, you go though the while (!cpumask_empty(\u0026visit_cpus)) loop only once). However, it is possible for a specific sd hierarchy that you happen to reach the sd that spans over sg_top with some of the CPUs of sg_top not yet visited. In this case the outer while loop and the goto next_cpu will ensure that you will visit the missing CPUs and re-climb the sd hierarchy from their point of view. This is because this behaviour is possible that you need to ensure that the cluster level energy is not accounted multiple times using:\n\n /* Has this sched_domain already been visited? */\n if (sd-\u003echild \u0026\u0026 group_first_cpu(sg) !\u003d cpu)\n      break;\n\nIndeed, only a sd with childs can be visited several times (since it can be visited by climbing from several childs) -- rationale for the sd-\u003echild part of the condition. The second part of the condition ensures that you will visit the high level sd in only one case: when you\u0027re climbing the hierarchy from the first CPU of the sg.\n\n\u003e Infact this xor is a bit odd because what if there are bit positions in visit_cpus that are 0 but are 1 in sched_group_cpus, wouldn\u0027t that end up setting those bits?\n\nThat\u0027s a very good point. I agree it\u0027s not clear why a xor is necessary here while cpumask_clear seems to be a better fit. I suspect there\u0027s a good reason for this but it\u0027s far from being obvious. It definitely is a good question for Patrick or Morten. I\u0027ll look into that.\n\n\u003e Last comment I had, we seem to be doing __cpu_util twice, once for each CPU in the MC and then once again at the group MC level for cluster\n\nYou\u0027re right, it most likely possible to reduce the number of calls to __cpu_norm_util (and thus the number of division) by caching some values computed in group_norm_util at the lowest level of sched groups. We already had this \"issue\" (or, let\u0027s say this optimisation opportunity) in the previous implementation. I feel like this patch is already a big step in the direction of a cleaner and faster energy evaluation overall and I\u0027m not sure if this feature would be trivial to implement. Do you think we should try to add it to this patch ? Should we try to include that in a future patch bringing further optimisations ? What do you think ?",
+      "parentUuid": "000c71d8_20570524",
+      "range": {
+        "startLine": 5636,
+        "startChar": 0,
+        "endLine": 5636,
+        "endChar": 28
+      },
+      "revId": "aaba55f75cab55fea7d1f782b467c7ac67f872e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
