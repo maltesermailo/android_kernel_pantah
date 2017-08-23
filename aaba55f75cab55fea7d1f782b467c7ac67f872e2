@@ -142,6 +142,29 @@
       "revId": "aaba55f75cab55fea7d1f782b467c7ac67f872e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ab1d282_8a5dcb22",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 5656,
+      "author": {
+        "id": 1200908
+      },
+      "writtenOn": "2017-08-23T16:20:31Z",
+      "side": 1,
+      "message": "@Joel: After discussing this with Patrick, we agreed that, thanks to the way we browse the sd hierarchy, it should not be possible to have bits to 1 in sched_group_cpus(sg) that are 0 in visits_cpus. If this is the case, it means that some sched_domains are overlapping. I\u0027ve never seen something like that but I\u0027m not sure if there is a rule about it or if it\u0027s just insane and people don\u0027t do that. I\u0027ll try to check that and I\u0027ll let you now.\nSo, to make it short, this xor here is just an efficient way (1 instruction) to reset the bits of sg in visit_cpus. It might be a good idea to add a little comment here to explain this -- it can be misleading.",
+      "range": {
+        "startLine": 5656,
+        "startChar": 5,
+        "endLine": 5656,
+        "endChar": 64
+      },
+      "revId": "aaba55f75cab55fea7d1f782b467c7ac67f872e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
