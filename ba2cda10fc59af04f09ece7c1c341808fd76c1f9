@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e2d6b3e7_7adc961b",
+        "filename": "drivers/cpufreq/cpufreq-dt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1118600
+      },
+      "writtenOn": "2017-08-24T05:48:12Z",
+      "side": 1,
+      "message": "Ah, thanks for this. I forgot this schedutil error, before Viresh has patch tries to fix it: https://lkml.org/lkml/2017/5/22/19\n\nHere I think we should use below formula:\npolicy-\u003etransition_delay_us \u003d transition_latency / NSEC_PER_USEC\n\n\u0027transition_latency\u0027 is in the unit of nanosecond, and \u0027transition_delay_us\u0027 is in the unit of microsecond. So should covert the unit?",
+      "revId": "ba2cda10fc59af04f09ece7c1c341808fd76c1f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
