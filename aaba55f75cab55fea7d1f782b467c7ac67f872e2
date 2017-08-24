@@ -165,6 +165,29 @@
       "revId": "aaba55f75cab55fea7d1f782b467c7ac67f872e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ce58d23_c90c46a9",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 5659,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2017-08-24T16:29:24Z",
+      "side": 1,
+      "message": "thanks. and about this one, is this just a cheap way of skipping the rest of the group once we reach the top-most (1 level below the parent) sd? so in our example, it would terminate at mc1 and not look at mc2 once we looking at mc1 and mc2 from die level.",
+      "range": {
+        "startLine": 5657,
+        "startChar": 0,
+        "endLine": 5659,
+        "endChar": 19
+      },
+      "revId": "aaba55f75cab55fea7d1f782b467c7ac67f872e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
