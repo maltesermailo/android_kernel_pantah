@@ -52,6 +52,24 @@
       "revId": "f66ce011c923cb565f12cd223e2fe2ddf6650e50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63945e1a_4fdbe5fb",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1120758
+      },
+      "writtenOn": "2017-08-28T16:43:45Z",
+      "side": 1,
+      "message": "\u003e Yes this could make the boost prelonged. For a CPU that boosts to\n \u003e the max and goes idle, we will depend on this patch to reset the\n \u003e boost.\n \u003e \n \u003e Probably we should separate out the skip cpu path and the reset\n \u003e boost path here,  and reset the boost always if last update\n \u003e happened before the tick?\n \u003e \n \u003e Also Juri I think your patch is not in common for the last_update\n \u003e time. (If it is please ignore, thanks)\n\nDo you mean this one?\n\nhttps://android-review.googlesource.com/#/c/kernel/common/+/457363/\n\nAlso, we don\u0027t seem to have your patch for iowait_boost as well?",
+      "parentUuid": "63440141_1e5060bb",
+      "revId": "f66ce011c923cb565f12cd223e2fe2ddf6650e50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
