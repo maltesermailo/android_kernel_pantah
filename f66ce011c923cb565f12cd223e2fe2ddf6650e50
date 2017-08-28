@@ -16,6 +16,24 @@
       "revId": "f66ce011c923cb565f12cd223e2fe2ddf6650e50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "63440141_1e5060bb",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2017-08-28T16:32:15Z",
+      "side": 1,
+      "message": "Yes this could make the boost prelonged. For a CPU that boosts to the max and goes idle, we will depend on this patch to reset the boost.\n\nProbably we should separate out the skip cpu path and the reset boost path here,  and reset the boost always if last update happened before the tick?\n\nAlso Juri I think your patch is not in common for the last_update time. (If it is please ignore, thanks)",
+      "parentUuid": "0a160ac5_48825908",
+      "revId": "f66ce011c923cb565f12cd223e2fe2ddf6650e50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
