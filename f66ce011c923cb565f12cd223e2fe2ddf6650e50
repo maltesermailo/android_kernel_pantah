@@ -88,6 +88,24 @@
       "revId": "f66ce011c923cb565f12cd223e2fe2ddf6650e50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0a6b81d1_88fefd6e",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1093953
+      },
+      "writtenOn": "2017-08-29T16:26:09Z",
+      "side": 1,
+      "message": "The window size provides a natural hysteresis, but more importantly the whole idea of WALT is that what is seen in the previous window will likely be repeated in the current window, so making decisions based on current window state/stats is rather incorrect (except for migrations where we do update previous-window stats).\n\nFurthermore I\u0027m actually curious now - with a 3.3ms or 4ms tick and 20ms window you might be seeing a lot of frequency changes that can be avoided?\n\nI agree about iowait_boost - will split that out and restore original logical expression for that case",
+      "parentUuid": "76ca0aa0_6ba1c3c3",
+      "revId": "f66ce011c923cb565f12cd223e2fe2ddf6650e50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
