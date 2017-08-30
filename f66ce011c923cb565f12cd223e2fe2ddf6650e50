@@ -160,6 +160,24 @@
       "revId": "f66ce011c923cb565f12cd223e2fe2ddf6650e50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "53a49ea3_ef8e9b01",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1120758
+      },
+      "writtenOn": "2017-08-30T06:59:39Z",
+      "side": 1,
+      "message": "[...]\n\n \u003e Also I was thinking - how does the remote update stuff relate to\n \u003e this patch? I think that came up on today\u0027s call but it was early\n \u003e in the morning for me and I hadn\u0027t had my coffee yet. (Also sorry\n \u003e for my verbosity)\n\nMy thinking about this point was that, since we now have Chris\u0027 remote update fix (7b63e1ff5213 \"sched/fair: Update signals of nohz cpus if we are going idle\") in common, the problem with stale signals should be not that big anymore and we might want to try remove this if condition completely and always consider all j_sg_cpu (s). Worth trying, IMHO.",
+      "parentUuid": "46918dc8_dc883b57",
+      "revId": "f66ce011c923cb565f12cd223e2fe2ddf6650e50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
