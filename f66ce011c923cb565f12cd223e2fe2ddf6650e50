@@ -142,6 +142,24 @@
       "revId": "f66ce011c923cb565f12cd223e2fe2ddf6650e50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "46918dc8_dc883b57",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2017-08-30T00:38:49Z",
+      "side": 1,
+      "message": "Oh ok you\u0027re referring to the combination of tick gran. and the CPU going stale. Yeah I guess that would cause a drop in the middle of the window.. I understand the hysteresis point but if its not expensive to change the frequency back up when needed, then its probably not that big of a deal?\nPELT also would have this issue, kind of, right? So we\u0027re not doing any more worse with WALT than we would be if we were using PELT. I think another way to look at it is to let the governor decide about whether it wants to drop the frequency or not than enforcing the behavior that WALT wants.\nAlso I was thinking - how does the remote update stuff relate to this patch? I think that came up on today\u0027s call but it was early in the morning for me and I hadn\u0027t had my coffee yet. (Also sorry for my verbosity)",
+      "parentUuid": "07ec2b7c_7e940048",
+      "revId": "f66ce011c923cb565f12cd223e2fe2ddf6650e50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
