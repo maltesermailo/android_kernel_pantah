@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b95f2ded_eabdf7bd",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3194,
+      "author": {
+        "id": 1093953
+      },
+      "writtenOn": "2017-08-30T18:42:58Z",
+      "side": 1,
+      "message": "Hmm.. schedutil eventually ignores an idle CPU\u0027s vote in the shared policy case, but if it\u0027s not a shared policy the vote could be in place forever? Would this change have to go hand in hand with something like Chris\u0027s change to poll idle CPUs from non-idle ones to update their utilization?",
+      "range": {
+        "startLine": 3194,
+        "startChar": 12,
+        "endLine": 3194,
+        "endChar": 34
+      },
+      "revId": "0f3854826d21f8754c040dea58ba90745adafae2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
