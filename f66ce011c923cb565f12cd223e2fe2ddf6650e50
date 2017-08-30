@@ -178,6 +178,24 @@
       "revId": "f66ce011c923cb565f12cd223e2fe2ddf6650e50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eb76e7fb_1cdcc86a",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2017-08-30T18:05:57Z",
+      "side": 1,
+      "message": "If I understand that patch correctly, we update the utilization of tick-less CPUs from another CPUs newly-idle path. I believe this will increase the likelihood of making the contribution less stale - however what if there is a chance none of the other CPUs in the cluster go idle, except for the idle CPU. then in this case wouldn\u0027t we be falsely considering the stale contribution of the idle CPU?",
+      "parentUuid": "53a49ea3_ef8e9b01",
+      "revId": "f66ce011c923cb565f12cd223e2fe2ddf6650e50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
