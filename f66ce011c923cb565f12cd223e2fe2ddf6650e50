@@ -124,6 +124,24 @@
       "revId": "f66ce011c923cb565f12cd223e2fe2ddf6650e50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "07ec2b7c_7e940048",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1093953
+      },
+      "writtenOn": "2017-08-30T00:31:35Z",
+      "side": 1,
+      "message": "If j_sg_cpu had the highest utilization amongs CPUs in the policy, and its vote is discounted, then frequency will drop immediately. If it wasn\u0027t the one driving the frequency, the yes, no frequency change.\n\nThinking a bit more here, apologies for verbosity..\nEven with PELT, which leaves utilization on idle CPUs presuming those tasks will come back in the near future - and with AOSP-running SoCs potentially having slow (2ms+) frequency switching, the original logic is a bit suspect in the sense that it works very well for fast-switching capable targets but not otherwise.. \n\nWorkloads exhibit parallelism in Android, so it may mean skewing of the stats for workloads running on other CPUs in the same window too. \n\nIf there\u0027s no change anywhere with respect to power/perf I actually have no problem in ignoring/dropping this change for the sake of keeping alignment with upstream (this works well for x86 I suppose)",
+      "parentUuid": "36e7f94d_ee5416d2",
+      "revId": "f66ce011c923cb565f12cd223e2fe2ddf6650e50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
