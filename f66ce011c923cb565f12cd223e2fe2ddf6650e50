@@ -196,6 +196,24 @@
       "revId": "f66ce011c923cb565f12cd223e2fe2ddf6650e50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "21af0bd4_b0d3d46a",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2017-08-31T09:16:06Z",
+      "side": 1,
+      "message": "Yes, that\u0027s true. Mostly we have something going idle elsewhere, and the signals get updated. If that doesn\u0027t happen, then my patch does nothing to address the stale signals of those tick-less RQs. Further, we might also skip a nohz balance if the task distribution is exactly correct, so we could perhaps have a stale signal for quite a long time. I\u0027d expect that to be a rare occasion, but it\u0027s perfectly possible I think. Vincent has been working on doing something about this for mainline at https://git.linaro.org/people/vincent.guittot/kernel.git/commit/?h\u003dsched/pelt\u0026id\u003ddddcc93dd38d7c52c69277c5ee251409b8038c15 which can also help.",
+      "parentUuid": "eb76e7fb_1cdcc86a",
+      "revId": "f66ce011c923cb565f12cd223e2fe2ddf6650e50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
