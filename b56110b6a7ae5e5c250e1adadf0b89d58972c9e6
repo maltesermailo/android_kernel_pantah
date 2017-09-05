@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "14e88be8_7df21d37",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 5741,
+      "author": {
+        "id": 1200908
+      },
+      "writtenOn": "2017-09-05T17:53:52Z",
+      "side": 1,
+      "message": "We should add a condition to avoid cases where \n eenv-\u003ecpu[cpu_idx].cpu_id is -1 \nas it is done above. Otherwise the calling function will do\n target_cpu \u003d eenv.cpu[eenv.next_idx].cpu_id\nwith a -1 index for the array.",
+      "range": {
+        "startLine": 5741,
+        "startChar": 1,
+        "endLine": 5741,
+        "endChar": 64
+      },
+      "revId": "b56110b6a7ae5e5c250e1adadf0b89d58972c9e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
