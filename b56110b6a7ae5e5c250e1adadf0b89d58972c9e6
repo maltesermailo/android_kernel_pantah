@@ -22,6 +22,30 @@
       "revId": "b56110b6a7ae5e5c250e1adadf0b89d58972c9e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f81c35ea_e83c0913",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 5741,
+      "author": {
+        "id": 1200908
+      },
+      "writtenOn": "2017-09-05T18:23:02Z",
+      "side": 1,
+      "message": "Sorry, went too fast for this one, but the idea is the same. target_cpu will be -1 whereas it should be valid at this point. If it\u0027s not, we have select_task_rq_fair returning -1 causing select_task_rq to use select_fallback_rq().",
+      "parentUuid": "14e88be8_7df21d37",
+      "range": {
+        "startLine": 5741,
+        "startChar": 1,
+        "endLine": 5741,
+        "endChar": 64
+      },
+      "revId": "b56110b6a7ae5e5c250e1adadf0b89d58972c9e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
