@@ -69,6 +69,30 @@
       "revId": "001e6b30f47252655f74cd7c8725eeda8816e1cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1678e22f_2b300cae",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1229,
+      "author": {
+        "id": 1004277
+      },
+      "writtenOn": "2017-09-07T20:09:32Z",
+      "side": 1,
+      "message": "Maybe this can happen if we get two GOV_POLICY_EXIT events in a row in some bogus situation?\n\nJust change the WARN_ON to an if(WARN_ON(...)) and return -EINVAL if so.",
+      "parentUuid": "8c2ebc2e_f3207465",
+      "range": {
+        "startLine": 1229,
+        "startChar": 0,
+        "endLine": 1229,
+        "endChar": 16
+      },
+      "revId": "001e6b30f47252655f74cd7c8725eeda8816e1cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
