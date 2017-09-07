@@ -45,6 +45,30 @@
       "revId": "001e6b30f47252655f74cd7c8725eeda8816e1cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c2ebc2e_f3207465",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1229,
+      "author": {
+        "id": 1224874
+      },
+      "writtenOn": "2017-09-07T19:27:45Z",
+      "side": 1,
+      "message": "I agree, the code path does not have a possibility to get tunables as NULL. In that case, can we remove the WARN_ON as well, because if we consider that WARN_ON is probable, we shouldn\u0027t we check for NULL also??",
+      "parentUuid": "6f5fe2c6_92baa1ad",
+      "range": {
+        "startLine": 1229,
+        "startChar": 0,
+        "endLine": 1229,
+        "endChar": 16
+      },
+      "revId": "001e6b30f47252655f74cd7c8725eeda8816e1cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
