@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9c76e535_8a39650b",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1209,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-09-07T19:14:29Z",
+      "side": 1,
+      "message": "How can this ever happen?",
+      "range": {
+        "startLine": 1209,
+        "startChar": 0,
+        "endLine": 1209,
+        "endChar": 16
+      },
+      "revId": "001e6b30f47252655f74cd7c8725eeda8816e1cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f5fe2c6_92baa1ad",
+        "filename": "drivers/cpufreq/cpufreq_interactive.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1229,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2017-09-07T19:14:29Z",
+      "side": 1,
+      "message": "same here, what code path allows this to be NULL?  Shouldn\u0027t that be fixed instead?\nI agree, the WARN_ON() doesn\u0027t protect from this, which isn\u0027t ok, but I don\u0027t see how that could ever trigger anyway, do you?",
+      "range": {
+        "startLine": 1229,
+        "startChar": 0,
+        "endLine": 1229,
+        "endChar": 16
+      },
+      "revId": "001e6b30f47252655f74cd7c8725eeda8816e1cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
