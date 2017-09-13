@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7db55c1a_c63c4577",
+        "filename": "kernel/sched/features.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2017-09-13T14:52:04Z",
+      "side": 1,
+      "message": "I think we should set this to true, and I\u0027ll push an update to that effect later today.\n\nThe reason is like so. Imagine we have a small task located on a little CPU.\n\nThe task wakes up and the cpu_util_wake happens (due to a small amount of other task load previously) to tell us that there is a tiny amount of blocked load (maybe 1-2%). This is enough to indicate that we can save 8% relative energy by moving the task to another little CPU, although in reality the amount saved is very small indeed if it ever exists.\n\nWe can of course set the deadzone up to ignore these percentages however if we did that we would also ignore the much bigger absolute energy savings which are available by moving a newly-small task from a bigger CPU, since in relative terms 8% of Juno\u0027s big CPU energy is almost 53% of Juno\u0027s little CPU energy.\n\nIn short, I think using relative energy is going to be quite complex to do the right thing and we shouldn\u0027t enable it until we have the basic research completed.\n\nNormalised energy, where we filter in reference to a specific amount of whole-system-energy is much less likely to need per-platform tweaking IMO",
+      "revId": "7c097de90fc153cef53ac8a781056c3320748382",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
