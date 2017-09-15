@@ -22,6 +22,30 @@
       "revId": "e6e9aa03b6ecf4e09420438e5e2b90f33cc30fb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7dea970e_8f134f28",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 929,
+      "author": {
+        "id": 1170883
+      },
+      "writtenOn": "2017-09-15T03:08:08Z",
+      "side": 1,
+      "message": "[ 2876.186886] -(3)[297:logd.reader] Possible unsafe locking scenario:\\x0a\n[ 2876.186900] -(3)[297:logd.reader]       CPU0                    CPU1\n[ 2876.186911] -(3)[297:logd.reader]       ----                    ----\n[ 2876.186921] -(3)[297:logd.reader]  lock(\u0026(\u0026lru-\u003enode[i].lock)-\u003erlock);\n[ 2876.186943] -(3)[297:logd.reader]                               lock(\u0026(\u0026dentry-\u003ed_lockref.lock)-\u003erlock);\n[ 2876.186965] -(3)[297:logd.reader]                               lock(\u0026(\u0026lru-\u003enode[i].lock)-\u003erlock);",
+      "parentUuid": "6956ca8c_ad5ed357",
+      "range": {
+        "startLine": 929,
+        "startChar": 0,
+        "endLine": 929,
+        "endChar": 31
+      },
+      "revId": "e6e9aa03b6ecf4e09420438e5e2b90f33cc30fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
