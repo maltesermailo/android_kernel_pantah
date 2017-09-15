@@ -46,6 +46,30 @@
       "revId": "e6e9aa03b6ecf4e09420438e5e2b90f33cc30fb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8ca84481_aa58b01a",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 929,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-09-15T03:47:36Z",
+      "side": 1,
+      "message": "Can you include more detail here? get_task_mm does should not lock the lru lock. Do anyone else lock the lru lock with the task lock held?",
+      "parentUuid": "7dea970e_8f134f28",
+      "range": {
+        "startLine": 929,
+        "startChar": 0,
+        "endLine": 929,
+        "endChar": 31
+      },
+      "revId": "e6e9aa03b6ecf4e09420438e5e2b90f33cc30fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
