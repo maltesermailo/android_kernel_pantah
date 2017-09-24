@@ -16,6 +16,24 @@
       "revId": "da9f0ff13d90f630b12ec0176db91f1d7bba1cea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0b00c9db_1d8952d8",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5491,
+      "author": {
+        "id": 1118600
+      },
+      "writtenOn": "2017-09-24T03:23:55Z",
+      "side": 1,
+      "message": "Good point, we should consider the boost margin.\n\nBut I think if we only consider task boost margin is not enough, we need to consider boost margin for both CPU\u0027s existed boost margin and the waken task\u0027s boost margin together.\n\nSo I suggest the function group_max_util() should firstly check the max boost margin from CPU level and task level, then use the boost margin to inflate the \u0027util\u0027 value; so finally group_max_util() will return back the maximum util value with boost margin applied. Then find_best_target() can directly select a capacity index for this.\n\nDoes this idea make sense for you?",
+      "parentUuid": "19c5d7d6_f7c41e75",
+      "revId": "da9f0ff13d90f630b12ec0176db91f1d7bba1cea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
