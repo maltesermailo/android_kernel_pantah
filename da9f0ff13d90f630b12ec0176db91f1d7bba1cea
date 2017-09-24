@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "19c5d7d6_f7c41e75",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5491,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-09-24T01:58:00Z",
+      "side": 1,
+      "message": "For consistency, should not we apply the same fix here?\n\nA 10% task, which is 50% boosted, will gets a 450 utilization margin, which potentially completely eclipse the fix on fidn_new_capacity. \n\nIndeed, if it\u0027s the only task on a CPU, this 100+450\u003d550 utilization is the value used by schedutil to select the OPP. Thus, again we should consider the capacity_margin to potentially skip the min_capacity OPP.",
+      "revId": "da9f0ff13d90f630b12ec0176db91f1d7bba1cea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
