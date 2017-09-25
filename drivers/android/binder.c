@@ -2846,8 +2846,11 @@ static void binder_transaction(struct binder_proc *proc,
 			ref = binder_get_ref_olocked(proc, tr->target.handle,
 						     true);
 			if (ref) {
-				binder_inc_node(ref->node, 1, 0, NULL);
 				target_node = ref->node;
+				binder_node_inner_lock(target_node);
+				binder_inc_node_nilocked(ref->node, 1, 0, NULL);
+				binder_inc_node_tmpref_ilocked(target_node);
+				binder_node_inner_unlock(target_node);
 			}
 			binder_proc_unlock(proc);
 			if (target_node == NULL) {
@@ -2867,7 +2870,10 @@ static void binder_transaction(struct binder_proc *proc,
 				return_error_line = __LINE__;
 				goto err_no_context_mgr_node;
 			}
-			binder_inc_node(target_node, 1, 0, NULL);
+			binder_node_inner_lock(target_node);
+			binder_inc_node_nilocked(target_node, 1, 0, NULL);
+			binder_inc_node_tmpref_ilocked(target_node);
+			binder_node_inner_unlock(target_node);
 			mutex_unlock(&context->context_mgr_node_lock);
 		}
 		e->to_node = target_node->debug_id;
@@ -3241,6 +3247,8 @@ static void binder_transaction(struct binder_proc *proc,
 	if (target_thread)
 		binder_thread_dec_tmpref(target_thread);
 	binder_proc_dec_tmpref(target_proc);
+	if (target_node)
+		binder_dec_node_tmpref(target_node);
 	/*
 	 * write barrier to synchronize with initialization
 	 * of log entry
@@ -3260,6 +3268,7 @@ err_bad_parent:
 err_copy_data_failed:
 	trace_binder_transaction_failed_buffer_release(t->buffer);
 	binder_transaction_buffer_release(target_proc, t->buffer, offp);
+	binder_dec_node_tmpref(target_node);
 	target_node = NULL;
 	t->buffer->transaction = NULL;
 	binder_alloc_free_buf(&target_proc->alloc, t->buffer);
@@ -3279,8 +3288,10 @@ err_no_context_mgr_node:
 		binder_thread_dec_tmpref(target_thread);
 	if (target_proc)
 		binder_proc_dec_tmpref(target_proc);
-	if (target_node)
+	if (target_node) {
 		binder_dec_node(target_node, 1, 0);
+		binder_dec_node_tmpref(target_node);
+	}
 
 	binder_debug(BINDER_DEBUG_FAILED_TRANSACTION,
 		     "%d:%d transaction failed %d/%d, size %lld-%lld line %d\n",
