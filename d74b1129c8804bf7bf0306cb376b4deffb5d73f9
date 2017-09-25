@@ -142,6 +142,30 @@
       "revId": "d74b1129c8804bf7bf0306cb376b4deffb5d73f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed7bce76_2b14c7e5",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2117,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-09-25T19:32:56Z",
+      "side": 1,
+      "message": "I was not suggesting you take that whole patch, as it replaces existing error codes that user-space acts on. Adding the new error as BR_ERROR would be a little better than adding another way to return the same error code to user-space. I\u0027m fine with you merging this as is though, but your new helper function will also have to change when we switch to BR_ERROR.",
+      "parentUuid": "7ee24578_7ecbbdda",
+      "range": {
+        "startLine": 2117,
+        "startChar": 30,
+        "endLine": 2117,
+        "endChar": 43
+      },
+      "revId": "d74b1129c8804bf7bf0306cb376b4deffb5d73f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
