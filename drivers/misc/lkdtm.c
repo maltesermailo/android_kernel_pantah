@@ -105,6 +105,21 @@ enum ctype {
 	CT_WRITE_RO,
 	CT_WRITE_RO_AFTER_INIT,
 	CT_WRITE_KERN,
+	CT_FS_STRCPY,
+	CT_FS_STRNCPY,
+	CT_FS_STRCAT,
+	CT_FS_STRLEN,
+	CT_FS_STRNLEN,
+	CT_FS_STRLCPY,
+	CT_FS_STRNCAT,
+	CT_FS_MEMSET,
+	CT_FS_MEMCPY,
+	CT_FS_MEMMOVE,
+	CT_FS_MEMSCAN,
+	CT_FS_MEMCMP,
+	CT_FS_MEMCHR,
+	CT_FS_MEMCHR_INV,
+	CT_FS_KMEMDUP,
 };
 
 static char* cp_name[] = {
@@ -143,6 +158,21 @@ static char* cp_type[] = {
 	"WRITE_RO",
 	"WRITE_RO_AFTER_INIT",
 	"WRITE_KERN",
+	"FS_STRCPY",
+	"FS_STRNCPY",
+	"FS_STRCAT",
+	"FS_STRLEN",
+	"FS_STRNLEN",
+	"FS_STRLCPY",
+	"FS_STRNCAT",
+	"FS_MEMSET",
+	"FS_MEMCPY",
+	"FS_MEMMOVE",
+	"FS_MEMSCAN",
+	"FS_MEMCMP",
+	"FS_MEMCHR",
+	"FS_MEMCHR_INV",
+	"FS_KMEMDUP",
 };
 
 static struct jprobe lkdtm;
@@ -378,9 +408,11 @@ static void lkdtm_do_action(enum ctype which)
 	case CT_WARNING:
 		WARN_ON(1);
 		break;
-	case CT_EXCEPTION:
-		*((int *) 0) = 0;
+	case CT_EXCEPTION: {
+		int *ptr = NULL;
+		*ptr = 0;
 		break;
+	}
 	case CT_LOOP:
 		for (;;)
 			;
@@ -548,6 +580,62 @@ static void lkdtm_do_action(enum ctype which)
 		do_overwritten();
 		break;
 	}
+	case CT_FS_STRCPY: {
+		char buf[10];
+		const char* test = "1234567890";
+		strcpy(buf, test);
+		break;
+	}
+	case CT_FS_STRNCPY: {
+		char buf[10];
+		const char* test = "1234567890";
+		// strncpy(buf, test, 11); // Will not compile
+		strncpy(buf, test, strlen(test) + 1);
+		break;
+	}
+	case CT_FS_STRCAT: {
+		char buf[10];
+		const char* test = "12345";
+		strcpy(buf, test);
+		strcat(buf, test);
+		break;
+	}
+	case CT_FS_STRLEN: {
+		char buf[10];
+		const char* test = "1234567890";
+		strncpy(buf, test, 10);
+		strlen(buf);
+		break;
+	}
+	case CT_FS_STRNLEN: {
+		char buf[10];
+		const char* test = "1234567890";
+		strncpy(buf, test, 10);
+		strnlen(buf, 11);
+		break;
+	}
+	case CT_FS_STRLCPY: {
+		char buf[10];
+		const char* test = "1234567890";
+		strlcpy(buf, test, 11);
+		strlcpy(buf, test, strlen(test) + 1);
+		break;
+	}
+	case CT_FS_STRNCAT: {
+		char buf[10];
+		const char* test = "12345";
+		strcpy(buf, test);
+		strncat(buf, test, strlen(test) + 1);
+		break;
+	}
+	case CT_FS_MEMSET:
+	case CT_FS_MEMCPY:
+	case CT_FS_MEMMOVE:
+	case CT_FS_MEMSCAN:
+	case CT_FS_MEMCMP:
+	case CT_FS_MEMCHR:
+	case CT_FS_MEMCHR_INV:
+	case CT_FS_KMEMDUP:
 	case CT_NONE:
 	default:
 		break;
