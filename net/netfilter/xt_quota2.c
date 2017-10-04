@@ -18,6 +18,7 @@
 #include <linux/spinlock.h>
 #include <asm/atomic.h>
 #include <net/netlink.h>
+#include <net/tcp.h>
 
 #include <linux/netfilter/x_tables.h>
 #include <linux/netfilter/xt_quota2.h>
@@ -307,6 +308,21 @@ quota_mt2(const struct sk_buff *skb, struct xt_action_param *par)
 	struct xt_quota_mtinfo2 *q = (void *)par->matchinfo;
 	struct xt_quota_counter *e = q->master;
 	bool ret = q->flags & XT_QUOTA_INVERT;
+	int offload_unacc = 0;
+
+	/*  For GRO/GSO'ed packets, also count the network and transport header
+	 *  lengths of coalesced packets which are not counted in skb->len.
+	 */
+	if(skb_shinfo(skb)->gso_segs >= 1 &&
+			((par->family == NFPROTO_IPV4 &&
+				ip_hdr(skb)->protocol == IPPROTO_TCP) ||
+			(par->family == NFPROTO_IPV6 &&
+				ipv6_hdr(skb)->nexthdr == IPPROTO_TCP))) {
+		offload_unacc = skb_transport_header(skb)
+					- skb_network_header(skb);
+		offload_unacc += tcp_hdrlen(skb);
+		offload_unacc *= (skb_shinfo(skb)->gso_segs - 1);
+	}
 
 	spin_lock_bh(&e->lock);
 	if (q->flags & XT_QUOTA_GROW) {
@@ -315,13 +331,15 @@ quota_mt2(const struct sk_buff *skb, struct xt_action_param *par)
 		 * implement it here simply to have a consistent behavior.
 		 */
 		if (!(q->flags & XT_QUOTA_NO_CHANGE)) {
-			e->quota += (q->flags & XT_QUOTA_PACKET) ? 1 : skb->len;
+			e->quota += (q->flags & XT_QUOTA_PACKET) ?
+				1 : (skb->len + offload_unacc);
 		}
 		ret = true;
 	} else {
-		if (e->quota >= skb->len) {
+		if (e->quota >= skb->len + offload_unacc) {
 			if (!(q->flags & XT_QUOTA_NO_CHANGE))
-				e->quota -= (q->flags & XT_QUOTA_PACKET) ? 1 : skb->len;
+				e->quota -= (q->flags & XT_QUOTA_PACKET) ?
+					1 : (skb->len + offload_unacc);
 			ret = !ret;
 		} else {
 			/* We are transitioning, log that fact. */
