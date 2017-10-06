@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "131cbb8c_b6312ad0",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 8768,
+      "author": {
+        "id": 1155783
+      },
+      "writtenOn": "2017-10-06T13:30:47Z",
+      "side": 1,
+      "message": "Seems to me this is somewhat hard-coded for MC-level (i.e. assumes a group \u003d\u003d 1 CPU). My instinct says we should use:\n\n- sgs-\u003egroup_capacity instead of capacity_orig_of\n- sgs-\u003egroup_no_capacity instead of nr_running \u003c 2 and cpu_util_energy comparison\n\nDoes that make sense?",
+      "revId": "9ed36c47e4e24f7f6f35e5b72a72a316b5a790b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
