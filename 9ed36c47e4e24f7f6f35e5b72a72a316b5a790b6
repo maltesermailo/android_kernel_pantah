@@ -16,6 +16,24 @@
       "revId": "9ed36c47e4e24f7f6f35e5b72a72a316b5a790b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d18dd9c4_75157cdf",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 8768,
+      "author": {
+        "id": 1209348
+      },
+      "writtenOn": "2017-10-09T21:20:32Z",
+      "side": 1,
+      "message": "\u003e sgs-\u003egroup_capacity instead of capacity_orig_of\n\nTo prevent migration between sibling SMT cpus when domain 0 is sibling level?\nGood point but I haven\u0027t thought about which way is better.  Will need discussion.  My gut feeling is we might be better preventing like you said though..\n\n\u003e sgs-\u003egroup_no_capacity instead of nr_running \u003c 2 and cpu_util_energy comparison\n\nstatic inline bool\ngroup_is_overloaded(struct lb_env *env, struct sg_lb_stats *sgs)\n{\n        if (sgs-\u003esum_nr_running \u003c\u003d sgs-\u003egroup_weight)\n                return false;\n\n-\u003e I agree using this portion will be right thing to do.\n\n        if ((sgs-\u003egroup_capacity * 100) \u003c\n                        (sgs-\u003egroup_util * env-\u003esd-\u003eimbalance_pct))\n                return true;\n\n-\u003e But worried about if this makes thing\u0027s too conservative because imbalance_pct is meant to be high enough make newly idle and busy load balancers conservative.\n\n        return false;\n}",
+      "parentUuid": "131cbb8c_b6312ad0",
+      "revId": "9ed36c47e4e24f7f6f35e5b72a72a316b5a790b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
