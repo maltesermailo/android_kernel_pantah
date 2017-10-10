@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "7cca54b7_01ddfb2e",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 9912,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2017-10-10T17:03:02Z",
+      "side": 1,
+      "message": "irqsave is not needed here I think, since irqs are already disabled in the tick path",
+      "revId": "f441cb8f5df1bca48773a5808a48add2aca013a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d794e19e_f03185f0",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 7
