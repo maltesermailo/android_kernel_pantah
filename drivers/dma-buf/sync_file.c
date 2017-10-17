@@ -170,14 +170,10 @@ static struct fence **get_fences(struct sync_file *sync_file, int *num_fences)
 	return &sync_file->fence;
 }
 
-static void add_fence(struct fence **fences, int *i, struct fence *fence)
+static void add_fence(struct fence **fences, int i, struct fence *fence)
 {
-	fences[*i] = fence;
-
-	if (!fence_is_signaled(fence)) {
-		fence_get(fence);
-		(*i)++;
-	}
+	fences[i] = fence;
+	fence_get(fence);
 }
 
 /**
@@ -224,18 +220,18 @@ static struct sync_file *sync_file_merge(const char *name, struct sync_file *a,
 		struct fence *pt_b = b_fences[i_b];
 
 		if (pt_a->context < pt_b->context) {
-			add_fence(fences, &i, pt_a);
+			add_fence(fences, i++, pt_a);
 
 			i_a++;
 		} else if (pt_a->context > pt_b->context) {
-			add_fence(fences, &i, pt_b);
+			add_fence(fences, i++, pt_b);
 
 			i_b++;
 		} else {
 			if (pt_a->seqno - pt_b->seqno <= INT_MAX)
-				add_fence(fences, &i, pt_a);
+				add_fence(fences, i++, pt_a);
 			else
-				add_fence(fences, &i, pt_b);
+				add_fence(fences, i++, pt_b);
 
 			i_a++;
 			i_b++;
@@ -243,10 +239,10 @@ static struct sync_file *sync_file_merge(const char *name, struct sync_file *a,
 	}
 
 	for (; i_a < a_num_fences; i_a++)
-		add_fence(fences, &i, a_fences[i_a]);
+		add_fence(fences, i++, a_fences[i_a]);
 
 	for (; i_b < b_num_fences; i_b++)
-		add_fence(fences, &i, b_fences[i_b]);
+		add_fence(fences, i++, b_fences[i_b]);
 
 	if (i == 0)
 		fences[i++] = fence_get(a_fences[0]);
