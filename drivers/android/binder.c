@@ -2814,10 +2814,11 @@ static void binder_transaction(struct binder_proc *proc,
 {
 	int ret;
 	struct binder_transaction *t;
-	struct binder_work *tcomplete;
 	binder_size_t *offp, *off_end, *off_start;
 	binder_size_t off_min;
 	u8 *sg_bufp, *sg_buf_end;
+	struct binder_work *tcomplete = NULL;
+	struct binder_work *tcomplete_target = NULL;
 	struct binder_proc *target_proc = NULL;
 	struct binder_thread *target_thread = NULL;
 	struct binder_node *target_node = NULL;
@@ -2996,14 +2997,31 @@ static void binder_transaction(struct binder_proc *proc,
 	binder_stats_created(BINDER_STAT_TRANSACTION);
 	spin_lock_init(&t->lock);
 
-	tcomplete = kzalloc(sizeof(*tcomplete), GFP_KERNEL);
-	if (tcomplete == NULL) {
-		return_error = BR_FAILED_REPLY;
-		return_error_param = -ENOMEM;
-		return_error_line = __LINE__;
-		goto err_alloc_tcomplete_failed;
+	if (reply || (tr->flags & TF_ONE_WAY)) {
+		/* transaction complete to return to caller */
+		tcomplete = kzalloc(sizeof(*tcomplete), GFP_KERNEL);
+		if (!tcomplete) {
+			return_error = BR_FAILED_REPLY;
+			return_error_param = -ENOMEM;
+			return_error_line = __LINE__;
+			goto err_alloc_tcomplete_failed;
+		}
+		tcomplete->type = BINDER_WORK_TRANSACTION_COMPLETE;
+		binder_stats_created(BINDER_STAT_TRANSACTION_COMPLETE);
 	}
-	binder_stats_created(BINDER_STAT_TRANSACTION_COMPLETE);
+
+	if (reply) {
+		/* transaction complete to return to original caller */
+		tcomplete_target = kzalloc(sizeof(*tcomplete), GFP_KERNEL);
+		if (!tcomplete_target) {
+			return_error = BR_FAILED_REPLY;
+			return_error_param = -ENOMEM;
+			return_error_line = __LINE__;
+			goto err_alloc_tcomplete_target_failed;
+		}
+		tcomplete_target->type = BINDER_WORK_TRANSACTION_COMPLETE;
+		binder_stats_created(BINDER_STAT_TRANSACTION_COMPLETE);
+	}
 
 	t->debug_id = t_debug_id;
 
@@ -3257,11 +3275,11 @@ static void binder_transaction(struct binder_proc *proc,
 			goto err_bad_object_type;
 		}
 	}
-	tcomplete->type = BINDER_WORK_TRANSACTION_COMPLETE;
-	binder_enqueue_work(proc, tcomplete, &thread->todo);
+
 	t->work.type = BINDER_WORK_TRANSACTION;
 
 	if (reply) {
+		binder_enqueue_work(proc, tcomplete, &thread->todo);
 		binder_inner_proc_lock(target_proc);
 		if (target_thread->is_dead) {
 			binder_inner_proc_unlock(target_proc);
@@ -3269,6 +3287,8 @@ static void binder_transaction(struct binder_proc *proc,
 		}
 		BUG_ON(t->buffer->async_transaction != 0);
 		binder_pop_transaction_ilocked(target_thread, in_reply_to);
+		binder_enqueue_work_ilocked(tcomplete_target,
+					    &target_thread->todo);
 		binder_enqueue_work_ilocked(&t->work, &target_thread->todo);
 		binder_inner_proc_unlock(target_proc);
 		wake_up_interruptible_sync(&target_thread->wait);
@@ -3290,6 +3310,7 @@ static void binder_transaction(struct binder_proc *proc,
 	} else {
 		BUG_ON(target_node == NULL);
 		BUG_ON(t->buffer->async_transaction != 1);
+		binder_enqueue_work(proc, tcomplete, &thread->todo);
 		if (!binder_proc_transaction(t, target_proc, NULL))
 			goto err_dead_proc_or_thread;
 	}
@@ -3323,8 +3344,15 @@ err_copy_data_failed:
 	t->buffer->transaction = NULL;
 	binder_alloc_free_buf(&target_proc->alloc, t->buffer);
 err_binder_alloc_buf_failed:
-	kfree(tcomplete);
-	binder_stats_deleted(BINDER_STAT_TRANSACTION_COMPLETE);
+	if (tcomplete_target) {
+		kfree(tcomplete_target);
+		binder_stats_deleted(BINDER_STAT_TRANSACTION_COMPLETE);
+	}
+err_alloc_tcomplete_target_failed:
+	if (tcomplete) {
+		kfree(tcomplete);
+		binder_stats_deleted(BINDER_STAT_TRANSACTION_COMPLETE);
+	}
 err_alloc_tcomplete_failed:
 	kfree(t);
 	binder_stats_deleted(BINDER_STAT_TRANSACTION);
