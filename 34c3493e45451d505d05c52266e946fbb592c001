@@ -134,6 +134,24 @@
       "revId": "34c3493e45451d505d05c52266e946fbb592c001",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d3650731_c0175d1f",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3289,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-10-19T19:57:44Z",
+      "side": 1,
+      "message": "Sounds about right. I think it would be better to replace the BUG_ON with a binder_user_error than to just remove it. It may also be possible to not add a list, but instead add something like a thread-\u003etodo_should_wake flag instead.",
+      "parentUuid": "6ecff026_58b19e4a",
+      "revId": "34c3493e45451d505d05c52266e946fbb592c001",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
