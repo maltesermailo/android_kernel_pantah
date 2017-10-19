@@ -34,6 +34,24 @@
       "revId": "9ed36c47e4e24f7f6f35e5b72a72a316b5a790b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "11b1a2cf_6ca3c797",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 8768,
+      "author": {
+        "id": 1093953
+      },
+      "writtenOn": "2017-10-19T08:33:08Z",
+      "side": 1,
+      "message": "I agree that the nr_running check and the cpu_util_energy checks don\u0027t make sense here when group_weight \u003e 1 CPU. \n\ncapacity_orig_of should still be okay if the intent was to not move tasks between clusters?\n\nIn lieu of cpu_util_energy we could try to figure out a group_util_energy or maybe just compare group_norm_util for local and busiest?\n\nLooks like there are already checks for group_no_cap and group_has_capacity on lines 8975 below. Do we want to bail out here to out_balanced using a ! version of that check?",
+      "parentUuid": "d18dd9c4_75157cdf",
+      "revId": "9ed36c47e4e24f7f6f35e5b72a72a316b5a790b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
