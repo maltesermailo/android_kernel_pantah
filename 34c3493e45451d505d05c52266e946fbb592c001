@@ -116,6 +116,24 @@
       "revId": "34c3493e45451d505d05c52266e946fbb592c001",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6ecff026_58b19e4a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3289,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-10-19T19:17:36Z",
+      "side": 1,
+      "message": "So from what I can tell, the current driver only queues to thread-\u003etodo (from the local process) in the following scenarios:\n- userspace sends BC_REQUEST_DEATH_NOTIFICATION, but we have no memory for the death recipient\n- userspace sends BC_CLEAR_DEATH_NOTIFICATION (for a valid death recipient)\n- userspace sends BC_DEAD_BINDER_DONE while a clear was already pending\n\nUserspace needs to send these without reading from the kernel, so using a flushCommands(). Then, if userspace intiiates a transaction, thread-\u003etodo will not be empty.\n\nI think delivering these out of order is not a problem - in the first case it will return BR_ERROR and abort the process, in the other cases it results in a decWeak on a proxy object - delaying a decWeak() should be fine.\n\nA remote process should only be able to add to our thread-\u003etodo while we are waiting, so that should not be a problem either.\n\nDo you agree? If so we could also just remove the BUG_ON(). Perhaps Sherry\u0027s idea is safer - only add to _nowake if there\u0027s no work on thread-\u003etodo - I think this would not happen with normal libbinder usage.",
+      "parentUuid": "e5b559a5_65b63508",
+      "revId": "34c3493e45451d505d05c52266e946fbb592c001",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
