@@ -98,6 +98,24 @@
       "revId": "34c3493e45451d505d05c52266e946fbb592c001",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5b559a5_65b63508",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3289,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-10-19T17:58:35Z",
+      "side": 1,
+      "message": "Ok, I guess you mean it can be triggered by a malicious userspace. You could send a BC_CLEAR_DEATH_NOTIFICATION (which adds to thread-\u003etodo) without reading from the kernel, which leaves it in the thread-\u003etodo, and then initiate a transaction. Perhaps there are legitimate scenarios too. Will think about this more.",
+      "parentUuid": "0fe71dea_db34163d",
+      "revId": "34c3493e45451d505d05c52266e946fbb592c001",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
