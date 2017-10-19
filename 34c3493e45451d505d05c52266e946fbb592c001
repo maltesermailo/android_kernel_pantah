@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a72a3a0_1b799ca1",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-10-19T13:55:47Z",
+      "side": 1,
+      "message": "I don\u0027t really like the name _nowake, since we only ever queue work to this from our own thread (so we wouldn\u0027t wake it up, anyway).",
+      "range": {
+        "startLine": 604,
+        "startChar": 4,
+        "endLine": 604,
+        "endChar": 15
+      },
+      "revId": "34c3493e45451d505d05c52266e946fbb592c001",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e1336261_15847251",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2444,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-10-19T13:55:47Z",
+      "side": 1,
+      "message": "technically we could always queue to _nowake, since in case of ONE_WAY we know BR_TRANSACTION_COMPLETE will be queued to the regular todo (see below).",
+      "range": {
+        "startLine": 2441,
+        "startChar": 3,
+        "endLine": 2444,
+        "endChar": 37
+      },
+      "revId": "34c3493e45451d505d05c52266e946fbb592c001",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
