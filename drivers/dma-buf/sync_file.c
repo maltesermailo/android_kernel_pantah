@@ -218,24 +218,13 @@ static struct sync_file *sync_file_merge(const char *name, struct sync_file *a,
 	for (i = i_a = i_b = 0; i_a < a_num_fences && i_b < b_num_fences; ) {
 		struct fence *pt_a = a_fences[i_a];
 		struct fence *pt_b = b_fences[i_b];
-
-		if (pt_a->context < pt_b->context) {
-			add_fence(fences, i++, pt_a);
-
-			i_a++;
-		} else if (pt_a->context > pt_b->context) {
-			add_fence(fences, i++, pt_b);
-
-			i_b++;
-		} else {
-			if (pt_a->seqno - pt_b->seqno <= INT_MAX)
-				add_fence(fences, i++, pt_a);
-			else
-				add_fence(fences, i++, pt_b);
-
-			i_a++;
-			i_b++;
-		}
+		struct fence *pt =
+			(pt_a->context < pt_b->context) ? pt_a :
+			(pt_a->context > pt_b->context) ? pt_b :
+			fence_is_later(pt_a, pt_b) ? pt_a : pt_b;
+		add_fence(fences, i++, pt);
+		i_a += pt->context == pt_a->context ? 1 : 0;
+		i_b += pt->context == pt_b->context ? 1 : 0;
 	}
 
 	for (; i_a < a_num_fences; i_a++)
