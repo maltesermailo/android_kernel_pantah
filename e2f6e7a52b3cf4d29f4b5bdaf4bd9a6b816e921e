@@ -16,6 +16,24 @@
       "revId": "e2f6e7a52b3cf4d29f4b5bdaf4bd9a6b816e921e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6c0e5c63_e25ddcea",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3294,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-10-20T18:57:52Z",
+      "side": 1,
+      "message": "I looked at that, but it makes the code tricky in places, eg binder_inc_ref_for_node() that just takes a list_head* and passes it into other functions before it is finally used - it becomes hard to associate the queue with the flag.\n\nAlso I think there can\u0027t be any work here that needs to be returned immediately -see my previous comment. If we want to be safe, an alternative could be to check in the beginning of binder_transaction() whether there\u0027s work on the todo list, and only set the flag to false here if there was no work?",
+      "parentUuid": "e4cf89c2_e4f5d88b",
+      "revId": "e2f6e7a52b3cf4d29f4b5bdaf4bd9a6b816e921e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
