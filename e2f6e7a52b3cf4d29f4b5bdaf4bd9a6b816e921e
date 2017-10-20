@@ -52,6 +52,24 @@
       "revId": "e2f6e7a52b3cf4d29f4b5bdaf4bd9a6b816e921e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b15f5f2d_ae6ce25f",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3294,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-10-20T19:14:36Z",
+      "side": 1,
+      "message": "Yes, I think it will always be followed by something else. But it seems a bit fragile to write code that depends on that implicit assumption to remain correct. I could add a comment. Is that your preference vs the other idea I mentioned in my previous comment? If I go with your suggestion I\u0027d probably also add new functions to enqueue to thread-\u003etodo specifically, so I don\u0027t have to set the bool all over the place.",
+      "parentUuid": "72a9ee14_e3fddf68",
+      "revId": "e2f6e7a52b3cf4d29f4b5bdaf4bd9a6b816e921e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
