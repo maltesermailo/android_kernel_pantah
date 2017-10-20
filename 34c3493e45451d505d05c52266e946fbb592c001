@@ -170,6 +170,24 @@
       "revId": "34c3493e45451d505d05c52266e946fbb592c001",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ac18140_ede17abc",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3289,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2017-10-20T13:21:08Z",
+      "side": 1,
+      "message": "Actually, I don\u0027t think we can make it a user error, because this does happen in practice; libbinder already sends BC_REQUEST_DEATH_NOTIFICATION/BC_CLEAR_DEATH_NOTIFICATION with a flush(); it can\u0027t read from the kernel because the kernel doesn\u0027t always send something back in response.\n\nPS3 shows the flag; I think I prefer that solution, because it maintains the ordering no matter what (less fragile).",
+      "parentUuid": "3dc960f1_59d111db",
+      "revId": "34c3493e45451d505d05c52266e946fbb592c001",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
