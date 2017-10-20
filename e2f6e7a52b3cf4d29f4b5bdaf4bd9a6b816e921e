@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e4cf89c2_e4f5d88b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3294,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2017-10-20T18:19:37Z",
+      "side": 1,
+      "message": "It might be better to clear this flag when the queue becomes empty and set it after queuing work that should be processed right away. If there is already work on the queue that needs to be returned clearing the flag here would prevent that work from getting processed. It might also be useful to check if this new flag adds anything beyond what looper_need_return already does or if they can be merged.",
+      "revId": "e2f6e7a52b3cf4d29f4b5bdaf4bd9a6b816e921e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
