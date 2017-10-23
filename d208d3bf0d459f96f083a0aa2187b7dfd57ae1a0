@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8582c6d0_6db205cd",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 9922,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2017-10-23T15:43:00Z",
+      "side": 1,
+      "message": "Just to note: In the future we can we use select_task_rq_fair here with SD_BALANCE_WAKE to make sure we\u0027re using a unified selection logic. I guess for now since Chris has already run the tests, we can do that in a subsequent patch.",
+      "range": {
+        "startLine": 9922,
+        "startChar": 12,
+        "endLine": 9922,
+        "endChar": 35
+      },
+      "revId": "d208d3bf0d459f96f083a0aa2187b7dfd57ae1a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
