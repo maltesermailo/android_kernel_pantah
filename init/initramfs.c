@@ -18,7 +18,11 @@
 #include <linux/dirent.h>
 #include <linux/syscalls.h>
 #include <linux/utime.h>
+<<<<<<< HEAD   (86f97a Merge 4.9.57 into android-4.9-o)
 #include <linux/initramfs.h>
+=======
+#include <linux/file.h>
+>>>>>>> BRANCH (4d4a6a Linux 4.9.58)
 
 static ssize_t __init xwrite(int fd, const char *p, size_t count)
 {
@@ -664,6 +668,7 @@ static int __init populate_rootfs(void)
 			printk(KERN_EMERG "Initramfs unpacking failed: %s\n", err);
 		free_initrd();
 #endif
+		flush_delayed_fput();
 		/*
 		 * Try loading default modules from initramfs.  This gives
 		 * us a chance to load before device_initcalls.
