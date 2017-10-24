@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d76a68e5_51ee0013",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 5544,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2017-10-24T00:30:20Z",
+      "side": 1,
+      "message": "Is this issue something specific to this hardware? IMO modern hardware should not waste power if CPU pipeline is idle and not doing anything. Further how often would we hit this, isn\u0027t CPU expected to enter WFI quickly? In that case, something like if (idle_idx \u003d\u003d 0) { idle_idx \u003d 1 } would also be Ok IMO. In most of our device\u0027s EM, we see idle state 0 and and 1 have same idle power. If not much time is spent at state 0, then I\u0027d rather just assume state 0 \u003d\u003d state 1 in the code here and properly account the idle power.\n\nAlso with this change, its a bit counter intuitive in the sense, the energy will be calculated such that the CPU is 100% busy? It would be SCHED_LOAD_SCALE * cap_states[cap_idx].power. Is that correct? Basically, we\u0027re assuming that the power is the same as if the CPU is 100% busy at cap_idx.",
+      "revId": "61e6b10d03e3c06abeeb6b198087f5b540dba0d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
