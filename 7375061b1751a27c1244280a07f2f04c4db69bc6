@@ -34,6 +34,24 @@
       "revId": "7375061b1751a27c1244280a07f2f04c4db69bc6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2664c60f_012aad91",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5603,
+      "author": {
+        "id": 1124848
+      },
+      "writtenOn": "2017-10-24T15:45:40Z",
+      "side": 1,
+      "message": "How about we do:\n\nif (!util_delta \u0026\u0026 !boost \u0026\u0026 capacity_orig_of(src) \u003d\u003d capacity_orig_of(dst))\n  return 0;\nelse\n  /* continue execution function */;\n\nThat would optimize it for the case you\u0027re looking for but still do energy diff otherwise - especially to consider the idle part of the energy as you mentioned. And it will also mean that the energy_diff function is telling the true ;)",
+      "parentUuid": "22f1c2cb_b3f6ec83",
+      "revId": "7375061b1751a27c1244280a07f2f04c4db69bc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
