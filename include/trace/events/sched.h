@@ -938,20 +938,22 @@ TRACE_EVENT(sched_boost_task,
  */
 TRACE_EVENT(sched_overutilized,
 
-	TP_PROTO(bool overutilized),
+	TP_PROTO(struct sched_domain *sd, bool overutilized),
 
-	TP_ARGS(overutilized),
+	TP_ARGS(sd, overutilized),
 
 	TP_STRUCT__entry(
-		__field( bool,	overutilized	)
+		__field( bool,	overutilized	  )
+		__array( char,  cpulist , 32      )
 	),
 
 	TP_fast_assign(
 		__entry->overutilized	= overutilized;
+		scnprintf(__entry->cpulist, sizeof(__entry->cpulist), "%*pbl", cpumask_pr_args(sched_domain_span(sd)));
 	),
 
-	TP_printk("overutilized=%d",
-		__entry->overutilized ? 1 : 0)
+	TP_printk("overutilized=%d sd_span=%s",
+		__entry->overutilized ? 1 : 0, __entry->cpulist)
 );
 
 /*
