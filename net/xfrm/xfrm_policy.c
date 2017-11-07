@@ -1292,8 +1292,14 @@ EXPORT_SYMBOL(xfrm_policy_delete);
 
 int xfrm_sk_policy_insert(struct sock *sk, int dir, struct xfrm_policy *pol)
 {
-	struct net *net = xp_net(pol);
 	struct xfrm_policy *old_pol;
+	struct net *net = NULL;
+	if (pol)
+		net = xp_net(pol);
+	else
+	net = sock_net(sk);
+
+	printk("NET_PTR: %p\n", net);
 
 #ifdef CONFIG_XFRM_SUB_POLICY
 	if (pol && pol->type != XFRM_POLICY_TYPE_MAIN)
