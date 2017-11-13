@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce499975_2b0c792d",
+        "filename": "drivers/staging/android/esdfs/inode.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1133869
+      },
+      "writtenOn": "2017-11-13T01:28:19Z",
+      "side": 1,
+      "message": "seriously, this approach still has deadlock with i_mutex lock from VFS, I promise.\n(\"fs: esdfs: fix deadlock between rmdir and lookup\" didn\u0027t really fix the original drop_shared_icache problem.)\nI don\u0027t know why esdfs is imported, but if you use this approach, sync or deadlock problem between multiviews is still unsolved.",
+      "range": {
+        "startLine": 230,
+        "startChar": 1,
+        "endLine": 230,
+        "endChar": 25
+      },
+      "revId": "08e67c2ff280b81274d8f5a3876b2f11521df55a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
