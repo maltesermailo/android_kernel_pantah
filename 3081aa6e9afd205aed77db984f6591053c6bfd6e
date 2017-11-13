@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3d368d20_eb119367",
+        "filename": "drivers/staging/android/esdfs/lookup.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1133869
+      },
+      "writtenOn": "2017-11-13T01:59:33Z",
+      "side": 1,
+      "message": "please refer to HUAWEI sdcardfs clean obb implementation.\n\neven though this AOSP workaround solves deadlock problem , but it can cause duplicate i_ino.\n\nOur sdcardfs overlay the obb directory (like overlayfs way) as the upstream overlayfs approach, overlay inode is a totally false node.",
+      "range": {
+        "startLine": 165,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 41
+      },
+      "revId": "3081aa6e9afd205aed77db984f6591053c6bfd6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
