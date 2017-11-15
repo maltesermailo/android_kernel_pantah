@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "07ddd6fd_419399bb",
+        "filename": "drivers/staging/android/esdfs/lookup.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2017-11-15T22:02:27Z",
+      "side": 1,
+      "message": "This is the Android user id, which is a bit isolated from the uid/gid. I had previously had this as a uid_t, but that was misleading, as it\u0027s only indirectly tied to a uid.",
+      "parentUuid": "06a18806_884e9096",
+      "range": {
+        "startLine": 125,
+        "startChar": 1,
+        "endLine": 125,
+        "endChar": 9
+      },
+      "revId": "c140f02a35f9489d3bcf71d05152ff81d74016aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1aa2493a_e124ffec",
         "filename": "drivers/staging/android/esdfs/lookup.c",
         "patchSetId": 9
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "872ef389_31d1354f",
+        "filename": "drivers/staging/android/esdfs/lookup.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2017-11-15T22:02:27Z",
+      "side": 1,
+      "message": "I missed this one when changing the type. Unsure what type is preferred for this, but judging from the comment above, probably u32?",
+      "parentUuid": "1aa2493a_e124ffec",
+      "range": {
+        "startLine": 236,
+        "startChar": 32,
+        "endLine": 236,
+        "endChar": 37
+      },
+      "revId": "c140f02a35f9489d3bcf71d05152ff81d74016aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2a23471f_f015a8a8",
         "filename": "drivers/staging/android/esdfs/main.c",
         "patchSetId": 9
@@ -59,6 +107,30 @@
       "writtenOn": "2017-11-15T15:34:23Z",
       "side": 1,
       "message": "what is id \u00270\u0027?  Are you _sure_ it is root?",
+      "range": {
+        "startLine": 278,
+        "startChar": 52,
+        "endLine": 278,
+        "endChar": 53
+      },
+      "revId": "c140f02a35f9489d3bcf71d05152ff81d74016aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "24be8e66_688cc009",
+        "filename": "drivers/staging/android/esdfs/main.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2017-11-15T22:02:27Z",
+      "side": 1,
+      "message": "Id 0 is the default Android User here.",
+      "parentUuid": "2a23471f_f015a8a8",
       "range": {
         "startLine": 278,
         "startChar": 52,
