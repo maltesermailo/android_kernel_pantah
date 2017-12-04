@@ -363,6 +363,8 @@ struct binder_error {
  *                        (invariant after initialized)
  * @async_todo:           list of async work items
  *                        (protected by @proc->inner_lock)
+ * @thread:               thread dedicated to handling work for this node
+ *                        (protected by @proc->inner_lock)
  *
  * Bookkeeping structure for binder nodes.
  */
@@ -403,6 +405,7 @@ struct binder_node {
 	};
 	bool has_async_transaction;
 	struct list_head async_todo;
+	struct binder_thread *thread;
 };
 
 struct binder_ref_death {
@@ -613,6 +616,10 @@ enum {
  *                        when outstanding transactions are cleaned up
  *                        (protected by @proc->inner_lock)
  * @task:                 struct task_struct for this thread
+ * @node_todo:            list of todo-work for node(s) tied to this thread
+ *                        (protected by @proc->inner_lock)
+ * @is_node_dedicated:    whether this thread is dedicated to one or more nodes
+ *                        (protected by @proc->inner_lock)
  *
  * Bookkeeping structure for binder threads.
  */
@@ -633,6 +640,8 @@ struct binder_thread {
 	atomic_t tmp_ref;
 	bool is_dead;
 	struct task_struct *task;
+	struct list_head node_todo;
+	bool is_node_dedicated;
 };
 
 struct binder_transaction {
@@ -944,6 +953,9 @@ binder_defer_work(struct binder_proc *proc, enum binder_deferred_state defer);
 static void binder_free_thread(struct binder_thread *thread);
 static void binder_free_proc(struct binder_proc *proc);
 static void binder_inc_node_tmpref_ilocked(struct binder_node *node);
+static void binder_thread_dec_tmpref(struct binder_thread *thread);
+static struct binder_thread *binder_get_thread_by_pid(struct binder_proc *proc,
+						      pid_t pid);
 
 struct files_struct *binder_get_files_struct(struct binder_proc *proc)
 {
@@ -1017,6 +1029,7 @@ static bool binder_has_work_ilocked(struct binder_thread *thread,
 {
 	return thread->process_todo ||
 		thread->looper_need_return ||
+		!binder_worklist_empty_ilocked(&thread->node_todo) ||
 		(do_proc_work &&
 		 !binder_worklist_empty_ilocked(&thread->proc->todo));
 }
@@ -1032,12 +1045,19 @@ static bool binder_has_work(struct binder_thread *thread, bool do_proc_work)
 	return has_work;
 }
 
-static bool binder_available_for_proc_work_ilocked(struct binder_thread *thread)
+static bool binder_available_for_work_ilocked(struct binder_thread* thread)
 {
 	return !thread->transaction_stack &&
 		binder_worklist_empty_ilocked(&thread->todo) &&
+		binder_worklist_empty_ilocked(&thread->node_todo) &&
 		(thread->looper & (BINDER_LOOPER_STATE_ENTERED |
 				   BINDER_LOOPER_STATE_REGISTERED));
+}
+
+static bool binder_available_for_proc_work_ilocked(struct binder_thread *thread)
+{
+	return !thread->is_node_dedicated &&
+		binder_available_for_work_ilocked(thread);
 }
 
 static void binder_wakeup_poll_threads_ilocked(struct binder_proc *proc,
@@ -1322,6 +1342,7 @@ static struct binder_node *binder_get_node(struct binder_proc *proc,
 static struct binder_node *binder_init_node_ilocked(
 						struct binder_proc *proc,
 						struct binder_node *new_node,
+						struct binder_thread *thread,
 						struct flat_binder_object *fp)
 {
 	struct rb_node **p = &proc->nodes.rb_node;
@@ -1363,6 +1384,10 @@ static struct binder_node *binder_init_node_ilocked(
 	node->ptr = ptr;
 	node->cookie = cookie;
 	node->work.type = BINDER_WORK_NODE;
+	if (thread && !thread->is_dead) {
+		node->thread = thread;
+		thread->is_node_dedicated = true;
+	}
 	priority = flags & FLAT_BINDER_FLAG_PRIORITY_MASK;
 	node->sched_policy = (flags & FLAT_BINDER_FLAG_SCHED_POLICY_MASK) >>
 		FLAT_BINDER_FLAG_SCHED_POLICY_SHIFT;
@@ -1385,11 +1410,19 @@ static struct binder_node *binder_new_node(struct binder_proc *proc,
 {
 	struct binder_node *node;
 	struct binder_node *new_node = kzalloc(sizeof(*node), GFP_KERNEL);
+	struct binder_thread *node_thread = NULL;
 
 	if (!new_node)
 		return NULL;
+
+	if (fp && (fp->flags & FLAT_BINDER_FLAG_THREAD)) {
+		pid_t thread = ((struct flat_binder_object_thread *)fp)->thread;
+		if (thread != 0)
+			node_thread = binder_get_thread_by_pid(proc, thread);
+	}
+
 	binder_inner_proc_lock(proc);
-	node = binder_init_node_ilocked(proc, new_node, fp);
+	node = binder_init_node_ilocked(proc, new_node, node_thread, fp);
 	binder_inner_proc_unlock(proc);
 	if (node != new_node)
 		/*
@@ -1397,6 +1430,8 @@ static struct binder_node *binder_new_node(struct binder_proc *proc,
 		 */
 		kfree(new_node);
 
+	if (node_thread)
+		binder_thread_dec_tmpref(node_thread);
 	return node;
 }
 
@@ -2210,6 +2245,7 @@ static size_t binder_validate_object(struct binder_buffer *buffer, u64 offset)
 {
 	/* Check if we can read a header first */
 	struct binder_object_header *hdr;
+	struct flat_binder_object *fb;
 	size_t object_size = 0;
 
 	if (offset > buffer->data_size - sizeof(*hdr) ||
@@ -2224,8 +2260,14 @@ static size_t binder_validate_object(struct binder_buffer *buffer, u64 offset)
 	case BINDER_TYPE_WEAK_BINDER:
 	case BINDER_TYPE_HANDLE:
 	case BINDER_TYPE_WEAK_HANDLE:
-		object_size = sizeof(struct flat_binder_object);
-		break;
+		if (offset > buffer->data_size - sizeof(*fb) ||
+		    buffer->data_size < sizeof(*fb))
+			return 0;
+		fb = to_flat_binder_object(hdr);
+		if (fb->flags & FLAT_BINDER_FLAG_THREAD)
+			object_size = sizeof(struct flat_binder_object_thread);
+		else
+			object_size = sizeof(struct flat_binder_object);
 	case BINDER_TYPE_FD:
 		object_size = sizeof(struct binder_fd_object);
 		break;
@@ -2790,23 +2832,26 @@ static bool binder_proc_transaction(struct binder_transaction *t,
 	struct binder_node *node = t->buffer->target_node;
 	struct binder_priority node_prio;
 	bool oneway = !!(t->flags & TF_ONE_WAY);
-	bool pending_async = false;
+	bool pending_node_work = false;
 
 	BUG_ON(!node);
 	binder_node_lock(node);
 	node_prio.prio = node->min_priority;
 	node_prio.sched_policy = node->sched_policy;
 
-	if (oneway) {
-		BUG_ON(thread);
-		if (node->has_async_transaction) {
-			pending_async = true;
+	binder_inner_proc_lock(proc);
+
+	if (!thread) {
+		if ((oneway && node->has_async_transaction) ||
+		    (node->thread &&
+		    !binder_available_for_work_ilocked(node->thread))) {
+			pending_node_work = true;
 		} else {
-			node->has_async_transaction = 1;
+			thread = node->thread;
+			if (oneway)
+				node->has_async_transaction = 1;
 		}
 	}
-
-	binder_inner_proc_lock(proc);
 
 	if (proc->is_dead || (thread && thread->is_dead)) {
 		binder_inner_proc_unlock(proc);
@@ -2814,20 +2859,25 @@ static bool binder_proc_transaction(struct binder_transaction *t,
 		return false;
 	}
 
-	if (!thread && !pending_async)
+	if (!thread && !pending_node_work)
 		thread = binder_select_thread_ilocked(proc);
 
 	if (thread) {
 		binder_transaction_priority(thread->task, t, node_prio,
 					    node->inherit_rt);
 		binder_enqueue_thread_work_ilocked(thread, &t->work);
-	} else if (!pending_async) {
+	} else if (!pending_node_work) {
 		binder_enqueue_work_ilocked(&t->work, &proc->todo);
 	} else {
-		binder_enqueue_work_ilocked(&t->work, &node->async_todo);
+		if (node->thread)
+			binder_enqueue_work_ilocked(&t->work,
+						    &node->thread->node_todo);
+		else
+			binder_enqueue_work_ilocked(&t->work,
+						    &node->async_todo);
 	}
 
-	if (!pending_async)
+	if (!pending_node_work)
 		binder_wakeup_thread_ilocked(proc, thread, !oneway /* sync */);
 
 	binder_inner_proc_unlock(proc);
@@ -3654,6 +3704,7 @@ static int binder_thread_write(struct binder_proc *proc,
 
 				buf_node = buffer->target_node;
 				binder_node_inner_lock(buf_node);
+				// TODO this will trigger
 				BUG_ON(!buf_node->has_async_transaction);
 				BUG_ON(buf_node->proc != proc);
 				w = binder_dequeue_work_head_ilocked(
@@ -4054,6 +4105,8 @@ retry:
 		binder_inner_proc_lock(proc);
 		if (!binder_worklist_empty_ilocked(&thread->todo))
 			list = &thread->todo;
+		else if (!binder_worklist_empty_ilocked(&thread->node_todo))
+			list = &thread->node_todo;
 		else if (!binder_worklist_empty_ilocked(&proc->todo) &&
 			   wait_for_proc_work)
 			list = &proc->todo;
@@ -4404,7 +4457,8 @@ static void binder_release_work(struct binder_proc *proc,
 }
 
 static struct binder_thread *binder_get_thread_ilocked(
-		struct binder_proc *proc, struct binder_thread *new_thread)
+		struct binder_proc *proc, struct task_struct *task,
+		struct binder_thread *new_thread)
 {
 	struct binder_thread *thread = NULL;
 	struct rb_node *parent = NULL;
@@ -4414,9 +4468,9 @@ static struct binder_thread *binder_get_thread_ilocked(
 		parent = *p;
 		thread = rb_entry(parent, struct binder_thread, rb_node);
 
-		if (current->pid < thread->pid)
+		if (task->pid < thread->pid)
 			p = &(*p)->rb_left;
-		else if (current->pid > thread->pid)
+		else if (task->pid > thread->pid)
 			p = &(*p)->rb_right;
 		else
 			return thread;
@@ -4426,12 +4480,13 @@ static struct binder_thread *binder_get_thread_ilocked(
 	thread = new_thread;
 	binder_stats_created(BINDER_STAT_THREAD);
 	thread->proc = proc;
-	thread->pid = current->pid;
-	get_task_struct(current);
-	thread->task = current;
+	thread->pid = task->pid;
+	get_task_struct(task);
+	thread->task = task;
 	atomic_set(&thread->tmp_ref, 0);
 	init_waitqueue_head(&thread->wait);
 	INIT_LIST_HEAD(&thread->todo);
+	INIT_LIST_HEAD(&thread->node_todo);
 	rb_link_node(&thread->rb_node, parent, p);
 	rb_insert_color(&thread->rb_node, &proc->threads);
 	thread->looper_need_return = true;
@@ -4443,25 +4498,101 @@ static struct binder_thread *binder_get_thread_ilocked(
 	return thread;
 }
 
-static struct binder_thread *binder_get_thread(struct binder_proc *proc)
+/**
+ * binder_do_get_thread() - Get binder_thread structure
+ * @proc:         struct binder_proc
+ * @task:         struct task_struct of the thread
+ * @take_tmpref:  whether to take a tmpref on the thread
+ *
+ * Allows for retrieving any thread in @proc. If @task
+ * is not current, @take_tmpref should be set, to make
+ * sure the binder_thread structure stays alive.
+ *
+ * If @take_tmpref is set, the caller must release the
+ * tmpref with binder_thread_dec_tmpref() when it's done.
+ *
+ * Return: The binder_thread associated with @task.
+ */
+static struct binder_thread *binder_do_get_thread(struct binder_proc *proc,
+						  struct task_struct *task,
+						  bool take_tmpref)
 {
 	struct binder_thread *thread;
 	struct binder_thread *new_thread;
 
 	binder_inner_proc_lock(proc);
-	thread = binder_get_thread_ilocked(proc, NULL);
+	thread = binder_get_thread_ilocked(proc, task, NULL);
+	if (thread && take_tmpref)
+		atomic_inc(&thread->tmp_ref);
 	binder_inner_proc_unlock(proc);
 	if (!thread) {
 		new_thread = kzalloc(sizeof(*thread), GFP_KERNEL);
 		if (new_thread == NULL)
 			return NULL;
 		binder_inner_proc_lock(proc);
-		thread = binder_get_thread_ilocked(proc, new_thread);
+		thread = binder_get_thread_ilocked(proc, task, new_thread);
+		if (thread && take_tmpref)
+			atomic_inc(&thread->tmp_ref);
 		binder_inner_proc_unlock(proc);
 		if (thread != new_thread)
 			kfree(new_thread);
 	}
 	return thread;
+}
+
+/**
+ * binder_get_thread() - Get binder_thread structure for the current task
+ *
+ * Return: The binder_thread associated with 'current'.
+ */
+static struct binder_thread *binder_get_thread(struct binder_proc *proc) {
+	return binder_do_get_thread(proc, current, /* take_tmpref = */false);
+}
+
+/**
+ * binder_get_thread_by_pid() - Get binder_thread structure for a pid
+ * @proc:         struct binder_proc of the thread
+ * @pid:          pid of the thread
+ *
+ * Allows for retrieving a binder_thread by pid. @pid should belong
+ * to the thread-group of @proc.
+ *
+ * If a binder_thread is found, it will be returned with a tmpref held.
+ * The caller should release the tmpref with binder_thread_dec_tmpref()
+ * when it's done.
+ *
+ * Return: The binder_thread associated with @pid, with a tmpref held,
+ *         or NULL if no binder_thread could be found or created.
+ */
+static struct binder_thread *binder_get_thread_by_pid(struct binder_proc *proc,
+						      pid_t pid)
+{
+	struct binder_thread *thread;
+	struct task_struct *task;
+	struct pid_namespace *pid_ns = task_active_pid_ns(current);
+
+	/* Need RCU because pid may not correspond to current */
+	rcu_read_lock();
+	task = find_task_by_pid_ns(pid, pid_ns);
+	if (task)
+		get_task_struct(task);
+	rcu_read_unlock();
+
+	if (!task)
+		goto err_no_task;
+
+	if (task_tgid_nr_ns(task, pid_ns) != proc->pid)
+		goto err_not_part_of_tg;
+
+	thread = binder_do_get_thread(proc, task, /* take_tmpref = */true);
+
+	put_task_struct(task);
+
+	return thread;
+err_not_part_of_tg:
+	put_task_struct(task);
+err_no_task:
+	return NULL;
 }
 
 static void binder_free_proc(struct binder_proc *proc)
@@ -4487,9 +4618,11 @@ static int binder_thread_release(struct binder_proc *proc,
 				 struct binder_thread *thread)
 {
 	struct binder_transaction *t;
+	struct rb_node *n;
 	struct binder_transaction *send_reply = NULL;
 	int active_transactions = 0;
 	struct binder_transaction *last_t = NULL;
+	struct binder_node *node = NULL;
 
 	binder_inner_proc_lock(thread->proc);
 	/*
@@ -4512,6 +4645,15 @@ static int binder_thread_release(struct binder_proc *proc,
 			send_reply = t;
 	}
 	thread->is_dead = true;
+
+	if (thread->is_node_dedicated) {
+		/* Clean out any node references to this thread */
+		for (n = rb_first(&proc->nodes); n != NULL; n = rb_next(n)) {
+			node = rb_entry(n, struct binder_node, rb_node);
+			if (node->thread == thread)
+				node->thread = NULL;
+		}
+	}
 
 	while (t) {
 		last_t = t;
@@ -4544,6 +4686,7 @@ static int binder_thread_release(struct binder_proc *proc,
 	if (send_reply)
 		binder_send_failed_reply(send_reply, BR_DEAD_REPLY);
 	binder_release_work(proc, &thread->todo);
+	binder_release_work(proc, &thread->node_todo);
 	binder_thread_dec_tmpref(thread);
 	return active_transactions;
 }
@@ -5308,9 +5451,10 @@ static void print_binder_node_nilocked(struct seq_file *m,
 	hlist_for_each_entry(ref, &node->refs, node_entry)
 		count++;
 
-	seq_printf(m, "  node %d: u%016llx c%016llx pri %d:%d hs %d hw %d ls %d lw %d is %d iw %d tr %d",
+	seq_printf(m, "  node %d: u%016llx c%016llx pri %d:%d thread %d hs %d hw %d ls %d lw %d is %d iw %d tr %d",
 		   node->debug_id, (u64)node->ptr, (u64)node->cookie,
 		   node->sched_policy, node->min_priority,
+		   node->thread ? node->thread->task->pid : 0,
 		   node->has_strong_ref, node->has_weak_ref,
 		   node->local_strong_refs, node->local_weak_refs,
 		   node->internal_strong_refs, count, node->tmp_refs);

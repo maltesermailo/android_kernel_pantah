@@ -87,6 +87,12 @@ enum flat_binder_object_flags {
 	 * scheduling policy from the caller (for synchronous transactions).
 	 */
 	FLAT_BINDER_FLAG_INHERIT_RT = 0x800,
+
+	/**
+	 * @FLAT_BINDER_FLAG_THREAD: must be set for flat_binder_object_thread
+	 *
+	 */
+	FLAT_BINDER_FLAG_THREAD = 0x1000,
 };
 
 #ifdef BINDER_IPC_32BIT
@@ -124,6 +130,23 @@ struct flat_binder_object {
 
 	/* extra data associated with local object */
 	binder_uintptr_t	cookie;
+};
+
+struct flat_binder_object_thread {
+	struct binder_object_header	hdr;
+	__u32				flags;
+
+	/* 8 bytes of data. */
+	union {
+		binder_uintptr_t	binder;	/* local object */
+		__u32			handle;	/* remote object */
+	};
+
+	/* extra data associated with local object */
+	binder_uintptr_t	cookie;
+
+	/* pid of thread for handling transactions into this node */
+	pid_t thread;
 };
 
 /**
