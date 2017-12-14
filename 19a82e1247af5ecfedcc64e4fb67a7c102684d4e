@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad4096ad_4730b395",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2017-12-14T16:54:37Z",
+      "side": 1,
+      "message": "I might be missing something here. I don\u0027t understand why you want to move this into CONFIG_CFS_BANDWIDTH - that feature is not enabled on some Android platforms. Instead it seems to me that maybe we should just move the definition of cumulative_runnable_avg outside the CONFIG_FAIR_GROUP_SCHED block so that it is only covered by CONFIG_SMP.\n\nIIRC, EAS and WALT are expected to be compiled out for !SMP and in wherever cfs has load \u0026 utilization signals available (which is for all CONFIG_SMP I think?).",
+      "range": {
+        "startLine": 457,
+        "startChar": 0,
+        "endLine": 459,
+        "endChar": 30
+      },
+      "revId": "19a82e1247af5ecfedcc64e4fb67a7c102684d4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
