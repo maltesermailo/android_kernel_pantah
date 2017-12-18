@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "76f35023_113d1283",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 4935,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-12-18T17:32:23Z",
+      "side": 1,
+      "message": "Give this usage, where the tracepoint is always subject to a condition, we should better defined this trace events using the TRACE_EVENT_CONDITION macro:\nhttps://android.googlesource.com/kernel/common/+/ebd0c14a03fe37f339b5169f4859fadefdc60e6d/include/trace/define_trace.h#31\n\nHere is an example of this macro usage:\nhttps://android.googlesource.com/kernel/common/+/ebd0c14a03fe37f339b5169f4859fadefdc60e6d/include/trace/events/smbus.h#27\n\nWhich for us should be something like:\n\nTRACE_EVENT_CONDITION(sched_overutilized,\n\tTP_PROTO(struct sched_domain *sd,\n\t\t bool is_overutilized,\n\t\t bool was_verutilized),\n\tTP_ARGS(sd, is_overutilized, was_overutilzied),\n\tTP_CONDITION(is_overutilized !\u003d was_overutilzied),\n\t//...same tracepoint code\n\nWhich will results into this more run-time efficient implementation:\n\nstatic void set_sd_overutilized(struct sched_domain *sd)\n{\n\ttrace_sched_overutilized(sd, sd-\u003eshared-\u003eoverutilized, true);\n\tsd-\u003eshared-\u003eoverutilized \u003d true;\n}\n\nNotice that to get rid of the branch, we need to fold it into the tracepoint and this will require to have an additional parameter (the second) which reports the current underutilised status. The tracepoint, when enabled, will be generated only if TP_CONDITION is meet. Otherwise, when disabled, we don\u0027t have the branch at all.",
+      "range": {
+        "startLine": 4934,
+        "startChar": 1,
+        "endLine": 4935,
+        "endChar": 37
+      },
+      "revId": "ebd0c14a03fe37f339b5169f4859fadefdc60e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d27a3e4b_9f49c29a",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 4942,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2017-12-18T17:32:23Z",
+      "side": 1,
+      "message": "Similar to the above:\n\nstatic void set_sd_overutilized(struct sched_domain *sd)\n{\n\ttrace_sched_overutilized_clear(sd, sd-\u003eshared-\u003eoverutilized, false);\n\tsd-\u003eshared-\u003eoverutilized \u003d true;\n}",
+      "range": {
+        "startLine": 4941,
+        "startChar": 1,
+        "endLine": 4942,
+        "endChar": 38
+      },
+      "revId": "ebd0c14a03fe37f339b5169f4859fadefdc60e6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
