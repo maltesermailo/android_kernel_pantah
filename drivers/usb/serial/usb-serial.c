@@ -40,6 +40,8 @@
 #include <linux/idr.h>
 #include "pl2303.h"
 
+IMPORT_NS(USB);
+
 #define DRIVER_AUTHOR "Greg Kroah-Hartman <gregkh@linuxfoundation.org>"
 #define DRIVER_DESC "USB Serial Driver core"
 

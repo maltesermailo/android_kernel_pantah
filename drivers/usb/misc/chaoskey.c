@@ -30,6 +30,8 @@
 #include <linux/mutex.h>
 #include <linux/uaccess.h>
 
+IMPORT_NS(USB);
+
 static struct usb_driver chaoskey_driver;
 static struct usb_class_driver chaoskey_class;
 static int chaoskey_rng_read(struct hwrng *rng, void *data,

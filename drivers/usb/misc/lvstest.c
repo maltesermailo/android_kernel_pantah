@@ -21,6 +21,8 @@
 #include <linux/usb/hcd.h>
 #include <linux/usb/phy.h>
 
+IMPORT_NS(USB);
+
 struct lvs_rh {
 	/* root hub interface */
 	struct usb_interface *intf;

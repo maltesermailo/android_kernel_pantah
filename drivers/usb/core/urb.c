@@ -709,7 +709,7 @@ void usb_poison_urb(struct urb *urb)
 	usb_hcd_unlink_urb(urb, -ENOENT);
 	wait_event(usb_kill_urb_queue, atomic_read(&urb->use_count) == 0);
 }
-EXPORT_SYMBOL_GPL(usb_poison_urb);
+EXPORT_SYMBOL_NS(usb_poison_urb, USB);
 
 void usb_unpoison_urb(struct urb *urb)
 {
