@@ -1349,10 +1349,17 @@ out:
 			memcpy(&x1->sel, &x->sel, sizeof(x1->sel));
 		memcpy(&x1->lft, &x->lft, sizeof(x1->lft));
 		x1->km.dying = 0;
-
 		tasklet_hrtimer_start(&x1->mtimer, ktime_set(1, 0), HRTIMER_MODE_REL);
 		if (x1->curlft.use_time)
 			xfrm_state_check_expire(x1);
+		if (memcmp(&x1->mark, &x->mark, sizeof(x1->mark)) ||
+		    x1->props.output_mark != x->props.output_mark) {
+			spin_lock_bh(&net->xfrm.xfrm_state_lock);
+			__xfrm_state_bump_genids(x1);
+			memcpy(&x1->mark, &x->mark, sizeof(x1->mark));
+			x1->props.output_mark = x->props.output_mark;
+			spin_unlock_bh(&net->xfrm.xfrm_state_lock);
+		}
 
 		err = 0;
 		x->km.state = XFRM_STATE_DEAD;
