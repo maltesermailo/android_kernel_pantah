@@ -22,6 +22,30 @@
       "revId": "19a82e1247af5ecfedcc64e4fb67a7c102684d4e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3dc23e87_fd581bf9",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1006514
+      },
+      "writtenOn": "2018-01-17T23:19:57Z",
+      "side": 1,
+      "message": "Thanks Chris, \n\nApologies for the delay in reply. We don\u0027t need cumulative_runnable_avg in cfs_rq structure when CFS_BANDWIDTH (depends on FAIR_GROUP_SCHED) is not enabled. So adding cra unconditionally in cfs_rq is not right. The cfs_rq-\u003ecumulative_runnable_avg should be guarded with CFS_BANDWITH.\n\nThis is the reason why I had to move under CFS_BANDWIDTH.\n\nBr,\nSatya",
+      "parentUuid": "ad4096ad_4730b395",
+      "range": {
+        "startLine": 457,
+        "startChar": 0,
+        "endLine": 459,
+        "endChar": 30
+      },
+      "revId": "19a82e1247af5ecfedcc64e4fb67a7c102684d4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
