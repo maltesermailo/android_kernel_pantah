@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "edf54de9_998ae0a8",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1003665
+      },
+      "writtenOn": "2018-01-26T23:34:48Z",
+      "side": 1,
+      "message": "How are these stats going to be different from what cpufreq stats would report? Seems like an redundant exposure of stats.",
+      "range": {
+        "startLine": 105,
+        "startChar": 26,
+        "endLine": 105,
+        "endChar": 32
+      },
+      "revId": "f45dc2d79d3e3d02a4cb5c4dc807bf49ba5fabea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "217850c8_0e978587",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1003665
+      },
+      "writtenOn": "2018-01-26T23:34:48Z",
+      "side": 1,
+      "message": "Any time you use for_each_online/offline() or cpu_online/offline(), you need to do get_online_cpus() and put_online_cpus(). Otherwise, you can race with hotplug (exception is if you are using these inside a hotplug notifier).",
+      "range": {
+        "startLine": 164,
+        "startChar": 1,
+        "endLine": 164,
+        "endChar": 20
+      },
+      "revId": "f45dc2d79d3e3d02a4cb5c4dc807bf49ba5fabea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f42b2ad8_106636f6",
+        "filename": "include/linux/cpufreq.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1003665
+      },
+      "writtenOn": "2018-01-26T23:34:48Z",
+      "side": 1,
+      "message": "I was hoping you would completely avoid touching any core cpufreq files except for the freq transition calls, but this isn\u0027t too bad. It\u0027s unfortunate that we are keeping parallel stats to cpufreq stats, but I also understand why you need to do this.\n\nMaybe once I understand the full series, I can try to think of ways to avoid this.",
+      "revId": "f45dc2d79d3e3d02a4cb5c4dc807bf49ba5fabea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
