@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "357e0f08_ac480035",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1003665
+      },
+      "writtenOn": "2018-01-26T23:35:30Z",
+      "side": 1,
+      "message": "I think I understand the output format of this file. Are we really creating a new sysfs file just to avoid reading two time_in_state files? Seems like a LOT of work to avoid opening a few files in userspace. Can\u0027t we just change userspace to improve the parsing?",
+      "revId": "820d41cb89de80e1093c73e23eae991006cbc046",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "36bfefae_eb915a66",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1003665
+      },
+      "writtenOn": "2018-01-26T23:35:30Z",
+      "side": 1,
+      "message": "You need to skip over \"invalid frequencies\".",
+      "range": {
+        "startLine": 90,
+        "startChar": 9,
+        "endLine": 90,
+        "endChar": 18
+      },
+      "revId": "820d41cb89de80e1093c73e23eae991006cbc046",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9b9e67e_7beaa33b",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1003665
+      },
+      "writtenOn": "2018-01-26T23:35:30Z",
+      "side": 1,
+      "message": "Why do you need this cpufreq_states data struct if all it\u0027s doing is keeping a frequency table list that matches the frequency in the cpufreq\u0027s freq table? Why not just directly access it after accounting for times-\u003eoffset instead of creating and maintaining this new struct?",
+      "revId": "820d41cb89de80e1093c73e23eae991006cbc046",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f1e5551_da4f2d7f",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1003665
+      },
+      "writtenOn": "2018-01-26T23:35:30Z",
+      "side": 1,
+      "message": "This is the one of the bugs I alluded to in our emails when this code was part of cpufreq_stats.c. A cluster (as in, \"policy\". Not ARM\u0027s unintuitive definition of a cluster) can go offline/online multiple times. You are going to keep leaking memory because you never subtract next_offset when a cluster goes offline.\n\nI think a simpler solution is to not try to follow policy creation and destruction. Instead, just keep the \"times\" struct in a local per-cpu array (all CPUs in a policy will point to the same \"times\" struct). You\u0027ll populated the time_in_state for CPUs the first time the policy is created and then leave them untouched. That\u0027ll keep the code a lot simpler at the expense of \"wasting\" a few KB when a cluster is offline.\n\nAnother benefit is, you won\u0027t lose stats every time a cluster goes offline (like cpufreq_stats does).\n\nTo be clear, none of this precludes you from having one array in the process struct to store all time in state details across all CPUs.",
+      "range": {
+        "startLine": 175,
+        "startChar": 2,
+        "endLine": 175,
+        "endChar": 14
+      },
+      "revId": "820d41cb89de80e1093c73e23eae991006cbc046",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
