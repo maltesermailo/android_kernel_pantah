@@ -95,6 +95,24 @@
     },
     {
       "key": {
+        "uuid": "24c3df96_c245c613",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1003665
+      },
+      "writtenOn": "2018-01-30T23:32:34Z",
+      "side": 1,
+      "message": "Ah right, forgot you also use it for displaying the stats in that file. Yeah, you\u0027ll need this then.",
+      "parentUuid": "dc0156a0_635cc66b",
+      "revId": "820d41cb89de80e1093c73e23eae991006cbc046",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6f1e5551_da4f2d7f",
         "filename": "drivers/cpufreq/cpufreq_times.c",
         "patchSetId": 3
@@ -130,6 +148,30 @@
       "side": 1,
       "message": "The simpler approach makes sense. I think single per-task arrays still require something like a \"next_offset\" variable though. The offsets into per-task arrays can be stored in the per-cpu structs you described, but there needs to be a way of assigning those offsets in the first place.",
       "parentUuid": "6f1e5551_da4f2d7f",
+      "range": {
+        "startLine": 175,
+        "startChar": 2,
+        "endLine": 175,
+        "endChar": 14
+      },
+      "revId": "820d41cb89de80e1093c73e23eae991006cbc046",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aee8603f_f3d8d619",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1003665
+      },
+      "writtenOn": "2018-01-30T23:32:34Z",
+      "side": 1,
+      "message": "I don\u0027t think the \"next_offset\" needs to be per-task. Does it? Wouldn\u0027t that just be \"per-CPU\" based on which cluster comes in online first?",
+      "parentUuid": "87b03292_f1e82425",
       "range": {
         "startLine": 175,
         "startChar": 2,
