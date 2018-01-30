@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7a2196dd_ebca84c5",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-01-30T22:01:32Z",
+      "side": 1,
+      "message": "This file was added to pixel kernels last year before the O release; I\u0027ll talk to the people using it to see if they can just use the time_in_state files instead.",
+      "parentUuid": "357e0f08_ac480035",
+      "revId": "820d41cb89de80e1093c73e23eae991006cbc046",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "36bfefae_eb915a66",
         "filename": "drivers/cpufreq/cpufreq_times.c",
         "patchSetId": 3
@@ -59,6 +77,24 @@
     },
     {
       "key": {
+        "uuid": "dc0156a0_635cc66b",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-01-30T22:01:32Z",
+      "side": 1,
+      "message": "Given your comment below about policy creation \u0026 destruction, don\u0027t these frequencies need to be copied to ensure they\u0027re always available when printing e.g. /proc/\u003cpid\u003e/time_in_state?",
+      "parentUuid": "d9b9e67e_7beaa33b",
+      "revId": "820d41cb89de80e1093c73e23eae991006cbc046",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6f1e5551_da4f2d7f",
         "filename": "drivers/cpufreq/cpufreq_times.c",
         "patchSetId": 3
@@ -70,6 +106,30 @@
       "writtenOn": "2018-01-26T23:35:30Z",
       "side": 1,
       "message": "This is the one of the bugs I alluded to in our emails when this code was part of cpufreq_stats.c. A cluster (as in, \"policy\". Not ARM\u0027s unintuitive definition of a cluster) can go offline/online multiple times. You are going to keep leaking memory because you never subtract next_offset when a cluster goes offline.\n\nI think a simpler solution is to not try to follow policy creation and destruction. Instead, just keep the \"times\" struct in a local per-cpu array (all CPUs in a policy will point to the same \"times\" struct). You\u0027ll populated the time_in_state for CPUs the first time the policy is created and then leave them untouched. That\u0027ll keep the code a lot simpler at the expense of \"wasting\" a few KB when a cluster is offline.\n\nAnother benefit is, you won\u0027t lose stats every time a cluster goes offline (like cpufreq_stats does).\n\nTo be clear, none of this precludes you from having one array in the process struct to store all time in state details across all CPUs.",
+      "range": {
+        "startLine": 175,
+        "startChar": 2,
+        "endLine": 175,
+        "endChar": 14
+      },
+      "revId": "820d41cb89de80e1093c73e23eae991006cbc046",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87b03292_f1e82425",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-01-30T22:01:32Z",
+      "side": 1,
+      "message": "The simpler approach makes sense. I think single per-task arrays still require something like a \"next_offset\" variable though. The offsets into per-task arrays can be stored in the per-cpu structs you described, but there needs to be a way of assigning those offsets in the first place.",
+      "parentUuid": "6f1e5551_da4f2d7f",
       "range": {
         "startLine": 175,
         "startChar": 2,
