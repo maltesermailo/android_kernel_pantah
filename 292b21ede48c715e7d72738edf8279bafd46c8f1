@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "72ab05b5_fd44de79",
+        "filename": "drivers/cpufreq/cpufreq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1003665
+      },
+      "writtenOn": "2018-02-07T03:14:15Z",
+      "side": 1,
+      "message": "Probably move this to post change so that if there\u0027s an error, you aren\u0027t doing unnecessary/incorrect updates? That\u0027s where cpufreq stats updates its stats in newer kernels too.",
+      "revId": "292b21ede48c715e7d72738edf8279bafd46c8f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9aa6e9dc_49a249ea",
+        "filename": "drivers/cpufreq/cpufreq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1347,
+      "author": {
+        "id": 1003665
+      },
+      "writtenOn": "2018-02-07T03:14:15Z",
+      "side": 1,
+      "message": "You can still use policy creation notifiers instead of adding a direct call here. The only reason you need to use a direct call for transition notifiers is because you can\u0027t have transition notifiers AND have fast switching working.\n\nHaving said that, maybe this one like change here is okay considering that this is pretty closely related to cpufreq. It\u0027ll also avoid you having to have a separate init function to deal with CPUs that became online before you registered for the notifier.",
+      "range": {
+        "startLine": 1347,
+        "startChar": 2,
+        "endLine": 1347,
+        "endChar": 29
+      },
+      "revId": "292b21ede48c715e7d72738edf8279bafd46c8f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2475fc18_ee494411",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1003665
+      },
+      "writtenOn": "2018-02-07T03:14:15Z",
+      "side": 1,
+      "message": "I think this can return an error value. And during policy creating, I think cur could be a value not in the table? Check for error value and check for overflow here.",
+      "revId": "292b21ede48c715e7d72738edf8279bafd46c8f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c12b5c80_b056523a",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1003665
+      },
+      "writtenOn": "2018-02-07T03:14:15Z",
+      "side": 1,
+      "message": "If this is not NULL you would have already returned up top? Policy creation/deletion can\u0027t race. You also can\u0027t have one CPU in two policies. So it\u0027s not clear what\u0027s going on with the check below.",
+      "range": {
+        "startLine": 165,
+        "startChar": 31,
+        "endLine": 165,
+        "endChar": 34
+      },
+      "revId": "292b21ede48c715e7d72738edf8279bafd46c8f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "afc57059_ba88daf4",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1003665
+      },
+      "writtenOn": "2018-02-07T03:14:15Z",
+      "side": 1,
+      "message": "Couldn\u0027t you use cpufreq_frequency_table_get_index() here and then call atomic_set() after that?  A little code reuse I suppose. Up to you.",
+      "range": {
+        "startLine": 184,
+        "startChar": 17,
+        "endLine": 184,
+        "endChar": 23
+      },
+      "revId": "292b21ede48c715e7d72738edf8279bafd46c8f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
