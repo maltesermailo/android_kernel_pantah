@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "db198d31_243c284d",
+        "filename": "drivers/cpufreq/cpufreq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-02-08T02:10:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72ab05b5_fd44de79",
+      "revId": "292b21ede48c715e7d72738edf8279bafd46c8f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9aa6e9dc_49a249ea",
         "filename": "drivers/cpufreq/cpufreq.c",
         "patchSetId": 2
@@ -59,6 +77,24 @@
     },
     {
       "key": {
+        "uuid": "652dd73c_e4fbf7d8",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-02-08T02:10:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2475fc18_ee494411",
+      "revId": "292b21ede48c715e7d72738edf8279bafd46c8f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c12b5c80_b056523a",
         "filename": "drivers/cpufreq/cpufreq_times.c",
         "patchSetId": 2
@@ -82,6 +118,30 @@
     },
     {
       "key": {
+        "uuid": "059b32f9_c7ad57b9",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-02-08T02:10:13Z",
+      "side": 1,
+      "message": "Makes sense, removed the check and the locking",
+      "parentUuid": "c12b5c80_b056523a",
+      "range": {
+        "startLine": 165,
+        "startChar": 31,
+        "endLine": 165,
+        "endChar": 34
+      },
+      "revId": "292b21ede48c715e7d72738edf8279bafd46c8f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "afc57059_ba88daf4",
         "filename": "drivers/cpufreq/cpufreq_times.c",
         "patchSetId": 2
@@ -102,6 +162,30 @@
       "revId": "292b21ede48c715e7d72738edf8279bafd46c8f1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "43b10592_3e08be67",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-02-08T02:10:13Z",
+      "side": 1,
+      "message": "Yes, although cpufreq_frequency_table_get_index() uses cpufreq_for_each_valid_entry, so this also required switching cpufreq_times_create_policy() to copy only valid entries.",
+      "parentUuid": "afc57059_ba88daf4",
+      "range": {
+        "startLine": 184,
+        "startChar": 17,
+        "endLine": 184,
+        "endChar": 23
+      },
+      "revId": "292b21ede48c715e7d72738edf8279bafd46c8f1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
