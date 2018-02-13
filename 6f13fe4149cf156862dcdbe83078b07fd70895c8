@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "16e8c267_648acb0d",
+        "filename": "drivers/cpufreq/Makefile",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-02-13T21:50:38Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cc314fa5_32af7805",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-02-13T21:50:38Z",
+      "side": 1,
+      "message": "used?",
+      "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9e30f6a3_747d07c5",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-02-13T21:50:38Z",
+      "side": 1,
+      "message": "It would help to have a comment block describing this and what the fields are (offset into what? max_state of what kinds of states?).\n\nMaybe use kerneldoc syntax.",
+      "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ace02286_fd9add7d",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-02-13T21:50:38Z",
+      "side": 1,
+      "message": "why is this atomic? I don\u0027t see any atomic ops on it.",
+      "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "047980e1_4b180f65",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-02-13T21:50:38Z",
+      "side": 1,
+      "message": "elements are allocated once and never deleted? Are we guaranteed that all initializations occur before any accesses? Are the elements static once init is done?",
+      "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3b45d88a_7905584b",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-02-13T21:50:38Z",
+      "side": 1,
+      "message": "Can next_offset be modified while we are reading it or is it static after init is complete?",
+      "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5064a91a_daa54de5",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-02-13T21:50:38Z",
+      "side": 1,
+      "message": "Do you need to hold the lock for this check? Is it possible that another thread is in cpufreq_task_times_exit()?",
+      "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
