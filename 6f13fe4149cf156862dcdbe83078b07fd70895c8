@@ -194,6 +194,24 @@
     },
     {
       "key": {
+        "uuid": "3758ac8b_982cc771",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-02-14T02:03:44Z",
+      "side": 1,
+      "message": "My understanding is that the compiler could see that next_offset is not modified within this function and do something like\n\ntemp \u003d kcalloc(next_offset, ...);\n...\np-\u003emax_state \u003d next_offset;\n\nwhich could race with next_offset being incremented in cpufreq_times_create_policy. I guess READ_ONCE/WRITE_ONCE would be enough to prevent this though. And the atomic_add_return() during policy creation is unnecessary given Saravana\u0027s comment that policy creation can\u0027t race.",
+      "parentUuid": "fcabd7f6_a22a3c8f",
+      "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5064a91a_daa54de5",
         "filename": "drivers/cpufreq/cpufreq_times.c",
         "patchSetId": 5
