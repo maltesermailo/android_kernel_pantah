@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1e967463_e5a5e6b7",
+        "filename": "drivers/cpufreq/Makefile",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-02-14T22:26:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16e8c267_648acb0d",
+      "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "cc314fa5_32af7805",
         "filename": "drivers/cpufreq/cpufreq_times.c",
         "patchSetId": 5
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "f246781b_c93a2556",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-02-14T22:26:13Z",
+      "side": 1,
+      "message": "Deleted, thanks.",
+      "parentUuid": "cc314fa5_32af7805",
+      "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9e30f6a3_747d07c5",
         "filename": "drivers/cpufreq/cpufreq_times.c",
         "patchSetId": 5
@@ -50,6 +86,24 @@
       "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2ea02427_0cef3da6",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-02-14T22:26:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e30f6a3_747d07c5",
+      "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -103,6 +157,24 @@
       "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "add9d167_4282ffe1",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-02-14T22:26:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f29a4c18_bafb9a52",
+      "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -302,6 +374,24 @@
     },
     {
       "key": {
+        "uuid": "52afed26_2ed7f789",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-02-14T22:26:13Z",
+      "side": 1,
+      "message": "I had assumed we still wanted to send this patch upstream if possible. Should I go ahead and try adding code to reallocate p-\u003etime_in_state? I think it could just be a function called from acct_update_power, either when p-\u003emax_state \u003c next_offset or when p-\u003emax_state \u003c state\n\nWould the alternative to the global lock be per-task locks? I guess another option would be to protect the pointer to p-\u003etime_in_state using RCU since most accesses only modify its entries, not the pointer itself.",
+      "parentUuid": "8a249627_397afe70",
+      "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5064a91a_daa54de5",
         "filename": "drivers/cpufreq/cpufreq_times.c",
         "patchSetId": 5
@@ -334,6 +424,24 @@
       "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e73f4ecf_8d1c8af6",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-02-14T22:26:13Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "da80d064_57c87e12",
+      "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
