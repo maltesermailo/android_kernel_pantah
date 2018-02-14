@@ -284,6 +284,24 @@
     },
     {
       "key": {
+        "uuid": "8a249627_397afe70",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-02-14T22:00:37Z",
+      "side": 1,
+      "message": "Ok, I see us guarding against re-initializing all_freqs() so we are just left with the case of tasks that start before a cluster has ever been brought online. This is probably not an interesting case for android, but it could be an important case for upstream if we plan to send this upstream (online addition of numa nodes etc). Are we still planning to submit this upstream? The global lock could also become an issue in that case.",
+      "parentUuid": "160e2cb8_8d8a2801",
+      "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5064a91a_daa54de5",
         "filename": "drivers/cpufreq/cpufreq_times.c",
         "patchSetId": 5
