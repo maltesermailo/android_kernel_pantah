@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "0741add8_201913c1",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-02-14T00:58:54Z",
+      "side": 1,
+      "message": "It could be updated by cpufreq_times_record_transition while being read by acct_update_power.",
+      "parentUuid": "ace02286_fd9add7d",
+      "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "047980e1_4b180f65",
         "filename": "drivers/cpufreq/cpufreq_times.c",
         "patchSetId": 5
@@ -81,6 +99,24 @@
       "writtenOn": "2018-02-13T21:50:38Z",
       "side": 1,
       "message": "elements are allocated once and never deleted? Are we guaranteed that all initializations occur before any accesses? Are the elements static once init is done?",
+      "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9258cf9c_739f7ffc",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-02-14T00:58:54Z",
+      "side": 1,
+      "message": "Yes, the pointers are static once init is done. Before initialization they\u0027re NULL, and all accesses have null checks before dereferencing.",
+      "parentUuid": "047980e1_4b180f65",
       "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -104,6 +140,24 @@
     },
     {
       "key": {
+        "uuid": "fcd8be89_a0577871",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-02-14T00:58:54Z",
+      "side": 1,
+      "message": "Both, because tasks can be initialized and call this code before init is complete.",
+      "parentUuid": "3b45d88a_7905584b",
+      "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5064a91a_daa54de5",
         "filename": "drivers/cpufreq/cpufreq_times.c",
         "patchSetId": 5
@@ -115,6 +169,24 @@
       "writtenOn": "2018-02-13T21:50:38Z",
       "side": 1,
       "message": "Do you need to hold the lock for this check? Is it possible that another thread is in cpufreq_task_times_exit()?",
+      "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "da80d064_57c87e12",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-02-14T00:58:54Z",
+      "side": 1,
+      "message": "It is possible, but the check on line 100 will prevent an error in that case. I suppose that makes this check redundant though, so maybe I should remove it.",
+      "parentUuid": "5064a91a_daa54de5",
       "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
