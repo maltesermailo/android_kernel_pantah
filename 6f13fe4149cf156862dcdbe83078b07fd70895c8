@@ -266,6 +266,24 @@
     },
     {
       "key": {
+        "uuid": "160e2cb8_8d8a2801",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-02-14T20:36:53Z",
+      "side": 1,
+      "message": "policy was the wrong choice of words on my part. If a cluster has ever had a policy initialized, even if it is later offlined and its policy is freed, its frequency table is permanently stored in all_freqs and tasks initialized after that point will have data for it. I don\u0027t think we need to do anything about subsequent policy destruction or creation for that cluster since the frequency table stays the same.",
+      "parentUuid": "418523ed_c02e1150",
+      "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5064a91a_daa54de5",
         "filename": "drivers/cpufreq/cpufreq_times.c",
         "patchSetId": 5
