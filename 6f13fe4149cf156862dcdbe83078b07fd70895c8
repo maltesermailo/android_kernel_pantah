@@ -230,6 +230,24 @@
     },
     {
       "key": {
+        "uuid": "50f008fb_87e71bfd",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-02-14T19:54:05Z",
+      "side": 1,
+      "message": "Both times we index into p-\u003etime_in_state, we first check whether the indices are less than p-\u003emax_state (line 95, line 123). This means tasks will track time_in_state data only for policies initialized before they started, but they will never overflow the array.\n\nWe could still reallocate for the sake of more comprehensive data (although the existing pixel patches don\u0027t, so it might be expensive), but it\u0027s not necessary to avoid overflows.",
+      "parentUuid": "3e320de5_6757e32b",
+      "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5064a91a_daa54de5",
         "filename": "drivers/cpufreq/cpufreq_times.c",
         "patchSetId": 5
