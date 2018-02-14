@@ -248,6 +248,24 @@
     },
     {
       "key": {
+        "uuid": "418523ed_c02e1150",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-02-14T20:20:44Z",
+      "side": 1,
+      "message": "Oh. Doesn\u0027t this mean that if a big cluster is offline (eg, cpus 2-3 on pixel 1) when a process starts, it will never get stats for the big cluster even when the cpus come online?\n\nI think policies are freed if all the cpus in a cluster are offlined (correct?). If so, when they come back online are they considered \"new\" and therefore no stats for any task that was started earlier?\n\nWhat are the cases that trigger creation of a new policy?",
+      "parentUuid": "50f008fb_87e71bfd",
+      "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5064a91a_daa54de5",
         "filename": "drivers/cpufreq/cpufreq_times.c",
         "patchSetId": 5
