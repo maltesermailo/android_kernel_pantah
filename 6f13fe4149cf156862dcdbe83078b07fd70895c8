@@ -88,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "f29a4c18_bafb9a52",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-02-14T01:38:43Z",
+      "side": 1,
+      "message": "atomic_set() and atomic_read() aren\u0027t really providing any value here other than guaranteeing that a compiler can\u0027t read/write it using multiple accesses (eg, writing as 4 separate bytes and reading back as word). You can do this by making this an unsigned int and using:\n\n  foo \u003d READ_ONCE(freqs-\u003elast_index);\n\nand\n\n  WRITE_ONCE(freqs-\u003elast_index, foo);",
+      "parentUuid": "0741add8_201913c1",
+      "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "047980e1_4b180f65",
         "filename": "drivers/cpufreq/cpufreq_times.c",
         "patchSetId": 5
@@ -152,6 +170,24 @@
       "side": 1,
       "message": "Both, because tasks can be initialized and call this code before init is complete.",
       "parentUuid": "3b45d88a_7905584b",
+      "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fcabd7f6_a22a3c8f",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-02-14T01:38:43Z",
+      "side": 1,
+      "message": "What if that happens... it does\u0027t matter which version of next_offset (old or new) is used to initialize p-\u003emax_state?",
+      "parentUuid": "fcd8be89_a0577871",
       "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
