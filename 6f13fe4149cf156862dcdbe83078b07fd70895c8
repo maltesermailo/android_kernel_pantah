@@ -212,6 +212,24 @@
     },
     {
       "key": {
+        "uuid": "3e320de5_6757e32b",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-02-14T19:43:02Z",
+      "side": 1,
+      "message": "My main question is the race for max_state (not its consistency). If there is a concurrent thread in create_policy, next_offset can be modified while we are here, so max_state might get the old version (before the other thread modifies next_offset) or it might get the new version (after the the other thread modifies next_offset).\n\nIf we are using the old value, is there a chance that we allocated too little memory (memory allocated and then max_state is increased). Might we overflow the array later when we index by a state that we didn\u0027t know about at allocation time?\n\nUnless we reallocate time_in_state for all tasks that were previously initialized, it seems like we need to know the max before allocation and it needs to be stable and especially never increase.",
+      "parentUuid": "3758ac8b_982cc771",
+      "revId": "6f13fe4149cf156862dcdbe83078b07fd70895c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5064a91a_daa54de5",
         "filename": "drivers/cpufreq/cpufreq_times.c",
         "patchSetId": 5
