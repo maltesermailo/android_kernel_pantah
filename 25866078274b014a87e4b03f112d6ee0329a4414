@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "375ccb0b_a3a109bf",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1003665
+      },
+      "writtenOn": "2018-02-17T03:28:32Z",
+      "side": 1,
+      "message": "Regarding tasks not tracking stats on CPUs that were never onlined when the task was created, is it for sure not a concern with Android? I thought there were some cases where the big CPUs were brought up sometime after userspace started up? Does it matter if the battery stats for some of the early threads isn\u0027t accurate? Does Google really look closely into those threads and try to optimize them? If it\u0027s not a metric that\u0027s tracked, it might not be a big issue to worry about.\n\nI\u0027m not against reallocating the array if we find more cpus have come online. It could help NUMA, etc. But I\u0027m sure there are going to be some architectures where this code isn\u0027t optimal. And if we make it optimal for those, it might be an overkill for Android. We could just say that this module isn\u0027t mandatory and they don\u0027t need to use it.\n\nFor example, this code never frees a \"all_freqs[cpu]\" if the CPU/policy goes offline. What if a CPU is physically removed in a server and never replaced. We\u0027ll be wasting memory for that CPU/cluster permanently. I\u0027m sure someone will complain about that.\n\nI\u0027m sure someone else will complain about cacheline thrashing in some case where NR_CPU is 1000 and we haven\u0027t declared the array as a \"per_cpu\" variable. But I\u0027m not sure we can avoid cache line thrashing since \"all_freqs[]\" for all CPUs in the same cluster point to the same memory location.\n\nLong story short, if we push this upstream we should try to claim that this will work for every architecture. We should upstream it as something meant for mobile devices that need finer tracking of CPU usage. If anyone wants to improve on this, they are welcome to.",
+      "revId": "25866078274b014a87e4b03f112d6ee0329a4414",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "58783130_56951573",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1003665
+      },
+      "writtenOn": "2018-02-17T03:28:32Z",
+      "side": 1,
+      "message": "Does this file not print the CPU/cluster number somewhere? If not, how does the userspace parsing tool know which frequencies belong to which CPU?",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 2
+      },
+      "revId": "25866078274b014a87e4b03f112d6ee0329a4414",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9f10887_c76eea93",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1003665
+      },
+      "writtenOn": "2018-02-17T03:28:32Z",
+      "side": 1,
+      "message": "Why not just move this outside the loop and call it a day? I don\u0027t see the point of lock and unlocking it so often. How often is this file read? The only concern is if this file is read while acct_update() is called during a tick. Then the seq_printf() time could be saved. But not sure if locking and unlocking so often is worth that optimization (considering that lock/unlock itself has memory barriers in there which are probably more expensive than seq_printf())",
+      "range": {
+        "startLine": 100,
+        "startChar": 22,
+        "endLine": 100,
+        "endChar": 45
+      },
+      "revId": "25866078274b014a87e4b03f112d6ee0329a4414",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "869036f4_a3792df0",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1003665
+      },
+      "writtenOn": "2018-02-17T03:28:32Z",
+      "side": 1,
+      "message": "Curious. Why do we need this PF_EXITING check? And we are checking it without any locks that protect flags. So this check can easily race. Do we even need this check?",
+      "range": {
+        "startLine": 124,
+        "startChar": 18,
+        "endLine": 124,
+        "endChar": 28
+      },
+      "revId": "25866078274b014a87e4b03f112d6ee0329a4414",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cbc0e460_dabb2ec9",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1003665
+      },
+      "writtenOn": "2018-02-17T03:28:32Z",
+      "side": 1,
+      "message": "You are mixing up looping over only valid entries with counting the number of entries. You should continue using the cpufreq_for_each_entry() as you did before even if you use cpufreq_frequency_table_get_index() later on. Take a look at those macros and you\u0027ll see what I mean.\n\nAs you have written the code, you\u0027ll definitely be overflowing the allocated memory in acct_update and record_transition functions.\n\nAnd your stats will also be wrong if there are invalid freqs",
+      "range": {
+        "startLine": 147,
+        "startChar": 1,
+        "endLine": 147,
+        "endChar": 29
+      },
+      "revId": "25866078274b014a87e4b03f112d6ee0329a4414",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3e57006_66dac768",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1003665
+      },
+      "writtenOn": "2018-02-17T03:28:32Z",
+      "side": 1,
+      "message": "I think this would be clearer if you use zero-length array at the end.\n\nstruct cpu_freqs {\n..\n..\n..\nunsigned int freq_table[0];\n}\n\nhttps://gcc.gnu.org/onlinedocs/gcc/Zero-Length.html\n\nIt\u0027ll also make sure the struct has proper padding to make sure that the freq_table array actually starts at the proper alignment.",
+      "range": {
+        "startLine": 156,
+        "startChar": 8,
+        "endLine": 156,
+        "endChar": 19
+      },
+      "revId": "25866078274b014a87e4b03f112d6ee0329a4414",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ec224af8_ab88028b",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1003665
+      },
+      "writtenOn": "2018-02-17T03:28:32Z",
+      "side": 1,
+      "message": "And overflowing here too.",
+      "range": {
+        "startLine": 161,
+        "startChar": 13,
+        "endLine": 161,
+        "endChar": 18
+      },
+      "revId": "25866078274b014a87e4b03f112d6ee0329a4414",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
