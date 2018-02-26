@@ -511,8 +511,13 @@ void __init paging_init(void)
 	 * To do this we need to go via a temporary pgd.
 	 */
 	cpu_replace_ttbr1(__va(pgd_phys));
+<<<<<<< HEAD   (a92bb8 ANDROID: sdcardfs: Hold i_mutex for i_size_write)
 	memcpy(swapper_pg_dir, pgd, PAGE_SIZE);
 	cpu_replace_ttbr1(lm_alias(swapper_pg_dir));
+=======
+	memcpy(swapper_pg_dir, pgd, PGD_SIZE);
+	cpu_replace_ttbr1(swapper_pg_dir);
+>>>>>>> BRANCH (19c04c Linux 4.9.84)
 
 	pgd_clear_fixmap();
 	memblock_free(pgd_phys, PAGE_SIZE);

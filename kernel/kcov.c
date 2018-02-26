@@ -357,6 +357,7 @@ static int kcov_ioctl_locked(struct kcov *kcov, unsigned int cmd,
 		 */
 		if (kcov->mode != KCOV_MODE_INIT || !kcov->area)
 			return -EINVAL;
+<<<<<<< HEAD   (a92bb8 ANDROID: sdcardfs: Hold i_mutex for i_size_write)
 		if (kcov->t != NULL)
 			return -EBUSY;
 		if (arg == KCOV_TRACE_PC)
@@ -369,7 +370,11 @@ static int kcov_ioctl_locked(struct kcov *kcov, unsigned int cmd,
 #endif
 		else
 			return -EINVAL;
+=======
+>>>>>>> BRANCH (19c04c Linux 4.9.84)
 		t = current;
+		if (kcov->t != NULL || t->kcov != NULL)
+			return -EBUSY;
 		/* Cache in task struct for performance. */
 		t->kcov_size = kcov->size;
 		t->kcov_area = kcov->area;
