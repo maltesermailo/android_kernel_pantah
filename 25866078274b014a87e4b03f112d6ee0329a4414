@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f7405061_6eed08d5",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-02-26T23:41:06Z",
+      "side": 1,
+      "message": "Added support for reallocating the array, it might not be crucial on Android but there\u0027s no reason not to make the accounting more comprehensive.\n\nWith regard to permanently offline/physically removed CPUs, is it necessarily a waste of memory to hold onto their frequency table to support tracking tasks that may still be around? For per-task accounting I\u0027m not sure you stop caring about a chunk of its history when the CPUs it was using are no longer available.",
+      "parentUuid": "375ccb0b_a3a109bf",
+      "revId": "25866078274b014a87e4b03f112d6ee0329a4414",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "58783130_56951573",
         "filename": "drivers/cpufreq/cpufreq_times.c",
         "patchSetId": 6
@@ -30,6 +48,30 @@
       "writtenOn": "2018-02-17T03:28:32Z",
       "side": 1,
       "message": "Does this file not print the CPU/cluster number somewhere? If not, how does the userspace parsing tool know which frequencies belong to which CPU?",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 2
+      },
+      "revId": "25866078274b014a87e4b03f112d6ee0329a4414",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b9d8b0a_040a42e6",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-02-26T23:41:06Z",
+      "side": 1,
+      "message": "I think they\u0027re getting that information from somewhere else now (maybe scaling_available_frequencies?). But it would be more reliable to include it in this file. New version uses the format:\n\ncpu0\n\u003cfreq\u003e: \u003ctime\u003e\n...\ncpu4\n\u003cfreq\u003e: \u003ctime\u003e\n...",
+      "parentUuid": "58783130_56951573",
       "range": {
         "startLine": 95,
         "startChar": 0,
@@ -65,6 +107,30 @@
     },
     {
       "key": {
+        "uuid": "b3708ed6_ffd4da40",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-02-26T23:41:06Z",
+      "side": 1,
+      "message": "I think the new version avoids both problems, we can just read all of p-\u003etime_in_state before we start printing anything.",
+      "parentUuid": "c9f10887_c76eea93",
+      "range": {
+        "startLine": 100,
+        "startChar": 22,
+        "endLine": 100,
+        "endChar": 45
+      },
+      "revId": "25866078274b014a87e4b03f112d6ee0329a4414",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "869036f4_a3792df0",
         "filename": "drivers/cpufreq/cpufreq_times.c",
         "patchSetId": 6
@@ -76,6 +142,30 @@
       "writtenOn": "2018-02-17T03:28:32Z",
       "side": 1,
       "message": "Curious. Why do we need this PF_EXITING check? And we are checking it without any locks that protect flags. So this check can easily race. Do we even need this check?",
+      "range": {
+        "startLine": 124,
+        "startChar": 18,
+        "endLine": 124,
+        "endChar": 28
+      },
+      "revId": "25866078274b014a87e4b03f112d6ee0329a4414",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d44cc23_680ad559",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-02-26T23:41:06Z",
+      "side": 1,
+      "message": "This is in the original version of these patches that I was working from, I\u0027ll try to get an answer on why it was considered necessary.",
+      "parentUuid": "869036f4_a3792df0",
       "range": {
         "startLine": 124,
         "startChar": 18,
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "62c3f93b_89e40b8d",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-02-26T23:41:06Z",
+      "side": 1,
+      "message": "Yeah I misread cpufreq_frequency_table_get_index() and missed that even though it only looks at valid entries, it still returns an offset from the start of the table. Should be fixed now.",
+      "parentUuid": "cbc0e460_dabb2ec9",
+      "range": {
+        "startLine": 147,
+        "startChar": 1,
+        "endLine": 147,
+        "endChar": 29
+      },
+      "revId": "25866078274b014a87e4b03f112d6ee0329a4414",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b3e57006_66dac768",
         "filename": "drivers/cpufreq/cpufreq_times.c",
         "patchSetId": 6
@@ -134,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "ca54cd5d_beaacda3",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-02-26T23:41:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3e57006_66dac768",
+      "range": {
+        "startLine": 156,
+        "startChar": 8,
+        "endLine": 156,
+        "endChar": 19
+      },
+      "revId": "25866078274b014a87e4b03f112d6ee0329a4414",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ec224af8_ab88028b",
         "filename": "drivers/cpufreq/cpufreq_times.c",
         "patchSetId": 6
@@ -154,6 +292,30 @@
       "revId": "25866078274b014a87e4b03f112d6ee0329a4414",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8218a449_37694b93",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-02-26T23:41:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec224af8_ab88028b",
+      "range": {
+        "startLine": 161,
+        "startChar": 13,
+        "endLine": 161,
+        "endChar": 18
+      },
+      "revId": "25866078274b014a87e4b03f112d6ee0329a4414",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
