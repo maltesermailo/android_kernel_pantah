@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "517f98a7_ea35ce1b",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1003665
+      },
+      "writtenOn": "2018-02-27T02:18:10Z",
+      "side": 1,
+      "message": "It\u0027s annoying that they don\u0027t have a kzrealloc().",
+      "revId": "c6f794f58c7d5a5f32ee9f8e7609e339f12f8222",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "41ffbf4e_9c262b75",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1003665
+      },
+      "writtenOn": "2018-02-27T02:18:10Z",
+      "side": 1,
+      "message": "I personally wouldn\u0027t do this to avoid any potential memory fragmentation. I don\u0027t see any problem with just holding the lock for longer -- a full alloc and copy is seems very expensive to do. I\u0027ll let you/Todd make the final decision on this.",
+      "range": {
+        "startLine": 108,
+        "startChar": 9,
+        "endLine": 108,
+        "endChar": 16
+      },
+      "revId": "c6f794f58c7d5a5f32ee9f8e7609e339f12f8222",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
