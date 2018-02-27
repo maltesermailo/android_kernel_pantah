@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c0ffa214_bb159e78",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 6331,
+      "author": {
+        "id": 1129709
+      },
+      "writtenOn": "2018-02-27T05:26:45Z",
+      "side": 1,
+      "message": "Hi Dietmar,\n\nSorry to start discussion on a really old patch, but I was wondering on why did you change this in your commit. Earlier we used to calculate new_util as cpu_util(i) + boosted_task_util(), but now it is calculated using cpu_util(i) + task_util() and later on we just do a max of new_util and boosted_task_util(). I don\u0027t think this can guarantee enough bandwidth for the task and the earlier code was doing the right thing.\n\nSure, I can send a patch to propose the earlier solution, but just wanted to check your view on it first. Thanks.",
+      "revId": "3bfde3b4f8486e091805d871267dd3a56a200b9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
