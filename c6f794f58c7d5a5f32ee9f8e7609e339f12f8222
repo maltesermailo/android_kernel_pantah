@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8ff7fd8e_ae6816dd",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-02-28T01:01:39Z",
+      "side": 1,
+      "message": "have you looked at possible contention on this global lock? How often is it being acquired? What are the worst-case hold times?",
+      "revId": "c6f794f58c7d5a5f32ee9f8e7609e339f12f8222",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "517f98a7_ea35ce1b",
         "filename": "drivers/cpufreq/cpufreq_times.c",
         "patchSetId": 8
@@ -35,6 +52,53 @@
         "startChar": 9,
         "endLine": 108,
         "endChar": 16
+      },
+      "revId": "c6f794f58c7d5a5f32ee9f8e7609e339f12f8222",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "505152b5_fb30e559",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-02-28T01:01:39Z",
+      "side": 1,
+      "message": "I tend to agree with Saravana... seems better to avoid the alloc/copy and hold the lock around the cpu traversal. Any idea how frequently we are acq\u0027ing this spinlock? If we hold it longer, will it make any measurable difference to contention?",
+      "parentUuid": "41ffbf4e_9c262b75",
+      "range": {
+        "startLine": 108,
+        "startChar": 9,
+        "endLine": 108,
+        "endChar": 16
+      },
+      "revId": "c6f794f58c7d5a5f32ee9f8e7609e339f12f8222",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "600870f5_aa41ea1a",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-02-28T01:01:39Z",
+      "side": 1,
+      "message": "The other functions here are prefixed by \"cpufreq_\"... should this be \"cpufreq_acct_update_power\"?",
+      "range": {
+        "startLine": 138,
+        "startChar": 5,
+        "endLine": 138,
+        "endChar": 9
       },
       "revId": "c6f794f58c7d5a5f32ee9f8e7609e339f12f8222",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
