@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "004a8230_8bfb212d",
+        "filename": "include/trace/events/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2018-02-28T11:19:49Z",
+      "side": 1,
+      "message": "Since we are (indirectly) at optimising a bit the trace record storages... cannot we switch also the above fields to u32? 32bits should be a big enough storage for utilization and load _avg\u0027s.",
+      "revId": "1209dfa136eb5f9d947f7ede08b144ecb998be71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67873a14_53458282",
+        "filename": "include/trace/events/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2018-02-28T11:19:49Z",
+      "side": 1,
+      "message": "Why don\u0027t we use the same expression for these two fixes?\nIf I can choose one, I like better the second one using div64_ul.\n\nMoreover, by using div64_ul, I think it\u0027s still safe from overflow to do:\n\n   div64_ul((cpu_rq(cpu)-\u003eprev_runnable_sum \u003c\u003c SCHED_CAPACITY_SHIFT),\n            sched_ravg_window);\n\nwhich is better on rounding errors, isn\u0027t it?",
+      "revId": "1209dfa136eb5f9d947f7ede08b144ecb998be71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
