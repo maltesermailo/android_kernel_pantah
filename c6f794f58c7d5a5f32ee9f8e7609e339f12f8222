@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f6bbbade_4e7e49ca",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-03-01T03:33:14Z",
+      "side": 1,
+      "message": "Just measured on hikey and saw max hold time of 23.96 us (average 0.68) and max wait time of 25 us (average 1.89). The kernel I measured with includes the change to do uid accounting in acct_update_power (not yet uploaded), without that change I would expect worse contention due to the need to take this lock when reading /proc/uid_time_in_state.",
+      "parentUuid": "8ff7fd8e_ae6816dd",
+      "revId": "c6f794f58c7d5a5f32ee9f8e7609e339f12f8222",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "517f98a7_ea35ce1b",
         "filename": "drivers/cpufreq/cpufreq_times.c",
         "patchSetId": 8
