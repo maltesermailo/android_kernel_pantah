@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "6d67246a_aa17e598",
+        "filename": "include/trace/events/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1215505
+      },
+      "writtenOn": "2018-03-01T08:21:30Z",
+      "side": 1,
+      "message": "Agree. I noticed that too. We can do it separately.",
+      "parentUuid": "004a8230_8bfb212d",
+      "revId": "1209dfa136eb5f9d947f7ede08b144ecb998be71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "67873a14_53458282",
         "filename": "include/trace/events/sched.h",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2018-02-28T11:19:49Z",
       "side": 1,
       "message": "Why don\u0027t we use the same expression for these two fixes?\nIf I can choose one, I like better the second one using div64_ul.\n\nMoreover, by using div64_ul, I think it\u0027s still safe from overflow to do:\n\n   div64_ul((cpu_rq(cpu)-\u003eprev_runnable_sum \u003c\u003c SCHED_CAPACITY_SHIFT),\n            sched_ravg_window);\n\nwhich is better on rounding errors, isn\u0027t it?",
+      "revId": "1209dfa136eb5f9d947f7ede08b144ecb998be71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d38d66dd_0fb36577",
+        "filename": "include/trace/events/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1215505
+      },
+      "writtenOn": "2018-03-01T08:21:30Z",
+      "side": 1,
+      "message": "ravg-\u003edemand is a  32 bit quantity. so we can get away with native division. I don\u0027t think the below expression makes any difference wrt rounding. any task demand \u003c sched_ravg_window/1024 would be 0 in both cases.\n\ndiv64_ul((u64)demand\u003c\u003cSCHED_CAPACUTY_SHIFT, sched_ravg_window)",
+      "parentUuid": "67873a14_53458282",
       "revId": "1209dfa136eb5f9d947f7ede08b144ecb998be71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
