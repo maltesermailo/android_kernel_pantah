@@ -196,6 +196,30 @@
     },
     {
       "key": {
+        "uuid": "5a519a76_e497e6dd",
+        "filename": "drivers/cpufreq/cpufreq_times.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2018-03-02T01:52:30Z",
+      "side": 1,
+      "message": "I think this check was originally meant to prevent racing with the freeing of p-\u003etime_in_state in cpufreq_task_times_exit. That race is impossible in this version since locking ensures p-\u003etime_in_state is either valid or NULL when we use it.\n\nThat said I think looking at this flag is the only way to distinguish between 2 different cases where p-\u003emax_state \u003d\u003d 0 and p-\u003etime_in_state \u003d\u003d NULL:\n- They have always had those values because all_freqs was empty when the task started\n- They were set to those values in cpufreq_task_times_exit\n\nWe only want to reallocate p-\u003etime_in_state in the first case, if we do it in the second the newly allocated array will never be freed.\n\nI don\u0027t think the check can race. This function runs during an interrupt, p refers to the current task, and the PF_EXITING flag can only be set for the current task (by do_exit()) so I don\u0027t think its value can change during acct_update_power. Am I missing something?",
+      "parentUuid": "7d44cc23_680ad559",
+      "range": {
+        "startLine": 124,
+        "startChar": 18,
+        "endLine": 124,
+        "endChar": 28
+      },
+      "revId": "25866078274b014a87e4b03f112d6ee0329a4414",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cbc0e460_dabb2ec9",
         "filename": "drivers/cpufreq/cpufreq_times.c",
         "patchSetId": 6
