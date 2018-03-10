@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f3435d6e_2c2d8a45",
+        "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-03-10T00:32:55Z",
+      "side": 1,
+      "message": "Please do not reinvent logging macros.  The kernel has all of the macros you could ever need/want, please use them.\n\nSpecifically the dev_err() and friends are there for anything that has a struct device around, and if not, then use pr_debug() and friends.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 0
+      },
+      "revId": "6310dfd9c360a95ccdc77d6aa851fc5fb92c3870",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a4cf3ec_6e40e18a",
+        "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-03-10T00:32:55Z",
+      "side": 1,
+      "message": "BIT(3)?",
+      "range": {
+        "startLine": 91,
+        "startChar": 25,
+        "endLine": 91,
+        "endChar": 32
+      },
+      "revId": "6310dfd9c360a95ccdc77d6aa851fc5fb92c3870",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d107f657_d6806c05",
+        "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-03-10T00:32:55Z",
+      "side": 1,
+      "message": "why (void)?  Just don\u0027t check the return value, that\u0027s all.",
+      "range": {
+        "startLine": 386,
+        "startChar": 1,
+        "endLine": 386,
+        "endChar": 7
+      },
+      "revId": "6310dfd9c360a95ccdc77d6aa851fc5fb92c3870",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a317a6a_24d4e008",
+        "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 568,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-03-10T00:32:55Z",
+      "side": 1,
+      "message": "please use scripts/checkpatch.pl to fix up the coding style issues with your changes before treehugger does it and complains about it :)",
+      "range": {
+        "startLine": 568,
+        "startChar": 0,
+        "endLine": 568,
+        "endChar": 70
+      },
+      "revId": "6310dfd9c360a95ccdc77d6aa851fc5fb92c3870",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8e08219d_62fd485f",
+        "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-03-10T00:32:55Z",
+      "side": 1,
+      "message": "what happens if this changes the next line?  What is \"protecting\" the change from happening then?  This feels really wrong...",
+      "range": {
+        "startLine": 586,
+        "startChar": 0,
+        "endLine": 587,
+        "endChar": 0
+      },
+      "revId": "6310dfd9c360a95ccdc77d6aa851fc5fb92c3870",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
