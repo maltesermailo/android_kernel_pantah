@@ -138,6 +138,30 @@
       "revId": "6310dfd9c360a95ccdc77d6aa851fc5fb92c3870",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "49735eae_92d9699b",
+        "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1082465
+      },
+      "writtenOn": "2018-03-10T00:50:48Z",
+      "side": 1,
+      "message": "You\u0027re right, that is weird. There\u0027s no reason for this pipe-\u003eclosing check to be here, nor should there be a return. Thanks for catching this.",
+      "parentUuid": "300d033b_2ba71c0e",
+      "range": {
+        "startLine": 586,
+        "startChar": 0,
+        "endLine": 587,
+        "endChar": 0
+      },
+      "revId": "6310dfd9c360a95ccdc77d6aa851fc5fb92c3870",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
