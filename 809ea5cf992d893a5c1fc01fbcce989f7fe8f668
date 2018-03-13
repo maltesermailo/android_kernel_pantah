@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "448a8d67_4c1131dc",
+        "filename": "drivers/platform/goldfish/goldfish_pipe.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-03-13T11:44:08Z",
+      "side": 1,
+      "message": "pr_dbg()\n\nAnd why mix these message printk changes in with the DMA changes here?\n\nRemember, a kernel patch should only do one logical thing at a time, this should be broken up into smaller pieces.  Makes them easier to review and accept as well.",
+      "range": {
+        "startLine": 271,
+        "startChar": 2,
+        "endLine": 271,
+        "endChar": 9
+      },
+      "revId": "809ea5cf992d893a5c1fc01fbcce989f7fe8f668",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b35d8ff9_b5712d16",
+        "filename": "drivers/platform/goldfish/goldfish_pipe.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-03-13T11:44:08Z",
+      "side": 1,
+      "message": "pr_err()?",
+      "range": {
+        "startLine": 274,
+        "startChar": 3,
+        "endLine": 274,
+        "endChar": 10
+      },
+      "revId": "809ea5cf992d893a5c1fc01fbcce989f7fe8f668",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d622cea_ca543715",
+        "filename": "drivers/platform/goldfish/goldfish_pipe.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-03-13T11:44:08Z",
+      "side": 1,
+      "message": "error?",
+      "range": {
+        "startLine": 280,
+        "startChar": 3,
+        "endLine": 280,
+        "endChar": 10
+      },
+      "revId": "809ea5cf992d893a5c1fc01fbcce989f7fe8f668",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "69ea2f27_776eacdf",
+        "filename": "drivers/platform/goldfish/goldfish_pipe.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-03-13T11:44:08Z",
+      "side": 1,
+      "message": "error?",
+      "range": {
+        "startLine": 296,
+        "startChar": 4,
+        "endLine": 296,
+        "endChar": 11
+      },
+      "revId": "809ea5cf992d893a5c1fc01fbcce989f7fe8f668",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9422d613_ef0729d2",
+        "filename": "drivers/platform/goldfish/goldfish_pipe.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-03-13T11:44:08Z",
+      "side": 1,
+      "message": "debug for all of these, don\u0027t add a bunch of unneeded kernel log messages for no reason please.",
+      "range": {
+        "startLine": 519,
+        "startChar": 1,
+        "endLine": 519,
+        "endChar": 8
+      },
+      "revId": "809ea5cf992d893a5c1fc01fbcce989f7fe8f668",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f02c295b_08572c75",
+        "filename": "drivers/platform/goldfish/goldfish_pipe.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-03-13T11:44:08Z",
+      "side": 1,
+      "message": "fixing up whitespace is nice, but again, do it in a separate patch, not one where you are saying you are only doing something totally different.",
+      "range": {
+        "startLine": 571,
+        "startChar": 0,
+        "endLine": 571,
+        "endChar": 62
+      },
+      "revId": "809ea5cf992d893a5c1fc01fbcce989f7fe8f668",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "be40be4a_0d240d45",
+        "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-03-13T11:44:08Z",
+      "side": 1,
+      "message": "what about version 3?",
+      "range": {
+        "startLine": 56,
+        "startChar": 9,
+        "endLine": 56,
+        "endChar": 18
+      },
+      "revId": "809ea5cf992d893a5c1fc01fbcce989f7fe8f668",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
