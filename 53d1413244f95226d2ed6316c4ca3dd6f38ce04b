@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41b340df_477db3f2",
+        "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1038,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-03-23T10:17:17Z",
+      "side": 1,
+      "message": "why?  Document all memory barriers please.",
+      "range": {
+        "startLine": 1038,
+        "startChar": 0,
+        "endLine": 1038,
+        "endChar": 10
+      },
+      "revId": "53d1413244f95226d2ed6316c4ca3dd6f38ce04b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1952bdc1_93b757aa",
+        "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-03-23T10:17:17Z",
+      "side": 1,
+      "message": "what happens if locked changes right after the check bug before this one?\n\nIt feels like you are \"rolling your own locking scheme\" and that is really dangerous, and almost always buggy.  Why can\u0027t you use \"normal\" locks in this code instead?",
+      "range": {
+        "startLine": 1040,
+        "startChar": 0,
+        "endLine": 1040,
+        "endChar": 48
+      },
+      "revId": "53d1413244f95226d2ed6316c4ca3dd6f38ce04b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0f5d8f73_4fe671f5",
+        "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1193,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-03-23T10:17:17Z",
+      "side": 1,
+      "message": "never crash the machine.\n\nDo a BUILD_BUG_ON() instead, if you really are worried about this.  But you can enforce this in your Kconfig build options instead, right?  Why is this a requirement that is unusual?",
+      "range": {
+        "startLine": 1192,
+        "startChar": 0,
+        "endLine": 1193,
+        "endChar": 0
+      },
+      "revId": "53d1413244f95226d2ed6316c4ca3dd6f38ce04b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
