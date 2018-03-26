@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2cb4a7e7_cc45fe42",
+        "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1038,
+      "author": {
+        "id": 1082465
+      },
+      "writtenOn": "2018-03-26T21:05:58Z",
+      "side": 1,
+      "message": "That\u0027s so pipe-\u003edma-\u003elocked is the latest value. Will comment.",
+      "parentUuid": "41b340df_477db3f2",
+      "range": {
+        "startLine": 1038,
+        "startChar": 0,
+        "endLine": 1038,
+        "endChar": 10
+      },
+      "revId": "53d1413244f95226d2ed6316c4ca3dd6f38ce04b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1952bdc1_93b757aa",
         "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
         "patchSetId": 13
@@ -36,6 +60,30 @@
       "writtenOn": "2018-03-23T10:17:17Z",
       "side": 1,
       "message": "what happens if locked changes right after the check bug before this one?\n\nIt feels like you are \"rolling your own locking scheme\" and that is really dangerous, and almost always buggy.  Why can\u0027t you use \"normal\" locks in this code instead?",
+      "range": {
+        "startLine": 1040,
+        "startChar": 0,
+        "endLine": 1040,
+        "endChar": 48
+      },
+      "revId": "53d1413244f95226d2ed6316c4ca3dd6f38ce04b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "748ae7dd_fd7cb9a2",
+        "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1082465
+      },
+      "writtenOn": "2018-03-26T21:05:58Z",
+      "side": 1,
+      "message": "These locks are essentially shared between the host and the guest and need to apply to all processes system wide. IIUC, standard mutex locks need to be locked and unlocked by the same processes, and we can\u0027t (yet!) share a mutex lock between guest and host. So we are using our current scheme.",
+      "parentUuid": "1952bdc1_93b757aa",
       "range": {
         "startLine": 1040,
         "startChar": 0,
