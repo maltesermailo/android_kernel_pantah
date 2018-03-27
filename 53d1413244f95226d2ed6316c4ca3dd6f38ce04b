@@ -240,6 +240,30 @@
     },
     {
       "key": {
+        "uuid": "77bbc56c_ca90b364",
+        "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1082465
+      },
+      "writtenOn": "2018-03-27T15:37:35Z",
+      "side": 1,
+      "message": "Well, we require locking across processes because the pipe objects are actually the data associated with fd\u0027s which can get dup\u0027ed across processes, so two processes share the data backing two different fd\u0027s.\n\nWhat would be the right way to protect against concurrent open() / read() / write() / mmap() / close() operations across processes? This seems like something that commonly happens in drivers, and yes, I also feel like there\u0027s a simpler way to do it.",
+      "parentUuid": "b5ff7c1e_6a63532e",
+      "range": {
+        "startLine": 1040,
+        "startChar": 0,
+        "endLine": 1040,
+        "endChar": 48
+      },
+      "revId": "53d1413244f95226d2ed6316c4ca3dd6f38ce04b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0f5d8f73_4fe671f5",
         "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
         "patchSetId": 13
