@@ -216,6 +216,30 @@
     },
     {
       "key": {
+        "uuid": "b5ff7c1e_6a63532e",
+        "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-03-27T15:32:57Z",
+      "side": 1,
+      "message": "That article is 12 years old, things might have changed a bit in kernel development since then :)\n\nBut really, why would you even need/want to lock something over a process boundry?  That\u0027s a huge hint that the design is not correct.  And in looking at the implementation here, I really don\u0027t think your design is correct based on the issues I\u0027ve already reported.\n\nPlease step back and look at what data you are trying to protect, and from what you are trying to protect it from, and then you should be able to find a simpler solution.",
+      "parentUuid": "aac68140_ac7b1f1d",
+      "range": {
+        "startLine": 1040,
+        "startChar": 0,
+        "endLine": 1040,
+        "endChar": 48
+      },
+      "revId": "53d1413244f95226d2ed6316c4ca3dd6f38ce04b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0f5d8f73_4fe671f5",
         "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
         "patchSetId": 13
