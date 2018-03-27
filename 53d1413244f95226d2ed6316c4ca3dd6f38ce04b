@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "653aa1d1_e6d08405",
+        "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1038,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-03-27T13:48:05Z",
+      "side": 1,
+      "message": "why?  that\u0027s not going to help :(",
+      "parentUuid": "63182455_0c69027e",
+      "range": {
+        "startLine": 1038,
+        "startChar": 0,
+        "endLine": 1038,
+        "endChar": 10
+      },
+      "revId": "53d1413244f95226d2ed6316c4ca3dd6f38ce04b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1952bdc1_93b757aa",
         "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
         "patchSetId": 13
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "I replaced this to compare and swap.",
       "parentUuid": "748ae7dd_fd7cb9a2",
+      "range": {
+        "startLine": 1040,
+        "startChar": 0,
+        "endLine": 1040,
+        "endChar": 48
+      },
+      "revId": "53d1413244f95226d2ed6316c4ca3dd6f38ce04b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d59e6fd7_ffae902d",
+        "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-03-27T13:48:05Z",
+      "side": 1,
+      "message": "There is no requirement that the same process lock/unlock a mutex at all.  You might be thinking of the \"irqsave\" variants of things, which you are not dealing with here.\n\nAgain, do not create your own locking primitives, you are doing it wrong, and it is buggy.",
+      "parentUuid": "27e180ad_8b97fa59",
       "range": {
         "startLine": 1040,
         "startChar": 0,
