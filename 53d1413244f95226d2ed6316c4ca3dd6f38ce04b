@@ -288,6 +288,30 @@
     },
     {
       "key": {
+        "uuid": "9028b2f4_dc397c75",
+        "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-03-27T19:03:55Z",
+      "side": 1,
+      "message": "LDD3 is also 10+ years old :)\n\nIf you are thinking a semaphore even would possibly work here, please stop as that makes no sense what so ever.  Again, think about what you are wanting to do here.\n\nIf you only want to protect from concurrent operations, what\u0027s wrong with a mutex?  When would one process lock something that some other process could then unlock?  That sounds really really broken to me, how about you?\n\nHave you tried a simple mutex for all of this?  If so, what happened?\n\nmeta-comment, doing technical design decisions in gerrit is a huge pain, why not just take this to email with all of the needed people and review and discuss it that way.  Like the 4000 kernel developers do every year?  :)",
+      "parentUuid": "8d402b9e_e76e01b6",
+      "range": {
+        "startLine": 1040,
+        "startChar": 0,
+        "endLine": 1040,
+        "endChar": 48
+      },
+      "revId": "53d1413244f95226d2ed6316c4ca3dd6f38ce04b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0f5d8f73_4fe671f5",
         "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
         "patchSetId": 13
