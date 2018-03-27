@@ -192,6 +192,30 @@
     },
     {
       "key": {
+        "uuid": "aac68140_ac7b1f1d",
+        "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1082465
+      },
+      "writtenOn": "2018-03-27T15:21:05Z",
+      "side": 1,
+      "message": "Sorry, we didn\u0027t know that mutexes are system wide. Can you explain why this article says the mutex must be unlocked by the same process that locked it?\n\nhttps://lwn.net/Articles/167034/\n\n\"The mutex API (obtained through \u003clinux/mutex.h\u003e) is simple. Every mutex must first be initialized either at declaration time with:\n\n    DEFINE_MUTEX(name);\nOr at run time with:\n\n    mutex_init(struct mutex *lock);\nOnce a mutex has been initialized, it can be locked with any of:\n\n    void mutex_lock(struct mutex *lock);\n    int mutex_lock_interruptible(struct mutex *lock);\n    int mutex_trylock(struct mutex *lock);\nA call to mutex_lock() will lock the mutex, putting the calling process into an uninterruptible wait if need be. mutex_lock_interruptible() uses an interruptible sleep; if the lock is obtained, it will return zero. A return value of -EINTR means that the locking attempt was interrupted by a signal and the caller should act accordingly. Finally, mutex_trylock() will attempt to obtain the lock, but will not sleep; unlike mutex_lock_interruptible(), it returns zero on failure (the lock was unavailable) and one if the lock is acquired.\n\nIn all cases, the mutex must eventually be freed (by the same process which acquired it) through a call to:\n\n    void mutex_unlock(struct mutex *lock);\"",
+      "parentUuid": "d59e6fd7_ffae902d",
+      "range": {
+        "startLine": 1040,
+        "startChar": 0,
+        "endLine": 1040,
+        "endChar": 48
+      },
+      "revId": "53d1413244f95226d2ed6316c4ca3dd6f38ce04b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0f5d8f73_4fe671f5",
         "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
         "patchSetId": 13
