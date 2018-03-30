@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3b1b88ef_1b189ee6",
+        "filename": "drivers/platform/goldfish/goldfish_dma.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-03-30T10:21:04Z",
+      "side": 1,
+      "message": "again, this is a userspace api file (you are declaring a public-facing ioctl)!",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 2
+      },
+      "revId": "af10457c1157dd356dee00c43e73624705b350ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54dd8bcf_aef766df",
+        "filename": "drivers/platform/goldfish/goldfish_dma.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-03-30T10:21:04Z",
+      "side": 1,
+      "message": "This is not how you define a public ioctl structure in a portable way.  You are using in-kernel defines for a out-of-kernel structure.  That\u0027s not allowed and will not even work!\n\nThink about 32bit userspace and 64bit kernels please.",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 13
+      },
+      "revId": "af10457c1157dd356dee00c43e73624705b350ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
