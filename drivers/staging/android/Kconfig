@@ -14,6 +14,13 @@ config ASHMEM
 	  It is, in theory, a good memory allocator for low-memory devices,
 	  because it can discard shared memory units when under memory pressure.
 
+config ANDROID_VSOC
+	tristate "Android VSoC support"
+	default n
+	---help---
+	  This option enables the vsoc driver that interacts with memory
+	  published by QEmu's ivshmem device.
+
 source "drivers/staging/android/ion/Kconfig"
 
 source "drivers/staging/android/fiq_debugger/Kconfig"
