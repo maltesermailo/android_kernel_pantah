@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af9c4ca8_3750ec8e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2018-04-12T18:43:36Z",
+      "side": 1,
+      "message": "Just \"BACKPORT:\" is enough, see my comment on the 4.14 version of the change.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 16
+      },
+      "revId": "3f200f801039db3e005fac33ca8bd1f32c071885",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6fd4e27_f5ee30ae",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2018-04-12T18:43:36Z",
+      "side": 1,
+      "message": "You need to compile it at the very least, if not test it.  Older kernels don\u0027t have kvzalloc().  I think it should be replaced with vzalloc() and vfree().\n\ndrivers/md/dm-verity-target.c: In function ‘verity_alloc_most_once’:\ndrivers/md/dm-verity-target.c:774:24: error: implicit declaration of function ‘kvzalloc’; did you mean ‘kzalloc’? [-Werror\u003dimplicit-function-declaration]\n  v-\u003evalidated_blocks \u003d kvzalloc(BITS_TO_LONGS(v-\u003edata_blocks) *\n                        ^~~~~~~~\n                        kzalloc\ndrivers/md/dm-verity-target.c:774:22: warning: assignment makes pointer from integer without a cast [-Wint-conversion]\n  v-\u003evalidated_blocks \u003d kvzalloc(BITS_TO_LONGS(v-\u003edata_blocks) *\n                      ^\ncc1: some warnings being treated as errors",
+      "revId": "3f200f801039db3e005fac33ca8bd1f32c071885",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
