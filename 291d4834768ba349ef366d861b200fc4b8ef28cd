@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4282e59a_718772a0",
+        "filename": "arch/arm/configs/keystone_defconfig",
+        "patchSetId": 7
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2018-04-16T17:54:56Z",
+      "side": 1,
+      "message": "Why add this here?",
+      "revId": "291d4834768ba349ef366d861b200fc4b8ef28cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ea10981e_8dfad259",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 742,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2018-04-16T17:54:56Z",
+      "side": 1,
+      "message": "Need to include \u003clinux/vmalloc.h\u003e:\n\ndrivers/md/dm-verity-target.c: In function ‘verity_dtr’:\ndrivers/md/dm-verity-target.c:742:2: error: implicit declaration of function ‘vfree’; did you mean ‘kvfree’? [-Werror\u003dimplicit-function-declaration]\n  vfree(v-\u003evalidated_blocks);\n  ^~~~~\n  kvfree\ndrivers/md/dm-verity-target.c: In function ‘verity_alloc_most_once’:\ndrivers/md/dm-verity-target.c:774:24: error: implicit declaration of function ‘vzalloc’; did you mean ‘kzalloc’? [-Werror\u003dimplicit-function-declaration]\n  v-\u003evalidated_blocks \u003d vzalloc(BITS_TO_LONGS(v-\u003edata_blocks) *\n                        ^~~~~~~\n                        kzalloc",
+      "revId": "291d4834768ba349ef366d861b200fc4b8ef28cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
