@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7b3f0c3a_307935db",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7104,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2018-04-27T16:02:42Z",
+      "side": 1,
+      "message": "Since this is now the third site we compute a spare capacity in Case A.2 and Case C, what about tracking it with a local spare_cap variable to make the code a bit more readable?\n\nI would suggest to update the following lines:\nL6920: long spare_cap;\nL6992: spare_cap \u003d capacity_orig - new_util;\n       and use this var in the following two lines (L6993, L6994)\nL7103: spare_cap \u003d capacity_orig - new_util;\n       and use this var in the following two lines (L7104, L7107)",
+      "range": {
+        "startLine": 7104,
+        "startChar": 9,
+        "endLine": 7104,
+        "endChar": 33
+      },
+      "revId": "0668048de7ba3bc839ef2e8cf245eab6fe3fc57e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
