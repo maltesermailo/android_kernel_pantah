@@ -2,6 +2,144 @@
   "comments": [
     {
       "key": {
+        "uuid": "db9d8cb6_66103799",
+        "filename": "drivers/platform/goldfish/goldfish_dma.h",
+        "patchSetId": 26
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-04-27T15:09:57Z",
+      "side": 1,
+      "message": "Wrong year :(\n\nWhy does this need to be a .h file at all?  You only include it in one .c file, right?",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 34
+      },
+      "revId": "490d2a7de1c03cc22830802829d63bd262686a1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "110d4ac7_4ecad99c",
+        "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-04-27T15:09:57Z",
+      "side": 1,
+      "message": "this isn\u0027t an error?\n\nYou are mixing cleanups in this file with the new feature, making it hard to review.  Hint, split out those changes to a separate commit, that can be easily merged, making this one much smaller and easier to review.",
+      "range": {
+        "startLine": 551,
+        "startChar": 9,
+        "endLine": 551,
+        "endChar": 10
+      },
+      "revId": "490d2a7de1c03cc22830802829d63bd262686a1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e1aa68a0_c5f55273",
+        "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-04-27T15:09:57Z",
+      "side": 1,
+      "message": "not an error?",
+      "range": {
+        "startLine": 557,
+        "startChar": 0,
+        "endLine": 557,
+        "endChar": 38
+      },
+      "revId": "490d2a7de1c03cc22830802829d63bd262686a1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8ddf8708_9f669334",
+        "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-04-27T15:09:57Z",
+      "side": 1,
+      "message": "dev_dbg() for all of these as you do have a platform device to tie these all to in your goldfish_pipe, right?",
+      "range": {
+        "startLine": 808,
+        "startChar": 2,
+        "endLine": 808,
+        "endChar": 10
+      },
+      "revId": "490d2a7de1c03cc22830802829d63bd262686a1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1fba493c_af230a05",
+        "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 863,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-04-27T15:09:57Z",
+      "side": 1,
+      "message": "no need to check this, call kfree and set it.",
+      "range": {
+        "startLine": 863,
+        "startChar": 0,
+        "endLine": 863,
+        "endChar": 17
+      },
+      "revId": "490d2a7de1c03cc22830802829d63bd262686a1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "072be658_c92f3021",
+        "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-04-27T15:09:57Z",
+      "side": 1,
+      "message": "frace is your friend, no need to sprinkle these types of debugging messages everywhere.",
+      "range": {
+        "startLine": 1088,
+        "startChar": 0,
+        "endLine": 1088,
+        "endChar": 44
+      },
+      "revId": "490d2a7de1c03cc22830802829d63bd262686a1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "5de291d9_cadb3725",
         "filename": "include/uapi/linux/goldfish/goldfish_dma.h",
         "patchSetId": 26
