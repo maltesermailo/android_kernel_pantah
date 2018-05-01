@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ed453b5_d4833d9e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-05-01T15:24:30Z",
+      "side": 1,
+      "message": "For this whole series, please fix up the first changelog line to be correct based on our requirements for Android patches, as well as the requirements for upstream patches.\n\nThe upstream requirement is \"subsystem: driver: information\" so this should be \"goldfish: pipe: fix logging format strings\", and you need a ANDROID or something else as well for the android patch requirement.\n\nAlso, there\u0027s a typo in this line :(\n\nPlease fix up all of these and update and I will be glad to review the patches themselves then.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 42
+      },
+      "revId": "ee9ba4460f5176206401774ba394a3dac80d684e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fa4a3706_ad10d55d",
+        "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-05-01T15:24:30Z",
+      "side": 1,
+      "message": "note, a \"raw\" %p is a security hole, please fix that up for here and elsewhere as well.",
+      "range": {
+        "startLine": 749,
+        "startChar": 17,
+        "endLine": 749,
+        "endChar": 19
+      },
+      "revId": "ee9ba4460f5176206401774ba394a3dac80d684e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
