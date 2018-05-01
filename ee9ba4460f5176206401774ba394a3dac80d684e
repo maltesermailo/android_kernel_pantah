@@ -117,6 +117,30 @@
       "revId": "ee9ba4460f5176206401774ba394a3dac80d684e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9fe3d61a_7b34c805",
+        "filename": "drivers/platform/goldfish/goldfish_pipe_v2.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-05-01T23:30:27Z",
+      "side": 1,
+      "message": "Yes, userspace should never know about kernel addresses.  If you really want to print a pointer, you can use %pK as that will properly \"sanitize\" it",
+      "parentUuid": "1d8fcf41_18f52920",
+      "range": {
+        "startLine": 749,
+        "startChar": 17,
+        "endLine": 749,
+        "endChar": 19
+      },
+      "revId": "ee9ba4460f5176206401774ba394a3dac80d684e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
