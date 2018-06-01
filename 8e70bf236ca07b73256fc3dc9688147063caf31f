@@ -22,6 +22,30 @@
       "revId": "8e70bf236ca07b73256fc3dc9688147063caf31f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cf8975aa_f8f215ab",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 7074,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2018-06-01T12:54:33Z",
+      "side": 1,
+      "message": "Since here we are at scheduling non latency sensitive tasks, the potential to be preempted by another task waking up (which is proportional to the blocked utilization) should not be a big issue. Isn\u0027t it?\n\nHowever, I see your point, maybe it\u0027s worth to try it but I would keep it into a separate patch. Also because, eventually, we should find a clean way to avoid the code duplication wrt the check we already do for case C (L7103).",
+      "parentUuid": "a7e632b4_8e4efcc8",
+      "range": {
+        "startLine": 7074,
+        "startChar": 5,
+        "endLine": 7074,
+        "endChar": 14
+      },
+      "revId": "8e70bf236ca07b73256fc3dc9688147063caf31f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
