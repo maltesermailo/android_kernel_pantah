@@ -46,6 +46,30 @@
       "revId": "8e70bf236ca07b73256fc3dc9688147063caf31f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba061266_2b43c0e2",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 7074,
+      "author": {
+        "id": 1125654
+      },
+      "writtenOn": "2018-06-04T11:26:37Z",
+      "side": 1,
+      "message": "\u003e\u003e Should we also skip CPUs that have the same capacity orig, the same\n\u003e\u003e idle state but less spare cap ? We completely ignore blocked load otherwise.\nYes, this is somewhat a gap in the policy of spreading tasks that find_best_target is trying to achieve, although as Patrick suggested, this might not be a (noticeable) problem given that this only applies to non-prefer_idle tasks.\n\nI agree with you both that this might be worth a look, separate from this patch-set.",
+      "parentUuid": "cf8975aa_f8f215ab",
+      "range": {
+        "startLine": 7074,
+        "startChar": 5,
+        "endLine": 7074,
+        "endChar": 14
+      },
+      "revId": "8e70bf236ca07b73256fc3dc9688147063caf31f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
