@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4233f962_82ef0866",
+        "filename": "include/uapi/linux/goldfish/goldfish_dma.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2018-06-14T19:00:52Z",
+      "side": 1,
+      "message": "This is not a good way to handle a pointer in a structure that crosses the user/kernel boundary at all.  In fact, it doesn\u0027t even work properly on all kernel types.\n\nPlease fix.",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 59
+      },
+      "revId": "b9f35665ab8725bdd56c9898b55b5c2834b35ada",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
