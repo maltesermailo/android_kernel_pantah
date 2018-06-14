@@ -194,24 +194,6 @@ struct goldfish_pipe_dev_buffers {
 		signalled_pipe_buffers[MAX_SIGNALLED_PIPES];
 };
 
-/*
- * The main data structure tracking state is
- * struct goldfish_dma_context, which is included
- * as an extra pointer field in struct goldfish_pipe.
- * Each such context is associated with possibly
- * one physical address and size describing the
- * allocated DMA region, and only one allocation
- * is allowed for each pipe fd. Further allocations
- * require more open()'s of pipe fd's.
- */
-struct goldfish_dma_context {
-	struct device *pdev_dev;	/* pointer to feed to dma_*_coherent */
-	void *dma_vaddr;		/* kernel vaddr of dma region */
-	size_t dma_size;		/* size of dma region */
-	dma_addr_t phys_begin;		/* paddr of dma region */
-	dma_addr_t phys_end;		/* paddr of dma region + dma_size */
-};
-
 /* This data type models a given pipe instance */
 struct goldfish_pipe {
 	/* pipe ID - index into goldfish_pipe_dev::pipes array */
@@ -840,7 +822,7 @@ static void goldfish_pipe_dma_release_guest(struct goldfish_pipe *pipe)
 
 	if (dma->dma_vaddr) {
 		dma_free_coherent(
-				dma->pdev_dev,
+				pipe->dev->pdev_dev,
 				dma->dma_size,
 				dma->dma_vaddr,
 				dma->phys_begin);
@@ -946,11 +928,10 @@ static int goldfish_pipe_dma_alloc_locked(struct goldfish_pipe *pipe)
 
 	dma->phys_begin = 0;
 	dma->dma_vaddr =
-		dma_alloc_coherent(
-				dma->pdev_dev,
-				dma->dma_size,
-				&dma->phys_begin,
-				GFP_KERNEL);
+		dma_alloc_coherent(pipe->dev->pdev_dev,
+				   dma->dma_size,
+				   &dma->phys_begin,
+				   GFP_KERNEL);
 	if (!dma->dma_vaddr)
 		return -ENOMEM;
 
@@ -958,7 +939,7 @@ static int goldfish_pipe_dma_alloc_locked(struct goldfish_pipe *pipe)
 	pipe->dev->dma_alloc_total += dma->dma_size;
 
 	dev_dbg(pdev_dev, "%s: got v/p addrs "
-		"%p 0x%llx sz %zu total alloc %zu\n",
+		"%p 0x%llx sz %lld total alloc %zu\n",
 		__func__,
 		dma->dma_vaddr,
 		dma->phys_begin,
@@ -1048,7 +1029,6 @@ static int goldfish_pipe_dma_create_region(
 		}
 
 		dma->dma_size = size;
-		dma->pdev_dev = pipe->dev->pdev_dev;
 		pipe->dma = dma;
 		mutex_unlock(&pipe->lock);
 		return 0;
