@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "458680cf_6f159586",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7323,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2018-06-27T10:33:11Z",
+      "side": 1,
+      "message": "This can be changed to be:\n\n   struct energy_env *eenv;\n   int target_cpu;",
+      "range": {
+        "startLine": 7322,
+        "startChar": 1,
+        "endLine": 7323,
+        "endChar": 25
+      },
+      "revId": "e6cf1bbfe82e9248edd6ca8db2f4d81050a88d37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "399ff8a2_6db3ce32",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7334,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2018-06-27T10:33:11Z",
+      "side": 1,
+      "message": "This can be more explicit, and less dependant on previous code, by:\n\n    return -1;",
+      "range": {
+        "startLine": 7334,
+        "startChar": 9,
+        "endLine": 7334,
+        "endChar": 19
+      },
+      "revId": "e6cf1bbfe82e9248edd6ca8db2f4d81050a88d37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5a4267aa_e8638058",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7380,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2018-06-27T10:33:11Z",
+      "side": 1,
+      "message": "nit-pick: have you got one less TAB here?",
+      "range": {
+        "startLine": 7380,
+        "startChar": 4,
+        "endLine": 7380,
+        "endChar": 11
+      },
+      "revId": "e6cf1bbfe82e9248edd6ca8db2f4d81050a88d37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "54452b4f_781ac65b",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7404,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2018-06-27T10:33:11Z",
+      "side": 1,
+      "message": "Here also we can kill a non necessary dependency on previous code by being more explicit:\n\n    return -1;",
+      "range": {
+        "startLine": 7404,
+        "startChar": 9,
+        "endLine": 7404,
+        "endChar": 19
+      },
+      "revId": "e6cf1bbfe82e9248edd6ca8db2f4d81050a88d37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7fab5cba_96a0d1e6",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7408,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2018-06-27T10:33:11Z",
+      "side": 1,
+      "message": "This finally will be:\n\n        /* find most energy-efficient CPU */\n        target_cpu \u003d select_enecy_cpu_idx()....\n\n        return target_cpu;\n    }",
+      "range": {
+        "startLine": 7408,
+        "startChar": 1,
+        "endLine": 7408,
+        "endChar": 11
+      },
+      "revId": "e6cf1bbfe82e9248edd6ca8db2f4d81050a88d37",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
