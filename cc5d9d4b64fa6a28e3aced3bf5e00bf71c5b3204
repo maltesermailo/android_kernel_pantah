@@ -16,6 +16,24 @@
       "revId": "cc5d9d4b64fa6a28e3aced3bf5e00bf71c5b3204",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6fcc71e_9de9d111",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 7322,
+      "author": {
+        "id": 1125654
+      },
+      "writtenOn": "2018-06-28T15:02:36Z",
+      "side": 1,
+      "message": "I wanted to keep target_cpu initialised (just in case) so it made more sense to me to keep the initialised variables first followed by the un-initialised one (but I\u0027m seeing now that cpu_iter is not initialised either). In any case, what kind of consistency are you trying to enforce by moving this below? I\u0027m failing to see it.",
+      "parentUuid": "c3a3fa07_95f74721",
+      "revId": "cc5d9d4b64fa6a28e3aced3bf5e00bf71c5b3204",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
