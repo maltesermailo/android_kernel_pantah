@@ -858,6 +858,8 @@ static int vfat_unlink(struct inode *dir, struct dentry *dentry)
 	if (err)
 		goto out;
 	clear_nlink(inode);
+	fat_truncate_blocks(inode, 0);
+	invalidate_inode_buffers(inode);
 	inode->i_mtime = inode->i_atime = current_time(inode);
 	fat_detach(inode);
 	vfat_d_version_set(dentry, dir->i_version);
