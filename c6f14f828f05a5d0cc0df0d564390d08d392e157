@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "44fabe07_4f823f57",
+        "filename": "include/net/dst.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2018-07-17T21:16:17Z",
+      "side": 1,
+      "message": "Feels strange to have this be in dst.h, but I suppose since there are lots of xfrm-specific functions here already, perhaps this is fine.",
+      "range": {
+        "startLine": 520,
+        "startChar": 18,
+        "endLine": 520,
+        "endChar": 39
+      },
+      "revId": "c6f14f828f05a5d0cc0df0d564390d08d392e157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2e35587_4c548cc6",
+        "filename": "net/xfrm/xfrm_policy.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2452,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2018-07-17T21:16:17Z",
+      "side": 1,
+      "message": "How does this work? Because there are no parameters I can\u0027t tell where the cb comes from and what it is. Is this a global? A skb cb? ...?\n\nIf this is an skb cb, then generally speaking, those are typically overwritten by whatever layer \"owns\" the skb at the moment, and are limited in size (56 bytes, maybe?). Is it guaranteed that there is space in the cb for anything you add? Is it guaranteed that when this function is called the cb will be set to what you expect it to be? I would imagine that this function can be called in many different codepaths.",
+      "range": {
+        "startLine": 2452,
+        "startChar": 33,
+        "endLine": 2452,
+        "endChar": 47
+      },
+      "revId": "c6f14f828f05a5d0cc0df0d564390d08d392e157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
