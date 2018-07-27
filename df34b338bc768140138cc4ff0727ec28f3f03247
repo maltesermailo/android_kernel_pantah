@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c80dd216_b36972b1",
+        "filename": "fs/sdcardfs/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2018-07-27T17:47:24Z",
+      "side": 1,
+      "message": "NB: ecryptfs and overlayfs both return EINVAL for the same condition, and have an identical print message.\n\nI am wondering out loud if EMLINK might be a more meaningful error code? EINVAL just seems overused ...",
+      "range": {
+        "startLine": 301,
+        "startChar": 2,
+        "endLine": 301,
+        "endChar": 16
+      },
+      "revId": "df34b338bc768140138cc4ff0727ec28f3f03247",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
