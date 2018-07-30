@@ -91,10 +91,13 @@ static inline bool fscrypt_valid_enc_modes(u32 contents_mode,
 	    filenames_mode == FS_ENCRYPTION_MODE_AES_256_CTS)
 		return true;
 
+<<<<<<< HEAD   (48a0bb Revert "f2fs: give message and set need_fsck given broken no)
 	if (contents_mode == FS_ENCRYPTION_MODE_SPECK128_256_XTS &&
 	    filenames_mode == FS_ENCRYPTION_MODE_SPECK128_256_CTS)
 		return true;
 
+=======
+>>>>>>> BRANCH (787f7f f2fs: run fstrim asynchronously if runtime discard is on)
 	return false;
 }
 
