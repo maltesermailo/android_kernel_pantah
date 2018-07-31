@@ -2389,10 +2389,14 @@ static ssize_t f2fs_direct_IO(int rw, struct kiocb *iocb, struct iov_iter *iter,
 	err = check_direct_IO(inode, iter, offset);
 	if (err)
 		return err;
+<<<<<<< HEAD   (236c07 ANDROID: sdcardfs: Check stacked filesystem depth)
 
 	if (__force_buffered_io(inode, rw))
 		return 0;
+=======
+>>>>>>> BRANCH (f264f5 f2fs: run fstrim asynchronously if runtime discard is on)
 
+<<<<<<< HEAD   (236c07 ANDROID: sdcardfs: Check stacked filesystem depth)
 	if (trace_android_fs_dataread_start_enabled() && (rw == READ)) {
 		char *path, pathbuf[MAX_TRACE_PATHBUF_LEN];
 
@@ -2413,6 +2417,10 @@ static ssize_t f2fs_direct_IO(int rw, struct kiocb *iocb, struct iov_iter *iter,
 						 current->pid, path,
 						 current->comm);
 	}
+=======
+	if (__force_buffered_io(inode, rw))
+		return 0;
+>>>>>>> BRANCH (f264f5 f2fs: run fstrim asynchronously if runtime discard is on)
 
 	trace_f2fs_direct_IO_enter(inode, offset, count, rw);
 

@@ -85,6 +85,7 @@ void truncate_inline_inode(struct inode *inode, struct page *ipage, u64 from)
 int f2fs_read_inline_data(struct inode *inode, struct page *page)
 {
 	struct page *ipage;
+<<<<<<< HEAD   (236c07 ANDROID: sdcardfs: Check stacked filesystem depth)
 
 	if (trace_android_fs_dataread_start_enabled()) {
 		char *path, pathbuf[MAX_TRACE_PATHBUF_LEN];
@@ -97,6 +98,8 @@ int f2fs_read_inline_data(struct inode *inode, struct page *page)
 						PAGE_SIZE, current->pid,
 						path, current->comm);
 	}
+=======
+>>>>>>> BRANCH (f264f5 f2fs: run fstrim asynchronously if runtime discard is on)
 
 	ipage = get_node_page(F2FS_I_SB(inode), inode->i_ino);
 	if (IS_ERR(ipage)) {
@@ -118,10 +121,16 @@ int f2fs_read_inline_data(struct inode *inode, struct page *page)
 
 	if (!PageUptodate(page))
 		SetPageUptodate(page);
+<<<<<<< HEAD   (236c07 ANDROID: sdcardfs: Check stacked filesystem depth)
 
+=======
+>>>>>>> BRANCH (f264f5 f2fs: run fstrim asynchronously if runtime discard is on)
 	f2fs_put_page(ipage, 1);
+<<<<<<< HEAD   (236c07 ANDROID: sdcardfs: Check stacked filesystem depth)
 
 	trace_android_fs_dataread_end(inode, page_offset(page), PAGE_SIZE);
+=======
+>>>>>>> BRANCH (f264f5 f2fs: run fstrim asynchronously if runtime discard is on)
 	unlock_page(page);
 	return 0;
 }
