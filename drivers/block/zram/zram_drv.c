@@ -276,6 +276,15 @@ static ssize_t mem_used_max_store(struct device *dev,
 	return len;
 }
 
+static bool zram_wb_incompressible_page(struct zram *zram)
+{
+#ifdef CONFIG_ZRAM_WB_INCOMPRESSIBLE_PAGES
+	return true;
+#else
+	return false;
+#endif
+}
+
 #ifdef CONFIG_ZRAM_WRITEBACK
 static bool zram_wb_enabled(struct zram *zram)
 {
@@ -1102,7 +1111,8 @@ compress_again:
 	}
 
 	if (unlikely(comp_len >= huge_class_size)) {
-		if (zram_wb_enabled(zram) && allow_wb) {
+		if (zram_wb_enabled(zram) && zram_wb_incompressible_page(zram) &&
+									allow_wb) {
 			zcomp_stream_put(zram->comp);
 			ret = write_to_bdev(zram, bvec, index, bio, &element);
 			if (!ret) {
