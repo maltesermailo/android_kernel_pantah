@@ -9,6 +9,7 @@
 #include <linux/module.h>
 #include <linux/slab.h>
 #include <linux/vmalloc.h>
+#include <linux/dma-noncoherent.h>
 
 #include "ion_private.h"
 
@@ -195,6 +196,27 @@ int ion_buffer_zero(struct ion_buffer *buffer)
 	return ion_sglist_zero(table->sgl, table->nents, pgprot);
 }
 EXPORT_SYMBOL_GPL(ion_buffer_zero);
+
+void ion_buffer_prep_noncached(struct ion_buffer *buffer)
+{
+	struct scatterlist *sg;
+	struct sg_table *table;
+	int i;
+
+	if (!buffer || !buffer->sg_table) {
+		pr_warn_once("%s: invalid argument\n", __func__);
+		return;
+	}
+
+	if (buffer->flags & ION_FLAG_CACHED)
+		return;
+
+	table = buffer->sg_table;
+
+	for_each_sg(table->sgl, sg, table->orig_nents, i)
+		arch_dma_prep_coherent(sg_page(sg), sg->length);
+}
+EXPORT_SYMBOL_GPL(ion_buffer_prep_noncached);
 
 void ion_buffer_release(struct ion_buffer *buffer)
 {
