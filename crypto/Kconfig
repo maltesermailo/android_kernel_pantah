@@ -1752,6 +1752,14 @@ config CRYPTO_USER_API_AEAD
 config CRYPTO_HASH_INFO
 	bool
 
+config CRYPTO_BENCHMARK
+	tristate "Crypto algorithm benchmark and testing module"
+	select CRYPTO_MANAGER
+	help
+	  This module exposes a file /proc/cryptobench.  Writing
+	  commands to this file triggers benchmarking and testing of
+	  crypto algorithms (symmetric ciphers and hashes).
+
 source "drivers/crypto/Kconfig"
 source crypto/asymmetric_keys/Kconfig
 source certs/Kconfig
