@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "14778e14_d608414a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2018-11-06T17:14:33Z",
+      "side": 1,
+      "message": "I don\u0027t think we are taking any new feature / fixes that are not in security\nbulletin or LTS in this branch. It is dead for Q launches and only available *as a reference* for Q\nupgrades\n\nThis looks like a a legitimate bug fix though, so I think we should take it for anyone who\nwants the patch to fix it. It is much more likely to show up on devices though if this patch\nis added to -p/-o (stable) branches.\n\nI will leave that for Greg / Todd / Alistair to decide.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 50
+      },
+      "revId": "283509b974f1d6577ce13b3253d8f39fa6682fe4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0e38b90a_39c8975e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2018-11-06T17:14:33Z",
+      "side": 1,
+      "message": "this seems to have been fixed in 4.4-stable already (https://elixir.bootlin.com/linux/v4.4.162/source/drivers/md/dm-verity.c#L514) ?\nWe seem to have backported a bunch of changes from upstream which also renamed the file so may be the -stable merges missed it?\n\ncc: gregkh\ncc: sami, who brought in the UPSTREAM changes.",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 66
+      },
+      "revId": "283509b974f1d6577ce13b3253d8f39fa6682fe4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87b7c9c6_14bf2e33",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1108565
+      },
+      "writtenOn": "2018-11-06T17:14:33Z",
+      "side": 1,
+      "message": "Bug: ??\n\nsee: http://go/common-kernel-3p",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 63
+      },
+      "revId": "283509b974f1d6577ce13b3253d8f39fa6682fe4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
