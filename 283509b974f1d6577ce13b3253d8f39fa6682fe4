@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "a55c0ca5_ed18a0c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2018-11-07T08:22:55Z",
+      "side": 1,
+      "message": "That is fair. The problem this fixes doesn\u0027t really cause any runtime issues, but if the prefetch happens to be near the end of the hashtree, we will do a lot of work for nothing and spam the kernel log with errors. This is not very likely to happen with /system, but pretty much guaranteed to happen with APEX modules, most of which are small and typically have a hashtree much smaller than the prefetch size.\n\nLet me know where you want this to go.",
+      "parentUuid": "14778e14_d608414a",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 50
+      },
+      "revId": "283509b974f1d6577ce13b3253d8f39fa6682fe4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0e38b90a_39c8975e",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "38836938_2279abc9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2018-11-07T08:22:55Z",
+      "side": 1,
+      "message": "I think it has always been like that upstream - but we broke it with this (Android-specific) commit:\n\nhttps://android-review.googlesource.com/c/kernel/common/+/310918\n\n(to be fair, it wasn\u0027t obvious that hash_blocks is wrong, and that should probably be fixed upstream).",
+      "parentUuid": "0e38b90a_39c8975e",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 66
+      },
+      "revId": "283509b974f1d6577ce13b3253d8f39fa6682fe4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "87b7c9c6_14bf2e33",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -59,6 +107,30 @@
       "writtenOn": "2018-11-06T17:14:33Z",
       "side": 1,
       "message": "Bug: ??\n\nsee: http://go/common-kernel-3p",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 63
+      },
+      "revId": "283509b974f1d6577ce13b3253d8f39fa6682fe4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "30b96f04_ead67138",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2018-11-07T08:22:55Z",
+      "side": 1,
+      "message": "Ack, I\u0027ll add a bug as soon as we\u0027ve agreed where this should go.",
+      "parentUuid": "87b7c9c6_14bf2e33",
       "range": {
         "startLine": 32,
         "startChar": 0,
