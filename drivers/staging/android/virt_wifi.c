@@ -30,11 +30,28 @@ struct virt_wifi_wiphy_priv {
 	struct cfg80211_scan_request *scan_request;
 };
 
-static struct ieee80211_channel channel_2ghz = {
-	.band = IEEE80211_BAND_2GHZ,
-	.center_freq = 2432,
-	.hw_value = 2432,
-	.max_power = 20,
+#define CHAN2G(_freq)  { \
+	.band = IEEE80211_BAND_2GHZ, \
+	.center_freq = (_freq), \
+	.hw_value = (_freq), \
+	.max_power = 20, \
+}
+
+static struct ieee80211_channel channels_2ghz[] = {
+	CHAN2G(2412), /* Channel 1 */
+	CHAN2G(2417), /* Channel 2 */
+	CHAN2G(2422), /* Channel 3 */
+	CHAN2G(2427), /* Channel 4 */
+	CHAN2G(2432), /* Channel 5 */
+	CHAN2G(2437), /* Channel 6 */
+	CHAN2G(2442), /* Channel 7 */
+	CHAN2G(2447), /* Channel 8 */
+	CHAN2G(2452), /* Channel 9 */
+	CHAN2G(2457), /* Channel 10 */
+	CHAN2G(2462), /* Channel 11 */
+	CHAN2G(2467), /* Channel 12 */
+	CHAN2G(2472), /* Channel 13 */
+	CHAN2G(2484), /* Channel 14 */
 };
 
 static struct ieee80211_rate bitrates_2ghz[] = {
@@ -48,10 +65,10 @@ static struct ieee80211_rate bitrates_2ghz[] = {
 };
 
 static struct ieee80211_supported_band band_2ghz = {
-	.channels = &channel_2ghz,
+	.channels = channels_2ghz,
 	.bitrates = bitrates_2ghz,
 	.band = IEEE80211_BAND_2GHZ,
-	.n_channels = 1,
+	.n_channels = ARRAY_SIZE(channels_2ghz),
 	.n_bitrates = ARRAY_SIZE(bitrates_2ghz),
 	.ht_cap = {
 		.ht_supported = true,
@@ -69,11 +86,41 @@ static struct ieee80211_supported_band band_2ghz = {
 	},
 };
 
-static struct ieee80211_channel channel_5ghz = {
-	.band = IEEE80211_BAND_5GHZ,
-	.center_freq = 5240,
-	.hw_value = 5240,
-	.max_power = 20,
+#define CHAN5G(_freq) { \
+	.band = IEEE80211_BAND_5GHZ, \
+	.center_freq = (_freq), \
+	.hw_value = (_freq), \
+	.max_power = 20, \
+}
+
+static struct ieee80211_channel channels_5ghz[] = {
+	CHAN5G(5180), /* Channel 36 */
+	CHAN5G(5200), /* Channel 40 */
+	CHAN5G(5220), /* Channel 44 */
+	CHAN5G(5240), /* Channel 48 */
+
+	CHAN5G(5260), /* Channel 52 */
+	CHAN5G(5280), /* Channel 56 */
+	CHAN5G(5300), /* Channel 60 */
+	CHAN5G(5320), /* Channel 64 */
+
+	CHAN5G(5500), /* Channel 100 */
+	CHAN5G(5520), /* Channel 104 */
+	CHAN5G(5540), /* Channel 108 */
+	CHAN5G(5560), /* Channel 112 */
+	CHAN5G(5580), /* Channel 116 */
+	CHAN5G(5600), /* Channel 120 */
+	CHAN5G(5620), /* Channel 124 */
+	CHAN5G(5640), /* Channel 128 */
+	CHAN5G(5660), /* Channel 132 */
+	CHAN5G(5680), /* Channel 136 */
+	CHAN5G(5700), /* Channel 140 */
+
+	CHAN5G(5745), /* Channel 149 */
+	CHAN5G(5765), /* Channel 153 */
+	CHAN5G(5785), /* Channel 157 */
+	CHAN5G(5805), /* Channel 161 */
+	CHAN5G(5825), /* Channel 165 */
 };
 
 static struct ieee80211_rate bitrates_5ghz[] = {
@@ -101,10 +148,10 @@ static struct ieee80211_rate bitrates_5ghz[] = {
 		    IEEE80211_VHT_MCS_SUPPORT_0_9 << 14)
 
 static struct ieee80211_supported_band band_5ghz = {
-	.channels = &channel_5ghz,
+	.channels = channels_5ghz,
 	.bitrates = bitrates_5ghz,
 	.band = IEEE80211_BAND_5GHZ,
-	.n_channels = 1,
+	.n_channels = ARRAY_SIZE(channels_5ghz),
 	.n_bitrates = ARRAY_SIZE(bitrates_5ghz),
 	.ht_cap = {
 		.ht_supported = true,
@@ -176,7 +223,7 @@ static void virt_wifi_scan_result(struct work_struct *work)
 			     scan_result.work);
 	struct wiphy *wiphy = priv_to_wiphy(priv);
 
-	informed_bss = cfg80211_inform_bss(wiphy, &channel_5ghz,
+	informed_bss = cfg80211_inform_bss(wiphy, &channels_5ghz[0],
 					   CFG80211_BSS_FTYPE_PRESP,
 					   fake_router_bssid,
 					   ktime_get_boot_ns(),
@@ -209,6 +256,7 @@ struct virt_wifi_netdev_priv {
 	struct net_device *upperdev;
 	bool being_deleted;
 	bool is_connected;
+	bool is_hosting;
 	bool is_up;
 	u8 connect_requested_bss[ETH_ALEN];
 	struct delayed_work connect;
@@ -223,6 +271,8 @@ static int virt_wifi_connect(struct wiphy *wiphy, struct net_device *netdev,
 	struct virt_wifi_netdev_priv *priv = netdev_priv(netdev);
 	bool could_schedule;
 
+	if (netdev->ieee80211_ptr->iftype != NL80211_IFTYPE_STATION)
+		return -EINVAL;
 	if (priv->being_deleted || !priv->is_up)
 		return -EBUSY;
 
@@ -283,6 +333,8 @@ static int virt_wifi_disconnect(struct wiphy *wiphy, struct net_device *netdev,
 {
 	struct virt_wifi_netdev_priv *priv = netdev_priv(netdev);
 
+	if (netdev->ieee80211_ptr->iftype != NL80211_IFTYPE_STATION)
+		return -EINVAL;
 	if (priv->being_deleted)
 		return -EBUSY;
 
@@ -304,6 +356,8 @@ static int virt_wifi_get_station(struct wiphy *wiphy, struct net_device *dev,
 
 	wiphy_debug(wiphy, "get_station\n");
 
+	if (dev->ieee80211_ptr->iftype != NL80211_IFTYPE_STATION)
+		return -EINVAL;
 	if (!priv->is_connected || !ether_addr_equal(mac, fake_router_bssid))
 		return -ENOENT;
 
@@ -329,11 +383,89 @@ static int virt_wifi_dump_station(struct wiphy *wiphy, struct net_device *dev,
 
 	wiphy_debug(wiphy, "dump_station\n");
 
+	if (dev->ieee80211_ptr->iftype != NL80211_IFTYPE_STATION)
+		return -EINVAL;
+
 	if (idx != 0 || !priv->is_connected)
 		return -ENOENT;
 
 	ether_addr_copy(mac, fake_router_bssid);
 	return virt_wifi_get_station(wiphy, dev, fake_router_bssid, sinfo);
+}
+
+static int virt_wifi_change_virtual_intf(struct wiphy *wiphy,
+					 struct net_device *dev,
+					 enum nl80211_iftype type, u32 *flags,
+					 struct vif_params *params)
+{
+	struct virt_wifi_netdev_priv *priv = netdev_priv(dev);
+
+	wiphy_debug(wiphy, "change_virtual_intf\n");
+
+	if (type != NL80211_IFTYPE_STATION && type != NL80211_IFTYPE_AP)
+		return -EOPNOTSUPP;
+	if (priv->is_connected || priv->is_hosting)
+		return -EBUSY;
+	dev->ieee80211_ptr->iftype = type;
+	return 0;
+}
+
+static int virt_wifi_dump_survey(struct wiphy *wiphy, struct net_device *netdev,
+				 int idx, struct survey_info *info)
+{
+	const int n_2ghz = ARRAY_SIZE(channels_2ghz);
+	const int n_5ghz = ARRAY_SIZE(channels_5ghz);
+
+	wiphy_debug(wiphy, "dump_survey\n");
+
+	if (idx >= 0 && idx < n_2ghz)
+		info->channel = &channels_2ghz[idx];
+	else if (idx >= n_2ghz && idx < n_2ghz + n_5ghz)
+		info->channel = &channels_5ghz[idx - n_2ghz];
+	else
+		return -ENOENT;
+
+	info->filled = 0;
+	return 0;
+}
+
+static int virt_wifi_start_ap(struct wiphy *wiphy, struct net_device *dev,
+			      struct cfg80211_ap_settings *settings)
+{
+	struct virt_wifi_netdev_priv *priv = netdev_priv(dev);
+
+	wiphy_debug(wiphy, "start_ap\n");
+
+	if (dev->ieee80211_ptr->iftype != NL80211_IFTYPE_AP)
+		return -EINVAL;
+	if (priv->is_connected || priv->is_hosting)
+		return -EBUSY;
+
+	priv->is_hosting = true;
+	return 0;
+}
+
+static int virt_wifi_change_beacon(struct wiphy *wiphy, struct net_device *dev,
+				   struct cfg80211_beacon_data *info)
+{
+	wiphy_debug(wiphy, "change_beacon\n");
+
+	if (dev->ieee80211_ptr->iftype != NL80211_IFTYPE_AP)
+		return -EINVAL;
+	return 0;
+}
+
+static int virt_wifi_stop_ap(struct wiphy *wiphy, struct net_device *dev)
+{
+	struct virt_wifi_netdev_priv *priv = netdev_priv(dev);
+
+	wiphy_debug(wiphy, "stop_ap\n");
+
+	if (!priv->is_hosting)
+		return -EINVAL;
+
+	priv->is_hosting = false;
+	return 0;
 }
 
 static const struct cfg80211_ops virt_wifi_cfg80211_ops = {
@@ -344,6 +476,13 @@ static const struct cfg80211_ops virt_wifi_cfg80211_ops = {
 
 	.get_station = virt_wifi_get_station,
 	.dump_station = virt_wifi_dump_station,
+
+	.change_virtual_intf = virt_wifi_change_virtual_intf,
+	.dump_survey = virt_wifi_dump_survey,
+
+	.start_ap = virt_wifi_start_ap,
+	.change_beacon = virt_wifi_change_beacon,
+	.stop_ap = virt_wifi_stop_ap,
 };
 
 /* Acquires and releases the rtnl lock. */
@@ -367,7 +506,8 @@ static struct wiphy *virt_wifi_make_wiphy(void)
 	wiphy->bands[IEEE80211_BAND_60GHZ] = NULL;
 
 	wiphy->regulatory_flags = REGULATORY_WIPHY_SELF_MANAGED;
-	wiphy->interface_modes = BIT(NL80211_IFTYPE_STATION);
+	wiphy->interface_modes = BIT(NL80211_IFTYPE_STATION)
+		| BIT(NL80211_IFTYPE_AP);
 
 	priv = wiphy_priv(wiphy);
 	priv->being_deleted = false;
@@ -552,6 +692,7 @@ static int virt_wifi_newlink(struct net *src_net, struct net_device *dev,
 	priv->being_deleted = false;
 	priv->is_connected = false;
 	priv->is_up = false;
+	priv->is_hosting = false;
 	INIT_DELAYED_WORK(&priv->connect, virt_wifi_connect_complete);
 
 	return 0;
