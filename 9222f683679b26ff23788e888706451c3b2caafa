@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2df8273d_c3362113",
+        "filename": "drivers/staging/android/virt_wifi.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1291337
+      },
+      "writtenOn": "2018-11-14T21:19:13Z",
+      "side": 1,
+      "message": "This was based on a comment from the kernel maintainers:\n\nhttps://lkml.org/lkml/2018/10/9/389\n\n\"Come to think of it, the typical order here would be 1,2,5.5,11,6,12,24\n(6\u003c-\u003e11), due to the ordering in the probe request frame I guess.\n\nI\u0027m not sure it matters though.\"",
+      "parentUuid": "e40cb813_bf6ddb50",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 1
+      },
+      "revId": "9222f683679b26ff23788e888706451c3b2caafa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4a1d387a_6b994122",
         "filename": "drivers/staging/android/virt_wifi.c",
         "patchSetId": 2
@@ -36,6 +60,24 @@
       "writtenOn": "2018-11-14T03:10:50Z",
       "side": 1,
       "message": "Potential race here?",
+      "revId": "9222f683679b26ff23788e888706451c3b2caafa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "60148d39_4119f5a4",
+        "filename": "drivers/staging/android/virt_wifi.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1291337
+      },
+      "writtenOn": "2018-11-14T21:19:13Z",
+      "side": 1,
+      "message": "I\u0027ve described the scenarios I\u0027ve been able to think of below for this code, is there a case missing?\n\n- Multiple invocations of virt_wifi_scan_result: impossible. virt_wifi_scan is guarded by the wireless_dev mutex, so there is only ever one caller inside that method. That method is the only place that can schedule virt_wifi_scan_result calls, and it guards itself against doing that by checking if priv-\u003escan_request is null. This requires setting priv-\u003escan_request to NULL at the last possible moment to avoid overlapping runs.\n- wiphy / net_device is taken down: state is protected by virt_wifi_cancel_scan, which is invoked by the network going down callback. It uses cancel_delayed_work_sync which either waits for the scheduled callback to finish if it is already executing, or unschedules the callback if it has not started executing. That leaves it in a definite not-executing state when virt_wifi_cancel_scan interacts with priv-\u003escan_request.\n- Deletion of the net_device / wiphy: The kernel sends devices to the \"down\" state before deleting them. The down transition callback calls virt_wifi_cancel_scan, which guarantees putting the device into a not-scanning state as described above.\n\ncfg80211_scan_done also synchronously deletes the scan request passed in as a parameter, so references to that memory should be cleared afterwards.\nhttps://elixir.bootlin.com/linux/latest/source/include/net/cfg80211.h#L2893\n\"... the scan request is given the driver, and will be valid until passed to cfg80211_scan_done().\"",
+      "parentUuid": "4a1d387a_6b994122",
       "revId": "9222f683679b26ff23788e888706451c3b2caafa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -59,6 +101,24 @@
     },
     {
       "key": {
+        "uuid": "de8df895_427afdac",
+        "filename": "drivers/staging/android/virt_wifi.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1291337
+      },
+      "writtenOn": "2018-11-14T21:19:13Z",
+      "side": 1,
+      "message": "Not deliberately, what would a better ordering be?",
+      "parentUuid": "33c9d10b_4deec45c",
+      "revId": "9222f683679b26ff23788e888706451c3b2caafa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b4db610f_8bdae725",
         "filename": "drivers/staging/android/virt_wifi.c",
         "patchSetId": 2
@@ -73,6 +133,24 @@
       "revId": "9222f683679b26ff23788e888706451c3b2caafa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c9e74941_22edda52",
+        "filename": "drivers/staging/android/virt_wifi.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1291337
+      },
+      "writtenOn": "2018-11-14T21:19:13Z",
+      "side": 1,
+      "message": "Added a WARN_ON line.",
+      "parentUuid": "b4db610f_8bdae725",
+      "revId": "9222f683679b26ff23788e888706451c3b2caafa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
