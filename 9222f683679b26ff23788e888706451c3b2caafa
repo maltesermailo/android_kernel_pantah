@@ -162,6 +162,24 @@
     },
     {
       "key": {
+        "uuid": "36ab9a63_fd08e96d",
+        "filename": "drivers/staging/android/virt_wifi.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1291337
+      },
+      "writtenOn": "2018-11-15T21:38:33Z",
+      "side": 1,
+      "message": "My understanding of the specification of cancel_delayed_work_sync is it treats the virt_wifi_scan_result function as atomic. After cancel_delayed_work_sync returns, virt_wifi_scan_result will not be running. It either cancels the operation if it hasn\u0027t started or blocks until the operation is done, or does nothing if nothing is scheduled. The return value of cancel_delayed_work_sync is whether there was pending work or not.\n\nI could also be misreading the specification of cancel_delayed_work_sync though, in which case there are probably more issues with how the async stuff interacts here.",
+      "parentUuid": "8bdfe7c9_81cf118c",
+      "revId": "9222f683679b26ff23788e888706451c3b2caafa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "33c9d10b_4deec45c",
         "filename": "drivers/staging/android/virt_wifi.c",
         "patchSetId": 2
