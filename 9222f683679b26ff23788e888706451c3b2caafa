@@ -126,6 +126,24 @@
     },
     {
       "key": {
+        "uuid": "b510819b_8c52fd7e",
+        "filename": "drivers/staging/android/virt_wifi.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1291337
+      },
+      "writtenOn": "2018-11-15T00:54:38Z",
+      "side": 1,
+      "message": "cfg80211_scan_done is definitely not idempotent, one side-effect includes a free of the passed in scan request.\n\nThe whole construction with cancel_delayed_work_sync is to enforce there is exactly one call to cfg80211_scan_done, through depending on cancel_delayed_work_sync\u0027s return value indicating whether or not it canceled any outstanding work. The specification is that it never interrupts the work partway through execution; cancel_delayed_work_sync cancels the work if it hasn\u0027t started or blocks until the executing work function is done.\n\nhttps://elixir.bootlin.com/linux/v4.20-rc2/source/kernel/workqueue.c#L3126",
+      "parentUuid": "edfbdb9a_be9babe6",
+      "revId": "9222f683679b26ff23788e888706451c3b2caafa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "33c9d10b_4deec45c",
         "filename": "drivers/staging/android/virt_wifi.c",
         "patchSetId": 2
@@ -173,6 +191,24 @@
       "side": 1,
       "message": "Generally speaking, you want to order big-\u003esmall, except word-sized members should be placed at the top because those buckets can never be better filled (think bin-packing).  This gets tricky with struct-within-struct (opacity, expansion, etc).  Something like the below seems reasonable to me:\n\n\tstruct virt_wifi_netdev_priv {\n\t\tstruct net_device *lowerdev;\n\t\tstruct net_device *upperdev;\n\t\tu32 tx_packets;\n\t\tu32 tx_failed;\n\t\tstruct delayed_work connect;\n\t\tu8 connect_requested_bss[ETH_ALEN];\n\t\tbool being_deleted;\n\t\tbool is_connected;\n\t\tbool is_up;\n\t};\n\nThe above assumes you\u0027re doing this for memory-efficiency reasons, though.  If you need run-time performance, then you can make that trade-off and waste space as needed for important members.",
       "parentUuid": "de8df895_427afdac",
+      "revId": "9222f683679b26ff23788e888706451c3b2caafa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "89577424_422bde1f",
+        "filename": "drivers/staging/android/virt_wifi.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1291337
+      },
+      "writtenOn": "2018-11-15T00:54:38Z",
+      "side": 1,
+      "message": "Thanks for the explanation! The only times this struct is referenced on the critical path are in virt_wifi_start_xmit and virt_wifi_rx_handler, since those are invoked per-packet in the networking level. Those functions use is_connected, lowerdev, upperdev, tx_packets, and tx_failed. I\u0027ll move is_connected to the top to guarantee alignment, and otherwise use your recommended layout, assuming the pointers get word-aligned after the bool.",
+      "parentUuid": "e0c5acae_4d07e8a1",
       "revId": "9222f683679b26ff23788e888706451c3b2caafa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
