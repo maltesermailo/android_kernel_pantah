@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "23868e29_8dad6d36",
+        "filename": "fs/f2fs/data.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1176763
+      },
+      "writtenOn": "2018-12-14T02:10:04Z",
+      "side": 1,
+      "message": "hmm, the concern is, this type comes from DATA, NODE, META. But, the above tracepoint is to track DATA only. You need to keep DATA only for submit_bio, and change end_io to get the tracepoint only if (inode-\u003ei_ino !\u003d F2FS_NODE_INO(F2FS_I_SB(inode)) \u0026\u0026 inode-\u003ei_ino !\u003d F2FS_META_INO(F2FS_I_SB(inode)).",
+      "range": {
+        "startLine": 354,
+        "startChar": 1,
+        "endLine": 354,
+        "endChar": 30
+      },
+      "revId": "a2342d82ff29695e4e8e3cc187db246ef24a34dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
