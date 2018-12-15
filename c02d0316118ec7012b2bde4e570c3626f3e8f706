@@ -16,6 +16,24 @@
       "revId": "c02d0316118ec7012b2bde4e570c3626f3e8f706",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d96be09f_bbee5c5d",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2401,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2018-12-15T01:01:50Z",
+      "side": 1,
+      "message": "I left them as pointers so the pointer arithmetic is the same. I can change them to offsets though, binder_size_t is probably not going to ever change...\n\nI\u0027m assuming your comment is specifically about these locals, not a more general comment about all the __user pointers...",
+      "parentUuid": "46134e79_49c1dc76",
+      "revId": "c02d0316118ec7012b2bde4e570c3626f3e8f706",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
