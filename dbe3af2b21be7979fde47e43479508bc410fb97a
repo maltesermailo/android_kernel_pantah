@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "fac3ec30_ff1476f9",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2540,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-01-18T19:36:14Z",
+      "side": 1,
+      "message": "Isn\u0027t that just the definition of a struct binder_buffer_object? So a comment like:\n\n  /*\n   * the @buffer element of struct binder_buffer_object is the address\n   * of the buffer space containing the fd_array. This needs to be\n   * converted to an offset relative to the transaction buffer.\n   */",
+      "parentUuid": "2cbf7a6b_422a1ebc",
+      "revId": "dbe3af2b21be7979fde47e43479508bc410fb97a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "c3f28314_4069cac9",
         "filename": "drivers/android/binder.c",
         "patchSetId": 7
