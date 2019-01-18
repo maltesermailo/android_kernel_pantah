@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "56e2bd1e_09c20288",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2540,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2019-01-18T18:40:11Z",
+      "side": 1,
+      "message": "Do you want to add a comment here explaining why parent buffer is a binder_uintptr_t and parent_offset is relative to that. I would also change the order of these operations so you subtract the pointers first then add parent_offset. You should only need to case user_data to binder_uintptr_t (through uintptr_t to avoid problems when they are not the same size)",
+      "revId": "dbe3af2b21be7979fde47e43479508bc410fb97a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c3f28314_4069cac9",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2777,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2019-01-18T18:40:11Z",
+      "side": 1,
+      "message": "see comment above.",
+      "revId": "dbe3af2b21be7979fde47e43479508bc410fb97a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
