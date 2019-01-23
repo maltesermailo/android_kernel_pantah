@@ -236,8 +236,12 @@ static void recover_inode(struct inode *inode, struct page *page)
 			ino_of_node(page), name, raw->i_inline);
 }
 
+<<<<<<< HEAD   (e78da6 Merge 4.9.151 into android-4.9-p)
 static int find_fsync_dnodes(struct f2fs_sb_info *sbi, struct list_head *head,
 				bool check_only)
+=======
+static int find_fsync_dnodes(struct f2fs_sb_info *sbi, struct list_head *head)
+>>>>>>> BRANCH (ef50e3 Linux 4.9.152)
 {
 	struct curseg_info *curseg;
 	struct page *page = NULL;
@@ -267,10 +271,14 @@ static int find_fsync_dnodes(struct f2fs_sb_info *sbi, struct list_head *head,
 
 		entry = get_fsync_inode(head, ino_of_node(page));
 		if (!entry) {
+<<<<<<< HEAD   (e78da6 Merge 4.9.151 into android-4.9-p)
 			bool quota_inode = false;
 
 			if (!check_only &&
 					IS_INODE(page) && is_dent_dnode(page)) {
+=======
+			if (IS_INODE(page) && is_dent_dnode(page)) {
+>>>>>>> BRANCH (ef50e3 Linux 4.9.152)
 				err = recover_inode_page(sbi, page);
 				if (err)
 					break;
