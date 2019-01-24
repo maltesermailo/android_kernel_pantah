@@ -6726,8 +6726,14 @@ unsigned long
 boosted_cpu_util(int cpu, unsigned long other_util)
 {
 	unsigned long util = cpu_util_freq(cpu) + other_util;
-	long margin = schedtune_cpu_margin(util, cpu);
+	long margin;
 
+#ifdef CONFIG_SCHED_WALT
+	if (likely(!walt_disabled && sysctl_sched_use_walt_cpu_util))
+		util = cpu_util_freq(cpu);
+#endif
+
+	margin = schedtune_cpu_margin(util, cpu);
 	trace_sched_boost_cpu(cpu, util, margin);
 
 	return util + margin;
