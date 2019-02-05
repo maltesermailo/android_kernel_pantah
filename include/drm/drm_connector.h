@@ -233,6 +233,12 @@ enum drm_panel_orientation {
 /* Additional Colorimetry extension added as part of CTA 861.G */
 #define DRM_MODE_COLORIMETRY_DCI_P3_RGB_D65		11
 #define DRM_MODE_COLORIMETRY_DCI_P3_RGB_THEATER		12
+/* DP MSA Colorimetry Options */
+#define DRM_MODE_DP_COLORIMETRY_YCBCR_ITU_601		13
+#define DRM_MODE_DP_COLORIMETRY_YCBCR_ITU_601		14
+#define DRM_MODE_DP_COLORIMETRY_SRGB			15
+#define DRM_MODE_DP_COLORIMETRY_RGB_WIDE_GAMUT		16
+#define DRM_MODE_DP_COLORIMETRY_SCRGB			17
 
 /**
  * struct drm_display_info - runtime data about the connected sink
