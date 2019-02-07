@@ -825,7 +825,10 @@ static int truncate_node(struct dnode_of_data *dn)
 {
 	struct f2fs_sb_info *sbi = F2FS_I_SB(dn->inode);
 	struct node_info ni;
+<<<<<<< HEAD   (b842e7 Merge 3.18.133 into android-3.18)
 	int err;
+=======
+>>>>>>> BRANCH (49ab1e Linux 3.18.134)
 	pgoff_t index;
 
 	err = f2fs_get_node_info(sbi, dn->nid, &ni);
@@ -843,9 +846,12 @@ static int truncate_node(struct dnode_of_data *dn)
 		f2fs_inode_synced(dn->inode);
 	}
 
+<<<<<<< HEAD   (b842e7 Merge 3.18.133 into android-3.18)
 	clear_node_page_dirty(dn->node_page);
 	set_sbi_flag(sbi, SBI_IS_DIRTY);
 
+=======
+>>>>>>> BRANCH (49ab1e Linux 3.18.134)
 	index = dn->node_page->index;
 	f2fs_put_page(dn->node_page, 1);
 
