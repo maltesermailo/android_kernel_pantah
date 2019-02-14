@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "41463530_db3da390",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6734,
+      "author": {
+        "id": 1119068
+      },
+      "writtenOn": "2019-02-14T12:19:26Z",
+      "side": 1,
+      "message": "Without this patch, we are actually double accounting the RT utilization when WALT is in use.\n\nWhat I don\u0027t like is just that we add yet another WALT/PELT conditional block.\n\nPerhaps we can fix this and get the change to clean up a bit the current FAIR+RT aggregation by using the compilation guards we already have in place.\n\nWhat about doing the aggregation in cpu_util_freq(), only when required (i.e. !WALT or WALT is disabled)?\n\nThat way:\n - boosted_cpu_util() will remains WALT/PELT agnostic\n - we avoid to explicitly collect RT contributions from sugov_get_util(),\n   which are ultimately not required when WALT is in use\n\nHere it is a possible alternative path:\n   https://pastebin.com/XNgzUWKs\nimplementing this idea.\n\nThoughts?",
+      "range": {
+        "startLine": 6731,
+        "startChar": 0,
+        "endLine": 6734,
+        "endChar": 6
+      },
+      "revId": "c739393d1af8a9981be6c2793af639020aaef925",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
