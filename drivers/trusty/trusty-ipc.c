@@ -30,6 +30,7 @@
 #include <linux/virtio_ids.h>
 #include <linux/virtio_config.h>
 
+#include <linux/trusty/trusty.h>
 #include <linux/trusty/trusty_ipc.h>
 
 #define MAX_DEVICES			4
@@ -173,11 +174,40 @@ static int _match_data(int id, void *p, void *data)
 
 static void *_alloc_shareable_mem(struct tipc_virtio_dev *vds, size_t sz, gfp_t gfp)
 {
-	return alloc_pages_exact(sz, gfp);
+	void *va = alloc_pages_exact(sz, gfp);
+	if (va) {
+		int ret;
+		phys_addr_t pa = virt_to_phys(va);
+		ret = trusty_share_memory(vds->vdev->dev.parent->parent, &pa,
+					  sz, 1, TRUSTY_SHARE_MEMORY_ADD);
+		if (ret) {
+			dev_err(&vds->vdev->dev,
+				"trusty_share_memory failed: %d txbuf at %pa\n",
+				ret, pa);
+			free_pages_exact(va, sz);
+			va = NULL;
+		}
+	}
+	return va;
 }
 
 static void _free_shareable_mem(struct tipc_virtio_dev *vds, size_t sz, void *va, phys_addr_t pa)
 {
+	int ret;
+
+	ret = trusty_share_memory(vds->vdev->dev.parent->parent, &pa,
+				  sz, 1, TRUSTY_SHARE_MEMORY_REMOVE);
+	if (ret) {
+		dev_err(&vds->vdev->dev,
+			"trusty_share_memory remove failed: %d txbuf at %pa\n",
+			ret, pa);
+
+		/*
+		 * It is not safe to feee this memory if trusty_share_memory
+		 * fails. Leak it in that case.
+		 */
+		return;
+	}
 	free_pages_exact(va, sz);
 }
 
