@@ -1,0 +1,274 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b7a9ef10_4d852f26",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-03-05T22:06:18Z",
+      "side": 1,
+      "message": "Perhaps \"block: add keyslot manager\"?  The convention for kernel commit titles is to include a subsystem prefix and to use the imperative tense.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 36
+      },
+      "revId": "cfa82f074c01b84a86c381d742006e9b9770ec27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "911e5d1f_2f87da32",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-03-05T22:06:18Z",
+      "side": 1,
+      "message": "Need details.  What problem does this solve and why, and what is the high-level outline of the solution?",
+      "revId": "cfa82f074c01b84a86c381d742006e9b9770ec27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f078af79_f79c4972",
+        "filename": "block/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-03-05T22:06:18Z",
+      "side": 1,
+      "message": "Like the previous patch: selectable Kconfig options should describe user-visible features, not implementations or internal APIs.  Perhaps this should just be controlled by CONFIG_BLK_INLINE_ENCRYPTION?  Is inline encryption support useful without this?\n\nAlternatively, it could have no prompt string (so it\u0027s not shown to users and can\u0027t be set directly) and be selected by filesystems that need it.",
+      "range": {
+        "startLine": 213,
+        "startChar": 7,
+        "endLine": 213,
+        "endChar": 26
+      },
+      "revId": "cfa82f074c01b84a86c381d742006e9b9770ec27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7c016e6_69b1f6d1",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-03-05T22:06:18Z",
+      "side": 1,
+      "message": "slot_refs should be a flexible array at the end of the struct.  That makes the code simpler.\n\natomic_t slot_refs[];",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 36
+      },
+      "revId": "cfa82f074c01b84a86c381d742006e9b9770ec27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "389eef8d_cbf8743e",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-03-05T22:06:18Z",
+      "side": 1,
+      "message": "WARN_ON() can go in the expression.\n\nif (WARN_ON(slot \u003e\u003d (int)kvm-\u003enum_slots)) {\n}",
+      "range": {
+        "startLine": 78,
+        "startChar": 5,
+        "endLine": 78,
+        "endChar": 32
+      },
+      "revId": "cfa82f074c01b84a86c381d742006e9b9770ec27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f6e069a4_8c5c3380",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-03-05T22:06:18Z",
+      "side": 1,
+      "message": "Shouldn\u0027t it choose the least-recently-used slot?  Currently it just choose the available slot with the lowest keyslot number.",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 0
+      },
+      "revId": "cfa82f074c01b84a86c381d742006e9b9770ec27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "718378af_d011ff6d",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-03-05T22:06:18Z",
+      "side": 1,
+      "message": "Use a negative errno value, not -1.",
+      "range": {
+        "startLine": 137,
+        "startChar": 8,
+        "endLine": 137,
+        "endChar": 10
+      },
+      "revId": "cfa82f074c01b84a86c381d742006e9b9770ec27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4838d9d5_75f0574e",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-03-05T22:06:18Z",
+      "side": 1,
+      "message": "Use atomic_dec_and_test()?",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 22
+      },
+      "revId": "cfa82f074c01b84a86c381d742006e9b9770ec27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67403eb8_a7031e60",
+        "filename": "include/linux/keyslot-manager.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-03-05T22:06:18Z",
+      "side": 1,
+      "message": "Prefix these with something.  I am not sure what, maybe INLINECRYPT_TYPE_?",
+      "range": {
+        "startLine": 15,
+        "startChar": 1,
+        "endLine": 15,
+        "endChar": 16
+      },
+      "revId": "cfa82f074c01b84a86c381d742006e9b9770ec27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b5667999_22763e6e",
+        "filename": "include/linux/keyslot-manager.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-03-05T22:06:18Z",
+      "side": 1,
+      "message": "Consider calling these \"idle slots\" instead of \"free slots\".  \"Free\" has the connotation that nothing is there; think of malloc() and free().  But in the case of a \"free slot\" here, a key may be programmed into the slot -- it\u0027s just that nothing is using it at the moment.",
+      "range": {
+        "startLine": 46,
+        "startChar": 10,
+        "endLine": 46,
+        "endChar": 24
+      },
+      "revId": "cfa82f074c01b84a86c381d742006e9b9770ec27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ddace1cb_8a22bba7",
+        "filename": "include/linux/keyslot-manager.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-03-05T22:06:18Z",
+      "side": 1,
+      "message": "Use a proper error code like -EOPNOTSUPP instead of -1.",
+      "range": {
+        "startLine": 104,
+        "startChar": 9,
+        "endLine": 104,
+        "endChar": 10
+      },
+      "revId": "cfa82f074c01b84a86c381d742006e9b9770ec27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18b2294b_242c88f6",
+        "filename": "include/linux/keyslot-manager.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-03-05T22:06:18Z",
+      "side": 1,
+      "message": "What\u0027s this for?  It\u0027s not used.",
+      "range": {
+        "startLine": 110,
+        "startChar": 21,
+        "endLine": 110,
+        "endChar": 51
+      },
+      "revId": "cfa82f074c01b84a86c381d742006e9b9770ec27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
