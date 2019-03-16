@@ -59,8 +59,13 @@ static struct regmap_config hmc5843_i2c_regmap_config = {
 static int hmc5843_i2c_probe(struct i2c_client *client,
 			 const struct i2c_device_id *id)
 {
+	struct regmap *regmap = devm_regmap_init_i2c(cli,
+			&hmc5843_i2c_regmap_config);
+	if (IS_ERR(regmap))
+		return PTR_ERR(regmap);
+
 	return hmc5843_common_probe(&client->dev,
-			devm_regmap_init_i2c(client, &hmc5843_i2c_regmap_config),
+			regmap,
 			id->driver_data);
 }
 
