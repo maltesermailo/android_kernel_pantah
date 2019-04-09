@@ -42,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "232628fa_db434366",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1038033
+      },
+      "writtenOn": "2019-04-09T01:08:24Z",
+      "side": 1,
+      "message": "Or add a .rst Documentation file, and describe all of it there.  Then put a pointer to it in the commit message.   That\u0027s actually probably the better way to go, come to think of it.....",
+      "parentUuid": "911e5d1f_2f87da32",
+      "revId": "cfa82f074c01b84a86c381d742006e9b9770ec27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "f078af79_f79c4972",
         "filename": "block/Kconfig",
         "patchSetId": 3
@@ -109,6 +127,29 @@
       "revId": "cfa82f074c01b84a86c381d742006e9b9770ec27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "327008e9_7827a1d9",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1038033
+      },
+      "writtenOn": "2019-04-09T01:08:24Z",
+      "side": 1,
+      "message": "In this design, we need to call crypto_alg_find every single time we need to get a new slot. If we are assuming that key slot load times for hardware will always be slow, and so we won\u0027t be calling keyslot_manager_get_slot() very often, then this might not matter.  However, suppose there might be hardware where key load times are super fast --- for example, if we tried to push the current fscrypt \"every file has its own key\" so the encryption is done in the block layer.   Then we might not want to call crypto_alg_find() on every single call to keyslot_manager_get_slot().\n\nDo we anticipate cases where there might be different ICE algorithms used on the same file system?    If not, maybe the crypto_alg_id could be cached on a per file system basis?",
+      "range": {
+        "startLine": 62,
+        "startChar": 32,
+        "endLine": 62,
+        "endChar": 33
+      },
+      "revId": "cfa82f074c01b84a86c381d742006e9b9770ec27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     },
     {
       "key": {
