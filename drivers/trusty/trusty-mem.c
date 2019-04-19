@@ -17,6 +17,14 @@
 #include <linux/trusty/trusty.h>
 #include <linux/trusty/smcall.h>
 
+#if defined(CONFIG_X86_64)
+/* Normal memory */
+#define NS_MAIR_NORMAL_CACHED_WB_RWA       0xFF /* inner and outer write back read/write allocate */
+#define NS_MAIR_NORMAL_CACHED_WT_RA        0xAA /* inner and outer write through read allocate */
+#define NS_MAIR_NORMAL_CACHED_WB_RA        0xEE /* inner and outer wriet back, read allocate */
+#define NS_MAIR_NORMAL_UNCACHED            0x44 /* uncached */
+#endif
+
 static int get_mem_attr(struct page *page, pgprot_t pgprot)
 {
 #if defined(CONFIG_ARM64)
@@ -69,6 +77,11 @@ static int get_mem_attr(struct page *page, pgprot_t pgprot)
 	default:
 		return -EINVAL;
 	}
+#elif defined(CONFIG_X86_64)
+	/* Since current caller of trusty_call32_mem_buf() always allocate
+	** memory in kernel heap, the memory allocated in kernel heap should be CACHED.
+	*/
+	return NS_MAIR_NORMAL_UNCACHED;
 #else
 	return 0;
 #endif
@@ -101,6 +114,11 @@ int trusty_encode_page_info(struct ns_mem_page_info *inf,
 		pte |= (1 << 7);
 	if (pgprot_val(pgprot) & L_PTE_SHARED)
 		pte |= (3 << 8); /* inner sharable */
+#elif defined(CONFIG_X86_64)
+	if (pgprot_val(pgprot) & _PAGE_USER)
+		pte |= (1 << 6);
+	if (!(pgprot_val(pgprot) & _PAGE_RW))
+		pte |= (1 << 7);
 #endif
 
 	inf->attr = (pte & 0x0000FFFFFFFFFFFFull) | ((uint64_t)mem_attr << 48);

@@ -12,6 +12,9 @@
  *
  */
 
+#if defined(CONFIG_X86_64)
+#include <asm/apic.h>
+#endif
 #include <linux/cpu.h>
 #include <linux/interrupt.h>
 #include <linux/irq.h>
@@ -25,6 +28,12 @@
 #include <linux/trusty/smcall.h>
 #include <linux/trusty/sm_err.h>
 #include <linux/trusty/trusty.h>
+
+#if defined(CONFIG_X86_64)
+#define IRQ_VECTOR_OFFSET 0x30
+#define IRQ_FOR_LK_TIMER 1
+extern struct irqaction irq1;
+#endif
 
 struct trusty_irq {
 	struct trusty_irq_state *is;
@@ -160,6 +169,10 @@ irqreturn_t trusty_irq_handler(int irq, void *data)
 	dev_dbg(is->dev, "%s: irq %d, percpu %d, cpu %d, enable %d\n",
 		__func__, irq, trusty_irq->irq, smp_processor_id(),
 		trusty_irq->enable);
+
+#if defined(CONFIG_X86_64)
+	apic->send_IPI_self(IRQ_VECTOR_OFFSET + irq);
+#endif
 
 	if (trusty_irq->percpu) {
 		disable_percpu_irq(irq);
@@ -304,12 +317,16 @@ static int trusty_irq_init_normal_irq(struct trusty_irq_state *is, int tirq)
 
 	dev_dbg(is->dev, "%s: irq %d\n", __func__, tirq);
 
+#if defined(CONFIG_ARM64) || defined(CONFIG_ARM)
 	irq = trusty_irq_create_irq_mapping(is, tirq);
 	if (irq < 0) {
 		dev_err(is->dev,
 			"trusty_irq_create_irq_mapping failed (%d)\n", irq);
 		return irq;
 	}
+#elif defined(CONFIG_X86_64)
+	irq = tirq - IRQ_VECTOR_OFFSET;
+#endif
 
 	trusty_irq = kzalloc(sizeof(*trusty_irq), GFP_KERNEL);
 	if (!trusty_irq)
@@ -322,6 +339,10 @@ static int trusty_irq_init_normal_irq(struct trusty_irq_state *is, int tirq)
 	spin_lock_irqsave(&is->normal_irqs_lock, irq_flags);
 	hlist_add_head(&trusty_irq->node, &is->normal_irqs.inactive);
 	spin_unlock_irqrestore(&is->normal_irqs_lock, irq_flags);
+
+#if defined(CONFIG_X86_64)
+	remove_irq(irq, &irq1);
+#endif
 
 	ret = request_irq(irq, trusty_irq_handler, IRQF_NO_THREAD,
 			  "trusty", trusty_irq);
@@ -428,7 +449,9 @@ static void trusty_irq_free_irqs(struct trusty_irq_state *is)
 {
 	struct trusty_irq *irq;
 	struct hlist_node *n;
+#if defined(CONFIG_ARM64) || defined(CONFIG_ARM)
 	unsigned int cpu;
+#endif
 
 	hlist_for_each_entry_safe(irq, n, &is->normal_irqs.inactive, node) {
 		dev_dbg(is->dev, "%s: irq %d\n", __func__, irq->irq);
@@ -436,6 +459,7 @@ static void trusty_irq_free_irqs(struct trusty_irq_state *is)
 		hlist_del(&irq->node);
 		kfree(irq);
 	}
+#if defined(CONFIG_ARM64) || defined(CONFIG_ARM)
 	hlist_for_each_entry_safe(irq, n,
 				  &this_cpu_ptr(is->percpu_irqs)->inactive,
 				  node) {
@@ -452,6 +476,7 @@ static void trusty_irq_free_irqs(struct trusty_irq_state *is)
 		}
 		free_percpu(trusty_irq_handler_data);
 	}
+#endif
 }
 
 static int trusty_irq_probe(struct platform_device *pdev)
@@ -489,8 +514,10 @@ static int trusty_irq_probe(struct platform_device *pdev)
 		goto err_trusty_call_notifier_register;
 	}
 
+#if defined(CONFIG_ARM64) || defined(CONFIG_ARM)
 	for (irq = 0; irq >= 0;)
 		irq = trusty_irq_init_one(is, irq, true);
+#endif
 	for (irq = 0; irq >= 0;)
 		irq = trusty_irq_init_one(is, irq, false);
 
