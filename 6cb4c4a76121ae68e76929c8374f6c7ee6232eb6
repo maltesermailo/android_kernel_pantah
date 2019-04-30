@@ -46,6 +46,30 @@
       "revId": "6cb4c4a76121ae68e76929c8374f6c7ee6232eb6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "28a906ea_9df525a0",
+        "filename": "net/vmw_vsock/virtio_transport.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1110304
+      },
+      "writtenOn": "2019-04-30T21:03:25Z",
+      "side": 1,
+      "message": "Actually, that\u0027s also wrong.\nThe driver being the last thing being done it doesn\u0027t need to be reversed, it\u0027s the vsock_core_init function that (maybe) needs a reversing.",
+      "parentUuid": "66d13f41_0a7b7935",
+      "range": {
+        "startLine": 715,
+        "startChar": 0,
+        "endLine": 718,
+        "endChar": 43
+      },
+      "revId": "6cb4c4a76121ae68e76929c8374f6c7ee6232eb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
