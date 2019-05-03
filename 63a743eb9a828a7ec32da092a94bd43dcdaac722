@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "12192272_8bb9d32f",
+        "filename": "fs/ext4/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-05-03T17:48:26Z",
+      "side": 1,
+      "message": "FYI to other reviewers: we decided to leave the kconfig options CONFIG_EXT4_ENCRYPTION and CONFIG_F2FS_FS_ENCRYPTION as dummy options that select CONFIG_FS_ENCRYPTION, rather than removing them completely as the upstream commit \"fscrypt: remove filesystem specific build config option\" does.  Then we don\u0027t break everyone\u0027s kernel config the next time they merge android-common.  But CONFIG_FS_ENCRYPTION will be needed for android-5.x.",
+      "revId": "63a743eb9a828a7ec32da092a94bd43dcdaac722",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
