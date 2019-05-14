@@ -147,6 +147,8 @@ struct platform_device *of_device_alloc(struct device_node *np,
 	}
 
 	dev->dev.of_node = of_node_get(np);
+	if (!dev->dev.of_node->dev)
+		dev->dev.of_node->dev = &dev->dev;
 	dev->dev.fwnode = &np->fwnode;
 	dev->dev.parent = parent ? : &platform_bus;
 
