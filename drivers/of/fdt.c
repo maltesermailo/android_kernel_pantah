@@ -1112,9 +1112,16 @@ int __init early_init_dt_scan_chosen(unsigned long node, const char *uname,
 
 	early_init_dt_check_for_initrd(node);
 
+<<<<<<< HEAD   (c10d19 ANDROID: gki_defconfig: remove more recommended configs)
 	/* Put CONFIG_CMDLINE in if forced or if data had nothing in it to start */
 	if (overwrite_incoming_cmdline || !cmdline[0])
 		strlcpy(cmdline, config_cmdline, COMMAND_LINE_SIZE);
+=======
+	/* Retrieve command line */
+	p = of_get_flat_dt_prop(node, "bootargs", &l);
+	if (p != NULL && l > 0)
+		strlcpy(data, p, min(l, COMMAND_LINE_SIZE));
+>>>>>>> BRANCH (a18833 Linux 5.2-rc1)
 
 	/* Retrieve command line unless forcing */
 	if (read_dt_cmdline)
