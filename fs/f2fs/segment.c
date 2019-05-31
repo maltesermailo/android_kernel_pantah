@@ -580,8 +580,13 @@ static int submit_flush_wait(struct f2fs_sb_info *sbi, nid_t ino)
 	int ret = 0;
 	int i;
 
+<<<<<<< HEAD   (b4a973 Merge remote-tracking branch 'origin/upstream-f2fs-stable-li)
 	if (!f2fs_is_multi_device(sbi))
 		return __submit_flush_wait(sbi, sbi->sb->s_bdev);
+=======
+	if (!f2fs_is_multi_device(sbi) || ret)
+		return ret;
+>>>>>>> BRANCH (8cb123 Linux 4.14.123)
 
 	for (i = 0; i < sbi->s_ndevs; i++) {
 		if (!f2fs_is_dirty_device(sbi, ino, i, FLUSH_INO))
