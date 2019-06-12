@@ -513,6 +513,8 @@ static bool part_zone_aligned(struct gendisk *disk,
 	return true;
 }
 
+extern void allow_dm_setup(void);
+
 int rescan_partitions(struct gendisk *disk, struct block_device *bdev)
 {
 	struct parsed_partitions *state = NULL;
@@ -639,6 +641,7 @@ rescan:
 			md_autodetect_dev(part_to_dev(part)->devt);
 #endif
 	}
+	allow_dm_setup();
 	free_partitions(state);
 	return 0;
 }

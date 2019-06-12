@@ -368,6 +368,13 @@ static int __init do_mount_root(char *name, char *fs, int flags, void *data)
 	return 0;
 }
 
+static volatile bool dm_setup_allowed = false;
+void allow_dm_setup(void) {
+	dm_setup_allowed = true;
+}
+EXPORT_SYMBOL_GPL(allow_dm_setup);
+
+
 void __init mount_block_root(char *name, int flags)
 {
 	struct page *page = alloc_page(GFP_KERNEL);
@@ -555,6 +562,9 @@ void __init prepare_namespace(void)
 	wait_for_device_probe();
 
 	md_run_setup();
+	while (!dm_setup_allowed) {
+		msleep(5);
+	}
 
 	if (saved_root_name[0]) {
 		root_device_name = saved_root_name;
