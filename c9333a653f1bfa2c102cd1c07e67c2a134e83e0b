@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "6ee91b56_85559e75",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1045553
+      },
+      "writtenOn": "2019-06-17T19:44:22Z",
+      "side": 1,
+      "message": "Reworking this code to simplify it. stashed_but_list is removed, all buffer accounting is  is done by counters.",
+      "parentUuid": "471bbf7f_d37e2c8d",
+      "revId": "c9333a653f1bfa2c102cd1c07e67c2a134e83e0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e052d18c_4fea2ce3",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2019-06-03T22:10:11Z",
       "side": 1,
       "message": "explain why",
+      "revId": "c9333a653f1bfa2c102cd1c07e67c2a134e83e0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9eb2e76b_4832a093",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1045553
+      },
+      "writtenOn": "2019-06-17T19:44:22Z",
+      "side": 1,
+      "message": "Reworking this code to simplify it. stashed_but_list is removed, all buffer accounting is  is done by counters.",
+      "parentUuid": "e052d18c_4fea2ce3",
       "revId": "c9333a653f1bfa2c102cd1c07e67c2a134e83e0b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "8ded1b11_21a23ff0",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1045553
+      },
+      "writtenOn": "2019-06-17T19:44:22Z",
+      "side": 1,
+      "message": "It is an optimization. There is no reason to call wakeup if max number of buffers in use has not been previously reached.",
+      "parentUuid": "c5926821_f071b57a",
+      "revId": "c9333a653f1bfa2c102cd1c07e67c2a134e83e0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a4c86798_c5cd5291",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 1
@@ -81,6 +135,30 @@
       "writtenOn": "2019-06-03T22:10:11Z",
       "side": 1,
       "message": "uninterruptible sleeps on user threads should be avoided",
+      "range": {
+        "startLine": 361,
+        "startChar": 49,
+        "endLine": 361,
+        "endChar": 69
+      },
+      "revId": "c9333a653f1bfa2c102cd1c07e67c2a134e83e0b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5782b0be_9bfdd752",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1045553
+      },
+      "writtenOn": "2019-06-17T19:44:22Z",
+      "side": 1,
+      "message": "This code path will only be triggered when we are out of buffers while closing channel, which should not be very rare. In that case, if interrupted, we will fail to notify the other side that we are closing channel which could lead to leaking memory.",
+      "parentUuid": "a4c86798_c5cd5291",
       "range": {
         "startLine": 361,
         "startChar": 49,
