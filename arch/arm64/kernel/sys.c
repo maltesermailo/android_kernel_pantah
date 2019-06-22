@@ -49,7 +49,11 @@ SYSCALL_DEFINE1(arm64_personality, unsigned int, personality)
 
 asmlinkage long sys_ni_syscall(void);
 
+<<<<<<< HEAD   (4a8032 ANDROID: kernel: cgroup: cpuset: Clear cpus_requested for em)
 SYSCALL_DEFINE0(ni_syscall)
+=======
+asmlinkage long __arm64_sys_ni_syscall(const struct pt_regs *__unused)
+>>>>>>> BRANCH (63bbbc Linux 4.19.54)
 {
 	return sys_ni_syscall();
 }
