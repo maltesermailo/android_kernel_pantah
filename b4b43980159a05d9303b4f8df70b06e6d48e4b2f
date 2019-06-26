@@ -16,6 +16,24 @@
       "revId": "b4b43980159a05d9303b4f8df70b06e6d48e4b2f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9582fa8_4fa8e3e2",
+        "filename": "drivers/staging/android/lowmemorykiller.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2019-06-26T22:57:55Z",
+      "side": 1,
+      "message": "You are right. I think we need to call task_lock(selected); while inside rcu_read section because handle_lmk_event() expects selected and selected-\u003emm to be stable.",
+      "parentUuid": "417a9316_50069673",
+      "revId": "b4b43980159a05d9303b4f8df70b06e6d48e4b2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
