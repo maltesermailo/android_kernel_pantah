@@ -843,7 +843,11 @@ do {									\
 
 #define DITOREG(di, x)							\
 do {									\
+<<<<<<< HEAD   (26c229 Merge 4.4.184 into android-4.4-p)
 	unsigned int fpr, i;						\
+=======
+	unsigned fpr, i;						\
+>>>>>>> BRANCH (7bbf48 Linux 4.4.185)
 	fpr = (x) & ~(cop1_64bit(xcp) ^ 1);				\
 	set_fpr64(&ctx->fpr[fpr], 0, di);				\
 	for (i = 1; i < ARRAY_SIZE(ctx->fpr[x].val64); i++)		\
