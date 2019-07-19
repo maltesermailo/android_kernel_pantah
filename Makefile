@@ -1227,12 +1227,17 @@ endif
 # needs to be updated, so this check is forced on all builds
 
 uts_len := 64
+ifneq (,$(BUILD_NUMBER))
+	KERNELRELEASE_TMP=$(KERNELRELEASE)-ab$(BUILD_NUMBER)
+else
+	KERNELRELEASE_TMP=$(KERNELRELEASE)
+endif
 define filechk_utsrelease.h
-	if [ `echo -n "$(KERNELRELEASE)" | wc -c ` -gt $(uts_len) ]; then \
-	  echo '"$(KERNELRELEASE)" exceeds $(uts_len) characters' >&2;    \
-	  exit 1;                                                         \
-	fi;                                                               \
-	(echo \#define UTS_RELEASE \"$(KERNELRELEASE)\";)
+	if [ `echo -n "$(KERNELRELEASE_TMP)" | wc -c ` -gt $(uts_len) ]; then \
+		echo '"$(KERNELRELEASE_TMP)" exceeds $(uts_len) characters' >&2;    \
+		exit 1;                                                             \
+	fi;                                                                   \
+	(echo \#define UTS_RELEASE \"$(KERNELRELEASE_TMP)\";)
 endef
 
 define filechk_version.h
