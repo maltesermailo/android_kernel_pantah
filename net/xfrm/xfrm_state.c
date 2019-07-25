@@ -2266,9 +2266,12 @@ int xfrm_user_policy(struct sock *sk, int optname, u8 __user *optval, int optlen
 	struct xfrm_mgr *km;
 	struct xfrm_policy *pol = NULL;
 
+<<<<<<< HEAD   (e78f95 Revert "Revert "Revert "x86/mm: Identify the end of the kern)
 	if (in_compat_syscall())
 		return -EOPNOTSUPP;
 
+=======
+>>>>>>> CHANGE (4be5bd ANDROID: xfrm: remove in_compat_syscall() checks)
 	if (!optval && !optlen) {
 		xfrm_sk_policy_insert(sk, XFRM_POLICY_IN, NULL);
 		xfrm_sk_policy_insert(sk, XFRM_POLICY_OUT, NULL);

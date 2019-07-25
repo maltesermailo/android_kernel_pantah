@@ -2634,9 +2634,12 @@ static int xfrm_user_rcv_msg(struct sk_buff *skb, struct nlmsghdr *nlh,
 	const struct xfrm_link *link;
 	int type, err;
 
+<<<<<<< HEAD   (e78f95 Revert "Revert "Revert "x86/mm: Identify the end of the kern)
 	if (in_compat_syscall())
 		return -EOPNOTSUPP;
 
+=======
+>>>>>>> CHANGE (4be5bd ANDROID: xfrm: remove in_compat_syscall() checks)
 	type = nlh->nlmsg_type;
 	if (type > XFRM_MSG_MAX)
 		return -EINVAL;
