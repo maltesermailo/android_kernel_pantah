@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "42bc7f1f_742b2569",
+        "filename": "drivers/clk/clk.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1836,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2019-08-10T00:28:21Z",
+      "side": 1,
+      "message": "Maybe:\n\nint ret; /* no initializer */\n\nif (core-\u003eops-\u003evote_vdd) {\n\tret \u003d core-\u003eops-\u003evote_vdd(core-\u003ehw, new_rate);\n\tif (ret)\n\t\treturn ret;\n}\n\nInstead?",
+      "range": {
+        "startLine": 1831,
+        "startChar": 1,
+        "endLine": 1836,
+        "endChar": 13
+      },
+      "revId": "95168ac513f8d7b934cdf7ade418ebc715c8aa59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
