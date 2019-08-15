@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "742bde91_2fc294bc",
+        "filename": "drivers/staging/android/ion/ion_heap.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1530208
+      },
+      "writtenOn": "2019-08-15T18:21:40Z",
+      "side": 0,
+      "message": "Our carveout heap uses this to zero out the carveout initially, so can you please maintain this function? Alternatively, you can make ion_heap_sglist_zero() public, and we can just prepare the SGT ourselves.",
+      "range": {
+        "startLine": 237,
+        "startChar": 4,
+        "endLine": 237,
+        "endChar": 23
+      },
+      "revId": "d8d3c37f73780978302a1cacdd4a86d57132ed62",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "db7e33a3_15752a1b",
         "filename": "drivers/staging/android/uapi/ion.h",
         "patchSetId": 2
