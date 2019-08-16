@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bfcef859_33e2f37b",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2349,
+      "author": {
+        "id": 1291841
+      },
+      "writtenOn": "2019-08-16T10:43:27Z",
+      "side": 1,
+      "message": "I understand here we are to add the bare minimum to be functionally equivalent to what we have in previous ACKs, i.e. the SchedTune\u0027s prefer_idle flag.\n\nHowever, we are still adding in an attribute which requires some user-space changes to be actually used.\nIndeed, the sysfs path is different for the new prefer_idle flag.\n\nThus, I was wondering IF it could make sense to fold into this method also the other small heuristics we come up with.\nSpecifically, the ones we have in these two patches:\n\n- http://www.linux-arm.org/git?p\u003dlinux-pb.git;a\u003dcommitdiff;h\u003d6114f5bd9698152f346961e7e7c57a1eb1c82be9;hp\u003ddf50d2228280a586e86ea2e151fae3101e5e2326\n\n- http://www.linux-arm.org/git?p\u003dlinux-pb.git;a\u003dcommitdiff;h\u003d2096840c1702b7993d3cf2002db5247a477d6ffb;hp\u003d66bee8dcc6cab2b1a2247058b16c7283e9334e2f\n\nThis will not pollute very much the code since everything is confined within uclamp_latency_sensitive. Perhaps we can further warn the user by guarding as EXPERIMENTAL those addition bits.\n\nThought?",
+      "range": {
+        "startLine": 2349,
+        "startChar": 19,
+        "endLine": 2349,
+        "endChar": 43
+      },
+      "revId": "db6c1112ad3c96c78dc312b6ff8b406c149eac64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
