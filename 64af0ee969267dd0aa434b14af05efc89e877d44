@@ -16,6 +16,24 @@
       "revId": "64af0ee969267dd0aa434b14af05efc89e877d44",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f81adfba_6f124e60",
+        "filename": "drivers/base/regmap/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1131915
+      },
+      "writtenOn": "2019-08-22T19:07:59Z",
+      "side": 1,
+      "message": "Continuing that line of thought, shouldn\u0027t drivers that depend on the REGMAP core depend on a config like this (CONFIG_REGMAP_CORE) instead, which could also be independently enabled without building a driver module at the same time? Fortunately that could happen in the future after the core option is added which unblocks GKI.",
+      "parentUuid": "35036ea3_886d26de",
+      "revId": "64af0ee969267dd0aa434b14af05efc89e877d44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
