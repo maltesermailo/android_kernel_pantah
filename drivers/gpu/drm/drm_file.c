@@ -46,6 +46,8 @@
 /* from BKL pushdown */
 DEFINE_MUTEX(drm_global_mutex);
 
+#define MAX_DRM_OPEN_COUNT		128
+
 /**
  * DOC: file operations
  *
@@ -434,9 +436,19 @@ static void drm_legacy_dev_reinit(struct drm_device *dev)
 
 	drm_legacy_agp_clear(dev);
 
+<<<<<<< HEAD   (3964d9 UPSTREAM: drm: plug memory leak on drm_setup() failure)
 	drm_legacy_sg_cleanup(dev);
 	drm_legacy_vma_flush(dev);
 	drm_legacy_dma_takedown(dev);
+=======
+	if (dev->open_count >= MAX_DRM_OPEN_COUNT) {
+		retcode = -EPERM;
+		goto err_undo;
+	}
+
+	/* share address_space across all char-devs of a single device */
+	filp->f_mapping = dev->anon_inode->i_mapping;
+>>>>>>> CHANGE (9a6a3c ANDROID: drivers: gpu: drm: fix bugs encountered while fuzzi)
 
 	mutex_unlock(&dev->struct_mutex);
 
