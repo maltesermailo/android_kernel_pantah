@@ -39,7 +39,7 @@ struct trusty_log_state {
 	uint32_t get;
 
 	struct page *log_pages;
-	uint64_t log_pages_shared_mem_id;
+	trusty_shared_mem_id_t log_pages_shared_mem_id;
 
 	struct notifier_block call_notifier;
 	struct notifier_block panic_notifier;
@@ -165,7 +165,7 @@ static int trusty_log_probe(struct platform_device *pdev)
 	struct trusty_log_state *s;
 	int result;
 	phys_addr_t pa;
-	uint64_t mem_id;
+	trusty_shared_mem_id_t mem_id;
 
 	dev_dbg(&pdev->dev, "%s\n", __func__);
 	if (!trusty_supports_logging(pdev->dev.parent)) {
@@ -261,7 +261,7 @@ static int trusty_log_remove(struct platform_device *pdev)
 	int result;
 	struct trusty_log_state *s = platform_get_drvdata(pdev);
 	phys_addr_t pa = page_to_phys(s->log_pages);
-	uint64_t mem_id = s->log_pages_shared_mem_id;
+	trusty_shared_mem_id_t mem_id = s->log_pages_shared_mem_id;
 
 	dev_dbg(&pdev->dev, "%s\n", __func__);
 

@@ -42,7 +42,7 @@ struct trusty_vdev;
 struct trusty_ctx {
 	struct device		*dev;
 	void			*shared_va;
-	uint64_t		shared_id;
+	trusty_shared_mem_id_t	shared_id;
 	size_t			shared_sz;
 	struct work_struct	check_vqs;
 	struct work_struct	kick_vqs;
@@ -56,7 +56,7 @@ struct trusty_ctx {
 struct trusty_vring {
 	void			*vaddr;
 	phys_addr_t		paddr;
-	uint64_t		shared_mem_id;
+	trusty_shared_mem_id_t	shared_mem_id;
 	size_t			size;
 	uint			align;
 	uint			elem_num;
@@ -602,7 +602,7 @@ static int trusty_virtio_add_devices(struct trusty_ctx *tctx)
 	int ret_tmp;
 	void *descr_va;
 	phys_addr_t descr_pa;
-	uint64_t descr_id;
+	trusty_shared_mem_id_t descr_id;
 	size_t descr_sz;
 	size_t descr_buf_sz;
 
