@@ -931,7 +931,11 @@ int f2fs_get_valid_checkpoint(struct f2fs_sb_info *sbi)
 		sbi->cur_cp_pack = 2;
 
 	/* Sanity checking of checkpoint */
+<<<<<<< HEAD   (ed203b BACKPORT: block: annotate refault stalls from IO submission)
 	if (f2fs_sanity_check_ckpt(sbi)) {
+=======
+	if (sanity_check_ckpt(sbi)) {
+>>>>>>> BRANCH (db1892 Linux 4.14.147)
 		err = -EFSCORRUPTED;
 		goto free_fail_no_cp;
 	}
@@ -965,7 +969,11 @@ free_fail_no_cp:
 	f2fs_put_page(cp1, 1);
 	f2fs_put_page(cp2, 1);
 fail_no_cp:
+<<<<<<< HEAD   (ed203b BACKPORT: block: annotate refault stalls from IO submission)
 	kvfree(sbi->ckpt);
+=======
+	kfree(sbi->ckpt);
+>>>>>>> BRANCH (db1892 Linux 4.14.147)
 	return err;
 }
 

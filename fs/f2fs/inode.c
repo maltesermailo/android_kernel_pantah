@@ -73,7 +73,11 @@ static int __written_first_block(struct f2fs_sb_info *sbi,
 
 	if (!__is_valid_data_blkaddr(addr))
 		return 1;
+<<<<<<< HEAD   (ed203b BACKPORT: block: annotate refault stalls from IO submission)
 	if (!f2fs_is_valid_blkaddr(sbi, addr, DATA_GENERIC_ENHANCE))
+=======
+	if (!f2fs_is_valid_blkaddr(sbi, addr, DATA_GENERIC))
+>>>>>>> BRANCH (db1892 Linux 4.14.147)
 		return -EFSCORRUPTED;
 	return 0;
 }

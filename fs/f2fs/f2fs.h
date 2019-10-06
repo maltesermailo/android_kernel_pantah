@@ -3699,6 +3699,7 @@ extern void f2fs_build_fault_attr(struct f2fs_sb_info *sbi, unsigned int rate,
 #define f2fs_build_fault_attr(sbi, rate, type)		do { } while (0)
 #endif
 
+<<<<<<< HEAD   (ed203b BACKPORT: block: annotate refault stalls from IO submission)
 static inline bool is_journalled_quota(struct f2fs_sb_info *sbi)
 {
 #ifdef CONFIG_QUOTA
@@ -3716,3 +3717,8 @@ static inline bool is_journalled_quota(struct f2fs_sb_info *sbi)
 #define EFSCORRUPTED	EUCLEAN		/* Filesystem is corrupted */
 
 #endif /* _LINUX_F2FS_H */
+=======
+#define EFSBADCRC	EBADMSG		/* Bad CRC detected */
+#define EFSCORRUPTED	EUCLEAN		/* Filesystem is corrupted */
+
+>>>>>>> BRANCH (db1892 Linux 4.14.147)

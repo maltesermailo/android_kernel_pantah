@@ -550,9 +550,16 @@ retry_dn:
 	f2fs_bug_on(sbi, ni.ino != ino_of_node(page));
 
 	if (ofs_of_node(dn.node_page) != ofs_of_node(page)) {
+<<<<<<< HEAD   (ed203b BACKPORT: block: annotate refault stalls from IO submission)
 		f2fs_warn(sbi, "Inconsistent ofs_of_node, ino:%lu, ofs:%u, %u",
 			  inode->i_ino, ofs_of_node(dn.node_page),
 			  ofs_of_node(page));
+=======
+		f2fs_msg(sbi->sb, KERN_WARNING,
+			"Inconsistent ofs_of_node, ino:%lu, ofs:%u, %u",
+			inode->i_ino, ofs_of_node(dn.node_page),
+			ofs_of_node(page));
+>>>>>>> BRANCH (db1892 Linux 4.14.147)
 		err = -EFSCORRUPTED;
 		goto err;
 	}

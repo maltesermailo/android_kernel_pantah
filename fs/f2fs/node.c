@@ -34,8 +34,14 @@ int f2fs_check_nid_range(struct f2fs_sb_info *sbi, nid_t nid)
 {
 	if (unlikely(nid < F2FS_ROOT_INO(sbi) || nid >= NM_I(sbi)->max_nid)) {
 		set_sbi_flag(sbi, SBI_NEED_FSCK);
+<<<<<<< HEAD   (ed203b BACKPORT: block: annotate refault stalls from IO submission)
 		f2fs_warn(sbi, "%s: out-of-range nid=%x, run fsck to fix.",
 			  __func__, nid);
+=======
+		f2fs_msg(sbi->sb, KERN_WARNING,
+				"%s: out-of-range nid=%x, run fsck to fix.",
+				__func__, nid);
+>>>>>>> BRANCH (db1892 Linux 4.14.147)
 		return -EFSCORRUPTED;
 	}
 	return 0;

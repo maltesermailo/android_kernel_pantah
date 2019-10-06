@@ -2822,8 +2822,15 @@ int f2fs_trim_fs(struct f2fs_sb_info *sbi, struct fstrim_range *range)
 		goto out;
 
 	if (is_sbi_flag_set(sbi, SBI_NEED_FSCK)) {
+<<<<<<< HEAD   (ed203b BACKPORT: block: annotate refault stalls from IO submission)
 		f2fs_warn(sbi, "Found FS corruption, run fsck to fix.");
 		return -EFSCORRUPTED;
+=======
+		f2fs_msg(sbi->sb, KERN_WARNING,
+			"Found FS corruption, run fsck to fix.");
+		err = -EFSCORRUPTED;
+		goto out;
+>>>>>>> BRANCH (db1892 Linux 4.14.147)
 	}
 
 	/* start/end segment number in main_area */
@@ -3447,11 +3454,6 @@ static int read_compacted_summaries(struct f2fs_sb_info *sbi)
 		seg_i = CURSEG_I(sbi, i);
 		segno = le32_to_cpu(ckpt->cur_data_segno[i]);
 		blk_off = le16_to_cpu(ckpt->cur_data_blkoff[i]);
-		if (blk_off > ENTRIES_IN_SUM) {
-			f2fs_bug_on(sbi, 1);
-			f2fs_put_page(page, 1);
-			return -EFAULT;
-		}
 		seg_i->next_segno = segno;
 		reset_curseg(sbi, i, 0);
 		seg_i->alloc_type = ckpt->alloc_type[i];
@@ -4316,10 +4318,19 @@ static int sanity_check_curseg(struct f2fs_sb_info *sbi)
 			if (!f2fs_test_bit(blkofs, se->cur_valid_map))
 				continue;
 out:
+<<<<<<< HEAD   (ed203b BACKPORT: block: annotate refault stalls from IO submission)
 			f2fs_err(sbi,
 				 "Current segment's next free block offset is inconsistent with bitmap, logtype:%u, segno:%u, type:%u, next_blkoff:%u, blkofs:%u",
 				 i, curseg->segno, curseg->alloc_type,
 				 curseg->next_blkoff, blkofs);
+=======
+			f2fs_msg(sbi->sb, KERN_ERR,
+				"Current segment's next free block offset is "
+				"inconsistent with bitmap, logtype:%u, "
+				"segno:%u, type:%u, next_blkoff:%u, blkofs:%u",
+				i, curseg->segno, curseg->alloc_type,
+				curseg->next_blkoff, blkofs);
+>>>>>>> BRANCH (db1892 Linux 4.14.147)
 			return -EFSCORRUPTED;
 		}
 	}
