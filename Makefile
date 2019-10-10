@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-2.0
-VERSION = 5
+VERSION = 5.2
 PATCHLEVEL = 4
 SUBLEVEL = 0
 EXTRAVERSION = -rc2
