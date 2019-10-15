@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "69c659a7_32d0ce7c",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1625,
+      "author": {
+        "id": 1030767
+      },
+      "writtenOn": "2019-10-15T19:40:25Z",
+      "side": 1,
+      "message": "GregKH wrote:\n\u003e So this only gets set to the \"first\" device?  What happens to the other\n\u003e ones?\n\nYes I guess the original intent was to keep android_device pointing to the \"first\" device since create_function_device() above on line 28 has no idea which \"gi-\u003edev\" to use when f_audio_source/f_midi call it. Again these are existing Google modifications that assume there is only a single \"android0\" instance.",
+      "revId": "9e8c8266d7d44b38137861fe3c92f81bb8ebe2be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
