@@ -70,6 +70,24 @@
       "revId": "4fbccbf9ffbb0cfc0ffa7785073586bb4b94c11e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ac7605e_97f69f8b",
+        "filename": "patches/series",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-10-17T17:13:16Z",
+      "side": 0,
+      "message": "One of the benefits of using quilt is we can fix/annotate some of the issues with patches. If a patch doesn\u0027t have a \"Bug: \" tag and a bug is subsequently added to track it (or added to track a set of patches), the quilt file can be used to annotate it. We also could fix issues in the patch itself (eg, add \"ANDROID: \" tag or \"Bug: \" tag) -- but if the script always regenerates the patches and strips comments then we can\u0027t do any of that.\n\nIMHO, existing patches should not be regenerated (allowing us to add \"Bug:\" \"ANDROID:\", fix misspellings etc. and have them preserved)\n\nWe should also be able to annotate patches with comments in the series file. Obviously, it is up to us to maintain whatever comments are there and delete if no longer relevant. I think the most common use will be to group patches with a pointer to a bug that explains the upstream or deprecation plan.\n\nIt seems like the script should leave the series file alone except for adding/replacing header comments and adding new patches. The previously existing patches don\u0027t need to change.",
+      "parentUuid": "45459dfa_f3909990",
+      "revId": "4fbccbf9ffbb0cfc0ffa7785073586bb4b94c11e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
