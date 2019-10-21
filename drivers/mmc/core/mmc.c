@@ -1551,6 +1551,198 @@ static int mmc_hs200_tuning(struct mmc_card *card)
 	return mmc_execute_tuning(card);
 }
 
+static int mmc_select_hs_ddr52(struct mmc_host *host, unsigned long freq)
+{
+	int err;
+
+	mmc_select_hs(host->card);
+	err = mmc_select_bus_width(host->card);
+	if (err < 0) {
+		pr_err("%s: %s: select_bus_width failed(%d)\n",
+			mmc_hostname(host), __func__, err);
+		return err;
+	}
+
+	err = mmc_select_hs_ddr(host->card);
+	mmc_set_clock(host, freq);
+
+	return err;
+}
+
+/*
+ * Scale down from HS400 to HS in order to allow frequency change.
+ * This is needed for cards that doesn't support changing frequency in HS400
+ */
+static int mmc_scale_low(struct mmc_host *host, unsigned long freq)
+{
+	int err = 0;
+
+	mmc_set_timing(host, MMC_TIMING_LEGACY);
+	mmc_set_clock(host, MMC_HIGH_26_MAX_DTR);
+
+	if (host->clk_scaling.lower_bus_speed_mode &
+	    MMC_SCALING_LOWER_DDR52_MODE) {
+		err = mmc_select_hs_ddr52(host, freq);
+		if (err)
+			pr_err("%s: %s: failed to switch to DDR52: err: %d\n",
+			       mmc_hostname(host), __func__, err);
+		else
+			return err;
+	}
+
+	err = mmc_select_hs(host->card);
+	if (err) {
+		pr_err("%s: %s: scaling low: failed (%d)\n",
+		       mmc_hostname(host), __func__, err);
+		return err;
+	}
+
+	err = mmc_select_bus_width(host->card);
+	if (err < 0) {
+		pr_err("%s: %s: select_bus_width failed(%d)\n",
+			mmc_hostname(host), __func__, err);
+		return err;
+	}
+
+	mmc_set_clock(host, freq);
+
+	return 0;
+}
+
+/*
+ * Scale UP from HS to HS200/H400
+ */
+static int mmc_scale_high(struct mmc_host *host)
+{
+	int err = 0;
+
+	if (mmc_card_ddr52(host->card)) {
+		mmc_set_timing(host, MMC_TIMING_LEGACY);
+		mmc_set_clock(host, MMC_HIGH_26_MAX_DTR);
+	}
+
+	if (!host->card->ext_csd.strobe_support) {
+		if (!(host->card->mmc_avail_type & EXT_CSD_CARD_TYPE_HS200)) {
+			pr_err("%s: %s: card does not support HS200\n",
+				mmc_hostname(host), __func__);
+			WARN_ON(1);
+			return -EPERM;
+		}
+
+		err = mmc_select_hs200(host->card);
+		if (err) {
+			pr_err("%s: %s: selecting HS200 failed (%d)\n",
+				mmc_hostname(host), __func__, err);
+			return err;
+		}
+
+		mmc_set_bus_speed(host->card);
+
+		err = mmc_hs200_tuning(host->card);
+		if (err) {
+			pr_err("%s: %s: hs200 tuning failed (%d)\n",
+				mmc_hostname(host), __func__, err);
+			return err;
+		}
+
+		if (!(host->card->mmc_avail_type & EXT_CSD_CARD_TYPE_HS400)) {
+			pr_debug("%s: card does not support HS400\n",
+				mmc_hostname(host));
+			return 0;
+		}
+	}
+
+	err = mmc_select_hs400(host->card);
+	if (err) {
+		pr_err("%s: %s: select hs400 failed (%d)\n",
+			mmc_hostname(host), __func__, err);
+		return err;
+	}
+
+	return 0;
+}
+
+static int mmc_set_clock_bus_speed(struct mmc_card *card, unsigned long freq)
+{
+	int err = 0;
+
+	if (freq == MMC_HS200_MAX_DTR)
+		err = mmc_scale_high(card->host);
+	else
+		err = mmc_scale_low(card->host, freq);
+
+	return err;
+}
+
+static inline unsigned long mmc_ddr_freq_accommodation(unsigned long freq)
+{
+	if (freq == MMC_HIGH_DDR_MAX_DTR)
+		return freq;
+
+	return freq/2;
+}
+
+/**
+ * mmc_change_bus_speed() - Change MMC card bus frequency at runtime
+ * @host: pointer to mmc host structure
+ * @freq: pointer to desired frequency to be set
+ *
+ * Change the MMC card bus frequency at runtime after the card is
+ * initialized. Callers are expected to make sure of the card's
+ * state (DATA/RCV/TRANSFER) before changing the frequency at runtime.
+ *
+ * If the frequency to change is greater than max. supported by card,
+ * *freq is changed to max. supported by card. If it is less than min.
+ * supported by host, *freq is changed to min. supported by host.
+ * Host is assumed to be calimed while calling this funciton.
+ */
+static int mmc_change_bus_speed(struct mmc_host *host, unsigned long *freq)
+{
+	int err = 0;
+	struct mmc_card *card;
+	unsigned long actual_freq;
+
+	card = host->card;
+
+	if (!card || !freq) {
+		err = -EINVAL;
+		goto out;
+	}
+	actual_freq = *freq;
+
+	WARN_ON(!host->claimed);
+
+	/*
+	 * For scaling up/down HS400 we'll need special handling,
+	 * for other timings we can simply do clock frequency change
+	 */
+	if (mmc_card_hs400(card) ||
+		(!mmc_card_hs200(host->card) && *freq == MMC_HS200_MAX_DTR)) {
+		err = mmc_set_clock_bus_speed(card, *freq);
+		if (err) {
+			pr_err("%s: %s: failed (%d)to set bus and clock speed (freq=%lu)\n",
+				mmc_hostname(host), __func__, err, *freq);
+			goto out;
+		}
+	} else if (mmc_card_hs200(host->card)) {
+		mmc_set_clock(host, *freq);
+		err = mmc_hs200_tuning(host->card);
+		if (err) {
+			pr_warn("%s: %s: tuning execution failed %d\n",
+				mmc_hostname(card->host),
+				__func__, err);
+			mmc_set_clock(host, host->clk_scaling.curr_freq);
+		}
+	} else {
+		if (mmc_card_ddr52(host->card))
+			actual_freq = mmc_ddr_freq_accommodation(*freq);
+		mmc_set_clock(host, actual_freq);
+	}
+
+out:
+	return err;
+}
+
 /*
  * Handle the detection and initialisation of a card.
  *
