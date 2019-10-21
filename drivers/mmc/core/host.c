@@ -201,6 +201,44 @@ static void mmc_retune_timer(struct timer_list *t)
 	mmc_retune_needed(host);
 }
 
+static int mmc_dt_get_array(struct device *dev, const char *prop_name,
+				u32 **out, int *len, u32 size)
+{
+	int ret = 0;
+	struct device_node *np = dev->of_node;
+	size_t sz;
+	u32 *arr = NULL;
+
+	if (!of_get_property(np, prop_name, len)) {
+		ret = -EINVAL;
+		goto out;
+	}
+	sz = *len = *len / sizeof(*arr);
+	if (sz <= 0 || (size > 0 && (sz > size))) {
+		dev_err(dev, "%s invalid size\n", prop_name);
+		ret = -EINVAL;
+		goto out;
+	}
+
+	arr = devm_kcalloc(dev, sz, sizeof(*arr), GFP_KERNEL);
+	if (!arr) {
+		ret = -ENOMEM;
+		goto out;
+	}
+
+	ret = of_property_read_u32_array(np, prop_name, arr, sz);
+	if (ret < 0) {
+		dev_err(dev, "%s failed reading array %d\n", prop_name, ret);
+		goto out;
+	}
+	*out = arr;
+out:
+	if (ret)
+		*len = 0;
+	return ret;
+
+}
+
 /**
  *	mmc_of_parse() - parse host's device-tree node
  *	@host: host whose node should be parsed.
@@ -213,7 +251,9 @@ static void mmc_retune_timer(struct timer_list *t)
 int mmc_of_parse(struct mmc_host *host)
 {
 	struct device *dev = host->parent;
+	struct device_node *np = dev->of_node;
 	u32 bus_width, drv_type, cd_debounce_delay_ms;
+	const char *lower_bus_speed = NULL;
 	int ret;
 
 	if (!dev || !dev_fwnode(dev))
@@ -364,6 +404,29 @@ int mmc_of_parse(struct mmc_host *host)
 
 	device_property_read_u32(dev, "post-power-on-delay-ms",
 				 &host->ios.power_delay_ms);
+
+	if (mmc_dt_get_array(dev, "devfreq,freq-table",
+				&host->clk_scaling.pltfm_freq_table,
+				&host->clk_scaling.pltfm_freq_table_sz, 0))
+		pr_debug("%s: no clock scaling frequencies were supplied\n",
+				dev_name(dev));
+	else if (!host->clk_scaling.pltfm_freq_table ||
+			host->clk_scaling.pltfm_freq_table_sz)
+		dev_info(dev, "bad dts clock scaling frequencies\n");
+
+	/*
+	 * Few hosts can support DDR52 mode at the same lower
+	 * system voltage corner as high-speed mode. In such
+	 * cases, it is always better to put it in DDR
+	 * mode which will improve the performance
+	 * without any power impact.
+	 */
+	if (!of_property_read_string(np, "scaling-lower-bus-speed-mode",
+			&lower_bus_speed)) {
+		if (!strncmp(lower_bus_speed, "DDR52", strlen(lower_bus_speed)))
+			host->clk_scaling.lower_bus_speed_mode |=
+				MMC_SCALING_LOWER_DDR52_MODE;
+	}
 
 	return mmc_pwrseq_alloc(host);
 }
