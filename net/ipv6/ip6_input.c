@@ -80,10 +80,8 @@ static void ip6_sublist_rcv_finish(struct list_head *head)
 {
 	struct sk_buff *skb, *next;
 
-	list_for_each_entry_safe(skb, next, head, list) {
-		skb_list_del_init(skb);
+	list_for_each_entry_safe(skb, next, head, list)
 		dst_input(skb);
-	}
 }
 
 static void ip6_list_rcv_finish(struct net *net, struct sock *sk,

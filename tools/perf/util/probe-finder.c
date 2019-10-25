@@ -24,7 +24,6 @@
 #include "dso.h"
 #include "debug.h"
 #include "intlist.h"
-#include "strbuf.h"
 #include "strlist.h"
 #include "symbol.h"
 #include "probe-finder.h"

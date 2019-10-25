@@ -364,7 +364,8 @@ static int mqueue_get_tree(struct fs_context *fc)
 {
 	struct mqueue_fs_context *ctx = fc->fs_private;
 
-	return get_tree_keyed(fc, mqueue_fill_super, ctx->ipc_ns);
+	fc->s_fs_info = ctx->ipc_ns;
+	return vfs_get_super(fc, vfs_get_keyed_super, mqueue_fill_super);
 }
 
 static void mqueue_fs_context_free(struct fs_context *fc)

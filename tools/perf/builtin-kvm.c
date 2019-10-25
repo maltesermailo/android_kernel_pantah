@@ -2,16 +2,15 @@
 #include "builtin.h"
 #include "perf.h"
 
-#include "util/build-id.h"
 #include "util/evsel.h"
 #include "util/evlist.h"
 #include "util/term.h"
+#include "util/cache.h"
 #include "util/symbol.h"
 #include "util/thread.h"
 #include "util/header.h"
 #include "util/session.h"
 #include "util/intlist.h"
-#include <subcmd/pager.h>
 #include <subcmd/parse-options.h>
 #include "util/trace-event.h"
 #include "util/debug.h"
@@ -20,7 +19,6 @@
 #include "util/top.h"
 #include "util/data.h"
 #include "util/ordered-events.h"
-#include "ui/ui.h"
 
 #include <sys/prctl.h>
 #ifdef HAVE_TIMERFD_SUPPORT
@@ -32,7 +30,6 @@
 #include <fcntl.h>
 
 #include <linux/kernel.h>
-#include <linux/string.h>
 #include <linux/time64.h>
 #include <linux/zalloc.h>
 #include <errno.h>
@@ -60,7 +57,7 @@ static const char *get_filename_for_perf_kvm(void)
 #ifdef HAVE_KVM_STAT_SUPPORT
 #include "util/kvm-stat.h"
 
-void exit_event_get_key(struct evsel *evsel,
+void exit_event_get_key(struct perf_evsel *evsel,
 			struct perf_sample *sample,
 			struct event_key *key)
 {
@@ -68,12 +65,12 @@ void exit_event_get_key(struct evsel *evsel,
 	key->key = perf_evsel__intval(evsel, sample, kvm_exit_reason);
 }
 
-bool kvm_exit_event(struct evsel *evsel)
+bool kvm_exit_event(struct perf_evsel *evsel)
 {
 	return !strcmp(evsel->name, kvm_exit_trace);
 }
 
-bool exit_event_begin(struct evsel *evsel,
+bool exit_event_begin(struct perf_evsel *evsel,
 		      struct perf_sample *sample, struct event_key *key)
 {
 	if (kvm_exit_event(evsel)) {
@@ -84,12 +81,12 @@ bool exit_event_begin(struct evsel *evsel,
 	return false;
 }
 
-bool kvm_entry_event(struct evsel *evsel)
+bool kvm_entry_event(struct perf_evsel *evsel)
 {
 	return !strcmp(evsel->name, kvm_entry_trace);
 }
 
-bool exit_event_end(struct evsel *evsel,
+bool exit_event_end(struct perf_evsel *evsel,
 		    struct perf_sample *sample __maybe_unused,
 		    struct event_key *key __maybe_unused)
 {
@@ -289,7 +286,7 @@ static bool update_kvm_event(struct kvm_event *event, int vcpu_id,
 }
 
 static bool is_child_event(struct perf_kvm_stat *kvm,
-			   struct evsel *evsel,
+			   struct perf_evsel *evsel,
 			   struct perf_sample *sample,
 			   struct event_key *key)
 {
@@ -399,7 +396,7 @@ static bool handle_end_event(struct perf_kvm_stat *kvm,
 
 static
 struct vcpu_event_record *per_vcpu_record(struct thread *thread,
-					  struct evsel *evsel,
+					  struct perf_evsel *evsel,
 					  struct perf_sample *sample)
 {
 	/* Only kvm_entry records vcpu id. */
@@ -422,7 +419,7 @@ struct vcpu_event_record *per_vcpu_record(struct thread *thread,
 
 static bool handle_kvm_event(struct perf_kvm_stat *kvm,
 			     struct thread *thread,
-			     struct evsel *evsel,
+			     struct perf_evsel *evsel,
 			     struct perf_sample *sample)
 {
 	struct vcpu_event_record *vcpu_record;
@@ -675,7 +672,7 @@ static bool skip_sample(struct perf_kvm_stat *kvm,
 static int process_sample_event(struct perf_tool *tool,
 				union perf_event *event,
 				struct perf_sample *sample,
-				struct evsel *evsel,
+				struct perf_evsel *evsel,
 				struct machine *machine)
 {
 	int err = 0;
@@ -746,7 +743,7 @@ static bool verify_vcpu(int vcpu)
 static s64 perf_kvm__mmap_read_idx(struct perf_kvm_stat *kvm, int idx,
 				   u64 *mmap_time)
 {
-	struct evlist *evlist = kvm->evlist;
+	struct perf_evlist *evlist = kvm->evlist;
 	union perf_event *event;
 	struct perf_mmap *md;
 	u64 timestamp;
@@ -975,7 +972,7 @@ static int kvm_events_live_report(struct perf_kvm_stat *kvm)
 		goto out;
 
 	/* everything is good - enable the events and process */
-	evlist__enable(kvm->evlist);
+	perf_evlist__enable(kvm->evlist);
 
 	while (!done) {
 		struct fdarray *fda = &kvm->evlist->pollfd;
@@ -996,7 +993,7 @@ static int kvm_events_live_report(struct perf_kvm_stat *kvm)
 			err = fdarray__poll(fda, 100);
 	}
 
-	evlist__disable(kvm->evlist);
+	perf_evlist__disable(kvm->evlist);
 
 	if (err == 0) {
 		sort_result(kvm);
@@ -1014,8 +1011,8 @@ out:
 static int kvm_live_open_events(struct perf_kvm_stat *kvm)
 {
 	int err, rc = -1;
-	struct evsel *pos;
-	struct evlist *evlist = kvm->evlist;
+	struct perf_evsel *pos;
+	struct perf_evlist *evlist = kvm->evlist;
 	char sbuf[STRERR_BUFSIZE];
 
 	perf_evlist__config(evlist, &kvm->opts, NULL);
@@ -1025,7 +1022,7 @@ static int kvm_live_open_events(struct perf_kvm_stat *kvm)
 	 *       This command processes KVM tracepoints from host only
 	 */
 	evlist__for_each_entry(evlist, pos) {
-		struct perf_event_attr *attr = &pos->core.attr;
+		struct perf_event_attr *attr = &pos->attr;
 
 		/* make sure these *are* set */
 		perf_evsel__set_sample_bit(pos, TID);
@@ -1051,7 +1048,7 @@ static int kvm_live_open_events(struct perf_kvm_stat *kvm)
 		attr->disabled = 1;
 	}
 
-	err = evlist__open(evlist);
+	err = perf_evlist__open(evlist);
 	if (err < 0) {
 		printf("Couldn't create the events: %s\n",
 		       str_error_r(errno, sbuf, sizeof(sbuf)));
@@ -1061,7 +1058,7 @@ static int kvm_live_open_events(struct perf_kvm_stat *kvm)
 	if (perf_evlist__mmap(evlist, kvm->opts.mmap_pages) < 0) {
 		ui__error("Failed to mmap the events: %s\n",
 			  str_error_r(errno, sbuf, sizeof(sbuf)));
-		evlist__close(evlist);
+		perf_evlist__close(evlist);
 		goto out;
 	}
 
@@ -1286,14 +1283,14 @@ kvm_events_report(struct perf_kvm_stat *kvm, int argc, const char **argv)
 }
 
 #ifdef HAVE_TIMERFD_SUPPORT
-static struct evlist *kvm_live_event_list(void)
+static struct perf_evlist *kvm_live_event_list(void)
 {
-	struct evlist *evlist;
+	struct perf_evlist *evlist;
 	char *tp, *name, *sys;
 	int err = -1;
 	const char * const *events_tp;
 
-	evlist = evlist__new();
+	evlist = perf_evlist__new();
 	if (evlist == NULL)
 		return NULL;
 
@@ -1328,7 +1325,7 @@ static struct evlist *kvm_live_event_list(void)
 
 out:
 	if (err) {
-		evlist__delete(evlist);
+		perf_evlist__delete(evlist);
 		evlist = NULL;
 	}
 
@@ -1453,7 +1450,7 @@ static int kvm_events_live(struct perf_kvm_stat *kvm,
 	perf_session__set_id_hdr_size(kvm->session);
 	ordered_events__set_copy_on_queue(&kvm->session->ordered_events, true);
 	machine__synthesize_threads(&kvm->session->machines.host, &kvm->opts.target,
-				    kvm->evlist->core.threads, false, 1);
+				    kvm->evlist->threads, false, 1);
 	err = kvm_live_open_events(kvm);
 	if (err)
 		goto out;
@@ -1463,7 +1460,7 @@ static int kvm_events_live(struct perf_kvm_stat *kvm,
 out:
 	perf_session__delete(kvm->session);
 	kvm->session = NULL;
-	evlist__delete(kvm->evlist);
+	perf_evlist__delete(kvm->evlist);
 
 	return err;
 }

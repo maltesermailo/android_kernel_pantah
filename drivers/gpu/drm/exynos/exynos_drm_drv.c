@@ -242,7 +242,9 @@ static struct component_match *exynos_drm_match_add(struct device *dev)
 		if (!info->driver || !(info->flags & DRM_COMPONENT_DRIVER))
 			continue;
 
-		while ((d = platform_find_device_by_driver(p, &info->driver->driver))) {
+		while ((d = bus_find_device(&platform_bus_type, p,
+					    &info->driver->driver,
+					    (void *)platform_bus_type.match))) {
 			put_device(p);
 
 			if (!(info->flags & DRM_FIMC_DEVICE) ||
@@ -410,8 +412,9 @@ static void exynos_drm_unregister_devices(void)
 		if (!info->driver || !(info->flags & DRM_VIRTUAL_DEVICE))
 			continue;
 
-		while ((dev = platform_find_device_by_driver(NULL,
-						&info->driver->driver))) {
+		while ((dev = bus_find_device(&platform_bus_type, NULL,
+					    &info->driver->driver,
+					    (void *)platform_bus_type.match))) {
 			put_device(dev);
 			platform_device_unregister(to_platform_device(dev));
 		}

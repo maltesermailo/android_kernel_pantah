@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <api/fs/fs.h>
-#include "debug.h"
 #include "header.h"
 
 #define MIDR "/regs/identification/midr_el1"
@@ -17,7 +16,7 @@ char *get_cpuid_str(struct perf_pmu *pmu)
 	const char *sysfs = sysfs__mountpoint();
 	int cpu;
 	u64 midr = 0;
-	struct perf_cpu_map *cpus;
+	struct cpu_map *cpus;
 	FILE *file;
 
 	if (!sysfs || !pmu || !pmu->cpus)
@@ -28,7 +27,7 @@ char *get_cpuid_str(struct perf_pmu *pmu)
 		return NULL;
 
 	/* read midr from list of cpus mapped to this pmu */
-	cpus = perf_cpu_map__get(pmu->cpus);
+	cpus = cpu_map__get(pmu->cpus);
 	for (cpu = 0; cpu < cpus->nr; cpu++) {
 		scnprintf(path, PATH_MAX, "%s/devices/system/cpu/cpu%d"MIDR,
 				sysfs, cpus->map[cpu]);
@@ -61,6 +60,6 @@ char *get_cpuid_str(struct perf_pmu *pmu)
 		buf = NULL;
 	}
 
-	perf_cpu_map__put(cpus);
+	cpu_map__put(cpus);
 	return buf;
 }

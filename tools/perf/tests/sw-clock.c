@@ -5,15 +5,12 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <sys/mman.h>
-#include <linux/string.h>
 
 #include "tests.h"
-#include "util/debug.h"
 #include "util/evsel.h"
 #include "util/evlist.h"
 #include "util/cpumap.h"
 #include "util/thread_map.h"
-#include <perf/evlist.h>
 
 #define NR_LOOPS  10000000
 
@@ -30,8 +27,8 @@ static int __test__sw_clock_freq(enum perf_sw_ids clock_id)
 	int nr_samples = 0;
 	char sbuf[STRERR_BUFSIZE];
 	union perf_event *event;
-	struct evsel *evsel;
-	struct evlist *evlist;
+	struct perf_evsel *evsel;
+	struct perf_evlist *evlist;
 	struct perf_event_attr attr = {
 		.type = PERF_TYPE_SOFTWARE,
 		.config = clock_id,
@@ -40,26 +37,26 @@ static int __test__sw_clock_freq(enum perf_sw_ids clock_id)
 		.disabled = 1,
 		.freq = 1,
 	};
-	struct perf_cpu_map *cpus;
-	struct perf_thread_map *threads;
+	struct cpu_map *cpus;
+	struct thread_map *threads;
 	struct perf_mmap *md;
 
 	attr.sample_freq = 500;
 
-	evlist = evlist__new();
+	evlist = perf_evlist__new();
 	if (evlist == NULL) {
-		pr_debug("evlist__new\n");
+		pr_debug("perf_evlist__new\n");
 		return -1;
 	}
 
-	evsel = evsel__new(&attr);
+	evsel = perf_evsel__new(&attr);
 	if (evsel == NULL) {
 		pr_debug("perf_evsel__new\n");
 		goto out_delete_evlist;
 	}
-	evlist__add(evlist, evsel);
+	perf_evlist__add(evlist, evsel);
 
-	cpus = perf_cpu_map__dummy_new();
+	cpus = cpu_map__dummy_new();
 	threads = thread_map__new_by_tid(getpid());
 	if (!cpus || !threads) {
 		err = -ENOMEM;
@@ -67,12 +64,12 @@ static int __test__sw_clock_freq(enum perf_sw_ids clock_id)
 		goto out_free_maps;
 	}
 
-	perf_evlist__set_maps(&evlist->core, cpus, threads);
+	perf_evlist__set_maps(evlist, cpus, threads);
 
 	cpus	= NULL;
 	threads = NULL;
 
-	if (evlist__open(evlist)) {
+	if (perf_evlist__open(evlist)) {
 		const char *knob = "/proc/sys/kernel/perf_event_max_sample_rate";
 
 		err = -errno;
@@ -89,13 +86,13 @@ static int __test__sw_clock_freq(enum perf_sw_ids clock_id)
 		goto out_delete_evlist;
 	}
 
-	evlist__enable(evlist);
+	perf_evlist__enable(evlist);
 
 	/* collect samples */
 	for (i = 0; i < NR_LOOPS; i++)
 		tmp++;
 
-	evlist__disable(evlist);
+	perf_evlist__disable(evlist);
 
 	md = &evlist->mmap[0];
 	if (perf_mmap__read_init(md) < 0)
@@ -128,10 +125,10 @@ out_init:
 	}
 
 out_free_maps:
-	perf_cpu_map__put(cpus);
-	perf_thread_map__put(threads);
+	cpu_map__put(cpus);
+	thread_map__put(threads);
 out_delete_evlist:
-	evlist__delete(evlist);
+	perf_evlist__delete(evlist);
 	return err;
 }
 

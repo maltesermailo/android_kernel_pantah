@@ -10,7 +10,6 @@
 #include <linux/kernel.h>
 
 #include "vdso.h"
-#include "dso.h"
 #include "util.h"
 #include "map.h"
 #include "symbol.h"

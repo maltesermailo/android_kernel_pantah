@@ -104,9 +104,7 @@ needed).
    fb/index
    fpga/index
    hid/index
-   i2c/index
    iio/index
-   isdn/index
    infiniband/index
    leds/index
    media/index
@@ -116,10 +114,8 @@ needed).
    power/index
    target/index
    timers/index
-   spi/index
-   w1/index
    watchdog/index
-   virt/index
+   virtual/index
    input/index
    hwmon/index
    gpu/index
@@ -150,10 +146,6 @@ implementation.
    ia64/index
    m68k/index
    powerpc/index
-   mips/index
-   nios2/nios2
-   openrisc/index
-   parisc/index
    riscv/index
    s390/index
    sh/index

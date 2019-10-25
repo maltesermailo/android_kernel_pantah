@@ -593,25 +593,24 @@ static void msm_gpio_dbg_show(struct seq_file *s, struct gpio_chip *chip)
 #define msm_gpio_dbg_show NULL
 #endif
 
-static int msm_gpio_init_valid_mask(struct gpio_chip *gc,
-				    unsigned long *valid_mask,
-				    unsigned int ngpios)
+static int msm_gpio_init_valid_mask(struct gpio_chip *chip)
 {
-	struct msm_pinctrl *pctrl = gpiochip_get_data(gc);
+	struct msm_pinctrl *pctrl = gpiochip_get_data(chip);
 	int ret;
 	unsigned int len, i;
+	unsigned int max_gpios = pctrl->soc->ngpios;
 	const int *reserved = pctrl->soc->reserved_gpios;
 	u16 *tmp;
 
 	/* Driver provided reserved list overrides DT and ACPI */
 	if (reserved) {
-		bitmap_fill(valid_mask, ngpios);
+		bitmap_fill(chip->valid_mask, max_gpios);
 		for (i = 0; reserved[i] >= 0; i++) {
-			if (i >= ngpios || reserved[i] >= ngpios) {
+			if (i >= max_gpios || reserved[i] >= max_gpios) {
 				dev_err(pctrl->dev, "invalid list of reserved GPIOs\n");
 				return -EINVAL;
 			}
-			clear_bit(reserved[i], valid_mask);
+			clear_bit(reserved[i], chip->valid_mask);
 		}
 
 		return 0;
@@ -623,7 +622,7 @@ static int msm_gpio_init_valid_mask(struct gpio_chip *gc,
 	if (ret < 0)
 		return 0;
 
-	if (ret > ngpios)
+	if (ret > max_gpios)
 		return -EINVAL;
 
 	tmp = kmalloc_array(len, sizeof(*tmp), GFP_KERNEL);
@@ -636,9 +635,9 @@ static int msm_gpio_init_valid_mask(struct gpio_chip *gc,
 		goto out;
 	}
 
-	bitmap_zero(valid_mask, ngpios);
+	bitmap_zero(chip->valid_mask, max_gpios);
 	for (i = 0; i < len; i++)
-		set_bit(tmp[i], valid_mask);
+		set_bit(tmp[i], chip->valid_mask);
 
 out:
 	kfree(tmp);
@@ -654,6 +653,7 @@ static const struct gpio_chip msm_gpio_template = {
 	.request          = gpiochip_generic_request,
 	.free             = gpiochip_generic_free,
 	.dbg_show         = msm_gpio_dbg_show,
+	.init_valid_mask  = msm_gpio_init_valid_mask,
 };
 
 /* For dual-edge interrupts in software, since some hardware has no
@@ -1015,8 +1015,7 @@ static int msm_gpio_init(struct msm_pinctrl *pctrl)
 	chip->parent = pctrl->dev;
 	chip->owner = THIS_MODULE;
 	chip->of_node = pctrl->dev->of_node;
-	if (msm_gpio_needs_valid_mask(pctrl))
-		chip->init_valid_mask = msm_gpio_init_valid_mask;
+	chip->need_valid_mask = msm_gpio_needs_valid_mask(pctrl);
 
 	pctrl->irq_chip.name = "msmgpio";
 	pctrl->irq_chip.irq_enable = msm_gpio_irq_enable;

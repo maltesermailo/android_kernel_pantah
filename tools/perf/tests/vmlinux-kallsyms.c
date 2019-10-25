@@ -4,7 +4,6 @@
 #include <inttypes.h>
 #include <string.h>
 #include <stdlib.h>
-#include "dso.h"
 #include "map.h"
 #include "symbol.h"
 #include "util.h"

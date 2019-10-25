@@ -330,7 +330,8 @@ static struct component_match *rockchip_drm_match_add(struct device *dev)
 		struct device *p = NULL, *d;
 
 		do {
-			d = platform_find_device_by_driver(p, &drv->driver);
+			d = bus_find_device(&platform_bus_type, p, &drv->driver,
+					    (void *)platform_bus_type.match);
 			put_device(p);
 			p = d;
 

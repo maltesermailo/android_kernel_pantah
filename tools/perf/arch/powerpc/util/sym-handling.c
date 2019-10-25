@@ -5,7 +5,6 @@
  */
 
 #include "debug.h"
-#include "dso.h"
 #include "symbol.h"
 #include "map.h"
 #include "probe-event.h"

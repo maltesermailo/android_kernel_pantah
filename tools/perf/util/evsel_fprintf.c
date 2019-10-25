@@ -33,26 +33,26 @@ static int __print_attr__fprintf(FILE *fp, const char *name, const char *val, vo
 	return comma_fprintf(fp, (bool *)priv, " %s: %s", name, val);
 }
 
-int perf_evsel__fprintf(struct evsel *evsel,
+int perf_evsel__fprintf(struct perf_evsel *evsel,
 			struct perf_attr_details *details, FILE *fp)
 {
 	bool first = true;
 	int printed = 0;
 
 	if (details->event_group) {
-		struct evsel *pos;
+		struct perf_evsel *pos;
 
 		if (!perf_evsel__is_group_leader(evsel))
 			return 0;
 
-		if (evsel->core.nr_members > 1)
+		if (evsel->nr_members > 1)
 			printed += fprintf(fp, "%s{", evsel->group_name ?: "");
 
 		printed += fprintf(fp, "%s", perf_evsel__name(evsel));
 		for_each_group_member(pos, evsel)
 			printed += fprintf(fp, ",%s", perf_evsel__name(pos));
 
-		if (evsel->core.nr_members > 1)
+		if (evsel->nr_members > 1)
 			printed += fprintf(fp, "}");
 		goto out;
 	}
@@ -60,22 +60,22 @@ int perf_evsel__fprintf(struct evsel *evsel,
 	printed += fprintf(fp, "%s", perf_evsel__name(evsel));
 
 	if (details->verbose) {
-		printed += perf_event_attr__fprintf(fp, &evsel->core.attr,
+		printed += perf_event_attr__fprintf(fp, &evsel->attr,
 						    __print_attr__fprintf, &first);
 	} else if (details->freq) {
 		const char *term = "sample_freq";
 
-		if (!evsel->core.attr.freq)
+		if (!evsel->attr.freq)
 			term = "sample_period";
 
 		printed += comma_fprintf(fp, &first, " %s=%" PRIu64,
-					 term, (u64)evsel->core.attr.sample_freq);
+					 term, (u64)evsel->attr.sample_freq);
 	}
 
 	if (details->trace_fields) {
 		struct tep_format_field *field;
 
-		if (evsel->core.attr.type != PERF_TYPE_TRACEPOINT) {
+		if (evsel->attr.type != PERF_TYPE_TRACEPOINT) {
 			printed += comma_fprintf(fp, &first, " (not a tracepoint)");
 			goto out;
 		}

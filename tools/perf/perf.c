@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-2.0
 /*
  * perf.c
  *
@@ -7,10 +8,7 @@
  * perf top, perf record, perf report, etc.) are started.
  */
 #include "builtin.h"
-#include "perf.h"
 
-#include "util/build-id.h"
-#include "util/cache.h"
 #include "util/env.h"
 #include <subcmd/exec-cmd.h>
 #include "util/config.h"
@@ -20,9 +18,6 @@
 #include "util/bpf-loader.h"
 #include "util/debug.h"
 #include "util/event.h"
-#include "util/util.h"
-#include "ui/ui.h"
-#include "perf-sys.h"
 #include <api/fs/fs.h>
 #include <api/fs/tracing_path.h>
 #include <errno.h>
@@ -34,7 +29,6 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <linux/kernel.h>
-#include <linux/string.h>
 #include <linux/zalloc.h>
 
 const char perf_usage_string[] =
@@ -446,9 +440,6 @@ int main(int argc, const char **argv)
 		cmd = "perf-help";
 
 	srandom(time(NULL));
-
-	/* Setting $PERF_CONFIG makes perf read _only_ the given config file. */
-	config_exclusive_filename = getenv("PERF_CONFIG");
 
 	err = perf_config(perf_default_config, NULL);
 	if (err)

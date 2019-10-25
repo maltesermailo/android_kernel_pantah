@@ -76,7 +76,7 @@ static void hypfs_remove(struct dentry *dentry)
 		else
 			simple_unlink(d_inode(parent), dentry);
 	}
-	d_drop(dentry);
+	d_delete(dentry);
 	dput(dentry);
 	inode_unlock(d_inode(parent));
 }

@@ -477,7 +477,8 @@ static int mcde_probe(struct platform_device *pdev)
 		struct device_driver *drv = &mcde_component_drivers[i]->driver;
 		struct device *p = NULL, *d;
 
-		while ((d = platform_find_device_by_driver(p, drv))) {
+		while ((d = bus_find_device(&platform_bus_type, p, drv,
+					    (void *)platform_bus_type.match))) {
 			put_device(p);
 			component_match_add(dev, &match, mcde_compare_dev, d);
 			p = d;

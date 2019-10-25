@@ -348,8 +348,7 @@ static int nvmet_tcp_map_data(struct nvmet_tcp_cmd *cmd)
 
 	return 0;
 err:
-	if (cmd->req.sg_cnt)
-		sgl_free(cmd->req.sg);
+	sgl_free(cmd->req.sg);
 	return NVME_SC_INTERNAL;
 }
 
@@ -554,8 +553,7 @@ static int nvmet_try_send_data(struct nvmet_tcp_cmd *cmd)
 
 	if (queue->nvme_sq.sqhd_disabled) {
 		kfree(cmd->iov);
-		if (cmd->req.sg_cnt)
-			sgl_free(cmd->req.sg);
+		sgl_free(cmd->req.sg);
 	}
 
 	return 1;
@@ -586,8 +584,7 @@ static int nvmet_try_send_response(struct nvmet_tcp_cmd *cmd,
 		return -EAGAIN;
 
 	kfree(cmd->iov);
-	if (cmd->req.sg_cnt)
-		sgl_free(cmd->req.sg);
+	sgl_free(cmd->req.sg);
 	cmd->queue->snd_cmd = NULL;
 	nvmet_tcp_put_cmd(cmd);
 	return 1;
@@ -1309,9 +1306,7 @@ static void nvmet_tcp_finish_cmd(struct nvmet_tcp_cmd *cmd)
 {
 	nvmet_req_uninit(&cmd->req);
 	nvmet_tcp_unmap_pdu_iovec(cmd);
-	kfree(cmd->iov);
-	if (cmd->req.sg_cnt)
-		sgl_free(cmd->req.sg);
+	sgl_free(cmd->req.sg);
 }
 
 static void nvmet_tcp_uninit_data_in_cmds(struct nvmet_tcp_queue *queue)
@@ -1415,7 +1410,6 @@ done:
 static int nvmet_tcp_set_queue_sock(struct nvmet_tcp_queue *queue)
 {
 	struct socket *sock = queue->sock;
-	struct inet_sock *inet = inet_sk(sock->sk);
 	struct linger sol = { .l_onoff = 1, .l_linger = 0 };
 	int ret;
 
@@ -1438,16 +1432,6 @@ static int nvmet_tcp_set_queue_sock(struct nvmet_tcp_queue *queue)
 			(char *)&sol, sizeof(sol));
 	if (ret)
 		return ret;
-
-	/* Set socket type of service */
-	if (inet->rcv_tos > 0) {
-		int tos = inet->rcv_tos;
-
-		ret = kernel_setsockopt(sock, SOL_IP, IP_TOS,
-				(char *)&tos, sizeof(tos));
-		if (ret)
-			return ret;
-	}
 
 	write_lock_bh(&sock->sk->sk_callback_lock);
 	sock->sk->sk_user_data = queue;

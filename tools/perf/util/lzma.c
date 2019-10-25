@@ -9,7 +9,6 @@
 #include "compress.h"
 #include "util.h"
 #include "debug.h"
-#include <string.h>
 #include <unistd.h>
 
 #define BUFSIZE 8192
