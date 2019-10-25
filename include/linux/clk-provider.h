@@ -199,13 +199,6 @@ struct clk_duty {
  *		directory is provided as an argument.  Called with
  *		prepare_lock held.  Returns 0 on success, -EERROR otherwise.
  *
- * @pre_rate_change: Optional callback for a clock to fulfill its rate
- *		change requirements before any rate change has occurred in
- *		its clock tree. Returns 0 on success, -EERROR otherwise.
- *
- * @post_rate_change: Optional callback for a clock to clean up any
- *		requirements that were needed while the clock and its tree
- *		was changing states. Returns 0 on success, -EERROR otherwise.
  *
  * The clk_enable/clk_disable and clk_prepare/clk_unprepare pairs allow
  * implementations to split any work between atomic (enable) and sleepable
@@ -252,12 +245,6 @@ struct clk_ops {
 					  struct clk_duty *duty);
 	void		(*init)(struct clk_hw *hw);
 	void		(*debug_init)(struct clk_hw *hw, struct dentry *dentry);
-	int		(*pre_rate_change)(struct clk_hw *hw,
-					   unsigned long rate,
-					   unsigned long new_rate);
-	int		(*post_rate_change)(struct clk_hw *hw,
-					    unsigned long old_rate,
-					    unsigned long rate);
 };
 
 /**
@@ -312,8 +299,7 @@ struct clk_init_data {
  * into the clk API
  *
  * @init: pointer to struct clk_init_data that contains the init data shared
- * with the common clock framework. This pointer will be set to NULL once
- * a clk_register() variant is called on this clk_hw pointer.
+ * with the common clock framework.
  */
 struct clk_hw {
 	struct clk_core *core;

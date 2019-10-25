@@ -792,7 +792,6 @@ out_root_realloc:
  */
 void
 xfs_bmap_local_to_extents_empty(
-	struct xfs_trans	*tp,
 	struct xfs_inode	*ip,
 	int			whichfork)
 {
@@ -809,7 +808,6 @@ xfs_bmap_local_to_extents_empty(
 	ifp->if_u1.if_root = NULL;
 	ifp->if_height = 0;
 	XFS_IFORK_FMT_SET(ip, whichfork, XFS_DINODE_FMT_EXTENTS);
-	xfs_trans_log_inode(tp, ip, XFS_ILOG_CORE);
 }
 
 
@@ -842,7 +840,7 @@ xfs_bmap_local_to_extents(
 	ASSERT(XFS_IFORK_FORMAT(ip, whichfork) == XFS_DINODE_FMT_LOCAL);
 
 	if (!ifp->if_bytes) {
-		xfs_bmap_local_to_extents_empty(tp, ip, whichfork);
+		xfs_bmap_local_to_extents_empty(ip, whichfork);
 		flags = XFS_ILOG_CORE;
 		goto done;
 	}
@@ -889,7 +887,7 @@ xfs_bmap_local_to_extents(
 
 	/* account for the change in fork size */
 	xfs_idata_realloc(ip, -ifp->if_bytes, whichfork);
-	xfs_bmap_local_to_extents_empty(tp, ip, whichfork);
+	xfs_bmap_local_to_extents_empty(ip, whichfork);
 	flags |= XFS_ILOG_CORE;
 
 	ifp->if_u1.if_root = NULL;
@@ -4044,12 +4042,8 @@ xfs_bmapi_allocate(
 	 */
 	if (!(bma->flags & XFS_BMAPI_METADATA)) {
 		bma->datatype = XFS_ALLOC_NOBUSY;
-		if (whichfork == XFS_DATA_FORK) {
-			if (bma->offset == 0)
-				bma->datatype |= XFS_ALLOC_INITIAL_USER_DATA;
-			else
-				bma->datatype |= XFS_ALLOC_USERDATA;
-		}
+		if (whichfork == XFS_DATA_FORK && bma->offset == 0)
+			bma->datatype |= XFS_ALLOC_INITIAL_USER_DATA;
 		if (bma->flags & XFS_BMAPI_ZERO)
 			bma->datatype |= XFS_ALLOC_USERDATA_ZERO;
 	}
@@ -5624,11 +5618,6 @@ xfs_bmse_merge(
 	XFS_WANT_CORRUPTED_RETURN(mp, i == 1);
 
 	error = xfs_bmbt_update(cur, &new);
-	if (error)
-		return error;
-
-	/* change to extent format if required after extent removal */
-	error = xfs_bmap_btree_to_extents(tp, ip, cur, logflags, whichfork);
 	if (error)
 		return error;
 
