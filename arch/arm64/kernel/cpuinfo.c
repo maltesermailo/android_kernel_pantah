@@ -74,6 +74,16 @@ static const char *const hwcap_str[] = {
 	"sm4",
 	"asimddp",
 	"sha512",
+<<<<<<< HEAD   (e6a117 rtlwifi: Fix potential overflow on P2P code)
+=======
+	"sve",
+	"asimdfhm",
+	"dit",
+	"uscat",
+	"ilrcpc",
+	"flagm",
+	"ssbs",
+>>>>>>> BRANCH (ddef1e Linux 4.14.151)
 	NULL
 };
 
