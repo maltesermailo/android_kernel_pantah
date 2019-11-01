@@ -22,6 +22,30 @@
       "revId": "2bbcad5d9048ef479f55c79d9c9d346ae6fa507f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "580221e7_2a6fd863",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2972,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-11-01T16:10:34Z",
+      "side": 1,
+      "message": "Yes, if we don\u0027t set it back to false, then the next async transaction (or this one on the retry) will assume that there is a pending_async transaction when there isn\u0027t one and everything will queue on async_todo with none ever getting dequeued and posted to the proc-\u003etodo.\n\nThe alternative would be to remove this line and change the logic at 2933 to\n  if (oneway \u0026\u0026 !retry)\n\nso pending_async is preserved as false and this transaction gets queued on proc-\u003etodo. That might be a nice simplification.\n\nI was a little nervous about letting node-\u003ehas_async_transaction \u003d\u003d true when the node-\u003elock is dropped if there isn\u0027t actually an async transaction in flight...",
+      "parentUuid": "808a5928_0fc3ed4a",
+      "range": {
+        "startLine": 2971,
+        "startChar": 3,
+        "endLine": 2972,
+        "endChar": 40
+      },
+      "revId": "2bbcad5d9048ef479f55c79d9c9d346ae6fa507f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
