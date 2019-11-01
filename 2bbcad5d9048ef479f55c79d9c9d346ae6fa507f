@@ -70,6 +70,30 @@
       "revId": "2bbcad5d9048ef479f55c79d9c9d346ae6fa507f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "63645bf4_1d5be308",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2972,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2019-11-01T19:08:33Z",
+      "side": 1,
+      "message": "I could put in a comment stating that we are briefly in a state with no async transaction in flight which hopefully would inform the developer of the \"future code\" (but might not since prio inheritance is not upstream so this won\u0027t be either).\n\nDo you have a preference? I can go either way, so if we both don\u0027t care, let\u0027s go with this version.",
+      "parentUuid": "a08806e5_3823762b",
+      "range": {
+        "startLine": 2971,
+        "startChar": 3,
+        "endLine": 2972,
+        "endChar": 40
+      },
+      "revId": "2bbcad5d9048ef479f55c79d9c9d346ae6fa507f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
