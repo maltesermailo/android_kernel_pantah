@@ -46,6 +46,30 @@
       "revId": "2bbcad5d9048ef479f55c79d9c9d346ae6fa507f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a08806e5_3823762b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2972,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2019-11-01T18:40:14Z",
+      "side": 1,
+      "message": "Ah yeah I didn\u0027t even realize you need to set it to false to make sure this one gets queued to the proc todo. I like the simplification, but I am also nervous about the exact thing you said; as far as I can tell no code would break with this today, but some future code might make assumptions based on it. So I\u0027m also fine leaving it as is.",
+      "parentUuid": "580221e7_2a6fd863",
+      "range": {
+        "startLine": 2971,
+        "startChar": 3,
+        "endLine": 2972,
+        "endChar": 40
+      },
+      "revId": "2bbcad5d9048ef479f55c79d9c9d346ae6fa507f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
