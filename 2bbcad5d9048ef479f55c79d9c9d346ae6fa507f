@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "808a5928_0fc3ed4a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2972,
+      "author": {
+        "id": 1013030
+      },
+      "writtenOn": "2019-11-01T10:22:47Z",
+      "side": 1,
+      "message": "I think this is the safest approach.\n\nI had been wondering whether we could leave has_async_transaction set to true after we selected the thread; if another transaction to the node comes in, it would be added to node-\u003easync_todo, and would still automatically be picked up. This would save you the more complex logic in L2940-L2957 above. \n\nBut, I haven\u0027t totally convinced myself this is safe. There was always some period in time where node-\u003ehas_async_transaction \u003d true without there being any work on the workqueue for it; but previously, that would only be while holding the node lock, and now we drop the node lock in-between.\n\nIf you agree then I think your CL as is is the safest way to go.",
+      "range": {
+        "startLine": 2971,
+        "startChar": 3,
+        "endLine": 2972,
+        "endChar": 40
+      },
+      "revId": "2bbcad5d9048ef479f55c79d9c9d346ae6fa507f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
