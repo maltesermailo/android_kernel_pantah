@@ -8202,6 +8202,11 @@ static int sctp_get_port_local(struct sock *sk, union sctp_addr *addr)
 		 */
 		snum = rover;
 	} else {
+		if (inet_is_unbindable_port(sock_net(sk), snum)) {
+			ret = 1;
+			goto fail;
+		}
+
 		/* We are given an specific port number; we verify
 		 * that it is not being used. If it is used, we will
 		 * exahust the search in the hash list corresponding

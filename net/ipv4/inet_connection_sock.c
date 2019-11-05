@@ -304,6 +304,10 @@ int inet_csk_get_port(struct sock *sk, unsigned short snum)
 			goto tb_not_found;
 		goto success;
 	}
+
+	if (inet_is_unbindable_port(net, port))
+		return ret;
+
 	head = &hinfo->bhash[inet_bhashfn(net, port,
 					  hinfo->bhash_size)];
 	spin_lock_bh(&head->lock);
