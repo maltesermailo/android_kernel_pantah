@@ -423,13 +423,18 @@ static void reset_bdev(struct zram *zram)
 static ssize_t backing_dev_show(struct device *dev,
 		struct device_attribute *attr, char *buf)
 {
+	struct file *file;
 	struct zram *zram = dev_to_zram(dev);
-	struct file *file = zram->backing_dev;
 	char *p;
 	ssize_t ret;
 
 	down_read(&zram->init_lock);
+<<<<<<< HEAD   (fd8c49 UPSTREAM: scsi: ufs: override auto suspend tunables for ufs)
 	if (!zram->backing_dev) {
+=======
+	file = zram->backing_dev;
+	if (!file) {
+>>>>>>> BRANCH (5ee935 Linux 4.19.82)
 		memcpy(buf, "none\n", 5);
 		up_read(&zram->init_lock);
 		return 5;
