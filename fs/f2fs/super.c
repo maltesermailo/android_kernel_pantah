@@ -2139,6 +2139,7 @@ void f2fs_quota_off_umount(struct super_block *sb)
 	 * put_super already dropped it.
 	 */
 	sync_filesystem(sb);
+<<<<<<< HEAD   (2b2bb0 ANDROID: don't enable TOOLS_SUPPORT_RELR in all{mod,yes}conf)
 }
 
 static void f2fs_truncate_quota_inode_pages(struct super_block *sb)
@@ -2151,6 +2152,8 @@ static void f2fs_truncate_quota_inode_pages(struct super_block *sb)
 			continue;
 		f2fs_inode_synced(dqopt->files[type]);
 	}
+=======
+>>>>>>> BRANCH (c9fda4 Linux 4.14.152)
 }
 
 static int f2fs_dquot_commit(struct dquot *dquot)

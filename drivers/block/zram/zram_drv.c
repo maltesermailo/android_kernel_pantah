@@ -422,13 +422,18 @@ static void reset_bdev(struct zram *zram)
 static ssize_t backing_dev_show(struct device *dev,
 		struct device_attribute *attr, char *buf)
 {
+	struct file *file;
 	struct zram *zram = dev_to_zram(dev);
-	struct file *file = zram->backing_dev;
 	char *p;
 	ssize_t ret;
 
 	down_read(&zram->init_lock);
+<<<<<<< HEAD   (2b2bb0 ANDROID: don't enable TOOLS_SUPPORT_RELR in all{mod,yes}conf)
 	if (!zram->backing_dev) {
+=======
+	file = zram->backing_dev;
+	if (!file) {
+>>>>>>> BRANCH (c9fda4 Linux 4.14.152)
 		memcpy(buf, "none\n", 5);
 		up_read(&zram->init_lock);
 		return 5;
