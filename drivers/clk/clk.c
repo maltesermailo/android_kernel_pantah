@@ -1187,45 +1187,62 @@ static void clk_core_disable_unprepare(struct clk_core *core)
 	clk_core_unprepare_lock(core);
 }
 
-static void clk_unprepare_unused_subtree(struct clk_core *core)
+static int clk_unprepare_unused_subtree(struct clk_core *core, struct device *dev)
 {
 	struct clk_core *child;
+	int ret = 0;
 
 	lockdep_assert_held(&prepare_lock);
 
 	hlist_for_each_entry(child, &core->children, child_node)
-		clk_unprepare_unused_subtree(child);
+		if (clk_unprepare_unused_subtree(child, dev))
+			ret = -EBUSY;
 
 	if (core->prepare_count)
-		return;
+		return 0;
 
 	if (core->flags & CLK_IGNORE_UNUSED)
-		return;
+		return 0;
 
 	if (clk_pm_runtime_get(core))
-		return;
+		return 0;
 
-	if (clk_core_is_prepared(core)) {
-		trace_clk_unprepare(core);
-		if (core->ops->unprepare_unused)
-			core->ops->unprepare_unused(core->hw);
-		else if (core->ops->unprepare)
-			core->ops->unprepare(core->hw);
-		trace_clk_unprepare_complete(core);
+	if (!clk_core_is_prepared(core))
+		goto out;
+
+	/*
+	 * If this clock belongs to a clock provider that has sync state
+	 * support, don't disable it unless explicitly called for the clock
+	 * provider. If any of the children are on, don't disable either.
+	 */
+	if ((dev_has_sync_state(core->dev) && core->dev != dev) || ret) {
+		ret = -EBUSY;
+		goto out;
 	}
 
+	trace_clk_unprepare(core);
+	if (core->ops->unprepare_unused)
+		core->ops->unprepare_unused(core->hw);
+	else if (core->ops->unprepare)
+		core->ops->unprepare(core->hw);
+	trace_clk_unprepare_complete(core);
+
+out:
 	clk_pm_runtime_put(core);
+	return ret;
 }
 
-static void clk_disable_unused_subtree(struct clk_core *core)
+static int clk_disable_unused_subtree(struct clk_core *core, struct device *dev)
 {
 	struct clk_core *child;
 	unsigned long flags;
+	int ret = 0;
 
 	lockdep_assert_held(&prepare_lock);
 
 	hlist_for_each_entry(child, &core->children, child_node)
-		clk_disable_unused_subtree(child);
+		if (clk_disable_unused_subtree(child, dev))
+			ret = -EBUSY;
 
 	if (core->flags & CLK_OPS_PARENT_ENABLE)
 		clk_core_prepare_enable(core->parent);
@@ -1241,19 +1258,30 @@ static void clk_disable_unused_subtree(struct clk_core *core)
 	if (core->flags & CLK_IGNORE_UNUSED)
 		goto unlock_out;
 
+	if (!clk_core_is_enabled(core))
+		goto unlock_out;
+
+	/*
+	 * If this clock belongs to a clock provider that has sync state
+	 * support, don't disable it unless explicitly called for the clock
+	 * provider. If any of the children are on, don't disable either.
+	 */
+	if ((dev_has_sync_state(core->dev) && core->dev != dev) || ret) {
+		ret = -EBUSY;
+		goto unlock_out;
+	}
+
 	/*
 	 * some gate clocks have special needs during the disable-unused
 	 * sequence.  call .disable_unused if available, otherwise fall
 	 * back to .disable
 	 */
-	if (clk_core_is_enabled(core)) {
-		trace_clk_disable(core);
-		if (core->ops->disable_unused)
-			core->ops->disable_unused(core->hw);
-		else if (core->ops->disable)
-			core->ops->disable(core->hw);
-		trace_clk_disable_complete(core);
-	}
+	trace_clk_disable(core);
+	if (core->ops->disable_unused)
+		core->ops->disable_unused(core->hw);
+	else if (core->ops->disable)
+		core->ops->disable(core->hw);
+	trace_clk_disable_complete(core);
 
 unlock_out:
 	clk_enable_unlock(flags);
@@ -1261,6 +1289,8 @@ unlock_out:
 unprepare_out:
 	if (core->flags & CLK_OPS_PARENT_ENABLE)
 		clk_core_disable_unprepare(core->parent);
+
+	return ret;
 }
 
 static bool clk_ignore_unused;
@@ -1271,7 +1301,7 @@ static int __init clk_ignore_unused_setup(char *__unused)
 }
 __setup("clk_ignore_unused", clk_ignore_unused_setup);
 
-static int clk_disable_unused(void)
+int clk_sync_state(struct device *dev)
 {
 	struct clk_core *core;
 
@@ -1283,19 +1313,26 @@ static int clk_disable_unused(void)
 	clk_prepare_lock();
 
 	hlist_for_each_entry(core, &clk_root_list, child_node)
-		clk_disable_unused_subtree(core);
+		clk_disable_unused_subtree(core, dev);
 
 	hlist_for_each_entry(core, &clk_orphan_list, child_node)
-		clk_disable_unused_subtree(core);
+		clk_disable_unused_subtree(core, dev);
 
 	hlist_for_each_entry(core, &clk_root_list, child_node)
-		clk_unprepare_unused_subtree(core);
+		clk_unprepare_unused_subtree(core, dev);
 
 	hlist_for_each_entry(core, &clk_orphan_list, child_node)
-		clk_unprepare_unused_subtree(core);
+		clk_unprepare_unused_subtree(core, dev);
 
 	clk_prepare_unlock();
 
+	return 0;
+}
+EXPORT_SYMBOL_GPL(clk_sync_state);
+
+static int clk_disable_unused(void)
+{
+	clk_sync_state(NULL);
 	return 0;
 }
 late_initcall_sync(clk_disable_unused);
