@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9f854352_2eb4d004",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2019-11-08T06:22:10Z",
+      "side": 1,
+      "message": "While I think this is sufficient to make the device not crash on boot, if we do it this way, the kernel will still allocate some memory in ufshcd_hba_init_crypto_spec (in ufshcd-crypto.c) which will go unused. I think we should instead change ufshcd_hba_init_crypto_spec to check for the quirk, and return -ENODEV instead, like: \n\n- if (!(hba-\u003ecapabilities \u0026 MASK_CRYPTO_SUPPORT)) {\n+ if (!(hba-\u003ecapabilities \u0026 MASK_CRYPTO_SUPPORT) ||\n+     (hba-\u003equirks \u0026 UFSHCI_QUIRK_BROKEN_CRYPTO)) {\n\terr \u003d -ENODEV;\n\tgoto out;\n}\n\nThen no extra memory will be allocated, and we\u0027ll also no longer have to change ufshcd_hba_is_crypto_supported.\n\nThere was a separate bug in the way UFS initialization worked if inline crypto support was not present, which I\u0027ve sent out a CL to fix at https://android-review.googlesource.com/c/kernel/common/+/1161737. The change that I\u0027m suggesting above depends on that CL.",
+      "revId": "72c076f9f9908e8a3a8820634c600196d87e5538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
