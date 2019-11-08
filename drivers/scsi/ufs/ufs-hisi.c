@@ -478,6 +478,10 @@ static int ufs_hisi_init_common(struct ufs_hba *hba)
 	if (!host)
 		return -ENOMEM;
 
+
+	/* This driver doesn't seem to support inline crypto */
+	hba->quirks |= UFSHCI_QUIRK_BROKEN_CRYPTO;
+
 	host->hba = hba;
 	ufshcd_set_variant(hba, host);
 
