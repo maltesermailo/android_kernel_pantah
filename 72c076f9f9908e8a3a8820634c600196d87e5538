@@ -16,6 +16,70 @@
       "revId": "72c076f9f9908e8a3a8820634c600196d87e5538",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "090f7556_b5de06d8",
+        "filename": "drivers/scsi/ufs/ufshcd-crypto.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-08T23:44:39Z",
+      "side": 1,
+      "message": "I agree with Satya; the quirk bit should be checked in ufshcd_hba_init_crypto_spec().",
+      "parentUuid": "9f854352_2eb4d004",
+      "revId": "72c076f9f9908e8a3a8820634c600196d87e5538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "af3f5bfa_5b770539",
+        "filename": "drivers/scsi/ufs/ufshcd.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-08T23:44:39Z",
+      "side": 1,
+      "message": "I think this should be more specific, like:\n\n\"This quirk needs to be enabled if the host controller advertises inline encryption support but it doesn\u0027t work correctly.\"",
+      "range": {
+        "startLine": 676,
+        "startChar": 0,
+        "endLine": 677,
+        "endChar": 29
+      },
+      "revId": "72c076f9f9908e8a3a8820634c600196d87e5538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4a5fd77b_1c912253",
+        "filename": "drivers/scsi/ufs/ufshcd.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-08T23:44:39Z",
+      "side": 1,
+      "message": "I get the impression it\u0027s supposed to be UFSHCD_*, and then people started using UFSHCI_* by accident when adding new flags.  I\u0027d probably go with UFSHCD...",
+      "range": {
+        "startLine": 678,
+        "startChar": 4,
+        "endLine": 678,
+        "endChar": 44
+      },
+      "revId": "72c076f9f9908e8a3a8820634c600196d87e5538",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
