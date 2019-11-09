@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bdf4c043_8f171845",
+        "filename": "drivers/scsi/ufs/ufs-hisi.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-09T00:07:07Z",
+      "side": 1,
+      "message": "Explanations in commit messages can easily be lost, and we\u0027ll be re-working the inline encryption patch series for the next upstream proposal which might involve squashing or re-organizing patches.  Can you consider also adding a code comment summarizing the issue on this hardware, like:\n\n\n        /*\n         * Inline crypto is currently broken with ufs-hisi because the keyslots\n         * overlap with the vendor-specific SYS CTRL registers -- and even if\n         * software uses only non-overlapping keyslots, the kernel crashes when\n         * programming a key or a UFS error occurs on the first encrypted I/O.\n         */",
+      "range": {
+        "startLine": 482,
+        "startChar": 1,
+        "endLine": 482,
+        "endChar": 56
+      },
+      "revId": "b3f94fc3cd188ff1780673b348f3ad9bb9b666aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
