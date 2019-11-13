@@ -150,5 +150,34 @@ config FW_LOADER_USER_HELPER_FALLBACK
 
 	  If you are unsure about this, say N here.
 
+<<<<<<< HEAD   (b82fc4 ANDROID: gki_defconfig: removed CONFIG_PM_WAKELOCKS)
+=======
+config FW_LOADER_COMPRESS
+	bool "Enable compressed firmware support"
+	select FW_LOADER_PAGED_BUF
+	select XZ_DEC
+	help
+	  This option enables the support for loading compressed firmware
+	  files. The caller of firmware API receives the decompressed file
+	  content. The compressed file is loaded as a fallback, only after
+	  loading the raw file failed at first.
+
+	  Currently only XZ-compressed files are supported, and they have to
+	  be compressed with either none or crc32 integrity check type (pass
+	  "-C crc32" option to xz command).
+
+config FW_CACHE
+	bool "Enable firmware caching during suspend"
+	depends on PM_SLEEP
+	default y if PM_SLEEP
+	help
+	  Because firmware caching generates uevent messages that are sent
+	  over a netlink socket, it can prevent suspend on many platforms.
+	  It is also not always useful, so on such platforms we have the
+	  option.
+
+	  If unsure, say Y.
+
+>>>>>>> CHANGE (cd403e FROMGIT: firmware_class: make firmware caching configurable)
 endif # FW_LOADER
 endmenu
