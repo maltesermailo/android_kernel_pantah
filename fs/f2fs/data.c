@@ -584,8 +584,12 @@ skip:
 	if (fio->in_list)
 		goto next;
 out:
+<<<<<<< HEAD   (314ab7 Merge 4.19.84 into android-4.19-q)
 	if (is_sbi_flag_set(sbi, SBI_IS_SHUTDOWN) ||
 				f2fs_is_checkpoint_ready(sbi))
+=======
+	if (is_sbi_flag_set(sbi, SBI_IS_SHUTDOWN))
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 		__submit_merged_bio(io);
 	up_write(&io->io_rwsem);
 }
@@ -1350,9 +1354,15 @@ static int get_data_block_dio(struct inode *inode, sector_t iblock,
 			struct buffer_head *bh_result, int create)
 {
 	return __get_data_block(inode, iblock, bh_result, create,
+<<<<<<< HEAD   (314ab7 Merge 4.19.84 into android-4.19-q)
 				F2FS_GET_BLOCK_DIO, NULL,
 				f2fs_rw_hint_to_seg_type(inode->i_write_hint),
 				false);
+=======
+						F2FS_GET_BLOCK_DIO, NULL,
+						f2fs_rw_hint_to_seg_type(
+							inode->i_write_hint));
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 }
 
 static int get_data_block_bmap(struct inode *inode, sector_t iblock,
@@ -2528,7 +2538,11 @@ repeat:
 		}
 	}
 
+<<<<<<< HEAD   (314ab7 Merge 4.19.84 into android-4.19-q)
 	f2fs_wait_on_page_writeback(page, DATA, false, true);
+=======
+	f2fs_wait_on_page_writeback(page, DATA, false);
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 
 	if (len == PAGE_SIZE || PageUptodate(page))
 		return 0;

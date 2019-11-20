@@ -109,6 +109,16 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
 	f2fs_update_time(sbi, REQ_TIME);
 
 	trace_f2fs_vm_page_mkwrite(page, DATA);
+<<<<<<< HEAD   (314ab7 Merge 4.19.84 into android-4.19-q)
+=======
+mapped:
+	/* fill the page */
+	f2fs_wait_on_page_writeback(page, DATA, false);
+
+	/* wait for GCed page writeback via META_MAPPING */
+	f2fs_wait_on_block_writeback(inode, dn.data_blkaddr);
+
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 out_sem:
 	up_read(&F2FS_I(inode)->i_mmap_sem);
 
@@ -2697,8 +2707,11 @@ static int f2fs_ioc_setproject(struct file *filp, __u32 projid)
 	F2FS_I(inode)->i_projid = kprojid;
 	inode->i_ctime = current_time(inode);
 	f2fs_mark_inode_dirty_sync(inode, true);
+<<<<<<< HEAD   (314ab7 Merge 4.19.84 into android-4.19-q)
 out_unlock:
 	f2fs_unlock_op(sbi);
+=======
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 	return err;
 }
 #else
