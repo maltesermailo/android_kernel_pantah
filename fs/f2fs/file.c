@@ -118,6 +118,16 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
 	f2fs_update_time(sbi, REQ_TIME);
 
 	trace_f2fs_vm_page_mkwrite(page, DATA);
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
+=======
+mapped:
+	/* fill the page */
+	f2fs_wait_on_page_writeback(page, DATA, false);
+
+	/* wait for GCed page writeback via META_MAPPING */
+	f2fs_wait_on_block_writeback(inode, dn.data_blkaddr);
+
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 out_sem:
 	up_read(&F2FS_I(inode)->i_mmap_sem);
 
@@ -2877,8 +2887,11 @@ static int f2fs_ioc_setproject(struct file *filp, __u32 projid)
 	F2FS_I(inode)->i_projid = kprojid;
 	inode->i_ctime = current_time(inode);
 	f2fs_mark_inode_dirty_sync(inode, true);
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 out_unlock:
 	f2fs_unlock_op(sbi);
+=======
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 	return err;
 }
 #else
@@ -2971,6 +2984,30 @@ static int f2fs_ioc_fsgetxattr(struct file *filp, unsigned long arg)
 	return 0;
 }
 
+static int f2fs_ioctl_check_project(struct inode *inode, struct fsxattr *fa)
+{
+	/*
+	 * Project Quota ID state is only allowed to change from within the init
+	 * namespace. Enforce that restriction only if we are trying to change
+	 * the quota ID state. Everything else is allowed in user namespaces.
+	 */
+	if (current_user_ns() == &init_user_ns)
+		return 0;
+
+	if (__kprojid_val(F2FS_I(inode)->i_projid) != fa->fsx_projid)
+		return -EINVAL;
+
+	if (F2FS_I(inode)->i_flags & F2FS_PROJINHERIT_FL) {
+		if (!(fa->fsx_xflags & FS_XFLAG_PROJINHERIT))
+			return -EINVAL;
+	} else {
+		if (fa->fsx_xflags & FS_XFLAG_PROJINHERIT)
+			return -EINVAL;
+	}
+
+	return 0;
+}
+
 static int f2fs_ioc_fssetxattr(struct file *filp, unsigned long arg)
 {
 	struct inode *inode = file_inode(filp);
@@ -2997,16 +3034,28 @@ static int f2fs_ioc_fssetxattr(struct file *filp, unsigned long arg)
 		return err;
 
 	inode_lock(inode);
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 
 	f2fs_fill_fsxattr(inode, &old_fa);
 	err = vfs_ioc_fssetxattr_check(inode, &old_fa, &fa);
+=======
+	err = f2fs_ioctl_check_project(inode, &fa);
 	if (err)
 		goto out;
+	flags = (fi->i_flags & ~F2FS_FL_XFLAG_VISIBLE) |
+				(flags & F2FS_FL_XFLAG_VISIBLE);
+	err = __f2fs_ioc_setflags(inode, flags);
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
+	if (err)
+		goto out;
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 
 	err = f2fs_setflags_common(inode, iflags,
 			f2fs_xflags_to_iflags(F2FS_SUPPORTED_XFLAGS));
 	if (err)
 		goto out;
+=======
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 
 	err = f2fs_ioc_setproject(filp, fa.fsx_projid);
 out:

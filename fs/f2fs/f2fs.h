@@ -3131,10 +3131,15 @@ void f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
 			struct f2fs_summary *sum, int type,
 			struct f2fs_io_info *fio, bool add_list);
 void f2fs_wait_on_page_writeback(struct page *page,
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 			enum page_type type, bool ordered, bool locked);
 void f2fs_wait_on_block_writeback(struct inode *inode, block_t blkaddr);
 void f2fs_wait_on_block_writeback_range(struct inode *inode, block_t blkaddr,
 								block_t len);
+=======
+			enum page_type type, bool ordered);
+void f2fs_wait_on_block_writeback(struct inode *inode, block_t blkaddr);
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 void f2fs_write_data_summaries(struct f2fs_sb_info *sbi, block_t start_blk);
 void f2fs_write_node_summaries(struct f2fs_sb_info *sbi, block_t start_blk);
 int f2fs_lookup_journal_in_cursum(struct f2fs_journal *journal, int type,

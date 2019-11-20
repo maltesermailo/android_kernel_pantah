@@ -181,10 +181,14 @@ struct etr_buf {
  * @trigger_cntr: amount of words to store after a trigger.
  * @etr_caps:	Bitmask of capabilities of the TMC ETR, inferred from the
  *		device configuration register (DEVID)
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
  * @idr:	Holds etr_bufs allocated for this ETR.
  * @idr_mutex:	Access serialisation for idr.
  * @sysfs_buf:	SYSFS buffer for ETR.
  * @perf_buf:	PERF buffer for ETR.
+=======
+ * @sysfs_data:	SYSFS buffer for ETR.
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
  */
 struct tmc_drvdata {
 	void __iomem		*base;
@@ -205,10 +209,14 @@ struct tmc_drvdata {
 	enum tmc_mem_intf_width	memwidth;
 	u32			trigger_cntr;
 	u32			etr_caps;
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 	struct idr		idr;
 	struct mutex		idr_mutex;
 	struct etr_buf		*sysfs_buf;
 	struct etr_buf		*perf_buf;
+=======
+	struct etr_buf		*sysfs_buf;
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 };
 
 struct etr_buf_operations {

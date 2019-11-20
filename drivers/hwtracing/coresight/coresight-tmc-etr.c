@@ -940,10 +940,19 @@ static void tmc_sync_etr_buf(struct tmc_drvdata *drvdata)
 	etr_buf->ops->sync(etr_buf, rrp, rwp);
 }
 
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 static void __tmc_etr_enable_hw(struct tmc_drvdata *drvdata)
+=======
+static void tmc_etr_enable_hw(struct tmc_drvdata *drvdata,
+			      struct etr_buf *etr_buf)
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 {
 	u32 axictl, sts;
-	struct etr_buf *etr_buf = drvdata->etr_buf;
+
+	/* Callers should provide an appropriate buffer for use */
+	if (WARN_ON(!etr_buf || drvdata->etr_buf))
+		return;
+	drvdata->etr_buf = etr_buf;
 
 	CS_UNLOCK(drvdata->base);
 
@@ -1074,6 +1083,7 @@ static void tmc_etr_sync_sysfs_buf(struct tmc_drvdata *drvdata)
 		drvdata->sysfs_buf = NULL;
 	} else {
 		tmc_sync_etr_buf(drvdata);
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 		/*
 		 * Insert barrier packets at the beginning, if there was
 		 * an overflow.
@@ -1081,6 +1091,8 @@ static void tmc_etr_sync_sysfs_buf(struct tmc_drvdata *drvdata)
 		if (etr_buf->full)
 			tmc_etr_buf_insert_barrier_packet(etr_buf,
 							  etr_buf->offset);
+=======
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 	}
 }
 
@@ -1107,7 +1119,10 @@ static void tmc_etr_disable_hw(struct tmc_drvdata *drvdata)
 	__tmc_etr_disable_hw(drvdata);
 	/* Disable CATU device if this ETR is connected to one */
 	tmc_etr_disable_catu(drvdata);
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 	coresight_disclaim_device(drvdata->base);
+=======
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 	/* Reset the ETR buf used by hardware */
 	drvdata->etr_buf = NULL;
 }
@@ -1166,11 +1181,16 @@ static int tmc_enable_etr_sink_sysfs(struct coresight_device *csdev)
 		drvdata->sysfs_buf = new_buf;
 	}
 
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 	ret = tmc_etr_enable_hw(drvdata, drvdata->sysfs_buf);
 	if (!ret) {
 		drvdata->mode = CS_MODE_SYSFS;
 		atomic_inc(csdev->refcnt);
 	}
+=======
+	drvdata->mode = CS_MODE_SYSFS;
+	tmc_etr_enable_hw(drvdata, drvdata->sysfs_buf);
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 out:
 	spin_unlock_irqrestore(&drvdata->spinlock, flags);
 
@@ -1686,7 +1706,17 @@ int tmc_read_prepare_etr(struct tmc_drvdata *drvdata)
 		goto out;
 	}
 
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 	/* Disable the TMC if we are trying to read from a running session. */
+=======
+	/* If sysfs_buf is NULL the trace data has been read already */
+	if (!drvdata->sysfs_buf) {
+		ret = -EINVAL;
+		goto out;
+	}
+
+	/* Disable the TMC if we are trying to read from a running session */
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 	if (drvdata->mode == CS_MODE_SYSFS)
 		__tmc_etr_disable_hw(drvdata);
 
@@ -1715,7 +1745,11 @@ int tmc_read_unprepare_etr(struct tmc_drvdata *drvdata)
 		 * buffer. Since the tracer is still enabled drvdata::buf can't
 		 * be NULL.
 		 */
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 		__tmc_etr_enable_hw(drvdata);
+=======
+		tmc_etr_enable_hw(drvdata, drvdata->sysfs_buf);
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 	} else {
 		/*
 		 * The ETR is not tracing and the buffer was just read.

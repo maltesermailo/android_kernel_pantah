@@ -748,8 +748,12 @@ skip:
 	if (fio->in_list)
 		goto next;
 out:
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 	if (is_sbi_flag_set(sbi, SBI_IS_SHUTDOWN) ||
 				!f2fs_is_checkpoint_ready(sbi))
+=======
+	if (is_sbi_flag_set(sbi, SBI_IS_SHUTDOWN))
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 		__submit_merged_bio(io);
 	up_write(&io->io_rwsem);
 }
@@ -1544,9 +1548,15 @@ static int get_data_block_dio(struct inode *inode, sector_t iblock,
 			struct buffer_head *bh_result, int create)
 {
 	return __get_data_block(inode, iblock, bh_result, create,
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 				F2FS_GET_BLOCK_DIO, NULL,
 				f2fs_rw_hint_to_seg_type(inode->i_write_hint),
 				false);
+=======
+						F2FS_GET_BLOCK_DIO, NULL,
+						f2fs_rw_hint_to_seg_type(
+							inode->i_write_hint));
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 }
 
 static int get_data_block_bmap(struct inode *inode, sector_t iblock,
@@ -1909,6 +1919,52 @@ static int f2fs_mpage_readpages(struct address_space *mapping,
 			zero_user_segment(page, 0, PAGE_SIZE);
 			unlock_page(page);
 		}
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
+=======
+
+		/*
+		 * This page will go to BIO.  Do we need to send this
+		 * BIO off first?
+		 */
+		if (bio && (last_block_in_bio != block_nr - 1 ||
+			!__same_bdev(F2FS_I_SB(inode), block_nr, bio))) {
+submit_and_realloc:
+			__submit_bio(F2FS_I_SB(inode), bio, DATA);
+			bio = NULL;
+		}
+		if (bio == NULL) {
+			bio = f2fs_grab_read_bio(inode, block_nr, nr_pages,
+					is_readahead ? REQ_RAHEAD : 0);
+			if (IS_ERR(bio)) {
+				bio = NULL;
+				goto set_error_page;
+			}
+		}
+
+		/*
+		 * If the page is under writeback, we need to wait for
+		 * its completion to see the correct decrypted data.
+		 */
+		f2fs_wait_on_block_writeback(inode, block_nr);
+
+		if (bio_add_page(bio, page, blocksize, 0) < blocksize)
+			goto submit_and_realloc;
+
+		ClearPageError(page);
+		last_block_in_bio = block_nr;
+		goto next_page;
+set_error_page:
+		SetPageError(page);
+		zero_user_segment(page, 0, PAGE_SIZE);
+		unlock_page(page);
+		goto next_page;
+confused:
+		if (bio) {
+			__submit_bio(F2FS_I_SB(inode), bio, DATA);
+			bio = NULL;
+		}
+		unlock_page(page);
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 next_page:
 		if (pages)
 			put_page(page);
@@ -1962,9 +2018,12 @@ static int encrypt_one_page(struct f2fs_io_info *fio)
 
 	/* wait for GCed page writeback via META_MAPPING */
 	f2fs_wait_on_block_writeback(inode, fio->old_blkaddr);
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 
 	if (fscrypt_inode_uses_inline_crypto(inode))
 		return 0;
+=======
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 
 retry_encrypt:
 	fio->encrypted_page = fscrypt_encrypt_pagecache_blocks(fio->page,
@@ -2788,7 +2847,11 @@ repeat:
 		}
 	}
 
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 	f2fs_wait_on_page_writeback(page, DATA, false, true);
+=======
+	f2fs_wait_on_page_writeback(page, DATA, false);
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 
 	if (len == PAGE_SIZE || PageUptodate(page))
 		return 0;

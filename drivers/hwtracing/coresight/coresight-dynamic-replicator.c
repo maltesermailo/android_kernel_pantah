@@ -40,15 +40,52 @@ struct replicator_state {
  * replicator_reset : Reset the replicator configuration to sane values.
  */
 static void replicator_reset(struct replicator_state *drvdata)
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
+=======
 {
 	CS_UNLOCK(drvdata->base);
 
+	writel_relaxed(0xff, drvdata->base + REPLICATOR_IDFILTER0);
+	writel_relaxed(0xff, drvdata->base + REPLICATOR_IDFILTER1);
+
+	CS_LOCK(drvdata->base);
+}
+
+static int replicator_enable(struct coresight_device *csdev, int inport,
+			      int outport)
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
+{
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
+=======
+	u32 reg;
+	struct replicator_state *drvdata = dev_get_drvdata(csdev->dev.parent);
+
+	switch (outport) {
+	case 0:
+		reg = REPLICATOR_IDFILTER0;
+		break;
+	case 1:
+		reg = REPLICATOR_IDFILTER1;
+		break;
+	default:
+		WARN_ON(1);
+		return -EINVAL;
+	}
+
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
+	CS_UNLOCK(drvdata->base);
+
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 	if (!coresight_claim_device_unlocked(drvdata->base)) {
 		writel_relaxed(0xff, drvdata->base + REPLICATOR_IDFILTER0);
 		writel_relaxed(0xff, drvdata->base + REPLICATOR_IDFILTER1);
 		coresight_disclaim_device_unlocked(drvdata->base);
 	}
+=======
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 
+	/* Ensure that the outport is enabled. */
+	writel_relaxed(0x00, drvdata->base + reg);
 	CS_LOCK(drvdata->base);
 }
 
@@ -138,19 +175,45 @@ static void dynamic_replicator_disable(struct replicator_state *drvdata,
 static void replicator_disable(struct coresight_device *csdev, int inport,
 				int outport)
 {
+	u32 reg;
 	struct replicator_state *drvdata = dev_get_drvdata(csdev->dev.parent);
 	unsigned long flags;
 	bool last_disable = false;
 
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 	spin_lock_irqsave(&drvdata->spinlock, flags);
 	if (atomic_dec_return(&csdev->refcnt[outport]) == 0) {
 		dynamic_replicator_disable(drvdata, inport, outport);
 		last_disable = true;
 	}
 	spin_unlock_irqrestore(&drvdata->spinlock, flags);
+=======
+	switch (outport) {
+	case 0:
+		reg = REPLICATOR_IDFILTER0;
+		break;
+	case 1:
+		reg = REPLICATOR_IDFILTER1;
+		break;
+	default:
+		WARN_ON(1);
+		return;
+	}
 
+	CS_UNLOCK(drvdata->base);
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
+
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 	if (last_disable)
 		dev_dbg(drvdata->dev, "REPLICATOR disabled\n");
+=======
+	/* disable the flow of ATB data through port */
+	writel_relaxed(0xff, drvdata->base + reg);
+
+	CS_LOCK(drvdata->base);
+
+	dev_info(drvdata->dev, "REPLICATOR disabled\n");
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 }
 
 static const struct coresight_ops_link replicator_link_ops = {

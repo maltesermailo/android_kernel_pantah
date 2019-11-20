@@ -3397,7 +3397,11 @@ void f2fs_wait_on_block_writeback(struct inode *inode, block_t blkaddr)
 	if (!f2fs_post_read_required(inode))
 		return;
 
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 	if (!__is_valid_data_blkaddr(blkaddr))
+=======
+	if (!is_valid_data_blkaddr(sbi, blkaddr))
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 		return;
 
 	cpage = find_lock_page(META_MAPPING(sbi), blkaddr);

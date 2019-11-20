@@ -431,10 +431,20 @@ static int crng_init = 0;
 #define crng_ready() (likely(crng_init > 1))
 static int crng_init_cnt = 0;
 static unsigned long crng_global_init_time = 0;
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 #define CRNG_INIT_CNT_THRESH (2*CHACHA_KEY_SIZE)
 static void _extract_crng(struct crng_state *crng, __u8 out[CHACHA_BLOCK_SIZE]);
+=======
+#define CRNG_INIT_CNT_THRESH (2*CHACHA20_KEY_SIZE)
+static void _extract_crng(struct crng_state *crng,
+			  __u8 out[CHACHA20_BLOCK_SIZE]);
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 static void _crng_backtrack_protect(struct crng_state *crng,
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 				    __u8 tmp[CHACHA_BLOCK_SIZE], int used);
+=======
+				    __u8 tmp[CHACHA20_BLOCK_SIZE], int used);
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 static void process_random_ready_list(void);
 static void _get_random_bytes(void *buf, int nbytes);
 
@@ -928,7 +938,11 @@ static void crng_reseed(struct crng_state *crng, struct entropy_store *r)
 	unsigned long	flags;
 	int		i, num;
 	union {
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 		__u8	block[CHACHA_BLOCK_SIZE];
+=======
+		__u8	block[CHACHA20_BLOCK_SIZE];
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 		__u32	key[8];
 	} buf;
 
@@ -975,7 +989,11 @@ static void crng_reseed(struct crng_state *crng, struct entropy_store *r)
 }
 
 static void _extract_crng(struct crng_state *crng,
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 			  __u8 out[CHACHA_BLOCK_SIZE])
+=======
+			  __u8 out[CHACHA20_BLOCK_SIZE])
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 {
 	unsigned long v, flags;
 
@@ -992,7 +1010,11 @@ static void _extract_crng(struct crng_state *crng,
 	spin_unlock_irqrestore(&crng->lock, flags);
 }
 
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 static void extract_crng(__u8 out[CHACHA_BLOCK_SIZE])
+=======
+static void extract_crng(__u8 out[CHACHA20_BLOCK_SIZE])
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 {
 	struct crng_state *crng = NULL;
 
@@ -1010,7 +1032,11 @@ static void extract_crng(__u8 out[CHACHA_BLOCK_SIZE])
  * enough) to mutate the CRNG key to provide backtracking protection.
  */
 static void _crng_backtrack_protect(struct crng_state *crng,
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 				    __u8 tmp[CHACHA_BLOCK_SIZE], int used)
+=======
+				    __u8 tmp[CHACHA20_BLOCK_SIZE], int used)
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 {
 	unsigned long	flags;
 	__u32		*s, *d;
@@ -1029,7 +1055,11 @@ static void _crng_backtrack_protect(struct crng_state *crng,
 	spin_unlock_irqrestore(&crng->lock, flags);
 }
 
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 static void crng_backtrack_protect(__u8 tmp[CHACHA_BLOCK_SIZE], int used)
+=======
+static void crng_backtrack_protect(__u8 tmp[CHACHA20_BLOCK_SIZE], int used)
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 {
 	struct crng_state *crng = NULL;
 
@@ -1044,8 +1074,13 @@ static void crng_backtrack_protect(__u8 tmp[CHACHA_BLOCK_SIZE], int used)
 
 static ssize_t extract_crng_user(void __user *buf, size_t nbytes)
 {
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 	ssize_t ret = 0, i = CHACHA_BLOCK_SIZE;
 	__u8 tmp[CHACHA_BLOCK_SIZE] __aligned(4);
+=======
+	ssize_t ret = 0, i = CHACHA20_BLOCK_SIZE;
+	__u8 tmp[CHACHA20_BLOCK_SIZE] __aligned(4);
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 	int large_request = (nbytes > 256);
 
 	while (nbytes) {
@@ -1624,7 +1659,11 @@ static void _warn_unseeded_randomness(const char *func_name, void *caller,
  */
 static void _get_random_bytes(void *buf, int nbytes)
 {
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 	__u8 tmp[CHACHA_BLOCK_SIZE] __aligned(4);
+=======
+	__u8 tmp[CHACHA20_BLOCK_SIZE] __aligned(4);
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 
 	trace_get_random_bytes(nbytes, _RET_IP_);
 

@@ -225,8 +225,17 @@ static int coresight_enable_sink(struct coresight_device *csdev,
 	 * We need to make sure the "new" session is compatible with the
 	 * existing "mode" of operation.
 	 */
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 	if (!sink_ops(csdev)->enable)
 		return -EINVAL;
+=======
+	if (sink_ops(csdev)->enable) {
+		ret = sink_ops(csdev)->enable(csdev, mode);
+		if (ret)
+			return ret;
+		csdev->enable = true;
+	}
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 
 	ret = sink_ops(csdev)->enable(csdev, mode, data);
 	if (ret)
@@ -434,7 +443,11 @@ int coresight_enable_path(struct list_head *path, u32 mode, void *sink_data)
 
 		switch (type) {
 		case CORESIGHT_DEV_TYPE_SINK:
+<<<<<<< HEAD   (0f2b4e FROMLIST: vsprintf: Inline call to ptr_to_hashval)
 			ret = coresight_enable_sink(csdev, mode, sink_data);
+=======
+			ret = coresight_enable_sink(csdev, mode);
+>>>>>>> BRANCH (c63ee2 Linux 4.19.85)
 			/*
 			 * Sink is the first component turned on. If we
 			 * failed to enable the sink, there are no components
