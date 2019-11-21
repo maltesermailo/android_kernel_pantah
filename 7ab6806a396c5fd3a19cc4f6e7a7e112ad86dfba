@@ -1,0 +1,216 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5864752d_e31359d1",
+        "filename": "fs/crypto/policy.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-21T22:31:07Z",
+      "side": 1,
+      "message": "Should add blank line before here, to be consistent with the code above",
+      "revId": "7ab6806a396c5fd3a19cc4f6e7a7e112ad86dfba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "81295286_dc2b0cd2",
+        "filename": "fs/crypto/policy.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-21T22:31:07Z",
+      "side": 1,
+      "message": "This should have a kerneldoc comment",
+      "revId": "7ab6806a396c5fd3a19cc4f6e7a7e112ad86dfba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a774a404_42002619",
+        "filename": "fs/crypto/policy.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-21T22:31:07Z",
+      "side": 1,
+      "message": "Should use \u0027const struct inode\u0027",
+      "range": {
+        "startLine": 539,
+        "startChar": 33,
+        "endLine": 539,
+        "endChar": 45
+      },
+      "revId": "7ab6806a396c5fd3a19cc4f6e7a7e112ad86dfba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97f8536b_96ad9822",
+        "filename": "fs/crypto/policy.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-21T22:31:07Z",
+      "side": 1,
+      "message": "It\u0027s probably fine in practice that if the directory is encrypted, we\u0027ll only allow setting the casefold flag if the encryption key is available.  But, keep in mind that this is an implementation shortcut and is not strictly required; we *could* call -\u003eget_context() to read the encryption xattr.\n\nIn any case, this case is not obvious and could use a comment.",
+      "range": {
+        "startLine": 543,
+        "startChar": 0,
+        "endLine": 545,
+        "endChar": 15
+      },
+      "revId": "7ab6806a396c5fd3a19cc4f6e7a7e112ad86dfba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8c35e783_761cdbb9",
+        "filename": "fs/crypto/policy.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-21T22:31:07Z",
+      "side": 1,
+      "message": "This needs to be FSCRYPT_POLICY_*, not FSCRYPT_CONTEXT_*.\n\nAlso, this whole switch statement  can be replaced with just\n\n    return ci-\u003eci_policy.version \u003d\u003d FSCRYPT_POLICY_V2;",
+      "range": {
+        "startLine": 551,
+        "startChar": 6,
+        "endLine": 551,
+        "endChar": 24
+      },
+      "revId": "7ab6806a396c5fd3a19cc4f6e7a7e112ad86dfba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca131f6a_f1794840",
+        "filename": "fs/inode.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2248,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-21T22:31:07Z",
+      "side": 1,
+      "message": "Should have a comment here",
+      "revId": "7ab6806a396c5fd3a19cc4f6e7a7e112ad86dfba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5584740_4b174973",
+        "filename": "fs/inode.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2249,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-21T22:31:07Z",
+      "side": 1,
+      "message": "IMO, \u0027(flags \u0026 ~oldflags \u0026 FS_CASEFOLD_FL)\u0027 would be slightly easier to read.",
+      "range": {
+        "startLine": 2249,
+        "startChar": 28,
+        "endLine": 2249,
+        "endChar": 64
+      },
+      "revId": "7ab6806a396c5fd3a19cc4f6e7a7e112ad86dfba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "12f77a02_d72410a6",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-21T22:31:07Z",
+      "side": 1,
+      "message": "We should include parameter names in new function declarations, as this is recommended practice.",
+      "range": {
+        "startLine": 131,
+        "startChar": 53,
+        "endLine": 131,
+        "endChar": 54
+      },
+      "revId": "7ab6806a396c5fd3a19cc4f6e7a7e112ad86dfba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e53c630_4d8d4260",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-21T22:31:07Z",
+      "side": 1,
+      "message": "inode",
+      "range": {
+        "startLine": 368,
+        "startChar": 60,
+        "endLine": 368,
+        "endChar": 66
+      },
+      "revId": "7ab6806a396c5fd3a19cc4f6e7a7e112ad86dfba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed37489e_8f8f886e",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-21T22:31:07Z",
+      "side": 1,
+      "message": "This should use bool, not int.  (And in fact the CONFIG_FS_ENCRYPTION\u003dy version already does.)",
+      "range": {
+        "startLine": 370,
+        "startChar": 1,
+        "endLine": 370,
+        "endChar": 10
+      },
+      "revId": "7ab6806a396c5fd3a19cc4f6e7a7e112ad86dfba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
