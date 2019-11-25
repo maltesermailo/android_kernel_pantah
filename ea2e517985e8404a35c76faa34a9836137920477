@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "defc5e47_4a120bd5",
+        "filename": "fs/crypto/policy.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T19:19:09Z",
+      "side": 1,
+      "message": "This comment isn\u0027t as helpful as it could be because it doesn\u0027t explain *why* this restriction exists.  IIUC, it\u0027s only to simplify the implementation.\n\nAlternatively, this quirk could be avoided by using -\u003eget_context(), rather than rely on the fscrypt_info.",
+      "range": {
+        "startLine": 545,
+        "startChar": 0,
+        "endLine": 546,
+        "endChar": 31
+      },
+      "revId": "ea2e517985e8404a35c76faa34a9836137920477",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "befdd145_b0ef5f5f",
+        "filename": "fs/crypto/policy.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2019-11-25T19:19:09Z",
+      "side": 1,
+      "message": "This is only called from fs/inode.c, which is always built-in, so this EXPORT_SYMBOL() is unneeded.",
+      "revId": "ea2e517985e8404a35c76faa34a9836137920477",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
