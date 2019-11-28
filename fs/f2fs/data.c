@@ -2781,6 +2781,13 @@ void f2fs_invalidate_page(struct page *page, unsigned int offset,
 	}
 
 	clear_cold_data(page);
+<<<<<<< HEAD   (13ff51 Merge 4.9.203 into android-4.9-q)
+=======
+
+	/* This is atomic written page, keep Private */
+	if (IS_ATOMIC_WRITTEN_PAGE(page))
+		return;
+>>>>>>> BRANCH (95e55e Linux 4.9.204)
 
 	if (IS_ATOMIC_WRITTEN_PAGE(page))
 		return f2fs_drop_inmem_page(inode, page);
@@ -2799,7 +2806,12 @@ int f2fs_release_page(struct page *page, gfp_t wait)
 		return 0;
 
 	clear_cold_data(page);
+<<<<<<< HEAD   (13ff51 Merge 4.9.203 into android-4.9-q)
 	f2fs_clear_page_private(page);
+=======
+	set_page_private(page, 0);
+	ClearPagePrivate(page);
+>>>>>>> BRANCH (95e55e Linux 4.9.204)
 	return 1;
 }
 
