@@ -279,7 +279,12 @@ next:
 			ClearPageUptodate(page);
 			clear_cold_data(page);
 		}
+<<<<<<< HEAD   (d34321 Merge 4.14.156 into android-4.14-q)
 		f2fs_clear_page_private(page);
+=======
+		set_page_private(page, 0);
+		ClearPagePrivate(page);
+>>>>>>> BRANCH (fbc5fe Linux 4.14.157)
 		f2fs_put_page(page, 1);
 
 		list_del(&cur->list);
