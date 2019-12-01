@@ -273,7 +273,12 @@ next:
 			ClearPageUptodate(page);
 			clear_cold_data(page);
 		}
+<<<<<<< HEAD   (714ada ANDROID: removed CONFIG_PM_WAKELOCKS)
 		f2fs_clear_page_private(page);
+=======
+		set_page_private(page, 0);
+		ClearPagePrivate(page);
+>>>>>>> BRANCH (fbc5fe Linux 4.14.157)
 		f2fs_put_page(page, 1);
 
 		list_del(&cur->list);
