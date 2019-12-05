@@ -3563,7 +3563,7 @@ extern const struct fsverity_operations f2fs_verityops;
 /*
  * crypto support
  */
-static inline bool f2fs_encrypted_file(struct inode *inode)
+static inline bool f2fs_encrypted_file(const struct inode *inode)
 {
 	return IS_ENCRYPTED(inode) && S_ISREG(inode->i_mode);
 }

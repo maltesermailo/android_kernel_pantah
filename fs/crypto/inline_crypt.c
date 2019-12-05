@@ -253,6 +253,8 @@ static inline u64 fscrypt_generate_dun(const struct fscrypt_info *ci,
  *
  * The encryption context will be freed automatically when the bio is freed.
  *
+ * This function also handles setting REQ_SKIP_DM_DEFAULT_KEY if needed.
+ *
  * Return: 0 on success, -errno on failure.  If __GFP_NOFAIL is specified, this
  *	   is guaranteed to succeed.
  */
@@ -261,6 +263,9 @@ int fscrypt_set_bio_crypt_ctx(struct bio *bio, const struct inode *inode,
 {
 	const struct fscrypt_info *ci = inode->i_crypt_info;
 	u64 dun;
+
+	if (IS_ENCRYPTED(inode) && S_ISREG(inode->i_mode))
+		bio->bi_opf |= REQ_SKIP_DM_DEFAULT_KEY;
 
 	if (!fscrypt_inode_uses_inline_crypto(inode))
 		return 0;

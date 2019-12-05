@@ -338,6 +338,9 @@ enum req_flag_bits {
 
 	__REQ_HIPRI,
 
+	/* bio is for encrypted file contents, so skip dm-default-key. */
+	__REQ_SKIP_DM_DEFAULT_KEY,
+
 	/* for driver use */
 	__REQ_DRV,
 	__REQ_SWAP,		/* swapping request. */
@@ -363,6 +366,8 @@ enum req_flag_bits {
 
 #define REQ_NOUNMAP		(1ULL << __REQ_NOUNMAP)
 #define REQ_HIPRI		(1ULL << __REQ_HIPRI)
+
+#define REQ_SKIP_DM_DEFAULT_KEY	(1ULL << __REQ_SKIP_DM_DEFAULT_KEY)
 
 #define REQ_DRV			(1ULL << __REQ_DRV)
 #define REQ_SWAP		(1ULL << __REQ_SWAP)
