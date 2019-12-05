@@ -5,8 +5,9 @@
 
 #include <nvhe/pkvm.h>
 #include <nvhe/spinlock.h>
+#include "../debug-pl011.h"
 
-static void (*__hyp_putc)(char c);
+static void (*__hyp_putc)(char c) = _hyp_putc;
 
 static inline void __hyp_putx4(unsigned int x)
 {
