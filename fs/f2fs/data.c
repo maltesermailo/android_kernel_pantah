@@ -316,8 +316,11 @@ static int f2fs_set_bio_crypt_ctx(struct bio *bio, const struct inode *inode,
 	 * The f2fs garbage collector sets ->encrypted_page when it wants to
 	 * read/write raw data without encryption.
 	 */
-	if (fio && fio->encrypted_page)
+	if (fio && fio->encrypted_page) {
+		if (fscrypt_inode_should_skip_dm_default_key(inode))
+			bio_set_skip_dm_default_key(bio);
 		return 0;
+	}
 
 	return fscrypt_set_bio_crypt_ctx(bio, inode, first_idx, gfp_mask);
 }
@@ -331,7 +334,8 @@ static bool f2fs_crypt_mergeable_bio(struct bio *bio, const struct inode *inode,
 	 * read/write raw data without encryption.
 	 */
 	if (fio && fio->encrypted_page)
-		return true;
+		return (bio_should_skip_dm_default_key(bio) ==
+			fscrypt_inode_should_skip_dm_default_key(inode));
 
 	return fscrypt_mergeable_bio(bio, inode, next_idx);
 }
