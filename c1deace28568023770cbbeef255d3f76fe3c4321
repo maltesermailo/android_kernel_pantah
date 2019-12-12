@@ -16,6 +16,24 @@
       "revId": "c1deace28568023770cbbeef255d3f76fe3c4321",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "40feb649_31b17bce",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2019-12-12T11:01:40Z",
+      "side": 1,
+      "message": "Thanks for the link about the convention adopted here.\n\nLine 248 is slightly different since there\u0027s the additional sched_feat(SUGOV_RT_MAX_FREQ) check which doesn\u0027t exist in mainline. But otherwise the rest of the code is the same as the upstream version.\n\nI\u0027ll mark it as backport marking the sched_feat() as the only difference.",
+      "parentUuid": "a9f98a1b_fa2fce0d",
+      "revId": "c1deace28568023770cbbeef255d3f76fe3c4321",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
