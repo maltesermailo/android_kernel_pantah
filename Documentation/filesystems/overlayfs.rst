@@ -1,4 +1,5 @@
-<<<<<<< HEAD   (88329c ANDROID: mm/memory.c: export mm_trace_rss_stat)
+.. SPDX-License-Identifier: GPL-2.0
+
 Written by: Neil Brown
 Please see MAINTAINERS file for where to send questions.
 
@@ -103,29 +104,6 @@ Only the lists of names from directories are merged.  Other content
 such as metadata and extended attributes are reported for the upper
 directory only.  These attributes of the lower directory are hidden.
 
-credentials
------------
-
-By default, all access to the upper, lower and work directories is the
-recorded mounter's MAC and DAC credentials.  The incoming accesses are
-checked against the caller's credentials.
-
-In the case where caller MAC or DAC credentials do not overlap, a
-use case available in older versions of the driver, the
-override_creds mount flag can be turned off and help when the use
-pattern has caller with legitimate credentials where the mounter
-does not.  Several unintended side effects will occur though.  The
-caller without certain key capabilities or lower privilege will not
-always be able to delete files or directories, create nodes, or
-search some restricted directories.  The ability to search and read
-a directory entry is spotty as a result of the cache mechanism not
-retesting the credentials because of the assumption, a privileged
-caller can fill cache, then a lower privilege can read the directory
-cache.  The uneven security model where cache, upperdir and workdir
-are opened at privilege, but accessed without creating a form of
-privilege escalation, should only be used with strict understanding
-of the side effects and of the security policies.
-
 whiteouts and opaque directories
 --------------------------------
 
@@ -205,7 +183,7 @@ Kernel config options:
     worried about backward compatibility with kernels that have the redirect_dir
     feature and follow redirects even if turned off.
 
-Module options (can also be changed through /sys/module/overlay/parameters/*):
+Module options (can also be changed through /sys/module/overlay/parameters/):
 
 - "redirect_dir=BOOL":
     See OVERLAY_FS_REDIRECT_DIR kernel config option above.
@@ -287,7 +265,7 @@ top, lower2 the middle and lower3 the bottom layer.
 
 
 Metadata only copy up
---------------------
+---------------------
 
 When metadata only copy up feature is enabled, overlayfs will only copy
 up metadata (as opposed to whole file), when a metadata specific operation
@@ -310,10 +288,10 @@ pointed by REDIRECT. This should not be possible on local system as setting
 "trusted." xattrs will require CAP_SYS_ADMIN. But it should be possible
 for untrusted layers like from a pen drive.
 
-Note: redirect_dir={off|nofollow|follow(*)} conflicts with metacopy=on, and
+Note: redirect_dir={off|nofollow|follow[*]} conflicts with metacopy=on, and
 results in an error.
 
-(*) redirect_dir=follow only conflicts with metacopy=on if upperdir=... is
+[*] redirect_dir=follow only conflicts with metacopy=on if upperdir=... is
 given.
 
 Sharing and copying layers
@@ -517,5 +495,3 @@ Run as root:
 
   # cd unionmount-testsuite
   # ./run --ov --verify
-=======
->>>>>>> BRANCH (d1eef1 Linux 5.5-rc2)
