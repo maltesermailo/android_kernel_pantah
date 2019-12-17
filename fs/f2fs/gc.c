@@ -1201,11 +1201,16 @@ static int do_garbage_collect(struct f2fs_sb_info *sbi,
 
 		if (get_valid_blocks(sbi, segno, false) == 0)
 			goto freed;
+<<<<<<< HEAD   (e54ad5 ANDROID: staging: android: ion: Fix build when CONFIG_ION_SY)
 		if (__is_large_section(sbi) &&
 				migrated >= sbi->migration_granularity)
 			goto skip;
 		if (!PageUptodate(sum_page) || unlikely(f2fs_cp_error(sbi)))
 			goto skip;
+=======
+		if (!PageUptodate(sum_page) || unlikely(f2fs_cp_error(sbi)))
+			goto next;
+>>>>>>> BRANCH (bfb9e5 Linux 4.14.159)
 
 		sum = page_address(sum_page);
 		if (type != GET_SUM_TYPE((&sum->footer))) {
