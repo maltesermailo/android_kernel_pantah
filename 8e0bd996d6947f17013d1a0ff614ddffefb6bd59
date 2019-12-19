@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce211fd0_2714924b",
+        "filename": "drivers/gnss/cmdline.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1291337
+      },
+      "writtenOn": "2019-12-19T20:41:13Z",
+      "side": 1,
+      "message": "If I\u0027m reading the man page correctly (the kernel promises it works the same way)\nhttp://man7.org/linux/man-pages/man3/strsep.3.html\nhttps://www.kernel.org/doc/htmldocs/kernel-api/API-strsep.html\n\n\"In case no delimiter was found, the token is taken to be the string *stringp, and *stringp is made NULL. The strsep() function returns a pointer to the token, that is, returns the original value of *stringp.\"\n\nIf this errors out and exits early, then serdev_dup will be set to NULL and err_free_serdev_dup will not be able to free it. An extra variable should hold the original value of serdev_dup so that err_free_serdev_dup can free it.",
+      "range": {
+        "startLine": 59,
+        "startChar": 15,
+        "endLine": 59,
+        "endChar": 40
+      },
+      "revId": "8e0bd996d6947f17013d1a0ff614ddffefb6bd59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
