@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "af495d01_e7e2c1e9",
+        "filename": "drivers/tty/serial/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-12-23T17:04:18Z",
+      "side": 1,
+      "message": "do not depend on a platform, depend on an arch first, and then BUILD_TEST as well so that you get proper build testing functionality.",
+      "range": {
+        "startLine": 972,
+        "startChar": 12,
+        "endLine": 972,
+        "endChar": 21
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6f3d10c_475c5f09",
+        "filename": "drivers/tty/serial/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 978,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-12-23T17:04:18Z",
+      "side": 1,
+      "message": "You forgot to list what the module name is if this is built as a module.",
+      "range": {
+        "startLine": 978,
+        "startChar": 0,
+        "endLine": 978,
+        "endChar": 61
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4129ce07_98a8d63f",
+        "filename": "drivers/tty/serial/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 994,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-12-23T17:04:18Z",
+      "side": 1,
+      "message": "How does anyone know the hardware version?  Can\u0027t this be dynamically determined at runtime instead of configuration time?",
+      "range": {
+        "startLine": 994,
+        "startChar": 0,
+        "endLine": 994,
+        "endChar": 22
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4f1a7de2_d1f51699",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-12-23T17:04:18Z",
+      "side": 1,
+      "message": "You are creating custom sysfs files with no documentation.  THere is also no need for this, use the in-kernel api for this instead please.",
+      "range": {
+        "startLine": 211,
+        "startChar": 0,
+        "endLine": 211,
+        "endChar": 48
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7f1a6a50_0d1d2f38",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-12-23T17:04:18Z",
+      "side": 1,
+      "message": "No error return?  Why not tell the upper layers this did not work?",
+      "range": {
+        "startLine": 398,
+        "startChar": 2,
+        "endLine": 398,
+        "endChar": 8
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2aab486b_bd48f917",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-12-23T17:04:18Z",
+      "side": 1,
+      "message": "empty function?  Why?",
+      "range": {
+        "startLine": 436,
+        "startChar": 0,
+        "endLine": 436,
+        "endChar": 60
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "18608617_fafb3d82",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2019-12-23T17:04:18Z",
+      "side": 1,
+      "message": "How can this ever happen?  If it can, properly test for it and return an error.  don\u0027t just ignor it and keep on running.",
+      "range": {
+        "startLine": 779,
+        "startChar": 0,
+        "endLine": 779,
+        "endChar": 61
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
