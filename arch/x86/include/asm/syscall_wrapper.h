@@ -50,6 +50,16 @@ struct pt_regs;
  * To keep the naming coherent, re-define SYSCALL_DEFINE0 to create an alias
  * named __ia32_sys_*()
  */
+<<<<<<< HEAD   (3523ed ANDROID: Kconfig.gki: Add Hidden SPRD DRM configs)
+=======
+
+#define SYSCALL_DEFINE0(sname)						\
+	SYSCALL_METADATA(_##sname, 0);					\
+	asmlinkage long __x64_sys_##sname(const struct pt_regs *__unused);\
+	ALLOW_ERROR_INJECTION(__x64_sys_##sname, ERRNO);		\
+	SYSCALL_ALIAS(__ia32_sys_##sname, __x64_sys_##sname);		\
+	asmlinkage long __x64_sys_##sname(const struct pt_regs *__unused)
+>>>>>>> BRANCH (c7ecf3 Linux 4.19.92)
 
 #define SYSCALL_DEFINE0(sname)						\
 	SYSCALL_METADATA(_##sname, 0);					\
@@ -190,10 +200,17 @@ struct pt_regs;
  * macros to work correctly.
  */
 #ifndef SYSCALL_DEFINE0
+<<<<<<< HEAD   (3523ed ANDROID: Kconfig.gki: Add Hidden SPRD DRM configs)
 #define SYSCALL_DEFINE0(sname)					\
 	SYSCALL_METADATA(_##sname, 0);				\
 	asmlinkage long __x64_sys_##sname(const struct pt_regs *__unused);\
 	ALLOW_ERROR_INJECTION(__x64_sys_##sname, ERRNO);	\
+=======
+#define SYSCALL_DEFINE0(sname)						\
+	SYSCALL_METADATA(_##sname, 0);					\
+	asmlinkage long __x64_sys_##sname(const struct pt_regs *__unused);\
+	ALLOW_ERROR_INJECTION(__x64_sys_##sname, ERRNO);		\
+>>>>>>> BRANCH (c7ecf3 Linux 4.19.92)
 	asmlinkage long __x64_sys_##sname(const struct pt_regs *__unused)
 #endif
 
