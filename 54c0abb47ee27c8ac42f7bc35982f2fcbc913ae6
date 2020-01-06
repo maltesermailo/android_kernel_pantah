@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b48a99cf_1945366c",
+        "filename": "fs/crypto/policy.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-01-06T23:28:48Z",
+      "side": 1,
+      "message": "It would be simpler to just put this code in fscrypt_prepare_setflags().",
+      "range": {
+        "startLine": 540,
+        "startChar": 0,
+        "endLine": 552,
+        "endChar": 1
+      },
+      "revId": "54c0abb47ee27c8ac42f7bc35982f2fcbc913ae6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6f193f50_1b7cdaba",
+        "filename": "fs/crypto/policy.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-01-06T23:28:48Z",
+      "side": 1,
+      "message": "For consistency with the other fscrypt_prepare_*() functions I think this function should be named fscrypt_prepare_setflags(), and go in fs/crypto/hooks.c.  (fscrypt_get_policy() can be made non-static.)",
+      "range": {
+        "startLine": 554,
+        "startChar": 4,
+        "endLine": 554,
+        "endChar": 32
+      },
+      "revId": "54c0abb47ee27c8ac42f7bc35982f2fcbc913ae6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "088e667d_509f751c",
+        "filename": "fs/inode.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2258,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-01-06T23:28:48Z",
+      "side": 1,
+      "message": "Can just use \u0027return fscrypt_prepare_setflags(...\u0027",
+      "range": {
+        "startLine": 2258,
+        "startChar": 1,
+        "endLine": 2258,
+        "endChar": 60
+      },
+      "revId": "54c0abb47ee27c8ac42f7bc35982f2fcbc913ae6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "582bb907_619e1588",
+        "filename": "include/linux/fscrypt.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-01-06T23:28:48Z",
+      "side": 1,
+      "message": "Need to fix this function prototype.",
+      "range": {
+        "startLine": 371,
+        "startChar": 18,
+        "endLine": 371,
+        "endChar": 49
+      },
+      "revId": "54c0abb47ee27c8ac42f7bc35982f2fcbc913ae6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
