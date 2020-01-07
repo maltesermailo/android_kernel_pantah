@@ -16,6 +16,24 @@
       "revId": "f16cb2b129850cec32cac9ebd71929f41a7bef97",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7647b2d9_4609131b",
+        "filename": "drivers/usb/dwc3/gadget.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3346,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-01-07T03:09:25Z",
+      "side": 1,
+      "message": "So, its a db845c and hikey960 issue. There is a more upstream friendly fix for hikey960 here:\n  https://android-review.googlesource.com/c/kernel/common/+/1193025\n\nBut unfortunately that fix doesn\u0027t work on the db845c, so in absence of a better solution this takes the heavy handed approach of disabling scatter-gather.",
+      "parentUuid": "210b3269_41d2fcb9",
+      "revId": "f16cb2b129850cec32cac9ebd71929f41a7bef97",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
