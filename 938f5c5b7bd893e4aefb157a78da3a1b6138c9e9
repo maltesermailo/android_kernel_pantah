@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "5a8d19a1_300de5e3",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "NB: I set this on an internal (oloder) product and the kernel panic\u0027d ... and without a console trace to investigate. I assume that this snapshot works :-)",
+      "range": {
+        "startLine": 290,
+        "startChar": 0,
+        "endLine": 291,
+        "endChar": 32
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "af495d01_e7e2c1e9",
         "filename": "drivers/tty/serial/Kconfig",
         "patchSetId": 2
@@ -94,6 +117,75 @@
     },
     {
       "key": {
+        "uuid": "e42678c9_2417976f",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "nit: This value is named msm_port 3 times more often than port. consistency?",
+      "range": {
+        "startLine": 215,
+        "startChar": 30,
+        "endLine": 215,
+        "endChar": 34
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b068c3b8_66c989a3",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "This has no relationship to the size of buf. PAGE_SIZE?",
+      "range": {
+        "startLine": 217,
+        "startChar": 23,
+        "endLine": 217,
+        "endChar": 34
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "027f87c2_860c521a",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "nit: superfluous initialization",
+      "range": {
+        "startLine": 324,
+        "startChar": 8,
+        "endLine": 324,
+        "endChar": 12
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7f1a6a50_0d1d2f38",
         "filename": "drivers/tty/serial/msm_geni_serial.c",
         "patchSetId": 2
@@ -117,6 +209,29 @@
     },
     {
       "key": {
+        "uuid": "61902a30_a8978a13",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "Q: AFAIK mb() is a compiler directive to enforce (volatile) ordering. It does not make sure that an operation deferred by the processor or bus engine (?) is completed. return instruction should already do that?\n\nHowever, I understand that this is necessary should the compiler inline this function? Is this correct?\n\nShould the mb() be part of the i/o operations to uport-\u003emembase?",
+      "range": {
+        "startLine": 407,
+        "startChar": 0,
+        "endLine": 408,
+        "endChar": 6
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2aab486b_bd48f917",
         "filename": "drivers/tty/serial/msm_geni_serial.c",
         "patchSetId": 2
@@ -133,6 +248,144 @@
         "startChar": 0,
         "endLine": 436,
         "endChar": 60
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d004628_08906674",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "Q: ditto?",
+      "range": {
+        "startLine": 461,
+        "startChar": 0,
+        "endLine": 462,
+        "endChar": 6
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "89fd149a_b9ab8c4f",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "nit: unnecessary initialization",
+      "range": {
+        "startLine": 477,
+        "startChar": 34,
+        "endLine": 477,
+        "endChar": 41
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8a1a68e0_313308d5",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "nit: unnecessary initialization",
+      "range": {
+        "startLine": 495,
+        "startChar": 8,
+        "endLine": 495,
+        "endChar": 12
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "32bedac3_e6c2b706",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "nit: this is the only block where ret is used.",
+      "range": {
+        "startLine": 522,
+        "startChar": 2,
+        "endLine": 522,
+        "endChar": 8
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a2f4da6e_aea98151",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "bool",
+      "range": {
+        "startLine": 548,
+        "startChar": 7,
+        "endLine": 548,
+        "endChar": 10
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "907a28a9_dc3db0e8",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "bit",
+      "range": {
+        "startLine": 702,
+        "startChar": 61,
+        "endLine": 702,
+        "endChar": 64
       },
       "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
@@ -160,6 +413,489 @@
       "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "87ae5008_6c3a4513",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "nit: this is the only block using irq_en, local definition.",
+      "range": {
+        "startLine": 815,
+        "startChar": 3,
+        "endLine": 815,
+        "endChar": 8
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "395ad18b_96cd92a7",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 990,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "nit: unnecessary initialization",
+      "range": {
+        "startLine": 990,
+        "startChar": 9,
+        "endLine": 990,
+        "endChar": 13
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ce87f86_e9f75183",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1065,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "nit: this is the only place where port is references in this block, replaced with GET_DEV_PORT(uport)?",
+      "range": {
+        "startLine": 1065,
+        "startChar": 14,
+        "endLine": 1065,
+        "endChar": 18
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a55ae1c_cd211fa0",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1124,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "Q: wonders out loud if the mb() on 1131 is being respected when flow gets optimized?",
+      "range": {
+        "startLine": 1124,
+        "startChar": 3,
+        "endLine": 1124,
+        "endChar": 32
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56393ab6_9f6d2d04",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "nit: unnecessary initialization",
+      "range": {
+        "startLine": 1155,
+        "startChar": 9,
+        "endLine": 1155,
+        "endChar": 13
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "018f27b2_1326be68",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1274,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "nit: only place port is referenced",
+      "range": {
+        "startLine": 1274,
+        "startChar": 14,
+        "endLine": 1274,
+        "endChar": 18
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "701b47fd_95b71f19",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1291,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "nit: unnecessary initialization",
+      "range": {
+        "startLine": 1291,
+        "startChar": 13,
+        "endLine": 1291,
+        "endChar": 17
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3f538b74_72f6e214",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1321,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "nit: unnecessary initialization",
+      "range": {
+        "startLine": 1321,
+        "startChar": 24,
+        "endLine": 1321,
+        "endChar": 28
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "875f4709_a73251e4",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1322,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "nit: unnecessary initialization",
+      "range": {
+        "startLine": 1322,
+        "startChar": 32,
+        "endLine": 1322,
+        "endChar": 36
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "832a99de_2ad0d563",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1323,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "nit: unnecessary initialization",
+      "range": {
+        "startLine": 1323,
+        "startChar": 21,
+        "endLine": 1323,
+        "endChar": 25
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d8785c6_18ce44bf",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1443,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "nit: unnecessary initialization",
+      "range": {
+        "startLine": 1443,
+        "startChar": 22,
+        "endLine": 1443,
+        "endChar": 26
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "74b85fee_a2044eff",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1753,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "nit: ret only used in this block",
+      "range": {
+        "startLine": 1753,
+        "startChar": 2,
+        "endLine": 1753,
+        "endChar": 8
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24caff2f_7d89dd55",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1846,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "nit: superfluous initialization",
+      "range": {
+        "startLine": 1846,
+        "startChar": 8,
+        "endLine": 1846,
+        "endChar": 12
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "715d4672_370fed57",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1910,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "nit: \u0027static const\u0027 would reduce a memory copy every time this function is called.",
+      "range": {
+        "startLine": 1910,
+        "startChar": 1,
+        "endLine": 1910,
+        "endChar": 26
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "18a32844_12761acc",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1962,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "nit: superfluous initialization",
+      "range": {
+        "startLine": 1962,
+        "startChar": 12,
+        "endLine": 1962,
+        "endChar": 16
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "40129dc1_c74cef54",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2156,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "nit: snprintf can take up to us to evaluate, whereas a memcpy takes mere ns",
+      "range": {
+        "startLine": 2156,
+        "startChar": 8,
+        "endLine": 2156,
+        "endChar": 50
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "165e54a2_92e225c8",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2207,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "nit: There is no need to initialize this",
+      "range": {
+        "startLine": 2207,
+        "startChar": 12,
+        "endLine": 2207,
+        "endChar": 16
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e7849431_2fe7fe68",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2228,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "nit: there is no need to initialize this",
+      "range": {
+        "startLine": 2228,
+        "startChar": 8,
+        "endLine": 2228,
+        "endChar": 12
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0edb5269_0e01126a",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2236,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "nit: this is the only context where ret is used, consider local block definition only.",
+      "range": {
+        "startLine": 2236,
+        "startChar": 2,
+        "endLine": 2236,
+        "endChar": 5
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e861bd16_9c45861b",
+        "filename": "drivers/tty/serial/msm_geni_serial.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2383,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "Q: if the statement defined(CONFIG_SERIAL_CORE_CONSOLE) || defined(CONFIG_CONSOLE_POLL) is true and this is a module, this function is not exported ... is there a plan to upstream a change to drivers/tty/serial/serial_core.c to export it?",
+      "range": {
+        "startLine": 2383,
+        "startChar": 11,
+        "endLine": 2383,
+        "endChar": 30
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "464ef1b1_d33a3136",
+        "filename": "include/uapi/asm-generic/ioctls.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-01-10T16:26:02Z",
+      "side": 1,
+      "message": "nit:\n\n  _IO(\u0027T\u0027, 0x4D)\n  _IO(\u0027T\u0027, 0x4E)\n  _IO(\u0027T\", 0x4F)\n\nrespectively",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 43
+      },
+      "revId": "938f5c5b7bd893e4aefb157a78da3a1b6138c9e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
