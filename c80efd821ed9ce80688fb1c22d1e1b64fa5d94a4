@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f3e725d_c6193c85",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2020-01-10T14:18:29Z",
+      "side": 1,
+      "message": "1 for the primary VM. 0 is used for Hafnium itself.",
+      "range": {
+        "startLine": 347,
+        "startChar": 18,
+        "endLine": 347,
+        "endChar": 19
+      },
+      "revId": "c80efd821ed9ce80688fb1c22d1e1b64fa5d94a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a9346385_ebb3ac8a",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2020-01-10T14:18:29Z",
+      "side": 1,
+      "message": "Use 0x8000 as the endpoint ID for Trusty running in Secure World, so Hafnium can distinguish it from VMs in the normal world.",
+      "revId": "c80efd821ed9ce80688fb1c22d1e1b64fa5d94a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "764db4ca_afa16e5f",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2020-01-10T14:18:29Z",
+      "side": 1,
+      "message": "If the Hafnium/SPCI driver is loaded then this will clash with the buffers it has already registered. We\u0027ll need to co-ordinate between the two. Probably what we should do is have a common SPCI driver that does the buffer set-up and provides an interface that both the Trusty driver and the higher-level Hafnium driver can use. That can wait for a later commit though, once we have this working.",
+      "revId": "c80efd821ed9ce80688fb1c22d1e1b64fa5d94a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
