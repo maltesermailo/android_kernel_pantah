@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "701962e7_f0f06e41",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 2400,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-01-15T10:41:23Z",
+      "side": 0,
+      "message": "cpu_util_cfs() below is used outside of schedutil on Android, so it can\u0027t be defined only for CONFIG_CPU_FREQ_GOV_SCHEDUTIL\u003dy. In its current status, this patch breaks the build when sugov is disabled (try building the x86 gki_defconfig).\n\nPlease fix the patch and mark it BACKPORT.\n\nThanks!",
+      "range": {
+        "startLine": 2400,
+        "startChar": 0,
+        "endLine": 2400,
+        "endChar": 17
+      },
+      "revId": "cc9a9ed3b959cab387a20558cc03725345c75b8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
