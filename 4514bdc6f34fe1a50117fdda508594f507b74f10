@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8a4b007c_c443a26c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-01-29T18:55:46Z",
+      "side": 1,
+      "message": "This didn\u0027t apply cleanly, so it should be \"BACKPORT: FROMLIST:\", not just \"FROMLIST:\".  Also, it would be helpful if there were notes at the end of the commit message about anything nontrivial that needed to be changed or resolved for the backport.\n\nThis would also be easier to review and if had just backported the v6 patches directly, rather than backporting v5 and then applying a delta v5 \u003d\u003e v6.  But this works too...",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "4514bdc6f34fe1a50117fdda508594f507b74f10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70ac2d92_823269c9",
+        "filename": "block/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-01-29T18:55:46Z",
+      "side": 1,
+      "message": "This needs to be CRYPTO_BLKCIPHER, like it is in android-4.19.",
+      "range": {
+        "startLine": 198,
+        "startChar": 8,
+        "endLine": 198,
+        "endChar": 23
+      },
+      "revId": "4514bdc6f34fe1a50117fdda508594f507b74f10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "732d713d_1f6d3045",
+        "filename": "block/blk-crypto-fallback.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-01-29T18:55:46Z",
+      "side": 1,
+      "message": "This was changed from \"SECTOR_SHIFT\" to 9.  I think it would be preferable to keep the code itself the same and instead add the missing definition at the beginning of the file:\n\n #define SECTOR_SHIFT   9\n\nThat makes it more clear what\u0027s going on, and will help avoid merge conflicts later.",
+      "range": {
+        "startLine": 230,
+        "startChar": 30,
+        "endLine": 230,
+        "endChar": 31
+      },
+      "revId": "4514bdc6f34fe1a50117fdda508594f507b74f10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d8909d02_c028000d",
+        "filename": "fs/crypto/inline_crypt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-01-29T18:55:46Z",
+      "side": 1,
+      "message": "This was changed from struct_size().\n\nThis kernel branch actually has the definition of struct_size(); it\u0027s just not being included.  It would be less error-prone, and would help to avoid merge conflicts in the future, if you just kept the struct_size() and included the header instead:\n\n  #include \u003clinux/overflow.h\u003e\n\nLikewise for keyslot-manager.c, where you also replaced struct_size().",
+      "range": {
+        "startLine": 67,
+        "startChar": 19,
+        "endLine": 68,
+        "endChar": 39
+      },
+      "revId": "4514bdc6f34fe1a50117fdda508594f507b74f10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
