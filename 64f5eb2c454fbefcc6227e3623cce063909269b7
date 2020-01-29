@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f98fa2ca_c230b3b5",
+        "filename": "drivers/md/dm-default-key.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-01-29T19:00:30Z",
+      "side": 1,
+      "message": "Please use a #define so that this matches later kernels:\n\n  #define SECTOR_SIZE                    (1 \u003c\u003c SECTOR_SHIFT)\n\nOtherwise this will cause problems if someone backports the patch that defines SECTOR_SIZE in \u003clinux/blkdev.h\u003e, or if SECTOR_SIZE gets used in this file in a place in a context where an integer literal works but a \u0027const int\u0027 doesn\u0027t, like as an array size.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 33
+      },
+      "revId": "64f5eb2c454fbefcc6227e3623cce063909269b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
