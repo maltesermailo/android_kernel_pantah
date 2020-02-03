@@ -1,0 +1,257 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8ea133d3_6cdac326",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-03T22:18:06Z",
+      "side": 1,
+      "message": "Can you improve this description?  It\u0027s not really \"skipping\" the fallback -- it\u0027s prohibiting it from being used.",
+      "range": {
+        "startLine": 7,
+        "startChar": 16,
+        "endLine": 7,
+        "endChar": 53
+      },
+      "revId": "311d4438968bb7710f8b68ba7e2cf3313e86f290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b0cef61a_4b8c4578",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-03T22:18:06Z",
+      "side": 1,
+      "message": "\"is_hw_wrapped\", not \"is_hw-wrapped\"",
+      "range": {
+        "startLine": 10,
+        "startChar": 47,
+        "endLine": 10,
+        "endChar": 60
+      },
+      "revId": "311d4438968bb7710f8b68ba7e2cf3313e86f290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dc1ff6a1_ed0ca789",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-03T22:18:06Z",
+      "side": 1,
+      "message": "\"blk-crypto-fallback\", not\"bio-crypto-fallback\"",
+      "range": {
+        "startLine": 18,
+        "startChar": 9,
+        "endLine": 18,
+        "endChar": 28
+      },
+      "revId": "311d4438968bb7710f8b68ba7e2cf3313e86f290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "99242bbe_abb20a2e",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-03T22:18:06Z",
+      "side": 1,
+      "message": "This check should be done in blk_crypto_fallback_submit_bio(), to avoid cluttering up this file with fallback-specific logic.",
+      "range": {
+        "startLine": 121,
+        "startChar": 1,
+        "endLine": 121,
+        "endChar": 34
+      },
+      "revId": "311d4438968bb7710f8b68ba7e2cf3313e86f290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38ac458d_5eda8c11",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-03T22:18:06Z",
+      "side": 1,
+      "message": "Need to document this parameter in the comment above.",
+      "range": {
+        "startLine": 193,
+        "startChar": 3,
+        "endLine": 193,
+        "endChar": 22
+      },
+      "revId": "311d4438968bb7710f8b68ba7e2cf3313e86f290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7ec2e87c_d4d9bc21",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-03T22:18:06Z",
+      "side": 1,
+      "message": "We should validate the key size appropriately depending on in_hw_wrapped.  For is_hw_wrapped, use these existing checks.  For !is_hw_wrapped, require raw_key_size \u003d\u003d mode-\u003ekeysize.",
+      "range": {
+        "startLine": 208,
+        "startChar": 0,
+        "endLine": 210,
+        "endChar": 17
+      },
+      "revId": "311d4438968bb7710f8b68ba7e2cf3313e86f290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9f243667_77fa02de",
+        "filename": "block/blk-crypto.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-03T22:18:06Z",
+      "side": 1,
+      "message": "Put this after the next line so that the initialization order more closely matches the order of the fields.",
+      "range": {
+        "startLine": 218,
+        "startChar": 1,
+        "endLine": 218,
+        "endChar": 40
+      },
+      "revId": "311d4438968bb7710f8b68ba7e2cf3313e86f290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0b408ae4_3114ea38",
+        "filename": "fs/crypto/keysetup.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-03T22:18:06Z",
+      "side": 1,
+      "message": "Put \u0027is_hw_wrapped\u0027 and \u0027ci\u0027 on the same line here, since they fit.",
+      "range": {
+        "startLine": 120,
+        "startChar": 3,
+        "endLine": 120,
+        "endChar": 22
+      },
+      "revId": "311d4438968bb7710f8b68ba7e2cf3313e86f290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e70160a6_02cc256e",
+        "filename": "fs/crypto/keysetup.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-03T22:18:06Z",
+      "side": 1,
+      "message": "This function call can fit on 2 lines still:\n\n        return fscrypt_prepare_key(\u0026ci-\u003eci_key, raw_key, ci-\u003eci_mode-\u003ekeysize,\n                                   false /*is_hw_wrapped*/, ci);",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 156,
+        "endChar": 36
+      },
+      "revId": "311d4438968bb7710f8b68ba7e2cf3313e86f290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f079b33e_7a068566",
+        "filename": "fs/crypto/keysetup.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-03T22:18:06Z",
+      "side": 1,
+      "message": "This should just be \u0027true\u0027 here.",
+      "range": {
+        "startLine": 208,
+        "startChar": 7,
+        "endLine": 208,
+        "endChar": 34
+      },
+      "revId": "311d4438968bb7710f8b68ba7e2cf3313e86f290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ab4bb088_47a5094f",
+        "filename": "include/linux/bio-crypt-ctx.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-02-03T22:18:06Z",
+      "side": 1,
+      "message": "Need to document this field in the comment above.",
+      "range": {
+        "startLine": 45,
+        "startChar": 1,
+        "endLine": 45,
+        "endChar": 20
+      },
+      "revId": "311d4438968bb7710f8b68ba7e2cf3313e86f290",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
