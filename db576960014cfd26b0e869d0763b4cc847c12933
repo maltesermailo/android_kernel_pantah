@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fe8e7cbf_2991c1cd",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7425,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-02-05T12:29:39Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "cc958491_0d7d9f03",
+      "range": {
+        "startLine": 7425,
+        "startChar": 3,
+        "endLine": 7425,
+        "endChar": 4
+      },
+      "revId": "db576960014cfd26b0e869d0763b4cc847c12933",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "758207fc_f77e73e9",
         "filename": "kernel/sched/core.c",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2020-02-05T10:53:21Z",
       "side": 1,
       "message": "This is a hypothetical question. Because we never had deep hierarchies in schedtune in Android.\n\nwe are enforcing the hold value to be greater than its parent. however the child may have lower than the newly written value.\n\nLets say\n\nroot \u003d 0 msec\n\n/root/A is created and /root/A hold is set to 10 msec\n\n/root/A/B is created. By default root/A/B hold get 10 msec\n\nNow what happens if we write 15 msec to /root/A . we will allow it because it is greater than root\u0027s hold i.e 0. With this A (parent) have more value than the child B",
+      "range": {
+        "startLine": 7429,
+        "startChar": 0,
+        "endLine": 7429,
+        "endChar": 1
+      },
+      "revId": "db576960014cfd26b0e869d0763b4cc847c12933",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "10dad051_6753378b",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7429,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-02-05T12:29:39Z",
+      "side": 1,
+      "message": "That is a very good question. We do have a bug in this area you\u0027re right. We don\u0027t have a function to update the hierarchy when a value changes.\n\nHmm this means we need to keep track of the original group request and the effective (real one) based on hierarchy restrictions.",
+      "parentUuid": "758207fc_f77e73e9",
       "range": {
         "startLine": 7429,
         "startChar": 0,
