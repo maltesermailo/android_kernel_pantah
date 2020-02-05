@@ -2,6 +2,75 @@
   "comments": [
     {
       "key": {
+        "uuid": "43588ed6_feae8898",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7406,
+      "author": {
+        "id": 1291841
+      },
+      "writtenOn": "2020-02-05T15:44:49Z",
+      "side": 1,
+      "message": "The rcu_read{,un}lock should be unnecessary in the context of kernfs file op handler.\nThe tg/css won\u0027t go away as long as its kernfs file is being worked with.",
+      "range": {
+        "startLine": 7406,
+        "startChar": 1,
+        "endLine": 7406,
+        "endChar": 17
+      },
+      "revId": "db576960014cfd26b0e869d0763b4cc847c12933",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3d77fb6e_c39e7b1f",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7412,
+      "author": {
+        "id": 1291841
+      },
+      "writtenOn": "2020-02-05T15:44:49Z",
+      "side": 1,
+      "message": "nit-pick: space before return statements?",
+      "range": {
+        "startLine": 7412,
+        "startChar": 1,
+        "endLine": 7412,
+        "endChar": 10
+      },
+      "revId": "db576960014cfd26b0e869d0763b4cc847c12933",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0ec6a597_d2d88509",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7423,
+      "author": {
+        "id": 1291841
+      },
+      "writtenOn": "2020-02-05T15:44:49Z",
+      "side": 1,
+      "message": "Same as above: not needed.",
+      "range": {
+        "startLine": 7423,
+        "startChar": 1,
+        "endLine": 7423,
+        "endChar": 17
+      },
+      "revId": "db576960014cfd26b0e869d0763b4cc847c12933",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cc958491_0d7d9f03",
         "filename": "kernel/sched/core.c",
         "patchSetId": 2
@@ -89,6 +158,53 @@
         "startChar": 0,
         "endLine": 7429,
         "endChar": 1
+      },
+      "revId": "db576960014cfd26b0e869d0763b4cc847c12933",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e94110b0_4324df50",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7429,
+      "author": {
+        "id": 1291841
+      },
+      "writtenOn": "2020-02-05T15:44:49Z",
+      "side": 1,
+      "message": "And that\u0027s why we have two concepts: requested values -vs- effective values.\n\nWhen it comes to cpu.util.{min,max}, each cgroup tracks its requested value and we do a hierarchical update on write in cpu_util_update_eff():\n   https://elixir.bootlin.com/linux/latest/source/kernel/sched/core.c#L7181\n\nThe same logic should apply for the boot hold propagation.",
+      "parentUuid": "10dad051_6753378b",
+      "range": {
+        "startLine": 7429,
+        "startChar": 0,
+        "endLine": 7429,
+        "endChar": 1
+      },
+      "revId": "db576960014cfd26b0e869d0763b4cc847c12933",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d68d2f38_62ac68fe",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1291841
+      },
+      "writtenOn": "2020-02-05T15:44:49Z",
+      "side": 1,
+      "message": "According to the comments above, this is what should be turned into:\n\n  unsigned long   uclamp_hold_ms_rq;\n  unsigned long   uclamp_hold_ms;\n\nand manage them similar to what we do with uclamp{_req}[UCLAMP_CNT].",
+      "range": {
+        "startLine": 409,
+        "startChar": 1,
+        "endLine": 409,
+        "endChar": 35
       },
       "revId": "db576960014cfd26b0e869d0763b4cc847c12933",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
