@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "99d4f7b2_7df007b0",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 6958,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-02-05T16:13:00Z",
+      "side": 1,
+      "message": "Patrick, I was having a discussion with Chris about whether this needs to be initialized to 0 or parent\u0027s value. Do you mind commenting on this? I really must follow your advice and read that cgroup document..",
+      "range": {
+        "startLine": 6957,
+        "startChar": 1,
+        "endLine": 6958,
+        "endChar": 53
+      },
+      "revId": "db576960014cfd26b0e869d0763b4cc847c12933",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "43588ed6_feae8898",
         "filename": "kernel/sched/core.c",
         "patchSetId": 2
@@ -22,6 +45,30 @@
       "revId": "db576960014cfd26b0e869d0763b4cc847c12933",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f4d54e88_4e77d053",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7406,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-02-05T16:13:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43588ed6_feae8898",
+      "range": {
+        "startLine": 7406,
+        "startChar": 1,
+        "endLine": 7406,
+        "endChar": 17
+      },
+      "revId": "db576960014cfd26b0e869d0763b4cc847c12933",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -48,6 +95,30 @@
     },
     {
       "key": {
+        "uuid": "962687a3_03bd7e81",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7412,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-02-05T16:13:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d77fb6e_c39e7b1f",
+      "range": {
+        "startLine": 7412,
+        "startChar": 1,
+        "endLine": 7412,
+        "endChar": 10
+      },
+      "revId": "db576960014cfd26b0e869d0763b4cc847c12933",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0ec6a597_d2d88509",
         "filename": "kernel/sched/core.c",
         "patchSetId": 2
@@ -68,6 +139,30 @@
       "revId": "db576960014cfd26b0e869d0763b4cc847c12933",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c0ab8404_852a473a",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7423,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-02-05T16:13:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ec6a597_d2d88509",
+      "range": {
+        "startLine": 7423,
+        "startChar": 1,
+        "endLine": 7423,
+        "endChar": 17
+      },
+      "revId": "db576960014cfd26b0e869d0763b4cc847c12933",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
       "key": {
@@ -177,6 +272,30 @@
       "side": 1,
       "message": "And that\u0027s why we have two concepts: requested values -vs- effective values.\n\nWhen it comes to cpu.util.{min,max}, each cgroup tracks its requested value and we do a hierarchical update on write in cpu_util_update_eff():\n   https://elixir.bootlin.com/linux/latest/source/kernel/sched/core.c#L7181\n\nThe same logic should apply for the boot hold propagation.",
       "parentUuid": "10dad051_6753378b",
+      "range": {
+        "startLine": 7429,
+        "startChar": 0,
+        "endLine": 7429,
+        "endChar": 1
+      },
+      "revId": "db576960014cfd26b0e869d0763b4cc847c12933",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "20f9d0d0_525c6ba5",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7429,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-02-05T16:13:00Z",
+      "side": 1,
+      "message": "Thanks Patrick. I have a patch that does just that, will post as soon as I get a chance to test it enough.",
+      "parentUuid": "e94110b0_4324df50",
       "range": {
         "startLine": 7429,
         "startChar": 0,
