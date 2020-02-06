@@ -527,8 +527,23 @@ void prep_transhuge_page(struct page *page)
 	set_compound_page_dtor(page, TRANSHUGE_PAGE_DTOR);
 }
 
+<<<<<<< HEAD   (121c64 Merge 893e591b5903 ("Merge tag 'devicetree-for-5.6' of git:/)
 static unsigned long __thp_get_unmapped_area(struct file *filp,
 		unsigned long addr, unsigned long len,
+=======
+bool is_transparent_hugepage(struct page *page)
+{
+	if (!PageCompound(page))
+		return 0;
+
+	page = compound_head(page);
+	return is_huge_zero_page(page) ||
+	       page[1].compound_dtor == TRANSHUGE_PAGE_DTOR;
+}
+EXPORT_SYMBOL_GPL(is_transparent_hugepage);
+
+static unsigned long __thp_get_unmapped_area(struct file *filp, unsigned long len,
+>>>>>>> BRANCH (4cbc41 Merge branch 'cve-2019-3016' into kvm-next-5.6)
 		loff_t off, unsigned long flags, unsigned long size)
 {
 	loff_t off_end = off + len;
