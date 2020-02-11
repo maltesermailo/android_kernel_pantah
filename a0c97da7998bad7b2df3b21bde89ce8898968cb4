@@ -46,6 +46,30 @@
       "revId": "a0c97da7998bad7b2df3b21bde89ce8898968cb4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5db1673a_8dbec96f",
+        "filename": "drivers/iommu/arm-smmu-qcom.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2020-02-11T19:40:48Z",
+      "side": 0,
+      "message": "No need to apologise! I didn\u0027t realise we\u0027d broken something with the update. I *tried* to resolve the conflict so that the old behaviour was preserved, but I did drop the \u0027ANDROID\u0027 hunk changing arm_smmu_test_smr_masks() in favour of upstream commit 79f7a5cb87ba (\"iommu/arm-smmu: Improve SMR mask test\"), which tests the \u0027valid\u0027 field of the SMR instead of reading it back out of the register. qcom_sdm845_smmu500_cfg_probe() should initialise the SMRs appropriately.\n\nCan you elaborate a bit more about what goes wrong? I\u0027d prefer to fix what we have rather than replace it with yet another downstream solution, especially as we tried to make an upstream change to accommodate some of this.",
+      "parentUuid": "2e2a6f5a_5235b96b",
+      "range": {
+        "startLine": 15,
+        "startChar": 11,
+        "endLine": 15,
+        "endChar": 40
+      },
+      "revId": "a0c97da7998bad7b2df3b21bde89ce8898968cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
