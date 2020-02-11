@@ -22,6 +22,30 @@
       "revId": "a0c97da7998bad7b2df3b21bde89ce8898968cb4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e2a6f5a_5235b96b",
+        "filename": "drivers/iommu/arm-smmu-qcom.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-02-11T19:04:39Z",
+      "side": 0,
+      "message": "Sorry, after updating to v5.6-rc1 I found some of the collisions upstream with these patches caused them to no longer work. Bjorn provided an updated patch (see: ANDROID: iommu: arm-smmu: Handoff SMR registers and context b...) that applied and worked on its own, so I was trying to clear out the older patches and replace them with the newer one.  If the newer one isn\u0027t right, then I can circle around with Bjorn to see what should be done.",
+      "parentUuid": "6f898eeb_a99a4d12",
+      "range": {
+        "startLine": 15,
+        "startChar": 11,
+        "endLine": 15,
+        "endChar": 40
+      },
+      "revId": "a0c97da7998bad7b2df3b21bde89ce8898968cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
