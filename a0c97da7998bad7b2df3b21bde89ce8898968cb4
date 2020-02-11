@@ -70,6 +70,30 @@
       "revId": "a0c97da7998bad7b2df3b21bde89ce8898968cb4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b31f4f3b_3516dc65",
+        "filename": "drivers/iommu/arm-smmu-qcom.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-02-11T20:40:26Z",
+      "side": 0,
+      "message": "I don\u0027t have the expertise to know really whats going wrong (again I\u0027d have to defer to Bjorn), but when booting the board will crash into the usb crash recovery mode.\n\nThat said, the initial trouble was seen with my own db845c mainline tracking tree when it hit the upstream changes in 5.6-rc1, which collided badly, and dropping all the older smmu patches and replacing it with Bjorns new one worked. \n\nSo I was assuming the merge in android-mainline was similarly troubled, but it seems you\u0027ve put some thought into it and its sounds your resolution in android-mainline will do better? \n\nLet me re-check and validate the state of android-mainline specifically and maybe some of these changes aren\u0027t necessary.",
+      "parentUuid": "5db1673a_8dbec96f",
+      "range": {
+        "startLine": 15,
+        "startChar": 11,
+        "endLine": 15,
+        "endChar": 40
+      },
+      "revId": "a0c97da7998bad7b2df3b21bde89ce8898968cb4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
