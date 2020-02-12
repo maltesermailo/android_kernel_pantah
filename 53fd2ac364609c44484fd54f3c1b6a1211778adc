@@ -45,6 +45,52 @@
       "revId": "53fd2ac364609c44484fd54f3c1b6a1211778adc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a089131b_ed7adadb",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1466,
+      "author": {
+        "id": 1142024
+      },
+      "writtenOn": "2020-02-12T22:23:04Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it be easier just to read additional data from (df-\u003edf_signature-\u003eadd_data_offset, df-\u003edf_signature-\u003eadd_data_size)? It would save the trouble of reading and parsing the pkcs7 blobl",
+      "range": {
+        "startLine": 1466,
+        "startChar": 15,
+        "endLine": 1466,
+        "endChar": 46
+      },
+      "revId": "53fd2ac364609c44484fd54f3c1b6a1211778adc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f699c1d0_e28918a2",
+        "filename": "include/uapi/linux/incrementalfs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1142024
+      },
+      "writtenOn": "2020-02-12T22:23:04Z",
+      "side": 1,
+      "message": "I would consider merging this ioctl with INCFS_IOC_READ_FILE_SIGNATURE. I think in most cases they\u0027ll be called together one by one.",
+      "range": {
+        "startLine": 52,
+        "startChar": 8,
+        "endLine": 52,
+        "endChar": 38
+      },
+      "revId": "53fd2ac364609c44484fd54f3c1b6a1211778adc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
