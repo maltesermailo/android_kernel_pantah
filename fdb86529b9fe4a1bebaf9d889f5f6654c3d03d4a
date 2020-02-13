@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2bb9a6b7_0b08eaa3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-02-13T10:55:27Z",
+      "side": 1,
+      "message": "Chris had an internal patch before that that did system wide, per task and cgroup support. But given the specific need here; we opted to expose the cgroup support only and do a wider implementation if we will ever push this upstream.",
+      "parentUuid": "cbee7182_bf0d7016",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 35
+      },
+      "revId": "fdb86529b9fe4a1bebaf9d889f5f6654c3d03d4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3bbbbb7a_25ee890f",
         "filename": "/COMMIT_MSG",
         "patchSetId": 4
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "5ece22c4_019a083c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-02-13T10:55:27Z",
+      "side": 1,
+      "message": "cgroup rules have caught me up several times so far.\n\nWhat you say makes sense but I need to hear from Chris (who\u0027s off for a bit) and Todd/Suren/Quentin that this is the functionality they want before I go ahead and change the rules.",
+      "parentUuid": "3bbbbb7a_25ee890f",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 31
+      },
+      "revId": "fdb86529b9fe4a1bebaf9d889f5f6654c3d03d4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "e763a6bc_754efd15",
         "filename": "kernel/sched/core.c",
         "patchSetId": 4
@@ -59,6 +107,30 @@
       "writtenOn": "2020-02-13T09:33:33Z",
       "side": 1,
       "message": "This feature makes sense only for uclamp.min, since we use it to provide a boost hold feature.\nI don\u0027t see cases for uclamp.max, do we have one?\n\nI\u0027m wondering if we should not make the name more explicit, i.e. `uclamp.min.hold_ms`?\nOr otherwise add a pair of attributes, so that each clamp can be independently controlled.",
+      "range": {
+        "startLine": 8026,
+        "startChar": 11,
+        "endLine": 8026,
+        "endChar": 25
+      },
+      "revId": "fdb86529b9fe4a1bebaf9d889f5f6654c3d03d4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a7f3b01d_1e9d816e",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 8026,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-02-13T10:55:27Z",
+      "side": 1,
+      "message": "`uclamp.min.hold_ms\u0027 makes sense to me too and happy to change it unless someone screams against it.",
+      "parentUuid": "e763a6bc_754efd15",
       "range": {
         "startLine": 8026,
         "startChar": 11,
