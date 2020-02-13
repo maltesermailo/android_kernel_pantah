@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "cbee7182_bf0d7016",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1598371
+      },
+      "writtenOn": "2020-02-13T09:33:33Z",
+      "side": 1,
+      "message": "We should expose a system-wide knob to tune this one.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 35
+      },
+      "revId": "fdb86529b9fe4a1bebaf9d889f5f6654c3d03d4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3bbbbb7a_25ee890f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1598371
+      },
+      "writtenOn": "2020-02-13T09:33:33Z",
+      "side": 1,
+      "message": "I see all this should be working the other way around.\n\nWe should start from the observation that cgroups are there to control (i.e. limit) resources and that the uclamp hold is actually a \"boost hold\". Which means, the more we hold the more we consume, e.g. sleeping at higher OPPs thus consuming more energy.\n\nMoreover, if we look at how uclamp.{min,max} work, we always do a min aggregation for nested groups:\n a) the parent group defines what\u0027s the max its children can get\n b) child groups request are restricted by parent allowance\n c) child groups can always ask for less\n\nAll that considered, in your example above, when:\n\n   parent-\u003euclamp_hold_ms_req \u003d 50\n   child-\u003euclamp_hold_ms_req \u003d 10\n\nthe child should be free to get 10ms hold. While, the moment the parent changes to 0ms, the child group gets an effective 0ms hold.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 31
+      },
+      "revId": "fdb86529b9fe4a1bebaf9d889f5f6654c3d03d4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e763a6bc_754efd15",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 8026,
+      "author": {
+        "id": 1598371
+      },
+      "writtenOn": "2020-02-13T09:33:33Z",
+      "side": 1,
+      "message": "This feature makes sense only for uclamp.min, since we use it to provide a boost hold feature.\nI don\u0027t see cases for uclamp.max, do we have one?\n\nI\u0027m wondering if we should not make the name more explicit, i.e. `uclamp.min.hold_ms`?\nOr otherwise add a pair of attributes, so that each clamp can be independently controlled.",
+      "range": {
+        "startLine": 8026,
+        "startChar": 11,
+        "endLine": 8026,
+        "endChar": 25
+      },
+      "revId": "fdb86529b9fe4a1bebaf9d889f5f6654c3d03d4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
