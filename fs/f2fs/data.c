@@ -3840,9 +3840,12 @@ static int f2fs_swap_activate(struct swap_info_struct *sis, struct file *file,
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD   (d0dbb0 ANDROID: abi_gki_aarch64_whitelist: add module_layout and ta)
 	if (f2fs_disable_compressed_file(inode))
 		return -EINVAL;
 
+=======
+>>>>>>> BRANCH (cff670 Linux 5.4.24)
 	ret = check_swap_activate(sis, file, span);
 	if (ret < 0)
 		return ret;
