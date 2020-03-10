@@ -39,6 +39,30 @@
       "revId": "b7856812911c75d27d2d047e9674d5700ff79521",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9cbb7cd9_a748651a",
+        "filename": "abi_gki_aarch64_unisoc_whitelist",
+        "patchSetId": 1
+      },
+      "lineNbr": 1517,
+      "author": {
+        "id": 1051392
+      },
+      "writtenOn": "2020-03-10T12:37:25Z",
+      "side": 1,
+      "message": "In driver/watchdog/Makefile:\n  7 obj-$(CONFIG_WATCHDOG_CORE)     +\u003d watchdog.o\n  8 \n  9 watchdog-objs   +\u003d watchdog_core.o watchdog_dev.o\n\nBut CONFIG_WATCHDOG_CORE is not set at gki_defconfig.\n\nsprd_wtd.ko depends on\n\n 318:    ret \u003d devm_watchdog_register_device(dev, \u0026wdt-\u003ewdd);\n\nwhich is from watchdog_core.o from watchdog.ko.\n\nSo \"CONFIG_WATCHDOG_CORE\" is set to \"m\" as module at Unisoc side.",
+      "parentUuid": "7998a449_3b658514",
+      "range": {
+        "startLine": 1517,
+        "startChar": 0,
+        "endLine": 1517,
+        "endChar": 25
+      },
+      "revId": "b7856812911c75d27d2d047e9674d5700ff79521",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
