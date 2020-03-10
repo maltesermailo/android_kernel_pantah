@@ -225,6 +225,10 @@ struct signal_struct {
 	struct mutex cred_guard_mutex;	/* guard against foreign influences on
 					 * credential calculations
 					 * (notably. ptrace) */
+	ANDROID_KAB_RESERVE(1);
+	ANDROID_KAB_RESERVE(2);
+	ANDROID_KAB_RESERVE(3);
+	ANDROID_KAB_RESERVE(4);
 } __randomize_layout;
 
 /*
