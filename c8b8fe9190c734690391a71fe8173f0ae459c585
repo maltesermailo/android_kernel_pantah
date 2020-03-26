@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b3296a82_87af38c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2020-03-26T21:16:30Z",
+      "side": 1,
+      "message": "I would argue that it is *always* mapped non-cached.",
+      "range": {
+        "startLine": 10,
+        "startChar": 15,
+        "endLine": 10,
+        "endChar": 30
+      },
+      "revId": "c8b8fe9190c734690391a71fe8173f0ae459c585",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2d8eb05a_6c7ca1b6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2020-03-26T21:16:30Z",
+      "side": 1,
+      "message": "The work \"unlikely\" might raise some concerns as it suggests that cache coherency problems might still occur but are getting ignored.\nHow about something along the lines of: \"In the absence of caching, cache maintenance operations become unnecessary.\"",
+      "range": {
+        "startLine": 12,
+        "startChar": 24,
+        "endLine": 12,
+        "endChar": 32
+      },
+      "revId": "c8b8fe9190c734690391a71fe8173f0ae459c585",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "79f426f6_d8f9ba6b",
+        "filename": "drivers/staging/android/ion/ion_dma_buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2020-03-26T21:16:30Z",
+      "side": 1,
+      "message": "One thing that I think is worth pointing out is that the member dma_map_attrs of struct dma_buf_attachment has been introduced by commit f57c5b53d9a2 (\"ANDROID: dma-buf: Add support for mapping buffers with DMA attributes\") with gerrit change-id Ib2e5bafdc02ae31a58ce96a82d77cc508dd71bd4\nAt the time, no code was added to actually pass .dma_map_attrs into dma_map_sg_attrs(). I don\u0027t know whether this was discussed at the time, but I am wondering if there was a reason for not adding this.\nI would consider two things:\n(1) Create a separate patch to pass attachment-\u003edma_map_attrs into dma_map_sg_attrs()\n(2) Make it explicit in the commit message that attachment-\u003edma_map_attrs is now passed into dma_map_sg_attrs() and into dma_unmap_sg_attr() for that matter.",
+      "revId": "c8b8fe9190c734690391a71fe8173f0ae459c585",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
