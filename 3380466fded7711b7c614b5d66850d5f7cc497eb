@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a15dbf9f_e98486f8",
+        "filename": "Documentation/block/00-INDEX",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-03-26T22:14:13Z",
+      "side": 1,
+      "message": "These two added lines aren\u0027t in v8.  IMO it would be fine to just not add them.  I really doubt anyone would care whether the documentation file is properly indexed downstream.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 45
+      },
+      "revId": "3380466fded7711b7c614b5d66850d5f7cc497eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "451d03de_cf07fe7a",
+        "filename": "drivers/scsi/ufs/ufshcd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-03-26T22:14:13Z",
+      "side": 1,
+      "message": "Remove this newline to exactly revert the addition of the quirk bit, making this code again match stable/linux-4.19.y exactly?",
+      "revId": "3380466fded7711b7c614b5d66850d5f7cc497eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a8313165_bc7757ae",
+        "filename": "fs/crypto/bio.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-03-26T22:14:13Z",
+      "side": 1,
+      "message": "v8 has #include \u003clinux/blkdev.h\u003e here.  Shouldn\u0027t that be kept?",
+      "revId": "3380466fded7711b7c614b5d66850d5f7cc497eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
