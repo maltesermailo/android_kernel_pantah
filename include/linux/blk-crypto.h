@@ -23,6 +23,11 @@ int blk_crypto_init_key(struct blk_crypto_key *blk_key,
 int blk_crypto_evict_key(struct request_queue *q,
 			 const struct blk_crypto_key *key);
 
+bool blk_crypto_mode_supported(struct request_queue *q,
+			       enum blk_crypto_mode_num crypto_mode,
+			       unsigned int data_unit_size,
+			       bool is_hw_wrapped_key);
+
 #else /* CONFIG_BLK_INLINE_ENCRYPTION */
 
 static inline int blk_crypto_submit_bio(struct bio **bio_ptr)

@@ -260,3 +260,28 @@ int blk_crypto_evict_key(struct request_queue *q,
 	return blk_crypto_fallback_evict_key(key);
 }
 EXPORT_SYMBOL_GPL(blk_crypto_evict_key);
+
+/**
+ * blk_crypto_mode_supported() - Check if an inline encryption setting is usable
+ * @q: The device on which inline encryption would be used
+ * @crypto_mode: The crypto algorithm that would be used
+ * @data_unit_size: The data unit size that would be used
+ * @is_hw_wrapped_key: Whether the key would be hardware-wrapped
+ *
+ * Return: true iff inline encryption with the given settings is usable on the
+ *	   given device, either via hardware or via blk-crypto-fallback.
+ */
+bool blk_crypto_mode_supported(struct request_queue *q,
+			       enum blk_crypto_mode_num crypto_mode,
+			       unsigned int data_unit_size,
+			       bool is_hw_wrapped_key)
+{
+	if (keyslot_manager_crypto_mode_supported(q->ksm, crypto_mode,
+						  data_unit_size,
+						  is_hw_wrapped_key))
+		return true;
+	if (is_hw_wrapped_key)
+		return false;
+	return IS_ENABLED(CONFIG_BLK_INLINE_ENCRYPTION_FALLBACK);
+}
+EXPORT_SYMBOL_GPL(blk_crypto_mode_supported);
