@@ -2372,16 +2372,20 @@ static struct keyslot_mgmt_ll_ops dm_ksm_ll_ops = {
 static int dm_init_inline_encryption(struct mapped_device *md)
 {
 	unsigned int mode_masks[BLK_ENCRYPTION_MODE_MAX];
+	unsigned int features;
 
 	/*
 	 * Start out with all crypto mode support bits set.  Any unsupported
 	 * bits will be cleared later when calculating the device restrictions.
 	 */
 	memset(mode_masks, 0xFF, sizeof(mode_masks));
+	features = BLK_CRYPTO_FEATURE_STANDARD_KEYS |
+		   BLK_CRYPTO_FEATURE_WRAPPED_KEYS;
 
 	md->queue->ksm = keyslot_manager_create_passthrough(NULL,
 							    &dm_ksm_ll_ops,
-							    mode_masks, md);
+							    mode_masks,
+							    features, md);
 	if (!md->queue->ksm)
 		return -ENOMEM;
 	return 0;

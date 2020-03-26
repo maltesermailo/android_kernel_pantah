@@ -44,6 +44,7 @@ struct keyslot_manager {
 	unsigned int num_slots;
 	struct keyslot_mgmt_ll_ops ksm_ll_ops;
 	unsigned int crypto_mode_supported[BLK_ENCRYPTION_MODE_MAX];
+	unsigned int features;
 	void *ll_priv_data;
 
 #ifdef CONFIG_PM
@@ -142,6 +143,8 @@ static inline void keyslot_manager_hw_exit(struct keyslot_manager *ksm)
  *				a data unit size of (1 << i) is supported. We
  *				only support data unit sizes that are powers of
  *				2.
+ * @features: Bitmask of BLK_CRYPTO_FEATURE_* flags.  Most people should pass
+ *	      BLK_CRYPTO_FEATURE_STANDARD_KEYS here.
  * @ll_priv_data: Private data passed as is to the functions in ksm_ll_ops.
  *
  * Allocate memory for and initialize a keyslot manager. Called by e.g.
@@ -155,6 +158,7 @@ struct keyslot_manager *keyslot_manager_create(
 	unsigned int num_slots,
 	const struct keyslot_mgmt_ll_ops *ksm_ll_ops,
 	const unsigned int crypto_mode_supported[BLK_ENCRYPTION_MODE_MAX],
+	unsigned int features,
 	void *ll_priv_data)
 {
 	struct keyslot_manager *ksm;
@@ -177,6 +181,7 @@ struct keyslot_manager *keyslot_manager_create(
 	ksm->ksm_ll_ops = *ksm_ll_ops;
 	memcpy(ksm->crypto_mode_supported, crypto_mode_supported,
 	       sizeof(ksm->crypto_mode_supported));
+	ksm->features = features;
 	ksm->ll_priv_data = ll_priv_data;
 	keyslot_manager_set_dev(ksm, dev);
 
@@ -521,6 +526,7 @@ EXPORT_SYMBOL_GPL(keyslot_manager_destroy);
  * @dev: Device for runtime power management (NULL if none)
  * @ksm_ll_ops: The struct keyslot_mgmt_ll_ops
  * @crypto_mode_supported: Bitmasks for supported encryption modes
+ * @features: Bitmask of BLK_CRYPTO_FEATURE_* flags
  * @ll_priv_data: Private data passed as is to the functions in ksm_ll_ops.
  *
  * Allocate memory for and initialize a passthrough keyslot manager.
@@ -538,6 +544,7 @@ struct keyslot_manager *keyslot_manager_create_passthrough(
 	struct device *dev,
 	const struct keyslot_mgmt_ll_ops *ksm_ll_ops,
 	const unsigned int crypto_mode_supported[BLK_ENCRYPTION_MODE_MAX],
+	unsigned int features,
 	void *ll_priv_data)
 {
 	struct keyslot_manager *ksm;
@@ -549,6 +556,7 @@ struct keyslot_manager *keyslot_manager_create_passthrough(
 	ksm->ksm_ll_ops = *ksm_ll_ops;
 	memcpy(ksm->crypto_mode_supported, crypto_mode_supported,
 	       sizeof(ksm->crypto_mode_supported));
+	ksm->features = features;
 	ksm->ll_priv_data = ll_priv_data;
 	keyslot_manager_set_dev(ksm, dev);
 
@@ -579,9 +587,11 @@ void keyslot_manager_intersect_modes(struct keyslot_manager *parent,
 			parent->crypto_mode_supported[i] &=
 				child->crypto_mode_supported[i];
 		}
+		parent->features &= child->features;
 	} else {
 		memset(parent->crypto_mode_supported, 0,
 		       sizeof(parent->crypto_mode_supported));
+		parent->features = 0;
 	}
 }
 EXPORT_SYMBOL_GPL(keyslot_manager_intersect_modes);
