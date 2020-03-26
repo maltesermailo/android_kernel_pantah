@@ -386,23 +386,24 @@ void keyslot_manager_put_slot(struct keyslot_manager *ksm, unsigned int slot)
 }
 
 /**
- * keyslot_manager_crypto_mode_supported() - Find out if a crypto_mode/data
- *					     unit size combination is supported
- *					     by a ksm.
+ * keyslot_manager_crypto_mode_supported() - Find out if a crypto_mode /
+ *					     data unit size / is_hw_wrapped_key
+ *					     combination is supported by a ksm.
  * @ksm: The keyslot manager to check
  * @crypto_mode: The crypto mode to check for.
  * @data_unit_size: The data_unit_size for the mode.
+ * @is_hw_wrapped_key: Whether a hardware-wrapped key will be used.
  *
  * Calls and returns the result of the crypto_mode_supported function specified
  * by the ksm.
  *
  * Context: Process context.
- * Return: Whether or not this ksm supports the specified crypto_mode/
- *	   data_unit_size combo.
+ * Return: Whether or not this ksm supports the specified crypto settings.
  */
 bool keyslot_manager_crypto_mode_supported(struct keyslot_manager *ksm,
 					   enum blk_crypto_mode_num crypto_mode,
-					   unsigned int data_unit_size)
+					   unsigned int data_unit_size,
+					   bool is_hw_wrapped_key)
 {
 	if (!ksm)
 		return false;
@@ -410,6 +411,13 @@ bool keyslot_manager_crypto_mode_supported(struct keyslot_manager *ksm,
 		return false;
 	if (WARN_ON(!is_power_of_2(data_unit_size)))
 		return false;
+	if (is_hw_wrapped_key) {
+		if (!(ksm->features & BLK_CRYPTO_FEATURE_WRAPPED_KEYS))
+			return false;
+	} else {
+		if (!(ksm->features & BLK_CRYPTO_FEATURE_STANDARD_KEYS))
+			return false;
+	}
 	return ksm->crypto_mode_supported[crypto_mode] & data_unit_size;
 }
 

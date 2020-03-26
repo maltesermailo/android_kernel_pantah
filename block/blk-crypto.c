@@ -109,7 +109,8 @@ int blk_crypto_submit_bio(struct bio **bio_ptr)
 	/* Get device keyslot if supported */
 	if (keyslot_manager_crypto_mode_supported(q->ksm,
 						  bc->bc_key->crypto_mode,
-						  bc->bc_key->data_unit_size)) {
+						  bc->bc_key->data_unit_size,
+						  bc->bc_key->is_hw_wrapped)) {
 		err = bio_crypt_ctx_acquire_keyslot(bc, q->ksm);
 		if (!err)
 			return 0;
@@ -252,7 +253,8 @@ int blk_crypto_evict_key(struct request_queue *q,
 {
 	if (q->ksm &&
 	    keyslot_manager_crypto_mode_supported(q->ksm, key->crypto_mode,
-						  key->data_unit_size))
+						  key->data_unit_size,
+						  key->is_hw_wrapped))
 		return keyslot_manager_evict_key(q->ksm, key);
 
 	return blk_crypto_fallback_evict_key(key);

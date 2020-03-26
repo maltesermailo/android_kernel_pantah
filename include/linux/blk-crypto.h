@@ -41,6 +41,7 @@ static inline bool blk_crypto_endio(struct bio *bio)
 
 int blk_crypto_start_using_mode(enum blk_crypto_mode_num mode_num,
 				unsigned int data_unit_size,
+				bool is_hw_wrapped_key,
 				struct request_queue *q);
 
 int blk_crypto_fallback_init(void);
@@ -50,6 +51,7 @@ int blk_crypto_fallback_init(void);
 static inline int
 blk_crypto_start_using_mode(enum blk_crypto_mode_num mode_num,
 			    unsigned int data_unit_size,
+			    bool is_hw_wrapped_key,
 			    struct request_queue *q)
 {
 	return 0;

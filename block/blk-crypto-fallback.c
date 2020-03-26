@@ -492,6 +492,7 @@ out:
  * blk_crypto_start_using_mode() - Start using a crypto algorithm on a device
  * @mode_num: the blk_crypto_mode we want to allocate ciphers for.
  * @data_unit_size: the data unit size that will be used
+ * @is_hw_wrapped_key: whether a hardware-wrapped key will be used
  * @q: the request queue for the device
  *
  * Upper layers must call this function to ensure that a the crypto API fallback
@@ -501,6 +502,7 @@ out:
  */
 int blk_crypto_start_using_mode(enum blk_crypto_mode_num mode_num,
 				unsigned int data_unit_size,
+				bool is_hw_wrapped_key,
 				struct request_queue *q)
 {
 	struct blk_crypto_keyslot *slotp;
@@ -520,7 +522,8 @@ int blk_crypto_start_using_mode(enum blk_crypto_mode_num mode_num,
 	 * crypto mode, then we don't need to allocate this mode.
 	 */
 	if (keyslot_manager_crypto_mode_supported(q->ksm, mode_num,
-						  data_unit_size))
+						  data_unit_size,
+						  is_hw_wrapped_key))
 		return 0;
 
 	mutex_lock(&tfms_init_lock);

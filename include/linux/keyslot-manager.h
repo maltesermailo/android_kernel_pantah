@@ -67,7 +67,8 @@ void keyslot_manager_put_slot(struct keyslot_manager *ksm, unsigned int slot);
 
 bool keyslot_manager_crypto_mode_supported(struct keyslot_manager *ksm,
 					   enum blk_crypto_mode_num crypto_mode,
-					   unsigned int data_unit_size);
+					   unsigned int data_unit_size,
+					   bool is_hw_wrapped_key);
 
 int keyslot_manager_evict_key(struct keyslot_manager *ksm,
 			      const struct blk_crypto_key *key);
