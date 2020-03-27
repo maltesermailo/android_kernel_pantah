@@ -74,6 +74,7 @@ config GKI_HIDDEN_QCOM_CONFIGS
 	select QCOM_SCM if (ARM64)
 	select QCOM_GDSC if (ARCH_QCOM)
 	select PINCTRL_MSM if (PINCTRL && ARCH_QCOM)
+	select SOC_BUS if (ARM64)
 	help
 	  Dummy config option used to enable hidden QCOM configs.
 	  These are normally selected implicitly when a module
