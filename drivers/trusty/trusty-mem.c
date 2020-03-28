@@ -84,7 +84,8 @@ int trusty_encode_page_info(struct ns_mem_page_info *inf,
 {
 	int mem_attr;
 	uint64_t pte;
-	uint16_t spci_mem_attr;
+	uint8_t spci_mem_attr;
+	uint8_t spci_mem_perm;
 
 	if (!inf || !page)
 		return -EINVAL;
@@ -136,12 +137,15 @@ int trusty_encode_page_info(struct ns_mem_page_info *inf,
 #endif
 
 	if (!(pte & ATTR_RDONLY))
-		spci_mem_attr |= SPCI_MEM_ATTR_RW;
+		spci_mem_perm |= SPCI_MEM_PERM_RW;
+	else
+		spci_mem_perm |= SPCI_MEM_PERM_RO;
 
 	if ((pte & ATTR_INNER_SHAREABLE) == ATTR_INNER_SHAREABLE)
 		spci_mem_attr |= SPCI_MEM_ATTR_INNER_SHAREABLE;
 
 	inf->spci_mem_attr = spci_mem_attr;
+	inf->spci_mem_perm = spci_mem_perm;
 	inf->compat_attr = (pte & 0x0000FFFFFFFFFFFFull) |
 			   ((uint64_t)mem_attr << 48);
 	return 0;
