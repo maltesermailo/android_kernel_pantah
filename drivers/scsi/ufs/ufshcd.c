@@ -441,8 +441,6 @@ static void ufshcd_print_host_regs(struct ufs_hba *hba)
 
 	if (hba->vops && hba->vops->dbg_register_dump)
 		hba->vops->dbg_register_dump(hba);
-
-	ufshcd_crypto_debug(hba);
 }
 
 static
