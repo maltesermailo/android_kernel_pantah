@@ -1222,11 +1222,15 @@ DEFINE_SIMPLE_PROP(interrupt_parent, "interrupt-parent", NULL)
 DEFINE_SIMPLE_PROP(dmas, "dmas", "#dma-cells")
 DEFINE_SIMPLE_PROP(power_domains, "power-domains", "#power-domain-cells")
 DEFINE_SIMPLE_PROP(hwlocks, "hwlocks", "#hwlock-cells")
+<<<<<<< HEAD   (bc72fb ANDROID: GKI: of: property: Add device link support for phys)
 DEFINE_SIMPLE_PROP(phys, "phys", "#phy-cells")
 DEFINE_SIMPLE_PROP(pinctrl0, "pinctrl-0", NULL)
 DEFINE_SIMPLE_PROP(pinctrl1, "pinctrl-1", NULL)
 DEFINE_SIMPLE_PROP(pinctrl2, "pinctrl-2", NULL)
 DEFINE_SIMPLE_PROP(pinctrl3, "pinctrl-3", NULL)
+=======
+DEFINE_SIMPLE_PROP(extcon, "extcon", NULL)
+>>>>>>> CHANGE (1609e6 FROMGIT: of: property: Add device link support for extcon)
 DEFINE_SUFFIX_PROP(regulators, "-supply", NULL)
 DEFINE_SUFFIX_PROP(gpio, "-gpio", "#gpio-cells")
 DEFINE_SUFFIX_PROP(gpios, "-gpios", "#gpio-cells")
@@ -1254,11 +1258,15 @@ static const struct supplier_bindings of_supplier_bindings[] = {
 	{ .parse_prop = parse_dmas, },
 	{ .parse_prop = parse_power_domains, },
 	{ .parse_prop = parse_hwlocks, },
+<<<<<<< HEAD   (bc72fb ANDROID: GKI: of: property: Add device link support for phys)
 	{ .parse_prop = parse_phys, },
 	{ .parse_prop = parse_pinctrl0, },
 	{ .parse_prop = parse_pinctrl1, },
 	{ .parse_prop = parse_pinctrl2, },
 	{ .parse_prop = parse_pinctrl3, },
+=======
+	{ .parse_prop = parse_extcon, },
+>>>>>>> CHANGE (1609e6 FROMGIT: of: property: Add device link support for extcon)
 	{ .parse_prop = parse_regulators, },
 	{ .parse_prop = parse_gpio, },
 	{ .parse_prop = parse_gpios, },
