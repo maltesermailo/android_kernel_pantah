@@ -474,11 +474,15 @@ void blk_ksm_intersect_modes(struct blk_keyslot_manager *parent,
 	if (child) {
 		unsigned int i;
 
+		parent->max_dun_bytes_supported =
+			min(parent->max_dun_bytes_supported,
+			    child->max_dun_bytes_supported);
 		for (i = 0; i < ARRAY_SIZE(child->crypto_modes_supported); i++) {
 			parent->crypto_modes_supported[i] &=
 				child->crypto_modes_supported[i];
 		}
 	} else {
+		parent->max_dun_bytes_supported = 0;
 		memset(parent->crypto_modes_supported, 0,
 		       sizeof(parent->crypto_modes_supported));
 	}
