@@ -22,6 +22,30 @@
       "revId": "5b70298fc7bf5f0f3bb7e3fa78fdc6b9300b85b6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "094c6c4e_c0950456",
+        "filename": "block/keyslot-manager.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-03T00:08:25Z",
+      "side": 0,
+      "message": "Barani,\n\nThere are some big advantages to this update -- for example, it makes the code match what is being proposed and reviewed upstream, it improves performance by making the keyslots be managed per-request rather than per-bio, and it reduces the overhead of blk-crypto-fallback when it\u0027s not used.\n\nThere will indeed be some driver updates needed, namely: initializing the keyslot manager a bit differently and setting UFSHCD_CAP_CRYPTO.  However, these are all relatively straightforward changes, and we\u0027d be glad to help you update your driver.  If you can provide us with source code access, we can even write a patch for you.  (We can\u0027t actually test it, but we can compile and review it).\n\nWe\u0027re double checking with the GKI team, but we were under the impression that the GKI ABI isn\u0027t declared stable until the end of April, so there was still time to update the ABI.\n\nNote that even if we stay with v6, we\u0027re still going to need to merge a bug fix http://aosp/1277075, which will require a driver update too.",
+      "parentUuid": "4220bbd9_3bd5efc0",
+      "range": {
+        "startLine": 153,
+        "startChar": 24,
+        "endLine": 153,
+        "endChar": 46
+      },
+      "revId": "5b70298fc7bf5f0f3bb7e3fa78fdc6b9300b85b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
