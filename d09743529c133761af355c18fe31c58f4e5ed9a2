@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a041b49e_01283af8",
+        "filename": "fs/proc/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2568,
+      "author": {
+        "id": 1082649
+      },
+      "writtenOn": "2020-04-09T16:46:27Z",
+      "side": 1,
+      "message": "Please revert this whitespace change.",
+      "revId": "d09743529c133761af355c18fe31c58f4e5ed9a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e6cc702d_8776b1f2",
+        "filename": "fs/proc/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2755,
+      "author": {
+        "id": 1082649
+      },
+      "writtenOn": "2020-04-09T16:46:27Z",
+      "side": 1,
+      "message": "Please revert this whitespace change.",
+      "revId": "d09743529c133761af355c18fe31c58f4e5ed9a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6d40befc_6b2f47e6",
+        "filename": "fs/proc/seccomp.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1082649
+      },
+      "writtenOn": "2020-04-09T16:46:27Z",
+      "side": 1,
+      "message": "I think I\u0027d just put all of this in fs/proc/array.c inside an #ifdef",
+      "range": {
+        "startLine": 3,
+        "startChar": 3,
+        "endLine": 3,
+        "endChar": 26
+      },
+      "revId": "d09743529c133761af355c18fe31c58f4e5ed9a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aeab8272_d6e07c98",
+        "filename": "fs/proc/seccomp.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1082649
+      },
+      "writtenOn": "2020-04-09T16:46:27Z",
+      "side": 1,
+      "message": "I\u0027d rename this to match the others: seccomp_show,",
+      "range": {
+        "startLine": 67,
+        "startChar": 11,
+        "endLine": 67,
+        "endChar": 23
+      },
+      "revId": "d09743529c133761af355c18fe31c58f4e5ed9a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "758275df_4a87cd83",
+        "filename": "include/linux/seccomp.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1082649
+      },
+      "writtenOn": "2020-04-09T16:46:27Z",
+      "side": 1,
+      "message": "Since this is about to be defined, you can drop this line.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 21
+      },
+      "revId": "d09743529c133761af355c18fe31c58f4e5ed9a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f1fcd68f_81341d25",
+        "filename": "kernel/seccomp.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1438,
+      "author": {
+        "id": 1082649
+      },
+      "writtenOn": "2020-04-09T16:46:27Z",
+      "side": 1,
+      "message": "I would say they\u0027re distinct features, and should just get ||ed together:\n\n#if defined(CONFIG_SECCOMP_FILTER) \u0026\u0026 (defined(CONFIG_CHECKPOINT_RESTORE) ||\n                                       defined(CONFIG_PROC_PID_SECCOMP))\n\nBut since you\u0027re not using get_nth_filter() anywhere, you can just skip this for now.",
+      "range": {
+        "startLine": 1436,
+        "startChar": 0,
+        "endLine": 1438,
+        "endChar": 51
+      },
+      "revId": "d09743529c133761af355c18fe31c58f4e5ed9a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc8512ce_f6adc336",
+        "filename": "kernel/seccomp.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1506,
+      "author": {
+        "id": 1082649
+      },
+      "writtenOn": "2020-04-09T16:46:27Z",
+      "side": 1,
+      "message": "revert...",
+      "range": {
+        "startLine": 1506,
+        "startChar": 5,
+        "endLine": 1506,
+        "endChar": 28
+      },
+      "revId": "d09743529c133761af355c18fe31c58f4e5ed9a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
