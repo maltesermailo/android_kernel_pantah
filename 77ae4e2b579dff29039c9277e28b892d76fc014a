@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e42562c_8cfcd6c6",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2120,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2020-04-14T17:27:20Z",
+      "side": 1,
+      "message": "Why is this code checking !*key? Was it supposed to be !key? And if so, shouldn\u0027t we fail if\n(!key || !tkey), rather than (!key \u0026\u0026 !tkey)?",
+      "revId": "77ae4e2b579dff29039c9277e28b892d76fc014a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08bf53d0_17b2ccd2",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2126,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2020-04-14T17:27:20Z",
+      "side": 1,
+      "message": "Is this code complete here? Is there nothing to do to switch to MSDC?",
+      "revId": "77ae4e2b579dff29039c9277e28b892d76fc014a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3050927_bdb3a6b6",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2205,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2020-04-14T17:27:20Z",
+      "side": 1,
+      "message": "I don\u0027t think the sdus_mask can be meaningless. A value of 9 will mean that the device supports data units of size 4096 bytes and 512 bytes.",
+      "revId": "77ae4e2b579dff29039c9277e28b892d76fc014a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "29c63f92_67ceec36",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2208,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2020-04-14T17:27:20Z",
+      "side": 1,
+      "message": "So the crypto_cap_array.algorithm_id expects to have enums like MMC_CRYPTO_ALG_AES_XTS, not \nMSDC_CRYPTO_ALG_AES_XTS. MMC_CRYPTO_ALG_AES_XTS is 0, and is different from MSDC_CRYPTO_ALG_AES_XTS, which is 4.\nSimilarly for crypto_cap_array.key_size.\n\nAlso, is the crypto_cap_array.reserved actually used at all? If not, why not just keep it set to 0?",
+      "revId": "77ae4e2b579dff29039c9277e28b892d76fc014a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
