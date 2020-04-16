@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "57854e3e_6a6f5fa9",
+        "filename": "drivers/mmc/core/block.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1257,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-16T17:44:22Z",
+      "side": 1,
+      "message": "This can only fail because it calls \u0027host-\u003ecrypto_vops-\u003eprepare_mqr_crypto\u0027, which can fail.\nBut that\u0027s only used to set the Mediatek-specific crypto registers, which seems buggy because this can run before the previous command has finished.\n\nI think we should remove -\u003eprepare_mqr_crypto and just do:\n\nvoid mmc_prepare_mrq_crypto(struct mmc_host *host, struct mmc_request *mrq,      \n                            struct request *req)                                 \n{                                                                                \n        struct bio_crypt_ctx *bc;                                                \n                                                                                 \n        if (!bio_crypt_should_process(req)) {                                    \n                mrq-\u003ecrypto_key_slot \u003d -1;                                       \n                return;                                                          \n        }                                                                        \n                                                                                 \n        bc \u003d req-\u003ebio-\u003ebi_crypt_context;                                         \n                                                                                 \n        mrq-\u003ecrypto_key_slot \u003d bc-\u003ebc_keyslot;                                   \n        mrq-\u003edata_unit_num \u003d bc-\u003ebc_dun[0];                                      \n}                \n\n(Note the typo fix: \"mqr\" \u003d\u003e \"mrq\" since it stands for \"mmc_request\".)                                           \n\nThen, the proper place to set the Mediatek-specific crypto registers seems to be in msdc_ops_request().  No new variant op needed.",
+      "range": {
+        "startLine": 1255,
+        "startChar": 0,
+        "endLine": 1257,
+        "endChar": 13
+      },
+      "revId": "f027f2a490d577a09d6be8e041dbe3113f2f1f56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
