@@ -22,6 +22,30 @@
       "revId": "f027f2a490d577a09d6be8e041dbe3113f2f1f56",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6681ee37_00dc281c",
+        "filename": "drivers/mmc/core/block.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1257,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-16T17:59:04Z",
+      "side": 1,
+      "message": "Here\u0027s what I\u0027m thinking in msdc_ops_request():\n\nstatic void msdc_ops_request(struct mmc_host *mmc, struct mmc_request *mrq)      \n{                                                                                \n        struct msdc_host *host \u003d mmc_priv(mmc);                                  \n                                                                                 \n        host-\u003eerror \u003d 0;                                                         \n        WARN_ON(host-\u003emrq);                                                      \n        host-\u003emrq \u003d mrq;                                                         \n                                                                                 \n#ifdef CONFIG_MMC_CRYPTO                                                         \n        if (mrq-\u003ecrypto_key_slot \u003e\u003d 0) {                                         \n                /*                                                               \n                 * TODO: Are we really alright with rejecting a 0 data_unit_num? \n                 */                                                              \n                if (unlikely(!mrq-\u003edata_unit_num)) {                             \n                        mrq-\u003ecmd-\u003eerror \u003d -EINVAL;                               \n                        mmc_request_done(mmc, mrq);                              \n                        return;                                                  \n                }                                                                \n                if (msdc_set_crypto(host, mrq-\u003edata_unit_num,                    \n                                    (mrq-\u003edata-\u003eflags \u0026 MMC_DATA_WRITE))) {      \n                        mrq-\u003ecmd-\u003eerror \u003d -EINVAL;                               \n                        mmc_request_done(mmc, mrq);                              \n                        return;                                                  \n                }                                                                \n        }                                                                        \n#endif                                                                           \n\nThe last argument of msdc_set_crypto() is changed to \u0027bool enc\u0027:\n\nstatic int msdc_set_crypto(struct msdc_host *host, u64 data_unit_num, bool enc);",
+      "parentUuid": "57854e3e_6a6f5fa9",
+      "range": {
+        "startLine": 1255,
+        "startChar": 0,
+        "endLine": 1257,
+        "endChar": 13
+      },
+      "revId": "f027f2a490d577a09d6be8e041dbe3113f2f1f56",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
