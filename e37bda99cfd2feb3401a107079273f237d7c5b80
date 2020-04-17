@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "700a2a1a_0c7388c6",
+        "filename": "drivers/mmc/core/crypto.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-17T20:23:38Z",
+      "side": 1,
+      "message": "It\u0027s still causing a checkpatch error due to the missing space after \u0027if\u0027.  Can you fix the following checkpatch warnings/errors?\n\nWARNING: Co-developed-by: must be immediately followed by Signed-off-by:\n#21: Co-developed-by: Eric Biggers \u003cebiggers@google.com\u003e\n\nERROR: do not set execute permissions for source files\n#86: FILE: drivers/mmc/core/crypto.c\n\nERROR: space required before the open parenthesis \u0027(\u0027\n#106: FILE: drivers/mmc/core/crypto.c:16:\n+\tif(host-\u003ecaps2 \u0026 MMC_CAP2_CRYPTO)\n\nERROR: do not set execute permissions for source files\n#132: FILE: drivers/mmc/core/crypto.h",
+      "parentUuid": "ae0121ad_ff6f60af",
+      "range": {
+        "startLine": 16,
+        "startChar": 1,
+        "endLine": 16,
+        "endChar": 37
+      },
+      "revId": "e37bda99cfd2feb3401a107079273f237d7c5b80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "59884ca1_729ca937",
         "filename": "drivers/mmc/core/crypto.c",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "9ea6d0c9_ec3effe0",
+        "filename": "drivers/mmc/core/crypto.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-17T20:23:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59884ca1_729ca937",
+      "range": {
+        "startLine": 33,
+        "startChar": 5,
+        "endLine": 33,
+        "endChar": 15
+      },
+      "revId": "e37bda99cfd2feb3401a107079273f237d7c5b80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "de340a5e_0954bb1b",
         "filename": "drivers/mmc/core/crypto.h",
         "patchSetId": 2
@@ -68,6 +116,30 @@
       "revId": "e37bda99cfd2feb3401a107079273f237d7c5b80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67a9a86a_b257730f",
+        "filename": "drivers/mmc/core/crypto.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-17T20:23:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de340a5e_0954bb1b",
+      "range": {
+        "startLine": 31,
+        "startChar": 1,
+        "endLine": 31,
+        "endChar": 10
+      },
+      "revId": "e37bda99cfd2feb3401a107079273f237d7c5b80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
