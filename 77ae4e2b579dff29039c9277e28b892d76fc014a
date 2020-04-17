@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "75d46e47_7e204895",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2120,
+      "author": {
+        "id": 1409360
+      },
+      "writtenOn": "2020-04-17T11:18:00Z",
+      "side": 1,
+      "message": "OKay, I will change it",
+      "parentUuid": "4e42562c_8cfcd6c6",
+      "revId": "77ae4e2b579dff29039c9277e28b892d76fc014a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "08bf53d0_17b2ccd2",
         "filename": "drivers/mmc/host/mtk-sd.c",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2020-04-14T17:27:20Z",
       "side": 1,
       "message": "Is this code complete here? Is there nothing to do to switch to MSDC?",
+      "revId": "77ae4e2b579dff29039c9277e28b892d76fc014a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b4741102_275340de",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2126,
+      "author": {
+        "id": 1409360
+      },
+      "writtenOn": "2020-04-17T11:18:00Z",
+      "side": 1,
+      "message": "Sorry, I will remove it",
+      "parentUuid": "08bf53d0_17b2ccd2",
       "revId": "77ae4e2b579dff29039c9277e28b892d76fc014a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "51b4324c_787fcf32",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2205,
+      "author": {
+        "id": 1409360
+      },
+      "writtenOn": "2020-04-17T11:18:00Z",
+      "side": 1,
+      "message": "Ya, sdus_mask should\u0027t be meaningless of cause, but MTK old chipsets had a non-cqe （aka SW-cqe，used software to simulate HW-cqe）solution, those old chipsets will be also updated to GKI version in future, so we must take care of non-cqe requirement.\n\ncrypto engine of MTK non-cqe solution is not a standard part of eMMC, so crypto engine is special which is very different with cqe HW setting.\n\nso, \"non_cqe\" string in my patch is only for MTK chipset, it\u0027s not a standard path.",
+      "parentUuid": "b3050927_bdb3a6b6",
+      "revId": "77ae4e2b579dff29039c9277e28b892d76fc014a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "29c63f92_67ceec36",
         "filename": "drivers/mmc/host/mtk-sd.c",
         "patchSetId": 1
@@ -81,6 +135,24 @@
       "writtenOn": "2020-04-14T17:27:20Z",
       "side": 1,
       "message": "So the crypto_cap_array.algorithm_id expects to have enums like MMC_CRYPTO_ALG_AES_XTS, not \nMSDC_CRYPTO_ALG_AES_XTS. MMC_CRYPTO_ALG_AES_XTS is 0, and is different from MSDC_CRYPTO_ALG_AES_XTS, which is 4.\nSimilarly for crypto_cap_array.key_size.\n\nAlso, is the crypto_cap_array.reserved actually used at all? If not, why not just keep it set to 0?",
+      "revId": "77ae4e2b579dff29039c9277e28b892d76fc014a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8890fc30_90dbacb8",
+        "filename": "drivers/mmc/host/mtk-sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2208,
+      "author": {
+        "id": 1409360
+      },
+      "writtenOn": "2020-04-17T11:18:00Z",
+      "side": 1,
+      "message": "same with above, special for non-cqe",
+      "parentUuid": "29c63f92_67ceec36",
       "revId": "77ae4e2b579dff29039c9277e28b892d76fc014a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
