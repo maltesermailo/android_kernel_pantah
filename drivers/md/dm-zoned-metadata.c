@@ -1109,10 +1109,15 @@ static int dmz_init_zone(struct blk_zone *blkz, unsigned int idx, void *data)
 	switch (blkz->type) {
 	case BLK_ZONE_TYPE_CONVENTIONAL:
 		set_bit(DMZ_RND, &zone->flags);
+<<<<<<< HEAD   (85a41c ANDROID: iommu: Kconfig: Make ARM_SMMU depend on QCOM_SCM ||)
 		zmd->nr_rnd_zones++;
 		break;
 	case BLK_ZONE_TYPE_SEQWRITE_REQ:
 	case BLK_ZONE_TYPE_SEQWRITE_PREF:
+=======
+	} else if (blkz->type == BLK_ZONE_TYPE_SEQWRITE_REQ ||
+		   blkz->type == BLK_ZONE_TYPE_SEQWRITE_PREF) {
+>>>>>>> BRANCH (dc4059 Linux 5.4.33)
 		set_bit(DMZ_SEQ, &zone->flags);
 		break;
 	default:

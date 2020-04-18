@@ -55,7 +55,10 @@
 #include <linux/clk.h>
 #include <linux/completion.h>
 #include <linux/regulator/consumer.h>
+<<<<<<< HEAD   (85a41c ANDROID: iommu: Kconfig: Make ARM_SMMU depend on QCOM_SCM ||)
 #include <linux/devfreq.h>
+=======
+>>>>>>> BRANCH (dc4059 Linux 5.4.33)
 #include <linux/bitfield.h>
 #include "unipro.h"
 
