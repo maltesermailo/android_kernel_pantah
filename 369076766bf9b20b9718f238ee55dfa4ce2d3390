@@ -45,6 +45,30 @@
       "revId": "369076766bf9b20b9718f238ee55dfa4ce2d3390",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "59fcf793_31cbb6cc",
+        "filename": "include/linux/mmc/core.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-20T17:07:04Z",
+      "side": 1,
+      "message": "Then mmc_crypto_prepare_req() could just do:\n\n        if (!bio_crypt_should_process(req)) \n                return;\n\n... since its caller initializes the mmc_request to 0.\n\nAnd in patches 2 and 3, cqhci_prep_crypto_desc() and msdc_prepare_crypto() would use mmc_request_crypto_enabled() instead of checking crypto_key_slot.\n\nA bool \u0027crypto_enabled\u0027 would also work, but since we already have \u0027crypto_key\u0027 we can use that.",
+      "parentUuid": "fb904734_3565ac71",
+      "range": {
+        "startLine": 166,
+        "startChar": 1,
+        "endLine": 166,
+        "endChar": 21
+      },
+      "revId": "369076766bf9b20b9718f238ee55dfa4ce2d3390",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
