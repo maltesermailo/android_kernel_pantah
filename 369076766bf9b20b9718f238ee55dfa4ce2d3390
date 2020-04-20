@@ -22,6 +22,29 @@
       "revId": "369076766bf9b20b9718f238ee55dfa4ce2d3390",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb904734_3565ac71",
+        "filename": "include/linux/mmc/core.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-20T17:01:43Z",
+      "side": 1,
+      "message": "I\u0027m concerned about using \u0027crypto_key_slot \u003d\u003d - 1\u0027 to represent that an mmc_request has crypto disabled, because there seem to be cases that initialize a \u0027struct mmc_request\u0027 to 0 without going through mmc_blk_data_prep().  For example, mmc_blk_cqe_prep_dcmd(), mmc_wait_for_cmd(),  __mmc_blk_ioctl_cmd(), and mmc_sd_num_wr_blocks().\n\nI think we should add a helper function that checks crypto_key instead:\n\n  #ifdef CONFIG_MMC_CRYPTO\n  static inline bool mmc_request_crypto_enabled(const struct mmc_request *mrq)\n  {\n          return mrq-\u003ecrypto_key !\u003d NULL;\n  }\n  #else\n  static inline bool mmc_request_crypto_enabled(const struct mmc_request *mrq)\n  {\n          return false;\n  }\n  #endif",
+      "range": {
+        "startLine": 166,
+        "startChar": 1,
+        "endLine": 166,
+        "endChar": 21
+      },
+      "revId": "369076766bf9b20b9718f238ee55dfa4ce2d3390",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
