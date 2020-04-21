@@ -16,6 +16,24 @@
       "revId": "70f68ea4c714b3a3fc94c897a4708e1f7419e224",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "189abea1_97e1e11d",
+        "filename": "include/linux/mmc/host.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-21T20:48:04Z",
+      "side": 1,
+      "message": "If vendors have customized struct mmc_host, that would make their modules incompatible with GKI anyway, since mmc_core is built-in to GKI.  If you need per-host fields or bits in your driver, you need to put them in the driver-specific host structure like \u0027struct sdhci_msm_host\u0027.",
+      "parentUuid": "3c8f5bb1_bf2f8004",
+      "revId": "70f68ea4c714b3a3fc94c897a4708e1f7419e224",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
