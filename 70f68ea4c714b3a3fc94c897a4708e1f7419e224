@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "8562b17d_5df7bcdc",
+        "filename": "drivers/mmc/core/crypto.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-04-22T06:53:24Z",
+      "side": 1,
+      "message": "no need to export this symbol, only the other two?",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 1
+      },
+      "revId": "70f68ea4c714b3a3fc94c897a4708e1f7419e224",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3c8f5bb1_bf2f8004",
         "filename": "include/linux/mmc/host.h",
         "patchSetId": 7
@@ -31,6 +54,29 @@
       "side": 1,
       "message": "If vendors have customized struct mmc_host, that would make their modules incompatible with GKI anyway, since mmc_core is built-in to GKI.  If you need per-host fields or bits in your driver, you need to put them in the driver-specific host structure like \u0027struct sdhci_msm_host\u0027.",
       "parentUuid": "3c8f5bb1_bf2f8004",
+      "revId": "70f68ea4c714b3a3fc94c897a4708e1f7419e224",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a839de57_2f2cf3a1",
+        "filename": "include/linux/mmc/host.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-04-22T06:53:24Z",
+      "side": 1,
+      "message": "based on what I have seen recently with other vendors, they do not understand that \"reserved\" means \"DO NOT USE!\" and seem to think it means \"oh look it was reserved just for me to use!\" instead (translations are hard...)\n\nSo maybe just make this \"crypto_DO_NOT_USE[7]\" instead?\n\nAnyway, just nit.",
+      "range": {
+        "startLine": 470,
+        "startChar": 9,
+        "endLine": 470,
+        "endChar": 24
+      },
       "revId": "70f68ea4c714b3a3fc94c897a4708e1f7419e224",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
