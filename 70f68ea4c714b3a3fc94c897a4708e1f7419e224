@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "ed56cd2c_22f50593",
+        "filename": "drivers/mmc/core/crypto.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-22T16:29:49Z",
+      "side": 1,
+      "message": "Yes this is correct.  mmc_crypto_free_host() is only called from the same module, mmc_core.  mmc_crypto_setup_queue() and mmc_crypto_prepare_req() are called from a different module, mmc_block.",
+      "parentUuid": "8562b17d_5df7bcdc",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 1
+      },
+      "revId": "70f68ea4c714b3a3fc94c897a4708e1f7419e224",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "3c8f5bb1_bf2f8004",
         "filename": "include/linux/mmc/host.h",
         "patchSetId": 7
@@ -71,6 +95,30 @@
       "writtenOn": "2020-04-22T06:53:24Z",
       "side": 1,
       "message": "based on what I have seen recently with other vendors, they do not understand that \"reserved\" means \"DO NOT USE!\" and seem to think it means \"oh look it was reserved just for me to use!\" instead (translations are hard...)\n\nSo maybe just make this \"crypto_DO_NOT_USE[7]\" instead?\n\nAnyway, just nit.",
+      "range": {
+        "startLine": 470,
+        "startChar": 9,
+        "endLine": 470,
+        "endChar": 24
+      },
+      "revId": "70f68ea4c714b3a3fc94c897a4708e1f7419e224",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "923da9f0_10ff7016",
+        "filename": "include/linux/mmc/host.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-04-22T16:29:49Z",
+      "side": 1,
+      "message": "What about using ANDROID_KABI_RESERVE()?",
+      "parentUuid": "a839de57_2f2cf3a1",
       "range": {
         "startLine": 470,
         "startChar": 9,
