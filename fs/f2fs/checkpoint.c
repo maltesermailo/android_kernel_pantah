@@ -1260,7 +1260,11 @@ void f2fs_wait_on_all_pages(struct f2fs_sb_info *sbi, int type)
 		if (unlikely(f2fs_cp_error(sbi)))
 			break;
 
+<<<<<<< HEAD   (6a4789 ANDROID: ABI/Whitelist: update unisoc Whitelist to latest)
 		io_schedule_timeout(DEFAULT_IO_TIMEOUT);
+=======
+		io_schedule_timeout(HZ/50);
+>>>>>>> BRANCH (0c4187 Linux 5.4.35)
 	}
 	finish_wait(&sbi->cp_wait, &wait);
 }
