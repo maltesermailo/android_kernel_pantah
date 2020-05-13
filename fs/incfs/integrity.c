@@ -220,12 +220,13 @@ int incfs_calc_digest(struct incfs_hash_alg *alg, struct mem_range data,
 
 	if (data.len < INCFS_DATA_FILE_BLOCK_SIZE) {
 		int err;
-		void *buf = kzalloc(INCFS_DATA_FILE_BLOCK_SIZE, GFP_NOFS);
+		void *buf = kmalloc(INCFS_DATA_FILE_BLOCK_SIZE, GFP_NOFS);
 
 		if (!buf)
 			return -ENOMEM;
 
 		memcpy(buf, data.data, data.len);
+		memset(buf + data.len, 0, INCFS_DATA_FILE_BLOCK_SIZE - data.len);
 		err = crypto_shash_digest(desc, buf, INCFS_DATA_FILE_BLOCK_SIZE,
 					  digest.data);
 		kfree(buf);
