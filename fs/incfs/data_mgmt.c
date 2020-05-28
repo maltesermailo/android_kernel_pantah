@@ -428,6 +428,7 @@ static int validate_hash_tree(struct file *bf, struct file *f,
 		pgoff_t hash_page = file_pages +
 			hash_block_offset[lvl] / INCFS_DATA_FILE_BLOCK_SIZE;
 		struct page *page = find_get_page(f->f_inode->i_mapping, hash_page);
+		u8 *addr = NULL;
 
 		if (page) {
 			u8 *addr = kmap_atomic(page);
@@ -438,17 +439,36 @@ static int validate_hash_tree(struct file *bf, struct file *f,
 			continue;
 		}
 
-		res = incfs_kread(bf, buf, INCFS_DATA_FILE_BLOCK_SIZE,
-				hash_block_offset[lvl] + sig->hash_offset);
-		if (res < 0)
-			return res;
-		if (res != INCFS_DATA_FILE_BLOCK_SIZE)
-			return -EIO;
+		if ((hash_block_offset[lvl] + sig->hash_offset) % 4096 == 0) {
+			page = read_mapping_page(bf->f_inode->i_mapping,
+					(hash_block_offset[lvl] + sig->hash_offset) / INCFS_DATA_FILE_BLOCK_SIZE,
+					NULL);
+
+			if (!IS_ERR(page))
+				addr = kmap_atomic(page);
+			else
+				page = NULL;
+		}
+
+		if (addr == NULL) {
+			res = incfs_kread(bf, buf, INCFS_DATA_FILE_BLOCK_SIZE,
+					hash_block_offset[lvl] + sig->hash_offset);
+
+			if (res < 0)
+				return res;
+			if (res != INCFS_DATA_FILE_BLOCK_SIZE)
+				return -EIO;
+		}
+
 		res = incfs_calc_digest(tree->alg,
-				range(buf, INCFS_DATA_FILE_BLOCK_SIZE),
+				range(addr ? addr : buf, INCFS_DATA_FILE_BLOCK_SIZE),
 				range(calculated_digest, digest_size));
+
+		if (addr)
+			kunmap_atomic(addr);
+
 		if (res)
-			return res;
+			goto fail;
 
 		if (memcmp(stored_digest, calculated_digest, digest_size)) {
 			int i;
@@ -464,20 +484,47 @@ static int validate_hash_tree(struct file *bf, struct file *f,
 
 			if (zero)
 				pr_debug("incfs: Note saved_digest all zero - did you forget to load the hashes?\n");
-			return -EBADMSG;
+			res = -EBADMSG;
+			goto fail;
 		}
 
-		memcpy(stored_digest, buf + hash_offset_in_block[lvl], digest_size);
+		memcpy(stored_digest, (addr ? addr : buf) + hash_offset_in_block[lvl], digest_size);
 
-		page = grab_cache_page(f->f_inode->i_mapping, hash_page);
 		if (page) {
-			u8 *addr = kmap_atomic(page);
+			lock_page(page);
 
-			memcpy(addr, buf, INCFS_DATA_FILE_BLOCK_SIZE);
-			kunmap_atomic(addr);
+			if (!PageDirty(page)) {
+				delete_from_page_cache(page);
+				res = add_to_page_cache_locked(page, f->f_inode->i_mapping, hash_page,
+					mapping_gfp_mask(f->f_inode->i_mapping));
+			}
+
 			unlock_page(page);
 			put_page(page);
+
+			if (res) {
+				page = NULL;
+				pr_debug("Failed to add_to_page_cache");
+			}
 		}
+
+		if (!page) {
+			page = grab_cache_page(f->f_inode->i_mapping, hash_page);
+			if (page) {
+				u8 *addr = kmap_atomic(page);
+
+				memcpy(addr, buf, INCFS_DATA_FILE_BLOCK_SIZE);
+				kunmap_atomic(addr);
+				unlock_page(page);
+				put_page(page);
+			}
+		}
+		continue;
+
+fail:
+		if (page)
+			put_page(page);
+		return res;
 	}
 
 	res = incfs_calc_digest(tree->alg, data,
