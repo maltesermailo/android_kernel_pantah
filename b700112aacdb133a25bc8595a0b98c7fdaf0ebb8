@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4f1c2707_10e105e9",
+        "filename": "kernel/module.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4151,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2020-05-28T16:08:05Z",
+      "side": 1,
+      "message": "I don\u0027t think this would cause any actual issues in Android, but a better fix for the warning is to use rcu_read_lock instead. Note that you only need to hold the lock while calling mod_find_symname:\n\nhttps://android-review.googlesource.com/c/kernel/common/+/1175583/5/kernel/module.c#4297",
+      "revId": "b700112aacdb133a25bc8595a0b98c7fdaf0ebb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
