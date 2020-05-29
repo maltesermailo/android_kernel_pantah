@@ -12,9 +12,14 @@ obj-vdso := gettimeofday.o note.o sigreturn.o
 targets := $(obj-vdso) vdso.so vdso.so.dbg
 obj-vdso := $(addprefix $(obj)/, $(obj-vdso))
 
+<<<<<<< HEAD   (a1c37d Merge 4.14.183 into android-4.14-q)
 ccflags-y := -shared -fno-common -fno-builtin
 ccflags-y += -nostdlib -Wl,-soname=linux-vdso.so.1 \
 		$(call cc-ldoption, -Wl$(comma)--hash-style=sysv)
+=======
+ldflags-y := -shared -nostdlib -soname=linux-vdso.so.1  --hash-style=sysv \
+		--build-id -n -T
+>>>>>>> CHANGE (a9ee8b BACKPORT: arm64: vdso: Explicitly add build-id option)
 ccflags-y += $(DISABLE_LTO)
 
 # Disable gcov profiling for VDSO code
