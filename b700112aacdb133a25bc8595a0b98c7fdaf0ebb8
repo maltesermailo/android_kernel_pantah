@@ -16,6 +16,24 @@
       "revId": "b700112aacdb133a25bc8595a0b98c7fdaf0ebb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21b93145_6b3c9e97",
+        "filename": "kernel/module.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4151,
+      "author": {
+        "id": 1696370
+      },
+      "writtenOn": "2020-05-29T03:32:21Z",
+      "side": 1,
+      "message": "rcu_read_lock() might also resolved the issue. But we actually met lockprove warning during our Android platform boot up in kernel-4.14. The base diff you provided is different from kernel-4.14-stable.\n\nIn kernel-4.14-stable, there is another example to use preempt_disable() before mod_find_symname():\n\nunsigned long module_kallsyms_lookup_name(const char *name)\n{\n    ...\n    preempt_disable();\n    ...\n    ret \u003d mod_find_symname(mod, colon+1);\n    ...\n}\n\nreference: https://android.googlesource.com/kernel/common/+/cb2a52052cebe4716e83b9d2e53682ba00f67de6",
+      "parentUuid": "4f1c2707_10e105e9",
+      "revId": "b700112aacdb133a25bc8595a0b98c7fdaf0ebb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
