@@ -47607,7 +47607,17 @@ member {
   offset: 128
 }
 member {
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  id: 0x85f3d21f
+  name: "base"
+  type_id: 0x293b162f
+  offset: 2048
+}
+member {
+  id: 0x85f3d282
+=======
   id: 0x85f3de85
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   name: "base"
   type_id: 0x293b162f
   offset: 512
@@ -242976,6 +242986,23 @@ struct_union {
   kind: STRUCT
   name: "shash_alg"
   definition {
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+    bytesize: 640
+    member_id: 0x1ac78232
+    member_id: 0xd6886f0b
+    member_id: 0x6fd2b6e0
+    member_id: 0x7e491f35
+    member_id: 0x5f82a477
+    member_id: 0x24b8d418
+    member_id: 0x6f151f16
+    member_id: 0x177acdc5
+    member_id: 0x4a525181
+    member_id: 0x7c86a539
+    member_id: 0x2bac99e8
+    member_id: 0x9f7a3da5
+    member_id: 0x1b3dcac5
+    member_id: 0x85f3d21f
+=======
     bytesize: 576
     member_id: 0x1ac78232
     member_id: 0xd6886f0b
@@ -242991,6 +243018,7 @@ struct_union {
     member_id: 0x9f7a3da5
     member_id: 0x1b3dcac5
     member_id: 0x85f3df7a
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   }
 }
 struct_union {
@@ -313247,7 +313275,11 @@ elf_symbol {
   name: "__clk_mux_determine_rate"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x790ae1ff
+=======
   crc: 0xd5687b79
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9fc8d916
   full_name: "__clk_mux_determine_rate"
 }
@@ -313463,6 +313495,18 @@ elf_symbol {
   name: "__devm_clk_hw_register_divider"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x7bbde018
+  type_id: 0xde292a8a
+  full_name: "__devm_clk_hw_register_divider"
+}
+elf_symbol {
+  id: 0xce934a47
+  name: "__devm_clk_hw_register_mux"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xec042871
+=======
   crc: 0xa2316c66
   type_id: 0xde292a8a
   full_name: "__devm_clk_hw_register_divider"
@@ -313473,6 +313517,7 @@ elf_symbol {
   is_defined: true
   symbol_type: FUNCTION
   crc: 0x5d6b7a21
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0xde2977ad
   full_name: "__devm_clk_hw_register_mux"
 }
@@ -313562,7 +313607,11 @@ elf_symbol {
   name: "__devm_reset_control_bulk_get"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x9a34a512
+=======
   crc: 0xde866395
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9c8307a8
   full_name: "__devm_reset_control_bulk_get"
 }
@@ -313589,7 +313638,11 @@ elf_symbol {
   name: "__devm_spi_alloc_controller"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xe3b474eb
+=======
   crc: 0x755bec98
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x5179d95b
   full_name: "__devm_spi_alloc_controller"
 }
@@ -313607,7 +313660,11 @@ elf_symbol {
   name: "__dma_request_channel"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xe1402ccf
+=======
   crc: 0xa05bcbf5
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x89ab6589
   full_name: "__dma_request_channel"
 }
@@ -313688,7 +313745,11 @@ elf_symbol {
   name: "__drm_atomic_helper_plane_reset"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x20654d45
+=======
   crc: 0xd7586b0f
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x16ebcbfa
   full_name: "__drm_atomic_helper_plane_reset"
 }
@@ -314661,7 +314722,11 @@ elf_symbol {
   name: "__of_reset_control_get"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xbe7a1035
+=======
   crc: 0x0eff9df4
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x026c1696
   full_name: "__of_reset_control_get"
 }
@@ -314958,7 +315023,11 @@ elf_symbol {
   name: "__reset_control_get"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x482fd25f
+=======
   crc: 0x7bd511d5
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x0fe6e820
   full_name: "__reset_control_get"
 }
@@ -321542,7 +321611,11 @@ elf_symbol {
   name: "clk_hw_get_clk"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x94e28de4
+=======
   crc: 0x233e2ba3
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0xa45e82f4
   full_name: "clk_hw_get_clk"
 }
@@ -321938,7 +322011,11 @@ elf_symbol {
   name: "component_compare_of"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x593bf008
+=======
   crc: 0xff10d04e
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9d7428e0
   full_name: "component_compare_of"
 }
@@ -322969,7 +323046,11 @@ elf_symbol {
   name: "crypto_register_shash"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x51946f24
+=======
   crc: 0x1fa77889
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9e955b54
   full_name: "crypto_register_shash"
 }
@@ -323113,7 +323194,11 @@ elf_symbol {
   name: "crypto_unregister_shash"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x14ede29f
+=======
   crc: 0x3d5286c9
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x138de9e8
   full_name: "crypto_unregister_shash"
 }
@@ -323176,7 +323261,11 @@ elf_symbol {
   name: "dapm_regulator_event"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xdfc59deb
+=======
   crc: 0x7d7df5d3
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9fb0a0b3
   full_name: "dapm_regulator_event"
 }
@@ -323932,7 +324021,11 @@ elf_symbol {
   name: "dev_pm_opp_find_level_exact"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x156aaf1d
+=======
   crc: 0xfeed08ab
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x80d1a163
   full_name: "dev_pm_opp_find_level_exact"
 }
@@ -323950,6 +324043,18 @@ elf_symbol {
   name: "dev_pm_opp_get_level"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xd6f4b63b
+  type_id: 0xc8a2e5e7
+  full_name: "dev_pm_opp_get_level"
+}
+elf_symbol {
+  id: 0x4640865f
+  name: "dev_pm_opp_get_of_node"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x034827b9
+=======
   crc: 0x124db191
   type_id: 0xc8a2e5e7
   full_name: "dev_pm_opp_get_level"
@@ -323960,6 +324065,7 @@ elf_symbol {
   is_defined: true
   symbol_type: FUNCTION
   crc: 0x1bb48e62
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x708a45ca
   full_name: "dev_pm_opp_get_of_node"
 }
@@ -324013,7 +324119,11 @@ elf_symbol {
   name: "dev_pm_opp_of_get_opp_desc_node"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x4ec3108b
+=======
   crc: 0xd99ad1df
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x7665e08d
   full_name: "dev_pm_opp_of_get_opp_desc_node"
 }
@@ -324553,7 +324663,11 @@ elf_symbol {
   name: "device_get_mac_address"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x853c5d0b
+=======
   crc: 0x1f736720
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9d04d2ef
   full_name: "device_get_mac_address"
 }
@@ -324571,7 +324685,11 @@ elf_symbol {
   name: "device_get_named_child_node"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xedb2791d
+=======
   crc: 0x4acc1d8a
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x3908f702
   full_name: "device_get_named_child_node"
 }
@@ -324904,7 +325022,11 @@ elf_symbol {
   name: "devm_clk_bulk_get_optional"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xf26c5195
+=======
   crc: 0x10da08ca
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9c84371e
   full_name: "devm_clk_bulk_get_optional"
 }
@@ -324940,7 +325062,11 @@ elf_symbol {
   name: "devm_clk_hw_register_fixed_factor_parent_hw"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x2e26f459
+=======
   crc: 0x197839db
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0xde006855
   full_name: "devm_clk_hw_register_fixed_factor_parent_hw"
 }
@@ -324967,7 +325093,11 @@ elf_symbol {
   name: "devm_devfreq_add_device"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x777e5101
+=======
   crc: 0x12de3b4f
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0xda80c39b
   full_name: "devm_devfreq_add_device"
 }
@@ -325084,7 +325214,11 @@ elf_symbol {
   name: "devm_get_clk_from_child"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xa2a94c52
+=======
   crc: 0x17f38b39
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0xa6579ee9
   full_name: "devm_get_clk_from_child"
 }
@@ -325138,7 +325272,11 @@ elf_symbol {
   name: "devm_gpiod_get_index"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xabc61cb1
+=======
   crc: 0x9bbaf410
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x5f3cfa16
   full_name: "devm_gpiod_get_index"
 }
@@ -325156,7 +325294,11 @@ elf_symbol {
   name: "devm_gpiod_put"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x00e24d83
+=======
   crc: 0xd4132666
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x109bed40
   full_name: "devm_gpiod_put"
 }
@@ -325318,7 +325460,11 @@ elf_symbol {
   name: "devm_led_classdev_multicolor_register_ext"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xa8941c9e
+=======
   crc: 0x2d79bf48
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9de8f9f8
   full_name: "devm_led_classdev_multicolor_register_ext"
 }
@@ -325345,7 +325491,11 @@ elf_symbol {
   name: "devm_memremap"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xf6ad47f0
+=======
   crc: 0x50d14050
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x5468daf3
   full_name: "devm_memremap"
 }
@@ -325552,6 +325702,36 @@ elf_symbol {
   name: "devm_pm_clk_create"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xc037d49a
+  type_id: 0x9d16dd74
+  full_name: "devm_pm_clk_create"
+}
+elf_symbol {
+  id: 0xa7a43193
+  name: "devm_pm_opp_of_add_table"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8616916c
+  type_id: 0x9d16dd74
+  full_name: "devm_pm_opp_of_add_table"
+}
+elf_symbol {
+  id: 0xb271f21a
+  name: "devm_pm_opp_set_config"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x56cfde38
+  type_id: 0x9d0fcb12
+  full_name: "devm_pm_opp_set_config"
+}
+elf_symbol {
+  id: 0xce4b7f5f
+  name: "devm_pm_runtime_enable"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3d2d3c18
+=======
   crc: 0xcd1ff068
   type_id: 0x9d16dd74
   full_name: "devm_pm_clk_create"
@@ -325580,6 +325760,7 @@ elf_symbol {
   is_defined: true
   symbol_type: FUNCTION
   crc: 0x415fc010
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9d16dd74
   full_name: "devm_pm_runtime_enable"
 }
@@ -325606,7 +325787,11 @@ elf_symbol {
   name: "devm_qcom_smem_state_get"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xc52a28b1
+=======
   crc: 0xf0af2d5b
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x4f30442f
   full_name: "devm_qcom_smem_state_get"
 }
@@ -325651,7 +325836,11 @@ elf_symbol {
   name: "devm_regulator_bulk_get_const"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x0dde7966
+=======
   crc: 0xcda6dc32
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9c86c8d2
   full_name: "devm_regulator_bulk_get_const"
 }
@@ -325732,7 +325921,11 @@ elf_symbol {
   name: "devm_reset_control_array_get"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xc4fbce8a
+=======
   crc: 0xac3329ca
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x0ea86f7f
   full_name: "devm_reset_control_array_get"
 }
@@ -325786,7 +325979,11 @@ elf_symbol {
   name: "devm_spi_register_controller"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x8bc7bb05
+=======
   crc: 0x65b0e202
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9d15ab3e
   full_name: "devm_spi_register_controller"
 }
@@ -325831,7 +326028,11 @@ elf_symbol {
   name: "devm_watchdog_register_device"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xe70b0fb2
+=======
   crc: 0xef96ca49
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9d5d4010
   full_name: "devm_watchdog_register_device"
 }
@@ -326492,7 +326693,11 @@ elf_symbol {
   name: "dma_pool_create"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x1b289bfb
+=======
   crc: 0xc5de9158
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x5f4c14dc
   full_name: "dma_pool_create"
 }
@@ -326546,7 +326751,11 @@ elf_symbol {
   name: "dma_resv_describe"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x634ee453
+=======
   crc: 0x3bbdfd0f
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x1950a0f3
   full_name: "dma_resv_describe"
 }
@@ -326582,6 +326791,18 @@ elf_symbol {
   name: "dma_resv_iter_first"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x2d091c1b
+  type_id: 0xdc551b4d
+  full_name: "dma_resv_iter_first"
+}
+elf_symbol {
+  id: 0x034915b6
+  name: "dma_resv_iter_next"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc5cfc54d
+=======
   crc: 0x3aca9496
   type_id: 0xdc551b4d
   full_name: "dma_resv_iter_first"
@@ -326592,6 +326813,7 @@ elf_symbol {
   is_defined: true
   symbol_type: FUNCTION
   crc: 0xd37606e7
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0xdc551b4d
   full_name: "dma_resv_iter_next"
 }
@@ -327005,7 +327227,11 @@ elf_symbol {
   name: "drm_atomic_get_new_bridge_state"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x1f3b0004
+=======
   crc: 0x2982397b
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x289916da
   full_name: "drm_atomic_get_new_bridge_state"
 }
@@ -327482,7 +327708,11 @@ elf_symbol {
   name: "drm_atomic_print_new_state"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x5a05596f
+=======
   crc: 0xd8361862
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x1de9a6b4
   full_name: "drm_atomic_print_new_state"
 }
@@ -327662,6 +327892,36 @@ elf_symbol {
   name: "drm_bridge_connector_enable_hpd"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x95b895b3
+  type_id: 0x1cf53808
+  full_name: "drm_bridge_connector_enable_hpd"
+}
+elf_symbol {
+  id: 0x51b726c8
+  name: "drm_bridge_connector_init"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x90247066
+  type_id: 0xadb56de9
+  full_name: "drm_bridge_connector_init"
+}
+elf_symbol {
+  id: 0x5d9f16f7
+  name: "drm_bridge_detect"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x60225341
+  type_id: 0xfcf090be
+  full_name: "drm_bridge_detect"
+}
+elf_symbol {
+  id: 0xd82232b3
+  name: "drm_bridge_hpd_notify"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x14867893
+=======
   crc: 0xf1e4091c
   type_id: 0x1cf53808
   full_name: "drm_bridge_connector_enable_hpd"
@@ -327690,6 +327950,7 @@ elf_symbol {
   is_defined: true
   symbol_type: FUNCTION
   crc: 0xf735f8a3
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x182b2835
   full_name: "drm_bridge_hpd_notify"
 }
@@ -327950,7 +328211,11 @@ elf_symbol {
   name: "drm_crtc_vblank_helper_get_vblank_timestamp"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xe39a12e3
+=======
   crc: 0x024be560
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0xf2bde902
   full_name: "drm_crtc_vblank_helper_get_vblank_timestamp"
 }
@@ -328490,6 +328755,18 @@ elf_symbol {
   name: "drm_gem_lru_move_tail"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x31ba7604
+  type_id: 0x1dfacbed
+  full_name: "drm_gem_lru_move_tail"
+}
+elf_symbol {
+  id: 0x419b2e18
+  name: "drm_gem_lru_scan"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x24b4efd8
+=======
   crc: 0xd6c2b94a
   type_id: 0x1dfacbed
   full_name: "drm_gem_lru_move_tail"
@@ -328500,6 +328777,7 @@ elf_symbol {
   is_defined: true
   symbol_type: FUNCTION
   crc: 0x649ae489
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x3d346eb2
   full_name: "drm_gem_lru_scan"
 }
@@ -328589,7 +328867,11 @@ elf_symbol {
   name: "drm_gem_plane_helper_prepare_fb"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x30edcba2
+=======
   crc: 0x50a310d4
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9bf37946
   full_name: "drm_gem_plane_helper_prepare_fb"
 }
@@ -328850,6 +329132,18 @@ elf_symbol {
   name: "drm_handle_vblank"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x68e3e773
+  type_id: 0xf1736137
+  full_name: "drm_handle_vblank"
+}
+elf_symbol {
+  id: 0xe5568c92
+  name: "drm_hdmi_avi_infoframe_from_display_mode"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd7cf719a
+=======
   crc: 0xe32d3f12
   type_id: 0xf1736137
   full_name: "drm_handle_vblank"
@@ -328860,6 +329154,7 @@ elf_symbol {
   is_defined: true
   symbol_type: FUNCTION
   crc: 0x79f6753f
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x99c0ccec
   full_name: "drm_hdmi_avi_infoframe_from_display_mode"
 }
@@ -328886,7 +329181,11 @@ elf_symbol {
   name: "drm_helper_move_panel_connectors_to_head"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x6a88860b
+=======
   crc: 0x30e6b1ce
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x1e597e38
   full_name: "drm_helper_move_panel_connectors_to_head"
 }
@@ -329021,6 +329320,18 @@ elf_symbol {
   name: "drm_mode_config_helper_resume"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xd25334df
+  type_id: 0x9341cc84
+  full_name: "drm_mode_config_helper_resume"
+}
+elf_symbol {
+  id: 0xd219907d
+  name: "drm_mode_config_helper_suspend"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xeb5ed697
+=======
   crc: 0xcb226672
   type_id: 0x9341cc84
   full_name: "drm_mode_config_helper_resume"
@@ -329031,6 +329342,7 @@ elf_symbol {
   is_defined: true
   symbol_type: FUNCTION
   crc: 0x79db9ec5
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9341cc84
   full_name: "drm_mode_config_helper_suspend"
 }
@@ -329102,7 +329414,11 @@ elf_symbol {
   name: "drm_mode_destroy"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xf73c7541
+=======
   crc: 0x943f0878
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x1ef285a9
   full_name: "drm_mode_destroy"
 }
@@ -329282,7 +329598,11 @@ elf_symbol {
   name: "drm_modeset_lock_init"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xac5533b2
+=======
   crc: 0x93ed1870
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x1aecf5d9
   full_name: "drm_modeset_lock_init"
 }
@@ -329525,7 +329845,11 @@ elf_symbol {
   name: "drm_plane_enable_fb_damage_clips"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x3862a8d6
+=======
   crc: 0x66445160
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x1653799a
   full_name: "drm_plane_enable_fb_damage_clips"
 }
@@ -329570,7 +329894,11 @@ elf_symbol {
   name: "drm_prime_sg_to_page_array"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xe0c923e5
+=======
   crc: 0x64be6b64
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9d9ce4b7
   full_name: "drm_prime_sg_to_page_array"
 }
@@ -329588,7 +329916,11 @@ elf_symbol {
   name: "drm_probe_ddc"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x8cd738db
+=======
   crc: 0x46b167d2
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0xf7820d73
   full_name: "drm_probe_ddc"
 }
@@ -329831,6 +330163,54 @@ elf_symbol {
   name: "drm_state_dump"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x2e8612ba
+  type_id: 0x1ef499ec
+  full_name: "drm_state_dump"
+}
+elf_symbol {
+  id: 0xdae72f16
+  name: "drm_syncobj_add_point"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc9d99ebc
+  type_id: 0x15766e8a
+  full_name: "drm_syncobj_add_point"
+}
+elf_symbol {
+  id: 0x4cbe86f3
+  name: "drm_syncobj_find"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x541928c5
+  type_id: 0xe211074d
+  full_name: "drm_syncobj_find"
+}
+elf_symbol {
+  id: 0xfad82b0b
+  name: "drm_syncobj_find_fence"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xfd45bd39
+  type_id: 0x9a3bbebc
+  full_name: "drm_syncobj_find_fence"
+}
+elf_symbol {
+  id: 0xb11bdc47
+  name: "drm_syncobj_free"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1a411479
+  type_id: 0x14cd8502
+  full_name: "drm_syncobj_free"
+}
+elf_symbol {
+  id: 0x3b60a5fe
+  name: "drm_syncobj_replace_fence"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3a9f5c14
+=======
   crc: 0x617eb81a
   type_id: 0x1ef499ec
   full_name: "drm_state_dump"
@@ -329877,6 +330257,7 @@ elf_symbol {
   is_defined: true
   symbol_type: FUNCTION
   crc: 0x805b0704
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x15401a81
   full_name: "drm_syncobj_replace_fence"
 }
@@ -329930,7 +330311,11 @@ elf_symbol {
   name: "drm_writeback_connector_init_with_encoder"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xb0608c34
+=======
   crc: 0x96f83796
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x93f6a75b
   full_name: "drm_writeback_connector_init_with_encoder"
 }
@@ -331019,7 +331404,11 @@ elf_symbol {
   name: "fwnode_usb_role_switch_get"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x655427a6
+=======
   crc: 0x4fef96e7
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x84380e6d
   full_name: "fwnode_usb_role_switch_get"
 }
@@ -332945,7 +333334,11 @@ elf_symbol {
   name: "i2c_generic_scl_recovery"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xba0388df
+=======
   crc: 0x0eb62e64
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x94a6b558
   full_name: "i2c_generic_scl_recovery"
 }
@@ -333026,7 +333419,11 @@ elf_symbol {
   name: "i2c_parse_fw_timings"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x3526a4f5
+=======
   crc: 0x50a04285
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x10b9d05d
   full_name: "i2c_parse_fw_timings"
 }
@@ -333053,7 +333450,11 @@ elf_symbol {
   name: "i2c_recover_bus"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xe681c8eb
+=======
   crc: 0x4f63e535
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x94a6b558
   full_name: "i2c_recover_bus"
 }
@@ -333332,6 +333733,18 @@ elf_symbol {
   name: "icc_disable"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xf0411853
+  type_id: 0x975db23f
+  full_name: "icc_disable"
+}
+elf_symbol {
+  id: 0xd04a88f6
+  name: "icc_enable"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xcf2be3eb
+=======
   crc: 0x6ff24606
   type_id: 0x975db23f
   full_name: "icc_disable"
@@ -333342,6 +333755,7 @@ elf_symbol {
   is_defined: true
   symbol_type: FUNCTION
   crc: 0x0fd462d0
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x975db23f
   full_name: "icc_enable"
 }
@@ -333440,7 +333854,11 @@ elf_symbol {
   name: "icc_std_aggregate"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xd880edc1
+=======
   crc: 0x63780787
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9d001826
   full_name: "icc_std_aggregate"
 }
@@ -335699,7 +336117,11 @@ elf_symbol {
   name: "invalidate_mapping_pages"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x4225134b
+=======
   crc: 0x0478706d
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x340d6f59
   full_name: "invalidate_mapping_pages"
 }
@@ -337409,7 +337831,11 @@ elf_symbol {
   name: "kstrdup_quotable_cmdline"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x5bdfd7df
+=======
   crc: 0x3e5d93f9
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x3abef0c1
   full_name: "kstrdup_quotable_cmdline"
 }
@@ -338291,7 +338717,11 @@ elf_symbol {
   name: "led_mc_calc_color_components"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x8995c579
+=======
   crc: 0x71ff0464
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x927aedd4
   full_name: "led_mc_calc_color_components"
 }
@@ -338771,6 +339201,15 @@ elf_symbol {
   crc: 0x4c894766
   type_id: 0x01a85b76
   full_name: "memblock_end_of_DRAM"
+}
+elf_symbol {
+  id: 0x4fb91c54
+  name: "memblock_free"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa6ecab47
+  type_id: 0x1567dd7e
+  full_name: "memblock_free"
 }
 elf_symbol {
   id: 0xaa97e158
@@ -339664,7 +340103,11 @@ elf_symbol {
   name: "netdev_notice"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x435b37d6
+=======
   crc: 0xf7a30cfe
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x1caf28d1
   full_name: "netdev_notice"
 }
@@ -340456,7 +340899,11 @@ elf_symbol {
   name: "nvmem_cell_read_variable_le_u32"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x04e2721a
+=======
   crc: 0x90394179
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9de0ab2c
   full_name: "nvmem_cell_read_variable_le_u32"
 }
@@ -340591,7 +341038,11 @@ elf_symbol {
   name: "of_clk_hw_onecell_get"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x65e08118
+=======
   crc: 0x77fa7e26
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0xdd32bce5
   full_name: "of_clk_hw_onecell_get"
 }
@@ -340609,7 +341060,11 @@ elf_symbol {
   name: "of_clk_set_defaults"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x314761e7
+=======
   crc: 0x4bca2ec1
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9129debd
   full_name: "of_clk_set_defaults"
 }
@@ -340699,7 +341154,11 @@ elf_symbol {
   name: "of_device_request_module"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x00c41a13
+=======
   crc: 0x87121dbe
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9d16dd74
   full_name: "of_device_request_module"
 }
@@ -340933,7 +341392,11 @@ elf_symbol {
   name: "of_get_compatible_child"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xf9c78e92
+=======
   crc: 0x1530f7f6
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x7a80bf10
   full_name: "of_get_compatible_child"
 }
@@ -340951,7 +341414,11 @@ elf_symbol {
   name: "of_get_i2c_adapter_by_node"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xf0a2750d
+=======
   crc: 0x9679a1eb
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x619a645f
   full_name: "of_get_i2c_adapter_by_node"
 }
@@ -341347,7 +341814,11 @@ elf_symbol {
   name: "of_pm_clk_add_clks"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x6659cdbe
+=======
   crc: 0x86f84223
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9d16dd74
   full_name: "of_pm_clk_add_clks"
 }
@@ -342050,7 +342521,11 @@ elf_symbol {
   name: "pci_enable_msi"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x36928e62
+=======
   crc: 0xf72df9f7
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x99f942bc
   full_name: "pci_enable_msi"
 }
@@ -342149,7 +342624,11 @@ elf_symbol {
   name: "pci_get_slot"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x639ffe10
+=======
   crc: 0x49cb5010
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x8e8c9c93
   full_name: "pci_get_slot"
 }
@@ -342230,7 +342709,11 @@ elf_symbol {
   name: "pci_match_id"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x396a2478
+=======
   crc: 0x22d0cdeb
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0xaddc5fdc
   full_name: "pci_match_id"
 }
@@ -342473,7 +342956,11 @@ elf_symbol {
   name: "pcie_capability_write_word"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xdd1ec708
+=======
   crc: 0x923c07ee
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9841929f
   full_name: "pcie_capability_write_word"
 }
@@ -342707,7 +343194,11 @@ elf_symbol {
   name: "phy_configure"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xee038e17
+=======
   crc: 0xf91b1ad1
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9faf6f77
   full_name: "phy_configure"
 }
@@ -343265,6 +343756,45 @@ elf_symbol {
   name: "pinctrl_generic_add_group"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xdd90cdf0
+  type_id: 0x9ba88768
+  full_name: "pinctrl_generic_add_group"
+}
+elf_symbol {
+  id: 0x86c3082b
+  name: "pinctrl_generic_get_group_count"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x575bcfe6
+  type_id: 0x9b558913
+  full_name: "pinctrl_generic_get_group_count"
+}
+elf_symbol {
+  id: 0x0fdc5a85
+  name: "pinctrl_generic_get_group_name"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x325601ba
+  type_id: 0x95876807
+  full_name: "pinctrl_generic_get_group_name"
+}
+elf_symbol {
+  id: 0x3ce6f576
+  name: "pinctrl_generic_get_group_pins"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2eb92a89
+  type_id: 0x9a42cb81
+  full_name: "pinctrl_generic_get_group_pins"
+}
+elf_symbol {
+  id: 0xc93168f3
+  name: "pinctrl_generic_remove_group"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xddc7753f
+=======
   crc: 0xd10ee321
   type_id: 0x9ba88768
   full_name: "pinctrl_generic_add_group"
@@ -343302,6 +343832,7 @@ elf_symbol {
   is_defined: true
   symbol_type: FUNCTION
   crc: 0x631f983c
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9a439c8b
   full_name: "pinctrl_generic_remove_group"
 }
@@ -343328,7 +343859,11 @@ elf_symbol {
   name: "pinctrl_pm_select_idle_state"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x8b8c5844
+=======
   crc: 0xcec017a9
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9d16dd74
   full_name: "pinctrl_pm_select_idle_state"
 }
@@ -343670,6 +344205,18 @@ elf_symbol {
   name: "pm_generic_runtime_resume"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x2d1f61b0
+  type_id: 0x9d16dd74
+  full_name: "pm_generic_runtime_resume"
+}
+elf_symbol {
+  id: 0x2e17e257
+  name: "pm_generic_runtime_suspend"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2401efd0
+=======
   crc: 0xdef20543
   type_id: 0x9d16dd74
   full_name: "pm_generic_runtime_resume"
@@ -343680,6 +344227,7 @@ elf_symbol {
   is_defined: true
   symbol_type: FUNCTION
   crc: 0x8cfd90e4
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9d16dd74
   full_name: "pm_generic_runtime_suspend"
 }
@@ -345299,7 +345847,11 @@ elf_symbol {
   name: "regcache_cache_bypass"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xa4521de0
+=======
   crc: 0x80d0c36e
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x1347a32b
   full_name: "regcache_cache_bypass"
 }
@@ -345713,7 +346265,11 @@ elf_symbol {
   name: "regmap_get_val_bytes"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x1f3f7830
+=======
   crc: 0xbfe04f4e
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9feaece8
   full_name: "regmap_get_val_bytes"
 }
@@ -345767,6 +346323,18 @@ elf_symbol {
   name: "regmap_noinc_read"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x97ff4391
+  type_id: 0x9ef906fc
+  full_name: "regmap_noinc_read"
+}
+elf_symbol {
+  id: 0xdbf7d123
+  name: "regmap_noinc_write"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8b3447ba
+=======
   crc: 0xeebe1eaf
   type_id: 0x9ef906fc
   full_name: "regmap_noinc_read"
@@ -345777,6 +346345,7 @@ elf_symbol {
   is_defined: true
   symbol_type: FUNCTION
   crc: 0x6a746497
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9ef16e60
   full_name: "regmap_noinc_write"
 }
@@ -345875,7 +346444,11 @@ elf_symbol {
   name: "regulator_bulk_get"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x260fd9a0
+=======
   crc: 0x2f43cd2f
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9c874de2
   full_name: "regulator_bulk_get"
 }
@@ -345947,6 +346520,18 @@ elf_symbol {
   name: "regulator_get_current_limit_regmap"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x528ec906
+  type_id: 0x9e5ef2fc
+  full_name: "regulator_get_current_limit_regmap"
+}
+elf_symbol {
+  id: 0xc92def38
+  name: "regulator_get_linear_step"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x364542dd
+=======
   crc: 0xa68da238
   type_id: 0x9e5ef2fc
   full_name: "regulator_get_current_limit_regmap"
@@ -345957,6 +346542,7 @@ elf_symbol {
   is_defined: true
   symbol_type: FUNCTION
   crc: 0x7d45529e
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0xceb0f977
   full_name: "regulator_get_linear_step"
 }
@@ -346109,7 +346695,11 @@ elf_symbol {
   name: "regulator_set_current_limit_regmap"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x6a8d3508
+=======
   crc: 0xaae8fcde
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9fdbb984
   full_name: "regulator_set_current_limit_regmap"
 }
@@ -346739,6 +347329,18 @@ elf_symbol {
   name: "rpmsg_create_channel"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x46078793
+  type_id: 0xa3adbe6c
+  full_name: "rpmsg_create_channel"
+}
+elf_symbol {
+  id: 0x492407e0
+  name: "rpmsg_create_ept"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe5440616
+=======
   crc: 0x6f036680
   type_id: 0xa3adbe6c
   full_name: "rpmsg_create_channel"
@@ -346749,6 +347351,7 @@ elf_symbol {
   is_defined: true
   symbol_type: FUNCTION
   crc: 0xcedd0d50
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x4cd21214
   full_name: "rpmsg_create_ept"
 }
@@ -346784,7 +347387,11 @@ elf_symbol {
   name: "rpmsg_release_channel"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x0fe460ee
+=======
   crc: 0x28c60ab5
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x947a09b6
   full_name: "rpmsg_release_channel"
 }
@@ -346919,7 +347526,11 @@ elf_symbol {
   name: "rproc_elf_get_boot_addr"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xd99df029
+=======
   crc: 0x39db0d65
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x5d665720
   full_name: "rproc_elf_get_boot_addr"
 }
@@ -347207,7 +347818,11 @@ elf_symbol {
   name: "sb800_prefetch"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x116a0cae
+=======
   crc: 0xd1c13609
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x1192ec84
   full_name: "sb800_prefetch"
 }
@@ -348377,7 +348992,11 @@ elf_symbol {
   name: "shmem_truncate_range"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xdc8eaa21
+=======
   crc: 0x32d2ac6d
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x16ee4350
   full_name: "shmem_truncate_range"
 }
@@ -349169,6 +349788,18 @@ elf_symbol {
   name: "snd_dma_alloc_dir_pages"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xe5ea165b
+  type_id: 0x84710953
+  full_name: "snd_dma_alloc_dir_pages"
+}
+elf_symbol {
+  id: 0xafa6f89a
+  name: "snd_dma_free_pages"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8c244d74
+=======
   crc: 0x4cb13777
   type_id: 0x84710953
   full_name: "snd_dma_alloc_dir_pages"
@@ -349179,6 +349810,7 @@ elf_symbol {
   is_defined: true
   symbol_type: FUNCTION
   crc: 0xc7379b74
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x1c27266a
   full_name: "snd_dma_free_pages"
 }
@@ -349277,7 +349909,11 @@ elf_symbol {
   name: "snd_pcm_fill_iec958_consumer"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x12ceb02b
+=======
   crc: 0x6c76d2d0
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9c8e6c6c
   full_name: "snd_pcm_fill_iec958_consumer"
 }
@@ -349313,7 +349949,11 @@ elf_symbol {
   name: "snd_pcm_hw_constraint_eld"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x77150fa7
+=======
   crc: 0x17d844de
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9cd28836
   full_name: "snd_pcm_hw_constraint_eld"
 }
@@ -349340,6 +349980,18 @@ elf_symbol {
   name: "snd_pcm_hw_constraint_minmax"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x7d829ea1
+  type_id: 0x9d419277
+  full_name: "snd_pcm_hw_constraint_minmax"
+}
+elf_symbol {
+  id: 0xc6fd5d28
+  name: "snd_pcm_hw_constraint_step"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc6411bb1
+=======
   crc: 0x8023fbb0
   type_id: 0x9d419277
   full_name: "snd_pcm_hw_constraint_minmax"
@@ -349350,6 +350002,7 @@ elf_symbol {
   is_defined: true
   symbol_type: FUNCTION
   crc: 0x7e79e6d6
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9db8bc66
   full_name: "snd_pcm_hw_constraint_step"
 }
@@ -349529,7 +350182,11 @@ elf_symbol {
   name: "snd_soc_component_read_field"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xb59e86e3
+=======
   crc: 0xf727ed45
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0xcb85eb41
   full_name: "snd_soc_component_read_field"
 }
@@ -349583,7 +350240,11 @@ elf_symbol {
   name: "snd_soc_component_write_field"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x36a006c3
+=======
   crc: 0xe4058fd8
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x98df6080
   full_name: "snd_soc_component_write_field"
 }
@@ -349601,7 +350262,11 @@ elf_symbol {
   name: "snd_soc_dai_link_set_capabilities"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xaac298ea
+=======
   crc: 0x6deba5bb
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x1899030d
   full_name: "snd_soc_dai_link_set_capabilities"
 }
@@ -349619,7 +350284,11 @@ elf_symbol {
   name: "snd_soc_dai_set_fmt"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x18567a2c
+=======
   crc: 0xd17f2b50
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9ddd1db7
   full_name: "snd_soc_dai_set_fmt"
 }
@@ -349736,7 +350405,11 @@ elf_symbol {
   name: "snd_soc_dapm_kcontrol_dapm"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x02afdf89
+=======
   crc: 0x5d55ab96
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x146afcfb
   full_name: "snd_soc_dapm_kcontrol_dapm"
 }
@@ -349943,6 +350616,18 @@ elf_symbol {
   name: "snd_soc_of_parse_audio_simple_widgets"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x029139fc
+  type_id: 0x9b3fd927
+  full_name: "snd_soc_of_parse_audio_simple_widgets"
+}
+elf_symbol {
+  id: 0x79fa03e3
+  name: "snd_soc_of_parse_aux_devs"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x97be8f84
+=======
   crc: 0x13811215
   type_id: 0x9b3fd927
   full_name: "snd_soc_of_parse_audio_simple_widgets"
@@ -349953,6 +350638,7 @@ elf_symbol {
   is_defined: true
   symbol_type: FUNCTION
   crc: 0x26713b4d
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9b3fd927
   full_name: "snd_soc_of_parse_aux_devs"
 }
@@ -349970,7 +350656,11 @@ elf_symbol {
   name: "snd_soc_of_parse_pin_switches"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x8fb07fe7
+=======
   crc: 0x204f627b
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9b3fd927
   full_name: "snd_soc_of_parse_pin_switches"
 }
@@ -350069,6 +350759,27 @@ elf_symbol {
   name: "snd_soc_tplg_component_load"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x2033332a
+  type_id: 0x99516809
+  full_name: "snd_soc_tplg_component_load"
+}
+elf_symbol {
+  id: 0x7c7f5167
+  name: "snd_soc_tplg_component_remove"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x35a7913a
+  type_id: 0x99d90254
+  full_name: "snd_soc_tplg_component_remove"
+}
+elf_symbol {
+  id: 0xe5cef1d3
+  name: "snd_soc_tplg_widget_bind_event"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x22c8822f
+=======
   crc: 0xee02c2a1
   type_id: 0x99516809
   full_name: "snd_soc_tplg_component_load"
@@ -350088,6 +350799,7 @@ elf_symbol {
   is_defined: true
   symbol_type: FUNCTION
   crc: 0x40a92409
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9fee7b3a
   full_name: "snd_soc_tplg_widget_bind_event"
 }
@@ -350501,7 +351213,11 @@ elf_symbol {
   name: "spi_async"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x3954e429
+=======
   crc: 0xa3d1d14f
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x99b7b018
   full_name: "spi_async"
 }
@@ -350564,6 +351280,27 @@ elf_symbol {
   name: "spi_finalize_current_transfer"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x1711133c
+  type_id: 0x10af3538
+  full_name: "spi_finalize_current_transfer"
+}
+elf_symbol {
+  id: 0x8d01be1f
+  name: "spi_get_device_id"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x97a4bee3
+  type_id: 0xdb53d61f
+  full_name: "spi_get_device_id"
+}
+elf_symbol {
+  id: 0x53ad82f3
+  name: "spi_get_next_queued_message"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc13b87fa
+=======
   crc: 0xfd5d1438
   type_id: 0x10af3538
   full_name: "spi_finalize_current_transfer"
@@ -350583,6 +351320,7 @@ elf_symbol {
   is_defined: true
   symbol_type: FUNCTION
   crc: 0x52a7a824
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0xb91d7092
   full_name: "spi_get_next_queued_message"
 }
@@ -350636,7 +351374,11 @@ elf_symbol {
   name: "spi_write_then_read"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x7a532200
+=======
   crc: 0xf5af76eb
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x99c5a325
   full_name: "spi_write_then_read"
 }
@@ -352709,7 +353451,11 @@ elf_symbol {
   name: "typec_set_orientation"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xb4f0d083
+=======
   crc: 0xee74ec9e
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9365db7d
   full_name: "typec_set_orientation"
 }
@@ -352772,7 +353518,11 @@ elf_symbol {
   name: "typec_unregister_port"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x8a84fc38
+=======
   crc: 0x9e7adeb9
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x1d404c08
   full_name: "typec_unregister_port"
 }
@@ -353078,7 +353828,11 @@ elf_symbol {
   name: "ufshcd_dme_configure_adapt"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xe98eae38
+=======
   crc: 0x38bfbc80
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9de56de8
   full_name: "ufshcd_dme_configure_adapt"
 }
@@ -354275,7 +355029,11 @@ elf_symbol {
   name: "usb_hc_died"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xc3c2c2a4
+=======
   crc: 0xcd1f06d9
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x19c6594b
   full_name: "usb_hc_died"
 }
@@ -354320,6 +355078,36 @@ elf_symbol {
   name: "usb_hcd_pci_pm_ops"
   is_defined: true
   symbol_type: OBJECT
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x1025d5e4
+  type_id: 0xc44f560e
+  full_name: "usb_hcd_pci_pm_ops"
+}
+elf_symbol {
+  id: 0x55447a3f
+  name: "usb_hcd_pci_probe"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x3cfb1afe
+  type_id: 0x991753c2
+  full_name: "usb_hcd_pci_probe"
+}
+elf_symbol {
+  id: 0x9de4bb85
+  name: "usb_hcd_pci_remove"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1e4a3f9b
+  type_id: 0x14e1f000
+  full_name: "usb_hcd_pci_remove"
+}
+elf_symbol {
+  id: 0xa4091e22
+  name: "usb_hcd_pci_shutdown"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x7ae4c605
+=======
   crc: 0x1954b53f
   type_id: 0xc44f560e
   full_name: "usb_hcd_pci_pm_ops"
@@ -354348,6 +355136,7 @@ elf_symbol {
   is_defined: true
   symbol_type: FUNCTION
   crc: 0x4ed1c0be
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x14e1f000
   full_name: "usb_hcd_pci_shutdown"
 }
@@ -354644,7 +355433,11 @@ elf_symbol {
   name: "usb_root_hub_lost_power"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xe6ba10a0
+=======
   crc: 0xc6947800
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x13c76860
   full_name: "usb_root_hub_lost_power"
 }
@@ -355004,7 +355797,11 @@ elf_symbol {
   name: "v4l2_ctrl_handler_setup"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x0c2cfe78
+=======
   crc: 0xfee0a034
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9d1bec55
   full_name: "v4l2_ctrl_handler_setup"
 }
@@ -355040,7 +355837,11 @@ elf_symbol {
   name: "v4l2_ctrl_new_std_compound"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x09de17e9
+=======
   crc: 0x1e1cfe6a
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x1e5a69e0
   full_name: "v4l2_ctrl_new_std_compound"
 }
@@ -355247,6 +356048,18 @@ elf_symbol {
   name: "v4l2_m2m_buf_remove_by_buf"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xa1ff0d32
+  type_id: 0x127a8e67
+  full_name: "v4l2_m2m_buf_remove_by_buf"
+}
+elf_symbol {
+  id: 0x0ac8b028
+  name: "v4l2_m2m_buf_remove_by_idx"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x22bd6fd1
+=======
   crc: 0x5e8eb9d6
   type_id: 0x127a8e67
   full_name: "v4l2_m2m_buf_remove_by_buf"
@@ -355257,6 +356070,7 @@ elf_symbol {
   is_defined: true
   symbol_type: FUNCTION
   crc: 0x33ae7844
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x309ad6f0
   full_name: "v4l2_m2m_buf_remove_by_idx"
 }
@@ -355328,7 +356142,11 @@ elf_symbol {
   name: "v4l2_m2m_ioctl_create_bufs"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xd1d6fbad
+=======
   crc: 0xee130563
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9bd21a8b
   full_name: "v4l2_m2m_ioctl_create_bufs"
 }
@@ -355346,6 +356164,27 @@ elf_symbol {
   name: "v4l2_m2m_ioctl_expbuf"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xa1973b19
+  type_id: 0x9bd4409d
+  full_name: "v4l2_m2m_ioctl_expbuf"
+}
+elf_symbol {
+  id: 0x04b823f9
+  name: "v4l2_m2m_ioctl_prepare_buf"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1cb0c6df
+  type_id: 0x9bdfa419
+  full_name: "v4l2_m2m_ioctl_prepare_buf"
+}
+elf_symbol {
+  id: 0xa23d06ae
+  name: "v4l2_m2m_ioctl_qbuf"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x1582748f
+=======
   crc: 0x26997351
   type_id: 0x9bd4409d
   full_name: "v4l2_m2m_ioctl_expbuf"
@@ -355365,6 +356204,7 @@ elf_symbol {
   is_defined: true
   symbol_type: FUNCTION
   crc: 0x510121ae
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9bdfa419
   full_name: "v4l2_m2m_ioctl_qbuf"
 }
@@ -355409,6 +356249,18 @@ elf_symbol {
   name: "v4l2_m2m_ioctl_try_decoder_cmd"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0xf9481841
+  type_id: 0x9bdd631f
+  full_name: "v4l2_m2m_ioctl_try_decoder_cmd"
+}
+elf_symbol {
+  id: 0x2e26a86b
+  name: "v4l2_m2m_ioctl_try_encoder_cmd"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x199d4744
+=======
   crc: 0xf9a7b3ed
   type_id: 0x9bdd631f
   full_name: "v4l2_m2m_ioctl_try_decoder_cmd"
@@ -355419,6 +356271,7 @@ elf_symbol {
   is_defined: true
   symbol_type: FUNCTION
   crc: 0x2eb2db67
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x9bd829a3
   full_name: "v4l2_m2m_ioctl_try_encoder_cmd"
 }
@@ -355535,7 +356388,11 @@ elf_symbol {
   name: "vb2_dma_contig_memops"
   is_defined: true
   symbol_type: OBJECT
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x123daca7
+=======
   crc: 0xe318c981
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0xe32fa2b6
   full_name: "vb2_dma_contig_memops"
 }
@@ -355751,7 +356608,11 @@ elf_symbol {
   name: "vb2_queue_error"
   is_defined: true
   symbol_type: FUNCTION
+<<<<<<< PATCH SET (fad657 ANDROID: GKI: Export memblock_free to drivers)
+  crc: 0x0cec337f
+=======
   crc: 0x9f180caa
+>>>>>>> BASE      (bbabed ANDROID: GKI: 3/1/2023 KMI update)
   type_id: 0x163b1761
   full_name: "vb2_queue_error"
 }
@@ -369456,6 +370317,10 @@ symbols {
   symbol {
     key: "memblock_end_of_DRAM"
     value: 0x746374fa
+  }
+  symbol {
+    key: "memblock_free"
+    value: 0x4fb91c54
   }
   symbol {
     key: "memchr"
