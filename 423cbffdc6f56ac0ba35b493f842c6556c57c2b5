@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "91481ee4_b3b30d42",
+        "filename": "abi_gki_aarch64_unisoc_whitelist",
+        "patchSetId": 2
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-06-09T09:27:50Z",
+      "side": 1,
+      "message": "what driver needs this?  All needed USB host drivers should already be built into the system, right?  What are we missing?",
+      "range": {
+        "startLine": 691,
+        "startChar": 0,
+        "endLine": 691,
+        "endChar": 24
+      },
+      "revId": "423cbffdc6f56ac0ba35b493f842c6556c57c2b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a6025b0b_2081e95e",
+        "filename": "abi_gki_aarch64_unisoc_whitelist",
+        "patchSetId": 2
+      },
+      "lineNbr": 2386,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-06-09T09:27:50Z",
+      "side": 1,
+      "message": "drivers should not be calling raw_spin_trylock, what is wrong with a \"real\" spinlock instead?",
+      "range": {
+        "startLine": 2386,
+        "startChar": 0,
+        "endLine": 2386,
+        "endChar": 19
+      },
+      "revId": "423cbffdc6f56ac0ba35b493f842c6556c57c2b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
