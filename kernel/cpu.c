@@ -995,17 +995,34 @@ static int __ref _cpu_down(unsigned int cpu, int tasks_frozen,
 	struct cpuhp_cpu_state *st = per_cpu_ptr(&cpuhp_state, cpu);
 	int prev_state, ret = 0;
 
+	/*
+	 * TODO: should be aware of the active CPUs.
+	 */
 	if (num_online_cpus() == 1)
 		return -EBUSY;
 
 	if (!cpu_present(cpu))
 		return -EINVAL;
 
-	cpus_write_lock();
-
 	cpuhp_tasks_frozen = tasks_frozen;
 
 	prev_state = cpuhp_set_state(st, target);
+
+	/*
+	 * Stages that can be run remotely by this CPU and before taking the
+	 * cpus_write_lock().
+	 */
+	ret = cpuhp_down_callbacks(cpu, st, CPUHP_AP_LIMIT);
+	if (ret || st->state == target)
+		goto out_no_lock;
+
+	/*
+	 * TODO: __cpuhp_setup_state and __cpuhp_remove_state aren't protected
+	 * by cpu_maps_*() lock and still they access cpuhp_tasks_frozen and the
+	 * per_cpu cpuhp_state !
+	 */
+	cpus_write_lock();
+
 	/*
 	 * If the current CPU state is in the range of the AP hotplug thread,
 	 * then we need to kick the thread.
@@ -1047,6 +1064,8 @@ out:
 	 */
 	lockup_detector_cleanup();
 	arch_smt_update();
+
+out_no_lock:
 	return ret;
 }
 
@@ -1655,8 +1674,17 @@ static struct cpuhp_step cpuhp_hp_states[] = {
 	 */
 
 #ifdef CONFIG_SMP
+	/*
+	 * This delimits where the AP worker thread needs to kick-in.
+	 */
+	[CPUHP_AP_LIMIT] = {
+		.name			= "ap_work_limit",
+		.startup.single		= NULL,
+		.teardown.single	= NULL,
+	},
+
 	/* Last state is scheduler control setting the cpu active */
-	[CPUHP_AP_ACTIVE] = {
+	[CPUHP_SCHED_ACTIVE] = {
 		.name			= "sched:active",
 		.startup.single		= sched_cpu_activate,
 		.teardown.single	= sched_cpu_deactivate,
