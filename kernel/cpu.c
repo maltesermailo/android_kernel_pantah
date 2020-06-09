@@ -1683,6 +1683,16 @@ static struct cpuhp_step cpuhp_hp_states[] = {
 		.teardown.single	= NULL,
 	},
 
+	/*
+	 * TODO: This could be simply part of sched_cpu_deactivate. This is
+	 * sched related after all.
+	 */
+	[CPUHP_SCHED_MIGRATE] = {
+		.name			= "sched_migrate:offline",
+		.startup.single		= NULL,
+		.teardown.single	= sched_cpu_migrate_all,
+	},
+
 	/* Last state is scheduler control setting the cpu active */
 	[CPUHP_SCHED_ACTIVE] = {
 		.name			= "sched:active",

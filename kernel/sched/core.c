@@ -6358,7 +6358,7 @@ static void calc_load_migrate(struct rq *rq)
 		atomic_long_add(delta, &calc_load_tasks);
 }
 
-static struct task_struct *__pick_migrate_task(struct rq *rq)
+static struct task_struct *__pick_migrate_task(struct rq *rq, bool kthreads)
 {
 	const struct sched_class *class;
 	struct task_struct *next;
@@ -6367,6 +6367,11 @@ static struct task_struct *__pick_migrate_task(struct rq *rq)
 		next = class->pick_next_task(rq);
 		if (next) {
 			next->sched_class->put_prev_task(rq, next);
+
+			if (is_per_cpu_kthread(next) && !kthreads &&
+			    next->sched_class != &idle_sched_class)
+				continue;
+
 			return next;
 		}
 	}
@@ -6383,7 +6388,8 @@ static struct task_struct *__pick_migrate_task(struct rq *rq)
  * there's no concurrency possible, we hold the required locks anyway
  * because of lock validation efforts.
  */
-static void migrate_tasks(struct rq *dead_rq, struct rq_flags *rf)
+static void migrate_tasks(struct rq *dead_rq, struct rq_flags *rf,
+			  bool kthreads)
 {
 	struct rq *rq = dead_rq;
 	struct task_struct *next, *stop = rq->stop;
@@ -6416,7 +6422,9 @@ static void migrate_tasks(struct rq *dead_rq, struct rq_flags *rf)
 		if (rq->nr_running == 1)
 			break;
 
-		next = __pick_migrate_task(rq);
+		next = __pick_migrate_task(rq, kthreads);
+		if (!kthreads && next->sched_class == &idle_sched_class)
+			break;
 
 		/*
 		 * Rules for changing task_struct::cpus_mask are holding
@@ -6535,6 +6543,63 @@ static int cpuset_cpu_inactive(unsigned int cpu)
 	return 0;
 }
 
+static int migrate_all_stopper(void *data)
+{
+	struct rq *rq = this_rq();
+	struct rq_flags rf;
+	int ret = 0;
+
+	rq_lock_irqsave(rq, &rf);
+	migrate_tasks(rq, &rf, false);
+	rq_unlock_irqrestore(rq, &rf);
+
+	calc_load_migrate(rq);
+
+	/*
+	 * TODO: update_max_interval() should be aware of active CPUs and not
+	 * just the online ones.
+	 */
+	update_max_interval();
+
+	return ret;
+}
+
+static int _sched_cpu_migrate_all(unsigned int cpu)
+{
+	struct rq *rq = cpu_rq(cpu);
+	struct rq_flags rf;
+	bool is_idle;
+	int err = 0;
+
+	rq_lock_irqsave(rq, &rf);
+	is_idle = idle_cpu(cpu);
+	rq_unlock_irqrestore(rq, &rf);
+
+	if (!is_idle)
+		err = stop_one_cpu(cpu, migrate_all_stopper, NULL);
+
+	return err;
+}
+
+int sched_cpu_migrate_all(unsigned int cpu)
+{
+	/*
+	 * Part 1. Try to migrate everything off this CPU, without any
+	 * synchronization to give a chance for this CPU to go idle as quickly
+	 * as possible.
+	 */
+	_sched_cpu_migrate_all(cpu);
+
+	/*
+	 * Part 2. Synchronize with preempt-disabled and RCU readers
+	 * (e.g ttwu), which could have not observed the cpu_active_mask change
+	 * from sched_cpu_deactivate().
+	 */
+	synchronize_rcu();
+
+	return _sched_cpu_migrate_all(cpu);
+}
+
 int sched_cpu_activate(unsigned int cpu)
 {
 	struct rq *rq = cpu_rq(cpu);
@@ -6579,13 +6644,9 @@ int sched_cpu_deactivate(unsigned int cpu)
 
 	set_cpu_active(cpu, false);
 	/*
-	 * We've cleared cpu_active_mask, wait for all preempt-disabled and RCU
-	 * users of this state to go away such that all new such users will
-	 * observe it.
-	 *
-	 * Do sync before park smpboot threads to take care the rcu boost case.
+	 * Synchronization with !preempt paths will be done in
+	 * sched_cpu_migrate_all().
 	 */
-	synchronize_rcu();
 
 #ifdef CONFIG_SCHED_SMT
 	/*
@@ -6636,7 +6697,7 @@ int sched_cpu_dying(unsigned int cpu)
 		BUG_ON(!cpumask_test_cpu(cpu, rq->rd->span));
 		set_rq_offline(rq);
 	}
-	migrate_tasks(rq, &rf);
+	migrate_tasks(rq, &rf, true);
 	BUG_ON(rq->nr_running != 1);
 	rq_unlock_irqrestore(rq, &rf);
 
