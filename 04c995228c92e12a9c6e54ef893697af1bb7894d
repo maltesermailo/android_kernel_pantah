@@ -34,6 +34,24 @@
       "revId": "04c995228c92e12a9c6e54ef893697af1bb7894d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3a2b3f2f_a0e0135f",
+        "filename": "scripts/module-lto.lds.S",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2020-06-10T22:43:26Z",
+      "side": 1,
+      "message": "A random module with ToT LLVM and ToT Linux:\n\n  $ llvm-readelf -S fs/fuse/fuse.ko | grep patchable\n    [16] __patchable_function_entries PROGBITS 0000000000000000 02d0c8 \n000730 00 WAL 12   0  8\n    [17] .rela__patchable_function_entries RELA 0000000000000000 02d7f8 001590 18   I 62  16  8\n    [46] __patchable_function_entries PROGBITS 0000000000000000 2f42a0 000020 00 WAL 45   0  8\n    [48] .rela__patchable_function_entries RELA 0000000000000000 2f49c8 000060 18   I 62  46  8\n\narm64 uses -fpatchable-function-entry with dynamic ftrace when CONFIG_DYNAMIC_FTRACE_WITH_REGS is enabled. However, looks like this feature was added after 5.4, so I\u0027m fine with removing it from here.",
+      "parentUuid": "1a898235_0efe2879",
+      "revId": "04c995228c92e12a9c6e54ef893697af1bb7894d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
