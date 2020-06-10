@@ -16,6 +16,24 @@
       "revId": "04c995228c92e12a9c6e54ef893697af1bb7894d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1a898235_0efe2879",
+        "filename": "scripts/module-lto.lds.S",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2020-06-10T22:28:06Z",
+      "side": 1,
+      "message": "Without this, and with ThinLTO+-fpatchable-function-entry, we end up with multiple identically named __patchable_function_entries sections, at least the last time I ran into this. I can test again with ToT LLVM.",
+      "parentUuid": "2f190189_7ce5b662",
+      "revId": "04c995228c92e12a9c6e54ef893697af1bb7894d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
