@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "625b5bd5_6558c63f",
+        "filename": "abi_gki_aarch64_unisoc_whitelist",
+        "patchSetId": 2
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1639060
+      },
+      "writtenOn": "2020-06-10T02:16:26Z",
+      "side": 1,
+      "message": "xhci-hcd.ko \u0026 xhci-plat-hcd.ko",
+      "parentUuid": "91481ee4_b3b30d42",
+      "range": {
+        "startLine": 691,
+        "startChar": 0,
+        "endLine": 691,
+        "endChar": 24
+      },
+      "revId": "423cbffdc6f56ac0ba35b493f842c6556c57c2b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a6025b0b_2081e95e",
         "filename": "abi_gki_aarch64_unisoc_whitelist",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2020-06-09T09:27:50Z",
       "side": 1,
       "message": "drivers should not be calling raw_spin_trylock, what is wrong with a \"real\" spinlock instead?",
+      "range": {
+        "startLine": 2386,
+        "startChar": 0,
+        "endLine": 2386,
+        "endChar": 19
+      },
+      "revId": "423cbffdc6f56ac0ba35b493f842c6556c57c2b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b28fd549_4a61cead",
+        "filename": "abi_gki_aarch64_unisoc_whitelist",
+        "patchSetId": 2
+      },
+      "lineNbr": 2386,
+      "author": {
+        "id": 1639060
+      },
+      "writtenOn": "2020-06-10T02:16:26Z",
+      "side": 1,
+      "message": "We used spin_trylock_irqsave.\nspin_trylock_irqsave is defined as follows:\ninclude/linux/spinlock.h\n406  #define spin_trylock_irqsave(lock, flags)\t\t\t\\\n407  ({\t\t\t\t\t\t\t\t\\\n408  \traw_spin_trylock_irqsave(spinlock_check(lock), flags); \\\n409  })\n\n302  #define raw_spin_trylock_irqsave(lock, flags) \\\n303  ({ \\\n304  \tlocal_irq_save(flags); \\\n305  \traw_spin_trylock(lock) ? \\\n306  \t1 : ({ local_irq_restore(flags); 0; }); \\\n307  })\n\n221  #define raw_spin_trylock(lock)\t__cond_lock(lock, _raw_spin_trylock(lock))",
+      "parentUuid": "a6025b0b_2081e95e",
       "range": {
         "startLine": 2386,
         "startChar": 0,
