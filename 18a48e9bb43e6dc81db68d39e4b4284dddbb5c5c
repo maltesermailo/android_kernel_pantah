@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2c1b0c5a_71d3b358",
+        "filename": "scripts/module-lto.lds.S",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-06-10T23:53:13Z",
+      "side": 1,
+      "message": "It looks like clang creates these, see clang::tryEmitGlobalCompoundLiteral and clang::CodeGenFunction::EmitCompoundLiteralLValue due to the use of `-fdata-sections` from LTO.\n\nI wonder if we should be safe and add `.bss..L*` as an input?",
+      "revId": "18a48e9bb43e6dc81db68d39e4b4284dddbb5c5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
