@@ -10,3 +10,9 @@ abi_gki_aarch64_qcom_whitelist
 "
 TRIM_NONLISTED_KMI=1
 KMI_WHITELIST_STRICT_MODE=1
+
+if [ -n "${BUILD_BOOT_IMG}" ]; then
+  SKIP_VENDOR_BOOT=1
+  KERNEL_BINARY=Image.gz
+  MKBOOTIMG_PATH=tools/mkbootimg/mkbootimg.py
+fi
