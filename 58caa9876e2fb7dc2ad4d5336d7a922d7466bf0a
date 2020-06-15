@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "75d77569_3c07d57d",
+        "filename": "abi_gki_aarch64_db845c_whitelist",
+        "patchSetId": 2
+      },
+      "lineNbr": 1304,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2020-06-15T12:47:16Z",
+      "side": 1,
+      "message": "this should indeed not show up here anymore. When doing the update, you need to only have your own modules in the tree for extract_symbols to discover.",
+      "parentUuid": "d3a40d90_a729c26c",
+      "range": {
+        "startLine": 1304,
+        "startChar": 0,
+        "endLine": 1304,
+        "endChar": 22
+      },
+      "revId": "58caa9876e2fb7dc2ad4d5336d7a922d7466bf0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "058e9660_d696982a",
         "filename": "abi_gki_aarch64_whitelist",
         "patchSetId": 2
@@ -72,6 +96,24 @@
       "side": 1,
       "message": "Apologies. This wasn\u0027t something I specified myself, just the result of running the update commands. Am I running the tools incorrectly here? (I\u0027m following previous instructions)",
       "parentUuid": "d57595cc_a6dffe26",
+      "revId": "58caa9876e2fb7dc2ad4d5336d7a922d7466bf0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "97907863_1965afba",
+        "filename": "abi_gki_aarch64_whitelist",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2020-06-15T12:47:16Z",
+      "side": 1,
+      "message": "I think _this_ update is correct, as erofs.ko is now a GKI module (as per configuration). The module support for ABI tracking is not yet perfect, but we are on a development branch here for the next version.",
+      "parentUuid": "505776fe_8bae841d",
       "revId": "58caa9876e2fb7dc2ad4d5336d7a922d7466bf0a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
