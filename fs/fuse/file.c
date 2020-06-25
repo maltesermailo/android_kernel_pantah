@@ -1966,10 +1966,9 @@ static bool fuse_writepage_in_flight(struct fuse_writepage_args *new_wpa,
 	struct fuse_writepage_args *old_wpa;
 	struct fuse_args_pages *new_ap = &new_wpa->ia.ap;
 
-	WARN_ON(new_ap->num_pages != 0);
+	WARN_ON(new_ap->num_pages != 1);
 
 	spin_lock(&fi->lock);
-	rb_erase(&new_wpa->writepages_entry, &fi->writepages);
 	old_wpa = fuse_find_writeback(fi, page->index, page->index);
 	if (!old_wpa) {
 		tree_insert(&fi->writepages, new_wpa);
@@ -1977,7 +1976,6 @@ static bool fuse_writepage_in_flight(struct fuse_writepage_args *new_wpa,
 		return false;
 	}
 
-	new_ap->num_pages = 1;
 	for (tmp = old_wpa->next; tmp; tmp = tmp->next) {
 		pgoff_t curr_index;
 
@@ -2020,7 +2018,7 @@ static int fuse_writepages_fill(struct page *page,
 	struct fuse_conn *fc = get_fuse_conn(inode);
 	struct page *tmp_page;
 	bool is_writeback;
-	int err;
+	int index, err;
 
 	if (!data->ff) {
 		err = -EIO;
@@ -2083,44 +2081,48 @@ static int fuse_writepages_fill(struct page *page,
 		wpa->next = NULL;
 		ap->args.in_pages = true;
 		ap->args.end = fuse_writepage_end;
-		ap->num_pages = 0;
+		ap->num_pages = 1;
 		wpa->inode = inode;
-
-		spin_lock(&fi->lock);
-		tree_insert(&fi->writepages, wpa);
-		spin_unlock(&fi->lock);
-
+		index = 0;
 		data->wpa = wpa;
+	} else {
+		index = ap->num_pages;
 	}
 	set_page_writeback(page);
 
 	copy_highpage(tmp_page, page);
-	ap->pages[ap->num_pages] = tmp_page;
-	ap->descs[ap->num_pages].offset = 0;
-	ap->descs[ap->num_pages].length = PAGE_SIZE;
+	ap->pages[index] = tmp_page;
+	ap->descs[index].offset = 0;
+	ap->descs[index].length = PAGE_SIZE;
 
 	inc_wb_stat(&inode_to_bdi(inode)->wb, WB_WRITEBACK);
 	inc_node_page_state(tmp_page, NR_WRITEBACK_TEMP);
 
 	err = 0;
-	if (is_writeback && fuse_writepage_in_flight(wpa, page)) {
-		end_page_writeback(page);
-		data->wpa = NULL;
-		goto out_unlock;
+	if (is_writeback) {
+		if (fuse_writepage_in_flight(wpa, page)) {
+			end_page_writeback(page);
+			data->wpa = NULL;
+			goto out_unlock;
+		}
+	} else if (!index) {
+		spin_lock(&fi->lock);
+		tree_insert(&fi->writepages, wpa);
+		spin_unlock(&fi->lock);
 	}
-	data->orig_pages[ap->num_pages] = page;
+	data->orig_pages[index] = page;
 
-	/*
-	 * Protected by fi->lock against concurrent access by
-	 * fuse_page_is_writeback().
-	 */
-	spin_lock(&fi->lock);
-	ap->num_pages++;
-	spin_unlock(&fi->lock);
-
+	if (index) {
+		/*
+		 * Protected by fi->lock against concurrent access by
+		 * fuse_page_is_writeback().
+		 */
+		spin_lock(&fi->lock);
+		ap->num_pages++;
+		spin_unlock(&fi->lock);
+	}
 out_unlock:
 	unlock_page(page);
-
 	return err;
 }
 
