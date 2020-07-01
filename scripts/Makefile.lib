@@ -334,10 +334,16 @@ cmd_lzo = (cat $(filter-out FORCE,$^) | \
 	(rm -f $@ ; false)
 
 quiet_cmd_lz4 = LZ4     $@
+<<<<<<< HEAD   (b32937 Merge 4.19.131 into android-4.19-stable)
 cmd_lz4 = (cat $(filter-out FORCE,$^) | \
 	lz4 -c -l -12 --favor-decSpeed stdin stdout && \
 	$(call size_append, $(filter-out FORCE,$^))) > $@ || \
 	(rm -f $@ ; false)
+=======
+      cmd_lz4 = { cat $(real-prereqs) | \
+                  lz4 -l -12 --favor-decSpeed stdin stdout; \
+                  $(size_append); } > $@
+>>>>>>> CHANGE (8f89ab ANDROID: GKI: scripts: Makefile: update the lz4 command (#2))
 
 # U-Boot mkimage
 # ---------------------------------------------------------------------------
