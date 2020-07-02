@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "149992e3_97a91bf7",
+        "filename": "mm/vmstat.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1708,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-07-02T01:21:27Z",
+      "side": 1,
+      "message": "Please skip NR_GPU_HEAP here so that vmstat in ACK does not expose this out-of-tree field. We want to make sure Android framework does not use it so that we can replace this with an upstream solution later on.",
+      "revId": "603d4f6e2dd034839840b33c7b01a96ec2ff0abe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
