@@ -33,6 +33,24 @@
       "revId": "deae8823806e764aaac231cf4893dba4f4add6cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d132b49_8acb657e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1407350
+      },
+      "writtenOn": "2020-07-07T07:43:09Z",
+      "side": 1,
+      "message": "Below is the logic to set \"sys.usb.controller\" in system/init.\nIt will choose the first item in /sys/class/udc.\nit may choose the dummy udc even have the real udc.\n\n512static void SetUsbController() {\n513    static auto controller_set \u003d false;\n514    if (controller_set) return;\n515    std::unique_ptr\u003cDIR, decltype(\u0026closedir)\u003edir(opendir(\"/sys/class/udc\"), closedir);\n516    if (!dir) return;\n517\n518    dirent* dp;\n519    while ((dp \u003d readdir(dir.get())) !\u003d nullptr) {\n520        if (dp-\u003ed_name[0] \u003d\u003d \u0027.\u0027) continue;\n521\n522        SetProperty(\"sys.usb.controller\", dp-\u003ed_name);\n523        controller_set \u003d true;\n524        break;\n525    }\n526}",
+      "parentUuid": "ef01fa96_6c992b59",
+      "revId": "deae8823806e764aaac231cf4893dba4f4add6cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
