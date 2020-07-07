@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6eacdd8e_3e3a6317",
+        "filename": "fs/crypto/inline_crypt.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-07-07T17:32:29Z",
+      "side": 1,
+      "message": "We should delete this line of this comment, since this change moves the block_size \u003d\u003d PAGE_SIZE check from fscrypt_dio_supported() to another place.  I also messed this comment up in the first place because fscrypt_limit_dio_pages() is also called when block_size !\u003d PAGE_SIZE and either the inode is not using inline encryption or is not using IV_INO_LBLK_32.  It just doesn\u0027t do anything in those cases.  A better place for a comment would be just above the WARN_ON_ONCE().",
+      "revId": "c6784bca7bfd1e8abf11bd0651898696a12d09a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
