@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7f971f3c_99ba04fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1260195
+      },
+      "writtenOn": "2020-07-07T11:13:52Z",
+      "side": 1,
+      "message": "I\u0027m commenting on:\n\nANDROID: sched/uclamp: Replace uclamp_latency_sensitive (2020-06-04 Chris Redpath)\nANDROID: sched/uclamp: use task_struct-\u003elatency_nice in EAS/UClamp (2020-06-04 Chris Redpath)\nFROMLIST: sched/core: Propagate parent task\u0027s latency requirements to the child task (2020-06-04 Parth Shah)\nFROMLIST: sched: Introduce latency-nice as a per-task attribute (2020-06-04 Parth Shah)\nANDROID: sched/uclamp: rename uclamp_latency_sensitive (2020-06-04 Chris Redpath)\n\nLGTM, just a couple of hints/questions:\n\n(1) Parth\u0027s patches are not considered to go into mainline yet.\n\n(2) We try to continue the latency-nice discussion on lkml. So far there isn\u0027t really momentum. We\u0027re \n    continuing to puth for it.\n\n    lkml.kernel.org/r/87imfi2qbk.derkling@matbug.net\n\n    There is a latency-nice topic planned at the task scheduler LPC uconf in August. \n\n(3) I assume that Chrome-OS use the per-task group interface \u0027cpu.uclamp.latency_sensitive\u0027 or add \n    Parth\u0027s system call extension?. So this Android change is there to bring Chrome-OS\u0027s and Android\u0027s \n    latency-nice story closer together?\n\nDid light testing, seems to work ;-)\n\nroot@juno:/sys/fs/cgroup/cpu# echo $$\n1667\n\nroot@juno:~# cat /proc/1667/task/1667/sched | grep \"(\\|latency_nice\"\nbash (1667, #threads: 1)\nlatency_nice                                 :                    0\n\nroot@juno:/sys/fs/cgroup/cpu# mkdir A\n\nroot@juno:/sys/fs/cgroup/cpu# echo $$ \u003e A/tasks\n\nroot@juno:/sys/fs/cgroup/cpu# echo 1 \u003e A/cpu.uclamp.latency_sensitive\n\nroot@juno:~# cat /proc/1667/task/1667/sched | grep \"(\\|latency_nice\"\nbash (1667, #threads: 1)\nlatency_nice                                 :                   -1\n\nroot@juno:/sys/fs/cgroup/cpu# echo 0 \u003e A/cpu.uclamp.latency_sensitive\n\nroot@juno:~# cat /proc/1667/task/1667/sched | grep \"(\\|latency_nice\"\nbash (1667, #threads: 1)\nlatency_nice                                 :                    0\n",
+      "revId": "7ded59d9a2fb3977d73f3f655578482734fb500b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
