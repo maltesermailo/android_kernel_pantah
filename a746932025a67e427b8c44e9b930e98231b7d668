@@ -69,6 +69,24 @@
       "revId": "a746932025a67e427b8c44e9b930e98231b7d668",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "346cc9fc_780272e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1407350
+      },
+      "writtenOn": "2020-07-14T08:03:01Z",
+      "side": 1,
+      "message": "Hi,\nMaybe I do not explain clearly why I push this ticket. below is the reason:\n1. we need enable drivers/net/ethernet/freescale/ which is need by imx devices.\n   fec_main is the driver of ethernet.\n2. if we want to enable driver under drivers/net/ethernet/, we must enable CONFIG_ETHERNET by default.\n3. I think many other vendor also have this requirement.",
+      "parentUuid": "17cc82ee_2da00953",
+      "revId": "a746932025a67e427b8c44e9b930e98231b7d668",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
