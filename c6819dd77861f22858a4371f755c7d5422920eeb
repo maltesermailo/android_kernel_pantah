@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f95ecf7c_08d0c158",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1837,
+      "author": {
+        "id": 1074798
+      },
+      "writtenOn": "2020-07-15T05:56:48Z",
+      "side": 1,
+      "message": "Hello, I think there may be an issue with this line.  It appears that this function is used for opening both files and directories.  However, it is an error to use O_RDWR on a directory.  The open(2) manpage states that doing so will return EISDIR:\n\n    EISDIR pathname refers to a directory and the access requested\n           involved writing (that is, O_WRONLY or O_RDWR is set).\n\n\nI think we should pick the flags based on the mode.  Maybe something like:\n\n    int flags \u003d O_NOATIME;\n    if (S_ISDIR(inode-\u003ei_mode)) {\n      flags |\u003d O_RDONLY;\n    } else {\n      flags |\u003d O_RDWR;\n    }",
+      "revId": "c6819dd77861f22858a4371f755c7d5422920eeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
