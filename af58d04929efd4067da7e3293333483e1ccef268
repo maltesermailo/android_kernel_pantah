@@ -34,6 +34,24 @@
       "revId": "af58d04929efd4067da7e3293333483e1ccef268",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6525bdc7_aaaa7355",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1081223
+      },
+      "writtenOn": "2020-07-15T13:25:20Z",
+      "side": 1,
+      "message": "Gave a quick look and likely CONFIG_BT_RFCOMM can be dropped.\n\nThe other HCI drivers are used to bring up the BT chip up from sleep\nti,wl1837-st is used by hikey960 apparently so the LL driver is needed\nqca is used by db845 I think ( but not by QCOM \\o/ )",
+      "parentUuid": "38ebc615_d10bb76c",
+      "revId": "af58d04929efd4067da7e3293333483e1ccef268",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
