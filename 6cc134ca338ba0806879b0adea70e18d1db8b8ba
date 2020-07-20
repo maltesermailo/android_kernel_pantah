@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9006d96a_b43faac0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-20T12:59:19Z",
+      "side": 1,
+      "message": "Thanks for the better description, but I still fail to see how this is fixing anything correctly.\n\nYou can, and will, race with setting that global variable.  It could have just been freed right after grabbing the pointer to it.\n\nAs the kernel coding style documentation has said for 20+ years, when you have pointers floating around without any reference counts like this, it\u0027s a bug.  You need to either properly reference count it, or use a lock, otherwise you are not really fixing the issue.",
+      "revId": "6cc134ca338ba0806879b0adea70e18d1db8b8ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
