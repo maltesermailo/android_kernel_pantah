@@ -888,10 +888,15 @@
 #define SW_LINEIN_INSERT	0x0d  /* set = inserted */
 #define SW_MUTE_DEVICE		0x0e  /* set = device disabled */
 #define SW_PEN_INSERTED		0x0f  /* set = pen inserted */
+<<<<<<< HEAD   (16330b ANDROID: Add vendor hooks to the scheduler)
 #define SW_HPHL_OVERCURRENT	0x10  /* set = over current on left hph */
 #define SW_HPHR_OVERCURRENT	0x11  /* set = over current on right hph */
 #define SW_UNSUPPORT_INSERT	0x12  /* set = unsupported device inserted */
 #define SW_MAX			0x20
+=======
+#define SW_MACHINE_COVER	0x10  /* set = cover closed */
+#define SW_MAX			0x10
+>>>>>>> BRANCH (ba47d8 Linux 5.8-rc6)
 #define SW_CNT			(SW_MAX+1)
 
 /*

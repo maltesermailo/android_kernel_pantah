@@ -13,6 +13,7 @@ struct qcom_smmu {
 	struct arm_smmu_device smmu;
 };
 
+<<<<<<< HEAD   (16330b ANDROID: Add vendor hooks to the scheduler)
 static int qcom_sdm845_smmu500_cfg_probe(struct arm_smmu_device *smmu)
 {
 	u32 s2cr;
@@ -51,6 +52,9 @@ static int qcom_sdm845_smmu500_cfg_probe(struct arm_smmu_device *smmu)
 }
 
 static const struct of_device_id qcom_smmu_client_of_match[] = {
+=======
+static const struct of_device_id qcom_smmu_client_of_match[] __maybe_unused = {
+>>>>>>> BRANCH (ba47d8 Linux 5.8-rc6)
 	{ .compatible = "qcom,adreno" },
 	{ .compatible = "qcom,mdp4" },
 	{ .compatible = "qcom,mdss" },

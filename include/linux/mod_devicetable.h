@@ -318,7 +318,11 @@ struct pcmcia_device_id {
 #define INPUT_DEVICE_ID_LED_MAX		0x0f
 #define INPUT_DEVICE_ID_SND_MAX		0x07
 #define INPUT_DEVICE_ID_FF_MAX		0x7f
+<<<<<<< HEAD   (16330b ANDROID: Add vendor hooks to the scheduler)
 #define INPUT_DEVICE_ID_SW_MAX		0x20
+=======
+#define INPUT_DEVICE_ID_SW_MAX		0x10
+>>>>>>> BRANCH (ba47d8 Linux 5.8-rc6)
 #define INPUT_DEVICE_ID_PROP_MAX	0x1f
 
 #define INPUT_DEVICE_ID_MATCH_BUS	1
