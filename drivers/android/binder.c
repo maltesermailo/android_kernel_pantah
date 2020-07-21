@@ -67,6 +67,7 @@
 #include <linux/task_work.h>
 #include <linux/sizes.h>
 
+
 #include <uapi/linux/sched/types.h>
 #include <uapi/linux/android/binder.h>
 #include <uapi/linux/android/binderfs.h>
@@ -76,6 +77,8 @@
 #include "binder_alloc.h"
 #include "binder_internal.h"
 #include "binder_trace.h"
+
+#include <trace/hooks/binder.h>
 
 static HLIST_HEAD(binder_deferred_list);
 static DEFINE_MUTEX(binder_deferred_lock);
@@ -616,6 +619,7 @@ struct binder_transaction {
 	 * during thread teardown
 	 */
 	spinlock_t lock;
+	ANDROID_VENDOR_DATA(1);
 };
 
 /**
@@ -2939,6 +2943,7 @@ static bool binder_proc_transaction(struct binder_transaction *t,
 		binder_transaction_priority(thread->task, t, node_prio,
 					    node->inherit_rt);
 		binder_enqueue_thread_work_ilocked(thread, &t->work);
+		trace_android_vh_binder_set_tune(t, thread);
 	} else if (!pending_async) {
 		binder_enqueue_work_ilocked(&t->work, &proc->todo);
 	} else {
@@ -3597,6 +3602,7 @@ static void binder_transaction(struct binder_proc *proc,
 		binder_enqueue_thread_work_ilocked(target_thread, &t->work);
 		binder_inner_proc_unlock(target_proc);
 		wake_up_interruptible_sync(&target_thread->wait);
+		trace_android_vh_binder_restore_tune(t, thread);
 		binder_restore_priority(current, in_reply_to->saved_priority);
 		binder_free_transaction(in_reply_to);
 	} else if (!(t->flags & TF_ONE_WAY)) {
@@ -3708,6 +3714,7 @@ err_invalid_target_handle:
 
 	BUG_ON(thread->return_error.cmd != BR_OK);
 	if (in_reply_to) {
+		trace_android_vh_binder_restore_tune(t, thread);
 		binder_restore_priority(current, in_reply_to->saved_priority);
 		thread->return_error.cmd = BR_TRANSACTION_COMPLETE;
 		binder_enqueue_thread_work(thread, &thread->return_error.work);
@@ -4375,6 +4382,7 @@ retry:
 			wait_event_interruptible(binder_user_error_wait,
 						 binder_stop_on_user_error < 2);
 		}
+		trace_android_vh_binder_restore_tune(NULL, thread);
 		binder_restore_priority(current, proc->default_priority);
 	}
 
@@ -4622,6 +4630,7 @@ retry:
 			trd->sender_pid =
 				task_tgid_nr_ns(sender,
 						task_active_pid_ns(current));
+			trace_android_vh_binder_set_tune(t, thread);
 		} else {
 			trd->sender_pid = 0;
 		}
