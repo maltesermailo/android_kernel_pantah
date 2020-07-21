@@ -142,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "f0043b66_de759392",
+        "filename": "fs/incfs/stats.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-21T16:59:22Z",
+      "side": 1,
+      "message": "If you have different types of things, just put them in different files.\n\nAnd there is no \"versioning\" here, sorry, that\u0027s not how kernel code works 😞",
+      "parentUuid": "22154b53_66563ba9",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 46
+      },
+      "revId": "91eac08cfe7d6ec1fd225b68609aa1534abe4292",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ea93279f_8668e864",
         "filename": "fs/incfs/stats.h",
         "patchSetId": 3
@@ -177,6 +201,30 @@
       "side": 1,
       "message": "Well, atomics was used only for correctness; but if this is viewed as informational, yes, we can just use simple u32/u64. \n\nI guess per-cpu counters may help here..",
       "parentUuid": "ea93279f_8668e864",
+      "range": {
+        "startLine": 16,
+        "startChar": 7,
+        "endLine": 16,
+        "endChar": 17
+      },
+      "revId": "91eac08cfe7d6ec1fd225b68609aa1534abe4292",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6081b101_0ae03322",
+        "filename": "fs/incfs/stats.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-21T16:59:22Z",
+      "side": 1,
+      "message": "Don\u0027t optimize things that you do not even know if they are a problem 😊\nWorry about per-cpu counters only if that\u0027s really needed, just try a single variable first and see how that goes.",
+      "parentUuid": "b54226ee_119bebca",
       "range": {
         "startLine": 16,
         "startChar": 7,
