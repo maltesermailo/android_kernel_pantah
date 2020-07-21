@@ -166,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "9f4cce0f_8acea44c",
+        "filename": "fs/incfs/stats.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2020-07-21T17:11:16Z",
+      "side": 1,
+      "message": "Sure, will remove.\n\nI see some of the drivers such as FScache do add headers. Hence, wanted to be on same lines:\n\nhttps://elixir.bootlin.com/linux/latest/source/fs/fscache/stats.c#L139",
+      "parentUuid": "f0043b66_de759392",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 46
+      },
+      "revId": "91eac08cfe7d6ec1fd225b68609aa1534abe4292",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "ea93279f_8668e864",
         "filename": "fs/incfs/stats.h",
         "patchSetId": 3
@@ -225,6 +249,30 @@
       "side": 1,
       "message": "Don\u0027t optimize things that you do not even know if they are a problem 😊\nWorry about per-cpu counters only if that\u0027s really needed, just try a single variable first and see how that goes.",
       "parentUuid": "b54226ee_119bebca",
+      "range": {
+        "startLine": 16,
+        "startChar": 7,
+        "endLine": 16,
+        "endChar": 17
+      },
+      "revId": "91eac08cfe7d6ec1fd225b68609aa1534abe4292",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3c2b85c5_d5e5fe39",
+        "filename": "fs/incfs/stats.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2020-07-21T17:11:16Z",
+      "side": 1,
+      "message": "From my past experience, atomics do have overhead (at least on a big system where there are like 96 CPU cores) especially in the hot IO path and more specifically for smaller block size IO (\u003c\u003d 4k). \n\nYes, certainly using single variable helps and probably after some perf runs, we can think of optimization if required.",
+      "parentUuid": "6081b101_0ae03322",
       "range": {
         "startLine": 16,
         "startChar": 7,
