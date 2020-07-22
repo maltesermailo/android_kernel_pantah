@@ -16,6 +16,24 @@
       "revId": "0b09511c7525750154289d2f744ede1de84165ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35242769_67cbb047",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-22T15:56:30Z",
+      "side": 1,
+      "message": "During the early phases of development this is operationally difficult for partners like QC when there is a lot of churn. There are many separate kernel teams who all would be changing their symbol list and the result is that synchronization is difficult and teams have booting issues.\n\nI think we should disable trimming and KMI checking while in the \"dev\" phase of a branch and turn it all on when we enter the \"stabilization\" phase. That would mean that this is always off for android-mainline and is off in android12-5.4 until March or April when it enters stabilization phase.",
+      "parentUuid": "15a9f160_acd33254",
+      "revId": "0b09511c7525750154289d2f744ede1de84165ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
