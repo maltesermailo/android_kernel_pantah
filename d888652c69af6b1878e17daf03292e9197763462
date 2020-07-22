@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "26167d9b_4ca00960",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-22T18:34:49Z",
+      "side": 1,
+      "message": "A few more comments -- and please remove the extra blank line.",
+      "revId": "d888652c69af6b1878e17daf03292e9197763462",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7d06d554_666ac50d",
+        "filename": "kernel/locking/rwsem.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1221,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-22T18:34:49Z",
+      "side": 1,
+      "message": "Does this hook do something different than the one at L1088? If not, can we use the same hook for both? (maybe use \"rwsem_wake\" for both)",
+      "revId": "d888652c69af6b1878e17daf03292e9197763462",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "578f94e9_9c325837",
+        "filename": "kernel/locking/rwsem.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1609,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-07-22T18:34:49Z",
+      "side": 1,
+      "message": "Is this hook doing something different than the one at L1598? If they are the same, then let\u0027s use the same hook. Maybe call it \"..._write_finished()\" or something that.",
+      "revId": "d888652c69af6b1878e17daf03292e9197763462",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
