@@ -33,6 +33,52 @@
       "revId": "bf5c50ce0a5d10fe5feae9627ed9d0084369159c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bef28897_6d866b47",
+        "filename": "kernel/time/timer.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1960,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-07-23T15:14:20Z",
+      "side": 1,
+      "message": "This changes the behavior of timer_dead_cpu(). If the timer is !pending it won\u0027t be detached, no?\n\n   820 static int detach_if_pending(struct timer_list *timer, struct timer_base *base, \n   821                              bool clear_pending)                                \n   822 {                                                                               \n   823         unsigned idx \u003d timer_get_idx(timer);                                    \n   824                                                                                 \n   825         if (!timer_pending(timer))                                                                                                                                                                       \n   826                 return 0;\n\nFor timer_dead_cpu() the detach_timer() was called unconditionally.\n\nIt seems you faced a problem that warranted this change. Please add a comment and expand the commit message too.",
+      "range": {
+        "startLine": 1960,
+        "startChar": 2,
+        "endLine": 1960,
+        "endChar": 19
+      },
+      "revId": "bf5c50ce0a5d10fe5feae9627ed9d0084369159c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2e89e5c5_0ca0915c",
+        "filename": "kernel/time/timer.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1995,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2020-07-23T15:14:20Z",
+      "side": 1,
+      "message": "Same here. Please add something in the commit message why you needed to transform this. And possibly expand the comment above too.",
+      "range": {
+        "startLine": 1995,
+        "startChar": 2,
+        "endLine": 1995,
+        "endChar": 48
+      },
+      "revId": "bf5c50ce0a5d10fe5feae9627ed9d0084369159c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
