@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fdfb5b9c_ed01d7b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2020-07-24T06:26:23Z",
+      "side": 1,
+      "message": "Address GregKH review comments.\n\n1: Remove atomic* counters for monotonically increasing counters. atomics are used only for tracking active counters as they will wrap around and will be misleading. Active counters are useful to track IOs which are hung and should be correct.\n\n2: Remove CONFIG_INCFS_STATS; debugfs will be now always have stats.\n",
+      "revId": "0ac442263c47e86c84d2240c9df4c272c433b04c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
