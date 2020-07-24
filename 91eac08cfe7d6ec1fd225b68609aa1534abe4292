@@ -525,6 +525,30 @@
     },
     {
       "key": {
+        "uuid": "6fde18f8_25709a7b",
+        "filename": "fs/incfs/stats.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-07-24T18:00:35Z",
+      "side": 1,
+      "message": "Also, \"never use an atomic if you do not need to\" as we all know it slows things down.  Only use it for things that you have to use an atomic variable for, which for simple stats like this, is not the case.",
+      "parentUuid": "eb115c7b_cd8427e0",
+      "range": {
+        "startLine": 16,
+        "startChar": 7,
+        "endLine": 16,
+        "endChar": 17
+      },
+      "revId": "91eac08cfe7d6ec1fd225b68609aa1534abe4292",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "0b2fcffc_3711041b",
         "filename": "fs/incfs/stats.h",
         "patchSetId": 3
