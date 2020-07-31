@@ -89,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "a4c75f01_eb9a0e07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1579699
+      },
+      "writtenOn": "2020-07-31T18:15:19Z",
+      "side": 1,
+      "message": "The upstream headers_install target is guarded by\n\n  ifeq ($(KBUILD_EXTMOD),)\n\non line 1076. This patch is adding headers_install for the \"else\" case, when compiling external modules. We can\u0027t do something like this on upstream (I skipped many of the flags that you\u0027d probably want to have):\n\n  make -C ${EXT_MOD} M\u003d${EXT_MOD_REL} headers_install",
+      "parentUuid": "94a77862_54842b56",
+      "revId": "66c60cd166bddb74a35a64a55c17981906ef32d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4aadbfa0_b6d679e9",
         "filename": "Makefile",
         "patchSetId": 2
@@ -133,6 +151,30 @@
       "revId": "66c60cd166bddb74a35a64a55c17981906ef32d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d3fd0057_a7ce4a36",
+        "filename": "Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 1727,
+      "author": {
+        "id": 1579699
+      },
+      "writtenOn": "2020-07-31T18:15:19Z",
+      "side": 1,
+      "message": "Copy/paste mistake from the help text from kernel compilation. I can fix in the next patch.",
+      "parentUuid": "4aadbfa0_b6d679e9",
+      "range": {
+        "startLine": 1727,
+        "startChar": 82,
+        "endLine": 1727,
+        "endChar": 85
+      },
+      "revId": "66c60cd166bddb74a35a64a55c17981906ef32d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
