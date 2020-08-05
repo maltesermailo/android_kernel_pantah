@@ -357,6 +357,10 @@ SECTIONS
 	.bss : AT(ADDR(.bss) - LOAD_OFFSET) {
 		__bss_start = .;
 		*(.bss..page_aligned)
+<<<<<<< HEAD   (10d31e Merge 4.14.191 into android-4.14-stable)
+=======
+		. = ALIGN(PAGE_SIZE);
+>>>>>>> BRANCH (ca4f2c Linux 4.14.192)
 		*(BSS_MAIN)
 		. = ALIGN(PAGE_SIZE);
 		__bss_stop = .;

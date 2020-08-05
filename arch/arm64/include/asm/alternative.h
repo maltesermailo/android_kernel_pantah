@@ -72,9 +72,13 @@ void apply_alternatives(void *start, size_t length);
 	"663:\n\t"							\
 	newinstr "\n"							\
 	"664:\n\t"							\
+<<<<<<< HEAD   (10d31e Merge 4.14.191 into android-4.14-stable)
 	".popsection\n\t"						\
+=======
+>>>>>>> BRANCH (ca4f2c Linux 4.14.192)
 	".org	. - (664b-663b) + (662b-661b)\n\t"			\
-	".org	. - (662b-661b) + (664b-663b)\n"			\
+	".org	. - (662b-661b) + (664b-663b)\n\t"			\
+	".previous\n"							\
 	".endif\n"
 
 #define __ALTERNATIVE_CFG_CB(oldinstr, feature, cfg_enabled, cb)	\
