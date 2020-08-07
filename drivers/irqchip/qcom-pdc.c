@@ -16,6 +16,7 @@
 #include <linux/of_irq.h>
 #include <linux/of_address.h>
 #include <linux/of_device.h>
+#include <linux/of_irq.h>
 #include <linux/soc/qcom/irq.h>
 #include <linux/spinlock.h>
 #include <linux/slab.h>
@@ -525,6 +526,7 @@ fail:
 	return ret;
 }
 
+<<<<<<< HEAD   (075d0e Merge c0842fbc1b18 ("random32: move the pseudo-random 32-bit)
 #ifdef MODULE
 static int qcom_pdc_probe(struct platform_device *pdev)
 {
@@ -551,5 +553,10 @@ module_platform_driver(qcom_pdc_driver);
 IRQCHIP_DECLARE(qcom_pdc, "qcom,pdc", qcom_pdc_init);
 #endif
 
+=======
+IRQCHIP_PLATFORM_DRIVER_BEGIN(qcom_pdc)
+IRQCHIP_MATCH("qcom,pdc", qcom_pdc_init)
+IRQCHIP_PLATFORM_DRIVER_END(qcom_pdc)
+>>>>>>> BRANCH (7b4ea9 Revert "x86/mm/64: Do not sync vmalloc/ioremap mappings")
 MODULE_DESCRIPTION("Qualcomm Technologies, Inc. Power Domain Controller");
 MODULE_LICENSE("GPL v2");
