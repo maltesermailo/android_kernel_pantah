@@ -34,6 +34,24 @@
       "revId": "f04a11ac990793de9417928e90b0cd56c2d1e886",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "f5173e7a_f8a7a39f",
+        "filename": "net/xfrm/xfrm_state.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2274,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-08-07T18:18:58Z",
+      "side": 1,
+      "message": "Perhaps.  I don\u0027t think it matters much, but IMO go ahead if you\u0027d like to do that.\n\nNote, generally IS_ENABLED() is preferred to #ifdef:\n\n        if (in_compat_syscall() \u0026\u0026 !IS_ENABLED(CONFIG_ANDROID))\n                return -EOPNOTSUPP;",
+      "parentUuid": "603f8a79_f8814812",
+      "revId": "f04a11ac990793de9417928e90b0cd56c2d1e886",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
