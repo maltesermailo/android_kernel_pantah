@@ -2572,3 +2572,5 @@ static inline bool is_per_cpu_kthread(struct task_struct *p)
 
 void swake_up_all_locked(struct swait_queue_head *q);
 void __prepare_to_swait(struct swait_queue_head *q, struct swait_queue *wait);
+
+extern void init_sched_groups_capacity(int cpu, struct sched_domain *sd);
