@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "27be558f_25d70583",
+        "filename": "include/linux/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2020-08-11T23:46:07Z",
+      "side": 1,
+      "message": "This completely breaks the offset of the subsequent bit fields. And probably wastes a byte because bit fields that could have fit into the same byte are now split by a normal variable.",
+      "range": {
+        "startLine": 808,
+        "startChar": 12,
+        "endLine": 808,
+        "endChar": 31
+      },
+      "revId": "9723f187ad964d78e28d84a02253263f9357e3bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
