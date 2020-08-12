@@ -3764,7 +3764,7 @@ out:
 }
 
 static int enable_verity(const char *mount_dir, struct test_file *file,
-			   EVP_PKEY *key, X509 *cert)
+			   EVP_PKEY *key, X509 *cert, bool use_signatures)
 {
 	int result = TEST_FAILURE;
 	char *filename = NULL;
@@ -3805,15 +3805,26 @@ static int enable_verity(const char *mount_dir, struct test_file *file,
 	};
 	uint64_t flags;
 
-	memcpy(fsverity_descriptor.root_hash, file->root_hash, 32);
-	sha256((char *)&fsverity_descriptor, sizeof(fsverity_descriptor),
-	       (char *)fsverity_signed_digest.digest);
 	memcpy(fsverity_signed_digest.magic, "FSVerity", 8);
 
 	TEST(filename = concat_file_name(mount_dir, file->name), filename);
 	TEST(fd = open(filename, O_RDONLY | O_CLOEXEC), fd != -1);
 	TESTEQUAL(ioctl(fd, FS_IOC_GETFLAGS, &flags), 0);
 	TESTEQUAL(flags & FS_VERITY_FL, 0);
+
+	/* First try to enable verity with random digest */
+	TESTEQUAL(sign(key, cert, (void *)&fsverity_signed_digest,
+		       sizeof(fsverity_signed_digest), &sig, &sig_len),
+		  0);
+
+	fear.sig_size = sig_len;
+	fear.sig_ptr = ptr_to_u64(sig);
+	TESTEQUAL(ioctl(fd, FS_IOC_ENABLE_VERITY, &fear), -1);
+
+	/* Now try with correct digest */
+	memcpy(fsverity_descriptor.root_hash, file->root_hash, 32);
+	sha256((char *)&fsverity_descriptor, sizeof(fsverity_descriptor),
+	       (char *)fsverity_signed_digest.digest);
 
 	if (ioctl(fd, FS_IOC_ENABLE_VERITY, NULL) == -1 &&
 	    errno == EOPNOTSUPP) {
@@ -3825,8 +3836,13 @@ static int enable_verity(const char *mount_dir, struct test_file *file,
 		       sizeof(fsverity_signed_digest), &sig, &sig_len),
 		  0);
 
-	fear.sig_size = sig_len;
-	fear.sig_ptr = ptr_to_u64(sig);
+	if (use_signatures) {
+		fear.sig_size = sig_len;
+		fear.sig_ptr = ptr_to_u64(sig);
+	} else {
+		fear.sig_size = 0;
+		fear.sig_ptr = 0;
+	}
 	TESTEQUAL(ioctl(fd, FS_IOC_ENABLE_VERITY, &fear), 0);
 
 	result = TEST_SUCCESS;
@@ -3856,7 +3872,7 @@ out:
 	return result;
 }
 
-static int verity_test(const char *mount_dir)
+static int verity_test_optional_sigs(const char *mount_dir, bool use_signatures)
 {
 	int result = TEST_FAILURE;
 	char *backing_dir = NULL;
@@ -3908,8 +3924,19 @@ static int verity_test(const char *mount_dir)
 				     file->sig.add_data), 0);
 
 		TESTEQUAL(emit_partial_test_file_hash(mount_dir, file), 0);
-		TESTEQUAL(enable_verity(mount_dir, file, key, cert), 0);
+		TESTEQUAL(enable_verity(mount_dir, file, key, cert,
+					use_signatures),
+			  0);
 	}
+
+	for (i = 0; i < file_num; i++)
+		TESTEQUAL(validate_verity(mount_dir, &test.files[i]), 0);
+
+	close(cmd_fd);
+	cmd_fd = -1;
+	TESTEQUAL(umount(mount_dir), 0);
+	TESTEQUAL(mount_fs_opt(mount_dir, backing_dir, "readahead=0", false),
+		  0);
 
 	for (i = 0; i < file_num; i++)
 		TESTEQUAL(validate_verity(mount_dir, &test.files[i]), 0);
@@ -3924,6 +3951,17 @@ out:
 	close(cmd_fd);
 	umount(mount_dir);
 	free(backing_dir);
+	return result;
+}
+
+static int verity_test(const char *mount_dir)
+{
+	int result = TEST_FAILURE;
+
+	TESTEQUAL(verity_test_optional_sigs(mount_dir, true), TEST_SUCCESS);
+	TESTEQUAL(verity_test_optional_sigs(mount_dir, false), TEST_SUCCESS);
+	result = TEST_SUCCESS;
+out:
 	return result;
 }
 
