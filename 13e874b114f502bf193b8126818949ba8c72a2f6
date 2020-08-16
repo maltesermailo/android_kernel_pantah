@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "07cf7203_71649445",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-08-16T18:17:14Z",
+      "side": 1,
+      "message": "Dmitry, can you check that enabling ARCH_MESON doesn\u0027t turn on other things in the kernel? Sometimes it is not obvious. I suggest you look at the resulting .config file before/after your change to see if other options got toggled and, if they did, disable them and enable downstream instead. If you find def_bool or other bool options (or hidden bool options) get turned on, we\u0027ll need to discuss further..",
+      "revId": "13e874b114f502bf193b8126818949ba8c72a2f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
