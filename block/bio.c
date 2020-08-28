@@ -235,9 +235,12 @@ void bio_uninit(struct bio *bio)
 {
 	bio_disassociate_blkg(bio);
 
+<<<<<<< HEAD   (343648 ANDROID: ion: export some ion symbols)
 	if (bio_integrity(bio))
 		bio_integrity_free(bio);
 
+=======
+>>>>>>> BRANCH (b20984 fs-verity: use smp_load_acquire() for ->i_verity_info)
 	bio_crypt_free_ctx(bio);
 }
 EXPORT_SYMBOL(bio_uninit);

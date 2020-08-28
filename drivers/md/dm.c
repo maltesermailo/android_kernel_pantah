@@ -27,7 +27,10 @@
 #include <linux/pr.h>
 #include <linux/refcount.h>
 #include <linux/blk-crypto.h>
+<<<<<<< HEAD   (343648 ANDROID: ion: export some ion symbols)
 #include <linux/keyslot-manager.h>
+=======
+>>>>>>> BRANCH (b20984 fs-verity: use smp_load_acquire() for ->i_verity_info)
 
 #define DM_MSG_PREFIX "core"
 
