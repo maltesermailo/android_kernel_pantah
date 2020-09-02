@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "327ccbae_dbefd72a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-02T23:55:48Z",
+      "side": 1,
+      "message": "In drivers/trusty/Kconfig, TRUSTY_SMC_ARM and TRUSTY_SMC_ARM64 should be \u0027bool\u0027 rather than \u0027tristate\u0027 since they are options for the trusty-core module, not modules themselves.\n\nAlso there\u0027s no need to use \u0027default n\u0027 for TRUSTY, since \u0027n\u0027 is already the default.",
+      "revId": "b364e0926539f1e64e1fad70a5dd96afc817bbd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
