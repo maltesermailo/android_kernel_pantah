@@ -1260,8 +1260,11 @@ static void f2fs_put_super(struct super_block *sb)
 
 	f2fs_destroy_post_read_wq(sbi);
 
+<<<<<<< HEAD   (0ede46 ANDROID: vendor_hooks: Add vendor hooks for key combination)
 	kvfree(sbi->ckpt);
 
+=======
+>>>>>>> BRANCH (933cf1 Linux 5.4.62)
 	sb->s_fs_info = NULL;
 	if (sbi->s_chksum_driver)
 		crypto_free_shash(sbi->s_chksum_driver);
