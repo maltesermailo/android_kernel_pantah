@@ -33,6 +33,12 @@
 
 #define INCFS_ROOT_INODE 0
 
+#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#define le32_to_cpu(x)          (x)
+#else
+#error Big endian not supported!
+#endif
+
 struct hash_block {
 	char data[INCFS_DATA_FILE_BLOCK_SIZE];
 };
@@ -3011,33 +3017,40 @@ static const char v1_file[] = {
 	0x01, 0x00, 0x00, 0x00,
 };
 
-#define TEST(statement, condition)					\
+#define TESTCOND(condition)						\
 	do {								\
-		statement;						\
 		if (!(condition)) {					\
 			ksft_print_msg("%s failed %d\n",		\
 				       __func__, __LINE__);		\
 			goto out;					\
 		}							\
-	} while(false)
+	} while (false)
+
+#define TEST(statement, condition)					\
+	do {								\
+		statement;						\
+		TESTCOND(condition);					\
+	} while (false)
+
+#define TESTEQUAL(statement, res)					\
+	TESTCOND(statement == res)
 
 static int compatibility_test(const char *mount_dir)
 {
-	char *backing_dir = NULL;
 	static const char *name = "file";
 	int result = TEST_FAILURE;
+	char *backing_dir = NULL;
 	char *filename = NULL;
 	int fd = -1;
-	int err;
 	uint64_t size = 0x0c;
 
 	TEST(backing_dir = create_backing_dir(mount_dir), backing_dir);
 	TEST(filename = concat_file_name(backing_dir, name), filename);
 	TEST(fd = open(filename, O_CREAT | O_WRONLY | O_CLOEXEC), fd != -1);
-	TEST(err = write(fd, v1_file, sizeof(v1_file)), err == sizeof(v1_file));
-	TEST(err = fsetxattr(fd, INCFS_XATTR_SIZE_NAME, &size, sizeof(size), 0),
-	     err == 0);
-	TEST(err = mount_fs(mount_dir, backing_dir, 50), err == 0);
+	TESTEQUAL(write(fd, v1_file, sizeof(v1_file)), sizeof(v1_file));
+	TESTEQUAL(fsetxattr(fd, INCFS_XATTR_SIZE_NAME, &size, sizeof(size), 0),
+		  0);
+	TESTEQUAL(mount_fs(mount_dir, backing_dir, 50), 0);
 	free(filename);
 	TEST(filename = concat_file_name(mount_dir, name), filename);
 	close(fd);
@@ -3052,15 +3065,55 @@ out:
 	return result;
 }
 
-static int validate_block_count(const char *mount_dir, struct test_file *file)
+static int zero_blocks_written_count(int fd, uint32_t blocks_written)
+{
+	int test_result = TEST_FAILURE;
+	uint64_t offset;
+	uint8_t type;
+	uint32_t bw;
+
+	/* Get start of blockmap md record */
+	TESTEQUAL(pread(fd, &offset, sizeof(offset), 24), sizeof(offset));
+	TESTEQUAL(pread(fd, &type, sizeof(type), offset), sizeof(type));
+	TESTEQUAL(type, 1);
+
+	/* Get start of status md record */
+	TESTEQUAL(pread(fd, &offset, sizeof(offset), offset + 7),
+		  sizeof(offset));
+	TESTEQUAL(pread(fd, &type, sizeof(type), offset), sizeof(type));
+	TESTEQUAL(type, 4);
+
+	/* read blocks_written */
+	TESTEQUAL(pread(fd, &bw, sizeof(bw), offset + 23), sizeof(bw));
+	TESTEQUAL(bw, blocks_written);
+
+	/* Write out zero */
+	bw = 0;
+	TESTEQUAL(pwrite(fd, &bw, sizeof(bw), offset + 23), sizeof(bw));
+
+	test_result = TEST_SUCCESS;
+out:
+	return test_result;
+}
+
+static int validate_block_count(const char *mount_dir, const char *backing_dir,
+				struct test_file *file)
 {
 	int block_cnt = 1 + (file->size - 1) / INCFS_DATA_FILE_BLOCK_SIZE;
 	char *filename = concat_file_name(mount_dir, file->name);
+	char *backing_filename = concat_file_name(backing_dir, file->name);
 	int fd;
 	struct incfs_get_block_count_args bca = {};
 	int test_result = TEST_FAILURE;
 	int result;
 	int i;
+	struct incfs_filled_range ranges[128];
+	struct incfs_get_filled_blocks_args fba = {
+		.range_buffer = ptr_to_u64(ranges),
+		.range_buffer_size = sizeof(ranges),
+	};
+	int cmd_fd = -1;
+	struct incfs_permit_fill permit_fill;
 
 	fd = open(filename, O_RDONLY | O_CLOEXEC);
 	if (fd <= 0)
@@ -3098,9 +3151,46 @@ static int validate_block_count(const char *mount_dir, struct test_file *file)
 	if (bca.total_blocks_out != block_cnt ||
 	    bca.filled_blocks_out != (block_cnt + 1) / 2)
 		goto out;
+	close(fd);
+
+	drop_caches();
+
+	fd = open(backing_filename, O_RDWR | O_CLOEXEC);
+	TEST(result = zero_blocks_written_count(fd, bca.filled_blocks_out),
+	     result == TEST_SUCCESS);
+	close(fd);
+
+	fd = open(filename, O_RDONLY | O_CLOEXEC);
+	result = ioctl(fd, INCFS_IOC_GET_BLOCK_COUNT, &bca);
+	if (result != 0)
+		goto out;
+
+	if (bca.total_blocks_out != block_cnt ||
+	    bca.filled_blocks_out != 0)
+		goto out;
+
+	cmd_fd = open_commands_file(mount_dir);
+	permit_fill.file_descriptor = fd;
+	if (ioctl(cmd_fd, INCFS_IOC_PERMIT_FILL, &permit_fill))
+		goto out;
+
+	do {
+		result = ioctl(fd, INCFS_IOC_GET_FILLED_BLOCKS, &fba);
+		fba.start_index = fba.index_out + 1;
+	} while (fba.index_out < fba.data_blocks_out);
+
+	result = ioctl(fd, INCFS_IOC_GET_BLOCK_COUNT, &bca);
+	if (result != 0)
+		goto out;
+
+	if (bca.total_blocks_out != block_cnt ||
+	    bca.filled_blocks_out != (block_cnt + 1) / 2)
+		goto out;
 
 	test_result = TEST_SUCCESS;
 out:
+	free(backing_filename);
+	close(cmd_fd);
 	free(filename);
 	close(fd);
 	return test_result;
@@ -3133,7 +3223,7 @@ static int block_count_test(const char *mount_dir)
 					NULL) < 0)
 			goto failure;
 
-		result = validate_block_count(mount_dir, file);
+		result = validate_block_count(mount_dir, backing_dir, file);
 		if (result)
 			goto failure;
 	}
