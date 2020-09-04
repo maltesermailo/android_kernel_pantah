@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d1619e0_4c1e5c90",
+        "filename": "fs/pstore/ram_core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-04T21:22:43Z",
+      "side": 1,
+      "message": "I\u0027m a little concerned about the \"notrace\" declaration which inhibits kprobes on this function due to risk of infinite recursion. On the surface it seems like the same potential exists for this hook.\n\n@salyzyn: what are your thoughts on this?",
+      "revId": "9e1431b80f1890cb1c2ea6cd24849444039f16b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
