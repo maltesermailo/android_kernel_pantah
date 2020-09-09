@@ -69,6 +69,24 @@
       "revId": "9e1431b80f1890cb1c2ea6cd24849444039f16b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "45951f54_f5b206ed",
+        "filename": "fs/pstore/ram_core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-09-09T13:07:14Z",
+      "side": 1,
+      "message": "Good stuff, thanks.\n\nAs livepatch only works reliably when the dynamic ftrace is located at the very beginning of the function. notrace turns that off (as does inlining). Also, and most importantly, livepatch must be turned off in the ftrace handler paths, which ramoops is part of since we can record ftrace into this memory, the result would be an infinite loop.",
+      "parentUuid": "805fbc92_f51c72bd",
+      "revId": "9e1431b80f1890cb1c2ea6cd24849444039f16b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
