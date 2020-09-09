@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "989b7998_27f9644e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-09-09T01:06:50Z",
+      "side": 1,
+      "message": "I will need to understand more about why they are doing this?",
+      "revId": "9e1431b80f1890cb1c2ea6cd24849444039f16b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4d1619e0_4c1e5c90",
         "filename": "fs/pstore/ram_core.c",
         "patchSetId": 1
@@ -13,6 +30,24 @@
       "writtenOn": "2020-09-04T21:22:43Z",
       "side": 1,
       "message": "I\u0027m a little concerned about the \"notrace\" declaration which inhibits kprobes on this function due to risk of infinite recursion. On the surface it seems like the same potential exists for this hook.\n\n@salyzyn: what are your thoughts on this?",
+      "revId": "9e1431b80f1890cb1c2ea6cd24849444039f16b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "86120e67_47b96f71",
+        "filename": "fs/pstore/ram_core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1032276
+      },
+      "writtenOn": "2020-09-09T01:06:50Z",
+      "side": 1,
+      "message": "This is definitely an anti-pattern, there is absolutely no trace operations in any notrace function (except in trace_event_raw_event_synth, which does it all manually as it has that job) anywhere in the kernel. I agree, the same reasons this is a notrace function is the reason no trace hooks should be placed here.\n\nThe address of the buffer data for the console/logd buffers is a well known address passed on the kernel command line or via the device tree from the bootloader reserving and _preserving_ the fragment. Why it is needed in a trace message puzzles me in any case.\n\nThe fix for the problem of preserving the content is in the NHLOS (Bootloader). Other vendors take actions to preserve this content, some only do it when there is a kernel panic or watchdog, some preserve it always, through other means. For instance one of our vendors creates a one-time-volatile-key (tiny) and preserves the content encrypted on flash storage to restore later. Such heroic operations when the ram preservation is problematic due to hardware constraints such as a problematic pmic. Basically, it is the job of the NHLOS to preserve (or copy) ramoops content, not the pstore driver, not the ramoops driver.",
+      "parentUuid": "4d1619e0_4c1e5c90",
       "revId": "9e1431b80f1890cb1c2ea6cd24849444039f16b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
