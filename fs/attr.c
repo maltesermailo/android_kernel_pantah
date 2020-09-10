@@ -17,6 +17,7 @@
 #include <linux/security.h>
 #include <linux/evm.h>
 #include <linux/ima.h>
+#include <trace/hooks/fs.h>
 
 static bool chown_ok(const struct inode *inode, kuid_t uid)
 {
@@ -339,6 +340,7 @@ int notify_change(struct dentry * dentry, struct iattr * attr, struct inode **de
 
 	if (!error) {
 		fsnotify_change(dentry, ia_valid);
+		trace_android_vh_post_setattr(dentry);
 		ima_inode_post_setattr(dentry);
 		evm_inode_post_setattr(dentry, ia_valid);
 	}
