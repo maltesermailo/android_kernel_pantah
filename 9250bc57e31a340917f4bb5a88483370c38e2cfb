@@ -2,6 +2,46 @@
   "comments": [
     {
       "key": {
+        "uuid": "2904c2e9_bcdfe6ac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-11T00:20:21Z",
+      "side": 1,
+      "message": "Make clear that this change only affects restricted vendor hooks",
+      "revId": "9250bc57e31a340917f4bb5a88483370c38e2cfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "13f12104_402c25f5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-11T00:20:21Z",
+      "side": 1,
+      "message": "remove comma",
+      "range": {
+        "startLine": 11,
+        "startChar": 31,
+        "endLine": 11,
+        "endChar": 33
+      },
+      "revId": "9250bc57e31a340917f4bb5a88483370c38e2cfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "2bac7b3a_7441ffdc",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -33,6 +73,176 @@
       "revId": "9250bc57e31a340917f4bb5a88483370c38e2cfb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d89a0edb_52bb4d04",
+        "filename": "include/linux/tracepoint.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-11T00:20:21Z",
+      "side": 1,
+      "message": "change to \"restricted_vendor_hook_register()\" ?",
+      "revId": "9250bc57e31a340917f4bb5a88483370c38e2cfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9894d6c6_47f72c40",
+        "filename": "include/trace/hooks/vendor_hooks.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-11T00:20:21Z",
+      "side": 1,
+      "message": "do you need an rmb() here to ensure observed ordering of func/data?",
+      "revId": "9250bc57e31a340917f4bb5a88483370c38e2cfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dd7587ad_241b6cde",
+        "filename": "kernel/tracepoint.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-11T00:20:21Z",
+      "side": 1,
+      "message": "All of the new code in this file should be under #ifdef CONFIG_ANDROID_VENDOR_HOOKS. Maybe group the new code together under one #ifdef",
+      "revId": "9250bc57e31a340917f4bb5a88483370c38e2cfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67942c69_001456e0",
+        "filename": "kernel/tracepoint.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-11T00:20:21Z",
+      "side": 1,
+      "message": "Can we name these helper functions so it is obvious they are for restricted vendor hooks (not normal ones)",
+      "revId": "9250bc57e31a340917f4bb5a88483370c38e2cfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5f65361_256f9cf8",
+        "filename": "kernel/tracepoint.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-11T00:20:21Z",
+      "side": 1,
+      "message": "Does prio have any effect?",
+      "revId": "9250bc57e31a340917f4bb5a88483370c38e2cfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ba556d66_b66c51b0",
+        "filename": "kernel/tracepoint.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-11T00:20:21Z",
+      "side": 1,
+      "message": "please say a bit more -- what is the hazard? (The consumer of this is going to check -\u003efunc and assume that -\u003edata is safe to deref)",
+      "revId": "9250bc57e31a340917f4bb5a88483370c38e2cfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7650ae76_689f3560",
+        "filename": "kernel/tracepoint.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-11T00:20:21Z",
+      "side": 1,
+      "message": "is debug_print_probes() the reason this new code has to be in tracepoint.c? I\u0027d prefer if it were all moved out to it\u0027s own file.",
+      "revId": "9250bc57e31a340917f4bb5a88483370c38e2cfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a99512f2_2465c799",
+        "filename": "kernel/tracepoint.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-11T00:20:21Z",
+      "side": 1,
+      "message": "This description doesn\u0027t match the code",
+      "revId": "9250bc57e31a340917f4bb5a88483370c38e2cfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0081bf1e_16fc0b1a",
+        "filename": "kernel/tracepoint.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-11T00:20:21Z",
+      "side": 1,
+      "message": "Description doesn\u0027t match code",
+      "revId": "9250bc57e31a340917f4bb5a88483370c38e2cfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e7b25c6c_19714f84",
+        "filename": "kernel/tracepoint.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-11T00:20:21Z",
+      "side": 1,
+      "message": "this could be moved down to line 458",
+      "revId": "9250bc57e31a340917f4bb5a88483370c38e2cfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
