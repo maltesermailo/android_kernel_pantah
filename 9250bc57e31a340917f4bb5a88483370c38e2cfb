@@ -205,6 +205,24 @@
     },
     {
       "key": {
+        "uuid": "56a06b0b_f855393b",
+        "filename": "include/trace/hooks/vendor_hooks.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-17T16:00:15Z",
+      "side": 1,
+      "message": "You\u0027ve guaranteed the write-side ordering, but if you don\u0027t have anything here, isn\u0027t it fair for the compiler to reorder the loads of -\u003efunc and -\u003edata? It might not, but it would be allowed. You need to somehow tell the compiler that -\u003edata must be loaded after -\u003efunc.",
+      "parentUuid": "19a5319d_43520a0e",
+      "revId": "9250bc57e31a340917f4bb5a88483370c38e2cfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dd7587ad_241b6cde",
         "filename": "kernel/tracepoint.c",
         "patchSetId": 2
@@ -374,6 +392,24 @@
       "side": 1,
       "message": "The code was in this file because it is based upon the existing code in this file.  It may be benifical to have the content in the same file, therefore, if common changes are necessary.\n\nI won\u0027t mark this as resolved.  If you feel strongly about it, I can rework the code as you suggest.",
       "parentUuid": "7650ae76_689f3560",
+      "revId": "9250bc57e31a340917f4bb5a88483370c38e2cfb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "fb5d0eb5_87317ed7",
+        "filename": "kernel/tracepoint.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-17T16:00:15Z",
+      "side": 1,
+      "message": "Yes, I would like to keep our out-of-tree changes for hooks separate from the upstream tracepoint implementation if possible. This avoids conflicts and generally makes it easier to manage our out-of-tree code.\n\nMaybe put a comment in the function headers to indicate what it was based on to help the cases where an upstream change in tracepoints requires us to update these functions.",
+      "parentUuid": "e6e90b33_5b6916de",
       "revId": "9250bc57e31a340917f4bb5a88483370c38e2cfb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
