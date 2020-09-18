@@ -17,6 +17,7 @@
 #include <trace/hooks/topology.h>
 #include <trace/hooks/debug.h>
 #include <trace/hooks/wqlockup.h>
+#include <trace/hooks/xfrm.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -56,3 +57,6 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_futex_plist_add);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ipi_stop);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_wq_lockup_pool);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_find_busiest_group);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ip6_pkt_too_big);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ip6_fragment);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh__xfrm4_output);
