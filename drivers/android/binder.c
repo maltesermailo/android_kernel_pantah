@@ -4258,7 +4258,6 @@ static int binder_wait_for_work(struct binder_thread *thread,
 	struct binder_proc *proc = thread->proc;
 	int ret = 0;
 
-	freezer_do_not_count();
 	binder_inner_proc_lock(proc);
 	for (;;) {
 		prepare_to_wait(&thread->wait, &wait, TASK_INTERRUPTIBLE);
@@ -4269,6 +4268,7 @@ static int binder_wait_for_work(struct binder_thread *thread,
 				 &proc->waiting_threads);
 		binder_inner_proc_unlock(proc);
 		schedule();
+		try_to_freeze();
 		binder_inner_proc_lock(proc);
 		list_del_init(&thread->waiting_thread_node);
 		if (signal_pending(current)) {
@@ -4278,7 +4278,6 @@ static int binder_wait_for_work(struct binder_thread *thread,
 	}
 	finish_wait(&thread->wait, &wait);
 	binder_inner_proc_unlock(proc);
-	freezer_count();
 
 	return ret;
 }
