@@ -43,7 +43,12 @@ KBUILD_CFLAGS += -Wno-pointer-sign
 KBUILD_CFLAGS += $(call cc-option,-fmacro-prefix-map=$(srctree)/=)
 KBUILD_CFLAGS += -fno-asynchronous-unwind-tables
 KBUILD_CFLAGS += -D__DISABLE_EXPORTS
+<<<<<<< HEAD   (0df7b9 ANDROID: gic: Add vendor hook for gic-v3 resume)
 KBUILD_CFLAGS += -include $(srctree)/$(src)/hidden.h
+=======
+# Disable relocation relaxation in case the link is not PIE.
+KBUILD_CFLAGS += $(call as-option,-Wa$(comma)-mrelax-relocations=no)
+>>>>>>> BRANCH (ba4f18 Linux 5.9-rc6)
 
 KBUILD_AFLAGS  := $(KBUILD_CFLAGS) -D__ASSEMBLY__
 GCOV_PROFILE := n
