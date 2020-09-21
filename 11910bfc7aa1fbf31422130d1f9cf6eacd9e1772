@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "194eadd7_a797d6a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2020-09-21T14:33:50Z",
+      "side": 1,
+      "message": "kernel_cf_{aarch64,x86_64} is failing:\n\n+ cd common-modules/virtual-device\n+ make CC\u003dclang HOSTCC\u003dclang LD\u003dld.lld HOSTLD\u003dld.lld HOSTLDFLAGS\u003d-fuse-ld\u003dlld NM\u003dllvm-nm OBJCOPY\u003dllvm-objcopy DEPMOD\u003ddepmod O\u003d.../common-android-4.19-stable/out/android-4.19-stable/common-modules/virtual-device -j80 mrproper\nmake: *** No rule to make target \u0027mrproper\u0027.  Stop.",
+      "revId": "11910bfc7aa1fbf31422130d1f9cf6eacd9e1772",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
