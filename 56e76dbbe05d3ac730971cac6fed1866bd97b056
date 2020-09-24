@@ -46,6 +46,54 @@
       "revId": "56e76dbbe05d3ac730971cac6fed1866bd97b056",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1e729a02_b78550cf",
+        "filename": "drivers/input/evdev.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1765456
+      },
+      "writtenOn": "2020-09-24T06:44:09Z",
+      "side": 1,
+      "message": "Operation through vendor hook is just saving the input events to the buffer like evdev client. Actual operation of booster module is performed in other context through kworkers. So I thought it could be placed in the spinlock section.\n\nCould you please make sure that placing \"vendor hook\" in spinlock section with irq disabled could be a problem?\nI wonder if what you talked about is the location of \"Vendor Hook\" or the logic in the vendor hook.",
+      "parentUuid": "14742e9b_80ec6061",
+      "range": {
+        "startLine": 218,
+        "startChar": 0,
+        "endLine": 218,
+        "endChar": 79
+      },
+      "revId": "56e76dbbe05d3ac730971cac6fed1866bd97b056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cec266ef_3236ed29",
+        "filename": "drivers/input/evdev.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1765456
+      },
+      "writtenOn": "2020-09-24T06:44:09Z",
+      "side": 1,
+      "message": "There are vendor specific ways to control system resources like \"cpu frequency\". and we adjust resource levels properly corresponding input event type such as \"key,touch,mouse\" when input event is handled in kernel.\nAnd I described this processes as \"boost\".\n\nWe\u0027ve faced many issues regarding input latency.\nFor example, in case of user interactions that require fast responsiveness, it usually generates heavy load such as drawing, zoom-in\u0026out.\nif these tasks work on low frequency of cpu, it should take a quite long time from the time input events occur to the time users want to do.\nTo resolve this kind of issues, we\u0027ve controlled resources which is \"boost\" depending on scenarios.",
+      "parentUuid": "14742e9b_80ec6061",
+      "range": {
+        "startLine": 218,
+        "startChar": 0,
+        "endLine": 218,
+        "endChar": 79
+      },
+      "revId": "56e76dbbe05d3ac730971cac6fed1866bd97b056",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
