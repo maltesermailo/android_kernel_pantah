@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3502216a_8af2605d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-25T16:09:05Z",
+      "side": 1,
+      "message": "This has a build error. Please build/test your changes before posting!\n\n/buildbot/src/android/common-android11-5.4/common/drivers/base/arch_topology.c:60:72: error: too few arguments to function call, expected 4, have 3\n        trace_android_vh_arch_set_freq_scale(policy_max_freq, max_freq, \u0026scale);\n        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                                  ^\n/buildbot/src/android/common-android11-5.4/common/include/trace/hooks/topology.h:16:1: note: \u0027trace_android_vh_arch_set_freq_scale\u0027 declared here\nDECLARE_HOOK(android_vh_arch_set_freq_scale,\n^\n/buildbot/src/android/common-android11-5.4/common/include/trace/hooks/vendor_hooks.h:12:22: note: expanded from macro \u0027DECLARE_HOOK\u0027\n#define DECLARE_HOOK DECLARE_TRACE\n                     ^\n/buildbot/src/android/common-android11-5.4/common/include/linux/tracepoint.h:396:2: note: expanded from macro \u0027DECLARE_TRACE\u0027\n        __DECLARE_TRACE(name, PARAMS(proto), PARAMS(args),              \\\n        ^\n/buildbot/src/android/common-android11-5.4/common/include/linux/tracepoint.h:233:2: note: expanded from macro \u0027__DECLARE_TRACE\u0027\n        static inline void trace_##name(proto)                          \\\n        ^\n1 error generated.\n",
+      "revId": "fa9c69d1307c61770f7c32fbccc5d42bba4112fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79fe4aa0_59dad560",
+        "filename": "drivers/base/arch_topology.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-09-25T16:09:05Z",
+      "side": 1,
+      "message": "This line needs the new parameter",
+      "revId": "fa9c69d1307c61770f7c32fbccc5d42bba4112fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
