@@ -52,6 +52,24 @@
       "revId": "6e6bcb42e26b03e8ec55c82465e3c0e81919373b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "273016b5_289f8e59",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-25T23:44:32Z",
+      "side": 1,
+      "message": "Kind of.  If there is a kernel bug, any pointer could potentially be NULL.  We don\u0027t put BUG_ON(NULL) before every pointer dereference.  The question is are these cases special/important enough to need it, and if so, shouldn\u0027t they be changed to WARN_ON() + recovery instead.  It wasn\u0027t immediately obvious how to recover from the two cases in trusty-ipc.c, but maybe:\n\nvds_get_txbuf():\n  if (WARN_ON(!mb))\n        return ERR_PTR(-EINVAL);\n\n_handle_rxbuf():        \n  kref_put(\u0026chan-\u003erefcount, _free_chan);\n  if (WARN_ON(!rxbuf))\n        return -EINVAL;",
+      "parentUuid": "1fdcbcdf_942f1818",
+      "revId": "6e6bcb42e26b03e8ec55c82465e3c0e81919373b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
