@@ -16,6 +16,23 @@
       "revId": "fe5d16d339aee7a1a7a059abe1a38b43438e876c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "18e0f9df_18fd95f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2020-09-25T15:25:27Z",
+      "side": 1,
+      "message": "-EL is used to specify endian on ARM, but it isn\u0027t valid for x86 (all x86 is little endian). Secondly, scripts/selinux/mdp is a host tool, and should always be built for x86. I can\u0027t see -EL specified to clang specifically, so something strange is going on in the compiler frontend to make it specify this when invoking the assembler. Maybe try to re-run the command locally, but call \"clang -v or \"clang -v -v\" instead to see how as ends up being invoked?",
+      "revId": "fe5d16d339aee7a1a7a059abe1a38b43438e876c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
