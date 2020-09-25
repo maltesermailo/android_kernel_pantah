@@ -16,6 +16,24 @@
       "revId": "c4a9b13b2e19ab2ca930fbae09da0c03171279be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bef28bee_8bc58653",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1765456
+      },
+      "writtenOn": "2020-09-25T10:34:12Z",
+      "side": 1,
+      "message": "As you know, the ways to control resources must be very vendor specific so I believe it\u0027s pretty hard to submit the solution to linux upstream.\n \nWe have been using this solution for many years and we always consider that the hooking existing in the spinlock section might be a problem. so we have used it very carefully.\n\nActually, except hooking the input data, almost of main logic is handled by kworker thread to split from main context.\nTherefore, the real operation in the hook is just sending the data in the main context.\n\nAnd we\u0027ve been testing all the release binaries for all possible scenarios with huge number of devices and we\u0027ve checked that it works fine until now on.\n\nCould you please let us know how we can guarantee the solution is safe even in the spinlock section?",
+      "parentUuid": "c73f1d26_acddaac1",
+      "revId": "c4a9b13b2e19ab2ca930fbae09da0c03171279be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
