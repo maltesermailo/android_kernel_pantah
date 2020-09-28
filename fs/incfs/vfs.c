@@ -775,6 +775,8 @@ static long dispatch_ioctl(struct file *f, unsigned int req, unsigned long arg)
 		return ioctl_enable_verity(f, (const void __user *)arg);
 	case FS_IOC_GETFLAGS:
 		return incfs_verity_get_flags(f, (void __user *) arg);
+	case FS_IOC_MEASURE_VERITY:
+		return fsverity_ioctl_measure(f, (void __user *)arg);
 	default:
 		return -ENOTTY;
 	}
