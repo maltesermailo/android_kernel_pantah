@@ -52,6 +52,24 @@
       "revId": "c4a9b13b2e19ab2ca930fbae09da0c03171279be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "09c3c78a_5af79463",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1765456
+      },
+      "writtenOn": "2020-09-28T10:25:49Z",
+      "side": 1,
+      "message": "I believe I misunderstood for some words.\nWays to control resources are different depending on H/W chipset because of their own modules.\nMore specifically, each chipset vendor companies such as QualComm, Samsung LSI, MediaTek has their own api to control resources on kernel side.\nAnd we have to implement proper code that handles resources depending on chipsets.\nFor example, in case of cpu freqeuncy, each chipset vendor provides there own api.\n\n\nAs you said, we will consider the changes integrate to upstream.\nHowever we are already under progressing new product on R os so we need to do this through vendor hook.\n\nThe below reasons why I think here is the best place to hook the all input event datas.\n - Available to check all the input datas from all device drivers(Touch, Pen, Mouse, Key etc).\n - Available to get all filtered input event datas before sending it to F/W(EventHub).\n - Available to keep data consistancy with lock.\n\nAgain, most important thing is we handle all the logic using kworker thread spliting from main context except hooking the datas to save.\n\nI think there might be misunderstanding for me or short explaning.\nCould you please explain that you need exactly for the \"Point\"?\nI\u0027m worried about what I got.",
+      "parentUuid": "7e95e6c4_0b23cf7c",
+      "revId": "c4a9b13b2e19ab2ca930fbae09da0c03171279be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
