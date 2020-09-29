@@ -16,6 +16,24 @@
       "revId": "9fcf83f6aa959b98300aa90e1022ca2a219c2977",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e9ca9e2e_92a6f4e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-09-29T23:24:31Z",
+      "side": 1,
+      "message": "For 32-bit, compiled only.  At https://android-review.googlesource.com/c/kernel/common/+/1418812/1/drivers/trusty/trusty.c#345 you said that the Trusty driver can\u0027t be tested on 32-bit yet.  Let me know if that\u0027s no longer the case.\n\nAnyway, uint is just a typedef for unsigned int, and ulong just is a typedef for unsigned long.  Replacing them with the standard names isn\u0027t going to break anything.",
+      "parentUuid": "15dcbf56_4de2afd0",
+      "revId": "9fcf83f6aa959b98300aa90e1022ca2a219c2977",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
