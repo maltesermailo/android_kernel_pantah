@@ -33,8 +33,14 @@ static inline struct super_block *file_superblock(struct file *f)
 #ifdef CONFIG_FS_VERITY
 extern const struct fsverity_operations incfs_verityops;
 extern int incfs_verity_get_flags(struct file *f, void __user *arg);
+extern long incfs_fsverity_enable(struct file *f, const void __user *arg);
 #else
 static inline int incfs_verity_get_flags(struct file *f, void __user *arg) {
+	return -EOPNOTSUPP;
+}
+
+static inline long incfs_fsverity_enable(struct file *f,
+					 const void __user *arg) {
 	return -EOPNOTSUPP;
 }
 #endif

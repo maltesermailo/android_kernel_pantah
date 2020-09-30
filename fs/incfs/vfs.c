@@ -19,6 +19,7 @@
 
 #include "data_mgmt.h"
 #include "format.h"
+#include "integrity.h"
 #include "internal.h"
 #include "pseudo_files.h"
 
@@ -709,7 +710,6 @@ static long ioctl_read_file_signature(struct file *f, void __user *arg)
 
 out:
 	kfree(sig_buffer);
-
 	return error;
 }
 
@@ -759,6 +759,7 @@ static long ioctl_get_block_count(struct file *f, void __user *arg)
 	return 0;
 }
 
+
 static long dispatch_ioctl(struct file *f, unsigned int req, unsigned long arg)
 {
 	switch (req) {
@@ -771,7 +772,7 @@ static long dispatch_ioctl(struct file *f, unsigned int req, unsigned long arg)
 	case INCFS_IOC_GET_BLOCK_COUNT:
 		return ioctl_get_block_count(f, (void __user *)arg);
 	case FS_IOC_ENABLE_VERITY:
-		return fsverity_ioctl_enable(f, (const void __user *)arg);
+		return incfs_fsverity_enable(f, (const void __user *)arg);
 	case FS_IOC_GETFLAGS:
 		return incfs_verity_get_flags(f, (void __user *) arg);
 	case FS_IOC_MEASURE_VERITY:
