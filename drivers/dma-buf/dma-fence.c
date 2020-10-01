@@ -330,7 +330,6 @@ void __dma_fence_might_wait(void)
 int dma_fence_signal_locked(struct dma_fence *fence)
 {
 	struct dma_fence_cb *cur, *tmp;
-	struct list_head cb_list;
 
 	lockdep_assert_held(fence->lock);
 
@@ -338,16 +337,18 @@ int dma_fence_signal_locked(struct dma_fence *fence)
 				      &fence->flags)))
 		return -EINVAL;
 
-	/* Stash the cb_list before replacing it with the timestamp */
-	list_replace(&fence->cb_list, &cb_list);
-
-	fence->timestamp = ktime_get();
+	/* set current time, if not set by signaling driver */
+	if (!fence->timestamp)
+		fence->timestamp = ktime_get();
 	set_bit(DMA_FENCE_FLAG_TIMESTAMP_BIT, &fence->flags);
 	trace_dma_fence_signaled(fence);
 
-	list_for_each_entry_safe(cur, tmp, &cb_list, node) {
-		INIT_LIST_HEAD(&cur->node);
-		cur->func(fence, cur);
+	if (!list_empty(&fence->cb_list)) {
+		list_for_each_entry_safe(cur, tmp, &fence->cb_list, node) {
+			INIT_LIST_HEAD(&cur->node);
+			cur->func(fence, cur);
+		}
+		INIT_LIST_HEAD(&fence->cb_list);
 	}
 
 	return 0;
