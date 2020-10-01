@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0050c570_0525272d",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-10-01T21:17:46Z",
+      "side": 1,
+      "message": "This won\u0027t work when called by a 32-bit binary, since the number of this ioctl is _IOR(\u0027f\u0027, 1, long) which differs depending on sizeof(long).  To fix this, file_operations::compat_ioctl() needs to be implemented separately.  Check what other filesystems (e.g. ext4) do.",
+      "range": {
+        "startLine": 767,
+        "startChar": 6,
+        "endLine": 767,
+        "endChar": 21
+      },
+      "revId": "fb41a05a2b73d83f564f079b79d1eaf3a6dc6974",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    }
+  ]
+}
