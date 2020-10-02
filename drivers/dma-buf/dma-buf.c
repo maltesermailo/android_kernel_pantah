@@ -76,6 +76,11 @@ static void dma_buf_release(struct dentry *dentry)
 
 	dmabuf->ops->release(dmabuf);
 
+	if (dmabuf->exp_stats) {
+		atomic_dec(&dmabuf->exp_stats->num_buffers);
+		atomic64_sub(dmabuf->size, &dmabuf->exp_stats->total_exported);
+	}
+
 	mutex_lock(&db_list.lock);
 	list_del(&dmabuf->list_node);
 	mutex_unlock(&db_list.lock);
@@ -546,6 +551,13 @@ struct dma_buf *dma_buf_export(const struct dma_buf_export_info *exp_info)
 	dmabuf->size = exp_info->size;
 	dmabuf->exp_name = exp_info->exp_name;
 	dmabuf->owner = exp_info->owner;
+
+	if (exp_info->stats) {
+		dmabuf->exp_stats = exp_info->stats;
+		atomic_inc(&dmabuf->exp_stats->num_buffers);
+		atomic64_add(dmabuf->size, &dmabuf->exp_stats->total_exported);
+	}
+
 	spin_lock_init(&dmabuf->name_lock);
 	init_waitqueue_head(&dmabuf->poll);
 	dmabuf->cb_excl.poll = dmabuf->cb_shared.poll = &dmabuf->poll;
@@ -1308,6 +1320,85 @@ int dma_buf_get_flags(struct dma_buf *dmabuf, unsigned long *flags)
 }
 EXPORT_SYMBOL_GPL(dma_buf_get_flags);
 
+static ssize_t num_bufs_show(struct dma_buf_exporter_stats *exp_stats,
+			     char *buf)
+{
+	return sprintf(buf, "%u\n", atomic_read(&exp_stats->num_buffers));
+}
+
+static ssize_t total_size_exported_show(struct dma_buf_exporter_stats *exp_stats,
+					char *buf)
+{
+	return sprintf(buf, "%lu\n", atomic64_read(&exp_stats->total_exported));
+}
+
+struct exporter_sysfs_entry {
+	struct attribute attr;
+	ssize_t (*show)(struct dma_buf_exporter_stats *stats, char *buf);
+};
+
+static struct exporter_sysfs_entry exporter_num_bufs_attribute =
+	__ATTR_RO(num_bufs);
+static struct exporter_sysfs_entry exporter_total_size_exported_attribute =
+	__ATTR_RO(total_size_exported);
+
+static struct attribute *exporter_sysfs_attrs[] = {
+	&exporter_num_bufs_attribute.attr,
+	&exporter_total_size_exported_attribute.attr,
+	NULL,
+};
+
+#define to_dma_buf_exp_stats(stats) container_of(stats, struct dma_buf_exporter_stats, kobj)
+
+static ssize_t exporter_type_show(struct kobject *kobj, struct attribute *attr,
+			     char *buf)
+{
+	struct exporter_sysfs_entry *entry;
+	struct dma_buf_exporter_stats *exp_stats;
+
+	exp_stats = to_dma_buf_exp_stats(kobj);
+
+	entry = container_of(attr, struct exporter_sysfs_entry, attr);
+	if (!entry->show)
+		return -EIO;
+
+	return entry->show(exp_stats, buf);
+}
+
+static const struct sysfs_ops exporter_stats_sysfs_ops = {
+	.show = exporter_type_show,
+};
+
+static struct kobj_type exporter_stats_attr_type = {
+	.sysfs_ops	= &exporter_stats_sysfs_ops,
+	.default_attrs	= exporter_sysfs_attrs,
+};
+
+static struct kobject *dma_buf_exp_stats_kobj;
+int dma_buf_register_exporter_stats(struct dma_buf_export_info *exp_info)
+{
+	int ret = 0;
+	struct dma_buf_exporter_stats *exp_stats;
+
+	if (!exp_info || !exp_info->stats)
+		return -EINVAL;
+
+	exp_stats = exp_info->stats;
+	kobject_init(&exp_stats->kobj, &exporter_stats_attr_type);
+	ret = kobject_add(&exp_stats->kobj, dma_buf_exp_stats_kobj,
+			  exp_info->exp_name);
+	if (ret)
+		kobject_put(&exp_stats->kobj);
+	return ret;
+}
+EXPORT_SYMBOL_GPL(dma_buf_register_exporter_stats);
+
+void dma_buf_deregister_exporter_stats(struct dma_buf_exporter_stats *stats)
+{
+	kobject_del(&stats->kobj);
+}
+EXPORT_SYMBOL_GPL(dma_buf_deregister_exporter_stats);
+
 int dma_buf_get_uuid(struct dma_buf *dmabuf, uuid_t *uuid)
 {
 	if (WARN_ON(!dmabuf) || !uuid)
@@ -1458,6 +1549,14 @@ static int __init dma_buf_init(void)
 	if (IS_ERR(dma_buf_mnt))
 		return PTR_ERR(dma_buf_mnt);
 
+	dma_buf_exp_stats_kobj =
+			kobject_create_and_add("dma_buf_exporter_stats",
+					       kernel_kobj);
+	if (!dma_buf_exp_stats_kobj) {
+		kern_unmount(dma_buf_mnt);
+		return -ENOMEM;
+	}
+
 	mutex_init(&db_list.lock);
 	INIT_LIST_HEAD(&db_list.head);
 	dma_buf_init_debugfs();
@@ -1468,6 +1567,7 @@ subsys_initcall(dma_buf_init);
 static void __exit dma_buf_deinit(void)
 {
 	dma_buf_uninit_debugfs();
+	kobject_put(dma_buf_exp_stats_kobj);
 	kern_unmount(dma_buf_mnt);
 }
 __exitcall(dma_buf_deinit);

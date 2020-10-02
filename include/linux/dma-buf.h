@@ -356,6 +356,20 @@ struct dma_buf_ops {
 };
 
 /**
+ * struct dma_buf_exporter_stats - holds metadata for per-exporter stats in
+ * sysfs.
+ * @num_buffers: Total number of buffers currently exported by this exporter.
+ * @total_exported: total size of all buffers exported by this exporter.
+ * @kobj: sysfs node for exporter statistics which will appear in
+ * /sys/kernel/dma_buf_exporter_stats.
+ */
+struct dma_buf_exporter_stats {
+	atomic_t num_buffers;
+	atomic64_t total_exported;
+	struct kobject kobj;
+};
+
+/**
  * struct dma_buf - shared buffer object
  * @size: size of the buffer
  * @file: file pointer used for sharing buffers across, and for refcounting.
@@ -377,6 +391,7 @@ struct dma_buf_ops {
  * @poll: for userspace poll support
  * @cb_excl: for userspace poll support
  * @cb_shared: for userspace poll support
+ * @exp_stats: exporter statistics metadata
  *
  * This represents a shared buffer, created by calling dma_buf_export(). The
  * userspace representation is a normal file descriptor, which can be created by
@@ -412,6 +427,7 @@ struct dma_buf {
 
 		__poll_t active;
 	} cb_excl, cb_shared;
+	struct dma_buf_exporter_stats *exp_stats;
 };
 
 /**
@@ -495,6 +511,7 @@ struct dma_buf_attachment {
  * @flags:	mode flags for the file
  * @resv:	reservation-object, NULL to allocate default one
  * @priv:	Attach private data of allocator to this buffer
+ * @stats:	exporter statistics support
  *
  * This structure holds the information required to export the buffer. Used
  * with dma_buf_export() only.
@@ -507,6 +524,7 @@ struct dma_buf_export_info {
 	int flags;
 	struct dma_resv *resv;
 	void *priv;
+	struct dma_buf_exporter_stats *stats;
 };
 
 /**
@@ -519,6 +537,26 @@ struct dma_buf_export_info {
 #define DEFINE_DMA_BUF_EXPORT_INFO(name)	\
 	struct dma_buf_export_info name = { .exp_name = KBUILD_MODNAME, \
 					 .owner = THIS_MODULE }
+
+
+/**
+ * dma_buf_register_exporter_stats - set up sysfs statistics for a DMA-BUF
+ * exporter
+ * @exp_info: [in] The name of the directory that holds the statistics is
+ *            set from exp_info->exp_name. exp_info->stats->kobj is initialized
+ *            by the function.
+ *
+ * Returns 0 if successful and otherwise an error code.
+ */
+int dma_buf_register_exporter_stats(struct dma_buf_export_info *exp_info);
+
+/**
+ * dma_buf_deregister_exporter_stats - tear down sysfs node for the exporter
+ * statistics.
+ *
+ * @exp_stats: [in] exp_stats->kobj is deleted.
+ */
+void dma_buf_deregister_exporter_stats(struct dma_buf_exporter_stats *exporter_stats);
 
 /**
  * get_dma_buf - convenience wrapper for get_file.
