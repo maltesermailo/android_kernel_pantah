@@ -869,6 +869,7 @@ struct dma_buf *drm_gem_prime_export(struct drm_gem_object *obj,
 		.flags = flags,
 		.priv = obj,
 		.resv = obj->resv,
+		.stats = &drm_dma_buf_exporter_stats,
 	};
 
 	return drm_gem_dmabuf_export(dev, &exp_info);

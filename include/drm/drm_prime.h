@@ -55,6 +55,8 @@ struct dma_buf_export_info;
 struct dma_buf;
 struct dma_buf_attachment;
 
+extern struct dma_buf_exporter_stats drm_dma_buf_exporter_stats;
+
 enum dma_data_direction;
 
 struct drm_device;

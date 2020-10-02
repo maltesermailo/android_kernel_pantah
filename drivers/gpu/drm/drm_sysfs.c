@@ -11,6 +11,7 @@
  */
 
 #include <linux/device.h>
+#include <linux/dma-buf.h>
 #include <linux/err.h>
 #include <linux/export.h>
 #include <linux/gfp.h>
@@ -46,6 +47,7 @@
  * drm_connector_unregister().
  */
 
+struct dma_buf_exporter_stats drm_dma_buf_exporter_stats;
 static struct device_type drm_sysfs_device_minor = {
 	.name = "drm_minor"
 };
@@ -73,6 +75,8 @@ int drm_sysfs_init(void)
 {
 	int err;
 
+	DEFINE_DMA_BUF_EXPORT_INFO(exp_info);
+
 	drm_class = class_create(THIS_MODULE, "drm");
 	if (IS_ERR(drm_class))
 		return PTR_ERR(drm_class);
@@ -83,6 +87,15 @@ int drm_sysfs_init(void)
 		drm_class = NULL;
 		return err;
 	}
+
+	exp_info.stats = &drm_dma_buf_exporter_stats;
+
+	/*
+	 * It is ok to not set exp_info.name here because this exporter uses
+	 * KBUILD_MODINFO(i.e drm) as the exporter name.
+	 */
+	if (dma_buf_register_exporter_stats(&exp_info))
+		pr_err("Unable to set up drm DMA-BUF exporter stats\n");
 
 	drm_class->devnode = drm_devnode;
 	return 0;
@@ -95,6 +108,7 @@ int drm_sysfs_init(void)
  */
 void drm_sysfs_destroy(void)
 {
+	dma_buf_deregister_exporter_stats(&drm_dma_buf_exporter_stats);
 	if (IS_ERR_OR_NULL(drm_class))
 		return;
 	class_remove_file(drm_class, &class_attr_version.attr);
