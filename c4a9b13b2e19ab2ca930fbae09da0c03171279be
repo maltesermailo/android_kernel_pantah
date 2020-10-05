@@ -142,6 +142,24 @@
       "revId": "c4a9b13b2e19ab2ca930fbae09da0c03171279be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4cdb0ee4_27e539ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1765456
+      },
+      "writtenOn": "2020-10-05T09:35:14Z",
+      "side": 1,
+      "message": "If I understand in a right way, the boost in the scheduler might be handle util values through governor and boost in userspace might be hint through power-hal.\n\nScheduler boost is not only focused on input but it also doesn\u0027t give us enough system resources to satisfy all the load.\nAnd in case of userspace, we need faster reactive boost is needed because some latency occur as it goes through several stages(kernel-\u003euserspace-\u003ekernel).\n\nAnd could you please explain more about controlling resources apart from Vendor even though they have own apis to control resources?\nVendor is like Samsung LSI, Qualcomm.\nLet me show some example, we use \"exynos_pm_qos\" on LSI Chipset to control cpu frequency.\nIn case of QC chipset, we use \"freq_qos_update_request\" api to control cpu frequency.",
+      "parentUuid": "70c7ff77_c4d3369e",
+      "revId": "c4a9b13b2e19ab2ca930fbae09da0c03171279be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
