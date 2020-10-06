@@ -1,7 +1,6 @@
 {
   "comments": [
     {
-      "unresolved": false,
       "key": {
         "uuid": "c73f1d26_acddaac1",
         "filename": "/PATCHSET_LEVEL",
@@ -15,10 +14,10 @@
       "side": 1,
       "message": "As upstream is very interested in always reducing latency, can you just submit your real solution there?  That way it would properly integrate into this location and all is good.\n\nAgain, having a vendor hook under a spinlock is very worrisome and can cause problems if not used properly.",
       "revId": "c4a9b13b2e19ab2ca930fbae09da0c03171279be",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
-      "unresolved": false,
       "key": {
         "uuid": "bef28bee_8bc58653",
         "filename": "/PATCHSET_LEVEL",
@@ -33,10 +32,10 @@
       "message": "As you know, the ways to control resources must be very vendor specific so I believe it\u0027s pretty hard to submit the solution to linux upstream.\n \nWe have been using this solution for many years and we always consider that the hooking existing in the spinlock section might be a problem. so we have used it very carefully.\n\nActually, except hooking the input data, almost of main logic is handled by kworker thread to split from main context.\nTherefore, the real operation in the hook is just sending the data in the main context.\n\nAnd we\u0027ve been testing all the release binaries for all possible scenarios with huge number of devices and we\u0027ve checked that it works fine until now on.\n\nCould you please let us know how we can guarantee the solution is safe even in the spinlock section?",
       "parentUuid": "c73f1d26_acddaac1",
       "revId": "c4a9b13b2e19ab2ca930fbae09da0c03171279be",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     },
     {
-      "unresolved": true,
       "key": {
         "uuid": "7e95e6c4_0b23cf7c",
         "filename": "/PATCHSET_LEVEL",
@@ -51,10 +50,10 @@
       "message": "Ways to control resources are not vendor-specific at all, everyone has the same problems for all devices 😊\n\nCan you point us at the current code that does this to ensure that this even is the correct place to be doing this?\n\nAlso, again, upstream is very interested in reducing latency, so any changes that you have that does this are greatly appreciated.",
       "parentUuid": "bef28bee_8bc58653",
       "revId": "c4a9b13b2e19ab2ca930fbae09da0c03171279be",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     },
     {
-      "unresolved": true,
       "key": {
         "uuid": "09c3c78a_5af79463",
         "filename": "/PATCHSET_LEVEL",
@@ -69,10 +68,10 @@
       "message": "I believe I misunderstood for some words.\nWays to control resources are different depending on H/W chipset because of their own modules.\nMore specifically, each chipset vendor companies such as QualComm, Samsung LSI, MediaTek has their own api to control resources on kernel side.\nAnd we have to implement proper code that handles resources depending on chipsets.\nFor example, in case of cpu freqeuncy, each chipset vendor provides there own api.\n\n\nAs you said, we will consider the changes integrate to upstream.\nHowever we are already under progressing new product on R os so we need to do this through vendor hook.\n\nThe below reasons why I think here is the best place to hook the all input event datas.\n - Available to check all the input datas from all device drivers(Touch, Pen, Mouse, Key etc).\n - Available to get all filtered input event datas before sending it to F/W(EventHub).\n - Available to keep data consistancy with lock.\n\nAgain, most important thing is we handle all the logic using kworker thread spliting from main context except hooking the datas to save.\n\nI think there might be misunderstanding for me or short explaning.\nCould you please explain that you need exactly for the \"Point\"?\nI\u0027m worried about what I got.",
       "parentUuid": "7e95e6c4_0b23cf7c",
       "revId": "c4a9b13b2e19ab2ca930fbae09da0c03171279be",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     },
     {
-      "unresolved": true,
       "key": {
         "uuid": "1d197eb9_777753e9",
         "filename": "/PATCHSET_LEVEL",
@@ -87,10 +86,10 @@
       "message": "The system already handles \"touch boost\" with no hook or kernel modification needed, so why is this additional \"boost\" also needed?  Why not fix the code we already have that is present to resolve this very issue?\n\nAnd this should not need to be a vendor-specific issue at all, this is the normal input stack, if there is latency issues, it needs to be fixed for everything, not worked around in per-device methods.",
       "parentUuid": "09c3c78a_5af79463",
       "revId": "c4a9b13b2e19ab2ca930fbae09da0c03171279be",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     },
     {
-      "unresolved": true,
       "key": {
         "uuid": "cd71fc53_63d31299",
         "filename": "/PATCHSET_LEVEL",
@@ -105,10 +104,10 @@
       "message": "It\u0027s pretty hard for me to understand how each vendors can control resources in the same way even though they have their own specific ways.\nKindly could you please let me know the location of \"boost\" code or file that you talked about?\nI will check again whether the boost I want to do is the same as what you talked about.\n\nAnd I would like you to consider that I\u0027m not just talking about \"touch boost\".\nPlease consider that the boost I want to hook includes not only \"touch\" but also other devices such as Pen, Keyboard, Mouse so on.",
       "parentUuid": "1d197eb9_777753e9",
       "revId": "c4a9b13b2e19ab2ca930fbae09da0c03171279be",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     },
     {
-      "unresolved": true,
       "key": {
         "uuid": "88805c9d_49a4ad26",
         "filename": "/PATCHSET_LEVEL",
@@ -123,10 +122,10 @@
       "message": "if the system you talked about is Android F/W, \"The boost\" means power hint operation.\nIf so, it starts from kernel-side and it goes to user-space and again to kernel side and this process produces quite latency to respond input event.\nSo we need to trigger the boost in kernel side and the boost in kernel side has to call vendor-specific apis to control resources.\nThat\u0027s why I said that the boost which is controlling resources is vendor-specific.",
       "parentUuid": "cd71fc53_63d31299",
       "revId": "c4a9b13b2e19ab2ca930fbae09da0c03171279be",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     },
     {
-      "unresolved": true,
       "key": {
         "uuid": "70c7ff77_c4d3369e",
         "filename": "/PATCHSET_LEVEL",
@@ -141,10 +140,10 @@
       "message": "The \"boost\" happens in the scheduler, and userspace, and Todd should know where to look for that.  And this should happen on all systems, independent of specific hardware.\n\nAnd again, this is something that all systems need, why not submit this upstream?",
       "parentUuid": "88805c9d_49a4ad26",
       "revId": "c4a9b13b2e19ab2ca930fbae09da0c03171279be",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     },
     {
-      "unresolved": true,
       "key": {
         "uuid": "4cdb0ee4_27e539ed",
         "filename": "/PATCHSET_LEVEL",
@@ -159,10 +158,10 @@
       "message": "If I understand in a right way, the boost in the scheduler might be handle util values through governor and boost in userspace might be hint through power-hal.\n\nScheduler boost is not only focused on input but it also doesn\u0027t give us enough system resources to satisfy all the load.\nAnd in case of userspace, we need faster reactive boost is needed because some latency occur as it goes through several stages(kernel-\u003euserspace-\u003ekernel).\n\nAnd could you please explain more about controlling resources apart from Vendor even though they have own apis to control resources?\nVendor is like Samsung LSI, Qualcomm.\nLet me show some example, we use \"exynos_pm_qos\" on LSI Chipset to control cpu frequency.\nIn case of QC chipset, we use \"freq_qos_update_request\" api to control cpu frequency.",
       "parentUuid": "70c7ff77_c4d3369e",
       "revId": "c4a9b13b2e19ab2ca930fbae09da0c03171279be",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     },
     {
-      "unresolved": true,
       "key": {
         "uuid": "2ebe2ea9_2b20a5d8",
         "filename": "/PATCHSET_LEVEL",
@@ -177,10 +176,10 @@
       "message": "As I do not know what you are actually doing in this \"hook\", it is hard to determine if this is \"better\" or not from the existing options.\n\nDo you have a link to a kernel change that shows exactly what you are doing here on your device?",
       "parentUuid": "4cdb0ee4_27e539ed",
       "revId": "c4a9b13b2e19ab2ca930fbae09da0c03171279be",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     },
     {
-      "unresolved": true,
       "key": {
         "uuid": "07195f3f_1fe43da9",
         "filename": "/PATCHSET_LEVEL",
@@ -195,7 +194,26 @@
       "message": "Let me explain about what I\u0027m going to do more detaily.\nI would like to say that I think this \"boost\" is more suitable in terms of performance.\nThere are some reasons like belows.\n\n- Go through several steps\n In case of using a hint in F/W level, you have to go through several steps, starting with AMS and leading to PMS and PowerHal by Binder.\nIn the final step, the system call must be called to the kernel. \n Since this might lead to delays during several steps, controlling resources directly in the kernel can provide faster reactivity.\n- Easy to adjust boost level corresponding each H/W chipset.\n It is easier to adjust to the appropriate level value using the dtsi file in kernel. \n So the boot has the optimized values depends on consumption and performance balance maintained in each chipset.\n- Available to trigger at the proper scenarios.\n As you know, hint interaction occurs at the unintended scenarios besides the situation that users actually inputs such as accessibility. And then, even in unexpected scenarios, hint is called more than we want and it should affect to power consumption increase and heating level.\nAs a result, it leads to make fine tuning between performance and power consumption difficult. On the other hand, hooking the input event data in kernel side can trigger the boost at the exact time when the event we want is delivered. So it can be used properly for the purpose.\n\nAfter all, here\u0027s the flow that I really want to do. \n 1. Main context : The input event is received through the vendor hook. \n 2. Main context : Determines the device type using the key, code, and value included in the input event. (Touch Screen, Wacom Spen, Keyboard, Mouse, GPIO Key etc) \n 3. Kworker Thread : Controls the necessary resources depending on H/W chipset. (Cpu, Gpu, DDR, C-state etc)\n\nDo you want to see the all changes line by line?\nOr should I file some more information of it?",
       "parentUuid": "2ebe2ea9_2b20a5d8",
       "revId": "c4a9b13b2e19ab2ca930fbae09da0c03171279be",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c1f22546_e4f45f39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-06T12:11:47Z",
+      "side": 1,
+      "message": "A simple link to the code that uses this would be appreciated, so we can see what it is doing.\n\nAlso, if this is required, please submit it upstream so that all systems can use it and we do not have to take a out-of-tree patch in our tree.",
+      "parentUuid": "07195f3f_1fe43da9",
+      "revId": "c4a9b13b2e19ab2ca930fbae09da0c03171279be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": true
     }
   ]
 }
