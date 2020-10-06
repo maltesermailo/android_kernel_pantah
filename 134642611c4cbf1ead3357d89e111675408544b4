@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "1d54d086_b43a26f6",
         "filename": "/PATCHSET_LEVEL",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "Only uploaded for internal reviews before upstreaming",
       "revId": "134642611c4cbf1ead3357d89e111675408544b4",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "8e037f68_0906e1d2",
         "filename": "/PATCHSET_LEVEL",
@@ -31,10 +32,28 @@
       "side": 1,
       "message": "Right now you are modifying just the drm sysfs core with this feature. Should it be something like /sys/kernel/drm/export_stats/num_bufs.. instead?",
       "revId": "134642611c4cbf1ead3357d89e111675408544b4",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b3f0174_11fcb1b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2020-10-06T18:57:31Z",
+      "side": 1,
+      "message": "Thanks Alistair, our plan is to group all dma-buf exporter stats in one location, for example /sys/kernel/dma_buf_exporter_stats/\u003cname\u003e/num_bufs and /sys/kernel/dma_buf_exporter_stats/\u003cname\u003e/total_size_exported. I will try to get it working with Greg\u0027s suggestion here: https://android-review.googlesource.com/c/kernel/common/+/1449596/1/drivers/gpu/drm/drm_sysfs.c#97",
+      "parentUuid": "8e037f68_0906e1d2",
+      "revId": "134642611c4cbf1ead3357d89e111675408544b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "caf7be16_600abd8b",
         "filename": "drivers/gpu/drm/drm_sysfs.c",
@@ -54,10 +73,10 @@
         "endChar": 36
       },
       "revId": "134642611c4cbf1ead3357d89e111675408544b4",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
       "key": {
         "uuid": "8613db46_132a0116",
         "filename": "drivers/gpu/drm/drm_sysfs.c",
@@ -78,8 +97,31 @@
         "endChar": 36
       },
       "revId": "134642611c4cbf1ead3357d89e111675408544b4",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fcf4f62_84b521f8",
+        "filename": "drivers/gpu/drm/drm_sysfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2020-10-06T18:57:31Z",
+      "side": 1,
+      "message": "Thanks Greg, let me try this out and get back to you. Our aim is to have all exporter stats grouped under a common location for example /sys/kernel/dma_buf_exporter_stats.",
+      "parentUuid": "8613db46_132a0116",
+      "range": {
+        "startLine": 97,
+        "startChar": 5,
+        "endLine": 97,
+        "endChar": 36
+      },
+      "revId": "134642611c4cbf1ead3357d89e111675408544b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
