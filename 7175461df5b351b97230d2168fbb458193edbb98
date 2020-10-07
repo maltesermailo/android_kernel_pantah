@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "d00986d3_340afbe4",
         "filename": "/PATCHSET_LEVEL",
@@ -14,10 +15,10 @@
       "side": 1,
       "message": "Is this the final form?  Why do you need to build the tree and sign?  Shouldn\u0027t we stream the tree and use the trusted signer\u0027s signature from the ioctl?",
       "revId": "7175461df5b351b97230d2168fbb458193edbb98",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "1542fa68_989057ac",
         "filename": "/PATCHSET_LEVEL",
@@ -31,8 +32,43 @@
       "side": 1,
       "message": "Just a high-level comment: it\u0027s hard for me to understand what\u0027s going on here, especially w.r.t. how the fs-verity support in incfs differs from the fs-verity support in ext4 and f2fs.  It would help if there was a better explanation.  Also, maybe this should be squashed with the patch that adds FS_IOC_ENABLE_VERITY support.  It seems there is a patch that wires up FS_IOC_ENABLE_VERITY, but it doesn\u0027t actually work until this patch?",
       "revId": "7175461df5b351b97230d2168fbb458193edbb98",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8d49e86_6889e977",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-10-07T14:47:44Z",
+      "side": 1,
+      "message": "Play will have some files that aren\u0027t v4-signed, but need to be protected\nv4 signing is only for APKs",
+      "parentUuid": "d00986d3_340afbe4",
+      "revId": "7175461df5b351b97230d2168fbb458193edbb98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f27d6061_9c6a38f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-10-07T14:47:44Z",
+      "side": 1,
+      "message": "Normally when you construct a file in incfs, you mark it as having a merkle tree, stream the file then enable verity. Merkle tree validation is then handled entirely by incfs itself.However, there is also a use case when we are needing to protect a file which does not come with the merkle tree but does live in an incfs mount. So in that case, there is no hash tree when verity is enabled. The cleanest solution would seem to be to build the incfs style merkle tree then enable the incfs protection.\n\nSo now I\u0027m wondering if this isn\u0027t simply a duplicate of verity code, and if I change the fs-verity support so that vops-\u003eget_root_hash can return \u0027No\u0027 then we fall through to the fs-verity code that builds the tree.",
+      "parentUuid": "1542fa68_989057ac",
+      "revId": "7175461df5b351b97230d2168fbb458193edbb98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
