@@ -33,7 +33,7 @@ static int incfs_end_enable_verity(struct file *filp, const void *desc,
 		return 0;
 
 	if (!df || !df->df_backing_file_context)
-		return -EFAULT;
+		return -EFSCORRUPTED;
 
 	bfc = df->df_backing_file_context;
 	error = mutex_lock_interruptible(&bfc->bc_mutex);
@@ -69,7 +69,7 @@ static int incfs_get_verity_descriptor(struct inode *inode, void *buf,
 	int read;
 
 	if (!df || !df->df_backing_file_context)
-		return -EFAULT;
+		return -EFSCORRUPTED;
 
 	vd = df->df_verity_descriptor;
 	if (!vd)
@@ -256,7 +256,7 @@ static int sign_file(struct file *f, struct data_file *df)
 	struct incfs_df_signature *signature = NULL;
 
 	if (df->df_signature || df->df_hash_tree)
-		return -EFAULT;
+		return -EFSCORRUPTED;
 
 	/* Add signature metadata record to file */
 	hash_tree = incfs_alloc_mtree(range((u8 *)&sig, sizeof(sig)),
