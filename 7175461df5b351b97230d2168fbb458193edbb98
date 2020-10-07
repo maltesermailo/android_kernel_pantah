@@ -69,6 +69,24 @@
       "parentUuid": "1542fa68_989057ac",
       "revId": "7175461df5b351b97230d2168fbb458193edbb98",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c10d3e40_f3c4acc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1042276
+      },
+      "writtenOn": "2020-10-07T16:25:13Z",
+      "side": 1,
+      "message": "Could you elaborate about the file type?  I\u0027m not aware of it.  Can Play generate the fs-verity signature for the file?  Package manager actually requires all (or none) installed files to have fs-verity consistently (at least in the regular flow, I know incremental has some special code).\n\nAlso note that we can\u0027t simply put a certificate into .fs-verity keyring.  Since fs-verity honors any key in the key ring, we need to keep the weakest key strong.",
+      "parentUuid": "b8d49e86_6889e977",
+      "revId": "7175461df5b351b97230d2168fbb458193edbb98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
