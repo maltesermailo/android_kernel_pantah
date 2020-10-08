@@ -159,6 +159,24 @@
       "parentUuid": "999d402a_aad78bb0",
       "revId": "7175461df5b351b97230d2168fbb458193edbb98",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "224d30e7_06ddb550",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-10-08T20:00:41Z",
+      "side": 1,
+      "message": "Incremental doesn\u0027t add any metadata files in the app\u0027s directory, it uses parent dir for all those. The issue with IncFS is that it can reuse the apk\u0027s merkle tree that Play streams for fs-verity, but Play wont\u0027t stream any non-apk trees, forcing us to implement that locally",
+      "parentUuid": "cbc3d89c_f709cc65",
+      "revId": "7175461df5b351b97230d2168fbb458193edbb98",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
