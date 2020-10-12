@@ -2468,6 +2468,22 @@ static int f2fs_set_context(struct inode *inode, const void *ctx, size_t len,
 				ctx, len, fs_data, XATTR_CREATE);
 }
 
+static int f2fs_get_extra_context(struct inode *inode,
+						const char *name, void *buffer, size_t buffer_size)
+{
+	return f2fs_getxattr(inode, F2FS_XATTR_INDEX_ENCRYPTION,
+				name, buffer, buffer_size, NULL);
+}
+
+static int f2fs_set_extra_context(struct inode *inode,
+						const char *name, const void *value, size_t size,
+						void *fs_data)
+{
+	return f2fs_setxattr(inode, F2FS_XATTR_INDEX_ENCRYPTION,
+				name ? name : F2FS_XATTR_NAME_ENCRYPTION_CONTEXT,
+				value, size, fs_data, 0);
+}
+
 static const union fscrypt_context *
 f2fs_get_dummy_context(struct super_block *sb)
 {
@@ -2514,6 +2530,8 @@ static const struct fscrypt_operations f2fs_cryptops = {
 	.key_prefix		= "f2fs:",
 	.get_context		= f2fs_get_context,
 	.set_context		= f2fs_set_context,
+	.get_extra_context	= f2fs_get_extra_context,
+	.set_extra_context	= f2fs_set_extra_context,
 	.get_dummy_context	= f2fs_get_dummy_context,
 	.empty_dir		= f2fs_empty_dir,
 	.max_namelen		= F2FS_NAME_LEN,

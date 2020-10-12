@@ -1352,6 +1352,22 @@ retry:
 	return res;
 }
 
+static inline int ext4_get_extra_context(struct inode *inode,
+						const char *name, void *buffer, size_t buffer_size)
+{
+	return ext4_xattr_get(inode, EXT4_XATTR_INDEX_ENCRYPTION,
+				name, buffer, buffer_size);
+}
+
+static inline int ext4_set_extra_context(struct inode *inode,
+						const char *name, const void *value, size_t size,
+						void *fs_data)
+{
+	return ext4_xattr_set(inode, EXT4_XATTR_INDEX_ENCRYPTION,
+				name ? name : EXT4_XATTR_NAME_ENCRYPTION_CONTEXT,
+				value, size, 0);
+}
+
 static const union fscrypt_context *
 ext4_get_dummy_context(struct super_block *sb)
 {
@@ -1379,6 +1395,8 @@ static const struct fscrypt_operations ext4_cryptops = {
 	.key_prefix		= "ext4:",
 	.get_context		= ext4_get_context,
 	.set_context		= ext4_set_context,
+	.get_extra_context	= ext4_get_extra_context,
+	.set_extra_context	= ext4_set_extra_context,
 	.get_dummy_context	= ext4_get_dummy_context,
 	.empty_dir		= ext4_empty_dir,
 	.max_namelen		= EXT4_NAME_LEN,

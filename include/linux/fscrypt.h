@@ -45,7 +45,7 @@ struct fscrypt_name {
 #define fname_len(p)		((p)->disk_name.len)
 
 /* Maximum value for the third parameter of fscrypt_operations.set_context(). */
-#define FSCRYPT_SET_CONTEXT_MAX_SIZE	40
+#define FSCRYPT_SET_CONTEXT_MAX_SIZE	48
 
 #ifdef CONFIG_FS_ENCRYPTION
 /*
@@ -62,6 +62,10 @@ struct fscrypt_operations {
 	int (*get_context)(struct inode *inode, void *ctx, size_t len);
 	int (*set_context)(struct inode *inode, const void *ctx, size_t len,
 			   void *fs_data);
+	int (*get_extra_context)(struct inode *inode, const char *name,
+			   void *buffer, size_t len);
+	int (*set_extra_context)(struct inode *inode, const char *name,
+			   const void *value, size_t len, void *fs_data);
 	const union fscrypt_context *(*get_dummy_context)(
 		struct super_block *sb);
 	bool (*empty_dir)(struct inode *inode);

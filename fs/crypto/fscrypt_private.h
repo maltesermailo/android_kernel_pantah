@@ -15,6 +15,7 @@
 #include <linux/siphash.h>
 #include <crypto/hash.h>
 #include <linux/bio-crypt-ctx.h>
+#include <linux/android_vendor.h>
 
 #define CONST_STRLEN(str)	(sizeof(str) - 1)
 
@@ -33,6 +34,8 @@ struct fscrypt_context_v1 {
 	u8 flags;
 	u8 master_key_descriptor[FSCRYPT_KEY_DESCRIPTOR_SIZE];
 	u8 nonce[FS_KEY_DERIVATION_NONCE_SIZE];
+
+	ANDROID_VENDOR_DATA(1);
 };
 
 struct fscrypt_context_v2 {
@@ -43,6 +46,8 @@ struct fscrypt_context_v2 {
 	u8 __reserved[4];
 	u8 master_key_identifier[FSCRYPT_KEY_IDENTIFIER_SIZE];
 	u8 nonce[FS_KEY_DERIVATION_NONCE_SIZE];
+
+	ANDROID_VENDOR_DATA(1);
 };
 
 /*
@@ -69,10 +74,10 @@ static inline int fscrypt_context_size(const union fscrypt_context *ctx)
 {
 	switch (ctx->version) {
 	case FSCRYPT_CONTEXT_V1:
-		BUILD_BUG_ON(sizeof(ctx->v1) != 28);
+		BUILD_BUG_ON(sizeof(ctx->v1) != 36);
 		return sizeof(ctx->v1);
 	case FSCRYPT_CONTEXT_V2:
-		BUILD_BUG_ON(sizeof(ctx->v2) != 40);
+		BUILD_BUG_ON(sizeof(ctx->v2) != 48);
 		return sizeof(ctx->v2);
 	}
 	return 0;
@@ -249,6 +254,8 @@ struct fscrypt_info {
 
 	/* Hashed inode number.  Only set for IV_INO_LBLK_32 */
 	u32 ci_hashed_ino;
+
+	ANDROID_VENDOR_DATA_ARRAY(1, 2);
 };
 
 typedef enum {
