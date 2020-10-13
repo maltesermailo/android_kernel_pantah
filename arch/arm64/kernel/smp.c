@@ -903,7 +903,10 @@ static void do_handle_IPI(int ipinr)
 		break;
 
 	case IPI_CPU_STOP:
+<<<<<<< HEAD   (3a11b4 Revert "ANDROID: include: uapi: drm: add additional QCOM mod)
 		trace_android_vh_ipi_stop(get_irq_regs());
+=======
+>>>>>>> BRANCH (865c50 x86/uaccess: utilize CONFIG_CC_HAS_ASM_GOTO_OUTPUT)
 		local_cpu_stop();
 		break;
 
