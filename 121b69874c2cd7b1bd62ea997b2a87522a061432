@@ -16,6 +16,24 @@
       "message": "This wasn\u0027t a clean cherry-pick from upstream, so shouldn\u0027t it be marked BACKPORT and have an explanatory note?  Likewise for the other commits that weren\u0027t clean cherry-picks from upstream.",
       "revId": "121b69874c2cd7b1bd62ea997b2a87522a061432",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d900e0bb_cbf02ef7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-10-13T12:53:56Z",
+      "side": 1,
+      "message": "Looks like a trivial \"backport\" to me, I never can tell when BACKPORT is used instead of UPSTREAM for tiny stuff.\n\nAll that is \"different\" here is one CONFIG_ option changed from upstream (CONFIG_CRYPTO_SKCIPHER vs CONFIG_CRYPTO_BLKCIPHER).  I can add it to the changelog...",
+      "parentUuid": "e0d58437_610fab6e",
+      "revId": "121b69874c2cd7b1bd62ea997b2a87522a061432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
