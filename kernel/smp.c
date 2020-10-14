@@ -24,6 +24,8 @@
 #include "smpboot.h"
 #include "sched/smp.h"
 
+#include <trace/hooks/debug.h>
+
 #define CSD_TYPE(_csd)	((_csd)->flags & CSD_FLAG_TYPE_MASK)
 
 struct call_function_data {
@@ -257,6 +259,7 @@ static void flush_smp_call_function_queue(bool warn_cpu_offline)
 	 */
 	prev = NULL;
 	llist_for_each_entry_safe(csd, csd_next, entry, llist) {
+		trace_android_vh_smp_call_entry(func);
 		/* Do we wait until *after* callback? */
 		if (CSD_TYPE(csd) == CSD_TYPE_SYNC) {
 			smp_call_func_t func = csd->func;
@@ -273,6 +276,7 @@ static void flush_smp_call_function_queue(bool warn_cpu_offline)
 		} else {
 			prev = &csd->llist;
 		}
+		trace_android_vh_smp_call_exit(func);
 	}
 
 	if (!entry)

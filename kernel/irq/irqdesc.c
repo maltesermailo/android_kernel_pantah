@@ -19,6 +19,7 @@
 
 #include "internals.h"
 
+#include <trace/hooks/debug.h>
 /*
  * lockdep: we want to handle all irq_desc locks as a single lock-class:
  */
@@ -639,6 +640,7 @@ int generic_handle_irq(unsigned int irq)
 {
 	struct irq_desc *desc = irq_to_desc(irq);
 	struct irq_data *data;
+	u64 start_time;
 
 	if (!desc)
 		return -EINVAL;
@@ -647,7 +649,10 @@ int generic_handle_irq(unsigned int irq)
 	if (WARN_ON_ONCE(!in_irq() && handle_enforce_irqctx(data)))
 		return -EPERM;
 
+	start_time = local_clock();
+	trace_android_vh_irq_entry(irq, desc, 0);
 	generic_handle_irq_desc(desc);
+	trace_android_vh_irq_exit(irq, desc, start_time);
 	return 0;
 }
 EXPORT_SYMBOL_GPL(generic_handle_irq);
