@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c77f81a_0be7c4e4",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-10-15T01:06:01Z",
+      "side": 1,
+      "message": "A lot of these functions really could use an \"incfs_\" prefix.",
+      "range": {
+        "startLine": 47,
+        "startChar": 12,
+        "endLine": 47,
+        "endChar": 24
+      },
+      "revId": "d1b735a1f4ebee63b5cfbd96caa1ef155439d7b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00140751_0a6dadbd",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-10-15T01:06:01Z",
+      "side": 1,
+      "message": "This comment looks like it\u0027s describing the whole switch statement, but it\u0027s actually just talking about FS_IOC32_GETFLAGS.",
+      "range": {
+        "startLine": 785,
+        "startChar": 1,
+        "endLine": 785,
+        "endChar": 73
+      },
+      "revId": "d1b735a1f4ebee63b5cfbd96caa1ef155439d7b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e055b5c_4238e0cc",
+        "filename": "fs/incfs/vfs.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-10-15T01:06:01Z",
+      "side": 1,
+      "message": "Something like incfs_ioctl_getflags() would be a better name, since FS_IOC_GETFLAGS isn\u0027t specific to fs-verity.",
+      "revId": "d1b735a1f4ebee63b5cfbd96caa1ef155439d7b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8217ea9_3f7a96dc",
+        "filename": "fs/incfs/vfs.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-10-15T01:06:01Z",
+      "side": 1,
+      "message": "Making FS_IOC_GETFLAGS return EOPNOTSUPP when CONFIG_FS_VERITY\u003dn seems wrong, since FS_IOC_GETFLAGS isn\u0027t specific to fs-verity, and EOPNOTSUPP isn\u0027t an expected error code for it.\n\nI think the right approach is to rename incfs_verity_get_flags() to incfs_ioctl_getflags() and move it into a file that\u0027s always compiled.",
+      "revId": "d1b735a1f4ebee63b5cfbd96caa1ef155439d7b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c89206f3_88bf16f1",
+        "filename": "tools/testing/selftests/filesystems/incfs/incfs_test.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3563,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-10-15T01:06:01Z",
+      "side": 1,
+      "message": "What is this trying to do by passing a NULL argument to FS_IOC_ENABLE_VERITY?  It should just fail with EFAULT.",
+      "range": {
+        "startLine": 3563,
+        "startChar": 11,
+        "endLine": 3563,
+        "endChar": 49
+      },
+      "revId": "d1b735a1f4ebee63b5cfbd96caa1ef155439d7b9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
