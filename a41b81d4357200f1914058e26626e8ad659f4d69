@@ -1,0 +1,425 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1a18fce_abfd647d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-20T08:26:35Z",
+      "side": 1,
+      "message": "This change only initializes some HPB related stuffs if it is supported, but not actually use any of it since those ufshpb_prep()/ufshpb_rsp_upiu() funcs are basically no-ops and the regions/sub-regions are allocated for no use, which makes the change really weird...  I guess it is split out from a huge change, but we still need to make sure each change be there for a reason, not just for getting merged easier. So please give more details of what is this specific change actually doing and maybe consider putting things where they really belong to.",
+      "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "199f93dd_dd59021d",
+        "filename": "drivers/scsi/ufs/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-20T08:26:35Z",
+      "side": 1,
+      "message": "Remove the last blank line",
+      "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac91f3f5_907188e6",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4715,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-20T08:26:35Z",
+      "side": 1,
+      "message": "Can we merge these checks into one if()?",
+      "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d20d04b_d7e2af41",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4729,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-20T08:26:35Z",
+      "side": 1,
+      "message": "Can we merge these checks into one if()?",
+      "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76fe809a_3fd296b8",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-20T08:26:35Z",
+      "side": 1,
+      "message": "This change has many unused fields like this one, since it is split from one huge change. If no one else complains it then I am fine.",
+      "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c310f624_63070ff6",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-20T08:26:35Z",
+      "side": 1,
+      "message": "Missing a line break?",
+      "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a596c1db_5a75741a",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-20T08:26:35Z",
+      "side": 1,
+      "message": "Having name \"hpb\" is just fine. And I think we should keep all the sysfs entries in ufs-sysfs.c instead of having them here and there. Meanwhile, can we also add HBP related descriptors/flags/attributes into ufs-sysfs.c? That would be convenient for users/tools/utilities to debug/know HPB infos.",
+      "range": {
+        "startLine": 229,
+        "startChar": 19,
+        "endLine": 229,
+        "endChar": 21
+      },
+      "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "848546fe_00ca9754",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-20T08:26:35Z",
+      "side": 1,
+      "message": "The 3rd parameter hpb_dev_info is not used at all... Why keep it?",
+      "range": {
+        "startLine": 244,
+        "startChar": 45,
+        "endLine": 244,
+        "endChar": 46
+      },
+      "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a98fa372_f892d67e",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-20T08:26:35Z",
+      "side": 1,
+      "message": "Have you considered using devm_kazlloc()?",
+      "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2d3f487_df4ffc8d",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-20T08:26:35Z",
+      "side": 1,
+      "message": "Keep the naming symmetric - ufshcd_lu_xxxx_init, like ufshpb_lu_hpb_init() down below",
+      "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db9c6592_13c15b4c",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-20T08:26:35Z",
+      "side": 1,
+      "message": "I can understand you want to poll the flag in ufshpb_check_hpb_reset_query() by retrying the query cmd 10 times, but I don\u0027t get the point here - do we really need to retry the set flag query cmd 10 times? If no, using ufshcd_query_flag_retry() should just be fine.",
+      "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56231e63_cd4a8309",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-20T08:26:35Z",
+      "side": 1,
+      "message": "dev_info -\u003e dev_dbg",
+      "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec41b067_6c2098e7",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-20T08:26:35Z",
+      "side": 1,
+      "message": "I have a general question regs HPB since it is not quite clearly mentioned in JEDEC standard - what if an HPB entry in one HPB read cmd is invalid/out-of-date? Shall the device still output data or fail this cmd?",
+      "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a674a1fb_7e15bf7d",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-20T08:26:35Z",
+      "side": 1,
+      "message": "dev_info -\u003e dev_dbg. Meanwhile, please add a line break.",
+      "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3022edc_eec8f090",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-20T08:26:35Z",
+      "side": 1,
+      "message": "dev_info -\u003e dev_dbg. Meanwhile, please add a line break.",
+      "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b981bdd7_abfe8112",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-20T08:26:35Z",
+      "side": 1,
+      "message": "dev_info -\u003e dev_dbg. Meanwhile, please add a line break.",
+      "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e14aaa47_3626c133",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-20T08:26:35Z",
+      "side": 1,
+      "message": "Why do we need this func? It is only used once by ufshpb_get_lu_info(), why cannot ufshpb_get_lu_info() directly use ufshcd_query_descriptor_retry()?",
+      "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05746333_23e96d2b",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-20T08:26:35Z",
+      "side": 1,
+      "message": "What if reset flag never gets cleared? What should be done for that case?",
+      "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01e2e1d0_c756b9c2",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-20T08:26:35Z",
+      "side": 1,
+      "message": "Why alloc the buf here? I don\u0027t see anyone uses it but func ufshpb_get_lu_info(), so shouldn\u0027t it be allocated and released inside ufshcd_get_lu_info()?",
+      "range": {
+        "startLine": 500,
+        "startChar": 51,
+        "endLine": 500,
+        "endChar": 53
+      },
+      "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4da9a3e_96e3d14f",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-20T08:26:35Z",
+      "side": 1,
+      "message": "Do we really need this line?",
+      "range": {
+        "startLine": 533,
+        "startChar": 35,
+        "endLine": 533,
+        "endChar": 36
+      },
+      "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "893d7d85_4980adaa",
+        "filename": "drivers/scsi/ufs/ufshpb.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-20T08:26:35Z",
+      "side": 1,
+      "message": "Is it used anywhere?",
+      "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8bb560d_5da70dce",
+        "filename": "drivers/scsi/ufs/ufshpb.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-20T08:26:35Z",
+      "side": 1,
+      "message": "Is it used anywhere?",
+      "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f687e900_027029fd",
+        "filename": "drivers/scsi/ufs/ufshpb.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-20T08:26:35Z",
+      "side": 1,
+      "message": "Is it used anywhere? There are many Unused stuffs here, will you clean them up? Not just the 3 I mentioned here.",
+      "range": {
+        "startLine": 45,
+        "startChar": 31,
+        "endLine": 45,
+        "endChar": 32
+      },
+      "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
