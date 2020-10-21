@@ -22,6 +22,30 @@
       },
       "revId": "44136c3b812b4d003c90adf687b23a07cb8599ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4259cf20_ee8b50cc",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 858,
+      "author": {
+        "id": 1292828
+      },
+      "writtenOn": "2020-10-21T03:20:59Z",
+      "side": 1,
+      "message": "Because there are many end users who use Android phone connect to head unit but not success lunch Android Auto , add the logs here could much help us to analyse what is the root cause.\nClarify it is the head unit issue which the head unit does not send control request or Android phone issue.\n\nThese logs only print on the connection beginning.\nOn once success connect there are total 8 lines.\n\"%s: got ACCESSORY_START(53) request\\n\"       : 1\n\"%s: got ACCESSORY_SEND_STRING(52) request\\n\" : 6\n\"%s: got ACCESSORY_GET_PROTOCOL(51) request\\n\": 1\n\nRelated Document : go/broadcast_accessory_intent",
+      "parentUuid": "84676a61_3846867d",
+      "range": {
+        "startLine": 858,
+        "startChar": 3,
+        "endLine": 858,
+        "endChar": 11
+      },
+      "revId": "44136c3b812b4d003c90adf687b23a07cb8599ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
