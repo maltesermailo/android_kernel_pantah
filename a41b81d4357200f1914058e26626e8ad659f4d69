@@ -218,6 +218,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "17ffae2f_9b72c6d9",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-21T09:22:05Z",
+      "side": 1,
+      "message": "I will change sysfs name and move sysfs entries.\nI will also add HBP related descriptors/flags/attributes into ufs-sysfs.c.",
+      "parentUuid": "a596c1db_5a75741a",
+      "range": {
+        "startLine": 229,
+        "startChar": 19,
+        "endLine": 229,
+        "endChar": 21
+      },
+      "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "848546fe_00ca9754",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -382,6 +406,24 @@
       "writtenOn": "2020-10-20T08:26:35Z",
       "side": 1,
       "message": "I can understand you want to poll the flag in ufshpb_check_hpb_reset_query() by retrying the query cmd 10 times, but I don\u0027t get the point here - do we really need to retry the set flag query cmd 10 times? If no, using ufshcd_query_flag_retry() should just be fine.",
+      "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50e4af0f_c6aa1e1a",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-21T09:22:05Z",
+      "side": 1,
+      "message": "OK, I will change it.",
+      "parentUuid": "db9c6592_13c15b4c",
       "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -615,6 +657,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d4b9d99b_f62e77d5",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-21T09:22:05Z",
+      "side": 1,
+      "message": "I will change it to disable HPB feature when it never gets cleared.",
+      "parentUuid": "05746333_23e96d2b",
+      "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "01e2e1d0_c756b9c2",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
@@ -673,6 +733,30 @@
       "writtenOn": "2020-10-20T08:26:35Z",
       "side": 1,
       "message": "Do we really need this line?",
+      "range": {
+        "startLine": 533,
+        "startChar": 35,
+        "endLine": 533,
+        "endChar": 36
+      },
+      "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf591034_13afc61e",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-21T09:22:05Z",
+      "side": 1,
+      "message": "It can be removed, because hba struct is allocated as zero.",
+      "parentUuid": "a4da9a3e_96e3d14f",
       "range": {
         "startLine": 533,
         "startChar": 35,
