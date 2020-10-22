@@ -242,6 +242,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fb7b228b_e23d38ba",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-22T05:09:47Z",
+      "side": 1,
+      "message": "Since the HPB is not a default feature, HPB sysfs entires are enabled depending on whether the HPB is enabled or not.\nSo, by moving HPB sysfs entries to ufs-sysfs.c, ufshcd.h and ufshpb.h can be messed up by other HPB related declares. (it requires additional header file)\nIf moving the location of sysfs entries is not important, can I just add attribute/flag/descriptor related HPB feature?",
+      "parentUuid": "17ffae2f_9b72c6d9",
+      "range": {
+        "startLine": 229,
+        "startChar": 19,
+        "endLine": 229,
+        "endChar": 21
+      },
+      "revId": "a41b81d4357200f1914058e26626e8ad659f4d69",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "848546fe_00ca9754",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 2
