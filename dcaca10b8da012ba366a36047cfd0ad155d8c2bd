@@ -22,6 +22,30 @@
       },
       "revId": "dcaca10b8da012ba366a36047cfd0ad155d8c2bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7359620_afab56e3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1292828
+      },
+      "writtenOn": "2020-10-22T06:16:29Z",
+      "side": 1,
+      "message": "control_request 51 :\nSend a 51 control request (\"Get Protocol\") to figure out if the device supports the Android accessory protocol. A non-zero number is returned if the protocol is supported, which represents the version of the protocol that the device supports (currently, only version 1 exists). \n\ncontrol_request 52 :\nIf the device returns a proper protocol version, send identifying string information to the device. This information allows the device to figure out an appropriate application for this accessory and also present the user with a URL if an appropriate application does not exist. \n\nThe detail description could reference below link.\nhttps://tool.oschina.net/uploads/apidocs/android/tools/adk/aoa.html\n\nBelow document is show the uevent work.\nhttps://docs.google.com/document/d/1hAmw41yn9ErT2O0DsMc7NPesF_BW3M0-g-OhjBhgznQ/edit",
+      "parentUuid": "271c6a49_11385656",
+      "range": {
+        "startLine": 9,
+        "startChar": 42,
+        "endLine": 9,
+        "endChar": 50
+      },
+      "revId": "dcaca10b8da012ba366a36047cfd0ad155d8c2bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
