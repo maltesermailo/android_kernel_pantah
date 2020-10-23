@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fef1ab7c_312a2ff3",
+        "filename": "drivers/iommu/io-pgtable-arm-v7s.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1769527
+      },
+      "writtenOn": "2020-10-23T00:54:36Z",
+      "side": 1,
+      "message": "Just be noted, in the latest upstream patch I use this one:\n\n+#define ARM_V7S_PTES_PER_LVL(lvl, cfg)\t({\t\t\t\t\\\n+\tint _lvl \u003d lvl;\t\t\t\t\t\t\t\\\n+\t!arm_v7s_is_mtk_enabled(cfg) ?\t\t\t\t\t\\\n+\t (1 \u003c\u003c _ARM_V7S_LVL_BITS(_lvl)) : (1 \u003c\u003c _ARM_V7S_LVL_BITS_MTK(_lvl));\\\n+})\n+",
+      "revId": "0245f11b470a072d60e574e66f2ee02d83f0bc3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
