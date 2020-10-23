@@ -52,6 +52,24 @@
       "parentUuid": "0549fb42_9364ef9c",
       "revId": "0449eea9fe09a74a1b20f7d9b53f1ef33530a5fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8929e22c_d96b2191",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-10-23T11:40:36Z",
+      "side": 1,
+      "message": "I am not sure about the reasons, but there are differences on the abi files, like here[1] is the output of command \"git diff android11-5.4 android11-5.4-lts android\".\nAnd the kernel version of android11-5.4 branch is still 5.4.61, but the version of android11-5.4-lts is 5.4.72. not sure if that\u0027s one of the reasons.\n\nAnd regarding to the reason for this change, it\u0027s on the idr_alloc_u32 function as you could see in the commit message when I tried to boot db845c with the gki kernel which was generated with the build.config.gki.aarch64 file. No such error reported when try with the android11-5.4 branch.\n\n\n[1]. https://pastebin.ubuntu.com/p/KQ6Vpfxy54/",
+      "parentUuid": "26e17199_ede5b32c",
+      "revId": "0449eea9fe09a74a1b20f7d9b53f1ef33530a5fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
