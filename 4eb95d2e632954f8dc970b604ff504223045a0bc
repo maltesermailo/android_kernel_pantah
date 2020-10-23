@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e46912de_a6ea0ed2",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-23T03:28:27Z",
+      "side": 1,
+      "message": "-\u003e ufshpb_is_write_or_discard_cmd()",
+      "revId": "4eb95d2e632954f8dc970b604ff504223045a0bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59b3de2c_9151f0e3",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-23T03:28:27Z",
+      "side": 1,
+      "message": "transfer_len \u003d\u003d ?",
+      "revId": "4eb95d2e632954f8dc970b604ff504223045a0bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5605bbdf_5b125bfb",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-23T03:28:27Z",
+      "side": 1,
+      "message": "One HPB entry has only 8 bytes, why use u64 here?",
+      "revId": "4eb95d2e632954f8dc970b604ff504223045a0bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "985e4d08_934c801c",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-23T03:28:27Z",
+      "side": 1,
+      "message": "Now, since we set sdev-\u003euse_10_for_rw to 1 in scsi_scan.c, in a READ(10) cdb, cdb[1] can contain DUO and FUA flags. If we overwrite it as a HPB READ cmd, cdb[1] becomes \"reserved\" as HPB spec says, how will the device treat the DUO and FUA flags? Will the device still fulfill what the DUO and FUA flags meant for?",
+      "revId": "4eb95d2e632954f8dc970b604ff504223045a0bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "672693a2_eb996701",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-23T03:28:27Z",
+      "side": 1,
+      "message": "One HPB entry has only 8 bytes",
+      "revId": "4eb95d2e632954f8dc970b604ff504223045a0bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "471236ef_541d3a96",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-23T03:28:27Z",
+      "side": 1,
+      "message": "Why do we need this WARN_ON()?",
+      "revId": "4eb95d2e632954f8dc970b604ff504223045a0bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ef877f3_20e61a21",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-23T03:28:27Z",
+      "side": 1,
+      "message": "Why do we need this WARN_ON()? Are we expecting any exceptions? If yes, why don\u0027t handle that exceptions?",
+      "revId": "4eb95d2e632954f8dc970b604ff504223045a0bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7090b6e0_8654f0db",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2020-10-23T03:28:27Z",
+      "side": 1,
+      "message": "As you mentioned, if ppn is dirty, we can still send HPB READ cmd and get the correct data, why bail here?",
+      "revId": "4eb95d2e632954f8dc970b604ff504223045a0bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
