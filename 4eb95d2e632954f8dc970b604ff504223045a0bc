@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c851d05_d4c148a4",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:39:07Z",
+      "side": 1,
+      "message": "OK,",
+      "parentUuid": "e46912de_a6ea0ed2",
+      "revId": "4eb95d2e632954f8dc970b604ff504223045a0bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59b3de2c_9151f0e3",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 3
@@ -31,6 +49,24 @@
       "writtenOn": "2020-10-23T03:28:27Z",
       "side": 1,
       "message": "transfer_len \u003d\u003d ?",
+      "revId": "4eb95d2e632954f8dc970b604ff504223045a0bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1e856e2_e0b73cfd",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:39:07Z",
+      "side": 1,
+      "message": "The next version of HPB, chunk size can be larger than now.",
+      "parentUuid": "59b3de2c_9151f0e3",
       "revId": "4eb95d2e632954f8dc970b604ff504223045a0bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f3cb0e8c_975ba6f1",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:39:07Z",
+      "side": 1,
+      "message": "I think u64 is suitable for present 8B-sized entry.",
+      "parentUuid": "5605bbdf_5b125bfb",
+      "revId": "4eb95d2e632954f8dc970b604ff504223045a0bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "985e4d08_934c801c",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 3
@@ -65,6 +119,24 @@
       "writtenOn": "2020-10-23T03:28:27Z",
       "side": 1,
       "message": "Now, since we set sdev-\u003euse_10_for_rw to 1 in scsi_scan.c, in a READ(10) cdb, cdb[1] can contain DUO and FUA flags. If we overwrite it as a HPB READ cmd, cdb[1] becomes \"reserved\" as HPB spec says, how will the device treat the DUO and FUA flags? Will the device still fulfill what the DUO and FUA flags meant for?",
+      "revId": "4eb95d2e632954f8dc970b604ff504223045a0bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c93a6f2_2b55ca10",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:39:07Z",
+      "side": 1,
+      "message": "In this code, it doesn\u0027t overwrite cdb[1]. So DPO and FUA flag will be remained.",
+      "parentUuid": "985e4d08_934c801c",
       "revId": "4eb95d2e632954f8dc970b604ff504223045a0bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -88,6 +160,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f4f95539_5ab7c788",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:39:07Z",
+      "side": 1,
+      "message": "I think u64 is suitable for present 8B-sized entry.",
+      "parentUuid": "672693a2_eb996701",
+      "revId": "4eb95d2e632954f8dc970b604ff504223045a0bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "471236ef_541d3a96",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 3
@@ -99,6 +189,24 @@
       "writtenOn": "2020-10-23T03:28:27Z",
       "side": 1,
       "message": "Why do we need this WARN_ON()?",
+      "revId": "4eb95d2e632954f8dc970b604ff504223045a0bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90406b9f_aec3045f",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:39:07Z",
+      "side": 1,
+      "message": "It means that there may be a something wrong with the given cmd.",
+      "parentUuid": "471236ef_541d3a96",
       "revId": "4eb95d2e632954f8dc970b604ff504223045a0bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -122,6 +230,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a5c70dc3_0141bd97",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:39:07Z",
+      "side": 1,
+      "message": "It can be removed.",
+      "parentUuid": "5ef877f3_20e61a21",
+      "revId": "4eb95d2e632954f8dc970b604ff504223045a0bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7090b6e0_8654f0db",
         "filename": "drivers/scsi/ufs/ufshpb.c",
         "patchSetId": 3
@@ -133,6 +259,24 @@
       "writtenOn": "2020-10-23T03:28:27Z",
       "side": 1,
       "message": "As you mentioned, if ppn is dirty, we can still send HPB READ cmd and get the correct data, why bail here?",
+      "revId": "4eb95d2e632954f8dc970b604ff504223045a0bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccaa4ba4_d371a823",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1775886
+      },
+      "writtenOn": "2020-10-23T05:39:07Z",
+      "side": 1,
+      "message": "This avoids the UFS device from doing unnecessary ppn verification for HPB read.",
+      "parentUuid": "7090b6e0_8654f0db",
       "revId": "4eb95d2e632954f8dc970b604ff504223045a0bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
