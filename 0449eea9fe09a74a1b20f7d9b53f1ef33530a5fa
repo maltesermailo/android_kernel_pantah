@@ -124,6 +124,24 @@
       "parentUuid": "b166cb25_6ad297e9",
       "revId": "0449eea9fe09a74a1b20f7d9b53f1ef33530a5fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "666807e0_41f98459",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-10-24T14:57:14Z",
+      "side": 1,
+      "message": "I guess \"the first line\" you said above meant \"BUILD_CONFIG\u003dcommon/build.config.gki.aarch64 build/build_abi.sh --update --print-report\", if my guess is right, then as described in the commit message, here is the report output from the command:\n\n    Leaf changes summary: 1 artifact changed\n    Changed leaf types summary: 0 leaf type changed\n    Removed/Changed/Added functions summary: 0 Removed, 0 Changed, 1 Added function\n    Removed/Changed/Added variables summary: 0 Removed, 0 Changed, 0 Added variable\n\n    1 Added function:\n\n      [A] \u0027function int idr_alloc_u32(idr*, void*, unsigned int*, unsigned long int, unsigned int)\u0027\n\n I think this means there are abi changes, and we need to update android/abi_gki_aarch64.xml if we want to use the gki kernel from android11-5.4-lts for other builds like db845c build.\nIf I am wrong somewhere, please help to correct me.",
+      "parentUuid": "e0726843_b256fcef",
+      "revId": "0449eea9fe09a74a1b20f7d9b53f1ef33530a5fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
