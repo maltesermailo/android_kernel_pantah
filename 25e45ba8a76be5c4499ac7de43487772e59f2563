@@ -34,6 +34,24 @@
       "parentUuid": "64561865_a774f957",
       "revId": "25e45ba8a76be5c4499ac7de43487772e59f2563",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3054524_85e2a42f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2020-10-26T23:42:38Z",
+      "side": 1,
+      "message": "Spooky, if I boot cuttlefish myself with these 2 patches, the tests succeed.\n\n$ BUILD_CONFIG\u003dcommon/build.config.gki.x86_64 build/build.sh \u0026\u0026 BUILD_CONFIG\u003dcommon-modules/virtual-device/build.config.cuttlefish.x86_64 build/build.sh\n$ ${ANDROID_HOST_OUT}/bin/launch_cvd -kernel_path\u003d/android0/kernel-common2/out/android-mainline/dist/bzImage -initramfs_path\u003d/android0/kernel-common2/out/android-mainline/dist/initramfs.img\n$ atest CtsBionicTestCases:sys_ptrace#hardware_breakpoint CtsBionicTestCases:sys_ptrace#watchpoint_imprecise -- --abi x86\n\n@#$%!  Patch needs a rebase anyways, so I\u0027ll rekick TH to run again overnight, but there should be no reason why the results come out differently locally vs remote.",
+      "parentUuid": "6a3fea54_768cf9d3",
+      "revId": "25e45ba8a76be5c4499ac7de43487772e59f2563",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
