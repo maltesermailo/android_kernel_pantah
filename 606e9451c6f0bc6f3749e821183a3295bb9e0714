@@ -16,6 +16,24 @@
       "message": "I thought we discussed that incfs files already have a Merkle tree, and they verify the data against that Merkle tree by default (like the signature-less fs-verity support).  So this ioctl really just needs to verify that the Merkle tree parameters match, then verify and persist the signature.  Aren\u0027t a lot of these checks unnecessary, then?  For example, deny_write_access() makes no sense, because no one should have write access to a file that\u0027s already being verified via a Merkle tree.  If they can, that\u0027s a bug.",
       "revId": "606e9451c6f0bc6f3749e821183a3295bb9e0714",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f8f1550_6355f08d",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-10-28T19:54:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1fc9b6d6_eee16585",
+      "revId": "606e9451c6f0bc6f3749e821183a3295bb9e0714",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
