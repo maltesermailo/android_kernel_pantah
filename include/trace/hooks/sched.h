@@ -452,6 +452,31 @@ DECLARE_HOOK(android_vh_task_cmdline_prio_restore,
 	TP_PROTO(int saved_prio),
 	TP_ARGS(saved_prio));
 
+<<<<<<< PATCH SET (891aef309643c59371cd64b1496a0189f78338a9 ANDROID: sched: Add vendor hooks for override sugov behavior)
+<<<<<<< HEAD   (9c8fb18c9387eb441d9b34f0d4e1f8c94d801e0b ANDROID: GKI: Update symbols list for exynos)
+||||||| BASE   (3e15db3d1b75a641ca6ab84276e8684ee15c5d66 ANDROID: sched: Add vendor hook for rt util update)
+DECLARE_RESTRICTED_HOOK(android_rvh_update_rt_rq_load_avg,
+	TP_PROTO(u64 now, struct rq *rq, struct task_struct *tsk, int running),
+	TP_ARGS(now, rq, tsk, running), 1);
+
+=======
+DECLARE_RESTRICTED_HOOK(android_rvh_update_rt_rq_load_avg,
+	TP_PROTO(u64 now, struct rq *rq, struct task_struct *tsk, int running),
+	TP_ARGS(now, rq, tsk, running), 1);
+
+struct sched_attr;
+
+DECLARE_HOOK(android_vh_set_sugov_sched_attr,
+	TP_PROTO(struct sched_attr *attr),
+	TP_ARGS(attr));
+
+DECLARE_RESTRICTED_HOOK(android_rvh_set_iowait,
+	TP_PROTO(struct task_struct *p, struct rq *rq, int *should_iowait_boost),
+	TP_ARGS(p, rq, should_iowait_boost), 1);
+
+>>>>>>> CHANGE (390c2b429d090269bbb0bbe316c8032ac8860369 ANDROID: sched: Add vendor hooks for override sugov behavior)
+||||||| BASE      (9c8fb18c9387eb441d9b34f0d4e1f8c94d801e0b ANDROID: GKI: Update symbols list for exynos)
+=======
 DECLARE_RESTRICTED_HOOK(android_rvh_update_rt_rq_load_avg,
 	TP_PROTO(u64 now, struct rq *rq, struct task_struct *tsk, int running),
 	TP_ARGS(now, rq, tsk, running), 1);
@@ -461,6 +486,7 @@ DECLARE_RESTRICTED_HOOK(android_rvh_util_fits_cpu,
 		 int cpu, bool *fits, bool *done),
 	TP_ARGS(util, uclamp_min, uclamp_max, cpu, fits, done), 1);
 
+>>>>>>> BASE      (aa5f57345faf289021ab42dae1ff1e494d1db920 ANDROID: topology: Add vendor hook for use_amu_fie)
 /* macro versions of hooks are no longer required */
 #endif /* _TRACE_HOOK_SCHED_H */
 /* This part must be outside protection */
