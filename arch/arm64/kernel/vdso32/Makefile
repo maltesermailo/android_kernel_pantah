@@ -23,7 +23,11 @@ endif
 CC_COMPAT ?= $(CC)
 CC_COMPAT += $(CC_COMPAT_CLANG_FLAGS)
 
+<<<<<<< HEAD   (83a889 Merge 11ad2a73de10 ("Merge tag 'asm-generic-fixes-5.10' of g)
 ifeq ($(LLVM),1)
+=======
+ifneq ($(LLVM),)
+>>>>>>> BRANCH (aab6bf Merge tag 'arm64-fixes' of git://git.kernel.org/pub/scm/linu)
 LD_COMPAT ?= $(LD)
 else
 LD_COMPAT ?= $(CROSS_COMPILE_COMPAT)ld
