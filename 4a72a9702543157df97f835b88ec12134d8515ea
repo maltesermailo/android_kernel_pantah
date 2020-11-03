@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93fd19a3_55346113",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2020-11-03T19:48:31Z",
+      "side": 1,
+      "message": "At that time, I helped Vinayak to help to resolve the issue but yeah, it was reverted by some benchmark, unfortunately.\n\nThe reason I supported Vinayak\u0027s patch at that time was it could cause *regression* for some workload via changing the access bit artificially and it also could affect vmpressure logic.  \n\nHowever, upstream decided taking a risk of the regression and improved a lot since then.\nAndroid also start to rely on PSI rather than vmpressure.\n\nFurthermore, such kinds of access bit stuff is just heuristic so some workload even could get a benefit for the change while some workload are not. IOW, we couldn\u0027t say it\u0027s universally good/bad for every workload. What we \n\nBased on the such thinking, I\u0027d like to follow upstream way rather than taking another fragmentation of MM between upstream and android kernel.",
+      "revId": "4a72a9702543157df97f835b88ec12134d8515ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
