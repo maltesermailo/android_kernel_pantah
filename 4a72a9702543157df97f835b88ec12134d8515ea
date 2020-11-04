@@ -16,6 +16,69 @@
       "message": "At that time, I helped Vinayak to help to resolve the issue but yeah, it was reverted by some benchmark, unfortunately.\n\nThe reason I supported Vinayak\u0027s patch at that time was it could cause *regression* for some workload via changing the access bit artificially and it also could affect vmpressure logic.  \n\nHowever, upstream decided taking a risk of the regression and improved a lot since then.\nAndroid also start to rely on PSI rather than vmpressure.\n\nFurthermore, such kinds of access bit stuff is just heuristic so some workload even could get a benefit for the change while some workload are not. IOW, we couldn\u0027t say it\u0027s universally good/bad for every workload. What we \n\nBased on the such thinking, I\u0027d like to follow upstream way rather than taking another fragmentation of MM between upstream and android kernel.",
       "revId": "4a72a9702543157df97f835b88ec12134d8515ea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5a150fc_8f1cddfa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-11-04T07:19:08Z",
+      "side": 1,
+      "message": "there\u0027s the obvious issues that Lint found here that need to be addressed of course, and some more minor ones below.",
+      "revId": "4a72a9702543157df97f835b88ec12134d8515ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27a62fc6_33abe628",
+        "filename": "kernel/sysctl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3145,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-11-04T07:19:08Z",
+      "side": 1,
+      "message": "sysctl variables should start with \u0027sysctl\u0027, right?",
+      "range": {
+        "startLine": 3145,
+        "startChar": 21,
+        "endLine": 3145,
+        "endChar": 45
+      },
+      "revId": "4a72a9702543157df97f835b88ec12134d8515ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0de9eb6_83476acc",
+        "filename": "mm/filemap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-11-04T07:19:08Z",
+      "side": 1,
+      "message": "bool",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 3
+      },
+      "revId": "4a72a9702543157df97f835b88ec12134d8515ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
