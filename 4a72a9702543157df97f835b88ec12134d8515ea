@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d4206f1e_bb627995",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1790165
+      },
+      "writtenOn": "2020-11-04T10:42:07Z",
+      "side": 1,
+      "message": "Though we do not rely on vmpressure, the reclaim code will favor to keep these young faultaround pages compared to other eligible ones (and the time spent in refaults later), and probably the time spent in skipping these in scan. I understand that the \"eligible ones\" depends on workload, but the fact is that we are seeing an issue on Android low RAM (\u003c\u003d4GB) devices without this patch. It shows up in launch latency of apps when they are sequentially launched.\nThe issue is that the patch does regress some workloads on x86 like unixbench that resulted in the patch to be reverted upstream. The sysctl was added later for that, to make sure it gets enabled only when a benefit is seen. But that wasn\u0027t accepted either. There maybe ways to detect the problem runtime and do something dynamically. But that would take time and not sure that would be done by GKI 2.0 timelines. Can we have the patch in ACK till then ? If sysctl is a maintenance burden, should I change it to a config ?",
+      "parentUuid": "79e9a429_75e44512",
+      "revId": "4a72a9702543157df97f835b88ec12134d8515ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "27a62fc6_33abe628",
         "filename": "kernel/sysctl.c",
         "patchSetId": 1
@@ -78,6 +96,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "89727bec_d89e2ce0",
+        "filename": "kernel/sysctl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3145,
+      "author": {
+        "id": 1790165
+      },
+      "writtenOn": "2020-11-04T10:42:07Z",
+      "side": 1,
+      "message": "ya, will fix that",
+      "parentUuid": "27a62fc6_33abe628",
+      "range": {
+        "startLine": 3145,
+        "startChar": 21,
+        "endLine": 3145,
+        "endChar": 45
+      },
+      "revId": "4a72a9702543157df97f835b88ec12134d8515ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d0de9eb6_83476acc",
         "filename": "mm/filemap.c",
         "patchSetId": 1
@@ -89,6 +131,30 @@
       "writtenOn": "2020-11-04T07:19:08Z",
       "side": 1,
       "message": "bool",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 3
+      },
+      "revId": "4a72a9702543157df97f835b88ec12134d8515ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2514e1c1_ed82ba78",
+        "filename": "mm/filemap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1790165
+      },
+      "writtenOn": "2020-11-04T10:42:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0de9eb6_83476acc",
       "range": {
         "startLine": 57,
         "startChar": 0,
