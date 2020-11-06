@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4dc6748_efa29641",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2020-11-06T11:57:25Z",
+      "side": 1,
+      "message": "LGTM. I haven\u0027t tested this patch on this kernel, but I did check it against the original version and it matches. I am doing a bit of learning about softirq handling so there are some comments - feel free to ignore my notes, I\u0027ve marked them as resolved.",
+      "revId": "ba8d07bedcb5a852645a5c61304230f6d69bd4b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84303c90_8be91abc",
+        "filename": "kernel/softirq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2020-11-06T11:57:25Z",
+      "side": 1,
+      "message": "Just making notes as I go along.\nHere we mask out the long set from pending, and put it into deferred *if there are any RT tasks enqueued on this CPU*.\nLONG_SOFTIRQ set is Net TX/RX, Block, IRQPoll or Tasklet.\n\npending \u003d anything else\ndeferred \u003d any pending long softirqs.",
+      "revId": "ba8d07bedcb5a852645a5c61304230f6d69bd4b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54966ca9_9aed55e9",
+        "filename": "kernel/softirq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2020-11-06T11:57:25Z",
+      "side": 1,
+      "message": "We are about to handle all the short ones, so just mark the deferred ones as pending.",
+      "revId": "ba8d07bedcb5a852645a5c61304230f6d69bd4b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dffa0e8e_f21c873d",
+        "filename": "kernel/softirq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2020-11-06T11:57:25Z",
+      "side": 1,
+      "message": "Check this again in case we have new ones.",
+      "revId": "ba8d07bedcb5a852645a5c61304230f6d69bd4b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "805e5ac6_cc83d8ee",
+        "filename": "kernel/softirq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1122323
+      },
+      "writtenOn": "2020-11-06T11:57:25Z",
+      "side": 1,
+      "message": "wakeup_softirqd will start processing still-pending (which we expect to be the long ones) softirqs in the kthread. For reference, each CPU gets a kthread which is used for this.",
+      "revId": "ba8d07bedcb5a852645a5c61304230f6d69bd4b0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
