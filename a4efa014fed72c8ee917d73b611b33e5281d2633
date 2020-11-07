@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b176999e_3c401d21",
+        "filename": "kernel/sched/cpupri.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-11-07T00:48:40Z",
+      "side": 1,
+      "message": "instead, can we define the !CONFIG_RT_SOFTINT_OPTIMIZATION as a static inline in sched.h (as is done for CONFIG_SMP). Seems best to remove those conditional SMP declarations and instead do the same for CONFIG_RT_SOFT_INT_OPTIMIZATION. You can make RT_SOFT_INT_OPTIMIZATION rely on SMP.",
+      "range": {
+        "startLine": 337,
+        "startChar": 0,
+        "endLine": 343,
+        "endChar": 6
+      },
+      "revId": "a4efa014fed72c8ee917d73b611b33e5281d2633",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
