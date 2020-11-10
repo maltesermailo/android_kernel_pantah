@@ -826,11 +826,18 @@ int f2fs_fill_dentries(struct dir_context *ctx, struct f2fs_dentry_ptr *d,
 			int save_len = fstr->len;
 			int err;
 
+<<<<<<< HEAD   (1c23a2 ANDROID: Temporarily disable XFRM_USER_COMPAT filtering)
 			err = fscrypt_fname_disk_to_usr(d->inode,
 						(u32)de->hash_code, 0,
 						&de_name, fstr);
 			if (err)
 				return err;
+=======
+			ret = f2fs_fname_disk_to_usr(d->inode, &de->hash_code,
+							&de_name, fstr);
+			if (ret < 0)
+				return true;
+>>>>>>> BRANCH (ad5e80 Linux 4.4.242)
 
 			de_name = *fstr;
 			fstr->len = save_len;
