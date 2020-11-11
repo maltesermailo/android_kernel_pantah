@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4b114b5_a25ca4dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1215505
+      },
+      "writtenOn": "2020-11-11T03:41:09Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "5bc4c78627883e796b032706185d48ec35354328",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24c4fdfe_c8364e72",
+        "filename": "kernel/stop_machine.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1215505
+      },
+      "writtenOn": "2020-11-11T03:41:09Z",
+      "side": 1,
+      "message": "This async and wait API looks good to me.\n\nHowever, it is slightly confusing when you look at stop_one_cpu_nowait() and this new async function. would it be better to accept the struct cpu_stop_done as param to know whether the caller wants a completion thing or not? This also means that moving this struct definition out of this file. another option would be acception a bool param to know if caller later wants to call a completion or not based on that we could allocate done or not. \n\nFrom pause interface pov, I would like to keep re-using the done similar work_buf instead of new allocation. \n\nThis is not a big deal and I don\u0027t have a strong opinion. The code looks good to me.",
+      "range": {
+        "startLine": 395,
+        "startChar": 0,
+        "endLine": 395,
+        "endChar": 1
+      },
+      "revId": "5bc4c78627883e796b032706185d48ec35354328",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
