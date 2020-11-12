@@ -16,6 +16,24 @@
       "message": "Is this relevant for upstream? If so, has it been proposed?",
       "revId": "55228a0e3b3aa201b0d5b06486003ccbb9a7943b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce376c36_cf8d2b1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1117108
+      },
+      "writtenOn": "2020-11-12T16:57:47Z",
+      "side": 1,
+      "message": "It might be relevant, but there are two caveats:\n  1) this certification requirement only applies for mobile devices;\n  2) the important bit of this code is where we do `kernel_restart(\"bootloader\")` if a test fails, and I couldn\u0027t come up with a good way to make this generic enough for the upstream.\n\nSo considering those two points, and the fact that the code is relatively small and self-contained, I\u0027ve decided to send the patch to ack.",
+      "parentUuid": "cba376f5_88a647f6",
+      "revId": "55228a0e3b3aa201b0d5b06486003ccbb9a7943b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
