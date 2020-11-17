@@ -27,6 +27,7 @@
 #include <linux/export.h>
 #include <linux/kthread.h>
 #include <linux/moduleparam.h>
+#include <linux/dma-fence.h>
 
 #include <drm/drm_crtc.h>
 #include <drm/drm_drv.h>
@@ -999,6 +1000,14 @@ static void send_vblank_event(struct drm_device *dev,
 		e->event.seq.time_ns = ktime_to_ns(now);
 		break;
 	}
+
+	/*
+	* update fence timestamp with the same vblank timestamp as both
+	* are signaled by the same event
+	*/
+	if (e->base.fence)
+		e->base.fence->timestamp = now;
+
 	trace_drm_vblank_event_delivered(e->base.file_priv, e->pipe, seq);
 	drm_send_event_locked(dev, &e->base);
 }
