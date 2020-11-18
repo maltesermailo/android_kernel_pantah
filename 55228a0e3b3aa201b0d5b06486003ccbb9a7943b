@@ -98,6 +98,30 @@
       },
       "revId": "55228a0e3b3aa201b0d5b06486003ccbb9a7943b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05c567bd_912f9709",
+        "filename": "crypto/niap.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1117108
+      },
+      "writtenOn": "2020-11-18T13:31:35Z",
+      "side": 1,
+      "message": "they call panic in case of fail, if I\u0027m looking at the right source file (crypto/testmgr.c). What are other options, apart from the reboot? If I understand this NIAP requirement right, kernel shouldn\u0027t do any crypto operations if a test fails.",
+      "parentUuid": "15c7b6ee_0b877ac8",
+      "range": {
+        "startLine": 276,
+        "startChar": 0,
+        "endLine": 276,
+        "endChar": 32
+      },
+      "revId": "55228a0e3b3aa201b0d5b06486003ccbb9a7943b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
