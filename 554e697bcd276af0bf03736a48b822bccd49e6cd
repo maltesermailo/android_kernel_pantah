@@ -16,6 +16,29 @@
       "message": "Add symbols to unisoc.Please review.\n",
       "revId": "554e697bcd276af0bf03736a48b822bccd49e6cd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7806d8f_0ceed0e5",
+        "filename": "android/abi_gki_aarch64_unisoc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2515,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-11-19T12:59:30Z",
+      "side": 1,
+      "message": "drivers should not use this, or the next function, use the default groups attributes that the driver supports to have the driver core add/remove the sysfs files you are adding.  If you use these you are racing with userspace and loosing 😞\n\nAlso, individual drivers exporting sysfs files is generally a bad idea, as you are creating a user user/kernel api that isn\u0027t documented, and you will have to support it for a very long time 😊",
+      "range": {
+        "startLine": 2515,
+        "startChar": 2,
+        "endLine": 2515,
+        "endChar": 19
+      },
+      "revId": "554e697bcd276af0bf03736a48b822bccd49e6cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
