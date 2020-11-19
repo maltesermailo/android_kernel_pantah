@@ -5220,11 +5220,11 @@ static void perf_pmu_output_stop(struct perf_event *event);
 static void perf_mmap_close(struct vm_area_struct *vma)
 {
 	struct perf_event *event = vma->vm_file->private_data;
-
 	struct ring_buffer *rb = ring_buffer_get(event);
 	struct user_struct *mmap_user = rb->mmap_user;
 	int mmap_locked = rb->mmap_locked;
 	unsigned long size = perf_data_size(rb);
+	bool detach_rest = false;
 
 	if (event->pmu->event_unmapped)
 		event->pmu->event_unmapped(event, vma->vm_mm);
@@ -5255,7 +5255,8 @@ static void perf_mmap_close(struct vm_area_struct *vma)
 		mutex_unlock(&event->mmap_mutex);
 	}
 
-	atomic_dec(&rb->mmap_count);
+	if (atomic_dec_and_test(&rb->mmap_count))
+		detach_rest = true;
 
 	if (!atomic_dec_and_mutex_lock(&event->mmap_count, &event->mmap_mutex))
 		goto out_put;
@@ -5264,7 +5265,7 @@ static void perf_mmap_close(struct vm_area_struct *vma)
 	mutex_unlock(&event->mmap_mutex);
 
 	/* If there's still other mmap()s of this buffer, we're done. */
-	if (atomic_read(&rb->mmap_count))
+	if (!detach_rest)
 		goto out_put;
 
 	/*
@@ -6468,8 +6469,12 @@ static void perf_event_addr_filters_exec(struct perf_event *event, void *data)
 	raw_spin_lock_irqsave(&ifh->lock, flags);
 	list_for_each_entry(filter, &ifh->list, entry) {
 		if (filter->path.dentry) {
+<<<<<<< HEAD   (7b860d UPSTREAM: sched: idle: Avoid retaining the tick when it has )
 			event->addr_filter_ranges[count].start = 0;
 			event->addr_filter_ranges[count].size = 0;
+=======
+			event->addr_filters_offs[count] = 0;
+>>>>>>> BRANCH (896107 Linux 4.14.207)
 			restart++;
 		}
 
@@ -8467,11 +8472,21 @@ static void perf_event_addr_filters_apply(struct perf_event *event)
 			event->addr_filter_ranges[count].start = 0;
 			event->addr_filter_ranges[count].size = 0;
 
+<<<<<<< HEAD   (7b860d UPSTREAM: sched: idle: Avoid retaining the tick when it has )
 			perf_addr_filter_apply(filter, mm, &event->addr_filter_ranges[count]);
 		} else {
 			event->addr_filter_ranges[count].start = filter->offset;
 			event->addr_filter_ranges[count].size  = filter->size;
 		}
+=======
+		/*
+		 * Adjust base offset if the filter is associated to a binary
+		 * that needs to be mapped:
+		 */
+		if (filter->path.dentry)
+			event->addr_filters_offs[count] =
+				perf_addr_filter_apply(filter, mm);
+>>>>>>> BRANCH (896107 Linux 4.14.207)
 
 		count++;
 	}
@@ -8606,6 +8621,7 @@ perf_event_parse_addr_filter(struct perf_event *event, char *fstr,
 			if (token == IF_SRC_FILE || token == IF_SRC_FILEADDR) {
 				int fpos = filter->range ? 2 : 1;
 
+				kfree(filename);
 				filename = match_strdup(&args[fpos]);
 				if (!filename) {
 					ret = -ENOMEM;
@@ -8644,16 +8660,20 @@ perf_event_parse_addr_filter(struct perf_event *event, char *fstr,
 				 */
 				ret = -EOPNOTSUPP;
 				if (!event->ctx->task)
-					goto fail_free_name;
+					goto fail;
 
 				/* look up the path and grab its inode */
 				ret = kern_path(filename, LOOKUP_FOLLOW,
 						&filter->path);
 				if (ret)
+<<<<<<< HEAD   (7b860d UPSTREAM: sched: idle: Avoid retaining the tick when it has )
 					goto fail_free_name;
 
 				kfree(filename);
 				filename = NULL;
+=======
+					goto fail;
+>>>>>>> BRANCH (896107 Linux 4.14.207)
 
 				ret = -EINVAL;
 				if (!filter->path.dentry ||
@@ -8673,13 +8693,13 @@ perf_event_parse_addr_filter(struct perf_event *event, char *fstr,
 	if (state != IF_STATE_ACTION)
 		goto fail;
 
+	kfree(filename);
 	kfree(orig);
 
 	return 0;
 
-fail_free_name:
-	kfree(filename);
 fail:
+	kfree(filename);
 	free_filters_list(filters);
 	kfree(orig);
 

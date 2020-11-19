@@ -1219,7 +1219,11 @@ static void pt_event_addr_filters_sync(struct perf_event *event)
 		return;
 
 	list_for_each_entry(filter, &head->list, entry) {
+<<<<<<< HEAD   (7b860d UPSTREAM: sched: idle: Avoid retaining the tick when it has )
 		if (filter->path.dentry && !fr[range].start) {
+=======
+		if (filter->path.dentry && !offs[range]) {
+>>>>>>> BRANCH (896107 Linux 4.14.207)
 			msr_a = msr_b = 0;
 		} else {
 			/* apply the offset */
