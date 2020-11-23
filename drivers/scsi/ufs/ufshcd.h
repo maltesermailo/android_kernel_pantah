@@ -553,8 +553,17 @@ enum ufshcd_quirks {
 	UFSHCD_QUIRK_BROKEN_AUTO_HIBERN8		= 1 << 11,
 
 	/*
+<<<<<<< HEAD   (65f5ed ANDROID: arm64: gki_defconfig: Disable VHE)
 	 * This quirk needs to disable manual flush for write booster
+=======
+	 * This quirk needs to be enabled if the host controller supports inline
+	 * encryption, but it needs to initialize the crypto capabilities in a
+	 * nonstandard way and/or it needs to override blk_ksm_ll_ops.  If
+	 * enabled, the standard code won't initialize the blk_keyslot_manager;
+	 * ufs_hba_variant_ops::init() must do it instead.
+>>>>>>> BRANCH (99c79b GKI: ABI: Update the ABI xml)
 	 */
+<<<<<<< HEAD   (65f5ed ANDROID: arm64: gki_defconfig: Disable VHE)
 	UFSHCI_QUIRK_SKIP_MANUAL_WB_FLUSH_CTRL		= 1 << 12,
 
 	/*
@@ -564,6 +573,8 @@ enum ufshcd_quirks {
 	 * enabled, the standard code won't initialize the blk_keyslot_manager;
 	 * ufs_hba_variant_ops::init() must do it instead.
 	 */
+=======
+>>>>>>> BRANCH (99c79b GKI: ABI: Update the ABI xml)
 	UFSHCD_QUIRK_CUSTOM_KEYSLOT_MANAGER		= 1 << 20,
 
 	/*

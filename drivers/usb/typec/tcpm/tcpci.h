@@ -8,6 +8,8 @@
 #ifndef __LINUX_USB_TCPCI_H
 #define __LINUX_USB_TCPCI_H
 
+#include <linux/usb/typec.h>
+
 #define TCPC_VENDOR_ID			0x0
 #define TCPC_PRODUCT_ID			0x2
 #define TCPC_BCD_DEV			0x4
@@ -16,6 +18,10 @@
 #define TCPC_PD_INT_REV			0xa
 
 #define TCPC_ALERT			0x10
+<<<<<<< HEAD   (65f5ed ANDROID: arm64: gki_defconfig: Disable VHE)
+=======
+#define TCPC_ALERT_VENDOR		BIT(15)
+>>>>>>> BRANCH (99c79b GKI: ABI: Update the ABI xml)
 #define TCPC_ALERT_EXTND		BIT(14)
 #define TCPC_ALERT_EXTENDED_STATUS	BIT(13)
 #define TCPC_ALERT_VBUS_DISCNCT		BIT(11)
@@ -31,11 +37,18 @@
 #define TCPC_ALERT_POWER_STATUS		BIT(1)
 #define TCPC_ALERT_CC_STATUS		BIT(0)
 
+<<<<<<< HEAD   (65f5ed ANDROID: arm64: gki_defconfig: Disable VHE)
 #define TCPC_ALERT_MASK			0x12
 #define TCPC_POWER_STATUS_MASK		0x14
 #define TCPC_FAULT_STATUS_MASK		0x15
 
 #define TCPC_EXTENDED_STATUS_MASK		0x16
+=======
+#define TCPC_ALERT_MASK				0x12
+#define TCPC_POWER_STATUS_MASK			0x14
+#define TCPC_FAULT_STATUS_MASK			0x15
+#define	TCPC_EXTENDED_STATUS_MASK		0x16
+>>>>>>> BRANCH (99c79b GKI: ABI: Update the ABI xml)
 #define TCPC_EXTENDED_STATUS_MASK_VSAFE0V	BIT(0)
 
 #define TCPC_ALERT_EXTENDED_MASK	0x17
@@ -46,6 +59,8 @@
 #define TCPC_TCPC_CTRL			0x19
 #define TCPC_TCPC_CTRL_ORIENTATION	BIT(0)
 #define TCPC_TCPC_CTRL_BIST_TM		BIT(1)
+
+#define TCPC_EXTENDED_STATUS		0x20
 
 #define TCPC_ROLE_CTRL			0x1a
 #define TCPC_ROLE_CTRL_DRP		BIT(6)
@@ -67,6 +82,11 @@
 
 #define TCPC_POWER_CTRL			0x1c
 #define TCPC_POWER_CTRL_VCONN_ENABLE	BIT(0)
+<<<<<<< HEAD   (65f5ed ANDROID: arm64: gki_defconfig: Disable VHE)
+=======
+#define TCPC_POWER_CTRL_BLEED_DISCHARGE	BIT(3)
+#define TCPC_POWER_CTRL_AUTO_DISCHARGE	BIT(4)
+>>>>>>> BRANCH (99c79b GKI: ABI: Update the ABI xml)
 #define TCPC_FAST_ROLE_SWAP_EN		BIT(7)
 
 #define TCPC_CC_STATUS			0x1d
@@ -78,6 +98,7 @@
 #define TCPC_CC_STATUS_CC1_MASK		0x3
 
 #define TCPC_POWER_STATUS		0x1e
+#define TCPC_POWER_STATUS_DBG_ACC_CON	BIT(7)
 #define TCPC_POWER_STATUS_UNINIT	BIT(6)
 #define TCPC_POWER_STATUS_SOURCING_VBUS	BIT(4)
 #define TCPC_POWER_STATUS_VBUS_DET	BIT(3)
@@ -133,6 +154,8 @@
 
 #define TCPC_VBUS_VOLTAGE			0x70
 #define TCPC_VBUS_SINK_DISCONNECT_THRESH	0x72
+#define TCPC_VBUS_SINK_DISCONNECT_THRESH_LSB	25
+#define TCPC_VBUS_SINK_DISCONNECT_THRESH_MAX	1023
 #define TCPC_VBUS_STOP_DISCHARGE_THRESH		0x74
 #define TCPC_VBUS_VOLTAGE_ALARM_HI_CFG		0x76
 #define TCPC_VBUS_VOLTAGE_ALARM_LO_CFG		0x78
@@ -145,20 +168,59 @@
  *		optional; Set when TX_BUF_BYTE_x can only be accessed through I2C_WRITE_BYTE_COUNT.
  */
 struct tcpci;
+
+/*
+ * @auto_discharge_disconnect:
+ *		Optional; Enables TCPC to autonously discharge vbus on disconnect.
+ * @get_vbus:
+ *		Optional; From the tcpci spec, "The TCPC shall report VBUS present
+ *		when TCPC detects VBUS rises above 4V. The TCPC shall report VBUS is
+ *		not present when TCPC detects VBUS falls below 3.5V. The TCPC may report
+ *		VBUS is not present if VBUS is between 3.5V and 4V." Between one
+ *		implementation of TCPC and another, 3.5V < VBUS < 4V might or
+ *		might not be reported as PRESENT. When VBUS < 4V is reported as
+ *		absent, the link might be disconnected to early before
+ *		vSinkDisconnect max(3.67V) is reached. Hence provide a chip
+ *		specific callback for the tcpc chip driver override if needed.
+ *		Return 0 from callback for TCPM to restart toggling.
+ */
 struct tcpci_data {
 	struct regmap *regmap;
 	unsigned char TX_BUF_BYTE_x_hidden:1;
+<<<<<<< HEAD   (65f5ed ANDROID: arm64: gki_defconfig: Disable VHE)
+=======
+	bool override_toggling;
+	unsigned char auto_discharge_disconnect:1;
+
+>>>>>>> BRANCH (99c79b GKI: ABI: Update the ABI xml)
 	int (*init)(struct tcpci *tcpci, struct tcpci_data *data);
 	int (*set_vconn)(struct tcpci *tcpci, struct tcpci_data *data,
 			 bool enable);
 	int (*start_drp_toggling)(struct tcpci *tcpci, struct tcpci_data *data,
 				  enum typec_cc_status cc);
 	int (*set_vbus)(struct tcpci *tcpci, struct tcpci_data *data, bool source, bool sink);
+<<<<<<< HEAD   (65f5ed ANDROID: arm64: gki_defconfig: Disable VHE)
+=======
+	int (*get_vbus)(struct tcpci *tcpci, struct tcpci_data *data);
+	int (*set_roles)(struct tcpci *tcpci, struct tcpci_data *data, bool attached,
+			 enum typec_role role, enum typec_data_role data_role,
+			 bool usb_comm_capable);
+	int (*get_current_limit)(struct tcpci *tcpci, struct tcpci_data *data);
+	int (*set_current_limit)(struct tcpci *tcpci, struct tcpci_data *data, u32 max_ma, u32 mv);
+	void (*set_pd_capable)(struct tcpci *tcpci, struct tcpci_data *data, bool capable);
+	void (*set_cc_polarity)(struct tcpci *tcpci, struct tcpci_data *data,
+				enum typec_cc_polarity polarity);
+	int (*frs_sourcing_vbus)(struct tcpci *tcpci, struct tcpci_data *data);
+	int (*enable_frs)(struct tcpci *tcpci, struct tcpci_data *data, bool enable);
+	int (*check_contaminant)(struct tcpci *tcpci, struct tcpci_data *data);
+>>>>>>> BRANCH (99c79b GKI: ABI: Update the ABI xml)
 };
 
 struct tcpci *tcpci_register_port(struct device *dev, struct tcpci_data *data);
 void tcpci_unregister_port(struct tcpci *tcpci);
 irqreturn_t tcpci_irq(struct tcpci *tcpci);
+void tcpci_auto_discharge_update(struct tcpci *tcpci);
+bool tcpci_is_debouncing(struct tcpci *tcpci);
 
 struct tcpm_port;
 struct tcpm_port *tcpci_get_tcpm_port(struct tcpci *tcpci);

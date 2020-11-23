@@ -350,15 +350,37 @@ struct drm_display_mode {
 	u8 type;
 
 	/**
+<<<<<<< HEAD   (65f5ed ANDROID: arm64: gki_defconfig: Disable VHE)
 	 * @expose_to_userspace:
+=======
+	 * @private:
+>>>>>>> BRANCH (99c79b GKI: ABI: Update the ABI xml)
 	 *
+<<<<<<< HEAD   (65f5ed ANDROID: arm64: gki_defconfig: Disable VHE)
 	 * Indicates whether the mode is to be exposed to the userspace.
 	 * This is to maintain a set of exposed modes while preparing
 	 * user-mode's list in drm_mode_getconnector ioctl. The purpose of
 	 * this only lies in the ioctl function, and is not to be used
 	 * outside the function.
+=======
+	 * Pointer for driver private data. This can only be used for mode
+	 * objects passed to drivers in modeset operations. It shouldn't be used
+	 * by atomic drivers since they can store any additional data by
+	 * subclassing state structures.
+>>>>>>> BRANCH (99c79b GKI: ABI: Update the ABI xml)
 	 */
+<<<<<<< HEAD   (65f5ed ANDROID: arm64: gki_defconfig: Disable VHE)
 	bool expose_to_userspace;
+=======
+	int *private;
+
+	/**
+	 * @private_flags:
+	 *
+	 * Similar to @private, but just an integer.
+	 */
+	int private_flags;
+>>>>>>> BRANCH (99c79b GKI: ABI: Update the ABI xml)
 
 	/**
 	 * @head:

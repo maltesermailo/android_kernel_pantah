@@ -564,7 +564,11 @@ endif
 
 ifneq ($(shell $(CC) --version 2>&1 | head -n 1 | grep clang),)
 ifneq ($(CROSS_COMPILE),)
+<<<<<<< HEAD   (65f5ed ANDROID: arm64: gki_defconfig: Disable VHE)
 CLANG_FLAGS	+= --target=$(notdir $(CROSS_COMPILE:%-=%))
+=======
+CLANG_FLAGS	:= --target=$(notdir $(CROSS_COMPILE:%-=%))
+>>>>>>> BRANCH (99c79b GKI: ABI: Update the ABI xml)
 GCC_TOOLCHAIN_DIR := $(dir $(shell which $(CROSS_COMPILE)elfedit))
 CLANG_FLAGS	+= --prefix=$(GCC_TOOLCHAIN_DIR)$(notdir $(CROSS_COMPILE))
 GCC_TOOLCHAIN	:= $(realpath $(GCC_TOOLCHAIN_DIR)/..)
@@ -828,11 +832,18 @@ DEBUG_CFLAGS	+= -gsplit-dwarf
 else
 DEBUG_CFLAGS	+= -g
 endif
+<<<<<<< HEAD   (65f5ed ANDROID: arm64: gki_defconfig: Disable VHE)
 
+=======
+>>>>>>> BRANCH (99c79b GKI: ABI: Update the ABI xml)
 ifneq ($(LLVM_IAS),1)
 KBUILD_AFLAGS	+= -Wa,-gdwarf-2
 endif
+<<<<<<< HEAD   (65f5ed ANDROID: arm64: gki_defconfig: Disable VHE)
 
+=======
+endif
+>>>>>>> BRANCH (99c79b GKI: ABI: Update the ABI xml)
 ifdef CONFIG_DEBUG_INFO_DWARF4
 DEBUG_CFLAGS	+= -gdwarf-4
 endif

@@ -412,9 +412,15 @@ TRACE_EVENT(sched_blocked_reason,
 	TP_ARGS(tsk),
 
 	TP_STRUCT__entry(
+<<<<<<< HEAD   (65f5ed ANDROID: arm64: gki_defconfig: Disable VHE)
 		__field( pid_t,	pid	)
 		__field( void*, caller	)
 		__field( bool, io_wait	)
+=======
+		__field(pid_t,	pid)
+		__field(void*, caller)
+		__field(bool, io_wait)
+>>>>>>> BRANCH (99c79b GKI: ABI: Update the ABI xml)
 	),
 
 	TP_fast_assign(
