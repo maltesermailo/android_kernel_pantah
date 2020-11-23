@@ -22,6 +22,30 @@
       },
       "revId": "efab334061ff7ed8f9dd5e28f2c7bdb09e2a77ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06fe7eb0_10ee78a9",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-11-23T21:49:18Z",
+      "side": 1,
+      "message": "This isn\u0027t necessary. The framework/subsystem is expressed by which header file under include/trace/hooks the hook is defined in. It is also used in files that implement that framework/subsystem. I don\u0027t want the mandatory part of the names to be too long and it already requires \"trace_android_vh_\".",
+      "parentUuid": "c25e1eac_8c2d3561",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 59
+      },
+      "revId": "efab334061ff7ed8f9dd5e28f2c7bdb09e2a77ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
