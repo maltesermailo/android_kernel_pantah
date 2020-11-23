@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "136021d6_b6e2cf01",
+        "filename": "drivers/cpufreq/cpufreq.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 698,
+      "author": {
+        "id": 1781415
+      },
+      "writtenOn": "2020-11-23T19:25:49Z",
+      "side": 1,
+      "message": "We will need to pass the policy structure too,so the module can override for the right one.",
+      "revId": "dbc328390a55df1907a793b50e96f3133b0e1305",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c66e21bc_6d2a6d56",
+        "filename": "drivers/cpufreq/freq_table.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1781415
+      },
+      "writtenOn": "2020-11-23T19:25:49Z",
+      "side": 1,
+      "message": "Please pass the policy object as well. This will help the module side note the max freq per cluster",
+      "revId": "dbc328390a55df1907a793b50e96f3133b0e1305",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
