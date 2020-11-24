@@ -51,6 +51,29 @@
       "parentUuid": "e065c422_b1d0fd02",
       "revId": "c925d305b636d43cae5a61981bf837a2e700822c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c74f63c_37271c59",
+        "filename": "arch/arm64/include/asm/mmu_context.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-11-24T02:32:40Z",
+      "side": 1,
+      "message": "according to the comment here:\nhttps://github.com/aosp-mirror/kernel_common/commit/fda4c1842737a8a0ec2aa4a46830e89b18fcac9d\n\nhere we should use \"WRITE_ONCE(task_thread_info(tsk)-\u003ettbr0, ttbr);\", will check and update later.",
+      "range": {
+        "startLine": 174,
+        "startChar": 0,
+        "endLine": 174,
+        "endChar": 37
+      },
+      "revId": "c925d305b636d43cae5a61981bf837a2e700822c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
