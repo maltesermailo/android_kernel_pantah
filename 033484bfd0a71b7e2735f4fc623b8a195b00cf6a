@@ -33,6 +33,24 @@
       "message": "Since the patch has been modified from the upstream version, it should be \"BACKPORT:\" instead of \"UPSTREAM:\". Were these changes really needed to backport the patch to 4.9? If not, I\u0027d prefer to stay with the upstream version and if those changes are really necessary, send them upstream first.",
       "revId": "033484bfd0a71b7e2735f4fc623b8a195b00cf6a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b38da26b_8a5af576",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-11-25T00:42:41Z",
+      "side": 1,
+      "message": "This change depends on the change here:\nhttps://android-review.googlesource.com/c/kernel/common/+/1498504\n\nfrom the commit logs, they should be submitted together for \"Fixes: 39bc88e5e38e9b21 (\"arm64: Disable TTBR0_EL1 during normal kernel execution\")\".\n\nI don\u0027t see the commit of \"UPSTREAM: arm64: SW PAN: Update saved ttbr0 value on enter_lazy_tlb\" in the upstream kernel here: \nhttps://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/log/arch/arm64/include/asm/mmu_context.h?h\u003dlinux-4.9.y\n\nso I guess we only need this in the ACK?",
+      "parentUuid": "599b943b_d54dce51",
+      "revId": "033484bfd0a71b7e2735f4fc623b8a195b00cf6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
