@@ -16,6 +16,23 @@
       "message": "Urgh, the x86 kernel build on this branch has a bunch somewhat worrisome warnings:\n\n   ld.lld: warning: cannot find entry symbol _start; defaulting to 0x1000\n   ...\n   2 warnings generated.\n   WARNING: EXPORT symbol \"page_offset_base\" [vmlinux] version generation failed, symbol will not be versioned.\n   WARNING: EXPORT symbol \"vmalloc_base\" [vmlinux] version generation failed, symbol will not be versioned.\n   WARNING: EXPORT symbol \"vmemmap_base\" [vmlinux] version generation failed, symbol will not be versioned.\n   WARNING: \"__memcat_p\" [vmlinux] is a static (unknown)\n\nThe static export is a false positive, so it seems that we\u0027re missing a dependency in 5.4 for this to work properly :/\n",
       "revId": "d1e3811b6c48c7f44c0ed0bc4a576468f212ccb6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10c58c40_3ce2ab39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2020-11-25T15:04:49Z",
+      "side": 1,
+      "message": "As per the previous comment, we have a bunch of \u0027scary\u0027 warnings w/ the x86 build on android12-5.4 ATM. Is this something we already knew and are ok with or something we should address?",
+      "revId": "d1e3811b6c48c7f44c0ed0bc4a576468f212ccb6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
