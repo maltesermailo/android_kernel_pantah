@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb77301e_f0ccf956",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2020-11-26T04:37:18Z",
+      "side": 1,
+      "message": "Hi, Todd, Greg\n\nAs the change of [1] caused the hikey/hikey960 4.4/4.9 builds failed to boot successfully from the uefi bootloader, and from the commit logs, the changes of [1] and [2] should be submitted together.\nbut we only have [1] in the ACK 4.4/4.9 kernels right now, we need to have [2] merged into the 4.4/4.9 kernels too.\n\nfor the solutions what I could think of are as following:\noption1: revert the change of [1] from ACK if it\u0027s not necessary\noption2: merge the backport of [2] into ACK\noption3: send them to the upstream stable branches if they are really necessary.\n\nfrom our side, we are not aware of any problem related to the change[1] with the hikey/hikey960 builds, so want to know your comments on how we should resolve this boot regression problem for hikey/hikey960 builds.\n\nThanks in advance!\n         \n[1]: \"arm64: SW PAN: Update saved ttbr0 value on enter_lazy_tlb\"\n     https://android-review.googlesource.com/c/kernel/common/+/1498504\n     https://android.googlesource.com/kernel/common/+/d96cc49bff5a7735576cc6f6f111f875d101cec8\n     \n[2]: \"arm64: SW PAN: Point saved ttbr0 at the zero page when switching to init_mm\"\n     https://android.googlesource.com/kernel/common/+/0adbdfde8cfc9415aeed2a4955d2d17b3bd9bf13",
+      "revId": "9c9f57920570e80147a818055c702474ab7fff28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
