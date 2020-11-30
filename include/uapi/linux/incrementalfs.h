@@ -146,6 +146,16 @@
  */
 #define INCFS_FEATURE_FLAG_ZSTD "zstd"
 
+/*
+ * v2 feature set support. Covers:
+ *   INCFS_IOC_CREATE_MAPPED_FILE
+ *   INCFS_IOC_GET_BLOCK_COUNT
+ *   INCFS_IOC_GET_READ_TIMEOUTS/INCFS_IOC_SET_READ_TIMEOUTS
+ *   .blocks_written status file
+ *   .incomplete folder
+ */
+#define INCFS_FEATURE_FLAG_V2 "v2"
+
 enum incfs_compression_alg {
 	COMPRESSION_NONE = 0,
 	COMPRESSION_LZ4 = 1,
