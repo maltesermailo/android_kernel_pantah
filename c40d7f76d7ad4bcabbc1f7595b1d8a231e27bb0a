@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ed164d28_370ef1ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-11-30T12:47:13Z",
+      "side": 1,
+      "message": "I do not understand the bug you are trying to solve by changing the ability of the system to suspend or not when it is trying to do so.\n\nPlease describe the problem that is happening.  If there are issues in a storage driver, we will gladly take patches for them to resolve this, and recommend you send them upstream so that they will be merged for all systems.  But one-off hooks like this feel really wrong for this type of functionality.",
+      "parentUuid": "4756eb39_a27c809e",
+      "revId": "c40d7f76d7ad4bcabbc1f7595b1d8a231e27bb0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a150872d_069b6d6e",
         "filename": "include/trace/hooks/suspend_sync.h",
         "patchSetId": 1
@@ -73,6 +91,30 @@
       "side": 1,
       "message": "I\u0027m sorry, but I don\u0027t understand what you mean. Can you explain in more detail?\nI just refer other hooks implementation.",
       "parentUuid": "a150872d_069b6d6e",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 63
+      },
+      "revId": "c40d7f76d7ad4bcabbc1f7595b1d8a231e27bb0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d50e9679_5126dadb",
+        "filename": "include/trace/hooks/suspend_sync.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-11-30T12:47:13Z",
+      "side": 1,
+      "message": "Most hooks are static inline functions with the proper function arguments, to check if the code is written incorrectly if the trace option is not enabled.  Using an \"empty\" #define is not good coding style for this.\n\nYes, some hooks are written that way, but they should be fixed to not do that, and we should not add new ones that follow this incorrect manner.",
+      "parentUuid": "c2ad3ec7_89db1022",
       "range": {
         "startLine": 22,
         "startChar": 0,
