@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4756eb39_a27c809e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1409309
+      },
+      "writtenOn": "2020-11-30T08:43:33Z",
+      "side": 1,
+      "message": "This hook is not for the busy of my own driver, It\u0027s for the long syncing busy, by ksys_sync_helper().\nI think it might make another problem if I prevent system from full syncing in my driver, e.g. in PM_SUSPEND_PREPARE notifier,\nbecause we couldn\u0027t know the order of pm notifier call, and other driver\u0027s - especially block or storage driver\u0027s current or future behavior in pm notifier.\n\nI think you misunderstood the purpose of this commit, If not, do you still think it\u0027s not right place to hook?",
+      "parentUuid": "95dc02dd_70aa02be",
+      "revId": "c40d7f76d7ad4bcabbc1f7595b1d8a231e27bb0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a150872d_069b6d6e",
@@ -31,6 +49,30 @@
       "writtenOn": "2020-11-30T07:25:50Z",
       "side": 1,
       "message": "these should be inline functions.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 63
+      },
+      "revId": "c40d7f76d7ad4bcabbc1f7595b1d8a231e27bb0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2ad3ec7_89db1022",
+        "filename": "include/trace/hooks/suspend_sync.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1409309
+      },
+      "writtenOn": "2020-11-30T08:43:33Z",
+      "side": 1,
+      "message": "I\u0027m sorry, but I don\u0027t understand what you mean. Can you explain in more detail?\nI just refer other hooks implementation.",
+      "parentUuid": "a150872d_069b6d6e",
       "range": {
         "startLine": 22,
         "startChar": 0,
