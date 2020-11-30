@@ -335,8 +335,8 @@ struct dir_file *incfs_open_dir_file(struct mount_info *mi, struct file *bf);
 void incfs_free_dir_file(struct dir_file *dir);
 
 ssize_t incfs_read_data_file_block(struct mem_range dst, struct file *f,
-			int index, int min_time_ms,
-			int min_pending_time_ms, int max_pending_time_ms,
+			int index, int min_time_us,
+			int min_pending_time_us, int max_pending_time_us,
 			struct mem_range tmp);
 
 int incfs_get_filled_blocks(struct data_file *df,
