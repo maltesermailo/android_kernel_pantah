@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95dc02dd_70aa02be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-11-30T07:25:50Z",
+      "side": 1,
+      "message": "Why not do the right thing in your driver, preventing suspend if they are busy, instead of trying to hook the core kernel in this location?",
+      "revId": "c40d7f76d7ad4bcabbc1f7595b1d8a231e27bb0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a150872d_069b6d6e",
+        "filename": "include/trace/hooks/suspend_sync.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-11-30T07:25:50Z",
+      "side": 1,
+      "message": "these should be inline functions.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 63
+      },
+      "revId": "c40d7f76d7ad4bcabbc1f7595b1d8a231e27bb0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00efeb54_7c187218",
+        "filename": "kernel/power/suspend.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-11-30T07:25:50Z",
+      "side": 1,
+      "message": "Same here, provide support for this in your drivers.",
+      "range": {
+        "startLine": 593,
+        "startChar": 0,
+        "endLine": 593,
+        "endChar": 82
+      },
+      "revId": "c40d7f76d7ad4bcabbc1f7595b1d8a231e27bb0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
