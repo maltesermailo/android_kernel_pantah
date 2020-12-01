@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21759204_8f4e9348",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1008,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-12-01T21:51:47Z",
+      "side": 1,
+      "message": "should it be u32?",
+      "range": {
+        "startLine": 1008,
+        "startChar": 32,
+        "endLine": 1008,
+        "endChar": 35
+      },
+      "revId": "defea90f4f63f5c0bdedcbe3d2803af83ce49e59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1c1a8b1_8db80652",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1019,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-12-01T21:51:47Z",
+      "side": 1,
+      "message": "what about following the suggestion in http://lxr.free-electrons.com/source/Documentation/timers/timers-howto.txt ?\n\u003c20us -\u003e udelay\n20us-20ms -\u003eusleep_range\notherwise msleep_interruptible() (and discard the extra microseconds as they\u0027re insignificant already, esp given the precision of ms sleeps)\n\nwe can\u0027t interrupt usleep_range() but given it\u0027s \u003c20ms it\u0027s fine",
+      "range": {
+        "startLine": 1010,
+        "startChar": 1,
+        "endLine": 1019,
+        "endChar": 19
+      },
+      "revId": "defea90f4f63f5c0bdedcbe3d2803af83ce49e59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8c96776_10aec1e8",
+        "filename": "fs/incfs/pseudo_files.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1024,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-12-01T21:51:47Z",
+      "side": 1,
+      "message": "I\u0027d probably add a validation for the values we don\u0027t support, e.g. \u003e INT32_MAX (or fix the code where we use int for them in the read handler)",
+      "range": {
+        "startLine": 1020,
+        "startChar": 0,
+        "endLine": 1024,
+        "endChar": 4
+      },
+      "revId": "defea90f4f63f5c0bdedcbe3d2803af83ce49e59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d366108_46296d58",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-12-01T21:51:47Z",
+      "side": 1,
+      "message": "can read timeout be U32_MAX by itself?",
+      "range": {
+        "startLine": 432,
+        "startChar": 39,
+        "endLine": 432,
+        "endChar": 54
+      },
+      "revId": "defea90f4f63f5c0bdedcbe3d2803af83ce49e59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e44ab2df_58febf16",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-12-01T21:51:47Z",
+      "side": 1,
+      "message": "nit: passing u32 into int is dangerous",
+      "range": {
+        "startLine": 435,
+        "startChar": 2,
+        "endLine": 435,
+        "endChar": 56
+      },
+      "revId": "defea90f4f63f5c0bdedcbe3d2803af83ce49e59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "829f65b3_7b1694b1",
+        "filename": "include/uapi/linux/incrementalfs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2020-12-01T21:51:47Z",
+      "side": 1,
+      "message": "nit: missing space",
+      "range": {
+        "startLine": 503,
+        "startChar": 55,
+        "endLine": 503,
+        "endChar": 58
+      },
+      "revId": "defea90f4f63f5c0bdedcbe3d2803af83ce49e59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
