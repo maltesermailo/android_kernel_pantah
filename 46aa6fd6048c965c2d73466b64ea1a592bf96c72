@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dfdedca_3e0b766f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2020-12-01T19:49:00Z",
+      "side": 1,
+      "message": "Commented",
+      "revId": "46aa6fd6048c965c2d73466b64ea1a592bf96c72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d482a9a3_c9e6783a",
@@ -31,6 +48,23 @@
       "writtenOn": "2020-12-01T19:34:57Z",
       "side": 1,
       "message": "should cpuhp_tasks_frozen be set to 0 here, emulating line 1264 but performing the operation early?",
+      "revId": "46aa6fd6048c965c2d73466b64ea1a592bf96c72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a162d1d6_35350ab5",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1260,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2020-12-01T19:49:00Z",
+      "side": 1,
+      "message": "The domains need to be rebuilt in order for CPUs to be present.  For example, if a domain only contains one CPU, and that CPU has been paused, the domain is eliminated from scheduler domains.  \n\nSubsequently, in order to re-use the CPU, the domains need to be rebuilt.  \n\nThe goal here, is to rebuild them early, so that the CPU may be used as quickly as possible.\n\n(shall I add this to the comments/other suggestions?)",
       "revId": "46aa6fd6048c965c2d73466b64ea1a592bf96c72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
