@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66297622_323b6f6a",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1259,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-12-02T14:40:41Z",
+      "side": 1,
+      "message": "if you aren\u0027t calling cpuset_cpu_active() it won\u0027t be necessary.",
+      "parentUuid": "d482a9a3_c9e6783a",
+      "revId": "46aa6fd6048c965c2d73466b64ea1a592bf96c72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a162d1d6_35350ab5",
         "filename": "kernel/cpu.c",
         "patchSetId": 1
@@ -65,6 +83,24 @@
       "writtenOn": "2020-12-01T19:49:00Z",
       "side": 1,
       "message": "The domains need to be rebuilt in order for CPUs to be present.  For example, if a domain only contains one CPU, and that CPU has been paused, the domain is eliminated from scheduler domains.  \n\nSubsequently, in order to re-use the CPU, the domains need to be rebuilt.  \n\nThe goal here, is to rebuild them early, so that the CPU may be used as quickly as possible.\n\n(shall I add this to the comments/other suggestions?)",
+      "revId": "46aa6fd6048c965c2d73466b64ea1a592bf96c72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a948f60e_fdb9a01f",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1260,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2020-12-02T14:40:41Z",
+      "side": 1,
+      "message": "Yes, it would be nice and helpful to add a comment to explain why doing all this _before_ the cpus_write_lock and why it is correct to do so.",
+      "parentUuid": "a162d1d6_35350ab5",
       "revId": "46aa6fd6048c965c2d73466b64ea1a592bf96c72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
