@@ -52,6 +52,41 @@
       "parentUuid": "3e1c4b23_8148b5ee",
       "revId": "ab9ca2d90c363f05fdd2095af8fb263cac770e73",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02841813_5f60e101",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-12-05T01:06:40Z",
+      "side": 1,
+      "message": "Uploaded fixes for both. The Failure was due to an incorrect declaration of `cpuset_hotplug_workfn` in cpuset.h (this CL). The warning was due to a bogus character in the declarations of pause_cpus() and resume_cpus() in include/linux/cpu.h (\"ANDROID: cpu/hotplug: add pause/resume_cpus interface\")",
+      "parentUuid": "168f888a_1155f994",
+      "revId": "ab9ca2d90c363f05fdd2095af8fb263cac770e73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6385f92_d79a1a80",
+        "filename": "include/linux/cpuset.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2020-12-05T01:06:40Z",
+      "side": 1,
+      "message": "This caused the build-break -- should be defined as \"static inline\". Fixed in next version.",
+      "revId": "ab9ca2d90c363f05fdd2095af8fb263cac770e73",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
