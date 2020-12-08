@@ -41,6 +41,41 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93d68588_48fc372c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-12-08T19:16:35Z",
+      "side": 1,
+      "message": "Thanks for these nits! I\u0027ll work on a separate patch series to address them usptream first.",
+      "revId": "3fb66df582c92c6e1780473a5e35945a14b4b19a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57cc4c2a_abdab68d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-12-08T19:16:35Z",
+      "side": 1,
+      "message": "I probably won\u0027t respin this patch as its trying to match whats queued for upstream. But I will try to address most of these issues in a separate patch series and push them upstream (and then backport here)",
+      "parentUuid": "a34c117a_39c8c975",
+      "revId": "3fb66df582c92c6e1780473a5e35945a14b4b19a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2ec9ef9_df8e8015",
@@ -54,6 +89,30 @@
       "writtenOn": "2020-12-08T06:46:09Z",
       "side": 1,
       "message": "would be nice to have a BUG_ON in case vmap_cnt goes negative",
+      "range": {
+        "startLine": 248,
+        "startChar": 6,
+        "endLine": 248,
+        "endChar": 24
+      },
+      "revId": "3fb66df582c92c6e1780473a5e35945a14b4b19a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "246119e5_cc46297c",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-12-08T19:16:35Z",
+      "side": 1,
+      "message": "Upstream doesn\u0027t really like BUG_ON except in the most dire of situations. But we can do something like a WARN_ON and try to bail out.",
+      "parentUuid": "e2ec9ef9_df8e8015",
       "range": {
         "startLine": 248,
         "startChar": 6,
