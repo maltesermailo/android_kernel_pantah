@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86d404a0_b94c57b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-08T14:11:54Z",
+      "side": 1,
+      "message": "Hi Greg,\nThere are no change from https://lore.kernel.org/lkml/a9de1928-d709-896f-ffa6-febc5d6d34c6@gmail.com/\n\nupstream is asking for common solution and not specific to arm64.\n\"Also, have you looked at making mmiotrace less x86 specific and more\ngeneric?\"\n\ncoming up with common solution to all the architectures does not meet our GKI timelines, so pulled this change into ACK tree. \n\n-Thanks, Prasad",
+      "parentUuid": "b7e0e3a5_4817da2c",
+      "revId": "bdf49461258495241b6c8c5e9cc41273b402c7ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d16a38a0_5f4be852",
@@ -48,6 +66,30 @@
       "writtenOn": "2020-12-06T16:39:27Z",
       "side": 1,
       "message": "I still think the \u0027val\u0027 needs to be logged as well, just an address can\u0027t be that useful, can it?  Why not provide it, you can get it \"for free\"?",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 20
+      },
+      "revId": "bdf49461258495241b6c8c5e9cc41273b402c7ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06116710_5e949b9c",
+        "filename": "arch/arm64/include/asm/io.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-08T14:11:54Z",
+      "side": 1,
+      "message": "Hi Greg, \nVal is not required for Qualcomm debugging. Val will be available in some structures. We need to debug device hang cases/unclocked register access cases and we don\u0027t have use case with Val. \n\n-Thanks, Prasad",
+      "parentUuid": "d16a38a0_5f4be852",
       "range": {
         "startLine": 28,
         "startChar": 0,
