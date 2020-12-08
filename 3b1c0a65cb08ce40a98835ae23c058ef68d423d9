@@ -16,6 +16,24 @@
       "message": "Can dmabuf be mapped more than once? Say once in DMA_TO_DEVICE direction and then again in DMA_FROM_DEVICE direction? If yes, then a-\u003emapped should be a counter similar to vmap_cnt. If that\u0027s not allowed then should we check a-\u003emapped and exit early with an error if such attempt is made?",
       "revId": "3b1c0a65cb08ce40a98835ae23c058ef68d423d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afa5472e_5164dbcd",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2020-12-08T19:11:04Z",
+      "side": 1,
+      "message": "Hrm. That\u0027s a good point. While it does seem like a potential issue, I suspect it doesn\u0027t happen in practice on Android devices, mostly as this patch was lifted from the ION code.\n\nLet me dig around a bit more on this, as a fair amount of the dmabuf rules are a bit ill defined (at least in my view).\n\nThanks for pointing this out!",
+      "parentUuid": "00fdb214_9eec3f9a",
+      "revId": "3b1c0a65cb08ce40a98835ae23c058ef68d423d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
