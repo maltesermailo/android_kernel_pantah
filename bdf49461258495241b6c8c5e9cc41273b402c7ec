@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be826ed1_f0a010fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-08T20:46:14Z",
+      "side": 1,
+      "message": "Hi Greg KH, \n\nI really don\u0027t understand upstream requirements. upstream is looking for mmiotrace extension to arm64, which is not possible for Qualcomm timelines. \n\n\n-Thanks, Prasad",
+      "parentUuid": "1520b63a_cad3af7a",
+      "revId": "bdf49461258495241b6c8c5e9cc41273b402c7ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d16a38a0_5f4be852",
         "filename": "arch/arm64/include/asm/io.h",
         "patchSetId": 1
@@ -132,6 +150,30 @@
       "side": 1,
       "message": "You have a trace point, and you have only 2 variables at that trace point.  To be ignoring one of those values is crazy, emit that value too please, others might find them useful.",
       "parentUuid": "06116710_5e949b9c",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 20
+      },
+      "revId": "bdf49461258495241b6c8c5e9cc41273b402c7ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74748f60_f35d3901",
+        "filename": "arch/arm64/include/asm/io.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-08T20:46:14Z",
+      "side": 1,
+      "message": "Hi Greg KH, \n\nI will add other tracepoint for val, which comes after read operation success. If you like the initial patch set and adding tracepoint for val,  i can that also. \n\n-Thanks, Prasad",
+      "parentUuid": "35bf2d0f_f24de956",
       "range": {
         "startLine": 28,
         "startChar": 0,
