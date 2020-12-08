@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00fdb214_9eec3f9a",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2020-12-08T07:04:00Z",
+      "side": 1,
+      "message": "Can dmabuf be mapped more than once? Say once in DMA_TO_DEVICE direction and then again in DMA_FROM_DEVICE direction? If yes, then a-\u003emapped should be a counter similar to vmap_cnt. If that\u0027s not allowed then should we check a-\u003emapped and exit early with an error if such attempt is made?",
+      "revId": "3b1c0a65cb08ce40a98835ae23c058ef68d423d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
