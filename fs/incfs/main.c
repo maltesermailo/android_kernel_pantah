@@ -30,8 +30,17 @@ static ssize_t corefs_show(struct kobject *kobj,
 
 static struct kobj_attribute corefs_attr = __ATTR_RO(corefs);
 
+static ssize_t credential_fix_show(struct kobject *kobj,
+			  struct kobj_attribute *attr, char *buff)
+{
+	return snprintf(buff, PAGE_SIZE, "supported\n");
+}
+
+static struct kobj_attribute credential_fix_attr = __ATTR_RO(credential_fix);
+
 static struct attribute *attributes[] = {
 	&corefs_attr.attr,
+	&credential_fix_attr.attr,
 	NULL,
 };
 
