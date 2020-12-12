@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10942952_b1d49a0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-12T04:24:04Z",
+      "side": 1,
+      "message": "Hi Greg KH,\nI just looked into upstream comments again from - \nhttps://lore.kernel.org/lkml/a9de1928-d709-896f-ffa6-febc5d6d34c6@gmail.com/\n\n--------------------------------------------------------------------------\n\u003eThere is not anything arm64 specific here other than where you have\n\u003ehooked into the low-level I/O accessors, you could consider adding this\n\u003eas a generic facility to other architectures as well.\n\n\u003eAlso, have you looked at making mmiotrace less x86 specific and more\ngeneric?\n\u003e-- \n\u003eFlorian\n--------------------------------------------------------------------------\n\nBased on Florian comments, he was asking me to check mmiotrace. So I checked \n\"Documentation/trace/mmiotrace.rst\" and there are couple of interesting points, which wont suite to Qualcomm requirements.\n\n\n1)  on SMP system, mmiotrace is unreliable and event may get lost. Qualcomm does not want to use if events are getting lost.   \n 23 Preparation\n 24 -----------\n 25\n 26 Mmiotrace feature is compiled in by the CONFIG_MMIOTRACE option. Tracing is\n 27 disabled by default, so it is safe to have this set to yes. SMP systems are\n 28 supported, but tracing is unreliable and may miss events if more than one CPU\n 29 is on-line,\n\n\n\n2) It looks mmiotrace is relying on the page table entries. I think, this has really complicated the design by changing page table entries. \n\n126 MMIO accesses are recorded via page faults. Just before __ioremap() returns,\n127 the mapped pages are marked as not present. Any access to the pages causes a\n128 fault. The page fault handler calls mmiotrace to handle the fault. Mmiotrace\n129 marks the page present, sets TF flag to achieve single stepping and exits the\n130 fault handler. The instruction that faulted is executed and debug trap is\n131 entered. Here mmiotrace again marks the page as not present. The instruction\n132 is decoded to get the type of operation (read/write), data width and the value\n133 read or written. These are stored to the trace log.\n134\n135 Setting the page present in the page fault handler has a race condition on SMP\n136 machines. During the single stepping other CPUs may run freely on that page\n137 and events can be missed without a notice. Re-enabling other CPUs during\n138 tracing is discouraged.\n139\n\n\nBased on my understanding, we are looking for simple solution to trace the register reads and write operations.\n\n\nComing back to you suggestion of adding tracing for reading Val or writing Val - I checked internally about this and we just need the register address location only.",
+      "parentUuid": "b740a7b2_4949c042",
+      "revId": "bdf49461258495241b6c8c5e9cc41273b402c7ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d16a38a0_5f4be852",
         "filename": "arch/arm64/include/asm/io.h",
         "patchSetId": 1
@@ -192,6 +210,30 @@
       "side": 1,
       "message": "Hi Greg KH, \n\nI will add other tracepoint for val, which comes after read operation success. If you like the initial patch set and adding tracepoint for val,  i can that also. \n\n-Thanks, Prasad",
       "parentUuid": "35bf2d0f_f24de956",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 20
+      },
+      "revId": "bdf49461258495241b6c8c5e9cc41273b402c7ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04296f1d_a5a2bec0",
+        "filename": "arch/arm64/include/asm/io.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-12T04:24:04Z",
+      "side": 1,
+      "message": "#define __raw_writew __raw_writew\nstatic inline void __raw_writew(u16 val, volatile void __iomem *addr)\n{\n\tlog_write_io_u16(val,addr);\n\tasm volatile(\"strh %w0, [%1]\" : : \"rZ\" (val), \"r\" (addr));\n}\n\n#define __raw_writel __raw_writel\nstatic __always_inline void __raw_writel(u32 val, volatile void __iomem *addr)\n{\n\n\tlog_write_io_u32(val,addr);\n\tasm volatile(\"str %w0, [%1]\" : : \"rZ\" (val), \"r\" (addr));\n}\n\nI have to add 4 variants of tracepoints instead of single trace points(log_write_io). \nlog_write_io_u8(val,addr);\nlog_write_io_u16(val,addr);\nlog_write_io_u32(val,addr);\nlog_write_io_u64(val,addr);\n\nPlease let me know if you want me add like above or not. \n\nComing back to read tracpoint:-\nCurrently this patch having log_read_io(addr) only and have to add 4 more post_read tracepoints.\nlog_post_read_u8(val)\nlog_post_read_u16(val)\nlog_post_read_u32(val)\nlog_post_read_u64(val)\n\nIs this what you are looking for? Please suggest me If I need to follow different method.",
+      "parentUuid": "74748f60_f35d3901",
       "range": {
         "startLine": 28,
         "startChar": 0,
