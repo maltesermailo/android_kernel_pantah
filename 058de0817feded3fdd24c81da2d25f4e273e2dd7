@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7aa9bef6_05d68459",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-12-14T21:07:07Z",
+      "side": 1,
+      "message": "Why can\u0027t \u0027measurement\u0027 just be a field in the incfs inode?",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 2
+      },
+      "revId": "058de0817feded3fdd24c81da2d25f4e273e2dd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9081fb93_a8fab694",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-12-14T21:07:07Z",
+      "side": 1,
+      "message": "All this does is set S_VERITY.  It seems this should just be inlined into the caller.",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 1
+      },
+      "revId": "058de0817feded3fdd24c81da2d25f4e273e2dd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25b14321_80ba14c9",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-12-14T21:07:07Z",
+      "side": 1,
+      "message": "No need to do this unless incfs is storing the fsverity_descriptor on-disk.",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 20
+      },
+      "revId": "058de0817feded3fdd24c81da2d25f4e273e2dd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0075d918_f56e5b62",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-12-14T21:07:07Z",
+      "side": 1,
+      "message": "This code isn\u0027t needed when the fsverity_descriptor isn\u0027t stored on-disk.",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 2
+      },
+      "revId": "058de0817feded3fdd24c81da2d25f4e273e2dd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9713ccac_c7fcd378",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-12-14T21:07:07Z",
+      "side": 1,
+      "message": "Using -\u003ei_verity_info is error-prone because a different struct is supposed to be stored in it.   A field in the incfs-specific portion of the inode should be used instead, to avoid two incompatible uses of the same field.",
+      "range": {
+        "startLine": 193,
+        "startChar": 22,
+        "endLine": 193,
+        "endChar": 42
+      },
+      "revId": "058de0817feded3fdd24c81da2d25f4e273e2dd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f781d327_bef4484d",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-12-14T21:07:07Z",
+      "side": 1,
+      "message": "There\u0027s no need to copy the signature into the fsverity_descriptor, as incfs doesn\u0027t use fsverity_descriptor as an on-disk format.",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 228,
+        "endChar": 45
+      },
+      "revId": "058de0817feded3fdd24c81da2d25f4e273e2dd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61497208_05e2f04d",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-12-14T21:07:07Z",
+      "side": 1,
+      "message": "This doesn\u0027t make sense, as there is no \"verity in progress\" flag anymore.\n\nIt looks like this was copied from fs/verity/ but not updated to take into account the way that incfs does things.\n\nIt seems that this ioctl doesn\u0027t build the Merkle tree on incfs.  So we don\u0027t have to worry about holding the inode lock for too long, so we should just hold it the whole time.",
+      "range": {
+        "startLine": 232,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 0
+      },
+      "revId": "058de0817feded3fdd24c81da2d25f4e273e2dd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dc054c1_8835b223",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-12-14T21:07:07Z",
+      "side": 1,
+      "message": "Likewise, this seems to have been copy-and-pasted from fs/verity/, but it doesn\u0027t make sense in the new context.",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 258,
+        "endChar": 21
+      },
+      "revId": "058de0817feded3fdd24c81da2d25f4e273e2dd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "909365a4_f81daa12",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-12-14T21:07:07Z",
+      "side": 1,
+      "message": "Is this still true?  When I see a copy+pasted comment I am not sure whether it is still relevant or not -- it seems that most of them aren\u0027t, so currently my default assumption is that it\u0027s not.  It would be really helpful if everything was up-to-date.",
+      "range": {
+        "startLine": 268,
+        "startChar": 0,
+        "endLine": 272,
+        "endChar": 5
+      },
+      "revId": "058de0817feded3fdd24c81da2d25f4e273e2dd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "993fc285_7a7c9eb4",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2020-12-14T21:07:07Z",
+      "side": 1,
+      "message": "Functions should be prefixed with \"incfs_\", especially when they are global.",
+      "range": {
+        "startLine": 280,
+        "startChar": 4,
+        "endLine": 280,
+        "endChar": 23
+      },
+      "revId": "058de0817feded3fdd24c81da2d25f4e273e2dd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
