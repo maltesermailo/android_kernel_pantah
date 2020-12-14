@@ -84,6 +84,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bb5db53f_a94b8a4d",
+        "filename": "mm/dynamic_page_pool.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2020-12-14T16:59:55Z",
+      "side": 1,
+      "message": "This should be pool_highdeferred right?",
+      "range": {
+        "startLine": 311,
+        "startChar": 46,
+        "endLine": 311,
+        "endChar": 54
+      },
+      "revId": "9060eb02fe2aaf5eb4ecae52c55b4bff2a9221ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b959021e_f287170b",
         "filename": "mm/dynamic_page_pool.c",
         "patchSetId": 1
@@ -119,6 +142,30 @@
       "side": 1,
       "message": "So yes. The first pool in the list will be first to be reduced every time, so it is unfair. \n\nI worry that a shrinker for each pool won\u0027t help much, as my understanding is the shrinker interface itself is not ideal for fairness either (it just wants to quickly free memory).\n\nWe could remove pools from the front and move them to the rear of the list as we iterate through them, so its a little more round-robin, but I also worry it might be over-optimizing before we see trouble.\n\nBut maybe worth a comment in the code, so folks see it has been considered?",
       "parentUuid": "b959021e_f287170b",
+      "range": {
+        "startLine": 345,
+        "startChar": 14,
+        "endLine": 345,
+        "endChar": 42
+      },
+      "revId": "9060eb02fe2aaf5eb4ecae52c55b4bff2a9221ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8980cf7_d048356d",
+        "filename": "mm/dynamic_page_pool.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2020-12-14T16:59:55Z",
+      "side": 1,
+      "message": "Ok, maybe we can split this into two parts though so that the deferred free pages of all pools are freed first and then it starts removing the clean pages?",
+      "parentUuid": "94bb66dc_70a335e6",
       "range": {
         "startLine": 345,
         "startChar": 14,
