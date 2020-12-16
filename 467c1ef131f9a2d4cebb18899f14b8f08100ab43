@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a85201ed_e06892ac",
+        "filename": "Documentation/admin-guide/kernel-parameters.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-16T14:28:31Z",
+      "side": 1,
+      "message": "Pointer authentication is always enabled through Kconfg. Qualcomm would like to disable pointer authentication per chipsets based on the command line parameter. \n\nGKI image is common image and there can be different SoCs, where this feature is not supported from HW. So we would like to control this feature through commandline argument. \n\nTrue - pointer authentication disable.\nFalse - Pointer authentication enable. \n\nShall I add possible options to avoid confusions?",
+      "parentUuid": "eee08007_3848e567",
+      "range": {
+        "startLine": 376,
+        "startChar": 0,
+        "endLine": 376,
+        "endChar": 24
+      },
+      "revId": "467c1ef131f9a2d4cebb18899f14b8f08100ab43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ac4231ca_4adc9616",
         "filename": "arch/arm64/kernel/cpufeature.c",
         "patchSetId": 1
@@ -54,6 +78,30 @@
       "writtenOn": "2020-12-15T13:36:04Z",
       "side": 1,
       "message": "so you default to disabled?  Or enabled?  \"false\" means enabled?  See what I mean about negative options?  😊",
+      "range": {
+        "startLine": 169,
+        "startChar": 5,
+        "endLine": 169,
+        "endChar": 28
+      },
+      "revId": "467c1ef131f9a2d4cebb18899f14b8f08100ab43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c63331c8_9835b078",
+        "filename": "arch/arm64/kernel/cpufeature.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-16T14:28:31Z",
+      "side": 1,
+      "message": "Sorry Greg for creating confusion.\n\n\n1537 config ARM64_PTR_AUTH\n1538         bool \"Enable support for pointer authentication\"\n1539         default y\n\nAll ARM chipset features are default Y. Qualcomm would like to control this feature through commandline.\n\narm64_ptr_auth_disabled\u003d1   --\u003e Pointer authentication gets disabled.\narm64_ptr_auth_disabled\u003d0    --\u003e Pointer authentication enabled. If customer don\u0027t not specific any thing in the command line, pointer authentication is enabled.",
+      "parentUuid": "ac4231ca_4adc9616",
       "range": {
         "startLine": 169,
         "startChar": 5,
