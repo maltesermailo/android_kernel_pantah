@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "edf1e25b_4c120e8e",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-12-16T19:36:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aa9bef6_05d68459",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 2
+      },
+      "revId": "058de0817feded3fdd24c81da2d25f4e273e2dd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9081fb93_a8fab694",
@@ -37,6 +61,30 @@
       "writtenOn": "2020-12-14T21:07:07Z",
       "side": 1,
       "message": "All this does is set S_VERITY.  It seems this should just be inlined into the caller.",
+      "range": {
+        "startLine": 94,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 1
+      },
+      "revId": "058de0817feded3fdd24c81da2d25f4e273e2dd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f2989c3_3041edb9",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-12-16T19:36:59Z",
+      "side": 1,
+      "message": "This does more once we have to write out the signature to the backing file, so I\u0027d like to leave as is",
+      "parentUuid": "9081fb93_a8fab694",
       "range": {
         "startLine": 94,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0fbb799_f5850fa8",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-12-16T19:36:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25b14321_80ba14c9",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 20
+      },
+      "revId": "058de0817feded3fdd24c81da2d25f4e273e2dd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0075d918_f56e5b62",
@@ -83,6 +155,30 @@
       "writtenOn": "2020-12-14T21:07:07Z",
       "side": 1,
       "message": "This code isn\u0027t needed when the fsverity_descriptor isn\u0027t stored on-disk.",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 2
+      },
+      "revId": "058de0817feded3fdd24c81da2d25f4e273e2dd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "516fb539_ec0178b5",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-12-16T19:36:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0075d918_f56e5b62",
       "range": {
         "startLine": 131,
         "startChar": 0,
@@ -116,6 +212,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba9906ab_de06c52a",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-12-16T19:36:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9713ccac_c7fcd378",
+      "range": {
+        "startLine": 193,
+        "startChar": 22,
+        "endLine": 193,
+        "endChar": 42
+      },
+      "revId": "058de0817feded3fdd24c81da2d25f4e273e2dd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f781d327_bef4484d",
@@ -129,6 +249,30 @@
       "writtenOn": "2020-12-14T21:07:07Z",
       "side": 1,
       "message": "There\u0027s no need to copy the signature into the fsverity_descriptor, as incfs doesn\u0027t use fsverity_descriptor as an on-disk format.",
+      "range": {
+        "startLine": 220,
+        "startChar": 0,
+        "endLine": 228,
+        "endChar": 45
+      },
+      "revId": "058de0817feded3fdd24c81da2d25f4e273e2dd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e0065a4_7736ba70",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-12-16T19:36:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f781d327_bef4484d",
       "range": {
         "startLine": 220,
         "startChar": 0,
@@ -162,6 +306,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d23bad03_163621e7",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-12-16T19:36:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61497208_05e2f04d",
+      "range": {
+        "startLine": 232,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 0
+      },
+      "revId": "058de0817feded3fdd24c81da2d25f4e273e2dd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9dc054c1_8835b223",
@@ -175,6 +343,30 @@
       "writtenOn": "2020-12-14T21:07:07Z",
       "side": 1,
       "message": "Likewise, this seems to have been copy-and-pasted from fs/verity/, but it doesn\u0027t make sense in the new context.",
+      "range": {
+        "startLine": 251,
+        "startChar": 0,
+        "endLine": 258,
+        "endChar": 21
+      },
+      "revId": "058de0817feded3fdd24c81da2d25f4e273e2dd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4a4a04e_c9f05345",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-12-16T19:36:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9dc054c1_8835b223",
       "range": {
         "startLine": 251,
         "startChar": 0,
@@ -208,6 +400,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a35c3b1_1f1c3cf8",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-12-16T19:36:59Z",
+      "side": 1,
+      "message": "Comment removed",
+      "parentUuid": "909365a4_f81daa12",
+      "range": {
+        "startLine": 268,
+        "startChar": 0,
+        "endLine": 272,
+        "endChar": 5
+      },
+      "revId": "058de0817feded3fdd24c81da2d25f4e273e2dd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "993fc285_7a7c9eb4",
@@ -221,6 +437,30 @@
       "writtenOn": "2020-12-14T21:07:07Z",
       "side": 1,
       "message": "Functions should be prefixed with \"incfs_\", especially when they are global.",
+      "range": {
+        "startLine": 280,
+        "startChar": 4,
+        "endLine": 280,
+        "endChar": 23
+      },
+      "revId": "058de0817feded3fdd24c81da2d25f4e273e2dd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d54b7312_b514fcf8",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-12-16T19:36:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "993fc285_7a7c9eb4",
       "range": {
         "startLine": 280,
         "startChar": 4,
