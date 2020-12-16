@@ -125,6 +125,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c0c879e8_0b3c40fd",
+        "filename": "arch/arm64/include/asm/stackprotector.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2020-12-16T20:04:01Z",
+      "side": 1,
+      "message": "I hadn\u0027t considered treating this like the stack canary and, to be honest, I think that in itself might be a sensible cleanup unless people really care about authentication prior to start_kernel().\n\nPlease can you split this up into a few patches:\n\n1. Deferring ptr auth init on boot CPU\n2. Adding filter hook to cpufeature\n3. Adding the cmdline option\n\nand post upstream for review? We\u0027re going to need similar toggles for BTI and MTE and so I think this should be discussed on the mailing list. Thanks.",
+      "range": {
+        "startLine": 44,
+        "startChar": 1,
+        "endLine": 44,
+        "endChar": 18
+      },
+      "revId": "467c1ef131f9a2d4cebb18899f14b8f08100ab43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ac4231ca_4adc9616",
         "filename": "arch/arm64/kernel/cpufeature.c",
         "patchSetId": 1
