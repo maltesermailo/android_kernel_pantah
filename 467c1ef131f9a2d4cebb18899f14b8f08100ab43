@@ -35,6 +35,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c254d281_fd09467b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-16T16:48:01Z",
+      "side": 1,
+      "message": "[ARM64] Disable Linux support for address\n\t\t\tauthentication (both user and in-kernel)",
+      "revId": "467c1ef131f9a2d4cebb18899f14b8f08100ab43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eee08007_3848e567",
@@ -72,6 +89,30 @@
       "side": 1,
       "message": "Pointer authentication is always enabled through Kconfg. Qualcomm would like to disable pointer authentication per chipsets based on the command line parameter. \n\nGKI image is common image and there can be different SoCs, where this feature is not supported from HW. So we would like to control this feature through commandline argument. \n\nTrue - pointer authentication disable.\nFalse - Pointer authentication enable. \n\nShall I add possible options to avoid confusions?",
       "parentUuid": "eee08007_3848e567",
+      "range": {
+        "startLine": 376,
+        "startChar": 0,
+        "endLine": 376,
+        "endChar": 24
+      },
+      "revId": "467c1ef131f9a2d4cebb18899f14b8f08100ab43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a72a1b4_bb88e38c",
+        "filename": "Documentation/admin-guide/kernel-parameters.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-16T16:48:01Z",
+      "side": 1,
+      "message": "arm64.ptr_auth_disable\u003d\n                         [ARM64] Disable Linux support for address\n\t\t\tauthentication (both user and in-kernel)\n                       0 - Pointer authentication is enabled[Default]\n                       1 - Pointer authentication is force disabled",
+      "parentUuid": "a85201ed_e06892ac",
       "range": {
         "startLine": 376,
         "startChar": 0,
