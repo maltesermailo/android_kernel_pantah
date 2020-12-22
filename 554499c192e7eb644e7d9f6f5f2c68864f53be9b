@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f851769_3496cc04",
+        "filename": "drivers/base/arch_topology.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-22T19:55:09Z",
+      "side": 1,
+      "message": "wrong type of export, and again, this is not for a scheduler.",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 13
+      },
+      "revId": "554499c192e7eb644e7d9f6f5f2c68864f53be9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2def604_658c7d2b",
+        "filename": "drivers/base/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3608,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2020-12-22T19:55:09Z",
+      "side": 1,
+      "message": "this is NOT a scheduler issue, and you are exporting it incorrectly, even if it were to be exported.\n\nIt\u0027s also racy and almost always wrong to call, do NOT use this on any out-of-tree code please.",
+      "range": {
+        "startLine": 3608,
+        "startChar": 0,
+        "endLine": 3608,
+        "endChar": 29
+      },
+      "revId": "554499c192e7eb644e7d9f6f5f2c68864f53be9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
