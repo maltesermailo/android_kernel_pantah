@@ -167,14 +167,18 @@ struct dentry *incfs_lookup_dentry(struct dentry *parent, const char *name)
 {
 	struct inode *inode;
 	struct dentry *result = NULL;
+	bool locked;
 
 	if (!parent)
 		return ERR_PTR(-EFAULT);
 
 	inode = d_inode(parent);
-	inode_lock_nested(inode, I_MUTEX_PARENT);
+	locked = inode_is_locked(inode);
+	if (!locked)
+		inode_lock_nested(inode, I_MUTEX_PARENT);
 	result = lookup_one_len(name, parent, strlen(name));
-	inode_unlock(inode);
+	if (!locked)
+		inode_unlock(inode);
 
 	if (IS_ERR(result))
 		pr_warn("%s err:%ld\n", __func__, PTR_ERR(result));
