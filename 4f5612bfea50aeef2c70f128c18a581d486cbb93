@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "49d6332f_f74064f6",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-12-22T16:30:13Z",
+      "side": 1,
+      "message": "*If* you are happy with me exposing build_merkle_tree and struct merkle_tree_params then yes, by implementing the vops read_merkle_tree_page and write_merkle_tree_block (not hard) it seems that I should be able to just call build_merkle_tree. However, having chosen a very light binding between verity and incfs for the moment, this didn\u0027t seem like the best way?",
+      "parentUuid": "ee5043f0_c3763fb0",
+      "revId": "4f5612bfea50aeef2c70f128c18a581d486cbb93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8f373487_c144cb58",
         "filename": "fs/incfs/verity.c",
         "patchSetId": 4
@@ -72,6 +90,30 @@
       "side": 1,
       "message": "well, the function\u0027s named as if it was signing something, but it\u0027s just for writing down the signature section of the backing file and building its full Merkle tree. IMO better to rename it",
       "parentUuid": "8f373487_c144cb58",
+      "range": {
+        "startLine": 221,
+        "startChar": 11,
+        "endLine": 221,
+        "endChar": 20
+      },
+      "revId": "4f5612bfea50aeef2c70f128c18a581d486cbb93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da73ee55_0d44383e",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2020-12-22T16:30:13Z",
+      "side": 1,
+      "message": "Renamed to add_signature_record",
+      "parentUuid": "c1aa0100_b82e3ccd",
       "range": {
         "startLine": 221,
         "startChar": 11,
