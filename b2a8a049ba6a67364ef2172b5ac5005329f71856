@@ -16,6 +16,24 @@
       "message": "Why are any of these needed for the android-mainline branch which tracks upstream?\n\nIf you need these symbols exported, please get your user of this submitted upstream and then they will be automatically exported and backported to this branch.",
       "revId": "b2a8a049ba6a67364ef2172b5ac5005329f71856",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a66de889_6ee776b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1067053
+      },
+      "writtenOn": "2020-12-22T16:41:18Z",
+      "side": 1,
+      "message": "There are really good questions. All vendor module do not have upstream path, so upstream does not agree for patches. \n\nThere was documentation on the exporting symbols from Google- \n\n\nExporting symbols via EXPORT_SYMBOL_GPL()\nDo not send patches upstream that contain only symbol exports. To be considered for\nupstream Linux, additions of EXPORT_SYMBOL_GPL() require an in-tree modular driver that uses\nthe symbol, so include the new driver or changes to an existing driver in the same patchset as\nthe export.",
+      "parentUuid": "b2fc32f3_e8a73bbf",
+      "revId": "b2a8a049ba6a67364ef2172b5ac5005329f71856",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
