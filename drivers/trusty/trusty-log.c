@@ -28,6 +28,14 @@
 static struct ratelimit_state trusty_log_rate_limit =
 	RATELIMIT_STATE_INIT("trusty_log", 1 * HZ, 100);
 
+/* list of application names */
+struct log_trusty_app {
+    struct list_head node;
+    int32_t app_id;
+    char *name;
+};
+LIST_HEAD(app_names_list);
+
 struct trusty_log_state {
 	struct device *dev;
 	struct device *trusty_dev;
@@ -49,27 +57,103 @@ struct trusty_log_state {
 	char line_buffer[TRUSTY_LINE_BUFFER_SIZE];
 };
 
-static int log_read_line(struct trusty_log_state *s, int put, int get)
+static int log_alloc_app_name(struct trusty_log_state *s,
+                              char *name, int32_t app_id, struct list_head *list) {
+    int ret = -ENOMEM;
+    struct log_trusty_app *log_tapp;
+    struct log_trusty_app *obj, *next_obj;
+
+    if (!name) {
+        ret = -EINVAL;
+        goto err_alloc_log;
+    }
+
+    list_for_each_entry_safe(obj, next_obj, &app_names_list, node) {
+        if (strcmp(obj->name, name) == 0) {
+            goto already_name_exist;
+        }
+    }
+
+    log_tapp = kzalloc(sizeof(*log_tapp), GFP_KERNEL);
+    if (!log_tapp)
+        goto err_alloc_log;
+
+    log_tapp->name = kzalloc((strlen(name) + 1), GFP_KERNEL);
+    if (!log_tapp->name)
+        goto err_alloc_name;
+
+    strcpy(log_tapp->name, name);
+    log_tapp->app_id = app_id;
+
+    list_add_tail(&log_tapp->node, list);
+already_name_exist:
+    return 0;
+err_alloc_name:
+    kfree(log_tapp);
+err_alloc_log:
+    return ret;
+}
+
+static void log_free_app_name(struct log_trusty_app *log_tapp) {
+    list_del(&log_tapp->node);
+    kfree(log_tapp->name);
+    kfree(log_tapp);
+}
+
+static int log_read_line(struct trusty_log_state *s, u32 put, u32 get)
 {
-	struct log_rb *log = s->log;
-	int i;
-	char c = '\0';
-	size_t max_to_read =
-		min_t(size_t, put - get, sizeof(s->line_buffer) - 1);
-	size_t mask = log->sz - 1;
+    int i, j;
+    char c = '\0';
+    uint32_t offset, len, entry_size;
+    uint32_t size_rb = s->log->sz;
+    uint32_t app_name_len;
 
-	for (i = 0; i < max_to_read && c != '\n';)
-		s->line_buffer[i++] = c = log->data[get++ & mask];
-	s->line_buffer[i] = '\0';
+    i = 0;
+    while (i < sizeof(s->line_buffer) - 1 &&
+           get < put) {
+        offset = get & (size_rb - 1);
+        /* get app-name size */
+        app_name_len = (uint32_t)s->log->data[offset];
+        offset = offset + sizeof(uint32_t) + app_name_len;
 
-	return i;
+        /* get log string size */
+        len = (uint32_t)s->log->data[offset];
+        offset = offset + sizeof(uint32_t);
+
+        for (j = 0; j < len; j++) {
+            s->line_buffer[i++] = c = s->log->data[offset + j];
+            if ( c == '\n' || i >= sizeof(s->line_buffer) - 1)
+                break;
+        }
+        offset += len + sizeof(struct log_metadata);
+        entry_size = (uint32_t)s->log->data[offset];
+
+        /* each entry consist of
+         * {
+         *   app_name_size + app_name +
+         *   log_string_size + log_string +
+         *   metadata + size_of_this_entry
+         * }
+         * */
+        get += entry_size;
+
+        if (c == '\n')
+            break;
+    }
+    s->line_buffer[i] = '\0';
+
+    return get;
 }
 
 static void trusty_dump_logs(struct trusty_log_state *s)
 {
 	struct log_rb *log = s->log;
-	u32 get, put, alloc;
-	int read_chars;
+	u32 get, put, alloc, entry;
+        uint32_t offset, len, app_name_len;
+        uint32_t size_rb = s->log->sz;
+        uint32_t entry_size;
+        volatile struct log_metadata *metadata;
+        volatile char *app_name;
 
 	if (WARN_ON(!is_power_of_2(log->sz)))
 		return;
@@ -86,8 +170,31 @@ static void trusty_dump_logs(struct trusty_log_state *s)
 		/* Make sure that the read of put occurs before the read of log data */
 		rmb();
 
-		/* Read a line from the log */
-		read_chars = log_read_line(s, put, get);
+                offset = get & (size_rb - 1);
+                /* get app_name_size */
+                len = (uint32_t)s->log->data[offset];
+                offset = offset + sizeof(uint32_t);
+
+                /* get app_name */
+                if (len > 0) {
+                    app_name = &s->log->data[offset];
+                } else {
+                    app_name = NULL;
+                }
+                offset = offset + len;
+                
+                /* get log string size */
+                len = (uint32_t)s->log->data[offset];
+                offset = offset + sizeof(uint32_t) + len;
+
+                /* get metadata */
+                metadata = (struct log_metadata *)&s->log->data[offset];
+                if (app_name) {
+                    log_alloc_app_name(s, (char *)app_name, metadata->app_id, &app_names_list);
+                }
+
+                /* Read a line from the log */
+		get = log_read_line(s, put, get);
 
 		/* Force the loads from log_read_line to complete. */
 		rmb();
@@ -97,16 +204,35 @@ static void trusty_dump_logs(struct trusty_log_state *s)
 		 * Discard the line that was just read if the data could
 		 * have been corrupted by the producer.
 		 */
-		if (alloc - get > log->sz) {
-			dev_err(s->dev, "log overflow.");
-			get = alloc - log->sz;
-			continue;
-		}
+                if (alloc - get > log->sz) {
+                    dev_err(s->dev, "log overflow.");
+                    entry = alloc;
+                    do {
+                        offset = entry & (size_rb - 1);
 
-		if (__ratelimit(&trusty_log_rate_limit))
-			dev_info(s->dev, "%s", s->line_buffer);
+                        /* find previous entry size from footer*/
+                        offset -= sizeof(uint32_t);
+                        entry_size = (uint32_t)s->log->data[offset];
 
-		get += read_chars;
+                        entry = entry - entry_size;
+                    } while (entry > (alloc - log->sz));
+
+                    get = entry;
+                    continue;
+                }
+
+                if (__ratelimit(&trusty_log_rate_limit)) {
+                    if (app_name) {
+                        dev_info(s->dev, "%llu: %s: %s",
+                                 metadata->timestamp,
+                                 app_name,
+                                 s->line_buffer);
+                    } else {
+                        dev_info(s->dev, "%llu: %s",
+                                 metadata->timestamp,
+                                 s->line_buffer);
+                    }
+                }
 	}
 	s->get = get;
 }
@@ -261,8 +387,13 @@ error_alloc_state:
 static int trusty_log_remove(struct platform_device *pdev)
 {
 	int result;
+        struct log_trusty_app *obj, *next_obj;
 	struct trusty_log_state *s = platform_get_drvdata(pdev);
 	trusty_shared_mem_id_t mem_id = s->log_pages_shared_mem_id;
+
+        list_for_each_entry_safe(obj, next_obj, &app_names_list, node) {
+            log_free_app_name(obj);
+        }
 
 	atomic_notifier_chain_unregister(&panic_notifier_list,
 					 &s->panic_notifier);
