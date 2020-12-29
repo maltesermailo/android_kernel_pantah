@@ -34,6 +34,24 @@
       "parentUuid": "fab3ac85_133d0575",
       "revId": "a25fd376b5ee00dafbe6b98499135fff31a55bb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd188374_aba1a8e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1466604
+      },
+      "writtenOn": "2020-12-29T07:20:34Z",
+      "side": 1,
+      "message": "The change being reverted adds a new \"lockdown\" audit class. Support for this new class needs to be added to Android and the processes which need to be part of this class have to be annotated. While support for this class has not yet been added to Android, this lockdown class will be removed.\n\nIn this case, tracefs usage by Android triggers a violation with respect to this new audit class.",
+      "parentUuid": "cb300530_bfd373d0",
+      "revId": "a25fd376b5ee00dafbe6b98499135fff31a55bb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
