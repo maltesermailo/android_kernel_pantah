@@ -138,13 +138,25 @@ static inline int is_umdir_used(char *dir)
 	char file[strlen(uml_dir) + UMID_LEN + sizeof("/pid\0")];
 	char pid[sizeof("nnnnn\0")], *end;
 	int dead, fd, p, n, err;
+<<<<<<< HEAD   (7119d7 Merge branch 'android11-5.4' into 'android11-5.4-lts')
+=======
+	size_t filelen = strlen(dir) + sizeof("/pid") + 1;
+>>>>>>> BRANCH (dfce80 Linux 5.4.86)
 
+<<<<<<< HEAD   (7119d7 Merge branch 'android11-5.4' into 'android11-5.4-lts')
 	n = snprintf(file, sizeof(file), "%s/pid", dir);
 	if (n >= sizeof(file)) {
 		printk(UM_KERN_ERR "is_umdir_used - pid filename too long\n");
 		err = -E2BIG;
 		goto out;
 	}
+=======
+	file = malloc(filelen);
+	if (!file)
+		return -ENOMEM;
+
+	snprintf(file, filelen, "%s/pid", dir);
+>>>>>>> BRANCH (dfce80 Linux 5.4.86)
 
 	dead = 0;
 	fd = open(file, O_RDONLY);

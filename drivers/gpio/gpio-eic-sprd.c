@@ -598,7 +598,11 @@ static int sprd_eic_probe(struct platform_device *pdev)
 		 */
 		res = platform_get_resource(pdev, IORESOURCE_MEM, i);
 		if (!res)
+<<<<<<< HEAD   (7119d7 Merge branch 'android11-5.4' into 'android11-5.4-lts')
 			continue;
+=======
+			break;
+>>>>>>> BRANCH (dfce80 Linux 5.4.86)
 
 		sprd_eic->base[i] = devm_ioremap_resource(&pdev->dev, res);
 		if (IS_ERR(sprd_eic->base[i]))
