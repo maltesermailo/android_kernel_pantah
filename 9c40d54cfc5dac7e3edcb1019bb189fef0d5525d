@@ -173,6 +173,24 @@
       "message": "Hi Daejun,\n\nI am testing the HPB changes on one of our stable Android R builds, but I see filesystem corruption several times (no power loss happened at all during my test). The corruption still happens even after I do a factory reset (I only enabled HPB on LU0 and it is where I mount the user data partition. I have not enable any pinned regions, I only have wLUMaxActiveHPBRegions as 4096 as of now).  I have tried with different UFS3.1 parts from different flash vendors, but I see filesystem corruption regardless of the UFS parts. Is there anything special that I need to pay attention to? Like provision or something?\n\nI am using version #12. I will back port version #18 and give it try again.\n\nThanks,\nCan Guo.",
       "revId": "9c40d54cfc5dac7e3edcb1019bb189fef0d5525d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "784054a2_8424c3da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1650314
+      },
+      "writtenOn": "2021-01-05T06:30:50Z",
+      "side": 1,
+      "message": "Hi Daejun,\n\nI just checked with our design team, it might be because our controller has crypto checks against non-standard SCSI READ/WRITE commands, which is why HPB READ command did not fly well on my setup. I will try disabling crypto and verify the changes (and profile some DoU scenarios), so please give me more time on it.\n\nThanks,\nCan Guo.",
+      "parentUuid": "4e5f05ad_efb21455",
+      "revId": "9c40d54cfc5dac7e3edcb1019bb189fef0d5525d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
