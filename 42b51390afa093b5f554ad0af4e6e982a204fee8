@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33ce27c3_8888e966",
+        "filename": "fs/incfs/data_mgmt.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-01-05T23:11:13Z",
+      "side": 1,
+      "message": "This mutex seems to be misnamed because it\u0027s not held while actually enabling verity, but rather when building the Merkle tree, which for incfs is separate (a file on incfs can have a Merkle tree but not fs-verity enabled).",
+      "range": {
+        "startLine": 278,
+        "startChar": 0,
+        "endLine": 283,
+        "endChar": 0
+      },
+      "revId": "42b51390afa093b5f554ad0af4e6e982a204fee8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06cd4f9d_2db771a2",
+        "filename": "fs/incfs/format.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-01-05T23:11:13Z",
+      "side": 1,
+      "message": "This sounds error-prone; have you written tests that exercise this case?",
+      "range": {
+        "startLine": 235,
+        "startChar": 1,
+        "endLine": 241,
+        "endChar": 11
+      },
+      "revId": "42b51390afa093b5f554ad0af4e6e982a204fee8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da4f567d_a0ed9f9d",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-01-05T23:11:13Z",
+      "side": 1,
+      "message": "This doesn\u0027t make sense because the signature isn\u0027t actually passed to this function.  So it can\u0027t possible be adding the signature, as the comment says.  What is it actually doing?",
+      "range": {
+        "startLine": 368,
+        "startChar": 0,
+        "endLine": 369,
+        "endChar": 47
+      },
+      "revId": "42b51390afa093b5f554ad0af4e6e982a204fee8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
