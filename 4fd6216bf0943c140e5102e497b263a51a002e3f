@@ -16,6 +16,24 @@
       "message": "This one has a mis-merge in fs/crypto/ too.  For android12-5.4 (but not android11-5.4-lts), the easiest thing to do would be revert the five patches:\n\n            ext4: prevent creating duplicate encrypted filenames\n            ubifs: prevent creating duplicate encrypted filenames\n            f2fs: prevent creating duplicate encrypted filenames\n            fscrypt: add fscrypt_is_nokey_name()\n            fscrypt: remove kernel-internal constants from UAPI header\n\n... since Jaegeuk is just about to merge them correctly via f2fs-stable: https://android-review.googlesource.com/c/kernel/common/+/1540347",
       "revId": "4fd6216bf0943c140e5102e497b263a51a002e3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00b863b2_d6f7d23d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-06T17:25:41Z",
+      "side": 1,
+      "message": "I can\u0027t revert before a merge point, only after, so I don\u0027t know how that can happen here.  We can fix up in the merge point, or afterward, any hints?",
+      "parentUuid": "d1f82b33_ad6ebfad",
+      "revId": "4fd6216bf0943c140e5102e497b263a51a002e3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
