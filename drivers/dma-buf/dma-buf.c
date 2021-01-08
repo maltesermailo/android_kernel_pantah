@@ -127,9 +127,33 @@ static struct file_system_type dma_buf_fs_type = {
 	.kill_sb = kill_anon_super,
 };
 
+#ifdef CONFIG_DMABUF_SYSFS_STATS
+static void dma_buf_vma_open(struct vm_area_struct *vma)
+{
+	struct dma_buf *dmabuf = vma->vm_file->private_data;
+
+	dmabuf->mmap_count++;
+	/* call the heap provided vma open() op */
+	if (dmabuf->heap_vm_ops->open)
+		dmabuf->heap_vm_ops->open(vma);
+}
+
+static void dma_buf_vma_close(struct vm_area_struct *vma)
+{
+	struct dma_buf *dmabuf = vma->vm_file->private_data;
+
+	if (dmabuf->mmap_count)
+		dmabuf->mmap_count--;
+	/* call the heap provided vma close() op */
+	if (dmabuf->heap_vm_ops->close)
+		dmabuf->heap_vm_ops->close(vma);
+}
+#endif
+
 static int dma_buf_mmap_internal(struct file *file, struct vm_area_struct *vma)
 {
 	struct dma_buf *dmabuf;
+	int ret;
 
 	if (!is_dma_buf_file(file))
 		return -EINVAL;
@@ -145,7 +169,20 @@ static int dma_buf_mmap_internal(struct file *file, struct vm_area_struct *vma)
 	    dmabuf->size >> PAGE_SHIFT)
 		return -EINVAL;
 
-	return dmabuf->ops->mmap(dmabuf, vma);
+	ret = dmabuf->ops->mmap(dmabuf, vma);
+
+#ifdef CONFIG_DMABUF_SYSFS_STATS
+	dmabuf->heap_vm_ops = vma->vm_ops;
+	/* copy the heap provided vma ops */
+	dmabuf->vm_ops = *(dmabuf->heap_vm_ops);
+	/* override open() and close() to provide buffer mmap count */
+	dmabuf->vm_ops.open = dma_buf_vma_open;
+	dmabuf->vm_ops.close = dma_buf_vma_close;
+	vma->vm_ops = &dmabuf->vm_ops;
+	dma_buf_vma_open(vma);
+#endif
+
+	return ret;
 }
 
 static loff_t dma_buf_llseek(struct file *file, loff_t offset, int whence)
