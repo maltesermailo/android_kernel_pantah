@@ -91,7 +91,25 @@ struct kmem_cache *kmalloc_slab(size_t, gfp_t);
 
 gfp_t kmalloc_fix_flags(gfp_t flags);
 
+/*
+ * Tracking user of a slab.
+ */
+#define TRACK_ADDRS_COUNT 16
+struct track {
+	unsigned long addr;	/* Called from address */
+#ifdef CONFIG_STACKTRACE
+	unsigned long addrs[TRACK_ADDRS_COUNT];	/* Called from address */
+#endif
+	int cpu;		/* Was running on cpu */
+	int pid;		/* Pid context */
+	unsigned long when;	/* When did the operation occur */
+};
+
+enum track_item { TRACK_ALLOC, TRACK_FREE };
+
 /* Functions provided by the slab allocators */
+struct track *get_track(struct kmem_cache *s, void *object,
+		num track_item alloc);
 int __kmem_cache_create(struct kmem_cache *, slab_flags_t flags);
 
 struct kmem_cache *create_kmalloc_cache(const char *name, unsigned int size,
