@@ -22,6 +22,30 @@
       },
       "revId": "6cd89b1b471923e5e56dc4fa9f38a15c56615d5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8adc6095_0d0fdae1",
+        "filename": "drivers/iommu/dma-iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1584799
+      },
+      "writtenOn": "2021-01-11T15:23:51Z",
+      "side": 1,
+      "message": "I\u0027m not sure if I follow here. Do you mean that the CPU will have an uncached alias which will write to main memory, while the device mappings will have the memory mapped such that data gets cached in the system cache, and there\u0027s a mismatch there?",
+      "parentUuid": "99da8777_02ebf52f",
+      "range": {
+        "startLine": 439,
+        "startChar": 6,
+        "endLine": 439,
+        "endChar": 23
+      },
+      "revId": "6cd89b1b471923e5e56dc4fa9f38a15c56615d5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
