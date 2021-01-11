@@ -46,6 +46,30 @@
       },
       "revId": "6cd89b1b471923e5e56dc4fa9f38a15c56615d5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72abd96e_8521a8de",
+        "filename": "drivers/iommu/dma-iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-01-11T19:18:12Z",
+      "side": 1,
+      "message": "Yes, the outer-cacheability attributes would differ because pgprot_dmacoherent() uses non-cacheable outer-cacheability attributes (0x44) on the CPU.",
+      "parentUuid": "8adc6095_0d0fdae1",
+      "range": {
+        "startLine": 439,
+        "startChar": 6,
+        "endLine": 439,
+        "endChar": 23
+      },
+      "revId": "6cd89b1b471923e5e56dc4fa9f38a15c56615d5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
