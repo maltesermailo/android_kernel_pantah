@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99da8777_02ebf52f",
+        "filename": "drivers/iommu/dma-iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-01-11T14:58:10Z",
+      "side": 1,
+      "message": "For the bidirectional case, doesn\u0027t this give rise to a mismatched alias with the CPU, which will be using normal non-cacheable mappings for both the inner and outer caches?",
+      "range": {
+        "startLine": 439,
+        "startChar": 6,
+        "endLine": 439,
+        "endChar": 23
+      },
+      "revId": "6cd89b1b471923e5e56dc4fa9f38a15c56615d5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
