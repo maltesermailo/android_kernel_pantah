@@ -70,6 +70,30 @@
       },
       "revId": "6cd89b1b471923e5e56dc4fa9f38a15c56615d5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0520c985_043d1fc1",
+        "filename": "drivers/iommu/dma-iommu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1584799
+      },
+      "writtenOn": "2021-01-11T22:43:45Z",
+      "side": 1,
+      "message": "Right. On our systems, this isn\u0027t a problem, as the CPU access would look up in the system cache anyway. However, that\u0027s not really portable. Would it be better if in the presence of this attribute we also change the CPU mapping to match?",
+      "parentUuid": "72abd96e_8521a8de",
+      "range": {
+        "startLine": 439,
+        "startChar": 6,
+        "endLine": 439,
+        "endChar": 23
+      },
+      "revId": "6cd89b1b471923e5e56dc4fa9f38a15c56615d5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
