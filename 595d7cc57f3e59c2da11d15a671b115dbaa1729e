@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2e68fc5_e5f032fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-12T03:55:17Z",
+      "side": 1,
+      "message": "Please review upstream comments about this patch in b25d1dc9474e1f0cefca994885e82beea271acfe:\n\nThe reason for the bad timing is that it turns out that commit\n17839856fd58 (\"gup: document and work around \u0027COW can break either way\u0027\nissue\" broke not just UFFD functionality (as Peter noticed), but Mikulas\nPatocka also reports that it caused issues for strace when running in a\nDAX environment with ext4 on a persistent memory setup.\n\nI did not go into much details on this but please review and ensure there are no issues with this patch.",
+      "revId": "595d7cc57f3e59c2da11d15a671b115dbaa1729e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
