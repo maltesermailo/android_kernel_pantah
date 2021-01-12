@@ -16,6 +16,24 @@
       "message": "Please review upstream comments about this patch in b25d1dc9474e1f0cefca994885e82beea271acfe:\n\nThe reason for the bad timing is that it turns out that commit\n17839856fd58 (\"gup: document and work around \u0027COW can break either way\u0027\nissue\" broke not just UFFD functionality (as Peter noticed), but Mikulas\nPatocka also reports that it caused issues for strace when running in a\nDAX environment with ext4 on a persistent memory setup.\n\nI did not go into much details on this but please review and ensure there are no issues with this patch.",
       "revId": "595d7cc57f3e59c2da11d15a671b115dbaa1729e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c2105cc_109211cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-01-12T20:20:44Z",
+      "side": 1,
+      "message": "Removed:\ngup: document and work around \"COW can break either way\" issue - 17839856fd588f4ab6b789f482ed3ffd7c403e1f\n\nAdded these:\nmm: do_wp_page() simplification - 09854ba94c6aad7886996bfbee2530b3d8a7f4f4\nmm/ksm: Remove reuse_ksm_page() - 1a0cf26323c80e2f1c58fc04f15686de61bfab0c\nmm: Add PGREUSE counter - 798a6b87ecd72828a6c6b5469aaa2032a57e92b7\n\nThis fixes problem noticed with strace in the upstream discussion.\n\nThe fixes for dax mounted ext2/xfs mtime update are already backported from stable.",
+      "parentUuid": "e2e68fc5_e5f032fc",
+      "revId": "595d7cc57f3e59c2da11d15a671b115dbaa1729e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
