@@ -47,6 +47,75 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b034482_05f26949",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2021-01-12T20:57:42Z",
+      "side": 1,
+      "message": "thanks for this comment, it\u0027s usually what is missing in all the implementations I see in Android code.",
+      "range": {
+        "startLine": 302,
+        "startChar": 0,
+        "endLine": 306,
+        "endChar": 4
+      },
+      "revId": "42b51390afa093b5f554ad0af4e6e982a204fee8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "406fb182_5f5553c5",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2021-01-12T20:57:42Z",
+      "side": 1,
+      "message": "nit: hash_level_offset? I was sure it\u0027s going to be just the level in the usage",
+      "range": {
+        "startLine": 310,
+        "startChar": 10,
+        "endLine": 310,
+        "endChar": 20
+      },
+      "revId": "42b51390afa093b5f554ad0af4e6e982a204fee8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e03647e8_ea54efec",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2021-01-12T20:57:42Z",
+      "side": 1,
+      "message": "you change the .len field here, but later call free_pages() as if it wasn\u0027t changed. Please create a separate mem_range to change in the loop",
+      "range": {
+        "startLine": 330,
+        "startChar": 3,
+        "endLine": 330,
+        "endChar": 19
+      },
+      "revId": "42b51390afa093b5f554ad0af4e6e982a204fee8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da4f567d_a0ed9f9d",
@@ -65,6 +134,53 @@
         "startChar": 0,
         "endLine": 369,
         "endChar": 47
+      },
+      "revId": "42b51390afa093b5f554ad0af4e6e982a204fee8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "886297cd_a2f00eee",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2021-01-12T20:57:42Z",
+      "side": 1,
+      "message": "indeed, we have a generic empty signature struct, which isn\u0027t really populated with the data. Is this function only used in case when there\u0027s an unsigned tree? In that case please add that to the name - add_dummy_signature_record() or something similar. Also it builds the whole merkle tree as well, so even that name is misleading",
+      "parentUuid": "da4f567d_a0ed9f9d",
+      "range": {
+        "startLine": 368,
+        "startChar": 0,
+        "endLine": 369,
+        "endChar": 47
+      },
+      "revId": "42b51390afa093b5f554ad0af4e6e982a204fee8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25a00fb6_dd3f3477",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1080076
+      },
+      "writtenOn": "2021-01-12T20:57:42Z",
+      "side": 1,
+      "message": "we have two mutexes locked in some order. Can you please document that, and ensure they\u0027re always locked in the same order? Preferably somewhere around their declarations.\n\nBetter of course to split out the critical sections into independent ones, but I understand it is hard",
+      "range": {
+        "startLine": 438,
+        "startChar": 0,
+        "endLine": 438,
+        "endChar": 50
       },
       "revId": "42b51390afa093b5f554ad0af4e6e982a204fee8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
