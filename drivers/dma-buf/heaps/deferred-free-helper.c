@@ -39,6 +39,7 @@ void deferred_free(struct deferred_freelist_item *item,
 	spin_unlock_irqrestore(&free_list_lock, flags);
 	wake_up(&freelist_waitqueue);
 }
+EXPORT_SYMBOL_GPL(deferred_free);
 
 static size_t free_one_item(enum df_reason reason)
 {
@@ -133,4 +134,6 @@ static int deferred_freelist_init(void)
 
 	return register_shrinker(&freelist_shrinker);
 }
-device_initcall(deferred_freelist_init);
+module_init(deferred_freelist_init);
+MODULE_LICENSE("GPL v2");
+
