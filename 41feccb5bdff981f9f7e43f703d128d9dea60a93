@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df12987e_12cf90b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-13T01:25:43Z",
+      "side": 1,
+      "message": "Failing on checkpatch errors, please fix:\n\nERROR:CODE_INDENT: code indent should use tabs where possible\n#85: FILE: include/trace/hooks/pm_domain.h:16:\n+        TP_PROTO(struct generic_pm_domain* genpd, uint32_t idx, bool *allow),$\n\nERROR:POINTER_LOCATION: \"foo* bar\" should be \"foo *bar\"\n#85: FILE: include/trace/hooks/pm_domain.h:16:\n+        TP_PROTO(struct generic_pm_domain* genpd, uint32_t idx, bool *allow),\n\nERROR:CODE_INDENT: code indent should use tabs where possible\n#86: FILE: include/trace/hooks/pm_domain.h:17:\n+        TP_ARGS(genpd, idx, allow))$\n\ntotal: 3 errors, 0 warnings, 56 lines checked\n\nNOTE: For some of the reported defects, checkpatch may be able to\n      mechanically convert to the typical style using --fix or --fix-inplace.\n\nNOTE: Whitespace errors detected.\n      You may wish to use scripts/cleanpatch or scripts/cleanfile\n\n/buildbot/src/android/common-android12-5.10/out/android12-5.10/common/common/checkpatch/patches/0001-ANDROID-PM-Domains-add-vendor_hook-to-disallow-domai.patch has style problems, please review.\n",
+      "revId": "41feccb5bdff981f9f7e43f703d128d9dea60a93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
