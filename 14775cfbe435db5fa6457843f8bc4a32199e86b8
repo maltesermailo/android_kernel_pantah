@@ -16,6 +16,24 @@
       "message": "This causes a build-break for non GKI builds. See fix for android12-5.10 and incorporate into this patch (aosp/1549277).",
       "revId": "14775cfbe435db5fa6457843f8bc4a32199e86b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6c412da_80af4454",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6791,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-01-13T09:20:15Z",
+      "side": 1,
+      "message": "Urgh, good catch, sorry about that.\n\n/me wonders if the stubs should be provided by include/trace/hooks/vendor_hooks.h directly ... That\u0027d avoid boilerplate and any future issues in the area. But maybe that\u0027s too late, I\u0027ll go fix this patch",
+      "parentUuid": "73902b47_fd262a6b",
+      "revId": "14775cfbe435db5fa6457843f8bc4a32199e86b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
