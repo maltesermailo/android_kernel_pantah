@@ -67,6 +67,7 @@
 #include <linux/task_work.h>
 #include <linux/sizes.h>
 #include <linux/android_vendor.h>
+#include <linux/delayacct.h>
 
 #include <uapi/linux/sched/types.h>
 #include <uapi/linux/android/binder.h>
@@ -4926,7 +4927,9 @@ static long binder_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 
 	switch (cmd) {
 	case BINDER_WRITE_READ:
+		delayacct_binder_start();
 		ret = binder_ioctl_write_read(filp, cmd, arg, thread);
+		delayacct_binder_end();
 		if (ret)
 			goto err;
 		break;

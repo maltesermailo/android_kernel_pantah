@@ -72,6 +72,7 @@
 #include <linux/padata.h>
 #include <linux/khugepaged.h>
 #include <trace/hooks/mm.h>
+#include <linux/delayacct.h>
 
 #include <asm/sections.h>
 #include <asm/tlbflush.h>
@@ -5122,7 +5123,9 @@ __alloc_pages_nodemask(gfp_t gfp_mask, unsigned int order, int preferred_nid,
 	 */
 	ac.nodemask = nodemask;
 
+	delayacct_slowpath_start();
 	page = __alloc_pages_slowpath(alloc_mask, order, &ac);
+	delayacct_slowpath_end();
 
 out:
 	if (memcg_kmem_enabled() && (gfp_mask & __GFP_ACCOUNT) && page &&
