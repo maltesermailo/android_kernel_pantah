@@ -46,6 +46,30 @@
       },
       "revId": "169d610b311a166824611ff2d71e8d9b5c412111",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e74c5b2_0df6d0d4",
+        "filename": "mm/page_owner.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-01-15T21:02:37Z",
+      "side": 1,
+      "message": "Hmm, I see. This is strange. get_page_owner() returns page_owner* and it\u0027s an exported function, however page_owner struct is defined internally in page_owner.c. Looks like nowhere get_page_owner is being used outside of page_owner.c.\nget_page_owner should probably be un-exported and made static upstream, but that\u0027s unrelated to this change.\n\nI think your approach is the cleanest considering the current code.",
+      "parentUuid": "8aa9b8a6_6d2ab7da",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 41
+      },
+      "revId": "169d610b311a166824611ff2d71e8d9b5c412111",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
