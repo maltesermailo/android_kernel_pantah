@@ -462,9 +462,16 @@
  */
 #define TEXT_TEXT							\
 		ALIGN_FUNCTION();					\
+<<<<<<< HEAD   (30bb6c ANDROID: cuttlefish_defconfig: add missing CONFIG_BLK_CGROUP)
 		*(.text.hot TEXT_MAIN .text.fixup .text.unlikely)	\
 		*(.text..ftrace)					\
 		*(TEXT_CFI_MAIN) 					\
+=======
+		*(.text.hot .text.hot.*)				\
+		*(TEXT_MAIN .text.fixup)				\
+		*(.text.unlikely .text.unlikely.*)			\
+		*(.text.unknown .text.unknown.*)			\
+>>>>>>> BRANCH (10161a Linux 4.9.252)
 		*(.ref.text)						\
 	MEM_KEEP(init.text)						\
 	MEM_KEEP(exit.text)						\
