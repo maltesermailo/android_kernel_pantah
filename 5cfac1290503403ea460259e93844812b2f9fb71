@@ -16,6 +16,23 @@
       "message": "Updated ringbuffer implementation with log entries holding metadata and log-text.\n - Handled overflow condition\n - Handled partial log-data extraction\n\n",
       "revId": "5cfac1290503403ea460259e93844812b2f9fb71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afdb909d_1228c544",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-01-20T21:44:49Z",
+      "side": 1,
+      "message": "I don\u0027t think this works. The file doubled in size, but there is not much explanation of what the code you added is supposed to do. The old code copied the entry first, then discarded it if it had been overwritten during the copy. Now you use data directly, casting away the volatile pointer, and potentially crash before the entry gets discarded. You also perform a general memory allocation with interrupts disabled (please enable all lock debugging kconfig options if you don\u0027t already have this as it should catch this).",
+      "revId": "5cfac1290503403ea460259e93844812b2f9fb71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
