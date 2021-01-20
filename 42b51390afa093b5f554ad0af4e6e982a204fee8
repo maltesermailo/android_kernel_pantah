@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98ad6282_d55512cf",
+        "filename": "fs/incfs/data_mgmt.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-01-20T18:27:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33ce27c3_8888e966",
+      "range": {
+        "startLine": 278,
+        "startChar": 0,
+        "endLine": 283,
+        "endChar": 0
+      },
+      "revId": "42b51390afa093b5f554ad0af4e6e982a204fee8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06cd4f9d_2db771a2",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-01-05T23:11:13Z",
       "side": 1,
       "message": "This sounds error-prone; have you written tests that exercise this case?",
+      "range": {
+        "startLine": 235,
+        "startChar": 1,
+        "endLine": 241,
+        "endChar": 11
+      },
+      "revId": "42b51390afa093b5f554ad0af4e6e982a204fee8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1113a168_28614867",
+        "filename": "fs/incfs/format.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-01-20T18:27:32Z",
+      "side": 1,
+      "message": "This code is not yet implemented - it will be done in a follow-on CL",
+      "parentUuid": "06cd4f9d_2db771a2",
       "range": {
         "startLine": 235,
         "startChar": 1,
@@ -93,6 +141,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8963e456_2f07c07f",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-01-20T18:27:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "406fb182_5f5553c5",
+      "range": {
+        "startLine": 310,
+        "startChar": 10,
+        "endLine": 310,
+        "endChar": 20
+      },
+      "revId": "42b51390afa093b5f554ad0af4e6e982a204fee8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e03647e8_ea54efec",
@@ -106,6 +178,30 @@
       "writtenOn": "2021-01-12T20:57:42Z",
       "side": 1,
       "message": "you change the .len field here, but later call free_pages() as if it wasn\u0027t changed. Please create a separate mem_range to change in the loop",
+      "range": {
+        "startLine": 330,
+        "startChar": 3,
+        "endLine": 330,
+        "endChar": 19
+      },
+      "revId": "42b51390afa093b5f554ad0af4e6e982a204fee8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e360709d_3140975e",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-01-20T18:27:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e03647e8_ea54efec",
       "range": {
         "startLine": 330,
         "startChar": 3,
@@ -163,6 +259,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58d4b802_68dc372a",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-01-20T18:27:32Z",
+      "side": 1,
+      "message": "Added a comment to explain. I\u0027ll not repeat it here, since I want to make sure the comment is comprehensible.",
+      "parentUuid": "886297cd_a2f00eee",
+      "range": {
+        "startLine": 368,
+        "startChar": 0,
+        "endLine": 369,
+        "endChar": 47
+      },
+      "revId": "42b51390afa093b5f554ad0af4e6e982a204fee8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25a00fb6_dd3f3477",
@@ -176,6 +296,30 @@
       "writtenOn": "2021-01-12T20:57:42Z",
       "side": 1,
       "message": "we have two mutexes locked in some order. Can you please document that, and ensure they\u0027re always locked in the same order? Preferably somewhere around their declarations.\n\nBetter of course to split out the critical sections into independent ones, but I understand it is hard",
+      "range": {
+        "startLine": 438,
+        "startChar": 0,
+        "endLine": 438,
+        "endChar": 50
+      },
+      "revId": "42b51390afa093b5f554ad0af4e6e982a204fee8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf37b853_c4183b71",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-01-20T18:27:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25a00fb6_dd3f3477",
       "range": {
         "startLine": 438,
         "startChar": 0,
