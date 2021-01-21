@@ -50,6 +50,24 @@
       "message": "https://android-review.googlesource.com/c/kernel/common/+/1555543 will detect the locking issue",
       "revId": "5cfac1290503403ea460259e93844812b2f9fb71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ddd36c3_8b00a631",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1611900
+      },
+      "writtenOn": "2021-01-21T22:52:03Z",
+      "side": 1,
+      "message": "Changes are made to read split long entries.\nHandled over flow case and partial log printing.\n\nRetained the earlier logic of copying log data and use the data only if it is valid otherwise discarded.\n\nAs of now communicated app-id, app-name, timestamp as metadata from trusty to Linux. And this metadata is printed along log-data.",
+      "parentUuid": "afdb909d_1228c544",
+      "revId": "5cfac1290503403ea460259e93844812b2f9fb71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
