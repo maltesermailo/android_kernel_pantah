@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f4dcd57_e5e558ae",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-01-21T23:59:03Z",
+      "side": 1,
+      "message": "run checkpatch",
+      "revId": "028600db844a9f3777654e6352f3698c6a3b2ad1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af527a17_808d783a",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-01-21T23:59:03Z",
+      "side": 1,
+      "message": "not a new problem, but we are wasting a lot of space (almost a page) by requiring the log size to be a power of 2.",
+      "revId": "028600db844a9f3777654e6352f3698c6a3b2ad1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc0f955a_c58fb2f0",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-01-21T23:59:03Z",
+      "side": 1,
+      "message": "don\u0027t duplicate this code for every type you copy. You can have a single function that copies a specified number of bytes.",
+      "revId": "028600db844a9f3777654e6352f3698c6a3b2ad1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24197964_b5e54935",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-01-21T23:59:03Z",
+      "side": 1,
+      "message": "I don\u0027t think we want to duplicate the code that prints a log entry. If you have a single function that prints the entry, you can have an argument that tells you how much of the data is valid.",
+      "revId": "028600db844a9f3777654e6352f3698c6a3b2ad1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "172980e2_97d6b4a8",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-01-21T23:59:03Z",
+      "side": 1,
+      "message": "kerneldoc?",
+      "revId": "028600db844a9f3777654e6352f3698c6a3b2ad1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dadb349f_962b32c3",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-01-21T23:59:03Z",
+      "side": 1,
+      "message": "the result of this should be validated",
+      "revId": "028600db844a9f3777654e6352f3698c6a3b2ad1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07cf39c8_10f1501a",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-01-21T23:59:03Z",
+      "side": 1,
+      "message": "why not copy the whole log entry here, or at least the metadata. In the current form you have to keep the code here in sync with the struct",
+      "revId": "028600db844a9f3777654e6352f3698c6a3b2ad1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bb57729_fb022793",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-01-21T23:59:03Z",
+      "side": 1,
+      "message": "is this check for \u0027\\n\u0027 still needed?",
+      "revId": "028600db844a9f3777654e6352f3698c6a3b2ad1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abd8d805_023b0e2b",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-01-21T23:59:03Z",
+      "side": 1,
+      "message": "comment?",
+      "revId": "028600db844a9f3777654e6352f3698c6a3b2ad1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ef2fd15_d2c84d30",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-01-21T23:59:03Z",
+      "side": 1,
+      "message": "This does not seem necessary unless alloc moved into or over the current entry. Also make sure you have the needed barriers.",
+      "revId": "028600db844a9f3777654e6352f3698c6a3b2ad1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98fa108a_698ba6d9",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-01-21T23:59:03Z",
+      "side": 1,
+      "message": "Why do you have two entry variables and duplicate loop conditions?",
+      "revId": "028600db844a9f3777654e6352f3698c6a3b2ad1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45b3f716_9ce296c0",
+        "filename": "drivers/trusty/trusty-log.h",
+        "patchSetId": 26
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-01-21T23:59:03Z",
+      "side": 1,
+      "message": "this is an incomplete description",
+      "revId": "028600db844a9f3777654e6352f3698c6a3b2ad1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
