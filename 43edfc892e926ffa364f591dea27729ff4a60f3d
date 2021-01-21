@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42e227aa_c92ecb05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2021-01-21T05:44:03Z",
+      "side": 1,
+      "message": "Hi, Chris, Suren, Laura, All\n\nIt seems that this change caused the kernel crash when the LTP syscalls.readahead02_32bit test,\nlike crash reported here[1], it\u0027s not reported when I reverted this change.\nCould you please help to check on it?\n\nbtw, it could be tested with vts command like this:\n  ./android-vts/tools/vts-tradefed run commandAndExit vts-kernel -m vts_ltp_test_arm -t  syscalls.readahead02_32bit\n\n[1]: https://pastebin.ubuntu.com/p/qdYXzJ76tK/\n\nThanks,\nYongqin Liu",
+      "revId": "43edfc892e926ffa364f591dea27729ff4a60f3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
