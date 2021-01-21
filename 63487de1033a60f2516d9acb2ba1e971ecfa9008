@@ -33,6 +33,24 @@
       "message": "again, if this really is an issue, why isn\u0027t this sent upstream first for review there?",
       "revId": "63487de1033a60f2516d9acb2ba1e971ecfa9008",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "033cb073_f3f814d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1827640
+      },
+      "writtenOn": "2021-01-21T19:28:39Z",
+      "side": 1,
+      "message": "The \"issue\" arose as our logic involved registering trace hooks while the scheduler was quiesced. We had quickly patched it up by solving the crash at the time by using GFP_ATOMIC when doing the kmalloc in allocate_probes. However, thanks to Quentin and yourself, we realized that this approach was incorrect in nature, and the optimal idea would be to modify our logic to register for the tracehooks needed in vendor modules prior to quiescing the scheduler.",
+      "parentUuid": "84588ed9_b8d64cdb",
+      "revId": "63487de1033a60f2516d9acb2ba1e971ecfa9008",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
