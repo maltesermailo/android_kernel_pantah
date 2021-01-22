@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4094564_7e0b20c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1697971
+      },
+      "writtenOn": "2021-01-22T01:47:42Z",
+      "side": 1,
+      "message": "Hey Minchan,\n\nThanks for spotting this.  __GFP_CMA shouldn\u0027t be placed into alloc_flags (unless you know otherwise), and with the introduction of my patch here (https://android-review.googlesource.com/c/kernel/common/+/1493978), ALLOC_CMA being set implies __GFP_CMA is set.  So, let\u0027s check for alloc_flags \u0026 ALLOC_CMA instead.\n\nThanks,\n\nChris.",
+      "revId": "4b584c6492b6b893a9eaf31b418f14f83e2a6367",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6b38dc4_37a63274",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3512,
+      "author": {
+        "id": 1697971
+      },
+      "writtenOn": "2021-01-22T01:47:42Z",
+      "side": 1,
+      "message": "Let\u0027s also make the same replacement here, by changing `gfp_flags \u0026 __GFP_CMA` to alloc_flags \u0026 ALLOC_CMA.",
+      "revId": "4b584c6492b6b893a9eaf31b418f14f83e2a6367",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
