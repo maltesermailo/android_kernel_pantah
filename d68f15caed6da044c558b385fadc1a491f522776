@@ -22,6 +22,30 @@
       },
       "revId": "d68f15caed6da044c558b385fadc1a491f522776",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8620b80_0be1bcb3",
+        "filename": "kernel/watchdog.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1743420
+      },
+      "writtenOn": "2021-01-22T08:01:48Z",
+      "side": 1,
+      "message": "If a module registers panic_notifier call, the module can see that the softlockup panic occurred.\nHowever, since there is no \u0027regs\u0027 data, the module cannot know PC/LR at the time of softlockup detection.\n\u0027regs\u0027 is useful for two features mentioned in Bug: 177483057.\n\n 1) Auto comment\n   \u0027regs\u0027 can provide us a interested part of call trace, while panic call trace contains many traces that are not related.\n\n    ex) call trace from \u0027regs\u0027\n       Call trace:\n        _raw_spin_unlock_irqrestore+0xc/0x44\n        del_timer_sync+0x48/0x5c\n        is_hardware_shot_done+0xa0/0x614\n        …\n   ex) panic call trace\n       Call trace:\n        dump_backtrace+0x0/0x27c\n        show_stack+0x14/0x20\n        dump_stack+0xc4/0x100\n        panic+0x160/0x2c8\n        watchdog_timer_fn+0x690/0x694\n        __hrtimer_run_queues+0x250/0x3a0\n        hrtimer_interrupt+0xe8/0x22c\n        exynos4_mct_tick_isr+0x28/0x3c\n        __handle_irq_event_percpu+0x164/0x288\n        …\n\n 2) Market issue monitoring\n   When softlockup panics happen on many end-user devices, it is not possible to determine whether the problems are already known or new.\n     ex) PANIC:softlockup: hung tasks/\n\n   \u0027regs\u0027 can provide us additional information like pc/lr/calltrace..\n     ex) PC:_raw_spin_unlock_irqrestore+0xc/0x44/\n         LR:try_to_del_timer_sync+0x70/0xa0/\n         STACK:_raw_spin_unlock_irqrestore:\n               del_timer_sync:\n               is_hardware_shot_done:\n               is_hardware_frame_done:\n               …/",
+      "parentUuid": "78f7fdee_396c2d29",
+      "range": {
+        "startLine": 435,
+        "startChar": 0,
+        "endLine": 435,
+        "endChar": 81
+      },
+      "revId": "d68f15caed6da044c558b385fadc1a491f522776",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
