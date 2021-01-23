@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1e39522d_5b9e982a",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1611900
+      },
+      "writtenOn": "2021-01-23T06:01:13Z",
+      "side": 1,
+      "message": "Yes, Total memory available is 8192 bytes, currently only 4096 bytes are used for log-buffer, maximum space in remaining region is unused.\nPlease suggest what size should be used, can we set it to \n\"buff_size - sizeof(struct log_rb)\"",
+      "parentUuid": "af527a17_808d783a",
+      "revId": "028600db844a9f3777654e6352f3698c6a3b2ad1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bc0f955a_c58fb2f0",
         "filename": "drivers/trusty/trusty-log.c",
         "patchSetId": 26
@@ -48,6 +66,24 @@
       "writtenOn": "2021-01-21T23:59:03Z",
       "side": 1,
       "message": "don\u0027t duplicate this code for every type you copy. You can have a single function that copies a specified number of bytes.",
+      "revId": "028600db844a9f3777654e6352f3698c6a3b2ad1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1b74097_c5612ec8",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1611900
+      },
+      "writtenOn": "2021-01-23T06:01:13Z",
+      "side": 1,
+      "message": "updated to have only one method to read specified number of bytes.",
+      "parentUuid": "bc0f955a_c58fb2f0",
       "revId": "028600db844a9f3777654e6352f3698c6a3b2ad1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -65,6 +101,24 @@
       "writtenOn": "2021-01-21T23:59:03Z",
       "side": 1,
       "message": "I don\u0027t think we want to duplicate the code that prints a log entry. If you have a single function that prints the entry, you can have an argument that tells you how much of the data is valid.",
+      "revId": "028600db844a9f3777654e6352f3698c6a3b2ad1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b29b2c5_967896b4",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1611900
+      },
+      "writtenOn": "2021-01-23T06:01:13Z",
+      "side": 1,
+      "message": "this method is removed and changes are made in log_read_line method to handle partial entries also.",
+      "parentUuid": "24197964_b5e54935",
       "revId": "028600db844a9f3777654e6352f3698c6a3b2ad1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -103,6 +157,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6e62b81_659e6bbd",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1611900
+      },
+      "writtenOn": "2021-01-23T06:01:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dadb349f_962b32c3",
+      "revId": "028600db844a9f3777654e6352f3698c6a3b2ad1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "07cf39c8_10f1501a",
@@ -116,6 +188,24 @@
       "writtenOn": "2021-01-21T23:59:03Z",
       "side": 1,
       "message": "why not copy the whole log entry here, or at least the metadata. In the current form you have to keep the code here in sync with the struct",
+      "revId": "028600db844a9f3777654e6352f3698c6a3b2ad1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a4b0889_6fe0f78b",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1611900
+      },
+      "writtenOn": "2021-01-23T06:01:13Z",
+      "side": 1,
+      "message": "Updated this method to read header, footer structs and also to handle partial data entry.",
+      "parentUuid": "07cf39c8_10f1501a",
       "revId": "028600db844a9f3777654e6352f3698c6a3b2ad1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -137,6 +227,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "711993d5_5cdbb077",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1611900
+      },
+      "writtenOn": "2021-01-23T06:01:13Z",
+      "side": 1,
+      "message": "yes I think it is required, otherwise there is chance of missing few characters in the log-text sometime",
+      "parentUuid": "6bb57729_fb022793",
+      "revId": "028600db844a9f3777654e6352f3698c6a3b2ad1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abd8d805_023b0e2b",
@@ -150,6 +258,24 @@
       "writtenOn": "2021-01-21T23:59:03Z",
       "side": 1,
       "message": "comment?",
+      "revId": "028600db844a9f3777654e6352f3698c6a3b2ad1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "816cfb3a_14cf6b7a",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1611900
+      },
+      "writtenOn": "2021-01-23T06:01:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abd8d805_023b0e2b",
       "revId": "028600db844a9f3777654e6352f3698c6a3b2ad1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -171,6 +297,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98d1d369_4a71ecd2",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1611900
+      },
+      "writtenOn": "2021-01-23T06:01:13Z",
+      "side": 1,
+      "message": "Added a condition to reset the entry to alloc only if alloc is moved over the current entry.",
+      "parentUuid": "7ef2fd15_d2c84d30",
+      "revId": "028600db844a9f3777654e6352f3698c6a3b2ad1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98fa108a_698ba6d9",
@@ -188,6 +332,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed545458_bdcd8971",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 26
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1611900
+      },
+      "writtenOn": "2021-01-23T06:01:13Z",
+      "side": 1,
+      "message": "updated with one entry variable, removed this condition from this location.",
+      "parentUuid": "98fa108a_698ba6d9",
+      "revId": "028600db844a9f3777654e6352f3698c6a3b2ad1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45b3f716_9ce296c0",
@@ -201,6 +363,24 @@
       "writtenOn": "2021-01-21T23:59:03Z",
       "side": 1,
       "message": "this is an incomplete description",
+      "revId": "028600db844a9f3777654e6352f3698c6a3b2ad1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12103d3b_7aba16e2",
+        "filename": "drivers/trusty/trusty-log.h",
+        "patchSetId": 26
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1611900
+      },
+      "writtenOn": "2021-01-23T06:01:13Z",
+      "side": 1,
+      "message": "Updated",
+      "parentUuid": "45b3f716_9ce296c0",
       "revId": "028600db844a9f3777654e6352f3698c6a3b2ad1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
