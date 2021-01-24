@@ -34,6 +34,23 @@
       "parentUuid": "a9cd4fe0_26eb5be4",
       "revId": "410d4fef73530efdfab6e1cf4994f4a2f31a822b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc49b9e9_519357a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-01-24T12:41:04Z",
+      "side": 1,
+      "message": "With the recent printk/logbuffer rewrite, these symbols are almost guaranteed to go away in the next kernel release, and we will not be able to ensure they stick around.\n\nSo please work with upstream on their rewrite to ensure that your needs are met, otherwise they have no idea what you all are doing here, you can not rely on these at all.\n\nGiven the long time before the next android kernel release, I see no need for these to be exported at this point in time given they will be going away and will only cause merge issues that we have to resolve.",
+      "revId": "410d4fef73530efdfab6e1cf4994f4a2f31a822b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
