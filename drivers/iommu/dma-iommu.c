@@ -47,6 +47,7 @@ struct iommu_dma_cookie {
 
 	/* Domain for flush queue callback; NULL if flush queue not in use */
 	struct iommu_domain		*fq_domain;
+	bool				tlb_flush_on_unmap;
 };
 
 static inline size_t cookie_msi_granule(struct iommu_dma_cookie *cookie)
@@ -347,6 +348,9 @@ static int iommu_dma_init_domain(struct iommu_domain *domain, dma_addr_t base,
 			pr_warn("iova flush queue initialization failed\n");
 		else
 			cookie->fq_domain = domain;
+	} else if (!iommu_domain_get_attr(domain,
+			DOMAIN_ATTR_TLB_FLUSH_ON_UNMAP, &attr) && attr) {
+		cookie->tlb_flush_on_unmap = true;
 	}
 
 	if (!dev)
@@ -522,7 +526,7 @@ static void __iommu_dma_unmap(struct device *dev, dma_addr_t dma_addr,
 	unmapped = iommu_unmap_fast(domain, dma_addr, size, &iotlb_gather);
 	WARN_ON(unmapped != size);
 
-	if (!cookie->fq_domain)
+	if (!cookie->fq_domain && !cookie->tlb_flush_on_unmap)
 		iommu_iotlb_sync(domain, &iotlb_gather);
 	iommu_dma_free_iova(cookie, dma_addr, size);
 }
