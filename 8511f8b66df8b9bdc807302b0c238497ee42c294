@@ -122,6 +122,41 @@
       "parentUuid": "24d99d78_1d6a1adc",
       "revId": "8511f8b66df8b9bdc807302b0c238497ee42c294",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc1aa21d_c8705ee2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2021-01-27T16:58:57Z",
+      "side": 1,
+      "message": "This is a wrong understanding of \"value-tier\" devices. Please talk with Android Kernel Team within Google. \n\nWe are not talking about build-bloat here. This is runtime memory consumption and value-tier devices do run GKI kernel BTW. I don\u0027t want this change to be part of GKI and I would like to keep it that way.",
+      "parentUuid": "a21ae954_49db63b0",
+      "revId": "8511f8b66df8b9bdc807302b0c238497ee42c294",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6671978_38865338",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2021-01-27T16:58:57Z",
+      "side": 1,
+      "message": "Mentioned in the comment below. Please don\u0027t take this change. Memory impact on the production kernel is real and we don\u0027t want even these kind of 1M to 2M impact. If this is just for debug then you should use the debug variant of the GKI, reproduce the problem and then debug. ",
+      "revId": "8511f8b66df8b9bdc807302b0c238497ee42c294",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
