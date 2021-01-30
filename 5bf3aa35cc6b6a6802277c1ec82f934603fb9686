@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a92530ac_0f5e769e",
+        "filename": "kernel/sched/pelt.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-01-30T01:17:43Z",
+      "side": 1,
+      "message": "What happens if there is no \"pelt\" on the command line? It looks like the globals will remain unset. Does this work.\n\nWouldn\u0027t it be better to initialize the globals with the default and ignore (with a message) any unknown half-lives in set_pelt?",
+      "revId": "5bf3aa35cc6b6a6802277c1ec82f934603fb9686",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
