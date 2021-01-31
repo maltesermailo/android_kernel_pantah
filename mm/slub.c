@@ -134,6 +134,7 @@ void *fixup_red_left(struct kmem_cache *s, void *p)
 
 	return p;
 }
+EXPORT_SYMBOL_GPL(fixup_red_left);
 
 static inline bool kmem_cache_has_cpu_partial(struct kmem_cache *s)
 {
@@ -292,12 +293,6 @@ static inline void set_freepointer(struct kmem_cache *s, void *object, void *fp)
 	freeptr_addr = (unsigned long)kasan_reset_tag((void *)freeptr_addr);
 	*(void **)freeptr_addr = freelist_ptr(s, fp, freeptr_addr);
 }
-
-/* Loop over all objects in a slab */
-#define for_each_object(__p, __s, __addr, __objects) \
-	for (__p = fixup_red_left(__s, __addr); \
-		__p < (__addr) + (__objects) * (__s)->size; \
-		__p += (__s)->size)
 
 static inline unsigned int order_objects(unsigned int order, unsigned int size)
 {

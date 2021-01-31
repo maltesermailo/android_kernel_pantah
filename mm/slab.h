@@ -106,10 +106,17 @@ struct track {
 	unsigned long when;	/* When did the operation occur */
 };
 
+/* Loop over all objects in a slab */
+#define for_each_object(__p, __s, __addr, __objects) \
+	for (__p = fixup_red_left(__s, __addr); \
+		__p < (__addr) + (__objects) * (__s)->size; \
+		__p += (__s)->size)
+
 enum track_item { TRACK_ALLOC, TRACK_FREE };
 
 struct track *get_track(struct kmem_cache *s, void *object,
 		enum track_item alloc);
+void *fixup_red_left(struct kmem_cache *s, void *p);
 #endif
 
 /* Functions provided by the slab allocators */
@@ -146,7 +153,6 @@ static inline slab_flags_t kmem_cache_flags(unsigned int object_size,
 	return flags;
 }
 #endif
-
 
 /* Legal flag mask for kmem_cache_create(), for various configurations */
 #define SLAB_CORE_FLAGS (SLAB_HWCACHE_ALIGN | SLAB_CACHE_DMA | \
