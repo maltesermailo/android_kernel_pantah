@@ -333,6 +333,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "916f4a19_ac6b023b",
+        "filename": "kernel/sched/sched-pelt.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-02-01T21:00:02Z",
+      "side": 1,
+      "message": "Actually it seems more relevant now that the definition of PELT32_LOAD_AVG_PERIOD is in a different file than the definition of the default pelt_runnable_avg_yN_inv, but I agree my example would need to be tweaked a little:\n\nMaybe something like (in pelt.c):\n```\n#define DEFAULT_LOAD_AVG_PERIOD (sizeof(pelt_runnable_avg_yN_inv) / \\ \n                                 sizeof(pelt_runnable_avg_yN_inv[0]))\n#if (DEFAULT_LOAD_AVG_PERIOD !\u003d PELT32_LOAD_AVG_PERIOD)\n#error invalid array for default pelt_runnable_avg_yN_inv\n#endif\n```",
+      "parentUuid": "a141b31d_34a808da",
+      "range": {
+        "startLine": 13,
+        "startChar": 31,
+        "endLine": 13,
+        "endChar": 33
+      },
+      "revId": "10912e143a11676ad7ee99ce4f37da7577579639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f1c58ccb_593a3d38",
         "filename": "kernel/sched/sched-pelt.h",
         "patchSetId": 3
