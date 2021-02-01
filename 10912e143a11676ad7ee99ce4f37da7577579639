@@ -285,6 +285,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "46c8cb2e_36269e60",
+        "filename": "kernel/sched/sched-pelt.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-02-01T19:46:22Z",
+      "side": 1,
+      "message": "What was actually \"Done\" here?\n\nI think Greg was suggesting that instead of a constant, this comes from the sizeof the array to guarantee that these stay in-sync. Something like:\n\n  PELT32_LOAD_AVG_PERIOD (sizeof(pelt32_runnable_avg_yN_inv) / sizeof(pelt32_runnable_avg_yN_inv[0]))\n\nThen you can verify the array size with something like:\n\n  #if (PELT32_LOAD_AVG_PERIOD !\u003d 32)\n  #error invalid array for pelt32_runnable_avg_yN_inv\n  #endif\n\n(Greg, is that what you were thinking?)",
+      "parentUuid": "dad9be37_53ea7957",
+      "range": {
+        "startLine": 13,
+        "startChar": 31,
+        "endLine": 13,
+        "endChar": 33
+      },
+      "revId": "10912e143a11676ad7ee99ce4f37da7577579639",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f1c58ccb_593a3d38",
         "filename": "kernel/sched/sched-pelt.h",
         "patchSetId": 3
