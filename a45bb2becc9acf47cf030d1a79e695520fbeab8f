@@ -16,6 +16,24 @@
       "message": "won\u0027t this be an error if there is a single \"pelt\u003d32\" on the command-line? That seems like it should be ok.",
       "revId": "a45bb2becc9acf47cf030d1a79e695520fbeab8f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe227bc5_e05a6cf3",
+        "filename": "kernel/sched/pelt.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1827640
+      },
+      "writtenOn": "2021-02-01T19:58:19Z",
+      "side": 1,
+      "message": "As we would only enter set_pelt once, due to a single invocation of the pelt parameter, this condition will not hit because by default pelt_load_avg_period\u003d32. \n\nBut now I realize this isn\u0027t correct, because if you have pelt\u003d32 and then pelt\u003d8, we would select pelt\u003d8 and this error message won\u0027t print. Let me think about this some more.",
+      "parentUuid": "662456a1_8d7f1a3f",
+      "revId": "a45bb2becc9acf47cf030d1a79e695520fbeab8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
