@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec43dea6_3e250fbf",
+        "filename": "kernel/sched/sched-pelt.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1215505
+      },
+      "writtenOn": "2021-02-01T04:21:11Z",
+      "side": 1,
+      "message": "if it is a too much of a change to carry, can we define something like\n\n#define LOAD_AVG_PERIOD pelt_load_avg_period\n#define LOAD_AVG_MAX pelt_load_avg_max\n\nThose variables will be defined in pelt.c (like you have done) and modify them in the patch via cmd line arguments. This way we contain the changes.\n\nI will leave this to Todd\u0027s opinion.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 7
+      },
+      "revId": "2386f00d1fc0aeae56d63d186a61228e2234d95c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
