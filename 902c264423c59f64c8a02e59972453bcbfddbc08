@@ -16,6 +16,24 @@
       "message": "What happens for a command-line that has \"...pelt\u003d8 pelt\u003d32...\"? It seems like this should either be an error (\"pelt\u003d\" appears twice) or the 32ms parameters should be restored (\"pelt\u003d32\" is the last processed).\n\nAlso, if the command-line contains only 1 \"pelt\u003d32\", it should be a \"pr_info\" instead of a \"pr_err\", shouldn\u0027t it? It\u0027s not an error.\n\nShould there be a \"pr_info\" for setting to pelt\u003d8?",
       "revId": "902c264423c59f64c8a02e59972453bcbfddbc08",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8405c4cc_6ddf687d",
+        "filename": "kernel/sched/pelt.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1827640
+      },
+      "writtenOn": "2021-02-01T19:48:12Z",
+      "side": 1,
+      "message": "Yes I agree that should be regarded as an error. Added prints for regular cases.",
+      "parentUuid": "7cfce050_3d9152ac",
+      "revId": "902c264423c59f64c8a02e59972453bcbfddbc08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
