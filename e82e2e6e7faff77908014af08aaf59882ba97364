@@ -142,6 +142,24 @@
       "parentUuid": "a5f76ad0_bb552193",
       "revId": "e82e2e6e7faff77908014af08aaf59882ba97364",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56a7b903_dac328b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-02-02T15:29:37Z",
+      "side": 1,
+      "message": "Yeah I was really worried about inlining in general, which LTO just makes worse. Can you really attach to e.g static inline functions? How does that work? There is no function preamble per se no?\n\nBut anyway, I would much rather take this hook and have that part of the ABI we maintain stable than have partners hook to random unstable functions.",
+      "parentUuid": "adb66f61_46365feb",
+      "revId": "e82e2e6e7faff77908014af08aaf59882ba97364",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
