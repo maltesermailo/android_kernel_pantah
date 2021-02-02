@@ -35,6 +35,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bff40832_c2678b2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2021-02-02T17:35:16Z",
+      "side": 1,
+      "message": "Hi Stephen,\n\nCorrect me if I\u0027m wrong, but there\u0027s nothing that prevents doing this into a separated vendor module, is there ? Your thermal and core_ctl drivers could simply register to that vendor interface. This would avoid having yet another patch to support into ACK (the \"cpu pause\" feature already had to diverged from android-mainline) and leave the choice to any other vendor to handle the feature the way they want.",
+      "revId": "fcda8540b9d5e1222433dd049660f2609c120be2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb2f5e97_0e1fb232",
