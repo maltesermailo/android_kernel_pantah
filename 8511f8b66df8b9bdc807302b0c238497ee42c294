@@ -157,6 +157,24 @@
       "message": "Mentioned in the comment below. Please don\u0027t take this change. Memory impact on the production kernel is real and we don\u0027t want even these kind of 1M to 2M impact. If this is just for debug then you should use the debug variant of the GKI, reproduce the problem and then debug. ",
       "revId": "8511f8b66df8b9bdc807302b0c238497ee42c294",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d958dc55_51f8d097",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-02-03T19:26:10Z",
+      "side": 1,
+      "message": "Greg, can DYNAMIC_DEBUG_CORE be enabled in gki_defconfig and then DYNAMIC_DEBUG just enabled in vendor modules? It seems like that would have minimal memory overhead in the core kernel.\n\nChun-Hung, would pr_debug in modules but not core kernel be acceptable?",
+      "parentUuid": "a6671978_38865338",
+      "revId": "8511f8b66df8b9bdc807302b0c238497ee42c294",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
