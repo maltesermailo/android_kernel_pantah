@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d737cd07_a0af0a5c",
+        "filename": "fs/incfs/data_mgmt.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-02-03T02:57:49Z",
+      "side": 1,
+      "message": "when verity is enabled and the file has been opened",
+      "range": {
+        "startLine": 280,
+        "startChar": 32,
+        "endLine": 280,
+        "endChar": 54
+      },
+      "revId": "5c4f054c3cffc947b28531db21362d4c7d317fa7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf9f5864_d2d33864",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-02-03T02:57:49Z",
+      "side": 1,
+      "message": "It would be good to put this comment above the includes (just below the copyright comment) so that it\u0027s clear that it\u0027s describing the whole file.",
+      "range": {
+        "startLine": 18,
+        "startChar": 3,
+        "endLine": 18,
+        "endChar": 35
+      },
+      "revId": "5c4f054c3cffc947b28531db21362d4c7d317fa7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38e966df_4021cca2",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-02-03T02:57:49Z",
+      "side": 1,
+      "message": "Now that there will be an xattr to indicate whether a file has fs-verity enabled, is it still useful to have an empty INCFS_MD_VERITY_SIGNATURE item if the file doesn\u0027t have a verity signature?  It seems more logical for the file to simply not have a INCFS_MD_VERITY_SIGNATURE item in that case.",
+      "range": {
+        "startLine": 40,
+        "startChar": 12,
+        "endLine": 42,
+        "endChar": 10
+      },
+      "revId": "5c4f054c3cffc947b28531db21362d4c7d317fa7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96f74dc9_059290c4",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 21
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-02-03T02:57:49Z",
+      "side": 1,
+      "message": "This is outdated due to the addition of the xattr, right?",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 35
+      },
+      "revId": "5c4f054c3cffc947b28531db21362d4c7d317fa7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
