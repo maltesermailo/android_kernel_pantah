@@ -27,9 +27,9 @@
  * Trusty. Options may be valid only for certain kinds of fds.
  */
 enum transfer_kind {
-	TRUSTY_SHARE = 0,
-	TRUSTY_LEND = 1,
-	TRUSTY_SEND_SECURE = 2,
+       TRUSTY_SHARE = 0,
+       TRUSTY_LEND = 1,
+       TRUSTY_SEND_SECURE = 2,
 };
 
 /**
