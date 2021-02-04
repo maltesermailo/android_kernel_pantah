@@ -145,6 +145,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b5f8a594_1921d954",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 1555,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-02-04T21:25:06Z",
+      "side": 1,
+      "message": "This:\n\n    if (df-\u003edf_data_block_count + hash_block_count !\u003d df-\u003edf_total_block_count \u0026\u0026\n        df-\u003edf_data_block_count !\u003d df-\u003edf_total_block_count)\n\nis equivalent to:\n\n    if (df-\u003edf_data_block_count + hash_block_count !\u003d df-\u003edf_total_block_count \u0026\u0026\n        hash_block_count !\u003d 0)\n\nSo if one version is wrong, then the other version is wrong too.",
+      "parentUuid": "98c05432_f0ae56b6",
+      "range": {
+        "startLine": 1555,
+        "startChar": 6,
+        "endLine": 1555,
+        "endChar": 60
+      },
+      "revId": "aae88a898d4c79cf285846934e68f3d85a021289",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "662cf303_699d727e",
         "filename": "fs/incfs/format.h",
         "patchSetId": 19
