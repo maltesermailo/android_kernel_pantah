@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e50f735d_75c20b61",
+        "filename": "fs/incfs/verity.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-02-04T21:16:41Z",
+      "side": 1,
+      "message": "This can race with FS_IOC_ENABLE_VERITY and see S_VERITY set but NULL verity_file_digest, causing a NULL deference.  It would be better to go with the approach used in earlier versions of this patch, where verity_file_digest.data is checked for NULL.  With that, it\u0027s not necessary to look at S_VERITY here.",
+      "range": {
+        "startLine": 455,
+        "startChar": 5,
+        "endLine": 455,
+        "endChar": 33
+      },
+      "revId": "c435feacef0e25cf48e0a995ba8eca8b74b81087",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
