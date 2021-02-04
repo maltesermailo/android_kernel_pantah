@@ -119,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98c05432_f0ae56b6",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 1555,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-02-04T15:48:39Z",
+      "side": 1,
+      "message": "But that\u0027s not the same thing at all. (I made that change to watch the code fail ...)\n\nYou mean replace this line with:\n\n        \u0026\u0026 hash_block_count !\u003d 0)\n\nSo df-\u003edf_data_block_count + hash_block_count !\u003d df-\u003edf_total_block_count because we are not using the original approach of putting the hash blocks next to the data blocks. In this case, \ndf-\u003edf_data_block_count \u003d\u003d df-\u003edf_total_block_count, but hash_block_count is whatever it should be.\n\nI have added a long comment to try to explain this, since I too found it confusing on revisiting.",
+      "parentUuid": "33a58f98_857290e6",
+      "range": {
+        "startLine": 1555,
+        "startChar": 6,
+        "endLine": 1555,
+        "endChar": 60
+      },
+      "revId": "aae88a898d4c79cf285846934e68f3d85a021289",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "662cf303_699d727e",
