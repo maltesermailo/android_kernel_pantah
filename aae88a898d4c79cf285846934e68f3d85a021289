@@ -193,6 +193,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9d640951_20da79b0",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 1555,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-02-05T19:02:55Z",
+      "side": 1,
+      "message": "You\u0027re right, I was thinking of the first part as \u003d\u003d.  I\u0027m not sure why, but something about this is really confusing to me.  Maybe the following would be easier to understand?\n\n        nondata_block_count \u003d df-\u003etotal_blocks_count - df-\u003edata_block_count;     \n        if (df-\u003edf_hash_tree) {                                                  \n                int hash_block_count \u003d get_blocks_count_for_size(                \n                        df-\u003edf_hash_tree-\u003ehash_tree_area_size);                  \n                                                                                 \n                /*                                                               \n                 * Files that were created with a hash tree have the hash tree   \n                 * included in the block map, i.e. nondata_block_count \u003d\u003d        \n                 * hash_block_count.  Files whose hash tree was added by         \n                 * FS_IOC_ENABLE_VERITY will still have the original block       \n                 * count, i.e. nondata_block_count \u003d\u003d 0.                         \n                 */                                                              \n                if (nondata_block_count !\u003d hash_block_count \u0026\u0026                   \n                    nondata_block_count !\u003d 0)                                    \n                        result \u003d -EINVAL;                                        \n        } else if (nondata_block_count !\u003d 0) {                                   \n                result \u003d -EINVAL;                                                \n        }",
+      "parentUuid": "f1a7be5b_24a056c7",
+      "range": {
+        "startLine": 1555,
+        "startChar": 6,
+        "endLine": 1555,
+        "endChar": 60
+      },
+      "revId": "aae88a898d4c79cf285846934e68f3d85a021289",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "662cf303_699d727e",
         "filename": "fs/incfs/format.h",
         "patchSetId": 19
