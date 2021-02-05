@@ -52,6 +52,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34321501_fadf6724",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2021-02-05T00:22:05Z",
+      "side": 1,
+      "message": "Yes, this can be implemented in a module, and I had an implementation that did it in that way.  \n\nThe team wanted this in ACK, because it is a better solution.  What if there is yet another module that is developed, perhaps downstream from QC, which uses the pause interface directly, as they certainly are allowed to do?  Under those circumstances, you might have OEM code that will fail sometimes. In other words, those entities will be trying to pause (or unpause) a CPU, and fighting other modules like thermal and core-ctl.\n\nWorst case, you could have a system that is unpausing a thermal-paused CPU, negating thermal\u0027s goal of reducing the CPU\u0027s temperature. With ref-counting in pause_cpus()/resume_cpus(), this won\u0027t happen.",
+      "parentUuid": "bff40832_c2678b2f",
+      "revId": "fcda8540b9d5e1222433dd049660f2609c120be2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb2f5e97_0e1fb232",
