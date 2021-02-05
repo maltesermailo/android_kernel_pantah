@@ -38,6 +38,9 @@ static const struct dm_default_key_cipher {
  * @sector_size: crypto sector size in bytes (usually 4096)
  * @sector_bits: log2(sector_size)
  * @key: the encryption key to use
+ * @is_hw_wrapped: true if the key is a hardware-wrapped key
+ * @all_blocks: if true, encrypt/decrypt all blocks rather than just the ones
+ *	        that aren't already part of an encrypted file
  * @max_dun: the maximum DUN that may be used (computed from other params)
  */
 struct default_key_c {
@@ -49,6 +52,7 @@ struct default_key_c {
 	unsigned int sector_bits;
 	struct blk_crypto_key key;
 	bool is_hw_wrapped;
+	bool all_blocks;
 	u64 max_dun;
 };
 
@@ -86,7 +90,7 @@ static int default_key_ctr_optional(struct dm_target *ti,
 	struct default_key_c *dkc = ti->private;
 	struct dm_arg_set as;
 	static const struct dm_arg _args[] = {
-		{0, 4, "Invalid number of feature args"},
+		{0, 5, "Invalid number of feature args"},
 	};
 	unsigned int opt_params;
 	const char *opt_string;
@@ -121,6 +125,8 @@ static int default_key_ctr_optional(struct dm_target *ti,
 			iv_large_sectors = true;
 		} else if (!strcmp(opt_string, "wrappedkey_v0")) {
 			dkc->is_hw_wrapped = true;
+		} else if (!strcmp(opt_string, "all_blocks")) {
+			dkc->all_blocks = true;
 		} else {
 			ti->error = "Invalid feature arguments";
 			return -EINVAL;
@@ -288,18 +294,23 @@ static int default_key_map(struct dm_target *ti, struct bio *bio)
 
 	/*
 	 * If the bio should skip dm-default-key (i.e. if it's for an encrypted
-	 * file's contents), or if it doesn't have any data (e.g. if it's a
-	 * DISCARD request), there's nothing more to do.
+	 * file's contents) and all_blocks wasn't specified when the target was
+	 * set up, or if the bio doesn't have any data (e.g. if it's a DISCARD
+	 * request), then there's nothing more to do.
 	 */
-	if (bio_should_skip_dm_default_key(bio) || !bio_has_data(bio))
+	if (bio_should_skip_dm_default_key(bio) && !dkc->all_blocks)
+		return DM_MAPIO_REMAPPED;
+	if (!bio_has_data(bio))
 		return DM_MAPIO_REMAPPED;
 
 	/*
 	 * Else, dm-default-key needs to set this bio's encryption context.
 	 * It must not already have one.
 	 */
-	if (WARN_ON_ONCE(bio_has_crypt_ctx(bio)))
+	if (bio_has_crypt_ctx(bio)) {
+		DMWARN("bio already has an encryption context!  'inlinecrypt' mount option needs to be removed from filesystem.");
 		return DM_MAPIO_KILL;
+	}
 
 	/* Calculate the DUN and enforce data-unit (crypto sector) alignment. */
 	dun[0] = dkc->iv_offset + sector_in_target; /* 512-byte sectors */
@@ -340,8 +351,8 @@ static void default_key_status(struct dm_target *ti, status_type_t type,
 		num_feature_args += !!ti->num_discard_bios;
 		if (dkc->sector_size != SECTOR_SIZE)
 			num_feature_args += 2;
-		if (dkc->is_hw_wrapped)
-			num_feature_args += 1;
+		num_feature_args += dkc->is_hw_wrapped;
+		num_feature_args += dkc->all_blocks;
 		if (num_feature_args != 0) {
 			DMEMIT(" %d", num_feature_args);
 			if (ti->num_discard_bios)
@@ -352,6 +363,8 @@ static void default_key_status(struct dm_target *ti, status_type_t type,
 			}
 			if (dkc->is_hw_wrapped)
 				DMEMIT(" wrappedkey_v0");
+			if (dkc->all_blocks)
+				DMEMIT(" all_blocks");
 		}
 		break;
 	}
@@ -396,7 +409,7 @@ static void default_key_io_hints(struct dm_target *ti,
 
 static struct target_type default_key_target = {
 	.name			= "default-key",
-	.version		= {2, 1, 0},
+	.version		= {2, 2, 0},
 	.module			= THIS_MODULE,
 	.ctr			= default_key_ctr,
 	.dtr			= default_key_dtr,
