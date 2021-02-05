@@ -365,7 +365,7 @@ static int ufs_qcom_hce_enable_notify(struct ufs_hba *hba,
 		/* check if UFS PHY moved from DISABLED to HIBERN8 */
 		err = ufs_qcom_check_hibern8(hba);
 		ufs_qcom_enable_hw_clk_gating(hba);
-		ufs_qcom_ice_enable(host);
+		ufshcd_crypto_qti_ice_enable(host);
 		break;
 	default:
 		dev_err(hba->dev, "%s: invalid status %d\n", __func__, status);
@@ -1070,9 +1070,15 @@ static int ufs_qcom_init(struct ufs_hba *hba)
 	ufs_qcom_set_caps(hba);
 	ufs_qcom_advertise_quirks(hba);
 
-	err = ufs_qcom_ice_init(host);
+	err = ufshcd_crypto_qti_ice_init(host);
 	if (err)
 		goto out_variant_clear;
+
+	if (hba->quirks & UFSHCD_QUIRK_CUSTOM_KEYSLOT_MANAGER) {
+		err = ufshcd_hba_init_crypto_qti_wrapped_capabilities(hba);
+		if (err)
+			goto out_variant_clear;
+	}
 
 	ufs_qcom_setup_clocks(hba, true, POST_CHANGE);
 

@@ -18,7 +18,8 @@ static const struct ufs_crypto_alg_entry {
 };
 
 static int ufshcd_program_key(struct ufs_hba *hba,
-			      const union ufs_crypto_cfg_entry *cfg, int slot)
+			      const union ufs_crypto_cfg_entry *cfg,
+				  const struct blk_crypto_key *key, int slot)
 {
 	int i;
 	u32 slot_offset = hba->crypto_cfg_register + slot * sizeof(*cfg);
@@ -27,7 +28,7 @@ static int ufshcd_program_key(struct ufs_hba *hba,
 	ufshcd_hold(hba, false);
 
 	if (hba->vops && hba->vops->program_key) {
-		err = hba->vops->program_key(hba, cfg, slot);
+		err = hba->vops->program_key(hba, cfg, key, slot);
 		goto out;
 	}
 
@@ -88,7 +89,7 @@ static int ufshcd_crypto_keyslot_program(struct blk_keyslot_manager *ksm,
 		memcpy(cfg.crypto_key, key->raw, key->size);
 	}
 
-	err = ufshcd_program_key(hba, &cfg, slot);
+	err = ufshcd_program_key(hba, &cfg, key, slot);
 
 	memzero_explicit(&cfg, sizeof(cfg));
 	return err;
@@ -100,9 +101,10 @@ static int ufshcd_clear_keyslot(struct ufs_hba *hba, int slot)
 	 * Clear the crypto cfg on the device. Clearing CFGE
 	 * might not be sufficient, so just clear the entire cfg.
 	 */
+	struct blk_crypto_key *key;
 	union ufs_crypto_cfg_entry cfg = {};
 
-	return ufshcd_program_key(hba, &cfg, slot);
+	return ufshcd_program_key(hba, &cfg, key, slot);
 }
 
 static int ufshcd_crypto_keyslot_evict(struct blk_keyslot_manager *ksm,

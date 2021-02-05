@@ -363,9 +363,8 @@ struct ufs_hba_variant_ops {
 					struct devfreq_dev_profile *profile,
 					void *data);
 	int	(*program_key)(struct ufs_hba *hba,
-			       const union ufs_crypto_cfg_entry *cfg, int slot);
-	void	(*event_notify)(struct ufs_hba *hba,
-				enum ufs_event_type evt, void *data);
+					const union ufs_crypto_cfg_entry *cfg,
+			        const struct blk_crypto_key *key, int slot);
 	int	(*fill_prdt)(struct ufs_hba *hba, struct ufshcd_lrb *lrbp,
 			     unsigned int segments);
 	int	(*prepare_command)(struct ufs_hba *hba,
