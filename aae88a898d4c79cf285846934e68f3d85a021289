@@ -167,6 +167,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1a7be5b_24a056c7",
+        "filename": "fs/incfs/data_mgmt.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 1555,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2021-02-05T14:36:58Z",
+      "side": 1,
+      "message": "In the \u0027enable verity writes the merkle tree\u0027 path, we have df-\u003edf_data_block_count \u003d\u003d df-\u003edf_total_block_count and a non-zero hash_block_count.\n\nIn this case, my way is correct (the second !\u003d fails, so the \u0026\u0026 fails, so this is not an error) but yours isn\u0027t (both statements are true so the error is triggered)\n\nx+y !\u003d z \u0026\u0026 x !\u003d z\n\nx+y !\u003d z \u0026\u0026 y !\u003d 0\n\nx \u003d 1, y \u003d 1, z \u003d 1:\n\n2 !\u003d 1 \u0026\u0026 1 !\u003d 1 is false\n2 !\u003d 1 \u0026\u0026 1 !\u003d 0 is true\n\nSo no, they are not the same.",
+      "parentUuid": "b5f8a594_1921d954",
+      "range": {
+        "startLine": 1555,
+        "startChar": 6,
+        "endLine": 1555,
+        "endChar": 60
+      },
+      "revId": "aae88a898d4c79cf285846934e68f3d85a021289",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "662cf303_699d727e",
