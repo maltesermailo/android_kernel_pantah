@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "762c9430_d1792710",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 924,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2021-02-06T06:43:09Z",
+      "side": 1,
+      "message": "In what situation would this be NULL? I would expect that channel is present if we are handling an event. (Same question for other trace_trusty_ipc_*)",
+      "range": {
+        "startLine": 924,
+        "startChar": 22,
+        "endLine": 924,
+        "endChar": 30
+      },
+      "revId": "3b6b7debc9c834ea4936035c76c49b13ae9fe580",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d3454f3_31e7d8b1",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 998,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2021-02-06T06:43:09Z",
+      "side": 1,
+      "message": "You could also put a one tracepoint here and record an the event instead of the three above.",
+      "revId": "3b6b7debc9c834ea4936035c76c49b13ae9fe580",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df0bae61_494d3d63",
+        "filename": "drivers/trusty/trusty-irq-trace.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2021-02-06T06:43:09Z",
+      "side": 1,
+      "message": "2021 \nSame for other files",
+      "range": {
+        "startLine": 3,
+        "startChar": 17,
+        "endLine": 3,
+        "endChar": 21
+      },
+      "revId": "3b6b7debc9c834ea4936035c76c49b13ae9fe580",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "873f21a3_30c99e4c",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2021-02-06T06:43:09Z",
+      "side": 1,
+      "message": "Consider putting the tracepoints inside smc() and collapsing smc trace events into one. We should be able to figure out whether the call is fast/std or 32/64 from the SMC number.",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 36
+      },
+      "revId": "3b6b7debc9c834ea4936035c76c49b13ae9fe580",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad8f375f_dd87a715",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2021-02-06T06:43:09Z",
+      "side": 1,
+      "message": "The other tracepoints surround smc() call. What\u0027s different here?",
+      "revId": "3b6b7debc9c834ea4936035c76c49b13ae9fe580",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
