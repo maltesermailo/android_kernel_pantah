@@ -19,6 +19,7 @@
 #include <linux/bug.h>
 #include <linux/jump_label.h>
 #include <linux/kernel.h>
+#include <linux/cpumask.h>
 
 /*
  * CPU feature register tracking
@@ -798,6 +799,7 @@ static inline unsigned int get_vmid_bits(u64 mmfr1)
 
 u32 get_kvm_ipa_limit(void);
 void dump_cpu_features(void);
+extern cpumask_var_t cpu_32bit_el0_mask;
 
 #endif /* __ASSEMBLY__ */
 

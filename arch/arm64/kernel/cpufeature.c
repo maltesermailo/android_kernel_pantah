@@ -123,7 +123,7 @@ DEFINE_STATIC_KEY_FALSE(arm64_mismatched_32bit_el0);
  * Mask of CPUs supporting 32-bit EL0.
  * Only valid if arm64_mismatched_32bit_el0 is enabled.
  */
-static cpumask_var_t cpu_32bit_el0_mask __cpumask_var_read_mostly;
+cpumask_var_t cpu_32bit_el0_mask __cpumask_var_read_mostly;
 
 /*
  * Flag to indicate if we have computed the system wide
