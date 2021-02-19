@@ -1173,6 +1173,31 @@ static void ufshcd_clock_scaling_unprepare(struct ufs_hba *hba)
 }
 
 /**
+ * ufshcd_get_exclusive_access - block all UFS requests and wait for existing
+ *				 UFS requests to complete
+ * @hba: per adapter instance
+ *
+ * This must be paired with ufshcd_put_exclusive_access().
+ *
+ * Return: 0 on success, -EBUSY on timeout
+ */
+int ufshcd_get_exclusive_access(struct ufs_hba *hba)
+{
+	return ufshcd_clock_scaling_prepare(hba);
+}
+EXPORT_SYMBOL_GPL(ufshcd_get_exclusive_access);
+
+/**
+ * ufshcd_put_exclusive_access - resume UFS request processing
+ * @hba: per adapter instance
+ */
+void ufshcd_put_exclusive_access(struct ufs_hba *hba)
+{
+	ufshcd_clock_scaling_unprepare(hba);
+}
+EXPORT_SYMBOL_GPL(ufshcd_put_exclusive_access);
+
+/**
  * ufshcd_devfreq_scale - scale up/down UFS clocks and gear
  * @hba: per adapter instance
  * @scale_up: True for scaling up and false for scalin down
