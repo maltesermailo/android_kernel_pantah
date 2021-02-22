@@ -40,6 +40,7 @@
 #include <trace/hooks/ufshcd.h>
 #include <trace/hooks/avc.h>
 #include <trace/hooks/creds.h>
+#include <trace/hooks/module.h>
 #include <trace/hooks/memory.h>
 
 /*
@@ -180,3 +181,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_override_creds);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_revert_creds);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_memory_ro_x);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_memory_rw_nx);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_module_permission);
