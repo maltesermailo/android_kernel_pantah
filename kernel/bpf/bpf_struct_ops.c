@@ -10,6 +10,7 @@
 #include <linux/seq_file.h>
 #include <linux/refcount.h>
 #include <linux/mutex.h>
+#include <trace/hooks/memory.h>
 
 enum bpf_struct_ops_state {
 	BPF_STRUCT_OPS_STATE_INIT,
@@ -449,6 +450,7 @@ static int bpf_struct_ops_map_update_elem(struct bpf_map *map, void *key,
 
 	set_memory_ro((long)st_map->image, 1);
 	set_memory_x((long)st_map->image, 1);
+	trace_android_vh_set_memory_ro_x((unsigned long)st_map->image, 1, true);
 	err = st_ops->reg(kdata);
 	if (likely(!err)) {
 		/* Pair with smp_load_acquire() during lookup_elem().
@@ -533,6 +535,7 @@ static void bpf_struct_ops_map_free(struct bpf_map *map)
 		bpf_struct_ops_map_put_progs(st_map);
 	bpf_map_area_free(st_map->progs);
 	bpf_jit_free_exec(st_map->image);
+	trace_android_vh_set_memory_rw_nx((unsigned long)st_map->image, 1, true);
 	bpf_map_area_free(st_map->uvalue);
 	bpf_map_area_free(st_map);
 }
