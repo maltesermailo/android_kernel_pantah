@@ -511,6 +511,7 @@ static unsigned long arm_trbe_update_buffer(struct coresight_device *csdev,
 	if (cpudata->mode != CS_MODE_PERF)
 		return -EINVAL;
 
+	perf_aux_output_flag(handle, PERF_AUX_FLAG_CORESIGHT_FORMAT_RAW);
 	/*
 	 * If the TRBE was disabled due to lack of space in the AUX buffer or a
 	 * spurious fault, the driver leaves it disabled, truncating the buffer.
@@ -606,6 +607,7 @@ static void trbe_handle_overflow(struct perf_output_handle *handle)
 	size = offset - PERF_IDX2OFF(handle->head, buf);
 	if (buf->snapshot)
 		handle->head = offset;
+	perf_aux_output_flag(handle, PERF_AUX_FLAG_CORESIGHT_FORMAT_RAW);
 	perf_aux_output_end(handle, size);
 
 	event_data = perf_aux_output_begin(handle, event);
