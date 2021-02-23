@@ -156,6 +156,17 @@ config CORESIGHT_CTI
 	  To compile this driver as a module, choose M here: the
 	  module will be called coresight-cti.
 
+config CORESIGHT_TRBE
+	bool "Trace Buffer Extension (TRBE) driver"
+	depends on ARM64
+	help
+	  This driver provides support for percpu Trace Buffer Extension (TRBE).
+	  TRBE always needs to be used along with it's corresponding percpu ETE
+	  component. ETE generates trace data which is then captured with TRBE.
+	  Unlike traditional sink devices, TRBE is a CPU feature accessible via
+	  system registers. But it's explicit dependency with trace unit (ETE)
+	  requires it to be plugged in as a coresight sink device.
+
 config CORESIGHT_CTI_INTEGRATION_REGS
 	bool "Access CTI CoreSight Integration Registers"
 	depends on CORESIGHT_CTI
