@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88731148_b6ec8f40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2021-02-24T00:02:14Z",
+      "side": 1,
+      "message": "I honestly don\u0027t know how much you care about making this precise, but at first very casual glance I see the following networking dirs in a 5.10 tree:\n\n./Documentation/networking\n./arch/mips/net\n./arch/powerpc/net\n./arch/riscv/net\n./arch/arm64/net\n./arch/s390/net\n./arch/x86/net\n./arch/sparc/net\n./arch/arm/net\n./include/linux/netfilter_bridge\n./include/linux/net\n./include/linux/netfilter_ipv6\n./include/linux/netfilter_ipv4\n./include/linux/netfilter\n./include/linux/netfilter_arp\n./include/uapi/linux/netfilter_bridge\n./include/uapi/linux/netfilter_ipv6\n./include/uapi/linux/netfilter_ipv4\n./include/uapi/linux/netfilter\n./include/uapi/linux/netfilter_arp\n\n(the other archs could potentially matter for cherrypicks/backports)\n\nThis still doesn\u0027t cover things like \u0027./include/linux/ipv6.h\u0027 \u0027./include/uapi/linux/ipv6.h\u0027 \u0027./include/linux/rtnetlink.h\u0027 \u0027./include/uapi/linux/ipsec.h\u0027 ... and tons of other stuff, especially for header files with \u0027/fib\u0027, \u0027/net\u0027, \u0027/ip\u0027 or \u0027/rt\u0027 somewhere in the path (not to mention bpf).\n\nUnfortunately header files (because of struct/enum/inline declarations that then affect the full tree and often have additional userspace visible api considerations) are often more important to get right then the core code itself (which is far easier to fix later)...\n\nIt would probably be best if this was based on some central config file with regexps and not on actual OWNER files due to limited configurability there-of???\n\nI guess, I\u0027m just not sure if this provides all that much benefit in its current form...",
+      "revId": "46480664b11ae5db03c28d552e95e01bf85690f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45387fa5_2253f528",
