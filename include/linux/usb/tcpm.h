@@ -19,6 +19,10 @@ enum typec_cc_status {
 	TYPEC_CC_RP_3_0,
 };
 
+/* Collision Avoidance */
+#define SINK_TX_NG	TYPEC_CC_RP_1_5
+#define SINK_TX_OK	TYPEC_CC_RP_3_0
+
 enum typec_cc_polarity {
 	TYPEC_POLARITY_CC1,
 	TYPEC_POLARITY_CC2,
@@ -104,6 +108,7 @@ enum tcpm_transmit_type {
  *		is supported by TCPC, set this callback for TCPM to query
  *		whether vbus is at VSAFE0V when needed.
  *		Returns true when vbus is at VSAFE0V, false otherwise.
+<<<<<<< HEAD   (114062 Merge 2c405d1ab8b3 ("Merge tag 'x86_asm_for_v5.12' of git://)
  * @check_contaminant:
  *		Optional; The callback is called when CC pins report open status
  *		at the end of the toggling period. Chip level drivers are
@@ -112,6 +117,12 @@ enum tcpm_transmit_type {
  *		restart toggling after checking the connector for contaminant.
  *		This forces the TCPM state machine to tranistion to TOGGLING state
  *		without calling start_toggling callback.
+=======
+ * @set_partner_usb_comm_capable:
+ *              Optional; The USB Communications Capable bit indicates if port
+ *              partner is capable of communication over the USB data lines
+ *              (e.g. D+/- or SS Tx/Rx). Called to notify the status of the bit.
+>>>>>>> BRANCH (5d99aa Merge tag 'staging-5.12-rc1' of git://git.kernel.org/pub/scm)
  */
 struct tcpc_dev {
 	struct fwnode_handle *fwnode;
@@ -143,7 +154,11 @@ struct tcpc_dev {
 	int (*set_auto_vbus_discharge_threshold)(struct tcpc_dev *dev, enum typec_pwr_opmode mode,
 						 bool pps_active, u32 requested_vbus_voltage);
 	bool (*is_vbus_vsafe0v)(struct tcpc_dev *dev);
+<<<<<<< HEAD   (114062 Merge 2c405d1ab8b3 ("Merge tag 'x86_asm_for_v5.12' of git://)
 	int (*check_contaminant)(struct tcpc_dev *dev);
+=======
+	void (*set_partner_usb_comm_capable)(struct tcpc_dev *dev, bool enable);
+>>>>>>> BRANCH (5d99aa Merge tag 'staging-5.12-rc1' of git://git.kernel.org/pub/scm)
 };
 
 struct tcpm_port;
