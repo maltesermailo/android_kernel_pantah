@@ -36,6 +36,7 @@
 #include <trace/hooks/power.h>
 #include <trace/hooks/fault.h>
 #include <trace/hooks/iommu.h>
+#include <trace/hooks/ufshcd.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -156,3 +157,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_pick_next_entity);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_check_preempt_wakeup);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rmqueue);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pagecache_get_page);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ufs_prepare_command);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ufs_update_sysfs);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ufs_send_command);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ufs_compl_command);
