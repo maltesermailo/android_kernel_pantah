@@ -675,6 +675,12 @@ dma_buf_attachment_is_dynamic(struct dma_buf_attachment *attach)
 	return !!attach->importer_ops;
 }
 
+<<<<<<< HEAD   (3e4fa5 ANDROID: hung_task: Add vendor hook for hung task detect)
+=======
+int get_each_dmabuf(int (*callback)(const struct dma_buf *dmabuf,
+		    void *private), void *private);
+int is_dma_buf_file(struct file *file);
+>>>>>>> CHANGE (602e4e ANDROID: dma-buf: add get_each_dmabuf function)
 struct dma_buf_attachment *dma_buf_attach(struct dma_buf *dmabuf,
 					  struct device *dev);
 struct dma_buf_attachment *
