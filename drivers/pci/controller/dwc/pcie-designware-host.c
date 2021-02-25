@@ -5,7 +5,7 @@
  * Copyright (C) 2013 Samsung Electronics Co., Ltd.
  *		https://www.samsung.com
  *
- * Author: Jingoo Han <jg1.han@samsung.com>
+ * Author: Jingoo Han <jg1.han@samsung.com>tt
  */
 
 #include <linux/irqchip/chained_irq.h>
