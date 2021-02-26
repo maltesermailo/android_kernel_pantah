@@ -22,6 +22,30 @@
       },
       "revId": "72244c77f81202a5d2b2f5cf0b39963fdc69ae36",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a90f214b_b21ce562",
+        "filename": "android/abi_gki_aarch64_imx",
+        "patchSetId": 2
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2021-02-26T03:52:11Z",
+      "side": 1,
+      "message": "Thanks Greg. I have tried to remove all kernel_read/write used in our drivers, then update the symbol list, but they appears here again.\nI searched whole code and found them also exists in drivers/usb/gadget/function/f_mass_storage.c.\nWhat\u0027s more, they do exists in other vendor\u0027s symbol list in android/abi_gki_aarch64_*.\nI see that in the long run, we should remove uses of kernel_read/write in drivers, but in current stage, should I just remove these two lines in abi_gki_aarch64_imx then resend the patch?\nThanks",
+      "parentUuid": "2b5bdd76_89dbe743",
+      "range": {
+        "startLine": 300,
+        "startChar": 2,
+        "endLine": 301,
+        "endChar": 14
+      },
+      "revId": "72244c77f81202a5d2b2f5cf0b39963fdc69ae36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
