@@ -13,6 +13,8 @@
 #include <linux/module.h>
 #include <linux/log2.h>
 #include <asm/page.h>
+#include <linux/debugfs.h>
+#include <linux/delay.h>
 #include "trusty-log.h"
 
 #define TRUSTY_LOG_SIZE (PAGE_SIZE * 2)
@@ -49,7 +51,131 @@ struct trusty_log_state {
 	char line_buffer[TRUSTY_LINE_BUFFER_SIZE];
 	struct log_data_footer footer;
 	struct log_data_header header;
+
+	struct dentry *trusty_debugfs_file;
+	struct dentry *trusty_debugfs_dir;
 };
+
+static void trusty_dump_logs(struct trusty_log_state *s, struct seq_file *seqf);
+
+static void *trusty_log_start(struct seq_file *m, loff_t *pos)
+{
+	struct trusty_log_state *s = (struct trusty_log_state *)m->private;
+
+	return s;
+}
+
+static void *trusty_log_next(struct seq_file *m, void *p, loff_t *pos)
+{
+	struct trusty_log_state *s = (struct trusty_log_state *)m->private;
+
+	return s;
+}
+
+static int trusty_log_show(struct seq_file *m, void *p)
+{
+	struct trusty_log_state *s = (struct trusty_log_state *)m->private;
+	unsigned long flags;
+
+	spin_lock_irqsave(&s->lock, flags);
+	trusty_dump_logs(s, m);
+	spin_unlock_irqrestore(&s->lock, flags);
+
+	return 0;
+}
+
+static void trusty_log_stop(struct seq_file *m, void *p)
+{
+	return;
+}
+
+static const struct seq_operations trusty_log_seqops = {
+	.start = trusty_log_start,
+	.next = trusty_log_next,
+	.show = trusty_log_show,
+	.stop = trusty_log_stop
+};
+
+static int trusty_debugfs_log_open(struct inode *inode, struct file *file)
+{
+	int ret = seq_open_private(file, &trusty_log_seqops,
+				sizeof(struct trusty_log_state));
+	struct trusty_log_state *tls =
+	(struct trusty_log_state *)((struct seq_file *)file->private_data)->private;
+	memcpy(tls, inode->i_private, sizeof(struct trusty_log_state));
+	tls->get = 0;
+	return ret;
+}
+
+static const struct file_operations trusty_debugfs_ops = {
+		.owner = THIS_MODULE,
+		.open = trusty_debugfs_log_open,
+		.read = seq_read,
+		.llseek = seq_lseek,
+		.release = seq_release_private,
+};
+
+static int trusty_debugfs_init(struct trusty_log_state *s)
+{
+	s->trusty_debugfs_dir = debugfs_create_dir("trusty_logs", NULL);
+	if (!s->trusty_debugfs_dir) {
+		dev_err(s->dev, "failed to create trusty_logs debugfs directory\n");
+		return -1;
+	}
+
+	s->trusty_debugfs_file = debugfs_create_file(
+			"trusty_debug.log",
+			0644, s->trusty_debugfs_dir,
+			(void *)s,
+			&trusty_debugfs_ops);
+	if(!s->trusty_debugfs_file) {
+		dev_err(s->dev,
+				"failed to create trusty_logs/trusty_debug.log debugfs file\n");
+		return -1;
+	}
+
+	return 0;
+}
+
+static void trusty_debugfs_exit(struct trusty_log_state *s)
+{
+	debugfs_remove_recursive(s->trusty_debugfs_dir);
+}
+
+static void trusty_debugfs_write(struct trusty_log_state *s,
+					struct seq_file *seqf,
+					bool is_overflow)
+{
+	int i;
+	char *app_name = NULL;
+	if (s == NULL || seqf == NULL)
+		return;
+
+	if (is_overflow) {
+		sprintf(s->line_buffer, "%s\n", "log overflow");
+		strcpy(s->header.data, s->line_buffer);
+		strcat(s->header.data, "trusty-log");
+		s->header.entry_size = sizeof(uint32_t) +
+			strlen(s->line_buffer) + strlen("trusty-log") + 1 +
+			sizeof(struct log_data_footer);
+		s->footer.log_level = 0;
+		s->footer.app_id = -1;
+		s->footer.timestamp = 0;
+		s->footer.app_name_len = strlen("trusty-log");
+		s->footer.log_len = strlen(s->line_buffer);
+	}
+	app_name = &s->header.data[s->footer.log_len];
+
+	s->footer.log_len = strlen(s->line_buffer) + 1;
+	seq_write(seqf, (const void *)&s->footer,
+			sizeof(struct log_data_footer));
+
+	for (i = 0; i < s->footer.log_len; i++)
+		seq_printf(seqf, "%c", s->line_buffer[i]);
+
+	for (i = 0; i < s->footer.app_name_len; i++)
+		seq_printf(seqf, "%c", app_name[i]);
+}
 
 static void read_log_data(struct trusty_log_state *s, uint32_t log_offset,
 			   uint32_t len, char *value)
@@ -165,7 +291,7 @@ static int log_read_line(struct trusty_log_state *s, u32 put, u32 get,
 	return get;
 }
 
-static void trusty_dump_logs(struct trusty_log_state *s)
+static void trusty_dump_logs(struct trusty_log_state *s, struct seq_file *seqf)
 {
 	struct log_rb *log = s->log;
 	u32 get, put, alloc;
@@ -197,8 +323,6 @@ static void trusty_dump_logs(struct trusty_log_state *s)
 		 * have been corrupted by the producer.
 		 */
 		if (alloc - get > log->sz) {
-			dev_err(s->dev, "log overflow.");
-
 			/* traverse backwards till we get valid entry */
 			entry = alloc;
 			entry_size = get_previous_entry_size(s, entry);
@@ -227,25 +351,34 @@ static void trusty_dump_logs(struct trusty_log_state *s)
 				partial_entry_size = 0;
 			}
 
+			if (seqf == NULL)
+				dev_err(s->dev, "log overflow.");
+			else
+				trusty_debugfs_write(s, seqf, true);
+
 			get = entry;
 			continue;
 		}
 
-		if (__ratelimit(&trusty_log_rate_limit)) {
-			if (s->footer.app_name_len > 0) {
-				char *app_name =
-					&s->header.data[s->footer.log_len];
-
-				dev_info(s->dev, "%llu: %u: %s: %s",
-					s->footer.timestamp,
-					s->footer.log_level,
-					app_name,
-					s->line_buffer);
-			} else {
-				dev_info(s->dev, "%llu: %u: %s",
-					s->footer.timestamp,
-					s->footer.log_level,
-					s->line_buffer);
+		if (seqf) {
+			/* write to debugfs trusty-log file */
+			trusty_debugfs_write(s, seqf, false);
+		} else {
+			if (__ratelimit(&trusty_log_rate_limit)) {
+				if (s->footer.app_name_len > 0) {
+					char *app_name =
+						&s->header.data[s->footer.log_len];
+					dev_info(s->dev, "%llu: %u: %s: %s",
+						s->footer.timestamp,
+						s->footer.log_level,
+						app_name,
+						s->line_buffer);
+				} else {
+					dev_info(s->dev, "%llu: %u: %s",
+						s->footer.timestamp,
+						s->footer.log_level,
+						s->line_buffer);
+				}
 			}
 		}
 	}
@@ -263,7 +396,7 @@ static int trusty_log_call_notify(struct notifier_block *nb,
 
 	s = container_of(nb, struct trusty_log_state, call_notifier);
 	spin_lock_irqsave(&s->lock, flags);
-	trusty_dump_logs(s);
+	trusty_dump_logs(s, NULL);
 	spin_unlock_irqrestore(&s->lock, flags);
 	return NOTIFY_OK;
 }
@@ -280,7 +413,7 @@ static int trusty_log_panic_notify(struct notifier_block *nb,
 	s = container_of(nb, struct trusty_log_state, panic_notifier);
 	dev_info(s->dev, "panic notifier - trusty version %s",
 		 trusty_version_str_get(s->trusty_dev));
-	trusty_dump_logs(s);
+	trusty_dump_logs(s, NULL);
 	return NOTIFY_OK;
 }
 
@@ -374,6 +507,11 @@ static int trusty_log_probe(struct platform_device *pdev)
 	}
 	platform_set_drvdata(pdev, s);
 
+	result = trusty_debugfs_init(s);
+	if (result < 0) {
+		goto error_panic_notifier;
+	}
+
 	return 0;
 
 error_panic_notifier:
@@ -427,6 +565,9 @@ static int trusty_log_remove(struct platform_device *pdev)
 		 */
 		__free_pages(s->log_pages, get_order(TRUSTY_LOG_SIZE));
 	}
+
+	trusty_debugfs_exit(s);
+
 	kfree(s);
 
 	return 0;
