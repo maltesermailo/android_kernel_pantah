@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a7ba90a_312dd63c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-02-28T22:02:53Z",
+      "side": 1,
+      "message": "This caused a kernelci build-break:\n\nkernel/sched/rt.c:1385:33: error: ‘struct \u003canonymous\u003e’ has no member named ‘next’\nkernel/sched/rt.c:1387:1: error: control reaches end of non-void function [-Werror\u003dreturn-type]\n\nSee https://kernelci.org/build/id/6037ff223efaaff813addcb7/logs/",
+      "revId": "da5f3cd37802e4d68861422ba4503a4e2d58aa23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
