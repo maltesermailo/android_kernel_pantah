@@ -16,6 +16,23 @@
       "message": "Eric, here you can watch the failures if you are interested 😊",
       "revId": "8ad3e4a357f3e090494065fd1ce821868d76c55b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dc7cd91_58473565",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-03-04T20:21:45Z",
+      "side": 1,
+      "message": "The log has:\n\n    [   28.412427] init: [libfs_mgr]Skipping mounting \u0027/dev/block/dm-2\u0027\n    [   28.413459] init: [libfs_mgr]Failed to open \u0027/dev/block/dm-2\u0027: No such file or directory\n    [   28.414611] init: [libfs_mgr]__mount(source\u003d/dev/block/dm-2(missing),target\u003d/system,type\u003dext4)\u003d-1: No such file or directory\n\nThis same issue was already reported upstream by John Stultz (https://lkml.kernel.org/linux-block/CALAqxLU3B8YcS_MTnr2Lpasvn8oLJvD2qO4hkfkZeEwVNfeHXg@mail.gmail.com/), and supposedly it was fixed by upstream commit 75ab6afacda (\"block: don\u0027t skip empty device in in disk_uevent\").\n\nGreg, you might want to ask John to Cc you each time he notices that something upstream broke Android, since this isn\u0027t the first time this has happened :-)  It also happened for the blk-crypto-fallback crash: https://lkml.kernel.org/linux-block/CALAqxLUWjr2oR\u003d5XxyGQ2HcC-TLARvboHRHHaAOUFq6_TsKXyw@mail.gmail.com/",
+      "revId": "8ad3e4a357f3e090494065fd1ce821868d76c55b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
