@@ -251,6 +251,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_util_est_update);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_setscheduler_uclamp);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_wake_up_sync);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_wake_flags);
+<<<<<<< HEAD   (276a5e ANDROID: uapi: icmp: Bionic compat with __unused)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_effective_cpu_util);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_report_bug);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_watchdog_timer_softlockup);
@@ -297,3 +298,12 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_force_compatible_post);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_regmap_update);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dma_buf_release);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_check_status);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_uclamp_eff_value);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpufreq_transition);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cgroup_set_task);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_syscall_prctl_finished);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_mutex_list_add);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_unlock_slowpath);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_wake_finish);
+>>>>>>> CHANGE (80b434 ANDROID: vendor_hooks: Add hooks for rwsem and mutex)
