@@ -45,6 +45,30 @@
       },
       "revId": "e52a5870a7705b6ec29dedc17af677260b0c31c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5663d655_1f9dd282",
+        "filename": "android/abi_gki_aarch64_qcom",
+        "patchSetId": 1
+      },
+      "lineNbr": 928,
+      "author": {
+        "id": 1864155
+      },
+      "writtenOn": "2021-03-09T08:48:55Z",
+      "side": 1,
+      "message": "we have a perf. analysis module that retrieves a bunch of task related stats (similar to taskstats) along with task\u0027s name as below:\np \u003d find_lock_task_mm(tsk);\nexe_file \u003d get_mm_exe_file(p-\u003emm);\npath \u003d file_path(exe_file, pathbuf, PATH_MAX);\n\nHence needed these two symbols, file_path and get_mm_exe_file in whitelist.",
+      "parentUuid": "c448730c_8c5e03bd",
+      "range": {
+        "startLine": 928,
+        "startChar": 2,
+        "endLine": 928,
+        "endChar": 17
+      },
+      "revId": "e52a5870a7705b6ec29dedc17af677260b0c31c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
