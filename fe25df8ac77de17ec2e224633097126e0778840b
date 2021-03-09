@@ -16,6 +16,24 @@
       "message": "why is this all needed?",
       "revId": "fe25df8ac77de17ec2e224633097126e0778840b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cf3521a_9232f2d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2021-03-09T17:39:53Z",
+      "side": 1,
+      "message": "Hi Greg,since all vendor heap drivers are not located in drivers/dma-buf/heaps, its a little cumbersome for those drivers to include this header file(deferred-free-helper.h). It is doable but the include statement looks ugly :). Do you see any concerns with moving it to include/linux instead? Thanks!",
+      "parentUuid": "c6c0b6a9_7aa173d6",
+      "revId": "fe25df8ac77de17ec2e224633097126e0778840b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
