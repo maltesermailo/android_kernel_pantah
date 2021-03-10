@@ -16,6 +16,24 @@
       "message": "This is baking in the internal xhci structures to a stable api, are you SURE you really want to do that?\n\nWhat\u0027s preventing you from submitting your xhci offload patch upstream?  Upstream has been begging for such patches for a while now...",
       "revId": "53a86cb9c99cdd893b19d0813bc00a0289b93d7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d951eed_4c2b5df1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1030767
+      },
+      "writtenOn": "2021-03-10T22:06:27Z",
+      "side": 1,
+      "message": "\u003e This is baking in the internal xhci structures to a stable api, are you SURE you really want to do that?\n\nUnderstood. We really only need these to the extent that our vendor driver currently manages a secondary xhci ring structure outside of the core xhci driver. The ideal situation would be to of course send a patch to upstream for proper support of secondary ring management and make expose public interfaces public suitable for a stable API/ABI without exposing any of the internals that can change over time. But...\n \n\u003e What\u0027s preventing you from submitting your xhci offload patch upstream?  Upstream has been begging for such patches for a while now...\n\nMainly it\u0027s the ALSA side of things that need to be prepared to upstream. We have a custom QMI client driver as well which is where the secondary ring info is passed to the coprocessor, and these aren\u0027t currently in upstreamable shape yet, will probably need several weeks to get there. I would be more than happy to introduce these new xhci secondary ring APIs that would support what we need. But my impression from past remarks from you \u0026 other maintainers upstream is that introducing new APIs without also submitting patches showing callers of the new code seems to be discouraged, so our reluctance is due to not having all the end-to-end pieces ready yet. If we do it piecemeal (introduce the xhci changes now, and ALSA changes later), would that work?",
+      "parentUuid": "2e87c112_1fb6f9c5",
+      "revId": "53a86cb9c99cdd893b19d0813bc00a0289b93d7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
