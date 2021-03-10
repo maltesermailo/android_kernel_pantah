@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2eadd5f_9039a5f6",
+        "filename": "drivers/mmc/host/cqhci-crypto.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1368904
+      },
+      "writtenOn": "2021-03-10T20:20:16Z",
+      "side": 1,
+      "message": "Not important, but should we should put a WARN_ON(mrq-\u003ecrypt_ctx-\u003ebc_dun[0] \u003e U32_MAX) here (like what we had before in mmc_crypto_prepare_req()? And maybe it makes sense to also check that the rest of bc_dun is 0?",
+      "revId": "e0b640f8db9ad25e5ba06440b4a4b915801c4387",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
