@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "447e5e1d_5964b497",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2021-03-10T19:40:02Z",
+      "side": 1,
+      "message": "This issue came up in one of our test cases.",
+      "revId": "c18b3e31db398605b88a9f8b4aacc41824f997b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a41b77d_14ade6ab",
+        "filename": "kernel/cpu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1011,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2021-03-10T19:40:02Z",
+      "side": 1,
+      "message": "the above came up in a test case where there was one CPU that was still online and active, but one CPU that was online but inactive (paused).  If we attempted to offline the paused CPU, the previous check fails, because there is only one active CPU. Instead, check that if there is only one active CPU, that this is actually the CPU being offlined with this operation.  Otherwise, we should allow the offline operation.",
+      "revId": "c18b3e31db398605b88a9f8b4aacc41824f997b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
