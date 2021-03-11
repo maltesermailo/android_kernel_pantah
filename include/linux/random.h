@@ -136,4 +136,18 @@ static inline bool __must_check arch_get_random_seed_int(unsigned int *v)
 }
 #endif
 
+#ifdef CONFIG_CRYPTO_DRBG_FIPS_PASSIVE_ENTROPY
+void register_drbg_entropy_func(void (*cb)(const void *buf, size_t size));
+void unregister_drbg_entropy_func(void);
+void drbg_need_entropy(size_t size);
+#else
+static inline void register_drbg_entropy_func(void (*cb)(const void *buf,
+							 size_t size))
+{
+}
+static inline void unregister_drbg_entropy_func(void)
+{
+}
+#endif
+
 #endif /* _LINUX_RANDOM_H */
