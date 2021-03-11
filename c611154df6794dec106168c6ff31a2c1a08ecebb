@@ -51,6 +51,42 @@
       "message": "Also, no bug id, and we need a full name for the signed-off-by line 😞",
       "revId": "c611154df6794dec106168c6ff31a2c1a08ecebb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff530c70_e3ca3240",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1539471
+      },
+      "writtenOn": "2021-03-11T09:03:16Z",
+      "side": 1,
+      "message": "i will apply for one,thanks！",
+      "parentUuid": "0bf6a951_b24f5828",
+      "revId": "c611154df6794dec106168c6ff31a2c1a08ecebb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e83d250_fc49bd3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1539471
+      },
+      "writtenOn": "2021-03-11T09:03:16Z",
+      "side": 1,
+      "message": "dear sir, \nanswer1：\nthe symbol is used in kernel/cgroup/cgroup.c as below:\n#define SUBSYS(_x) [_x ## _cgrp_id] \u003d \u0026_x ## _cgrp_subsys,\nstruct cgroup_subsys *cgroup_subsys[] \u003d {\n#include \u003clinux/cgroup_subsys.h\u003e\n};\n#undef SUBSYS\nanswer2:\nwe need it for Authenticate management, in current freezer control, it lack the can_attach \u0026 cancel_attach, we need it to judge task can or can\u0027t be attached to cgroup, which is belong to our power tuning policy.",
+      "parentUuid": "57019b55_9801b0f1",
+      "revId": "c611154df6794dec106168c6ff31a2c1a08ecebb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
