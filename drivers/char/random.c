@@ -2297,3 +2297,6 @@ void add_bootloader_randomness(const void *buf, unsigned int size)
 		add_device_randomness(buf, size);
 }
 EXPORT_SYMBOL_GPL(add_bootloader_randomness);
+
+void (*get_entropy_for_drbg)(void *buf, int nbytes) = get_random_bytes;
+EXPORT_SYMBOL_GPL(get_entropy_for_drbg);
