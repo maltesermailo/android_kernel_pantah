@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ed8358f2_4db5660d",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4156,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-03-12T10:47:31Z",
+      "side": 1,
+      "message": "I see, so you need to modify se-\u003evruntime in the hook? That changes things a bit. \n\nThe best course of action IMO is to move the existing trace_android_rvh_place_entity() hook down here at the end of the function, and to extend it with \u0027cfs_rq\u0027, \u0027initial\u0027 and \u0027vruntime\u0027. That should enable all use-cases.\n\n@Satya: is that working for you.",
+      "parentUuid": "b49f28c2_5e7f4d75",
+      "range": {
+        "startLine": 4156,
+        "startChar": 1,
+        "endLine": 4156,
+        "endChar": 65
+      },
+      "revId": "a0a5873b04b9b79991d4efe11d18e05ff92d5be8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d595e6a_c091f874",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 4
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "Hook further down the function is \"trace_android_rvh_check_preempt_wakeup\", but it\u0027s used for jumping to preempet directly, but what I want is ignore preempt this time.",
       "parentUuid": "1d595e6a_c091f874",
+      "range": {
+        "startLine": 7030,
+        "startChar": 1,
+        "endLine": 7030,
+        "endChar": 62
+      },
+      "revId": "a0a5873b04b9b79991d4efe11d18e05ff92d5be8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fab224f_bc764bdc",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 7030,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-03-12T10:47:31Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "820e6018_00c1853f",
       "range": {
         "startLine": 7030,
         "startChar": 1,
@@ -159,6 +207,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7744ee07_f36ccee0",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 7206,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-03-12T10:47:31Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c9f89e67_50ef820f",
+      "range": {
+        "startLine": 7204,
+        "startChar": 1,
+        "endLine": 7206,
+        "endChar": 12
+      },
+      "revId": "a0a5873b04b9b79991d4efe11d18e05ff92d5be8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7842105e_b3b02649",
@@ -196,6 +268,30 @@
       "side": 1,
       "message": "Thanks for you professional comment, I will use the hook in rebalance_domains() instead.",
       "parentUuid": "7842105e_b3b02649",
+      "range": {
+        "startLine": 10835,
+        "startChar": 1,
+        "endLine": 10837,
+        "endChar": 9
+      },
+      "revId": "a0a5873b04b9b79991d4efe11d18e05ff92d5be8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4e311e2_fd366f4e",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 10837,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-03-12T10:47:31Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "580d0f40_ba3b5cd6",
       "range": {
         "startLine": 10835,
         "startChar": 1,
