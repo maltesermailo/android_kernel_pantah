@@ -16,6 +16,24 @@
       "message": "Not important, but should we should put a WARN_ON(mrq-\u003ecrypt_ctx-\u003ebc_dun[0] \u003e U32_MAX) here (like what we had before in mmc_crypto_prepare_req()? And maybe it makes sense to also check that the rest of bc_dun is 0?",
       "revId": "e0b640f8db9ad25e5ba06440b4a4b915801c4387",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a1d2336_a5adac41",
+        "filename": "drivers/mmc/host/cqhci-crypto.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-03-12T19:46:25Z",
+      "side": 1,
+      "message": "I added back the check for bc_dun[0].  I didn\u0027t add a check for bc_dun[1..3].  The code didn\u0027t do that before, and UFS code doesn\u0027t do it, and there is a balance between performance/simplicity and doing extra debugging checks on every I/O request to detect kernel bugs.\n\nNote also that in Android we test the encryption via vts_kernel_encryption_test anyway, so we aren\u0027t relying just on debugging checks like these to catch bugs with DUN handling.",
+      "parentUuid": "f2eadd5f_9039a5f6",
+      "revId": "e0b640f8db9ad25e5ba06440b4a4b915801c4387",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
