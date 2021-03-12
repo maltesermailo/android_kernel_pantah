@@ -16,6 +16,98 @@
       "message": "\u003e Patch Set 4:\n\u003e \n\u003e qperret added for:\n\u003e     kernel/sched/fair.c\n\u003e     kernel/sched/topology.c\n\u003e \n\u003e Reviewer source(s):\n\u003e qperret is from context\n\n",
       "revId": "a0a5873b04b9b79991d4efe11d18e05ff92d5be8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0462a662_1ef70421",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4156,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-03-12T08:56:53Z",
+      "side": 1,
+      "message": "Please move this one line up, add \u0026vruntime as parameter, make it a restricted hook, and remove trace_android_rvh_place_entity() above.\n\n+CC Satya: could you please confirm this modification works for you?",
+      "range": {
+        "startLine": 4156,
+        "startChar": 1,
+        "endLine": 4156,
+        "endChar": 65
+      },
+      "revId": "a0a5873b04b9b79991d4efe11d18e05ff92d5be8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d595e6a_c091f874",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 7030,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-03-12T08:56:53Z",
+      "side": 1,
+      "message": "Could you use the existing hook further down the function?",
+      "range": {
+        "startLine": 7030,
+        "startChar": 1,
+        "endLine": 7030,
+        "endChar": 62
+      },
+      "revId": "a0a5873b04b9b79991d4efe11d18e05ff92d5be8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23a606b5_b03a128e",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 7206,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-03-12T08:56:53Z",
+      "side": 1,
+      "message": "Do we really need these two hooks? Could we just use a single call at the top of the function instead?",
+      "range": {
+        "startLine": 7204,
+        "startChar": 1,
+        "endLine": 7206,
+        "endChar": 12
+      },
+      "revId": "a0a5873b04b9b79991d4efe11d18e05ff92d5be8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7842105e_b3b02649",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 10837,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-03-12T08:56:53Z",
+      "side": 1,
+      "message": "Hooking very early here can have subtle consequences. Specifically, it means you may not run update_blocked_averages() when you need to, which can lead to stale utilization values, incorrect misfit accounting, and such.\n\nWe already have a hook in rebalance_domains() that avoids this issue. Could you use it instead?",
+      "range": {
+        "startLine": 10835,
+        "startChar": 1,
+        "endLine": 10837,
+        "endChar": 9
+      },
+      "revId": "a0a5873b04b9b79991d4efe11d18e05ff92d5be8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
