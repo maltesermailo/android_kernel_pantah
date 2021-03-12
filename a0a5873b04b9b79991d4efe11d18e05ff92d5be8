@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b49f28c2_5e7f4d75",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4156,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-03-12T10:27:49Z",
+      "side": 1,
+      "message": "Sure, but I need to add a new parameter to return directly if necessary. Avoid going to max_vruntime() and changed the se-\u003evruntime set by us in the hook.",
+      "parentUuid": "0462a662_1ef70421",
+      "range": {
+        "startLine": 4156,
+        "startChar": 1,
+        "endLine": 4156,
+        "endChar": 65
+      },
+      "revId": "a0a5873b04b9b79991d4efe11d18e05ff92d5be8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d595e6a_c091f874",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 4
@@ -54,6 +78,30 @@
       "writtenOn": "2021-03-12T08:56:53Z",
       "side": 1,
       "message": "Could you use the existing hook further down the function?",
+      "range": {
+        "startLine": 7030,
+        "startChar": 1,
+        "endLine": 7030,
+        "endChar": 62
+      },
+      "revId": "a0a5873b04b9b79991d4efe11d18e05ff92d5be8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "820e6018_00c1853f",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 7030,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-03-12T10:27:49Z",
+      "side": 1,
+      "message": "Hook further down the function is \"trace_android_rvh_check_preempt_wakeup\", but it\u0027s used for jumping to preempet directly, but what I want is ignore preempt this time.",
+      "parentUuid": "1d595e6a_c091f874",
       "range": {
         "startLine": 7030,
         "startChar": 1,
@@ -89,6 +137,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c9f89e67_50ef820f",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 7206,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-03-12T10:27:49Z",
+      "side": 1,
+      "message": "Many functions like put_prev_entity()/set_next_entity() can\u0027t be called in our moduler, that\u0027s why I need to add these two hooks here :(",
+      "parentUuid": "23a606b5_b03a128e",
+      "range": {
+        "startLine": 7204,
+        "startChar": 1,
+        "endLine": 7206,
+        "endChar": 12
+      },
+      "revId": "a0a5873b04b9b79991d4efe11d18e05ff92d5be8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7842105e_b3b02649",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 4
@@ -100,6 +172,30 @@
       "writtenOn": "2021-03-12T08:56:53Z",
       "side": 1,
       "message": "Hooking very early here can have subtle consequences. Specifically, it means you may not run update_blocked_averages() when you need to, which can lead to stale utilization values, incorrect misfit accounting, and such.\n\nWe already have a hook in rebalance_domains() that avoids this issue. Could you use it instead?",
+      "range": {
+        "startLine": 10835,
+        "startChar": 1,
+        "endLine": 10837,
+        "endChar": 9
+      },
+      "revId": "a0a5873b04b9b79991d4efe11d18e05ff92d5be8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "580d0f40_ba3b5cd6",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 10837,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-03-12T10:27:49Z",
+      "side": 1,
+      "message": "Thanks for you professional comment, I will use the hook in rebalance_domains() instead.",
+      "parentUuid": "7842105e_b3b02649",
       "range": {
         "startLine": 10835,
         "startChar": 1,
