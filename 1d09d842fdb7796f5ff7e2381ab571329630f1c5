@@ -16,6 +16,23 @@
       "message": "No, please fix ubsan, this code is correct, the tool is broken here.",
       "revId": "1d09d842fdb7796f5ff7e2381ab571329630f1c5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59640cf8_83696389",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-03-16T18:43:53Z",
+      "side": 1,
+      "message": "Also note that the code looks this way _because_ ubsan told us to make it look this way, many years ago.  If that is no longer correct, please work upstream to resolve this.\n\nAlso, this is only an ehci issue, turning this off for the \"real\" USB host controller drivers is not acceptable, as ehci is not on \"modern\" devices at all.",
+      "revId": "1d09d842fdb7796f5ff7e2381ab571329630f1c5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
