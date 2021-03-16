@@ -115,10 +115,15 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_allow_domain_state);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpuidle_psci_enter);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpuidle_psci_exit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpufreq_transition);
+<<<<<<< HEAD   (029c3b29942fa7c9965736a5ab9030f41c9c02d3 ANDROID: ABI: New variables and hooks added, honor symbol li)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_gic_v3_set_affinity);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_freq_qos_add_request);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_freq_qos_update_request);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_freq_qos_remove_request);
+||||||| BASE   (35aeaa5075cc919a17a61214120c743fe2182329 ANDROID: binder: Add vendor hook to the binder)
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sync_txn_recvd);
+>>>>>>> CHANGE (937bd07184e5fe5110f50803ce6a057da9b00342 ANDROID: vendor_hooks: Add hooks for improving binder trans)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_balance_anon_file_reclaim);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_show_max_freq);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sched_show_task);
@@ -165,6 +170,29 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_mutex_list_add);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_unlock_slowpath);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_free);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_alloc);
+<<<<<<< HEAD   (029c3b29942fa7c9965736a5ab9030f41c9c02d3 ANDROID: ABI: New variables and hooks added, honor symbol li)
+||||||| BASE   (35aeaa5075cc919a17a61214120c743fe2182329 ANDROID: binder: Add vendor hook to the binder)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_isolate_freepages);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_check_panic);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_folio_look_around_ref);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_look_around);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_look_around_migrate_folio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_test_clear_look_around_ref);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_arm64_serror_panic);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_sea);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_isolate_freepages);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_check_panic);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_wait_for_work);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_folio_look_around_ref);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_look_around);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_look_around_migrate_folio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_test_clear_look_around_ref);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_arm64_serror_panic);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_sea);
+>>>>>>> CHANGE (937bd07184e5fe5110f50803ce6a057da9b00342 ANDROID: vendor_hooks: Add hooks for improving binder trans)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpu_capacity_show);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ep_create_wakeup_source);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_async_psi_bypass);
