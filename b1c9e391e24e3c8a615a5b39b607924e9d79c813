@@ -38,6 +38,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "89a2bf95_94c6025e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2499,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-03-17T16:58:01Z",
+      "side": 1,
+      "message": "Can you use the hook in binder_wakeup_thread_ilocked() instead?",
+      "revId": "b1c9e391e24e3c8a615a5b39b607924e9d79c813",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afcb45a5_c6a52ba5",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3155,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-03-17T16:58:01Z",
+      "side": 1,
+      "message": "Can\u0027t you use \u0027trace_android_vh_binder_restore_priority()`? thread-\u003etask is the same as current at this callsite. proc-\u003etsk will be current-\u003egroup_leader.",
+      "revId": "b1c9e391e24e3c8a615a5b39b607924e9d79c813",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f61c254_159f629a",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 4184,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-03-17T16:58:01Z",
+      "side": 1,
+      "message": "\"alter_binder_thread\" begs the question \"what is being altered?\". It would be better to name it based on where we are in the code since other vendors might use this hook w/o altering anything. How about \"trace_android_vh_sync_txn_recvd()\" or something like that.",
+      "revId": "b1c9e391e24e3c8a615a5b39b607924e9d79c813",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3cde73d8_25bbd4e3",
         "filename": "fs/exec.c",
         "patchSetId": 6
