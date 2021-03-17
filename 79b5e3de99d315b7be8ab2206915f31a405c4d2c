@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8df4cfc2_11a100a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-03-17T18:38:38Z",
+      "side": 1,
+      "message": "Could we please document here how this list was compiled?",
+      "revId": "79b5e3de99d315b7be8ab2206915f31a405c4d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a445e3c_8aed89ae",
+        "filename": "crypto/Kconfig",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-03-17T18:38:38Z",
+      "side": 1,
+      "message": "The intention seems to be to always link this code into the core kernel, so this should probably be bool not tristate.",
+      "revId": "79b5e3de99d315b7be8ab2206915f31a405c4d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1328b50_ee6bdad8",
+        "filename": "crypto/Kconfig",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-03-17T18:38:38Z",
+      "side": 1,
+      "message": "These dependencies seem somewhat inaccurate and arbitrary: the true link time dependencies of the selftest code are on the skcipher, s/ahash and aead APIs (and drbg?). The actual algorithms are resolved at runtime",
+      "revId": "79b5e3de99d315b7be8ab2206915f31a405c4d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "693aaa27_50df829f",
+        "filename": "crypto/niap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-03-17T18:38:38Z",
+      "side": 1,
+      "message": "Please use \u0027static inline\u0027 only in .h files, just static is sufficient here.",
+      "revId": "79b5e3de99d315b7be8ab2206915f31a405c4d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43beed84_ea71e236",
+        "filename": "crypto/niap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-03-17T18:38:38Z",
+      "side": 1,
+      "message": "Could you reorganize the code here so that we don\u0027t goto from one if (err) to another one? I think we can do this without any gotos.",
+      "revId": "79b5e3de99d315b7be8ab2206915f31a405c4d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca72de5c_8653ddf6",
+        "filename": "crypto/niap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-03-17T18:38:38Z",
+      "side": 1,
+      "message": "This code pattern looks very different from the skcipher one, even though the underlying APIs are very similar. Better to rewrite this to use crypto_wait_reg() as above, and line up the logic and code flow a bit more.",
+      "revId": "79b5e3de99d315b7be8ab2206915f31a405c4d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a45f380c_218e1941",
+        "filename": "crypto/niap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-03-17T18:38:38Z",
+      "side": 1,
+      "message": "Same here. Please use a consistent -E code for when the memcmp() fails.",
+      "revId": "79b5e3de99d315b7be8ab2206915f31a405c4d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c1e0d25_b8f88da6",
+        "filename": "crypto/niap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-03-17T18:38:38Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "79b5e3de99d315b7be8ab2206915f31a405c4d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
