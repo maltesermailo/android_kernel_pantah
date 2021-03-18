@@ -1056,7 +1056,7 @@ static inline int drbg_get_random_bytes(struct drbg_state *drbg,
 	int ret;
 
 	do {
-		get_random_bytes(entropy, entropylen);
+		(*get_entropy_for_fipsmodule)(entropy, entropylen);
 		ret = drbg_fips_continuous_test(drbg, entropy);
 		if (ret && ret != -EAGAIN)
 			return ret;
