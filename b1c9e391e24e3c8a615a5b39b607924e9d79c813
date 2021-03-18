@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "aa4ef184_7373c3d8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-03-18T05:58:26Z",
+      "side": 1,
+      "message": "But this is my real name :)",
+      "parentUuid": "3e414b51_16de8446",
+      "revId": "b1c9e391e24e3c8a615a5b39b607924e9d79c813",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "127e4cd8_d387e3cc",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 6
@@ -70,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27f3a0aa_eb0f0ae0",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2499,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-03-18T05:58:26Z",
+      "side": 1,
+      "message": "Sure, but we need to add more parameters like below:\ntrace_android_vh_binder_wakeup_ilocked(thread-\u003etask, sync, proc-\u003etsk, proc-\u003emax_threads);\n\nHi,Todd. If I use \u0027proc\u0027 as a parameter, it seems that I can\u0027t use it in my moduler for structure binder_proc is defined in binder.c. Right?",
+      "parentUuid": "89a2bf95_94c6025e",
+      "revId": "b1c9e391e24e3c8a615a5b39b607924e9d79c813",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "afcb45a5_c6a52ba5",
@@ -83,6 +119,24 @@
       "writtenOn": "2021-03-17T16:58:01Z",
       "side": 1,
       "message": "Can\u0027t you use \u0027trace_android_vh_binder_restore_priority()`? thread-\u003etask is the same as current at this callsite. proc-\u003etsk will be current-\u003egroup_leader.",
+      "revId": "b1c9e391e24e3c8a615a5b39b607924e9d79c813",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8983ab3_abb9d46f",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3155,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-03-18T05:58:26Z",
+      "side": 1,
+      "message": "Sure, It\u0027s working for me.",
+      "parentUuid": "afcb45a5_c6a52ba5",
       "revId": "b1c9e391e24e3c8a615a5b39b607924e9d79c813",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -104,6 +158,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27a46602_ec72fcbb",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3818,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-03-18T05:58:26Z",
+      "side": 1,
+      "message": "Sure. I have replied in aosp/1620629. Wait for his commit.",
+      "parentUuid": "0ed83fb1_8eba141a",
+      "revId": "b1c9e391e24e3c8a615a5b39b607924e9d79c813",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f61c254_159f629a",
@@ -117,6 +189,24 @@
       "writtenOn": "2021-03-17T16:58:01Z",
       "side": 1,
       "message": "\"alter_binder_thread\" begs the question \"what is being altered?\". It would be better to name it based on where we are in the code since other vendors might use this hook w/o altering anything. How about \"trace_android_vh_sync_txn_recvd()\" or something like that.",
+      "revId": "b1c9e391e24e3c8a615a5b39b607924e9d79c813",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0c44a2a_df9b065d",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 4184,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-03-18T05:58:26Z",
+      "side": 1,
+      "message": "Sure, \"trace_android_vh_sync_txn_recvd()\" seems more suitable, Thks.",
+      "parentUuid": "9f61c254_159f629a",
       "revId": "b1c9e391e24e3c8a615a5b39b607924e9d79c813",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
