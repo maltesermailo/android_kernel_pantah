@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8fbc27c6_1b0ffda0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-03-18T00:13:05Z",
+      "side": 1,
+      "message": "How is this related to FIPS?  Does this meet the FIPS requirements too, or are those different?",
+      "range": {
+        "startLine": 11,
+        "startChar": 50,
+        "endLine": 12,
+        "endChar": 20
+      },
+      "revId": "79b5e3de99d315b7be8ab2206915f31a405c4d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8df4cfc2_11a100a5",
         "filename": "/COMMIT_MSG",
         "patchSetId": 6
@@ -14,6 +37,87 @@
       "writtenOn": "2021-03-17T18:38:38Z",
       "side": 1,
       "message": "Could we please document here how this list was compiled?",
+      "revId": "79b5e3de99d315b7be8ab2206915f31a405c4d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4552386_983f5b9b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-03-18T00:13:05Z",
+      "side": 1,
+      "message": "Please document it in the code too.  What is the criteria for what algorithms are included on this list... As-is it just seems like a totally arbitrary list.",
+      "parentUuid": "8df4cfc2_11a100a5",
+      "revId": "79b5e3de99d315b7be8ab2206915f31a405c4d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b772b43a_a339db3f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-03-18T00:13:05Z",
+      "side": 1,
+      "message": "Can you elaborate on why this can\u0027t be upstreamed?  It looks to me like the discussion on linux-crypto just died out and wasn\u0027t resolved.\n\nThe main issue is that in Android we aren\u0027t building the crypto code as modules, right?",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 52
+      },
+      "revId": "79b5e3de99d315b7be8ab2206915f31a405c4d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b2a4458_0e187dcc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-03-18T00:13:05Z",
+      "side": 1,
+      "message": "This explains how the test vectors were chosen but not why.  What are the NIAP and FIPS requirements for test vectors?  Just an arbitrary test vector for each algorithm?",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 29
+      },
+      "revId": "79b5e3de99d315b7be8ab2206915f31a405c4d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52a0ff6a_f6ea1af1",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 6
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-03-18T00:13:05Z",
+      "side": 1,
+      "message": "This will need to go in the arm64 gki_defconfig too.\n\nAlso, splitting the gki_defconfig update into a separate patch will be helpful for maintaining the android-mainline quilt series, since we try to keep real kernel changes in a different part of the series from the Android-specific build scripts and kconfigs.",
       "revId": "79b5e3de99d315b7be8ab2206915f31a405c4d2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -133,6 +237,29 @@
       "writtenOn": "2021-03-17T18:38:38Z",
       "side": 1,
       "message": "whitespace",
+      "revId": "79b5e3de99d315b7be8ab2206915f31a405c4d2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e97494b_ee591d95",
+        "filename": "crypto/niap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-03-18T00:13:05Z",
+      "side": 1,
+      "message": "Decryption is just the inverse of encryption.  So it would be possible to use the same test vector for both, just tested in both directions.  Likewise for \"ecb(aes)\" and \"gcm(aes)\".",
+      "range": {
+        "startLine": 288,
+        "startChar": 0,
+        "endLine": 315,
+        "endChar": 0
+      },
       "revId": "79b5e3de99d315b7be8ab2206915f31a405c4d2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
