@@ -2247,11 +2247,16 @@ static long fuse_dev_ioctl(struct file *file, unsigned int cmd,
 	struct fuse_dev *fud = NULL;
 	struct fuse_passthrough_out pto;
 
+<<<<<<< HEAD   (7f8b63 Revert "ANDROID: AVB error handler to invalidate vbmeta part)
 	if (_IOC_TYPE(cmd) != FUSE_DEV_IOC_MAGIC)
 		return -EINVAL;
 
 	switch (_IOC_NR(cmd)) {
 	case _IOC_NR(FUSE_DEV_IOC_CLONE):
+=======
+	switch (cmd) {
+	case FUSE_DEV_IOC_CLONE:
+>>>>>>> CHANGE (f5ec17 UPSTREAM: fuse: fix matching of FUSE_DEV_IOC_CLONE command)
 		res = -EFAULT;
 		if (!get_user(oldfd, (__u32 __user *)arg)) {
 			struct file *old = fget(oldfd);
@@ -2276,7 +2281,7 @@ static long fuse_dev_ioctl(struct file *file, unsigned int cmd,
 			}
 		}
 		break;
-	case _IOC_NR(FUSE_DEV_IOC_PASSTHROUGH_OPEN):
+	case FUSE_DEV_IOC_PASSTHROUGH_OPEN:
 		res = -EFAULT;
 		if (!copy_from_user(&pto,
 				    (struct fuse_passthrough_out __user *)arg,
