@@ -87,6 +87,29 @@
       "parentUuid": "4d7830c3_4d5e2a6d",
       "revId": "6f85b7e0f816d2a93069f890b2dec3b169783909",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1eeb3524_c042fed2",
+        "filename": "drivers/usb/typec/tcpm/tcpm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 6012,
+      "author": {
+        "id": 1042384
+      },
+      "writtenOn": "2021-03-19T02:09:20Z",
+      "side": 1,
+      "message": "The patch https://lore.kernel.org/linux-usb/20210317181249.1062995-1-badhri@google.com/ actually does it in set_prop @6036.\nThis change has moved it to getprop ? \nThis causes uevent storm I guess.",
+      "range": {
+        "startLine": 6012,
+        "startChar": 1,
+        "endLine": 6012,
+        "endChar": 33
+      },
+      "revId": "6f85b7e0f816d2a93069f890b2dec3b169783909",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
