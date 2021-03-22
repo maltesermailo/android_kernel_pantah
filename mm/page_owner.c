@@ -56,6 +56,12 @@ static bool need_page_owner(void)
 	return page_owner_enabled;
 }
 
+bool is_page_owner_enabled(void)
+{
+	return page_owner_enabled;
+}
+EXPORT_SYMBOL_GPL(is_page_owner_enabled);
+
 static __always_inline depot_stack_handle_t create_dummy_stack(void)
 {
 	unsigned long entries[4];
