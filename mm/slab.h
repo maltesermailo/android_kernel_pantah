@@ -239,6 +239,7 @@ extern unsigned long get_each_object_track(struct kmem_cache *s,
 		struct page *page, enum track_item alloc,
 		int (*fn)(const struct kmem_cache *, const void *,
 		const struct track *, void *), void *private);
+extern bool is_slub_debug_enabled(void);
 #else
 static inline void print_tracking(struct kmem_cache *s, void *object)
 {
@@ -250,6 +251,10 @@ static inline unsigned long get_each_object_track(struct kmem_cache *s,
 		const struct track *, void *), void *private)
 {
 	return 0;
+}
+bool is_slub_debug_enabled(void)
+{
+	return false;
 }
 #endif
 #endif

@@ -481,6 +481,14 @@ static slab_flags_t slub_debug;
 static char *slub_debug_string;
 static int disable_higher_order_debug;
 
+bool is_slub_debug_enabled(void)
+{
+	if (slub_debug)
+		return true;
+	return false;
+}
+EXPORT_SYMBOL_GPL(is_slub_debug_enabled);
+
 /*
  * slub is about to manipulate internal object metadata.  This memory lies
  * outside the range of the allocated object, so accessing it would normally
