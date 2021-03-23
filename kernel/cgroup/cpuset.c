@@ -67,6 +67,12 @@
 #include <linux/cgroup.h>
 #include <linux/wait.h>
 
+<<<<<<< HEAD   (601149 ANDROID: ABI: Update the tcpci symbols for pixel)
+=======
+#include <trace/hooks/sched.h>
+#include <trace/hooks/cgroup.h>
+
+>>>>>>> CHANGE (a18836 ANDROID: cgroup: Add vendor hook for cpuset.)
 DEFINE_STATIC_KEY_FALSE(cpusets_pre_enable_key);
 DEFINE_STATIC_KEY_FALSE(cpusets_enabled_key);
 
@@ -3225,10 +3231,13 @@ static void cpuset_bind(struct cgroup_subsys_state *root_css)
  */
 static void cpuset_fork(struct task_struct *task)
 {
+	int inherit_cpus = 0;
 	if (task_css_is_root(task, cpuset_cgrp_id))
 		return;
 
-	set_cpus_allowed_ptr(task, current->cpus_ptr);
+	trace_android_rvh_cpuset_fork(task, &inherit_cpus);
+	if (!inherit_cpus)
+		set_cpus_allowed_ptr(task, current->cpus_ptr);
 	task->mems_allowed = current->mems_allowed;
 }
 

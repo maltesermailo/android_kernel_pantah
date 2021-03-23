@@ -21,8 +21,17 @@ DECLARE_RESTRICTED_HOOK(android_rvh_cgroup_force_kthread_migration,
 	TP_PROTO(struct task_struct *tsk, struct cgroup *dst_cgrp, bool *force_migration),
 	TP_ARGS(tsk, dst_cgrp, force_migration), 1);
 
+<<<<<<< HEAD   (601149 ANDROID: ABI: Update the tcpci symbols for pixel)
 struct cgroup_taskset;
 struct cgroup_subsys;
+=======
+DECLARE_HOOK(android_rvh_memcgv2_calc_decayed_watermark,
+	TP_PROTO(struct mem_cgroup *memcg),
+	TP_ARGS(memcg));
+DECLARE_RESTRICTED_HOOK(android_rvh_cpuset_fork,
+	TP_PROTO(struct task_struct *p, int *inherit_cpus),
+	TP_ARGS(p, inherit_cpus), 1);
+>>>>>>> CHANGE (a18836 ANDROID: cgroup: Add vendor hook for cpuset.)
 
 DECLARE_RESTRICTED_HOOK(android_rvh_cpu_cgroup_attach,
 	TP_PROTO(struct cgroup_taskset *tset),
