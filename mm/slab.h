@@ -242,6 +242,7 @@ static inline bool __slub_debug_enabled(void)
 {
 	return static_branch_unlikely(&slub_debug_enabled);
 }
+extern slab_flags_t slub_debug;
 #else
 static inline void print_tracking(struct kmem_cache *s, void *object)
 {
