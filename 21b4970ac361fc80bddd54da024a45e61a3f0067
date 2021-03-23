@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbdf8f9c_87af175a",
+        "filename": "mm/memory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2732,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-03-23T22:34:52Z",
+      "side": 1,
+      "message": "Isn\u0027t this \u0027\u003d\u0027 extra?",
+      "range": {
+        "startLine": 2732,
+        "startChar": 31,
+        "endLine": 2732,
+        "endChar": 32
+      },
+      "revId": "21b4970ac361fc80bddd54da024a45e61a3f0067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5209ed5_46d22f1f",
+        "filename": "mm/memory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2764,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-03-23T22:34:52Z",
+      "side": 1,
+      "message": "You mean this comment:\n\n__anon_vma_prepare() requires the mmap_sem to be held\nbecause vm_next and vm_prev must be safe. This can\u0027t be\nguaranteed in the speculative path.\n\n?",
+      "range": {
+        "startLine": 2764,
+        "startChar": 5,
+        "endLine": 2764,
+        "endChar": 15
+      },
+      "revId": "21b4970ac361fc80bddd54da024a45e61a3f0067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b97116b7_c6edb834",
+        "filename": "mm/vmstat.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1356,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-03-23T22:34:52Z",
+      "side": 1,
+      "message": "Let\u0027s keep \"speculative_pgfault\" for anonymous speculative pgfaults to avoid changes in UAPI.",
+      "range": {
+        "startLine": 1356,
+        "startChar": 2,
+        "endLine": 1356,
+        "endChar": 26
+      },
+      "revId": "21b4970ac361fc80bddd54da024a45e61a3f0067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
