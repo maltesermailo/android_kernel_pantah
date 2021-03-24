@@ -20,8 +20,13 @@ config VFIO_VIRQFD
 	default n
 
 menuconfig VFIO
+<<<<<<< HEAD   (8963cb Merge 5.4.107 into android11-5.4-lts)
 	bool "VFIO Non-Privileged userspace driver framework"
 	depends on IOMMU_API
+=======
+	tristate "VFIO Non-Privileged userspace driver framework"
+	select IOMMU_API
+>>>>>>> BRANCH (b90344 Linux 5.4.108)
 	select VFIO_IOMMU_TYPE1 if (X86 || S390 || ARM || ARM64)
 	help
 	  VFIO provides a framework for secure userspace device drivers.
