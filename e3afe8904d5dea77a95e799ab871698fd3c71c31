@@ -16,6 +16,24 @@
       "message": "I thought this branch was closed to new features?",
       "revId": "e3afe8904d5dea77a95e799ab871698fd3c71c31",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ac53c61_0f140c1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1576895
+      },
+      "writtenOn": "2021-03-24T17:02:27Z",
+      "side": 1,
+      "message": "This branch is affected by a bug introduced by https://r.android.com/q/I1b585177c7ebfbd95a494fc4e65150cd522517cb. This cherry-pick should fix the bug.\n\nIn https://r.android.com/1612008, we use kvmalloc_array to allocate the memory. Without these 2 changes, we will use kfree to release that piece of memory(https://r.android.com/c/kernel/common/+/1651670/1/drivers/gpu/drm/virtio/virtgpu_vq.c#b157) which will lead to a kernel panic.",
+      "parentUuid": "19dcefba_8642b91d",
+      "revId": "e3afe8904d5dea77a95e799ab871698fd3c71c31",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
