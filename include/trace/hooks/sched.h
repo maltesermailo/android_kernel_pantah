@@ -393,6 +393,7 @@ DECLARE_HOOK(android_vh_force_compatible_post,
 	TP_PROTO(void *unused),
 	TP_ARGS(unused));
 
+<<<<<<< HEAD   (c4915f FROMLIST: scsi: ufs: Fix management of lrbp->cmd)
 DECLARE_HOOK(android_vh_dup_task_struct,
 	TP_PROTO(struct task_struct *tsk, struct task_struct *orig),
 	TP_ARGS(tsk, orig));
@@ -424,6 +425,14 @@ DECLARE_RESTRICTED_HOOK(android_rvh_update_blocked_fair,
 DECLARE_RESTRICTED_HOOK(android_rvh_update_rt_rq_load_avg,
 	TP_PROTO(u64 now, struct rq *rq, struct task_struct *tsk, int running),
 	TP_ARGS(now, rq, tsk, running), 1);
+=======
+struct cpufreq_policy;
+DECLARE_HOOK(android_vh_map_util_freq,
+	TP_PROTO(unsigned long util, unsigned long freq,
+		unsigned long cap, unsigned long *next_freq, struct cpufreq_policy *policy,
+		bool *need_freq_update),
+	TP_ARGS(util, freq, cap, next_freq, policy, need_freq_update));
+>>>>>>> CHANGE (d93c13 ANDROID: sched: Add vendor hooks to compute new cpu freq.)
 
 /* macro versions of hooks are no longer required */
 
