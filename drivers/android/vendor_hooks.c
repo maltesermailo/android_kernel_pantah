@@ -295,3 +295,5 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_resume_begin);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_resume_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_early_resume_begin);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_cpus_allowed_by_task);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_cpus_allowed_comm);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sched_setaffinity_early);
