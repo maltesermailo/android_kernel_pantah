@@ -51,6 +51,7 @@
 
 #undef CREATE_TRACE_POINTS
 #include <trace/hooks/mm.h>
+#include <trace/hooks/filemap.h>
 
 /*
  * FIXME: remove all knowledge of the buffer layer from the core VM
@@ -2234,6 +2235,7 @@ ssize_t generic_file_buffered_read(struct kiocb *iocb,
 		unsigned long nr, ret;
 
 		cond_resched();
+		trace_android_vh_io_rbwc(iocb, index);
 find_page:
 		if (fatal_signal_pending(current)) {
 			error = -EINTR;
@@ -3405,6 +3407,7 @@ ssize_t generic_perform_write(struct file *file,
 		offset = (pos & (PAGE_SIZE - 1));
 		bytes = min_t(unsigned long, PAGE_SIZE - offset,
 						iov_iter_count(i));
+		trace_android_vh_io_wbwc(file, offset);
 
 again:
 		/*
