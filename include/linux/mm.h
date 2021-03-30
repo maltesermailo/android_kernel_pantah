@@ -1454,7 +1454,11 @@ static inline bool cpupid_match_pid(struct task_struct *task, int cpupid)
 }
 #endif /* CONFIG_NUMA_BALANCING */
 
+<<<<<<< HEAD   (ee6918 ANDROID: roll back xt_IDLETIMER to 5.10.21 upstream/vanilla )
 #if defined(CONFIG_KASAN_SW_TAGS) || defined(CONFIG_KASAN_HW_TAGS)
+=======
+#ifdef CONFIG_KASAN_SW_TAGS
+>>>>>>> BRANCH (472493 Linux 5.10.27)
 
 /*
  * KASAN per-page tags are stored xor'ed with 0xff. This allows to avoid
@@ -1464,23 +1468,36 @@ static inline bool cpupid_match_pid(struct task_struct *task, int cpupid)
 
 static inline u8 page_kasan_tag(const struct page *page)
 {
+<<<<<<< HEAD   (ee6918 ANDROID: roll back xt_IDLETIMER to 5.10.21 upstream/vanilla )
 	u8 tag = 0xff;
 
 	if (kasan_enabled()) {
 		tag = (page->flags >> KASAN_TAG_PGSHIFT) & KASAN_TAG_MASK;
 		tag ^= 0xff;
 	}
+=======
+	u8 tag;
+
+	tag = (page->flags >> KASAN_TAG_PGSHIFT) & KASAN_TAG_MASK;
+	tag ^= 0xff;
+>>>>>>> BRANCH (472493 Linux 5.10.27)
 
 	return tag;
 }
 
 static inline void page_kasan_tag_set(struct page *page, u8 tag)
 {
+<<<<<<< HEAD   (ee6918 ANDROID: roll back xt_IDLETIMER to 5.10.21 upstream/vanilla )
 	if (kasan_enabled()) {
 		tag ^= 0xff;
 		page->flags &= ~(KASAN_TAG_MASK << KASAN_TAG_PGSHIFT);
 		page->flags |= (tag & KASAN_TAG_MASK) << KASAN_TAG_PGSHIFT;
 	}
+=======
+	tag ^= 0xff;
+	page->flags &= ~(KASAN_TAG_MASK << KASAN_TAG_PGSHIFT);
+	page->flags |= (tag & KASAN_TAG_MASK) << KASAN_TAG_PGSHIFT;
+>>>>>>> BRANCH (472493 Linux 5.10.27)
 }
 
 static inline void page_kasan_tag_reset(struct page *page)
