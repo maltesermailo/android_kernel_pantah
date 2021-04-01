@@ -39,6 +39,29 @@
       },
       "revId": "3d1350d2ee0ed854433f1ecc9dfbd135dbb595ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "539e5e86_02b663b5",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 7083,
+      "author": {
+        "id": 1851199
+      },
+      "writtenOn": "2021-04-01T00:43:50Z",
+      "side": 1,
+      "message": "Looks okay to me. However, I have a future request/enhancement to this hook\n\nAt the time of this hook introduction, we are looking only for \"preempt\" or \"take default action\". So the bool preempt worked. \n\nwe have a use case now to return from module to indicate \"don\u0027t preempt\". There is trace_android_rvh_check_preempt_wakeup_ignore hook at the top but that require duplicating lots of code in this function.\n\ncan we introduce another parameter like nopreempt and check like below\n\nif (preempt)\n goto preempt\nif (nopreempt)\n return\n\nI can submit another patch for this if needed. Please let me know.",
+      "range": {
+        "startLine": 7083,
+        "startChar": 0,
+        "endLine": 7083,
+        "endChar": 1
+      },
+      "revId": "3d1350d2ee0ed854433f1ecc9dfbd135dbb595ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
