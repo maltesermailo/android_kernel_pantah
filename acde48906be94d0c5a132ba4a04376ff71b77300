@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a4224e2_a7e7270a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1407350
+      },
+      "writtenOn": "2021-04-01T09:34:26Z",
+      "side": 1,
+      "message": "Hi Google Friends,\nI known google have use dma-buf heap instead of ion in kernel, and you remove CONFIG_ION recently in android12-5.10.\nHowever we use this branch android12-5.10 with android11, because android12-5.10 is the only branch which use kernel5.10. For some reasons, we must use kernel android12-5.10 + android11.\n\nSo we will meet GKI issue once you remove ION in this branch. This patch enable ion modulizing.",
+      "revId": "acde48906be94d0c5a132ba4a04376ff71b77300",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
