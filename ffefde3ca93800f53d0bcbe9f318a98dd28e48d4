@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c545fab8_b36dc349",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-02T03:28:43Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "2fa2bb86_195f1f4b",
+      "revId": "ffefde3ca93800f53d0bcbe9f318a98dd28e48d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c11d6206_1a904279",
@@ -52,6 +70,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab75ae27_74cc4279",
+        "filename": "include/trace/hooks/sched.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-02T03:28:43Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "c11d6206_1a904279",
+      "revId": "ffefde3ca93800f53d0bcbe9f318a98dd28e48d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad0d7797_d5b97787",
@@ -65,6 +101,24 @@
       "writtenOn": "2021-03-31T15:43:29Z",
       "side": 1,
       "message": "Please explain why this needs to be a restricted hook in the commit message",
+      "revId": "ffefde3ca93800f53d0bcbe9f318a98dd28e48d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "773bea33_f5376822",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1889,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-02T03:28:43Z",
+      "side": 1,
+      "message": "hello.\n\nThe reason for restricted hook is that we will modify the cpus_mask in hook, we don\u0027t want vendor(qualcomm/MTK） to modify it behind our hook, if vendor put a hook in front of ours, it is also ok.\n\nif changed to normal hook, and vendor use it also , it is hard to ensure our hook running at the last position.",
+      "parentUuid": "ad0d7797_d5b97787",
       "revId": "ffefde3ca93800f53d0bcbe9f318a98dd28e48d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
