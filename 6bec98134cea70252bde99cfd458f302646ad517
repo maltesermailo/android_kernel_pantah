@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "082c68ed_1b7aff21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000835
+      },
+      "writtenOn": "2021-04-06T08:39:36Z",
+      "side": 1,
+      "message": "This seems quite suboptimal. If I\u0027m reading it correctly, any time the device receives an indication that *any* destination has a lower MTU, the MTU is lowered for *all* destinations. That will lower performance for all other destinations, on all Android devices.\n\nFor the case of an MTU limitation that is \"close\" to the device - that seems a like a network configuration error. The network should ensure that it is sending an RA with the appropriate (lower) MTU, or for IPv4 should probably be using DHCP options or (at worst) MSS rewriting. Can you provide more details on the problem that caused you to make this change? For example, is this observed on a specific carrier network? Can you get in touch with the carrier, or can we contact the carrier together?\n\nIf this cannot be fixed in the network, then a few suggestions:\n- Make this a sysctl so that OEMs that want to use it can use it.\n- Make this a heuristic, so that the MTU is lowered for the whole netdevice only if several destinations on that network see MTU packet too big errors.\n\nThis also does not seem like a change that is appropriate to Android only, it seems like it should be taken upstream first.",
+      "revId": "6bec98134cea70252bde99cfd458f302646ad517",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
