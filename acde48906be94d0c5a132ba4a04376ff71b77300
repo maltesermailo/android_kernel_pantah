@@ -115,6 +115,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "df6608d1_4fc1ea19",
+        "filename": "drivers/staging/android/ion/Makefile",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1407350
+      },
+      "writtenOn": "2021-04-07T10:15:26Z",
+      "side": 1,
+      "message": "there is one default ion.c, do you mean rename ion.c to another name, and then use  obj-m\u003dion.o?",
+      "parentUuid": "9d79f048_4282ba89",
+      "range": {
+        "startLine": 2,
+        "startChar": 21,
+        "endLine": 2,
+        "endChar": 30
+      },
+      "revId": "acde48906be94d0c5a132ba4a04376ff71b77300",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b36acfa9_4d75a630",
         "filename": "drivers/staging/android/ion/ion.c",
         "patchSetId": 1
@@ -126,6 +150,30 @@
       "writtenOn": "2021-04-07T09:20:06Z",
       "side": 1,
       "message": "no need for this, if the code is built as a module subsys_initcall() turns into module_init()",
+      "range": {
+        "startLine": 521,
+        "startChar": 0,
+        "endLine": 523,
+        "endChar": 5
+      },
+      "revId": "acde48906be94d0c5a132ba4a04376ff71b77300",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bad484a_16550c66",
+        "filename": "drivers/staging/android/ion/ion.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1407350
+      },
+      "writtenOn": "2021-04-07T10:15:26Z",
+      "side": 1,
+      "message": "thanks. I see the definition in module.h. we do not need this macro to seperate.",
+      "parentUuid": "b36acfa9_4d75a630",
       "range": {
         "startLine": 521,
         "startChar": 0,
