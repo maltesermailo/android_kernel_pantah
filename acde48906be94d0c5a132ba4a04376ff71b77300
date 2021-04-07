@@ -70,6 +70,24 @@
       "parentUuid": "983121be_c719da3c",
       "revId": "acde48906be94d0c5a132ba4a04376ff71b77300",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dbebfb6_8935135c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1407350
+      },
+      "writtenOn": "2021-04-07T05:59:09Z",
+      "side": 1,
+      "message": "Hi,\nI known 12-5.10 is not supported for android11. \nBut for some reasons, we must use this branch 12-5.10 bind with android11.\n\nIf google remove the ION in aosp code in kernel 12-5.10, and we still need it in android11. Only modulize the io module, we can fix the GKI issue.\n\nWe can keep this patch in local, because it will been make as module.\nbut another two patches which only export some symbols, they need been in aosp code. Otherwie it will break gki.",
+      "parentUuid": "8eed7ae0_6bcac93b",
+      "revId": "acde48906be94d0c5a132ba4a04376ff71b77300",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
