@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf4c59ef_4fdcac6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-04-07T18:10:57Z",
+      "side": 1,
+      "message": "Can we pull up ",
+      "revId": "b3631a9b29ea3d56aadb14668b64f86ff3ca35d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30316f48_757b8197",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-04-07T18:10:57Z",
+      "side": 1,
+      "message": "nit: \n\nLet\u0027s pull up it at 15 line. \n\nI guess you just followed the slabinfo example in the header file.\nI don\u0027t think it\u0027s a good idea to place declaration in the middle of source code.\nOnce another code to reference the structure comes up above the line, it also emits the warning.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 11
+      },
+      "revId": "b3631a9b29ea3d56aadb14668b64f86ff3ca35d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
