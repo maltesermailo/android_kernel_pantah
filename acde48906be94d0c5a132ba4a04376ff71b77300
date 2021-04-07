@@ -34,6 +34,24 @@
       "parentUuid": "0a4224e2_a7e7270a",
       "revId": "acde48906be94d0c5a132ba4a04376ff71b77300",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "983121be_c719da3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1407350
+      },
+      "writtenOn": "2021-04-07T01:06:57Z",
+      "side": 1,
+      "message": "Hi Hridya,\n\nwe add kernel/configs/r/android-5.10 in our local git and compile the vts package, so that the vts case can pass for android11+kernel5.10.\n\nif we have new SOC tape out, it is only supported in lagtest lts(nxp choose kernel5.10 in end of last year) in nxp linux team. So nxp android team also choose kernel5.10 in android11 to support latest soc. \n\nAnd this patch should not bring harm for aosp code, and it can help for user to modunize the ion core driver.",
+      "parentUuid": "94bd578d_0728c0c6",
+      "revId": "acde48906be94d0c5a132ba4a04376ff71b77300",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
