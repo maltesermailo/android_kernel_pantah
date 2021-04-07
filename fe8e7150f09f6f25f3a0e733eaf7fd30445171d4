@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6df2368f_0d273ff8",
+        "filename": "drivers/iommu/arm/arm-smmu/arm-smmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1248,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-04-07T10:04:15Z",
+      "side": 1,
+      "message": "Won\u0027t this be NULL for domains using the short-descriptor format? You probably need to hook up unmap_pages() there, although you could do it as a loop around __arm_v7s_unmap() for now.",
+      "range": {
+        "startLine": 1248,
+        "startChar": 7,
+        "endLine": 1248,
+        "endChar": 23
+      },
+      "revId": "fe8e7150f09f6f25f3a0e733eaf7fd30445171d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
