@@ -52,6 +52,24 @@
       "parentUuid": "a050899c_5b31405f",
       "revId": "39096cc71a886830f72c277391591d07d0df7b38",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ad2729e_ccde5b16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-07T13:11:39Z",
+      "side": 1,
+      "message": "The hook of cpuset_fork() is just catching the information when process forked,\nif used do_set_cpus_allowed() or __set_cpus_allowed_ptr(), we can\u0027t get the right information, because the two function are used by many scenarios, we can\u0027t distinguish whether it is fork scenario.",
+      "parentUuid": "be709f20_e717292b",
+      "revId": "39096cc71a886830f72c277391591d07d0df7b38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
