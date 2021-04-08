@@ -88,6 +88,24 @@
       "parentUuid": "9ad2729e_ccde5b16",
       "revId": "39096cc71a886830f72c277391591d07d0df7b38",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f46d6648_7868f80c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-08T06:29:00Z",
+      "side": 1,
+      "message": "1. trace_android_rvh_set_cpus_allowed_comm()\n   in this hook, we get all task\u0027s cpus_mask, and backup the cpus_mask to oem\u0027s data, because set_cpus_allowed_common() is a low level common interface for all kinds of  cpuset operation, it could meet the our requirement of Real-time Synchronization between cpus_mask and its backup.\n\n2. trace_android_vh_sched_setaffinity()\n   the hook is called by user space, is to block the blacklist application\u0027s  cpu affinity, and record its status in which the block app can un-block later.\n\nso the two hooks are also necessary for our feature.",
+      "parentUuid": "ad95e707_d3abc9c5",
+      "revId": "39096cc71a886830f72c277391591d07d0df7b38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
