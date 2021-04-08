@@ -106,6 +106,24 @@
       "parentUuid": "ad95e707_d3abc9c5",
       "revId": "39096cc71a886830f72c277391591d07d0df7b38",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1182719f_16bf61a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-04-08T08:35:14Z",
+      "side": 1,
+      "message": "Thanks for the explanation.\n\n\u003e 2. trace_android_vh_sched_setaffinity()\n\u003e    the hook is called by user space, is to block the blacklist application\u0027s  cpu affinity, and record its status in which the block app can un-block later.\n\nWe have multiple partners using the existing hook in sched_setaffinity to do exactly this, any particular reason why it can\u0027t be used for your use-case?",
+      "parentUuid": "f46d6648_7868f80c",
+      "revId": "39096cc71a886830f72c277391591d07d0df7b38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
