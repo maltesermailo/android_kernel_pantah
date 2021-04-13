@@ -37,12 +37,16 @@
 #include <trace/hooks/pm_domain.h>
 #include <trace/hooks/cpuidle_psci.h>
 #include <trace/hooks/vmscan.h>
+<<<<<<< HEAD   (eff25c ANDROID: add initial symbol list for virtual devices)
 #include <trace/hooks/avc.h>
 #include <trace/hooks/creds.h>
 #include <trace/hooks/memory.h>
 #include <trace/hooks/module.h>
 #include <trace/hooks/selinux.h>
 #include <trace/hooks/syscall_check.h>
+=======
+#include <trace/hooks/logbuf.h>
+>>>>>>> CHANGE (ab9c01 ANDROID: logbuf: vendor hook for logbuf dump on oops)
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -180,6 +184,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_dequeue_entity);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_entity_tick);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_enqueue_task_fair);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_dequeue_task_fair);
+<<<<<<< HEAD   (eff25c ANDROID: add initial symbol list for virtual devices)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_selinux_avc_insert);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_selinux_avc_node_delete);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_selinux_avc_node_replace);
@@ -196,3 +201,6 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_selinux_is_initialized);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_mmap_file);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_file_open);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_bpf_syscall);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_logbuf);
+>>>>>>> CHANGE (ab9c01 ANDROID: logbuf: vendor hook for logbuf dump on oops)
