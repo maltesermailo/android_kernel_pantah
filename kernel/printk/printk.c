@@ -56,6 +56,7 @@
 #include <trace/events/printk.h>
 #undef CREATE_TRACE_POINTS
 #include <trace/hooks/printk.h>
+#include <trace/hooks/logbuf.h>
 
 #include "printk_ringbuffer.h"
 #include "console_cmdline.h"
@@ -2181,6 +2182,8 @@ int vprintk_store(int facility, int level,
 				prb_commit(&e);
 			}
 
+			trace_android_vh_logbuf_pr_cont(r.text_buf, r.info->text_len,
+							r.info->flags, text_len);
 			ret = text_len;
 			goto out;
 		}
@@ -2220,6 +2223,8 @@ int vprintk_store(int facility, int level,
 	else
 		prb_final_commit(&e);
 
+	trace_android_vh_logbuf(r.text_buf, r.info->text_len, r.info->ts_nsec,
+				r.info->caller_id);
 	ret = text_len + trunc_msg_len;
 out:
 	printk_exit_irqrestore(recursion_ptr, irqflags);
