@@ -142,6 +142,24 @@
       "parentUuid": "1182719f_16bf61a2",
       "revId": "39096cc71a886830f72c277391591d07d0df7b38",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "639d74a5_704a8284",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-14T03:46:26Z",
+      "side": 1,
+      "message": "maybe the above comment is not clear,\nupdate the comment as below:\n\nThe other partners\u0027 feature should be different with us.\nlet me do a detail explanation,\nin our code,trace_android_vh_sched_setaffinity() is to recognize the blacklist app and set a flag, and its next code security_task_setscheduler() is to prevent blacklist app from setting cpu affinity according to the flag and return true: goto end to skip the original cpu affinity setting of app.\n\ncode:\n\n\ttrace_android_vh_sched_setaffinity(p, in_mask);\n\tretval \u003d security_task_setscheduler(p);\n\tif (retval)\n\t\tgoto out_free_new_mask;\nif using existing hooks which is placed at the end of function, the blacklist app\u0027s original affinity is set before we recognize it, it break our feature.",
+      "parentUuid": "305154fb_f89ead22",
+      "revId": "39096cc71a886830f72c277391591d07d0df7b38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
