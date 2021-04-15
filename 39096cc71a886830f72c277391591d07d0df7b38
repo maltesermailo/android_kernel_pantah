@@ -160,6 +160,24 @@
       "parentUuid": "305154fb_f89ead22",
       "revId": "39096cc71a886830f72c277391591d07d0df7b38",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23579737_50336800",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-04-15T10:04:50Z",
+      "side": 1,
+      "message": "I think the other partners override the affinity from the hook at the end, based on a \u0027blacklist\u0027 as well. It\u0027s useful to make sure e.g. games pin themselves to big and medium CPUs and not just bigs when there are 3 types of CPUs in the system.\n\nIs that transferable to your use case? In other word, why do you need to rely on the security callback for this? This purely a performance concern and abusing the security callback for this is inappropriate.",
+      "parentUuid": "639d74a5_704a8284",
+      "revId": "39096cc71a886830f72c277391591d07d0df7b38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
