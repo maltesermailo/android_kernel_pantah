@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b08afd65_cf60bd10",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1851199
+      },
+      "writtenOn": "2021-04-15T01:53:05Z",
+      "side": 1,
+      "message": "self: add signed-off-by line",
+      "range": {
+        "startLine": 38,
+        "startChar": 15,
+        "endLine": 38,
+        "endChar": 25
+      },
+      "revId": "83c12eb0e26fb1d491d17c67c43882a71432b2fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "db8abc0e_8868442a",
@@ -68,6 +91,24 @@
       "side": 1,
       "message": "+Taeju, FYI.",
       "parentUuid": "3c5f814f_fc5a8b78",
+      "revId": "83c12eb0e26fb1d491d17c67c43882a71432b2fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "455d020c_d1d6b18a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1851199
+      },
+      "writtenOn": "2021-04-15T01:53:05Z",
+      "side": 1,
+      "message": "I prefer a kernel command line param option to vendor hook unless we invoke the hook only in case of a kernel thread. invoking a vendor hook for every task is a kill. we only care about kernel thread migration.\n\n@Quentin we want something to be available in ACK to address perf concerns without CGROUPS. Let me know if you are okay with a vendor hook that only gets trigged for kernel threads or a kernel command line param option for this.",
+      "parentUuid": "61fb8816_7c3bc2f3",
       "revId": "83c12eb0e26fb1d491d17c67c43882a71432b2fe",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
