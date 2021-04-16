@@ -178,6 +178,24 @@
       "parentUuid": "639d74a5_704a8284",
       "revId": "39096cc71a886830f72c277391591d07d0df7b38",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "410647b3_8d6fa044",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869300
+      },
+      "writtenOn": "2021-04-16T05:58:16Z",
+      "side": 1,
+      "message": "1. no, the partner vendor hook is not suitable for us:\nfrom the other partners\u0027s comment of the vendor hook , we can get the \nthe affinity path of blacklist app is orginral affinity  -\u003e in_mask -\u003e theirs\u0027 wanted affinity in the  end.\nbut in our feature, we just want to keep the affinity of blacklist app with orginral affinity for some time , after the time, we will restore the affinity with in_mask, above logic is  key point of our feature.\n if use the vendor in the end, we have to modify the affinity to orginral affinity, but we can\u0027t get the orginral affinity at this place.\n\n2. About useage of security_task_setscheduler, we may not use it by adding a return parameter in trace_android_vh_sched_setaffinity().",
+      "parentUuid": "23579737_50336800",
+      "revId": "39096cc71a886830f72c277391591d07d0df7b38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
