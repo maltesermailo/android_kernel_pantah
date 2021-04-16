@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4978ece6_e2abeed7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1851199
+      },
+      "writtenOn": "2021-04-16T06:29:27Z",
+      "side": 1,
+      "message": "Need clarification",
+      "revId": "48d40af49224bfd2e6bba86fe22d860b36bc566b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a48b974b_96e30d0c",
+        "filename": "kernel/cgroup/cgroup-v1.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1851199
+      },
+      "writtenOn": "2021-04-16T06:29:27Z",
+      "side": 1,
+      "message": "The only case vendors would be interested is kernel threads. would it not be a overkill to register for this all tasks? every time an app is switched in/out.\n\nalso the vendor module needs to implement (duplicate)all the logic in write_start\n\nwould something like this (part of the patch, I am writing) be better?\n\n struct task_struct *cgroup_procs_write_start(char *buf, bool threadgroup,\n-                                            bool *locked)\n+                                            bool *locked,\n+                                            struct cgroup *dst_cgrp)\n        __acquires(\u0026cgroup_threadgroup_rwsem)\n {\n        struct task_struct *tsk;\n        pid_t pid;\n+       bool want_migration \u003d false;\n\n        if (kstrtoint(strstrip(buf), 0, \u0026pid) || pid \u003c 0)\n                return ERR_PTR(-EINVAL);\n@@ -2788,13 +2793,16 @@ struct task_struct *cgroup_procs_write_start(char *buf, bool threadgroup,\n        if (threadgroup)\n                tsk \u003d tsk-\u003egroup_leader;\n\n+       if (tsk-\u003eflags \u0026 PF_KTHREAD)\n+               trace_android_rvh_cgroup_want_kthread_migration(tsk, dst_cgrp, \u0026want_migration);\n+\n        /*\n         * kthreads may acquire PF_NO_SETAFFINITY during initialization.\n         * If userland migrates such a kthread to a non-root cgroup, it can\n         * become trapped in a cpuset, or RT kthread may be born in a\n         * cgroup with no rt_runtime allocated.  Just say no.\n         */\n-       if (tsk-\u003eno_cgroup_migration || (tsk-\u003eflags \u0026 PF_NO_SETAFFINITY)) {\n+       if (!want_migration \u0026\u0026 (tsk-\u003eno_cgroup_migration || (tsk-\u003eflags \u0026 PF_NO_SETAFFINITY))) {\n                tsk \u003d ERR_PTR(-EINVAL);\n                goto out_unlock_threadgroup;\n        }",
+      "range": {
+        "startLine": 501,
+        "startChar": 1,
+        "endLine": 501,
+        "endChar": 43
+      },
+      "revId": "48d40af49224bfd2e6bba86fe22d860b36bc566b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
