@@ -89,7 +89,11 @@ void kvm_arm_reset_debug_ptr(struct kvm_vcpu *vcpu)
  *  - Debug ROM Address (MDCR_EL2_TDRA)
  *  - OS related registers (MDCR_EL2_TDOSA)
  *  - Statistical profiler (MDCR_EL2_TPMS/MDCR_EL2_E2PB)
+<<<<<<< HEAD   (005be5 ANDROID: abi_gki_aarch64_qcom: Add sock_setsockopt to list)
  *  - Self-hosted Trace (MDCR_EL2_TTRF/MDCR_EL2_E2TB)
+=======
+ *  - Self-hosted Trace Filter controls (MDCR_EL2_TTRF)
+>>>>>>> BRANCH (65f199 Linux 5.10.31)
  *
  * Additionally, KVM only traps guest accesses to the debug registers if
  * the guest is not actively using them (see the KVM_ARM64_DEBUG_DIRTY
