@@ -33,6 +33,42 @@
       "message": "This isn\u0027t even in linux-next yet???",
       "revId": "e620abbd6c7f9e02a26ce48b2a706edb40bf38c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bf1cbe6_74c690ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2021-04-19T11:14:24Z",
+      "side": 1,
+      "message": "Thanks for your review.\nIf build broadcast clock event device driver as module, and install it after system enters oneshot mode, then it will stay in periodic mode forever.\nFor example, when build drivers/clocksource/timer-imx-sysctr.c as module, it can\u0027t  work at oneshot mode.\nI think android12-5.10 also need this patch.",
+      "parentUuid": "c482c339_82e44575",
+      "revId": "e620abbd6c7f9e02a26ce48b2a706edb40bf38c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ba770d6_5c19f813",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2021-04-19T11:14:24Z",
+      "side": 1,
+      "message": "Yes, it is just applied on tip.git on 04-16.\nhttps://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git/commit/?id\u003d9c336c9935cff267470bb3aaa85c66fac194b650",
+      "parentUuid": "d946d8a7_495e4c99",
+      "revId": "e620abbd6c7f9e02a26ce48b2a706edb40bf38c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
