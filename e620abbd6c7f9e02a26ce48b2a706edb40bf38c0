@@ -86,6 +86,24 @@
       "message": "This branch is only for android11, and that has been released.  Are you seeing this problem for an android11 device?\n\nPlease always add it to newer releases first, before backporting it to older ones.",
       "revId": "e620abbd6c7f9e02a26ce48b2a706edb40bf38c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22c8c9eb_f94fab3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2021-04-19T12:20:13Z",
+      "side": 1,
+      "message": "Got it. I just send this patch to android12-5.10 for review.\n\nAs for android 11, some customer using i.MX device are still under development. From below log \u003cwithout this patch\u003e, we can see that the interrupt of timer@306a0000 mainly exists on one cpu, which means more power consumption； while \u003cwith this patch\u003e, its interrupt spread on each cpu.\n\n\u003cWithout this patch\u003e\nevk_8mp:/ # cat /proc/interrupts  | grep timer\n  3:      10611      10462      12703      10320     GICv3  30 Level     arch_timer\n 26:         54          0          0       9402     GICv3  79 Level     timer@306a0000\n\n\u003cWith this patch\u003e\nevk_8mp:/ # cat /proc/interrupts | grep timer\n  3:       9431       7959      10607       8023     GICv3  30 Level     arch_timer\n 26:        466        914        838       1097     GICv3  79 Level     timer@306a0000",
+      "parentUuid": "b3e2988b_5ffa452e",
+      "revId": "e620abbd6c7f9e02a26ce48b2a706edb40bf38c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
