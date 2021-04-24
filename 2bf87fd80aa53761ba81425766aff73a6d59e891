@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "21e710c3_30e2eef6",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6931,
+      "author": {
+        "id": 1851199
+      },
+      "writtenOn": "2021-04-24T04:07:11Z",
+      "side": 1,
+      "message": "since we know rq clock flags are updated here, we could something like this here\n\nrf-\u003eclock_update_flags \u003d RQCF_UPDATED;\n\nunder CONFIG_SCHED_DEBUG.\n\nprobably with a wrapper function",
+      "range": {
+        "startLine": 6931,
+        "startChar": 1,
+        "endLine": 6931,
+        "endChar": 16
+      },
+      "revId": "2bf87fd80aa53761ba81425766aff73a6d59e891",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "adf01c9c_c3980d93",
         "filename": "kernel/sched/core.c",
         "patchSetId": 1
@@ -77,6 +100,30 @@
       "writtenOn": "2021-04-24T03:52:54Z",
       "side": 1,
       "message": "we should probably take the backup of rf here. kind of redundant for every loop though..",
+      "range": {
+        "startLine": 6994,
+        "startChar": 13,
+        "endLine": 6994,
+        "endChar": 31
+      },
+      "revId": "2bf87fd80aa53761ba81425766aff73a6d59e891",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ffd64d4_ecb4f38b",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6994,
+      "author": {
+        "id": 1851199
+      },
+      "writtenOn": "2021-04-24T04:07:11Z",
+      "side": 1,
+      "message": "May be we should avoid taking backup inside the for loop instead take the above suggestion.",
+      "parentUuid": "6919d7f4_d7f99e3b",
       "range": {
         "startLine": 6994,
         "startChar": 13,
