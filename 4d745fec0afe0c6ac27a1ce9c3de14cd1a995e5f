@@ -16,6 +16,23 @@
       "message": "Defer +2 to Greg.\n\nThanks.",
       "revId": "4d745fec0afe0c6ac27a1ce9c3de14cd1a995e5f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e9305a3_f9498de8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-24T10:16:43Z",
+      "side": 1,
+      "message": "What type of \"overhead\" does a uevent cause?\n\nThis feels really odd, if you need to \"suppress\" events, you can do so directly by telling the driver core to not do it.\n\nOh wait, these are raw kobjects...\n\nThis still feels really really odd, what problem is this trying to solve?  Why doesn\u0027t userspace want to know that something has been added so that it can properly add it to the needed tools that monitor this type of thing?  Without uevents, that is cut off entirely which is not usually a good idea.",
+      "revId": "4d745fec0afe0c6ac27a1ce9c3de14cd1a995e5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
