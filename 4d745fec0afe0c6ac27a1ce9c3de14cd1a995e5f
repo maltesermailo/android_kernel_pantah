@@ -33,6 +33,24 @@
       "message": "What type of \"overhead\" does a uevent cause?\n\nThis feels really odd, if you need to \"suppress\" events, you can do so directly by telling the driver core to not do it.\n\nOh wait, these are raw kobjects...\n\nThis still feels really really odd, what problem is this trying to solve?  Why doesn\u0027t userspace want to know that something has been added so that it can properly add it to the needed tools that monitor this type of thing?  Without uevents, that is cut off entirely which is not usually a good idea.",
       "revId": "4d745fec0afe0c6ac27a1ce9c3de14cd1a995e5f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d6f3eb7_80f6b461",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2021-04-26T03:52:34Z",
+      "side": 1,
+      "message": "Hi Greg,\n\nueventd listens for uevents emitted by the kernel and tries to process them. Since the kset for per-buffer attachment sysfs statistics get created everytime a buffer gets allocated, it causes a measurable perf impact during high resolution video playback. Please find further details in b/186155231. There is no usecase/tool that needs to process the uevents from these sysfs statistics or monitor them on a realtime basis. They are only read during bugreport collection and occasionally by telemetry.",
+      "parentUuid": "2e9305a3_f9498de8",
+      "revId": "4d745fec0afe0c6ac27a1ce9c3de14cd1a995e5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
