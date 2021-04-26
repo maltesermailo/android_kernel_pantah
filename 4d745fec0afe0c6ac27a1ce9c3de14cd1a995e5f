@@ -51,6 +51,24 @@
       "parentUuid": "2e9305a3_f9498de8",
       "revId": "4d745fec0afe0c6ac27a1ce9c3de14cd1a995e5f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d579e56_16e6e58e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-04-26T06:02:15Z",
+      "side": 1,
+      "message": "Oh wow, no, this isn\u0027t going to be ok.\n\nThe kobject create path is NOT a fast path at all.  If this is being called for buffers that are constantly being allocated like this, then the kobject dma-buf code needs to be reworked.  I thought these buffers were created \"once at boot\" and then reused all the time, not created constantly like this.\n\nThis patch would just paper-over the problem here, please do not create/destroy kobject so quickly as that is not a wise idea.",
+      "parentUuid": "3d6f3eb7_80f6b461",
+      "revId": "4d745fec0afe0c6ac27a1ce9c3de14cd1a995e5f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
