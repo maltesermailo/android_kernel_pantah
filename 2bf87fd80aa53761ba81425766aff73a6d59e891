@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8852226a_b944fafb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2021-04-26T22:28:46Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9a10cb70_5bb8eec8",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 33
+      },
+      "revId": "2bf87fd80aa53761ba81425766aff73a6d59e891",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f870160d_888f89dc",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92b8b311_36fd45fe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2021-04-26T22:28:46Z",
+      "side": 1,
+      "message": "explanation added, please take one more look.",
+      "parentUuid": "f870160d_888f89dc",
+      "range": {
+        "startLine": 9,
+        "startChar": 40,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "2bf87fd80aa53761ba81425766aff73a6d59e891",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff35ae45_8fa85af6",
@@ -60,6 +108,30 @@
       "writtenOn": "2021-04-26T12:41:15Z",
       "side": 1,
       "message": "Which Warning are we talking about? I suppose WARN_DOUBLE_CLOCK, but if that\u0027s the case, clearing it out is a good thing.",
+      "range": {
+        "startLine": 14,
+        "startChar": 18,
+        "endLine": 14,
+        "endChar": 36
+      },
+      "revId": "2bf87fd80aa53761ba81425766aff73a6d59e891",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc07f45b_26e1a39a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1727546
+      },
+      "writtenOn": "2021-04-26T22:28:46Z",
+      "side": 1,
+      "message": "It\u0027s in assert_clock_updated().  There are few places that call this...\n\n  File    Function             Line\n0 pelt.h  rq_clock_pelt         145 assert_clock_updated(rq);\n1 sched.h assert_clock_updated 1143 static inline void assert_clock_updated(struct rq *rq)\n2 sched.h rq_clock             1155 assert_clock_updated(rq);\n3 sched.h rq_clock_task        1163 assert_clock_updated(rq);",
+      "parentUuid": "ff35ae45_8fa85af6",
       "range": {
         "startLine": 14,
         "startChar": 18,
