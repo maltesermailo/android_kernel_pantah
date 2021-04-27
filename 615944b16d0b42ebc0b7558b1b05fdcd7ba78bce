@@ -22,6 +22,30 @@
       },
       "revId": "615944b16d0b42ebc0b7558b1b05fdcd7ba78bce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8bbc9f0_125e1ebf",
+        "filename": "mm/kfence/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1084624
+      },
+      "writtenOn": "2021-04-27T08:56:34Z",
+      "side": 1,
+      "message": "We are missing the whole KCSAN in 5.4, it has only been introduced in 5.8 :)\nI removed all data_race() annotations when doing the initial KFENCE backport, but this include somehow sneaked in again. I\u0027ll remove it.",
+      "parentUuid": "7ad4c688_5dd93572",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 31
+      },
+      "revId": "615944b16d0b42ebc0b7558b1b05fdcd7ba78bce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
