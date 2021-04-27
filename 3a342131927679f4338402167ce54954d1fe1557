@@ -58,6 +58,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d53f81e5_103f0ee9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1851199
+      },
+      "writtenOn": "2021-04-27T10:48:37Z",
+      "side": 1,
+      "message": "not only that the code is not present in latest tree. Even in 5.10 upstream the issue may not show up. because migrate_tasks() is called during hotplug in which all CPUs are busy with interrupts disabled. so there is no entity to take this CPU\u0027s rq lock when it is dropped intermittently. so the clock update flags are not cleared.\n\nThe issue happens only when, \n\nwe drop rq lock in migrate tasks() and there is another CPU that task this CPU rq lock , the clock update flags are lost via rq_pin_lock().\n\nIt can only happen during pause since other CPUs are free to take rq lock of this CPU.",
+      "parentUuid": "7c88a240_5359a4a5",
+      "revId": "3a342131927679f4338402167ce54954d1fe1557",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "fa848d9a_3e97a40b",
