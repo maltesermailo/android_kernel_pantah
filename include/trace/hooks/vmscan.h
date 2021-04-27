@@ -18,6 +18,7 @@ DECLARE_HOOK(android_vh_check_folio_look_around_ref,
 DECLARE_HOOK(android_vh_tune_swappiness,
 	TP_PROTO(int *swappiness),
 	TP_ARGS(swappiness));
+<<<<<<< HEAD   (678561 ANDROID: Add the pixel symbols from Linux 5.*)
 DECLARE_HOOK(android_vh_modify_scan_control,
 	TP_PROTO(u64 *ext, unsigned long *nr_to_reclaim,
 	struct mem_cgroup *target_mem_cgroup,
@@ -40,6 +41,12 @@ DECLARE_HOOK(android_vh_should_memcg_bypass,
 DECLARE_HOOK(android_vh_do_shrink_slab,
 	TP_PROTO(struct shrinker *shrinker, long *freeable),
 	TP_ARGS(shrinker, freeable));
+||||||| BASE
+=======
+DECLARE_HOOK(android_vh_shrink_slab_bypass,
+	TP_PROTO(gfp_t gfp_mask, int nid, struct mem_cgroup *memcg, int priority, bool *bypass),
+	TP_ARGS(gfp_mask, nid, memcg, priority, bypass));
+>>>>>>> CHANGE (e576be ANDROID: vendor_hooks: bypass shrink slab)
 #endif /* _TRACE_HOOK_VMSCAN_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
