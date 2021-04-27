@@ -2569,8 +2569,7 @@ static void setup_elf_hwcaps(const struct arm64_cpu_capabilities *hwcaps)
 
 static void update_compat_elf_hwcaps(void)
 {
-	if (system_capabilities_finalized())
-		setup_elf_hwcaps(compat_elf_hwcaps);
+	setup_elf_hwcaps(compat_elf_hwcaps);
 }
 
 static void update_cpu_capabilities(u16 scope_mask)
