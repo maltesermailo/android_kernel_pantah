@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d69b406d_931105a6",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-04-27T22:30:27Z",
+      "side": 1,
+      "message": "This function name is rather long. Can the \"_cmd\" suffix be left out?",
+      "range": {
+        "startLine": 61,
+        "startChar": 12,
+        "endLine": 61,
+        "endChar": 42
+      },
+      "revId": "689dd662e605a009383e23d6723b6337a7f1a304",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bbd1fb6_5bbe00ce",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-04-27T22:30:27Z",
+      "side": 1,
+      "message": "What does this function do? What is a \"chunk\"? Should the function name perhaps be changed into ufshpb_is_supported_chunk()?",
+      "range": {
+        "startLine": 67,
+        "startChar": 12,
+        "endLine": 67,
+        "endChar": 35
+      },
+      "revId": "689dd662e605a009383e23d6723b6337a7f1a304",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76080c71_ec7b6c46",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-04-27T22:30:27Z",
+      "side": 1,
+      "message": "This comment suggests to me that the type of the ppn argument should be changed from \u0027u64\u0027 into \u0027__be64\u0027.",
+      "range": {
+        "startLine": 273,
+        "startChar": 1,
+        "endLine": 273,
+        "endChar": 59
+      },
+      "revId": "689dd662e605a009383e23d6723b6337a7f1a304",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "475fd67a_36ca8971",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-04-27T22:30:27Z",
+      "side": 1,
+      "message": "The \u0027transfer_len\u0027 argument has a size of 32 bits while cdb[14] has a size of 8 bits. If the truncation is intentional, please add a comment or a cast.",
+      "range": {
+        "startLine": 275,
+        "startChar": 1,
+        "endLine": 275,
+        "endChar": 24
+      },
+      "revId": "689dd662e605a009383e23d6723b6337a7f1a304",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b308fe3f_beee8e2d",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-04-27T22:30:27Z",
+      "side": 1,
+      "message": "Did the compiler warn here about missing parentheses around ... \u0026\u0026 ...?",
+      "range": {
+        "startLine": 310,
+        "startChar": 5,
+        "endLine": 311,
+        "endChar": 29
+      },
+      "revId": "689dd662e605a009383e23d6723b6337a7f1a304",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
