@@ -1,6 +1,63 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e0aa029_143b63e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2021-04-27T10:41:56Z",
+      "side": 1,
+      "message": "Couldn\u0027t this be sum-up by? Or am I missing some bits?\n\norf \u003d rf; // save flags, RQCF_UPDATE cleared\nupdate_rq_clock() // set RQCF_UPDATE\nfor()\n   ...\n   __migrate_task(dead_rq, new_cpu)\n   ...\n   // if migration, restore dead_rq\u0027s flags with orf.\n   // We loose RQCF_UPDATE\n   rq_relock(dead_rq, orf)",
+      "revId": "3a342131927679f4338402167ce54954d1fe1557",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5890edc8_0e636e25",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2021-04-27T10:41:56Z",
+      "side": 1,
+      "message": "What is missing here, is who\u0027s the clock reader that triggers the warning?",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 26
+      },
+      "revId": "3a342131927679f4338402167ce54954d1fe1557",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c88a240_5359a4a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1601419
+      },
+      "writtenOn": "2021-04-27T10:41:56Z",
+      "side": 1,
+      "message": "Upstream, migrate_tasks() doesn\u0027t exist anymore, due to the \"migrate disable\" introduction.",
+      "revId": "3a342131927679f4338402167ce54954d1fe1557",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "fa848d9a_3e97a40b",
