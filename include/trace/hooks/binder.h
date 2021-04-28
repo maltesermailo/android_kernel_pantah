@@ -82,6 +82,23 @@ DECLARE_HOOK(android_vh_binder_trans,
 	TP_PROTO(struct binder_proc *target_proc, struct binder_proc *proc,
 		struct binder_thread *thread, struct binder_transaction_data *tr),
 	TP_ARGS(target_proc, proc, thread, tr));
+<<<<<<< HEAD   (295ed6 ANDROID: GKI: Update symbol list for xiaomi)
+=======
+DECLARE_HOOK(android_vh_binder_preset,
+	TP_PROTO(struct hlist_head *hhead, struct mutex *lock),
+	TP_ARGS(hhead, lock));
+DECLARE_HOOK(android_vh_binder_proc_transaction,
+	TP_PROTO(struct task_struct *caller_task, struct task_struct *binder_proc_task,
+		struct task_struct *binder_th_task, int node_debug_id,
+		unsigned int code, bool pending_async),
+	TP_ARGS(caller_task, binder_proc_task, binder_th_task, node_debug_id, code, pending_async));
+DECLARE_HOOK(android_vh_binder_new_ref,
+	TP_PROTO(struct task_struct *proc, uint32_t ref_desc, int node_debug_id),
+	TP_ARGS(proc, ref_desc, node_debug_id));
+DECLARE_HOOK(android_vh_binder_del_ref,
+	TP_PROTO(struct task_struct *proc, uint32_t ref_desc),
+	TP_ARGS(proc, ref_desc));
+>>>>>>> CHANGE (e107ea ANDROID: vendor_hooks: Add hooks for binder proc transaction)
 
 #endif /* _TRACE_HOOK_BINDER_H */
 /* This part must be outside protection */
