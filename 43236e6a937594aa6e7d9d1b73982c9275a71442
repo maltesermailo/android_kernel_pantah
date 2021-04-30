@@ -16,6 +16,24 @@
       "message": "I am unclear if the ABI change will be part of this CL or separate commit. Holding this change here until process clarified.",
       "revId": "43236e6a937594aa6e7d9d1b73982c9275a71442",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c5fbcb0_5ef8dfe0",
+        "filename": "android/abi_gki_aarch64_generic",
+        "patchSetId": 4
+      },
+      "lineNbr": 1853,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2021-04-30T20:43:27Z",
+      "side": 1,
+      "message": "Normally we would add this as a separate change, but it should be fine to include here since this change adds this variable.\n\nRegarding updating the ABI xml, since this change modifies the kernel ABI it needs to wait until the next Kernel ABI merge window. So you just need to get it added to the 5/6 KMI merge window hash tag.",
+      "parentUuid": "a6b534ca_8c9d7241",
+      "revId": "43236e6a937594aa6e7d9d1b73982c9275a71442",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
