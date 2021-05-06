@@ -297,7 +297,11 @@ int ext4fs_dirhash(const struct inode *dir, const char *name, int len,
 	struct qstr qstr = {.name = name, .len = len };
 
 	if (len && IS_CASEFOLDED(dir) && um &&
+<<<<<<< HEAD   (893649 Merge c6536676c7fe3 ("Merge 'x86_core_for_v5.13' of git://gi)
 	    (!IS_ENCRYPTED(dir) || fscrypt_has_encryption_key(dir))) {
+=======
+	   (!IS_ENCRYPTED(dir) || fscrypt_has_encryption_key(dir))) {
+>>>>>>> BRANCH (d665ea Merge tag 'for-linus-5.13-rc1' of git://git.kernel.org/pub/s)
 		buff = kzalloc(sizeof(char) * PATH_MAX, GFP_KERNEL);
 		if (!buff)
 			return -ENOMEM;
