@@ -13,6 +13,9 @@
 #include <linux/kthread.h>
 #include <linux/mmu_context.h>
 
+#undef CREATE_TRACE_POINT
+#include <trace/hooks/cgroup.h>
+
 /* total number of freezing conditions in effect */
 atomic_t system_freezing_cnt = ATOMIC_INIT(0);
 EXPORT_SYMBOL(system_freezing_cnt);
@@ -67,10 +70,22 @@ bool __refrigerator(bool check_kthr_stop)
 		set_current_state(TASK_UNINTERRUPTIBLE);
 
 		spin_lock_irq(&freezer_lock);
+<<<<<<< HEAD   (ab3386 Merge changes Icdb539c6,I5d35ddaa,I59838b0a,I88efacf4 into a)
 		current->flags |= PF_FROZEN;
 		if (!freezing(current) ||
 		    (check_kthr_stop && kthread_should_stop()))
 			current->flags &= ~PF_FROZEN;
+=======
+<<<<<<< HEAD   (ef8b5c BACKPORT: KVM: arm64: Make vcpu flag updates non-preemptible)
+		freeze = freezing(current) && !(check_kthr_stop && kthread_should_stop());
+=======
+		current->flags |= PF_FROZEN;
+		if (!freezing(current) ||
+		    (check_kthr_stop && kthread_should_stop()))
+			current->flags &= ~PF_FROZEN;
+		trace_android_rvh_refrigerator(pm_nosig_freezing);
+>>>>>>> CHANGE (a15803 ANDROID: freezer: Add vendor hook to freezer for GKI purpose)
+>>>>>>> CHANGE (3e54ce ANDROID: freezer: Add vendor hook to freezer for GKI purpose)
 		spin_unlock_irq(&freezer_lock);
 
 		if (!(current->flags & PF_FROZEN))

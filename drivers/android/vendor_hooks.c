@@ -74,10 +74,30 @@
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
  * associated with them) to allow external modules to probe them.
  */
+<<<<<<< HEAD   (ab3386 Merge changes Icdb539c6,I5d35ddaa,I59838b0a,I88efacf4 into a)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_sk_alloc);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_sk_free);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_nf_conn_alloc);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_nf_conn_free);
+=======
+<<<<<<< HEAD   (ef8b5c BACKPORT: KVM: arm64: Make vcpu flag updates non-preemptible)
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_select_task_rq_fair);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_select_task_rq_rt);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_select_fallback_rq);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_refrigerator);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scheduler_tick);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_enqueue_task);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_dequeue_task);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_can_migrate_task);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_find_lowest_rq);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_rtmutex_prepare_setprio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_prepare_prio_fork);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_finish_prio_fork);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_user_nice);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_setscheduler);
+>>>>>>> CHANGE (a15803 ANDROID: freezer: Add vendor hook to freezer for GKI purpose)
+>>>>>>> CHANGE (3e54ce ANDROID: freezer: Add vendor hook to freezer for GKI purpose)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_arch_set_freq_scale);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_is_fpsimd_save);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_transaction_init);
