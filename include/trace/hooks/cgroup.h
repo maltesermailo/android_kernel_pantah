@@ -20,6 +20,18 @@ struct cgroup_taskset;
 DECLARE_HOOK(android_vh_cgroup_set_task,
 	TP_PROTO(int ret, struct task_struct *task),
 	TP_ARGS(ret, task));
+<<<<<<< HEAD   (2b0d64 UPSTREAM: wifi: cfg80211: Allow P2P client interface to indi)
+=======
+DECLARE_RESTRICTED_HOOK(android_rvh_cpuset_fork,
+	TP_PROTO(struct task_struct *p, int *inherit_cpus),
+	TP_ARGS(p, inherit_cpus), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_cgroup_force_kthread_migration,
+	TP_PROTO(struct task_struct *tsk, struct cgroup *dst_cgrp, bool *force_migration),
+	TP_ARGS(tsk, dst_cgrp, force_migration), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_refrigerator,
+	TP_PROTO(bool f),
+	TP_ARGS(f), 1);
+>>>>>>> CHANGE (a15803 ANDROID: freezer: Add vendor hook to freezer for GKI purpose)
 
 DECLARE_HOOK(android_vh_cgroup_attach,
 	TP_PROTO(struct cgroup_subsys *ss, struct cgroup_taskset *tset),
