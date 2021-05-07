@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57fda797_7c552010",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-05-07T16:48:03Z",
+      "side": 1,
+      "message": "Does this mean that the type of the ppn argument should be changed from u64 into __be64?",
+      "range": {
+        "startLine": 288,
+        "startChar": 1,
+        "endLine": 288,
+        "endChar": 59
+      },
+      "revId": "936371fa7a0d11eb08462685b8c746a3af834fca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5db164d_2a44b320",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-05-07T16:48:03Z",
+      "side": 1,
+      "message": "Has it been considered to change the type of the \u0027transfer_len\u0027 argument from \u0027unsigned int\u0027 into \u0027u8\u0027?",
+      "range": {
+        "startLine": 290,
+        "startChar": 11,
+        "endLine": 290,
+        "endChar": 15
+      },
+      "revId": "936371fa7a0d11eb08462685b8c746a3af834fca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2900117_f275ff33",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-05-07T16:48:03Z",
+      "side": 1,
+      "message": "How is it guaranteed that transfer_len \u003c\u003d 255?",
+      "range": {
+        "startLine": 575,
+        "startChar": 0,
+        "endLine": 578,
+        "endChar": 11
+      },
+      "revId": "936371fa7a0d11eb08462685b8c746a3af834fca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
