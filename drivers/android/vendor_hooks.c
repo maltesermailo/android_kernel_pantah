@@ -112,8 +112,12 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_printk_caller_id);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_printk_caller);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_printk_ext_header);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_jiffies_update);
+<<<<<<< HEAD   (dbc5eb ANDROID: Fix build errors caused by missing mmu_notifier_loc)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_gic_v3_set_affinity);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_gic_set_affinity);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_gic_v3_set_affinity);
+>>>>>>> CHANGE (3bd9ad ANDROID: gic-v3: Change GIC v3 vendor hook to restricted)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_gic_v3_affinity_init);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_show_suspend_epoch_val);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_show_resume_epoch_val);
