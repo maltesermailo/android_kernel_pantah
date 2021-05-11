@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd37b325_ecba7859",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-05-11T09:18:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a99fd86_0f8a21dd",
+      "range": {
+        "startLine": 7,
+        "startChar": 23,
+        "endLine": 7,
+        "endChar": 53
+      },
+      "revId": "1e6fedd732c26f045231fcf1f65efca72044915b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d3d9361_9572d002",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc5816cf_2255177a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-05-11T09:18:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d3d9361_9572d002",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 47
+      },
+      "revId": "1e6fedd732c26f045231fcf1f65efca72044915b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83a5fd15_b718dd57",
@@ -60,6 +108,30 @@
       "writtenOn": "2021-05-10T17:15:00Z",
       "side": 1,
       "message": "Let\u0027s separate the addition of mm_struct fields into a separate patch. If I understand correctly, these new mm_struct fields are not used by these vendor hooks.",
+      "range": {
+        "startLine": 588,
+        "startChar": 2,
+        "endLine": 588,
+        "endChar": 31
+      },
+      "revId": "1e6fedd732c26f045231fcf1f65efca72044915b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ecc6f83_dc94c6c0",
+        "filename": "include/linux/mm_types.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-05-11T09:18:11Z",
+      "side": 1,
+      "message": "We will initialize the 3 fields int the function trace_android_vh_gloom_va_feature_init(mm) in kernel/fork.c\nSo, I think they are used by these vendor hooks.",
+      "parentUuid": "83a5fd15_b718dd57",
       "range": {
         "startLine": 588,
         "startChar": 2,
