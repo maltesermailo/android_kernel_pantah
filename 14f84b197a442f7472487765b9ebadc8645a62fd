@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff4da925_3ec90d50",
+        "filename": "include/linux/mm_types.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-05-11T19:30:59Z",
+      "side": 1,
+      "message": "I think you will need to add:\n#include \u003clinux/android_vendor.h\u003e\n\nfor ANDROID_OEM_DATA_ARRAY() to be recognized. Have you built the change both for ARM64 and x86? Recently we had similar change which was failing presubmits because of that: https://android-review.googlesource.com/c/kernel/common/+/1671546/13..15/include/linux/vmalloc.h#b60",
+      "revId": "14f84b197a442f7472487765b9ebadc8645a62fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81a30d1a_74ebe352",
+        "filename": "kernel/fork.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1048,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-05-11T19:30:59Z",
+      "side": 1,
+      "message": "Let\u0027s not use feature names like \"gloom va\" in the hook name. How about:\n\ntrace_android_vh_mm_init or smth.",
+      "range": {
+        "startLine": 1048,
+        "startChar": 1,
+        "endLine": 1048,
+        "endChar": 39
+      },
+      "revId": "14f84b197a442f7472487765b9ebadc8645a62fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
