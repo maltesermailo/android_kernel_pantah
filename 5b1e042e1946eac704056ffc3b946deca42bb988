@@ -52,6 +52,24 @@
       "parentUuid": "64d55e98_6b253901",
       "revId": "5b1e042e1946eac704056ffc3b946deca42bb988",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c302b132_6d15d888",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2021-05-13T07:57:19Z",
+      "side": 1,
+      "message": "To clarify my first message, by \u0027open-code\u0027 I suggested that you copy the content of the functions to your module source -- they\u0027re one-liners so that should be trivial.\n\nAbout the patches you listed, none of them export trivial accessor functions, they provide the module with data it couldn\u0027t get otherwise. In your case all the data is already available to the module.\n\nAnd on a side note, as Greg mentioned, all symbols exported by GKI (vendor hooks, etc) are GPL, so your module is subject to term of the GPL licence.",
+      "parentUuid": "71abe22f_18f0ec28",
+      "revId": "5b1e042e1946eac704056ffc3b946deca42bb988",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
