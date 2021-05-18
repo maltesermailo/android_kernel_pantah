@@ -70,6 +70,30 @@
       },
       "revId": "3e8b73d38ff59731f6f01d3ede994bd1c3c2c1f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a4199e8_21787a5a",
+        "filename": "mm/mmap.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2307,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-05-18T19:30:38Z",
+      "side": 1,
+      "message": "If trace_android_vh_get_unmapped_area_exclude_reserved_zone modifies search area then I suggest moving trace_android_vh_get_unmapped_area_exclude_reserved_zone after all info fields are initialized but before vm_unmapped_area between lines 2310 and 2311.\nAlso a more appropriate name might be something like:\n\ntrace_android_vh_exclude_reserved_zone() or something like that.",
+      "parentUuid": "3378c034_2b7d2d7a",
+      "range": {
+        "startLine": 2307,
+        "startChar": 1,
+        "endLine": 2307,
+        "endChar": 69
+      },
+      "revId": "3e8b73d38ff59731f6f01d3ede994bd1c3c2c1f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
