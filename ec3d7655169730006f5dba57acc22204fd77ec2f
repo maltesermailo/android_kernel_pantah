@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df2c17d2_9b4a45ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878293
+      },
+      "writtenOn": "2021-05-18T12:55:22Z",
+      "side": 1,
+      "message": "I\u0027m going to abandon this patch.",
+      "revId": "ec3d7655169730006f5dba57acc22204fd77ec2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98d26da9_0b98246b",
@@ -109,6 +126,30 @@
       "side": 1,
       "message": "I do not see a `find_get_task_struct()` function anywhere in the kernel tree.\n\nAnd again, this should not be needed for any normal operation.\n\nUnwinding the task stack is fragile and prone to change in tricky ways, it is not a \"stable\" api that we can support, nor should you attempt to rely on it for any type of functionality.",
       "parentUuid": "18220178_3bb65dd2",
+      "range": {
+        "startLine": 444,
+        "startChar": 0,
+        "endLine": 444,
+        "endChar": 34
+      },
+      "revId": "ec3d7655169730006f5dba57acc22204fd77ec2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2eadf66_4ad89a86",
+        "filename": "kernel/fork.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1878293
+      },
+      "writtenOn": "2021-05-18T12:55:22Z",
+      "side": 1,
+      "message": "Dear Greg,\n\nI\u0027m so sorry for my typo. I mean `try_get_task_struct()` in my intention. But after I checking the code, I found that this function is defined in the sched private .h file. And we are going to give up using these functions.\n\nI\u0027m really sorry for wasting of your time.",
+      "parentUuid": "8187bae8_f335ec3e",
       "range": {
         "startLine": 444,
         "startChar": 0,
