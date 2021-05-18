@@ -33,6 +33,24 @@
       "message": "Hi Greg:\n\n One doubt here, if \"kernel_read\" and \"filp_open\" is not allowed to be used in kernel module,\nwhy android/abi_gki_aarch64.xml have \"kernel_read\", \"filp_open\" elf-symbol in it?\n./abi_gki_aarch64.xml:      \u003celf-symbol name\u003d\u0027filp_open\u0027 type\u003d\u0027func-type\u0027 binding\u003d\u0027global-binding\u0027 visibility\u003d\u0027default-visibility\u0027 is-defined\u003d\u0027yes\u0027 crc\u003d\u00270x7998f55c\u0027/\u003e\n./android/abi_gki_aarch64.xml:      \u003celf-symbol name\u003d\u0027kernel_read\u0027 type\u003d\u0027func-type\u0027 binding\u003d\u0027global-binding\u0027 visibility\u003d\u0027default-visibility\u0027 is-defined\u003d\u0027yes\u0027 crc\u003d\u00270x171fc44\u0027/\u003e",
       "revId": "742a7243aa87b45b2b08c2da5ff496c1da003fbf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52cc0512_7ed08b0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-05-18T07:18:14Z",
+      "side": 1,
+      "message": "While kernel_read is there (looks like an oversight, we will check, thanks for pointing that out), filp_open is not in the checked-in version of the abi.xml. Cab you double check?",
+      "parentUuid": "55e844b2_01caf9b7",
+      "revId": "742a7243aa87b45b2b08c2da5ff496c1da003fbf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
