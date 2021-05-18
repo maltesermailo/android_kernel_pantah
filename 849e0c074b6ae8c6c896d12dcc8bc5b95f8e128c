@@ -33,6 +33,42 @@
       "message": "And again, tracing system calls is almost never the thing you really need to do to solve problems, what problem are you trying to resolve here?",
       "revId": "849e0c074b6ae8c6c896d12dcc8bc5b95f8e128c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8330789_56a6470e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1810514
+      },
+      "writtenOn": "2021-05-18T01:06:48Z",
+      "side": 1,
+      "message": "We want to implement such a kernel module, when we turn on the corresponding switch from the user space，we can get process-related information from the specified system call.",
+      "parentUuid": "8f5366ae_61018b84",
+      "revId": "849e0c074b6ae8c6c896d12dcc8bc5b95f8e128c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "470a2869_aca27c6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1810514
+      },
+      "writtenOn": "2021-05-18T01:06:48Z",
+      "side": 1,
+      "message": "For some specific system calls or some sensitive system calls, sometimes we want to locate more process information backward through system calls, such as, \nwhich process called the system call, which CPU the process is running on, and so on. With this information, we can better analyze and locate problems.",
+      "parentUuid": "6178c926_0c65187e",
+      "revId": "849e0c074b6ae8c6c896d12dcc8bc5b95f8e128c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
