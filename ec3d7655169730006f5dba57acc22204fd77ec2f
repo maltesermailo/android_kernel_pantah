@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1acaef5_5db044da",
+        "filename": "arch/arm64/kernel/stacktrace.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1878293
+      },
+      "writtenOn": "2021-05-18T03:13:57Z",
+      "side": 1,
+      "message": "We just call this function in our module, and we won\u0027t try to put any probe call on this function.\n\nSorry, I don\u0027t know if there are some limits for NOKPROBE symbols exporting, but I saw the NOKPROBE symbols context_tracking_user_enter/exit were exported in file kernel/context_tracking.c.\n\n\u003e NOKPROBE_SYMBOL(context_tracking_enter);\n\u003e EXPORT_SYMBOL_GPL(context_tracking_enter);\n\u003e ...\n\u003e NOKPROBE_SYMBOL(context_tracking_exit);\n\u003e EXPORT_SYMBOL_GPL(context_tracking_exit);",
+      "parentUuid": "98d26da9_0b98246b",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 32
+      },
+      "revId": "ec3d7655169730006f5dba57acc22204fd77ec2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb7ff6e1_2e82c267",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18220178_3bb65dd2",
+        "filename": "kernel/fork.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1878293
+      },
+      "writtenOn": "2021-05-18T03:13:57Z",
+      "side": 1,
+      "message": "Actually, it‘s not a driver of some device which use this, it\u0027s just a kernel module we implemented for our own special tuning.\n\nAs mentioned in the CL, we use these functions to figure out where the task is stuck if we wait for a task for too long. And we may do some corresponding actions try to speed it up.\n\nSince the find_get_task_stack() is a inline function which is defined in a public .h file, so we can use this function in our module. So we need the put_task_stack() in pairs with this too.",
+      "parentUuid": "fb7ff6e1_2e82c267",
+      "range": {
+        "startLine": 444,
+        "startChar": 0,
+        "endLine": 444,
+        "endChar": 34
+      },
+      "revId": "ec3d7655169730006f5dba57acc22204fd77ec2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e748e44_c7c5f578",
@@ -60,6 +108,30 @@
       "writtenOn": "2021-05-17T16:08:41Z",
       "side": 1,
       "message": "what driver needs this?",
+      "range": {
+        "startLine": 7371,
+        "startChar": 0,
+        "endLine": 7371,
+        "endChar": 38
+      },
+      "revId": "ec3d7655169730006f5dba57acc22204fd77ec2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68778f7b_14ddbf07",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7371,
+      "author": {
+        "id": 1878293
+      },
+      "writtenOn": "2021-05-18T03:13:57Z",
+      "side": 1,
+      "message": "Same as the above reply.",
+      "parentUuid": "7e748e44_c7c5f578",
       "range": {
         "startLine": 7371,
         "startChar": 0,
