@@ -46,6 +46,30 @@
       },
       "revId": "3a66d1b99969ecb2855b7a548d80e7a10a8e202e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5bbbdd2_d6b60ba2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2021-05-19T16:28:19Z",
+      "side": 1,
+      "message": "\u003e The core issue is that update_live_fips140_algos() takes crypto_alg_sem while it overwrites the function pointers of live algorithms. This works fine for re-allocating TFMs for registered algos, but re-instantiating an algo based on a template is not going to work, as it will deadlock when it attemps to register it.\n\nIsn\u0027t there any way to drop crypto_alg_sem before calling crypto_alg_mod_lookup()?  What if we took a reference to the current algorithm to prevent it from going away before we continue the list iteration?\n\n\u003e On an arm64 system with support for crypto instructions, there aren\u0027t that many other cases where we rely on templates, which is why I am proposing doing all hmac(shaXXX) flavors that we have the accelerated SHA code for.\n\nThis seems pretty fragile, given that it will break as soon as someone starts using AES or SHA in another template.",
+      "parentUuid": "e5d8fe00_7c054a38",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 42
+      },
+      "revId": "3a66d1b99969ecb2855b7a548d80e7a10a8e202e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
