@@ -22,6 +22,30 @@
       },
       "revId": "3a66d1b99969ecb2855b7a548d80e7a10a8e202e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5d8fe00_7c054a38",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1843125
+      },
+      "writtenOn": "2021-05-19T11:01:49Z",
+      "side": 1,
+      "message": "The core issue is that update_live_fips140_algos() takes crypto_alg_sem while it overwrites the function pointers of live algorithms. This works fine for re-allocating TFMs for registered algos, but re-instantiating an algo based on a template is not going to work, as it will deadlock when it attemps to register it.\n\nSo this is a partial solution to that problem, based on my (incorrect) assumption that the fscrypt/fsverity layers might have allocated hmac(shaXXX) TFMs by the time this module is loaded.\n\nOn an arm64 system with support for crypto instructions, there aren\u0027t that many other cases where we rely on templates, which is why I am proposing doing all hmac(shaXXX) flavors that we have the accelerated SHA code for.",
+      "parentUuid": "01fea697_7db57702",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 42
+      },
+      "revId": "3a66d1b99969ecb2855b7a548d80e7a10a8e202e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
