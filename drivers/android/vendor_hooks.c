@@ -67,7 +67,20 @@
 #include <trace/hooks/evdev.h>
 #include <trace/hooks/ipv4.h>
 #include <trace/hooks/signal.h>
+<<<<<<< HEAD   (b109ce FROMGIT: usb: typec: ucsi: Acknowledge the GET_ERROR_STATUS )
 #include <trace/hooks/cfg80211.h>
+=======
+#include <trace/hooks/logbuf.h>
+#include <trace/hooks/vmscan.h>
+#include <trace/hooks/psi.h>
+#include <trace/hooks/selinux.h>
+#include <trace/hooks/hung_task.h>
+#include <trace/hooks/mmc_core.h>
+#include <trace/hooks/v4l2core.h>
+#include <trace/hooks/v4l2mc.h>
+#include <trace/hooks/scmi.h>
+#include <trace/hooks/user.h>
+>>>>>>> CHANGE (c9b8fa ANDROID: user: Add vendor hook to user for GKI purpose)
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -390,6 +403,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sd_update_bus_speed_mode);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_attach_sd);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sdhci_get_cd);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_gpio_cd_irqt);
+<<<<<<< HEAD   (b109ce FROMGIT: usb: typec: ucsi: Acknowledge the GET_ERROR_STATUS )
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_update_partition_status);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_sd_update_cmdline_timing);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_sd_update_dataline_timing);
@@ -432,3 +446,22 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_del_page_from_lrulist);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_page_should_be_protected);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mark_page_accessed);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_ffu_update_cid);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_vmalloc_stack);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_show_stack_hash);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_track_hash);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_task_comm);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpufreq_acct_update_power);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_tcpm_log);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_media_device_setup_link);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_reserved_fmt_fields);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fill_ext_fmtdesc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_mask_adjust);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scmi_timeout_sync);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_find_new_ilb);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_force_compatible_pre);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_force_compatible_post);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_uid);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_user);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_balance_anon_file_reclaim);
+>>>>>>> CHANGE (c9b8fa ANDROID: user: Add vendor hook to user for GKI purpose)

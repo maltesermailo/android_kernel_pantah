@@ -20,6 +20,8 @@
 #include <linux/user_namespace.h>
 #include <linux/proc_ns.h>
 
+#include <trace/hooks/user.h>
+
 /*
  * userns count is 1 for root user, 1 for init_uts_ns,
  * and 1 for... ?
@@ -152,6 +154,7 @@ static void user_epoll_free(struct user_struct *up)
 static void free_user(struct user_struct *up, unsigned long flags)
 	__releases(&uidhash_lock)
 {
+	trace_android_vh_free_user(up);
 	uid_hash_remove(up);
 	spin_unlock_irqrestore(&uidhash_lock, flags);
 	user_epoll_free(up);
@@ -204,10 +207,14 @@ struct user_struct *alloc_uid(kuid_t uid)
 
 		new->uid = uid;
 		refcount_set(&new->__count, 1);
+<<<<<<< HEAD   (b109ce FROMGIT: usb: typec: ucsi: Acknowledge the GET_ERROR_STATUS )
 		if (user_epoll_alloc(new)) {
 			kmem_cache_free(uid_cachep, new);
 			return NULL;
 		}
+=======
+		trace_android_vh_alloc_uid(new);
+>>>>>>> CHANGE (c9b8fa ANDROID: user: Add vendor hook to user for GKI purpose)
 		ratelimit_state_init(&new->ratelimit, HZ, 100);
 		ratelimit_set_flags(&new->ratelimit, RATELIMIT_MSG_ON_RELEASE);
 
