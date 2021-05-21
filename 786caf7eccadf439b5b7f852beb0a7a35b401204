@@ -33,6 +33,42 @@
       "message": "So\n\n{tty,usb}/** - find tty usb\nnet* - find -name \u0027net*\u0027\n*.md - find -name \u0027*.md\u0027\n{net*,*.md} - find \u0027(\u0027 -name \u0027net* -or -name \u0027*.md\u0027 \u0027)\u0027 ??\nnet/** - find net ?? or find $(find -name net) ??\n",
       "revId": "786caf7eccadf439b5b7f852beb0a7a35b401204",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "886ad663_cfa1b5bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-05-21T12:44:40Z",
+      "side": 1,
+      "message": "{tty,usb}/** - find tty usb\n\nnot exactly, the trailing slash is also required\n\n  net* - find -name \u0027net*\u0027\n\nyes\n\n  *.md - find -name \u0027*.md\u0027\n\nyes\n\n  {net*,*.md} - find \u0027(\u0027 -name \u0027net* -or -name \u0027*.md\u0027 \u0027)\u0027 ??\n\nI think so\n\n  net/** - find net ?? or find $(find -name net) ??\n\nfind -wholename \"*net/*\"",
+      "parentUuid": "780542b2_c2f45474",
+      "revId": "786caf7eccadf439b5b7f852beb0a7a35b401204",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4bb8090_417b36f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2021-05-21T12:44:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff6441b5_7b86b7c4",
+      "revId": "786caf7eccadf439b5b7f852beb0a7a35b401204",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
