@@ -87,6 +87,24 @@
       "parentUuid": "a132b4f7_22896c42",
       "revId": "541080d9ef908200cb9c81a2fd669cbeb79dca3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b12e7c4f_ea87d968",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878293
+      },
+      "writtenOn": "2021-05-23T10:16:55Z",
+      "side": 1,
+      "message": "Dear Mr. Todd,\n\nI don\u0027t know if there are some ways to analysis the memory cost indroduced by the lock change easily.\n\nI was tried to add statistics to __mutex_init and __init_rwsem to see how much locks were initialized. But I found that I can\u0027t make statistics at the end of the lock use. And then the statistic is continuously increasing on my device.\n\nDo you have some suggestions on how to do the analysis? I will be very willing to try.",
+      "parentUuid": "cd5fc719_d31ef93e",
+      "revId": "541080d9ef908200cb9c81a2fd669cbeb79dca3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
