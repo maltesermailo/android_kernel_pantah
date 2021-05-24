@@ -16,6 +16,24 @@
       "message": "The kernel_virt_arm build is failing with this change. Can be reproduced with\n\n  BUILD_CONFIG\u003dcommon-modules/virtual-device/build.config.virtual_device.arm build/build.sh",
       "revId": "774feca8f121f627520d7dda728ceb4f54447e5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f90b7c12_f9ab2087",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1879685
+      },
+      "writtenOn": "2021-05-24T02:29:07Z",
+      "side": 1,
+      "message": "HI,\nIf building with common-modules/virtual-device/build.config.virtual_device.arm, it seems to having no CONFIG_MMU_NOTIFIER. HMM_MIRROR need to have MMU_NOTIFIER for build. Because of this, added \"select MMU_NOTIFIER\" at HIDDEN GPU\n\n\u003cBuild error \"common-modules/virtual-device/build.config.virtual_device.arm\"\u003e\n/aosp/common/mm/hmm.c:581:7: error: implicit declaration of function \u0027mmu_interval_check_retry\u0027 [-Werror,-Wimplicit-function-declaration]\n                if (mmu_interval_check_retry(range-\u003enotifier,\n                    ^\n  CC      drivers/gpu/drm/drm_connector.o\n  CC      drivers/usb/core/notify.o\n  AR      drivers/net/ethernet/via/built-in.a\n  CC      fs/locks.o\n1 error generated.",
+      "parentUuid": "f7ea73f7_ce6ff0e9",
+      "revId": "774feca8f121f627520d7dda728ceb4f54447e5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
