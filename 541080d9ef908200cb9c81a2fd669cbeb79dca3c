@@ -123,6 +123,24 @@
       "parentUuid": "b12e7c4f_ea87d968",
       "revId": "541080d9ef908200cb9c81a2fd669cbeb79dca3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e99ddab7_e2938d7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878293
+      },
+      "writtenOn": "2021-05-24T07:20:33Z",
+      "side": 1,
+      "message": "As you suggested, I compared the memory using of this change in several workloads. I mainly focused on slab memory use since most locks are using as members inlined in other structures, and those structures are usually allocated as slab objects.\nI run the test on  my EXYNOS e9815 phone and got the result as below.\n\nbefore:\nafter reboot\nPD2046:/ $ cat /proc/meminfo | grep SUnreclaim\nSUnreclaim:       365004 kB\n\ncamera(taking a photo)\nPD2046:/ $ cat /proc/meminfo | grep SUnreclaim\nSUnreclaim:       373148 kB\n\nchrome(opening two tabs: facebook, youtube)\nPD2046:/ $ cat /proc/meminfo | grep SUnreclaim\nSUnreclaim:       377004 kB\n\nafter:\nafter boot\nPD2046:/ $ cat /proc/meminfo | grep SUnreclaim\nSUnreclaim:       364708 kB\n\ncamera(taking a photo)\nPD2046:/ $ cat /proc/meminfo | grep SUnreclaim\nSUnreclaim:       373160 kB\n\nchrome(opening two tabs: facebook, youtube)\nPD2046:/ $ cat /proc/meminfo | grep SUnreclaim\nSUnreclaim:       378048 kB\n\nIt seems there are not much differ between the two versions.",
+      "parentUuid": "ef84a476_da8bcb23",
+      "revId": "541080d9ef908200cb9c81a2fd669cbeb79dca3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
