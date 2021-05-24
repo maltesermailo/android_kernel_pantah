@@ -105,6 +105,24 @@
       "parentUuid": "cd5fc719_d31ef93e",
       "revId": "541080d9ef908200cb9c81a2fd669cbeb79dca3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef84a476_da8bcb23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-05-24T02:49:17Z",
+      "side": 1,
+      "message": "The idea is just to run a workload with and without this change and look at the kernel memory allocated (dumpsys memory or cat /proc/meminfo). I would be fine with doing this experiment with some common mobile workloads (eg,chrome with several tabs, or a camera workload).\n\nIt may be that adding an element to rwlock and mutex makes no difference at all. We\u0027d like to confirm that before taking this change.",
+      "parentUuid": "b12e7c4f_ea87d968",
+      "revId": "541080d9ef908200cb9c81a2fd669cbeb79dca3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
