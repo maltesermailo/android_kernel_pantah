@@ -119,10 +119,17 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(sched_util_est_cfs_tp);
 EXPORT_TRACEPOINT_SYMBOL_GPL(sched_util_est_se_tp);
 EXPORT_TRACEPOINT_SYMBOL_GPL(sched_update_nr_running_tp);
 EXPORT_TRACEPOINT_SYMBOL_GPL(sched_switch);
+<<<<<<< HEAD   (f6b472 ANDROID: 16K Prevent non-__PAGE_ALIGNED() VMA splits by anon)
 EXPORT_TRACEPOINT_SYMBOL_GPL(sched_waking);
 #if defined(CONFIG_SCHEDSTATS)
 EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_sleep);
 EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_iowait);
+=======
+#ifdef CONFIG_SCHEDSTATS
+EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_wait);
+EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_iowait);
+EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_blocked);
+>>>>>>> CHANGE (527ffd ANDROID: vendor_hooks: Export the tracepoints sched_stat_iow)
 #endif
 
 DEFINE_PER_CPU_SHARED_ALIGNED(struct rq, runqueues);
