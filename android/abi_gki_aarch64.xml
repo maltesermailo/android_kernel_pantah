@@ -4002,6 +4002,7 @@
       <elf-symbol name='static_key_slow_inc' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8e92f7c4'/>
       <elf-symbol name='stop_tty' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa9c9a9e7'/>
       <elf-symbol name='store_sampling_rate' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x972e22fd'/>
+      <elf-symbol name='stpcpy' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf4db35bc'/>
       <elf-symbol name='strcasecmp' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xaafdc258'/>
       <elf-symbol name='strcat' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x61651be'/>
       <elf-symbol name='strchr' type='func-type' binding='weak-binding' visibility='default-visibility' is-defined='yes' crc='0x349cba85'/>
@@ -17789,7 +17790,7 @@
           <var-decl name='error_count' type-id='95e97e5e' visibility='default' filepath='include/linux/blkdev.h' line='174' column='1'/>
         </data-member>
       </union-decl>
-      <union-decl name='__anonymous_union__' is-anonymous='yes' visibility='default' filepath='include/linux/blk_types.h' line='186' column='1' id='2a125a28'/>
+      <union-decl name='__anonymous_union__18' is-anonymous='yes' visibility='default' filepath='include/linux/blk_types.h' line='186' column='1' id='2a125a28'/>
       <pointer-type-def type-id='002ac4a6' size-in-bits='64' id='cf536864'/>
       <array-type-def dimensions='1' type-id='f0981eeb' size-in-bits='128' id='49580a63'>
         <subrange length='4' type-id='7ff19f0f' id='16fe7105'/>
@@ -20407,7 +20408,11 @@
           <var-decl name='pt_frag_refcount' type-id='49178f86' visibility='default' filepath='include/linux/mm_types.h' line='152' column='1'/>
         </data-member>
       </union-decl>
+<<<<<<< HEAD   (cac73f Merge 5.4.123 into android11-5.4-lts)
       <union-decl name='__anonymous_union__4' size-in-bits='32' is-anonymous='yes' visibility='default' filepath='arch/arm64/include/asm/uprobes.h' line='25' column='1' id='e021ecb2'>
+=======
+      <union-decl name='__anonymous_union__10' size-in-bits='32' is-anonymous='yes' visibility='default' filepath='arch/arm64/include/asm/uprobes.h' line='25' column='1' id='e021ecb2'>
+>>>>>>> BRANCH (7d99cf ANDROID: GKI: Update abi_gki_aarch64_exynos)
         <data-member access='public'>
           <var-decl name='insn' type-id='931565be' visibility='default' filepath='arch/arm64/include/asm/uprobes.h' line='26' column='1'/>
         </data-member>
@@ -30039,7 +30044,7 @@
           <var-decl name='val' type-id='e4266c7e' visibility='default' filepath='include/uapi/asm-generic/posix_types.h' line='80' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__2' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/cfg80211.h' line='4820' column='1' id='e1507a22'>
+      <class-decl name='__anonymous_struct__1' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/cfg80211.h' line='4820' column='1' id='e1507a22'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='peer' type-id='91ce1af9' visibility='default' filepath='include/net/cfg80211.h' line='4821' column='1'/>
         </data-member>
@@ -32438,7 +32443,7 @@
           <var-decl name='xmit' type-id='231269da' visibility='default' filepath='include/net/xfrm.h' line='418' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__1' size-in-bits='96' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/cfg80211.h' line='4457' column='1' id='0de9002c'>
+      <class-decl name='__anonymous_struct__' size-in-bits='96' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/cfg80211.h' line='4457' column='1' id='0de9002c'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='preambles' type-id='19c2251e' visibility='default' filepath='include/net/cfg80211.h' line='4458' column='1'/>
         </data-member>
@@ -148648,7 +148653,11 @@
           <var-decl name='simulate' type-id='b50a4934' visibility='default' filepath='arch/arm64/include/asm/uprobes.h' line='30' column='1'/>
         </data-member>
       </class-decl>
+<<<<<<< HEAD   (cac73f Merge 5.4.123 into android11-5.4-lts)
       <union-decl name='__anonymous_union__4' size-in-bits='32' is-anonymous='yes' visibility='default' filepath='arch/arm64/include/asm/uprobes.h' line='25' column='1' id='e021ecb2'>
+=======
+      <union-decl name='__anonymous_union__10' size-in-bits='32' is-anonymous='yes' visibility='default' filepath='arch/arm64/include/asm/uprobes.h' line='25' column='1' id='e021ecb2'>
+>>>>>>> BRANCH (7d99cf ANDROID: GKI: Update abi_gki_aarch64_exynos)
         <data-member access='public'>
           <var-decl name='insn' type-id='931565be' visibility='default' filepath='arch/arm64/include/asm/uprobes.h' line='26' column='1'/>
         </data-member>
@@ -164627,6 +164636,8 @@
       </function-decl>
     </abi-instr>
     <abi-instr address-size='64' path='lib/string.c' language='LANG_C89'>
+      <qualified-type-def type-id='26a90f95' restrict='yes' id='266fe297'/>
+      <qualified-type-def type-id='80f4b756' restrict='yes' id='9d26089a'/>
       <function-decl name='strncasecmp' mangled-name='strncasecmp' filepath='lib/string.c' line='43' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='strncasecmp'>
         <parameter type-id='80f4b756' name='s1' filepath='lib/string.c' line='43' column='1'/>
         <parameter type-id='80f4b756' name='s2' filepath='lib/string.c' line='43' column='1'/>
@@ -164654,6 +164665,11 @@
         <parameter type-id='80f4b756' name='src' filepath='lib/string.c' line='141' column='1'/>
         <parameter type-id='b59d7dce' name='size' filepath='lib/string.c' line='141' column='1'/>
         <return type-id='7359adad'/>
+      </function-decl>
+      <function-decl name='stpcpy' mangled-name='stpcpy' filepath='lib/string.c' line='291' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='stpcpy'>
+        <parameter type-id='266fe297' name='dest' filepath='lib/string.c' line='291' column='1'/>
+        <parameter type-id='9d26089a' name='src' filepath='lib/string.c' line='291' column='1'/>
+        <return type-id='26a90f95'/>
       </function-decl>
       <function-decl name='strcat' mangled-name='strcat' filepath='lib/string.c' line='306' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='strcat'>
         <parameter type-id='26a90f95' name='dest' filepath='lib/string.c' line='306' column='1'/>
@@ -167833,7 +167849,7 @@
           <var-decl name='mmp' type-id='0009269e' visibility='default' filepath='include/linux/skbuff.h' line='482' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__15' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/linux/skbuff.h' line='465' column='1' id='a27049de'>
+      <union-decl name='__anonymous_union__2' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/linux/skbuff.h' line='465' column='1' id='a27049de'>
         <data-member access='public'>
           <var-decl name='' type-id='3ee84947' visibility='default' filepath='include/linux/skbuff.h' line='466' column='1'/>
         </data-member>
@@ -167841,7 +167857,7 @@
           <var-decl name='' type-id='0efb3709' visibility='default' filepath='include/linux/skbuff.h' line='470' column='1'/>
         </data-member>
       </union-decl>
-      <class-decl name='__anonymous_struct__6' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/skbuff.h' line='466' column='1' id='3ee84947'>
+      <class-decl name='__anonymous_struct__3' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/skbuff.h' line='466' column='1' id='3ee84947'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='desc' type-id='7359adad' visibility='default' filepath='include/linux/skbuff.h' line='467' column='1'/>
         </data-member>
@@ -167849,7 +167865,7 @@
           <var-decl name='ctx' type-id='eaa32e2f' visibility='default' filepath='include/linux/skbuff.h' line='468' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__7' size-in-bits='96' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/skbuff.h' line='470' column='1' id='0efb3709'>
+      <class-decl name='__anonymous_struct__4' size-in-bits='96' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/linux/skbuff.h' line='470' column='1' id='0efb3709'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='id' type-id='19c2251e' visibility='default' filepath='include/linux/skbuff.h' line='471' column='1'/>
         </data-member>
@@ -174034,7 +174050,7 @@
           <var-decl name='max_flows' type-id='19c2251e' visibility='default' filepath='include/net/cfg80211.h' line='1458' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__3' size-in-bits='288' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/cfg80211.h' line='1010' column='1' id='5b11c736'>
+      <class-decl name='__anonymous_struct__2' size-in-bits='288' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/cfg80211.h' line='1010' column='1' id='5b11c736'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='legacy' type-id='19c2251e' visibility='default' filepath='include/net/cfg80211.h' line='1011' column='1'/>
         </data-member>
@@ -178800,7 +178816,7 @@
           <var-decl name='ftm' type-id='0de9002c' visibility='default' filepath='include/net/cfg80211.h' line='4467' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__1' size-in-bits='96' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/cfg80211.h' line='4457' column='1' id='0de9002c'>
+      <class-decl name='__anonymous_struct__' size-in-bits='96' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/cfg80211.h' line='4457' column='1' id='0de9002c'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='preambles' type-id='19c2251e' visibility='default' filepath='include/net/cfg80211.h' line='4458' column='1'/>
         </data-member>
@@ -178829,7 +178845,7 @@
           <var-decl name='request_civicloc' type-id='f9b06939' visibility='default' filepath='include/net/cfg80211.h' line='4466' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__2' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/cfg80211.h' line='4820' column='1' id='e1507a22'>
+      <class-decl name='__anonymous_struct__1' size-in-bits='128' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/cfg80211.h' line='4820' column='1' id='e1507a22'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='peer' type-id='91ce1af9' visibility='default' filepath='include/net/cfg80211.h' line='4821' column='1'/>
         </data-member>
@@ -179421,7 +179437,7 @@
           <var-decl name='control' type-id='b7cdf389' visibility='default' filepath='include/net/cfg80211.h' line='1015' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__3' size-in-bits='288' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/cfg80211.h' line='1010' column='1' id='5b11c736'>
+      <class-decl name='__anonymous_struct__2' size-in-bits='288' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/cfg80211.h' line='1010' column='1' id='5b11c736'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='legacy' type-id='19c2251e' visibility='default' filepath='include/net/cfg80211.h' line='1011' column='1'/>
         </data-member>
@@ -191062,6 +191078,6 @@
 </abi-corpus-group>
 
 <!--
-     libabigail: abidw: 2.0.0-6bca1bdb-soong
+     libabigail: abidw: 2.0.0-67dcde31-soong
      built with: clang: Android (7284624, based on r416183b) clang version 12.0.5 (https://android.googlesource.com/toolchain/llvm-project c935d99d7cf2016289302412d708641d52d2f7ee)
 -->
