@@ -52,6 +52,24 @@
       "parentUuid": "1b27fe18_e05d62e7",
       "revId": "a8ae950711c1774e47c84752aa1939932636a5f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af0f86b1_257839a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1863284
+      },
+      "writtenOn": "2021-06-02T07:31:40Z",
+      "side": 1,
+      "message": "We added new wake flag(WF_SYNC_CL) to prevent cluster bouncing. (Bug: 181743516)\nIt is intended to avoid warnings only when WF_SYNC_CL is used.\nConsequently, we want to allow both of WF_SYNC and WF_SYNC_CL, and if other wake flags are set, the same warning will be generated.",
+      "parentUuid": "a1b82c19_367f630c",
+      "revId": "a8ae950711c1774e47c84752aa1939932636a5f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
