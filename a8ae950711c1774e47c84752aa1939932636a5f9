@@ -88,6 +88,24 @@
       "parentUuid": "af0f86b1_257839a8",
       "revId": "a8ae950711c1774e47c84752aa1939932636a5f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1197df1_150d5d95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1759937
+      },
+      "writtenOn": "2021-06-02T09:28:19Z",
+      "side": 1,
+      "message": "We have applied the vendor_hook with Bug: 181743516.\n\nvoid __wake_up_sync_key(struct wait_queue_head *wq_head, unsigned int mode,\n\t\t\tvoid *key)\n[...]\n\ttrace_android_vh_set_wake_flags(\u0026wake_flags, \u0026mode);\n\t__wake_up_common_lock(wq_head, mode, 1, wake_flags, key);\n[...]\n\nIt will trigger \"default wake function\" with the new wake flag.\n\nAlso \"cluster bouncing\" is our specific feature.\nWe are not planning to send this to upstream.",
+      "parentUuid": "20308505_e32179b9",
+      "revId": "a8ae950711c1774e47c84752aa1939932636a5f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
