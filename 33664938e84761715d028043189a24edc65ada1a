@@ -16,6 +16,24 @@
       "message": "Why is this needed?  What is this changing that the existing configuration does not support?",
       "revId": "33664938e84761715d028043189a24edc65ada1a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a11dd2d_bd811ec2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1767641
+      },
+      "writtenOn": "2021-06-02T10:39:41Z",
+      "side": 1,
+      "message": "We have MEDIA_DIGITAL_TV_SUPPORT\u003dy in our internal frag config for ATV\nand DVB_CORE will be default y.\n\nIn order not to struggle with breaking ABI issue, we decide for making DVB_CORE as a module.\n\nAll the ATV media relative modules are depend on dvb_frountend subsystem,\nso we just make the whole subsystem as KO.",
+      "parentUuid": "afe255a7_248d46a5",
+      "revId": "33664938e84761715d028043189a24edc65ada1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
