@@ -70,6 +70,30 @@
       },
       "revId": "6e0e133044f4639625d86be9d4cd757a6d81982b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9932158_6d1dd809",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5019,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-02T16:32:45Z",
+      "side": 1,
+      "message": "I think this is catching a real issue... how do we know that the flag you defined for this feature isn\u0027t used for something else if the value isn\u0027t reserved anywhere?\n\nIf you need a new flag for your private use, I think it would be better to define something like \n```\n#define WF_VENDOR 0x1000\n```\nin kernel/sched/sched.h and then change this line to\n```\nWARN_ON_ONCE(IS_ENABLED(CONFIG_SCHED_DEBUG) \u0026\u0026 wake_flags \u0026 ~(WF_SYNC|WF_VENDOR));\n```",
+      "parentUuid": "f53249d7_8a1aec3f",
+      "range": {
+        "startLine": 5019,
+        "startChar": 26,
+        "endLine": 5019,
+        "endChar": 44
+      },
+      "revId": "6e0e133044f4639625d86be9d4cd757a6d81982b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
