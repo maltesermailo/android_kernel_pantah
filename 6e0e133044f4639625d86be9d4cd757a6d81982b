@@ -22,6 +22,30 @@
       },
       "revId": "6e0e133044f4639625d86be9d4cd757a6d81982b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6ea6493_5041ad3e",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5019,
+      "author": {
+        "id": 1863284
+      },
+      "writtenOn": "2021-06-02T07:51:07Z",
+      "side": 1,
+      "message": "It is defined \u0027default y\u0027 as below.\n\nDefined at lib/Kconfig.debug:1095\n\nconfig SCHED_DEBUG\n        bool \"Collect scheduler debugging info\"\n        depends on DEBUG_KERNEL \u0026\u0026 PROC_FS\n        default y\n        help\n          If you say Y here, the /proc/sched_debug file will be provided\n          that can help debug the scheduler. The runtime overhead of this\n          option is minimal.",
+      "parentUuid": "af0efdde_abb6aec6",
+      "range": {
+        "startLine": 5019,
+        "startChar": 26,
+        "endLine": 5019,
+        "endChar": 44
+      },
+      "revId": "6e0e133044f4639625d86be9d4cd757a6d81982b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
