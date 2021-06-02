@@ -16,6 +16,24 @@
       "message": "What specific warning are you trying to avoid here, and why?",
       "revId": "a8ae950711c1774e47c84752aa1939932636a5f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b27fe18_e05d62e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1863284
+      },
+      "writtenOn": "2021-06-02T07:06:06Z",
+      "side": 1,
+      "message": "WARNING: CPU: 4 PID: 422 at kernel/sched/core.c:4891 default_wake_function+0x28/0x30\n\npc : default_wake_function+0x28/0x30\nlr : autoremove_wake_function+0x1c/0x60\nsp : ffffffc02f30ba50\nx29: ffffffc02f30ba50 x28: 0000000000000000 \nx27: 0000000000000000 x26: ffffff8823600f80 \nx25: ffffffc01277bb30 x24: ffffff8823600f80 \nx23: 0000000000000001 x22: 0000000000001000 \nx21: 00000000000000c3 x20: ffffffc02f30bb00 \nx19: ffffffc01277bb30 x18: ffffffc01e8c5070 \nx17: 0000000000000000 x16: 0000000000000000 \nx15: 0000000000000000 x14: 0000000000000000 \nx13: 0000000004000000 x12: 00000000bbfcbbe6 \nx11: bdc20395d7bcf1ec x10: 000000000000000d \nx9 : 0000000000000000 x8 : ffffffc011214074 \nx7 : 0000000000000000 x6 : ffffffc010186714 \nx5 : ffffffc02f30bb00 x4 : 00000000000000c3 \nx3 : 00000000000000c3 x2 : 0000000000001000 \nx1 : 0000000000000001 x0 : ffffffc01277bb30 \nCall trace:\n default_wake_function+0x28/0x30\n __wake_up_common.llvm.7440138020130777892+0x100/0x1b8\n __wake_up_sync_key+0x90/0xdc\n cpif_hook_do_wake_up_sync+0x24/0x30 [cpif]\n __traceiter_android_vh_do_wake_up_sync+0x60/0x88\n trace_android_vh_do_wake_up_sync+0x100/0x14c\n sock_def_readable+0x64/0x10c\n unix_stream_sendmsg+0x30c/0x4c4\n __sys_sendto+0x1b8/0x25c\n __arm64_sys_sendto+0x28/0x38\n el0_svc_common.llvm.5858956534231991617+0xb8/0x1b4\n do_el0_svc+0x24/0x8c\n el0_svc+0x10/0x1c\n el0_sync_handler+0x68/0xac\n el0_sync+0x180/0x1c0\n---[ end trace a276851acf68e7c0 ]---\n\nWe handle all warnings in panic to ensure kernel stability.",
+      "parentUuid": "8926f7d9_8b604c87",
+      "revId": "a8ae950711c1774e47c84752aa1939932636a5f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
