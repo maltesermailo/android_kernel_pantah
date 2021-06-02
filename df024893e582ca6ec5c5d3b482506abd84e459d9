@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f434b067_d5a89141",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-02T23:16:21Z",
+      "side": 1,
+      "message": "Why is this so complicated. The old code should have worked with ubsan off, so it should be simpler to replace the add and subtract operations with versions that allow wrapping without triggering ubsan errors without completely changing the logic.",
+      "revId": "df024893e582ca6ec5c5d3b482506abd84e459d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73b69d1c_82b9c32a",
+        "filename": "drivers/trusty/trusty-log.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-06-02T23:16:21Z",
+      "side": 1,
+      "message": "Linux does not require that the compiler support these builtin operations and have wrappers that you could use instead. I don\u0027t see any other code in Linux that call these directly.",
+      "revId": "df024893e582ca6ec5c5d3b482506abd84e459d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
