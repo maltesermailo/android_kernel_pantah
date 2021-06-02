@@ -52,6 +52,42 @@
       "parentUuid": "9a11dd2d_bd811ec2",
       "revId": "33664938e84761715d028043189a24edc65ada1a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa37aeb2_054b62bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1767641
+      },
+      "writtenOn": "2021-06-02T12:33:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf045e1c_36b242b6",
+      "revId": "33664938e84761715d028043189a24edc65ada1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23af1638_d82c928d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1767641
+      },
+      "writtenOn": "2021-06-02T12:33:34Z",
+      "side": 1,
+      "message": "Our internal config have already had DVB_CORE\u003dm and work fine for at least three months.\n\nThe Kconfig for DVB in upstream is quite different[1].\n\nThe default was changed from y to MEDIA_DIGITAL_TV_SUPPORT\nbut the type of MEDIA_DIGITAL_TV_SUPPORT is still bool.\n\nI think the patch for upstream will be quite different with 5.4.\nAnd I\u0027ll need to pick many of upstream commits[2] to this branch.\n\nIf you think I have to upstream first is fine for me, but may be FROMLIST if the\npatch is not reviewed in-time.(the ABI frozen deadline is close in case that might break ABI)\n\n\n[1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/media/Kconfig#n181\n[2]\nhttps://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/log/drivers/media/Kconfig",
+      "parentUuid": "cf045e1c_36b242b6",
+      "revId": "33664938e84761715d028043189a24edc65ada1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
