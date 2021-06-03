@@ -159,6 +159,24 @@
       "parentUuid": "70aa63b0_da415c47",
       "revId": "2aa322a65f255667d33f3287c731f5fb02bbee71",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a8a2853_37b50477",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1767641
+      },
+      "writtenOn": "2021-06-03T07:12:13Z",
+      "side": 1,
+      "message": "LOL that is another choice,\nbut our point is without this support userspace have to do things like the following without kernel patch:\n\niterate alsa device:\nopen /dev/snd/pcm0p\n    get status\nopen /dev/snd/pcm1p\n    get status\n...\n\nThis looks like not a really good(?) code and procfs should be stable interface so we can rely on it.\n\nI\u0027m not familiar with the api standard of HAL but I\u0027ll try to tell our audio team to do so if you reject this, they think it much easier and clean code if GKI can support this config.",
+      "parentUuid": "8348b1c4_9ee1d0b5",
+      "revId": "2aa322a65f255667d33f3287c731f5fb02bbee71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
