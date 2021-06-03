@@ -2691,7 +2691,7 @@ __ieee80211_rx_h_amsdu(struct ieee80211_rx_data *rx, u8 data_offset)
 	skb->dev = dev;
 	__skb_queue_head_init(&frame_list);
 
-	if (ieee80211_data_to_8023_exthdr(skb, &ethhdr,
+	if (ieee80211_data_to_8023_exthdr_bool(skb, &ethhdr,
 					  rx->sdata->vif.addr,
 					  rx->sdata->vif.type,
 					  data_offset, true))
