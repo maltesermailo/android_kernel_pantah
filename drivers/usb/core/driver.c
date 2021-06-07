@@ -1257,7 +1257,7 @@ static int usb_suspend_device(struct usb_device *udev, pm_message_t msg)
 		status = usb_generic_driver_suspend(udev, msg);
 
  done:
-	dev_vdbg(&udev->dev, "%s: status %d\n", __func__, status);
+	dev_info(&udev->dev, "[PU]%s: status %d\n", __func__, status);
 	return status;
 }
 
@@ -1292,7 +1292,7 @@ static int usb_resume_device(struct usb_device *udev, pm_message_t msg)
 		status = udriver->resume(udev, msg);
 
  done:
-	dev_vdbg(&udev->dev, "%s: status %d\n", __func__, status);
+	dev_info(&udev->dev, "[PU]%s: status %d\n", __func__, status);
 	return status;
 }
 
@@ -1313,7 +1313,7 @@ static int usb_suspend_interface(struct usb_device *udev,
 		dev_err(&intf->dev, "suspend error %d\n", status);
 
  done:
-	dev_vdbg(&intf->dev, "%s: status %d\n", __func__, status);
+	dev_info(&intf->dev, "[PU]%s: status %d\n", __func__, status);
 	return status;
 }
 
@@ -1365,7 +1365,7 @@ static int usb_resume_interface(struct usb_device *udev,
 	}
 
 done:
-	dev_vdbg(&intf->dev, "%s: status %d\n", __func__, status);
+	dev_err(&intf->dev, "[PU]%s: status %d\n", __func__, status);
 
 	/* Later we will unbind the driver and/or reprobe, if necessary */
 	return status;
@@ -1523,6 +1523,7 @@ static int usb_resume_both(struct usb_device *udev, pm_message_t msg)
 					udev->reset_resume);
 		}
 	}
+
 	usb_mark_last_busy(udev);
 
  done:
@@ -1636,6 +1637,7 @@ int usb_resume(struct device *dev, pm_message_t msg)
  */
 void usb_enable_autosuspend(struct usb_device *udev)
 {
+	dev_info(&udev->dev, "[PU][%s] ++\n", __func__);
 	pm_runtime_allow(&udev->dev);
 }
 EXPORT_SYMBOL_GPL(usb_enable_autosuspend);
@@ -1651,6 +1653,7 @@ EXPORT_SYMBOL_GPL(usb_enable_autosuspend);
  */
 void usb_disable_autosuspend(struct usb_device *udev)
 {
+	dev_err(&udev->dev, "[PU][%s] ++\n", __func__);
 	pm_runtime_forbid(&udev->dev);
 }
 EXPORT_SYMBOL_GPL(usb_disable_autosuspend);
@@ -1677,7 +1680,7 @@ void usb_autosuspend_device(struct usb_device *udev)
 
 	usb_mark_last_busy(udev);
 	status = pm_runtime_put_sync_autosuspend(&udev->dev);
-	dev_vdbg(&udev->dev, "%s: cnt %d -> %d\n",
+	dev_info(&udev->dev, "[PU]%s: cnt %d -> %d\n",
 			__func__, atomic_read(&udev->dev.power.usage_count),
 			status);
 }
@@ -1709,7 +1712,7 @@ int usb_autoresume_device(struct usb_device *udev)
 	status = pm_runtime_get_sync(&udev->dev);
 	if (status < 0)
 		pm_runtime_put_sync(&udev->dev);
-	dev_vdbg(&udev->dev, "%s: cnt %d -> %d\n",
+	dev_info(&udev->dev, "[PU]%s: cnt %d -> %d\n",
 			__func__, atomic_read(&udev->dev.power.usage_count),
 			status);
 	if (status > 0)
@@ -1739,7 +1742,7 @@ void usb_autopm_put_interface(struct usb_interface *intf)
 
 	usb_mark_last_busy(udev);
 	status = pm_runtime_put_sync(&intf->dev);
-	dev_vdbg(&intf->dev, "%s: cnt %d -> %d\n",
+	dev_info(&intf->dev, "[PU]%s: cnt %d -> %d\n",
 			__func__, atomic_read(&intf->dev.power.usage_count),
 			status);
 }
@@ -1767,7 +1770,7 @@ void usb_autopm_put_interface_async(struct usb_interface *intf)
 
 	usb_mark_last_busy(udev);
 	status = pm_runtime_put(&intf->dev);
-	dev_vdbg(&intf->dev, "%s: cnt %d -> %d\n",
+	dev_info(&intf->dev, "[PU]%s: cnt %d -> %d\n",
 			__func__, atomic_read(&intf->dev.power.usage_count),
 			status);
 }
@@ -1786,6 +1789,7 @@ void usb_autopm_put_interface_no_suspend(struct usb_interface *intf)
 {
 	struct usb_device	*udev = interface_to_usbdev(intf);
 
+	dev_info(&intf->dev, "[PU][%s] ++\n", __func__);
 	usb_mark_last_busy(udev);
 	pm_runtime_put_noidle(&intf->dev);
 }
@@ -1817,7 +1821,7 @@ int usb_autopm_get_interface(struct usb_interface *intf)
 	status = pm_runtime_get_sync(&intf->dev);
 	if (status < 0)
 		pm_runtime_put_sync(&intf->dev);
-	dev_vdbg(&intf->dev, "%s: cnt %d -> %d\n",
+	dev_err(&intf->dev, "[PU]%s: cnt %d -> %d\n",
 			__func__, atomic_read(&intf->dev.power.usage_count),
 			status);
 	if (status > 0)
@@ -1850,7 +1854,7 @@ int usb_autopm_get_interface_async(struct usb_interface *intf)
 	status = pm_runtime_get(&intf->dev);
 	if (status < 0 && status != -EINPROGRESS)
 		pm_runtime_put_noidle(&intf->dev);
-	dev_vdbg(&intf->dev, "%s: cnt %d -> %d\n",
+	dev_err(&intf->dev, "[PU]%s: cnt %d -> %d\n",
 			__func__, atomic_read(&intf->dev.power.usage_count),
 			status);
 	if (status > 0 || status == -EINPROGRESS)
@@ -1872,6 +1876,7 @@ void usb_autopm_get_interface_no_resume(struct usb_interface *intf)
 {
 	struct usb_device	*udev = interface_to_usbdev(intf);
 
+	dev_err(&intf->dev, "[PU]%s ++\n", __func__);
 	usb_mark_last_busy(udev);
 	pm_runtime_get_noresume(&intf->dev);
 }
@@ -1944,18 +1949,23 @@ int usb_runtime_suspend(struct device *dev)
 	struct usb_device	*udev = to_usb_device(dev);
 	int			status;
 
+	dev_info(&udev->dev, "[PU][%s](rs1) ++\n", __func__);
 	/* A USB device can be suspended if it passes the various autosuspend
 	 * checks.  Runtime suspend for a USB device means suspending all the
 	 * interfaces and then the device itself.
 	 */
-	if (autosuspend_check(udev) != 0)
+	if (autosuspend_check(udev) != 0) {
+		dev_err(&udev->dev, "[PU][%s](rs2) , return -EAGAIN\n", __func__);
 		return -EAGAIN;
+	}
 
 	status = usb_suspend_both(udev, PMSG_AUTO_SUSPEND);
 
 	/* Allow a retry if autosuspend failed temporarily */
-	if (status == -EAGAIN || status == -EBUSY)
+	if (status == -EAGAIN || status == -EBUSY) {
+		dev_err(&udev->dev, "[PU][%s](rs3) , usb_mark_last_busy ++\n", __func__);
 		usb_mark_last_busy(udev);
+	}
 
 	/*
 	 * The PM core reacts badly unless the return code is 0,
@@ -1963,8 +1973,11 @@ int usb_runtime_suspend(struct device *dev)
 	 * (except for root hubs, because they don't suspend through
 	 * an upstream port like other USB devices).
 	 */
-	if (status != 0 && udev->parent)
+	if (status != 0 && udev->parent) {
+		dev_err(&udev->dev, "[PU][%s](rs4) , return -EBUSY\n", __func__);
 		return -EBUSY;
+	}
+	dev_info(&udev->dev, "[PU][%s](rs5) , return %d\n", __func__, status);
 	return status;
 }
 
@@ -1973,6 +1986,7 @@ int usb_runtime_resume(struct device *dev)
 	struct usb_device	*udev = to_usb_device(dev);
 	int			status;
 
+	dev_err(&udev->dev, "[PU][%s] ++\n", __func__);
 	/* Runtime resume for a USB device means resuming both the device
 	 * and all its interfaces.
 	 */
@@ -1984,11 +1998,14 @@ int usb_runtime_idle(struct device *dev)
 {
 	struct usb_device	*udev = to_usb_device(dev);
 
+	dev_err(&udev->dev, "[PU][%s](ri1) ++\n", __func__);
 	/* An idle USB device can be suspended if it passes the various
 	 * autosuspend checks.
 	 */
-	if (autosuspend_check(udev) == 0)
+	if (autosuspend_check(udev) == 0) {
+		dev_err(&udev->dev, "[PU][%s](ri2) call pm_runtime_autosuspend()++\n", __func__);
 		pm_runtime_autosuspend(dev);
+	}
 	/* Tell the core not to suspend it, though. */
 	return -EBUSY;
 }

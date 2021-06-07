@@ -1153,14 +1153,16 @@ int snd_usb_autoresume(struct snd_usb_audio *chip)
 		return 0;
 
 	for (i = 0; i < chip->num_interfaces; i++) {
-		err = usb_autopm_get_interface(chip->intf[i]);
-		if (err < 0) {
+		pr_err("[PU][%s] call usb_autopm_get_interface(intf[%d]) ++ (skip)\n", __func__, i);
+		err = 0;
+		//err = usb_autopm_get_interface(chip->intf[i]);
+		//if (err < 0) {
 			/* rollback */
-			while (--i >= 0)
-				usb_autopm_put_interface(chip->intf[i]);
-			atomic_dec(&chip->active);
-			return err;
-		}
+		//	while (--i >= 0)
+		//		usb_autopm_put_interface(chip->intf[i]);
+		//	atomic_dec(&chip->active);
+		//	return err;
+		//}
 	}
 	return 0;
 }
@@ -1174,8 +1176,10 @@ void snd_usb_autosuspend(struct snd_usb_audio *chip)
 	if (!atomic_dec_and_test(&chip->active))
 		return;
 
-	for (i = 0; i < chip->num_interfaces; i++)
-		usb_autopm_put_interface(chip->intf[i]);
+	for (i = 0; i < chip->num_interfaces; i++) {
+		pr_err("[PU][%s] call usb_autopm_put_interface(intf[%d]) ++ (skip)\n", __func__, i);
+		//usb_autopm_put_interface(chip->intf[i]);
+	}
 }
 
 static int usb_audio_suspend(struct usb_interface *intf, pm_message_t message)
