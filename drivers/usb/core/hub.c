@@ -659,6 +659,7 @@ static void kick_hub_wq(struct usb_hub *hub)
 	 * the new work is called or when it is canceled.
 	 */
 	intf = to_usb_interface(hub->intfdev);
+	dev_err(hub->intfdev, "[PU][%s]: call usb_autopm_get_interface_no_resume ++\n", __func__);
 	usb_autopm_get_interface_no_resume(intf);
 	kref_get(&hub->kref);
 
@@ -1080,6 +1081,7 @@ static void hub_activate(struct usb_hub *hub, enum hub_activation_type type)
 					msecs_to_jiffies(delay));
 
 			/* Suppress autosuspend until init is done */
+			dev_err(hub->intfdev, "[PU][%s]: call usb_autopm_get_interface_no_resume ++\n", __func__);
 			usb_autopm_get_interface_no_resume(
 					to_usb_interface(hub->intfdev));
 			return;		/* Continues at init2: below */
@@ -1876,6 +1878,7 @@ static int hub_probe(struct usb_interface *intf, const struct usb_device_id *id)
 
 	if (id->driver_info & HUB_QUIRK_DISABLE_AUTOSUSPEND) {
 		hub->quirk_disable_autosuspend = 1;
+		dev_err(&intf->dev, "[PU][%s]: call usb_autopm_get_interface_no_resume ++\n", __func__);
 		usb_autopm_get_interface_no_resume(intf);
 	}
 
@@ -2523,7 +2526,7 @@ int usb_new_device(struct usb_device *udev)
 	err = usb_enumerate_device(udev);	/* Read descriptors */
 	if (err < 0)
 		goto fail;
-	dev_dbg(&udev->dev, "udev %d, busnum %d, minor = %d\n",
+	dev_info(&udev->dev, "[PU][%s] udev %d, busnum %d, minor = %d\n", __func__,
 			udev->devnum, udev->bus->busnum,
 			(((udev->bus->busnum-1) * 128) + (udev->devnum-1)));
 	/* export the usbdev device-node for libusb */
@@ -2580,6 +2583,7 @@ int usb_new_device(struct usb_device *udev)
 	}
 
 	(void) usb_create_ep_devs(&udev->dev, &udev->ep0, udev);
+	dev_err(&udev->dev, "[PU][%s](hub.c), usb_mark_last_busy ++\n", __func__);
 	usb_mark_last_busy(udev);
 	pm_runtime_put_sync_autosuspend(&udev->dev);
 	return err;
@@ -3283,6 +3287,7 @@ int usb_port_suspend(struct usb_device *udev, pm_message_t msg)
 	int		status;
 	bool		really_suspend = true;
 
+	dev_info(&udev->dev, "[PU][%s](hub.c) ++\n", __func__);
 	usb_lock_port(port_dev);
 
 	/* enable remote wakeup when appropriate; this lets the device
@@ -3367,6 +3372,7 @@ int usb_port_suspend(struct usb_device *udev, pm_message_t msg)
 			&& test_and_clear_bit(port1, hub->child_usage_bits))
 		pm_runtime_put_sync(&port_dev->dev);
 
+	dev_info(&udev->dev, "[PU][%s](hub.c) -- usb_mark_last_busy ++\n", __func__);
 	usb_mark_last_busy(hub->hdev);
 
 	usb_unlock_port(port_dev);
@@ -3390,7 +3396,7 @@ static int finish_port_resume(struct usb_device *udev)
 	u16	devstatus = 0;
 
 	/* caller owns the udev device lock */
-	dev_dbg(&udev->dev, "%s\n",
+	dev_err(&udev->dev, "[PU] %s\n",
 		udev->reset_resume ? "finish reset-resume" : "finish resume");
 
 	/* usb ch9 identifies four variants of SUSPENDED, based on what
@@ -3554,6 +3560,7 @@ int usb_port_resume(struct usb_device *udev, pm_message_t msg)
 	int		status;
 	u16		portchange, portstatus;
 
+	dev_err(&udev->dev, "[PU][%s](hub.c) ++\n", __func__);
 	if (!test_and_set_bit(port1, hub->child_usage_bits)) {
 		status = pm_runtime_resume_and_get(&port_dev->dev);
 		if (status < 0) {
@@ -3717,6 +3724,7 @@ static int hub_suspend(struct usb_interface *intf, pm_message_t msg)
 	struct usb_device	*hdev = hub->hdev;
 	unsigned		port1;
 
+	dev_info(&intf->dev, "[PU][%s](hub.c)501 ++\n", __func__);
 	/*
 	 * Warn if children aren't already suspended.
 	 * Also, add up the number of wakeup-enabled descendants.
@@ -3727,7 +3735,7 @@ static int hub_suspend(struct usb_interface *intf, pm_message_t msg)
 		struct usb_device *udev = port_dev->child;
 
 		if (udev && udev->can_submit) {
-			dev_warn(&port_dev->dev, "device %s not suspended yet\n",
+			dev_err(&port_dev->dev, "[PU][%s](hub.c)502 device %s not suspended yet\n", __func__,
 					dev_name(&udev->dev));
 			if (PMSG_IS_AUTO(msg))
 				return -EBUSY;
@@ -3739,6 +3747,7 @@ static int hub_suspend(struct usb_interface *intf, pm_message_t msg)
 
 	if (hdev->do_remote_wakeup && hub->quirk_check_port_auto_suspend) {
 		/* check if there are changes pending on hub ports */
+		dev_info(&intf->dev, "[PU][%s](hub.c)503 check if there are changes pending on hub ports\n", __func__);
 		if (check_ports_changed(hub)) {
 			if (PMSG_IS_AUTO(msg))
 				return -EBUSY;
@@ -3748,6 +3757,7 @@ static int hub_suspend(struct usb_interface *intf, pm_message_t msg)
 
 	if (hub_is_superspeed(hdev) && hdev->do_remote_wakeup) {
 		/* Enable hub to send remote wakeup for all ports. */
+		dev_info(&intf->dev, "[PU][%s](hub.c)504 Enable hub to send remote wakeup for all ports\n", __func__);
 		for (port1 = 1; port1 <= hdev->maxchild; port1++) {
 			set_port_feature(hdev,
 					 port1 |
@@ -3758,9 +3768,10 @@ static int hub_suspend(struct usb_interface *intf, pm_message_t msg)
 		}
 	}
 
-	dev_dbg(&intf->dev, "%s\n", __func__);
+	dev_info(&intf->dev, "[PU][%s]\n", __func__);
 
 	/* stop hub_wq and related activity */
+	dev_info(&intf->dev, "[PU][%s](hub.c)505 stop hub_wq, call hub_quiesce ++\n", __func__);
 	hub_quiesce(hub, HUB_SUSPEND);
 	return 0;
 }
@@ -5525,7 +5536,7 @@ static void hub_event(struct work_struct *work)
 
 	kcov_remote_start_usb((u64)hdev->bus->busnum);
 
-	dev_dbg(hub_dev, "state %d ports %d chg %04x evt %04x\n",
+	dev_err(hub_dev, "[PU][%s] state %d ports %d chg %04x evt %04x\n", __func__,
 			hdev->state, hdev->maxchild,
 			/* NOTE: expects max 15 ports... */
 			(u16) hub->change_bits[0],
