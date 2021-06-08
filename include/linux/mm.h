@@ -580,6 +580,16 @@ struct vm_fault {
 					 * page table to avoid allocation from
 					 * atomic context.
 					 */
+<<<<<<< HEAD   (825d99 ANDROID: abi_gki_aarch64_qcom: Update qcom abi symbol list)
+=======
+	/*
+	 * These entries are required when handling speculative page fault.
+	 * This way the page handling is done using consistent field values.
+	 */
+	unsigned long vma_flags;
+	pgprot_t vma_page_prot;
+	ANDROID_OEM_DATA_ARRAY(1, 2);
+>>>>>>> CHANGE (da33f6 ANDROID: mm: Add hooks to filemap_fault for oem's optimizati)
 };
 
 /* page entry size for vm->huge_fault() */
