@@ -12,6 +12,8 @@
 #include <linux/debug_locks.h>
 #include <linux/delay.h>
 #include <linux/export.h>
+#include <linux/stacktrace.h>
+#include <linux/gfp.h>
 
 void __raw_spin_lock_init(raw_spinlock_t *lock, const char *name,
 			  struct lock_class_key *key, short inner)
@@ -86,8 +88,15 @@ debug_spin_lock_before(raw_spinlock_t *lock)
 							lock, "cpu recursion");
 }
 
+#define RECURSION_STACK_DEBUG_DEPTH	8
 static inline void debug_spin_lock_after(raw_spinlock_t *lock)
 {
+	unsigned int n;
+	unsigned long stack_entries[RECURSION_STACK_DEBUG_DEPTH];
+
+	n = stack_trace_save(stack_entries, ARRAY_SIZE(stack_entries), 1);
+	lock->backtrace = stack_depot_save(stack_entries, n, GFP_KERNEL);
+
 	WRITE_ONCE(lock->owner_cpu, raw_smp_processor_id());
 	WRITE_ONCE(lock->owner, current);
 }
