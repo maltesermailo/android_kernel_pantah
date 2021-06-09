@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac844127_d0d5f1d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-09T08:50:43Z",
+      "side": 1,
+      "message": "why do you need a vendor-specific kernel log?  What\u0027s wrong with the current logging infrastructure?  Major changes to it should go upstream and not poke inside the printk core as that is constantly changing over time and is very fragile.\n\nWhat assurances have you made that these exports will not break the curent printk functionality?",
+      "revId": "b25f2807da8b961e7e14df1f253d7b8d13a5f514",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
