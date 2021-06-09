@@ -1930,6 +1930,7 @@ bool prb_read_valid(struct printk_ringbuffer *rb, u64 seq,
 {
 	return _prb_read_valid(rb, &seq, r, NULL);
 }
+EXPORT_SYMBOL_GPL(prb_read_valid);
 
 /**
  * prb_read_valid_info() - Non-blocking read of meta data for a requested
@@ -1989,6 +1990,7 @@ u64 prb_first_valid_seq(struct printk_ringbuffer *rb)
 
 	return seq;
 }
+EXPORT_SYMBOL_GPL(prb_first_valid_seq);
 
 /**
  * prb_next_seq() - Get the sequence number after the last available record.
