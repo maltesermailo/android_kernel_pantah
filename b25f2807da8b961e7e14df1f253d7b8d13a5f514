@@ -16,6 +16,24 @@
       "message": "why do you need a vendor-specific kernel log?  What\u0027s wrong with the current logging infrastructure?  Major changes to it should go upstream and not poke inside the printk core as that is constantly changing over time and is very fragile.\n\nWhat assurances have you made that these exports will not break the curent printk functionality?",
       "revId": "b25f2807da8b961e7e14df1f253d7b8d13a5f514",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "018c70ec_2080b310",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1738285
+      },
+      "writtenOn": "2021-06-09T09:04:41Z",
+      "side": 1,
+      "message": "Hi, we\u0027re using our own logging infrastructure to analyze what happened from OOPs. The ramdump feature, as you probably know, it\u0027s similar with pstore but our tool and infrastructure are still using the custom feature.\n\nWe\u0027re implementing our vendor logger by below hook but we need to get kernel logs from kernel start until the vendor module is loaded.\nhttps://android-review.googlesource.com/c/kernel/common/+/1673327\n\nThe logger is implemented very simple thus will not be affecting printk core mechanism. Just copying printk buffers to specific ram location.\n\nAnyway, we\u0027re also considering to move pstore/pmsg as well. But, it will take a time.",
+      "parentUuid": "ac844127_d0d5f1d2",
+      "revId": "b25f2807da8b961e7e14df1f253d7b8d13a5f514",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
