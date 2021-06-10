@@ -60,6 +60,7 @@
 #include <trace/hooks/v4l2core.h>
 #include <trace/hooks/v4l2mc.h>
 #include <trace/hooks/scmi.h>
+#include <trace/hooks/scsi_ioctl.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -191,6 +192,8 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rmqueue);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pagecache_get_page);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_enable_thermal_genl_check);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_thermal_pm_notify_suspend);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scsi_filter_cmd);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scsi_vendor_cbd);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_fill_prdt);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_prepare_command);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_update_sysfs);

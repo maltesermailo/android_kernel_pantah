@@ -21,6 +21,7 @@
 #include <scsi/scsi_ioctl.h>
 #include <scsi/scsi_cmnd.h>
 #include <scsi/sg.h>
+#include <trace/hooks/scsi_ioctl.h>
 
 struct blk_cmd_filter {
 	unsigned long read_ok[BLK_SCSI_CMD_PER_LONG];
@@ -195,6 +196,7 @@ static void blk_set_cmd_filter_defaults(struct blk_cmd_filter *filter)
 	/* ZBC Commands */
 	__set_bit(ZBC_OUT, filter->write_ok);
 	__set_bit(ZBC_IN, filter->read_ok);
+	trace_android_vh_scsi_filter_cmd(filter);
 }
 
 int blk_verify_command(unsigned char *cmd, fmode_t mode)
@@ -445,6 +447,8 @@ int sg_scsi_ioctl(struct request_queue *q, struct gendisk *disk, fmode_t mode,
 	req = scsi_req(rq);
 
 	cmdlen = COMMAND_SIZE(opcode);
+
+	trace_android_vh_scsi_vendor_cbd(q, opcode,  &cmdlen);
 
 	/*
 	 * get command and data to send to device, if any
