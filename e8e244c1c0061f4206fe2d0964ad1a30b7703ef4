@@ -33,6 +33,41 @@
       "message": "This should just be in the core UFS code, why not send the patch for that upstream?   Hooking into the scsi ioctl path feels very wrong, you will get a lot of calls for device types that are not what you are expecting.",
       "revId": "e8e244c1c0061f4206fe2d0964ad1a30b7703ef4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce5efae0_6d4b9686",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-06-13T23:43:38Z",
+      "side": 1,
+      "message": "I check the code again. We add a native program for reading UFS health information, by using ioctrl command. \nBut the command of health information is a vendor command, that had specified format. It is not support in scsi ioctl. That`s why we must need change scsi ioctl. It just will be called one time, late at night when consumer not using device.\n\nchanges:\nstatic void blk_set_cmd_filter_defaults(struct blk_cmd_filter *filter)\n{\n++// add write buffer command for common user\n++\t__set_bit(WRITE_BUFFER, filter-\u003ewrite_ok);\n++// add vendor command for common user\n++\t__set_bit(VENDOR_SPECIFIC_CDB, filter-\u003ewrite_ok);\n}\n\nint sg_scsi_ioctl(struct request_queue *q, struct gendisk *disk, fmode_t mode,\n\t\tstruct scsi_ioctl_command __user *sic)\n{\n++struct scsi_device *sdev \u003d NULL;\n\n++// vendor cmd len is 16 and not 10 in spec.\n++// in current application ,only samsung health will use this cmd.\n++\tsdev \u003d (struct scsi_device*)(q-\u003equeuedata);\n++\tif ((VENDOR_SPECIFIC_CDB \u003d\u003d opcode)\n++\t\t\u0026\u0026(0 \u003d\u003d strncmp(sdev-\u003evendor, \"SAMSUNG \", 8))\n++\t){\n++\t\tcmdlen \u003d 16;\n++\t}",
+      "parentUuid": "7da621f4_290abf4a",
+      "revId": "e8e244c1c0061f4206fe2d0964ad1a30b7703ef4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7b4dbb1_fb31e126",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-06-13T23:43:38Z",
+      "side": 1,
+      "message": "We had no other way to sovle it, for supporting vendor command by ioctrl.",
+      "revId": "e8e244c1c0061f4206fe2d0964ad1a30b7703ef4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
