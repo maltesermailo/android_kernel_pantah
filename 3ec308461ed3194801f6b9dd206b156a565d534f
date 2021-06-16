@@ -16,6 +16,24 @@
       "message": "Why is this not sent upstream first?",
       "revId": "3ec308461ed3194801f6b9dd206b156a565d534f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c981b18e_6ebe6705",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1739297
+      },
+      "writtenOn": "2021-06-16T10:21:27Z",
+      "side": 1,
+      "message": "Thanks for your comment.\nI see it doesn\u0027t has \"check flags flow\" in linux mainline as below, so does the \"check\" only has in ACK?\n\nstatic int dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,\n\t\t\t\t unsigned int fd_flags,\n\t\t\t\t unsigned int heap_flags)\n{\n\t/*\n\t * Allocations from all heaps have to begin\n\t * and end on page boundaries.\n\t */\n\tlen \u003d PAGE_ALIGN(len);\n\tif (!len)\n\t\treturn -EINVAL;\n\n\treturn heap-\u003eops-\u003eallocate(heap, len, fd_flags, heap_flags);\n}",
+      "parentUuid": "1c9025de_34dafaa0",
+      "revId": "3ec308461ed3194801f6b9dd206b156a565d534f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
