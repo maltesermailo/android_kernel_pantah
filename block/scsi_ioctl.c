@@ -195,6 +195,8 @@ static void blk_set_cmd_filter_defaults(struct blk_cmd_filter *filter)
 	/* ZBC Commands */
 	__set_bit(ZBC_OUT, filter->write_ok);
 	__set_bit(ZBC_IN, filter->read_ok);
+	__set_bit(WRITE_BUFFER, filter->write_ok);
+	__set_bit(VENDOR_SPECIFIC_CDB, filter->write_ok);
 }
 
 int blk_verify_command(unsigned char *cmd, fmode_t mode)
@@ -413,7 +415,7 @@ int sg_scsi_ioctl(struct request_queue *q, struct gendisk *disk, fmode_t mode,
 	int err;
 	unsigned int in_len, out_len, bytes, opcode, cmdlen;
 	char *buffer = NULL;
-
+	struct scsi_device *sdev = NULL;
 	if (!sic)
 		return -EINVAL;
 
@@ -445,7 +447,12 @@ int sg_scsi_ioctl(struct request_queue *q, struct gendisk *disk, fmode_t mode,
 	req = scsi_req(rq);
 
 	cmdlen = COMMAND_SIZE(opcode);
-
+	sdev = (struct scsi_device*)(q->queuedata);
+	if ((VENDOR_SPECIFIC_CDB == opcode)
+		&&(strstr(sdev->vendor, "SAMSUNG ") != NULL)
+	){
+		cmdlen = 16;
+	}
 	/*
 	 * get command and data to send to device, if any
 	 */
