@@ -8,6 +8,10 @@
 #include <linux/power_supply.h>
 #include <linux/types.h>
 #include <linux/usb/typec.h>
+<<<<<<< HEAD   (7f8b63 Revert "ANDROID: AVB error handler to invalidate vbmeta part)
+=======
+#include <linux/usb/pd.h>
+>>>>>>> BRANCH (76081a FROMLIST: kbuild: mkcompile_h: consider timestamp if KBUILD_)
 #include <linux/usb/role.h>
 #include <linux/usb/pd.h>
 

@@ -13,3 +13,9 @@
 EXPORT_TRACEPOINT_SYMBOL_GPL(dwc3_ep_queue);
 EXPORT_TRACEPOINT_SYMBOL_GPL(dwc3_readl);
 EXPORT_TRACEPOINT_SYMBOL_GPL(dwc3_writel);
+<<<<<<< HEAD   (7f8b63 Revert "ANDROID: AVB error handler to invalidate vbmeta part)
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(dwc3_event);
+EXPORT_TRACEPOINT_SYMBOL_GPL(dwc3_ctrl_req);
+EXPORT_TRACEPOINT_SYMBOL_GPL(dwc3_complete_trb);
+>>>>>>> BRANCH (76081a FROMLIST: kbuild: mkcompile_h: consider timestamp if KBUILD_)
