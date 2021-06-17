@@ -104,6 +104,24 @@
       "parentUuid": "ee2735a3_4d7642a7",
       "revId": "b25f2807da8b961e7e14df1f253d7b8d13a5f514",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "608a67cc_08069e91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1738285
+      },
+      "writtenOn": "2021-06-17T06:40:54Z",
+      "side": 1,
+      "message": "\u003e What is wrong with the existing logging infrastructure that you have to hook into the middle of the existing one?  Why not just use what we already have today, the pstore api should handle all of this properly now.\n\nAs I mentioned in commit message, we need to copy dmesg logs from kernel start until our logger is loaded.\nRegarding pstore, we\u0027re already using it for Android platform logs. For kernel message, however, we need to manipulate the format such as adding timestamp as absolute time and pcpu\u003c-\u003evcpu mapping as well under kernel level not user-space. And the logging \"infrastructure\" which include parser and loader were used a couple of years and hard to change one to another at once. Maybe most of the vendors have their own logging mechanism as we can see a comment of https://android-review.googlesource.com/c/kernel/common/+/1673327.\n\nAnyway, we\u0027d like to find an alternative way and get back to you.",
+      "parentUuid": "45938fdf_7ba2b5af",
+      "revId": "b25f2807da8b961e7e14df1f253d7b8d13a5f514",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
