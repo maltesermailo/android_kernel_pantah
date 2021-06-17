@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de749b6a_be5bd182",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-06-17T16:18:03Z",
+      "side": 1,
+      "message": "wirte -\u003e write?\n\nAnyway, I think this patch is not appropriate for direct inclusion in the Android kernel. Please send it upstream and request a backport of this patch after it has been accepted upstream.",
+      "range": {
+        "startLine": 7,
+        "startChar": 62,
+        "endLine": 7,
+        "endChar": 67
+      },
+      "revId": "4c2d88075a925adf44e64650bc55ae5c57874bde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "796acaba_3b9cf2a2",
+        "filename": "block/scsi_ioctl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-06-17T16:18:03Z",
+      "side": 1,
+      "message": "Have these commands perhaps been misplaced? As far as I know neither command is a zoned block command so these commands should not occur in the \"ZBC Commands\" section.",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 200,
+        "endChar": 0
+      },
+      "revId": "4c2d88075a925adf44e64650bc55ae5c57874bde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2389e179_c7142102",
+        "filename": "block/scsi_ioctl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-06-17T16:18:03Z",
+      "side": 1,
+      "message": "The above code does not comply with the Linux kernel coding style. Please verify patches with checkpatch to make sure that these comply with the Linux kernel coding style.\n\nAdditionally, direct checks for a vendor name are not allowed in Linux kernel SCSI code. Please use the BLIST (blacklist) mechanism instead. See also the BLIST_ definitions in include/scsi/scsi_devinfo.h.",
+      "range": {
+        "startLine": 450,
+        "startChar": 0,
+        "endLine": 455,
+        "endChar": 2
+      },
+      "revId": "4c2d88075a925adf44e64650bc55ae5c57874bde",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
