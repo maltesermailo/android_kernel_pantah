@@ -68,6 +68,24 @@
       "parentUuid": "64ff807f_d8ec2e60",
       "revId": "483066d1bbfcfe33b32218699c5d5683cbf3c2cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "158932a9_3f666d06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2021-06-18T08:51:51Z",
+      "side": 1,
+      "message": "oh, interesting.  stuff is busted for real\n\nfrom device boot (this is *not* test code)\n\n06-18 07:35:36.014   360   360 E TrafficController: Failed to get program from /sys/fs/bpf/prog_netd_cgroupskb_egress_stats: Invalid argument\n\n06-18 07:35:36.023   360   360 E netd    : Failed to start trafficcontroller: (Status[code: 22, msg: \"[Invalid argument] : cgroup program get failed\"])\n\n06-18 07:35:36.946   446   477 E GpuMem  : Failed to retrieve pinned program from /sys/fs/bpf/prog_gpu_mem_tracepoint_gpu_mem_gpu_mem_total [22(Invalid argument)]\n06-18 07:35:36.947   446   477 E GpuMemTracer: Cannot initialize GpuMemTracer before GpuMem\n\n06-18 07:35:42.972   718   786 I KernelCpuUidFreqTimeReader: mPerClusterTimesAvailable\u003dfalse\n06-18 07:35:42.974   718   786 W KernelCpuUidFreqTimeBpfMapReader: Failed to start tracking\n06-18 07:35:42.974   718   786 W KernelCpuProcStringReader: File not found. It\u0027s normal if not implemented: /proc/uid_time_in_state\n06-18 07:35:42.975   718   786 W KernelCpuUidActiveTimeBpfMapReader: Failed to start tracking\n06-18 07:35:42.975   718   786 W KernelCpuProcStringReader: File not found. It\u0027s normal if not implemented: /proc/uid_concurrent_active_time\n06-18 07:35:42.975   718   786 W KernelCpuUidClusterTimeBpfMapReader: Failed to start tracking\n06-18 07:35:42.975   718   786 W KernelCpuProcStringReader: File not found. It\u0027s normal if not implemented: /proc/uid_concurrent_policy_time\n06-18 07:35:42.976   718   786 E system_server: Cannot read thread CPU times for PID 718\n\nYet bpfloader completed successfully.\n\nThis is looking like a real kernel regression of some ?permissions? type.",
+      "parentUuid": "e7ac6fd0_c1c3af2f",
+      "revId": "483066d1bbfcfe33b32218699c5d5683cbf3c2cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
