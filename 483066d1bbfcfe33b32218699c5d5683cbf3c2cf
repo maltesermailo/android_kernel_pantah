@@ -103,6 +103,24 @@
       "message": "A good kernel/image should log early during the bootup:\n\n  06-18 03:13:29.631   331   331 I netd    : Initializing traffic control: 1382us\n\na bad one logs:\n\n  06-18 07:35:36.014   360   360 E TrafficController: Failed to get program from /sys/fs/bpf/prog_netd_cgroupskb_egress_stats: Invalid argument\n  06-18 07:35:36.023   360   360 E netd    : Failed to start trafficcontroller: (Status[code: 22, msg: \"[Invalid argument] : cgroup program get failed\"])\n\nWhat I don\u0027t understand is I see theoretically fully passed presubmit tests on kernels which fail the above test (and thus *are* bad).",
       "revId": "483066d1bbfcfe33b32218699c5d5683cbf3c2cf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22be8f86_510ed386",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2021-06-18T10:20:37Z",
+      "side": 1,
+      "message": "Minor correction.\n\nGood:\n\n06-18 03:13:29.629   331   331 I netd    : Setting up StrictController hooks: 6009us\n06-18 03:13:29.629   331   331 I netd    : Initializing ClatdController: 60us\n06-18 03:13:29.631   331   331 I netd    : Initializing traffic control: 1382us\n\nBad:\n\n06-09 12:07:34.388   365   365 I netd    : Setting up StrictController hooks: 46522us\n06-09 12:07:34.388   365   365 I netd    : Initializing ClatdController: 82us\n06-09 12:07:34.388   365   365 E TrafficController: Failed to get program from /sys/fs/bpf/prog_netd_cgroupskb_egress_stats: Invalid argument\n06-09 12:07:34.388   365   365 E netd    : Failed to start trafficcontroller: (Status[code: 22, msg: \"[Invalid argument] : cgroup program get failed\"])\n06-09 12:07:34.388   365   365 I netd    : Initializing traffic control: 434us",
+      "parentUuid": "5fab7d99_7fc36a80",
+      "revId": "483066d1bbfcfe33b32218699c5d5683cbf3c2cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
