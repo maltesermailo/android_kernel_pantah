@@ -20,6 +20,10 @@ DECLARE_HOOK(android_vh_check_mmap_file,
 	TP_PROTO(const struct file *file, unsigned long prot, unsigned long flag),
 	TP_ARGS(file, prot, flag));
 
+DECLARE_HOOK(android_vh_check_file_open,
+	TP_PROTO(const struct file *file),
+	TP_ARGS(file));
+
 #endif /* _TRACE_HOOK_SYSCALL_CHECK_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
