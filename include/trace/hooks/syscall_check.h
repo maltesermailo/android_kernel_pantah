@@ -12,6 +12,7 @@
  * mechanism for vendor modules to hook and extend functionality
  */
 struct file;
+union bpf_attr;
 DECLARE_HOOK(android_vh_check_file_ioctl,
 	TP_PROTO(const struct file *file, unsigned int cmd, unsigned long arg),
 	TP_ARGS(file, cmd, arg));
@@ -23,6 +24,10 @@ DECLARE_HOOK(android_vh_check_mmap_file,
 DECLARE_HOOK(android_vh_check_file_open,
 	TP_PROTO(const struct file *file),
 	TP_ARGS(file));
+
+DECLARE_HOOK(android_vh_check_bpf_syscall,
+	TP_PROTO(int cmd, const union bpf_attr *attr, unsigned int size),
+	TP_ARGS(cmd, attr, size));
 
 #endif /* _TRACE_HOOK_SYSCALL_CHECK_H */
 /* This part must be outside protection */
