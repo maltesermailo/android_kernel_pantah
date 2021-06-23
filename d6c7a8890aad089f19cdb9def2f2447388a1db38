@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20e479f6_f502d7c6",
+        "filename": "mm/slub.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-06-23T17:57:25Z",
+      "side": 1,
+      "message": "I suggest changing this to bool and passing (alloc \u003d\u003d TRACK_ALLOC). This way it represents the semantics of this parameter and in case the track_item enumeration changes we can still translate it into correct logic.",
+      "range": {
+        "startLine": 621,
+        "startChar": 35,
+        "endLine": 621,
+        "endChar": 45
+      },
+      "revId": "d6c7a8890aad089f19cdb9def2f2447388a1db38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
