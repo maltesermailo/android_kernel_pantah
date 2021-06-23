@@ -16,6 +16,24 @@
       "message": "Marc, I see a checkpatch error here:\n```\nERROR:ASSIGN_IN_IF: do not use assignment in if condition\n#96: FILE: kernel/irq/irqdesc.c:682:\n```\nAre you going to fix that in the upstream version or should we override the build failure?",
       "revId": "b1dccf2d86bc50f6c5c2459564d3872db4a0f9f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e7ad94b_a5da604d",
+        "filename": "kernel/irq/irqdesc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2021-06-23T18:04:46Z",
+      "side": 1,
+      "message": "Hi Todd,\n\nUpstream is going to be fairly different, as everything is being rewritten to not use irq numbers anymore, and this whole check is completely gone.\n\nWe can workaround this assignment, but the result is going to be even uglier (you don\u0027t want to pass an invalid value to irq_to_desc()...).\n\nLet me know what you prefer.",
+      "parentUuid": "8a85c3a0_3d84ea68",
+      "revId": "b1dccf2d86bc50f6c5c2459564d3872db4a0f9f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
