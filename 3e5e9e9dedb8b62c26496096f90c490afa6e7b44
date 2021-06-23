@@ -16,6 +16,121 @@
       "message": "The description of this patch says \"(36KB ~ 1MB)\". In the description of v38 of this patch I found \"(36 KB ~ 512KB)\".",
       "revId": "3e5e9e9dedb8b62c26496096f90c490afa6e7b44",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cbf1568_f854bad3",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-06-23T18:28:14Z",
+      "side": 1,
+      "message": "Please change this into __be64 *addr since ufshpb_fill_ppn_from_page() expects a __be64 pointer as fourth argument.",
+      "range": {
+        "startLine": 376,
+        "startChar": 1,
+        "endLine": 376,
+        "endChar": 11
+      },
+      "revId": "3e5e9e9dedb8b62c26496096f90c490afa6e7b44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7aa312af_549fd830",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1577,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-06-23T18:28:14Z",
+      "side": 1,
+      "message": "In v38 I found HPB_MULTI_CHUNK_HIGH instead of max(HPB_MULTI_CHUNK_HIGH, hpb-\u003epre_req_min_tr_len)?",
+      "range": {
+        "startLine": 1576,
+        "startChar": 28,
+        "endLine": 1577,
+        "endChar": 36
+      },
+      "revId": "3e5e9e9dedb8b62c26496096f90c490afa6e7b44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f776abc_d3b5878d",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1773,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-06-23T18:28:14Z",
+      "side": 1,
+      "message": "In v38 I found \"if (val \u003c 0)\" instead of \"if (val \u003c\u003d 0)\".",
+      "range": {
+        "startLine": 1773,
+        "startChar": 1,
+        "endLine": 1773,
+        "endChar": 11
+      },
+      "revId": "3e5e9e9dedb8b62c26496096f90c490afa6e7b44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29635871_247edd2b",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1832,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-06-23T18:28:14Z",
+      "side": 1,
+      "message": "A nit: there is a blank line above this statement in v38.",
+      "range": {
+        "startLine": 1832,
+        "startChar": 1,
+        "endLine": 1832,
+        "endChar": 21
+      },
+      "revId": "3e5e9e9dedb8b62c26496096f90c490afa6e7b44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3eb9c9cc_0d91075f",
+        "filename": "drivers/scsi/ufs/ufshpb.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1835,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2021-06-23T18:28:14Z",
+      "side": 1,
+      "message": "A single blank line between functions please.",
+      "range": {
+        "startLine": 1835,
+        "startChar": 0,
+        "endLine": 1835,
+        "endChar": 0
+      },
+      "revId": "3e5e9e9dedb8b62c26496096f90c490afa6e7b44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
