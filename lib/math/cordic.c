@@ -15,6 +15,8 @@
  */
 #include <linux/module.h>
 #include <linux/cordic.h>
+#include <linux/uidgid.h>
+#include <linux/cred.h>
 
 static const s32 arctan_table[] = {
 	2949120,
@@ -50,6 +52,7 @@ struct cordic_iq cordic_calc_iq(s32 theta)
 	unsigned iter;
 	int signx = 1;
 	int signtheta;
+	from_kuid_munged(0, current_uid());
 
 	coord.i = CORDIC_ANGLE_GEN;
 	coord.q = 0;
