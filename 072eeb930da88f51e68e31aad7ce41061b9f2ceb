@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66bd560c_01b7bd42",
+        "filename": "drivers/media/v4l2-core/v4l2-subdev.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-27T14:09:40Z",
+      "side": 1,
+      "message": "Please just simplify this to:\n\n  if (ret)\n          return ret;\n\nIt is up to you to set ret either 0 for success, or -ERROR for the error value.",
+      "parentUuid": "278975b7_bf0e3cbe",
+      "range": {
+        "startLine": 523,
+        "startChar": 11,
+        "endLine": 523,
+        "endChar": 14
+      },
+      "revId": "072eeb930da88f51e68e31aad7ce41061b9f2ceb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2685b755_937bfa8a",
         "filename": "drivers/media/v4l2-core/v4l2-subdev.c",
         "patchSetId": 4
