@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0f4e5128_c04b9ede",
+        "filename": "drivers/media/v4l2-core/v4l2-subdev.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1475635
+      },
+      "writtenOn": "2021-06-27T07:27:13Z",
+      "side": 1,
+      "message": "This is not belong to a different change. The purpose of this vh function is that hope the reserved field would not be cleared by memset statement after vh function.\n\nIn order to tell v4l2-framework that vh function is exist and has been register, it must return a non-zero value.\n\nBut for v4l2_subdev_call\n\n  return 0, means success\n  return \u003c 0, means fail\nso, we must let vh function return 1 if success, and return \u003c 0 if fail.\nBut finally, the return value must be changed back to 0 if success.\n\nso I add this statement \"return (ret \u003e 0) ? 0 : ret\"",
+      "parentUuid": "6c9fa6c8_1d36efaf",
+      "range": {
+        "startLine": 523,
+        "startChar": 11,
+        "endLine": 523,
+        "endChar": 14
+      },
+      "revId": "072eeb930da88f51e68e31aad7ce41061b9f2ceb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2685b755_937bfa8a",
         "filename": "drivers/media/v4l2-core/v4l2-subdev.c",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2021-06-25T08:13:45Z",
       "side": 1,
       "message": "same here.",
+      "range": {
+        "startLine": 634,
+        "startChar": 0,
+        "endLine": 634,
+        "endChar": 30
+      },
+      "revId": "072eeb930da88f51e68e31aad7ce41061b9f2ceb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b077606_8ed2b9ee",
+        "filename": "drivers/media/v4l2-core/v4l2-subdev.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1475635
+      },
+      "writtenOn": "2021-06-27T07:27:13Z",
+      "side": 1,
+      "message": "This is not belong to a different change. The purpose of this vh function is that hope the reserved field would not be cleared by memset statement after vh function.\n\nIn order to tell v4l2-framework that vh function is exist and has been register, it must return a non-zero value.\n\nBut for v4l2_subdev_call\n  return 0, means success\n  return \u003c 0, means fail\n\nso, we must let vh function return 1 if success, and return \u003c 0 if fail.\nBut finally, the return value must be changed back to 0 if success.\n\nso I add this statement \"return (ret \u003e 0) ? 0 : ret\"",
+      "parentUuid": "2685b755_937bfa8a",
       "range": {
         "startLine": 634,
         "startChar": 0,
