@@ -123,6 +123,8 @@ module_param_named(devices, binder_devices_param, charp, 0444);
 static DECLARE_WAIT_QUEUE_HEAD(binder_user_error_wait);
 static int binder_stop_on_user_error;
 
+static struct binder_capabilities binder_user_caps;
+
 static int binder_set_stop_on_user_error(const char *val,
 					 const struct kernel_param *kp)
 {
@@ -4860,6 +4862,26 @@ static int binder_ioctl_get_freezer_info(
 	return 0;
 }
 
+static int binder_ioctl_capabilities(void __user *ubuf, unsigned int size)
+{
+	static const struct binder_capabilities binder_kern_caps = {
+		.flags = BINDER_CAP_SPAM_DETECTION
+	};
+
+	if (size != sizeof(struct binder_capabilities))
+		return -EINVAL;
+
+	/* store userspace binder capabilities */
+	if (copy_from_user(&binder_user_caps, ubuf, size))
+		return -EFAULT;
+
+	/* populate kernel binder capabilities */
+	if (copy_to_user(ubuf, &binder_kern_caps, size))
+		return -EFAULT;
+
+	return 0;
+}
+
 static long binder_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 {
 	int ret;
@@ -5068,6 +5090,11 @@ static long binder_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		binder_inner_proc_unlock(proc);
 		break;
 	}
+	case BINDER_CAPABILITIES:
+		ret = binder_ioctl_capabilities(ubuf, size);
+		if (ret < 0)
+			goto err;
+		break;
 	default:
 		ret = -EINVAL;
 		goto err;
