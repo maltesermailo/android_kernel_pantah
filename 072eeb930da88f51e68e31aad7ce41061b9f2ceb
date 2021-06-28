@@ -146,6 +146,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "97566a2b_19486411",
+        "filename": "drivers/media/v4l2-core/v4l2-subdev.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1475635
+      },
+      "writtenOn": "2021-06-28T07:30:34Z",
+      "side": 1,
+      "message": "If I just want to skip memset, your suggestion would be like\n\n\tint ret \u003d 0;\n\ttracepoint(\u0026ret); //if tracepoint exist, ret 1 and skip memset, othewise ret keep 0 of initial value and do memset\n\tif (!ret)\n\t\tmemset(...);\n\t\n\trval \u003d v4l2_subdev_call(...);\n\treturn rval;\n\n\nin driver code, all I need is ret 1 to notify to skip memset\nstatic void tracepoint(int *ret)\n{\n\t*ret \u003d 1;\n}",
+      "parentUuid": "bd3c48d1_d39cb0ef",
+      "range": {
+        "startLine": 523,
+        "startChar": 11,
+        "endLine": 523,
+        "endChar": 14
+      },
+      "revId": "072eeb930da88f51e68e31aad7ce41061b9f2ceb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2685b755_937bfa8a",
         "filename": "drivers/media/v4l2-core/v4l2-subdev.c",
         "patchSetId": 4
