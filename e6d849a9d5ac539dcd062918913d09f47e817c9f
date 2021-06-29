@@ -1,0 +1,463 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4cf0545_2b8e5501",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:55:28Z",
+      "side": 1,
+      "message": "22 vendor hooks needed -- but looks doable with vendor hooks.",
+      "revId": "e6d849a9d5ac539dcd062918913d09f47e817c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15316dff_8aab4455",
+        "filename": "drivers/mmc/core/block.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 860,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:55:28Z",
+      "side": 1,
+      "message": "vendor hook",
+      "revId": "e6d849a9d5ac539dcd062918913d09f47e817c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d273fafa_3bfba2fa",
+        "filename": "drivers/mmc/core/block.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1425,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:55:28Z",
+      "side": 1,
+      "message": "vendor hook\n\n(or since there are quite a few of these, we could perhaps go ahead and add the active_reqs field to host and keep these atomic ops)",
+      "revId": "e6d849a9d5ac539dcd062918913d09f47e817c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5caa080b_90f2dd40",
+        "filename": "drivers/mmc/core/block.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1431,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:55:28Z",
+      "side": 1,
+      "message": "restricted vendor hook (atomic context)",
+      "revId": "e6d849a9d5ac539dcd062918913d09f47e817c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6e9f860_0809bfd8",
+        "filename": "drivers/mmc/core/block.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1437,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:55:28Z",
+      "side": 1,
+      "message": "vendor hook",
+      "revId": "e6d849a9d5ac539dcd062918913d09f47e817c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9900bc5_b41619c9",
+        "filename": "drivers/mmc/core/block.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1567,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:55:28Z",
+      "side": 1,
+      "message": "Replace with single vendor hook",
+      "revId": "e6d849a9d5ac539dcd062918913d09f47e817c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de0fc2c6_6f633e7b",
+        "filename": "drivers/mmc/core/block.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2021,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:55:28Z",
+      "side": 1,
+      "message": "vendor hook",
+      "revId": "e6d849a9d5ac539dcd062918913d09f47e817c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6228ab08_3313a2bc",
+        "filename": "drivers/mmc/core/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:55:28Z",
+      "side": 1,
+      "message": "vendor hook",
+      "revId": "e6d849a9d5ac539dcd062918913d09f47e817c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b46cdc28_0f5c0d71",
+        "filename": "drivers/mmc/core/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1134,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:55:28Z",
+      "side": 1,
+      "message": "vendor hook",
+      "revId": "e6d849a9d5ac539dcd062918913d09f47e817c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80507450_0a42055a",
+        "filename": "drivers/mmc/core/host.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:55:28Z",
+      "side": 1,
+      "message": "vendor hook",
+      "revId": "e6d849a9d5ac539dcd062918913d09f47e817c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01e86117_99428de6",
+        "filename": "drivers/mmc/core/mmc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1995,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:55:28Z",
+      "side": 1,
+      "message": "vendor hook",
+      "revId": "e6d849a9d5ac539dcd062918913d09f47e817c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f43e08a7_b2056c93",
+        "filename": "drivers/mmc/core/mmc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2200,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:55:28Z",
+      "side": 1,
+      "message": "vendor hook",
+      "revId": "e6d849a9d5ac539dcd062918913d09f47e817c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdca17b3_39c3d142",
+        "filename": "drivers/mmc/core/mmc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2255,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:55:28Z",
+      "side": 1,
+      "message": "vendor hook",
+      "revId": "e6d849a9d5ac539dcd062918913d09f47e817c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60dbbebc_76ace665",
+        "filename": "drivers/mmc/core/mmc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2282,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:55:28Z",
+      "side": 1,
+      "message": "vendor hook",
+      "revId": "e6d849a9d5ac539dcd062918913d09f47e817c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbaaeafe_554a129e",
+        "filename": "drivers/mmc/core/mmc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2314,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:55:28Z",
+      "side": 1,
+      "message": "vendor hook",
+      "revId": "e6d849a9d5ac539dcd062918913d09f47e817c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b93a9e84_cd645b5c",
+        "filename": "drivers/mmc/core/mmc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2327,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:55:28Z",
+      "side": 1,
+      "message": "vendor hook",
+      "revId": "e6d849a9d5ac539dcd062918913d09f47e817c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3f5fab6_24724ee1",
+        "filename": "drivers/mmc/core/mmc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2350,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:55:28Z",
+      "side": 1,
+      "message": "vendor hook",
+      "revId": "e6d849a9d5ac539dcd062918913d09f47e817c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fe69fa8_871e1a15",
+        "filename": "drivers/mmc/core/mmc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2439,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:55:28Z",
+      "side": 1,
+      "message": "vendor hook",
+      "revId": "e6d849a9d5ac539dcd062918913d09f47e817c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dcc9889_b765d1ab",
+        "filename": "drivers/mmc/core/mmc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2455,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:55:28Z",
+      "side": 1,
+      "message": "since this will be a vendor field, it needs to be initialized from one of the hooks.",
+      "revId": "e6d849a9d5ac539dcd062918913d09f47e817c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86a9257c_98a98e50",
+        "filename": "drivers/mmc/core/mmc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2516,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:55:28Z",
+      "side": 1,
+      "message": "vendor hook",
+      "revId": "e6d849a9d5ac539dcd062918913d09f47e817c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ac7c34c_8d1d4a33",
+        "filename": "drivers/mmc/core/sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1035,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:55:28Z",
+      "side": 1,
+      "message": "vendor hook",
+      "revId": "e6d849a9d5ac539dcd062918913d09f47e817c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaf444e7_2803a1c0",
+        "filename": "drivers/mmc/core/sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1224,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:55:28Z",
+      "side": 1,
+      "message": "vendor hook",
+      "revId": "e6d849a9d5ac539dcd062918913d09f47e817c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbb73808_b105c7b5",
+        "filename": "drivers/mmc/core/sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1241,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:55:28Z",
+      "side": 1,
+      "message": "vendor hook",
+      "revId": "e6d849a9d5ac539dcd062918913d09f47e817c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37e95659_68b19e06",
+        "filename": "drivers/mmc/core/sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1290,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:55:28Z",
+      "side": 1,
+      "message": "vendor hook",
+      "revId": "e6d849a9d5ac539dcd062918913d09f47e817c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9cf4549_e7e715d5",
+        "filename": "drivers/mmc/core/sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1347,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:55:28Z",
+      "side": 1,
+      "message": "vendor hook",
+      "revId": "e6d849a9d5ac539dcd062918913d09f47e817c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e6d0db5_aa748145",
+        "filename": "drivers/mmc/core/sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1412,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:55:28Z",
+      "side": 1,
+      "message": "initialize during hook",
+      "revId": "e6d849a9d5ac539dcd062918913d09f47e817c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04fbef2d_7c33f960",
+        "filename": "drivers/mmc/core/sd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1479,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-06-29T23:55:28Z",
+      "side": 1,
+      "message": "vendor hook",
+      "revId": "e6d849a9d5ac539dcd062918913d09f47e817c9f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
