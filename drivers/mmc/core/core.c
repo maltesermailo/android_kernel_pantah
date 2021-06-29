@@ -123,7 +123,7 @@ void mmc_command_done(struct mmc_host *host, struct mmc_request *mrq)
 
 	mmc_complete_cmd(mrq);
 
-	pr_debug("%s: cmd done, tfr ongoing (CMD%u)\n",
+	pr_err("%s: cmd done, tfr ongoing (CMD%u)\n",
 		 mmc_hostname(host), mrq->cmd->opcode);
 }
 EXPORT_SYMBOL(mmc_command_done);
