@@ -8604,7 +8604,8 @@ static int __alloc_contig_migrate_range(struct compact_control *cc,
 	if (cc->alloc_contig && cc->mode == MIGRATE_ASYNC)
 		max_tries = 1;
 
-	lru_cache_disable();
+	if (!info->lru_cache_disabled)
+		lru_cache_disable();
 
 	while (pfn < end || !list_empty(&cc->migratepages)) {
 		if (fatal_signal_pending(current)) {
@@ -8639,7 +8640,9 @@ static int __alloc_contig_migrate_range(struct compact_control *cc,
 			info->nr_migrated += cc->nr_migratepages;
 	}
 
-	lru_cache_enable();
+	if (!info->lru_cache_disabled)
+		lru_cache_enable();
+
 	if (ret < 0) {
 		if (ret == -EBUSY) {
 			alloc_contig_dump_pages(&cc->migratepages);

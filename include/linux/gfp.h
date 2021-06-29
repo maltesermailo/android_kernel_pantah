@@ -653,6 +653,7 @@ struct acr_info {
 	unsigned long nr_migrated;
 	unsigned long nr_reclaimed;
 	enum acr_failure fail;
+	bool lru_cache_disabled;
 };
 
 /* The below functions must be run on a range from a single zone. */
