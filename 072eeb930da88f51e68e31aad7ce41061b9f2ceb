@@ -240,6 +240,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "984b8258_e821ac64",
+        "filename": "drivers/media/v4l2-core/v4l2-subdev.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1475635
+      },
+      "writtenOn": "2021-06-29T08:47:22Z",
+      "side": 1,
+      "message": "We intend to use format-\u003ereserved to store some information but it will be cleared by memset(format-\u003ereserved, 0, ...)\nThe tracepoint function here do the same thing as v4l2_subdev_call(set_fmt) to replace\tstatements below, \n    memset(format-\u003ereserved, 0, sizeof(format-\u003ereserved));\n    memset(format-\u003eformat.reserved, 0, sizeof(format-\u003eformat.reserved));\n    return v4l2_subdev_call(sd, pad, set_fmt, subdev_fh-\u003epad, format);\n    \nso tracepoint always return a non-zero value(1:success, negative value:fail) to satisfy if(ret) condition and return immediately.\n    \nIn userspace, ioctl(fd,VIDIOC_SUBDEV_S_FMT,...) return 0 for success and return an negative number for fail.\nso the statement \"return (ret \u003e 0) ? 0 : ret;\" is hoping that ioctl can return 0 when v4l2_subdev_call(set_fmt) in tracepoint is success.\n\nBut actually We can just check if ioctl return a \"negative value\" and do error handling.\n  \nint ret \u003d ioctl(fd_, VIDIOC_SUBDEV_S_FMT, \u0026format);\nif (ret \u003c 0) {\n     VLOGE(\"VIDIOC_SUBDEV_S_FMT failed: %s\", strerror(errno));\n     return -EINVAL;\n   }    \n\nso there is no need to write as \"return (ret \u003e 0) ? 0 : ret;\".\nI already change back to\nif(ret)\n   return ret;\n   \nplease review again.",
+      "parentUuid": "5185bd15_639800fb",
+      "range": {
+        "startLine": 523,
+        "startChar": 11,
+        "endLine": 523,
+        "endChar": 14
+      },
+      "revId": "072eeb930da88f51e68e31aad7ce41061b9f2ceb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2685b755_937bfa8a",
