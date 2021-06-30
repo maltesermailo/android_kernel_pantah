@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ac303f27_ddf39f53",
+        "filename": "drivers/mmc/core/core.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1860498
+      },
+      "writtenOn": "2021-06-30T13:57:22Z",
+      "side": 1,
+      "message": "Yes, for the clock scaling feature () we need only 1 pointer here. Since there will be only 3 structures at max in the system (so no issues with memory), we would like to reserve 1 more for future usage.",
+      "parentUuid": "c9bcd699_dea58a4d",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 33
+      },
+      "revId": "78434113fdc151e635bda8a627eaa3cf67b4dc01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "83af0d05_f1132001",
         "filename": "include/linux/mmc/host.h",
         "patchSetId": 1
@@ -54,6 +78,30 @@
       "writtenOn": "2021-06-30T13:38:00Z",
       "side": 1,
       "message": "you should be able to use just one pointer here, right?",
+      "range": {
+        "startLine": 488,
+        "startChar": 0,
+        "endLine": 488,
+        "endChar": 34
+      },
+      "revId": "78434113fdc151e635bda8a627eaa3cf67b4dc01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7eb626ad_d28b0a04",
+        "filename": "include/linux/mmc/host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1860498
+      },
+      "writtenOn": "2021-06-30T13:57:22Z",
+      "side": 1,
+      "message": "yes, one 64 also will do and it should be used a pointer and need to allocate memory dynamically. \n\nI have seen few other structures like task_struct using the explicit padding instead of pointer approach. So I followed the same suite.\n\nIs the pointer approach recommended by GKI kernel team?",
+      "parentUuid": "83af0d05_f1132001",
       "range": {
         "startLine": 488,
         "startChar": 0,
