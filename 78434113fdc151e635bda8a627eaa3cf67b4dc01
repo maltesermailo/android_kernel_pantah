@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ce262d9_be8ac6fd",
+        "filename": "drivers/mmc/core/core.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-30T14:53:31Z",
+      "side": 1,
+      "message": "ok, that\u0027s fine.",
+      "parentUuid": "ac303f27_ddf39f53",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 33
+      },
+      "revId": "78434113fdc151e635bda8a627eaa3cf67b4dc01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83af0d05_f1132001",
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "yes, one 64 also will do and it should be used a pointer and need to allocate memory dynamically. \n\nI have seen few other structures like task_struct using the explicit padding instead of pointer approach. So I followed the same suite.\n\nIs the pointer approach recommended by GKI kernel team?",
       "parentUuid": "83af0d05_f1132001",
+      "range": {
+        "startLine": 488,
+        "startChar": 0,
+        "endLine": 488,
+        "endChar": 34
+      },
+      "revId": "78434113fdc151e635bda8a627eaa3cf67b4dc01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "173b9f24_25547ce1",
+        "filename": "include/linux/mmc/host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-06-30T14:53:31Z",
+      "side": 1,
+      "message": "If you can do it, yes, that is better as that will not waste space for all other vendors.",
+      "parentUuid": "7eb626ad_d28b0a04",
       "range": {
         "startLine": 488,
         "startChar": 0,
