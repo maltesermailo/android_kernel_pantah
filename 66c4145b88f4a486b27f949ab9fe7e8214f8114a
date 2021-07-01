@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8a640d2_70924290",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-01T06:43:44Z",
+      "side": 1,
+      "message": "please do not directly access the filesystem from drivers.",
+      "revId": "66c4145b88f4a486b27f949ab9fe7e8214f8114a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1af69dc9_973d18dc",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-01T06:43:44Z",
+      "side": 1,
+      "message": "should not be needed by a driver.",
+      "range": {
+        "startLine": 148,
+        "startChar": 2,
+        "endLine": 148,
+        "endChar": 12
+      },
+      "revId": "66c4145b88f4a486b27f949ab9fe7e8214f8114a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ab18000_aa258dc8",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 3
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-01T06:43:44Z",
+      "side": 1,
+      "message": "drivers can not read/write/open/close files directly from the filesystem, please remove.",
+      "range": {
+        "startLine": 763,
+        "startChar": 2,
+        "endLine": 764,
+        "endChar": 11
+      },
+      "revId": "66c4145b88f4a486b27f949ab9fe7e8214f8114a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a537158a_45ec68b9",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 3
+      },
+      "lineNbr": 1004,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-01T06:43:44Z",
+      "side": 1,
+      "message": "drivers are not allowed to read/write directly to the filesystem.",
+      "range": {
+        "startLine": 1004,
+        "startChar": 2,
+        "endLine": 1004,
+        "endChar": 13
+      },
+      "revId": "66c4145b88f4a486b27f949ab9fe7e8214f8114a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba9ed9dd_2da3a20f",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 3
+      },
+      "lineNbr": 1005,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-01T06:43:44Z",
+      "side": 1,
+      "message": "also not allowed.",
+      "range": {
+        "startLine": 1005,
+        "startChar": 2,
+        "endLine": 1005,
+        "endChar": 14
+      },
+      "revId": "66c4145b88f4a486b27f949ab9fe7e8214f8114a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0627021f_0f2340c4",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 3
+      },
+      "lineNbr": 1550,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-01T06:43:44Z",
+      "side": 1,
+      "message": "are you sure you need this?",
+      "range": {
+        "startLine": 1550,
+        "startChar": 2,
+        "endLine": 1550,
+        "endChar": 18
+      },
+      "revId": "66c4145b88f4a486b27f949ab9fe7e8214f8114a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4de824cd_8d8c4b55",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 3
+      },
+      "lineNbr": 1792,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-01T06:43:44Z",
+      "side": 1,
+      "message": "this is not allowed in drivers, sorry.  Please just reference the real symbol that you need, otherwise none of the symbols in this table would be needed.",
+      "range": {
+        "startLine": 1792,
+        "startChar": 2,
+        "endLine": 1792,
+        "endChar": 14
+      },
+      "revId": "66c4145b88f4a486b27f949ab9fe7e8214f8114a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa33f74e_d4f822f3",
+        "filename": "android/abi_gki_aarch64_exynos",
+        "patchSetId": 3
+      },
+      "lineNbr": 1793,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-01T06:43:44Z",
+      "side": 1,
+      "message": "also not allowed in drivers.",
+      "range": {
+        "startLine": 1793,
+        "startChar": 2,
+        "endLine": 1793,
+        "endChar": 14
+      },
+      "revId": "66c4145b88f4a486b27f949ab9fe7e8214f8114a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
