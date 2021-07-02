@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a00bb90_ad3d18f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-07-02T20:46:56Z",
+      "side": 1,
+      "message": "The change affects ABI, so we will have to wait until 7/17 to merge it:\n\n ABI DIFFERENCES HAVE BEEN DETECTED! (RC\u003d8)\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nLeaf changes summary: 74 artifacts changed\nChanged leaf types summary: 1 leaf type changed\nRemoved/Changed/Added functions summary: 0 Removed, 71 Changed, 0 Added function\nRemoved/Changed/Added variables summary: 0 Removed, 2 Changed, 0 Added variable\n\n71 functions with some sub-type change:\n\n  [C] \u0027function void __ClearPageMovable(page*)\u0027 at compaction.c:138:1 has some sub-type changes:\n    CRC (modversions) changed from 0xd8bcfba7 to 0x1c6d061e\n\n  [C] \u0027function void __SetPageMovable(page*, address_space*)\u0027 at compaction.c:130:1 has some sub-type changes:\n    CRC (modversions) changed from 0x7389406a to 0x485233f3\n\n  [C] \u0027function page* __alloc_pages_nodemask(gfp_t, unsigned int, int, nodemask_t*)\u0027 at page_alloc.c:5071:1 has some sub-type changes:\n    CRC (modversions) changed from 0x2b11318 to 0x6f239ff8\n\n",
+      "revId": "d26e24f2aa6608a2c20ea32fe4b8116b1020f5e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
