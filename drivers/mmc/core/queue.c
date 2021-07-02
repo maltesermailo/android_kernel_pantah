@@ -71,6 +71,7 @@ enum mmc_issue_type mmc_issue_type(struct mmc_queue *mq, struct request *req)
 
 	return MMC_ISSUE_SYNC;
 }
+EXPORT_SYMBOL(mmc_issue_type);
 
 static void __mmc_cqe_recovery_notifier(struct mmc_queue *mq)
 {
