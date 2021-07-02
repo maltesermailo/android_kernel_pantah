@@ -57,6 +57,47 @@
       "parentUuid": "4a92a4c2_d219c3b4",
       "revId": "dbcc9d443d676d23c4ac15de7f4a97c024f989bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74018d06_57e050be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-07-02T18:25:29Z",
+      "side": 1,
+      "message": "Please clarify this in the description of the patch. Description of the patch should explain the issue this patch is addressing and how it addresses it (if the patch is a bug fix) or if this is a new feature, if should explain the new feature along with how it is used.",
+      "parentUuid": "69d4e28e_5502a9f9",
+      "revId": "dbcc9d443d676d23c4ac15de7f4a97c024f989bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49a6b028_6b8b1c8f",
+        "filename": "mm/util.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-07-02T18:25:29Z",
+      "side": 1,
+      "message": "I would expect this vendor hook to be inside do_mmap() instead of here. Here you would be capturing failed cases as well...\n\nIf you need to capture all mmaps requests including failed ones (due to security_mmap_file() check), I would expect to see \"ret\" being passed to this hook as well.\n\nI think the failure case was not considered when the hook was added.",
+      "range": {
+        "startLine": 515,
+        "startChar": 1,
+        "endLine": 515,
+        "endChar": 33
+      },
+      "revId": "dbcc9d443d676d23c4ac15de7f4a97c024f989bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
