@@ -353,6 +353,7 @@ struct mem_cgroup {
 	struct lru_gen_mm_list mm_list;
 #endif
 
+	ANDROID_OEM_DATA(1);
 	struct mem_cgroup_per_node *nodeinfo[];
 };
 
