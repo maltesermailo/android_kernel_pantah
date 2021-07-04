@@ -34,6 +34,41 @@
 
 #include "usb.h"
 
+static struct usb_driver_vendor_ops *usb_drv_vendor_ops;
+
+int usb_vendor_set_ops(struct usb_driver_vendor_ops *ops)
+{
+	if ((!ops->suspend_both) ||
+	    (!ops->resume_both))
+		return -EINVAL;
+
+	usb_drv_vendor_ops = ops;
+	return 0;
+}
+EXPORT_SYMBOL_GPL(usb_vendor_set_ops);
+
+struct usb_driver_vendor_ops *usb_vendor_get_ops(void)
+{
+	return usb_drv_vendor_ops;
+}
+
+//I wanted to use this API, return -ENODEV when there is no ops so that the
+//original usb_suspend_both() can keep doing original API's job.
+//However, I'm not sure whether ops->suspend_both() will also return -ENODEV. If
+//so, it may make original usb_suspend_both() misundertansd that it doesn't have
+//ops and it may do duplicated jobs again.
+#if 0
+int usb_vendor_suspend_both(struct usb_device *udev, pm_message_t msg)
+{
+	struct usb_driver_vendor_ops *ops = usb_vendor_get_ops();
+	int status = 0;
+
+	if (!ops)
+		return -ENODEV;
+
+	return ops->suspend_both(udev, msg);
+}
+#endif
 
 /*
  * Adds a new dynamic USBdevice ID to this driver,
@@ -1403,10 +1438,16 @@ static int usb_suspend_both(struct usb_device *udev, pm_message_t msg)
 	int			status = 0;
 	int			i = 0, n = 0;
 	struct usb_interface	*intf;
+	struct usb_driver_vendor_ops *vendor_ops = usb_vendor_get_ops();
 
 	if (udev->state == USB_STATE_NOTATTACHED ||
 			udev->state == USB_STATE_SUSPENDED)
 		goto done;
+
+	if (vendor_ops) {
+		status = vendor_ops->suspend_both(udev, msg);
+		goto done;
+	}
 
 	/* Suspend all the interfaces and then udev itself */
 	if (udev->actconfig) {
@@ -1504,12 +1545,18 @@ static int usb_resume_both(struct usb_device *udev, pm_message_t msg)
 	int			status = 0;
 	int			i;
 	struct usb_interface	*intf;
+	struct usb_driver_vendor_ops *vendor_ops = usb_vendor_get_ops();
 
 	if (udev->state == USB_STATE_NOTATTACHED) {
 		status = -ENODEV;
 		goto done;
 	}
 	udev->can_submit = 1;
+
+	if (vendor_ops) {
+		status = vendor_ops->resume_both(udev, msg);
+		goto done;
+	}
 
 	/* Resume the device */
 	if (udev->state == USB_STATE_SUSPENDED || udev->reset_resume)
