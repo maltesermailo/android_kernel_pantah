@@ -3975,6 +3975,7 @@
       <elf-symbol name='stack_depot_fetch' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x51a0bc1'/>
       <elf-symbol name='stack_trace_print' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa45c7b90'/>
       <elf-symbol name='stack_trace_save' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6bd1aa56'/>
+      <elf-symbol name='stack_trace_save_tsk' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5900e344'/>
       <elf-symbol name='static_key_disable' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb912560d'/>
       <elf-symbol name='static_key_disable_cpuslocked' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe6b79af'/>
       <elf-symbol name='static_key_slow_dec' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2f4880df'/>
@@ -157502,6 +157503,13 @@
     </abi-instr>
     <abi-instr address-size='64' path='kernel/stacktrace.c' language='LANG_C89'>
       <pointer-type-def type-id='9cbd1c16' size-in-bits='64' id='f9b37274'/>
+      <function-decl name='stack_trace_save_tsk' mangled-name='stack_trace_save_tsk' filepath='kernel/stacktrace.c' line='135' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='stack_trace_save_tsk'>
+        <parameter type-id='f23e2572' name='tsk' filepath='kernel/stacktrace.c' line='135' column='1'/>
+        <parameter type-id='1d2c2b85' name='store' filepath='kernel/stacktrace.c' line='135' column='1'/>
+        <parameter type-id='f0981eeb' name='size' filepath='kernel/stacktrace.c' line='136' column='1'/>
+        <parameter type-id='f0981eeb' name='skipnr' filepath='kernel/stacktrace.c' line='136' column='1'/>
+        <return type-id='f0981eeb'/>
+      </function-decl>
       <function-decl name='stack_trace_save' mangled-name='stack_trace_save' filepath='kernel/stacktrace.c' line='111' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='stack_trace_save'>
         <parameter type-id='1d2c2b85' name='store' filepath='kernel/stacktrace.c' line='111' column='1'/>
         <parameter type-id='f0981eeb' name='size' filepath='kernel/stacktrace.c' line='111' column='1'/>
