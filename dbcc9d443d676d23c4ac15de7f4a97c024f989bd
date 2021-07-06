@@ -77,6 +77,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c85f77e4_461bbdbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1858441
+      },
+      "writtenOn": "2021-07-06T09:40:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74018d06_57e050be",
+      "revId": "dbcc9d443d676d23c4ac15de7f4a97c024f989bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49a6b028_6b8b1c8f",
@@ -90,6 +108,30 @@
       "writtenOn": "2021-07-02T18:25:29Z",
       "side": 1,
       "message": "I would expect this vendor hook to be inside do_mmap() instead of here. Here you would be capturing failed cases as well...\n\nIf you need to capture all mmaps requests including failed ones (due to security_mmap_file() check), I would expect to see \"ret\" being passed to this hook as well.\n\nI think the failure case was not considered when the hook was added.",
+      "range": {
+        "startLine": 515,
+        "startChar": 1,
+        "endLine": 515,
+        "endChar": 33
+      },
+      "revId": "dbcc9d443d676d23c4ac15de7f4a97c024f989bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb522acc_b8e7da83",
+        "filename": "mm/util.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1858441
+      },
+      "writtenOn": "2021-07-06T09:40:41Z",
+      "side": 1,
+      "message": "Thanks for the suggestion.\nWe pass \"ret\" to this hook in next patchset.",
+      "parentUuid": "49a6b028_6b8b1c8f",
       "range": {
         "startLine": 515,
         "startChar": 1,
