@@ -352,3 +352,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_mmap_file);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_file_open);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_bpf_syscall);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dwc3_gadget_ep_enable);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dwc3_ep0_set_config);
