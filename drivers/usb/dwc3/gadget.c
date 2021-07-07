@@ -27,6 +27,8 @@
 #include "gadget.h"
 #include "io.h"
 
+#include <trace/hooks/dwc3.h>
+
 #define DWC3_ALIGN_FRAME(d, n)	(((d)->frame_number + ((d)->interval * (n))) \
 					& ~((d)->interval - 1))
 
@@ -855,6 +857,7 @@ static int dwc3_gadget_ep_enable(struct usb_ep *ep,
 		return 0;
 
 	spin_lock_irqsave(&dwc->lock, flags);
+	trace_android_vh_dwc3_gadget_ep_enable(dep);
 	ret = __dwc3_gadget_ep_enable(dep, DWC3_DEPCFG_ACTION_INIT);
 	spin_unlock_irqrestore(&dwc->lock, flags);
 
