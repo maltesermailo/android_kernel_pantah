@@ -55,6 +55,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ed664ea6_98c2f2e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1427064
+      },
+      "writtenOn": "2021-07-07T04:01:33Z",
+      "side": 1,
+      "message": "The user is our usb module. As Albert commented, Pixel will support USB audio offloading, and we are trying to make a way to let CPU be able to sleep with USB still awake while device is playback by a headset.",
+      "parentUuid": "663017e3_60891f82",
+      "revId": "74a546f0c5faab2f757df35778859e1eeb8193e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2adb727e_75907e58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1427064
+      },
+      "writtenOn": "2021-07-07T04:01:33Z",
+      "side": 1,
+      "message": "Supplement: The usage case is while device is playback by a headset. Currently the USB may suspend if the CPU wants to suspend, it may cause the sound stop. This is a Pixel\u0027s feature we are trying to do, so we haven\u0027t upstream so far.",
+      "parentUuid": "f664b986_53392231",
+      "revId": "74a546f0c5faab2f757df35778859e1eeb8193e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb3aca16_78e1ac18",
         "filename": "drivers/usb/core/driver.c",
         "patchSetId": 8
@@ -66,6 +102,30 @@
       "writtenOn": "2021-07-06T15:00:28Z",
       "side": 1,
       "message": "why do you assume that you only have one USB host controller in the system?",
+      "range": {
+        "startLine": 219,
+        "startChar": 0,
+        "endLine": 219,
+        "endChar": 56
+      },
+      "revId": "74a546f0c5faab2f757df35778859e1eeb8193e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fb4bc61_3a5a1e60",
+        "filename": "drivers/usb/core/driver.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1427064
+      },
+      "writtenOn": "2021-07-07T04:01:33Z",
+      "side": 1,
+      "message": "I will try to re-design this, thanks for advising",
+      "parentUuid": "eb3aca16_78e1ac18",
       "range": {
         "startLine": 219,
         "startChar": 0,
