@@ -9,11 +9,11 @@
 #define _TRACE_HOOK_DWC3_H
 #include <linux/tracepoint.h>
 #include <trace/hooks/vendor_hooks.h>
+#include <linux/usb/ch9.h>
 /*
  * Following tracepoints are not exported in tracefs and provide a
  * mechanism for vendor modules to hook and extend functionality
  */
-#if defined(CONFIG_TRACEPOINTS) && defined(CONFIG_ANDROID_VENDOR_HOOKS)
 struct dwc3;
 struct dwc3_ep;
 
@@ -21,10 +21,10 @@ DECLARE_HOOK(android_vh___dwc3_gadget_ep_enable,
 	TP_PROTO(struct dwc3_ep *dep, unsigned int action),
 	TP_ARGS(dep, action));
 
-#else
-#define trace_android_vh___dwc3_gadget_ep_enable(dep, action)
+DECLARE_HOOK(android_vh_dwc3_ep0_set_config,
+	TP_PROTO(struct dwc3 *dwc, enum usb_device_state state),
+	TP_ARGS(dwc, state));
 
-#endif
 #endif /* _TRACE_HOOK_DWC3_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
