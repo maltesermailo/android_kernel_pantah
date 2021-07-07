@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51c29403_0b301e3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-07T06:57:50Z",
+      "side": 1,
+      "message": "Please break this up into 2 patches, one for each hook, and describe what the tracepoints are to be used for.",
+      "revId": "10280a24475fb06b2cb9434896476c63ca8792b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdf24161_2485b6e9",
+        "filename": "drivers/usb/dwc3/ep0.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-07T06:57:50Z",
+      "side": 1,
+      "message": "Why not do this no matter what the state is, and pass the state into the tracepoint before the switch statement is called?",
+      "range": {
+        "startLine": 621,
+        "startChar": 2,
+        "endLine": 621,
+        "endChar": 38
+      },
+      "revId": "10280a24475fb06b2cb9434896476c63ca8792b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
