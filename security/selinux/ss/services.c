@@ -591,7 +591,7 @@ static void type_attribute_bounds_av(struct policydb *policydb,
 
 /*
  * flag which drivers have permissions
- * only looking for ioctl based extended permssions
+ * only looking for ioctl/netlink based extended permssions
  */
 void services_compute_xperms_drivers(
 		struct extended_perms *xperms,
@@ -607,6 +607,9 @@ void services_compute_xperms_drivers(
 		/* if allowing permissions within a driver */
 		security_xperm_set(xperms->drivers.p,
 					node->datum.u.xperms->driver);
+	} else if (node->datum.u.xperms->specified == AVTAB_XPERMS_NLMSG) {
+		/* all netlink permissions are included in driver 0 */
+		xperms->drivers.p[0] |= 1;
 	}
 
 	xperms->len = 1;
@@ -970,6 +973,9 @@ void services_compute_xperms_decision(struct extended_perms_decision *xpermd,
 		if (!security_xperm_test(node->datum.u.xperms->perms.p,
 					xpermd->driver))
 			return;
+	} else if (node->datum.u.xperms->specified == AVTAB_XPERMS_NLMSG) {
+		if (xpermd->driver != node->datum.u.xperms->driver)
+			return;
 	} else {
 		BUG();
 	}
@@ -985,6 +991,11 @@ void services_compute_xperms_decision(struct extended_perms_decision *xpermd,
 				xpermd->allowed->p[i] |=
 					node->datum.u.xperms->perms.p[i];
 		}
+		if (node->datum.u.xperms->specified == AVTAB_XPERMS_NLMSG) {
+			for (i = 0; i < ARRAY_SIZE(xpermd->allowed->p); i++)
+				xpermd->allowed->p[i] |=
+					node->datum.u.xperms->perms.p[i];
+		}
 	} else if (node->key.specified == AVTAB_XPERMS_AUDITALLOW) {
 		xpermd->used |= XPERMS_AUDITALLOW;
 		if (node->datum.u.xperms->specified == AVTAB_XPERMS_IOCTLDRIVER) {
@@ -996,6 +1007,11 @@ void services_compute_xperms_decision(struct extended_perms_decision *xpermd,
 				xpermd->auditallow->p[i] |=
 					node->datum.u.xperms->perms.p[i];
 		}
+		if (node->datum.u.xperms->specified == AVTAB_XPERMS_NLMSG) {
+			for (i = 0; i < ARRAY_SIZE(xpermd->auditallow->p); i++)
+				xpermd->auditallow->p[i] |=
+					node->datum.u.xperms->perms.p[i];
+		}
 	} else if (node->key.specified == AVTAB_XPERMS_DONTAUDIT) {
 		xpermd->used |= XPERMS_DONTAUDIT;
 		if (node->datum.u.xperms->specified == AVTAB_XPERMS_IOCTLDRIVER) {
@@ -1003,6 +1019,11 @@ void services_compute_xperms_decision(struct extended_perms_decision *xpermd,
 					sizeof(xpermd->dontaudit->p));
 		}
 		if (node->datum.u.xperms->specified == AVTAB_XPERMS_IOCTLFUNCTION) {
+			for (i = 0; i < ARRAY_SIZE(xpermd->dontaudit->p); i++)
+				xpermd->dontaudit->p[i] |=
+					node->datum.u.xperms->perms.p[i];
+		}
+		if (node->datum.u.xperms->specified == AVTAB_XPERMS_NLMSG) {
 			for (i = 0; i < ARRAY_SIZE(xpermd->dontaudit->p); i++)
 				xpermd->dontaudit->p[i] |=
 					node->datum.u.xperms->perms.p[i];
@@ -2164,10 +2185,6 @@ static void security_load_policycaps(struct selinux_state *state,
 			pr_info("SELinux:  unknown policy capability %u\n",
 				i);
 	}
-
-	state->android_netlink_route = p->android_netlink_route;
-	state->android_netlink_getneigh = p->android_netlink_getneigh;
-	selinux_nlmsg_init();
 }
 
 static int security_preserve_bools(struct selinux_policy *oldpolicy,
