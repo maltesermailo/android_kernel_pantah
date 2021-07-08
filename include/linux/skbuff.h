@@ -41,6 +41,11 @@
 #if IS_ENABLED(CONFIG_NF_CONNTRACK)
 #include <linux/netfilter/nf_conntrack_common.h>
 #endif
+<<<<<<< HEAD   (4fb413 ANDROID: abi_gki_aarch64_qcom: Update qcom abi symbol list)
+=======
+#include <linux/android_kabi.h>
+#include <linux/android_vendor.h>
+>>>>>>> CHANGE (726468 ANDROID: GKI: add vendor padding variable in struct skb_shar)
 
 /* The interface for checksum offload between the stack and networking drivers
  * is as follows...
@@ -536,6 +541,8 @@ struct skb_shared_info {
 	/* Intermediate layers must ensure that destructor_arg
 	 * remains valid until skb destructor */
 	void *		destructor_arg;
+
+	ANDROID_OEM_DATA_ARRAY(1, 3);
 
 	/* must be last field, see pskb_expand_head() */
 	skb_frag_t	frags[MAX_SKB_FRAGS];
