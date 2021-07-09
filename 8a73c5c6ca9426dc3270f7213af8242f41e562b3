@@ -218,6 +218,30 @@
       },
       "revId": "8a73c5c6ca9426dc3270f7213af8242f41e562b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2e2bbf8_ff791ac6",
+        "filename": "drivers/dma-buf/dma-buf-sysfs-stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-07-09T20:58:45Z",
+      "side": 1,
+      "message": "If we don\u0027t add it, we will lose a key memory accounting feature in Android S until alternative is implemented in T. We discussed this with Sandeep and I think the conclusion was to add it and then phase it out when no more supported kernels use this API (past T for a number of years). Let me double-check with Sandeep whether my understanding was correct.",
+      "parentUuid": "53af4a9c_e91ae30d",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 62
+      },
+      "revId": "8a73c5c6ca9426dc3270f7213af8242f41e562b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
