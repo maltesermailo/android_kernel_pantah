@@ -122,6 +122,30 @@
       },
       "revId": "8a73c5c6ca9426dc3270f7213af8242f41e562b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eabf49e7_96cff5b7",
+        "filename": "drivers/dma-buf/dma-buf-sysfs-stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2021-07-09T17:17:32Z",
+      "side": 1,
+      "message": "Hi Greg, it is simply an array of device base names. They are all values of the same type. There is no likelihood of it overflowing the 4K sysfs buffer size since in practice only a handful of devices attach to a buffer.\n\nThere will be no functional dependency on the file. It is only going to be used for stats gathering purposes(specifically GPU memory accounting) so there is no real danger from reading a truncated file(which is extremely unlikely to happen).",
+      "parentUuid": "07656a72_702cf205",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 62
+      },
+      "revId": "8a73c5c6ca9426dc3270f7213af8242f41e562b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
