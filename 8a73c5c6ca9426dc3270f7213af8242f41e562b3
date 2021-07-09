@@ -33,6 +33,24 @@
       "message": "Hi Suren,\n\nIt turns out that we can implement the file without a KMI change(unlike what I said in the meeting). PTAL when you get a chance.\n\nRegards,\nHridya",
       "revId": "8a73c5c6ca9426dc3270f7213af8242f41e562b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "004e7c17_9a909397",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-07-09T03:20:46Z",
+      "side": 1,
+      "message": "What changes is previously only mapped attachments were reported. Now all attachments are reported (mapped or not).\n\nThis is more inline with the gpu_mem_total tracepoint which reports the imported memory (not necessarily mapped). Since these attachment stats are used to deduce the gpu private from gpu_mem_total (private + imported), all attachments should be reported as is done here.\n\nThis is what allows to drop the attachment map_count fields.",
+      "parentUuid": "03d89322_663b813c",
+      "revId": "8a73c5c6ca9426dc3270f7213af8242f41e562b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
