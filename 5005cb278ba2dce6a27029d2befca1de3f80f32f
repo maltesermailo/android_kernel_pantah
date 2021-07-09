@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78cf0f98_bedf8011",
+        "filename": "include/linux/page_pinner.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-07-09T02:31:59Z",
+      "side": 1,
+      "message": "IMHO page_pinner_mark_isolation_failed_page would be more descriptive.",
+      "range": {
+        "startLine": 57,
+        "startChar": 19,
+        "endLine": 57,
+        "endChar": 37
+      },
+      "revId": "5005cb278ba2dce6a27029d2befca1de3f80f32f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83e8f7a8_eaecce0a",
+        "filename": "include/linux/page_pinner.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-07-09T02:31:59Z",
+      "side": 1,
+      "message": "Would it be better to have PP_FAILURE_ISOLATE to report more specific info?",
+      "range": {
+        "startLine": 62,
+        "startChar": 28,
+        "endLine": 62,
+        "endChar": 45
+      },
+      "revId": "5005cb278ba2dce6a27029d2befca1de3f80f32f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aae54271_005d5a06",
+        "filename": "mm/page_isolation.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-07-09T02:31:59Z",
+      "side": 1,
+      "message": "nit:\n\nif (pfn \u003c end_pfn) {\n\tpage_pinner_record(pfn_to_page(pfn));\n\treturn -EBUSY;\n}\nreturn 0;\n\nmight be more readable here.",
+      "range": {
+        "startLine": 311,
+        "startChar": 1,
+        "endLine": 314,
+        "endChar": 35
+      },
+      "revId": "5005cb278ba2dce6a27029d2befca1de3f80f32f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
