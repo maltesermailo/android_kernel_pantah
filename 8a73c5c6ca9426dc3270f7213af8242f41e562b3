@@ -146,6 +146,30 @@
       },
       "revId": "8a73c5c6ca9426dc3270f7213af8242f41e562b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1555f76_0a7921c8",
+        "filename": "drivers/dma-buf/dma-buf-sysfs-stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-09T17:25:12Z",
+      "side": 1,
+      "message": "I understand the need/want to do this, but this is not ok for sysfs, and I would reject this upstream if it were submitted there.\n\nIt is a list of things, that you then have to parse in userspace.\n\nWe have had files in the past that were \"no way this is ever going to overflow the buffer\" that we are now dealing with overflows due to more LEDs in the system than people ever imagined, or more CPUs than people expected would be possible.  So to prevent this, please just do not have lists like this in sysfs.",
+      "parentUuid": "eabf49e7_96cff5b7",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 62
+      },
+      "revId": "8a73c5c6ca9426dc3270f7213af8242f41e562b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
