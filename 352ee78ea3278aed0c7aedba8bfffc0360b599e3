@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "deba0a17_d1c95e99",
+        "filename": "drivers/usb/dwc3/gadget.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 1764430
+      },
+      "writtenOn": "2021-07-09T23:01:56Z",
+      "side": 1,
+      "message": "sure, I can move it to dwc3_gadget_ep_enable(), but I\u0027m going to keep the call within the dwc3-\u003elock, as we need to make sure we\u0027re checking the dep-\u003eflags with the spin lock held.",
+      "parentUuid": "501e4ec4_91f8dd8d",
+      "range": {
+        "startLine": 651,
+        "startChar": 0,
+        "endLine": 651,
+        "endChar": 56
+      },
+      "revId": "352ee78ea3278aed0c7aedba8bfffc0360b599e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "175baa08_726bc06c",
         "filename": "include/trace/hooks/dwc3.h",
         "patchSetId": 3
@@ -108,6 +132,30 @@
       "writtenOn": "2021-07-08T18:40:22Z",
       "side": 1,
       "message": "remove -- no longer needed",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 71
+      },
+      "revId": "352ee78ea3278aed0c7aedba8bfffc0360b599e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0796e53_5f16572e",
+        "filename": "include/trace/hooks/dwc3.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1764430
+      },
+      "writtenOn": "2021-07-09T23:01:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "175baa08_726bc06c",
       "range": {
         "startLine": 16,
         "startChar": 0,
@@ -131,6 +179,30 @@
       "writtenOn": "2021-07-08T18:40:22Z",
       "side": 1,
       "message": "remove -- no longer needed",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 6
+      },
+      "revId": "352ee78ea3278aed0c7aedba8bfffc0360b599e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0454a04_2be2032f",
+        "filename": "include/trace/hooks/dwc3.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1764430
+      },
+      "writtenOn": "2021-07-09T23:01:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2076e8fc_57a7f067",
       "range": {
         "startLine": 24,
         "startChar": 0,
