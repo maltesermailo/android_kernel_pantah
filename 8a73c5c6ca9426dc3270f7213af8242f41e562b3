@@ -170,6 +170,30 @@
       },
       "revId": "8a73c5c6ca9426dc3270f7213af8242f41e562b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "802fd7a3_9eafcd37",
+        "filename": "drivers/dma-buf/dma-buf-sysfs-stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1120612
+      },
+      "writtenOn": "2021-07-09T17:36:26Z",
+      "side": 1,
+      "message": "We are actually not planning to send this upstream. It is more of a stop-gap measure for the GKI 2.0 kernel to not lose features based on the sysfs statistics we are deleting :( \n\nWe already have plans to start phasing out this file starting with GKI 3.0 so we don\u0027t really have to be concerned about requirements changing in future and causing the buffer to overflow.\n\nAbout the need to parse in user-space, this should be ok since the values are all of the same type right Greg?",
+      "parentUuid": "f1555f76_0a7921c8",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 62
+      },
+      "revId": "8a73c5c6ca9426dc3270f7213af8242f41e562b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
