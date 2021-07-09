@@ -51,6 +51,29 @@
       "parentUuid": "03d89322_663b813c",
       "revId": "8a73c5c6ca9426dc3270f7213af8242f41e562b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "738fe660_27b3b8b9",
+        "filename": "drivers/dma-buf/dma-buf-sysfs-stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-09T13:51:18Z",
+      "side": 1,
+      "message": "no, sysfs is \"one value per file\", never add something that has to be parsed.\n\nWhat happens if you have too many attachments and you run over the buffer size, you will have a truncated file.\n\nWhy is this still needed, what tool is going to rely on this?",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 62
+      },
+      "revId": "8a73c5c6ca9426dc3270f7213af8242f41e562b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
