@@ -74,6 +74,30 @@
       },
       "revId": "8a73c5c6ca9426dc3270f7213af8242f41e562b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1fd87d4_cd29707f",
+        "filename": "drivers/dma-buf/dma-buf-sysfs-stats.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-07-09T14:58:27Z",
+      "side": 1,
+      "message": "Hi Greg. The documentation seems to give some flexibility for certain cases like this. https://www.kernel.org/doc/Documentation/filesystems/sysfs.txt: \"It is noted that it may not be efficient to contain only one\nvalue per file, so it is socially acceptable to express an array of\nvalues of the same type.\"\n\nOn S, I\u0027ve only seen total 4 devices that attach dmabufs, so unlikely we will overflow the buffer with list of device names that attached the buffer. As long as that list is actually a set (I\u0027m not sure if there can be repeated attachments of the same buffer from the same device). Hridya, can you confirm this is a set of names (no repeats)?\n\nWe still need this to provide the per-device stats in dmabuf_dump tool for bugreports and for identifying GPU-imported dmabufs for lost RAM calculation and classifying GPU Memory (private vs dmabufs).",
+      "parentUuid": "738fe660_27b3b8b9",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 62
+      },
+      "revId": "8a73c5c6ca9426dc3270f7213af8242f41e562b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
