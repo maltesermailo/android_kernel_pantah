@@ -87,6 +87,24 @@
       "message": "Todd, this change is actually fine.\nI prefer this approach to adding the hook - since it much more cleanly documents the intent.\n\nThe UAPI change is confined (by the #ifdef __KERNEL__) to not be exposed outside of the kernel build itself.\n\nNote: the DEVCONF_MAX setting which succeeds it is already not immutable even though in a uapi header (it\u0027s just the max of all the constants exposed to userspace).",
       "revId": "04eee893a9e3666ca7f2d432c7f590059aed4d92",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfb26ca1_a5aff846",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-07-09T22:15:50Z",
+      "side": 1,
+      "message": "My preference would be the hook unless we have high confidence that this patch will land upstream, but maze@ knows this code much better than I do so I\u0027m willing to defer. Greg- are you ok with that?",
+      "parentUuid": "fc74978c_1093bc74",
+      "revId": "04eee893a9e3666ca7f2d432c7f590059aed4d92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
