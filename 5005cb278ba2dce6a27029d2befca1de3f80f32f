@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e56db1cf_3af95ba5",
+        "filename": "include/linux/page_pinner.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-07-11T20:20:18Z",
+      "side": 1,
+      "message": "I changed it with \"page_pinner_failure_detect\".",
+      "parentUuid": "78cf0f98_bedf8011",
+      "range": {
+        "startLine": 57,
+        "startChar": 19,
+        "endLine": 57,
+        "endChar": 37
+      },
+      "revId": "5005cb278ba2dce6a27029d2befca1de3f80f32f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "83e8f7a8_eaecce0a",
         "filename": "include/linux/page_pinner.h",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2021-07-09T02:31:59Z",
       "side": 1,
       "message": "Would it be better to have PP_FAILURE_ISOLATE to report more specific info?",
+      "range": {
+        "startLine": 62,
+        "startChar": 28,
+        "endLine": 62,
+        "endChar": 45
+      },
+      "revId": "5005cb278ba2dce6a27029d2befca1de3f80f32f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f7ec917_c7dee6cd",
+        "filename": "include/linux/page_pinner.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-07-11T20:20:18Z",
+      "side": 1,
+      "message": "Isolation failure, migration failure, test_page failure all are migration failure and I wanted to generalize them to \"PP_FAILURE_DETECT\". \n\nI think we resolved this issue in other review.\nHowever if you still have something in your mind, feel free to raise voice.\nThank you.",
+      "parentUuid": "83e8f7a8_eaecce0a",
       "range": {
         "startLine": 62,
         "startChar": 28,
@@ -60,6 +108,30 @@
       "writtenOn": "2021-07-09T02:31:59Z",
       "side": 1,
       "message": "nit:\n\nif (pfn \u003c end_pfn) {\n\tpage_pinner_record(pfn_to_page(pfn));\n\treturn -EBUSY;\n}\nreturn 0;\n\nmight be more readable here.",
+      "range": {
+        "startLine": 311,
+        "startChar": 1,
+        "endLine": 314,
+        "endChar": 35
+      },
+      "revId": "5005cb278ba2dce6a27029d2befca1de3f80f32f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "500221dd_fce21098",
+        "filename": "mm/page_isolation.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-07-11T20:20:18Z",
+      "side": 1,
+      "message": "Yeah, that\u0027s definitely better. I just wanted to keep upstream code. If you don\u0027t mind it, I am happy to change it. Thank you.",
+      "parentUuid": "aae54271_005d5a06",
       "range": {
         "startLine": 311,
         "startChar": 1,
