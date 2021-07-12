@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19063ceb_5aa7bcd1",
+        "filename": "arch/arm64/kernel/entry.S",
+        "patchSetId": 2
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2021-07-12T20:27:06Z",
+      "side": 1,
+      "message": "Remove this line",
+      "revId": "202e5e4df88ec5ba49dc2c77d54daf39c730de15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b1786ee_2debe0b7",
+        "filename": "arch/arm64/kernel/entry.S",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2021-07-12T20:27:06Z",
+      "side": 1,
+      "message": "You\u0027re missing this hunk here:\n\n\t/* Ignore asynchronous tag check faults in the uaccess routines */\n\tldr\tx0, [tsk, THREAD_SCTLR_USER]\n\tclear_mte_async_tcf x0",
+      "revId": "202e5e4df88ec5ba49dc2c77d54daf39c730de15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59f75bb3_e34337f0",
+        "filename": "arch/arm64/kernel/entry.S",
+        "patchSetId": 2
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1067098
+      },
+      "writtenOn": "2021-07-12T20:27:06Z",
+      "side": 1,
+      "message": "Remove this line.",
+      "revId": "202e5e4df88ec5ba49dc2c77d54daf39c730de15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
