@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1f66dbf_899b8d88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2021-07-12T17:01:21Z",
+      "side": 1,
+      "message": "Folks, could you check why this patchset makes ABI failure?\nThis CL didn\u0027t change anything of those function signatures.\n\n4 functions with some sub-type change:\n\n  [C] \u0027function page* cma_alloc(cma*, size_t, unsigned int, gfp_t)\u0027 at cma.c:434:1 has some sub-type changes:\n    CRC (modversions) changed from 0xca74cb2e to 0x825246f5\n\n  [C] \u0027function int cma_for_each_area(int (cma*, void*)*, void*)\u0027 at cma.c:620:1 has some sub-type changes:\n    CRC (modversions) changed from 0x86aed23 to 0xd480b04f\n\n  [C] \u0027function const char* cma_get_name(const cma*)\u0027 at cma.c:59:1 has some sub-type changes:\n    CRC (modversions) changed from 0x6496dc46 to 0x77c98872\n\n  ... 1 omitted; 4 symbols have only CRC changes\n",
+      "revId": "ba48638a8d7fb77158a26ece0505ff93c02f0daf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
