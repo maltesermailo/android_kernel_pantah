@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4deae6ef_44e3878f",
+        "filename": "drivers/media/v4l2-core/v4l2-subdev.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-07-16T22:01:23Z",
+      "side": 0,
+      "message": "To avoid the sleep-while-atomic issues, you need this hook to be a restricted hook instead of a regular one since restrict hook handlers are invoked in the context of the callsite -- w/o disabling preemption. As Saravana mentioned, the existing hook is part of the KMI and cannot be changed now, so you can accomplish this by adding the restricted hook:\n\n```\n    trace_android_vh_v4l2subdev_set_fmt(sd, subdev_fh-\u003epad,\n\t\t\t\t\tformat, \u0026ret);\n+   trace_android_rvh_v4l2subdev_set_fmt(sd, subdev_fh-\u003epad,\n+\t\t\t\t\t format, \u0026ret);\n```\n\nYour hander will now attach to the \"rvh\" version which allows for the handler to sleep.\n\nThe same approach would be taken for the other cases below.",
+      "revId": "ddabf14bea9d79fa7f472dee0f35a7ef4071d38a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
