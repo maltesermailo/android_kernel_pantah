@@ -33,6 +33,42 @@
       "message": "KMI freeze has happened. So, you can\u0027t delete or break any existing vendorhooks. You can stop using them, but can\u0027t delete them. Please fix your patch.",
       "revId": "05ff66d03c457b43fe642a6920edc1c25e4ec2ed",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f82a1b9_49d7fdc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1475635
+      },
+      "writtenOn": "2021-07-16T23:44:24Z",
+      "side": 1,
+      "message": "I will rollback and fix my patch.",
+      "parentUuid": "c8a0760e_918ed3a5",
+      "revId": "05ff66d03c457b43fe642a6920edc1c25e4ec2ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cac39b0f_8c48d275",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1475635
+      },
+      "writtenOn": "2021-07-16T23:44:24Z",
+      "side": 1,
+      "message": "You means this change break the exising api and can\u0027t be allowed?\n                org:\n                memset(format-\u003ereserved, 0, sizeof(format-\u003ereserved));\n                \n                new: \n\t\tif (!ret)\n\t\t\tmemset(format-\u003ereserved, 0, sizeof(format-\u003ereserved));",
+      "parentUuid": "e2e02ef9_397d3ef5",
+      "revId": "05ff66d03c457b43fe642a6920edc1c25e4ec2ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
