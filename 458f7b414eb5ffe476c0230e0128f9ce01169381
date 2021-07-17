@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "55f606d4_d79ba299",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-07-17T16:44:01Z",
+      "side": 1,
+      "message": "Please update commit message for the new implementation. Describe why you needed to use restricted hooks and point out that due to KMI freeze you could not change the existing hooks.",
+      "revId": "458f7b414eb5ffe476c0230e0128f9ce01169381",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "db48278f_f544cd15",
@@ -14,6 +31,24 @@
       "writtenOn": "2021-07-17T14:11:11Z",
       "side": 1,
       "message": "Hi Todd,\nI have already re-written and verified restricted vendor hook solution according to your suggestion, and it work well(patch set 5).\nThe remaining issue is I want to declare the three \"android_rvh_v4l2subdev_set_xxx\" in v4l2core.h, but it will build fail with error message below\n\n..../kernel-5.10/include/trace/hooks/v4l2core.h:41:1: error: redefinition of \u0027trace_android_rvh_v4l2subdev_set_fmt\u0027\n..../kernel-5.10/include/trace/hooks/v4l2core.h:41:1: error: redefinition of \u0027trace_android_rvh_v4l2subdev_set_fmt_enabled\u0027\n\nSo, in patch set 5, I have to declare them in v4l2mc.h instead to avoid build fail. I have no idea what\u0027s happen and need your hint.\n\n \n ",
+      "revId": "458f7b414eb5ffe476c0230e0128f9ce01169381",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6301d1f_bfbf8a10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-07-17T16:44:01Z",
+      "side": 1,
+      "message": "Can you send me a diff between patchset 4 and the version where you saw this failure?",
+      "parentUuid": "db48278f_f544cd15",
       "revId": "458f7b414eb5ffe476c0230e0128f9ce01169381",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
