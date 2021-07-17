@@ -88,6 +88,24 @@
       "parentUuid": "d12a9f79_871c98a6",
       "revId": "ddabf14bea9d79fa7f472dee0f35a7ef4071d38a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c105714b_1f25e137",
+        "filename": "drivers/media/v4l2-core/v4l2-subdev.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1475635
+      },
+      "writtenOn": "2021-07-17T00:39:51Z",
+      "side": 0,
+      "message": "New hook function do not call v4l2_subdev_call() anymore, just ret 1 to provide a flag to skip memset, so v4l2_subdev_call() would not be called twice.\n\n\n  trace_android_vh_v4l2subdev_bypass_code(\u0026ret);\n  if (!ret)\n     memset(format-\u003ereserved, 0, sizeof(format-\u003ereserved));\n  memset(format-\u003eformat.reserved, 0, sizeof(format-\u003eformat.reserved));\n  return v4l2_subdev_call(sd, pad, set_fmt, subdev_fh-\u003epad, format); \u003c\u003dall modules call original v4l2_subdev_call() here.\n  \nI just want to know the writing below changes semantics of KMI and is not allowed, right?\n  if (!ret)\n     memset(format-\u003ereserved, 0, sizeof(format-\u003ereserved));",
+      "parentUuid": "bfa6cd8c_ae9bd1cf",
+      "revId": "ddabf14bea9d79fa7f472dee0f35a7ef4071d38a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
