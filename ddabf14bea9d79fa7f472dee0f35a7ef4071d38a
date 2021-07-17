@@ -70,6 +70,24 @@
       "parentUuid": "222c25f8_7ad44fa0",
       "revId": "ddabf14bea9d79fa7f472dee0f35a7ef4071d38a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfa6cd8c_ae9bd1cf",
+        "filename": "drivers/media/v4l2-core/v4l2-subdev.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-07-17T00:22:13Z",
+      "side": 0,
+      "message": "In the old case, the handler has to call v4l2_subdev_call(), doesn\u0027t it? So other partners who use this hook might already have a handler with that implementation since they expect the hook to cause an early return.\n\nIf we accepted this change, v2l2_subdev_call() would be called twice for those old implementations which isn\u0027t safe (it might happen to be ok now, but we can\u0027t count on it remaining safe)... which means this change in semantics breaks other partners even if the KMI is the same.\n\nSo you need to preserve the semantics and the KMI. It seems like the easiest way to do that is to just add a restricted hook.",
+      "parentUuid": "d12a9f79_871c98a6",
+      "revId": "ddabf14bea9d79fa7f472dee0f35a7ef4071d38a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
