@@ -52,6 +52,24 @@
       "parentUuid": "38520191_e3209ac7",
       "revId": "ddabf14bea9d79fa7f472dee0f35a7ef4071d38a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d12a9f79_871c98a6",
+        "filename": "drivers/media/v4l2-core/v4l2-subdev.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1475635
+      },
+      "writtenOn": "2021-07-17T00:13:16Z",
+      "side": 0,
+      "message": "Hook function is still return 1, \nv4l2subdev_bypass_code_hook(void *data, int *ret) {\n\n\t*ret \u003d 1;  /* just provide a flag */\n}\nMy question is if I can\u0027t change any original code even just a shift\nif (!ret)  //if hook exist, then ret is 1 and skip memset\n   memset(format-\u003ereserved, 0, sizeof(format-\u003ereserved));  //just shift code here",
+      "parentUuid": "222c25f8_7ad44fa0",
+      "revId": "ddabf14bea9d79fa7f472dee0f35a7ef4071d38a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
