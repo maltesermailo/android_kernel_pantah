@@ -106,6 +106,24 @@
       "parentUuid": "bfa6cd8c_ae9bd1cf",
       "revId": "ddabf14bea9d79fa7f472dee0f35a7ef4071d38a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dd943c5_5311e5b8",
+        "filename": "drivers/media/v4l2-core/v4l2-subdev.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1475635
+      },
+      "writtenOn": "2021-07-17T07:08:54Z",
+      "side": 0,
+      "message": "Hi, I try to add restricted hook but encounter build error, do you know what\u0027s going on?\n\nerror msg,\n..../kernel-5.10/include/trace/hooks/v4l2core.h:41:1: error: redefinition of \u0027trace_android_rvh_v4l2subdev_set_fmt\u0027\n..../kernel-5.10/include/trace/hooks/v4l2core.h:41:1: error: redefinition of \u0027trace_android_rvh_v4l2subdev_set_fmt_enabled\u0027\n\ndeclaration\nDECLARE_RESTRICTED_HOOK(android_rvh_v4l2subdev_set_fmt,\n\tTP_PROTO(struct v4l2_subdev *sd, struct v4l2_subdev_pad_config *pad,\n\tstruct v4l2_subdev_format *format, int *ret),\n\tTP_ARGS(sd, pad, format, ret), 1);\n\nEXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_v4l2subdev_set_fmt);",
+      "parentUuid": "c105714b_1f25e137",
+      "revId": "ddabf14bea9d79fa7f472dee0f35a7ef4071d38a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
