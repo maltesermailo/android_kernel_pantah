@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "1267a0d2_9ba6508c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1475635
+      },
+      "writtenOn": "2021-07-18T00:51:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55f606d4_d79ba299",
+      "revId": "458f7b414eb5ffe476c0230e0128f9ce01169381",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "db48278f_f544cd15",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 5
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "Can you send me a diff between patchset 4 and the version where you saw this failure?",
       "parentUuid": "db48278f_f544cd15",
+      "revId": "458f7b414eb5ffe476c0230e0128f9ce01169381",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72cb86b1_7f36c484",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1475635
+      },
+      "writtenOn": "2021-07-18T00:51:04Z",
+      "side": 1,
+      "message": "The issue I encountered is, I would like declare the three hook functions below in v4l2core.h and it build fail. But its no problem if I declare those in v4l2mc.h(see patch set 5).\n\nDECLARE_RESTRICTED_HOOK(android_rvh_v4l2subdev_set_selection,...);\nDECLARE_RESTRICTED_HOOK(android_rvh_v4l2subdev_set_fmt,...);\nDECLARE_RESTRICTED_HOOK(android_rvh_v4l2subdev_set_frame_interval,...);\n\n\n\nIt build fail in latest ACK android12-5.10 when I do upstream check.\n\nfail message,\n\tLine 4559: ../include/trace/hooks/v4l2core.h:30:1: error: redefinition of \u0027trace_android_rvh_v4l2subdev_set_selection\u0027\n\tLine 4587: ../include/trace/hooks/v4l2core.h:30:1: error: redefinition of \u0027trace_android_rvh_v4l2subdev_set_selection_enabled\u0027\n\tLine 4615: ../include/trace/hooks/v4l2core.h:30:1: error: redefinition of \u0027register_trace_android_rvh_v4l2subdev_set_selection\u0027\n\tLine 4643: ../include/trace/hooks/v4l2core.h:36:1: error: redefinition of \u0027trace_android_rvh_v4l2subdev_set_fmt\u0027\n\tLine 4672: ../include/trace/hooks/v4l2core.h:36:1: error: redefinition of \u0027trace_android_rvh_v4l2subdev_set_fmt_enabled\u0027\n\tLine 4700: ../include/trace/hooks/v4l2core.h:36:1: error: redefinition of \u0027register_trace_android_rvh_v4l2subdev_set_fmt\u0027\n\tLine 4728: ../include/trace/hooks/v4l2core.h:42:1: error: redefinition of \u0027trace_android_rvh_v4l2subdev_set_frame_interval\u0027\n\tLine 4756: ../include/trace/hooks/v4l2core.h:42:1: error: redefinition of \u0027trace_android_rvh_v4l2subdev_set_frame_interval_enabled\u0027\n\tLine 4784: ../include/trace/hooks/v4l2core.h:42:1: error: redefinition of \u0027register_trace_android_rvh_v4l2subdev_set_frame_interval\u0027",
+      "parentUuid": "f6301d1f_bfbf8a10",
       "revId": "458f7b414eb5ffe476c0230e0128f9ce01169381",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
