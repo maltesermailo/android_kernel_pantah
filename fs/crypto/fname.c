@@ -334,6 +334,7 @@ int fscrypt_fname_disk_to_usr(const struct inode *inode,
 	if (fscrypt_has_encryption_key(inode))
 		return fname_decrypt(inode, iname, oname);
 
+<<<<<<< HEAD   (f26cac ANDROID: GKI: fix up crc change in ip.h)
 	/*
 	 * Sanity check that struct fscrypt_nokey_name doesn't have padding
 	 * between fields and that its encoded size never exceeds NAME_MAX.
@@ -363,6 +364,21 @@ int fscrypt_fname_disk_to_usr(const struct inode *inode,
 		size = FSCRYPT_NOKEY_NAME_MAX;
 	}
 	oname->len = base64_encode((const u8 *)&nokey_name, size, oname->name);
+=======
+	if (iname->len <= FSCRYPT_FNAME_MAX_UNDIGESTED_SIZE) {
+		oname->len = base64_encode(iname->name, iname->len,
+					   oname->name);
+		return 0;
+	}
+	digested_name.hash = hash;
+	digested_name.minor_hash = minor_hash;
+	memcpy(digested_name.digest,
+	       FSCRYPT_FNAME_DIGEST(iname->name, iname->len),
+	       FSCRYPT_FNAME_DIGEST_SIZE);
+	oname->name[0] = '_';
+	oname->len = 1 + base64_encode((const u8 *)&digested_name,
+				       sizeof(digested_name), oname->name + 1);
+>>>>>>> BRANCH (795e84 Linux 5.4.133)
 	return 0;
 }
 EXPORT_SYMBOL(fscrypt_fname_disk_to_usr);
