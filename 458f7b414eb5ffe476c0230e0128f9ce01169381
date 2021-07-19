@@ -87,6 +87,24 @@
       "parentUuid": "f6301d1f_bfbf8a10",
       "revId": "458f7b414eb5ffe476c0230e0128f9ce01169381",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fcf7802_04640281",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-07-19T20:37:44Z",
+      "side": 1,
+      "message": "This was caused by incorrect header inclusion protection in v4l2core.h:\n```\n-#if !defined(_TRACE_HOOK_V4L2CORE_H) || defined(TRACE_HEADER_MULTI_READ)\n+#if !defined(_TRACE_HOOK_V4L2_CORE_H) || defined(TRACE_HEADER_MULTI_READ)\n #define _TRACE_HOOK_V4L2_CORE_H\n```\n\nIf you make this change, defining the rvh hooks in v4l2core.h builds fine.",
+      "parentUuid": "72cb86b1_7f36c484",
+      "revId": "458f7b414eb5ffe476c0230e0128f9ce01169381",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
