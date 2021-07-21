@@ -644,6 +644,7 @@ void swiotlb_tbl_unmap_single(struct device *dev, phys_addr_t tlb_addr,
 	swiotlb_release_slots(dev, tlb_addr);
 }
 
+<<<<<<< HEAD   (f932f5 ANDROID: arm64: gki_defconfig: Add CONFIG_DMA_RESTRICTED_POO)
 void swiotlb_sync_single_for_device(struct device *dev, phys_addr_t tlb_addr,
 		size_t size, enum dma_data_direction dir)
 {
@@ -660,6 +661,29 @@ void swiotlb_sync_single_for_cpu(struct device *dev, phys_addr_t tlb_addr,
 		swiotlb_bounce(dev, tlb_addr, size, DMA_FROM_DEVICE);
 	else
 		BUG_ON(dir != DMA_TO_DEVICE);
+=======
+	orig_addr += (tlb_addr & (IO_TLB_SIZE - 1)) -
+		swiotlb_align_offset(hwdev, orig_addr);
+
+	switch (target) {
+	case SYNC_FOR_CPU:
+		if (likely(dir == DMA_FROM_DEVICE || dir == DMA_BIDIRECTIONAL))
+			swiotlb_bounce(orig_addr, tlb_addr,
+				       size, DMA_FROM_DEVICE);
+		else
+			BUG_ON(dir != DMA_TO_DEVICE);
+		break;
+	case SYNC_FOR_DEVICE:
+		if (likely(dir == DMA_TO_DEVICE || dir == DMA_BIDIRECTIONAL))
+			swiotlb_bounce(orig_addr, tlb_addr,
+				       size, DMA_TO_DEVICE);
+		else
+			BUG_ON(dir != DMA_FROM_DEVICE);
+		break;
+	default:
+		BUG();
+	}
+>>>>>>> BRANCH (fdb1cf FROMGIT: dma_buf: remove dmabuf sysfs teardown before releas)
 }
 
 /*
