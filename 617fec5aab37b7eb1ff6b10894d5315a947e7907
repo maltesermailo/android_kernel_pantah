@@ -16,6 +16,24 @@
       "message": "Why can you not just use touch_softlockup_watchdog()?",
       "revId": "617fec5aab37b7eb1ff6b10894d5315a947e7907",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e737ac5_84043c99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1770429
+      },
+      "writtenOn": "2021-07-21T02:11:51Z",
+      "side": 1,
+      "message": "As explained in the function show_state_filter(). We want to implement a function similar to show_state_filter() in ko, collect all RUNNING and UNINTERRUPTIBLE task info.\n\n\nvoid show_state_filter(unsigned long state_filter)\n{\n\tstruct task_struct *g, *p;\n\n\trcu_read_lock();\n\tfor_each_process_thread(g, p) {\n\t\t/*\n\t\t * reset the NMI-timeout, listing all files on a slow\n\t\t * console might take a lot of time:\n\t\t * Also, reset softlockup watchdogs on all CPUs, because\n\t\t * another CPU might be blocked waiting for us to process\n\t\t * an IPI.\n\t\t */\n\t\ttouch_nmi_watchdog();\n\t\ttouch_all_softlockup_watchdogs();\n\t\tif (state_filter_match(state_filter, p))\n\t\t\tsched_show_task(p);\n\t}\n\t...\n}",
+      "parentUuid": "eb3ff6a1_076ea31e",
+      "revId": "617fec5aab37b7eb1ff6b10894d5315a947e7907",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
