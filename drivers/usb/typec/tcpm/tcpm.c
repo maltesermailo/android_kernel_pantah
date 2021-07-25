@@ -4659,6 +4659,9 @@ static void run_state_machine(struct tcpm_port *port)
 		break;
 	case PR_SWAP_START:
 		tcpm_apply_rc(port);
+		port->sink_cap_done = false;
+		if (port->tcpc->enable_frs)
+			port->tcpc->enable_frs(port->tcpc, false);
 		if (port->pwr_role == TYPEC_SOURCE)
 			tcpm_set_state(port, PR_SWAP_SRC_SNK_TRANSITION_OFF,
 				       PD_T_SRC_TRANSITION);
