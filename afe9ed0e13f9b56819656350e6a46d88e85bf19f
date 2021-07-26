@@ -124,6 +124,24 @@
       "parentUuid": "ad293959_8897e726",
       "revId": "afe9ed0e13f9b56819656350e6a46d88e85bf19f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b73f2cf_f8b0abec",
+        "filename": "include/linux/bpf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 763,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-07-26T16:27:28Z",
+      "side": 1,
+      "message": "thanks for that option.\n\nI am now convinced that every data structure in the kernel can be reached by every other data structure 😊\n\nAnyway, this looks like a safe change, an \"internal pointer\" is changing size, but as the bpf core handles the allocation and access of this pointer directly, all should be fine.  Let me run some tests to see more...",
+      "parentUuid": "79375d3c_dcd6aee5",
+      "revId": "afe9ed0e13f9b56819656350e6a46d88e85bf19f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
