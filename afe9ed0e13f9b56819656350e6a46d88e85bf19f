@@ -70,6 +70,24 @@
       "parentUuid": "254dc508_a7338c94",
       "revId": "afe9ed0e13f9b56819656350e6a46d88e85bf19f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c4cd486_82a1e581",
+        "filename": "include/linux/bpf.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 763,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2021-07-26T13:09:57Z",
+      "side": 1,
+      "message": "I assume you\u0027re referring to:\n\n\u0027struct bpf_jit_poke_descriptor at bpf.h:759:1\u0027 changed:\n  type size changed from 384 to 448 (in bits)\n  1 data member insertion:\n    \u0027void* aux\u0027, at offset 192 (in bits) at bpf.h:763:1\n  there are data member changes:\n    anonymous data member \u0027union {struct {bpf_map* map; u32 key;} tail_call;}\u0027 offset changed from 192 to 256 (in bits) (by +64 bits)\n    4 (\u0027bool tailcall_target_stable\u0027 .. \u0027u32 insn_idx\u0027) offsets changed (by +64 bits)\n  3907 impacted interfaces\n  \n---\n\nTo me, this seems benign... *but* quite honestly I don\u0027t understand how we (can) support not-from-source builds (and I\u0027ve voiced the opinion that we should be getting vendors to provide us with driver module sources so we could simply build them) so I\u0027ll leave it up to you.  I think the revert is probably safe.",
+      "parentUuid": "7ba897cd_81db5e81",
+      "revId": "afe9ed0e13f9b56819656350e6a46d88e85bf19f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
