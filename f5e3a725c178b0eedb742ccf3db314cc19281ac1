@@ -16,6 +16,23 @@
       "message": "let TH run to see if the ABI is broken...",
       "revId": "f5e3a725c178b0eedb742ccf3db314cc19281ac1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f119ff82_d323ff84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-08-06T06:12:56Z",
+      "side": 1,
+      "message": "Almost all builds are failing, and the abi is broken:\n\nLeaf changes summary: 5 artifacts changed\nChanged leaf types summary: 1 leaf type changed\nRemoved/Changed/Added functions summary: 0 Removed, 4 Changed, 0 Added function\nRemoved/Changed/Added variables summary: 0 Removed, 0 Changed, 0 Added variable\n\n4 functions with some sub-type change:\n\n  [C] \u0027function page* cma_alloc(cma*, size_t, unsigned int, gfp_t)\u0027 at cma.c:448:1 has some sub-type changes:\n    CRC (modversions) changed from 0x6e17861c to 0x5014ef98\n  [C] \u0027function int cma_for_each_area(int (cma*, void*)*, void*)\u0027 at cma.c:645:1 has some sub-type changes:\n    CRC (modversions) changed from 0x86d07c22 to 0xf1149f06\n  [C] \u0027function const char* cma_get_name(const cma*)\u0027 at cma.c:59:1 has some sub-type changes:\n    CRC (modversions) changed from 0x507151bb to 0x7b7374dd\n  ... 1 omitted; 4 symbols have only CRC changes\n\u0027struct cma at cma.h:14:1\u0027 changed:\n\n  type size changed from 1856 to 1920 (in bits)\n  1 data member insertion:\n    \u0027bool preallocated_cma\u0027, at offset 1600 (in bits) at cma.h:34:1\n  there are data member changes:\n    \u0027u64 android_oem_data1[4]\u0027 offset changed (by +64 bits)\n  3725 impacted interfaces",
+      "revId": "f5e3a725c178b0eedb742ccf3db314cc19281ac1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
