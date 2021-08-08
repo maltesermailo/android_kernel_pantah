@@ -139,9 +139,14 @@ int scmi_driver_register(struct scmi_driver *driver, struct module *owner,
 {
 	int retval;
 
+<<<<<<< HEAD   (e3866a FROMGIT: powerpc/svm: Don't issue ultracalls if !mem_encrypt)
 	retval = scmi_request_protocol_device(driver->id_table);
 	if (retval)
 		return retval;
+=======
+	if (!driver->probe)
+		return -EINVAL;
+>>>>>>> BRANCH (1cd6e3 Linux 5.10.57)
 
 	driver->driver.bus = &scmi_bus_type;
 	driver->driver.name = driver->name;
