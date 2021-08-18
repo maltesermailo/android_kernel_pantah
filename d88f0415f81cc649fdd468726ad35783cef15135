@@ -52,6 +52,24 @@
       "parentUuid": "649d5246_684cc923",
       "revId": "d88f0415f81cc649fdd468726ad35783cef15135",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16798531_c9122a7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2021-08-18T02:35:21Z",
+      "side": 1,
+      "message": "Hi, we want to recognize worker threads created by \"kgsl-event\", then we can do some optimation with these threads.\n\nkgsl will call alloc_workqueue() with WQ_HIGHPRI, so it\u0027s pool-\u003eattrs-\u003enice is -20, if we change the nice to -19, then in trace_android_vh_create_worker(), we can find these threads with the special pool-\u003eattrs-\u003enice.",
+      "parentUuid": "c7ec462e_d0913eef",
+      "revId": "d88f0415f81cc649fdd468726ad35783cef15135",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
