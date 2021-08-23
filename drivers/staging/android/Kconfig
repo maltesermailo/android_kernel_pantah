@@ -25,6 +25,12 @@ config DEBUG_KINFO
 	   - UTS_RELEASE
 	   - BUILD_INFO(ro.build.fingerprint)
 
+config USERPANIC_CHARDEV
+	bool "User-panic device interface"
+	help
+	  Say Y here to use user-panic device for user space processes to
+	  request a system panic with customized panic message.
+
 endif # if ANDROID
 
 endmenu
