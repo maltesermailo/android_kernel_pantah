@@ -16,6 +16,24 @@
       "message": "What tty driver are you using that is not already in the kernel tree?",
       "revId": "078e3cf8d0e937c8b9eee30e3a94a93faadae1d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2d9695f_f6e40e76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1497372
+      },
+      "writtenOn": "2021-08-25T06:35:10Z",
+      "side": 1,
+      "message": "Hi Greg,\n  Those tty symbols are introduced by imx_rpmsg_tty driver, the driver is used to \"Demostrate the string transmission from A core to the remote M core on the iMX AMP platforms\".\nBut I checked again, this driver is not used on our platform now, it is built as module by default.\nSo in this new patch set, I removed this driver.\nPlease review again.\nThanks",
+      "parentUuid": "bff3ecd8_94b116b0",
+      "revId": "078e3cf8d0e937c8b9eee30e3a94a93faadae1d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
