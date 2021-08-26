@@ -16,6 +16,24 @@
       "message": "These are not symbols a driver should ever use, sorry.  Please fix your code to use the proper in-kernel apis, and not care about user ids at all.",
       "revId": "0811102b9f84137ca9d0c4f158687b05c5d209ec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1857176b_82c0fd15",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1876972
+      },
+      "writtenOn": "2021-08-26T11:09:18Z",
+      "side": 1,
+      "message": "find_user is used to find the user_struct by a specific uid , xiaomi have added some oem data in user_struct , if find_user can not be used ,please tell me how can we get the oem data in the user_struct ? how we used the find_user is as followed：\n\n\nstruct mi_user_struct *get_mi_user_struct(struct user_struct *user,\n\t\t\tint gfp_flag)\n{\n\t.......\n\treturn (struct mi_user_struct *)user-\u003eandroid_oem_data1[1];\n\t.........\n\n}\n\nstruct mi_user_struct *mi_user；\nuser \u003d find_user(uid);\nif (user) {\n\tmi_user \u003d get_mi_user_struct(user, GFP_KERNEL);\n\tif (!mi_user) {\n\t\tfree_uid(user);\n\t\tgoto check_refcount;\n}",
+      "parentUuid": "e40be369_c2008950",
+      "revId": "0811102b9f84137ca9d0c4f158687b05c5d209ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
