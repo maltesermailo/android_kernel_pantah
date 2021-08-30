@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "78e07215_245441c9",
+        "filename": "kernel/trace/trace_events_hist.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2073,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-08-30T23:49:29Z",
+      "side": 1,
+      "message": "We can have the caller set the flags if that\u0027s preferred. I wanted it have the flexibility of a variable so that we can also use the constant in other hist triggers by creating a reference.",
+      "parentUuid": "edbffbf3_970d7b99",
+      "revId": "922be32dffcbb604e0b3097e102615d93c2fafd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e3cf7073_e9214689",
         "filename": "kernel/trace/trace_events_hist.c",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2021-08-27T21:02:39Z",
       "side": 1,
       "message": "Is this really needed?  Wouldn\u0027t parse_var_ref() below find the const variable?",
+      "revId": "922be32dffcbb604e0b3097e102615d93c2fafd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c609b29_918afa9b",
+        "filename": "kernel/trace/trace_events_hist.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2120,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-08-30T23:49:29Z",
+      "side": 1,
+      "message": "The parse_var_ref below finds it var const we are referencing the variable in another hist trigger and creates a var_ref field.\n\ne.g.\necho \u0027hist:keys\u003dcommon_pid:granularity\u003d0x80000\u0027 \u003e\u003e events/kmem/rss_stat\necho \u0027hist:keys\u003dcommon_pid:vals\u003d$granularity\u0027 \u003e\u003e events/kmem/rss_stat\n\nWe use this for the case when referencing a var const that is local to the hist trigger currently being defined and so as to not create an addition var_ref field.",
+      "parentUuid": "e3cf7073_e9214689",
       "revId": "922be32dffcbb604e0b3097e102615d93c2fafd8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
