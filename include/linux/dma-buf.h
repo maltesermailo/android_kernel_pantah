@@ -701,7 +701,13 @@ int dma_buf_end_cpu_access_partial(struct dma_buf *dma_buf,
 
 int dma_buf_mmap(struct dma_buf *, struct vm_area_struct *,
 		 unsigned long);
+<<<<<<< HEAD   (d6c38d Revert "ANDROID: modularize BLK_MQ_VIRTIO")
 int dma_buf_vmap(struct dma_buf *dmabuf, struct dma_buf_map *map);
 void dma_buf_vunmap(struct dma_buf *dmabuf, struct dma_buf_map *map);
+=======
+void *dma_buf_vmap(struct dma_buf *);
+void dma_buf_vunmap(struct dma_buf *, void *vaddr);
+long dma_buf_set_name(struct dma_buf *dmabuf, const char *name);
+>>>>>>> CHANGE (49af2e FROMLIST: dma-buf: support users to change dma_buf.name)
 int dma_buf_get_flags(struct dma_buf *dmabuf, unsigned long *flags);
 #endif /* __DMA_BUF_H__ */
