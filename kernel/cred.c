@@ -285,8 +285,18 @@ struct cred *prepare_creds(void)
 	new->security = NULL;
 #endif
 
+<<<<<<< HEAD   (45cad7 ANDROID: GKI: update the android12-5.10-lts abi .xml file)
 	if (security_prepare_creds(new, old, GFP_KERNEL_ACCOUNT) < 0)
 		goto error;
+=======
+	new->ucounts = get_ucounts(new->ucounts);
+	if (!new->ucounts)
+		goto error;
+
+	if (security_prepare_creds(new, old, GFP_KERNEL_ACCOUNT) < 0)
+		goto error;
+
+>>>>>>> BRANCH (f6dd00 Linux 5.10.62)
 	validate_creds(new);
 	return new;
 
@@ -722,6 +732,13 @@ struct cred *prepare_kernel_cred(struct task_struct *daemon)
 #ifdef CONFIG_SECURITY
 	new->security = NULL;
 #endif
+<<<<<<< HEAD   (45cad7 ANDROID: GKI: update the android12-5.10-lts abi .xml file)
+=======
+	new->ucounts = get_ucounts(new->ucounts);
+	if (!new->ucounts)
+		goto error;
+
+>>>>>>> BRANCH (f6dd00 Linux 5.10.62)
 	if (security_prepare_creds(new, old, GFP_KERNEL_ACCOUNT) < 0)
 		goto error;
 
