@@ -16,6 +16,24 @@
       "message": "I am not sure how _this_ change breaks the ABI, but I assume it is reverted because the other change in the stack is reverted due to ABI issues?",
       "revId": "b6e7497caff1a89883b0d8597d8894548d2d6d93",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c444d2c_002119a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-06T12:51:38Z",
+      "side": 1,
+      "message": "Yes, both are \"together\" and need to be reverted together, only having one causes a performance regression, this is the \"fix\" for that performance regression caused by the previous pipe patch.",
+      "parentUuid": "b643285f_ee1e7f7a",
+      "revId": "b6e7497caff1a89883b0d8597d8894548d2d6d93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
