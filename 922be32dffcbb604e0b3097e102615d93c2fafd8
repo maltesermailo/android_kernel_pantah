@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "60bcf516_7382abb4",
+        "filename": "kernel/trace/trace_events_hist.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2073,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-09-07T22:15:01Z",
+      "side": 1,
+      "message": "Ok that makes sense. It would more convenient to allow the constant in an expression, so then the caller should set HIST_FIELD_FL_VAR, HIST_FIELD_FL_EXPR ...\n Will resend new version addressing this. Thanks Namhyung!",
+      "parentUuid": "55b49c1e_9f4a418c",
+      "revId": "922be32dffcbb604e0b3097e102615d93c2fafd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "74ca6275_e3c57aad",
         "filename": "kernel/trace/trace_events_hist.c",
         "patchSetId": 2
@@ -85,6 +103,24 @@
       "writtenOn": "2021-09-07T20:48:25Z",
       "side": 1,
       "message": "Do we really need this?  Why not simply allow \u0027z \u003d $y - 1234\u0027 as well?",
+      "revId": "922be32dffcbb604e0b3097e102615d93c2fafd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad760127_34553b92",
+        "filename": "kernel/trace/trace_events_hist.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2083,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-09-07T22:15:01Z",
+      "side": 1,
+      "message": "My initial thought was to have variables so the constants can be referenced in other hist triggers. But you are right, no reason why we couldn\u0027t allow both. Will update this to allow using constants without a variable.",
+      "parentUuid": "74ca6275_e3c57aad",
       "revId": "922be32dffcbb604e0b3097e102615d93c2fafd8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -138,6 +174,24 @@
       "side": 1,
       "message": "Not sure it\u0027s necessary though.  It looks like a valid var_ref.\n\nMaybe we can support changing the value of the variable (granularity) at runtime.  Then it\u0027d be better to reference it everytime.",
       "parentUuid": "2c609b29_918afa9b",
+      "revId": "922be32dffcbb604e0b3097e102615d93c2fafd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e6ff7fb_4afc528a",
+        "filename": "kernel/trace/trace_events_hist.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2120,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2021-09-07T22:15:01Z",
+      "side": 1,
+      "message": "I\u0027ll add using a constant directly (without creating a variable), then remove this.",
+      "parentUuid": "71666a87_39e148de",
       "revId": "922be32dffcbb604e0b3097e102615d93c2fafd8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
