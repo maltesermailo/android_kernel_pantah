@@ -203,6 +203,9 @@ void mte_thread_init_user(void)
 
 void mte_thread_switch(struct task_struct *next)
 {
+	if (!system_supports_mte())
+		return;
+
 	mte_update_sctlr_user(next);
 
 	/*
