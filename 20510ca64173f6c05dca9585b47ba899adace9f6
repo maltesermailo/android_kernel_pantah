@@ -50,6 +50,24 @@
       "message": "Do you have other networking related modules in their that you\u0027re loading?\nOther usb drivers, that sort of stuff?",
       "revId": "20510ca64173f6c05dca9585b47ba899adace9f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7f97a52_b96a0c26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2021-09-17T22:35:35Z",
+      "side": 1,
+      "message": "We use CONFIG_USB_NET_AX88179_178A\u003dm as well\n\nI\u0027m guessing the problem is that we were building CONFIG_USB_NET_AX8817X\u003dm and then on bootup when the modprobe failed (due to the option already being built in) the initrd logic fails hard. Its just unfortunate that seems to be before the serial module is loaded, so we don\u0027t get any useful debug output, thus my guess we were hitting a kabi issue (which often has a very similar no-output failure mode).\n\nFix submitted here:\nhttps://android-review.googlesource.com/c/kernel/common/+/1830535",
+      "parentUuid": "9c21bd6d_8dae83b5",
+      "revId": "20510ca64173f6c05dca9585b47ba899adace9f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
