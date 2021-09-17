@@ -16,6 +16,23 @@
       "message": "Just an FYI, this is apparently breaking kabi/symbol list on db845c and we\u0027re no longer booting. \n\nI\u0027m working on updating the kabi files.",
       "revId": "20510ca64173f6c05dca9585b47ba899adace9f6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da012f50_c8810e77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2021-09-17T21:51:46Z",
+      "side": 1,
+      "message": "Ends up the issue was we were setting it as \u003dm and trying to load the module (in early boot from the initrd) when its already present in the kernel results in the board not booting. Unfortunately without earlycon access its very hard to diagnose.\n\nPatch to remove setting it \u003dm in our fragment will be submitted soon.",
+      "revId": "20510ca64173f6c05dca9585b47ba899adace9f6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
