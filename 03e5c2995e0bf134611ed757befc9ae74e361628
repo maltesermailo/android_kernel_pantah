@@ -16,6 +16,24 @@
       "message": "The patch in question fixes the issue but reorders the struct members at the same time. Does the ABI still break if you leave the members in their original order, but make `digest_size` a `u32`?\n\nAlthough the issue was triggered by `keyctl`, this header is included in a few other places so I\u0027m not sure that the issue is really specific to `keyctl`.",
       "revId": "03e5c2995e0bf134611ed757befc9ae74e361628",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4eccdc58_9d0bb677",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2021-09-21T11:20:11Z",
+      "side": 1,
+      "message": "Yes, the abi would still break if the variable type changes size, we can\u0027t do that here 😞",
+      "parentUuid": "f4d1c317_86b39ecf",
+      "revId": "03e5c2995e0bf134611ed757befc9ae74e361628",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
