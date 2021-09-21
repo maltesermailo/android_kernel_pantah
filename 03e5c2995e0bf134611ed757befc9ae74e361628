@@ -34,6 +34,24 @@
       "parentUuid": "f4d1c317_86b39ecf",
       "revId": "03e5c2995e0bf134611ed757befc9ae74e361628",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cf61abf_4ee06820",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2021-09-21T11:52:51Z",
+      "side": 1,
+      "message": "Ah, it looked to me like there might be some padding there for it to grow into, given that it\u0027s sandwiched between two pointer types.\n\nRunning pahole shows that should be the case:\n\n```\n$ pahole -C public_key_signature vmlinux\nstruct public_key_signature {\n\tstruct asymmetric_key_id * auth_ids[2];          /*     0    16 */\n\tu8 *                       s;                    /*    16     8 */\n\tu32                        s_size;               /*    24     4 */\n\n\t/* XXX 4 bytes hole, try to pack */\n\n\tu8 *                       digest;               /*    32     8 */\n\tu8                         digest_size;          /*    40     1 */\n\n\t/* XXX 7 bytes hole, try to pack */\n\n\tconst char  *              pkey_algo;            /*    48     8 */\n\tconst char  *              hash_algo;            /*    56     8 */\n\t/* --- cacheline 1 boundary (64 bytes) --- */\n\tconst char  *              encoding;             /*    64     8 */\n\tconst void  *              data;                 /*    72     8 */\n\tunsigned int               data_size;            /*    80     4 */\n\n\t/* size: 88, cachelines: 2, members: 10 */\n\t/* sum members: 73, holes: 2, sum holes: 11 */\n\t/* padding: 4 */\n\t/* last cacheline: 24 bytes */\n};\n\n```\n\nand with the change:\n\n```\nstruct public_key_signature {\n\tstruct asymmetric_key_id * auth_ids[2];          /*     0    16 */\n\tu8 *                       s;                    /*    16     8 */\n\tu32                        s_size;               /*    24     4 */\n\n\t/* XXX 4 bytes hole, try to pack */\n\n\tu8 *                       digest;               /*    32     8 */\n\tu32                        digest_size;          /*    40     4 */\n\n\t/* XXX 4 bytes hole, try to pack */\n\n\tconst char  *              pkey_algo;            /*    48     8 */\n\tconst char  *              hash_algo;            /*    56     8 */\n\t/* --- cacheline 1 boundary (64 bytes) --- */\n\tconst char  *              encoding;             /*    64     8 */\n\tconst void  *              data;                 /*    72     8 */\n\tunsigned int               data_size;            /*    80     4 */\n\n\t/* size: 88, cachelines: 2, members: 10 */\n\t/* sum members: 76, holes: 2, sum holes: 8 */\n\t/* padding: 4 */\n\t/* last cacheline: 24 bytes */\n};\n\n```",
+      "parentUuid": "4eccdc58_9d0bb677",
+      "revId": "03e5c2995e0bf134611ed757befc9ae74e361628",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
