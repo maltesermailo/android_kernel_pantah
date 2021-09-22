@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0565cf47_73276617",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878293
+      },
+      "writtenOn": "2021-09-22T03:02:34Z",
+      "side": 1,
+      "message": "We made a OEM customed module to do memory reclaim in some situations. The get_nr_swap_pages API is used which requires the nr_swap_pages.\nI noticed that nr_swap_pages was added to the debug_symbols driver. Can we access this symbol by the debug_symbols driver? Will this driver always be enabled?\nhttps://android-review.googlesource.com/c/kernel/common/+/1713588",
+      "parentUuid": "51789af3_b2f78330",
+      "revId": "5c339c74d5be5d3ef1363793914973df130f4e26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "93554347_43fbeeb1",
         "filename": "android/abi_gki_aarch64_vivo",
         "patchSetId": 1
