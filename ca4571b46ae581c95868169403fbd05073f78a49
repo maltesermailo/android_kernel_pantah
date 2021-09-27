@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88588b02_81632619",
+        "filename": "security/selinux/include/classmap.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1363994
+      },
+      "writtenOn": "2021-09-27T14:33:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "282575b6_43450687",
+      "range": {
+        "startLine": 120,
+        "startChar": 35,
+        "endLine": 120,
+        "endChar": 49
+      },
+      "revId": "ca4571b46ae581c95868169403fbd05073f78a49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "539ea483_d9049805",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a789df72_5c3fc43c",
+        "filename": "security/selinux/ss/services.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 1363994
+      },
+      "writtenOn": "2021-09-27T14:33:45Z",
+      "side": 1,
+      "message": "My understanding is that this flags all \"drivers\" that include xperms, which is later read out by avc_has_extended_perms to figure out whether it needs to compute an xperms decision. Given that all netlink xperms are included in driver 0, the presence of those xperms means that driver 0 should be flagged.\n\nAlternatively, I could rewrite this to correspond to the AVTAB_XPERMS_IOCTLFUNCTION case above, where it would read the driver (which will always be 0) from the node-\u003edatum.u.xperms-\u003edriver field. Let me know what you prefer.",
+      "parentUuid": "539ea483_d9049805",
+      "range": {
+        "startLine": 612,
+        "startChar": 26,
+        "endLine": 612,
+        "endChar": 27
+      },
+      "revId": "ca4571b46ae581c95868169403fbd05073f78a49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f2cea54b_a01e19db",
         "filename": "security/selinux/ss/services.c",
         "patchSetId": 3
@@ -60,6 +108,30 @@
       "writtenOn": "2021-09-17T09:58:04Z",
       "side": 1,
       "message": "Can this be its own \"else if\" statement? I know it adds a few more lines, but it seems clearer/cleaner. Here and below.",
+      "range": {
+        "startLine": 968,
+        "startChar": 67,
+        "endLine": 969,
+        "endChar": 54
+      },
+      "revId": "ca4571b46ae581c95868169403fbd05073f78a49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c90ec7e_d69356e6",
+        "filename": "security/selinux/ss/services.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 969,
+      "author": {
+        "id": 1363994
+      },
+      "writtenOn": "2021-09-27T14:33:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2cea54b_a01e19db",
       "range": {
         "startLine": 968,
         "startChar": 67,
