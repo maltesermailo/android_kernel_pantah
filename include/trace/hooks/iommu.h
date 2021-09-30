@@ -12,8 +12,6 @@
 #include <linux/tracepoint.h>
 #include <trace/hooks/vendor_hooks.h>
 
-#if defined(CONFIG_TRACEPOINTS) && defined(CONFIG_ANDROID_VENDOR_HOOKS)
-
 DECLARE_HOOK(android_vh_iommu_setup_dma_ops,
 	TP_PROTO(struct device *dev, u64 dma_base, u64 dma_limit),
 	TP_ARGS(dev, dma_base, dma_limit));
@@ -25,13 +23,15 @@ DECLARE_HOOK(android_vh_iommu_alloc_iova,
 DECLARE_HOOK(android_vh_iommu_free_iova,
 	TP_PROTO(dma_addr_t iova, size_t size),
 	TP_ARGS(iova, size));
-#else
 
+<<<<<<< HEAD   (f7be82 ANDROID: iommu: Add vendor hook for iova allocation and free)
 #define trace_android_vh_iommu_setup_dma_ops(dev, dma_base, dma_limit)
 #define trace_android_vh_iommu_alloc_iova(dev, iova, size)
 #define trace_android_vh_iommu_free_iova(iova, size)
 
 #endif
+=======
+>>>>>>> CHANGE (befb2a ANDROID: iommu: vendor_hook: remove the obsolete code)
 
 #endif /* _TRACE_HOOK_IOMMU_H */
 
