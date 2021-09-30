@@ -16,6 +16,29 @@
       "message": "Thanks Todd!",
       "revId": "4e9c19b39ebb9f54555c370ec78edce9797e7250",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ed27df4_d941cfe1",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5206,
+      "author": {
+        "id": 1104430
+      },
+      "writtenOn": "2021-09-30T22:04:28Z",
+      "side": 1,
+      "message": "This should probably be `get_current_cred()` instead, to get the \"subjective\" (potentially overridden) creds of the current thread. Or `get_cred(filp-\u003ef_cred)`, which should be equivalent.\n\nOtherwise, if a process e.g. opens `/dev/binder` through io_uring\u0027s `IORING_OP_OPENAT`, this will get you the credentials of a kernel thread (UID 0, SELinux context `u:r:kernel:s0`).\n\n(Yes, this is a bit theoretical, since Android AFAIK doesn\u0027t have io_uring. And kernel context probably also isn\u0027t allowed to access binder anyway?)\n\n(I think the current code has the same problem.)",
+      "range": {
+        "startLine": 5206,
+        "startChar": 14,
+        "endLine": 5206,
+        "endChar": 50
+      },
+      "revId": "4e9c19b39ebb9f54555c370ec78edce9797e7250",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
