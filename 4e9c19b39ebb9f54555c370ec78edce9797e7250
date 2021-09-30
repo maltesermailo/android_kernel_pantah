@@ -39,6 +39,30 @@
       },
       "revId": "4e9c19b39ebb9f54555c370ec78edce9797e7250",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03750324_9c7a1e50",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5206,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-09-30T22:28:45Z",
+      "side": 1,
+      "message": "I think I like anchoring proc-\u003ecred to filp-\u003ef_cred instead of current-\u003ecred. I\u0027ll go with that even if it effectively the same thing.\n\n\u003e since Android AFAIK doesn\u0027t have io_uring\n...not yet, but good to avoid possible future issues.",
+      "parentUuid": "8ed27df4_d941cfe1",
+      "range": {
+        "startLine": 5206,
+        "startChar": 14,
+        "endLine": 5206,
+        "endChar": 50
+      },
+      "revId": "4e9c19b39ebb9f54555c370ec78edce9797e7250",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
