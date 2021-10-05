@@ -63,6 +63,24 @@
       "message": "Swapping the end_io_acct() and free_io() calls seems weird to me. I\u0027d prefer to wait for feedback from the dm maintainer before proceeding with this change.",
       "revId": "8298de98708cce5ec462f7fd4c050bb50d131a7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f32d1fbf_5745c749",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1724998
+      },
+      "writtenOn": "2021-10-05T18:06:44Z",
+      "side": 1,
+      "message": "Well, the only downside I see is it may have some minimal accounting issues.\n\nProbably, wake_up(md-\u003ewait) should be moved to free_io() and with that we don\u0027t need to swap end_io_acct() and free_io().",
+      "parentUuid": "cbe5fa4b_ad2c1114",
+      "revId": "8298de98708cce5ec462f7fd4c050bb50d131a7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
