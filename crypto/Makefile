@@ -202,6 +202,19 @@ ifneq ($(CONFIG_CRYPTO_FIPS140_MOD),)
 
 FIPS140_CFLAGS := -D__DISABLE_EXPORTS -DBUILD_FIPS140_KO
 
+#
+# llvm-strip version 13 and older gets confused by RELA ELF section with the
+# SHF_ALLOC flag set in partially linked objects such as Linux kernel modules,
+# and misidentifies them as dynamic relocation sections, leading to problems
+# when it attempts to read the symtab and strtab sections. Since the fips140.ko
+# module relies on such sections for its integrity self-check, we need to avoid
+# stripping the module, which means we should also avoid emitting anything that
+# we will want to strip out later.
+#
+# Fixed by https://reviews.llvm.org/D111181
+#
+FIPS140_CFLAGS += -g0
+
 CFLAGS_jitterentropy-fips.o := -O0
 KASAN_SANITIZE_jitterentropy-fips.o = n
 UBSAN_SANITIZE_jitterentropy-fips.o = n

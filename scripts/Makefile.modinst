@@ -14,12 +14,22 @@ PHONY += $(modules)
 __modinst: $(modules)
 	@:
 
+#
+# llvm-strip version 13 and older chokes on ET_REL binaries containing SHT_RELA
+# sections with the SHF_ALLOC attribute, so we need to avoid calling it for the
+# fips140.ko module, which relies on such sections for its integrity self-check
+#
+# Fixed by https://reviews.llvm.org/D111181
+#
+NO_STRIP := crypto/fips140.ko
+
 # Don't stop modules_install if we can't sign external modules.
 quiet_cmd_modules_install = INSTALL $@
       cmd_modules_install = \
     mkdir -p $(2) ; \
     cp $@ $(2) ; \
-    $(mod_strip_cmd) $(2)/$(notdir $@) ; \
+    if [ -n "$(filter-out $(addprefix %/,$(NO_STRIP)),$(2)/$(notdir $@))" ]; then \
+        $(mod_strip_cmd) $(2)/$(notdir $@) ; fi ; \
     $(mod_sign_cmd) $(2)/$(notdir $@) $(patsubst %,|| true,$(KBUILD_EXTMOD)) ; \
     $(mod_compress_cmd) $(2)/$(notdir $@)
 
