@@ -8,6 +8,7 @@ function update_config() {
          -d TEST_KMOD  \
          -d CPU_BIG_ENDIAN \
          -d DYNAMIC_FTRACE \
+         -d DEBUG_LOCK_ALLOC \
          -e UNWINDER_FRAME_POINTER \
 
     (cd ${OUT_DIR} && \
