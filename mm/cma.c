@@ -24,6 +24,7 @@
 #include <linux/memblock.h>
 #include <linux/err.h>
 #include <linux/mm.h>
+#include <linux/swap.h>
 #include <linux/module.h>
 #include <linux/mutex.h>
 #include <linux/sizes.h>
@@ -466,6 +467,7 @@ struct page *cma_alloc(struct cma *cma, size_t count, unsigned int align,
 	if (bitmap_count > bitmap_maxno)
 		goto out;
 
+	lru_cache_disable();
 	for (;;) {
 		struct acr_info info = {0};
 
@@ -545,6 +547,7 @@ struct page *cma_alloc(struct cma *cma, size_t count, unsigned int align,
 		}
 	}
 
+	lru_cache_enable();
 	trace_cma_alloc_finish(cma->name, pfn, page, count, align);
 	trace_cma_alloc_info(cma->name, page, count, align, &cma_info);
 
