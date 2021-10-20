@@ -3997,6 +3997,8 @@
       <elf-symbol name='v4l_bound_align_image' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf5ef842e'/>
       <elf-symbol name='vb2_buffer_done' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xcdae5db1'/>
       <elf-symbol name='vb2_create_bufs' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x778e1860'/>
+      <elf-symbol name='vb2_dma_contig_clear_max_seg_size' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8a3781ee'/>
+      <elf-symbol name='vb2_dma_contig_set_max_seg_size' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x284a4624'/>
       <elf-symbol name='vb2_dqbuf' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9de6b987'/>
       <elf-symbol name='vb2_expbuf' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc54f7ba'/>
       <elf-symbol name='vb2_fop_mmap' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd1220430'/>
@@ -4343,6 +4345,7 @@
       <elf-symbol name='v4l2_subdev_call_wrappers' size='64' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf7de0457'/>
       <elf-symbol name='v4l2_type_names' size='120' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x123959a1'/>
       <elf-symbol name='vabits_actual' size='8' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc56a41e6'/>
+      <elf-symbol name='vb2_dma_contig_memops' size='120' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf7143f5b'/>
       <elf-symbol name='vm_event_states' size='584' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x95b0105'/>
       <elf-symbol name='vm_node_stat' size='256' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe5c4cf93'/>
       <elf-symbol name='xt_tee_enabled' size='16' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd3fcc511'/>
@@ -127313,6 +127316,16 @@
       <function-decl name='vb2_create_bufs' mangled-name='vb2_create_bufs' filepath='drivers/media/common/videobuf2/videobuf2-v4l2.c' line='699' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='vb2_create_bufs'>
         <parameter type-id='a05f1ecd' name='q' filepath='drivers/media/common/videobuf2/videobuf2-v4l2.c' line='699' column='1'/>
         <parameter type-id='0bb617a4' name='create' filepath='drivers/media/common/videobuf2/videobuf2-v4l2.c' line='699' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='vb2_dma_contig_clear_max_seg_size' mangled-name='vb2_dma_contig_clear_max_seg_size' filepath='drivers/media/common/videobuf2/videobuf2-dma-contig.c' line='756' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='vb2_dma_contig_clear_max_seg_size'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/media/common/videobuf2/videobuf2-dma-contig.c' line='756' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <var-decl name='vb2_dma_contig_memops' type-id='23cb2797' mangled-name='vb2_dma_contig_memops' visibility='default' filepath='drivers/media/common/videobuf2/videobuf2-dma-contig.c' line='691' column='1' elf-symbol-id='vb2_dma_contig_memops'/>
+      <function-decl name='vb2_dma_contig_set_max_seg_size' mangled-name='vb2_dma_contig_set_max_seg_size' filepath='drivers/media/common/videobuf2/videobuf2-dma-contig.c' line='734' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='vb2_dma_contig_set_max_seg_size'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/media/common/videobuf2/videobuf2-dma-contig.c' line='734' column='1'/>
+        <parameter type-id='f0981eeb' name='size' filepath='drivers/media/common/videobuf2/videobuf2-dma-contig.c' line='734' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='vb2_dqbuf' mangled-name='vb2_dqbuf' filepath='drivers/media/common/videobuf2/videobuf2-v4l2.c' line='776' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='vb2_dqbuf'>
