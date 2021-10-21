@@ -20,9 +20,15 @@ DECLARE_HOOK(android_vh_update_topology_flags_workfn,
 	TP_PROTO(void *unused),
 	TP_ARGS(unused));
 
+<<<<<<< HEAD   (b7bcf8 ANDROID: KVM: arm64: Fix error path in pkvm_mem_abort())
 DECLARE_HOOK(android_vh_use_amu_fie,
 	TP_PROTO(bool *use_amu_fie),
 	TP_ARGS(use_amu_fie));
+=======
+DECLARE_RESTRICTED_HOOK(android_rvh_update_thermal_stats,
+	TP_PROTO(int cpu),
+	TP_ARGS(cpu), 1);
+>>>>>>> CHANGE (8c802d ANDROID: arch_topology: Add android_rvh_update_thermal_stats)
 
 #endif /* _TRACE_HOOK_TOPOLOGY_H */
 /* This part must be outside protection */

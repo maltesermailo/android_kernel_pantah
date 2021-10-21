@@ -359,6 +359,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_usb_dev_resume);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_alloc_new_buf_locked);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_reply);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_trans);
+<<<<<<< HEAD   (b7bcf8 ANDROID: KVM: arm64: Fix error path in pkvm_mem_abort())
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpuset_fork);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_uid);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_user);
@@ -371,3 +372,8 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_oem_binder_struct);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_special_task);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_free_buf);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_isolate_freepages);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_preset);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_memcg_scan_type);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_thermal_stats);
+>>>>>>> CHANGE (8c802d ANDROID: arch_topology: Add android_rvh_update_thermal_stats)
