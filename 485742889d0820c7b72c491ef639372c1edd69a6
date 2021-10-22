@@ -16,6 +16,24 @@
       "message": "what about the android19-stable branch as well?",
       "revId": "485742889d0820c7b72c491ef639372c1edd69a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e90d821_0735f921",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1442824
+      },
+      "writtenOn": "2021-10-22T22:14:56Z",
+      "side": 1,
+      "message": "android-4.19-stable looks fine:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-4.19-stable/arch/arm64/include/asm/lse.h#7\n\nLooks like -stable doesn\u0027t have this ANDROID: commit that caused the conflict on -q:\nhttps://android.googlesource.com/kernel/common/+/d31b9814d82223b0d363790b2631b7fbfd4eb3b7%5E%21/\nbecause it was reverted on -stable.",
+      "parentUuid": "eb35c2db_0a211888",
+      "revId": "485742889d0820c7b72c491ef639372c1edd69a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
