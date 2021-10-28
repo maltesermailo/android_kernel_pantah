@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bebd51d_9f114bc1",
+        "filename": "include/linux/cpuset.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1897817
+      },
+      "writtenOn": "2021-10-28T02:04:48Z",
+      "side": 1,
+      "message": "Have same NULL as cpuset_hotplug_workfn function.\nSince the cpuset_update_active_cpus_affine is intended to replace cpuset_hotplug_workfn. When there is no cpuset, it will only needed to run everything on it\u0027s own cpu, no need to have extra work like cpuset_hotplug_workfn to run on the other cpus.",
+      "range": {
+        "startLine": 176,
+        "startChar": 19,
+        "endLine": 176,
+        "endChar": 51
+      },
+      "revId": "c8e2d9c6ca67d6d732ea85b201ecb7e7641e899c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
