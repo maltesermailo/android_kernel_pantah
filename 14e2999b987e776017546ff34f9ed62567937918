@@ -16,6 +16,24 @@
       "message": "Since there is already a dedicated built-in driver to support minidump (debug_symbols), can we use that driver to call this function and return the data (along with the rest of the debug info)? There are 2 benefits:\n1) This patch is not needed\n2) It is obvious how vmalloc_nr_pages is being used (for minidump)\n\nMaybe \"debug_symbols\" should be renamed to \"crash_debug_info\" since it would now go beyond just symbols.",
       "revId": "14e2999b987e776017546ff34f9ed62567937918",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "440ae63b_345ab202",
+        "filename": "mm/vmalloc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 1709452
+      },
+      "writtenOn": "2021-10-29T10:40:18Z",
+      "side": 1,
+      "message": "Sure, Will move this to debug symbol driver to avoid the export.",
+      "parentUuid": "e245b233_7ff7cc51",
+      "revId": "14e2999b987e776017546ff34f9ed62567937918",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
