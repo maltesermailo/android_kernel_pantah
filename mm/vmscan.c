@@ -1141,6 +1141,8 @@ static int __remove_mapping(struct address_space *mapping, struct page *page,
 	BUG_ON(!PageLocked(page));
 	BUG_ON(mapping != page_mapping(page));
 
+	if (!PageSwapCache(page))
+		spin_lock(&mapping->host->i_lock);
 	xa_lock_irq(&mapping->i_pages);
 	/*
 	 * The non racy check for a busy page.
@@ -1211,6 +1213,9 @@ static int __remove_mapping(struct address_space *mapping, struct page *page,
 			shadow = workingset_eviction(page, target_memcg);
 		__delete_from_page_cache(page, shadow);
 		xa_unlock_irq(&mapping->i_pages);
+		if (mapping_shrinkable(mapping))
+			inode_add_lru(mapping->host);
+		spin_unlock(&mapping->host->i_lock);
 
 		if (freepage != NULL)
 			freepage(page);
@@ -1220,6 +1225,8 @@ static int __remove_mapping(struct address_space *mapping, struct page *page,
 
 cannot_free:
 	xa_unlock_irq(&mapping->i_pages);
+	if (!PageSwapCache(page))
+		spin_unlock(&mapping->host->i_lock);
 	return 0;
 }
 
