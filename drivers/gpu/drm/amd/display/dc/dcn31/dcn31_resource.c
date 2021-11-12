@@ -998,7 +998,11 @@ static const struct dc_debug_options debug_defaults_drv = {
 	.disable_dcc = DCC_ENABLE,
 	.vsr_support = true,
 	.performance_trace = false,
+<<<<<<< HEAD   (bb460c Merge 407baae3e6f3 ("Merge tag 'du-next-20211007' of git://l)
 	.max_downscale_src_width = 4096,/*upto true 4K*/
+=======
+	.max_downscale_src_width = 3840,/*upto 4K*/
+>>>>>>> BRANCH (b1f816 Merge tag 'amd-drm-next-5.16-2021-10-08' of https://gitlab.f)
 	.disable_pplib_wm_range = false,
 	.scl_reset_length10 = true,
 	.sanity_checks = false,
@@ -1013,7 +1017,7 @@ static const struct dc_debug_options debug_defaults_drv = {
 			.i2c = true,
 			.dmcu = false, // This is previously known to cause hang on S3 cycles if enabled
 			.dscl = true,
-			.cm = false, // visible flicker on OLED eDPs
+			.cm = true,
 			.mpc = true,
 			.optc = true,
 			.vpg = true,
@@ -2438,6 +2442,13 @@ static bool dcn31_resource_construct(
 			goto create_fail;
 		}
 		pool->base.sw_i2cs[i] = NULL;
+	}
+
+	if (dc->ctx->asic_id.chip_family == FAMILY_YELLOW_CARP &&
+	    dc->ctx->asic_id.hw_internal_rev == YELLOW_CARP_B0 &&
+	    !dc->debug.dpia_debug.bits.disable_dpia) {
+		/* YELLOW CARP B0 has 4 DPIA's */
+		pool->base.usb4_dpia_count = 4;
 	}
 
 	/* Audio, Stream Encoders including HPO and virtual, MPC 3D LUTs */
