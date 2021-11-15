@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e153335_59c2b77c",
+        "filename": "drivers/gpu/drm/virtio/virtgpu_drv.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1101621
+      },
+      "writtenOn": "2021-11-15T17:12:28Z",
+      "side": 0,
+      "message": "Not sure about your setup:\n\nCan you try checking if (vfpriv \u0026\u0026 !vfpriv-\u003ering_idx_mask)??",
+      "range": {
+        "startLine": 169,
+        "startChar": 5,
+        "endLine": 169,
+        "endChar": 27
+      },
+      "revId": "172272a5e910caa12d49deb7e08cb87e63c4e198",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed1ec7e9_699a7de0",
+        "filename": "drivers/gpu/drm/virtio/virtgpu_drv.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1101621
+      },
+      "writtenOn": "2021-11-15T17:12:28Z",
+      "side": 0,
+      "message": "if you have a moment, can you try:\n\nif (!vfpriv)\n   return drm_poll(flip, wait)",
+      "range": {
+        "startLine": 169,
+        "startChar": 5,
+        "endLine": 169,
+        "endChar": 27
+      },
+      "revId": "172272a5e910caa12d49deb7e08cb87e63c4e198",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
