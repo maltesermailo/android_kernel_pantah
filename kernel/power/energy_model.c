@@ -284,7 +284,6 @@ int em_dev_register_perf_domain(struct device *dev, unsigned int nr_states,
 				struct em_data_callback *cb, cpumask_t *cpus,
 				bool milliwatts)
 {
-	unsigned long cap, prev_cap = 0;
 	int cpu, ret;
 
 	if (!dev || !nr_states || !cb)
@@ -314,20 +313,6 @@ int em_dev_register_perf_domain(struct device *dev, unsigned int nr_states,
 				ret = -EEXIST;
 				goto unlock;
 			}
-			/*
-			 * All CPUs of a domain must have the same
-			 * micro-architecture since they all share the same
-			 * table.
-			 */
-			cap = arch_scale_cpu_capacity(cpu);
-			if (prev_cap && prev_cap != cap) {
-				dev_err(dev, "EM: CPUs of %*pbl must have the same capacity\n",
-					cpumask_pr_args(cpus));
-
-				ret = -EINVAL;
-				goto unlock;
-			}
-			prev_cap = cap;
 		}
 	}
 
