@@ -81,7 +81,11 @@ static void dma_buf_release(struct dentry *dentry)
 	if (dmabuf->resv == (struct dma_resv *)&dmabuf[1])
 		dma_resv_fini(dmabuf->resv);
 
+<<<<<<< HEAD   (25b722 Merge 5.4.159 into android12-5.4-lts)
 	dma_buf_stats_teardown(dmabuf);
+=======
+	WARN_ON(!list_empty(&dmabuf->attachments));
+>>>>>>> BRANCH (17efa1 Linux 5.4.160)
 	module_put(dmabuf->owner);
 	kfree(dmabuf->name);
 	kfree(dmabuf);
