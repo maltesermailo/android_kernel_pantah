@@ -921,6 +921,10 @@
 #define USB_DEVICE_ID_NINTENDO_JOYCONL	0x2006
 #define USB_DEVICE_ID_NINTENDO_JOYCONR	0x2007
 #define USB_DEVICE_ID_NINTENDO_PROCON	0x2009
+<<<<<<< HEAD   (0526d8 ANDROID: GKI: fix up gki_defconfig to keep CONFIG_HID_PLAYST)
+=======
+#define USB_DEVICE_ID_NINTENDO_CHRGGRIP	0x200E
+>>>>>>> BRANCH (0cc82d Merge branch 'for-5.16/nintendo' into for-linus)
 
 #define USB_VENDOR_ID_NOVATEK		0x0603
 #define USB_DEVICE_ID_NOVATEK_PCT	0x0600
