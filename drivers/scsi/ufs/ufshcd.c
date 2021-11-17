@@ -9620,6 +9620,13 @@ int ufshcd_init(struct ufs_hba *hba, void __iomem *mmio_base, unsigned int irq)
 	 */
 	mb();
 
+	/*
+	 * dev_set_drvdata() must be called before
+	 * async_schedule(ufshcd_async_scan, hba) since the callbacks registered
+	 * with the devfreq framework use dev_get_drvdata().
+	 */
+	dev_set_drvdata(dev, hba);
+
 	/* IRQ registration */
 	err = devm_request_irq(dev, irq, ufshcd_intr, IRQF_SHARED, UFSHCD, hba);
 	if (err) {
