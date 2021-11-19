@@ -34,6 +34,24 @@
       "parentUuid": "f867e470_4e6222b0",
       "revId": "2cce9291d67fa1bc56ebe72ace4ead9de19fdf78",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "974e99ec_0d14b07a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1427094
+      },
+      "writtenOn": "2021-11-19T02:56:04Z",
+      "side": 1,
+      "message": "Thanks, here is more informations.\nFor P22 project, Lassen want to use PCIe IOMMU to replace the DIT (Direct Internet packet Transfer) in CPIF(Mobile CP Interface) driver.\n\nThe following patch can enable IOMMU but needs to update ABI symbol list first.\n\nEnable IOMMU: https://partner-android-review.googlesource.com/c/kernel/private/gs-google/+/2057370\n\nFunction will be used by:\npage_frag_alloc: https://partner-android.googlesource.com/kernel/private/gs-google/+/refs/heads/android13-gs-pixel-5.10/drivers/soc/google/cpif/link_device_pcie_iommu.c#120\n\n__page_frag_cache_drain: https://partner-android.googlesource.com/kernel/private/gs-google/+/refs/heads/android13-gs-pixel-5.10/drivers/soc/google/cpif/link_device_pcie_iommu.c#176\n\npage_frag_free: https://partner-android.googlesource.com/kernel/private/gs-google/+/refs/heads/android13-gs-pixel-5.10/drivers/soc/google/cpif/link_device_pcie_iommu.c#97\n\ncsum_partial: https://partner-android-review.googlesource.com/c/kernel/private/gs-google/+/2096030/2/drivers/soc/google/cpif/link_rx_pktproc.c#586",
+      "parentUuid": "56d72f3c_59b50488",
+      "revId": "2cce9291d67fa1bc56ebe72ace4ead9de19fdf78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
