@@ -37,7 +37,7 @@ static void dcc_early_write(struct console *con, const char *s, unsigned n)
 {
 	struct earlycon_device *dev = con->data;
 
-	uart_console_write(&dev->port, s, n, dcc_uart_console_putchar);
+	//uart_console_write(&dev->port, s, n, dcc_uart_console_putchar);
 }
 
 static int __init dcc_early_console_setup(struct earlycon_device *device,
