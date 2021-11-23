@@ -276,8 +276,8 @@ __msm_geni_serial_console_write(struct uart_port *uport, const char *s,
 					avail_fifo_bytes);
 		if ((chars_to_write << 1) > avail_fifo_bytes)
 			chars_to_write = (avail_fifo_bytes >> 1);
-		uart_console_write(uport, (s + i), chars_to_write,
-					msm_geni_serial_wr_char);
+		//uart_console_write(uport, (s + i), chars_to_write,
+		//			msm_geni_serial_wr_char);
 		writel_relaxed(M_TX_FIFO_WATERMARK_EN,
 				uport->membase + SE_GENI_M_IRQ_CLEAR);
 		i += chars_to_write;

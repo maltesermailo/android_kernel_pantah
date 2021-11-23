@@ -96,8 +96,8 @@ static int __init parse_options(struct earlycon_device *device, char *options)
 	int length;
 	resource_size_t addr;
 
-	if (uart_parse_earlycon(options, &port->iotype, &addr, &options))
-		return -EINVAL;
+	//if (uart_parse_earlycon(options, &port->iotype, &addr, &options))
+	//	return -EINVAL;
 
 	switch (port->iotype) {
 	case UPIO_MEM:

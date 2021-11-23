@@ -33,7 +33,7 @@ static void dcc_uart_console_putchar(struct uart_port *port, int ch)
 	__dcc_putchar(ch);
 }
 
-static void dcc_early_write(struct console *con, const char *s, unsigned n)
+static void __init dcc_early_write(struct console *con, const char *s, unsigned n)
 {
 	struct earlycon_device *dev = con->data;
 
