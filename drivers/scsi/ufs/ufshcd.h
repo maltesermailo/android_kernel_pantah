@@ -843,12 +843,16 @@ struct ufs_hba {
 
 	struct blk_mq_tag_set tmf_tag_set;
 	struct request_queue *tmf_queue;
+<<<<<<< HEAD   (4b6443 ANDROID: GKI: disable CONFIG_FORTIFY_SOURCE)
 #if 0
 	/*
 	 * This has been moved into struct ufs_hba_add_info because of the GKI.
 	 */
 	struct request **tmf_rqs;
 #endif
+=======
+	struct request **tmf_rqs;
+>>>>>>> BRANCH (d5259a Linux 5.10.82)
 
 	struct uic_command *active_uic_cmd;
 	struct mutex uic_cmd_mutex;
