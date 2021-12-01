@@ -476,6 +476,7 @@ EXPORT_SYMBOL(kernel_read);
 ssize_t vfs_read(struct file *file, char __user *buf, size_t count, loff_t *pos)
 {
 	ssize_t ret;
+	bool debug = !strcmp(file->f_path.dentry->d_name.name, "real");
 
 	if (!(file->f_mode & FMODE_READ))
 		return -EBADF;
