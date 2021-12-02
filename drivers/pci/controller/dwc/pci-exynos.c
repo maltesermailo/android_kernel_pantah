@@ -19,9 +19,14 @@
 #include <linux/pci.h>
 #include <linux/platform_device.h>
 #include <linux/phy/phy.h>
+<<<<<<< HEAD
 #include <linux/resource.h>
 #include <linux/signal.h>
 #include <linux/types.h>
+=======
+#include <linux/regulator/consumer.h>
+#include <linux/module.h>
+>>>>>>> 8581fd402a0c... treewide: Add missing includes masked by cgroup -> bpf dependency
 
 #include "pcie-designware.h"
 

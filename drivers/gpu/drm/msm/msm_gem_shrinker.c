@@ -4,6 +4,12 @@
  * Author: Rob Clark <robdclark@gmail.com>
  */
 
+<<<<<<< HEAD
+=======
+#include <linux/vmalloc.h>
+#include <linux/sched/mm.h>
+
+>>>>>>> 8581fd402a0c... treewide: Add missing includes masked by cgroup -> bpf dependency
 #include "msm_drv.h"
 #include "msm_gem.h"
 #include "msm_gpu_trace.h"
