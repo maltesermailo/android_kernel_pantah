@@ -150,6 +150,14 @@ module_param_call(stop_on_user_error, binder_set_stop_on_user_error,
 			binder_stop_on_user_error = 2; \
 	} while (0)
 
+#define binder_set_extended_error(thread, errno, strerr...)		\
+	do {								\
+		thread->extended_error.ee_errno = errno;		\
+		snprintf(thread->extended_error.ee_strerr,		\
+			 sizeof(thread->extended_error.ee_strerr),	\
+			 #errno ": " strerr);				\
+	} while (0)
+
 #define to_flat_binder_object(hdr) \
 	container_of(hdr, struct flat_binder_object, hdr)
 
@@ -2873,6 +2881,10 @@ static void binder_transaction(struct binder_proc *proc,
 		security_cred_getsecid(proc->cred, &secid);
 		ret = security_secid_to_secctx(secid, &secctx, &secctx_sz);
 		if (ret) {
+			if (ret == -ENOMEM)
+				binder_set_extended_error(thread,
+						BINDER_EE_RETRY,
+						"security_secid_to_secctx() allocation failed");
 			return_error = BR_FAILED_REPLY;
 			return_error_param = ret;
 			return_error_line = __LINE__;
@@ -3234,6 +3246,7 @@ static void binder_transaction(struct binder_proc *proc,
 	if (target_thread)
 		binder_thread_dec_tmpref(target_thread);
 	binder_proc_dec_tmpref(target_proc);
+	binder_set_extended_error(thread, BINDER_EE_OK, "Success");
 	if (target_node)
 		binder_dec_node_tmpref(target_node);
 	/*
@@ -4898,6 +4911,17 @@ static int binder_ioctl_get_freezer_info(
 	return 0;
 }
 
+static int binder_ioctl_get_extended_error(struct binder_thread *thread,
+				void __user *ubuf)
+{
+	struct binder_extended_error *ee = &thread->extended_error;
+
+	if (copy_to_user(ubuf, ee, sizeof(*ee)))
+		return -EFAULT;
+
+	return 0;
+}
+
 static long binder_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 {
 	int ret;
@@ -5106,6 +5130,11 @@ static long binder_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		binder_inner_proc_unlock(proc);
 		break;
 	}
+	case BINDER_GET_EXTENDED_ERROR:
+		ret = binder_ioctl_get_extended_error(thread, ubuf);
+		if (ret < 0)
+			goto err;
+		break;
 	default:
 		ret = -EINVAL;
 		goto err;
