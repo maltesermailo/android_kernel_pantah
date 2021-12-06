@@ -4899,6 +4899,19 @@ static int binder_ioctl_get_freezer_info(
 	return 0;
 }
 
+static int binder_ioctl_get_error_info(struct binder_thread *thread,
+				void __user *ubuf)
+{
+	struct binder_error_info error;
+
+	error.errno = thread->errno;
+	strscpy(error.strerr, thread->strerr, sizeof(error.strerr));
+	if (copy_to_user(ubuf, &error, sizeof(error)))
+		return -EFAULT;
+
+	return 0;
+}
+
 static long binder_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 {
 	int ret;
@@ -5107,6 +5120,11 @@ static long binder_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		binder_inner_proc_unlock(proc);
 		break;
 	}
+	case BINDER_GET_ERROR_INFO:
+		ret = binder_ioctl_get_error_info(thread, ubuf);
+		if (ret < 0)
+			goto err;
+		break;
 	default:
 		ret = -EINVAL;
 		goto err;
