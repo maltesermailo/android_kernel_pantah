@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff047022_bda48f20",
+        "filename": "drivers/thermal/gov_power_allocator.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2021-12-06T17:20:45Z",
+      "side": 1,
+      "message": "This duplicates the code below at line 632. How about this instead?\n```\nif (enable)\n  ret \u003d tz-\u003eops-\u003eget_trip_temp(tz, params-\u003etrip_switch_on,\n\t\t\t       \u0026switch_on_temp);\n\nif (!enable || (!ret \u0026\u0026 (tz-\u003etemperature \u003c switch_on_temp))) {\n  ...\n}\n```",
+      "revId": "09b302d3dfa963a543d020f5e77a8d5c034d1515",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
