@@ -569,6 +569,7 @@ MODULE_DEVICE_TABLE(pci, ufshcd_pci_tbl);
 static struct pci_driver ufshcd_pci_driver = {
 	.name = UFSHCD,
 	.id_table = ufshcd_pci_tbl,
+	.groups = ufshcd_dev_attr_groups,
 	.probe = ufshcd_pci_probe,
 	.remove = ufshcd_pci_remove,
 	.shutdown = ufshcd_pci_shutdown,

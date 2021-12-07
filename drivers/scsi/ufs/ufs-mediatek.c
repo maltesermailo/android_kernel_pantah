@@ -1234,6 +1234,7 @@ static const struct dev_pm_ops ufs_mtk_pm_ops = {
 };
 
 static struct platform_driver ufs_mtk_pltform = {
+	.dev_groups = ufshcd_dev_attr_groups,
 	.probe      = ufs_mtk_probe,
 	.remove     = ufs_mtk_remove,
 	.shutdown   = ufshcd_pltfrm_shutdown,

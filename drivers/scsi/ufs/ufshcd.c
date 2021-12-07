@@ -1538,7 +1538,7 @@ static void ufshcd_resume_clkscaling(struct ufs_hba *hba)
 		devfreq_resume_device(hba->devfreq);
 }
 
-static ssize_t ufshcd_clkscale_enable_show(struct device *dev,
+static ssize_t clkscale_enable_show(struct device *dev,
 		struct device_attribute *attr, char *buf)
 {
 	struct ufs_hba *hba = dev_get_drvdata(dev);
@@ -1546,7 +1546,7 @@ static ssize_t ufshcd_clkscale_enable_show(struct device *dev,
 	return sysfs_emit(buf, "%d\n", hba->clk_scaling.is_enabled);
 }
 
-static ssize_t ufshcd_clkscale_enable_store(struct device *dev,
+static ssize_t clkscale_enable_store(struct device *dev,
 		struct device_attribute *attr, const char *buf, size_t count)
 {
 	struct ufs_hba *hba = dev_get_drvdata(dev);
@@ -1588,23 +1588,6 @@ out:
 	return err ? err : count;
 }
 
-static void ufshcd_init_clk_scaling_sysfs(struct ufs_hba *hba)
-{
-	hba->clk_scaling.enable_attr.show = ufshcd_clkscale_enable_show;
-	hba->clk_scaling.enable_attr.store = ufshcd_clkscale_enable_store;
-	sysfs_attr_init(&hba->clk_scaling.enable_attr.attr);
-	hba->clk_scaling.enable_attr.attr.name = "clkscale_enable";
-	hba->clk_scaling.enable_attr.attr.mode = 0644;
-	if (device_create_file(hba->dev, &hba->clk_scaling.enable_attr))
-		dev_err(hba->dev, "Failed to create sysfs for clkscale_enable\n");
-}
-
-static void ufshcd_remove_clk_scaling_sysfs(struct ufs_hba *hba)
-{
-	if (hba->clk_scaling.enable_attr.attr.name)
-		device_remove_file(hba->dev, &hba->clk_scaling.enable_attr);
-}
-
 static void ufshcd_init_clk_scaling(struct ufs_hba *hba)
 {
 	char wq_name[sizeof("ufs_clkscaling_00")];
@@ -1632,7 +1615,6 @@ static void ufshcd_exit_clk_scaling(struct ufs_hba *hba)
 	if (!hba->clk_scaling.is_initialized)
 		return;
 
-	ufshcd_remove_clk_scaling_sysfs(hba);
 	destroy_workqueue(hba->clk_scaling.workq);
 	ufshcd_devfreq_remove(hba);
 	hba->clk_scaling.is_initialized = false;
@@ -1872,7 +1854,7 @@ void ufshcd_release(struct ufs_hba *hba)
 }
 EXPORT_SYMBOL_GPL(ufshcd_release);
 
-static ssize_t ufshcd_clkgate_delay_show(struct device *dev,
+static ssize_t clkgate_delay_ms_show(struct device *dev,
 		struct device_attribute *attr, char *buf)
 {
 	struct ufs_hba *hba = dev_get_drvdata(dev);
@@ -1880,7 +1862,7 @@ static ssize_t ufshcd_clkgate_delay_show(struct device *dev,
 	return sysfs_emit(buf, "%lu\n", hba->clk_gating.delay_ms);
 }
 
-static ssize_t ufshcd_clkgate_delay_store(struct device *dev,
+static ssize_t clkgate_delay_ms_store(struct device *dev,
 		struct device_attribute *attr, const char *buf, size_t count)
 {
 	struct ufs_hba *hba = dev_get_drvdata(dev);
@@ -1895,7 +1877,7 @@ static ssize_t ufshcd_clkgate_delay_store(struct device *dev,
 	return count;
 }
 
-static ssize_t ufshcd_clkgate_enable_show(struct device *dev,
+static ssize_t clkgate_enable_show(struct device *dev,
 		struct device_attribute *attr, char *buf)
 {
 	struct ufs_hba *hba = dev_get_drvdata(dev);
@@ -1903,7 +1885,7 @@ static ssize_t ufshcd_clkgate_enable_show(struct device *dev,
 	return sysfs_emit(buf, "%d\n", hba->clk_gating.is_enabled);
 }
 
-static ssize_t ufshcd_clkgate_enable_store(struct device *dev,
+static ssize_t clkgate_enable_store(struct device *dev,
 		struct device_attribute *attr, const char *buf, size_t count)
 {
 	struct ufs_hba *hba = dev_get_drvdata(dev);
@@ -1930,32 +1912,45 @@ out:
 	return count;
 }
 
-static void ufshcd_init_clk_gating_sysfs(struct ufs_hba *hba)
-{
-	hba->clk_gating.delay_attr.show = ufshcd_clkgate_delay_show;
-	hba->clk_gating.delay_attr.store = ufshcd_clkgate_delay_store;
-	sysfs_attr_init(&hba->clk_gating.delay_attr.attr);
-	hba->clk_gating.delay_attr.attr.name = "clkgate_delay_ms";
-	hba->clk_gating.delay_attr.attr.mode = 0644;
-	if (device_create_file(hba->dev, &hba->clk_gating.delay_attr))
-		dev_err(hba->dev, "Failed to create sysfs for clkgate_delay\n");
+DEVICE_ATTR_RW(clkscale_enable);
+DEVICE_ATTR_RW(clkgate_delay_ms);
+DEVICE_ATTR_RW(clkgate_enable);
 
-	hba->clk_gating.enable_attr.show = ufshcd_clkgate_enable_show;
-	hba->clk_gating.enable_attr.store = ufshcd_clkgate_enable_store;
-	sysfs_attr_init(&hba->clk_gating.enable_attr.attr);
-	hba->clk_gating.enable_attr.attr.name = "clkgate_enable";
-	hba->clk_gating.enable_attr.attr.mode = 0644;
-	if (device_create_file(hba->dev, &hba->clk_gating.enable_attr))
-		dev_err(hba->dev, "Failed to create sysfs for clkgate_enable\n");
+struct attribute *ufshcd_dev_attrs[] = {
+	&dev_attr_clkscale_enable.attr,
+	&dev_attr_clkgate_delay_ms.attr,
+	&dev_attr_clkgate_enable.attr,
+	NULL
+};
+
+static umode_t ufschd_dev_attr_is_visible(struct kobject *kobj,
+					  struct attribute *attr, int i)
+{
+	struct device *dev = container_of(kobj, struct device, kobj);
+	struct ufs_hba *hba = dev_get_drvdata(dev);
+	bool visible = false;
+
+	if (attr == &dev_attr_clkscale_enable.attr)
+		visible = hba->clk_scaling.is_initialized;
+	else if (attr == &dev_attr_clkgate_delay_ms.attr ||
+		 attr == &dev_attr_clkgate_enable.attr)
+		visible = hba->clk_gating.is_initialized;
+	else
+		WARN_ON_ONCE(true);
+
+	return visible ? attr->mode : 0;
 }
 
-static void ufshcd_remove_clk_gating_sysfs(struct ufs_hba *hba)
-{
-	if (hba->clk_gating.delay_attr.attr.name)
-		device_remove_file(hba->dev, &hba->clk_gating.delay_attr);
-	if (hba->clk_gating.enable_attr.attr.name)
-		device_remove_file(hba->dev, &hba->clk_gating.enable_attr);
-}
+static const struct attribute_group ufshcd_dev_attr_group = {
+	.attrs = ufshcd_dev_attrs,
+	.is_visible = ufschd_dev_attr_is_visible,
+};
+
+const struct attribute_group *ufshcd_dev_attr_groups[] = {
+	&ufshcd_dev_attr_group,
+	NULL
+};
+EXPORT_SYMBOL_GPL(ufshcd_dev_attr_groups);
 
 static void ufshcd_init_clk_gating(struct ufs_hba *hba)
 {
@@ -1975,8 +1970,6 @@ static void ufshcd_init_clk_gating(struct ufs_hba *hba)
 	hba->clk_gating.clk_gating_workq = alloc_ordered_workqueue(wq_name,
 					WQ_MEM_RECLAIM | WQ_HIGHPRI);
 
-	ufshcd_init_clk_gating_sysfs(hba);
-
 	hba->clk_gating.is_enabled = true;
 	hba->clk_gating.is_initialized = true;
 }
@@ -1985,8 +1978,6 @@ static void ufshcd_exit_clk_gating(struct ufs_hba *hba)
 {
 	if (!hba->clk_gating.is_initialized)
 		return;
-
-	ufshcd_remove_clk_gating_sysfs(hba);
 
 	/* Ungate the clock if necessary. */
 	ufshcd_hold(hba, false);
@@ -8073,7 +8064,6 @@ static int ufshcd_add_lus(struct ufs_hba *hba)
 			goto out;
 
 		hba->clk_scaling.is_enabled = true;
-		ufshcd_init_clk_scaling_sysfs(hba);
 	}
 
 	ufs_bsg_probe(hba);

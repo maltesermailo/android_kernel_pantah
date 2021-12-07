@@ -332,6 +332,7 @@ static struct platform_driver cdns_ufs_pltfrm_driver = {
 		.name   = "cdns-ufshcd",
 		.pm     = &cdns_ufs_dev_pm_ops,
 		.of_match_table = cdns_ufs_of_match,
+		.dev_groups = ufshcd_dev_attr_groups,
 	},
 };
 

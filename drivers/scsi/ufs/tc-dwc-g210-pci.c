@@ -134,6 +134,7 @@ MODULE_DEVICE_TABLE(pci, tc_dwc_g210_pci_tbl);
 static struct pci_driver tc_dwc_g210_pci_driver = {
 	.name = "tc-dwc-g210-pci",
 	.id_table = tc_dwc_g210_pci_tbl,
+	.dev_groups = ufshcd_dev_attr_groups,
 	.probe = tc_dwc_g210_pci_probe,
 	.remove = tc_dwc_g210_pci_remove,
 	.shutdown = tc_dwc_g210_pci_shutdown,

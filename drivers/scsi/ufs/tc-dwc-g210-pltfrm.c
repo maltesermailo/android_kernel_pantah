@@ -96,6 +96,7 @@ static struct platform_driver tc_dwc_g210_pltfm_driver = {
 		.name	= "tc-dwc-g210-pltfm",
 		.pm	= &tc_dwc_g210_pltfm_pm_ops,
 		.of_match_table	= of_match_ptr(tc_dwc_g210_pltfm_match),
+		.dev_groups = ufshcd_dev_attr_groups,
 	},
 };
 

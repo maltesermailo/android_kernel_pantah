@@ -1612,6 +1612,7 @@ static const struct dev_pm_ops exynos_ufs_pm_ops = {
 };
 
 static struct platform_driver exynos_ufs_pltform = {
+	.dev_groups = ufshcd_dev_attr_groups,
 	.probe	= exynos_ufs_probe,
 	.remove	= exynos_ufs_remove,
 	.shutdown = ufshcd_pltfrm_shutdown,

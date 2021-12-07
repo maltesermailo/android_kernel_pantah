@@ -596,6 +596,7 @@ static struct platform_driver ufs_hisi_pltform = {
 		.name	= "ufshcd-hisi",
 		.pm	= &ufs_hisi_pm_ops,
 		.of_match_table = of_match_ptr(ufs_hisi_of_match),
+		.groups = ufshcd_dev_attr_groups,
 	},
 };
 module_platform_driver(ufs_hisi_pltform);
