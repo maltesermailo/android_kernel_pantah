@@ -808,8 +808,13 @@ stackp-flags-$(CONFIG_STACKPROTECTOR_STRONG)      := -fstack-protector-strong
 
 KBUILD_CFLAGS += $(stackp-flags-y)
 
+<<<<<<< HEAD   (3d4555 Merge f80ef9e49fdf ("Merge tag 'docs-5.16-3' of git://git.lw)
 KBUILD_CFLAGS += $(KBUILD_CFLAGS-y)
 KBUILD_CFLAGS += $(KBUILD_CFLAGS-y) $(CONFIG_CC_IMPLICIT_FALLTHROUGH)
+=======
+KBUILD_CFLAGS-$(CONFIG_WERROR) += -Werror
+KBUILD_CFLAGS += $(KBUILD_CFLAGS-y) $(CONFIG_CC_IMPLICIT_FALLTHROUGH:"%"=%)
+>>>>>>> BRANCH (cd8c91 Makefile: Do not quote value for CONFIG_CC_IMPLICIT_FALLTHRO)
 
 ifdef CONFIG_CC_IS_CLANG
 KBUILD_CPPFLAGS += -Qunused-arguments
