@@ -4155,14 +4155,16 @@ static void run_state_machine(struct tcpm_port *port)
 				       tcpm_try_src(port) ? SRC_TRY
 							  : SNK_ATTACHED,
 				       0);
+<<<<<<< HEAD   (6e6898 ANDROID: GKI: update abi_gki_aarch64.xml due to bpf changes )
 			port->debouncing = false;
 		} else {
 			/* Wait for VBUS, but not forever */
 			tcpm_set_state(port, PORT_RESET, PD_T_PS_SOURCE_ON);
 			port->debouncing = false;
 		}
+=======
+>>>>>>> BRANCH (a0582e Linux 5.10.84)
 		break;
-
 	case SRC_TRY:
 		port->try_src_count++;
 		tcpm_set_cc(port, tcpm_rp_cc(port));
