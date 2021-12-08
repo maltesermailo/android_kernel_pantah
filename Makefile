@@ -808,8 +808,13 @@ stackp-flags-$(CONFIG_STACKPROTECTOR_STRONG)      := -fstack-protector-strong
 
 KBUILD_CFLAGS += $(stackp-flags-y)
 
+<<<<<<< HEAD   (6e7a51 UPSTREAM: slab: add __alloc_size attributes for better bound)
 KBUILD_CFLAGS += $(KBUILD_CFLAGS-y)
 KBUILD_CFLAGS += $(KBUILD_CFLAGS-y) $(CONFIG_CC_IMPLICIT_FALLTHROUGH)
+=======
+KBUILD_CFLAGS-$(CONFIG_WERROR) += -Werror
+KBUILD_CFLAGS += $(KBUILD_CFLAGS-y) $(CONFIG_CC_IMPLICIT_FALLTHROUGH:"%"=%)
+>>>>>>> BRANCH (cd8c91 Makefile: Do not quote value for CONFIG_CC_IMPLICIT_FALLTHRO)
 
 ifdef CONFIG_CC_IS_CLANG
 KBUILD_CPPFLAGS += -Qunused-arguments
