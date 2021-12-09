@@ -401,3 +401,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_css_online);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_free);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_alloc);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_no_iommu_config);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_subpage_dma_contig_alloc);
