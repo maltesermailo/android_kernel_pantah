@@ -16,6 +16,24 @@
       "message": "size needs to be rounded up to PAGE_SIZE, since cma_alloc_align left-shifts by PAGE_SIZE (the only client we have identified so far uses a 4 Kb allocation size so I missed this in testing.).",
       "revId": "889e813006e9dfc65842ab1828e084912ea3c9f8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee41f42c_0ea1c15f",
+        "filename": "kernel/dma/contiguous.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2021-12-10T20:25:27Z",
+      "side": 1,
+      "message": "In that case you probably want to pass size to the tracehook to be modified?\nAlso, you probably want to call the tracehook only if (size \u003c\u003d PAGE_SIZE), so smth like this:\n\nif (size \u003c\u003d PAGE_SIZE) {\n    bool allow_subpage_alloc \u003d false;\n\n    trace_android_vh_subpage_dma_contig_alloc(\u0026allow_subpage_alloc, \u0026size, dev);\n    if (!allow_subpage_alloc)\n        return NULL;\n}",
+      "parentUuid": "baddd5a9_322b8661",
+      "revId": "889e813006e9dfc65842ab1828e084912ea3c9f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
