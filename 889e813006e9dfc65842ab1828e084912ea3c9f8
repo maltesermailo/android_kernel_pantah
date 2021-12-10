@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baddd5a9_322b8661",
+        "filename": "kernel/dma/contiguous.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1871253
+      },
+      "writtenOn": "2021-12-10T19:40:41Z",
+      "side": 1,
+      "message": "size needs to be rounded up to PAGE_SIZE, since cma_alloc_align left-shifts by PAGE_SIZE (the only client we have identified so far uses a 4 Kb allocation size so I missed this in testing.).",
+      "revId": "889e813006e9dfc65842ab1828e084912ea3c9f8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
