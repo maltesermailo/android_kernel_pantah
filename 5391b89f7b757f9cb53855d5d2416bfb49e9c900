@@ -18,6 +18,40 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e866a2d_852408c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2021-12-16T12:42:03Z",
+      "side": 1,
+      "message": "Targeting multiple CPUs has repeatedly shown to yield poor performance unless the CPUs are idle (all the CPUs get interrupted, and all but one will see a spurious interrupt).\n\nThe way you have placed your hook will also drive the GIC state and the core IRQ code out of sync, leading to potential interesting issues across CPU hotplug, for example.\n\nI won\u0027t block this patch (after all, this is only a hook), but I can\u0027t predict a good outcome with this.",
+      "revId": "5391b89f7b757f9cb53855d5d2416bfb49e9c900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb108c0c_61a8f2c7",
+        "filename": "drivers/irqchip/irq-gic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2021-12-16T12:42:03Z",
+      "side": 1,
+      "message": "If you change the GIC affinity here, you are messing with the tracking the core code does. This may result in interrupts not being migrated when they should.",
+      "revId": "5391b89f7b757f9cb53855d5d2416bfb49e9c900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03ab8358_33c804c4",
