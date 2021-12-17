@@ -35,6 +35,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0fad5eb_f9e8df73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1718267
+      },
+      "writtenOn": "2021-12-17T00:50:10Z",
+      "side": 1,
+      "message": " Hello, Thanks for your comment.\n \n As I already comment at uploading patch here, I also don\u0027t want to duplicate iommu_memory(GIC SFR) writing with vendor hook. But for Targeting multiple CPU irq action, we have no change (without changing mainstream).\n \n And for \"Targeting multiple CPUs for one IRQ\" (we call it \"Multi target IRQ\"), this is special case for Camera IRQ-reaction timing issue. From very old model, before 2014, we used that feature for fast IRQ reaction. Now, when we use GIC-600 HWIP, (gic-v3.c), we also using \"trace_android_rvh_gic_v3_set_affinity\" vendor hook to support targeting Multi CPU.\n  \n Anyway, I will also try to check affinity setting more. please wait and Thanks.",
+      "revId": "5391b89f7b757f9cb53855d5d2416bfb49e9c900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb108c0c_61a8f2c7",
@@ -48,6 +65,24 @@
       "writtenOn": "2021-12-16T12:42:03Z",
       "side": 1,
       "message": "If you change the GIC affinity here, you are messing with the tracking the core code does. This may result in interrupts not being migrated when they should.",
+      "revId": "5391b89f7b757f9cb53855d5d2416bfb49e9c900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42c8c67c_a5306272",
+        "filename": "drivers/irqchip/irq-gic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 1718267
+      },
+      "writtenOn": "2021-12-17T00:50:10Z",
+      "side": 1,
+      "message": "You are right. First of all, I\u0027m going to check \"migrate_one_irq\" function can work with \"Targeting multiple CPUs IRQ\".\n\nI mean, Starting with Multi Target IRQ -\u003e then migrate to Active CPU, then I think it can be OK, because we use Multi Target IRQ for special purpose, Camera IP fast reaction.",
+      "parentUuid": "fb108c0c_61a8f2c7",
       "revId": "5391b89f7b757f9cb53855d5d2416bfb49e9c900",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
