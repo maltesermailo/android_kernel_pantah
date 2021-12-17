@@ -8,6 +8,7 @@
 
 #include "fuse_i.h"
 
+#include <linux/filter.h>
 #include <linux/pagemap.h>
 #include <linux/slab.h>
 #include <linux/kernel.h>
@@ -137,7 +138,12 @@ int fuse_do_open(struct fuse_mount *fm, u64 nodeid, struct file *file,
 	struct fuse_file *ff;
 	int opcode = isdir ? FUSE_OPENDIR : FUSE_OPEN;
 
-	ff = fuse_file_alloc(fm);
+	if (file && file->private_data) {
+		ff = file->private_data;
+		file->private_data = NULL;
+	} else {
+		ff = fuse_file_alloc(fm);
+	}
 	if (!ff)
 		return -ENOMEM;
 
@@ -172,6 +178,7 @@ int fuse_do_open(struct fuse_mount *fm, u64 nodeid, struct file *file,
 
 	return 0;
 }
+
 EXPORT_SYMBOL_GPL(fuse_do_open);
 
 static void fuse_link_write_file(struct file *file)
@@ -234,6 +241,9 @@ int fuse_open_common(struct inode *inode, struct file *file, bool isdir)
 
 	err = generic_file_open(inode, file);
 	if (err)
+		return err;
+
+	if (fuse_bpf_open(&err, inode, file, isdir))
 		return err;
 
 	if (is_wb_truncate || dax_truncate) {
@@ -333,6 +343,10 @@ static int fuse_open(struct inode *inode, struct file *file)
 static int fuse_release(struct inode *inode, struct file *file)
 {
 	struct fuse_conn *fc = get_fuse_conn(inode);
+	int err;
+
+	if (fuse_bpf_release(&err, inode, file))
+		return err;
 
 	/* see fuse_vma_close() for !writeback_cache case */
 	if (fc->writeback_cache)
@@ -474,6 +488,9 @@ static int fuse_flush(struct file *file, fl_owner_t id)
 	if (fuse_is_bad(inode))
 		return -EIO;
 
+	if (fuse_bpf_flush(&err, file_inode(file), file, id))
+		return err;
+
 	err = write_inode_now(inode, 1);
 	if (err)
 		return err;
@@ -545,6 +562,9 @@ static int fuse_fsync(struct file *file, loff_t start, loff_t end,
 
 	if (fuse_is_bad(inode))
 		return -EIO;
+
+	if (fuse_bpf_fsync(&err, inode, file, start, end, datasync))
+		return err;
 
 	inode_lock(inode);
 
@@ -1580,12 +1600,16 @@ static ssize_t fuse_file_read_iter(struct kiocb *iocb, struct iov_iter *to)
 	struct file *file = iocb->ki_filp;
 	struct fuse_file *ff = file->private_data;
 	struct inode *inode = file_inode(file);
+	ssize_t ret;
 
 	if (fuse_is_bad(inode))
 		return -EIO;
 
 	if (FUSE_IS_DAX(inode))
 		return fuse_dax_read_iter(iocb, to);
+
+	if (fuse_bpf_file_read_iter(&ret, inode, iocb, to))
+		return ret;
 
 	if (ff->passthrough.filp)
 		return fuse_passthrough_read_iter(iocb, to);
@@ -1600,12 +1624,16 @@ static ssize_t fuse_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
 	struct file *file = iocb->ki_filp;
 	struct fuse_file *ff = file->private_data;
 	struct inode *inode = file_inode(file);
+	ssize_t ret = 0;
 
 	if (fuse_is_bad(inode))
 		return -EIO;
 
 	if (FUSE_IS_DAX(inode))
 		return fuse_dax_write_iter(iocb, from);
+
+	if (fuse_bpf_file_write_iter(&ret, inode, iocb, from))
+		return ret;
 
 	if (ff->passthrough.filp)
 		return fuse_passthrough_write_iter(iocb, from);
@@ -1866,6 +1894,19 @@ int fuse_write_inode(struct inode *inode, struct writeback_control *wbc)
 	 * involve any number of unrelated userspace processes.
 	 */
 	WARN_ON(wbc->for_reclaim);
+
+	/**
+	 * TODO - fully understand why this is necessary
+	 *
+	 * With fuse-bpf, fsstress fails if rename is enabled without this
+	 *
+	 * We are getting writes here on directory inodes, which do not have an
+	 * initialized file list so crash.
+	 *
+	 * The question is why we are getting those writes
+	 */
+	if (!S_ISREG(inode->i_mode))
+		return 0;
 
 	ff = __fuse_write_file_get(fc, fi);
 	err = fuse_flush_times(inode, ff);
@@ -2393,6 +2434,12 @@ static int fuse_file_mmap(struct file *file, struct vm_area_struct *vma)
 	if (FUSE_IS_DAX(file_inode(file)))
 		return fuse_dax_mmap(file, vma);
 
+#ifdef CONFIG_FUSE_BPF
+	/* TODO - this is simply passthrough, not a proper BPF filter */
+	if (ff->backing_file)
+		return fuse_backing_mmap(file, vma);
+#endif
+
 	if (ff->passthrough.filp)
 		return fuse_passthrough_mmap(file, vma);
 
@@ -2641,6 +2688,9 @@ static loff_t fuse_file_llseek(struct file *file, loff_t offset, int whence)
 {
 	loff_t retval;
 	struct inode *inode = file_inode(file);
+
+	if (fuse_bpf_lseek(&retval, inode, file, offset, whence))
+		return retval;
 
 	switch (whence) {
 	case SEEK_SET:
@@ -3289,6 +3339,9 @@ static long fuse_file_fallocate(struct file *file, int mode, loff_t offset,
 
 	bool block_faults = FUSE_IS_DAX(inode) && lock_inode;
 
+	if (fuse_bpf_file_fallocate(&err, inode, file, mode, offset, length))
+		return err;
+
 	if (mode & ~(FALLOC_FL_KEEP_SIZE | FALLOC_FL_PUNCH_HOLE))
 		return -EOPNOTSUPP;
 
@@ -3391,6 +3444,10 @@ static ssize_t __fuse_copy_file_range(struct file *file_in, loff_t pos_in,
 	 * extended */
 	bool is_unstable = (!fc->writeback_cache) &&
 			   ((pos_out + len) > inode_out->i_size);
+
+	if (fuse_bpf_copy_file_range(&err, file_inode(file_in), file_in, pos_in,
+				     file_out, pos_out, len, flags))
+		return err;
 
 	if (fc->no_copy_file_range)
 		return -EOPNOTSUPP;
