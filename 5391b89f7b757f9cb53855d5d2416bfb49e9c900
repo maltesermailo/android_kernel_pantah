@@ -52,6 +52,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cc8fa53_4cd8a086",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1718267
+      },
+      "writtenOn": "2021-12-20T02:05:48Z",
+      "side": 1,
+      "message": "I\u0027ve checked cpuhotplug action for vendor hook function, and it can successfully work.\n\nPlease consider to add vendor hook function in irq-gic.c for our camera drivers can work with MultiTargetIRQs. This is kind of some special case for IRQ actions.\n\nThanks.",
+      "revId": "5391b89f7b757f9cb53855d5d2416bfb49e9c900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb108c0c_61a8f2c7",
@@ -83,6 +100,24 @@
       "side": 1,
       "message": "You are right. First of all, I\u0027m going to check \"migrate_one_irq\" function can work with \"Targeting multiple CPUs IRQ\".\n\nI mean, Starting with Multi Target IRQ -\u003e then migrate to Active CPU, then I think it can be OK, because we use Multi Target IRQ for special purpose, Camera IP fast reaction.",
       "parentUuid": "fb108c0c_61a8f2c7",
+      "revId": "5391b89f7b757f9cb53855d5d2416bfb49e9c900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bccefa28_d70bad08",
+        "filename": "drivers/irqchip/irq-gic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 1718267
+      },
+      "writtenOn": "2021-12-20T02:05:48Z",
+      "side": 1,
+      "message": "Hello, I\u0027ve checked for our camera device with GIC-400 using SOC.\n\nWe apply this patch and apply also set affinity to Little CPUs for our Camera irqs like below :\n207:        988        937        966       1032          0          0          0          0     GIC-0 428 Level     3a0-0-0\n208:        326        330        294        356          0          0          0          0     GIC-0 429 Level     3a0-1-1\n209:          0          0          0          0          0          0          0          0     GIC-0 248 Level     3a0-zsl-2\n210:        643        596        623        704          0          0          0          0     GIC-0 229 Level     3a0-strp-3\n\nAnd when I checked migrate irqs with ftrace, all required multi target irqs set for little CPUs like below: (I printed affinity value to passing \"irq_do_set_affinity\" function.)\n\n \u003c...\u003e-18      [001] d..2   127.549705: migrate_one_irq+0x108/0x1c0: [+][migration/1][migrate_one_irq,134] irq_number 207 to affinity 0xF\n \u003c...\u003e-18      [001] d..2   127.549712: migrate_one_irq+0x108/0x1c0: [+][migration/1][migrate_one_irq,134] irq_number 208 to affinity 0xF\n \u003c...\u003e-18      [001] d..2   127.549719: migrate_one_irq+0x108/0x1c0: [+][migration/1][migrate_one_irq,134] irq_number 209 to affinity 0xF\n \u003c...\u003e-18      [001] d..2   127.549728: migrate_one_irq+0x108/0x1c0: [+][migration/1][migrate_one_irq,134] irq_number 210 to affinity 0xF\n \nAs you know, this migration was happened when cpuhotplug out and it could go down to suspend without problem or warning messages.\n\nSo, I think we can use targeting multiple CPUs when we need fast reaction for specific drivers.",
+      "parentUuid": "42c8c67c_a5306272",
       "revId": "5391b89f7b757f9cb53855d5d2416bfb49e9c900",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
