@@ -550,6 +550,11 @@ static struct device *tipc_shared_handle_dev(struct tipc_shared_handle
 	return shared_handle->vds->vdev->dev.parent->parent;
 }
 
+static bool dma_buf_eq(struct dma_buf *db1, struct dma_buf *db2)
+{
+	return file_inode(db1->file)->i_ino == file_inode(db2->file)->i_ino;
+}
+
 static void tipc_shared_handle_register(struct tipc_shared_handle
 					*new_handle)
 {
@@ -563,9 +568,12 @@ static void tipc_shared_handle_register(struct tipc_shared_handle
 		struct tipc_shared_handle *handle =
 			rb_entry(*new, struct tipc_shared_handle, node);
 		parent = *new;
-		/* The handle is already registered? */
-		if (WARN_ON(handle->tipc.obj_id == new_handle->tipc.obj_id))
-			goto already_registered;
+		/* The handle is already registered */
+		if ((handle->tipc.obj_id == new_handle->tipc.obj_id) &&
+		    WARN_ON(!dma_buf_eq(handle->dma_buf,
+					new_handle->dma_buf))) {
+			goto err;
+		}
 		if (handle->tipc.obj_id > new_handle->tipc.obj_id)
 			new = &((*new)->rb_left);
 		else
@@ -575,7 +583,7 @@ static void tipc_shared_handle_register(struct tipc_shared_handle
 	rb_link_node(&new_handle->node, parent, new);
 	rb_insert_color(&new_handle->node, &vds->shared_handles);
 
-already_registered:
+err:
 	mutex_unlock(&vds->shared_handles_lock);
 }
 
@@ -611,19 +619,7 @@ static struct tipc_shared_handle *tipc_shared_handle_take(struct tipc_virtio_dev
 static int tipc_shared_handle_drop(struct tipc_shared_handle *shared_handle)
 {
 	int ret;
-	struct tipc_virtio_dev *vds = shared_handle->vds;
 	struct device *dev = tipc_shared_handle_dev(shared_handle);
-
-	/*
-	 * If this warning fires, it means this shared handle was still in
-	 * the set of active handles. This shouldn't happen (calling code
-	 * should ensure it is out if the tree) but this serves as an extra
-	 * check before it is released.
-	 *
-	 * However, the take itself should clean this incorrect state up by
-	 * removing the handle from the tree.
-	 */
-	WARN_ON(tipc_shared_handle_take(vds, shared_handle->tipc.obj_id));
 
 	if (shared_handle->shared) {
 		ret = trusty_reclaim_memory(dev,
