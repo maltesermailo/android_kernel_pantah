@@ -325,7 +325,7 @@ static void divvy_up_power(u32 *req_power, u32 *max_power, int num_actors,
 }
 
 static int allocate_power(struct thermal_zone_device *tz,
-			  int control_temp)
+			  int control_temp, u32 user_power)
 {
 	struct thermal_instance *instance;
 	struct power_allocator_params *params = tz->governor_data;
@@ -411,6 +411,8 @@ static int allocate_power(struct thermal_zone_device *tz,
 	}
 
 	power_range = pid_controller(tz, control_temp, max_allocatable_power);
+	if (user_power && user_power < power_range)
+		power_range = user_power;
 
 	divvy_up_power(weighted_req_power, max_power, num_actors,
 		       total_weighted_req_power, power_range, granted_power,
@@ -610,6 +612,7 @@ static int power_allocator_throttle(struct thermal_zone_device *tz, int trip)
 	int switch_on_temp, control_temp;
 	struct power_allocator_params *params = tz->governor_data;
 	int enable = 1;
+	u32 user_power = 0;
 
 	/*
 	 * We get called for every trip point but we only need to do
@@ -618,11 +621,12 @@ static int power_allocator_throttle(struct thermal_zone_device *tz, int trip)
 	if (trip != params->trip_max_desired_temperature)
 		return 0;
 
-	trace_android_vh_enable_thermal_power_throttle(&enable);
+	trace_android_vh_enable_thermal_power_throttle(&enable, &user_power);
 	if (enable)
 		ret = tz->ops->get_trip_temp(tz, params->trip_switch_on,
 					     &switch_on_temp);
-	if (!enable || (!ret && (tz->temperature < switch_on_temp))) {
+	if (!enable || (!ret && (tz->temperature < switch_on_temp) &&
+			!user_power)) {
 		tz->passive = 0;
 		reset_pid_controller(params);
 		allow_maximum_power(tz);
@@ -640,7 +644,7 @@ static int power_allocator_throttle(struct thermal_zone_device *tz, int trip)
 		return ret;
 	}
 
-	return allocate_power(tz, control_temp);
+	return allocate_power(tz, control_temp, user_power);
 }
 
 static struct thermal_governor thermal_gov_power_allocator = {
