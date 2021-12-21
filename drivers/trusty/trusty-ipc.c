@@ -168,7 +168,7 @@ struct tipc_shared_handle {
 	struct sg_table *sgt;
 	struct dma_buf_attachment *attach;
 	struct dma_buf *dma_buf;
-	bool shared;
+	bool reclaim_on_release;
 };
 
 static struct class *tipc_class;
@@ -621,7 +621,7 @@ static int tipc_shared_handle_drop(struct tipc_shared_handle *shared_handle)
 	int ret;
 	struct device *dev = tipc_shared_handle_dev(shared_handle);
 
-	if (shared_handle->shared) {
+	if (shared_handle->reclaim_on_release) {
 		ret = trusty_reclaim_memory(dev,
 					    shared_handle->tipc.obj_id,
 					    shared_handle->sgt->sgl,
@@ -1104,6 +1104,7 @@ static int dn_share_fd(struct tipc_dn_chan *dn, int fd,
 	bool writable = false;
 	pgprot_t prot;
 	u64 tag = 0;
+	u64 ffa_handle;
 
 	if (dn->state != TIPC_CONNECTED) {
 		dev_dbg(dev, "Tried to share fd while not connected\n");
@@ -1157,22 +1158,30 @@ static int dn_share_fd(struct tipc_dn_chan *dn, int fd,
 	}
 
 	tag = trusty_dma_buf_get_ffa_tag(shared_handle->dma_buf);
+	ffa_handle = trusty_dma_buf_get_ffa_handle(shared_handle->dma_buf);
 
-	ret = trusty_transfer_memory(tipc_shared_handle_dev(shared_handle),
-				     &shared_handle->tipc.obj_id,
-				     shared_handle->sgt->sgl,
-				     shared_handle->sgt->orig_nents, prot,
-				     tag, lend);
+	if (trusty_dma_buf_owns_ffa_handle(shared_handle->dma_buf)) {
+		shared_handle->tipc.obj_id = ffa_handle;
+		shared_handle->reclaim_on_release = false;
+	} else {
+		ret = trusty_transfer_memory(tipc_shared_handle_dev(shared_handle),
+					     &shared_handle->tipc.obj_id,
+					     shared_handle->sgt->sgl,
+					     shared_handle->sgt->orig_nents,
+					     prot, tag, lend);
 
-	if (ret < 0) {
-		dev_dbg(dev, "Transferring memory failed: %d\n", ret);
-		/*
-		 * The handle now has a sgt containing the pages, so we no
-		 * longer need to clean up the pages directly.
-		 */
-		goto cleanup_handle;
+		if (ret < 0) {
+			dev_dbg(dev, "Transferring memory failed: %d\n", ret);
+			/*
+			 * The handle now has a sgt containing the pages, so we
+			 * no longer need to clean up the pages directly.
+			 */
+			goto cleanup_handle;
+		}
+
+		shared_handle->reclaim_on_release = true;
 	}
-	shared_handle->shared = true;
+
 	shared_handle->tipc.size = shared_handle->dma_buf->size;
 	shared_handle->tipc.tag = tag;
 	*out = shared_handle;

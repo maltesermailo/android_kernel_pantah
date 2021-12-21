@@ -85,6 +85,26 @@ static inline u64 trusty_dma_buf_get_ffa_tag(struct dma_buf *dma_buf)
 }
 #endif
 
+/* Invalid handle value is defined by FF-A spec */
+#define TRUSTY_INVALID_FFA_HANDLE (0xFFFFFFFFFFFFFFFF)
+#ifdef CONFIG_TRUSTY_DMA_BUF_FFA_HANDLE
+u64 trusty_dma_buf_get_ffa_handle(struct dma_buf *dma_buf);
+#else
+static inline u64 trusty_dma_buf_get_ffa_handle(struct dma_buf *dma_buf)
+{
+	return TRUSTY_INVALID_FFA_HANDLE;
+}
+#endif
+/*
+ * Whether given dma_buf owns the FF-A handle, i.e. responsible for
+ * allocating/releasing it.
+ */
+static inline bool trusty_dma_buf_owns_ffa_handle(struct dma_buf *dma_buf)
+{
+	return trusty_dma_buf_get_ffa_handle(dma_buf) !=
+			TRUSTY_INVALID_FFA_HANDLE;
+}
+
 struct trusty_nop {
 	struct list_head node;
 	u32 args[3];
