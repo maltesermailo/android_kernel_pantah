@@ -69,6 +69,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8e0ab14_853233b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1718267
+      },
+      "writtenOn": "2021-12-21T23:24:16Z",
+      "side": 1,
+      "message": "Hello,\n\nSorry for interrupt, but please check my comment and make review to insert this VH function for Multiple target irq action.\n\nIf you think we have to move VH function to other line, please let me know.\nBut I think we must change CPU Mask value not only 1 CPU, but many CPUs.",
+      "parentUuid": "1e866a2d_852408c0",
+      "revId": "5391b89f7b757f9cb53855d5d2416bfb49e9c900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb108c0c_61a8f2c7",
@@ -118,6 +136,24 @@
       "side": 1,
       "message": "Hello, I\u0027ve checked for our camera device with GIC-400 using SOC.\n\nWe apply this patch and apply also set affinity to Little CPUs for our Camera irqs like below :\n207:        988        937        966       1032          0          0          0          0     GIC-0 428 Level     3a0-0-0\n208:        326        330        294        356          0          0          0          0     GIC-0 429 Level     3a0-1-1\n209:          0          0          0          0          0          0          0          0     GIC-0 248 Level     3a0-zsl-2\n210:        643        596        623        704          0          0          0          0     GIC-0 229 Level     3a0-strp-3\n\nAnd when I checked migrate irqs with ftrace, all required multi target irqs set for little CPUs like below: (I printed affinity value to passing \"irq_do_set_affinity\" function.)\n\n \u003c...\u003e-18      [001] d..2   127.549705: migrate_one_irq+0x108/0x1c0: [+][migration/1][migrate_one_irq,134] irq_number 207 to affinity 0xF\n \u003c...\u003e-18      [001] d..2   127.549712: migrate_one_irq+0x108/0x1c0: [+][migration/1][migrate_one_irq,134] irq_number 208 to affinity 0xF\n \u003c...\u003e-18      [001] d..2   127.549719: migrate_one_irq+0x108/0x1c0: [+][migration/1][migrate_one_irq,134] irq_number 209 to affinity 0xF\n \u003c...\u003e-18      [001] d..2   127.549728: migrate_one_irq+0x108/0x1c0: [+][migration/1][migrate_one_irq,134] irq_number 210 to affinity 0xF\n \nAs you know, this migration was happened when cpuhotplug out and it could go down to suspend without problem or warning messages.\n\nSo, I think we can use targeting multiple CPUs when we need fast reaction for specific drivers.",
       "parentUuid": "42c8c67c_a5306272",
+      "revId": "5391b89f7b757f9cb53855d5d2416bfb49e9c900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed592076_af3e0b7f",
+        "filename": "drivers/irqchip/irq-gic.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 1718267
+      },
+      "writtenOn": "2021-12-21T23:24:16Z",
+      "side": 1,
+      "message": "\u003e Hello, I\u0027ve checked for our camera device with GIC-400 using SOC.\n\u003e \n\u003e We apply this patch and apply also set affinity to Little CPUs for our Camera irqs like below :\n\u003e 207:        988        937        966       1032          0          0          0          0     GIC-0 428 Level     3a0-0-0\n\u003e 208:        326        330        294        356          0          0          0          0     GIC-0 429 Level     3a0-1-1\n\u003e 209:          0          0          0          0          0          0          0          0     GIC-0 248 Level     3a0-zsl-2\n\u003e 210:        643        596        623        704          0          0          0          0     GIC-0 229 Level     3a0-strp-3\n\u003e \n\u003e And when I checked migrate irqs with ftrace, all required multi target irqs set for little CPUs like below: (I printed affinity value to passing \"irq_do_set_affinity\" function.)\n\u003e \n\u003e  \u003c...\u003e-18      [001] d..2   127.549705: migrate_one_irq+0x108/0x1c0: [+][migration/1][migrate_one_irq,134] irq_number 207 to affinity 0xF\n\u003e  \u003c...\u003e-18      [001] d..2   127.549712: migrate_one_irq+0x108/0x1c0: [+][migration/1][migrate_one_irq,134] irq_number 208 to affinity 0xF\n\u003e  \u003c...\u003e-18      [001] d..2   127.549719: migrate_one_irq+0x108/0x1c0: [+][migration/1][migrate_one_irq,134] irq_number 209 to affinity 0xF\n\u003e  \u003c...\u003e-18      [001] d..2   127.549728: migrate_one_irq+0x108/0x1c0: [+][migration/1][migrate_one_irq,134] irq_number 210 to affinity 0xF\n\u003e  \n\u003e As you know, this migration was happened when cpuhotplug out and it could go down to suspend without problem or warning messages.\n\u003e \n\u003e So, I think we can use targeting multiple CPUs when we need fast reaction for specific drivers.",
+      "parentUuid": "bccefa28_d70bad08",
       "revId": "5391b89f7b757f9cb53855d5d2416bfb49e9c900",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
