@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e180d68_b8689245",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2021-12-21T19:27:07Z",
+      "side": 1,
+      "message": "This approach a little wonky in that:\n- Associating an FF-A handle with a DMA buf requires a platform-specific implementation of trusty_dma_buf_get_ffa_handle()\n- It introduces a different code path for FF-A handle allocation/release for dma bufs. Previously, only trusty-ipc could do that. With this patch, DMA heap code can allocate FF-A handles when allocating dma bufs.\n- An FFA handles can only be reused if it was allocated by DMA heap code. \n\nThe patch is simple though.\nWDYT?",
+      "revId": "5311e705b37ccd2d90bda1b95e7972fe38690169",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
