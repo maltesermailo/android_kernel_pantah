@@ -16,6 +16,24 @@
       "message": "why cherry-pick random patches that are already in the LTS releases?\n\nYou will miss known fixes by doing this, why not just do the full merge?  This gives people a false-sense of fixing known problems and leaves many security fixes and bug fixes missing from the tree.",
       "revId": "75d9f2ea84aa8ca2c40834a4a07b464db17f1e89",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2af386a3_193b3e37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1570698
+      },
+      "writtenOn": "2021-12-22T11:11:50Z",
+      "side": 1,
+      "message": "We are targeting to cherry-pick the security fixes to android12-5.10-2021-12, but we need to have the fixes landed on android12-5.10.\n\nIf the fixes had already merged into android12-5.10-lts but not merged to android12-5.10 yet, are we still able to ask for the cherry-pick to android12-5.10-2021-12?\n\nthis commit already landed on android12-5.10-lts, but not android12-5.10 yet.\nffca46766850d sctp: validate chunk size in __rcv_asconf_lookup",
+      "parentUuid": "4c51496b_68a3a95d",
+      "revId": "75d9f2ea84aa8ca2c40834a4a07b464db17f1e89",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
