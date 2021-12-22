@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf9c4933_f01abfb0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1878921
+      },
+      "writtenOn": "2021-12-22T01:56:02Z",
+      "side": 1,
+      "message": "Hi Greg,\nthanks for your message, it\u0027s used for history record, size changing is ok after reading it.",
+      "parentUuid": "8e9c533c_ca1bb1bf",
+      "revId": "3340b68591a64bbcd0a8a811c2505963a983f42d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63ae6d86_4b2c64f3",
@@ -41,6 +59,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f828277_a2b58e35",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1878921
+      },
+      "writtenOn": "2021-12-22T01:56:02Z",
+      "side": 1,
+      "message": "sorry, I updated patchset3 to fix build error.",
+      "parentUuid": "63ae6d86_4b2c64f3",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 38
+      },
+      "revId": "3340b68591a64bbcd0a8a811c2505963a983f42d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cbd57155_5917ed0c",
@@ -54,6 +96,30 @@
       "writtenOn": "2021-12-21T19:23:57Z",
       "side": 1,
       "message": "Either add vendor hooks to do this accounting internally or use get_each_dmabuf(). Adding a new get_dma_buf_total() API which you will later need to export is not acceptable option unless you can upstream it.",
+      "range": {
+        "startLine": 115,
+        "startChar": 1,
+        "endLine": 115,
+        "endChar": 13
+      },
+      "revId": "3340b68591a64bbcd0a8a811c2505963a983f42d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f808657a_38103a4b",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1878921
+      },
+      "writtenOn": "2021-12-22T01:56:02Z",
+      "side": 1,
+      "message": "Hi Suren,\nthanks for your message, using api \"get_each_dmabuf()\", added at GKI codebase, also is ok, but it will takes time to traverse the dmabuf list.\n\nSo, if change it as vendor hook is more acceptable, I will change it as vendor hook and to implement it at our side.",
+      "parentUuid": "cbd57155_5917ed0c",
       "range": {
         "startLine": 115,
         "startChar": 1,
