@@ -121,6 +121,24 @@
       "parentUuid": "c7b9d125_fa4f7601",
       "revId": "5311e705b37ccd2d90bda1b95e7972fe38690169",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7ef7684_3d59ae39",
+        "filename": "include/linux/trusty/trusty.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2021-12-28T21:02:18Z",
+      "side": 1,
+      "message": "If the handle was allocated as part of dma_buf allocation, then dma_buf \"owns\" the handle. Specifically what that means is that dma_buf release() code is responsible for deallocating the handle. \n\nI have an example in aosp/1930990, it\u0027s a mock dma_heap for testing that does FFA_SHARE when allocating the dma_buf and FFA_RECLAIM when releasing the buffer.",
+      "parentUuid": "cc6d68b5_6307b303",
+      "revId": "5311e705b37ccd2d90bda1b95e7972fe38690169",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
