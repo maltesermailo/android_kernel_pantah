@@ -16,6 +16,75 @@
       "message": "This approach a little wonky in that:\n- Associating an FF-A handle with a DMA buf requires a platform-specific implementation of trusty_dma_buf_get_ffa_handle()\n- It introduces a different code path for FF-A handle allocation/release for dma bufs. Previously, only trusty-ipc could do that. With this patch, DMA heap code can allocate FF-A handles when allocating dma bufs.\n- An FFA handles can only be reused if it was allocated by DMA heap code. \n\nThe patch is simple though.\nWDYT?",
       "revId": "5311e705b37ccd2d90bda1b95e7972fe38690169",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ca47447_4e8444ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-12-28T19:54:07Z",
+      "side": 1,
+      "message": "\u003e - Associating an FF-A handle with a DMA buf requires a platform-specific implementation of trusty_dma_buf_get_ffa_handle()\nOK. I think it would be better if this was not trusty specific, but it is not any worse than trusty_dma_buf_get_ffa_tag.\n\n\u003e - It introduces a different code path for FF-A handle allocation/release for dma bufs.\n\nI think you can unify it more. The handle you get from the dma buf should be locked until you get the tipc call that says trusty is done with it. This means you need to release something in both cases.",
+      "parentUuid": "8e180d68_b8689245",
+      "revId": "5311e705b37ccd2d90bda1b95e7972fe38690169",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "936d050b_6064de6f",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1163,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-12-28T19:54:07Z",
+      "side": 1,
+      "message": "this looks a little odd. trusty_dma_buf_get_ffa_handle gets called both here and in trusty_dma_buf_owns_ffa_handle, but the result of the first call is only used if trusty_dma_buf_owns_ffa_handle returns true.",
+      "revId": "5311e705b37ccd2d90bda1b95e7972fe38690169",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4300a356_d0bbd48d",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1165,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-12-28T19:54:07Z",
+      "side": 1,
+      "message": "this value is used in your error paths before this point, so there is no point in clearing this here as it has to already be false.",
+      "revId": "5311e705b37ccd2d90bda1b95e7972fe38690169",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94a99205_5c5d68e5",
+        "filename": "include/linux/trusty/trusty.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2021-12-28T19:54:07Z",
+      "side": 1,
+      "message": "Are there any cases where a dma buf has been already created, but does not (yet) have a handle?",
+      "revId": "5311e705b37ccd2d90bda1b95e7972fe38690169",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
