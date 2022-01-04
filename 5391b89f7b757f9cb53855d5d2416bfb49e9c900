@@ -106,6 +106,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1755e11e_dbb2d2ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2022-01-04T09:50:06Z",
+      "side": 1,
+      "message": "I still think this breaks a lot of expectations in the kernel.\n\nThink for example of a driver that has per-CPU data, and an interrupt that is configured with IRQ_PER_CPU. The driver has legitimate expectations that the interrupt won\u0027t fire anywhere else.\n\nBy changing the affinity under the hood, you are breaking these guarantees. It may well work for your particular application, but in general this looks broken.",
+      "parentUuid": "9f1968f8_f609a0d6",
+      "revId": "5391b89f7b757f9cb53855d5d2416bfb49e9c900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fb108c0c_61a8f2c7",
         "filename": "drivers/irqchip/irq-gic.c",
         "patchSetId": 2
