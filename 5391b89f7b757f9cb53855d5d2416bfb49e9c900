@@ -122,6 +122,41 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a55527b9_56f68aad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1684042
+      },
+      "writtenOn": "2022-01-05T08:20:02Z",
+      "side": 1,
+      "message": "Hello, I wish your happy new year.\n\nYou are right. If driver expect per-CPU driver, then we will not change anything. Only overwrite one more time with mask_val in gic_set_affinity function set value.\n\nWe will add multiple CPU target with cpumask structure and set it like below:\n \u003d\u003e irq_do_set_affinity+0xc/0x1ac\n \u003d\u003e irq_set_affinity_locked+0x90/0x1b0\n \u003d\u003e irq_set_affinity_hint+0x98/0xe4\n \u003d\u003e is_set_affinity_irq+0x68/0x9c [fimc_is]\n \u003d\u003e is_hw_ischain_enable+0x168/0x254 [fimc_is]\n\nSo, \"2 times SFR access\" is some kind of budden but only multiple cpumask will make effect.\n\nI partially agree with your comment, this is not general method, but We really need GIC400 multiple CPUs target IRQ application \"Camera\". \n\nAnd when I tested with hotplug out or in, then multiple target IRQs are set to CPU0 IRQ. And, one more, our camera application doesn\u0027t have any IRQ action while CPU hotplug out status, (only working with full load) so we can use it without your concern. Please consider our side work. It is not good vendor hook function, but it is essential for us.",
+      "parentUuid": "1755e11e_dbb2d2ec",
+      "revId": "5391b89f7b757f9cb53855d5d2416bfb49e9c900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2259298c_30159444",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1684042
+      },
+      "writtenOn": "2022-01-05T08:20:02Z",
+      "side": 1,
+      "message": "Please consider adding VH again. Our Camera application need this function for their performance.\n\nThanks.",
+      "revId": "5391b89f7b757f9cb53855d5d2416bfb49e9c900",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb108c0c_61a8f2c7",
