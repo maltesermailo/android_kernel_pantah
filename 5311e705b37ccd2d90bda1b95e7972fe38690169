@@ -139,6 +139,24 @@
       "parentUuid": "cc6d68b5_6307b303",
       "revId": "5311e705b37ccd2d90bda1b95e7972fe38690169",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e038e556_aa8bc68b",
+        "filename": "include/linux/trusty/trusty.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-06T11:17:14Z",
+      "side": 1,
+      "message": "That example does not cover the case I\u0027m asking about. If we have a dma_heap where we create a dma_buf but don\u0027t immediately lend it we could be in a situation where trusty_dma_buf_owns_ffa_handle should return true, but we don\u0027t (yet) have an ffs_handle to return (so any attempt to share this fd should fail).",
+      "parentUuid": "c7ef7684_3d59ae39",
+      "revId": "5311e705b37ccd2d90bda1b95e7972fe38690169",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
