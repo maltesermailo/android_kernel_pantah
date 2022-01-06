@@ -4800,7 +4800,7 @@ void android_debug_for_each_module(int (*fn)(const char *mod_name, void *mod_add
 
 	preempt_disable();
 	list_for_each_entry_rcu(module, &modules, list) {
-		if (fn(module->name, module->core_layout.base, data))
+		if (fn(module->name, module->core_layout.base, module))
 			goto out;
 	}
 out:
