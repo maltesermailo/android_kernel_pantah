@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c76dbd02_6da6159e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2022-01-08T04:55:16Z",
+      "side": 1,
+      "message": "This needs to be solved in some way for the build to succeed with BTF generation enabled but this may not be the cleanest approach, like with the other patch I\u0027d welcome any suggestions you might have\n\nAn ACK-only solution could potentially be much simpler; skel_internal.h has no effect on resolve_btfids and we don\u0027t use this build of libbpf for anything else, so the actual value of __NR_bpf wouldn\u0027t matter.",
+      "revId": "5914090ccf61558905b2ebdf06c0e667cf197877",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2d47707_4477b088",
+        "filename": "tools/bpf/resolve_btfids/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2022-01-08T04:55:16Z",
+      "side": 1,
+      "message": "Putting this in the libbpf Makefile might be nicer, but IIUC this path should use HOSTARCH or SRCARCH as appropriate in order to have the correct path for x86, and libbpf needs to support both. (Not an issue in this file since resolve_btfids is only on host \u0026 ARCH is set to HOSTARCH above).",
+      "range": {
+        "startLine": 52,
+        "startChar": 30,
+        "endLine": 52,
+        "endChar": 74
+      },
+      "revId": "5914090ccf61558905b2ebdf06c0e667cf197877",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
