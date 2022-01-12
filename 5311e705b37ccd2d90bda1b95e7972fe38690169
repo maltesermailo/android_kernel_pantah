@@ -157,6 +157,24 @@
       "parentUuid": "c7ef7684_3d59ae39",
       "revId": "5311e705b37ccd2d90bda1b95e7972fe38690169",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c57d5d1_0b9b85d3",
+        "filename": "include/linux/trusty/trusty.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2022-01-12T20:27:16Z",
+      "side": 1,
+      "message": "My intention is that trusty_dma_buf_owns_ffa_handle can\u0027t be true unless the dma_buf was lent when dma_heap allocated it. (I\u0027m not sure if I understood you point correctly)\n\ni.e. trusty_dma_buf_owns_ffa_handle \u003d\u003d true IFF (1) dma_buf allocation creates the ffa handle (by lending or sharing) and (2) dma_buf deallocation releases the ffa handle (by reclaiming). And trusty_dma_buf_owns_ffa_handle \u003d\u003d false means that the old code path is used.",
+      "parentUuid": "e038e556_aa8bc68b",
+      "revId": "5311e705b37ccd2d90bda1b95e7972fe38690169",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
