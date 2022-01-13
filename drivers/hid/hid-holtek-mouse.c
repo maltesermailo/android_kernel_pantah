@@ -65,6 +65,7 @@ static __u8 *holtek_mouse_report_fixup(struct hid_device *hdev, __u8 *rdesc,
 static int holtek_mouse_probe(struct hid_device *hdev,
 			      const struct hid_device_id *id)
 {
+<<<<<<< HEAD   (22411e Merge 5.4.171 into android11-5.4-lts)
 	int ret;
 
 	if (!hid_is_usb(hdev))
@@ -82,6 +83,10 @@ static int holtek_mouse_probe(struct hid_device *hdev,
 		return ret;
 	}
 
+=======
+	if (!hid_is_usb(hdev))
+		return -EINVAL;
+>>>>>>> BRANCH (983a7e FROMGIT: USB: gadget: bRequestType is a bitfield, not a enum)
 	return 0;
 }
 
