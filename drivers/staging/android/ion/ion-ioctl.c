@@ -118,8 +118,10 @@ long ion_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 			mutex_unlock(&client->lock);
 			return PTR_ERR(handle);
 		}
+		mutex_lock(&client->handle_lock);
 		ion_free_nolock(client, handle);
 		ion_handle_put_nolock(handle);
+		mutex_unlock(&client->handle_lock);
 		mutex_unlock(&client->lock);
 		break;
 	}
@@ -145,11 +147,13 @@ long ion_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 	{
 		struct ion_handle *handle;
 
+		mutex_lock(&client->handle_lock);
 		handle = ion_import_dma_buf_fd(client, data.fd.fd);
 		if (IS_ERR(handle))
 			ret = PTR_ERR(handle);
 		else
 			data.handle.handle = handle->id;
+		mutex_unlock(&client->handle_lock);
 		break;
 	}
 	case ION_IOC_SYNC:

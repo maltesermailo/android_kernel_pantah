@@ -127,6 +127,7 @@ struct ion_client {
 	struct rb_root handles;
 	struct idr idr;
 	struct mutex lock;
+	struct mutex handle_lock;
 	const char *name;
 	char *display_name;
 	int display_serial;
