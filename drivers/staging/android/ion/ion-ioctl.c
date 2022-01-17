@@ -103,9 +103,10 @@ long ion_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		if (IS_ERR(handle))
 			return PTR_ERR(handle);
 
+		mutex_lock(&client->handle_lock);
 		data.allocation.handle = handle->id;
-
 		cleanup_handle = handle;
+		mutex_unlock(&client->handle_lock);
 		break;
 	}
 	case ION_IOC_FREE:
