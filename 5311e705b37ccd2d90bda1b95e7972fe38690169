@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "618150e8_d3bcf112",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1163,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2022-01-19T00:54:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "936d050b_6064de6f",
+      "revId": "5311e705b37ccd2d90bda1b95e7972fe38690169",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4300a356_d0bbd48d",
@@ -66,6 +84,24 @@
       "writtenOn": "2021-12-28T19:54:07Z",
       "side": 1,
       "message": "this value is used in your error paths before this point, so there is no point in clearing this here as it has to already be false.",
+      "revId": "5311e705b37ccd2d90bda1b95e7972fe38690169",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a445095c_64054f5c",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1165,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2022-01-19T00:54:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4300a356_d0bbd48d",
       "revId": "5311e705b37ccd2d90bda1b95e7972fe38690169",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -173,6 +209,24 @@
       "side": 1,
       "message": "My intention is that trusty_dma_buf_owns_ffa_handle can\u0027t be true unless the dma_buf was lent when dma_heap allocated it. (I\u0027m not sure if I understood you point correctly)\n\ni.e. trusty_dma_buf_owns_ffa_handle \u003d\u003d true IFF (1) dma_buf allocation creates the ffa handle (by lending or sharing) and (2) dma_buf deallocation releases the ffa handle (by reclaiming). And trusty_dma_buf_owns_ffa_handle \u003d\u003d false means that the old code path is used.",
       "parentUuid": "e038e556_aa8bc68b",
+      "revId": "5311e705b37ccd2d90bda1b95e7972fe38690169",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ea905cc_1c194b0b",
+        "filename": "include/linux/trusty/trusty.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2022-01-19T00:54:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c57d5d1_0b9b85d3",
       "revId": "5311e705b37ccd2d90bda1b95e7972fe38690169",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
