@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dd5eb14_1b5882a9",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-24T23:33:49Z",
+      "side": 1,
+      "message": "Not added here, but this looks unsafe. The root of the rb_tree can change before you get the lock below that protects it.",
+      "revId": "fbce7a0e58ae99452d07340d3a3193d1930271fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d14c65f5_3db606c6",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-24T23:33:49Z",
+      "side": 1,
+      "message": "why do you need this? If you got the ffa id from the dma buf, then the other flags and fields you check here will not be set.\n\nThe WARN_ON below can be moved inside if (shared_handle-\u003eshared) if you need to disable it for dma buf owned ffa handles as it only gets added to that tree if dn_share_fd succeeded (with a comment)",
+      "revId": "fbce7a0e58ae99452d07340d3a3193d1930271fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3a35a1e_7599487e",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-24T23:33:49Z",
+      "side": 1,
+      "message": "this should be a separate change",
+      "revId": "fbce7a0e58ae99452d07340d3a3193d1930271fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d762710a_dc6e897d",
+        "filename": "include/linux/trusty/trusty.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-24T23:33:49Z",
+      "side": 1,
+      "message": "(As mentioned elsewhere) I think it would be better to have this api return an error code here and allow the platform specific trusty_dma_buf_get_ffa_handle function block sharing a dma_buf that is not currently in a shared/lent state.",
+      "revId": "fbce7a0e58ae99452d07340d3a3193d1930271fd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
