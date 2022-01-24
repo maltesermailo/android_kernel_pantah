@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27db8b60_49cac667",
+        "filename": "include/trace/hooks/ion.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-01-24T17:04:07Z",
+      "side": 1,
+      "message": "Any reason this should be void* and not struct ion_buffer* ? You could have struct ion_buffer; forward declared if you are worried about type CRC errors during ABI checks.",
+      "range": {
+        "startLine": 13,
+        "startChar": 11,
+        "endLine": 13,
+        "endChar": 21
+      },
+      "revId": "f9bb943816f6ba9b8dbf63bb16de5aced79ebecd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
