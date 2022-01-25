@@ -46,6 +46,30 @@
       },
       "revId": "f9bb943816f6ba9b8dbf63bb16de5aced79ebecd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19d1fb71_fd7622dd",
+        "filename": "include/trace/hooks/ion.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-01-25T05:31:10Z",
+      "side": 1,
+      "message": "parameter type in `register_trace_android_vh_ion_buffer_release` is void* because that\u0027s what you specified in DECLARE_HOOK(). Have you tried declaring it as `struct ion_buffer*` as it should be?",
+      "parentUuid": "bcb9b646_da536554",
+      "range": {
+        "startLine": 13,
+        "startChar": 11,
+        "endLine": 13,
+        "endChar": 21
+      },
+      "revId": "f9bb943816f6ba9b8dbf63bb16de5aced79ebecd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
