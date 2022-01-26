@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8abd0706_63088a75",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-26T22:48:24Z",
+      "side": 1,
+      "message": "The handles are already protected by a lock, just not correctly for the root pointer",
+      "revId": "c6426cb2e3f8865035773529e6fadf2ce65a990b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8661234c_d3911efd",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-26T22:48:24Z",
+      "side": 1,
+      "message": "This lock is not strictly needed as you are freeing the lock right after you release it. All other references to the lock are already gone.",
+      "revId": "c6426cb2e3f8865035773529e6fadf2ce65a990b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8f8d347_22055d49",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-26T22:48:24Z",
+      "side": 1,
+      "message": "this one was not wrong as the pointer is read on the next line",
+      "revId": "c6426cb2e3f8865035773529e6fadf2ce65a990b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
