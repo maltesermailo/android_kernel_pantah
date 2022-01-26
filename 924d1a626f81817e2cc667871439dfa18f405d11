@@ -1,0 +1,135 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "162b354e_4254939b",
+        "filename": "arch/arm64/configs/trusty_qemu_defconfig.fragment",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-26T23:23:08Z",
+      "side": 1,
+      "message": "Can this be selected by TRUSTY_DMA_HEAP as it will not work without it.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 32
+      },
+      "revId": "924d1a626f81817e2cc667871439dfa18f405d11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7e12cc0_53a21a3c",
+        "filename": "drivers/trusty/trusty-dma-heap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-26T23:23:08Z",
+      "side": 1,
+      "message": "is this what checkpatch suggest? Can you stick to the 80col margin?",
+      "revId": "924d1a626f81817e2cc667871439dfa18f405d11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0cc3cf7_96345c67",
+        "filename": "drivers/trusty/trusty-dma-heap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-26T23:23:08Z",
+      "side": 1,
+      "message": "It is not safe to free the memory if trusty_reclaim_memory failed.",
+      "revId": "924d1a626f81817e2cc667871439dfa18f405d11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b901dcd_26d2e0b2",
+        "filename": "drivers/trusty/trusty-dma-heap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-26T23:23:08Z",
+      "side": 1,
+      "message": "goto a new label and share the common code to encode this return value.",
+      "revId": "924d1a626f81817e2cc667871439dfa18f405d11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28052095_19fa2f51",
+        "filename": "drivers/trusty/trusty-dma-heap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-26T23:23:08Z",
+      "side": 1,
+      "message": "can we use a more descriptive name here, e.g. num_pages.",
+      "range": {
+        "startLine": 128,
+        "startChar": 1,
+        "endLine": 128,
+        "endChar": 3
+      },
+      "revId": "924d1a626f81817e2cc667871439dfa18f405d11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10768c94_03677b43",
+        "filename": "drivers/trusty/trusty-dma-heap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-26T23:23:08Z",
+      "side": 1,
+      "message": "why do you have two separate ways to free the pages? Can you not put them directly into table when you allocate them?",
+      "revId": "924d1a626f81817e2cc667871439dfa18f405d11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2e66c53_16e8c4b1",
+        "filename": "drivers/trusty/trusty-dma-heap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-26T23:23:08Z",
+      "side": 1,
+      "message": "what about remove?",
+      "revId": "924d1a626f81817e2cc667871439dfa18f405d11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
