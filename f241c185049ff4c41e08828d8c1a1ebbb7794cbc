@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "647e364f_524ed780",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-27T21:46:02Z",
+      "side": 1,
+      "message": "This comment is not accurate for the error case. attach gets set first and will be used by the cleanup code even if shared is not true. Similar for sgt",
+      "revId": "f241c185049ff4c41e08828d8c1a1ebbb7794cbc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec7918f4_ab9dfe3f",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1156,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-27T21:46:02Z",
+      "side": 1,
+      "message": "You are passing a custom defined error code here to a caller that expects a standard linux error code. It would be better to specify a single allowed linux error code to indicate that trusty_dma_buf_get_ffa_handle has no interest in how this buffer gets shared.",
+      "revId": "f241c185049ff4c41e08828d8c1a1ebbb7794cbc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

@@ -139,6 +139,24 @@
       "parentUuid": "e3ea772e_1c64860c",
       "revId": "9ddb6c4aacd9035a383ce0e55b71d33a1680b05b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c09f0cf7_316659b1",
+        "filename": "include/linux/trusty/trusty.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-27T21:46:02Z",
+      "side": 1,
+      "message": "trusty_shared_mem_id_t is also used to encode a physical address for old trusty versions. That only works if you share contiguous memory, and it should also not use this particular value, but it is best to not make assumptions about the value here.",
+      "parentUuid": "e89b136d_3a8bdd40",
+      "revId": "9ddb6c4aacd9035a383ce0e55b71d33a1680b05b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
