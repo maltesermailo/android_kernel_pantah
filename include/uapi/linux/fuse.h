@@ -376,10 +376,25 @@ struct fuse_file_lock {
 #define FUSE_SUBMOUNTS		(1 << 27)
 #define FUSE_HANDLE_KILLPRIV_V2	(1 << 28)
 #define FUSE_SETXATTR_EXT	(1 << 29)
+<<<<<<< HEAD   (739ec4 ANDROID: ABI: Update symbols to unisoc whitelist for rwsem)
 #define FUSE_INIT_EXT		(1 << 30)
 #define FUSE_PASSTHROUGH	(1 << 31)
 /* bits 32..63 get shifted down 32 bits into the flags2 field */
 #define FUSE_SECURITY_CTX	(1ULL << 32)
+=======
+
+/*
+ * For FUSE < 7.36 FUSE_PASSTHROUGH has value (1 << 31).
+ * This condition check is not really required, but would prevent having a
+ * broken commit in the tree.
+ */
+#if FUSE_KERNEL_VERSION > 7 ||                                                 \
+	(FUSE_KERNEL_VERSION == 7 && FUSE_KERNEL_MINOR_VERSION >= 36)
+#define FUSE_PASSTHROUGH (1ULL << 63)
+#else
+#define FUSE_PASSTHROUGH (1 << 31)
+#endif
+>>>>>>> CHANGE (cffa61 ANDROID: fs/fuse: Use extended init flags for FUSE_PASSTHROU)
 
 /**
  * CUSE INIT request/reply flags

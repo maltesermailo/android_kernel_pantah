@@ -1381,9 +1381,13 @@ void fuse_send_init(struct fuse_mount *fm)
 		FUSE_PARALLEL_DIROPS | FUSE_HANDLE_KILLPRIV | FUSE_POSIX_ACL |
 		FUSE_ABORT_ERROR | FUSE_MAX_PAGES | FUSE_CACHE_SYMLINKS |
 		FUSE_NO_OPENDIR_SUPPORT | FUSE_EXPLICIT_INVAL_DATA |
+<<<<<<< HEAD   (739ec4 ANDROID: ABI: Update symbols to unisoc whitelist for rwsem)
 		FUSE_PASSTHROUGH |
 		FUSE_HANDLE_KILLPRIV_V2 | FUSE_SETXATTR_EXT | FUSE_INIT_EXT |
 		FUSE_SECURITY_CTX;
+=======
+		FUSE_HANDLE_KILLPRIV_V2 | FUSE_SETXATTR_EXT;
+>>>>>>> CHANGE (cffa61 ANDROID: fs/fuse: Use extended init flags for FUSE_PASSTHROU)
 #ifdef CONFIG_FUSE_DAX
 	if (fm->fc->dax)
 		flags |= FUSE_MAP_ALIGNMENT;
@@ -1393,6 +1397,8 @@ void fuse_send_init(struct fuse_mount *fm)
 
 	ia->in.flags = flags;
 	ia->in.flags2 = flags >> 32;
+
+	ia->in.flags |= FUSE_PASSTHROUGH;
 
 	ia->args.opcode = FUSE_INIT;
 	ia->args.in_numargs = 1;
