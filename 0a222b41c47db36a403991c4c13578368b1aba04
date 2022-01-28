@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d3ae7b6_f04073dc",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1162,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-28T23:54:38Z",
+      "side": 1,
+      "message": "would it be simpler to do (ret \u0026\u0026 (transfer_kind \u003d\u003d TRUSTY_SEND_SECURE || ret !\u003d -ENODATA)) here? That way you don\u0027t need the switch statement below.",
+      "revId": "0a222b41c47db36a403991c4c13578368b1aba04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7a27934_f843b8b9",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1175,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-28T23:54:38Z",
+      "side": 1,
+      "message": "why are out using goto here when break would work?",
+      "revId": "0a222b41c47db36a403991c4c13578368b1aba04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0532a5e8_ece3f541",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1189,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-28T23:54:38Z",
+      "side": 1,
+      "message": "WARN_ON(transfer_kind \u003d\u003d TRUSTY_SEND_SECURE); (depending on how you rearrange the code above or below)",
+      "revId": "0a222b41c47db36a403991c4c13578368b1aba04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b110f70_d1c5514a",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1191,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-28T23:54:38Z",
+      "side": 1,
+      "message": "How does this work. If you trigger this warning, trusty_transfer_memory will fail below. I think you want something like this above:\n```\nif (!ret) {\n    /* TODO: Enforce transfer_kind \u003d\u003d TRUSTY_SEND_SECURE */\n    WARN_ONCE(transfer_kind !\u003d TRUSTY_SEND_SECURE);\n    ...\n    goto mem_id_allocated;\n}\n```",
+      "revId": "0a222b41c47db36a403991c4c13578368b1aba04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13269306_de89c829",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1336,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-28T23:54:38Z",
+      "side": 1,
+      "message": "OK, but you could just pass shm[shm_idx].transfer in below after validating the value (as you have already copied so it will not change under you).",
+      "revId": "0a222b41c47db36a403991c4c13578368b1aba04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06e714ad_6c2c20ad",
+        "filename": "include/linux/trusty/trusty.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-28T23:54:38Z",
+      "side": 1,
+      "message": "or shared",
+      "revId": "0a222b41c47db36a403991c4c13578368b1aba04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
