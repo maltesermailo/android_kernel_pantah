@@ -33,6 +33,24 @@
       "message": "need a bug id please.\n\nAnd userspace should really be fixed\n\nAnd is this the only branch that needs this change?",
       "revId": "a8b4a2d451434b7b8a15463634f8c3b916e3d8d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b391eea_ba2f09ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1442824
+      },
+      "writtenOn": "2022-01-28T15:41:23Z",
+      "side": 1,
+      "message": "\u003e need a bug id please.\n\nFiled [b/216737221](https://issuetracker.google.com/issues/216737221). Will update commit message if you think I should still proceed with this patch.\n\n\u003e And userspace should really be fixed\n\nSure, I can close if that\u0027s the way we want to go.\n\nI thought there was a preference for keeping the kernel upgradable independent of the rest of the system. Occasionally changing userspace interfaces on master (where there is a major/minor version bump and admins/device maintainers accept some risk) is one thing, but on LTS it seems especially not great.\n\nBut maybe that\u0027s not true for Android kernels, or for tracefs, or this is an exception due to security.\n\n\u003e And is this the only branch that needs this change?\n\nI can submit the revert to other branches, but I can\u0027t test them on Square hardware. Let me know if I should do that.",
+      "parentUuid": "107cb4d8_0bc62478",
+      "revId": "a8b4a2d451434b7b8a15463634f8c3b916e3d8d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
