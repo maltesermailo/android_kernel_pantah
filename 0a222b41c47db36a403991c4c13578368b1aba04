@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d415a549_3d319332",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1189,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2022-01-29T00:40:28Z",
+      "side": 1,
+      "message": "I think the warning should be when we use TRUSTY_SHARE/TRUSTY_LEND and ret \u003d\u003d 0 (which is below), since that the case that we don\u0027t want but need for compatibility for now.",
+      "parentUuid": "0532a5e8_ece3f541",
+      "revId": "0a222b41c47db36a403991c4c13578368b1aba04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2b110f70_d1c5514a",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 10
@@ -65,6 +83,24 @@
       "writtenOn": "2022-01-28T23:54:38Z",
       "side": 1,
       "message": "How does this work. If you trigger this warning, trusty_transfer_memory will fail below. I think you want something like this above:\n```\nif (!ret) {\n    /* TODO: Enforce transfer_kind \u003d\u003d TRUSTY_SEND_SECURE */\n    WARN_ONCE(transfer_kind !\u003d TRUSTY_SEND_SECURE);\n    ...\n    goto mem_id_allocated;\n}\n```",
+      "revId": "0a222b41c47db36a403991c4c13578368b1aba04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d744668_fbea4848",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1191,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2022-01-29T00:40:28Z",
+      "side": 1,
+      "message": "In the current code, TRUSTY_SEND_SECURE case can\u0027t get here though.",
+      "parentUuid": "2b110f70_d1c5514a",
       "revId": "0a222b41c47db36a403991c4c13578368b1aba04",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
