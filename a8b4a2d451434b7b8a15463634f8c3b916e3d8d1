@@ -69,6 +69,24 @@
       "parentUuid": "0b391eea_ba2f09ea",
       "revId": "a8b4a2d451434b7b8a15463634f8c3b916e3d8d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f380aa6_27fd7dbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1442824
+      },
+      "writtenOn": "2022-01-29T18:49:19Z",
+      "side": 1,
+      "message": "Thanks, good to know. From a quick search I don\u0027t see a CVE or Android Security Bulletin around this, but sounds best to follow other vendors.\n\nHave they sent their userspace changes to AOSP? Otherwise it seems AOSP targets (emulators, Pixels) will remain broken.\n\nIf that\u0027s not going to happen, it\u0027d be great to know at least what approach they took -- did they just chmod things back to 755 (slightly defeating the purpose of taking this as a security fix), or did they backport/make their own versions of Kalesh\u0027s `AID_TRACEFS` patches?",
+      "parentUuid": "02708904_1691023a",
+      "revId": "a8b4a2d451434b7b8a15463634f8c3b916e3d8d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
