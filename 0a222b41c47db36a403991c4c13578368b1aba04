@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37c1b7e4_3af9712c",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1162,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-29T01:47:10Z",
+      "side": 1,
+      "message": "The problem is that the switch statement you have below does not cover the compatibility case. You need to always use the handle from the dma_buf if one is available. Once you fix that code path the switch statement is not really needed anymore as it just computes \"lend \u003d (transfer_kind \u003d\u003d TRUSTY_LEND)\"",
+      "parentUuid": "ea28e710_36e87db0",
+      "revId": "0a222b41c47db36a403991c4c13578368b1aba04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e7a27934_f843b8b9",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 10
@@ -108,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad41e2ac_1aaaf7c0",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1189,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-29T01:47:10Z",
+      "side": 1,
+      "message": "This is a different warning, although depending on what the final code structure looks like it might not be needed. With this goto label, it would  be useful to make sure you never jump here with that in the TRUSTY_SEND_SECURE case.",
+      "parentUuid": "d415a549_3d319332",
+      "revId": "0a222b41c47db36a403991c4c13578368b1aba04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2b110f70_d1c5514a",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 10
@@ -143,6 +179,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "349fe6d0_44dbddd8",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1191,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-29T01:47:10Z",
+      "side": 1,
+      "message": "Yes, but the current code does not seem to work in the case where the current warning triggers either, so some changes are needed. I was suggesting rearranging the code so that the warning triggers inside the code path that uses the handle you got from the dma_buf instead.\n\nOn a related note. Do we actually need a compatibility path for both TRUSTY_LEND and TRUSTY_SHARE? It sounds like you did not hit either of them.",
+      "parentUuid": "9d744668_fbea4848",
+      "revId": "0a222b41c47db36a403991c4c13578368b1aba04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "13269306_de89c829",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 10
@@ -172,6 +226,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "13269306_de89c829",
+      "revId": "0a222b41c47db36a403991c4c13578368b1aba04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4592e048_d94f0ec4",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1336,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-01-29T01:47:10Z",
+      "side": 1,
+      "message": "What you did in #11 is not really related to this comment, and it is not correct. transfer_kind is an enum type that can\u0027t have any value other than the values you check for, so the compiler can eliminate your entire check.",
+      "parentUuid": "cd8cc538_946c89fa",
       "revId": "0a222b41c47db36a403991c4c13578368b1aba04",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
