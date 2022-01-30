@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6c36edc_db4872c8",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1162,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2022-01-30T22:24:51Z",
+      "side": 1,
+      "message": "\u003e You need to always use the handle from the dma_buf if one is available. \n\nAh, right. I forgot which handle I\u0027m supposed to use (or rather which condition takes precedence). I only tested on the emulator, and it\u0027s OK with allocating multiple handles for the same buffer. I fixed that case.",
+      "parentUuid": "37c1b7e4_3af9712c",
+      "revId": "0a222b41c47db36a403991c4c13578368b1aba04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7a27934_f843b8b9",
@@ -142,6 +160,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a73ba23_0c78febf",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1189,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2022-01-30T22:24:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad41e2ac_1aaaf7c0",
+      "revId": "0a222b41c47db36a403991c4c13578368b1aba04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b110f70_d1c5514a",
@@ -197,6 +233,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c34a810f_ae6d2701",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1191,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2022-01-30T22:24:51Z",
+      "side": 1,
+      "message": "The case where the current warning triggers is when dma_buf owns a handle and TRUSTY_SHARE/TRUSTY_LEND was used. This should be the case that is most common. Let me do another round of testing on a device.",
+      "parentUuid": "349fe6d0_44dbddd8",
+      "revId": "0a222b41c47db36a403991c4c13578368b1aba04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "13269306_de89c829",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 10
@@ -244,6 +298,24 @@
       "side": 1,
       "message": "What you did in #11 is not really related to this comment, and it is not correct. transfer_kind is an enum type that can\u0027t have any value other than the values you check for, so the compiler can eliminate your entire check.",
       "parentUuid": "cd8cc538_946c89fa",
+      "revId": "0a222b41c47db36a403991c4c13578368b1aba04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58ed826e_e9eb46a1",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1336,
+      "author": {
+        "id": 1124693
+      },
+      "writtenOn": "2022-01-30T22:24:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4592e048_d94f0ec4",
       "revId": "0a222b41c47db36a403991c4c13578368b1aba04",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
