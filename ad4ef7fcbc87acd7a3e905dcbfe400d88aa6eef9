@@ -34,6 +34,24 @@
       "parentUuid": "5f6162f2_8a8c0c6b",
       "revId": "ad4ef7fcbc87acd7a3e905dcbfe400d88aa6eef9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d537b5d_756a80d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2022-02-01T22:23:16Z",
+      "side": 1,
+      "message": "No, that is the right process.\n\nSome types have become declaration-only. `abitidy` then prunes away anything unreachable resulting in other types vanishing altogether.\n\nWe still don\u0027t know why libabigail sometimes picks up only declarations and no definitions of a given struct. There are more details from https://sourceware.org/bugzilla/show_bug.cgi?id\u003d26646#c5 onwards.\n\nThere is a known workaround (as mentioned there), but it is expensive as it adds 90s to `abidw` running time on a fast machine.\n\nFTR the `vmlinux{3,4}` mentioned in the bug correspond to the LKGB and presubmit build for aosp/1925903, respectively.",
+      "parentUuid": "f34b7dcc_297c7c75",
+      "revId": "ad4ef7fcbc87acd7a3e905dcbfe400d88aa6eef9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
