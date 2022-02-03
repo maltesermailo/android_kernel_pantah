@@ -1841,6 +1841,20 @@ static const struct attribute_group bpf_attr_group = {
 };
 /* TODO remove to here */
 
+static ssize_t android_passthrough_show(struct kobject *kobj,
+					struct kobj_attribute *attr, char *buf)
+{
+	return sysfs_emit(buf, "supported\n");
+}
+
+static struct kobj_attribute passthrough_attr = __ATTR_RO(android_passthrough);
+
+static struct attribute *fuse_attributes[] = { &passthrough_attr.attr, NULL };
+static const struct attribute_group feature_attr_group = {
+	.name = "features",
+	.attrs = fuse_attributes,
+};
+
 static int fuse_sysfs_init(void)
 {
 	int err;
@@ -1860,8 +1874,14 @@ static int fuse_sysfs_init(void)
 	if (err)
 		goto out_fuse_remove_mount_point;
 
+	err = sysfs_create_group(fuse_kobj, &feature_attr_group);
+	if (err)
+		goto out_fuse_remove_bpf_group;
+
 	return 0;
 
+ out_fuse_remove_bpf_group:
+	sysfs_remove_group(fuse_kobj, &bpf_attr_group);
  out_fuse_remove_mount_point:
 	sysfs_remove_mount_point(fuse_kobj, "connections");
  out_fuse_unregister:
@@ -1872,6 +1892,7 @@ static int fuse_sysfs_init(void)
 
 static void fuse_sysfs_cleanup(void)
 {
+	sysfs_remove_group(fuse_kobj, &feature_attr_group);
 	sysfs_remove_mount_point(fuse_kobj, "connections");
 	kobject_put(fuse_kobj);
 }
