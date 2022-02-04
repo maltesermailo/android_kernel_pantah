@@ -16,6 +16,24 @@
       "message": "scsi_debug should be a vendor-module only, we don\u0027t want to support that, right?",
       "revId": "f02d044bb58cd4f65261e16a37e18051f1a466ce",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb60f423_d0614440",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2022-02-04T16:15:55Z",
+      "side": 1,
+      "message": "We need this patch to build scsi_debug and null_blk as vendor modules. Without this patch attempting to build scsi_debug and null_blk as vendor modules fails as follows:\n\nERROR: modpost: \"uuid_gen\" [drivers/scsi/scsi_debug.ko] undefined!\nERROR: modpost: \"ip_compute_csum\" [drivers/scsi/scsi_debug.ko] undefined!\nERROR: modpost: \"sg_copy_buffer\" [drivers/scsi/scsi_debug.ko] undefined!\nERROR: modpost: \"sg_copy_to_buffer\" [drivers/scsi/scsi_debug.ko] undefined!\nERROR: modpost: \"sg_pcopy_from_buffer\" [drivers/scsi/scsi_debug.ko] undefined!\nERROR: modpost: \"int_to_scsilun\" [drivers/scsi/scsi_debug.ko] undefined!\nERROR: modpost: \"sg_copy_from_buffer\" [drivers/scsi/scsi_debug.ko] undefined!\nERROR: modpost: \"blk_abort_request\" [drivers/scsi/scsi_debug.ko] undefined!\nERROR: modpost: \"scsi_set_sense_information\" [drivers/scsi/scsi_debug.ko] undefined!\nERROR: modpost: \"scsi_change_queue_depth\" [drivers/scsi/scsi_debug.ko] undefined!\nERROR: modpost: \"scsi_build_sense_buffer\" [drivers/scsi/scsi_debug.ko] undefined!\nERROR: modpost: \"__scsi_iterate_devices\" [drivers/scsi/scsi_debug.ko] undefined!\nERROR: modpost: \"xa_set_mark\" [drivers/scsi/scsi_debug.ko] undefined!\nERROR: modpost: \"scsi_remove_host\" [drivers/scsi/scsi_debug.ko] undefined!\nERROR: modpost: \"scsi_host_put\" [drivers/scsi/scsi_debug.ko] undefined!\nERROR: modpost: \"scsi_scan_host\" [drivers/scsi/scsi_debug.ko] undefined!\nERROR: modpost: \"scsi_add_host_with_dma\" [drivers/scsi/scsi_debug.ko] undefined!\nERROR: modpost: \"scsi_host_alloc\" [drivers/scsi/scsi_debug.ko] undefined!\nERROR: modpost: \"xa_clear_mark\" [drivers/scsi/scsi_debug.ko] undefined!\nERROR: modpost: \"xa_get_mark\" [drivers/scsi/scsi_debug.ko] undefined!\nERROR: modpost: \"__xa_alloc\" [drivers/scsi/scsi_debug.ko] undefined!\nERROR: modpost: \"root_device_unregister\" [drivers/scsi/scsi_debug.ko] undefined!\nERROR: modpost: \"__root_device_register\" [drivers/scsi/scsi_debug.ko] undefined!\nERROR: modpost: \"io_schedule\" [drivers/block/null_blk.ko] undefined!\nERROR: modpost: \"badblocks_clear\" [drivers/block/null_blk.ko] undefined!\nERROR: modpost: \"badblocks_set\" [drivers/block/null_blk.ko] undefined!\nERROR: modpost: \"badblocks_show\" [drivers/block/null_blk.ko] undefined!\nERROR: modpost: \"config_item_put\" [drivers/block/null_blk.ko] undefined!\nERROR: modpost: \"config_item_init_type_name\" [drivers/block/null_blk.ko] undefined!\nERROR: modpost: \"blk_mq_stop_hw_queues\" [drivers/block/null_blk.ko] undefined!\nERROR: modpost: \"blk_mq_init_queue_data\" [drivers/block/null_blk.ko] undefined!\nERROR: modpost: \"badblocks_init\" [drivers/block/null_blk.ko] undefined!\nERROR: modpost: \"radix_tree_preload\" [drivers/block/null_blk.ko] undefined!\nERROR: modpost: \"radix_tree_gang_lookup\" [drivers/block/null_blk.ko] undefined!\nERROR: modpost: \"configfs_unregister_subsystem\" [drivers/block/null_blk.ko] undefined!\nERROR: modpost: \"badblocks_exit\" [drivers/block/null_blk.ko] undefined!\nERROR: modpost: \"configfs_register_subsystem\" [drivers/block/null_blk.ko] undefined!\nERROR: modpost: \"config_group_init\" [drivers/block/null_blk.ko] undefined!\nERROR: modpost: \"errno_to_blk_status\" [drivers/block/null_blk.ko] undefined!\nERROR: modpost: \"radix_tree_delete_item\" [drivers/block/null_blk.ko] undefined!\nERROR: modpost: \"badblocks_check\" [drivers/block/null_blk.ko] undefined!\nERROR: modpost: \"crypto_unregister_notifier\" [lib/crc-t10dif.ko] undefined!\nERROR: modpost: \"crypto_register_notifier\" [lib/crc-t10dif.ko] undefined!",
+      "parentUuid": "17402b3f_2037a12a",
+      "revId": "f02d044bb58cd4f65261e16a37e18051f1a466ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
