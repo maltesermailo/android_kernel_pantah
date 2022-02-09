@@ -20,3 +20,8 @@ package(
 load("//build/kernel/kleaf:common_kernels.bzl", "define_common_kernels")
 
 define_common_kernels()
+
+alias(
+    name = "build.config.constants",
+    actual = "build.config/constants",
+)
