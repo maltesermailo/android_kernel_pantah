@@ -5702,6 +5702,7 @@ restart:
 	BUG();
 }
 
+<<<<<<< HEAD   (6ebb3c FROMLIST: sched: Defer wakeup in ttwu() for unschedulable fr)
 #ifdef CONFIG_SCHED_CORE
 static inline bool is_task_rq_idle(struct task_struct *t)
 {
@@ -6240,6 +6241,24 @@ pick_next_task(struct rq *rq, struct task_struct *prev, struct rq_flags *rf)
 #else
 # define SM_MASK_PREEMPT	SM_PREEMPT
 #endif
+=======
+static bool __task_can_run(struct task_struct *prev)
+{
+	if (__fatal_signal_pending(prev))
+		return true;
+
+	if (!frozen_or_skipped(prev))
+		return true;
+
+	/*
+	 * We can't safely go back on the runqueue if we're an asymmetric
+	 * task skipping the freezer. Doing so can lead to migration failures
+	 * later on if there aren't any suitable CPUs left around for us to
+	 * move to.
+	 */
+	return task_cpu_possible_mask(prev) == cpu_possible_mask;
+}
+>>>>>>> CHANGE (48879e ANDROID: sched: Don't allow frozen asymmetric tasks to remai)
 
 /*
  * __schedule() is the main scheduler function.
@@ -6332,10 +6351,17 @@ static void __sched notrace __schedule(unsigned int sched_mode)
 	 *  - we form a control dependency vs deactivate_task() below.
 	 *  - ptrace_{,un}freeze_traced() can change ->state underneath us.
 	 */
+<<<<<<< HEAD   (6ebb3c FROMLIST: sched: Defer wakeup in ttwu() for unschedulable fr)
 	prev_state = READ_ONCE(prev->__state);
 	if (!(sched_mode & SM_MASK_PREEMPT) && prev_state) {
 		if (signal_pending_state(prev_state, prev)) {
 			WRITE_ONCE(prev->__state, TASK_RUNNING);
+=======
+	prev_state = prev->state;
+	if (!preempt && prev_state) {
+		if (signal_pending_state(prev_state, prev) && __task_can_run(prev)) {
+			prev->state = TASK_RUNNING;
+>>>>>>> CHANGE (48879e ANDROID: sched: Don't allow frozen asymmetric tasks to remai)
 		} else {
 			prev->sched_contributes_to_load =
 				(prev_state & TASK_UNINTERRUPTIBLE) &&
