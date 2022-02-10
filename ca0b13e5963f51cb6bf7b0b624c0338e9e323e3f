@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8b6da5e7_22c6acd7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-02-10T15:31:13Z",
+      "side": 1,
+      "message": "We don\u0027t trust the host, so we shouldn\u0027t let it spoof the ID of another entity.",
+      "parentUuid": "3881358b_1eb1efe5",
+      "revId": "ca0b13e5963f51cb6bf7b0b624c0338e9e323e3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7d5a5bfa_66cacc94",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 1
@@ -139,6 +157,24 @@
       "side": 1,
       "message": "It would be strange not to handle clearing pages at EL3 -- doesn\u0027t that mean that clearing doesn\u0027t work when there isn\u0027t a hypervisor? In any case, for now I think we should keep this as minimal as we can and extend it only as features are actually required.",
       "parentUuid": "e7251886_90cd942a",
+      "revId": "ca0b13e5963f51cb6bf7b0b624c0338e9e323e3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1292123_ea6a8ef0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-02-10T15:31:13Z",
+      "side": 1,
+      "message": "I\u0027m not saying you should handle it, I\u0027m just saying you should check that there aren\u0027t any unsupported features (such as clearing) being requested, and return an error if so.",
+      "parentUuid": "107ac38f_befb6541",
       "revId": "ca0b13e5963f51cb6bf7b0b624c0338e9e323e3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
