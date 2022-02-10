@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dd2b7577_9a98dfcb",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-02-10T13:36:30Z",
+      "side": 1,
+      "message": "It will check the receiver ID I guess, I\u0027m not sure what it does if the receiver ID is for a non-secure VM. I don\u0027t think it will check the sender ID, it\u0027s up to the non-secure world to do that for non-secure senders.",
+      "parentUuid": "ba715bbd_6d9a6527",
+      "revId": "ca0b13e5963f51cb6bf7b0b624c0338e9e323e3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7d5a5bfa_66cacc94",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 1
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Again, won\u0027t secure handle these?",
       "parentUuid": "7d5a5bfa_66cacc94",
+      "revId": "ca0b13e5963f51cb6bf7b0b624c0338e9e323e3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7251886_90cd942a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-02-10T13:36:30Z",
+      "side": 1,
+      "message": "I don\u0027t think it handles clearing pages. I\u0027m not sure how much other validation it does, I haven\u0027t looked at the code in a while but from memory I thought it was fairly minimal and relied on the hypervisor to do most of the work. In any case, it\u0027s safer to have duplicate checks than miss them, right?",
+      "parentUuid": "1c76ff93_0273a469",
       "revId": "ca0b13e5963f51cb6bf7b0b624c0338e9e323e3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
