@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3881358b_1eb1efe5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-02-10T14:53:21Z",
+      "side": 1,
+      "message": "Agreed. When we\u0027re exposing FF-A to pKVM guests, then we will need to look at this. But right now, I do not see the need.",
+      "parentUuid": "dd2b7577_9a98dfcb",
+      "revId": "ca0b13e5963f51cb6bf7b0b624c0338e9e323e3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7d5a5bfa_66cacc94",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 1
@@ -103,6 +121,24 @@
       "side": 1,
       "message": "I don\u0027t think it handles clearing pages. I\u0027m not sure how much other validation it does, I haven\u0027t looked at the code in a while but from memory I thought it was fairly minimal and relied on the hypervisor to do most of the work. In any case, it\u0027s safer to have duplicate checks than miss them, right?",
       "parentUuid": "1c76ff93_0273a469",
+      "revId": "ca0b13e5963f51cb6bf7b0b624c0338e9e323e3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "107ac38f_befb6541",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-02-10T14:53:21Z",
+      "side": 1,
+      "message": "It would be strange not to handle clearing pages at EL3 -- doesn\u0027t that mean that clearing doesn\u0027t work when there isn\u0027t a hypervisor? In any case, for now I think we should keep this as minimal as we can and extend it only as features are actually required.",
+      "parentUuid": "e7251886_90cd942a",
       "revId": "ca0b13e5963f51cb6bf7b0b624c0338e9e323e3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
