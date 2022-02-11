@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ae7a595_49bdad76",
+        "filename": "build.config.gki.aarch64",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2022-02-11T16:45:15Z",
+      "side": 1,
+      "message": "\"Keep in sync with BUILD.bazel, define_common_kernels and update the latter if this list differs from...\"?\n\nWould it be less confusing to say \"Update\" instead?\n\nOr from a slightly different perspective: `BUILD.bazel` has a \"default\" which is a glob. There is no default in `build.config` other than (`build.sh` and `build_abi.sh`\u0027s behaviour of) the environment variable not being set at all.\n\nNow, I know an XML file is going to be added here. Perhaps we can name it so it does NOT get picked up by the glob? A more explicit comment might be useful.\n\nI suppose it all depends on the directionality, which place will get updated first?",
+      "range": {
+        "startLine": 10,
+        "startChar": 2,
+        "endLine": 10,
+        "endChar": 11
+      },
+      "revId": "19a1a84e7ec4f1dbb9fbd19d877b4b3055dab99f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2089c39_92991c2b",
+        "filename": "build.config.gki.aarch64",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2022-02-11T16:45:15Z",
+      "side": 1,
+      "message": "Keep in sync",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 8
+      },
+      "revId": "19a1a84e7ec4f1dbb9fbd19d877b4b3055dab99f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
