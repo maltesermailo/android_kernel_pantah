@@ -16,6 +16,24 @@
       "message": "Please do not do this for android13, fix userspace properly.",
       "revId": "83f9f1f09dfc474a1021da20205b9646fe241282",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33750bca_124caa30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2022-02-15T19:37:26Z",
+      "side": 1,
+      "message": "Hi Greg. Sorry I should have updated the bugs in the commit text:\n\nWe have attempted to fix the userspace in T. However more tool breakages were discovered (traceur app) b/219393750, for which we don\u0027t have a simple fix this late in T (to be safe we decided to revert the kernel change). This is not so much a security issue for Android since access control is really delegated to sepolicy.",
+      "parentUuid": "c706f5b3_96fae0e6",
+      "revId": "83f9f1f09dfc474a1021da20205b9646fe241282",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
