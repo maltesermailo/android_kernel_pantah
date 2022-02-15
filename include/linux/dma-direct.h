@@ -27,7 +27,12 @@ struct bus_dma_region {
 static inline bool zone_dma32_is_empty(int node)
 {
 #ifdef CONFIG_ZONE_DMA32
-	pg_data_t *pgdat = NODE_DATA(node);
+	pg_data_t *pgdat;
+#ifdef CONFIG_NUMA
+	if (node == NUMA_NO_NODE)
+		node = numa_mem_id();
+#endif
+	pgdat = NODE_DATA(node);
 
 	return zone_is_empty(&pgdat->node_zones[ZONE_DMA32]);
 #else
