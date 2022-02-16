@@ -139,9 +139,12 @@ static void s2idle_loop(void)
 			break;
 		}
 
+<<<<<<< HEAD   (acccc2 FROMLIST: kasan: improve vmalloc tests)
 		pm_wakeup_clear(false);
 		clear_wakeup_reasons();
 
+=======
+>>>>>>> BRANCH (a0ebea Linux 5.15.24)
 		s2idle_enter();
 	}
 
