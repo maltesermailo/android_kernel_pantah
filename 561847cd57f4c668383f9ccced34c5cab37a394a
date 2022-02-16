@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb038ab6_96840ea3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1040443
+      },
+      "writtenOn": "2022-02-16T16:46:49Z",
+      "side": 1,
+      "message": "\u003e Patch Set 4: Code-Review+2\n\u003e \n\u003e By voting Code-Review+2 the following files are now code-owner approved by \u003cGERRIT_ACCOUNT_1125653\u003e:\n\u003e * fs/tracefs/inode.c\n\u003e \n\nHey folks thanks for understanding here.\nTo be honest I am still doing my best to try to figure out a solution for this in userspace.\n\nUnfortunately every single time in the last month that Kalesh and I went \"okay we got this sorted\" some new team showed up with a new breakage in some new case I didn\u0027t think about, and this is getting me nervous.\n\nThe issue here is that before these changes tracefs was world-accessible and Android used SELinux as a gating mechanism (still does).\nNow we introduced an extra layer (A capability group) and we are slowly discovering cases we were not thinking about where yet another process needs to be added to the capability group.\n\nThis would have been probably easier if there was a mount option to mount tracefs with 0666 (0755 for dirs), that is a way to opt in back to the old behaviour.\n\nI understand how the current group-based approach makes sense for most Linux Desktop cases, but Android historically has been heavily relied on Selinux (and still does)",
+      "revId": "561847cd57f4c668383f9ccced34c5cab37a394a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
