@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8ab8725a_f311fa3e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-02-16T13:40:54Z",
+      "side": 1,
+      "message": "The host could pretend that a VM is sending the memory. This shouldn\u0027t actually cause an issue by itself, as the secure world should know that there is no such VM, but perhaps it could be combined with some other bugs, so I\u0027d be happier if the hypervisor at least checked that the sender ID was the correct ID for the host and refused to send it on if not.",
+      "parentUuid": "a668d520_8720fc7c",
+      "revId": "ca0b13e5963f51cb6bf7b0b624c0338e9e323e3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7d5a5bfa_66cacc94",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 1
@@ -211,6 +229,24 @@
       "side": 1,
       "message": "Isn\u0027t that what currently happens? If clearing is requested and EL3 supports clearing, then the clearing will be handled by EL3. If it doesn\u0027t, then an error will be returned by virtue of us just forwarding the calls/responses between EL1 and EL3.\n\nWhy do we need to care whether EL3 supports these optional features if we are not relying on them?",
       "parentUuid": "b1292123_ea6a8ef0",
+      "revId": "ca0b13e5963f51cb6bf7b0b624c0338e9e323e3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c15198df_7d721b57",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1380243
+      },
+      "writtenOn": "2022-02-16T13:40:54Z",
+      "side": 1,
+      "message": "I guess my philosophy here (and in general) is essentially defence in depth, I\u0027d rather have more checks than necessary than not enough.",
+      "parentUuid": "ca0a557b_f579cb64",
       "revId": "ca0b13e5963f51cb6bf7b0b624c0338e9e323e3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
