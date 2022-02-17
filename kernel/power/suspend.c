@@ -137,9 +137,12 @@ static void s2idle_loop(void)
 			break;
 		}
 
+<<<<<<< HEAD   (eb8cf9 Merge 8ce964b520ad ("Merge tag 'gfs2-v5.16-rc3-fixes2' of gi)
 		pm_wakeup_clear(false);
 		clear_wakeup_reasons();
 
+=======
+>>>>>>> BRANCH (883fd0 Merge tag 'acpi-5.17-rc4' of git://git.kernel.org/pub/scm/li)
 		s2idle_enter();
 	}
 
