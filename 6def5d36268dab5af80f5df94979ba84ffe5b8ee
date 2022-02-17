@@ -16,6 +16,125 @@
       "message": "very original version, do not pay attention to this.",
       "revId": "6def5d36268dab5af80f5df94979ba84ffe5b8ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baca31e6_f1ba3758",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2022-02-17T05:59:04Z",
+      "side": 1,
+      "message": "Hey Zichar: In the future, this sort of early patch review is probably better done over private email (via git send-email), and after that its probably best to just send the patch to the list (rather then submitting to Gerrit) for discussion.\n\nAs the android-mainline branch already has wakeup reason functionality, and the goal here is to upstream this functionality, its would be less confusing to the android tree maintainers (who automatically get cc\u0027ed) to avoid submitting them to gerrit and instead focus the discussion on the list.",
+      "revId": "6def5d36268dab5af80f5df94979ba84ffe5b8ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df43988a_6429aee3",
+        "filename": "include/linux/irq.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2022-02-17T05:59:04Z",
+      "side": 1,
+      "message": "Probably need to declare irq_err_record() here?\n\nDoes this patch actually build?",
+      "revId": "6def5d36268dab5af80f5df94979ba84ffe5b8ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67af4307_136a04f3",
+        "filename": "kernel/irq/chip.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2022-02-17T05:59:04Z",
+      "side": 1,
+      "message": "Why is only this condition unlikely?",
+      "revId": "6def5d36268dab5af80f5df94979ba84ffe5b8ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ccf92d5_31d03c64",
+        "filename": "kernel/irq/chip.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2022-02-17T05:59:04Z",
+      "side": 1,
+      "message": "In this case, if things are very wrong, it looks like you might call irq_err_record() multiple times for a single call to irq_check_error(). \n\nThough the irq_error_record() can only note a single error at a time.\n\nShould this be a if () {} else if () {} else if (){ } statement instead (or should multiple errors be reported on a single call here)?",
+      "revId": "6def5d36268dab5af80f5df94979ba84ffe5b8ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59cdf187_f1f57302",
+        "filename": "kernel/irq/irqdesc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2022-02-17T05:59:04Z",
+      "side": 1,
+      "message": "Can there only be one error logged at a time? What happens if a few come in quickly together? Does it make sense to have a small ring buffer to log multiple errors?  (obviously, as you note, it needs to be atomic)",
+      "revId": "6def5d36268dab5af80f5df94979ba84ffe5b8ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1094eec5_eb1ddbe8",
+        "filename": "kernel/irq/irqdesc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2022-02-17T05:59:04Z",
+      "side": 1,
+      "message": "I might consider renaming this to irq_err_dequeue() to extract one error from a small ring buffer.",
+      "revId": "6def5d36268dab5af80f5df94979ba84ffe5b8ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd2fe1ba_b5bc3d46",
+        "filename": "kernel/irq/irqdesc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1010110
+      },
+      "writtenOn": "2022-02-17T05:59:04Z",
+      "side": 1,
+      "message": "Wrong function name?",
+      "revId": "6def5d36268dab5af80f5df94979ba84ffe5b8ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
