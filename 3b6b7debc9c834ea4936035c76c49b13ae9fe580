@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89d4524e_83b17d9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1902326
+      },
+      "writtenOn": "2022-02-17T19:41:16Z",
+      "side": 1,
+      "message": "I\u0027m taking over this CL in order to get this tracepoints landed. In order to target the latest Trusty branch I\u0027ve had to create a new CL https://android-review.googlesource.com/c/kernel/common/+/1990690. I\u0027ve addressed the initial comments in that CL.",
+      "revId": "3b6b7debc9c834ea4936035c76c49b13ae9fe580",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "762c9430_d1792710",
@@ -41,6 +58,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f9ec427_41448c19",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 998,
+      "author": {
+        "id": 1902326
+      },
+      "writtenOn": "2022-02-17T19:41:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6d3454f3_31e7d8b1",
+      "revId": "3b6b7debc9c834ea4936035c76c49b13ae9fe580",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df0bae61_494d3d63",
@@ -54,6 +89,30 @@
       "writtenOn": "2021-02-06T06:43:09Z",
       "side": 1,
       "message": "2021 \nSame for other files",
+      "range": {
+        "startLine": 3,
+        "startChar": 17,
+        "endLine": 3,
+        "endChar": 21
+      },
+      "revId": "3b6b7debc9c834ea4936035c76c49b13ae9fe580",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc8102bf_68245b35",
+        "filename": "drivers/trusty/trusty-irq-trace.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1902326
+      },
+      "writtenOn": "2022-02-17T19:41:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "df0bae61_494d3d63",
       "range": {
         "startLine": 3,
         "startChar": 17,
@@ -87,6 +146,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d152cbe_981fc0a4",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1902326
+      },
+      "writtenOn": "2022-02-17T19:41:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "873f21a3_30c99e4c",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 36
+      },
+      "revId": "3b6b7debc9c834ea4936035c76c49b13ae9fe580",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad8f375f_dd87a715",
@@ -100,6 +183,24 @@
       "writtenOn": "2021-02-06T06:43:09Z",
       "side": 1,
       "message": "The other tracepoints surround smc() call. What\u0027s different here?",
+      "revId": "3b6b7debc9c834ea4936035c76c49b13ae9fe580",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cefdf996_42594010",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1902326
+      },
+      "writtenOn": "2022-02-17T19:41:16Z",
+      "side": 1,
+      "message": "This tracepoint and the corresponding `trace_trusty_std_call32_done` tracepoint surround  `while` loop that repeatedly calls `trusty_std_call_helper`. If I\u0027m understanding it correctly, we need to repeatedly perform `smc()` calls in case Trusty is interrupted in order to ensure that it has enough time to complete whatever operation was requested. So having this tracepoint span the entire sequence of repeated `smc()` calls will help give us a high level picture of how long it took to complete the operation.",
+      "parentUuid": "ad8f375f_dd87a715",
       "revId": "3b6b7debc9c834ea4936035c76c49b13ae9fe580",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
