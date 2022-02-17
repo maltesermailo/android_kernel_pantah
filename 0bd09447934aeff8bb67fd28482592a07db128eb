@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c90e5b18_efc1dac1",
+        "filename": "kernel/power/energy_model.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1283701
+      },
+      "writtenOn": "2022-02-17T23:19:10Z",
+      "side": 1,
+      "message": "IIUC em_dev_update_perf_domain() is called periodically when IPA is active:\n\n```\nallocate_power()\n  modify_em_values()\n    em_dev_update_perf_domain()\n```\n\nWould it make sense to have an active rt_table and an inactive one (and swap between them) instead of doing the allocations in every call to em_dev_update_perf_domain()? Not sure if the allocations actually result in a significant overhead compared with the power calculations, ..., but it seems wasteful :)",
+      "range": {
+        "startLine": 283,
+        "startChar": 1,
+        "endLine": 287,
+        "endChar": 46
+      },
+      "revId": "0bd09447934aeff8bb67fd28482592a07db128eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
