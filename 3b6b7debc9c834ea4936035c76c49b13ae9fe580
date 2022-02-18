@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "611d9464_6777c602",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 924,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-02-18T23:23:51Z",
+      "side": 1,
+      "message": "It might never be NULL. I added the check to make sure we don\u0027t crash because of the added trace point if any these functions can be called when `dn-\u003echan` is NULL. If we go though the code and make sure that can\u0027t happen, then this guard can be removed. This function already has a code path where it assumes `dn-\u003echan` is a valid pointer, so I think there is a good chance that this function will never be called with a NULL `dn-\u003echan`.  The other functions with similar trace points don\u0027t touch `dn-\u003echan` though.",
+      "parentUuid": "762c9430_d1792710",
+      "range": {
+        "startLine": 924,
+        "startChar": 22,
+        "endLine": 924,
+        "endChar": 30
+      },
+      "revId": "3b6b7debc9c834ea4936035c76c49b13ae9fe580",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6d3454f3_31e7d8b1",
         "filename": "drivers/trusty/trusty-ipc.c",
         "patchSetId": 2
@@ -172,6 +196,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c7f42bc_fc7a2fdb",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-02-18T23:23:51Z",
+      "side": 1,
+      "message": "This was intentional so that we can see which variant was used (although we have WARN_ON checks above that block using the wrong api, so it would be possible to reconstruct the caller based on the smcnr argument)",
+      "parentUuid": "2d152cbe_981fc0a4",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 36
+      },
+      "revId": "3b6b7debc9c834ea4936035c76c49b13ae9fe580",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ad8f375f_dd87a715",
         "filename": "drivers/trusty/trusty.c",
         "patchSetId": 2
@@ -201,6 +249,24 @@
       "side": 1,
       "message": "This tracepoint and the corresponding `trace_trusty_std_call32_done` tracepoint surround  `while` loop that repeatedly calls `trusty_std_call_helper`. If I\u0027m understanding it correctly, we need to repeatedly perform `smc()` calls in case Trusty is interrupted in order to ensure that it has enough time to complete whatever operation was requested. So having this tracepoint span the entire sequence of repeated `smc()` calls will help give us a high level picture of how long it took to complete the operation.",
       "parentUuid": "ad8f375f_dd87a715",
+      "revId": "3b6b7debc9c834ea4936035c76c49b13ae9fe580",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6226e4c6_402f14f6",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-02-18T23:23:51Z",
+      "side": 1,
+      "message": "Yes. trusty_std_call_inner, which is what where the tracepoints around the smc call related to trusty_std_call32, can be called many times per trusty_std_call32 call.",
+      "parentUuid": "cefdf996_42594010",
       "revId": "3b6b7debc9c834ea4936035c76c49b13ae9fe580",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
