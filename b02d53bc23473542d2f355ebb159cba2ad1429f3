@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "367ef468_64aa23fd",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-02-22T15:26:21Z",
+      "side": 1,
+      "message": "I guess this means the iommu_lock is actually unecessary? Or is there another place where it is needed?",
+      "range": {
+        "startLine": 46,
+        "startChar": 1,
+        "endLine": 46,
+        "endChar": 38
+      },
+      "revId": "b02d53bc23473542d2f355ebb159cba2ad1429f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a291297_f6c394d6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-02-22T15:26:21Z",
+      "side": 1,
+      "message": "Feels like this should be factored out and generalized, but oh well",
+      "range": {
+        "startLine": 114,
+        "startChar": 1,
+        "endLine": 125,
+        "endChar": 2
+      },
+      "revId": "b02d53bc23473542d2f355ebb159cba2ad1429f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f2d85fd9_d3a39620",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 7
@@ -19,6 +65,29 @@
         "startChar": 0,
         "endLine": 363,
         "endChar": 61
+      },
+      "revId": "b02d53bc23473542d2f355ebb159cba2ad1429f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8608d1b_5468be9a",
+        "filename": "arch/arm64/kvm/iommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-02-22T15:26:21Z",
+      "side": 1,
+      "message": "Maybe get rid of the loop and duplicate the kvm_call_hyp_nvhe() call? Do we expect to re-try more than once?",
+      "range": {
+        "startLine": 32,
+        "startChar": 1,
+        "endLine": 32,
+        "endChar": 13
       },
       "revId": "b02d53bc23473542d2f355ebb159cba2ad1429f3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
