@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b88fcbfc_eac53c91",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4527,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-02-23T21:00:43Z",
+      "side": 1,
+      "message": "I have one more question. If you want to skip draining pcp page lists, then even go here and retry get_page_from_freelist()? Is the hope here that unreserve_highatomic_pageblock() alone will free the required memory?\n\nIf not, it sounds to me the whole retry look is not useful and I would place the vendor hook before retry to skip to the very end. Please clarify.",
+      "range": {
+        "startLine": 4527,
+        "startChar": 2,
+        "endLine": 4527,
+        "endChar": 22
+      },
+      "revId": "488e7f47dafdeb8e6adcbf40f9b1ec55b662d890",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c0b7ffa5_f57201b1",
         "filename": "mm/page_alloc.c",
         "patchSetId": 4
@@ -14,6 +37,24 @@
       "writtenOn": "2022-02-23T11:39:31Z",
       "side": 1,
       "message": "if (!skip_pcp_drain) {\n\t\t\tdrain_all_pages(NULL);\n\t\t\tdrained \u003d true;\n\t\t}",
+      "revId": "488e7f47dafdeb8e6adcbf40f9b1ec55b662d890",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14826600_a52e13e1",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4529,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-02-23T21:00:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0b7ffa5_f57201b1",
       "revId": "488e7f47dafdeb8e6adcbf40f9b1ec55b662d890",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
