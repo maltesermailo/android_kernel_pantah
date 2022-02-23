@@ -85,6 +85,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8900dada_15ba1b57",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2022-02-23T11:01:24Z",
+      "side": 1,
+      "message": "Maybe.\n\nI think what I dislike is that there are two notions of \u0027loaded\u0027:\n- the vcpu loaded attribute\n- the per-CPU pointer\n\nIdeally, we\u0027d drop the attribute altogether, and replace it with a pointer to the per-CPU pointer indicating *where* it is loaded. This xchg() becomes a cmpxchg() expecting NULL as the previous value, and the function can populate the per-CPU pointer with the vcpu pointer.\n\nThis rids us of some code in __pkvm_vcpu_load(), and the function now deserves its load_shadow_vcpu() name.",
+      "parentUuid": "f65554b1_09098297",
+      "range": {
+        "startLine": 293,
+        "startChar": 0,
+        "endLine": 295,
+        "endChar": 0
+      },
+      "revId": "521e2f1780da7543d07183f86ada76de57e79567",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a3d2c999_b23e85f5",
         "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
         "patchSetId": 2
