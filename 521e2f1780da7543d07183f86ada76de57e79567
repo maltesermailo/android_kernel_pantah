@@ -157,6 +157,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ffd39103_69376c00",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2022-02-23T14:29:50Z",
+      "side": 1,
+      "message": "All I am saying is that you can replace the boolean with the address of the per-CPU pointer holding the address of the vcpu. If it is NULL, the vcpu isn\u0027t loaded. Conversely, if it is !NULL, it is loaded.\n\nPassing the address of the per-CPU pointer to this function *and* having it to update the per-CPU state as well makes it self-contained: if this function return success, the vcpu is flagged as loaded (it contains a !NULL pointer), the per-CPU state is up-to-date, and we can even deduce which CPU the vcpu is loaded on by looking at the stored pointer, which is invaluable for debugging.\n\nNone of that needs to happen right now, but it would be a good cleanup.",
+      "parentUuid": "08420543_87b6887b",
+      "range": {
+        "startLine": 293,
+        "startChar": 0,
+        "endLine": 295,
+        "endChar": 0
+      },
+      "revId": "521e2f1780da7543d07183f86ada76de57e79567",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a3d2c999_b23e85f5",
         "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
         "patchSetId": 2
