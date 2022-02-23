@@ -16,6 +16,24 @@
       "message": "nit: the idiomatic infinite loop in the kernel is a while(true) loop. But in this case, it would be more elegantly written as a do {} while() loop:\n```\ndo {\n        refcount \u003d READ_ONCE();\n        BUG_ON();\n} while(unlikely(cmpxchg(...) !\u003d refcount));\n```",
       "revId": "cc7be17e8b9ec9362592c5aa17772991461a6679",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71325f44_67c810c7",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/memory.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2022-02-23T10:12:44Z",
+      "side": 1,
+      "message": "Will fix.",
+      "parentUuid": "6f6e000a_4dc5bffd",
+      "revId": "cc7be17e8b9ec9362592c5aa17772991461a6679",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
