@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "69317949_6da08ed1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-02-24T13:30:15Z",
+      "side": 1,
+      "message": "Please can you describe what is broken here?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 18
+      },
+      "revId": "bee18f09b4d451ef29a348c2c71e98ba398d1930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "50bcde42_539d2f59",
@@ -32,6 +55,75 @@
       "side": 1,
       "message": "You mean after the read and write once patches?",
       "parentUuid": "50bcde42_539d2f59",
+      "revId": "bee18f09b4d451ef29a348c2c71e98ba398d1930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1db02d5_f727cca7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-02-24T13:30:15Z",
+      "side": 1,
+      "message": "Make this unsigned?",
+      "range": {
+        "startLine": 254,
+        "startChar": 55,
+        "endLine": 254,
+        "endChar": 68
+      },
+      "revId": "bee18f09b4d451ef29a348c2c71e98ba398d1930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31dd165b_cc28e8f8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-02-24T13:30:15Z",
+      "side": 1,
+      "message": "How can this race with the lock held?",
+      "range": {
+        "startLine": 261,
+        "startChar": 8,
+        "endLine": 261,
+        "endChar": 17
+      },
+      "revId": "bee18f09b4d451ef29a348c2c71e98ba398d1930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01c368e8_95e3fa73",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-02-24T13:30:15Z",
+      "side": 1,
+      "message": "We can probably relax the memory ordering here once we\u0027ve got the refcount stuff sorted out.",
+      "range": {
+        "startLine": 293,
+        "startChar": 14,
+        "endLine": 293,
+        "endChar": 18
+      },
       "revId": "bee18f09b4d451ef29a348c2c71e98ba398d1930",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
