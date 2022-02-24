@@ -22,6 +22,30 @@
       },
       "revId": "ce6321be380e5f14a344a537b0acd3ec9cf5d8fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0da240d4_9e4ff9b1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2022-02-24T06:42:16Z",
+      "side": 1,
+      "message": "The problem is in the unpinning. When it\u0027s called we don\u0027t necessarily have the host_vcpu array (i.e., at __pkvm_teardown_shadow).\n\nThat said, I agree that I am not too happy with these two functions, they are still not that clean I think.\n\nWhat are your thoughts?",
+      "parentUuid": "69ced7e0_ba31e225",
+      "range": {
+        "startLine": 350,
+        "startChar": 31,
+        "endLine": 350,
+        "endChar": 76
+      },
+      "revId": "ce6321be380e5f14a344a537b0acd3ec9cf5d8fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
