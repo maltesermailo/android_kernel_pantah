@@ -46,6 +46,30 @@
       },
       "revId": "ce6321be380e5f14a344a537b0acd3ec9cf5d8fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "828dab07_a8da7bed",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-02-24T14:06:59Z",
+      "side": 1,
+      "message": "Sorry, I don\u0027t follow you here. __pkvm_teardown_shadow() passes a vm at the moment, so it could pass vm-\u003eshadow_vcpus instead, no? Then we\u0027d have:\n\nstatic void unpin_host_vcpus(struct kvm_vcpu *vcpus, int nr_vcpus);\n\nwhich could do:\n\n    for (i \u003d 0; i \u003c nr_vcpus; ++i) {\n        struct kvm_vcpu *host_vcpu \u003d vcpus[i].vcpu.arch.pkvm.host_vcpu;\n        \n(and maybe we want a vcpu_to_host(vcpus[i]) macro to hide all those field names).\n\nSimilarly, you\u0027d have:\n\nstatic int set_host_vcpus(struct kvm_vcpu *vcpus, int nr_vcpus, void *pgd, size_t pgd_sz);\n\nbut you should rename the \u0027pgd\u0027 arguments because this is nothing to do with the pgd; you\u0027re just reusing that memory.",
+      "parentUuid": "0da240d4_9e4ff9b1",
+      "range": {
+        "startLine": 350,
+        "startChar": 31,
+        "endLine": 350,
+        "endChar": 76
+      },
+      "revId": "ce6321be380e5f14a344a537b0acd3ec9cf5d8fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
