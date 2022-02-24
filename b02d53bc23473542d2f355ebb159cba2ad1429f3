@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "444e33a3_ff80d457",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-02-24T09:52:42Z",
+      "side": 1,
+      "message": "Eh, that was supposed to enforce ordering but obviously that\u0027s wrong. I had a lot of trouble getting the locking to work without reentrant locks. But looking at the code I think I can replace both iommu_lock and dev-\u003elock with the host lock.",
+      "parentUuid": "367ef468_64aa23fd",
+      "range": {
+        "startLine": 46,
+        "startChar": 1,
+        "endLine": 46,
+        "endChar": 38
+      },
+      "revId": "b02d53bc23473542d2f355ebb159cba2ad1429f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "3a291297_f6c394d6",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
         "patchSetId": 7
@@ -70,6 +94,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d53c5d8_46d231fd",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-02-24T09:52:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2d85fd9_d3a39620",
+      "range": {
+        "startLine": 363,
+        "startChar": 0,
+        "endLine": 363,
+        "endChar": 61
+      },
+      "revId": "b02d53bc23473542d2f355ebb159cba2ad1429f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c8608d1b_5468be9a",
@@ -83,6 +131,30 @@
       "writtenOn": "2022-02-22T15:26:21Z",
       "side": 1,
       "message": "Maybe get rid of the loop and duplicate the kvm_call_hyp_nvhe() call? Do we expect to re-try more than once?",
+      "range": {
+        "startLine": 32,
+        "startChar": 1,
+        "endLine": 32,
+        "endChar": 13
+      },
+      "revId": "b02d53bc23473542d2f355ebb159cba2ad1429f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21b7e503_eac4925c",
+        "filename": "arch/arm64/kvm/iommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-02-24T09:52:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8608d1b_5468be9a",
       "range": {
         "startLine": 32,
         "startChar": 1,
