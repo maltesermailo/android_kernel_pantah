@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49bb4483_1becc39b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1871253
+      },
+      "writtenOn": "2022-02-25T02:16:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "665d722a_237aea9e",
+      "revId": "3621c71dd0e2cd31e9ed439097e1cdf41c175c5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c62c62c6_7101ff46",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-02-25T01:09:22Z",
       "side": 1,
       "message": "Maybe add #ifdef CONFIG_NUMA to avoid unnecessary loop when CONFIG_NUMA\u003dn?",
+      "range": {
+        "startLine": 65,
+        "startChar": 2,
+        "endLine": 65,
+        "endChar": 26
+      },
+      "revId": "3621c71dd0e2cd31e9ed439097e1cdf41c175c5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6534212_a33bb2e2",
+        "filename": "kernel/dma/direct.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1871253
+      },
+      "writtenOn": "2022-02-25T02:16:35Z",
+      "side": 1,
+      "message": "I\u0027ve added the #ifdef selection in dma-direct.h - note that for_each_node() turns into a single-loop construct when CONFIG_NUMA isn\u0027t defined: https://elixir.bootlin.com/linux/latest/source/include/linux/nodemask.h#L483 (I guess it could be redone upstream to expand to just `node \u003d 0;` which would avoid the loop overhead, assuming it isn\u0027t optimized out).",
+      "parentUuid": "c62c62c6_7101ff46",
       "range": {
         "startLine": 65,
         "startChar": 2,
