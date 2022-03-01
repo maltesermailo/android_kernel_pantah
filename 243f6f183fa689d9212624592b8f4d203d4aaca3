@@ -159,6 +159,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7cb9af2_fe7b7ee3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1903606
+      },
+      "writtenOn": "2022-03-01T20:26:05Z",
+      "side": 1,
+      "message": "Here we are not talking about the memory used for sysfs node creation and all, instead this stats feature itself allocating a buffer for stats data collection at https://android.googlesource.com/kernel/common/+/refs/heads/android12-5.10/drivers/thermal/thermal_sysfs.c#905\n\nEach the cooling device stats buffer depends on that device max mitigation level supported and based on this max level, it is creating multiple stat info buffer, including max level * max level two dimensional array buffer as well.\n\nIn our platform, multiple cooling devices will support upto 255 levels which could lead to huge memory buffer overall for this feature.",
+      "parentUuid": "b2c77042_3bf6fb70",
+      "revId": "243f6f183fa689d9212624592b8f4d203d4aaca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b6173b6_3eb388cc",
