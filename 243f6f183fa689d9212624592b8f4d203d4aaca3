@@ -179,6 +179,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e3a043b8_f56dc422",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-03-01T20:32:26Z",
+      "side": 1,
+      "message": "Then work on removing the run-time memory requirement for those statistics.  Why do they have to be created ahead of time?  Why not just look up the information when the sysfs file is read?\n\nAnd you seem to be ignoring the new user/kernel api here for some odd reason 😞",
+      "parentUuid": "f7cb9af2_fe7b7ee3",
+      "revId": "243f6f183fa689d9212624592b8f4d203d4aaca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0b6173b6_3eb388cc",
         "filename": "drivers/thermal/thermal_sysfs.c",
         "patchSetId": 1
