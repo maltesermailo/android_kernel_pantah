@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "2941dff4_d4cc3d37",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1903606
+      },
+      "writtenOn": "2022-03-01T12:15:32Z",
+      "side": 1,
+      "message": "I will update it in next patch",
+      "parentUuid": "af830cd2_dad8158e",
+      "revId": "243f6f183fa689d9212624592b8f4d203d4aaca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "f1269d9e_04b28936",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -89,6 +107,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "466fff91_fc5ef2d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1903606
+      },
+      "writtenOn": "2022-03-01T12:15:32Z",
+      "side": 1,
+      "message": "Change is not intended to disable basic cooling device device objects. We only wanted to disable memory allocation of stats feature at https://android.googlesource.com/kernel/common/+/refs/heads/android12-5.10/drivers/thermal/thermal_sysfs.c#909 and stats attribute group (at https://android.googlesource.com/kernel/common/+/refs/heads/android12-5.10/drivers/thermal/thermal_sysfs.c#923 ) which exposes extra sysfs nodes under each cooling device to access this stats memory. \n\nThis is  the  same feature guarded under CONFIG_THERMAL_STATISTICS. So Upstream has already a way to disable this feature via defconfig. Now it is a restriction only in GKI right ?",
+      "parentUuid": "bcb7a6ee_b76d71f6",
+      "revId": "243f6f183fa689d9212624592b8f4d203d4aaca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d95ecf5f_ca0fb8be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1903606
+      },
+      "writtenOn": "2022-03-01T12:15:32Z",
+      "side": 1,
+      "message": "I will update commit text why we need to disable it and explain memory footprint issue in next patchset.\n\nAs mentioned in bug, in our platform, more than 80+ cooling devices are there and internal slab memory consumption breakup shows that this feature is consuming  around 18.5MB memory and it is more critical for target variants with lower DDR memory config. We are looking for a way for vendor to disable this debugging feature for low DDR memory target variant.",
+      "parentUuid": "81eff9cc_aa9a612b",
+      "revId": "243f6f183fa689d9212624592b8f4d203d4aaca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0b6173b6_3eb388cc",
         "filename": "drivers/thermal/thermal_sysfs.c",
         "patchSetId": 1
@@ -100,6 +154,30 @@
       "writtenOn": "2022-02-28T17:56:24Z",
       "side": 1,
       "message": "this is fine, but why not make this configurable per cooling device? E.g. bring to upstream: and one of the option is to add a per cooling-device stats config in device tree to skip it.",
+      "range": {
+        "startLine": 941,
+        "startChar": 0,
+        "endLine": 950,
+        "endChar": 0
+      },
+      "revId": "243f6f183fa689d9212624592b8f4d203d4aaca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5a296f0_a6791732",
+        "filename": "drivers/thermal/thermal_sysfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 950,
+      "author": {
+        "id": 1903606
+      },
+      "writtenOn": "2022-03-01T12:15:32Z",
+      "side": 1,
+      "message": "My understanding is that you are suggesting to have some devicetree property for each cooling device provider as similar to #cooling-cell property and based on that decide whether to enable it or not, right ?. It could handle for most of the cooling devices but one caveat is that some cooling devices in upstream are still registering cooling devices without of interfaces. For those cdevs, framework cannot check DT property. Anyway I will bring this to upstream and check it.",
+      "parentUuid": "0b6173b6_3eb388cc",
       "range": {
         "startLine": 941,
         "startChar": 0,
@@ -123,6 +201,30 @@
       "writtenOn": "2022-02-28T18:28:20Z",
       "side": 1,
       "message": "what happens when this is called when the objects were not setup?",
+      "range": {
+        "startLine": 960,
+        "startChar": 0,
+        "endLine": 960,
+        "endChar": 36
+      },
+      "revId": "243f6f183fa689d9212624592b8f4d203d4aaca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6a2b1ec_151279cf",
+        "filename": "drivers/thermal/thermal_sysfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 960,
+      "author": {
+        "id": 1903606
+      },
+      "writtenOn": "2022-03-01T12:15:32Z",
+      "side": 1,
+      "message": "It disables only cooling device stats related memory allocation and stats device attribute group for all cooling devices. It still allows to create cooling device objects.",
+      "parentUuid": "fb113836_69ce4f9e",
       "range": {
         "startLine": 960,
         "startChar": 0,
