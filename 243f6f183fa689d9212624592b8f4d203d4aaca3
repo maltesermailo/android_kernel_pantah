@@ -143,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b2c77042_3bf6fb70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-03-01T19:47:59Z",
+      "side": 1,
+      "message": "The config option is a supported option that the upstream kernel community is supporting.\n\nYou are creating a brand new user/kernel api with this command line option, which is not something that upstream is willing to support, so that would push the requirement onto the Android kernel team to support it for forever going forwared.\n\nAnd I do not understand the need here, what exactly is taking up so much memory here that it is noticable vs. other kernel subsystems?  sysfs should be quite small if it is not being accessed (the memory is reclaimed as part of the inode/dentry cache.)  What is so special about this subsytem that is causing a lot of unneeded memory usage?\n\nRemember, sysfs attributes and the like work just fine with tens of thousands of devices on small 31 bit machines with no problems.  I find it odd that thermal attributes are somehow more expensive and noticeable than that common usage model.",
+      "parentUuid": "466fff91_fc5ef2d6",
+      "revId": "243f6f183fa689d9212624592b8f4d203d4aaca3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0b6173b6_3eb388cc",
         "filename": "drivers/thermal/thermal_sysfs.c",
         "patchSetId": 1
