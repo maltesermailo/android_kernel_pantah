@@ -1,6 +1,52 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "180485d3_0081ea1b",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/iommu.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-03-02T13:23:47Z",
+      "side": 1,
+      "message": "Is this really needed here?",
+      "range": {
+        "startLine": 35,
+        "startChar": 6,
+        "endLine": 35,
+        "endChar": 13
+      },
+      "revId": "218e461879022ef2fd7418d0f42a557791637a5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91fb91b4_7933766b",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/iommu.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-03-02T13:23:47Z",
+      "side": 1,
+      "message": "Now that I think about it, the kernel recommendation is to avoid zero-length arrays and use flexible-array member instead in the kernel -- see beb69f15a095 (\"energy_model.h: Replace zero-length array with flexible-array member\") for example for the rationale.",
+      "range": {
+        "startLine": 37,
+        "startChar": 1,
+        "endLine": 37,
+        "endChar": 14
+      },
+      "revId": "218e461879022ef2fd7418d0f42a557791637a5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e328e3b3_3ad7e4a5",
