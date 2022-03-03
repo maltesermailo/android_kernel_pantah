@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54b7f5bb_24a53289",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/iommu.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-03-03T15:03:52Z",
+      "side": 1,
+      "message": "Hmm, weird. I could swear `writel` used to give me warnings. It seems happy now. Removed",
+      "parentUuid": "180485d3_0081ea1b",
+      "range": {
+        "startLine": 35,
+        "startChar": 6,
+        "endLine": 35,
+        "endChar": 13
+      },
+      "revId": "218e461879022ef2fd7418d0f42a557791637a5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "91fb91b4_7933766b",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-03-02T13:23:47Z",
       "side": 1,
       "message": "Now that I think about it, the kernel recommendation is to avoid zero-length arrays and use flexible-array member instead in the kernel -- see beb69f15a095 (\"energy_model.h: Replace zero-length array with flexible-array member\") for example for the rationale.",
+      "range": {
+        "startLine": 37,
+        "startChar": 1,
+        "endLine": 37,
+        "endChar": 14
+      },
+      "revId": "218e461879022ef2fd7418d0f42a557791637a5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21d40ade_8fe3b267",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/iommu.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-03-03T15:03:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91fb91b4_7933766b",
       "range": {
         "startLine": 37,
         "startChar": 1,
@@ -93,6 +141,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a24cc06_81fe08b6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-03-03T15:03:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e9938b8_38b16848",
+      "range": {
+        "startLine": 247,
+        "startChar": 31,
+        "endLine": 247,
+        "endChar": 55
+      },
+      "revId": "218e461879022ef2fd7418d0f42a557791637a5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "75aa8c65_406c184e",
@@ -106,6 +178,30 @@
       "writtenOn": "2022-03-02T13:16:43Z",
       "side": 1,
       "message": "This probably wants to be `goto unlock`.",
+      "range": {
+        "startLine": 590,
+        "startChar": 3,
+        "endLine": 590,
+        "endChar": 14
+      },
+      "revId": "218e461879022ef2fd7418d0f42a557791637a5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5d05198_8e708fde",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-03-03T15:03:52Z",
+      "side": 1,
+      "message": "Good catch!",
+      "parentUuid": "75aa8c65_406c184e",
       "range": {
         "startLine": 590,
         "startChar": 3,
