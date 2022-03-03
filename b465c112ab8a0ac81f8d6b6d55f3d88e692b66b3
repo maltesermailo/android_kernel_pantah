@@ -16,6 +16,24 @@
       "message": "Is there a respin request bug for this? It also needs to land in android12-5.10 first.",
       "revId": "b465c112ab8a0ac81f8d6b6d55f3d88e692b66b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcc64023_9df6836b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1871253
+      },
+      "writtenOn": "2022-03-03T20:41:28Z",
+      "side": 1,
+      "message": "I\u0027m posting this for Zhe\u0027s benefit in case he also wants the change to be picked up, on account of him posting https://android-review.googlesource.com/c/kernel/common/+/1991490/1 . This change wouldn\u0027t be required unless someone were to set CONFIG_NUMA\u003dy - when I tried doing this on 5.10, the only ABI complaint I received was that a symbol was missing from ksymtab (i.e. it wasn\u0027t being exported), so I guess it is possible to safely enable this, should someone want to in the future.",
+      "parentUuid": "15357aad_c7fdf053",
+      "revId": "b465c112ab8a0ac81f8d6b6d55f3d88e692b66b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
