@@ -21,9 +21,21 @@ DECLARE_RESTRICTED_HOOK(android_rvh_do_mem_abort,
 	TP_ARGS(addr, esr, regs), 1);
 
 DECLARE_RESTRICTED_HOOK(android_rvh_do_sp_pc_abort,
+<<<<<<< HEAD   (5bcf8d ANDROID: mmc: core: Export core functions required for clk s)
 	TP_PROTO(unsigned long addr, unsigned int esr, struct pt_regs *regs),
 	TP_ARGS(addr, esr, regs),
 	TP_CONDITION(!user_mode(regs)));
+=======
+	TP_PROTO(struct pt_regs *regs, unsigned int esr, unsigned long addr, bool user),
+	TP_ARGS(regs, esr, addr, user),
+	TP_CONDITION(!user));
+
+DECLARE_HOOK(android_vh_handle_tlb_conf,
+	TP_PROTO(unsigned long addr, unsigned int esr, int *ret),
+	TP_ARGS(addr, esr, ret));
+
+/* macro versions of hooks are no longer required */
+>>>>>>> CHANGE (fe75d5 ANDROID: fault: Add vendor hook for TLB conflict)
 
 #endif /* _TRACE_HOOK_FAULT_H */
 /* This part must be outside protection */
