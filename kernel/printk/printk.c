@@ -557,10 +557,14 @@ static ssize_t info_print_ext_header(char *buf, size_t size,
 	u64 ts_usec = info->ts_nsec;
 	char caller[20];
 #ifdef CONFIG_PRINTK_CALLER
+	int vh_ret = 0;
 	u32 id = info->caller_id;
 
-	snprintf(caller, sizeof(caller), ",caller=%c%u",
-		 id & 0x80000000 ? 'C' : 'T', id & ~0x80000000);
+	trace_android_vh_printk_ext_header(caller, sizeof(caller), id,
+					   &vh_ret);
+	if (!vh_ret)
+		snprintf(caller, sizeof(caller), ",caller=%c%u",
+			 id & 0x80000000 ? 'C' : 'T', id & ~0x80000000);
 #else
 	caller[0] = '\0';
 #endif
@@ -1269,9 +1273,13 @@ static size_t print_time(u64 ts, char *buf)
 static size_t print_caller(u32 id, char *buf)
 {
 	char caller[12];
+	int vh_ret = 0;
 
-	snprintf(caller, sizeof(caller), "%c%u",
-		 id & 0x80000000 ? 'C' : 'T', id & ~0x80000000);
+	trace_android_vh_printk_decode_caller(caller, sizeof(caller), id,
+					      &vh_ret);
+	if (!vh_ret)
+		snprintf(caller, sizeof(caller), "%c%u",
+			 id & 0x80000000 ? 'C' : 'T', id & ~0x80000000);
 	return sprintf(buf, "[%6s]", caller);
 }
 #else
@@ -2102,7 +2110,7 @@ int vprintk_store(int facility, int level,
 		  const struct dev_printk_info *dev_info,
 		  const char *fmt, va_list args)
 {
-	const u32 caller_id = printk_caller_id();
+	u32 caller_id;
 	struct prb_reserved_entry e;
 	enum printk_info_flags flags = 0;
 	struct printk_record r;
@@ -2115,7 +2123,11 @@ int vprintk_store(int facility, int level,
 	u16 text_len;
 	int ret = 0;
 	u64 ts_nsec;
+	int cus_caller = 0;
 
+	trace_android_vh_printk_encode_caller(&caller_id, &cus_caller);
+	if (!cus_caller)
+		caller_id = printk_caller_id();
 	/*
 	 * Since the duration of printk() can vary depending on the message
 	 * and state of the ringbuffer, grab the timestamp now so that it is
