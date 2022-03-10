@@ -1445,6 +1445,279 @@ static void z_erofs_fill_bio_vec(struct bio_vec *bvec,
 				 unsigned int nr,
 				 struct address_space *mc)
 {
+<<<<<<< HEAD   (3dfddc ANDROID: GKI: fix ABI breakage in struct userfaultfd_ctx)
+=======
+	return !page->mapping && !z_erofs_is_shortlived_page(page);
+}
+
+static void z_erofs_decompressqueue_endio(struct bio *bio)
+{
+	tagptr1_t t = tagptr_init(tagptr1_t, bio->bi_private);
+	struct z_erofs_decompressqueue *q = tagptr_unfold_ptr(t);
+	blk_status_t err = bio->bi_status;
+	struct bio_vec *bvec;
+	struct bvec_iter_all iter_all;
+
+	bio_for_each_segment_all(bvec, bio, iter_all) {
+		struct page *page = bvec->bv_page;
+
+		DBG_BUGON(PageUptodate(page));
+		DBG_BUGON(z_erofs_page_is_invalidated(page));
+
+		if (err)
+			SetPageError(page);
+
+		if (erofs_page_is_managed(EROFS_SB(q->sb), page)) {
+			if (!err)
+				SetPageUptodate(page);
+			unlock_page(page);
+		}
+	}
+	z_erofs_decompress_kickoff(q, tagptr_unfold_tags(t), -1);
+	bio_put(bio);
+}
+
+static int z_erofs_decompress_pcluster(struct super_block *sb,
+				       struct z_erofs_pcluster *pcl,
+				       struct page **pagepool)
+{
+	struct erofs_sb_info *const sbi = EROFS_SB(sb);
+	struct z_erofs_pagevec_ctor ctor;
+	unsigned int i, inputsize, outputsize, llen, nr_pages;
+	struct page *pages_onstack[Z_EROFS_VMAP_ONSTACK_PAGES];
+	struct page **pages, **compressed_pages, *page;
+
+	enum z_erofs_page_type page_type;
+	bool overlapped, partial;
+	struct z_erofs_collection *cl;
+	int err;
+
+	might_sleep();
+	cl = z_erofs_primarycollection(pcl);
+	DBG_BUGON(!READ_ONCE(cl->nr_pages));
+
+	mutex_lock(&cl->lock);
+	nr_pages = cl->nr_pages;
+
+	if (nr_pages <= Z_EROFS_VMAP_ONSTACK_PAGES) {
+		pages = pages_onstack;
+	} else if (nr_pages <= Z_EROFS_VMAP_GLOBAL_PAGES &&
+		   mutex_trylock(&z_pagemap_global_lock)) {
+		pages = z_pagemap_global;
+	} else {
+		gfp_t gfp_flags = GFP_KERNEL;
+
+		if (nr_pages > Z_EROFS_VMAP_GLOBAL_PAGES)
+			gfp_flags |= __GFP_NOFAIL;
+
+		pages = kvmalloc_array(nr_pages, sizeof(struct page *),
+				       gfp_flags);
+
+		/* fallback to global pagemap for the lowmem scenario */
+		if (!pages) {
+			mutex_lock(&z_pagemap_global_lock);
+			pages = z_pagemap_global;
+		}
+	}
+
+	for (i = 0; i < nr_pages; ++i)
+		pages[i] = NULL;
+
+	err = 0;
+	z_erofs_pagevec_ctor_init(&ctor, Z_EROFS_NR_INLINE_PAGEVECS,
+				  cl->pagevec, 0);
+
+	for (i = 0; i < cl->vcnt; ++i) {
+		unsigned int pagenr;
+
+		page = z_erofs_pagevec_dequeue(&ctor, &page_type);
+
+		/* all pages in pagevec ought to be valid */
+		DBG_BUGON(!page);
+		DBG_BUGON(z_erofs_page_is_invalidated(page));
+
+		if (z_erofs_put_shortlivedpage(pagepool, page))
+			continue;
+
+		if (page_type == Z_EROFS_VLE_PAGE_TYPE_HEAD)
+			pagenr = 0;
+		else
+			pagenr = z_erofs_onlinepage_index(page);
+
+		DBG_BUGON(pagenr >= nr_pages);
+
+		/*
+		 * currently EROFS doesn't support multiref(dedup),
+		 * so here erroring out one multiref page.
+		 */
+		if (pages[pagenr]) {
+			DBG_BUGON(1);
+			SetPageError(pages[pagenr]);
+			z_erofs_onlinepage_endio(pages[pagenr]);
+			err = -EFSCORRUPTED;
+		}
+		pages[pagenr] = page;
+	}
+	z_erofs_pagevec_ctor_exit(&ctor, true);
+
+	overlapped = false;
+	compressed_pages = pcl->compressed_pages;
+
+	for (i = 0; i < pcl->pclusterpages; ++i) {
+		unsigned int pagenr;
+
+		page = compressed_pages[i];
+
+		/* all compressed pages ought to be valid */
+		DBG_BUGON(!page);
+		DBG_BUGON(z_erofs_page_is_invalidated(page));
+
+		if (!z_erofs_is_shortlived_page(page)) {
+			if (erofs_page_is_managed(sbi, page)) {
+				if (!PageUptodate(page))
+					err = -EIO;
+				continue;
+			}
+
+			/*
+			 * only if non-head page can be selected
+			 * for inplace decompression
+			 */
+			pagenr = z_erofs_onlinepage_index(page);
+
+			DBG_BUGON(pagenr >= nr_pages);
+			if (pages[pagenr]) {
+				DBG_BUGON(1);
+				SetPageError(pages[pagenr]);
+				z_erofs_onlinepage_endio(pages[pagenr]);
+				err = -EFSCORRUPTED;
+			}
+			pages[pagenr] = page;
+
+			overlapped = true;
+		}
+
+		/* PG_error needs checking for all non-managed pages */
+		if (PageError(page)) {
+			DBG_BUGON(PageUptodate(page));
+			err = -EIO;
+		}
+	}
+
+	if (err)
+		goto out;
+
+	llen = pcl->length >> Z_EROFS_PCLUSTER_LENGTH_BIT;
+	if (nr_pages << PAGE_SHIFT >= cl->pageofs + llen) {
+		outputsize = llen;
+		partial = !(pcl->length & Z_EROFS_PCLUSTER_FULL_LENGTH);
+	} else {
+		outputsize = (nr_pages << PAGE_SHIFT) - cl->pageofs;
+		partial = true;
+	}
+
+	inputsize = pcl->pclusterpages * PAGE_SIZE;
+	err = z_erofs_decompress(&(struct z_erofs_decompress_req) {
+					.sb = sb,
+					.in = compressed_pages,
+					.out = pages,
+					.pageofs_out = cl->pageofs,
+					.inputsize = inputsize,
+					.outputsize = outputsize,
+					.alg = pcl->algorithmformat,
+					.inplace_io = overlapped,
+					.partial_decoding = partial
+				 }, pagepool);
+
+out:
+	/* must handle all compressed pages before ending pages */
+	for (i = 0; i < pcl->pclusterpages; ++i) {
+		page = compressed_pages[i];
+
+		if (erofs_page_is_managed(sbi, page))
+			continue;
+
+		/* recycle all individual short-lived pages */
+		(void)z_erofs_put_shortlivedpage(pagepool, page);
+
+		WRITE_ONCE(compressed_pages[i], NULL);
+	}
+
+	for (i = 0; i < nr_pages; ++i) {
+		page = pages[i];
+		if (!page)
+			continue;
+
+		DBG_BUGON(z_erofs_page_is_invalidated(page));
+
+		/* recycle all individual short-lived pages */
+		if (z_erofs_put_shortlivedpage(pagepool, page))
+			continue;
+
+		if (err < 0)
+			SetPageError(page);
+
+		z_erofs_onlinepage_endio(page);
+	}
+
+	if (pages == z_pagemap_global)
+		mutex_unlock(&z_pagemap_global_lock);
+	else if (pages != pages_onstack)
+		kvfree(pages);
+
+	cl->nr_pages = 0;
+	cl->vcnt = 0;
+
+	/* all cl locks MUST be taken before the following line */
+	WRITE_ONCE(pcl->next, Z_EROFS_PCLUSTER_NIL);
+
+	/* all cl locks SHOULD be released right now */
+	mutex_unlock(&cl->lock);
+
+	z_erofs_collection_put(cl);
+	return err;
+}
+
+static void z_erofs_decompress_queue(const struct z_erofs_decompressqueue *io,
+				     struct page **pagepool)
+{
+	z_erofs_next_pcluster_t owned = io->head;
+
+	while (owned != Z_EROFS_PCLUSTER_TAIL_CLOSED) {
+		struct z_erofs_pcluster *pcl;
+
+		/* no possible that 'owned' equals Z_EROFS_WORK_TPTR_TAIL */
+		DBG_BUGON(owned == Z_EROFS_PCLUSTER_TAIL);
+
+		/* no possible that 'owned' equals NULL */
+		DBG_BUGON(owned == Z_EROFS_PCLUSTER_NIL);
+
+		pcl = container_of(owned, struct z_erofs_pcluster, next);
+		owned = READ_ONCE(pcl->next);
+
+		z_erofs_decompress_pcluster(io->sb, pcl, pagepool);
+	}
+}
+
+static void z_erofs_decompressqueue_work(struct work_struct *work)
+{
+	struct z_erofs_decompressqueue *bgq =
+		container_of(work, struct z_erofs_decompressqueue, u.work);
+	struct page *pagepool = NULL;
+
+	DBG_BUGON(bgq->head == Z_EROFS_PCLUSTER_TAIL_CLOSED);
+	z_erofs_decompress_queue(bgq, &pagepool);
+	erofs_release_pages(&pagepool);
+	kvfree(bgq);
+}
+
+static struct page *pickup_page_for_submission(struct z_erofs_pcluster *pcl,
+					       unsigned int nr,
+					       struct page **pagepool,
+					       struct address_space *mc)
+{
+	const pgoff_t index = pcl->obj.index;
+>>>>>>> CHANGE (2296fa UPSTREAM: erofs: refine managed inode stuffs)
 	gfp_t gfp = mapping_gfp_mask(mc);
 	bool tocache = false;
 	struct z_erofs_bvec zbv;
@@ -1679,8 +1952,16 @@ static void z_erofs_submit_queue(struct z_erofs_decompress_frontend *f,
 		cur = mdev.m_pa;
 		end = cur + pcl->pclustersize;
 		do {
+<<<<<<< HEAD   (3dfddc ANDROID: GKI: fix ABI breakage in struct userfaultfd_ctx)
 			z_erofs_fill_bio_vec(&bvec, f, pcl, i++, mc);
 			if (!bvec.bv_page)
+=======
+			struct page *page;
+
+			page = pickup_page_for_submission(pcl, i++, pagepool,
+							  MNGD_MAPPING(sbi));
+			if (!page)
+>>>>>>> CHANGE (2296fa UPSTREAM: erofs: refine managed inode stuffs)
 				continue;
 
 			if (bio && (cur != last_pa ||

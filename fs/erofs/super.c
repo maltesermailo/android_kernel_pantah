@@ -603,8 +603,19 @@ static struct inode *erofs_nfs_get_inode(struct super_block *sb,
 	return erofs_iget(sb, ino);
 }
 
+<<<<<<< HEAD   (3dfddc ANDROID: GKI: fix ABI breakage in struct userfaultfd_ctx)
 static struct dentry *erofs_fh_to_dentry(struct super_block *sb,
 		struct fid *fid, int fh_len, int fh_type)
+=======
+/*
+ * It will be called only on inode eviction. In case that there are still some
+ * decompression requests in progress, wait with rescheduling for a bit here.
+ * We could introduce an extra locking instead but it seems unnecessary.
+ */
+static void erofs_managed_cache_invalidatepage(struct page *page,
+					       unsigned int offset,
+					       unsigned int length)
+>>>>>>> CHANGE (2296fa UPSTREAM: erofs: refine managed inode stuffs)
 {
 	return generic_fh_to_dentry(sb, fid, fh_len, fh_type,
 				    erofs_nfs_get_inode);
@@ -639,7 +650,20 @@ static int erofs_fc_fill_pseudo_super(struct super_block *sb, struct fs_context 
 {
 	static const struct tree_descr empty_descr = {""};
 
+<<<<<<< HEAD   (3dfddc ANDROID: GKI: fix ABI breakage in struct userfaultfd_ctx)
 	return simple_fill_super(sb, EROFS_SUPER_MAGIC, &empty_descr);
+=======
+	if (!inode)
+		return -ENOMEM;
+
+	set_nlink(inode, 1);
+	inode->i_size = OFFSET_MAX;
+
+	inode->i_mapping->a_ops = &managed_cache_aops;
+	mapping_set_gfp_mask(inode->i_mapping, GFP_NOFS);
+	sbi->managed_cache = inode;
+	return 0;
+>>>>>>> CHANGE (2296fa UPSTREAM: erofs: refine managed inode stuffs)
 }
 
 static int erofs_fc_fill_super(struct super_block *sb, struct fs_context *fc)
