@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9b389fd_9aea0f16",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1832,
+      "author": {
+        "id": 1899961
+      },
+      "writtenOn": "2022-03-10T17:31:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de0e1887_8ea722d5",
+      "range": {
+        "startLine": 1832,
+        "startChar": 1,
+        "endLine": 1832,
+        "endChar": 20
+      },
+      "revId": "aef3755e49ead3a88a0ec8a80b13c62b83dbdc1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f372ac29_e3891b0b",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-03-10T17:01:30Z",
       "side": 1,
       "message": "Don\u0027t understand why this is necessary - if we mount on top of an existing stacked fs, surely we need to still free these objects?",
+      "range": {
+        "startLine": 1904,
+        "startChar": 16,
+        "endLine": 1904,
+        "endChar": 38
+      },
+      "revId": "aef3755e49ead3a88a0ec8a80b13c62b83dbdc1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c360865a_159b830b",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1904,
+      "author": {
+        "id": 1899961
+      },
+      "writtenOn": "2022-03-10T17:31:59Z",
+      "side": 1,
+      "message": "Only on the last umount.\nThe incr_mount_fs() calls open_or_create_special_dir() for index and incomplete. Only the first mount will create these objects so the only last umount should remove them.",
+      "parentUuid": "f372ac29_e3891b0b",
       "range": {
         "startLine": 1904,
         "startChar": 16,
