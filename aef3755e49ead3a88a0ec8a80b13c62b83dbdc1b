@@ -117,6 +117,30 @@
       },
       "revId": "aef3755e49ead3a88a0ec8a80b13c62b83dbdc1b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec360fac_06cb8a36",
+        "filename": "fs/incfs/vfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1904,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2022-03-11T17:41:35Z",
+      "side": 1,
+      "message": "I don\u0027t see this - the code to create these objects is not gated on s_stack_depth.\n\nAh - I see what you\u0027re getting at - open_or_create will open or create, so your assumption is that this will create at stack level 0. But this means that if there is a different stacking fs this will go wrong. I think we need to store whether or not they were opened or created, and use that to decide whether to delete them.",
+      "parentUuid": "7afa454e_cf329b51",
+      "range": {
+        "startLine": 1904,
+        "startChar": 16,
+        "endLine": 1904,
+        "endChar": 38
+      },
+      "revId": "aef3755e49ead3a88a0ec8a80b13c62b83dbdc1b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
