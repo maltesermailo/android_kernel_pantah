@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b4fbb20_2d64c984",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 924,
+      "author": {
+        "id": 1902326
+      },
+      "writtenOn": "2022-03-14T19:40:46Z",
+      "side": 1,
+      "message": "As best I can tell, we never seem to null check the `tipc_msg_buf*` pointers that get passed into functions. So I suspect it\u0027s safe to access `dn-\u003echan-\u003elocal` without an additional null check, since the assumption is that a null value should never be passed in.",
+      "parentUuid": "611d9464_6777c602",
+      "range": {
+        "startLine": 924,
+        "startChar": 22,
+        "endLine": 924,
+        "endChar": 30
+      },
+      "revId": "3b6b7debc9c834ea4936035c76c49b13ae9fe580",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d3454f3_31e7d8b1",
@@ -218,6 +242,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92f8d233_8c09a90e",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1902326
+      },
+      "writtenOn": "2022-03-14T19:40:46Z",
+      "side": 1,
+      "message": "After some experimentation in the code and some futher discussion with Arve, I\u0027m inclined to go with the single trace event that Tri suggested. The only exception to this is the `trusty_std_call32` event, since that captures a higher level flow that may include multiple `smc()` calls.",
+      "parentUuid": "2c7f42bc_fc7a2fdb",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 36
+      },
+      "revId": "3b6b7debc9c834ea4936035c76c49b13ae9fe580",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad8f375f_dd87a715",
@@ -267,6 +315,24 @@
       "side": 1,
       "message": "Yes. trusty_std_call_inner, which is what where the tracepoints around the smc call related to trusty_std_call32, can be called many times per trusty_std_call32 call.",
       "parentUuid": "cefdf996_42594010",
+      "revId": "3b6b7debc9c834ea4936035c76c49b13ae9fe580",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f885067_ce82967e",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1902326
+      },
+      "writtenOn": "2022-03-14T19:40:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6226e4c6_402f14f6",
       "revId": "3b6b7debc9c834ea4936035c76c49b13ae9fe580",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
