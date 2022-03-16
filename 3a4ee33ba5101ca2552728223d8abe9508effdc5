@@ -16,6 +16,24 @@
       "message": "There is an existing `trace_pelt_rt_rq()` usptream tracepoint that is called whenever the scheduler updates the RT runqueue utilization signal. Would you be able to attach to that tracepoint instead? It should include all the scheduling events of interest.",
       "revId": "3a4ee33ba5101ca2552728223d8abe9508effdc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d57d7a58_7aba90d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1345812
+      },
+      "writtenOn": "2022-03-16T06:54:58Z",
+      "side": 1,
+      "message": "Thanks for the suggestion. I ended up using the existing trace_android_vh_scheduler_tick, so it\u0027s not needed to add a new track hook. I\u0027m abandoning this change.",
+      "parentUuid": "3d1cdebe_3835e1e6",
+      "revId": "3a4ee33ba5101ca2552728223d8abe9508effdc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
