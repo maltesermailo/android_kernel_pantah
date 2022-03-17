@@ -69,6 +69,24 @@
       "parentUuid": "869d7dad_83048218",
       "revId": "65d55de3f43c71453ec590307f88818d24f6e357",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "510a894c_d8cc2a58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1907384
+      },
+      "writtenOn": "2022-03-17T14:15:18Z",
+      "side": 1,
+      "message": "This block from include/linux/netdevice.h:\n\nstruct net_device {\n...\n#if IS_ENABLED(CONFIG_MACSEC)\n\t/* MACsec management functions */\n\tconst struct macsec_ops *macsec_ops;\n#endif\n...\n}\n\nWhen enabled or build as a module that changes struct net_device adding a field, shifting the fields below and changing the CRC.\n\nIf compiled separately as a modules, it can\u0027t be loaded into a kernel, that was built without CONFIG_MACSEC.",
+      "parentUuid": "9cd729bf_09025bf2",
+      "revId": "65d55de3f43c71453ec590307f88818d24f6e357",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
