@@ -33,6 +33,24 @@
       "message": "Also, why can\u0027t this be a module?",
       "revId": "65d55de3f43c71453ec590307f88818d24f6e357",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "869d7dad_83048218",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1907384
+      },
+      "writtenOn": "2022-03-17T13:57:27Z",
+      "side": 1,
+      "message": "I guess it can, with net_device and phy_device structs updated in GKI. Was just following the same process as it was for adding VLANs. Someone from Google suggested building it in, and also there is not a single GKI module in gki_defconfig.\n\nI\u0027ve updated the change, realizing there was no need to update the symbol list.",
+      "parentUuid": "93de15ab_2b8ea860",
+      "revId": "65d55de3f43c71453ec590307f88818d24f6e357",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
