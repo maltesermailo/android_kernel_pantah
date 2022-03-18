@@ -837,6 +837,7 @@ alternative_cb_end
 #endif /* CONFIG_MITIGATE_SPECTRE_BRANCH_HISTORY */
 	.endm
 
+<<<<<<< HEAD   (cf6a46 UPSTREAM: arm64: proton-pack: Include unprivileged eBPF stat)
 	.macro mitigate_spectre_bhb_loop	tmp
 #ifdef CONFIG_MITIGATE_SPECTRE_BRANCH_HISTORY
 alternative_cb	spectre_bhb_patch_loop_mitigation_enable
@@ -868,6 +869,19 @@ alternative_cb	spectre_bhb_patch_clearbhb
 	clearbhb
 	isb
 alternative_cb_end
+=======
+	/* Save/restores x0-x3 to the stack */
+	.macro __mitigate_spectre_bhb_fw
+#ifdef CONFIG_MITIGATE_SPECTRE_BRANCH_HISTORY
+	stp	x0, x1, [sp, #-16]!
+	stp	x2, x3, [sp, #-16]!
+	mov	w0, #ARM_SMCCC_ARCH_WORKAROUND_3
+alternative_cb	smccc_patch_fw_mitigation_conduit
+	nop					// Patched to SMC/HVC #0
+alternative_cb_end
+	ldp	x2, x3, [sp], #16
+	ldp	x0, x1, [sp], #16
+>>>>>>> BRANCH (b65b87 arm64: proton-pack: Include unprivileged eBPF status in Spec)
 #endif /* CONFIG_MITIGATE_SPECTRE_BRANCH_HISTORY */
 	.endm
 #endif	/* __ASM_ASSEMBLER_H */
