@@ -387,6 +387,7 @@ DECLARE_RESTRICTED_HOOK(android_rvh_update_blocked_fair,
 	TP_PROTO(struct rq *rq),
 	TP_ARGS(rq), 1);
 
+<<<<<<< HEAD   (93caea ANDROID: power: Add vendor hook for suspend)
 DECLARE_RESTRICTED_HOOK(android_rvh_set_task_comm,
 	TP_PROTO(struct task_struct *tsk, bool exec),
 	TP_ARGS(tsk, exec), 1);
@@ -495,6 +496,12 @@ DECLARE_HOOK(android_vh_prio_restore,
 	TP_ARGS(saved_prio));
 
 /* macro versions of hooks are no longer required */
+||||||| BASE
+=======
+DECLARE_RESTRICTED_HOOK(android_rvh_update_rt_rq_load_avg,
+	TP_PROTO(u64 now, struct rq *rq, struct task_struct *tsk, int running),
+	TP_ARGS(now, rq, tsk, running), 1);
+>>>>>>> CHANGE (84cc78 ANDROID: sched: Add vendor hook for rt util update)
 
 #endif /* _TRACE_HOOK_SCHED_H */
 /* This part must be outside protection */

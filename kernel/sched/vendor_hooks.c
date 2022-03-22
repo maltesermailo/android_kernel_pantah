@@ -103,6 +103,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_load_avg);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_remove_entity_load_avg);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_cpus_allowed_ptr);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_blocked_fair);
+<<<<<<< HEAD   (93caea ANDROID: power: Add vendor hook for suspend)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_task_comm);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_task_should_scx);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scx_ops_consider_migration);
@@ -128,3 +129,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_dequeue_entity_delayed);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmput);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_prio_inheritance);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_prio_restore);
+||||||| BASE
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_rt_rq_load_avg);
+>>>>>>> CHANGE (84cc78 ANDROID: sched: Add vendor hook for rt util update)
