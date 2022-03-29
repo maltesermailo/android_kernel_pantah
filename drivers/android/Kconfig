@@ -91,6 +91,20 @@ config ANDROID_STRUCT_PADDING
 
 	  If even slightly unsure, say Y.
 
+config ANDROID_VENDOR_DATA_PADDING
+	bool "Android Vendor Data Padding"
+	depends on ANDROID_STRUCT_PADDING
+	default y
+	help
+	  Enable Android vendor data padding in in-kernel structs.
+
+config ANDROID_OEM_DATA_PADDING
+	bool "Android OEM Data Padding"
+	depends on ANDROID_STRUCT_PADDING
+	default y
+	help
+	  Enable Android OEM data padding in in-kernel structs.
+
 endif # if ANDROID
 
 endmenu

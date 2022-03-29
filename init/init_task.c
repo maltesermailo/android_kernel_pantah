@@ -214,8 +214,12 @@ struct task_struct init_task
 	.seccomp	= { .filter_count = ATOMIC_INIT(0) },
 #endif
 #ifdef CONFIG_ANDROID_STRUCT_PADDING
+#ifdef CONFIG_ANDROID_VENDOR_DATA_PADDING
 	.android_vendor_data1 = {0, },
+#endif
+#ifdef CONFIG_ANDROID_OEM_DATA_PADDING
 	.android_oem_data1 = {0, },
+#endif
 #endif
 };
 EXPORT_SYMBOL(init_task);
