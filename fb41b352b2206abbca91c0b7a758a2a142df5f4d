@@ -94,6 +94,30 @@
       },
       "revId": "fb41b352b2206abbca91c0b7a758a2a142df5f4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d95976e_ef5a03ba",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-03-30T12:30:00Z",
+      "side": 1,
+      "message": "A lock protecting the IOMMU driver/device-list state essentially. In this paths, yes, that would be a superset of the host lock. But in other places I\u0027m hopeful that we can take them independently from each other and reduce the span of critical sections with the host lock held (to not delay host mem aborts and such). That\u0027d be especially cool as the IOMMU udpates are likely to be slow. We\u0027ll need more than just this IOMMU lock (specifically, per-page locks will help), but it shouldn\u0027t hurt to already start with finer grain locks now.",
+      "parentUuid": "883032c7_02174374",
+      "range": {
+        "startLine": 419,
+        "startChar": 0,
+        "endLine": 422,
+        "endChar": 1
+      },
+      "revId": "fb41b352b2206abbca91c0b7a758a2a142df5f4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
