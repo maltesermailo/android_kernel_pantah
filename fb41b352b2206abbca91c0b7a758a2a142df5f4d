@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cf0f630_b528c3a5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-03-30T11:09:06Z",
+      "side": 1,
+      "message": "It\u0027s a bit funny as once this has been done we\u0027re not actually guaranteed that the device list is stable as we might be racing with an ongoing registration. Have you considered dropping the atomic type and moving the iommu_finalized users under the host lock critical sections?",
+      "range": {
+        "startLine": 419,
+        "startChar": 0,
+        "endLine": 422,
+        "endChar": 1
+      },
+      "revId": "fb41b352b2206abbca91c0b7a758a2a142df5f4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
