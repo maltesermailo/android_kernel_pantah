@@ -22,6 +22,30 @@
       },
       "revId": "fb41b352b2206abbca91c0b7a758a2a142df5f4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef2c5c7c_8140cd83",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1059815
+      },
+      "writtenOn": "2022-03-30T12:06:25Z",
+      "side": 1,
+      "message": "I did initially. It\u0027s a bit fiddly in the driver registration - the host lock must be taken relatively late. So it would only do this check after taking the host lock and it would remain possible to execute the first part. Not a huge deal but this is a bit simpler. As you pointed out, it does change the guarantee after completion from \"all registrations have completed\" to \"no new registrations can be started\". A bit weaker but I thought strong enough for the clients. WDYT?",
+      "parentUuid": "5cf0f630_b528c3a5",
+      "range": {
+        "startLine": 419,
+        "startChar": 0,
+        "endLine": 422,
+        "endChar": 1
+      },
+      "revId": "fb41b352b2206abbca91c0b7a758a2a142df5f4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
