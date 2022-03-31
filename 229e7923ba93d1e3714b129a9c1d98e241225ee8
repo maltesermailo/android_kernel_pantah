@@ -33,6 +33,24 @@
       "message": "First, if you are forward porting patches from android12-5.10, please cherry-pick in a way that preserves the Change-Id (in this case it should be \"Change-Id: I22762136f980afaec29be70c32cca8b04e0805a0\" for aosp/1699785). You\u0027ll need to abandon this and submit with the proper Change-Id.\n\nBut before you do that...the patch was accepted in android12-5.10 as a workaround for a UAPI change that hadn\u0027t been sent upstream. What is the status of upstreaming that change? That should have been done back then. We don\u0027t want to carry forward patches like this when there is plenty of time to do it properly.",
       "revId": "229e7923ba93d1e3714b129a9c1d98e241225ee8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33e4d9ad_50cb574b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1475635
+      },
+      "writtenOn": "2022-03-31T09:59:39Z",
+      "side": 1,
+      "message": "I will cherry-pick patches from android12-5.10 and abandon this.\n\nSince these patches is for MTK new chip and is just ready for MP now.\nWe plan to upstream v4l2 framework changes with ISP driver to Linux kernel this year. Before upstream, it still needs to use vendor hook function instead for android13-5.15.",
+      "parentUuid": "36a7f4bc_cda3070f",
+      "revId": "229e7923ba93d1e3714b129a9c1d98e241225ee8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
