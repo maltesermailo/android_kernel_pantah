@@ -51,6 +51,24 @@
       "parentUuid": "3dbcb923_d35a34c6",
       "revId": "f1ae03df3323a0e8fc97b47aafb104fe8a9cd1b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe605831_9885fa24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1115183
+      },
+      "writtenOn": "2022-04-04T18:25:16Z",
+      "side": 1,
+      "message": "As I understand it, the __traceiter_* functions reflect the raw arguments passed when calling a tracepoint (defined by `TP_PROTO`, e..g. https://android.googlesource.com/kernel/common/+/refs/heads/android13-5.10/include/trace/events/sched.h#140), which is the set of arguments that would be passed to a \"raw tracepoint\" program.\nTime in state uses \"tracepoint\" type programs, which are passed a struct containing the processed fields from the user-visible trace event format (defined by `TP_STRUCT__entry`, e.g. https://android.googlesource.com/kernel/common/+/refs/heads/android13-5.10/include/trace/events/sched.h#146)",
+      "parentUuid": "fd8fe8db_2a9969c4",
+      "revId": "f1ae03df3323a0e8fc97b47aafb104fe8a9cd1b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
