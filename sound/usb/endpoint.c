@@ -1322,6 +1322,44 @@ static int snd_usb_endpoint_set_params(struct snd_usb_audio *chip,
 	ep->maxframesize = ep->maxpacksize / ep->cur_frame_bytes;
 	ep->curframesize = ep->curpacksize / ep->cur_frame_bytes;
 
+<<<<<<< HEAD   (11a15a ANDROID: Update the ABI symbol list)
+=======
+	err = update_clock_ref_rate(chip, ep);
+	if (err >= 0) {
+		ep->need_setup = false;
+		err = 0;
+	}
+
+ unlock:
+	mutex_unlock(&chip->mutex);
+	return err;
+}
+EXPORT_SYMBOL_GPL(snd_usb_endpoint_set_params);
+
+static int init_sample_rate(struct snd_usb_audio *chip,
+			    struct snd_usb_endpoint *ep)
+{
+	struct snd_usb_clock_ref *clock = ep->clock_ref;
+	int rate, err;
+
+	rate = update_clock_ref_rate(chip, ep);
+	if (rate < 0)
+		return rate;
+	if (clock && !clock->need_setup)
+		return 0;
+
+	if (!ep->fixed_rate) {
+		err = snd_usb_init_sample_rate(chip, ep->cur_audiofmt, rate);
+		if (err < 0) {
+			if (clock)
+				clock->rate = 0; /* reset rate */
+			return err;
+		}
+	}
+
+	if (clock)
+		clock->need_setup = false;
+>>>>>>> CHANGE (436cbc ANDROID: sound: usb: Export symbols for endpoint management)
 	return 0;
 }
 
@@ -1414,7 +1452,11 @@ unlock:
 	mutex_unlock(&chip->mutex);
 	return err;
 }
+<<<<<<< HEAD   (11a15a ANDROID: Update the ABI symbol list)
 EXPORT_SYMBOL_GPL(snd_usb_endpoint_configure);
+=======
+EXPORT_SYMBOL_GPL(snd_usb_endpoint_prepare);
+>>>>>>> CHANGE (436cbc ANDROID: sound: usb: Export symbols for endpoint management)
 
 /* get the current rate set to the given clock by any endpoint */
 int snd_usb_endpoint_get_clock_rate(struct snd_usb_audio *chip, int clock)
