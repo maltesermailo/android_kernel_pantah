@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "44be7221_11b2472e",
+        "filename": "sound/usb/card.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1030767
+      },
+      "writtenOn": "2022-04-07T19:01:42Z",
+      "side": 1,
+      "message": "We are not handling a specific device but instead our vendor driver is performing offloading for any device that sound/usb/card.c handles. The idea for a hook here is to allow the vendor driver to be notified when a new \"intf\" is probed.",
+      "parentUuid": "11de3780_d1ec449f",
+      "range": {
+        "startLine": 758,
+        "startChar": 0,
+        "endLine": 758,
+        "endChar": 42
+      },
+      "revId": "e3f8c3396ddb150ffcd06168c9c9089b177fb498",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3d47d77e_5fddfbae",
         "filename": "sound/usb/card.c",
         "patchSetId": 5
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5bcce767_f72c7c40",
+        "filename": "sound/usb/card.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 827,
+      "author": {
+        "id": 1030767
+      },
+      "writtenOn": "2022-04-07T19:01:42Z",
+      "side": 1,
+      "message": "Right, we don\u0027t need both. This second one is sufficient, will remove the first one.",
+      "parentUuid": "3d47d77e_5fddfbae",
+      "range": {
+        "startLine": 827,
+        "startChar": 0,
+        "endLine": 827,
+        "endChar": 49
+      },
+      "revId": "e3f8c3396ddb150ffcd06168c9c9089b177fb498",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55e624d4_44218c97",
         "filename": "sound/usb/card.c",
         "patchSetId": 5
@@ -60,6 +108,30 @@
       "writtenOn": "2022-04-07T15:19:00Z",
       "side": 1,
       "message": "shouldn\u0027t this be at the end of the call?  Why first?  And what about locking?",
+      "range": {
+        "startLine": 916,
+        "startChar": 0,
+        "endLine": 916,
+        "endChar": 45
+      },
+      "revId": "e3f8c3396ddb150ffcd06168c9c9089b177fb498",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79d592d5_b9903a33",
+        "filename": "sound/usb/card.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 916,
+      "author": {
+        "id": 1030767
+      },
+      "writtenOn": "2022-04-07T19:01:42Z",
+      "side": 1,
+      "message": "Our vendor driver wants to do some additional handling before the rest of the teardown here. It may need to access \"chip\" which could get destroyed at the end of this routine when snd_card_free_when_closed() is called.",
+      "parentUuid": "55e624d4_44218c97",
       "range": {
         "startLine": 916,
         "startChar": 0,
