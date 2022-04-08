@@ -463,15 +463,6 @@ int fuse_lseek_backing(struct fuse_args *fa, struct file *file, loff_t offset, i
 	struct file *backing_file = fuse_file->backing_file;
 	loff_t ret;
 
-	/* TODO: Handle changing of the file handle */
-	if (offset == 0) {
-		if (whence == SEEK_CUR)
-			return file->f_pos;
-
-		if (whence == SEEK_SET)
-			return vfs_setpos(file, 0, 0);
-	}
-
 	inode_lock(file->f_inode);
 	backing_file->f_pos = file->f_pos;
 	ret = vfs_llseek(backing_file, fli->offset, fli->whence);
