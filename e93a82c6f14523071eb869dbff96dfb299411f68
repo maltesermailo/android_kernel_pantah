@@ -16,6 +16,24 @@
       "message": "What about Greg\u0027s question on locking? Do you have enough context in these hook handlers to safely do what you need to do?",
       "revId": "e93a82c6f14523071eb869dbff96dfb299411f68",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61d1ad78_1f5dbde1",
+        "filename": "sound/usb/card.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 827,
+      "author": {
+        "id": 1030767
+      },
+      "writtenOn": "2022-04-08T20:14:33Z",
+      "side": 1,
+      "message": "In particular this connect hook is not expected to trigger any reentrant calls that would try to reacquire any locks (the register_mutex is held by this function at this point).\n\nI need to update the disconnect handler below as it needs to be a restricted hook as our attached module may need to perform a sleepable call and hence requires a nonatomic context.",
+      "parentUuid": "0da5f47c_eb2bcada",
+      "revId": "e93a82c6f14523071eb869dbff96dfb299411f68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
