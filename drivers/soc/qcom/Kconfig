@@ -209,4 +209,15 @@ config QCOM_APR
 	  application processor and QDSP6. APR is
 	  used by audio driver to configure QDSP6
 	  ASM, ADM and AFE modules.
+
+config QCOM_SECURE_HIBERNATION
+	bool "Add security support to hibernation"
+	depends on HIBERNATION
+	help
+	  Secure the hibernation snapshot by encrypting
+	  the snapshot at kernel before saving to disk.
+	  This uses GCM-AES crypto algorithm to encrypt the
+	  pages at the kernel.
+	  If not sure, say N.
+
 endmenu
