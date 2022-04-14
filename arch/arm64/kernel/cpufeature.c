@@ -1170,7 +1170,8 @@ void __init init_cpu_features(struct cpuinfo_arm64 *info)
 		cpacr_restore(cpacr);
 	}
 
-	if (id_aa64pfr0_mpam(info->reg_id_aa64pfr0))
+	if (IS_ENABLED(CONFIG_ARM64_MPAM) &&
+	    id_aa64pfr0_mpam(info->reg_id_aa64pfr0))
 		init_cpu_ftr_reg(SYS_MPAMIDR_EL1, info->reg_mpamidr);
 
 	if (id_aa64pfr1_mte(info->reg_id_aa64pfr1))
@@ -1422,7 +1423,8 @@ void update_cpu_features(int cpu,
 		cpacr_restore(cpacr);
 	}
 
-	if (id_aa64pfr0_mpam(info->reg_id_aa64pfr0)) {
+	if (IS_ENABLED(CONFIG_ARM64_MPAM) &&
+	    id_aa64pfr0_mpam(info->reg_id_aa64pfr0)) {
 		taint |= check_update_ftr_reg(SYS_MPAMIDR_EL1, cpu,
 					info->reg_mpamidr, boot->reg_mpamidr);
 	}
@@ -2386,6 +2388,7 @@ cpucap_panic_on_conflict(const struct arm64_cpu_capabilities *cap)
 	return !!(cap->type & ARM64_CPUCAP_PANIC_ON_CONFLICT);
 }
 
+#ifdef CONFIG_ARM64_MPAM
 static bool
 test_has_mpam(const struct arm64_cpu_capabilities *entry, int scope)
 {
@@ -2415,6 +2418,7 @@ test_has_mpam_hcr(const struct arm64_cpu_capabilities *entry, int scope)
 
 	return idr & MPAMIDR_EL1_HAS_HCR;
 }
+#endif
 
 static const struct arm64_cpu_capabilities arm64_features[] = {
 	{
@@ -2912,6 +2916,7 @@ static const struct arm64_cpu_capabilities arm64_features[] = {
 #endif
 	},
 #endif
+#ifdef CONFIG_ARM64_MPAM
 	{
 		.desc = "Memory Partitioning And Monitoring",
 		.type = ARM64_CPUCAP_SYSTEM_FEATURE,
@@ -2926,6 +2931,7 @@ static const struct arm64_cpu_capabilities arm64_features[] = {
 		.capability = ARM64_MPAM_HCR,
 		.matches = test_has_mpam_hcr,
 	},
+#endif
 	{
 		.desc = "NV1",
 		.capability = ARM64_HAS_HCR_NV1,
