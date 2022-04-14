@@ -36,9 +36,13 @@
 #include <trace/hooks/fpsimd.h>
 #include <trace/hooks/mm.h>
 #include <trace/hooks/dtask.h>
+<<<<<<< PATCH SET (99d253 ANDROID: GKI: regmap: Add regmap vendor hook for of_syscon_r)
+#include <trace/hooks/regmap.h>
+=======
 #include <trace/hooks/ftrace_dump.h>
 #include <trace/hooks/traps.h>
 #include <trace/hooks/fault.h>
+>>>>>>> BASE      (95e082 ANDROID: x86: gki_defconfig: Fix CONFIG_GENERIC_PHY warning)
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -108,6 +112,10 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_slab_folio_alloced);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_kmalloc_large_alloced);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_swappiness);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sched_show_task);
+<<<<<<< PATCH SET (99d253 ANDROID: GKI: regmap: Add regmap vendor hook for of_syscon_r)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_regmap_update);
+=======
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ftrace_format_check);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_arm64_serror_panic);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_sea);
+>>>>>>> BASE      (95e082 ANDROID: x86: gki_defconfig: Fix CONFIG_GENERIC_PHY warning)
