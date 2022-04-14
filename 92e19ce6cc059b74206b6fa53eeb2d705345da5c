@@ -52,6 +52,24 @@
       "parentUuid": "0a4aacdd_703622d6",
       "revId": "92e19ce6cc059b74206b6fa53eeb2d705345da5c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cddd5404_99724674",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2022-04-14T23:30:33Z",
+      "side": 1,
+      "message": "Also, if we want to combine both types `__u*` and `uint*_t`, we could _always_ include `linux/types.h`. Which is fine since we don\u0027t care about !__linux__. And this would also get rid of the warning. e.g.\n\n```\ndiff --git a/include/uapi/linux/fuse.h b/include/uapi/linux/fuse.h\nindex 84ba1d043d19..1bdd38e04851 100644\n--- a/include/uapi/linux/fuse.h\n+++ b/include/uapi/linux/fuse.h\n@@ -199,9 +199,8 @@\n #ifndef _LINUX_FUSE_H\n #define _LINUX_FUSE_H\n \n-#ifdef __KERNEL__\n #include \u003clinux/types.h\u003e\n-#else\n+#ifndef __KERNEL__\n #include \u003cstdint.h\u003e\n #endif\n\n```\n\nOther upstream uapi header already do this anyway.",
+      "parentUuid": "5317f776_6708bf3e",
+      "revId": "92e19ce6cc059b74206b6fa53eeb2d705345da5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
