@@ -34,7 +34,11 @@
 #include <trace/hooks/remoteproc.h>
 #include <trace/hooks/timer.h>
 #include <trace/hooks/fpsimd.h>
+<<<<<<< PATCH SET (058e6c ANDROID: GKI: regmap: Add regmap vendor hook for of_syscon_r)
+#include <trace/hooks/regmap.h>
+=======
 #include <trace/hooks/mm.h>
+>>>>>>> BASE      (d8faa0 ANDROID: vendor_hooks: mm: add kmalloc_large_alloced hook fo)
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -89,5 +93,9 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rproc_recovery);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rproc_recovery_set);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_timer_calc_index);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_is_fpsimd_save);
+<<<<<<< PATCH SET (058e6c ANDROID: GKI: regmap: Add regmap vendor hook for of_syscon_r)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_regmap_update);
+=======
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_slab_folio_alloced);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_kmalloc_large_alloced);
+>>>>>>> BASE      (d8faa0 ANDROID: vendor_hooks: mm: add kmalloc_large_alloced hook fo)
