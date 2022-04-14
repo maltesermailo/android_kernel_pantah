@@ -35,7 +35,11 @@
 #include <trace/hooks/timer.h>
 #include <trace/hooks/fpsimd.h>
 #include <trace/hooks/mm.h>
+<<<<<<< PATCH SET (50d9e9 ANDROID: GKI: regmap: Add regmap vendor hook for of_syscon_r)
+#include <trace/hooks/regmap.h>
+=======
 #include <trace/hooks/dtask.h>
+>>>>>>> BASE      (6063f6 ANDROID: Revert "ANDROID: default enable VHOST_TASK")
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -95,5 +99,9 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_timer_calc_index);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_is_fpsimd_save);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_slab_folio_alloced);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_kmalloc_large_alloced);
+<<<<<<< PATCH SET (50d9e9 ANDROID: GKI: regmap: Add regmap vendor hook for of_syscon_r)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_regmap_update);
+=======
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_swappiness);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sched_show_task);
+>>>>>>> BASE      (6063f6 ANDROID: Revert "ANDROID: default enable VHOST_TASK")
