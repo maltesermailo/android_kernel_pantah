@@ -152,6 +152,8 @@ find_format(struct list_head *fmt_list_head, snd_pcm_format_t format,
 			found = fp;
 			cur_attr = attr;
 		}
+
+		trace_android_vh_audio_usb_offload_pcm_binterval(fp, found, &cur_attr, &attr);
 	}
 	return found;
 }
@@ -450,6 +452,10 @@ static int configure_endpoints(struct snd_usb_audio *chip,
 		err = snd_usb_endpoint_configure(chip, subs->data_endpoint);
 		if (err < 0)
 			return err;
+
+		trace_android_rvh_audio_usb_offload_pcm_intf(chip, subs->data_endpoint->iface,
+				subs->data_endpoint->altsetting, subs->direction);
+
 		snd_usb_set_format_quirk(subs, subs->cur_audiofmt);
 	}
 
@@ -626,6 +632,7 @@ static int snd_usb_pcm_prepare(struct snd_pcm_substream *substream)
 	struct snd_usb_audio *chip = subs->stream->chip;
 	int ret;
 
+	trace_android_vh_audio_usb_offload_pcmbuf(subs->dev, subs->cur_audiofmt->iface);
 	ret = snd_usb_lock_shutdown(chip);
 	if (ret < 0)
 		return ret;
@@ -638,6 +645,8 @@ static int snd_usb_pcm_prepare(struct snd_pcm_substream *substream)
 	if (ret < 0)
 		goto unlock;
 
+	trace_android_vh_audio_usb_offload_set_rate(ep->cur_audiofmt->iface,
+				ep->cur_rate, ep->cur_audiofmt->altsetting);
 	/* reset the pointer */
 	subs->buffer_bytes = frames_to_bytes(runtime, runtime->buffer_size);
 	subs->inflight_bytes = 0;
@@ -1105,6 +1114,8 @@ static int snd_usb_pcm_open(struct snd_pcm_substream *substream)
 	struct snd_usb_substream *subs = &as->substream[direction];
 	int ret;
 
+	trace_android_rvh_audio_usb_offload_pcm_control(subs->dev, SOUND_PCM_OPEN,
+					    direction);
 	runtime->hw = snd_usb_hardware;
 	/* need an explicit sync to catch applptr update in low-latency mode */
 	if (direction == SNDRV_PCM_STREAM_PLAYBACK &&
@@ -1138,6 +1149,8 @@ static int snd_usb_pcm_close(struct snd_pcm_substream *substream)
 	struct snd_usb_substream *subs = &as->substream[direction];
 	int ret;
 
+	trace_android_rvh_audio_usb_offload_pcm_control(subs->dev, SOUND_PCM_CLOSE,
+					    direction);
 	snd_media_stop_pipeline(subs);
 
 	if (!snd_usb_lock_shutdown(subs->stream->chip)) {
