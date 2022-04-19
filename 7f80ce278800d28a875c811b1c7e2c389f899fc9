@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7461bef_75d5f0d0",
+        "filename": "mm/damon/reclaim.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-04-19T21:01:46Z",
+      "side": 1,
+      "message": "IIUC, this would mean this timer stays active even if the reclaim mechanism is never enabled. If so, this unnecessary overhead can be completely avoided by using module_param_call() for enabled flag:\n\n```\nstatic bool enabled;\nstatic int enabled_show(char *buffer, const struct kernel_param *kp)\n{\n\treturn sprintf(buffer, \"%c\\n\", enabled ? \u0027Y\u0027 : \u0027N\u0027);\n}\n\nstatic __meminit int enabled_store(const char *val,\n\t\tconst struct kernel_param *kp)\n{\n\tint rc \u003d param_set_bool(val, kp);\n\n\tif (rc \u003c 0)\n\t\treturn rc;\n\tif (enabled)\n\t\tschedule_delayed_work(\u0026damon_reclaim_timer, 0);\n\treturn 0;\n}\nmodule_param_call(enabled, enabled_store, enabled_show, \u0026enabled, 0400);\n```\n\nAnd in here rescheduling only if the mechanism is enabled:\n\n```\nif (enabled)\n    schedule_delayed_work(\u0026damon_reclaim_timer,\n\t\t\tmsecs_to_jiffies(ENABLE_CHECK_INTERVAL_MS));\n```",
+      "range": {
+        "startLine": 331,
+        "startChar": 1,
+        "endLine": 332,
+        "endChar": 47
+      },
+      "revId": "7f80ce278800d28a875c811b1c7e2c389f899fc9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
