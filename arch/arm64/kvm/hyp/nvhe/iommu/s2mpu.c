@@ -397,9 +397,27 @@ static u32 host_mmio_reg_access_mask(size_t off, bool is_write)
 	if (off == REG_NS_INTERRUPT_CLEAR)
 		return write_only & ALL_VIDS_BITMAP;
 
+	if (off == REG_NS_INFO)
+		return read_only & INFO_NUM_SET_MASK;
+
 	/* IRQ handler can read bitmap of pending interrupts. */
 	if (off == REG_NS_FAULT_STATUS)
 		return read_only & ALL_VIDS_BITMAP;
+
+	/*
+	 * Allow reading MPTC entries for debugging purposes.
+	 * That involves:
+	 *   - writing (set,way) to READ_MPTC
+	 *   - reading READ_MPTC_TAG_PPN/TAG_OTHERS/DATA
+	 */
+	if (off == REG_NS_READ_MPTC)
+		return write_only & READ_MPTC_MASK;
+	else if (off == REG_NS_READ_MPTC_TAG_PPN)
+		return read_only & READ_MPTC_TAG_PPN_MASK;
+	else if (off == REG_NS_READ_MPTC_TAG_OTHERS)
+		return read_only & READ_MPTC_TAG_OTHERS_MASK;
+	else if (off == REG_NS_READ_MPTC_DATA)
+		return read_only;
 
 	/* Allow reading L1ENTRY registers for debug purporses. */
 	if (off >= REG_NS_L1ENTRY_L2TABLE_ADDR(0, 0) &&
