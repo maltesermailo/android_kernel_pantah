@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee3c53eb_34e0f8c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-04-26T22:36:01Z",
+      "side": 1,
+      "message": "Validated a build on db845c, and this seems to be working ok. But I\u0027m a little worried we\u0027re setting folks up for trouble should the module list need changing.",
+      "revId": "32787ef6d205242bbf1105720319d57da552e78f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56161be1_3cf51f67",
+        "filename": "BUILD.bazel",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-04-26T22:36:01Z",
+      "side": 1,
+      "message": "Just generating the working config for a device can be a pain, so maintaining this list of ko files seems like it will be very laborious (with consequence of missing just one causing the device to stop booting). So this feels a bit fragile. Is there any easier way to capture the generated device driver modules without having to enumerate them?",
+      "revId": "32787ef6d205242bbf1105720319d57da552e78f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
