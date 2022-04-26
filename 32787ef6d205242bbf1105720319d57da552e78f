@@ -33,6 +33,24 @@
       "message": "Just generating the working config for a device can be a pain, so maintaining this list of ko files seems like it will be very laborious (with consequence of missing just one causing the device to stop booting). So this feels a bit fragile. Is there any easier way to capture the generated device driver modules without having to enumerate them?",
       "revId": "32787ef6d205242bbf1105720319d57da552e78f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50197266_e9f0568c",
+        "filename": "BUILD.bazel",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2022-04-26T22:43:53Z",
+      "side": 1,
+      "message": "The reason of this is the following:\n\n- Bazel requires the list of outputs to be listed\n- We also want to keep track of the list and ensure the change is deliberate.\n\nHence Matthias and I decide to ask developers to maintain this list, unlike in build.sh.\n\nCurrently, if the list is out-dated (e.g. a new module is built or a module is removed), a build error is raised when running the Bazel build.\n\nI am also going to add build test to postsubmit then presubmit. But it\u0027ll still need developers to update the list.\n\nStill, I think your point is absolutely valid. Filing Bug:230529320 to keep track of potentially removing this.",
+      "parentUuid": "56161be1_3cf51f67",
+      "revId": "32787ef6d205242bbf1105720319d57da552e78f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
