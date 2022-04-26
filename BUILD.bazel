@@ -17,6 +17,44 @@ package(
     ],
 )
 
+load("@kernel_toolchain_info//:dict.bzl", "BRANCH")
+load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
+load("//build/kernel/kleaf:kernel.bzl", "kernel_build", "kernel_images", "kernel_modules_install")
 load("//build/kernel/kleaf:common_kernels.bzl", "define_common_kernels")
+load("//build/kernel/kleaf:constants.bzl", "aarch64_gz_outs")
 
 define_common_kernels()
+
+# Sync with build.config.db845c
+kernel_build(
+    name = "db845c",
+    outs = aarch64_gz_outs + [
+        "arch/arm64/boot/dts/qcom/sdm845-db845c.dtb",
+        "arch/arm64/boot/dts/qcom/qrb5165-rb5.dtb",
+    ],
+    build_config = "build.config.db845c",
+)
+
+kernel_modules_install(
+    name = "db845c_modules_install",
+    kernel_build = ":db845c",
+    kernel_modules = [],
+)
+
+kernel_images(
+    name = "db845c_images",
+    build_initramfs = True,
+    kernel_build = ":db845c",
+    kernel_modules_install = ":db845c_modules_install",
+)
+
+copy_to_dist_dir(
+    name = "db845c_dist",
+    data = [
+        ":db845c",
+        ":db845c_images",
+        ":db845c_modules_install",
+    ],
+    dist_dir = "out/{branch}/dist".format(branch = BRANCH),
+    flat = True,
+)
