@@ -34,6 +34,24 @@
       "parentUuid": "2f0b8d81_b99656b8",
       "revId": "2a49815ff17b6c1a36e8e114cde87eed608a2c1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "867802dc_cc69ae76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-04-27T04:01:30Z",
+      "side": 1,
+      "message": "We can\u0027t take this patch because:\n1. It introduces an out-of-tree UAPI (changes to the memcg exposed attributes), which is a blocker by itself unless upstream accepts it.\n2. It\u0027s clear from the upstream discussion that it will not be accepted in this form.\n\nI think the best direction here would be to implement vendor hooks and move memcg limit adjustment logic into a separate driver. It\u0027s not pretty but seems to be doable. psi_system can be exposed to your driver using android_debug_symbols mechanism.\nAre you setting memcg-\u003etime_decay_fact, memcg-\u003esome_prop and memcg-\u003efull_prop based on the state of the app (background/foreground/etc.) or do you set them to the same values for all apps?",
+      "parentUuid": "0b2cc78f_2dd3fad7",
+      "revId": "2a49815ff17b6c1a36e8e114cde87eed608a2c1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
