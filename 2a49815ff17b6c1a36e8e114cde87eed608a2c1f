@@ -16,6 +16,24 @@
       "message": "Please add a link to the upstream discussion (https://lore.kernel.org/all/1648713656-24254-1-git-send-email-zhaoyang.huang@unisoc.com/) in your description.\n\nThe upstream (me included) is not convinced that this is the right direction, so please work there to either persuade them or change the approach so that it\u0027s acceptable.",
       "revId": "2a49815ff17b6c1a36e8e114cde87eed608a2c1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b2cc78f_2dd3fad7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1941381
+      },
+      "writtenOn": "2022-04-27T02:52:16Z",
+      "side": 1,
+      "message": "Upstream\u0027s opinion is that they prefer to setup a userspace monitor to poll the load thing(PSI pressure etc) and react(adjust memory.low). It could be make sense in server like system where the load doesn\u0027t change quickly as android does. In fact, this idea originally arise from comparing the result of lmk driver and LMKD, which could be deem as in-kernel/userspace monitor, where the latter one introduce acting latency. Furthermore, this is a opt-in code which would NOT affect original memcg\u0027s sheme.\n\nI have test this patch in android12 for cold/warm startup which could be seen big improvement. Could you please setup an same environment as bellowing to verify the result?\n\n1. apply the patched version on the phone.(it is forbidden by GKI on ARM64 during compiling, should surpass it for now. OR apply it on an ARM32 GO version)\n2. setup memcgv2 \n   2.1 unlock the phone\n   2.2 adb shell root \u0026 disable-verify \u0026 remount\n   2.3 adb shell busybox vi /system/etc/cgroup.json and add memory subsys in \n       memcgv2\n   2.4 adb shell reboot\n3. setup the memcgv2\u0027s topology\n   echo \"+memory\" \u003e /sys/fs/cgroup/cgroup.subtree_control\n   mkdir /sys/fs/cgroup/A\n   echo 36 \u003e /sys/fs/cgroup/A/memory.time_decay_factor\n   ps -elf|grep system_server\n   echo \"pid of system_server\" \u003e /sys/fs/cgroup/A/cgroup.procs\n4. verify test cases.",
+      "parentUuid": "2f0b8d81_b99656b8",
+      "revId": "2a49815ff17b6c1a36e8e114cde87eed608a2c1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
