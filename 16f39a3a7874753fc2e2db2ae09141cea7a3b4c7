@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b47a4691_eadd0282",
+        "filename": "drivers/trusty/trusty-virtio.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2022-04-28T04:53:43Z",
+      "side": 1,
+      "message": "Removed.\n\nIMHO, older version would still need this boost, probably at some point should remove all the old stuff altogether.",
+      "parentUuid": "395d5a16_d3af0486",
+      "revId": "16f39a3a7874753fc2e2db2ae09141cea7a3b4c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14294b8c_f737a2d4",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dd2f0b8_58852c98",
+        "filename": "drivers/trusty/trusty-virtio.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2022-04-28T04:53:43Z",
+      "side": 1,
+      "message": "done.\nright now Linus relaxed line limit to 100, but yes, as you wish.",
+      "parentUuid": "14294b8c_f737a2d4",
+      "revId": "16f39a3a7874753fc2e2db2ae09141cea7a3b4c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "771e8c88_eab1fbb1",
@@ -48,6 +84,24 @@
       "writtenOn": "2022-04-28T03:44:01Z",
       "side": 1,
       "message": "See comment in trusty_virtio_notify. I don\u0027t think we need to allocate this workqueue at all. At least, we should not allocate it if (api_ver \u003c TRUSTY_API_VERSION_SMP_NOP) as in that case the use of it is not reachable.",
+      "revId": "16f39a3a7874753fc2e2db2ae09141cea7a3b4c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa1bfc5b_0741fec0",
+        "filename": "drivers/trusty/trusty-virtio.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2022-04-28T04:53:43Z",
+      "side": 1,
+      "message": "see above.\n\nthe other WQ is also allocated `if (api_ver \u003c TRUSTY_API_VERSION_SMP_NOP)`, which sounds a good clean-up follow up",
+      "parentUuid": "771e8c88_eab1fbb1",
       "revId": "16f39a3a7874753fc2e2db2ae09141cea7a3b4c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -75,6 +129,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f95c0b6_d5f1d28f",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2022-04-28T04:53:43Z",
+      "side": 1,
+      "message": "I don\u0027t think it really be the case that kworker would be run as RT, but looks like we have few WARN usage in this file for surprise.",
+      "parentUuid": "9618e12b_1f7d17a5",
+      "range": {
+        "startLine": 770,
+        "startChar": 4,
+        "endLine": 770,
+        "endChar": 35
+      },
+      "revId": "16f39a3a7874753fc2e2db2ae09141cea7a3b4c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83507eae_616ac247",
@@ -92,6 +170,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a33b2f05_70ab157f",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2022-04-28T04:53:43Z",
+      "side": 1,
+      "message": "\u003e if the load is high and use_high_wq it may take a while to get here.\n\nMaybe, but I would bet a bigger change. Like said, I think we may want a kthread which can inherit the caller\u0027s scheduling priority/policy but at this moment we probably would prefer a smaller code change for T (so I cleaned out the WQ for api_ver \u003c TRUSTY_API_VERSION_SMP_NOP for such reason).\n\n\nI never see this for our usage, as we toggle this in user space before trusty execution. For the cases then trust is already running, the delay is happened just between trusty (trusty_std_call32 \u003d\u003d\u003e SM_ERR_NOP_INTERRUPTED) interrupted by IRQ till we reach the nice adjustment. Normally I see we have many many small scheduling delays, so even if we miss the first time, it is still a big improvement.\n\nAlso",
+      "parentUuid": "83507eae_616ac247",
+      "revId": "16f39a3a7874753fc2e2db2ae09141cea7a3b4c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc9c8102_35184979",
@@ -105,6 +201,24 @@
       "writtenOn": "2022-04-28T03:44:01Z",
       "side": 1,
       "message": "align with `(` on previous line",
+      "revId": "16f39a3a7874753fc2e2db2ae09141cea7a3b4c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42a4a057_38d2e758",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2022-04-28T04:53:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc9c8102_35184979",
       "revId": "16f39a3a7874753fc2e2db2ae09141cea7a3b4c7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
