@@ -50,6 +50,23 @@
       "message": "maennich: Ping^2 (verified that this still boots).",
       "revId": "b4743bdd9b0ea58100eb2929077e020bd3baea8b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f108e956_08c40d3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-04-28T04:44:14Z",
+      "side": 1,
+      "message": "Hey Peter, I gave this a spin with kleaf \"./tools/bazel run //common:db845c_dist\" and hit a failure:\n\nERROR: /usr/local/google/home/jstultz/projects/linux/android-kernel/common/BUILD.bazel:26:14: Building kernel db845c failed: (Exit 1): bash failed: error executing command (from target //common:db845c) /bin/bash -c ... (remaining 1 argument skipped)\n\nUse --sandbox_debug to see verbose messages from the sandbox\nIn file included from \u003cbuilt-in\u003e:1:\n./usr/include/linux/icmp.h:100:3: warning: declaration does not declare anything [-Wmissing-declarations]\n                __be16  __unused;\n                ^~~~~~\n1 warning generated.\nERROR: The following kernel modules are built but not copied. Add these lines to the module_outs attribute of //common:db845c:\n    \"drivers/clk/qcom/gcc-sm8450.ko\",\n    \"drivers/pinctrl/qcom/pinctrl-sm8450.ko\",\n    \"drivers/interconnect/qcom/qnoc-sm8450.ko\",\n  GEN     kernel/gki_module_protected.h\n  GEN     kernel/gki_module_exported.h\nTarget //common:db845c_dist failed to build\nUse --verbose_failures to see the command lines of failed build steps.\nERROR: /usr/local/google/home/jstultz/projects/linux/android-kernel/common/BUILD.bazel:26:14 Middleman _middlemen/common_Sdb845c_Udist-runfiles failed: (Exit 1): bash failed: error executing command (from target //common:db845c) /bin/bash -c ... (remaining 1 argument skipped)\n\nUse --sandbox_debug to see verbose messages from the sandbox\nINFO: Elapsed time: 1472.176s, Critical Path: 1443.54s\nINFO: 131 processes: 125 internal, 6 linux-sandbox.\nFAILED: Build did NOT complete successfully\nFAILED: Build did NOT complete successfully\n\nYou likely need to add the new .ko files to the db845c section in BUILD.bazel.",
+      "revId": "b4743bdd9b0ea58100eb2929077e020bd3baea8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
