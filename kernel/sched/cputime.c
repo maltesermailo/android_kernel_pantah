@@ -1,61 +1,11 @@
-// SPDX-License-Identifier: GPL-2.0-only
-/*
- * Simple CPU accounting cgroup controller
- */
-#include <linux/cpufreq_times.h>
-#include "sched.h"
-#include <trace/hooks/sched.h>
-
-#ifdef CONFIG_IRQ_TIME_ACCOUNTING
-
-/*
- * There are no locks covering percpu hardirq/softirq time.
- * They are only modified in vtime_account, on corresponding CPU
- * with interrupts disabled. So, writes are safe.
- * They are read and saved off onto struct rq in update_rq_clock().
- * This may result in other CPU reading this CPU's irq time and can
- * race with irq/vtime_account on this CPU. We would either get old
- * or new value with a side effect of accounting a slice of irq time to wrong
- * task when irq is in progress while we read rq->clock. That is a worthy
- * compromise in place of having locks on each irq in account_system_time.
- */
-DEFINE_PER_CPU(struct irqtime, cpu_irqtime);
-EXPORT_PER_CPU_SYMBOL_GPL(cpu_irqtime);
-
-static int sched_clock_irqtime;
-
-void enable_sched_clock_irqtime(void)
-{
-	sched_clock_irqtime = 1;
-}
-
-void disable_sched_clock_irqtime(void)
-{
-	sched_clock_irqtime = 0;
-}
-
-static void irqtime_account_delta(struct irqtime *irqtime, u64 delta,
-				  enum cpu_usage_stat idx)
-{
-	u64 *cpustat = kcpustat_this_cpu->cpustat;
-
-	u64_stats_update_begin(&irqtime->sync);
-	cpustat[idx] += delta;
-	irqtime->total += delta;
-	irqtime->tick_delta += delta;
-	u64_stats_update_end(&irqtime->sync);
-}
-
-/*
- * Called after incrementing preempt_count on {soft,}irq_enter
- * and before decrementing preempt_count on {soft,}irq_exit.
- */
+et nu
 void irqtime_account_irq(struct task_struct *curr, unsigned int offset)
 {
 	struct irqtime *irqtime = this_cpu_ptr(&cpu_irqtime);
 	unsigned int pc;
 	s64 delta;
 	int cpu;
+	bool irq_start = true;
 
 	if (!sched_clock_irqtime)
 		return;
@@ -71,12 +21,20 @@ void irqtime_account_irq(struct task_struct *curr, unsigned int offset)
 	 * in that case, so as not to confuse scheduler with a special task
 	 * that do not consume any time, but still wants to run.
 	 */
-	if (pc & HARDIRQ_MASK)
+	if (pc & HARDIRQ_MASK) {
 		irqtime_account_delta(irqtime, delta, CPUTIME_IRQ);
-	else if ((pc & SOFTIRQ_OFFSET) && curr != this_cpu_ksoftirqd())
+		irq_start = false;
+	} else if ((pc & SOFTIRQ_OFFSET) && curr != this_cpu_ksoftirqd()) {
 		irqtime_account_delta(irqtime, delta, CPUTIME_SOFTIRQ);
+		irq_start = false;
+	}
 
 	trace_android_rvh_account_irq(curr, cpu, delta);
+
+	if (irq_start)
+		trace_android_rvh_account_irq_start(curr, cpu, delta);
+	else
+		trace_android_rvh_account_irq_end(curr, cpu, delta);
 }
 
 static u64 irqtime_tick_accounted(u64 maxtime)
