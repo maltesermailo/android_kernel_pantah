@@ -1985,6 +1985,10 @@ static int f2fs_disable_checkpoint(struct f2fs_sb_info *sbi)
 {
 	unsigned int s_flags = sbi->sb->s_flags;
 	struct cp_control cpc;
+<<<<<<< HEAD   (889326 UPSTREAM: net/sched: cls_fw: Fix improper refcount update le)
+=======
+	unsigned int gc_mode = sbi->gc_mode;
+>>>>>>> CHANGE (a29ed1 UPSTREAM: f2fs: skip GC if possible when checkpoint disablin)
 	int err = 0;
 	int ret;
 	block_t unusable;
@@ -1995,8 +1999,18 @@ static int f2fs_disable_checkpoint(struct f2fs_sb_info *sbi)
 	}
 	sbi->sb->s_flags |= SB_ACTIVE;
 
+	/* check if we need more GC first */
+	unusable = f2fs_get_unusable_blocks(sbi);
+	if (!f2fs_disable_cp_again(sbi, unusable))
+		goto skip_gc;
+
 	f2fs_update_time(sbi, DISABLE_TIME);
 
+<<<<<<< HEAD   (889326 UPSTREAM: net/sched: cls_fw: Fix improper refcount update le)
+=======
+	sbi->gc_mode = GC_URGENT_HIGH;
+
+>>>>>>> CHANGE (a29ed1 UPSTREAM: f2fs: skip GC if possible when checkpoint disablin)
 	while (!f2fs_time_over(sbi, DISABLE_TIME)) {
 		f2fs_down_write(&sbi->gc_lock);
 		err = f2fs_gc(sbi, true, false, false, NULL_SEGNO);
@@ -2020,6 +2034,7 @@ static int f2fs_disable_checkpoint(struct f2fs_sb_info *sbi)
 		goto restore_flag;
 	}
 
+skip_gc:
 	f2fs_down_write(&sbi->gc_lock);
 	cpc.reason = CP_PAUSE;
 	set_sbi_flag(sbi, SBI_CP_DISABLED);
