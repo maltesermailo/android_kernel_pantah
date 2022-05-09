@@ -862,6 +862,7 @@ static void update_curr(struct cfs_rq *cfs_rq)
 	}
 
 	account_cfs_rq_runtime(cfs_rq, delta_exec);
+	trace_android_rvh_update_curr(cfs_rq);
 }
 
 static void update_curr_fair(struct rq *rq)

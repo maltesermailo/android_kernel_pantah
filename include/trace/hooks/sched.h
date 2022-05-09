@@ -191,6 +191,10 @@ DECLARE_RESTRICTED_HOOK(android_rvh_schedule,
 	TP_PROTO(struct task_struct *prev, struct task_struct *next, struct rq *rq),
 	TP_ARGS(prev, next, rq), 1);
 
+DECLARE_RESTRICTED_HOOK(android_rvh_update_curr,
+	TP_PROTO(struct cfs_rq *cfs_rq),
+	TP_ARGS(cfs_rq), 1);
+
 DECLARE_RESTRICTED_HOOK(android_rvh_sched_cpu_starting,
 	TP_PROTO(int cpu),
 	TP_ARGS(cpu), 1);
