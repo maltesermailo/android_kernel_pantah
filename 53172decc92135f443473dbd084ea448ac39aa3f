@@ -46,6 +46,30 @@
       },
       "revId": "53172decc92135f443473dbd084ea448ac39aa3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1006a29d_e7880722",
+        "filename": "include/linux/mmzone.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-05-09T20:34:38Z",
+      "side": 1,
+      "message": "I guess you could use `(mt \u003d\u003d MIGRATE_CMA || mt \u003d\u003d MIGRATE_ISOLATE);` instead of `__ret;` but that\u0027s a nit. I\u0027m fine with whatever you decide.",
+      "parentUuid": "92dc9799_db1cd256",
+      "range": {
+        "startLine": 80,
+        "startChar": 1,
+        "endLine": 83,
+        "endChar": 7
+      },
+      "revId": "53172decc92135f443473dbd084ea448ac39aa3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
