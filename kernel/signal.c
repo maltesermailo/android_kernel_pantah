@@ -1450,6 +1450,18 @@ int group_send_sig_info(int sig, struct kernel_siginfo *info,
 
 	if (!ret && sig)
 		ret = do_send_sig_info(sig, info, p, type);
+<<<<<<< HEAD   (c60388 UPSTREAM: netfilter: nf_tables: disallow rule addition to bo)
+=======
+		if (!ret && sig == SIGKILL) {
+			bool reap = false;
+
+			trace_android_vh_process_killed(current, &reap);
+			trace_android_vh_killed_process(current, p, &reap);
+			if (reap)
+				add_to_oom_reaper(p);
+		}
+	}
+>>>>>>> CHANGE (54f780 ANDROID: signal: Add vendor hook for memory reaping)
 
 	return ret;
 }

@@ -88,8 +88,13 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_send_sig_info);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_wait_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_wait_finish);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_init);
+<<<<<<< HEAD   (c60388 UPSTREAM: netfilter: nf_tables: disallow rule addition to bo)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_task_blocks_on_rtmutex);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rtmutex_waiter_prio);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_process_killed);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_killed_process);
+>>>>>>> CHANGE (54f780 ANDROID: signal: Add vendor hook for memory reaping)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rtmutex_wait_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rtmutex_wait_finish);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_opt_spin_start);
