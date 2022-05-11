@@ -2021,7 +2021,8 @@ retry:
 		if (ret < 0 && orig_gup_flags != gup_flags) {
 			gup_flags = orig_gup_flags;
 			goto retry;
-		}
+		} else
+			return ret;
 	}
 
 	return __get_user_pages_locked(mm, start, nr_pages, pages, vmas,
