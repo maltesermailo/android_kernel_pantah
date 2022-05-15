@@ -5,6 +5,8 @@ SUBLEVEL = 278
 EXTRAVERSION =
 NAME = Petit Gorille
 
+# This is a CANARY commit, disigned to test the current state of pre-submit
+
 # *DOCUMENTATION*
 # To see a list of typical targets execute "make help"
 # More info can be located in ./README
