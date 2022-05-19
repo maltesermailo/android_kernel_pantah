@@ -35,6 +35,12 @@ struct pkvm_iommu_ops {
 	int (*validate_child)(struct pkvm_iommu *dev, struct pkvm_iommu *child);
 
 	/*
+	 * Driver-specific validation of a device that is being registered.
+	 * All fields of the device struct have been populated.
+	 * Called with the host lock held.
+	 */
+	int (*command)(struct pkvm_iommu *dev, unsigned long cmd, unsigned long arg);
+	/*
 	 * Callback to apply a host stage-2 mapping change at driver level.
 	 * Called before 'host_stage2_idmap_apply' with host lock held.
 	 */
@@ -84,6 +90,8 @@ int __pkvm_iommu_register(unsigned long dev_id,
 			  phys_addr_t dev_pa, size_t dev_size,
 			  unsigned long parent_id,
 			  void *kern_mem_va, size_t mem_size);
+int __pkvm_iommu_device_cmd(unsigned long dev_id, unsigned long cmd,
+			    unsigned long arg);
 int __pkvm_iommu_pm_notify(unsigned long dev_id,
 			   enum pkvm_iommu_pm_event event);
 int __pkvm_iommu_finalize(void);

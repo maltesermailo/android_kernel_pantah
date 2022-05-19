@@ -1037,6 +1037,15 @@ static void handle___pkvm_iommu_register(struct kvm_cpu_context *host_ctxt)
 						      mem, mem_size);
 }
 
+static void handle___pkvm_iommu_device_cmd(struct kvm_cpu_context *host_ctxt)
+{
+	DECLARE_REG(unsigned long, dev_id, host_ctxt, 1);
+	DECLARE_REG(unsigned long, cmd, host_ctxt, 2);
+	DECLARE_REG(unsigned long, arg, host_ctxt, 3);
+
+	cpu_reg(host_ctxt, 1) = __pkvm_iommu_device_cmd(dev_id, cmd, arg);
+}
+
 static void handle___pkvm_iommu_pm_notify(struct kvm_cpu_context *host_ctxt)
 {
 	DECLARE_REG(unsigned long, dev_id, host_ctxt, 1);
@@ -1086,6 +1095,7 @@ static const hcall_t host_hcall[] = {
 	HANDLE_FUNC(__pkvm_iommu_driver_init),
 	HANDLE_FUNC(__pkvm_iommu_register),
 	HANDLE_FUNC(__pkvm_iommu_pm_notify),
+	HANDLE_FUNC(__pkvm_iommu_device_cmd),
 	HANDLE_FUNC(__pkvm_iommu_finalize),
 };
 

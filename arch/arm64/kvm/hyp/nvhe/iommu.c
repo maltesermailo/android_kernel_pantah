@@ -446,6 +446,22 @@ int __pkvm_iommu_finalize(void)
 	return ret;
 }
 
+int __pkvm_iommu_device_cmd(unsigned long dev_id, unsigned long cmd,
+			    unsigned long arg)
+{
+	struct pkvm_iommu *dev;
+	int ret;
+
+	host_lock_component();
+	dev = find_iommu_by_id(dev_id);
+	if (dev)
+		ret = dev->ops->command ? dev->ops->command(dev, cmd, arg) : 0;
+	else
+		ret = -ENODEV;
+	host_unlock_component();
+	return ret;
+}
+
 int __pkvm_iommu_pm_notify(unsigned long dev_id, enum pkvm_iommu_pm_event event)
 {
 	struct pkvm_iommu *dev;

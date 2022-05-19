@@ -42,6 +42,12 @@ int pkvm_iommu_register(struct device *dev, enum pkvm_iommu_driver_id drv_id,
 	return ret;
 }
 
+int pkvm_iommu_device_cmd(struct device *dev, unsigned long cmd, unsigned long arg)
+{
+	return kvm_call_hyp_nvhe(__pkvm_iommu_device_cmd, dev_to_id(dev),
+				 cmd, arg);
+}
+
 int pkvm_iommu_suspend(struct device *dev)
 {
 	return kvm_call_hyp_nvhe(__pkvm_iommu_pm_notify, dev_to_id(dev),
