@@ -1,6 +1,7 @@
 <abi-corpus-group version='2.0' architecture='elf-arm-aarch64'>
   <abi-corpus version='2.0' path='vmlinux' architecture='elf-arm-aarch64'>
     <elf-function-symbols>
+      <elf-symbol name='I_care_about_struct_avc_node' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2a8cbe64'/>
       <elf-symbol name='PDE_DATA' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfb24a559'/>
       <elf-symbol name='__ClearPageMovable' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x12641630'/>
       <elf-symbol name='__SetPageMovable' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xba0d0a4a'/>
@@ -12258,6 +12259,14 @@
         <parameter type-id='eaa32e2f'/>
         <return type-id='95e97e5e'/>
       </function-type>
+      <class-decl name='avc_xperms_node' size-in-bits='448' is-struct='yes' visibility='default' filepath='security/selinux/avc.c' line='69' column='1' id='102500dc'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='xp' type-id='cf46ff78' visibility='default' filepath='security/selinux/avc.c' line='70' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='320'>
+          <var-decl name='xpd_head' type-id='72f469ec' visibility='default' filepath='security/selinux/avc.c' line='71' column='1'/>
+        </data-member>
+      </class-decl>
       <qualified-type-def type-id='852a961e' const='yes' id='1027eea9'/>
       <pointer-type-def type-id='c01f4982' size-in-bits='64' id='102ab76c'/>
       <pointer-type-def type-id='6e03f2ca' size-in-bits='64' id='103756a0'/>
@@ -12405,6 +12414,23 @@
         <parameter type-id='cf2e76b1'/>
         <return type-id='95e97e5e'/>
       </function-type>
+      <class-decl name='avc_entry' size-in-bits='320' is-struct='yes' visibility='default' filepath='security/selinux/avc.c' line='50' column='1' id='10889c04'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='ssid' type-id='19c2251e' visibility='default' filepath='security/selinux/avc.c' line='51' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='32'>
+          <var-decl name='tsid' type-id='19c2251e' visibility='default' filepath='security/selinux/avc.c' line='52' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='tclass' type-id='1dc6a898' visibility='default' filepath='security/selinux/avc.c' line='53' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='96'>
+          <var-decl name='avd' type-id='eeb9fee1' visibility='default' filepath='security/selinux/avc.c' line='54' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='256'>
+          <var-decl name='xp_node' type-id='b7b332ca' visibility='default' filepath='security/selinux/avc.c' line='55' column='1'/>
+        </data-member>
+      </class-decl>
       <pointer-type-def type-id='7893b96a' size-in-bits='64' id='108c9fc0'/>
       <pointer-type-def type-id='dc5abf9a' size-in-bits='64' id='108dbc98'/>
       <pointer-type-def type-id='23d6768c' size-in-bits='64' id='109cc752'/>
@@ -44742,7 +44768,17 @@
         <parameter type-id='37a6b980'/>
         <return type-id='c0ced320'/>
       </function-type>
-      <class-decl name='avc_node' is-struct='yes' visibility='default' is-declaration-only='yes' id='610abebc'/>
+      <class-decl name='avc_node' size-in-bits='576' is-struct='yes' visibility='default' filepath='security/selinux/avc.c' line='58' column='1' id='610abebc'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='ae' type-id='10889c04' visibility='default' filepath='security/selinux/avc.c' line='59' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='320'>
+          <var-decl name='list' type-id='03a4a074' visibility='default' filepath='security/selinux/avc.c' line='60' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='448'>
+          <var-decl name='rhead' type-id='e3d8ce29' visibility='default' filepath='security/selinux/avc.c' line='61' column='1'/>
+        </data-member>
+      </class-decl>
       <class-decl name='cma' size-in-bits='1856' is-struct='yes' visibility='default' filepath='mm/cma.h' line='14' column='1' id='6110442c'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='base_pfn' type-id='7359adad' visibility='default' filepath='mm/cma.h' line='15' column='1'/>
@@ -65060,7 +65096,7 @@
         <return type-id='95e97e5e'/>
       </function-type>
       <function-type size-in-bits='64' id='9102a0ad'>
-        <parameter type-id='eb572b74'/>
+        <parameter type-id='eb572b74' name='sdev'/>
         <return type-id='48b5725f'/>
       </function-type>
       <pointer-type-def type-id='d89691b6' size-in-bits='64' id='91073894'/>
@@ -68589,7 +68625,20 @@
           <var-decl name='private_value' type-id='7359adad' visibility='default' filepath='include/sound/control.h' line='56' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='udp_table' is-struct='yes' visibility='default' is-declaration-only='yes' id='9a516b13'/>
+      <class-decl name='udp_table' size-in-bits='192' is-struct='yes' visibility='default' filepath='include/net/udp.h' line='72' column='1' id='9a516b13'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='hash' type-id='9cc41107' visibility='default' filepath='include/net/udp.h' line='73' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='hash2' type-id='9cc41107' visibility='default' filepath='include/net/udp.h' line='74' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='128'>
+          <var-decl name='mask' type-id='f0981eeb' visibility='default' filepath='include/net/udp.h' line='75' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='160'>
+          <var-decl name='log' type-id='f0981eeb' visibility='default' filepath='include/net/udp.h' line='76' column='1'/>
+        </data-member>
+      </class-decl>
       <pointer-type-def type-id='6661a698' size-in-bits='64' id='9a537bbe'/>
       <pointer-type-def type-id='2bc6669b' size-in-bits='64' id='9a53a8a3'/>
       <function-type size-in-bits='64' id='9a54e634'>
@@ -69490,6 +69539,7 @@
       <array-type-def dimensions='1' type-id='00205383' size-in-bits='3072' id='9cc39ce1'>
         <subrange length='24' type-id='7ff19f0f' id='fdd3342b'/>
       </array-type-def>
+      <pointer-type-def type-id='fa07ab8f' size-in-bits='64' id='9cc41107'/>
       <class-decl name='snd_kcontrol_volatile' size-in-bits='128' is-struct='yes' visibility='default' filepath='include/sound/control.h' line='59' column='1' id='9cd807f4'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='owner' type-id='ed27ccc9' visibility='default' filepath='include/sound/control.h' line='60' column='1'/>
@@ -70409,6 +70459,11 @@
         </data-member>
         <data-member access='public' layout-offset-in-bits='64'>
           <var-decl name='end' type-id='3b8255e6' visibility='default' filepath='include/linux/pci.h' line='775' column='1'/>
+        </data-member>
+      </class-decl>
+      <class-decl name='extended_perms_data' size-in-bits='256' is-struct='yes' visibility='default' filepath='security/selinux/include/security.h' line='274' column='1' id='9e7dce45'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='p' type-id='1c6311dd' visibility='default' filepath='security/selinux/include/security.h' line='275' column='1'/>
         </data-member>
       </class-decl>
       <pointer-type-def type-id='daf33c64' size-in-bits='64' id='9e80f729'/>
@@ -81395,6 +81450,7 @@
         </data-member>
       </class-decl>
       <pointer-type-def type-id='ab342f3f' size-in-bits='64' id='b7ad3a03'/>
+      <pointer-type-def type-id='102500dc' size-in-bits='64' id='b7b332ca'/>
       <function-type size-in-bits='64' id='b7b43e53'>
         <parameter type-id='0fbf3cfd'/>
         <parameter type-id='07b9ee34'/>
@@ -92770,6 +92826,14 @@
         <return type-id='95e97e5e'/>
       </function-type>
       <pointer-type-def type-id='7bd1ccce' size-in-bits='64' id='cf458aec'/>
+      <class-decl name='extended_perms' size-in-bits='288' is-struct='yes' visibility='default' filepath='security/selinux/include/security.h' line='286' column='1' id='cf46ff78'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='len' type-id='1dc6a898' visibility='default' filepath='security/selinux/include/security.h' line='287' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='32'>
+          <var-decl name='drivers' type-id='9e7dce45' visibility='default' filepath='security/selinux/include/security.h' line='288' column='1'/>
+        </data-member>
+      </class-decl>
       <qualified-type-def type-id='2a8ca227' const='yes' id='cf470d6a'/>
       <pointer-type-def type-id='002ac4a6' size-in-bits='64' id='cf536864'/>
       <class-decl name='cpuidle_driver_kobj' is-struct='yes' visibility='default' is-declaration-only='yes' id='cf6b9835'/>
@@ -101448,8 +101512,8 @@
         </data-member>
       </class-decl>
       <function-type size-in-bits='64' id='e1740daa'>
-        <parameter type-id='c485c22c' name='bh'/>
-        <parameter type-id='95e97e5e' name='uptodate'/>
+        <parameter type-id='c485c22c'/>
+        <parameter type-id='95e97e5e'/>
         <return type-id='48b5725f'/>
       </function-type>
       <pointer-type-def type-id='a5eadeee' size-in-bits='64' id='e1759090'/>
@@ -107665,6 +107729,23 @@
       <pointer-type-def type-id='afdad9ef' size-in-bits='64' id='eea9f8db'/>
       <pointer-type-def type-id='10ec1ded' size-in-bits='64' id='eeaf504d'/>
       <pointer-type-def type-id='fc053d58' size-in-bits='64' id='eeb35eda'/>
+      <class-decl name='av_decision' size-in-bits='160' is-struct='yes' visibility='default' filepath='security/selinux/include/security.h' line='260' column='1' id='eeb9fee1'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='allowed' type-id='19c2251e' visibility='default' filepath='security/selinux/include/security.h' line='261' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='32'>
+          <var-decl name='auditallow' type-id='19c2251e' visibility='default' filepath='security/selinux/include/security.h' line='262' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='auditdeny' type-id='19c2251e' visibility='default' filepath='security/selinux/include/security.h' line='263' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='96'>
+          <var-decl name='seqno' type-id='19c2251e' visibility='default' filepath='security/selinux/include/security.h' line='264' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='128'>
+          <var-decl name='flags' type-id='19c2251e' visibility='default' filepath='security/selinux/include/security.h' line='265' column='1'/>
+        </data-member>
+      </class-decl>
       <pointer-type-def type-id='fbd376ca' size-in-bits='64' id='eebb8ee8'/>
       <enum-decl name='kernel_pkey_operation' filepath='include/linux/keyctl.h' line='22' column='1' id='eec170ff'>
         <underlying-type type-id='9cac1fee'/>
@@ -111864,6 +111945,17 @@
       </class-decl>
       <pointer-type-def type-id='12506762' size-in-bits='64' id='fa013de0'/>
       <pointer-type-def type-id='91f77fa3' size-in-bits='64' id='fa058983'/>
+      <class-decl name='udp_hslot' size-in-bits='128' is-struct='yes' visibility='default' filepath='include/net/udp.h' line='58' column='1' id='fa07ab8f'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='head' type-id='e151255a' visibility='default' filepath='include/net/udp.h' line='59' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='count' type-id='95e97e5e' visibility='default' filepath='include/net/udp.h' line='60' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='96'>
+          <var-decl name='lock' type-id='fb4018a0' visibility='default' filepath='include/net/udp.h' line='61' column='1'/>
+        </data-member>
+      </class-decl>
       <array-type-def dimensions='2' type-id='8f048e17' size-in-bits='304' id='fa0a1f4c'>
         <subrange length='2' type-id='7ff19f0f' id='52efc4ef'/>
         <subrange length='19' type-id='7ff19f0f' id='448ee30f'/>
@@ -114581,6 +114673,10 @@
       </function-type>
       <pointer-type-def type-id='46f53066' size-in-bits='64' id='fffb07a4'/>
       <qualified-type-def type-id='55efd1a3' const='yes' id='fffdaf52'/>
+      <function-decl name='I_care_about_struct_avc_node' mangled-name='I_care_about_struct_avc_node' filepath='security/selinux/avc.c' line='1251' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='I_care_about_struct_avc_node'>
+        <parameter type-id='610abebc' name='ignored' filepath='security/selinux/avc.c' line='1251' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
       <function-decl name='PDE_DATA' mangled-name='PDE_DATA' filepath='fs/proc/generic.c' line='799' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='PDE_DATA'>
         <parameter type-id='c5a4eb7f' name='inode' filepath='fs/proc/generic.c' line='799' column='1'/>
         <return type-id='eaa32e2f'/>
