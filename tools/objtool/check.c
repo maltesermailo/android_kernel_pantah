@@ -144,7 +144,11 @@ static bool __dead_end_function(struct objtool_file *file, struct symbol *func,
 		"usercopy_abort",
 		"machine_real_restart",
 		"rewind_stack_do_exit",
+<<<<<<< HEAD   (31f463 Merge 5.4.195 into android12-5.4-lts)
 		"kunit_try_catch_throw",
+=======
+		"cpu_bringup_and_idle",
+>>>>>>> BRANCH (04b092 Linux 5.4.196)
 	};
 
 	if (!func)
