@@ -124,6 +124,24 @@
       "parentUuid": "0e8fcb66_f22d57ba",
       "revId": "a64683b91df2b1caf1bc309def72ae6363fc0152",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "775b08ae_f67fa0c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1891976
+      },
+      "writtenOn": "2022-05-25T09:27:55Z",
+      "side": 1,
+      "message": "Hi Greg,\nWe need to implement a hard-lockup detector on GKI2.0. On X86 it can be conveniently implemented via NMI, but Cortex-A series processors have no NMI hardware, and pseudo NMI is not available on android13-5.15(https://partnerissuetracker.corp.google.com/u/0/issues/229788502), so we finally have to choose FIQ to support the hard lockup detection.\nMain logic:\n1. Set the watchdog interrupt as Group0 interrupt and let it be handled in ATF (arm-trusted-firmware, EL3). This way the kernel cannot mask it.\n2. If the watchdog times out, we will save some information in the ATF firstly, set the ELR register to make the CPU jump out of the lockup context.\n3. Then we call ALL cpus return to the kernel to save some information.\n\nIn step 3, we need the task_struct address to switch to the kernel context. That\u0027s why we export the symbol.\n\nThe implementation of the hard-lockup detecting depends on the cooperation between ATF and the kernel. It doesn\u0027t seem to make sense if only upstream the kernel part, so we haven\u0027t do that.",
+      "parentUuid": "d4d57da7_9115aca7",
+      "revId": "a64683b91df2b1caf1bc309def72ae6363fc0152",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
