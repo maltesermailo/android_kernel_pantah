@@ -16,6 +16,24 @@
       "message": "This really should not be needed, what out-of-tree requires this?",
       "revId": "a64683b91df2b1caf1bc309def72ae6363fc0152",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "430f0191_8085bf2c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2022-05-25T06:24:41Z",
+      "side": 1,
+      "message": "In unisoc platform, we have the requirement that pull the task from el0 to el1 directly, at this time we need restore the X18, becaues the X18 is used to store the shadow addr when CONFIG_SHADOW_CALL_STACK is opened.\n\nSo we need get the __entry_task to restore the X18.",
+      "parentUuid": "d6a64702_c88aee2e",
+      "revId": "a64683b91df2b1caf1bc309def72ae6363fc0152",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
