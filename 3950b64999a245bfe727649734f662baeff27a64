@@ -33,6 +33,24 @@
       "message": "Not sure about its status on the android13-5.15 kabi symbol list, but would task_cputime_adjusted() be an already gpl-exported symbol that might provide something close to what you need?",
       "revId": "3950b64999a245bfe727649734f662baeff27a64",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cc00281_66c270c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1952930
+      },
+      "writtenOn": "2022-05-26T13:45:08Z",
+      "side": 1,
+      "message": "task_cputime_adjusted() gets the runtime from p-\u003ese.sum_exec_runtime,\nand why we need task_sched_runtime() is that the value of sum_exec_runtime is not a real-time value.\nHowever, in task_sched_runtime(), sum_exec_runtime will be updated real-time because it calls update_rq_clock() and update_curr().\n\nThank you for advice.",
+      "parentUuid": "13013d52_0a34b760",
+      "revId": "3950b64999a245bfe727649734f662baeff27a64",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
