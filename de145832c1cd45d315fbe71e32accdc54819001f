@@ -16,6 +16,23 @@
       "message": "Please submit upstream first.",
       "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23792081_44b2b9e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2022-05-28T16:59:22Z",
+      "side": 1,
+      "message": "I\u0027m less than enthusiast about the approach of this patch. Since multiqueue support has been defined in the UFSHCI 4.0 standard and since all multiqueue implementations are expected to implement that standard, I\u0027d prefer a single implementation of MCQ in the UFS driver core. This patch forces each UFS controller vendor to implement MCQ support in the UFS host driver instead of in the UFS core.",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
