@@ -411,8 +411,10 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_handle_pte_fault_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cow_user_page);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swap_page_present);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_add_anon_rmap);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_waiting_on_page);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_need_mmap_write);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_behavior_valid);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_vma);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_inactive_is_low);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_snapshot_refaults);
+
