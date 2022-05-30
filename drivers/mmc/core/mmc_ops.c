@@ -110,12 +110,13 @@ int mmc_select_card(struct mmc_card *card)
 
 	return _mmc_select_card(card->host, card);
 }
+EXPORT_SYMBOL_GPL(mmc_select_card);
 
 int mmc_deselect_cards(struct mmc_host *host)
 {
 	return _mmc_select_card(host, NULL);
 }
-
+EXPORT_SYMBOL_GPL(mmc_deselect_cards);
 /*
  * Write the value specified in the device tree or board code into the optional
  * 16 bit Driver Stage Register. This can be used to tune raise/fall times and
@@ -545,6 +546,7 @@ bool mmc_prepare_busy_cmd(struct mmc_host *host, struct mmc_command *cmd,
 	cmd->busy_timeout = timeout_ms;
 	return true;
 }
+EXPORT_SYMBOL_GPL(mmc_prepare_busy_cmd);
 
 /**
  *	__mmc_switch - modify EXT_CSD register

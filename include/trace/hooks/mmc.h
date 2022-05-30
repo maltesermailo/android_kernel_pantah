@@ -7,6 +7,7 @@
 #define _TRACE_HOOK_MMC_H
 #include <trace/hooks/vendor_hooks.h>
 struct blk_mq_queue_data;
+struct mmc_host;
 
 /*
  * Following tracepoints are not exported in tracefs and provide a
@@ -15,6 +16,15 @@ struct blk_mq_queue_data;
 DECLARE_HOOK(android_vh_mmc_check_status,
 	TP_PROTO(const struct blk_mq_queue_data *bd, int *ret),
 	TP_ARGS(bd, ret));
+
+DECLARE_HOOK(android_rvh_partial_init,
+	TP_PROTO(struct mmc_host *host, bool *part_init),
+	TP_ARGS(host, part_init));
+
+DECLARE_HOOK(android_rvh_cache_card_csd,
+	TP_PROTO(struct mmc_host *host, bool *card_csd),
+	TP_ARGS(host, card_csd));
+
 
 #endif /* _TRACE_HOOK_MMC_H */
 /* This part must be outside protection */

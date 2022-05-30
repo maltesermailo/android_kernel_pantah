@@ -16,6 +16,8 @@
 #include <linux/mmc/host.h>
 #include <linux/mmc/card.h>
 #include <linux/mmc/mmc.h>
+#include <trace/hooks/mmc.h>
+
 
 #include "core.h"
 #include "card.h"
@@ -1928,7 +1930,6 @@ static int mmc_can_sleep(struct mmc_card *card)
 {
 	return card->ext_csd.rev >= 3;
 }
-
 static int mmc_sleep_busy_cb(void *cb_data, bool *busy)
 {
 	struct mmc_host *host = cb_data;
@@ -2082,6 +2083,8 @@ static int _mmc_flush_cache(struct mmc_host *host)
 static int _mmc_suspend(struct mmc_host *host, bool is_suspend)
 {
 	int err = 0;
+	bool card_csd = true;
+
 	unsigned int notify_type = is_suspend ? EXT_CSD_POWER_OFF_SHORT :
 					EXT_CSD_POWER_OFF_LONG;
 
@@ -2098,9 +2101,11 @@ static int _mmc_suspend(struct mmc_host *host, bool is_suspend)
 	    ((host->caps2 & MMC_CAP2_FULL_PWR_CYCLE) || !is_suspend ||
 	     (host->caps2 & MMC_CAP2_FULL_PWR_CYCLE_IN_SUSPEND)))
 		err = mmc_poweroff_notify(host->card, notify_type);
-	else if (mmc_can_sleep(host->card))
+	else if (mmc_can_sleep(host->card)) {
+		memcpy(&host->cached_ios, &host->ios, sizeof(host->cached_ios));
+		trace_android_rvh_cache_card_csd(host, &card_csd);
 		err = mmc_sleep(host);
-	else if (!mmc_host_is_spi(host))
+	} else if (!mmc_host_is_spi(host))
 		err = mmc_deselect_cards(host);
 
 	if (!err) {
@@ -2135,6 +2140,8 @@ static int mmc_suspend(struct mmc_host *host)
 static int _mmc_resume(struct mmc_host *host)
 {
 	int err = 0;
+	bool part_init = true;
+
 
 	mmc_claim_host(host);
 
@@ -2142,7 +2149,9 @@ static int _mmc_resume(struct mmc_host *host)
 		goto out;
 
 	mmc_power_up(host, host->card->ocr);
-	err = mmc_init_card(host, host->card->ocr, host->card);
+	trace_android_rvh_partial_init(host, &part_init);
+	if (part_init)
+		err = mmc_init_card(host, host->card->ocr, host->card);
 	mmc_card_clr_suspended(host->card);
 
 out:
