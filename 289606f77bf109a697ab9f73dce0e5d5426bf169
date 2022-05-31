@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "679d11da_07ecf94a",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1948065
+      },
+      "writtenOn": "2022-05-31T03:14:12Z",
+      "side": 1,
+      "message": "We don\u0027t want these hook functions to be unregisterred",
+      "parentUuid": "00de3f2b_a024f9b9",
+      "range": {
+        "startLine": 410,
+        "startChar": 29,
+        "endLine": 410,
+        "endChar": 55
+      },
+      "revId": "289606f77bf109a697ab9f73dce0e5d5426bf169",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dca51f85_1ad5a939",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-05-30T07:56:17Z",
       "side": 1,
       "message": "random values for this is a maintenance nightmare.",
+      "range": {
+        "startLine": 145,
+        "startChar": 55,
+        "endLine": 145,
+        "endChar": 61
+      },
+      "revId": "289606f77bf109a697ab9f73dce0e5d5426bf169",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "792d9acc_e7e976fa",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1948065
+      },
+      "writtenOn": "2022-05-31T03:14:12Z",
+      "side": 1,
+      "message": "The purpose of this parameter is to control the processing of the added hook function. The processing logic of the hook functions need to be added in these places is similar, but the state value of vma_flag to be set are different. Therefore, we define a hook for processing, and set different state value of vma_flag  according to the value of parameter method.",
+      "parentUuid": "dca51f85_1ad5a939",
       "range": {
         "startLine": 145,
         "startChar": 55,
