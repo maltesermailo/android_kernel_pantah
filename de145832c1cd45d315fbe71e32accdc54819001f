@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8c69695b_0e32eb89",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "re-write for hook implementation",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a12fd34b_46d95c04",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -31,6 +48,630 @@
       "writtenOn": "2022-05-28T16:59:22Z",
       "side": 1,
       "message": "I\u0027m less than enthusiast about the approach of this patch. Since multiqueue support has been defined in the UFSHCI 4.0 standard and since all multiqueue implementations are expected to implement that standard, I\u0027d prefer a single implementation of MCQ in the UFS driver core. This patch forces each UFS controller vendor to implement MCQ support in the UFS host driver instead of in the UFS core.",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dd10314_5d823809",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "This is too complex as an ANDROID patch. Since the upstream changes for MCQ will not land in time, please refactor this using vendor hooks and ANDROID_VENDOR_DATA.\n\nPlease split into 2 patches:\n1) KMI breaking changes to ufshcd-pltfrm.h (add ANDROID_VENDOR_DATA)\n2) Remaining changes (adding hook implementation -- see suggestions in comments)",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2662333b_2b996d0d",
+        "filename": "drivers/scsi/ufs/cdns-pltfrm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "not needed for hook implementation",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6eedf9b_77712607",
+        "filename": "drivers/scsi/ufs/tc-dwc-g210-pltfrm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "not needed for hook implementation",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b5ac90a_f2b5a909",
+        "filename": "drivers/scsi/ufs/ufs-exynos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1223,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "not needed for hook implementation",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e94a73c_45fe588c",
+        "filename": "drivers/scsi/ufs/ufs-hisi.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "not needed for hook implementation",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4be818ed_532f916e",
+        "filename": "drivers/scsi/ufs/ufs-mediatek.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1200,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "not needed for hook implementation",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6bddfa4_6fe70973",
+        "filename": "drivers/scsi/ufs/ufs-qcom.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1516,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "not needed for hook implementation",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e2ecaed_c5b9cb57",
+        "filename": "drivers/scsi/ufs/ufshcd-pltfrm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "change not needed in hook implementation",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49011ef8_7afd6170",
+        "filename": "drivers/scsi/ufs/ufshcd-pltfrm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "mops is no longer passed in with hook implementation. Instead, call sites that would have called this with mops!\u003dNULL set the vendor data field via a hook.",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05df9848_bbd3bc3e",
+        "filename": "drivers/scsi/ufs/ufshcd-pltfrm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "replace with a hook",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7d417ec_c60040a2",
+        "filename": "drivers/scsi/ufs/ufshcd-pltfrm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "not needed for hook implementation",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74d14233_ce81da56",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "move to vendor module for hook implementation",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fca8ce80_32e2c89b",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1442,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "add local outstanding_reqs and adjust with a hook",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90f9dcf8_64f2ce6d",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2053,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "add local outstanding_reqs and adjust with hook",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1711bf56_526e29ec",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2137,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "move to vendor module via hook",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23e22205_94677937",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2229,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "move to vendor module via hook",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a11709d_e3567029",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2744,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "move to vendor module via hook",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6773d735_e19ac53c",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2802,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "use hook to initialize ANDROID_VENDOR_DATA field.",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5355c317_e36f1c15",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2865,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "move to vendor module via hook",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3d9d92b_138cded2",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2971,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "replace with hook",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "223f9d8e_b44702dd",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3008,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "set ANDROID_VENDOR_DATA via hook",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40ab8af1_bb05d547",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3627,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "replace with hook",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bcb2368_e12e6915",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3719,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "replace with hook",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "086de80c_14aa4395",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4501,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "replace with hook",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64536a30_c5411a38",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 6186,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "replace with hook",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86d71b51_3b4a1e79",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 6227,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "replace with hook",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0453eb8_69f36fdf",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 6532,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "replace with hook",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9dfb14d_d7f95a96",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 6577,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "replace with local modified by hook",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8cb42a2_461d7387",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 6929,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "replace with hook",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "162af263_f88416bd",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 7071,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "replace with hook",
+      "range": {
+        "startLine": 7063,
+        "startChar": 0,
+        "endLine": 7071,
+        "endChar": 31
+      },
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7986c069_5eee2466",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 9555,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "replace with hook",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "480049d9_6ff5ba83",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 9626,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "replace with hook.",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2350878_699a0d6c",
+        "filename": "drivers/scsi/ufs/ufshcd.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "Use an ANDROID_VENDOR_DATA(1) -- move to end of struct",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54d7c24d_ef53596b",
+        "filename": "drivers/scsi/ufs/ufshcd.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "Not needed for hook implementation",
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7d60f43_ce4e6e2d",
+        "filename": "drivers/scsi/ufs/ufshcd.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 997,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "replace with ANDROID_VENDOR_DATA_ARRAY(1, 2)",
+      "range": {
+        "startLine": 995,
+        "startChar": 1,
+        "endLine": 997,
+        "endChar": 0
+      },
+      "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e24d80b_b5822f84",
+        "filename": "drivers/scsi/ufs/ufshcd.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1432,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-02T18:27:25Z",
+      "side": 1,
+      "message": "not needed for hook implementation",
       "revId": "de145832c1cd45d315fbe71e32accdc54819001f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
