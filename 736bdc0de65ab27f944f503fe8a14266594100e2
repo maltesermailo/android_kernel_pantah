@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04971e42_b7dc33fe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-06-02T23:05:35Z",
+      "side": 1,
+      "message": "This patch introduces 3 separate hooks and each seems to be used for a separate functionality. Please break the patch into 3 separate ones. It\u0027s more work for you and for us to review them but in the long run that might save us from having to do partial reverts.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 0
+      },
+      "revId": "736bdc0de65ab27f944f503fe8a14266594100e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8114964_0fc3e8cc",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1293,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-06-02T23:05:35Z",
+      "side": 1,
+      "message": "Simply:\n```\nif (!skip \u0026\u0026 !add_to_swap(page))\n```\n\nsame later in the code.",
+      "range": {
+        "startLine": 1293,
+        "startChar": 4,
+        "endLine": 1293,
+        "endChar": 40
+      },
+      "revId": "736bdc0de65ab27f944f503fe8a14266594100e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ddc31b2_88c5434e",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1303,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-06-02T23:05:35Z",
+      "side": 1,
+      "message": "This assignment is not needed. For you to land here skip has to be false.",
+      "range": {
+        "startLine": 1303,
+        "startChar": 5,
+        "endLine": 1303,
+        "endChar": 18
+      },
+      "revId": "736bdc0de65ab27f944f503fe8a14266594100e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55a57e59_ba28c637",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 2287,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-06-02T23:05:35Z",
+      "side": 1,
+      "message": "Looks like you just want to calculate inactive_ratio yourself and skip everything else. Why not this then:\n\n```\ntrace_android_vh_calc_inactive_ratio(gb, inactive_lru, \u0026inactive_ratio, \u0026skip);\nif (skip)\n    goto out;\n...\n\nout:\n    return inactive * inactive_ratio \u003c active;\n```",
+      "range": {
+        "startLine": 2283,
+        "startChar": 0,
+        "endLine": 2287,
+        "endChar": 0
+      },
+      "revId": "736bdc0de65ab27f944f503fe8a14266594100e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
