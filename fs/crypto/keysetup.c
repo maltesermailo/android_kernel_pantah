@@ -94,7 +94,7 @@ fscrypt_allocate_skcipher(struct fscrypt_mode *mode, const u8 *raw_key,
 			    mode->cipher_str, PTR_ERR(tfm));
 		return tfm;
 	}
-	if (!xchg(&mode->logged_impl_name, 1)) {
+	if (!xchg(&mode->logged_cryptoapi_impl, 1)) {
 		/*
 		 * fscrypt performance can vary greatly depending on which
 		 * crypto algorithm implementation is used.  Help people debug
@@ -467,6 +467,7 @@ static int setup_file_encryption_key(struct fscrypt_info *ci,
 	struct fscrypt_key_specifier mk_spec;
 	int err;
 
+<<<<<<< HEAD   (e7c524 Merge ac2ab99072cc ("Merge tag 'random-5.19-rc1-for-linus' o)
 	switch (ci->ci_policy.version) {
 	case FSCRYPT_POLICY_V1:
 		mk_spec.type = FSCRYPT_KEY_SPEC_TYPE_DESCRIPTOR;
@@ -484,6 +485,15 @@ static int setup_file_encryption_key(struct fscrypt_info *ci,
 		WARN_ON(1);
 		return -EINVAL;
 	}
+=======
+	err = fscrypt_select_encryption_impl(ci);
+	if (err)
+		return err;
+
+	err = fscrypt_policy_to_key_spec(&ci->ci_policy, &mk_spec);
+	if (err)
+		return err;
+>>>>>>> BRANCH (c1f4cf Merge tag 'fscrypt-for-linus' of git://git.kernel.org/pub/sc)
 
 	key = fscrypt_find_master_key(ci->ci_inode->i_sb, &mk_spec);
 	if (IS_ERR(key)) {
