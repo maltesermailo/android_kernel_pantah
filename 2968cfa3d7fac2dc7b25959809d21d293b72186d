@@ -69,6 +69,24 @@
       "message": "how are you using gic_data in your vendor module when the struct is private to this file? (defined at line 70)",
       "revId": "2968cfa3d7fac2dc7b25959809d21d293b72186d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4eb69499_263906fa",
+        "filename": "drivers/irqchip/irq-gic.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1904890
+      },
+      "writtenOn": "2022-06-05T15:50:42Z",
+      "side": 1,
+      "message": "We are not using struct gic_data, we are passing two arguments, dist_base and irq_domain to vendor module.",
+      "parentUuid": "287c6238_166d047f",
+      "revId": "2968cfa3d7fac2dc7b25959809d21d293b72186d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
