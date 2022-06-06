@@ -62,6 +62,7 @@
 #define DMA_ATTR_PRIVILEGED		(1UL << 9)
 
 /*
+<<<<<<< HEAD   (fdd06d ANDROID: GKI: db845c: Update symbols list and ABI)
  * This is a hint to the DMA-mapping subsystem that the device is expected
  * to overwrite the entire mapped size, thus the caller does not require any
  * of the previous buffer contents to be preserved. This allows
@@ -87,6 +88,8 @@
 #define DMA_ATTR_SYS_CACHE_ONLY_NWA	(1UL << 15)
 
 /*
+=======
+>>>>>>> BRANCH (c204ee Linux 5.10.118)
  * A dma_addr_t can hold any valid DMA or bus address for the platform.  It can
  * be given to a device to use as a DMA source or target.  It is specific to a
  * given device and there may be a translation between the CPU physical address
