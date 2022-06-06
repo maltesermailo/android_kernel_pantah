@@ -64,6 +64,7 @@
 #include <trace/hooks/regmap.h>
 #include <trace/hooks/dmabuf.h>
 #include <trace/hooks/mmc.h>
+#include <trace/hooks/cfg80211.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -315,3 +316,5 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_rq_ctx_init);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmap_region);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_unmap_one);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_shrink_node_memcgs);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cfg80211_set_context);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cfg80211_get_context);
