@@ -56,6 +56,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7096c4ac_23fdb403",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2022-06-06T09:13:17Z",
+      "side": 1,
+      "message": "GIC v2 and v3 have different definitions of `struct gic_chip_data`.\n\nSo please create a separate header for v2 hooks.\n\nDo not forward declare any types you wish to access in your vendor modules, please include the relevant headers:\n\n#include \u003clinux/irq.h\u003e\n#include \u003clinux/irqdomain.h\u003e\n",
+      "revId": "2968cfa3d7fac2dc7b25959809d21d293b72186d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "287c6238_166d047f",
         "filename": "drivers/irqchip/irq-gic.c",
         "patchSetId": 4
