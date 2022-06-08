@@ -3213,6 +3213,9 @@ int device_add(struct device *dev)
 		goto DPMError;
 	device_pm_add(dev);
 
+	if (dev->bus)
+		device_enable_async_suspend(dev);
+
 	if (MAJOR(dev->devt)) {
 		error = device_create_file(dev, &dev_attr_dev);
 		if (error)
