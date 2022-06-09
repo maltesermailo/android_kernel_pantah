@@ -16,6 +16,69 @@
       "message": "Note: this change adds 3 exports.",
       "revId": "988069ca60625b6cf26035c521b6505ad1899cac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38d815b7_0996a7ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-09T12:56:08Z",
+      "side": 1,
+      "message": "These functions should never be called by modules, sorry.\n\nAlso all new exports always need to be _GPL().  And split exports from .xml update please.",
+      "revId": "988069ca60625b6cf26035c521b6505ad1899cac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b26ede6b_afa6ff5d",
+        "filename": "drivers/of/base.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1945,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-09T12:56:08Z",
+      "side": 1,
+      "message": "do not export this.",
+      "range": {
+        "startLine": 1945,
+        "startChar": 0,
+        "endLine": 1945,
+        "endChar": 34
+      },
+      "revId": "988069ca60625b6cf26035c521b6505ad1899cac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b66834bc_ba4ea527",
+        "filename": "net/core/dev.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1307,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-06-09T12:56:08Z",
+      "side": 1,
+      "message": "this is not to be exported.",
+      "range": {
+        "startLine": 1307,
+        "startChar": 0,
+        "endLine": 1307,
+        "endChar": 35
+      },
+      "revId": "988069ca60625b6cf26035c521b6505ad1899cac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
