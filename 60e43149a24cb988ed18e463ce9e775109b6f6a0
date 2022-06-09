@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "882ba543_9e857004",
+        "filename": "drivers/irqchip/irq-gic.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-09T19:43:48Z",
+      "side": 1,
+      "message": "would it be better to do this loop in the handler instead? Maybe\n\n  trace_android_vh_gic_v2_resume(gic_data);\n  \nThen the handler can loop through gics. This way we don\u0027t needlessly loop when nothing has attached to the hook.",
+      "revId": "60e43149a24cb988ed18e463ce9e775109b6f6a0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
