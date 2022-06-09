@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0165be05_de36fc21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1876090
+      },
+      "writtenOn": "2022-06-09T13:05:26Z",
+      "side": 1,
+      "message": "Sure will do",
+      "parentUuid": "38d815b7_0996a7ba",
+      "revId": "988069ca60625b6cf26035c521b6505ad1899cac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1a0ff03_6aed0c08",
@@ -81,6 +99,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36deea0d_ee839c33",
+        "filename": "drivers/of/base.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1945,
+      "author": {
+        "id": 1876090
+      },
+      "writtenOn": "2022-06-09T13:05:26Z",
+      "side": 1,
+      "message": "This is MUST for us. Following is the case.\nIn Android as Guest case, Device tree update for firmware node is not done by Hypervisor.\n\nWe need to set the status as disabled for android, vendor node. for this purpose, we need this function to be exported.\n\nPlease let us know if any concerns.",
+      "parentUuid": "b26ede6b_afa6ff5d",
+      "range": {
+        "startLine": 1945,
+        "startChar": 0,
+        "endLine": 1945,
+        "endChar": 34
+      },
+      "revId": "988069ca60625b6cf26035c521b6505ad1899cac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b66834bc_ba4ea527",
@@ -94,6 +136,30 @@
       "writtenOn": "2022-06-09T12:56:08Z",
       "side": 1,
       "message": "this is not to be exported.",
+      "range": {
+        "startLine": 1307,
+        "startChar": 0,
+        "endLine": 1307,
+        "endChar": 35
+      },
+      "revId": "988069ca60625b6cf26035c521b6505ad1899cac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3703bd8_3666a05f",
+        "filename": "net/core/dev.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1307,
+      "author": {
+        "id": 1876090
+      },
+      "writtenOn": "2022-06-09T13:05:26Z",
+      "side": 1,
+      "message": "This is also important for us, following is the use case.\n1. In case of 2 Android\u0027s running as Guests in Multi guest environment case, we are using virtio_net driver, which always names the inferface name as eth0.\n\nSince Android Guest works on Static IP configurations, IP is assigned by Network service in android based on interface name. \n\nIn Dual LA, both guests get eth0 as interface name and both guests would get same IP, which is conflicting. So we are renaming ethernet interface name based on Guest ID. \nfor renaming eth interface name, we need this API.\n\nWe have raised Google bug also for this same problem @ https://partnerissuetracker.corp.google.com/issues/221002829\n\nplease share your thoughts",
+      "parentUuid": "b66834bc_ba4ea527",
       "range": {
         "startLine": 1307,
         "startChar": 0,
