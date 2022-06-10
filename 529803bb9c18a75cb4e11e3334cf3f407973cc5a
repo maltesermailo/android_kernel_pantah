@@ -211,6 +211,30 @@
       },
       "revId": "529803bb9c18a75cb4e11e3334cf3f407973cc5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e13edd0_e546b197",
+        "filename": "include/trace/hooks/gic_v3.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2022-06-10T15:26:28Z",
+      "side": 1,
+      "message": "It\u0027s suggested because if the interface is incompletely typed, we may not notice if the types change.\n\nThere are various ways we could go about doing this. Including files here is one fairly obvious approach. The design space is rather dependent on the ABI tooling we currently have or can build in the very near future.\n\nAnd, yes, this is not a theoretical problem, ABI breakage is a current issue.",
+      "parentUuid": "b8c947fe_69b1076b",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 21
+      },
+      "revId": "529803bb9c18a75cb4e11e3334cf3f407973cc5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
