@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3500b816_171e4a14",
+        "filename": "include/trace/hooks/gic.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1904890
+      },
+      "writtenOn": "2022-06-10T08:35:11Z",
+      "side": 1,
+      "message": "Updated",
+      "parentUuid": "9dcae2b9_8f144912",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 15
+      },
+      "revId": "529803bb9c18a75cb4e11e3334cf3f407973cc5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cbf6cd41_0efae17e",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-06-10T08:03:54Z",
       "side": 1,
       "message": "This hook does not mention struct irq_domain, does it need this header at all?",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 28
+      },
+      "revId": "529803bb9c18a75cb4e11e3334cf3f407973cc5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5a8879d_1a496763",
+        "filename": "include/trace/hooks/gic_v2.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1904890
+      },
+      "writtenOn": "2022-06-10T08:35:11Z",
+      "side": 1,
+      "message": "Thanks for pointing this, removed in next revision.",
+      "parentUuid": "cbf6cd41_0efae17e",
       "range": {
         "startLine": 10,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9af5d96a_4d0efe84",
+        "filename": "include/trace/hooks/gic_v2.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1904890
+      },
+      "writtenOn": "2022-06-10T08:35:11Z",
+      "side": 1,
+      "message": "Doing this results in vendor_hook.c compile failure after finding multiple definitions for struct gic_chip_data.\n\nIn file included from common/drivers/android/vendor_hooks.c:69:\nIn file included from common/include/trace/hooks/gic_v2.h:10:\nlinux/irqchip/arm-gic.h:140:8: error: redefinition of \u0027gic_chip_data\u0027\nstruct gic_chip_data {\n\n\nlinux/irqchip/arm-gic-v3.h:640:8: note: previous definition is here\nstruct gic_chip_data {",
+      "parentUuid": "9ca935ea_f320d56d",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 21
+      },
+      "revId": "529803bb9c18a75cb4e11e3334cf3f407973cc5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "393665f2_079c942c",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-06-10T08:03:54Z",
       "side": 1,
       "message": "Please replace forward declarations with\n\n#include \u003cpublic/header.h\u003e /* struct foo */\n\nwhere possible.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 21
+      },
+      "revId": "529803bb9c18a75cb4e11e3334cf3f407973cc5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aeed33c5_af6af3e9",
+        "filename": "include/trace/hooks/gic_v3.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1904890
+      },
+      "writtenOn": "2022-06-10T08:35:11Z",
+      "side": 1,
+      "message": "included header for struct irq_data and struct cpumask.\nFor strtuct gic_chip_data, vendor_hook.c compilation fails as in gic_v2.h",
+      "parentUuid": "393665f2_079c942c",
       "range": {
         "startLine": 12,
         "startChar": 0,
