@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dcae2b9_8f144912",
+        "filename": "include/trace/hooks/gic.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2022-06-10T08:03:54Z",
+      "side": 1,
+      "message": "#include include \u003clinux/irq.h\u003e /* struct irq_data */",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 15
+      },
+      "revId": "529803bb9c18a75cb4e11e3334cf3f407973cc5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbf6cd41_0efae17e",
+        "filename": "include/trace/hooks/gic_v2.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2022-06-10T08:03:54Z",
+      "side": 1,
+      "message": "This hook does not mention struct irq_domain, does it need this header at all?",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 28
+      },
+      "revId": "529803bb9c18a75cb4e11e3334cf3f407973cc5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ca935ea_f320d56d",
+        "filename": "include/trace/hooks/gic_v2.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2022-06-10T08:03:54Z",
+      "side": 1,
+      "message": "Please replace this with a #include if possible.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 21
+      },
+      "revId": "529803bb9c18a75cb4e11e3334cf3f407973cc5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "393665f2_079c942c",
+        "filename": "include/trace/hooks/gic_v3.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2022-06-10T08:03:54Z",
+      "side": 1,
+      "message": "Please replace forward declarations with\n\n#include \u003cpublic/header.h\u003e /* struct foo */\n\nwhere possible.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 21
+      },
+      "revId": "529803bb9c18a75cb4e11e3334cf3f407973cc5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
