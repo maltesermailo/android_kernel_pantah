@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5707502_cad06c33",
+        "filename": "include/trace/hooks/gic_v2.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1904890
+      },
+      "writtenOn": "2022-06-10T16:40:10Z",
+      "side": 1,
+      "message": "Same as patch-set #9 comment.\n\nDoing this results in vendor_hook.c compile failure after finding multiple definitions for struct gic_chip_data.\n\nIn file included from common/drivers/android/vendor_hooks.c:69:\nIn file included from common/include/trace/hooks/gic_v2.h:10:\nlinux/irqchip/arm-gic.h:140:8: error: redefinition of \u0027gic_chip_data\u0027\nstruct gic_chip_data {\n\n\nlinux/irqchip/arm-gic-v3.h:640:8: note: previous definition is here\nstruct gic_chip_data {",
+      "parentUuid": "f8458b81_d0c9a689",
+      "revId": "2d9118a99901a167838328f1e1d94b40d796f28f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33911b10_f542072f",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-06-10T16:21:41Z",
       "side": 1,
       "message": "Replace w/ `#include \u003clinux/irqchip/arm-gic-v3.h\u003e`",
+      "revId": "2d9118a99901a167838328f1e1d94b40d796f28f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0251a84_8435d1f7",
+        "filename": "include/trace/hooks/gic_v3.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1904890
+      },
+      "writtenOn": "2022-06-10T16:40:10Z",
+      "side": 1,
+      "message": "Already replied in patch-set #9 for this..\n\nDoing this results in vendor_hook.c compile failure after finding multiple definitions for struct gic_chip_data.\n\nIn file included from common/drivers/android/vendor_hooks.c:69:\nIn file included from common/include/trace/hooks/gic_v2.h:10:\nlinux/irqchip/arm-gic.h:140:8: error: redefinition of \u0027gic_chip_data\u0027\nstruct gic_chip_data {\n\n\nlinux/irqchip/arm-gic-v3.h:640:8: note: previous definition is here\nstruct gic_chip_data {",
+      "parentUuid": "33911b10_f542072f",
       "revId": "2d9118a99901a167838328f1e1d94b40d796f28f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
