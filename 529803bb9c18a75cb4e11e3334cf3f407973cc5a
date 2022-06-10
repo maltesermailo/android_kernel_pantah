@@ -187,6 +187,30 @@
       },
       "revId": "529803bb9c18a75cb4e11e3334cf3f407973cc5a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8c947fe_69b1076b",
+        "filename": "include/trace/hooks/gic_v3.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1946045
+      },
+      "writtenOn": "2022-06-10T15:01:40Z",
+      "side": 1,
+      "message": "For my own benefit why is it suggested to include a header rather than have a struct forward reference? In my experience avoiding unnecessary header file inclusion can improve build times so in my own code reviews I prefer struct forward references to one-off includes. But I have not done any build profiling in many years, so perhaps the benefits from years ago are no longer applicable today?",
+      "parentUuid": "aeed33c5_af6af3e9",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 21
+      },
+      "revId": "529803bb9c18a75cb4e11e3334cf3f407973cc5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
