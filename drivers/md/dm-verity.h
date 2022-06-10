@@ -13,6 +13,7 @@
 
 #include <linux/dm-bufio.h>
 #include <linux/device-mapper.h>
+#include <linux/interrupt.h>
 #include <crypto/hash.h>
 
 #define DM_VERITY_MAX_LEVELS		63
@@ -57,7 +58,7 @@ struct dm_verity {
 	enum verity_mode mode;	/* mode for handling verification errors */
 	unsigned corrupted_errs;/* Number of errors for corrupted blocks */
 
-	struct workqueue_struct *verify_wq;
+	struct workqueue_struct *prefetch_verify_wq;
 
 	/* starting blocks for each tree level. 0 is the lowest level. */
 	sector_t hash_level_block[DM_VERITY_MAX_LEVELS];
@@ -79,7 +80,7 @@ struct dm_verity_io {
 
 	struct bvec_iter iter;
 
-	struct work_struct work;
+	struct tasklet_struct tasklet;
 
 	/*
 	 * Three variably-size fields follow this struct:

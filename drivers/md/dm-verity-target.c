@@ -571,9 +571,9 @@ static void verity_finish_io(struct dm_verity_io *io, blk_status_t status)
 	bio_endio(bio);
 }
 
-static void verity_work(struct work_struct *w)
+static void verity_tasklet(unsigned long data)
 {
-	struct dm_verity_io *io = container_of(w, struct dm_verity_io, work);
+	struct dm_verity_io *io = (struct dm_verity_io *) data;
 
 	verity_finish_io(io, errno_to_blk_status(verity_verify_io(io)));
 }
@@ -588,8 +588,8 @@ static void verity_end_io(struct bio *bio)
 		return;
 	}
 
-	INIT_WORK(&io->work, verity_work);
-	queue_work(io->v->verify_wq, &io->work);
+	tasklet_init(&io->tasklet, verity_tasklet, (unsigned long)io);
+	tasklet_schedule(&io->tasklet);
 }
 
 /*
@@ -660,7 +660,7 @@ static void verity_submit_prefetch(struct dm_verity *v, struct dm_verity_io *io)
 	pw->v = v;
 	pw->block = block;
 	pw->n_blocks = n_blocks;
-	queue_work(v->verify_wq, &pw->work);
+	queue_work(v->prefetch_verify_wq, &pw->work);
 }
 
 /*
@@ -821,8 +821,8 @@ static void verity_dtr(struct dm_target *ti)
 {
 	struct dm_verity *v = ti->private;
 
-	if (v->verify_wq)
-		destroy_workqueue(v->verify_wq);
+	if (v->prefetch_verify_wq)
+		destroy_workqueue(v->prefetch_verify_wq);
 
 	if (v->bufio)
 		dm_bufio_client_destroy(v->bufio);
@@ -1220,8 +1220,10 @@ static int verity_ctr(struct dm_target *ti, unsigned argc, char **argv)
 	}
 
 	/* WQ_UNBOUND greatly improves performance when running on ramdisk */
-	v->verify_wq = alloc_workqueue("kverityd", WQ_CPU_INTENSIVE | WQ_MEM_RECLAIM | WQ_UNBOUND, num_online_cpus());
-	if (!v->verify_wq) {
+	v->prefetch_verify_wq = alloc_workqueue("kverityd", WQ_CPU_INTENSIVE |
+						WQ_MEM_RECLAIM | WQ_UNBOUND,
+						num_online_cpus());
+	if (!v->prefetch_verify_wq) {
 		ti->error = "Cannot allocate workqueue";
 		r = -ENOMEM;
 		goto bad;
