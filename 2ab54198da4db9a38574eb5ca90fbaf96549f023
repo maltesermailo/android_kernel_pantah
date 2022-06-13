@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3d4e12d_798d4538",
+        "filename": "include/linux/sched/signal.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-13T16:56:58Z",
+      "side": 1,
+      "message": "We already allocate too much space for struct task_struct and there is one of these per task so this uses quite a bit of memory. Please use the OEM data in struct task_struct for this.",
+      "revId": "2ab54198da4db9a38574eb5ca90fbaf96549f023",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
