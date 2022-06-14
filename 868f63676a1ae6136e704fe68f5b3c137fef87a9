@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "092f490a_2ace30e5",
+        "filename": "mm/memory.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3759,
+      "author": {
+        "id": 1948065
+      },
+      "writtenOn": "2022-06-14T09:28:30Z",
+      "side": 1,
+      "message": "There is only the case that this parameter is used as false, but in the future iterations of this feature, there will exist the case that this parameter is used as true.\nNow, we have merged this hook with the following one. This hook has been removed.",
+      "parentUuid": "0e4f8a8d_642bd017",
+      "range": {
+        "startLine": 3759,
+        "startChar": 41,
+        "endLine": 3759,
+        "endChar": 46
+      },
+      "revId": "868f63676a1ae6136e704fe68f5b3c137fef87a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed1a49c5_bddba789",
@@ -64,6 +88,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "448dde7c_392aa9fd",
+        "filename": "mm/memory.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3788,
+      "author": {
+        "id": 1948065
+      },
+      "writtenOn": "2022-06-14T09:28:30Z",
+      "side": 1,
+      "message": "We have merged this hook with the trace_android_vh_swap_page_present.",
+      "parentUuid": "ed1a49c5_bddba789",
+      "range": {
+        "startLine": 3788,
+        "startChar": 1,
+        "endLine": 3788,
+        "endChar": 31
+      },
+      "revId": "868f63676a1ae6136e704fe68f5b3c137fef87a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c764d771_9bae5cfe",
@@ -77,6 +125,30 @@
       "writtenOn": "2022-06-14T05:39:32Z",
       "side": 1,
       "message": "handle_pte_fault() can exit at different locations: after calling do_fault(), do_swap_page(), do_numa_page() or do_wp_page(). Are you not interested in those faults?",
+      "range": {
+        "startLine": 4767,
+        "startChar": 1,
+        "endLine": 4767,
+        "endChar": 38
+      },
+      "revId": "868f63676a1ae6136e704fe68f5b3c137fef87a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f964274d_5ef57029",
+        "filename": "mm/memory.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 4767,
+      "author": {
+        "id": 1948065
+      },
+      "writtenOn": "2022-06-14T09:28:30Z",
+      "side": 1,
+      "message": "Yes, when this pte_fault does not call not do_fault(), do_swap_page(), do_numa_page() or do_wp_page(), we will specify the page can not be reclaimed to the extended memory(ie, the specified swap location).",
+      "parentUuid": "c764d771_9bae5cfe",
       "range": {
         "startLine": 4767,
         "startChar": 1,
