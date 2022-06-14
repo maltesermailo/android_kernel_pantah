@@ -92,6 +92,13 @@ DEFINE_SPINLOCK(trace_cgroup_path_lock);
 char trace_cgroup_path[TRACE_CGROUP_PATH_LEN];
 bool cgroup_debug __read_mostly;
 
+struct android_css_set {
+	struct css_set cset;
+
+	struct list_head mg_src_preload_node;
+	struct list_head mg_dst_preload_node;
+};
+
 /*
  * Protects cgroup_idr and css_idr so that IDs can be released without
  * grabbing cgroup_mutex.
@@ -200,13 +207,15 @@ static u16 have_exit_callback __read_mostly;
 static u16 have_release_callback __read_mostly;
 static u16 have_canfork_callback __read_mostly;
 
+extern struct android_css_set android_init_css_set;
+
 /* cgroup namespace for init task */
 struct cgroup_namespace init_cgroup_ns = {
 	.count		= REFCOUNT_INIT(2),
 	.user_ns	= &init_user_ns,
 	.ns.ops		= &cgroupns_operations,
 	.ns.inum	= PROC_CGROUP_INIT_INO,
-	.root_cset	= &init_css_set,
+	.root_cset	= &android_init_css_set.cset,
 };
 
 static struct file_system_type cgroup2_fs_type;
@@ -564,7 +573,7 @@ struct cgroup_subsys_state *cgroup_e_css(struct cgroup *cgrp,
 		cgrp = cgroup_parent(cgrp);
 	} while (cgrp);
 
-	return init_css_set.subsys[ss->id];
+	return init_css_set->subsys[ss->id];
 }
 
 /**
@@ -593,7 +602,7 @@ struct cgroup_subsys_state *cgroup_get_e_css(struct cgroup *cgrp,
 		cgrp = cgroup_parent(cgrp);
 	} while (cgrp);
 
-	css = init_css_set.subsys[ss->id];
+	css = init_css_set->subsys[ss->id];
 	css_get(css);
 out_unlock:
 	rcu_read_unlock();
@@ -746,26 +755,32 @@ EXPORT_SYMBOL_GPL(of_css);
  * reference-counted, to improve performance when child cgroups
  * haven't been created.
  */
-struct css_set init_css_set = {
-	.refcount		= REFCOUNT_INIT(1),
-	.dom_cset		= &init_css_set,
-	.tasks			= LIST_HEAD_INIT(init_css_set.tasks),
-	.mg_tasks		= LIST_HEAD_INIT(init_css_set.mg_tasks),
-	.dying_tasks		= LIST_HEAD_INIT(init_css_set.dying_tasks),
-	.task_iters		= LIST_HEAD_INIT(init_css_set.task_iters),
-	.threaded_csets		= LIST_HEAD_INIT(init_css_set.threaded_csets),
-	.cgrp_links		= LIST_HEAD_INIT(init_css_set.cgrp_links),
-	.mg_preload_node	= LIST_HEAD_INIT(init_css_set.mg_preload_node),
-	.mg_node		= LIST_HEAD_INIT(init_css_set.mg_node),
+struct android_css_set android_init_css_set = {
+	.cset = {
+		.refcount		= REFCOUNT_INIT(1),
+		.dom_cset		= &android_init_css_set.cset,
+		.tasks			= LIST_HEAD_INIT(android_init_css_set.cset.tasks),
+		.mg_tasks		= LIST_HEAD_INIT(android_init_css_set.cset.mg_tasks),
+		.dying_tasks		= LIST_HEAD_INIT(android_init_css_set.cset.dying_tasks),
+		.task_iters		= LIST_HEAD_INIT(android_init_css_set.cset.task_iters),
+		.threaded_csets		= LIST_HEAD_INIT(android_init_css_set.cset.threaded_csets),
+		.cgrp_links		= LIST_HEAD_INIT(android_init_css_set.cset.cgrp_links),
+		.mg_preload_node	= LIST_HEAD_INIT(android_init_css_set.cset.mg_preload_node),
+		.mg_node		= LIST_HEAD_INIT(android_init_css_set.cset.mg_node),
 
-	/*
-	 * The following field is re-initialized when this cset gets linked
-	 * in cgroup_init().  However, let's initialize the field
-	 * statically too so that the default cgroup can be accessed safely
-	 * early during boot.
-	 */
-	.dfl_cgrp		= &cgrp_dfl_root.cgrp,
+		/*
+		* The following field is re-initialized when this cset gets linked
+		* in cgroup_init().  However, let's initialize the field
+		* statically too so that the default cgroup can be accessed safely
+		* early during boot.
+		*/
+		.dfl_cgrp		= &cgrp_dfl_root.cgrp,
+	},
+	.mg_src_preload_node	= LIST_HEAD_INIT(android_init_css_set.mg_src_preload_node),
+	.mg_dst_preload_node	= LIST_HEAD_INIT(android_init_css_set.mg_dst_preload_node),
 };
+
+struct css_set * const init_css_set = &android_init_css_set.cset;
 
 static int css_set_count	= 1;	/* 1 for init_css_set */
 
@@ -1191,6 +1206,7 @@ static struct css_set *find_css_set(struct css_set *old_cset,
 				    struct cgroup *cgrp)
 {
 	struct cgroup_subsys_state *template[CGROUP_SUBSYS_COUNT] = { };
+	struct android_css_set *android_cset;
 	struct css_set *cset;
 	struct list_head tmp_links;
 	struct cgrp_cset_link *link;
@@ -1211,9 +1227,10 @@ static struct css_set *find_css_set(struct css_set *old_cset,
 	if (cset)
 		return cset;
 
-	cset = kzalloc(sizeof(*cset), GFP_KERNEL);
-	if (!cset)
+	android_cset = kzalloc(sizeof(*android_cset), GFP_KERNEL);
+	if (!android_cset)
 		return NULL;
+	cset = &android_cset->cset;
 
 	/* Allocate all the cgrp_cset_link objects that we'll need */
 	if (allocate_cgrp_cset_links(cgroup_root_count, &tmp_links) < 0) {
@@ -1231,6 +1248,8 @@ static struct css_set *find_css_set(struct css_set *old_cset,
 	INIT_HLIST_NODE(&cset->hlist);
 	INIT_LIST_HEAD(&cset->cgrp_links);
 	INIT_LIST_HEAD(&cset->mg_preload_node);
+	INIT_LIST_HEAD(&android_cset->mg_src_preload_node);
+	INIT_LIST_HEAD(&android_cset->mg_dst_preload_node);
 	INIT_LIST_HEAD(&cset->mg_node);
 
 	/* Copy the set of subsystem state objects generated in
@@ -1380,7 +1399,7 @@ current_cgns_cgroup_from_root(struct cgroup_root *root)
 	rcu_read_lock();
 
 	cset = current->nsproxy->cgroup_ns->root_cset;
-	if (cset == &init_css_set) {
+	if (cset == init_css_set) {
 		res = &root->cgrp;
 	} else if (root == &cgrp_dfl_root) {
 		res = cset->dfl_cgrp;
@@ -1411,7 +1430,7 @@ static struct cgroup *cset_cgroup_from_root(struct css_set *cset,
 	lockdep_assert_held(&cgroup_mutex);
 	lockdep_assert_held(&css_set_lock);
 
-	if (cset == &init_css_set) {
+	if (cset == init_css_set) {
 		res = &root->cgrp;
 	} else if (root == &cgrp_dfl_root) {
 		res = cset->dfl_cgrp;
@@ -2578,22 +2597,28 @@ int cgroup_migrate_vet_dst(struct cgroup *dst_cgrp)
  */
 void cgroup_migrate_finish(struct cgroup_mgctx *mgctx)
 {
-	LIST_HEAD(preloaded);
-	struct css_set *cset, *tmp_cset;
+	struct android_css_set *cset, *tmp_cset;
 
 	lockdep_assert_held(&cgroup_mutex);
 
 	spin_lock_irq(&css_set_lock);
 
-	list_splice_tail_init(&mgctx->preloaded_src_csets, &preloaded);
-	list_splice_tail_init(&mgctx->preloaded_dst_csets, &preloaded);
+	list_for_each_entry_safe(cset, tmp_cset, &mgctx->preloaded_src_csets,
+				 mg_src_preload_node) {
+		cset->cset.mg_src_cgrp = NULL;
+		cset->cset.mg_dst_cgrp = NULL;
+		cset->cset.mg_dst_cset = NULL;
+		list_del_init(&cset->mg_src_preload_node);
+		put_css_set_locked(&cset->cset);
+	}
 
-	list_for_each_entry_safe(cset, tmp_cset, &preloaded, mg_preload_node) {
-		cset->mg_src_cgrp = NULL;
-		cset->mg_dst_cgrp = NULL;
-		cset->mg_dst_cset = NULL;
-		list_del_init(&cset->mg_preload_node);
-		put_css_set_locked(cset);
+	list_for_each_entry_safe(cset, tmp_cset, &mgctx->preloaded_dst_csets,
+				 mg_dst_preload_node) {
+		cset->cset.mg_src_cgrp = NULL;
+		cset->cset.mg_dst_cgrp = NULL;
+		cset->cset.mg_dst_cset = NULL;
+		list_del_init(&cset->mg_dst_preload_node);
+		put_css_set_locked(&cset->cset);
 	}
 
 	spin_unlock_irq(&css_set_lock);
@@ -2620,6 +2645,7 @@ void cgroup_migrate_add_src(struct css_set *src_cset,
 			    struct cgroup_mgctx *mgctx)
 {
 	struct cgroup *src_cgrp;
+	struct android_css_set *android_cset;
 
 	lockdep_assert_held(&cgroup_mutex);
 	lockdep_assert_held(&css_set_lock);
@@ -2633,8 +2659,9 @@ void cgroup_migrate_add_src(struct css_set *src_cset,
 		return;
 
 	src_cgrp = cset_cgroup_from_root(src_cset, dst_cgrp->root);
+	android_cset = container_of(src_cset, struct android_css_set, cset);
 
-	if (!list_empty(&src_cset->mg_preload_node))
+	if (!list_empty(&android_cset->mg_src_preload_node))
 		return;
 
 	WARN_ON(src_cset->mg_src_cgrp);
@@ -2645,7 +2672,7 @@ void cgroup_migrate_add_src(struct css_set *src_cset,
 	src_cset->mg_src_cgrp = src_cgrp;
 	src_cset->mg_dst_cgrp = dst_cgrp;
 	get_css_set(src_cset);
-	list_add_tail(&src_cset->mg_preload_node, &mgctx->preloaded_src_csets);
+	list_add_tail(&android_cset->mg_src_preload_node, &mgctx->preloaded_src_csets);
 }
 
 /**
@@ -2664,20 +2691,23 @@ void cgroup_migrate_add_src(struct css_set *src_cset,
  */
 int cgroup_migrate_prepare_dst(struct cgroup_mgctx *mgctx)
 {
-	struct css_set *src_cset, *tmp_cset;
+	struct android_css_set *android_src_cset, *tmp_cset;
 
 	lockdep_assert_held(&cgroup_mutex);
 
 	/* look up the dst cset for each src cset and link it to src */
-	list_for_each_entry_safe(src_cset, tmp_cset, &mgctx->preloaded_src_csets,
-				 mg_preload_node) {
+	list_for_each_entry_safe(android_src_cset, tmp_cset, &mgctx->preloaded_src_csets,
+				 mg_src_preload_node) {
+		struct css_set *src_cset = &android_src_cset->cset;
 		struct css_set *dst_cset;
+		struct android_css_set *android_dst_cset;
 		struct cgroup_subsys *ss;
 		int ssid;
 
 		dst_cset = find_css_set(src_cset, src_cset->mg_dst_cgrp);
 		if (!dst_cset)
 			return -ENOMEM;
+		android_dst_cset = container_of(dst_cset, struct android_css_set, cset);
 
 		WARN_ON_ONCE(src_cset->mg_dst_cset || dst_cset->mg_dst_cset);
 
@@ -2689,7 +2719,7 @@ int cgroup_migrate_prepare_dst(struct cgroup_mgctx *mgctx)
 		if (src_cset == dst_cset) {
 			src_cset->mg_src_cgrp = NULL;
 			src_cset->mg_dst_cgrp = NULL;
-			list_del_init(&src_cset->mg_preload_node);
+			list_del_init(&android_src_cset->mg_src_preload_node);
 			put_css_set(src_cset);
 			put_css_set(dst_cset);
 			continue;
@@ -2697,8 +2727,8 @@ int cgroup_migrate_prepare_dst(struct cgroup_mgctx *mgctx)
 
 		src_cset->mg_dst_cset = dst_cset;
 
-		if (list_empty(&dst_cset->mg_preload_node))
-			list_add_tail(&dst_cset->mg_preload_node,
+		if (list_empty(&android_dst_cset->mg_dst_preload_node))
+			list_add_tail(&android_dst_cset->mg_dst_preload_node,
 				      &mgctx->preloaded_dst_csets);
 		else
 			put_css_set(dst_cset);
@@ -2926,7 +2956,7 @@ static int cgroup_update_dfl_csses(struct cgroup *cgrp)
 	DEFINE_CGROUP_MGCTX(mgctx);
 	struct cgroup_subsys_state *d_css;
 	struct cgroup *dsct;
-	struct css_set *src_cset;
+	struct android_css_set *android_src_cset;
 	int ret;
 
 	lockdep_assert_held(&cgroup_mutex);
@@ -2949,11 +2979,12 @@ static int cgroup_update_dfl_csses(struct cgroup *cgrp)
 		goto out_finish;
 
 	spin_lock_irq(&css_set_lock);
-	list_for_each_entry(src_cset, &mgctx.preloaded_src_csets, mg_preload_node) {
+	list_for_each_entry(android_src_cset, &mgctx.preloaded_src_csets,
+			    mg_src_preload_node) {
 		struct task_struct *task, *ntask;
 
 		/* all tasks in src_csets need to be migrated */
-		list_for_each_entry_safe(task, ntask, &src_cset->tasks, cg_list)
+		list_for_each_entry_safe(task, ntask, &android_src_cset->cset.tasks, cg_list)
 			cgroup_migrate_add_task(task, &mgctx);
 	}
 	spin_unlock_irq(&css_set_lock);
@@ -5715,7 +5746,7 @@ static void __init cgroup_init_subsys(struct cgroup_subsys *ss, bool early)
 	 * pointer to this state - since the subsystem is
 	 * newly registered, all tasks and hence the
 	 * init_css_set is in the subsystem's root cgroup. */
-	init_css_set.subsys[ss->id] = css;
+	init_css_set->subsys[ss->id] = css;
 
 	have_fork_callback |= (bool)ss->fork << ss->id;
 	have_exit_callback |= (bool)ss->exit << ss->id;
@@ -5748,7 +5779,7 @@ int __init cgroup_init_early(void)
 	init_cgroup_root(&ctx);
 	cgrp_dfl_root.cgrp.self.flags |= CSS_NO_REF;
 
-	RCU_INIT_POINTER(init_task.cgroups, &init_css_set);
+	RCU_INIT_POINTER(init_task.cgroups, init_css_set);
 
 	for_each_subsys(ss, i) {
 		WARN(!ss->css_alloc || !ss->css_free || ss->name || ss->id,
@@ -5800,8 +5831,8 @@ int __init cgroup_init(void)
 	 * Add init_css_set to the hash table so that dfl_root can link to
 	 * it during init.
 	 */
-	hash_add(css_set_table, &init_css_set.hlist,
-		 css_set_hash(init_css_set.subsys));
+	hash_add(css_set_table, &init_css_set->hlist,
+		 css_set_hash(init_css_set->subsys));
 
 	BUG_ON(cgroup_setup_root(&cgrp_dfl_root, 0));
 
@@ -5810,7 +5841,7 @@ int __init cgroup_init(void)
 	for_each_subsys(ss, ssid) {
 		if (ss->early_init) {
 			struct cgroup_subsys_state *css =
-				init_css_set.subsys[ss->id];
+				init_css_set->subsys[ss->id];
 
 			css->id = cgroup_idr_alloc(&ss->css_idr, css, 1, 2,
 						   GFP_KERNEL);
@@ -5819,7 +5850,7 @@ int __init cgroup_init(void)
 			cgroup_init_subsys(ss, false);
 		}
 
-		list_add_tail(&init_css_set.e_cset_node[ssid],
+		list_add_tail(&init_css_set->e_cset_node[ssid],
 			      &cgrp_dfl_root.cgrp.e_csets[ssid]);
 
 		/*
@@ -5855,17 +5886,17 @@ int __init cgroup_init(void)
 		}
 
 		if (ss->bind)
-			ss->bind(init_css_set.subsys[ssid]);
+			ss->bind(init_css_set->subsys[ssid]);
 
 		mutex_lock(&cgroup_mutex);
-		css_populate_dir(init_css_set.subsys[ssid]);
+		css_populate_dir(init_css_set->subsys[ssid]);
 		mutex_unlock(&cgroup_mutex);
 	}
 
-	/* init_css_set.subsys[] has been updated, re-hash */
-	hash_del(&init_css_set.hlist);
-	hash_add(css_set_table, &init_css_set.hlist,
-		 css_set_hash(init_css_set.subsys));
+	/* init_css_set.cset.subsys[] has been updated, re-hash */
+	hash_del(&init_css_set->hlist);
+	hash_add(css_set_table, &init_css_set->hlist,
+		 css_set_hash(init_css_set->subsys));
 
 	WARN_ON(sysfs_create_mount_point(fs_kobj, "cgroup"));
 	WARN_ON(register_filesystem(&cgroup_fs_type));
@@ -5992,7 +6023,7 @@ out:
  */
 void cgroup_fork(struct task_struct *child)
 {
-	RCU_INIT_POINTER(child->cgroups, &init_css_set);
+	RCU_INIT_POINTER(child->cgroups, init_css_set);
 	INIT_LIST_HEAD(&child->cg_list);
 }
 
