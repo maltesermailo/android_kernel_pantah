@@ -970,6 +970,8 @@ struct ufs_hba {
 	u32 luns_avail;
 	bool complete_put;
 
+	ANDROID_OEM_DATA_ARRAY(1, 2);
+
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
 	ANDROID_KABI_RESERVE(3);
