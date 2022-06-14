@@ -141,6 +141,30 @@
       },
       "revId": "0feeb62cd4a32c092ae4ebced23fa9cc60bb929c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "463d6839_25c6ebbc",
+        "filename": "mm/madvise.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 951,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-06-14T05:18:12Z",
+      "side": 1,
+      "message": "As I just commented in https://android-review.googlesource.com/c/kernel/common/+/2110106, I think adding a new madvise flavor would constitute a change in UAPI, which is a no go. Let\u0027s see what Greg and Todd think and if there is a better way to support this functionality.",
+      "parentUuid": "41670828_a49ea8f5",
+      "range": {
+        "startLine": 946,
+        "startChar": 0,
+        "endLine": 951,
+        "endChar": 13
+      },
+      "revId": "0feeb62cd4a32c092ae4ebced23fa9cc60bb929c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
