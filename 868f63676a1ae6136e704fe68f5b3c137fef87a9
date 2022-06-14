@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5ac90d3_b27f005e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-06-14T05:39:32Z",
+      "side": 1,
+      "message": "s",
+      "revId": "868f63676a1ae6136e704fe68f5b3c137fef87a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e4f8a8d_642bd017",
+        "filename": "mm/memory.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3759,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-06-14T05:39:32Z",
+      "side": 1,
+      "message": "do you use this argument? looks like it\u0027s always false.",
+      "range": {
+        "startLine": 3759,
+        "startChar": 41,
+        "endLine": 3759,
+        "endChar": 46
+      },
+      "revId": "868f63676a1ae6136e704fe68f5b3c137fef87a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed1a49c5_bddba789",
+        "filename": "mm/memory.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3788,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-06-14T05:39:32Z",
+      "side": 1,
+      "message": "Looks like this hook and trace_android_vh_swap_page_present above will always be hit together. If so, why not have only one hook here?",
+      "range": {
+        "startLine": 3788,
+        "startChar": 1,
+        "endLine": 3788,
+        "endChar": 31
+      },
+      "revId": "868f63676a1ae6136e704fe68f5b3c137fef87a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c764d771_9bae5cfe",
+        "filename": "mm/memory.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 4767,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-06-14T05:39:32Z",
+      "side": 1,
+      "message": "handle_pte_fault() can exit at different locations: after calling do_fault(), do_swap_page(), do_numa_page() or do_wp_page(). Are you not interested in those faults?",
+      "range": {
+        "startLine": 4767,
+        "startChar": 1,
+        "endLine": 4767,
+        "endChar": 38
+      },
+      "revId": "868f63676a1ae6136e704fe68f5b3c137fef87a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
