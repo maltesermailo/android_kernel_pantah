@@ -34,6 +34,24 @@
       "parentUuid": "d55b7bdf_1d2ce715",
       "revId": "0b2f91eb1870e2f876209f07990159f502ea7cd2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "729a04c0_bc321d82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-15T14:55:46Z",
+      "side": 1,
+      "message": "This is not a cherry-pick of the android12-5.10 version so it is being evaluated as a new patch (Change-Id doesn\u0027t match). Why was this not submitted upstream during the last year? Since this will apparently never be upstream and it was submitted only a few days before KMI freeze, there isn\u0027t time to vet it properly.\n\nI recommend reworking as a vendor hook based implementation. I\u0027d be willing to accept ANDROID_VENDOR_DATA() in the structs that affect KMI. The actual hooks can be added after KMI freeze.",
+      "parentUuid": "3a8abb74_42b2fcf2",
+      "revId": "0b2f91eb1870e2f876209f07990159f502ea7cd2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
