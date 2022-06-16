@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8169d5d6_b9fca3da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2022-06-16T16:26:04Z",
+      "side": 1,
+      "message": "Thanks for catching the problem, Charan.\n\nI am curious whether this is general problem or not between page_ext and offline.\n\nCPU A is accessing random page descriptor(so access page_ext naturally since page_ext is extension of struct page) but CPU B is offlining and then free the page_ext?\n\nA example,\n\npage_idle_bitmap_read                      \n  page_is_idle                          free_ext\n     lookup_page_ext\n",
+      "revId": "05c63911b098b1d5d8f2305c36b44096575aa398",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
