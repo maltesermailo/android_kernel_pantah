@@ -33,6 +33,24 @@
       "message": "Might be good to add a comment in the code (similar to the commit message) to clarify why \u003c is ok.",
       "revId": "481886fbdde464fec09c9a9cf96bf4a108a8dd00",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec5790d3_7ae6fe84",
+        "filename": "kernel/dma/debug.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1140,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2022-06-17T20:48:06Z",
+      "side": 1,
+      "message": "I understand the need for this change, but I\u0027m a bit wary of completely removing the message for all dma users. Can we get away with changing this to a debug log instead of an error? I guess that would be too noisy in userdebug builds?",
+      "parentUuid": "9add9ff6_8071cd4e",
+      "revId": "481886fbdde464fec09c9a9cf96bf4a108a8dd00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
