@@ -153,6 +153,8 @@ int set_memory_valid(unsigned long addr, int numpages, int enable)
 					__pgprot(PTE_VALID));
 }
 
+EXPORT_SYMBOL(set_memory_valid);
+
 int set_direct_map_invalid_noflush(struct page *page)
 {
 	struct page_change_data data = {
