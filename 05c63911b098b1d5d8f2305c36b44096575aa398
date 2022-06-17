@@ -34,6 +34,24 @@
       "parentUuid": "8169d5d6_b9fca3da",
       "revId": "05c63911b098b1d5d8f2305c36b44096575aa398",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddabdc1a_c788098e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2022-06-17T16:44:09Z",
+      "side": 1,
+      "message": "I didn\u0027t know memory_hotplug works for only 64 bit. Thanks.\n\nI knew why page_is_idle uses page_ext only when 64bit because of lacking of page-\u003eflags. IOW, If we don\u0027t see the crash there, it\u0027s coincidence.\n\nAbout put_page with offlining explanation above, I agree with your analysis.\n\nHowever, I am talking about more of design problem: page, page_ext and memory hotplugging.\n\nTo me, it\u0027s rather strange that page_ext and page have different life cycle even though one is extension of the other. I am not familiar with hotplugging. But isn\u0027t it also free struct page memmap area in the end? And kernel can access any struct page descriptor speculatively? Then, how does hotplug prevent the crash?\n\nshouldn\u0027t we make page_ext freeing after the struct page in generall since page_ext is just extension of struct page? Thus, user should access page_ext via page and if the page descriptor is already freed, they couldn\u0027t access page_ext, either. And I hope memory hotplug already has some way to prevent accessing struct page before freeing.\n\nWhat do you think?",
+      "parentUuid": "4688fd6b_ae032a46",
+      "revId": "05c63911b098b1d5d8f2305c36b44096575aa398",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
