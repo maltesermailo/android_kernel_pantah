@@ -16,6 +16,24 @@
       "message": "Thanks for catching the problem, Charan.\n\nI am curious whether this is general problem or not between page_ext and offline.\n\nCPU A is accessing random page descriptor(so access page_ext naturally since page_ext is extension of struct page) but CPU B is offlining and then free the page_ext?\n\nA example,\n\npage_idle_bitmap_read                      \n  page_is_idle                          free_ext\n     lookup_page_ext\n",
       "revId": "05c63911b098b1d5d8f2305c36b44096575aa398",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4688fd6b_ae032a46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1904204
+      },
+      "writtenOn": "2022-06-17T16:17:29Z",
+      "side": 1,
+      "message": "As per my understanding, As long as there is an extra refcount on the page, or the page_ext being accessed in the path where the final put_page() happens, it will be fine. Because extra ref_count makes the offline to wait till the refcount is zero or in the final put_page() where page_ext access happens(say for page_owner) before it is freed to buddy. \n\nWith simple grep, I feel that all paths are seems fine(unless I am really missing something here), but one where the reading of /proc/page_owner information directly and there is a parallel offlining happening.\n\n/proc/page_owner                  offline\n----------------               ------------\nPageBuddy(page) returns\nfalse\n                              Frees the page to buddy\n                              and successively free the\n                              ms-\u003epage_ext\nAccess the page_ext\n\nI think there should be extra refcount of the page should be taken here.\n\nBTW, for the use case you have mentioned, page_is_idle() is just a page-\u003eflags check for 64bit. It is for 32 bit where we do page_ext-\u003eflags but memory hotplug is not enabled for 32bit systems,(If I am not wrong here), to online/offline memory blocks.",
+      "parentUuid": "8169d5d6_b9fca3da",
+      "revId": "05c63911b098b1d5d8f2305c36b44096575aa398",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
