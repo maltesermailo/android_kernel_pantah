@@ -52,6 +52,24 @@
       "parentUuid": "4688fd6b_ae032a46",
       "revId": "05c63911b098b1d5d8f2305c36b44096575aa398",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0223cc86_c8652075",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1904204
+      },
+      "writtenOn": "2022-06-17T19:41:20Z",
+      "side": 1,
+      "message": "\u003e\u003eI didn\u0027t know memory_hotplug works for only 64 bit.\nI should be correcting this statement by saying that I had mentioned it only for ARM architecture where we are doing it only for 64bit. Not really have an idea about other architectures. But a simple grep showing that it seems there for x86 32bit with HIGHMEM. In such cases, your example about page_is_idle() is also a valid one.\n\n\u003e\u003e But isn\u0027t it also free struct page memmap area in the end? ......\nOfflining a memory block won\u0027t free the memmap but removal of memory block does it. And I am really doubt If kernel can access any page descriptor speculatively once memmap is removed, The offlining steps will be like \n1) Isolate all the pages \n2) while(1); try free the pages to buddy.( Here I mean to -\u003efree_list[MIGRATE_ISOLATE])\n3) delete the pages from this buddy list. \n4) Then free page_ext.  \n\nWith the step 1) above, kernel can\u0027t really allocates the pages any more\n2) only can succeed with the final put_page() from any path(which again makes the page directly goes to isolated free list). \n3) Is making the pages to be completely removed from the buddy. \nSo, I see that kernel can no way speculatively access page descriptor after offlining itself. After this If user wants, he can remove the page block which then removes the \u0027memmap\u0027.\n\n\u003e\u003e\u003e\u003et\u0027s rather strange that page_ext and page have different life cycle ......\nAnd I should agree with the design problem here about page, page_ext and its freeing in memory_hotplug. In theory, as long as page is accessible, the page_ext also should be accessible, but ***Why one should be needing the access to page_ext, If the page it self is not part of any buddy list? IOW, why one need to make checks, like page_is_idle(), on the page that isn\u0027t even a valid one***. Isn\u0027t the expectation of page_ext presence only when the page is onlined is suffice?",
+      "parentUuid": "ddabdc1a_c788098e",
+      "revId": "05c63911b098b1d5d8f2305c36b44096575aa398",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
