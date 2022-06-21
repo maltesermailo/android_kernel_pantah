@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "557c5c67_1ef6a7f5",
+        "filename": "include/trace/hooks/gic_v2.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-21T19:50:06Z",
+      "side": 1,
+      "message": "Since gic_chip_data is already used for the v3 case, I think we should:\n1) not pass gic_chip_data here...can we refactor to pass individual fields instead?\n2) fully define gic_chip_data for the v3 case so we can maintain it as stable\n3) long-term (U?), add support in ABI tools to handle duplicate struct names (some sort of namespace indicator?). Too late for android13 kernels.\n\nIf we do that, we don\u0027t need to split out this separate gic_v2.c file.",
+      "parentUuid": "0c105639_3cbf061f",
+      "revId": "2d9118a99901a167838328f1e1d94b40d796f28f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33911b10_f542072f",
         "filename": "include/trace/hooks/gic_v3.h",
         "patchSetId": 10

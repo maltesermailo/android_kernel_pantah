@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3a3c6a8_bfbbf825",
+        "filename": "drivers/irqchip/irq-gic.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-21T19:50:06Z",
+      "side": 1,
+      "message": "why does this need to be exported if it is accessed via the .resume method?",
+      "revId": "0b04570b951e94e3897ace439559a443a0a75b63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93cbc2ce_4961ad9c",
+        "filename": "drivers/irqchip/irq-gic.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-21T19:50:06Z",
+      "side": 1,
+      "message": "why do we need the gic_v2_resume stub?",
+      "revId": "0b04570b951e94e3897ace439559a443a0a75b63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baab25cc_1912ff29",
+        "filename": "drivers/irqchip/irq-gic.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1242,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-21T19:50:06Z",
+      "side": 1,
+      "message": "This is not mentioned in the commit message.",
+      "revId": "0b04570b951e94e3897ace439559a443a0a75b63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa809d45_90164fe5",
+        "filename": "include/linux/irqchip/arm-gic.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-21T19:50:06Z",
+      "side": 1,
+      "message": "Let\u0027s not do this. Instead keep it in the C file and pass individual fields for the v2 case.",
+      "revId": "0b04570b951e94e3897ace439559a443a0a75b63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e01c7520_3f33b7bf",
+        "filename": "include/trace/hooks/gic_v3.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-21T19:50:06Z",
+      "side": 1,
+      "message": "Makes sense to move this here since this hook us used in v3 context. Mention this rationale in the commit message.",
+      "revId": "0b04570b951e94e3897ace439559a443a0a75b63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
