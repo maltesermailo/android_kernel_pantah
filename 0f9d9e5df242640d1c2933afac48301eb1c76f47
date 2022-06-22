@@ -1,0 +1,146 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b6e6998_702c742c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-22T18:52:30Z",
+      "side": 1,
+      "message": "Needs to be refactored to avoid breaking KMI. See comments on a recommended technique.",
+      "revId": "0f9d9e5df242640d1c2933afac48301eb1c76f47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b2ec016_14730911",
+        "filename": "include/linux/cgroup-defs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-22T18:52:30Z",
+      "side": 1,
+      "message": "Instead, create an \"extended\" css_set that adds these (`mg_preload_node` will be unused):\n```\nstruct ext_css_set {\n  struct css_set css_set;\n  struct list_head mg_src_preload_node;\n  struct list_head mg_dst_preload_node;\n};\n```\nThen use `container_of()` on css_set to get access to the new fields when needed.",
+      "revId": "0f9d9e5df242640d1c2933afac48301eb1c76f47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e619916_9133337a",
+        "filename": "kernel/cgroup/cgroup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-22T18:52:30Z",
+      "side": 1,
+      "message": "this should initialize the ext_css_set. References to \"init_css_set\" need to be updated to \"init_ext_css_set.css_set\" (which could be done with `#define init_css_set init_ext_css_set.css_set`)",
+      "revId": "0f9d9e5df242640d1c2933afac48301eb1c76f47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63da5606_fff65897",
+        "filename": "kernel/cgroup/cgroup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1215,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-22T18:52:30Z",
+      "side": 1,
+      "message": "change to\n```\n  ext_cset \u003d kzalloc(sizeof(*ext_cset), GFP_KERNEL);\n  cset \u003d \u0026ext_cset.css_set;\n```",
+      "revId": "0f9d9e5df242640d1c2933afac48301eb1c76f47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7ffe8af_3f78b862",
+        "filename": "kernel/cgroup/cgroup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1235,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-22T18:52:30Z",
+      "side": 1,
+      "message": "change to:\n```\n  INIT_LIST_HEAD(\u0026ext_cset-\u003emg_src_preload_node);\n  INIT_LIST_HEAD(\u0026ext_cset-\u003emg_dst_preload_node);\n```",
+      "range": {
+        "startLine": 1234,
+        "startChar": 1,
+        "endLine": 1235,
+        "endChar": 44
+      },
+      "revId": "0f9d9e5df242640d1c2933afac48301eb1c76f47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "466c20af_16ba7c3b",
+        "filename": "kernel/cgroup/cgroup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2589,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-22T18:52:30Z",
+      "side": 1,
+      "message": "refactor these loops to get `ext_cset` via container_of() on `cset`) to access the new fields.",
+      "revId": "0f9d9e5df242640d1c2933afac48301eb1c76f47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5827912_1f4c90e3",
+        "filename": "kernel/cgroup/cgroup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2645,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-22T18:52:30Z",
+      "side": 1,
+      "message": "use `container_of()` to obtain `ext_cset` for this test. Same with line 2656.",
+      "revId": "0f9d9e5df242640d1c2933afac48301eb1c76f47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a187f87_af679243",
+        "filename": "kernel/cgroup/cgroup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2680,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-22T18:52:30Z",
+      "side": 1,
+      "message": "same technique for the rest of the access to the new fields.",
+      "revId": "0f9d9e5df242640d1c2933afac48301eb1c76f47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
