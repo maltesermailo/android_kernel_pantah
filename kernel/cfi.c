@@ -293,7 +293,7 @@ out:
 	return f;
 }
 
-void cfi_slowpath_handler(uint64_t id, void *ptr, void *diag)
+void __nocfi cfi_slowpath_handler(uint64_t id, void *ptr, void *diag)
 {
 	cfi_check_fn check = find_cfi_check(ptr);
 
