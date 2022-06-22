@@ -70,6 +70,24 @@
       "parentUuid": "ddabdc1a_c788098e",
       "revId": "05c63911b098b1d5d8f2305c36b44096575aa398",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdea1375_a2d0b795",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2022-06-22T17:01:47Z",
+      "side": 1,
+      "message": "The page in buddy list is one of those states struct page could have. That\u0027s not related to that whether user could access struct page or not. As long as page is accessed, page_ext should be allowed because page_ext is just extension of page-\u003eflags due to lacking of page-\u003eflags extra bits and it could be used for several other purpose, not only page_owner, page_pinner in future. \n\nLikewise you corrected page_is_idle(other example, page_owner\u0027s read_page_owner), they would still have problem with memory hotplug.\nI think those paths(and many pfn walkers) need to use get_online_mems with pfn_to_online_page but to me, it\u0027s still not nice. IMO, we need to free page_ext when struct page is destroyed. Or, if we want to really destroy page_ext at offline, lookup_page_ext really need to be aware of memory hotplug so that it could return NULL for offlined pages.\n\nHaving said, let\u0027s approach more practically. page_pinner is not the upstream feature so upstream would be reluctant to fix something without real example.\nThus, what we could do here as simple approach just accept your patch.\nBut my worry is your patch breaks the semantic since we decrease page refcount afterward. Since it\u0027s debugfs feature, I think it wouldn\u0027t be a big problem but it would be great if we try to keep the behavior.\n\nAny thought?",
+      "parentUuid": "0223cc86_c8652075",
+      "revId": "05c63911b098b1d5d8f2305c36b44096575aa398",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
