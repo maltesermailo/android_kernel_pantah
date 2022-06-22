@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63106cae_1ce3848c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-06-22T19:02:57Z",
+      "side": 1,
+      "message": "This results in a build-break for x86 builds:\n```\n/usr/local/google/buildbot/src/android/common-android13-5.15/common/include/linux/irqchip/arm-gic-v3.h:602:10: fatal error: \u0027asm/arch_gicv3.h\u0027 file not found\n#include \u003casm/arch_gicv3.h\u003e\n```\nmake conditional on CONFIG_ARM64?",
+      "revId": "06c5235a21363c51b3aa7ce021d5020754f24105",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
