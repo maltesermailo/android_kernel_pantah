@@ -5608,6 +5608,8 @@ void show_free_areas(unsigned int filter, nodemask_t *nodemask)
 	int cpu;
 	struct zone *zone;
 	pg_data_t *pgdat;
+	long file_protect = 0, anon_protect = 0;
+	long file_protect_max = 0, anon_protect_max = 0;
 
 	for_each_populated_zone(zone) {
 		if (show_mem_node_skip(filter, zone_to_nid(zone), nodemask))
@@ -5616,12 +5618,15 @@ void show_free_areas(unsigned int filter, nodemask_t *nodemask)
 		for_each_online_cpu(cpu)
 			free_pcp += per_cpu_ptr(zone->pageset, cpu)->pcp.count;
 	}
-
+	trace_android_vh_account_page_mapcount(&file_protect,
+			&anon_protect, &file_protect_max, &anon_protect_max);
 	printk("active_anon:%lu inactive_anon:%lu isolated_anon:%lu\n"
 		" active_file:%lu inactive_file:%lu isolated_file:%lu\n"
 		" unevictable:%lu dirty:%lu writeback:%lu\n"
 		" slab_reclaimable:%lu slab_unreclaimable:%lu\n"
 		" mapped:%lu shmem:%lu pagetables:%lu bounce:%lu\n"
+		" file_protect:%l anon_protect:%l"
+		" file_protect_max:%l anon_protect_max:%l\n"
 		" free:%lu free_pcp:%lu free_cma:%lu\n",
 		global_node_page_state(NR_ACTIVE_ANON),
 		global_node_page_state(NR_INACTIVE_ANON),
@@ -5638,6 +5643,8 @@ void show_free_areas(unsigned int filter, nodemask_t *nodemask)
 		global_node_page_state(NR_SHMEM),
 		global_zone_page_state(NR_PAGETABLE),
 		global_zone_page_state(NR_BOUNCE),
+		file_protect, anon_protect,
+		file_protect_max,  anon_protect_max,
 		global_zone_page_state(NR_FREE_PAGES),
 		free_pcp,
 		global_zone_page_state(NR_FREE_CMA_PAGES));
