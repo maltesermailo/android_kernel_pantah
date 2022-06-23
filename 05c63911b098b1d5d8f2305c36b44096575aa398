@@ -106,6 +106,24 @@
       "parentUuid": "fdea1375_a2d0b795",
       "revId": "05c63911b098b1d5d8f2305c36b44096575aa398",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71f59be0_63772181",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2022-06-23T21:43:18Z",
+      "side": 1,
+      "message": "```\nI don\u0027t have as much experience as you have in upstreaming, but, the read_page_owner is a valid example here, NO? Or upstream really ask for testcase to reproduce the issue with (only in the paths where code is present, eg: page_owner, page_idle)?\n```\nWhat I meant is upstream would still try to fix them for only existing features(i.e., page_idle and page_owner). In those case, get_online_mems with pfn_to_online_page would be enough but it couldn\u0027t fix the page_pinner case here.\n\nWhat we want to achieve is to move page_ext freeing with freeing \"struct page\". I am not sure we could persuade upstream to approach the way without real example(maybe possible, but would need a lot of argument as usual).\n\n```\nHmm, Semantic breaking is agreed. Not sure how the behaviour can be kept without breaking its semantic. One way is taking the memplug lock but that will be heavy in put_page (). As you also said, since this debug feature, the impact is very minimal, as the very immediate step anyway, ,for sure,  will be dropping the refcount.\n```\n\nA idea from my mind was to capture refcount of the page with decreasing -1 in page_pinner_put_page so keep the consistency with old behavior. I know there would be some trouble in detail(since page_pinner in 12-5.10 is mess since I couldn\u0027t clean them up due to ABI freeze at that time) but I think it could be doable to introduce new separate function.",
+      "parentUuid": "4e308dd3_392d0abc",
+      "revId": "05c63911b098b1d5d8f2305c36b44096575aa398",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
