@@ -2209,29 +2209,28 @@ blk_qc_t blk_mq_submit_bio(struct bio *bio)
 	if (!bio_integrity_prep(bio))
 		goto queue_exit;
 
+        bio_set_ioprio(bio);
+
 	if (!is_flush_fua && !blk_queue_nomerges(q) &&
-	    blk_attempt_plug_merge(q, bio, nr_segs, &same_queue_rq))
-		goto queue_exit;
+            blk_attempt_plug_merge(q, bio, nr_segs, &same_queue_rq))
+                goto queue_exit;
 
-	if (blk_mq_sched_bio_merge(q, bio, nr_segs))
-		goto queue_exit;
+        if (blk_mq_sched_bio_merge(q, bio, nr_segs))
+                goto queue_exit;
 
-	rq_qos_throttle(q, bio);
+        rq_qos_throttle(q, bio);
 
-	hipri = bio->bi_opf & REQ_HIPRI;
+        hipri = bio->bi_opf & REQ_HIPRI;
 
-	data.cmd_flags = bio->bi_opf;
-	rq = __blk_mq_alloc_request(&data);
-	if (unlikely(!rq)) {
-		rq_qos_cleanup(q, bio);
-		if (bio->bi_opf & REQ_NOWAIT)
-			bio_wouldblock_error(bio);
-		goto queue_exit;
-	}
+        data.cmd_flags = bio->bi_opf;
+        rq = __blk_mq_alloc_request(&data);
+        if (unlikely(!rq)) {
+                rq_qos_cleanup(q, bio);
+                if (bio->bi_opf & REQ_NOWAIT)
+                        bio_wouldblock_error(bio);
+                goto queue_exit;
 
 	trace_block_getrq(bio);
-
-	bio_set_ioprio(bio);
 
 	rq_qos_track(q, rq, bio);
 
