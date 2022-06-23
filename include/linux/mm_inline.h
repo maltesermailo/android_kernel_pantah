@@ -8,6 +8,29 @@
 #include <linux/string.h>
 #include <linux/userfaultfd_k.h>
 #include <linux/swapops.h>
+#include <linux/tracepoint-defs.h>
+
+extern struct tracepoint __tracepoint_android_vh_add_page_to_lrulist;
+extern struct tracepoint __tracepoint_android_vh_del_page_from_lrulist;
+
+void __trace_android_vh_add_page_to_lrulist(struct folio *folio, bool compound,
+					    enum lru_list lru);
+void __trace_android_vh_del_page_from_lrulist(struct folio *folio, bool compound,
+					      enum lru_list lru);
+
+static __always_inline
+void _trace_android_vh_add_page_to_lrulist(struct folio *folio, bool compound, enum lru_list lru)
+{
+	if (static_key_false(&__tracepoint_android_vh_add_page_to_lrulist.key))
+		__trace_android_vh_add_page_to_lrulist(folio, compound, lru);
+}
+
+static __always_inline
+void _trace_android_vh_del_page_from_lrulist(struct folio *folio, bool compound, enum lru_list lru)
+{
+	if (static_key_false(&__tracepoint_android_vh_del_page_from_lrulist.key))
+		__trace_android_vh_del_page_from_lrulist(folio, compound, lru);
+}
 
 /**
  * folio_is_file_lru - Should the folio be on a file LRU or anon LRU?
@@ -322,6 +345,7 @@ void lruvec_add_folio(struct lruvec *lruvec, struct folio *folio)
 	if (lru_gen_add_folio(lruvec, folio, false))
 		return;
 
+	_trace_android_vh_add_page_to_lrulist(folio, false, lru);
 	update_lru_size(lruvec, lru, folio_zonenum(folio),
 			folio_nr_pages(folio));
 	if (lru != LRU_UNEVICTABLE)
@@ -336,6 +360,7 @@ void lruvec_add_folio_tail(struct lruvec *lruvec, struct folio *folio)
 	if (lru_gen_add_folio(lruvec, folio, true))
 		return;
 
+	_trace_android_vh_add_page_to_lrulist(folio, false, lru);
 	update_lru_size(lruvec, lru, folio_zonenum(folio),
 			folio_nr_pages(folio));
 	/* This is not expected to be used on LRU_UNEVICTABLE */
@@ -350,6 +375,8 @@ void lruvec_del_folio(struct lruvec *lruvec, struct folio *folio)
 	if (lru_gen_del_folio(lruvec, folio, false))
 		return;
 
+
+	_trace_android_vh_del_page_from_lrulist(folio, false, lru);
 	if (lru != LRU_UNEVICTABLE)
 		list_del(&folio->lru);
 	update_lru_size(lruvec, lru, folio_zonenum(folio),
