@@ -77,10 +77,17 @@ Basic design
 ============
 
 We introduce ``struct blk_crypto_key`` to represent an inline encryption key and
+<<<<<<< HEAD   (65aa3a ANDROID: fix typo on microdroid config)
 how it will be used.  This includes the type of the key (standard or
 hardware-wrapped); the actual bytes of the key; the size of the key; the
 algorithm and data unit size the key will be used with; and the number of bytes
 needed to represent the maximum data unit number the key will be used with.
+=======
+how it will be used.  This includes the actual bytes of the key; the size of the
+key; the algorithm and data unit size the key will be used with; and the number
+of bytes needed to represent the maximum data unit number the key will be used
+with.
+>>>>>>> BRANCH (1456ae f2fs: do not count ENOENT for error case)
 
 We introduce ``struct bio_crypt_ctx`` to represent an encryption context.  It
 contains a data unit number and a pointer to a blk_crypto_key.  We add pointers
@@ -302,6 +309,7 @@ kernel will pretend that the device does not support hardware inline encryption
 When the crypto API fallback is enabled, this means that all bios with and
 encryption context will use the fallback, and IO will complete as usual.  When
 the fallback is disabled, a bio with an encryption context will be failed.
+<<<<<<< HEAD   (65aa3a ANDROID: fix typo on microdroid config)
 
 .. _hardware_wrapped_keys:
 
@@ -514,3 +522,5 @@ the hardware RNG and its use to generate the key, as well as the testing of the
 For an example of a test that verifies the ciphertext written to disk in the
 "import" mode, see `Android's vts_kernel_encryption_test
 <https://android.googlesource.com/platform/test/vts-testcase/kernel/+/refs/heads/master/encryption/>`_.
+=======
+>>>>>>> BRANCH (1456ae f2fs: do not count ENOENT for error case)

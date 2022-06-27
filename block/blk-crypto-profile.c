@@ -349,6 +349,7 @@ bool __blk_crypto_cfg_supported(struct blk_crypto_profile *profile,
 		return false;
 	if (profile->max_dun_bytes_supported < cfg->dun_bytes)
 		return false;
+<<<<<<< HEAD   (65aa3a ANDROID: fix typo on microdroid config)
 	if (!(profile->key_types_supported & cfg->key_type))
 		return false;
 	return true;
@@ -600,5 +601,213 @@ void blk_crypto_update_capabilities(struct blk_crypto_profile *dst,
 
 	dst->max_dun_bytes_supported = src->max_dun_bytes_supported;
 	dst->key_types_supported = src->key_types_supported;
+=======
+	return true;
+}
+
+/**
+ * __blk_crypto_evict_key() - Evict a key from a device.
+ * @profile: the crypto profile of the device
+ * @key: the key to evict.  It must not still be used in any I/O.
+ *
+ * If the device has keyslots, this finds the keyslot (if any) that contains the
+ * specified key and calls the driver's keyslot_evict function to evict it.
+ *
+ * Otherwise, this just calls the driver's keyslot_evict function if it is
+ * implemented, passing just the key (without any particular keyslot).  This
+ * allows layered devices to evict the key from their underlying devices.
+ *
+ * Context: Process context. Takes and releases profile->lock.
+ * Return: 0 on success or if there's no keyslot with the specified key, -EBUSY
+ *	   if the keyslot is still in use, or another -errno value on other
+ *	   error.
+ */
+int __blk_crypto_evict_key(struct blk_crypto_profile *profile,
+			   const struct blk_crypto_key *key)
+{
+	struct blk_crypto_keyslot *slot;
+	int err = 0;
+
+	if (profile->num_slots == 0) {
+		if (profile->ll_ops.keyslot_evict) {
+			blk_crypto_hw_enter(profile);
+			err = profile->ll_ops.keyslot_evict(profile, key, -1);
+			blk_crypto_hw_exit(profile);
+			return err;
+		}
+		return 0;
+	}
+
+	blk_crypto_hw_enter(profile);
+	slot = blk_crypto_find_keyslot(profile, key);
+	if (!slot)
+		goto out_unlock;
+
+	if (WARN_ON_ONCE(atomic_read(&slot->slot_refs) != 0)) {
+		err = -EBUSY;
+		goto out_unlock;
+	}
+	err = profile->ll_ops.keyslot_evict(profile, key,
+					    blk_crypto_keyslot_index(slot));
+	if (err)
+		goto out_unlock;
+
+	hlist_del(&slot->hash_node);
+	slot->key = NULL;
+	err = 0;
+out_unlock:
+	blk_crypto_hw_exit(profile);
+	return err;
+}
+
+/**
+ * blk_crypto_reprogram_all_keys() - Re-program all keyslots.
+ * @profile: The crypto profile
+ *
+ * Re-program all keyslots that are supposed to have a key programmed.  This is
+ * intended only for use by drivers for hardware that loses its keys on reset.
+ *
+ * Context: Process context. Takes and releases profile->lock.
+ */
+void blk_crypto_reprogram_all_keys(struct blk_crypto_profile *profile)
+{
+	unsigned int slot;
+
+	if (profile->num_slots == 0)
+		return;
+
+	/* This is for device initialization, so don't resume the device */
+	down_write(&profile->lock);
+	for (slot = 0; slot < profile->num_slots; slot++) {
+		const struct blk_crypto_key *key = profile->slots[slot].key;
+		int err;
+
+		if (!key)
+			continue;
+
+		err = profile->ll_ops.keyslot_program(profile, key, slot);
+		WARN_ON(err);
+	}
+	up_write(&profile->lock);
+}
+EXPORT_SYMBOL_GPL(blk_crypto_reprogram_all_keys);
+
+void blk_crypto_profile_destroy(struct blk_crypto_profile *profile)
+{
+	if (!profile)
+		return;
+	kvfree(profile->slot_hashtable);
+	kvfree_sensitive(profile->slots,
+			 sizeof(profile->slots[0]) * profile->num_slots);
+	memzero_explicit(profile, sizeof(*profile));
+}
+EXPORT_SYMBOL_GPL(blk_crypto_profile_destroy);
+
+bool blk_crypto_register(struct blk_crypto_profile *profile,
+			 struct request_queue *q)
+{
+	if (blk_integrity_queue_supports_integrity(q)) {
+		pr_warn("Integrity and hardware inline encryption are not supported together. Disabling hardware inline encryption.\n");
+		return false;
+	}
+	q->crypto_profile = profile;
+	return true;
+}
+EXPORT_SYMBOL_GPL(blk_crypto_register);
+
+/**
+ * blk_crypto_intersect_capabilities() - restrict supported crypto capabilities
+ *					 by child device
+ * @parent: the crypto profile for the parent device
+ * @child: the crypto profile for the child device, or NULL
+ *
+ * This clears all crypto capabilities in @parent that aren't set in @child.  If
+ * @child is NULL, then this clears all parent capabilities.
+ *
+ * Only use this when setting up the crypto profile for a layered device, before
+ * it's been exposed yet.
+ */
+void blk_crypto_intersect_capabilities(struct blk_crypto_profile *parent,
+				       const struct blk_crypto_profile *child)
+{
+	if (child) {
+		unsigned int i;
+
+		parent->max_dun_bytes_supported =
+			min(parent->max_dun_bytes_supported,
+			    child->max_dun_bytes_supported);
+		for (i = 0; i < ARRAY_SIZE(child->modes_supported); i++)
+			parent->modes_supported[i] &= child->modes_supported[i];
+	} else {
+		parent->max_dun_bytes_supported = 0;
+		memset(parent->modes_supported, 0,
+		       sizeof(parent->modes_supported));
+	}
+}
+EXPORT_SYMBOL_GPL(blk_crypto_intersect_capabilities);
+
+/**
+ * blk_crypto_has_capabilities() - Check whether @target supports at least all
+ *				   the crypto capabilities that @reference does.
+ * @target: the target profile
+ * @reference: the reference profile
+ *
+ * Return: %true if @target supports all the crypto capabilities of @reference.
+ */
+bool blk_crypto_has_capabilities(const struct blk_crypto_profile *target,
+				 const struct blk_crypto_profile *reference)
+{
+	int i;
+
+	if (!reference)
+		return true;
+
+	if (!target)
+		return false;
+
+	for (i = 0; i < ARRAY_SIZE(target->modes_supported); i++) {
+		if (reference->modes_supported[i] & ~target->modes_supported[i])
+			return false;
+	}
+
+	if (reference->max_dun_bytes_supported >
+	    target->max_dun_bytes_supported)
+		return false;
+
+	return true;
+}
+EXPORT_SYMBOL_GPL(blk_crypto_has_capabilities);
+
+/**
+ * blk_crypto_update_capabilities() - Update the capabilities of a crypto
+ *				      profile to match those of another crypto
+ *				      profile.
+ * @dst: The crypto profile whose capabilities to update.
+ * @src: The crypto profile whose capabilities this function will update @dst's
+ *	 capabilities to.
+ *
+ * Blk-crypto requires that crypto capabilities that were
+ * advertised when a bio was created continue to be supported by the
+ * device until that bio is ended. This is turn means that a device cannot
+ * shrink its advertised crypto capabilities without any explicit
+ * synchronization with upper layers. So if there's no such explicit
+ * synchronization, @src must support all the crypto capabilities that
+ * @dst does (i.e. we need blk_crypto_has_capabilities(@src, @dst)).
+ *
+ * Note also that as long as the crypto capabilities are being expanded, the
+ * order of updates becoming visible is not important because it's alright
+ * for blk-crypto to see stale values - they only cause blk-crypto to
+ * believe that a crypto capability isn't supported when it actually is (which
+ * might result in blk-crypto-fallback being used if available, or the bio being
+ * failed).
+ */
+void blk_crypto_update_capabilities(struct blk_crypto_profile *dst,
+				    const struct blk_crypto_profile *src)
+{
+	memcpy(dst->modes_supported, src->modes_supported,
+	       sizeof(dst->modes_supported));
+
+	dst->max_dun_bytes_supported = src->max_dun_bytes_supported;
+>>>>>>> BRANCH (1456ae f2fs: do not count ENOENT for error case)
 }
 EXPORT_SYMBOL_GPL(blk_crypto_update_capabilities);

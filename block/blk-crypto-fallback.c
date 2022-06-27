@@ -553,7 +553,10 @@ static int blk_crypto_fallback_init(void)
 
 	profile->ll_ops = blk_crypto_fallback_ll_ops;
 	profile->max_dun_bytes_supported = BLK_CRYPTO_MAX_IV_SIZE;
+<<<<<<< HEAD   (65aa3a ANDROID: fix typo on microdroid config)
 	profile->key_types_supported = BLK_CRYPTO_KEY_TYPE_STANDARD;
+=======
+>>>>>>> BRANCH (1456ae f2fs: do not count ENOENT for error case)
 
 	/* All blk-crypto modes have a crypto API fallback. */
 	for (i = 0; i < BLK_ENCRYPTION_MODE_MAX; i++)

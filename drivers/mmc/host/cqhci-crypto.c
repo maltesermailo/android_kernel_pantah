@@ -209,8 +209,11 @@ int cqhci_crypto_init(struct cqhci_host *cq_host)
 
 	/* Unfortunately, CQHCI crypto only supports 32 DUN bits. */
 	profile->max_dun_bytes_supported = 4;
+<<<<<<< HEAD   (65aa3a ANDROID: fix typo on microdroid config)
 
 	profile->key_types_supported = BLK_CRYPTO_KEY_TYPE_STANDARD;
+=======
+>>>>>>> BRANCH (1456ae f2fs: do not count ENOENT for error case)
 
 	/*
 	 * Cache all the crypto capabilities and advertise the supported crypto

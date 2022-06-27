@@ -16,7 +16,10 @@
 #include <linux/mmc/pm.h>
 #include <linux/dma-direction.h>
 #include <linux/blk-crypto-profile.h>
+<<<<<<< HEAD   (65aa3a ANDROID: fix typo on microdroid config)
 #include <linux/android_kabi.h>
+=======
+>>>>>>> BRANCH (1456ae f2fs: do not count ENOENT for error case)
 
 struct mmc_ios {
 	unsigned int	clock;			/* clock rate */

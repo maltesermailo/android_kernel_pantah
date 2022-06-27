@@ -458,7 +458,10 @@ struct request_queue {
 
 #ifdef CONFIG_BLK_INLINE_ENCRYPTION
 	struct blk_crypto_profile *crypto_profile;
+<<<<<<< HEAD   (65aa3a ANDROID: fix typo on microdroid config)
 	struct kobject *crypto_kobject;
+=======
+>>>>>>> BRANCH (1456ae f2fs: do not count ENOENT for error case)
 #endif
 
 	unsigned int		rq_timeout;

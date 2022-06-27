@@ -384,10 +384,15 @@ EXPORT_SYMBOL_GPL(blk_crypto_init_key);
 bool blk_crypto_config_supported(struct request_queue *q,
 				 const struct blk_crypto_config *cfg)
 {
+<<<<<<< HEAD   (65aa3a ANDROID: fix typo on microdroid config)
 	if (IS_ENABLED(CONFIG_BLK_INLINE_ENCRYPTION_FALLBACK) &&
 	    cfg->key_type == BLK_CRYPTO_KEY_TYPE_STANDARD)
 		return true;
 	return __blk_crypto_cfg_supported(q->crypto_profile, cfg);
+=======
+	return IS_ENABLED(CONFIG_BLK_INLINE_ENCRYPTION_FALLBACK) ||
+	       __blk_crypto_cfg_supported(q->crypto_profile, cfg);
+>>>>>>> BRANCH (1456ae f2fs: do not count ENOENT for error case)
 }
 
 /**
