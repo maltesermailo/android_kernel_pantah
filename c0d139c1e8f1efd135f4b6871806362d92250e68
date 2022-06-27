@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "412a089b_7a5366df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2022-06-27T15:43:30Z",
+      "side": 1,
+      "message": "https://kernelnewbies.org/FAQ/CodingStyle\n\nNow personally I think this is terrible advice - it\u0027s a tiny optimization, it adds hard to find bugs and requires everyone who reads the code to carefully check this, and I suspect modern compilers have no problem whatsoever optimizing excessive initializations away, but it is the kernel standard, so we have to follow it.\n\nAt a minimum, split this into the actual bug fix, and the rest, so we can get the bug fix non-controversially.\n\nAlso, why didn\u0027t the compiler pick up on the use of the potentially non-initialized variable?",
+      "revId": "c0d139c1e8f1efd135f4b6871806362d92250e68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
