@@ -875,6 +875,9 @@
       <elf-symbol name='devfreq_add_device' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb41c6d2d'/>
       <elf-symbol name='devfreq_add_governor' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3af3aab4'/>
       <elf-symbol name='devfreq_cooling_unregister' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd2ff843d'/>
+      <elf-symbol name='devfreq_event_disable_edev' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6cf2f461'/>
+      <elf-symbol name='devfreq_event_enable_edev' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4b43f3c3'/>
+      <elf-symbol name='devfreq_event_get_edev_by_phandle' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x72bbd84b'/>
       <elf-symbol name='devfreq_event_get_event' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7d7f5e72'/>
       <elf-symbol name='devfreq_recommended_opp' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xde80e7d7'/>
       <elf-symbol name='devfreq_register_opp_notifier' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x276291ca'/>
@@ -942,6 +945,7 @@
       <elf-symbol name='devm_clk_put' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x12a21a9e'/>
       <elf-symbol name='devm_clk_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7f673f7a'/>
       <elf-symbol name='devm_devfreq_add_device' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3553b70b'/>
+      <elf-symbol name='devm_devfreq_event_add_edev' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc42bb0b7'/>
       <elf-symbol name='devm_devfreq_register_opp_notifier' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x17c9e094'/>
       <elf-symbol name='devm_devfreq_remove_device' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5be9ea1a'/>
       <elf-symbol name='devm_extcon_dev_allocate' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6ba05785'/>
@@ -53776,12 +53780,31 @@
       <qualified-type-def type-id='3ea0d50a' const='yes' id='1ca42ff9'/>
       <pointer-type-def type-id='1ca42ff9' size-in-bits='64' id='e9774929'/>
       <pointer-type-def type-id='64705f1a' size-in-bits='64' id='d6184118'/>
+      <pointer-type-def type-id='ef40f18b' size-in-bits='64' id='72742e5b'/>
       <pointer-type-def type-id='112f2691' size-in-bits='64' id='88146159'/>
       <pointer-type-def type-id='cfa1a37d' size-in-bits='64' id='17b93571'/>
       <pointer-type-def type-id='105b52f0' size-in-bits='64' id='ae6a6d9a'/>
+      <function-decl name='devm_devfreq_event_add_edev' mangled-name='devm_devfreq_event_add_edev' filepath='drivers/devfreq/devfreq-event.c' line='395' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='devm_devfreq_event_add_edev'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/devfreq/devfreq-event.c' line='395' column='1'/>
+        <parameter type-id='72742e5b' name='desc' filepath='drivers/devfreq/devfreq-event.c' line='396' column='1'/>
+        <return type-id='88146159'/>
+      </function-decl>
       <function-decl name='devfreq_event_get_event' mangled-name='devfreq_event_get_event' filepath='drivers/devfreq/devfreq-event.c' line='160' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='devfreq_event_get_event'>
         <parameter type-id='88146159' name='edev' filepath='drivers/devfreq/devfreq-event.c' line='160' column='1'/>
         <parameter type-id='d6184118' name='edata' filepath='drivers/devfreq/devfreq-event.c' line='161' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='devfreq_event_get_edev_by_phandle' mangled-name='devfreq_event_get_edev_by_phandle' filepath='drivers/devfreq/devfreq-event.c' line='220' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='devfreq_event_get_edev_by_phandle'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/devfreq/devfreq-event.c' line='220' column='1'/>
+        <parameter type-id='95e97e5e' name='index' filepath='drivers/devfreq/devfreq-event.c' line='221' column='1'/>
+        <return type-id='88146159'/>
+      </function-decl>
+      <function-decl name='devfreq_event_enable_edev' mangled-name='devfreq_event_enable_edev' filepath='drivers/devfreq/devfreq-event.c' line='37' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='devfreq_event_enable_edev'>
+        <parameter type-id='88146159' name='edev' filepath='drivers/devfreq/devfreq-event.c' line='37' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='devfreq_event_disable_edev' mangled-name='devfreq_event_disable_edev' filepath='drivers/devfreq/devfreq-event.c' line='69' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='devfreq_event_disable_edev'>
+        <parameter type-id='88146159' name='edev' filepath='drivers/devfreq/devfreq-event.c' line='69' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-type size-in-bits='64' id='cfa1a37d'>
@@ -53789,8 +53812,8 @@
         <return type-id='95e97e5e'/>
       </function-type>
       <function-type size-in-bits='64' id='105b52f0'>
-        <parameter type-id='88146159' name='edev'/>
-        <parameter type-id='d6184118' name='edata'/>
+        <parameter type-id='88146159'/>
+        <parameter type-id='d6184118'/>
         <return type-id='95e97e5e'/>
       </function-type>
     </abi-instr>
@@ -177793,6 +177816,17 @@
           <var-decl name='accuracy' type-id='19c2251e' visibility='default' filepath='include/sound/pcm.h' line='322' column='1'/>
         </data-member>
       </class-decl>
+      <union-decl name='snd_pcm_sync_id' size-in-bits='128' visibility='default' filepath='include/uapi/sound/asound.h' line='324' column='1' id='85b4e5de'>
+        <data-member access='public'>
+          <var-decl name='id' type-id='92a46553' visibility='default' filepath='include/uapi/sound/asound.h' line='325' column='1'/>
+        </data-member>
+        <data-member access='public'>
+          <var-decl name='id16' type-id='ff13edc1' visibility='default' filepath='include/uapi/sound/asound.h' line='326' column='1'/>
+        </data-member>
+        <data-member access='public'>
+          <var-decl name='id32' type-id='49580a63' visibility='default' filepath='include/uapi/sound/asound.h' line='327' column='1'/>
+        </data-member>
+      </union-decl>
       <class-decl name='snd_pcm_runtime' size-in-bits='6080' is-struct='yes' visibility='default' filepath='include/sound/pcm.h' line='342' column='1' id='bc78c060'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='trigger_master' type-id='06b2cd14' visibility='default' filepath='include/sound/pcm.h' line='344' column='1'/>
@@ -177963,17 +177997,6 @@
           <var-decl name='driver_tstamp' type-id='a9c79a1f' visibility='default' filepath='include/sound/pcm.h' line='421' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='snd_pcm_sync_id' size-in-bits='128' visibility='default' filepath='include/uapi/sound/asound.h' line='324' column='1' id='85b4e5de'>
-        <data-member access='public'>
-          <var-decl name='id' type-id='92a46553' visibility='default' filepath='include/uapi/sound/asound.h' line='325' column='1'/>
-        </data-member>
-        <data-member access='public'>
-          <var-decl name='id16' type-id='ff13edc1' visibility='default' filepath='include/uapi/sound/asound.h' line='326' column='1'/>
-        </data-member>
-        <data-member access='public'>
-          <var-decl name='id32' type-id='49580a63' visibility='default' filepath='include/uapi/sound/asound.h' line='327' column='1'/>
-        </data-member>
-      </union-decl>
       <typedef-decl name='snd_pcm_sframes_t' type-id='bd54fe1a' filepath='include/uapi/sound/asound.h' line='160' column='1' id='721b74e7'/>
       <typedef-decl name='snd_pcm_access_t' type-id='95e97e5e' filepath='include/uapi/sound/asound.h' line='184' column='1' id='6459083c'/>
       <typedef-decl name='snd_pcm_format_t' type-id='95e97e5e' filepath='include/uapi/sound/asound.h' line='192' column='1' id='67fa9bd5'/>
