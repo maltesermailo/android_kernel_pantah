@@ -52,6 +52,24 @@
       "parentUuid": "164e727a_f82dc917",
       "revId": "0578248bedae9a6b7bd4325f06101332c29af962",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ba90462_960c86ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1456182
+      },
+      "writtenOn": "2022-06-30T19:17:26Z",
+      "side": 1,
+      "message": "Sorry it took me a long time to come back to this. I think there\u0027s a bug in this patch when CONFIG_RT_SOFTINT_OPTIMIZATION is not set.\n\nSpecifically this hunk\n\n```\n  -\n  -               wakeup_softirqd();\n          }\n \n  +#ifdef CONFIG_RT_SOFTINT_OPTIMIZATION\n  +       if (pending | deferred)\n  +               wakeup_softirqd(); \n  +#endif\n```\n\nwhere wakeup_softirqd() will never be called if CONFIG_RT_SOFTINT_OPTIMIZATION is not set. Is the ifdef guard actually required here? It must be removed AFAICT to preserve the behavior of the code when this is not set.\n\nI believe LONG_SOFTIRQ_MASK should be defined to 0 when this config option is not set OR compile out softirq_deferred_for_rt() function so that it never clear pending or set deferred.",
+      "parentUuid": "557e625e_5eae165c",
+      "revId": "0578248bedae9a6b7bd4325f06101332c29af962",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
