@@ -53,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00ade585_c223963c",
+        "filename": "include/linux/cgroup-defs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-07-06T23:16:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53dde2c8_7d1ad07b",
+      "revId": "0f9d9e5df242640d1c2933afac48301eb1c76f47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e619916_9133337a",
@@ -72,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4c4f218a_08f6215e",
+        "filename": "kernel/cgroup/cgroup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-07-06T23:16:51Z",
+      "side": 1,
+      "message": "Many of the changes in this patchset would go away if you used the #define above instead of making `init_css_set` a pointer. That would reduce likelihood of conflicts later.",
+      "parentUuid": "1e619916_9133337a",
+      "revId": "0f9d9e5df242640d1c2933afac48301eb1c76f47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "63da5606_fff65897",
         "filename": "kernel/cgroup/cgroup.c",
         "patchSetId": 1
@@ -83,6 +119,24 @@
       "writtenOn": "2022-06-22T18:52:30Z",
       "side": 1,
       "message": "change to\n```\n  ext_cset \u003d kzalloc(sizeof(*ext_cset), GFP_KERNEL);\n  cset \u003d \u0026ext_cset.css_set;\n```",
+      "revId": "0f9d9e5df242640d1c2933afac48301eb1c76f47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37206942_71dd2a5f",
+        "filename": "kernel/cgroup/cgroup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1215,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-07-06T23:16:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63da5606_fff65897",
       "revId": "0f9d9e5df242640d1c2933afac48301eb1c76f47",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -110,6 +164,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76d3456a_f655d57b",
+        "filename": "kernel/cgroup/cgroup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1235,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-07-06T23:16:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7ffe8af_3f78b862",
+      "range": {
+        "startLine": 1234,
+        "startChar": 1,
+        "endLine": 1235,
+        "endChar": 44
+      },
+      "revId": "0f9d9e5df242640d1c2933afac48301eb1c76f47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "466c20af_16ba7c3b",
@@ -123,6 +201,24 @@
       "writtenOn": "2022-06-22T18:52:30Z",
       "side": 1,
       "message": "refactor these loops to get `ext_cset` via container_of() on `cset`) to access the new fields.",
+      "revId": "0f9d9e5df242640d1c2933afac48301eb1c76f47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd7dcca5_bfd0bf58",
+        "filename": "kernel/cgroup/cgroup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2589,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-07-06T23:16:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "466c20af_16ba7c3b",
       "revId": "0f9d9e5df242640d1c2933afac48301eb1c76f47",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -144,6 +240,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21c72086_aceb68bd",
+        "filename": "kernel/cgroup/cgroup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2645,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-07-06T23:16:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5827912_1f4c90e3",
+      "revId": "0f9d9e5df242640d1c2933afac48301eb1c76f47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a187f87_af679243",
@@ -157,6 +271,24 @@
       "writtenOn": "2022-06-22T18:52:30Z",
       "side": 1,
       "message": "same technique for the rest of the access to the new fields.",
+      "revId": "0f9d9e5df242640d1c2933afac48301eb1c76f47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88a61834_2fc5ebbe",
+        "filename": "kernel/cgroup/cgroup.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2680,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-07-06T23:16:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a187f87_af679243",
       "revId": "0f9d9e5df242640d1c2933afac48301eb1c76f47",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
