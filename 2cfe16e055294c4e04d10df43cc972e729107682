@@ -33,6 +33,24 @@
       "message": "KERNEL_MODE_NEON is needed to get acceptable performance with various crypto algorithms on arm32, so it should not be disabled.  The commit message implies that it is broken upstream -- do you have a link to a bug report or anything?",
       "revId": "2cfe16e055294c4e04d10df43cc972e729107682",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2aa3495_6673a040",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-07-09T08:11:20Z",
+      "side": 1,
+      "message": "The \"broken\" issue is that the arm build does not work properly with clang for the xor-neon.c file, and no one seems to care.  We have a different patch that fixes this now, so all should be fine and I\u0027ll just abandon this commit.",
+      "parentUuid": "990a8ff6_0455a5f9",
+      "revId": "2cfe16e055294c4e04d10df43cc972e729107682",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
