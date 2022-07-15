@@ -22,6 +22,30 @@
       },
       "revId": "99db8b442794756147f25a09e3a9318b6693736b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdf9d4dc_137ace79",
+        "filename": "net/xfrm/xfrm_interface.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1297255
+      },
+      "writtenOn": "2022-07-15T01:46:31Z",
+      "side": 1,
+      "message": "Chatted offline.\n\nIn the base code, the policy check only happens when the network namespaces are different. Seems this block of code is never executed because Android does not create a separate namespaces, and xfrm_policy_check is only triggered on the inner ESP packet from somewhere else with the policy check skipped on outer ESP.",
+      "parentUuid": "aad81582_25863790",
+      "range": {
+        "startLine": 237,
+        "startChar": 1,
+        "endLine": 237,
+        "endChar": 5
+      },
+      "revId": "99db8b442794756147f25a09e3a9318b6693736b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
