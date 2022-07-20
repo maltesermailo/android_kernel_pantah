@@ -46,6 +46,30 @@
       },
       "revId": "27393ec2b2a4d29ba30952f7187d904e26c9570d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c493236_970e5b5d",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4793,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-20T18:31:58Z",
+      "side": 1,
+      "message": "I would suggest to have two hooks: `trace_android_vh_alloc_pages_slowpath_start` and `trace_android_vh_alloc_pages_slowpath_end` and you can set the start parameter in the first hook and pass it to the second hook.",
+      "parentUuid": "9b98d5bc_b548a531",
+      "range": {
+        "startLine": 4793,
+        "startChar": 0,
+        "endLine": 4793,
+        "endChar": 31
+      },
+      "revId": "27393ec2b2a4d29ba30952f7187d904e26c9570d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
