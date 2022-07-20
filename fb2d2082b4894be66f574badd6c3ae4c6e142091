@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "812792a0_8fa9660e",
+        "filename": "net/xfrm/xfrm_interface.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1221725
+      },
+      "writtenOn": "2022-07-20T23:43:20Z",
+      "side": 1,
+      "message": "Yeah, I believe this is the safest path; it\u0027s the central case where all packets go through, whereas trying to hit each of the protocols that may result in a packet going to an XFRM-I requires hunting down each path. In some cases that does create a redundant check, thus the need to be idiomatic if it\u0027s called twice at the same tunnel level.\n\nWith regards to performance impact, there is potential for minor security implications, since we\u0027ll have to look up the policies again, but IIRC, we\u0027re already holding the relevant locks, so meh?",
+      "parentUuid": "5e31ed78_8cafaeaa",
+      "revId": "fb2d2082b4894be66f574badd6c3ae4c6e142091",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8c610dd2_78b02b08",
         "filename": "net/xfrm/xfrm_interface.c",
         "patchSetId": 4
