@@ -57,6 +57,30 @@
       },
       "revId": "ab7cc39cf63777b25f303fcbb9a45cb7d496fff4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0324ecd6_9f72de0a",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5037,
+      "author": {
+        "id": 1868565
+      },
+      "writtenOn": "2022-07-21T22:29:28Z",
+      "side": 1,
+      "message": "vh_data dedicate it\u0027s a vendor_hook data.\n\nwhen trace_android_vh_alloc_pages_slowpath_end. we can calc by sched_clock() - *vh_data or jiffies - *vh_data\n\nif pass no reference here, we need set a variable in task_struct. is there anything wrong ?",
+      "parentUuid": "36c94edf_b7a96fef",
+      "range": {
+        "startLine": 5037,
+        "startChar": 60,
+        "endLine": 5037,
+        "endChar": 68
+      },
+      "revId": "ab7cc39cf63777b25f303fcbb9a45cb7d496fff4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
