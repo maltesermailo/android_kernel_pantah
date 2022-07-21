@@ -16,6 +16,47 @@
       "message": "what is vh_data being used here for?",
       "revId": "ab7cc39cf63777b25f303fcbb9a45cb7d496fff4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "643a07bb_ef0d5377",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-21T19:16:16Z",
+      "side": 1,
+      "message": "My guess is that it is used to store the current time in trace_android_vh_alloc_pages_slowpath_begin and to calculate the duration in trace_android_vh_alloc_pages_slowpath_end.",
+      "parentUuid": "6654961b_a0942f6b",
+      "revId": "ab7cc39cf63777b25f303fcbb9a45cb7d496fff4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36c94edf_b7a96fef",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5037,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-07-21T19:16:16Z",
+      "side": 1,
+      "message": "This parameter probably does not need to be passed by reference here?",
+      "range": {
+        "startLine": 5037,
+        "startChar": 60,
+        "endLine": 5037,
+        "endChar": 68
+      },
+      "revId": "ab7cc39cf63777b25f303fcbb9a45cb7d496fff4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
