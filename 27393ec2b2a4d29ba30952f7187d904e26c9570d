@@ -70,6 +70,30 @@
       },
       "revId": "27393ec2b2a4d29ba30952f7187d904e26c9570d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fddbd430_443fcf6f",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4793,
+      "author": {
+        "id": 1868565
+      },
+      "writtenOn": "2022-07-21T01:26:59Z",
+      "side": 1,
+      "message": "I thought I should keep the original vendor hook.\nActually trace_android_vh_alloc_pages_slowpath is ambiguous. rename the trace_android_vh_alloc_pages_slowpath to trace_android_vh_alloc_pages_slowpath_end  that looks great. \nbut does we really need trace_android_vh_alloc_pages_slowpath_start ? that will register 2 hooks here.",
+      "parentUuid": "7c493236_970e5b5d",
+      "range": {
+        "startLine": 4793,
+        "startChar": 0,
+        "endLine": 4793,
+        "endChar": 31
+      },
+      "revId": "27393ec2b2a4d29ba30952f7187d904e26c9570d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
