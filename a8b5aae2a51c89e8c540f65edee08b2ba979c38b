@@ -16,6 +16,24 @@
       "message": ".xml file change is too big for just 1 symbol added.  Please regenerate this with `LTO\u003dfull`",
       "revId": "a8b5aae2a51c89e8c540f65edee08b2ba979c38b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7004e2b4_34a63836",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2022-07-25T10:38:03Z",
+      "side": 1,
+      "message": "If `LTO\u003dfull` wasn\u0027t done before and now improves things, that\u0027s great.\n\nHowever, I believe this diff is within expectations. Unfortunately, an anonymous union, the one at `drivers/iommu/dma-iommu.c:43`, got added resulting in ~1/2 of all anonymous unions getting renumbered, affecting that many definitions and references.\n\nThis is now the subject of b/239910948.",
+      "parentUuid": "f18715ec_c25100bf",
+      "revId": "a8b5aae2a51c89e8c540f65edee08b2ba979c38b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
