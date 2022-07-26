@@ -16,6 +16,24 @@
       "message": "soc/gs/drivers/usb/typec/tcpm/google/max77759_contaminant.c:459:13: error: a function declaration without a prototype is deprecated in all versions of C and is not supported in C2x [-Werror,-Wdeprecated-non-prototype]\nstatic bool is_cc_open(cc_status)\n            ^\n            \nSo it sounds like we need to fix this downstream in pixel first.",
       "revId": "a5c877c2c0736811d644e71611613e83060d4c8e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bda57054_a8280d60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2022-07-26T22:01:08Z",
+      "side": 1,
+      "message": "```\ndiff --git a/drivers/usb/typec/tcpm/max77759_contaminant.c b/drivers/usb/typec/tcpm/max77759_contaminant.c\nindex 0b75a65d0314..6b062e60732f 100644\n--- a/drivers/usb/typec/tcpm/max77759_contaminant.c\n+++ b/drivers/usb/typec/tcpm/max77759_contaminant.c\n@@ -455,7 +455,7 @@ static int maxq_detect_contaminant(struct max77759_contaminant *contaminant, u8\n        return ret;\n }\n \n-static bool is_cc_open(cc_status)\n+static bool is_cc_open(u8 cc_status)\n {\n        return status_check(cc_status, TCPC_CC_STATUS_CC1_MASK \u003c\u003c TCPC_CC_STATUS_CC1_SHIFT,\n                            TCPC_CC_STATE_SRC_OPEN) \u0026\u0026 status_check(cc_status,\n```",
+      "parentUuid": "9879b1af_43f1b34a",
+      "revId": "a5c877c2c0736811d644e71611613e83060d4c8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
