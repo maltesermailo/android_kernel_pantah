@@ -663,4 +663,9 @@ struct migration_target_control {
 	gfp_t gfp_mask;
 };
 
+#define PG_lookaround_ref (__NR_PAGEFLAGS + 1)
+#define SetPageLookAroundRef(page) set_bit(PG_lookaround_ref, &(page)->flags)
+#define ClearPageLookAroundRef(page) clear_bit(PG_lookaround_ref, &(page)->flags)
+#define TestClearPageLookAroundRef(page) test_and_clear_bit(PG_lookaround_ref, &(page)->flags)
+
 #endif	/* __MM_INTERNAL_H */
