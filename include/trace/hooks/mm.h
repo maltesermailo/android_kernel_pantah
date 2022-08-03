@@ -20,6 +20,7 @@
 
 #include <linux/mm.h>
 #include <linux/oom.h>
+#include <linux/rmap.h>
 #include <linux/tracepoint.h>
 #include <trace/hooks/vendor_hooks.h>
 
@@ -236,6 +237,12 @@ DECLARE_HOOK(android_vh_set_shmem_page_flag,
 DECLARE_HOOK(android_vh_remove_vmalloc_stack,
 	TP_PROTO(struct vm_struct *vm),
 	TP_ARGS(vm));
+DECLARE_HOOK(android_vh_look_around,
+	TP_PROTO(struct page_vma_mapped_walk *pvmw, struct page *page, struct vm_area_struct *vma, bool *skip),
+	TP_ARGS(pvmw, page, vma, skip));
+DECLARE_HOOK(android_vh_test_clear_look_around_ref,
+	TP_PROTO(struct page *page, bool *skip),
+	TP_ARGS(page, skip));
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_MM_H */
