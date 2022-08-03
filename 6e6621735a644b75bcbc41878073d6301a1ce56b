@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39b0f5d1_fac24df9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-08-03T18:03:17Z",
+      "side": 1,
+      "message": "Could you add some more detail as to why these hooks are needed? Its not clear what you mean by protecting the locking process.",
+      "revId": "6e6621735a644b75bcbc41878073d6301a1ce56b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "998e7b36_310460ed",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-08-03T18:03:17Z",
+      "side": 1,
+      "message": "Some basic documentation on how these hooks interact would be helpful.",
+      "revId": "6e6621735a644b75bcbc41878073d6301a1ce56b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62ef735a_73ca339f",
+        "filename": "include/linux/percpu-rwsem.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-08-03T18:03:17Z",
+      "side": 1,
+      "message": "Why are you using this extra function instead of trace_android_vh_... version?",
+      "revId": "6e6621735a644b75bcbc41878073d6301a1ce56b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9783901_03985e60",
+        "filename": "include/trace/hooks/dtask.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-08-03T18:03:17Z",
+      "side": 1,
+      "message": "the settime unit is in jiffies, correct? it might be clearer to name it settime_jiffies.",
+      "revId": "6e6621735a644b75bcbc41878073d6301a1ce56b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c3f6f6c_4820e1d8",
+        "filename": "include/trace/hooks/dtask.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-08-03T18:03:17Z",
+      "side": 1,
+      "message": "Maybe use an enum for the lock_type so its clear which values map to which type.",
+      "revId": "6e6621735a644b75bcbc41878073d6301a1ce56b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a2e872b_83108c38",
+        "filename": "kernel/fork.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2548,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-08-03T18:03:17Z",
+      "side": 1,
+      "message": "The usage here is a bit confusing. I\u0027m assuming this hook is to initialize state on the vendor-hook implementation? Its not obvious why that\u0027s needed when there is already the trace_sched_process_fork() hook. Could you clarify?",
+      "revId": "6e6621735a644b75bcbc41878073d6301a1ce56b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b90626eb_f8b9f211",
+        "filename": "kernel/locking/mutex.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 753,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-08-03T18:03:17Z",
+      "side": 1,
+      "message": "It seems here passing the starttime\u003d0 is clearing the data (or the unlock step).\n\nI\u0027m guessing this means state is managed on the vendorhook side? Though as the lock isn\u0027t passed in, what happens if lock/unlock ordering of multiple locks are not trivially nested? lock(a); lock(b); unlock(a); unlock(b) ?",
+      "revId": "6e6621735a644b75bcbc41878073d6301a1ce56b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a072fb0a_1c2bf539",
+        "filename": "kernel/locking/percpu-rwsem.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-08-03T18:03:17Z",
+      "side": 1,
+      "message": "Why is this function/export needed?",
+      "revId": "6e6621735a644b75bcbc41878073d6301a1ce56b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
