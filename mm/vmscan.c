@@ -1020,6 +1020,19 @@ static enum page_references page_check_references(struct page *page,
 {
 	int referenced_ptes, referenced_page;
 	unsigned long vm_flags;
+	bool lookaround_ref = false, success = false;
+
+	trace_android_vh_check_page_look_around_ref(page, &lookaround_ref, &success);
+	if (success) {
+		if (lookaround_ref) {
+			if (PageReferenced(page))
+				return PAGEREF_ACTIVATE;
+			else {
+				SetPageReferenced(page);
+				return PAGEREF_KEEP;
+			}
+		}
+	}
 
 	referenced_ptes = page_referenced(page, 1, sc->target_mem_cgroup,
 					  &vm_flags);
