@@ -2177,7 +2177,10 @@ static int finalize_hyp_mode(void)
 	 * at, which would end badly once inaccessible.
 	 */
 	kmemleak_free_part(__hyp_bss_start, __hyp_bss_end - __hyp_bss_start);
+<<<<<<< HEAD   (6d7ccc Merge 5.15.50 into android13-5.15-lts)
 	kmemleak_free_part(__hyp_data_start, __hyp_data_end - __hyp_data_start);
+=======
+>>>>>>> BRANCH (372384 Linux 5.15.51)
 	kmemleak_free_part(__va(hyp_mem_base), hyp_mem_size);
 	return pkvm_drop_host_privileges();
 }
