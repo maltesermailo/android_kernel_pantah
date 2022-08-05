@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fead1dba_ee8fc02e",
+        "filename": "kernel/locking/percpu-rwsem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-08-05T15:25:57Z",
+      "side": 1,
+      "message": "Because if I include \u003ctrace/hooks/dtask.h\u003e in include/linux/percpu-rwsem.h, it will build err.",
+      "parentUuid": "b3450100_9a73ebe7",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 1
+      },
+      "revId": "7f83400e5425f8c5fbad6ca06a63dbf8afc9de65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30ad51ec_f27a98a7",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-08-05T13:31:47Z",
       "side": 1,
       "message": "This doesn\u0027t seem to add any value compared to trace_android_rvh_check_preempt_tick(), why is it needed?\n\nAlso, I\u0027m always concerned with these hooks to mess with the preemption rules. Aren\u0027t there locking patterns that could break fairness? What if a task has a locking pattern as follows:\n\nlock(a)\nlock(b)\nunlock(a)\nlock(a)\nunlock(b)\nlock(b)\nunlock(a)\nlock(a)\nunlock(b)\nlock(b)\n...\n\n\nIn this case there is always a lock that has been taken recently, so the task never gets preempted?",
+      "range": {
+        "startLine": 4431,
+        "startChar": 1,
+        "endLine": 4433,
+        "endChar": 9
+      },
+      "revId": "7f83400e5425f8c5fbad6ca06a63dbf8afc9de65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec834b50_13e1c3da",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4433,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-08-05T15:25:57Z",
+      "side": 1,
+      "message": "1.This doesn\u0027t seem to add any value compared to trace_android_rvh_check_preempt_tick(), why is it needed?\n------------------------------\nwe will compare tsk-\u003elock_start_time and now to judge clear tsk-\u003elock_start_time(cancle to protect the process in wakeup_preeempt);\n\n2.In this case there is always a lock that has been taken recently, so the task never gets preempted?\n----------------------------\nNo, we only record the last lock-hold-time, and clear it in any unlock.\n\nlock(a)     record lock_strat_time\nlock(b)     update lock_strat_time\nunlock(a)   clear lock_strat_time\nlock(a)     record lock_strat_time\nunlock(b)   clear lock_strat_time\n\nonly lock_strat_time \u003e 0, the process can be protected from being preempted in wakeup_preempt.\nMeanwhile, lock_start_time will be clear in check_preempt_tick()-\u003etrace_android_vh_locktask_tick_resched().",
+      "parentUuid": "30ad51ec_f27a98a7",
       "range": {
         "startLine": 4431,
         "startChar": 1,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f87497c2_00561d77",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7086,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-08-05T15:25:57Z",
+      "side": 1,
+      "message": "ALL right, done.",
+      "parentUuid": "fd24d56a_b8d4671c",
+      "range": {
+        "startLine": 7086,
+        "startChar": 1,
+        "endLine": 7086,
+        "endChar": 27
+      },
+      "revId": "7f83400e5425f8c5fbad6ca06a63dbf8afc9de65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f821305a_eb079c7c",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-08-05T13:31:47Z",
       "side": 1,
       "message": "There is a hook below, why not use it? This one looks like it\u0027s way too early -- I\u0027m worried this could violate the contract with userspace that e.g. SCHED_IDLE task are _always_ preempted by !SCHED_IDLE tasks, etc.",
+      "range": {
+        "startLine": 7090,
+        "startChar": 1,
+        "endLine": 7090,
+        "endChar": 59
+      },
+      "revId": "7f83400e5425f8c5fbad6ca06a63dbf8afc9de65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cb89ae6_a4d60089",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7090,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-08-05T15:25:57Z",
+      "side": 1,
+      "message": "Hi sir:\n\nDo you mean trace_android_rvh_check_preempt_wakeup?\n\nWe must clear the lock_start_time of tsk if the process hold the lock for a \"long\" time so we must try us best early to call hooks to clear it, which check_preempt_wakeup return since some other reasons.",
+      "parentUuid": "f821305a_eb079c7c",
       "range": {
         "startLine": 7090,
         "startChar": 1,
