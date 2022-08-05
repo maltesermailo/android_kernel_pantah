@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3450100_9a73ebe7",
+        "filename": "kernel/locking/percpu-rwsem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-08-05T13:31:47Z",
+      "side": 1,
+      "message": "Why is this needed?",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 1
+      },
+      "revId": "7f83400e5425f8c5fbad6ca06a63dbf8afc9de65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30ad51ec_f27a98a7",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4433,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-08-05T13:31:47Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem to add any value compared to trace_android_rvh_check_preempt_tick(), why is it needed?\n\nAlso, I\u0027m always concerned with these hooks to mess with the preemption rules. Aren\u0027t there locking patterns that could break fairness? What if a task has a locking pattern as follows:\n\nlock(a)\nlock(b)\nunlock(a)\nlock(a)\nunlock(b)\nlock(b)\nunlock(a)\nlock(a)\nunlock(b)\nlock(b)\n...\n\n\nIn this case there is always a lock that has been taken recently, so the task never gets preempted?",
+      "range": {
+        "startLine": 4431,
+        "startChar": 1,
+        "endLine": 4433,
+        "endChar": 9
+      },
+      "revId": "7f83400e5425f8c5fbad6ca06a63dbf8afc9de65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd24d56a_b8d4671c",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7086,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-08-05T13:31:47Z",
+      "side": 1,
+      "message": "why not use one of the existing variables above?",
+      "range": {
+        "startLine": 7086,
+        "startChar": 1,
+        "endLine": 7086,
+        "endChar": 27
+      },
+      "revId": "7f83400e5425f8c5fbad6ca06a63dbf8afc9de65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f821305a_eb079c7c",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7090,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-08-05T13:31:47Z",
+      "side": 1,
+      "message": "There is a hook below, why not use it? This one looks like it\u0027s way too early -- I\u0027m worried this could violate the contract with userspace that e.g. SCHED_IDLE task are _always_ preempted by !SCHED_IDLE tasks, etc.",
+      "range": {
+        "startLine": 7090,
+        "startChar": 1,
+        "endLine": 7090,
+        "endChar": 59
+      },
+      "revId": "7f83400e5425f8c5fbad6ca06a63dbf8afc9de65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
