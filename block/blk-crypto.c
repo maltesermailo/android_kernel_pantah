@@ -384,10 +384,15 @@ EXPORT_SYMBOL_GPL(blk_crypto_init_key);
 bool blk_crypto_config_supported(struct request_queue *q,
 				 const struct blk_crypto_config *cfg)
 {
+<<<<<<< HEAD   (e56ab9 ANDROID: GKI: db845c: Update symbols list and ABI)
 	if (IS_ENABLED(CONFIG_BLK_INLINE_ENCRYPTION_FALLBACK) &&
 	    cfg->key_type == BLK_CRYPTO_KEY_TYPE_STANDARD)
 		return true;
 	return __blk_crypto_cfg_supported(q->crypto_profile, cfg);
+=======
+	return IS_ENABLED(CONFIG_BLK_INLINE_ENCRYPTION_FALLBACK) ||
+	       __blk_crypto_cfg_supported(q->crypto_profile, cfg);
+>>>>>>> BRANCH (16df8a f2fs: use onstack pages instead of pvec)
 }
 
 /**

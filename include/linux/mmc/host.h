@@ -16,9 +16,12 @@
 #include <linux/mmc/pm.h>
 #include <linux/dma-direction.h>
 #include <linux/blk-crypto-profile.h>
+<<<<<<< HEAD   (e56ab9 ANDROID: GKI: db845c: Update symbols list and ABI)
 #include <linux/android_kabi.h>
 
 #include <linux/android_vendor.h>
+=======
+>>>>>>> BRANCH (16df8a f2fs: use onstack pages instead of pvec)
 
 struct mmc_ios {
 	unsigned int	clock;			/* clock rate */

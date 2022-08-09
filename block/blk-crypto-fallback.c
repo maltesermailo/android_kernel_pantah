@@ -553,7 +553,10 @@ static int blk_crypto_fallback_init(void)
 
 	profile->ll_ops = blk_crypto_fallback_ll_ops;
 	profile->max_dun_bytes_supported = BLK_CRYPTO_MAX_IV_SIZE;
+<<<<<<< HEAD   (e56ab9 ANDROID: GKI: db845c: Update symbols list and ABI)
 	profile->key_types_supported = BLK_CRYPTO_KEY_TYPE_STANDARD;
+=======
+>>>>>>> BRANCH (16df8a f2fs: use onstack pages instead of pvec)
 
 	/* All blk-crypto modes have a crypto API fallback. */
 	for (i = 0; i < BLK_ENCRYPTION_MODE_MAX; i++)

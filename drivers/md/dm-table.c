@@ -1237,6 +1237,7 @@ static int dm_keyslot_evict(struct blk_crypto_profile *profile,
 	return args.err;
 }
 
+<<<<<<< HEAD   (e56ab9 ANDROID: GKI: db845c: Update symbols list and ABI)
 struct dm_derive_sw_secret_args {
 	const u8 *wrapped_key;
 	unsigned int wrapped_key_size;
@@ -1247,10 +1248,22 @@ struct dm_derive_sw_secret_args {
 static int dm_derive_sw_secret_callback(struct dm_target *ti,
 					struct dm_dev *dev, sector_t start,
 					sector_t len, void *data)
+=======
+static int
+device_intersect_crypto_capabilities(struct dm_target *ti, struct dm_dev *dev,
+				     sector_t start, sector_t len, void *data)
+>>>>>>> BRANCH (16df8a f2fs: use onstack pages instead of pvec)
 {
+<<<<<<< HEAD   (e56ab9 ANDROID: GKI: db845c: Update symbols list and ABI)
 	struct dm_derive_sw_secret_args *args = data;
 	struct request_queue *q = bdev_get_queue(dev->bdev);
+=======
+	struct blk_crypto_profile *parent = data;
+	struct blk_crypto_profile *child =
+		bdev_get_queue(dev->bdev)->crypto_profile;
+>>>>>>> BRANCH (16df8a f2fs: use onstack pages instead of pvec)
 
+<<<<<<< HEAD   (e56ab9 ANDROID: GKI: db845c: Update symbols list and ABI)
 	if (!args->err)
 		return 0;
 
@@ -1259,9 +1272,13 @@ static int dm_derive_sw_secret_callback(struct dm_target *ti,
 						args->wrapped_key_size,
 						args->secret);
 	/* Try another device in case this fails. */
+=======
+	blk_crypto_intersect_capabilities(parent, child);
+>>>>>>> BRANCH (16df8a f2fs: use onstack pages instead of pvec)
 	return 0;
 }
 
+<<<<<<< HEAD   (e56ab9 ANDROID: GKI: db845c: Update symbols list and ABI)
 /*
  * Retrieve the sw_secret from the underlying device.  Given that only one
  * sw_secret can exist for a particular wrapped key, retrieve it only from the
@@ -1271,7 +1288,11 @@ static int dm_derive_sw_secret(struct blk_crypto_profile *profile,
 			       const u8 *wrapped_key,
 			       unsigned int wrapped_key_size,
 			       u8 secret[BLK_CRYPTO_SW_SECRET_SIZE])
+=======
+void dm_destroy_crypto_profile(struct blk_crypto_profile *profile)
+>>>>>>> BRANCH (16df8a f2fs: use onstack pages instead of pvec)
 {
+<<<<<<< HEAD   (e56ab9 ANDROID: GKI: db845c: Update symbols list and ABI)
 	struct mapped_device *md =
 		container_of(profile, struct dm_crypto_profile, profile)->md;
 	struct dm_derive_sw_secret_args args = {
@@ -1284,7 +1305,13 @@ static int dm_derive_sw_secret(struct blk_crypto_profile *profile,
 	int srcu_idx;
 	int i;
 	struct dm_target *ti;
+=======
+	struct dm_crypto_profile *dmcp = container_of(profile,
+						      struct dm_crypto_profile,
+						      profile);
+>>>>>>> BRANCH (16df8a f2fs: use onstack pages instead of pvec)
 
+<<<<<<< HEAD   (e56ab9 ANDROID: GKI: db845c: Update symbols list and ABI)
 	t = dm_get_live_table(md, &srcu_idx);
 	if (!t)
 		return -EOPNOTSUPP;
@@ -1299,12 +1326,24 @@ static int dm_derive_sw_secret(struct blk_crypto_profile *profile,
 	}
 	dm_put_live_table(md, srcu_idx);
 	return args.err;
+=======
+	if (!profile)
+		return;
+
+	blk_crypto_profile_destroy(profile);
+	kfree(dmcp);
+>>>>>>> BRANCH (16df8a f2fs: use onstack pages instead of pvec)
 }
 
+<<<<<<< HEAD   (e56ab9 ANDROID: GKI: db845c: Update symbols list and ABI)
 static int
 device_intersect_crypto_capabilities(struct dm_target *ti, struct dm_dev *dev,
 				     sector_t start, sector_t len, void *data)
+=======
+static void dm_table_destroy_crypto_profile(struct dm_table *t)
+>>>>>>> BRANCH (16df8a f2fs: use onstack pages instead of pvec)
 {
+<<<<<<< HEAD   (e56ab9 ANDROID: GKI: db845c: Update symbols list and ABI)
 	struct blk_crypto_profile *parent = data;
 	struct blk_crypto_profile *child =
 		bdev_get_queue(dev->bdev)->crypto_profile;
@@ -1328,6 +1367,8 @@ void dm_destroy_crypto_profile(struct blk_crypto_profile *profile)
 
 static void dm_table_destroy_crypto_profile(struct dm_table *t)
 {
+=======
+>>>>>>> BRANCH (16df8a f2fs: use onstack pages instead of pvec)
 	dm_destroy_crypto_profile(t->crypto_profile);
 	t->crypto_profile = NULL;
 }
@@ -1357,11 +1398,17 @@ static int dm_table_construct_crypto_profile(struct dm_table *t)
 	profile = &dmcp->profile;
 	blk_crypto_profile_init(profile, 0);
 	profile->ll_ops.keyslot_evict = dm_keyslot_evict;
+<<<<<<< HEAD   (e56ab9 ANDROID: GKI: db845c: Update symbols list and ABI)
 	profile->ll_ops.derive_sw_secret = dm_derive_sw_secret;
 	profile->max_dun_bytes_supported = UINT_MAX;
 	memset(profile->modes_supported, 0xFF,
 	       sizeof(profile->modes_supported));
 	profile->key_types_supported = ~0;
+=======
+	profile->max_dun_bytes_supported = UINT_MAX;
+	memset(profile->modes_supported, 0xFF,
+	       sizeof(profile->modes_supported));
+>>>>>>> BRANCH (16df8a f2fs: use onstack pages instead of pvec)
 
 	for (i = 0; i < dm_table_get_num_targets(t); i++) {
 		ti = dm_table_get_target(t, i);

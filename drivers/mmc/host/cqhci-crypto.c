@@ -209,8 +209,11 @@ int cqhci_crypto_init(struct cqhci_host *cq_host)
 
 	/* Unfortunately, CQHCI crypto only supports 32 DUN bits. */
 	profile->max_dun_bytes_supported = 4;
+<<<<<<< HEAD   (e56ab9 ANDROID: GKI: db845c: Update symbols list and ABI)
 
 	profile->key_types_supported = BLK_CRYPTO_KEY_TYPE_STANDARD;
+=======
+>>>>>>> BRANCH (16df8a f2fs: use onstack pages instead of pvec)
 
 	/*
 	 * Cache all the crypto capabilities and advertise the supported crypto

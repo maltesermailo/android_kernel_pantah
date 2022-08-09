@@ -461,7 +461,10 @@ struct request_queue {
 
 #ifdef CONFIG_BLK_INLINE_ENCRYPTION
 	struct blk_crypto_profile *crypto_profile;
+<<<<<<< HEAD   (e56ab9 ANDROID: GKI: db845c: Update symbols list and ABI)
 	struct kobject *crypto_kobject;
+=======
+>>>>>>> BRANCH (16df8a f2fs: use onstack pages instead of pvec)
 #endif
 
 	unsigned int		rq_timeout;
