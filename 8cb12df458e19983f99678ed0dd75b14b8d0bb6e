@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be868e32_d8357742",
+        "filename": "mm/slab_common.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-08-09T01:19:18Z",
+      "side": 1,
+      "message": "shouldn\u0027t `len` be equal to `(end - iter)`? IOW:\n```\nif ((len \u003d\u003d end - iter) \u0026\u0026 !strncmp(name, iter, len))\n    return true;\nif (!*end)\n    break;\niter \u003d end + 1;\n```\n?",
+      "range": {
+        "startLine": 919,
+        "startChar": 2,
+        "endLine": 919,
+        "endChar": 44
+      },
+      "revId": "8cb12df458e19983f99678ed0dd75b14b8d0bb6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4218e45f_f77b5a48",
+        "filename": "mm/slab_common.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 961,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-08-09T01:19:18Z",
+      "side": 1,
+      "message": "aligned_idx ?",
+      "range": {
+        "startLine": 961,
+        "startChar": 22,
+        "endLine": 961,
+        "endChar": 25
+      },
+      "revId": "8cb12df458e19983f99678ed0dd75b14b8d0bb6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
