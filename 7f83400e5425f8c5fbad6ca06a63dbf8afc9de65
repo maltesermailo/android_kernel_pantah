@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b827d827_5ba27a96",
+        "filename": "kernel/locking/percpu-rwsem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-08-09T12:19:21Z",
+      "side": 1,
+      "message": "\u003e Hi Sir:\n\u003e \n\u003e if I include \u003ctrace/hooks/dtask.h\u003e in include/linux/percpu-rwsem.h, it will build err.\n\u003e I think google should help to fix the build err?\n\nI can try to help, but I\u0027ll need more details than \"it will build err\". What is the error? What have you tried to fix it? Isn\u0027t the ifdefery at the top of dtask.h enough? If not, why would you add it at all (I thought this was meant to allow inclusion from header files, and it looks like percpu-rwsem.h is the only such header).",
+      "parentUuid": "24036c87_df793694",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 1
+      },
+      "revId": "7f83400e5425f8c5fbad6ca06a63dbf8afc9de65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "30ad51ec_f27a98a7",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 2
@@ -181,6 +205,30 @@
       "side": 1,
       "message": "\u003e we will compare tsk-\u003elock_start_time and now to judge clear tsk-\u003elock_start_time(cancle to protect the process in wakeup_preeempt);\n\nAnd is there any reason why that can\u0027t be done by attaching to trace_android_rvh_check_preempt_tick()? It takes more parameters than needed, but I don\u0027t see how that can be a problem.\n\n\u003e No, we only record the last lock-hold-time, and clear it in any unlock.\n\nRight, so this is not as bad, but still a task that keeps taking and releasing a mutex might be in a position to cause fairness issues :(",
       "parentUuid": "b4ac9752_7a9143de",
+      "range": {
+        "startLine": 4431,
+        "startChar": 1,
+        "endLine": 4433,
+        "endChar": 9
+      },
+      "revId": "7f83400e5425f8c5fbad6ca06a63dbf8afc9de65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "115f6c4d_a925b035",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4433,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-08-09T12:19:21Z",
+      "side": 1,
+      "message": "Marking this unresolved (didn\u0027t mean to mark it resolve originally).",
+      "parentUuid": "3a9ff1b6_4e9feca9",
       "range": {
         "startLine": 4431,
         "startChar": 1,
