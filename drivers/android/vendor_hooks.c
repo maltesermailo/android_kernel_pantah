@@ -137,3 +137,44 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ep_create_wakeup_source);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_timerfd_create);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_freeze_todo);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_freeze_todo_unfrozen);
+<<<<<<< HEAD   (5ba878e6b0187011b5635a5cecf46580b0e22263 ANDROID: Re-apply vendor hooks for information of blocked ta)
+||||||| BASE   (0923bde922b4f6146150bac0d5b98827f9d4984b ANDROID: vendor_hooks: add hook to optimize the madvise proc)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_die_kernel_fault);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_sp_pc_abort);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_dma_buf_stats_teardown);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dpm_wait_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dpm_wait_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sync_irq_wait_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sync_irq_wait_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_flush_wq_wait_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_flush_wq_wait_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_flush_work_wait_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_flush_work_wait_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_enable_thermal_genl_check);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_entry);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_unref_folios_to_pcp_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_fail);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_vmalloc_node_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_vfree_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_async_psi_bypass);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_die_kernel_fault);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_sp_pc_abort);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_dma_buf_stats_teardown);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dpm_wait_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dpm_wait_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sync_irq_wait_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sync_irq_wait_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_flush_wq_wait_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_flush_wq_wait_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_flush_work_wait_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_flush_work_wait_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_enable_thermal_genl_check);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_entry);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_unref_folios_to_pcp_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_fail);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_vmalloc_node_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_vfree_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_async_psi_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_retry);
+>>>>>>> CHANGE (5fa4c0d2c0fc53593c70acb5876e2208ea0eba24 ANDROID: mm/cma: add vendor_hook in cma_alloc for retries)
