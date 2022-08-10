@@ -22,6 +22,30 @@
       },
       "revId": "2fb369ec7c9c450e4e0ec5bbc4ac463f1c0a1cad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e961d340_a6941184",
+        "filename": "include/linux/slab.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2022-08-10T17:00:41Z",
+      "side": 1,
+      "message": "This file is included by modules though, and they need to reference the __kmalloc_min_size and __kmalloc_shift_low variables because __kmalloc_index() is inlined into their code, so wouldn\u0027t we have to export them? I believe it\u0027s the same case for the kmalloc_caches 2D array, and that\u0027s why it is exported even though drivers shouldn\u0027t modify it.\n\nOne thing we can do to mitigate writes to these variables is by adding the __ro_after_init annotation. That\u0027ll prevent them from getting written to after the kernel\u0027s init phase has completed. What do you think?",
+      "parentUuid": "97bbd36c_b9b5c3be",
+      "range": {
+        "startLine": 398,
+        "startChar": 6,
+        "endLine": 398,
+        "endChar": 51
+      },
+      "revId": "2fb369ec7c9c450e4e0ec5bbc4ac463f1c0a1cad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
