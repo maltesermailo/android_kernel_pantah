@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8edbe954_f466135f",
+        "filename": "include/trace/hooks/dtask.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-08-11T10:07:07Z",
+      "side": 1,
+      "message": "I don\u0027t think dtask.h is being included from a header, so please remove.",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 38
+      },
+      "revId": "011fd8bf89de60038ac413bbe40a1670bb692c6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcffbf26_48a60036",
+        "filename": "kernel/fork.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-08-11T10:07:07Z",
+      "side": 1,
+      "message": "fork.c isn\u0027t a header file, so I don\u0027t think this is needed. Please move this under the #include \u003ctrace/hooks/sched.h\u003e at line 117 and this should be fine.",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 108,
+        "endChar": 34
+      },
+      "revId": "011fd8bf89de60038ac413bbe40a1670bb692c6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51db0670_51206e7c",
+        "filename": "kernel/fork.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-08-11T10:07:07Z",
+      "side": 1,
+      "message": "No unnecessary whitespace changes please.",
+      "revId": "011fd8bf89de60038ac413bbe40a1670bb692c6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5db6f389_8d00ec36",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-08-11T10:07:07Z",
+      "side": 1,
+      "message": "Just checking, is the include below impacting CRCs?",
+      "range": {
+        "startLine": 25,
+        "startChar": 1,
+        "endLine": 25,
+        "endChar": 20
+      },
+      "revId": "011fd8bf89de60038ac413bbe40a1670bb692c6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54dd8063_aefe5638",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-08-11T10:07:07Z",
+      "side": 1,
+      "message": "Again, why? fair.c clearly isn\u0027t a header.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 34
+      },
+      "revId": "011fd8bf89de60038ac413bbe40a1670bb692c6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
