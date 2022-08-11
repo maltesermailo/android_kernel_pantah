@@ -122,6 +122,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "104208c4_4bee0bc5",
+        "filename": "kernel/locking/percpu-rwsem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-08-11T07:20:35Z",
+      "side": 1,
+      "message": "Hi Sir:\n\nthe err is as follows, if i include \u003ctrace/hooks/dtask.h\u003e in include/linux/percpu-rwsem.h.\n\nIn file included from /data/zhangkui/lipeifeng/android-kernel/common/kernel/sched/core.c:10:\nIn file included from /data/zhangkui/lipeifeng/android-kernel/common/include/trace/events/sched.h:683:\nIn file included from /data/zhangkui/lipeifeng/android-kernel/common/include/trace/define_trace.h:102:\n/data/zhangkui/lipeifeng/android-kernel/common/include/trace/trace_events.h:155:10: fatal error: \u0027trace/events/dtask.h\u0027 file not found\n#include TRACE_INCLUDE(TRACE_INCLUDE_FILE)\n         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n/data/zhangkui/lipeifeng/android-kernel/common/include/trace/define_trace.h:90:32: note: expanded from macro \u0027TRACE_INCLUDE\u0027\n# define TRACE_INCLUDE(system) __TRACE_INCLUDE(system)\n                               ^~~~~~~~~~~~~~~~~~~~~~~\n/data/zhangkui/lipeifeng/android-kernel/common/include/trace/define_trace.h:84:34: note: expanded from macro \u0027__TRACE_INCLUDE\u0027\n# define __TRACE_INCLUDE(system) \u003ctrace/events/system.h\u003e\n                                 ^~~~~~~~~~~~~~~~~~~~~~~\n\u003cscratch space\u003e:145:1: note: expanded from here\n\u003ctrace/events/dtask.h\u003e\n^~~~~~~~~~~~~~~~~~~~~~\nIn file included from /data/zhangkui/lipeifeng/android-kernel/common/arch/arm64/kernel/ptrace.c:45:\nIn file included from /data/zhangkui/lipeifeng/android-kernel/common/include/trace/events/syscalls.h:73:\n/data/zhangkui/lipeifeng/android-kernel/common/include/trace/define_trace.h:95:10: fatal error: \u0027trace/hooks/syscalls.h\u0027 file not found\n#include TRACE_INCLUDE(TRACE_INCLUDE_FILE)\n         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n/data/zhangkui/lipeifeng/android-kernel/common/include/trace/define_trace.h:90:32: note: expanded from macro \u0027TRACE_INCLUDE\u0027\n# define TRACE_INCLUDE(system) __TRACE_INCLUDE(system)\n                               ^~~~~~~~~~~~~~~~~~~~~~~\n/data/zhangkui/lipeifeng/android-kernel/common/include/trace/define_trace.h:87:34: note: expanded from macro \u0027__TRACE_INCLUDE\u0027\n# define __TRACE_INCLUDE(system) __stringify(TRACE_INCLUDE_PATH/system.h)\n                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n/data/zhangkui/lipeifeng/android-kernel/common/include/linux/stringify.h:10:27: note: expanded from macro \u0027__stringify\u0027\n#define __stringify(x...)       __stringify_1(x)\n                                ^~~~~~~~~~~~~~~~\n/data/zhangkui/lipeifeng/android-kernel/common/include/linux/stringify.h:9:29: note: expanded from macro \u0027__stringify_1\u0027\n#define __stringify_1(x...)     #x\n                                ^~\n\u003cscratch space\u003e:105:1: note: expanded from here\n\"trace/hooks/syscalls.h\"\n^~~~~~~~~~~~~~~~~~~~~~~~\n1 error generated.",
+      "parentUuid": "b827d827_5ba27a96",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 1
+      },
+      "revId": "7f83400e5425f8c5fbad6ca06a63dbf8afc9de65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "30ad51ec_f27a98a7",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 2
@@ -229,6 +253,30 @@
       "side": 1,
       "message": "Marking this unresolved (didn\u0027t mean to mark it resolve originally).",
       "parentUuid": "3a9ff1b6_4e9feca9",
+      "range": {
+        "startLine": 4431,
+        "startChar": 1,
+        "endLine": 4433,
+        "endChar": 9
+      },
+      "revId": "7f83400e5425f8c5fbad6ca06a63dbf8afc9de65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43e3bb22_ffa9e3eb",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4433,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2022-08-11T07:20:35Z",
+      "side": 1,
+      "message": "And is there any reason why that can\u0027t be done by attaching to trace_android_rvh_check_preempt_tick()? It takes more parameters than needed, but I don\u0027t see how that can be a problem.\n------------------------------------\nWe can use trace_android_rvh_check_preempt_tick to implement our function but we must write our feature-code with others\u0027 feature, not so good.\n\nRight, so this is not as bad, but still a task that keeps taking and releasing a mutex might be in a position to cause fairness issues :(\n------------------------------------\nBecause we don\u0027t want to add more operation in cpu-tick, which maybe make cpu-loaing heavy. We got a good performance from the methods（nerver make cpu-loading heavy）, and we submitted the patch.",
+      "parentUuid": "115f6c4d_a925b035",
       "range": {
         "startLine": 4431,
         "startChar": 1,
