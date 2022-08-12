@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17165dfc_f52493b5",
+        "filename": "kernel/locking/percpu-rwsem.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-08-12T12:44:17Z",
+      "side": 1,
+      "message": "Looks like exporting this was indeed necessary; allmodconfig is failing with a number of errors like this:\n\nERROR: modpost: \"_trace_android_vh_record_percpu_rwsem_lock_starttime\" [drivers/bluetooth/hci_uart.ko] undefined!\n\nMakes sense, modules that include percpu-rwsem.h will need that. Please add the export back :/",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 24
+      },
+      "revId": "9ada974de9f622c0760727113a18176c44b0cf21",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
