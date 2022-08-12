@@ -288,6 +288,8 @@ int dw_pcie_host_init(struct pcie_port *pp)
 	struct pci_host_bridge *bridge;
 	struct resource *cfg_res;
 	int ret;
+	bool msi_64bit = false;
+	u16 msi_capabilities;
 
 	raw_spin_lock_init(&pci->pp.lock);
 
@@ -365,9 +367,18 @@ int dw_pcie_host_init(struct pcie_port *pp)
 							    dw_chained_msi_isr,
 							    pp);
 
-			ret = dma_set_mask_and_coherent(dev, DMA_BIT_MASK(32));
+			msi_capabilities = dw_pcie_msi_capabilities(pci);
+			if (msi_capabilities & PCI_MSI_FLAGS_ENABLE)
+				msi_64bit = msi_capabilities & PCI_MSI_FLAGS_64BIT;
+
+			dev_dbg(dev, "Setting MSI DMA mask to %s-bit.\n",
+				msi_64bit ? "64" : "32");
+			ret = dma_set_mask_and_coherent(dev, msi_64bit ?
+							DMA_BIT_MASK(64) : DMA_BIT_MASK(32));
 			if (ret)
-				dev_warn(pci->dev, "Failed to set DMA mask to 32-bit. Devices with only 32-bit MSI support may not work properly\n");
+				dev_warn(dev, "Failed to set DMA mask to %s-bit.\n",
+					 msi_64bit ? "64" : "32");
+
 
 			msi_vaddr = dmam_alloc_coherent(dev, sizeof(u64), &pp->msi_data,
 							GFP_KERNEL);
