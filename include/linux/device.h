@@ -64,6 +64,7 @@ struct subsys_interface {
 	const char *name;
 	struct bus_type *subsys;
 	struct list_head node;
+        int abc;
 	int (*add_dev)(struct device *dev, struct subsys_interface *sif);
 	void (*remove_dev)(struct device *dev, struct subsys_interface *sif);
 };
