@@ -167,6 +167,24 @@
       "message": "static int cpufreq_online(unsigned int cpu)\n\n  blocking_notifier_call_chain(\u0026cpufreq_policy_notifier_list,\n                               CPUFREQ_CREATE_POLICY, policy);\n\n  if (cpufreq_driver-\u003eregister_em)\n      cpufreq_driver-\u003eregister_em(policy);\n\nmainline code:\n\nxxx_cpufreq_register_em()\n\n  em_dev_register_perf_domain()\n\n    em_create_pd()                                                       \u003c--- (1)\n\n    dev_info(dev, \"EM: created perf domain\\n\")\n      \n\nstatic struct notifier_block init_cpu_capacity_notifier \u003d {\n        .notifier_call \u003d init_cpu_capacity_callback,\n};\n\nregister_cpufreq_notifier()\n\n  ret \u003d cpufreq_register_notifier(\u0026init_cpu_capacity_notifier,\n                                  CPUFREQ_POLICY_NOTIFIER);\n\ninit_cpu_capacity_callback()\n\n  schedule_work(\u0026update_topology_flags_work)\n\n    update_topology_flags_workfn()\n\n      rebuild_sched_domains()\n\n        partition_sched_domains()\n\n          partition_sched_domains_locked()\n\n            /* !!! this is called initially even w/!sched_energy_update\n             * because of the if condition w/ the cpumasks is failing */ \n            has_eas |\u003d build_perf_domains(doms_new[i]);                   \u003c--- (2)      \n\nSo on your platform (2) is called before (1)? Android code might be slightly different ...\n\nIs the relation to https://android.googlesource.com/kernel/common/+/bdfa61448f3184fb8a48f25da621532fcbef3d3a%5E%21 that w/o this patch\nyou would have rebuild the scheduler domain hierarchy with the change to schedutil_gov? Are you using this governor? Or is this unrelated?\n",
       "revId": "436019789cf732fbf93d31b9b5c03967d78a9e6e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa096dc5_ef58857b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1260195
+      },
+      "writtenOn": "2022-08-17T20:00:02Z",
+      "side": 1,
+      "message": "Having EAS and schedutil tightly coupled still makes a lot of sense their since schedutil is the only governor using the same view on task and CPU utilization.\nWith all other governors on mainline, EAS wouldn\u0027t work at all. I understand that there are a lot of schedutil-like governors on Android (because they are so much better ;-)) but this is then still an Android rather a mainline issue.",
+      "parentUuid": "d14cc04d_79da66aa",
+      "revId": "436019789cf732fbf93d31b9b5c03967d78a9e6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
