@@ -16,6 +16,23 @@
       "message": "\"Reverting a revert\" isn\u0027t the most informative patch subject. :) \n\nWould you mind providing a more review-able commit message that provides an outline of why the change is needed?\n\nYou can also mention in the commit message, for historical reference, that it effectively reverts the earlier change, but as a general practice, having the rationale for why the change is needed is important to have for each commit.",
       "revId": "461cb2fc4fac2df11b0492df004322e869a51819",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14cbd643_3ab63c8e",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3923,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2022-08-17T02:37:09Z",
+      "side": 1,
+      "message": "Also, this was not an addition in the original patch:\n  https://android-review.googlesource.com/c/kernel/common/+/1534169/8/kernel/sched/core.c\n  \n  \nSo it probably needs a comment as to why it is needed to be added. I suspect it was incorrectly removed in the revert? It might be good to split that out in a separate patch (one to fix the revert, the second the add the hook).",
+      "revId": "461cb2fc4fac2df11b0492df004322e869a51819",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
