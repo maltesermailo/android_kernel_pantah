@@ -16,6 +16,23 @@
       "message": "upstream first please.",
       "revId": "436019789cf732fbf93d31b9b5c03967d78a9e6e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61fda303_4a7b6d96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1928416
+      },
+      "writtenOn": "2022-08-17T08:22:07Z",
+      "side": 1,
+      "message": "This issue is probably seen only with some custom downstream governors. In mainline we have a mechanism for schedutil governor to rebuild the sched domains. You can see it in the function:\nsched_cpufreq_governor_change(), which is called after register_em() from cpufreq_init_policy().\n\nIn that function sched_cpufreq_governor_change(), there is a check if governor is schedutil_gov only then rebuild the sched domains.\nLook at the comment there: \"EAS shouldn\u0027t be attempted without sugov...\"\n\nIMO we should change that function to always rebuild the shced domain when there is new policy, not only when schedutil gov is involved.",
+      "revId": "436019789cf732fbf93d31b9b5c03967d78a9e6e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
