@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6aecf67_6ae81981",
+        "filename": "drivers/mmc/core/mmc.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1777,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-08-18T16:34:54Z",
+      "side": 1,
+      "message": "why does this one have a different name? I would think they\u0027d differ only by \"vh\" vs \"rvh\"",
+      "revId": "6f1b2fad9eff019a5d56593df008a355a2daa249",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d75dc001_a7168abb",
+        "filename": "drivers/mmc/core/sd.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1522,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-08-18T16:34:54Z",
+      "side": 1,
+      "message": "we don\u0027t need these comments. The \"vh\" version is here only for KMI stability. Going forward only the \"rvh\" should be used. If this hook is in android-mainline, the \"vh\" should be replaced by \"rvh\".",
+      "revId": "6f1b2fad9eff019a5d56593df008a355a2daa249",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c0c0db6_af87679c",
+        "filename": "drivers/mmc/core/sd.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1530,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-08-18T16:34:54Z",
+      "side": 1,
+      "message": "just put this at line 1526. No need to duplicate the \"if (err)\" - at most one of them will change err and the other will leave it alone.",
+      "revId": "6f1b2fad9eff019a5d56593df008a355a2daa249",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
