@@ -92,6 +92,24 @@
       "parentUuid": "07b3bcef_badbe9f0",
       "revId": "eb610069f2ef107d84f1db0bf66ae090c7e258ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c165a12_22928a4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2022-08-19T20:17:47Z",
+      "side": 1,
+      "message": "We need to guarantee that domains are rebuilt to resolve a race in cpufreq.c; Specifically cpufreq.c will notify that the policy has changed, prior to performing the register_em operation.  This means that when rebuild_sched_domains (and ultimately, build_perf_domains) will fail to update rd-\u003epd.  This is a critical failure for our module.\n\nIf there is a better and correct way to address this, I need to know that.  If you don\u0027t mind any pointer or advice would help.  here\u0027s the original discussion.\n\nThe race condition fix, which also solves our problem, was rejected:\n\nhttps://android-review.googlesource.com/c/kernel/common/+/2188421",
+      "parentUuid": "30eacb3d_c2b039c6",
+      "revId": "eb610069f2ef107d84f1db0bf66ae090c7e258ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
