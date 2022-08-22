@@ -146,6 +146,24 @@
       "parentUuid": "4d3cb312_641cfe3b",
       "revId": "eb610069f2ef107d84f1db0bf66ae090c7e258ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc10b6de_f497aba4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2022-08-22T01:15:29Z",
+      "side": 1,
+      "message": "this looks like a flaw upstream to me.  the rebuilding of domains starts in a separate process caused by the notifier chain in cpufreq_online; the notifier in this case has been registered by arch_topology, for arm if I recall.  the notified function schedules work in a different process.\n\ncpufreq_online continues on and does a register_em, which initializes content that the rebuilding of domains is dependent on, the em_pd values.  if the separate process finishes building domains before cpufreq_online gets around to the register_em call, the root domains have their perf domain values wiped out.\n\nthis has nothing to do with our module.  we merely are the recipients of the bad rd-\u003epd data, which was bad well before the module gets loaded.",
+      "parentUuid": "39f8fb5a_2da4498a",
+      "revId": "eb610069f2ef107d84f1db0bf66ae090c7e258ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
