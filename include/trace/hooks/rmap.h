@@ -12,7 +12,8 @@
 #include <trace/hooks/vendor_hooks.h>
 
 DECLARE_HOOK(android_vh_look_around,
-	TP_PROTO(struct page_vma_mapped_walk *pvmw, struct page *page, struct vm_area_struct *vma, bool *skip),
+	TP_PROTO(struct page_vma_mapped_walk *pvmw, struct page *page,
+		struct vm_area_struct *vma, bool *skip),
 	TP_ARGS(pvmw, page, vma, skip));
 
 #endif /* _TRACE_HOOK_RMAP_H */

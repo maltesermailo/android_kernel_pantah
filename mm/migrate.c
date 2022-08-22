@@ -607,11 +607,8 @@ void migrate_page_states(struct page *newpage, struct page *page)
 		SetPageChecked(newpage);
 	if (PageMappedToDisk(page))
 		SetPageMappedToDisk(newpage);
-       trace_android_vh_test_clear_look_around_ref(page, &success);
-       if (success) {
-	if (test_clear_page_lookaround_ref(page))
-		set_page_lookaround_ref(newpage);
-	}
+	trace_android_vh_look_around_migrate_page(page, newpage);
+
 	/* Move dirty on pages not done by migrate_page_move_mapping() */
 	if (PageDirty(page))
 		SetPageDirty(newpage);
