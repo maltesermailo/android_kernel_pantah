@@ -16,6 +16,24 @@
       "message": "why not add this to the android debug module if you are only using this for debug things?",
       "revId": "6075223dc6895d2fb113bbcd0c1b2972e27a7279",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12db5188_91db30d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275292
+      },
+      "writtenOn": "2022-08-22T09:12:48Z",
+      "side": 1,
+      "message": "it\u0027s difficult to implement put_task_stack in debug module.\nput_task_stack is not a simple funciton, \nput_task_stack call static release_task_stack, \nrelease_task_stack call static account_kernel_stack/free_thread_stack",
+      "parentUuid": "410b132d_f8ee4ab0",
+      "revId": "6075223dc6895d2fb113bbcd0c1b2972e27a7279",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
