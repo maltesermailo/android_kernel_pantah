@@ -70,6 +70,23 @@
       "parentUuid": "dd9d87da_ab8aa790",
       "revId": "a5c877c2c0736811d644e71611613e83060d4c8e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71a4dd51_6ef03f66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2022-08-23T21:44:51Z",
+      "side": 1,
+      "message": "private/google-modules/lwis/lwis_util.h:62:36: error: a function declaration without a prototype is deprecated in all versions of C [-Werror,-Wstrict-prototypes]\nstatic inline ktime_t lwis_get_time()\n                                   ^\n                                    void\n\nI\u0027ll go clean that up, too.",
+      "revId": "a5c877c2c0736811d644e71611613e83060d4c8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
