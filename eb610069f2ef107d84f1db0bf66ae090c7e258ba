@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e61cca39_707ffef0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2022-08-23T17:55:28Z",
+      "side": 1,
+      "message": "Thanks, the other got abandoned.",
+      "parentUuid": "92e75ef2_3571aa46",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 14
+      },
+      "revId": "eb610069f2ef107d84f1db0bf66ae090c7e258ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "525d33d4_d39f3a48",
@@ -198,6 +222,24 @@
       "side": 1,
       "message": "Todd-  many thanks, we dug back into the upstream 5.19 code and in fact the issue is NOT present in upstream, due to the removal of sched_cpufreq_governor_change().  So it\u0027s an Android Only issue.  Sorry I misunderstood that.",
       "parentUuid": "faa9e605_f438daef",
+      "revId": "eb610069f2ef107d84f1db0bf66ae090c7e258ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80420c9a_e5dab6dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2022-08-23T17:55:28Z",
+      "side": 1,
+      "message": "We found one such method, using remove_cpu and add_cpu.  This was too much to be accepted internally.  Current fast-solution will have to be rebuild_sched_domains, I think the parties are in agreement.",
+      "parentUuid": "f85dfde8_92708f20",
       "revId": "eb610069f2ef107d84f1db0bf66ae090c7e258ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
