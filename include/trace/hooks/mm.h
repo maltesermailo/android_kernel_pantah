@@ -180,6 +180,7 @@ DECLARE_HOOK(android_vh_page_should_be_protected,
 DECLARE_HOOK(android_vh_mark_page_accessed,
 	TP_PROTO(struct page *page),
 	TP_ARGS(page));
+<<<<<<< HEAD   (3f90d4 ANDROID: GKI: Update symbol list)
 DECLARE_HOOK(android_vh_cma_drain_all_pages_bypass,
 	TP_PROTO(unsigned int migratetype, bool *bypass),
 	TP_ARGS(migratetype, bypass));
@@ -262,6 +263,19 @@ DECLARE_HOOK(android_vh_remove_vmalloc_stack,
 	TP_ARGS(vm));
 /* macro versions of hooks are no longer required */
 
+=======
+DECLARE_HOOK(android_vh_page_cache_forced_ra,
+	TP_PROTO(struct readahead_control *ractl, unsigned long req_count, bool *do_forced_ra),
+	TP_ARGS(ractl, req_count, do_forced_ra));
+DECLARE_HOOK(android_vh_alloc_pages_reclaim_bypass,
+	TP_PROTO(gfp_t gfp_mask, int order, int alloc_flags,
+	int migratetype, struct page **page),
+	TP_ARGS(gfp_mask, order, alloc_flags, migratetype, page));
+DECLARE_HOOK(android_vh_alloc_pages_failure_bypass,
+	TP_PROTO(gfp_t gfp_mask, int order, int alloc_flags,
+	int migratetype, struct page **page),
+	TP_ARGS(gfp_mask, order, alloc_flags, migratetype, page));
+>>>>>>> CHANGE (0312e9 ANDROID: vendor_hooks:vendor hook for __alloc_pages_slowpath)
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
