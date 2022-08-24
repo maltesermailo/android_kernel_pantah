@@ -120,6 +120,15 @@ DECLARE_HOOK(android_vh_try_to_unmap_one,
 	TP_PROTO(struct folio *folio, struct vm_area_struct *vma,
 		unsigned long addr, void *arg, bool ret),
 	TP_ARGS(folio, vma, addr, arg, ret));
+DECLARE_HOOK(android_vh_alloc_pages_reclaim_bypass,
+    TP_PROTO(gfp_t gfp_mask, int order, int alloc_flags,
+	int migratetype, struct page **page),
+	TP_ARGS(gfp_mask, order, alloc_flags, migratetype, page));
+DECLARE_HOOK(android_vh_alloc_pages_failure_bypass,
+	TP_PROTO(gfp_t gfp_mask, int order, int alloc_flags,
+	int migratetype, struct page **page),
+	TP_ARGS(gfp_mask, order, alloc_flags, migratetype, page));
+
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
