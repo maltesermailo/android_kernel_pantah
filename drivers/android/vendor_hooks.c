@@ -458,6 +458,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_si);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_pages);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_shmem_page_flag);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sched_pelt_multiplier);
+<<<<<<< HEAD   (f69b64 UPSTREAM: cgroup: Add missing cpus_read_lock() to cgroup_att)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_page_look_around_ref);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_look_around);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_look_around_migrate_page);
@@ -475,3 +476,7 @@ EXPORT_SYMBOL_GPL(GKI_struct_gic_chip_data);
 #include <linux/swap_slots.h>
 const struct swap_slots_cache *GKI_struct_swap_slots_cache;
 EXPORT_SYMBOL_GPL(GKI_struct_swap_slots_cache);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_reclaim_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_failure_bypass);
+>>>>>>> CHANGE (dec2f5 ANDROID: vendor_hooks:vendor hook for __alloc_pages_slowpath)
