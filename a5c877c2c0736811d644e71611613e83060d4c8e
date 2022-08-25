@@ -141,6 +141,23 @@
       "parentUuid": "fa0a43eb_c54e6ae5",
       "revId": "a5c877c2c0736811d644e71611613e83060d4c8e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bebc3b10_e57acc2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1114194
+      },
+      "writtenOn": "2022-08-25T17:05:21Z",
+      "side": 1,
+      "message": "There are no way that thees build failures are caused by the compiler update.\n\nprivate/google-modules/soc/gs/drivers/dma-buf/heaps/deferred-free-helper.c:134:47: error: too many arguments to function call, expected single argument \u0027shrinker\u0027, have 2 arguments\n        return register_shrinker(\u0026freelist_shrinker, \"dmabuf-deferred-free\");\n               ~~~~~~~~~~~~~~~~~                     ^~~~~~~~~~~~~~~~~~~~~~\n/buildbot/src/partner-android/android-gs-pixel-mainline/out/bazel/output_user_root/82bd7710efced908127f0c7a417ebbd8/sandbox/linux-sandbox/26/execroot/__main__/common/include/linux/shrinker.h:93:12: note: \u0027register_shrinker\u0027 declared here\nextern int register_shrinker(struct shrinker *shrinker);\n           ^\n\nprivate/google-modules/soc/gs/drivers/trusty/trusty-virtio.c:450:14: error: incompatible function pointer types initializing \u0027int (*)(struct virtio_device *, unsigned int, struct virtqueue **, vq_callback_t **, const char *const *, const bool *, struct irq_affinity *)\u0027 (aka \u0027int (*)(struct virtio_device *, unsigned int, struct virtqueue **, void (**)(struct virtqueue *), const char *const *, const _Bool *, struct irq_affinity *)\u0027) with an expression of type \u0027int (struct virtio_device *, unsigned int, struct virtqueue **, vq_callback_t **, const char *const *, u32 *, const bool *, struct irq_affinity *)\u0027 (aka \u0027int (struct virtio_device *, unsigned int, struct virtqueue **, void (**)(struct virtqueue *), const char *const *, unsigned int *, const _Bool *, struct irq_affinity *)\u0027) [-Werror,-Wincompatible-function-pointer-types]\n        .find_vqs \u003d trusty_virtio_find_vqs,\n                    ^~~~~~~~~~~~~~~~~~~~~~\n\nrekicking TH",
+      "revId": "a5c877c2c0736811d644e71611613e83060d4c8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
