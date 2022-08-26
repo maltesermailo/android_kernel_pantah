@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40581b7d_bbc726dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-08-26T10:22:17Z",
+      "side": 1,
+      "message": "This breaks the frozen ABI:\n\n```\nsymbol \u0027pid_t __task_pid_nr_ns(struct task_struct *, enum pid_type, struct pid_namespace *)\u0027 changed\n  CRC changed from 0xbd53bd8 to 0xcfcd121c\n\nsymbol \u0027struct pid * find_get_pid(pid_t)\u0027 changed\n  CRC changed from 0x90b01573 to 0x42dd4de5\n\nsymbol \u0027struct pid * find_pid_ns(int, struct pid_namespace *)\u0027 changed\n  CRC changed from 0x9542fd3e to 0xcac55a64\n\n... 10 omitted; 13 symbols have only CRC changes\n```",
+      "revId": "32ecb3fd0ca25333b61dae02912774f9ca287dcb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
