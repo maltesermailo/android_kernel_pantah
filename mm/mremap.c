@@ -468,8 +468,18 @@ unsigned long move_page_tables(struct vm_area_struct *vma,
 			 * If the extent is PMD-sized, try to speed the move by
 			 * moving at the PMD level if possible.
 			 */
+<<<<<<< HEAD   (3c131e Merge 5.10.136 into android13-5.10-lts)
 			if (move_pgt_entry(NORMAL_PMD, vma, old_addr, new_addr,
 					   old_pmd, new_pmd, true))
+=======
+			bool moved;
+
+			take_rmap_locks(vma);
+			moved = move_normal_pmd(vma, old_addr, new_addr,
+						old_pmd, new_pmd);
+			drop_rmap_locks(vma);
+			if (moved)
+>>>>>>> BRANCH (74ded1 Linux 5.10.137)
 				continue;
 		}
 
