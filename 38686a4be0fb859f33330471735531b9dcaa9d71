@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a422857_d32f7ee1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-08-31T15:48:19Z",
+      "side": 1,
+      "message": "This hook was added before in aosp/1831698. Then reverted in aosp/2146806 due to upstream conflicts.\n\nYou make this much harder to review by not providing the history so this gets evaluated as a brand new request.\n\nIn the revert message:\n```\n    There are problems with how the hooks work with the upstream changes in\n    5.19-rc1.  If these are still needed, they can be added back later, but\n    revert them for now to get the build working properly.\n```\n\nThis commit message should refer to that reversion and say that the patch is refactored to resolve those issues.",
+      "revId": "38686a4be0fb859f33330471735531b9dcaa9d71",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
