@@ -22,13 +22,27 @@ load("//build/kernel/kleaf:common_kernels.bzl", "define_common_kernels", "define
 
 define_common_kernels(target_configs = {
     "kernel_aarch64": {
+<<<<<<< HEAD   (bd3534 Merge dcf8e5633e2e ("tracing: Define the is_signed_type() ma)
         "module_outs": [
+=======
+        # TODO(b/188620248): re-enable trimming
+        "trim_nonlisted_kmi": False,
+        "kmi_symbol_list_strict_mode": False,
+        "module_implicit_outs": [
+>>>>>>> CHANGE (80170f ANDROID: kleaf: Do not include GKI modules in default output)
             "drivers/block/zram/zram.ko",
             "mm/zsmalloc.ko",
         ],
     },
     "kernel_aarch64_debug": {
+<<<<<<< HEAD   (bd3534 Merge dcf8e5633e2e ("tracing: Define the is_signed_type() ma)
         "module_outs": [
+=======
+        # TODO(b/188620248): re-enable trimming
+        "trim_nonlisted_kmi": False,
+        "kmi_symbol_list_strict_mode": False,
+        "module_implicit_outs": [
+>>>>>>> CHANGE (80170f ANDROID: kleaf: Do not include GKI modules in default output)
             "drivers/block/zram/zram.ko",
             "mm/zsmalloc.ko",
         ],
