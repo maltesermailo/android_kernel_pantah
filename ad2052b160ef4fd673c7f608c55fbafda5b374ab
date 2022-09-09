@@ -34,6 +34,24 @@
       "parentUuid": "d2ce0785_0fa85fd4",
       "revId": "ad2052b160ef4fd673c7f608c55fbafda5b374ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e931eb01_217cc77a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2022-09-09T21:32:36Z",
+      "side": 1,
+      "message": "I think only this part makes sense so it wouldn\u0027t be hard to upstream it rather than entire patch.\n\n```\n\t\t\t\tif (fatal_signal_pending(current)) {\n\t\t\t\t\tret \u003d -EINTR;\n\t\t\t\t\tbreak;\n\t\t\t\t}\n```\nBut yeah, it\u0027s not a big deal since CMA is already divergent a lot with upstream.\nJust wanted to reduce the gap as much as possible.",
+      "parentUuid": "69e531fd_ced6c984",
+      "revId": "ad2052b160ef4fd673c7f608c55fbafda5b374ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
