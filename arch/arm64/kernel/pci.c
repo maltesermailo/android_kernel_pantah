@@ -56,7 +56,7 @@ int raw_pci_write(unsigned int domain, unsigned int bus,
 
 #ifdef CONFIG_NUMA
 
-int pcibus_to_node(struct pci_bus *bus)
+long pcibus_to_node(struct pci_bus *bus)
 {
 	return dev_to_node(&bus->dev);
 }
