@@ -261,3 +261,36 @@
   __tracepoint_android_rvh_set_cpus_allowed_comm
   __tracepoint_android_rvh_dequeue_task
   cpuset_cpus_allowed
+<<<<<<< HEAD   (bc6d3d UPSTREAM: kbuild: rename cmd_{bzip2,lzma,lzo,lz4,xzkern,zstd)
+=======
+
+#required by perf_helper.ko
+  try_to_free_mem_cgroup_pages
+
+#required by debug_ext.ko
+  of_find_all_nodes
+
+#required by mi_freqwdg.ko
+  __traceiter_android_vh_freq_qos_remove_request
+  __traceiter_android_vh_freq_qos_update_request
+  __traceiter_android_vh_freq_qos_add_request
+  __traceiter_android_rvh_entity_tick
+  __traceiter_android_rvh_dequeue_task_fair
+  __tracepoint_android_vh_freq_qos_remove_request
+  __tracepoint_android_vh_freq_qos_update_request
+  __tracepoint_android_vh_freq_qos_add_request
+  __tracepoint_android_rvh_dequeue_task_fair
+  __tracepoint_android_rvh_entity_tick
+
+#required by binder_prio module
+  __traceiter_android_vh_binder_priority_skip
+  __tracepoint_android_vh_binder_priority_skip
+
+#required by mi_mempool.ko module
+  __traceiter_android_vh_mmput
+  __tracepoint_android_vh_mmput
+  __traceiter_android_vh_alloc_pages_reclaim_bypass
+  __tracepoint_android_vh_alloc_pages_reclaim_bypass
+  __traceiter_android_vh_alloc_pages_failure_bypass
+  __tracepoint_android_vh_alloc_pages_failure_bypass
+>>>>>>> CHANGE (42f39f ANDROID: GKI: update xiaomi symbol list)
