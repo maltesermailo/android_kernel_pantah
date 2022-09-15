@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad22648e_4d29b4e1",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 9207,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-09-15T18:10:37Z",
+      "side": 1,
+      "message": "Instead of restoring this function, can all of this be done from your vendor_module? `sched_class` is already part of the KMI so it seems like it only requires exporting `for_each_class`.",
+      "revId": "438f7af0f12a2d1d63c93784de1aaf8fd086fbb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
