@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "263e7f35_af01c66a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2022-09-16T20:50:43Z",
+      "side": 1,
+      "message": "exporting for_each_class implies exporting __sched_class_highest/__sched_class_lowest, granting access to the top level pointer for each class in the system (obviously).\n\nPlease consider when you get the chance.",
+      "revId": "438f7af0f12a2d1d63c93784de1aaf8fd086fbb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad22648e_4d29b4e1",
@@ -14,6 +31,24 @@
       "writtenOn": "2022-09-15T18:10:37Z",
       "side": 1,
       "message": "Instead of restoring this function, can all of this be done from your vendor_module? `sched_class` is already part of the KMI so it seems like it only requires exporting `for_each_class`.",
+      "revId": "438f7af0f12a2d1d63c93784de1aaf8fd086fbb9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e25febaa_ba6a2755",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 9207,
+      "author": {
+        "id": 1761165
+      },
+      "writtenOn": "2022-09-16T20:50:43Z",
+      "side": 1,
+      "message": "Would you be ok exporting __sched_class_highest and __sched_class_lowest, effectively exporting a pointer directly to each sched class? With those, for_each_class can work, and the pick_next_task function can be re-created in the module.\n\nBut just so we\u0027re clear here, that means granting vendor code access to each and every class in the system directly (where as currently, if I understand correctly, it is only accessible for a particular task. be-it on the rq or curr or whatever).\n\nWe hadn\u0027t gone down this path yet, as that appeared to be more intrusive.",
+      "parentUuid": "ad22648e_4d29b4e1",
       "revId": "438f7af0f12a2d1d63c93784de1aaf8fd086fbb9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
