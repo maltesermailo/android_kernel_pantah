@@ -19,6 +19,7 @@
 #include "node.h"
 #include "segment.h"
 #include <trace/events/f2fs.h>
+#include <trace/hooks/fs.h>
 
 #define DEFAULT_CHECKPOINT_IOPRIO (IOPRIO_PRIO_VALUE(IOPRIO_CLASS_BE, 3))
 
@@ -121,6 +122,7 @@ retry:
 				++count <= DEFAULT_RETRY_IO_COUNT)
 			goto retry;
 		f2fs_stop_checkpoint(sbi, false);
+		trace_android_vh_f2fs_stop_checkpoint_get_meta(sbi);
 	}
 	return page;
 }
