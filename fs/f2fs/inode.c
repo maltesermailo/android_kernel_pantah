@@ -17,6 +17,7 @@
 #include "xattr.h"
 
 #include <trace/events/f2fs.h>
+#include <trace/hooks/fs.h>
 
 #ifdef CONFIG_F2FS_FS_COMPRESSION
 extern const struct address_space_operations f2fs_compress_aops;
@@ -687,6 +688,7 @@ retry:
 			goto retry;
 		} else if (err != -ENOENT) {
 			f2fs_stop_checkpoint(sbi, false);
+			trace_android_vh_f2fs_stop_checkpoint_get_inode(sbi, inode);
 		}
 		return;
 	}

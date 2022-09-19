@@ -10,6 +10,7 @@
 
 #include <linux/tracepoint.h>
 #include <trace/hooks/vendor_hooks.h>
+struct f2fs_sb_info;
 DECLARE_HOOK(android_vh_ep_create_wakeup_source,
 	TP_PROTO(char *name, int len),
 	TP_ARGS(name, len));
@@ -17,6 +18,15 @@ DECLARE_HOOK(android_vh_ep_create_wakeup_source,
 DECLARE_HOOK(android_vh_timerfd_create,
 	TP_PROTO(char *name, int len),
 	TP_ARGS(name, len));
+DECLARE_HOOK(android_vh_f2fs_stop_checkpoint_get_meta,
+	TP_PROTO(struct f2fs_sb_info *sbi),
+	TP_ARGS(sbi));
+DECLARE_HOOK(android_vh_f2fs_stop_checkpoint_wb_cp_data,
+	TP_PROTO(struct f2fs_sb_info *sbi),
+	TP_ARGS(sbi));
+DECLARE_HOOK(android_vh_f2fs_stop_checkpoint_get_inode,
+	TP_PROTO(struct f2fs_sb_info *sbi, struct inode *inode),
+	TP_ARGS(sbi, inode));
 #endif /* _TRACE_HOOK_FS_H */
 
 /* This part must be outside protection */
