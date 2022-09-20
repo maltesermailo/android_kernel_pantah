@@ -1329,6 +1329,35 @@ headerdep:
 	$(Q)find $(srctree)/include/ -name '*.h' | xargs --max-args 1 \
 	$(srctree)/scripts/headerdep.pl -I$(srctree)/include
 
+<<<<<<< HEAD   (498b9a Merge 087aa69a9f2b ("Merge tag 'arm64-fixes' of git://git.ke)
+=======
+# ---------------------------------------------------------------------------
+# Kernel headers
+
+#Default location for installed headers
+export INSTALL_HDR_PATH = $(objtree)/usr
+
+quiet_cmd_headers_install = INSTALL $(INSTALL_HDR_PATH)/include
+      cmd_headers_install = \
+	mkdir -p $(INSTALL_HDR_PATH); \
+	rsync -mrl --include='*/' --include='*\.h' --exclude='*' \
+	usr/include $(INSTALL_HDR_PATH)
+
+PHONY += headers_install
+headers_install: headers
+	$(call cmd,headers_install)
+
+PHONY += archheaders archscripts
+
+hdr-inst := -f $(srctree)/scripts/Makefile.headersinst obj
+
+PHONY += headers
+headers: $(version_h) scripts_unifdef uapi-asm-generic archheaders archscripts
+	$(if $(filter um, $(SRCARCH)), $(error Headers not exportable for UML))
+	$(Q)$(MAKE) $(hdr-inst)=include/uapi
+	$(Q)$(MAKE) $(hdr-inst)=arch/$(SRCARCH)/include/uapi
+
+>>>>>>> BRANCH (4ed9c1 Merge tag 'kbuild-fixes-v6.0-2' of git://git.kernel.org/pub/)
 ifdef CONFIG_HEADERS_INSTALL
 prepare: headers
 endif
