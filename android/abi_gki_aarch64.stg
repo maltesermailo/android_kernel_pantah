@@ -61512,10 +61512,10 @@ member {
   offset: 32
 }
 member {
-  id: 0x20f935a9
+  id: 0x20f93679
   name: "ch_intmask"
   type_id: 0xc9082b19
-  offset: 416
+  offset: 480
 }
 member {
   id: 0x2054ca12
@@ -63555,10 +63555,10 @@ member {
   offset: 3456
 }
 member {
-  id: 0x685f31a0
+  id: 0x685f32be
   name: "client_id_mask"
   type_id: 0x914dbfdc
-  offset: 288
+  offset: 320
 }
 member {
   id: 0xf4c5928f
@@ -99853,10 +99853,10 @@ member {
   offset: 2304
 }
 member {
-  id: 0x7fbcccea
+  id: 0x7fbcc085
   name: "global_intstatus_channel_shift"
   type_id: 0xc9082b19
-  offset: 448
+  offset: 512
 }
 member {
   id: 0x88f8622b
@@ -101290,10 +101290,10 @@ member {
   offset: 192
 }
 member {
-  id: 0x3ec0be10
+  id: 0x3ec0b17f
   name: "has_addr_hi_reg"
   type_id: 0x6d7f5ff6
-  offset: 480
+  offset: 544
 }
 member {
   id: 0xeee91e70
@@ -105947,10 +105947,10 @@ member {
   bitsize: 1
 }
 member {
-  id: 0x0c93d7b1
+  id: 0x0c93dd22
   name: "icc_ops"
   type_id: 0x3e21070b
-  offset: 704
+  offset: 768
 }
 member {
   id: 0x9dfcef2c
@@ -111506,10 +111506,10 @@ member {
   offset: 1088
 }
 member {
-  id: 0x1b9b6526
+  id: 0x1b9b63c3
   name: "intmask"
   type_id: 0xc9082b19
-  offset: 384
+  offset: 448
 }
 member {
   id: 0x5dfd62b5
@@ -140920,16 +140920,22 @@ member {
   offset: 48
 }
 member {
+  id: 0x5a17ff8d
+  name: "num_carveouts"
+  type_id: 0x4585663f
+  offset: 288
+}
+member {
   id: 0x5facbc84
   name: "num_channels"
   type_id: 0x6720d32f
   offset: 8384
 }
 member {
-  id: 0x5fe2c2d5
+  id: 0x5fe2c4b3
   name: "num_channels"
   type_id: 0x295c7202
-  offset: 304
+  offset: 336
 }
 member {
   id: 0xc21eb7ca
@@ -142028,10 +142034,10 @@ member {
   offset: 384
 }
 member {
-  id: 0xfe804b5a
+  id: 0xfe804f1e
   name: "num_resets"
   type_id: 0x4585663f
-  offset: 640
+  offset: 704
 }
 member {
   id: 0xdc465f86
@@ -145173,10 +145179,10 @@ member {
   type_id: 0x326a19f7
 }
 member {
-  id: 0xafb9bc7f
+  id: 0xafb9b76b
   name: "ops"
   type_id: 0x32b472a5
-  offset: 768
+  offset: 832
 }
 member {
   id: 0xafb9c47f
@@ -169244,10 +169250,10 @@ member {
   offset: 256
 }
 member {
-  id: 0x69014681
+  id: 0x690144eb
   name: "reset_ops"
   type_id: 0x364a10f4
-  offset: 512
+  offset: 576
 }
 member {
   id: 0x98c83941
@@ -169353,10 +169359,10 @@ member {
   offset: 7744
 }
 member {
-  id: 0x54c3a704
+  id: 0x54c3a80f
   name: "resets"
   type_id: 0x3aa533cf
-  offset: 576
+  offset: 640
 }
 member {
   id: 0x4381fffc
@@ -184001,10 +184007,10 @@ member {
   type_id: 0x1ba9f29e
 }
 member {
-  id: 0xcab15bcf
+  id: 0xcab15d9a
   name: "smmu"
   type_id: 0x3f09383b
-  offset: 320
+  offset: 384
 }
 member {
   id: 0xcabc305c
@@ -265763,25 +265769,26 @@ struct_union {
   kind: STRUCT
   name: "tegra_mc_soc"
   definition {
-    bytesize: 104
+    bytesize: 112
     member_id: 0x1b57faed
     member_id: 0xe6531f76
     member_id: 0x4ffc68c3
     member_id: 0x8f1bb1bf
     member_id: 0x4b9a0804
     member_id: 0xd3de74cf
-    member_id: 0x685f31a0
-    member_id: 0x5fe2c2d5
-    member_id: 0xcab15bcf
-    member_id: 0x1b9b6526
-    member_id: 0x20f935a9
-    member_id: 0x7fbcccea
-    member_id: 0x3ec0be10
-    member_id: 0x69014681
-    member_id: 0x54c3a704
-    member_id: 0xfe804b5a
-    member_id: 0x0c93d7b1
-    member_id: 0xafb9bc7f
+    member_id: 0x5a17ff8d
+    member_id: 0x685f32be
+    member_id: 0x5fe2c4b3
+    member_id: 0xcab15d9a
+    member_id: 0x1b9b63c3
+    member_id: 0x20f93679
+    member_id: 0x7fbcc085
+    member_id: 0x3ec0b17f
+    member_id: 0x690144eb
+    member_id: 0x54c3a80f
+    member_id: 0xfe804f1e
+    member_id: 0x0c93dd22
+    member_id: 0xafb9b76b
   }
 }
 struct_union {
@@ -368801,7 +368808,7 @@ elf_symbol {
   name: "devm_tegra_memory_controller_get"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x986b8e36
+  crc: 0x2dacde4b
   type_id: 0x2195423c
   full_name: "devm_tegra_memory_controller_get"
 }
@@ -409112,7 +409119,7 @@ elf_symbol {
   name: "tegra_mc_probe_device"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x3f100eaf
+  crc: 0x04503a37
   type_id: 0x9079b097
   full_name: "tegra_mc_probe_device"
 }
