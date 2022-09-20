@@ -16,6 +16,24 @@
       "message": "Please add a \"Fixes:\" tag citing the patch that was causing the warning. Should this be sent upstream?",
       "revId": "e1c3fc64d3e23cefb655b88f0139737179357e30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d7df397_f39f25c6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1902398
+      },
+      "writtenOn": "2022-09-20T07:40:02Z",
+      "side": 1,
+      "message": "Because linux mainstream not support dma-buf partial cache sync, not has below interface in struct dma_buf_ops, this interface only in android common kernel:\n int (*begin_cpu_access_partial)\n int (*end_cpu_access_partial)\n\nso no need upstream to linux.",
+      "parentUuid": "e4e369ee_2f3fcb80",
+      "revId": "e1c3fc64d3e23cefb655b88f0139737179357e30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
