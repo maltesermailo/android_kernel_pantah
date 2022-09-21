@@ -16,6 +16,24 @@
       "message": "not a proper cherry-pick, why not do the same as in other branches?  Why is this different?",
       "revId": "59060031f080d33451e801f78abb403f5f9b5d83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f342358_668444f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945302
+      },
+      "writtenOn": "2022-09-21T10:56:01Z",
+      "side": 1,
+      "message": "Hi Greg,\n\nFixed some of the inconsistencies between the patches.\n\nThe patches for the other branches disable ANDROID_KABI_RESERVE, ANDROID_VENDOR_DATA\\* and ANDROID_OEM_DATA\\*. android-mainline does not have ANDROID_KABI_RESERVE. ANDROID_VENDOR_DATA\\* and ANDROID_OEM_DATA\\* though are present on android-mainline, so this patch disables only those. We are only adding CONFIG_ANDROID_VENDOR_OEM_DATA in this patch.\n\nThanks,\nJaskaran.",
+      "parentUuid": "16fcd9ba_281eebda",
+      "revId": "59060031f080d33451e801f78abb403f5f9b5d83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
