@@ -33,6 +33,24 @@
       "message": "Wei: Did you get a chance to try this? I\u0027m still a bit skeptical, but wanted to see if you found it helped or not for your case.",
       "revId": "7d58aa3bd60b0461a3b89af731c1bf9b0f42f693",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d0bf1b4_8a4be646",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1105075
+      },
+      "writtenOn": "2022-09-22T00:50:10Z",
+      "side": 1,
+      "message": "for the issues in the bug this should help in theory. to really test, I think we can have some SCHED_IDLE or prio 139 process grab this lock with other 120 spinning (manually created PI cases) and I would expect this helped for the cases i mentioned in the bug.",
+      "parentUuid": "0992ba6f_fd22a2db",
+      "revId": "7d58aa3bd60b0461a3b89af731c1bf9b0f42f693",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
