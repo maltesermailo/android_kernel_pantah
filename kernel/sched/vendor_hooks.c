@@ -105,3 +105,8 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_load_avg);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_remove_entity_load_avg);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_blocked_fair);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_rt_rq_load_avg);
+<<<<<<< HEAD   (1431f3 FROMLIST: binder: return pending info for frozen async txns)
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmput);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rebuild_root_domains_bypass);
+>>>>>>> CHANGE (e5e877 ANDROID: cgroup: Add vendor hook for rebuild_root_domains_by)

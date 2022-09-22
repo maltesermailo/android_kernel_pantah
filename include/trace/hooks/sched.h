@@ -425,6 +425,16 @@ DECLARE_RESTRICTED_HOOK(android_rvh_update_rt_rq_load_avg,
 	TP_PROTO(u64 now, struct rq *rq, struct task_struct *tsk, int running),
 	TP_ARGS(now, rq, tsk, running), 1);
 
+<<<<<<< HEAD   (1431f3 FROMLIST: binder: return pending info for frozen async txns)
+=======
+DECLARE_HOOK(android_vh_mmput,
+	TP_PROTO(struct mm_struct *mm),
+	TP_ARGS(mm));
+
+DECLARE_HOOK(android_vh_rebuild_root_domains_bypass,
+	TP_PROTO(bool cpuhp_tasks_frozen, bool *bypass),
+	TP_ARGS(cpuhp_tasks_frozen, bypass));
+>>>>>>> CHANGE (e5e877 ANDROID: cgroup: Add vendor hook for rebuild_root_domains_by)
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_SCHED_H */
