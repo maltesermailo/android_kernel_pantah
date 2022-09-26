@@ -52,6 +52,24 @@
       "parentUuid": "8f342358_668444f3",
       "revId": "59060031f080d33451e801f78abb403f5f9b5d83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1b436de_11563c3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1858345
+      },
+      "writtenOn": "2022-09-26T17:55:15Z",
+      "side": 1,
+      "message": "@gregkh@google.com, I was talking to our team about how to clean these changes up.\n\nIn the 13-5.15 change, there were really 2 changes: one to disable the KABI_RESERVE macros, and one to disable the {VENDOR,OEM}_DATA macros. We should\u0027ve split into two distinct changes. The android-mainline change is just the {VENDOR,OEM}_DATA macros. I\u0027m not sure why init/init_task.c and kernel/fork.c changes weren\u0027t there. IMO, it should\u0027ve been. I suspect it wasn\u0027t caught in initial testing but I see it got fixed separately in commit 78d6de78638b6.\n\nFor the sake of android-mainline and future releases, I think this change makes sense as-is but the cherry-picks on the other branches make the context of this change more confusing. Should we make it a new change-id to help clear up the confusion?",
+      "parentUuid": "c8879b1c_42cbc55b",
+      "revId": "59060031f080d33451e801f78abb403f5f9b5d83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
