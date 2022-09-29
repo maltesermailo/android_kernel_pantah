@@ -98,6 +98,30 @@
       },
       "revId": "98ba34584071189c592e80f71e4c4323b72cb298",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71f076c5_9cfde70e",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1672,
+      "author": {
+        "id": 1764341
+      },
+      "writtenOn": "2022-09-29T16:07:56Z",
+      "side": 1,
+      "message": "Greg\n\nthere is nothing new this change adding here as part of uevent notification.\nPreviously also actual ACK commit calls same uevent notification from reset callback. as now reset and disconnect callback are implemented differently due to requirement of updating charging current in upstream previously adding functionality with reset based callback is missing with newer upstream change.",
+      "parentUuid": "59c92d83_09305055",
+      "range": {
+        "startLine": 1672,
+        "startChar": 0,
+        "endLine": 1672,
+        "endChar": 26
+      },
+      "revId": "98ba34584071189c592e80f71e4c4323b72cb298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
