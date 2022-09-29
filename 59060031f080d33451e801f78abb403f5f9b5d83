@@ -124,6 +124,24 @@
       "parentUuid": "38f5df4b_44feb620",
       "revId": "59060031f080d33451e801f78abb403f5f9b5d83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbee6263_57a38729",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1851199
+      },
+      "writtenOn": "2022-09-29T05:35:24Z",
+      "side": 1,
+      "message": "include/linux/android_kabi.h is not present in android-mainline. so ANDROID_KABI_RESERVE won\u0027t be available here. If I understand Greg persistent comment, he is saying bring the config even if we don\u0027t update the code. i.e Add ANDROID_KABI_RESERVE to Kconfig. It is set to \u0027y\u0027 any way. so it would be straight forward (for us) when we go to new branches.",
+      "parentUuid": "56f385a1_b1a506f3",
+      "revId": "59060031f080d33451e801f78abb403f5f9b5d83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
