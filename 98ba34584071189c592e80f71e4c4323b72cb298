@@ -71,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "872887a6_c2233179",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1764341
+      },
+      "writtenOn": "2022-09-29T16:13:40Z",
+      "side": 1,
+      "message": "well UsbDeviceManager does need to know when each time USB session is new. Reset is one where new USB session start, so UsbDeviceManager does need disconnect notification as usb function driver is also being notified about that specific function related endpoint is getting disable.\n\nNot seeing disconnect notification, UsbDeviceManger remains as connect state only, instead of going into connect, disconnect and connect state.",
+      "parentUuid": "eb2036d9_9f2f7321",
+      "revId": "98ba34584071189c592e80f71e4c4323b72cb298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7fcd117_69b14354",
