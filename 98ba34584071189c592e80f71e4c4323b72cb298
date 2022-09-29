@@ -34,6 +34,70 @@
       "parentUuid": "374b2245_5f654834",
       "revId": "98ba34584071189c592e80f71e4c4323b72cb298",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb2036d9_9f2f7321",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-09-29T09:35:27Z",
+      "side": 1,
+      "message": "these uevents should not be relevant on this device reset path.  If they are, then properly handle them, this change you are proposing is not doing that at all.",
+      "parentUuid": "47489c5c_f68b19f2",
+      "revId": "98ba34584071189c592e80f71e4c4323b72cb298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7fcd117_69b14354",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1660,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-09-29T09:35:27Z",
+      "side": 1,
+      "message": "this feels wrong, why is the normal call not being made when the device is disconnected?\n\nAnd this is not a disconnect, it is a reset.",
+      "range": {
+        "startLine": 1660,
+        "startChar": 0,
+        "endLine": 1660,
+        "endChar": 18
+      },
+      "revId": "98ba34584071189c592e80f71e4c4323b72cb298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59c92d83_09305055",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1672,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-09-29T09:35:27Z",
+      "side": 1,
+      "message": "this is a sign that something is wrong, please do not do this.",
+      "range": {
+        "startLine": 1672,
+        "startChar": 0,
+        "endLine": 1672,
+        "endChar": 26
+      },
+      "revId": "98ba34584071189c592e80f71e4c4323b72cb298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
