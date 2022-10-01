@@ -2528,6 +2528,17 @@ static int dwc3_gadget_pullup(struct usb_gadget *g, int is_on)
 		pm_runtime_put(dwc->dev);
 		return 0;
 	}
+<<<<<<< HEAD   (391716 Revert "usb: dwc3: gadget: Avoid starting DWC3 gadget during)
+=======
+
+	/*
+	 * Synchronize and disable any further event handling while controller
+	 * is being enabled/disabled.
+	 */
+	disable_irq(dwc->irq_gadget);
+
+	spin_lock_irqsave(&dwc->lock, flags);
+>>>>>>> BRANCH (554580 ANDROID: abi_gki_aarch64_qcom: Add android_vh_madvise_cold_o)
 
 	if (!is_on) {
 		ret = dwc3_gadget_soft_disconnect(dwc);
