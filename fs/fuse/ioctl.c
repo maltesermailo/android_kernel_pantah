@@ -8,6 +8,7 @@
 #include <linux/uio.h>
 #include <linux/compat.h>
 #include <linux/fileattr.h>
+#include <linux/fscrypt.h>
 
 /*
  * CUSE servers compiled on 32bit broke on 64bit kernels because the
@@ -197,6 +198,25 @@ long fuse_do_ioctl(struct file *file, unsigned int cmd, unsigned long arg,
 
 		iov->iov_base = (void __user *)arg;
 		iov->iov_len = _IOC_SIZE(cmd);
+
+		if (FS_IOC_GET_ENCRYPTION_POLICY_EX == cmd) {
+			__u64 policy_size;
+			struct fscrypt_get_policy_ex_arg __user *uarg =
+				(struct fscrypt_get_policy_ex_arg __user *)arg;
+
+			if (copy_from_user(&policy_size, &uarg->policy_size,
+					   sizeof(policy_size))) {
+				err = -EFAULT;
+				goto out;
+			}
+
+			if (policy_size > SIZE_MAX - sizeof(policy_size)) {
+				err = -EINVAL;
+				goto out;
+			}
+
+			iov->iov_len = sizeof(policy_size) + policy_size;
+		}
 
 		if (_IOC_DIR(cmd) & _IOC_WRITE) {
 			in_iov = iov;
