@@ -9,6 +9,7 @@
 #include <linux/compat.h>
 #include <linux/fileattr.h>
 #include <linux/fscrypt.h>
+#include <linux/fsverity.h>
 
 /*
  * CUSE servers compiled on 32bit broke on 64bit kernels because the
@@ -199,6 +200,16 @@ long fuse_do_ioctl(struct file *file, unsigned int cmd, unsigned long arg,
 		iov->iov_base = (void __user *)arg;
 		iov->iov_len = _IOC_SIZE(cmd);
 
+		if (_IOC_DIR(cmd) & _IOC_WRITE) {
+			in_iov = iov;
+			in_iovs = 1;
+		}
+
+		if (_IOC_DIR(cmd) & _IOC_READ) {
+			out_iov = iov;
+			out_iovs = 1;
+		}
+
 		if (FS_IOC_GET_ENCRYPTION_POLICY_EX == cmd) {
 			__u64 policy_size;
 			struct fscrypt_get_policy_ex_arg __user *uarg =
@@ -216,16 +227,56 @@ long fuse_do_ioctl(struct file *file, unsigned int cmd, unsigned long arg,
 			}
 
 			iov->iov_len = sizeof(policy_size) + policy_size;
-		}
+		} else if (FS_IOC_MEASURE_VERITY == cmd) {
+			__u16 digest_size;
+			struct fsverity_digest __user *uarg =
+				(struct fsverity_digest __user *)arg;
 
-		if (_IOC_DIR(cmd) & _IOC_WRITE) {
-			in_iov = iov;
-			in_iovs = 1;
-		}
+			if (copy_from_user(&digest_size, &uarg->digest_size,
+					   sizeof(digest_size))) {
+				err = -EFAULT;
+				goto out;
+			}
 
-		if (_IOC_DIR(cmd) & _IOC_READ) {
-			out_iov = iov;
-			out_iovs = 1;
+			if (digest_size >
+				SIZE_MAX - sizeof(struct fsverity_digest)) {
+				err = -EINVAL;
+				goto out;
+			}
+
+			iov->iov_len =
+				sizeof(struct fsverity_digest) + digest_size;
+		} else if (FS_IOC_ENABLE_VERITY == cmd) {
+			struct fsverity_enable_arg enable;
+			struct fsverity_enable_arg __user *uarg =
+				(struct fsverity_enable_arg __user *)arg;
+			const __u32 max_buffer_len =
+				FUSE_MAX_MAX_PAGES * PAGE_SIZE;
+
+			if (copy_from_user(&enable, uarg, sizeof(enable))) {
+				err = -EFAULT;
+				goto out;
+			}
+
+			if (enable.salt_size > max_buffer_len ||
+			    enable.sig_size > max_buffer_len) {
+				err = -ENOMEM;
+				goto out;
+			}
+
+			if (enable.salt_size > 0) {
+				iov++;
+				in_iovs++;
+				iov->iov_base = u64_to_user_ptr(enable.salt_ptr);
+				iov->iov_len = enable.salt_size;
+			}
+
+			if (enable.sig_size > 0) {
+				iov++;
+				in_iovs++;
+				iov->iov_base = u64_to_user_ptr(enable.sig_ptr);
+				iov->iov_len = enable.sig_size;
+			}
 		}
 	}
 
