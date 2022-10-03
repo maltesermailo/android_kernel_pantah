@@ -11,3 +11,7 @@ ARM
    hypercalls
    pvtime
    ptp_kvm
+   mmio-guard
+   getfreq
+   util
+   get_freqtbl
