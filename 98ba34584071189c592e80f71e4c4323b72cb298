@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dfb24b86_72158079",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1660,
+      "author": {
+        "id": 1764341
+      },
+      "writtenOn": "2022-10-04T00:36:42Z",
+      "side": 1,
+      "message": "well this is USB bus reset, and there is no USB disconnect coming here.\n\nWith USB bus reset, it is expected to start new USB session, and some reason Android user space does need this notification as disconnect as new USB session.",
+      "parentUuid": "a7fcd117_69b14354",
+      "range": {
+        "startLine": 1660,
+        "startChar": 0,
+        "endLine": 1660,
+        "endChar": 18
+      },
+      "revId": "98ba34584071189c592e80f71e4c4323b72cb298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59c92d83_09305055",
         "filename": "drivers/usb/gadget/configfs.c",
         "patchSetId": 6
