@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4595f207_e5e17aa2",
+        "filename": "block/blk-merge.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2022-10-05T16:40:05Z",
+      "side": 1,
+      "message": "Hmm ... I\u0027m not sure I understand the above comment. The approach of this patch is to allow bvec_split_segs() to build bvecs larger than the segment size (4 KiB) and to split these later. Splitting later either happens by blk_rq_map_sg() (used by e.g. the SCSI core) or by the following changes applied to the null_blk driver:\n\n```\n        rq_for_each_segment(bvec, rq, iter) {\n-               len \u003d bvec.bv_len;\n+               len \u003d min(bvec.bv_len, nullb-\u003edev-\u003emax_segment_size);\n+               bvec.bv_len \u003d len;\n```",
+      "parentUuid": "f9412b13_beb380dc",
+      "range": {
+        "startLine": 275,
+        "startChar": 6,
+        "endLine": 275,
+        "endChar": 45
+      },
+      "revId": "1e79190c5799ac26ff1b49d34912f7b7aef134c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2d7d9aa_1a3afae7",
