@@ -60,7 +60,11 @@
 #include <trace/hooks/thermal.h>
 #include <trace/hooks/audio_usboffload.h>
 #include <trace/hooks/typec.h>
+<<<<<<< HEAD
 #include <trace/hooks/user.h>
+=======
+#include <trace/hooks/bl_hib.h>
+>>>>>>> 5fccdc02cd41... ANDROID: vendor hooks: Add hooks to support bootloader based hibernation
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -230,3 +234,6 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_preset);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_uid);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_user);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpuset_fork);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_hibernation_swap);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_cpu_resume);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_hib_resume_bdev);
