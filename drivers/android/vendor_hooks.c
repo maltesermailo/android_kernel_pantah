@@ -58,6 +58,7 @@
 #include <trace/hooks/power.h>
 #include <trace/hooks/gzvm.h>
 #include <trace/hooks/signal.h>
+#include <trace/hooks/bl_hib.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -212,3 +213,6 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_signal_whether_wake);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_check);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_freeze_whether_wake);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_percpu_rwsem_wq_add);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_hibernation_swap);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_cpu_resume);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_hib_resume_bdev);
