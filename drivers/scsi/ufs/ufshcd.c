@@ -8826,6 +8826,8 @@ static void ufshcd_vreg_set_lpm(struct ufs_hba *hba)
 	if (vcc_off && hba->vreg_info.vcc &&
 		hba->dev_quirks & UFS_DEVICE_QUIRK_DELAY_AFTER_LPM)
 		usleep_range(5000, 5100);
+
+	trace_android_rvh_ufs_set_lpm(hba, vcc_off);
 }
 
 #ifdef CONFIG_PM
