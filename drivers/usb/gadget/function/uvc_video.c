@@ -390,7 +390,8 @@ static void uvcg_video_pump(struct work_struct *work)
 		if (list_empty(&video->req_free) ||
 		    buf->state == UVC_BUF_STATE_DONE ||
 		    !(video->req_int_count %
-		       DIV_ROUND_UP(video->uvc_num_requests, 4))) {
+		       DIV_ROUND_UP(video->uvc_num_requests,
+			       video->req_int_skip_div))) {
 			video->req_int_count = 0;
 			req->no_interrupt = 0;
 		} else {

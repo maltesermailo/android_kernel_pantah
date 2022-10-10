@@ -106,6 +106,7 @@ struct uvc_video {
 	spinlock_t req_lock;
 
 	unsigned int req_int_count;
+	unsigned int req_int_skip_div;
 
 	void (*encode) (struct usb_request *req, struct uvc_video *video,
 			struct uvc_buffer *buf);
@@ -152,6 +153,7 @@ struct uvc_device {
 	/* Events */
 	unsigned int event_length;
 	unsigned int event_setup_out : 1;
+	unsigned int config_skip_int_div;
 };
 
 static inline struct uvc_device *to_uvc(struct usb_function *f)

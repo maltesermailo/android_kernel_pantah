@@ -63,6 +63,12 @@ static int uvc_queue_setup(struct vb2_queue *vq,
 	 */
 	nreq = DIV_ROUND_UP(DIV_ROUND_UP(sizes[0], 2), req_size);
 	nreq = clamp(nreq, 4U, 64U);
+	if (0 == video->uvc->config_skip_int_div) {
+		video->req_int_skip_div = nreq;
+	} else {
+		video->req_int_skip_div = min_t(unsigned int, nreq,
+				video->uvc->config_skip_int_div);
+	}
 	video->uvc_num_requests = nreq;
 
 	return 0;

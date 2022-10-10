@@ -24,6 +24,7 @@ struct f_uvc_opts {
 	unsigned int					streaming_interval;
 	unsigned int					streaming_maxpacket;
 	unsigned int					streaming_maxburst;
+	unsigned int					req_int_skip_div;
 
 	unsigned int					control_interface;
 	unsigned int					streaming_interface;
