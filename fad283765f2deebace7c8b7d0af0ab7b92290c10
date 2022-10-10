@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00e53418_6e6e2764",
+        "filename": "include/trace/hooks/fs.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-10T15:38:14Z",
+      "side": 1,
+      "message": "Please use `struct file;` instead of including this header.",
+      "revId": "fad283765f2deebace7c8b7d0af0ab7b92290c10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e15958e_f9114ca2",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-10T15:38:14Z",
+      "side": 1,
+      "message": "why? Please remove.\n\nInstead add `struct file;` as a forward decl. If needed for KMI visibility, the inclusion should go into drivers/android/vendor_hooks.c.",
+      "revId": "fad283765f2deebace7c8b7d0af0ab7b92290c10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
