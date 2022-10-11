@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "afc69354_77a881e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1901900
+      },
+      "writtenOn": "2022-10-11T18:43:57Z",
+      "side": 1,
+      "message": "Hi @gregkh@google.com \n\nI\u0027m not sure I understand the reasoning behind not treating a bus reset as a disconnect.  As Mayank mentioned, these are independent events and the host can drive a bus reset at any time.  Also, current composite upstream code treats the bus reset scenario as a disconnect:\n\nvoid composite_reset(struct usb_gadget *gadget)\n{\n...\n__composite_disconnect(gadget);\n\nThe only difference is that we can draw more current if we have received a bus reset versus a cable disconnect.\n\nThe portion being added (UEVENT generation) is not part of the upstream kernel, and is ANDROID specific code.  Because the upstream kernel split the composite disconnect and reset callbacks (due to the above current consumption comment) we are just updating the new behavior to match how it was doing it in the past. (ie in the past we were generating UEVENTS on bus reset as reset was calling composite_disconnect())\n\nThanks for helping to clarify.",
+      "parentUuid": "c3db5484_aad79d9d",
+      "revId": "98ba34584071189c592e80f71e4c4323b72cb298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a7fcd117_69b14354",
         "filename": "drivers/usb/gadget/configfs.c",
         "patchSetId": 6
