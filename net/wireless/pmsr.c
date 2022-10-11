@@ -266,6 +266,8 @@ int nl80211_pmsr_start(struct sk_buff *skb, struct genl_info *info)
 	struct nlattr *peers, *peer;
 	int count, rem, err, idx;
 
+	printk(KERN_ERR "jaewan: pmsr.c: pmsr_start");
+
 	if (!rdev->wiphy.pmsr_capa)
 		return -EOPNOTSUPP;
 
@@ -581,6 +583,19 @@ void cfg80211_pmsr_report(struct wireless_dev *wdev,
 			      NL80211_ATTR_PAD))
 		goto free;
 
+printk(KERN_ERR "jaewan: pmsr.c: sending result: %02x:%02x:%02x:%02x:%02x:%02x\n", result->addr[0], result->addr[1], result->addr[2], result->addr[3], result->addr[4], result->addr[5]);
+printk(KERN_ERR "jaewan: pmsr.c:   ftm\n");
+printk(KERN_ERR "jaewan: pmsr.c:   	busy_retry_time=%d\n", result->ftm.busy_retry_time);
+printk(KERN_ERR "jaewan: pmsr.c:   	num_bursts_exp=%d\n", result->ftm.num_bursts_exp);
+printk(KERN_ERR "jaewan: pmsr.c:   	burst_duration=%d\n", result->ftm.burst_duration);
+printk(KERN_ERR "jaewan: pmsr.c:   	rssi_avg=%llu\n", result->ftm.rssi_avg);
+printk(KERN_ERR "jaewan: pmsr.c:   	rssi_spread=%llu\n", result->ftm.rssi_spread);
+printk(KERN_ERR "jaewan: pmsr.c:   	rtt_avg=%llu\n", result->ftm.rtt_avg);
+printk(KERN_ERR "jaewan: pmsr.c:   	rtt_variance=%llu\n", result->ftm.rtt_variance);
+printk(KERN_ERR "jaewan: pmsr.c:   	rtt_spread=%llu\n", result->ftm.rtt_spread);
+printk(KERN_ERR "jaewan: pmsr.c:   	dist_avg=%llu\n", result->ftm.dist_avg);
+printk(KERN_ERR "jaewan: pmsr.c:   	dist_variance=%llu\n", result->ftm.dist_variance);
+printk(KERN_ERR "jaewan: pmsr.c:   	dist_spread=%llu\n", result->ftm.dist_spread);
 	err = nl80211_pmsr_send_result(msg, result);
 	if (err) {
 		pr_err_ratelimited("peer measurement result: message didn't fit!");
