@@ -16,6 +16,24 @@
       "message": "This was a pretty serious optimization, saving hundreds of thread wakeups on every transition into suspend, which can happen on the order of every few seconds.  I don\u0027t know if anything has changed since then, but it is probably worth measuring the cost to determine if it needs to be reimplemented.\n\nIIRC the upstream version was reverted due to a strange issue in i686 systemd, where a thread would lose its GS register value when it came out of suspend.  I was able to reproduce it on an i686 laptop, but not track down the reason.",
       "revId": "ebc7af30ceaca5d075f68d54aaa71989f87cccf3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a07c3348_75850be9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-12T16:16:17Z",
+      "side": 1,
+      "message": "THat\u0027s great, but the api it uses is no longer in the kernel so it\u0027s going to have to be rewritten to use something else 😊\n\nIf this is such a big benefit, it should also really go upstream please.",
+      "parentUuid": "150ac652_b337c4b6",
+      "revId": "ebc7af30ceaca5d075f68d54aaa71989f87cccf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
