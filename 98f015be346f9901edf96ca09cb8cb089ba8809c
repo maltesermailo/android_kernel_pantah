@@ -16,6 +16,24 @@
       "message": "This can all be done from userspace already using ptrace, or using ftrace on the system calls, why are kernel hooks needed?",
       "revId": "98f015be346f9901edf96ca09cb8cb089ba8809c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "410a8332_f4b984f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1191259
+      },
+      "writtenOn": "2022-10-12T09:45:59Z",
+      "side": 1,
+      "message": "Yes, this can be done by using ftrace. But the existing trace events does not satisfy our needs.\n\nCan we add some new trace events in this branch? Or we must submit upstream first? But submitting to the upstream will take a lot of time and will not catch up with the release of our product.",
+      "parentUuid": "362de454_ba7da84f",
+      "revId": "98f015be346f9901edf96ca09cb8cb089ba8809c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
