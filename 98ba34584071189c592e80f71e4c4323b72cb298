@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b74ee38b_eb6967ed",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1901900
+      },
+      "writtenOn": "2022-10-12T18:35:44Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a250b0af_56fad48d",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 7
+      },
+      "revId": "98ba34584071189c592e80f71e4c4323b72cb298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43d7aa36_3bcd6241",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-10-12T18:29:12Z",
       "side": 1,
       "message": "This sounds like a claim that there is a bug in the upstream implementation. If so, why is this patch not being proposed upstream?\n\nIf it is not an upstream bug, is this patch a workaround for android13-5.15 because you cannot implement the new model on the current product schedule?",
+      "revId": "98ba34584071189c592e80f71e4c4323b72cb298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f29798f4_1bdf262d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1901900
+      },
+      "writtenOn": "2022-10-12T18:35:44Z",
+      "side": 1,
+      "message": "There\u0027s nothing wrong with the upstream implementation.  There was a recent change upstream, which split up the disconnect and reset callbacks. (in the past reset was tied to the disconnect callback as well)  This change was made to fix USB2.0 compliance failures where the device wasn\u0027t drawing the proper current during a bus reset.\n\nThis change is just aligning it back to how it was behaving like in the past (before the reset callback was introduced for the above)",
+      "parentUuid": "43d7aa36_3bcd6241",
       "revId": "98ba34584071189c592e80f71e4c4323b72cb298",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -279,6 +321,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9ffbf56b_31bc7f1a",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1660,
+      "author": {
+        "id": 1901900
+      },
+      "writtenOn": "2022-10-12T18:35:44Z",
+      "side": 1,
+      "message": "There is no f_accessory support upstream, as it is an ANDROID specific use case.",
+      "parentUuid": "915a7de7_2f48f325",
+      "range": {
+        "startLine": 1660,
+        "startChar": 0,
+        "endLine": 1660,
+        "endChar": 18
+      },
+      "revId": "98ba34584071189c592e80f71e4c4323b72cb298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59c92d83_09305055",
         "filename": "drivers/usb/gadget/configfs.c",
         "patchSetId": 6
@@ -338,6 +404,30 @@
       "side": 1,
       "message": "What do you mean by \"there is nothing new\"? Do you mean that this is how it used to be done but it changed upstream? If so, why can\u0027t you use the new upstream paradigm?",
       "parentUuid": "71f076c5_9cfde70e",
+      "range": {
+        "startLine": 1672,
+        "startChar": 0,
+        "endLine": 1672,
+        "endChar": 26
+      },
+      "revId": "98ba34584071189c592e80f71e4c4323b72cb298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efde68e7_469970f9",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1672,
+      "author": {
+        "id": 1901900
+      },
+      "writtenOn": "2022-10-12T18:35:44Z",
+      "side": 1,
+      "message": "As mentioned, reset and disconnect events were using the same composite_disconnect() callback in the past, but a new change split those 2 events to use different callbacks.  Mayank is just mentioning that due to the change upstream, we need to also make this change to ensure the same behavior as the past.",
+      "parentUuid": "a745a27d_8bfde1a8",
       "range": {
         "startLine": 1672,
         "startChar": 0,
