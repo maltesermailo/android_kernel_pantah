@@ -83,6 +83,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6325083_c5124d36",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-12T18:44:21Z",
+      "side": 1,
+      "message": "Please update the commit message with the details on why this is android-specific (cite the android-specific patches that relate to it).",
+      "parentUuid": "f29798f4_1bdf262d",
+      "revId": "98ba34584071189c592e80f71e4c4323b72cb298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "374b2245_5f654834",
@@ -356,6 +374,30 @@
       "writtenOn": "2022-10-12T18:40:16Z",
       "side": 1,
       "message": "There\u0027s also no uevent mechanism, as this is implemented so that the Android USB framework is aware of changes from the UDC.",
+      "parentUuid": "9ffbf56b_31bc7f1a",
+      "range": {
+        "startLine": 1660,
+        "startChar": 0,
+        "endLine": 1660,
+        "endChar": 18
+      },
+      "revId": "98ba34584071189c592e80f71e4c4323b72cb298",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d01d1c8a_0015c73a",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1660,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-12T18:44:21Z",
+      "side": 1,
+      "message": "That needs to be made much more clear in the commit message.\n\nIs this `acc_disconnect();` appropriate for all callers of this function? Is the CONFIG_USB_CONFIGFS_F_ACC behavior appropriate for all of the devices from all vendors/OEMs?",
       "parentUuid": "9ffbf56b_31bc7f1a",
       "range": {
         "startLine": 1660,
