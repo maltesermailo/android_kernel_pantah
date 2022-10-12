@@ -46,6 +46,30 @@
       },
       "revId": "a05f095779ba9231104df4ef6073560756ea0f3c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d666283_50254bf8",
+        "filename": "kernel/locking/rwsem.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2022-10-12T13:31:02Z",
+      "side": 1,
+      "message": "strictly speaking there is still a difference compared to the upstream patch:\n\n```\n  ## kernel/locking/rwsem.c ##\n-@@ kernel/locking/rwsem.c: struct rwsem_waiter {\n-   struct task_struct *task;\n-   enum rwsem_waiter_type type;\n-   unsigned long timeout;\n--\n--  /* Writer only, not initialized in reader */\n-   bool handoff_set;\n- };\n- #define rwsem_first_waiter(sem) \\\n```\n\nPlease bring back that hunk to avoid merge conflicts in the future.",
+      "parentUuid": "660453e6_805020e5",
+      "range": {
+        "startLine": 340,
+        "startChar": 0,
+        "endLine": 351,
+        "endChar": 2
+      },
+      "revId": "a05f095779ba9231104df4ef6073560756ea0f3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
