@@ -33,6 +33,42 @@
       "message": "How will memory not be allocated?  Why would the existing tracepoint not be sufficient?",
       "revId": "79043045fd1f015c193117d844e3582ce7343002",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f965a9b_c66c13b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1191259
+      },
+      "writtenOn": "2022-10-13T07:51:15Z",
+      "side": 1,
+      "message": "My mistake, I have fixed it, thanks!",
+      "parentUuid": "f9904305_6ff9b7ab",
+      "revId": "79043045fd1f015c193117d844e3582ce7343002",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08e7e59b_ac6a0e06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1191259
+      },
+      "writtenOn": "2022-10-13T07:51:15Z",
+      "side": 1,
+      "message": "The following are several cases that may fail the allocation.\n\n```\n    if (fd_flags \u0026 ~DMA_HEAP_VALID_FD_FLAGS)\n\t\treturn ERR_PTR(-EINVAL);\n    if (heap_flags \u0026 ~DMA_HEAP_VALID_HEAP_FLAGS \u0026\u0026 !vh_valid)\n\t\treturn ERR_PTR(-EINVAL);\n   \n    return heap-\u003eops-\u003eallocate(heap, len, fd_flags, heap_flags);\n```\n\nThe existing tracepoint android_vh_dmabuf_heap_flags_validation is always executed without regard to failure cases.",
+      "parentUuid": "80d9d3a1_c348aa6f",
+      "revId": "79043045fd1f015c193117d844e3582ce7343002",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
