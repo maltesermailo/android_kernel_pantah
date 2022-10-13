@@ -12,6 +12,14 @@ config GKI_HIDDEN_DRM_CONFIGS
 	  These are normally selected implicitly when including a
 	  DRM module, but for GKI, the modules are built out-of-tree.
 
+config GKI_HIDDEN_DRM_MODULE_CONFIGS
+	tristate "Hidden DRM tristate configs for vendors"
+	select DRM_DISPLAY_HELPER if (DRM)
+	select DRM_DISPLAY_DP_HELPER if (DRM)
+	help
+	  Dummy config option used to allow vendors to enable hidden DRM
+	  configs as modules.
+
 config GKI_HIDDEN_MCP251XFD_CONFIGS
         bool "Hidden MCP251XFD configs needed for GKI"
         select CAN_RX_OFFLOAD
