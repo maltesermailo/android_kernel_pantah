@@ -83,6 +83,7 @@ struct dma_buf *dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
 				      unsigned int heap_flags)
 {
 	bool vh_valid = false;
+	struct dma_buf *dmabuf;
 
 	trace_android_vh_dmabuf_heap_flags_validation(heap,
 		len, fd_flags, heap_flags, &vh_valid);
@@ -100,7 +101,12 @@ struct dma_buf *dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
 	if (!len)
 		return ERR_PTR(-EINVAL);
 
-	return heap->ops->allocate(heap, len, fd_flags, heap_flags);
+	dmabuf = heap->ops->allocate(heap, len, fd_flags, heap_flags);
+	if(!IS_ERR(dmabuf))
+		trace_android_vh_dma_heap_buffer_alloc(heap,
+			len, fd_flags, heap_flags);
+
+	return dmabuf;
 }
 EXPORT_SYMBOL_GPL(dma_heap_buffer_alloc);
 
