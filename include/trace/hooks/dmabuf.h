@@ -26,6 +26,10 @@ DECLARE_HOOK(android_vh_dmabuf_heap_flags_validation,
 		TP_PROTO(struct dma_heap *heap, size_t len,
 			unsigned int fd_flags, unsigned int heap_flags, bool *skip),
 		TP_ARGS(heap, len, fd_flags, heap_flags, skip));
+DECLARE_HOOK(android_vh_dma_heap_buffer_alloc,
+		TP_PROTO(struct dma_heap *heap, size_t len,
+			unsigned int fd_flags, unsigned int heap_flags),
+		TP_ARGS(heap, len, fd_flags, heap_flags));
 #endif /* _TRACE_HOOK_DMABUF_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
