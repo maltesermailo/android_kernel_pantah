@@ -70,6 +70,30 @@
       },
       "revId": "594d62382526d50ec46d1b57e80f053e8be629e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9019e79_a71280dc",
+        "filename": "android/abi_gki_aarch64_mtk",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1970801
+      },
+      "writtenOn": "2022-10-14T09:14:11Z",
+      "side": 1,
+      "message": "Sorry. The WWAN driver hasn\u0027t been online exactly. \n\nThe WWAN driver provides some exported interfaces to another driver(Say **Driver A**) to use the device object under **some_class** . \n\n**Driver A** doesn\u0027t know how to get the exact pointer of the device object at the beginning.\n\nHence we provide an API in the WWAN driver, where **Driver A** can input a pre-defined proprietary parameter to search the pointer of the exact device object.\n\nThat\u0027s why we wanted to iterate the devices under **some_class**.",
+      "parentUuid": "652d43a5_ea433dfe",
+      "range": {
+        "startLine": 117,
+        "startChar": 2,
+        "endLine": 119,
+        "endChar": 21
+      },
+      "revId": "594d62382526d50ec46d1b57e80f053e8be629e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
