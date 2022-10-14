@@ -34,6 +34,24 @@
       "parentUuid": "3be1200a_141cee71",
       "revId": "63e45b0a22e98739b5bfd7c1f4ad1378e9208cf7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0963d0e0_b391a105",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2022-10-14T17:45:16Z",
+      "side": 1,
+      "message": "\u003e Sir, the main reason we add this hook is to add debug information in oom messages\n\nI understand the desire for this part.\n\nSo with this change, when you see an oom-kill you will print out all the dmabuf allocations for each heap that you tracked with this new tracepoint? If so, could you not do the same thing by waiting on a mark_victim event and then use dmabuf_dump to do the same thing?",
+      "parentUuid": "01de94b6_22eb360b",
+      "revId": "63e45b0a22e98739b5bfd7c1f4ad1378e9208cf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
