@@ -16,6 +16,24 @@
       "message": "I don\u0027t think this hook is necessary. `/sys/kernel/dma-buf/buffers`, `/proc/pid/fdinfo`, and `/proc/pid/maps` along with `dmabuf_dump` already provide information about all exported dmabufs on the system.",
       "revId": "63e45b0a22e98739b5bfd7c1f4ad1378e9208cf7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01de94b6_22eb360b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1191259
+      },
+      "writtenOn": "2022-10-14T02:46:40Z",
+      "side": 1,
+      "message": "Sir, the main reason we add this hook is to add debug information in oom messages, which helps in dma heap memory leak debugging. The method you mentioned above also does it, but it doesn\u0027t get debug messages in the first place, which may not help at times.",
+      "parentUuid": "3be1200a_141cee71",
+      "revId": "63e45b0a22e98739b5bfd7c1f4ad1378e9208cf7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
