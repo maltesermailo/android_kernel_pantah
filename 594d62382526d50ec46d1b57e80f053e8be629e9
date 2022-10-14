@@ -22,6 +22,30 @@
       },
       "revId": "594d62382526d50ec46d1b57e80f053e8be629e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b37cf6e2_95715da8",
+        "filename": "android/abi_gki_aarch64_mtk",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1970801
+      },
+      "writtenOn": "2022-10-14T00:50:54Z",
+      "side": 1,
+      "message": "Hi Greg,\n\nThanks for your review. The following snippet describes how we use the three functions.\n\n1. Create a device class by:\nsome_class \u003d class_create(THIS_MODULE, SOME_CLASS_NAME);\n\n2. Create a device (struct device) by:\nstruct mtk_defined_drvdata *drv_data;\ndevice_create(some_class, parent_dev, dev_number, drv_data, \"%s\", some_name);\n\n3.After we get a buntch of devices under this class, we could iterate the class and search the drv_data we need by:\n\nstruct device *dev;\nstruct class_dev_iter iter;\nstruct mtk_defined_drvdata *drv_data;\n\nclass_dev_iter_init(\u0026iter, some_class, NULL, NULL);\nwhile((dev \u003d class_dev_iter_next(\u0026iter)) \u0026\u0026 some_condition) {\n\tdrv_data \u003d dev_get_drvdata(dev);\n\tdo_sth_on(drv_data);\n}\n\nclass_dev_iter_exit(\u0026iter);",
+      "parentUuid": "dfca676e_592e6d0c",
+      "range": {
+        "startLine": 117,
+        "startChar": 2,
+        "endLine": 119,
+        "endChar": 21
+      },
+      "revId": "594d62382526d50ec46d1b57e80f053e8be629e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
