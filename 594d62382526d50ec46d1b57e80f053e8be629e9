@@ -94,6 +94,30 @@
       },
       "revId": "594d62382526d50ec46d1b57e80f053e8be629e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4aafa9d5_96b050be",
+        "filename": "android/abi_gki_aarch64_mtk",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-14T14:10:54Z",
+      "side": 1,
+      "message": "Sorry, but that is not how the driver model works, please do not do that.\n\nDrivers should only control the devices that are given to them by the driver core, they should not be attempting to walk all devices and find others and then do things with them, that way only leads to race conditions and other major problems.\n\nPlease follow the proper structure of the driver core model.\n\nAgain, if you can point me to where your code is at, I will be glad to review it and help find a proper solution for it.  As the license requires it to be public, this should not be a problem, right?",
+      "parentUuid": "c9019e79_a71280dc",
+      "range": {
+        "startLine": 117,
+        "startChar": 2,
+        "endLine": 119,
+        "endChar": 21
+      },
+      "revId": "594d62382526d50ec46d1b57e80f053e8be629e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
