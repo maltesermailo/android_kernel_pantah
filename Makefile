@@ -153,7 +153,7 @@ export KBUILD_EXTMOD
 # Kbuild from device kernel, so care must be taken to ensure that those headers match.
 ifdef KBUILD_MIXED_TREE
 # Need vmlinux.symvers for modpost and System.map for depmod, check whether they exist in KBUILD_MIXED_TREE
-required_mixed_files=vmlinux.symvers System.map
+required_mixed_files=Module.symvers System.map
 $(if $(filter-out $(words $(required_mixed_files)), \
 		$(words $(wildcard $(add-prefix $(KBUILD_MIXED_TREE)/,$(required_mixed_files))))),,\
 	$(error KBUILD_MIXED_TREE=$(KBUILD_MIXED_TREE) doesn't contain $(required_mixed_files)))
@@ -1975,7 +1975,7 @@ KBUILD_MODULES :=
 endif # CONFIG_MODULES
 
 PHONY += modpost
-modpost: $(if $(single-build),, $(if $(KBUILD_BUILTIN), vmlinux.o)) \
+modpost: $(if $(single-build),, $(if $(KBUILD_MIXED_TREE),, $(if $(KBUILD_BUILTIN), vmlinux.o))) \
 	 $(if $(KBUILD_MODULES), modules_check)
 	$(Q)$(MAKE) -f $(srctree)/scripts/Makefile.modpost
 
