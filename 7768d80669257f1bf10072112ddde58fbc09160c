@@ -117,6 +117,30 @@
       },
       "revId": "7768d80669257f1bf10072112ddde58fbc09160c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93b77e79_daddfd23",
+        "filename": "mm/swap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-18T23:41:14Z",
+      "side": 1,
+      "message": "```\n#undef CREATE_TRACE_POINTS\n#include \u003ctrace/hooks/mm.h\u003e\n```\nIs correct and is a common pattern. The alternative would be to move the inclusion of trace/hooks/mm.h above the `#ifdef CREATE_TRACE_POINTS` (`CREATE_TRACE_POINTS` must not be defined for the inclusion of the hook header.",
+      "parentUuid": "2c35938c_54ba4a8e",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 26
+      },
+      "revId": "7768d80669257f1bf10072112ddde58fbc09160c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
