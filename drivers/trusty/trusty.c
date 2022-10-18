@@ -21,6 +21,7 @@
 
 #include "trusty-smc.h"
 #include "trusty-trace.h"
+#include "trusty-sched-share-api.h"
 
 struct trusty_state;
 static struct platform_driver trusty_driver;
@@ -32,6 +33,8 @@ struct trusty_work {
 	struct trusty_state *ts;
 	struct work_struct work;
 };
+
+struct trusty_sched_share_state;
 
 struct trusty_state {
 	struct mutex smc_lock;
@@ -46,6 +49,7 @@ struct trusty_state {
 	struct list_head nop_queue;
 	spinlock_t nop_lock; /* protects nop_queue */
 	struct device_dma_parameters dma_parms;
+	void *trusty_sched_share_state;
 	void *ffa_tx;
 	void *ffa_rx;
 	u16 ffa_local_id;
@@ -941,6 +945,10 @@ static int trusty_probe(struct platform_device *pdev)
 		goto err_add_children;
 	}
 
+	s->trusty_sched_share_state = trusty_register_sched_share(&pdev->dev);
+	if (!s->trusty_sched_share_state)
+		dev_info(&pdev->dev, "Trusty-Sched-Share API not available.\n");
+
 	return 0;
 
 err_add_children:
@@ -963,13 +971,16 @@ err_api_version:
 	mutex_destroy(&s->smc_lock);
 	kfree(s);
 err_allocate_state:
-	return ret;
+	return 0;
 }
 
 static int trusty_remove(struct platform_device *pdev)
 {
 	unsigned int cpu;
 	struct trusty_state *s = platform_get_drvdata(pdev);
+
+	if (s->trusty_sched_share_state)
+		trusty_unregister_sched_share(s->trusty_sched_share_state);
 
 	device_for_each_child(&pdev->dev, NULL, trusty_remove_child);
 
