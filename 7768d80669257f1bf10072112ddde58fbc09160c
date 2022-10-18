@@ -69,6 +69,30 @@
       },
       "revId": "7768d80669257f1bf10072112ddde58fbc09160c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69015765_d4521057",
+        "filename": "mm/swap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2022-10-18T22:11:02Z",
+      "side": 1,
+      "message": "I really have no idea what\u0027s the right way but I saw the following error below.\n\n\n```\ndiff --git a/mm/swap.c b/mm/swap.c\nindex 467282ac2e967..3c445c1450fd5 100644\n--- a/mm/swap.c\n+++ b/mm/swap.c\n@@ -40,11 +40,11 @@\n \n #include \"internal.h\"\n \n+#include \u003ctrace/hooks/mm.h\u003e\n+\n #define CREATE_TRACE_POINTS\n #include \u003ctrace/events/pagemap.h\u003e\n \n-#undef CREATE_TRACE_POINTS\n-#include \u003ctrace/hooks/mm.h\u003e\n \n /* How many pages do we try to swap or page in/out together? */\n int page_cluster;\n\n```\n\n```\n\n/aosp/include/trace/define_trace.h:95:10: fatal error: \u0027trace/hooks/pagemap.h\u0027 file not found\n#include TRACE_INCLUDE(TRACE_INCLUDE_FILE)\n         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n/usr/local/google/home/minchan/nvme-2/kernel/t-dev-gs-pixel-5.10-tm-qpr2/aosp/include/trace/define_trace.h:90:32: note: expanded from macro \u0027TRACE_INCLUDE\u0027\n# define TRACE_INCLUDE(system) __TRACE_INCLUDE(system)\n                               ^~~~~~~~~~~~~~~~~~~~~~~\n/usr/local/google/home/minchan/nvme-2/kernel/t-dev-gs-pixel-5.10-tm-qpr2/aosp/include/trace/define_trace.h:87:34: note: expanded from macro \u0027__TRACE_INCLUDE\u0027\n# define __TRACE_INCLUDE(system) __stringify(TRACE_INCLUDE_PATH/system.h)\n                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n/usr/local/google/home/minchan/nvme-2/kernel/t-dev-gs-pixel-5.10-tm-qpr2/aosp/include/linux/stringify.h:10:27: note: expanded from macro \u0027__stringify\u0027\n#define __stringify(x...)       __stringify_1(x)\n                                ^~~~~~~~~~~~~~~~\n/usr/local/google/home/minchan/nvme-2/kernel/t-dev-gs-pixel-5.10-tm-qpr2/aosp/include/linux/stringify.h:9:29: note: expanded from macro \u0027__stringify_1\u0027\n#define __stringify_1(x...)     #x  \n                                ^~\n\u003cscratch space\u003e:157:1: note: expanded from here\n\"trace/hooks/pagemap.h\"\n^~~~~~~~~~~~~~~~~~~~~~~\n1 error generated.\n\n```\n\nAnd I also observed \n```\n$ ag \"#undef CREATE_TRACE_POINTS\" mm/\nmm/cma.c\n40:#undef CREATE_TRACE_POINTS\n\nmm/filemap.c\n52:#undef CREATE_TRACE_POINTS\n\nmm/swap.c\n46:#undef CREATE_TRACE_POINTS\n\nmm/oom_kill.c\n55:#undef CREATE_TRACE_POINTS\n\nmm/mmap.c\n59:#undef CREATE_TRACE_POINTS\n\nmm/shmem.c\n47:#undef CREATE_TRACE_POINTS\n\nmm/slab_common.c\n30:#undef CREATE_TRACE_POINTS\n\nmm/vmscan.c\n70:#undef CREATE_TRACE_POINTS\n\nmm/compaction.c\n47:#undef CREATE_TRACE_POINTS\n\nmm/gup.c\n28:#undef CREATE_TRACE_POINTS\n\n```\n\nPlease suggest right way if that\u0027s not desirable.\nThank you.",
+      "parentUuid": "26cdf8cc_13dbadfb",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 26
+      },
+      "revId": "7768d80669257f1bf10072112ddde58fbc09160c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
