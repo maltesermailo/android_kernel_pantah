@@ -16,6 +16,24 @@
       "message": "This looks quite different to the version upstream (it\u0027s missing a removal hunk). How come?",
       "revId": "624d7aa1b9778dd9d0046b40395dc2e7e31ebf25",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1eaa3b6c_eb3f620c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-20T18:31:09Z",
+      "side": 1,
+      "message": "It looks different because 2022-04 doesn\u0027t have \"usb: dwc3: gadget: Prevent repeat pullup()\" which is listed as required for this patch. We can\u0027t accept this without that prerequisite patch. Please add that patch to the series.",
+      "parentUuid": "df7e9e73_dbb388b0",
+      "revId": "624d7aa1b9778dd9d0046b40395dc2e7e31ebf25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
