@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "547ac801_34acb887",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1891695
+      },
+      "writtenOn": "2022-10-20T17:25:42Z",
+      "side": 1,
+      "message": "I just checked with the owner of this patch series and he mentioned the changes are approved and merged in the upstream",
+      "parentUuid": "a7b65e4b_b0dbbf51",
+      "revId": "e6def42efd9499ef7d25cddee0346e6d0dc25450",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "00528e7e_e8057614",
@@ -137,6 +155,24 @@
       "side": 1,
       "message": "Here are errors from the pixel build\n(kernel_raviole_kleaf on kernel-android13-gs-pixel-5.15-gs101):\n```\nINFO: From Building dtbo //private/google-modules/soc/gs:slider-initramfs_False-boot_True-vendor_boot-vendor_dlkm_True-True_dtbo:\nINFO: From Building dtbo //private/google-modules/soc/gs:slider-initramfs_True-boot_False-vendor_boot-vendor_dlkm_False-True_dtbo:\nINFO: From Building dtbo //private/google-modules/soc/gs:slider-initramfs_True-boot_True-vendor_kernel_boot-vendor_dlkm_True-True_dtbo:\nINFO: From Building dtbo //private/google-modules/soc/gs:slider-initramfs_True-boot_True-vendor_boot_None-vendor_dlkm_False-True_dtbo:\nINFO: From Building dtbo //private/google-modules/soc/gs:slider-initramfs_True-boot_False-vendor_boot-vendor_dlkm_True-True_dtbo:\nINFO: From Building dtbo //private/google-modules/soc/gs:slider-initramfs_False-boot_False-vendor_boot-vendor_dlkm_True-True_dtbo:\nINFO: From Building dtbo //private/google-modules/soc/gs:slider-initramfs_False-boot_True-vendor_kernel_boot-vendor_dlkm_False-True_dtbo:\nINFO: From Building dtbo //private/google-modules/soc/gs:slider-initramfs_True-boot_False-vendor_boot_None-vendor_dlkm_True-True_dtbo:\n... 216 lines skipped ...\n\nUse --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging\nERROR: modpost: \"log_post_read_mmio\" [../private/google-modules/soc/gs/drivers/clocksource/exynos_mct.ko] undefined!\nERROR: modpost: \"log_read_mmio\" [../private/google-modules/soc/gs/drivers/clocksource/exynos_mct.ko] undefined!\nERROR: modpost: \"log_post_write_mmio\" [../private/google-modules/soc/gs/drivers/clocksource/exynos_mct.ko] undefined!\nERROR: modpost: \"log_write_mmio\" [../private/google-modules/soc/gs/drivers/clocksource/exynos_mct.ko] undefined!\nERROR: modpost: \"log_post_write_mmio\" [../private/google-modules/soc/gs/drivers/watchdog/s3c2410_wdt.ko] undefined!\nERROR: modpost: \"log_write_mmio\" [../private/google-modules/soc/gs/drivers/watchdog/s3c2410_wdt.ko] undefined!\nERROR: modpost: \"log_post_read_mmio\" [../private/google-modules/soc/gs/drivers/watchdog/s3c2410_wdt.ko] undefined!\nERROR: modpost: \"log_read_mmio\" [../private/google-modules/soc/gs/drivers/watchdog/s3c2410_wdt.ko] undefined!\nERROR: modpost: \"log_post_read_mmio\" [../private/google-modules/soc/gs/drivers/thermal/samsung/gs101_thermal.ko] undefined!\nERROR: modpost: \"log_read_mmio\" [../private/google-modules/soc/gs/drivers/thermal/samsung/gs101_thermal.ko] undefined!\nWARNING: modpost: suppressed 108 unresolved symbol warnings because there were too many)\n...101/out/bazel/output_user_root/6a5de5996bc8af3e1c355f901c7e940c/sandbox/linux-sandbox/82/execroot/__main__/common/scripts/Makefile.modpost:158: ../private/google-modules/soc/gs/Module.symvers] Error 1\nmake[3]: *** Deleting file \u0027../private/google-modules/soc/gs/Module.symvers\u0027\n...buildbot/src/partner-android/android13-gs-pixel-5.15-gs101/out/bazel/output_user_root/6a5de5996bc8af3e1c355f901c7e940c/sandbox/linux-sandbox/82/execroot/__main__/common/Makefile:1828: modules] Error 2\nmake[1]: *** [Makefile:237: __sub-make] Error 2\nmake: *** [Makefile:7: modules] Error 2\nINFO: Elapsed time: 1452.380s, Critical Path: 1428.49s\nINFO: 321 processes: 238 internal, 82 linux-sandbox, 1 local.\n```",
       "parentUuid": "082e909f_407b4581",
+      "revId": "e6def42efd9499ef7d25cddee0346e6d0dc25450",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45970ff9_a3719506",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1891695
+      },
+      "writtenOn": "2022-10-20T17:25:42Z",
+      "side": 1,
+      "message": "To resolve these we need to add those export symbols from trace_readwrite.c to abi symbol list. can we do that ?",
+      "parentUuid": "0e83ac15_77dbf58f",
       "revId": "e6def42efd9499ef7d25cddee0346e6d0dc25450",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
