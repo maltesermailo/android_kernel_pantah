@@ -104,6 +104,24 @@
       "parentUuid": "5db670b7_0e206021",
       "revId": "e6def42efd9499ef7d25cddee0346e6d0dc25450",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e83ac15_77dbf58f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-10-20T17:17:19Z",
+      "side": 1,
+      "message": "Here are errors from the pixel build\n(kernel_raviole_kleaf on kernel-android13-gs-pixel-5.15-gs101):\n```\nINFO: From Building dtbo //private/google-modules/soc/gs:slider-initramfs_False-boot_True-vendor_boot-vendor_dlkm_True-True_dtbo:\nINFO: From Building dtbo //private/google-modules/soc/gs:slider-initramfs_True-boot_False-vendor_boot-vendor_dlkm_False-True_dtbo:\nINFO: From Building dtbo //private/google-modules/soc/gs:slider-initramfs_True-boot_True-vendor_kernel_boot-vendor_dlkm_True-True_dtbo:\nINFO: From Building dtbo //private/google-modules/soc/gs:slider-initramfs_True-boot_True-vendor_boot_None-vendor_dlkm_False-True_dtbo:\nINFO: From Building dtbo //private/google-modules/soc/gs:slider-initramfs_True-boot_False-vendor_boot-vendor_dlkm_True-True_dtbo:\nINFO: From Building dtbo //private/google-modules/soc/gs:slider-initramfs_False-boot_False-vendor_boot-vendor_dlkm_True-True_dtbo:\nINFO: From Building dtbo //private/google-modules/soc/gs:slider-initramfs_False-boot_True-vendor_kernel_boot-vendor_dlkm_False-True_dtbo:\nINFO: From Building dtbo //private/google-modules/soc/gs:slider-initramfs_True-boot_False-vendor_boot_None-vendor_dlkm_True-True_dtbo:\n... 216 lines skipped ...\n\nUse --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging\nERROR: modpost: \"log_post_read_mmio\" [../private/google-modules/soc/gs/drivers/clocksource/exynos_mct.ko] undefined!\nERROR: modpost: \"log_read_mmio\" [../private/google-modules/soc/gs/drivers/clocksource/exynos_mct.ko] undefined!\nERROR: modpost: \"log_post_write_mmio\" [../private/google-modules/soc/gs/drivers/clocksource/exynos_mct.ko] undefined!\nERROR: modpost: \"log_write_mmio\" [../private/google-modules/soc/gs/drivers/clocksource/exynos_mct.ko] undefined!\nERROR: modpost: \"log_post_write_mmio\" [../private/google-modules/soc/gs/drivers/watchdog/s3c2410_wdt.ko] undefined!\nERROR: modpost: \"log_write_mmio\" [../private/google-modules/soc/gs/drivers/watchdog/s3c2410_wdt.ko] undefined!\nERROR: modpost: \"log_post_read_mmio\" [../private/google-modules/soc/gs/drivers/watchdog/s3c2410_wdt.ko] undefined!\nERROR: modpost: \"log_read_mmio\" [../private/google-modules/soc/gs/drivers/watchdog/s3c2410_wdt.ko] undefined!\nERROR: modpost: \"log_post_read_mmio\" [../private/google-modules/soc/gs/drivers/thermal/samsung/gs101_thermal.ko] undefined!\nERROR: modpost: \"log_read_mmio\" [../private/google-modules/soc/gs/drivers/thermal/samsung/gs101_thermal.ko] undefined!\nWARNING: modpost: suppressed 108 unresolved symbol warnings because there were too many)\n...101/out/bazel/output_user_root/6a5de5996bc8af3e1c355f901c7e940c/sandbox/linux-sandbox/82/execroot/__main__/common/scripts/Makefile.modpost:158: ../private/google-modules/soc/gs/Module.symvers] Error 1\nmake[3]: *** Deleting file \u0027../private/google-modules/soc/gs/Module.symvers\u0027\n...buildbot/src/partner-android/android13-gs-pixel-5.15-gs101/out/bazel/output_user_root/6a5de5996bc8af3e1c355f901c7e940c/sandbox/linux-sandbox/82/execroot/__main__/common/Makefile:1828: modules] Error 2\nmake[1]: *** [Makefile:237: __sub-make] Error 2\nmake: *** [Makefile:7: modules] Error 2\nINFO: Elapsed time: 1452.380s, Critical Path: 1428.49s\nINFO: 321 processes: 238 internal, 82 linux-sandbox, 1 local.\n```",
+      "parentUuid": "082e909f_407b4581",
+      "revId": "e6def42efd9499ef7d25cddee0346e6d0dc25450",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
