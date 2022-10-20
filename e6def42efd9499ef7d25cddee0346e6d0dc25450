@@ -68,6 +68,42 @@
       "message": "it seems you need a lot more changes other than just this one.  Also, why is this needed at all?",
       "revId": "e6def42efd9499ef7d25cddee0346e6d0dc25450",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "082e909f_407b4581",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1891695
+      },
+      "writtenOn": "2022-10-20T17:03:03Z",
+      "side": 1,
+      "message": "What are the errors are you seeing ? I\u0027m not running into any build or abi errors with this in my repo.",
+      "parentUuid": "9a477cb7_324e5926",
+      "revId": "e6def42efd9499ef7d25cddee0346e6d0dc25450",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59c7efc3_1c291850",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1891695
+      },
+      "writtenOn": "2022-10-20T17:03:03Z",
+      "side": 1,
+      "message": "with this patch, we use asm-generic io which has logging apis and without this we are using arm64/include/asm/io.h IO apis with no logging. \nAlso, what are other changes you are talking about ? some vendor module changes are needed similar to this https://lore.kernel.org/lkml/f4256157c67961b500fc24cd59d4df5c3fa7d375.1652891705.git.quic_saipraka@quicinc.com/",
+      "parentUuid": "5db670b7_0e206021",
+      "revId": "e6def42efd9499ef7d25cddee0346e6d0dc25450",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
