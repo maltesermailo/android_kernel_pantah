@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee638cb1_00f49f14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-20T07:34:38Z",
+      "side": 1,
+      "message": "Please do not have an export and a .xml update in the same patch.  This needs to be 2 commits at the least.\n\nBut the root problem is why is this symbol needed at all?  No driver should ever be using this variable.",
+      "revId": "1aed085c5d81444c58a0a59ce5d0e3b870649826",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9ed72ff_53717629",
+        "filename": "kernel/sched/psi.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-20T07:34:38Z",
+      "side": 1,
+      "message": "not allowed for external modules, sorry.\n\nAnd even if it was, it has to be EXPORT_SYMBOL_GPL()",
+      "revId": "1aed085c5d81444c58a0a59ce5d0e3b870649826",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
