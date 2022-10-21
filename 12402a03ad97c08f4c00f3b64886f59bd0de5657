@@ -16,6 +16,23 @@
       "message": "Where is the 2nd patch (with the symbol list and XML)? It should be submitted together with this patch (submitted in same `git push` or `repo upload`).",
       "revId": "12402a03ad97c08f4c00f3b64886f59bd0de5657",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0804b821_a7941767",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-10-21T06:29:00Z",
+      "side": 1,
+      "message": "You don\u0027t want to hook between netfilter and the core, just use netfilter, that is what it is there for.  This tracepoint is the exact same codepath as netfilter can read from, please use that instead.",
+      "revId": "12402a03ad97c08f4c00f3b64886f59bd0de5657",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
