@@ -11,11 +11,15 @@
 
 #include <trace/hooks/vendor_hooks.h>
 
-struct dma_buf;
+#include <linux/dma-buf.h>
 
 DECLARE_HOOK(android_vh_dma_buf_release,
 		TP_PROTO(struct dma_buf *data),
 		TP_ARGS(data));
+
+DECLARE_HOOK(android_vh_dma_buf_stats_teardown,
+	TP_PROTO(struct dma_buf_sysfs_entry *sysfs_entry, bool *defer_sysfs_release_flag),
+	TP_ARGS(sysfs_entry, defer_sysfs_release_flag));
 #endif /* _TRACE_HOOK_DMABUF_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
