@@ -119,16 +119,45 @@ static struct kobj_type dma_buf_ktype = {
 	.default_groups = dma_buf_stats_default_groups,
 };
 
+struct sysfs_release_work {
+    struct work_struct work;
+    struct dma_buf_sysfs_entry *sysfs_entry;
+};
+
+static void __teardown(struct dma_buf_sysfs_entry *sysfs_entry)
+{
+	kobject_del(&sysfs_entry->kobj);
+	kobject_put(&sysfs_entry->kobj);
+}
+
+static void sysfs_del_workfn(struct work_struct *work)
+{
+	struct sysfs_release_work *release_work =
+		container_of(work, struct sysfs_release_work, work);
+
+	__teardown(release_work->sysfs_entry);
+	kfree(release_work);
+}
+
 void dma_buf_stats_teardown(struct dma_buf *dmabuf)
 {
 	struct dma_buf_sysfs_entry *sysfs_entry;
+	struct sysfs_release_work *release_work;
 
 	sysfs_entry = dmabuf->sysfs_entry;
 	if (!sysfs_entry)
 		return;
 
-	kobject_del(&sysfs_entry->kobj);
-	kobject_put(&sysfs_entry->kobj);
+	release_work = kmalloc(sizeof(struct sysfs_release_work), GFP_KERNEL);
+	if (WARN_ON(!release_work)) {
+	    __teardown(sysfs_entry);
+	    return;
+	}
+
+	release_work->sysfs_entry = sysfs_entry; /* Save this. Note that dmabuf might
+					          * dissapear before the work runs. */
+	INIT_WORK(&release_work->work, sysfs_del_workfn);
+	schedule_work(&release_work->work);
 }
 
 
