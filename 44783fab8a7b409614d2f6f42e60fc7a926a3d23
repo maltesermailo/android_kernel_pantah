@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b9efdda_4daba391",
+        "filename": "mm/memory.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 2732,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2022-10-27T20:53:18Z",
+      "side": 0,
+      "message": "Rather than using the bare local_irq_disable, let\u0027s use the speculative_page_walk_begin_end macro. It was clear to say the locking scheme is related to SPF. And let\u0027s modify the phrase to say uptodate behavior.",
+      "range": {
+        "startLine": 2728,
+        "startChar": 0,
+        "endLine": 2732,
+        "endChar": 74
+      },
+      "revId": "44783fab8a7b409614d2f6f42e60fc7a926a3d23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
