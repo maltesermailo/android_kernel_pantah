@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bf94097_4b741f2b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-10-28T11:50:26Z",
+      "side": 1,
+      "message": "IIUC, if we get here because of an error after pinning the host vCPU state and copying the feautres, but before pinning the SVE state (e.g. init_ptrauth() or else fails), I think we\u0027ll end up incorrectly try to unpin the SVE state which may or may not be populated (which I think is wrong either way).\n\nIt might even be possible to make `if (!shadow_vcpu-\u003earch.sve_state || sve_state_size || hyp_pin_shared_mem(sve_state, sve_state + sve_state_size))` fail to get the hypervisor to unpin something it shouldn\u0027t.",
+      "range": {
+        "startLine": 503,
+        "startChar": 1,
+        "endLine": 504,
+        "endChar": 32
+      },
+      "revId": "745213d8f38c01cf3e46ca65422b325b22531128",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
