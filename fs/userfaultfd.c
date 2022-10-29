@@ -1019,8 +1019,13 @@ static int resolve_userfault_fork(struct userfaultfd_ctx *new,
 {
 	int fd;
 
+<<<<<<< HEAD   (553ee5 ANDROID: GKI: db845c: Update symbols list and ABI)
 	fd = anon_inode_getfd_secure("[userfaultfd]", &userfaultfd_fops, new,
 			O_RDWR | (new->flags & UFFD_SHARED_FCNTL_FLAGS), inode);
+=======
+	fd = anon_inode_getfd("[userfaultfd]", &userfaultfd_fops, new,
+			      O_RDONLY | (new->flags & UFFD_SHARED_FCNTL_FLAGS));
+>>>>>>> BRANCH (fe18f1 Linux 5.4.220)
 	if (fd < 0)
 		return fd;
 
@@ -2068,8 +2073,13 @@ SYSCALL_DEFINE1(userfaultfd, int, flags)
 	/* prevent the mm struct to be freed */
 	mmgrab(ctx->mm);
 
+<<<<<<< HEAD   (553ee5 ANDROID: GKI: db845c: Update symbols list and ABI)
 	fd = anon_inode_getfd_secure("[userfaultfd]", &userfaultfd_fops, ctx,
 			O_RDWR | (flags & UFFD_SHARED_FCNTL_FLAGS), NULL);
+=======
+	fd = anon_inode_getfd("[userfaultfd]", &userfaultfd_fops, ctx,
+			      O_RDONLY | (flags & UFFD_SHARED_FCNTL_FLAGS));
+>>>>>>> BRANCH (fe18f1 Linux 5.4.220)
 	if (fd < 0) {
 		mmdrop(ctx->mm);
 		kmem_cache_free(userfaultfd_ctx_cachep, ctx);
