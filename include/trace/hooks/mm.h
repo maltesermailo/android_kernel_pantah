@@ -81,14 +81,14 @@ DECLARE_HOOK(android_vh_pagevec_drain,
 	TP_PROTO(struct page *page, bool *ret),
 	TP_ARGS(page, ret));
 DECLARE_HOOK(android_vh_zap_pte_range_tlb_start,
-	TP_PROTO(void *unused),
-	TP_ARGS(unused));
+	TP_PROTO(void *ret),
+	TP_ARGS(ret));
 DECLARE_HOOK(android_vh_zap_pte_range_tlb_force_flush,
 	TP_PROTO(struct page *page, bool *flush),
 	TP_ARGS(page, flush));
 DECLARE_HOOK(android_vh_zap_pte_range_tlb_end,
-	TP_PROTO(void *unused),
-	TP_ARGS(unused));
+	TP_PROTO(void *ret),
+	TP_ARGS(ret));
 DECLARE_HOOK(android_vh_skip_lru_disable,
 	TP_PROTO(bool *skip),
 	TP_ARGS(skip));
