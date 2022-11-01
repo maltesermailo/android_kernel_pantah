@@ -8,8 +8,7 @@
 bool can_set_direct_map(void);
 #define can_set_direct_map can_set_direct_map
 
-int set_memory_valid(unsigned long addr, int numpages, int enable);
-
+int set_direct_map_range_noncached(unsigned long addr, unsigned long numpages);
 int set_direct_map_invalid_noflush(struct page *page);
 int set_direct_map_default_noflush(struct page *page);
 bool kernel_page_present(struct page *page);
