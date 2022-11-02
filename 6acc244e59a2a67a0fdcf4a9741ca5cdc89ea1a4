@@ -46,6 +46,30 @@
       },
       "revId": "6acc244e59a2a67a0fdcf4a9741ca5cdc89ea1a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ab1a4c4_7fcf0f5f",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2022-11-02T11:14:15Z",
+      "side": 1,
+      "message": "Something like?\n\n```\ndiff --git a/arch/arm64/kvm/hyp/nvhe/pkvm.c b/arch/arm64/kvm/hyp/nvhe/pkvm.c\nindex a96d0c29989a..c3189d426f27 100644\n--- a/arch/arm64/kvm/hyp/nvhe/pkvm.c\n+++ b/arch/arm64/kvm/hyp/nvhe/pkvm.c\n@@ -773,8 +773,8 @@ teardown_donated_memory(struct kvm_hyp_memcache *mc, void *addr, size_t size)\n \n int __pkvm_teardown_vm(pkvm_handle_t handle)\n {\n+       struct kvm_hyp_memcache *mc, *stage2_mc;\n        size_t vm_size, last_ran_size;\n-       struct kvm_hyp_memcache *mc;\n        struct pkvm_hyp_vm *hyp_vm;\n        unsigned int idx;\n        int err;\n@@ -796,9 +796,11 @@ int __pkvm_teardown_vm(pkvm_handle_t handle)\n        remove_vm_table_entry(handle);\n        hyp_spin_unlock(\u0026vm_table_lock);\n \n-       /* Reclaim guest pages (including page-table pages) */\n        mc \u003d \u0026hyp_vm-\u003ehost_kvm-\u003earch.pkvm.teardown_mc;\n-       reclaim_guest_pages(hyp_vm, mc);\n+       stage2_mc \u003d \u0026hyp_vm-\u003ehost_kvm-\u003earch.pkvm.teardown_stage2_mc;\n+\n+       /* Reclaim guest pages (including page-table pages) */\n+       reclaim_guest_pages(hyp_vm, stage2_mc);\n        unpin_host_vcpus(hyp_vm-\u003evcpus, hyp_vm-\u003enr_vcpus);\n \n        /* Push the metadata pages to the teardown memcache */\n@@ -812,7 +814,7 @@ int __pkvm_teardown_vm(pkvm_handle_t handle)\n                vcpu_mc \u003d \u0026hyp_vcpu-\u003evcpu.arch.pkvm_memcache;\n                while (vcpu_mc-\u003enr_pages) {\n                        addr \u003d pop_hyp_memcache(vcpu_mc, hyp_phys_to_virt);\n-                       push_hyp_memcache(mc, addr, hyp_virt_to_phys);\n+                       push_hyp_memcache(stage2_mc, addr, hyp_virt_to_phys);\n                        unmap_donated_memory_noclear(addr, PAGE_SIZE);\n                }\n \ndiff --git a/arch/arm64/kvm/mmu.c b/arch/arm64/kvm/mmu.c\nindex d65bafdafee6..717a93204a06 100644\n--- a/arch/arm64/kvm/mmu.c\n+++ b/arch/arm64/kvm/mmu.c\n@@ -890,14 +890,24 @@ void kvm_free_stage2_pgd(struct kvm_s2_mmu *mmu)\n        }\n }\n \n-static void hyp_mc_free_fn(void *addr, void *unused)\n+static void hyp_mc_free_fn(void *addr, void *args)\n {\n+       bool account_stage2 \u003d (bool)args;\n+\n+       if (account_stage2)\n+               kvm_account_pgtable_pages(addr, -1);\n+\n        free_page((unsigned long)addr);\n }\n \n static void *hyp_mc_alloc_fn(void *unused)\n {\n-       return (void *)__get_free_page(GFP_KERNEL_ACCOUNT);\n+       void *addr \u003d (void *)__get_free_page(GFP_KERNEL_ACCOUNT);\n+\n+       if (addr)\n+               kvm_account_pgtable_pages(addr, 1);\n+\n+       return addr;\n }\n \n static void account_hyp_memcache(struct kvm_hyp_memcache *mc,\n@@ -918,7 +928,9 @@ static void account_hyp_memcache(struct kvm_hyp_memcache *mc,\n        }\n }\n \n-void free_hyp_memcache(struct kvm_hyp_memcache *mc, struct kvm *kvm)\n+static void __free_account_hyp_memcache(struct kvm_hyp_memcache *mc,\n+                                       struct kvm *kvm,\n+                                       bool account_stage2)\n {\n        unsigned long prev_nr_pages;\n \n@@ -926,10 +938,27 @@ void free_hyp_memcache(struct kvm_hyp_memcache *mc, struct kvm *kvm)\n                return;\n \n        prev_nr_pages \u003d mc-\u003enr_pages;\n-       __free_hyp_memcache(mc, hyp_mc_free_fn, kvm_host_va, NULL);\n+       __free_hyp_memcache(mc, hyp_mc_free_fn, kvm_host_va,\n+                           (void *)account_stage2);\n        account_hyp_memcache(mc, prev_nr_pages, kvm);\n }\n \n+void free_hyp_memcache(struct kvm_hyp_memcache *mc, struct kvm *kvm)\n+{\n+       __free_account_hyp_memcache(mc, kvm, false);\n+}\n+\n+/*\n+ * All pages donated to the hypervisor through kvm_hyp_memcache are for the\n+ * stage-2 page table. However, kvm_hyp_memcache is also a vehicule to retrieve\n+ * meta-data from the hypervisor, hence the need for a stage2 specific free\n+ * function.\n+ */\n+void free_hyp_stage2_memcache(struct kvm_hyp_memcache *mc, struct kvm *kvm)\n+{\n+       __free_account_hyp_memcache(mc, kvm, true);\n+}\n+\n int topup_hyp_memcache(struct kvm_hyp_memcache *mc, unsigned long min_pages,\n                       struct kvm *kvm)\n {\n```",
+      "parentUuid": "c401258d_a8235cab",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 2
+      },
+      "revId": "6acc244e59a2a67a0fdcf4a9741ca5cdc89ea1a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
