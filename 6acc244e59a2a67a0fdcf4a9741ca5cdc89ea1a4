@@ -22,6 +22,30 @@
       },
       "revId": "6acc244e59a2a67a0fdcf4a9741ca5cdc89ea1a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c401258d_a8235cab",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2022-11-02T09:51:15Z",
+      "side": 1,
+      "message": "I considered it, but thought it would be more changes in the teardown path, that flags might have a chance to be reused in the future and that it doesn\u0027t add anything to the kvm struct.\n\nNonetheless, I\u0027m happy to change for a separated MC.",
+      "parentUuid": "b58f1afc_6567e45e",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 2
+      },
+      "revId": "6acc244e59a2a67a0fdcf4a9741ca5cdc89ea1a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
