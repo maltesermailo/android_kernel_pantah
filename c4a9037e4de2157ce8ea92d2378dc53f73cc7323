@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7064e30b_e2c41418",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 882,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-03T00:19:11Z",
+      "side": 1,
+      "message": "Do we actually need atomics? The per-vcpu memcaches should probably be fine, and the teardown memcaches aren\u0027t accessed concurrently IIRC?",
+      "range": {
+        "startLine": 882,
+        "startChar": 2,
+        "endLine": 882,
+        "endChar": 14
+      },
+      "revId": "c4a9037e4de2157ce8ea92d2378dc53f73cc7323",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
