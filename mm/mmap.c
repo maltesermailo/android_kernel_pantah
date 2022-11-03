@@ -2664,12 +2664,17 @@ static void unmap_region(struct mm_struct *mm,
 	 * concurrent flush in this region has to be coming through the rmap,
 	 * and we synchronize against that using the rmap lock.
 	 */
+<<<<<<< HEAD   (7f2e60 Merge 5.15.74 into android13-5.15-lts)
 	for (cur_vma = vma; cur_vma; cur_vma = cur_vma->vm_next) {
 		if ((cur_vma->vm_flags & (VM_PFNMAP|VM_MIXEDMAP)) != 0) {
 			tlb_flush_mmu(&tlb);
 			break;
 		}
 	}
+=======
+	if ((vma->vm_flags & (VM_PFNMAP|VM_MIXEDMAP)) != 0)
+		tlb_flush_mmu(&tlb);
+>>>>>>> BRANCH (c0a7de ANDROID: KVM: arm64: Donate memory per vcpu for each vcpu sh)
 
 	free_pgtables(&tlb, vma, prev ? prev->vm_end : FIRST_USER_ADDRESS,
 				 next ? next->vm_start : USER_PGTABLES_CEILING);
