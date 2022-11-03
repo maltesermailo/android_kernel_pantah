@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19ee272c_07a07349",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2022-11-03T22:56:37Z",
+      "side": 1,
+      "message": "Hey Suren,\n\nThanks for dealing with issues I found before for the race. However, I am still troubled to understand how it could close the other race I am looking.\nCan you shed any light on this?\n\n\n```\n        CPU A                                           CPU B\n\n__pte_map_lock\n        rcu_read_lock\n        mmap_seq_read_check\n\n                                                mmap_write_lock\n                                                free_pte_range\n        ptl \u003d pte_lockptr(vmf-\u003epmd)                     pmd_lock\n                                                        spin_unlock\n                                                        pmd_clear \u003c- pmd cleared to zero\n\n            ptlock_ptr(pmd_page(*pmd));\n                        return pfn 0\u0027s struct page\u0027s ptl address\n\n        /* no gaurantee it will see uptodate value */\n        pmdval \u003d READ_ONCE(*vmf-\u003epmd)\n        /* so pass this one */\n        if (!pmd_same(pmdval, vmf-\u003eorig_pmd))\n                ..\n        spin_trylock(ptl) \u003c- Bang!\n\n```",
+      "revId": "f767d049cf5ffb22c3c7b81e80efb4142d8f372e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
