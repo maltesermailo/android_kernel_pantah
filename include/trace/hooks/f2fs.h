@@ -9,6 +9,7 @@
 #include <trace/hooks/vendor_hooks.h>
 
 struct f2fs_sb_info;
+struct dnode_of_data;
 
 DECLARE_HOOK(android_vh_f2fs_init_sbi_oem_data,
 	TP_PROTO(struct f2fs_sb_info *sbi),
@@ -25,6 +26,10 @@ DECLARE_HOOK(android_vh_f2fs_destory_sbi_oem_data,
 DECLARE_HOOK(android_vh_f2fs_init_inode_oem_data,
 	TP_PROTO(struct inode *inode),
 	TP_ARGS(inode));
+
+DECLARE_HOOK(android_vh_f2fs_record_outplace_write_info,
+	TP_PROTO(struct dnode_of_data *dn),
+	TP_ARGS(dn));
 
 DECLARE_HOOK(android_vh_f2fs_truncate_inode_oem_data,
 	TP_PROTO(struct inode *inode, pgoff_t fofs,
