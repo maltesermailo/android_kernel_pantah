@@ -22,6 +22,30 @@
       },
       "revId": "745213d8f38c01cf3e46ca65422b325b22531128",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "568d4516_b1d5f118",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-11-03T00:25:53Z",
+      "side": 1,
+      "message": "I think this has been addressed by aosp/2276806, although we only have to worry about the sve_state being NULL since the vm structure is zeroed at initialisation time.",
+      "parentUuid": "0bf94097_4b741f2b",
+      "range": {
+        "startLine": 503,
+        "startChar": 1,
+        "endLine": 504,
+        "endChar": 32
+      },
+      "revId": "745213d8f38c01cf3e46ca65422b325b22531128",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
