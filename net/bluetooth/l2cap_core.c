@@ -1992,7 +1992,12 @@ static struct l2cap_chan *l2cap_global_chan_by_psm(int state, __le16 psm,
 			src_match = !bacmp(&c->src, src);
 			dst_match = !bacmp(&c->dst, dst);
 			if (src_match && dst_match) {
+<<<<<<< HEAD   (7f2e60 Merge 5.15.74 into android13-5.15-lts)
 				if (!l2cap_chan_hold_unless_zero(c))
+=======
+				c = l2cap_chan_hold_unless_zero(c);
+				if (!c)
+>>>>>>> BRANCH (c0a7de ANDROID: KVM: arm64: Donate memory per vcpu for each vcpu sh)
 					continue;
 
 				read_unlock(&chan_list_lock);
