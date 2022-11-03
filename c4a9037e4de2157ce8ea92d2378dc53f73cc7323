@@ -22,6 +22,30 @@
       },
       "revId": "c4a9037e4de2157ce8ea92d2378dc53f73cc7323",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66434caf_81ccaeb9",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 882,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2022-11-03T08:50:16Z",
+      "side": 1,
+      "message": "Teardown yes, but the kvm struct is shared, couldn\u0027t we have a chance that two vCPUs will fill their cache at the same time and try to inc the value simultaneously?",
+      "parentUuid": "7064e30b_e2c41418",
+      "range": {
+        "startLine": 882,
+        "startChar": 2,
+        "endLine": 882,
+        "endChar": 14
+      },
+      "revId": "c4a9037e4de2157ce8ea92d2378dc53f73cc7323",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
