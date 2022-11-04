@@ -52,6 +52,24 @@
       "parentUuid": "f15c1946_b145f83f",
       "revId": "f767d049cf5ffb22c3c7b81e80efb4142d8f372e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44ee1dce_e9023450",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-11-04T16:36:52Z",
+      "side": 1,
+      "message": "In fact I think this is even better:\n```\n    pmdval \u003d READ_ONCE(*vmf-\u003epmd);\n    if (!pmd_same(pmdval, vmf-\u003eorig_pmd))\n        goto fail;\n    ptl \u003d pte_lockptr(vmf-\u003evma-\u003evm_mm, \u0026pmdval);\n```\nSince in both calls the same pmdval is used we can check PMD to be valid before we retrieve PTL from it.",
+      "parentUuid": "87688494_e428b966",
+      "revId": "f767d049cf5ffb22c3c7b81e80efb4142d8f372e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
