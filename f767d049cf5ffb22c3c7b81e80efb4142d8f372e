@@ -16,6 +16,24 @@
       "message": "Hey Suren,\n\nThanks for dealing with issues I found before for the race. However, I am still troubled to understand how it could close the other race I am looking.\nCan you shed any light on this?\n\n\n```\n        CPU A                                           CPU B\n\n__pte_map_lock\n        rcu_read_lock\n        mmap_seq_read_check\n\n                                                mmap_write_lock\n                                                free_pte_range\n        ptl \u003d pte_lockptr(vmf-\u003epmd)                     pmd_lock\n                                                        spin_unlock\n                                                        pmd_clear \u003c- pmd cleared to zero\n\n            ptlock_ptr(pmd_page(*pmd));\n                        return pfn 0\u0027s struct page\u0027s ptl address\n\n        /* no gaurantee it will see uptodate value */\n        pmdval \u003d READ_ONCE(*vmf-\u003epmd)\n        /* so pass this one */\n        if (!pmd_same(pmdval, vmf-\u003eorig_pmd))\n                ..\n        spin_trylock(ptl) \u003c- Bang!\n\n```",
       "revId": "f767d049cf5ffb22c3c7b81e80efb4142d8f372e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f15c1946_b145f83f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-11-04T00:00:54Z",
+      "side": 1,
+      "message": "Hi Minchan.\nI\u0027m not sure why in the following sequence:\n```\n\tptl \u003d pte_lockptr(vmf-\u003evma-\u003evm_mm, vmf-\u003epmd);\n\tpmdval \u003d READ_ONCE(*vmf-\u003epmd);\n```\npte_lockptr would read vmf-\u003epmd as 0 and READ_ONCE(*vmf-\u003epmd) would read it as non-0 (I think that\u0027s what you mean by \"no gaurantee it will see uptodate value\"). IIUC they should read either:\n1. Both non-zero (both didn\u0027t see the update)\n2. Both 0 (both saw the update)\n3. pte_lockptr reads non-zero, READ_ONCE(*vmf-\u003epmd) sees zero (update happened in between of these two statements).\n\nMaybe I\u0027m missing some memory barrier? I guess the code like this would be more robust:\n```\n\tpmdval \u003d READ_ONCE(*vmf-\u003epmd);\n\tptl \u003d pte_lockptr(vmf-\u003evma-\u003evm_mm, \u0026pmdval);\n\tif (!pmd_same(pmdval, vmf-\u003eorig_pmd))\n```\nWDYT?",
+      "parentUuid": "19ee272c_07a07349",
+      "revId": "f767d049cf5ffb22c3c7b81e80efb4142d8f372e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
