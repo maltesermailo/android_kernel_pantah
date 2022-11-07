@@ -32,7 +32,7 @@
 #include <linux/hiddev.h>
 #include <linux/hid-debug.h>
 #include <linux/hidraw.h>
-
+#include <trace/hooks/hid.h>
 #include "hid-ids.h"
 
 /*
@@ -1844,6 +1844,8 @@ int hid_input_report(struct hid_device *hid, int type, u8 *data, u32 size, int i
 		goto unlock;
 	}
 
+	trace_android_vh_hid_input_report(hid, report, data, size);
+	
 	if (hdrv && hdrv->raw_event && hid_match_report(hid, report)) {
 		ret = hdrv->raw_event(hid, report, data, size);
 		if (ret < 0)
