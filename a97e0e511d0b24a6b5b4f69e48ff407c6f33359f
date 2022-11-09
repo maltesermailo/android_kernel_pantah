@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9948882b_1dd5e29e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-11-09T11:50:03Z",
+      "side": 1,
+      "message": "This patch caused kernelci build failures:\n```\ndrivers/irqchip/irq-tegra.c:151:18: error: implicit conversion from \u0027unsigned long\u0027 to \u0027u32\u0027 (aka \u0027unsigned int\u0027) changes value from 18446744073709551615 to 4294967295 [-Werror,-Wconstant-conversion]\ndrivers/irqchip/irq-tegra.c:154:18: error: implicit conversion from \u0027unsigned long\u0027 to \u0027u32\u0027 (aka \u0027unsigned int\u0027) changes value from 18446744073709551615 to 4294967295 [-Werror,-Wconstant-conversion]\ndrivers/irqchip/irq-tegra.c:175:18: error: implicit conversion from \u0027unsigned long\u0027 to \u0027u32\u0027 (aka \u0027unsigned int\u0027) changes value from 18446744073709551615 to 4294967295 [-Werror,-Wconstant-conversion]\ndrivers/irqchip/irq-tegra.c:180:18: error: implicit conversion from \u0027unsigned long\u0027 to \u0027u32\u0027 (aka \u0027unsigned int\u0027) changes value from 18446744073709551615 to 4294967295 [-Werror,-Wconstant-conversion]\ndrivers/irqchip/irq-tegra.c:315:18: error: implicit conversion from \u0027unsigned long\u0027 to \u0027u32\u0027 (aka \u0027unsigned int\u0027) changes value from 18446744073709551615 to 4294967295 [-Werror,-Wconstant-conversion]\n```\nPlease fix.",
+      "revId": "a97e0e511d0b24a6b5b4f69e48ff407c6f33359f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
