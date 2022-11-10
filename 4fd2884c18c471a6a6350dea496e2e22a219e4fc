@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7e5a32ac_09aee72b",
+        "filename": "arch/arm64/kvm/hyp_trace.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2022-11-10T14:46:59Z",
+      "side": 1,
+      "message": "Ah yes, good point, I missed that somehow!",
+      "parentUuid": "604da26f_9c3156b7",
+      "revId": "4fd2884c18c471a6a6350dea496e2e22a219e4fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9527ed2f_3bcd76ab",
         "filename": "arch/arm64/kvm/hyp_trace.c",
         "patchSetId": 2
@@ -31,6 +49,30 @@
       "writtenOn": "2022-11-10T11:55:19Z",
       "side": 1,
       "message": "Q: Why we have this only for pkvm ?",
+      "range": {
+        "startLine": 639,
+        "startChar": 6,
+        "endLine": 639,
+        "endChar": 30
+      },
+      "revId": "4fd2884c18c471a6a6350dea496e2e22a219e4fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57690eab_25a93d40",
+        "filename": "arch/arm64/kvm/hyp_trace.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2022-11-10T14:46:59Z",
+      "side": 1,
+      "message": "This is because it\u0027s relying on memory donations from host to the hyp that only pkvm offers: `__pkvm_host_share_hyp`/`__pkvm_host_unshare_hyp`.\n\nIdeally it should support !protected as well, but that would mean a static ring-buffer.",
+      "parentUuid": "9527ed2f_3bcd76ab",
       "range": {
         "startLine": 639,
         "startChar": 6,
