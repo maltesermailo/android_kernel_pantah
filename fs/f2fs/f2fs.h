@@ -782,6 +782,8 @@ struct f2fs_inode_info {
 	unsigned char i_compress_level;		/* compress level (lz4hc,zstd) */
 	unsigned short i_compress_flag;		/* compress flag */
 	unsigned int i_cluster_size;		/* cluster size */
+
+	ANDROID_OEM_DATA(1);
 };
 
 static inline void get_extent_info(struct extent_info *ext,
