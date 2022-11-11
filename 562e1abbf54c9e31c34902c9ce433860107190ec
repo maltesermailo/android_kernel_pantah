@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cb0bec4_5225d8d2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2022-11-11T00:53:25Z",
+      "side": 1,
+      "message": "Please remove `[Test gerrit]` from the subject line. Also, from running `git log --pretty\u003done --no-merges drivers/irqchip/irq-gic-v3.c`, it seems that the most common subject line is irqchip/gic-v3, so please update the subject line accordingly (i.e. `ANDROID: irqchip/irq-gic-v3: Add vendor hook for gic suspend`).",
+      "revId": "562e1abbf54c9e31c34902c9ce433860107190ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c88d4f20_9f4ea7c5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2022-11-11T00:53:25Z",
+      "side": 1,
+      "message": "Please create a separate commit on top of this one where you add to qcom\u0027s symbol list and update the ABI XML.\n\nThe information about what symbols were added can be part of the commit message for that commit, but should not be part of this one.",
+      "revId": "562e1abbf54c9e31c34902c9ce433860107190ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0892bab2_0fccbe23",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2022-11-11T00:53:25Z",
+      "side": 1,
+      "message": "Please include a Bug tag with the number of the bug that corresponds to this CL. Please see: https://android.googlesource.com/kernel/common/+/refs/heads/android13-5.15/README.md",
+      "revId": "562e1abbf54c9e31c34902c9ce433860107190ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c68ab572_54182e11",
+        "filename": "drivers/irqchip/irq-gic-v3.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2022-11-11T00:53:25Z",
+      "side": 1,
+      "message": "Move `EXPORT_SYMBOL_GPL(gic_dist_wait_for_rwp)` to here, please.",
+      "revId": "562e1abbf54c9e31c34902c9ce433860107190ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6852efd_3bdff268",
+        "filename": "drivers/irqchip/irq-gic-v3.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1348,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2022-11-11T00:53:25Z",
+      "side": 1,
+      "message": "Is there a need to have this function exposed to the rest of the kernel and also exported to other modules? My understanding was that this will only be used by the syscore ops via a function pointer, so I don\u0027t see a need for such a large scope.",
+      "revId": "562e1abbf54c9e31c34902c9ce433860107190ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
