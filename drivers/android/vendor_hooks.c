@@ -473,6 +473,11 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_dma_buf_stats_teardown);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_init_sbi_oem_data);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_record_data_alloc_type);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_destory_sbi_oem_data);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_init_inode_oem_data);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_truncate_inode_oem_data);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_shrink_oem_data);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_drop_inode_oem_data);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_destroy_inode_oem_data);
 
 /*
  * For type visibility

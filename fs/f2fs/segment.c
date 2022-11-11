@@ -540,6 +540,8 @@ void f2fs_balance_fs_bg(struct f2fs_sb_info *sbi, bool from_bg)
 	if (!f2fs_available_free_memory(sbi, EXTENT_CACHE))
 		f2fs_shrink_extent_tree(sbi, EXTENT_CACHE_SHRINK_NUMBER);
 
+	trace_android_vh_f2fs_shrink_oem_data(sbi);
+
 	/* check the # of cached NAT entries */
 	if (!f2fs_available_free_memory(sbi, NAT_ENTRIES))
 		f2fs_try_to_free_nats(sbi, NAT_ENTRY_PER_BLOCK);

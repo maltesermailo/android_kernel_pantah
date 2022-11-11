@@ -30,6 +30,7 @@
 #include "acl.h"
 #include "gc.h"
 #include <trace/events/f2fs.h>
+#include <trace/hooks/f2fs.h>
 #include <uapi/linux/f2fs.h>
 
 static vm_fault_t f2fs_filemap_fault(struct vm_fault *vmf)
@@ -608,6 +609,7 @@ void f2fs_truncate_data_blocks_range(struct dnode_of_data *dn, int count)
 		fofs = f2fs_start_bidx_of_node(ofs_of_node(dn->node_page),
 							dn->inode) + ofs;
 		f2fs_update_extent_cache_range(dn, fofs, 0, len);
+		trace_android_vh_f2fs_truncate_inode_oem_data(dn->inode, fofs, nr_free);
 		dec_valid_block_count(sbi, dn->inode, nr_free);
 	}
 	dn->ofs_in_node = ofs;
@@ -1338,6 +1340,7 @@ static int f2fs_do_collapse(struct inode *inode, loff_t offset, loff_t len)
 
 	f2fs_lock_op(sbi);
 	f2fs_drop_extent_tree(inode);
+	trace_android_vh_f2fs_drop_inode_oem_data(inode);
 	truncate_pagecache(inode, offset);
 	ret = __exchange_data_block(inode, inode, end, start, nrpages - end, true);
 	f2fs_unlock_op(sbi);
@@ -1597,6 +1600,7 @@ static int f2fs_insert_range(struct inode *inode, loff_t offset, loff_t len)
 
 		f2fs_lock_op(sbi);
 		f2fs_drop_extent_tree(inode);
+		trace_android_vh_f2fs_drop_inode_oem_data(inode);
 
 		ret = __exchange_data_block(inode, inode, idx,
 					idx + delta, nr, false);

@@ -17,6 +17,7 @@
 #include "xattr.h"
 
 #include <trace/events/f2fs.h>
+#include <trace/hooks/f2fs.h>
 
 #ifdef CONFIG_F2FS_FS_COMPRESSION
 extern const struct address_space_operations f2fs_compress_aops;
@@ -381,6 +382,7 @@ static int do_read_inode(struct inode *inode)
 	fi->i_dir_level = ri->i_dir_level;
 
 	f2fs_init_extent_tree(inode, node_page);
+	trace_android_vh_f2fs_init_inode_oem_data(inode);
 
 	get_inline_info(inode, ri);
 
@@ -750,6 +752,7 @@ void f2fs_evict_inode(struct inode *inode)
 	f2fs_remove_dirty_inode(inode);
 
 	f2fs_destroy_extent_tree(inode);
+	trace_android_vh_f2fs_destroy_inode_oem_data(inode);
 
 	if (inode->i_nlink || is_bad_inode(inode))
 		goto no_delete;

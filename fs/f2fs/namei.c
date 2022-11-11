@@ -21,6 +21,7 @@
 #include "xattr.h"
 #include "acl.h"
 #include <trace/events/f2fs.h>
+#include <trace/hooks/f2fs.h>
 
 static struct inode *f2fs_new_inode(struct inode *dir, umode_t mode)
 {
@@ -106,6 +107,7 @@ static struct inode *f2fs_new_inode(struct inode *dir, umode_t mode)
 	F2FS_I(inode)->i_inline_xattr_size = xattr_size;
 
 	f2fs_init_extent_tree(inode, NULL);
+	trace_android_vh_f2fs_init_inode_oem_data(inode);
 
 	F2FS_I(inode)->i_flags =
 		f2fs_mask_flags(mode, F2FS_I(dir)->i_flags & F2FS_FL_INHERITED);
