@@ -209,6 +209,71 @@ static void check_sync_rss_stat(struct task_struct *task)
 
 #endif /* SPLIT_RSS_COUNTING */
 
+#ifdef CONFIG_SPECULATIVE_PAGE_FAULT
+
+static wait_queue_head_t vma_users_wait;
+static atomic_t vma_user_waiters;
+
+void init_vma_users_waitqueue(void)
+{
+	atomic_set(&vma_user_waiters, 0);
+	init_waitqueue_head(&vma_users_wait);
+}
+
+static inline bool wait_for_vma_users(struct vm_area_struct *vma)
+{
+	bool result;
+
+	/* Ensure RB_CLEAR_NODE is visible to a possible get_vma */
+	smp_mb();
+	/*
+	 * A well-behaving process should not be unmapping an area
+	 * while it's faulting a page.
+	 */
+	if (likely(atomic_read(&vma->file_ref_count) == 0))
+		return true;
+
+	atomic_inc(&vma_user_waiters);
+	result = !wait_event_interruptible(vma_users_wait,
+				atomic_read(&vma->file_ref_count) <= 0);
+	atomic_dec(&vma_user_waiters);
+
+	return result;
+}
+
+bool get_vma(struct vm_area_struct *vma)
+{
+	atomic_inc(&vma->file_ref_count);
+	/* Ensure the VMA is still in the tree after refcounting */
+	smp_mb();
+	if (RB_EMPTY_NODE(&vma->vm_rb)) {
+		put_vma(vma);
+		return false;
+	}
+	return true;
+}
+
+void put_vma(struct vm_area_struct *vma)
+{
+	if (!atomic_dec_and_test(&vma->file_ref_count))
+		return;
+
+	if (unlikely(atomic_read(&vma_user_waiters) > 0))
+		wake_up_interruptible(&vma_users_wait);
+}
+
+#else	/* CONFIG_SPECULATIVE_PAGE_FAULT */
+
+static inline bool wait_for_vma_users(struct vm_area_struct *vma)
+{
+	return true;
+}
+
+void get_vma(struct vm_area_struct *vma) {}
+void put_vma(struct vm_area_struct *vma) {}
+
+#endif	/* CONFIG_SPECULATIVE_PAGE_FAULT */
+
 /*
  * Note: this doesn't free the actual pages themselves. That
  * has been handled earlier when unmapping all the memory regions.
@@ -411,6 +476,7 @@ void free_pgtables(struct mmu_gather *tlb, struct vm_area_struct *vma,
 		 */
 		unlink_anon_vmas(vma);
 		unlink_file_vma(vma);
+		wait_for_vma_users(vma);
 
 		if (is_vm_hugetlb_page(vma)) {
 			hugetlb_free_pgd_range(tlb, addr, vma->vm_end,
@@ -425,6 +491,7 @@ void free_pgtables(struct mmu_gather *tlb, struct vm_area_struct *vma,
 				next = vma->vm_next;
 				unlink_anon_vmas(vma);
 				unlink_file_vma(vma);
+				wait_for_vma_users(vma);
 			}
 			free_pgd_range(tlb, addr, vma->vm_end,
 				floor, next ? next->vm_start : ceiling);
