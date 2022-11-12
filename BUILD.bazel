@@ -274,6 +274,72 @@ copy_to_dist_dir(
     flat = True,
 )
 
+kernel_build(
+    name = "allmodconfig_aarch64",
+    outs = [
+        "Image",
+        "System.map",
+        "modules.builtin",
+        "modules.builtin.modinfo",
+        "vmlinux",
+        "vmlinux.symvers",
+    ],
+    build_config = "build.config.allmodconfig.aarch64",
+    module_outs = ["auto"],
+    visibility = ["//visibility:private"],
+)
+
+copy_to_dist_dir(
+    name = "allmodconfig_aarch64_dist",
+    data = [":allmodconfig_aarch64"],
+    dist_dir = "out/allmodconfig_aarch64/dist",
+    flat = True,
+    visibility = ["//visibility:private"],
+)
+
+kernel_build(
+    name = "allmodconfig_x86_64",
+    outs = [
+        "System.map",
+        "bzImage",
+        "modules.builtin",
+        "modules.builtin.modinfo",
+        "vmlinux",
+        "vmlinux.symvers",
+    ],
+    build_config = "build.config.allmodconfig.x86_64",
+    module_outs = ["auto"],
+    visibility = ["//visibility:private"],
+)
+
+copy_to_dist_dir(
+    name = "allmodconfig_x86_64_dist",
+    data = [":allmodconfig_x86_64"],
+    dist_dir = "out/allmodconfig_x86_64/dist",
+    flat = True,
+    visibility = ["//visibility:private"],
+)
+
+kernel_build(
+    name = "allmodconfig_arm",
+    outs = [
+        "System.map",
+        "vmlinux",
+        "zImage",
+    ],
+    build_config = "build.config.allmodconfig.arm",
+    module_outs = ["auto"],
+    visibility = ["//visibility:private"],
+)
+
+copy_to_dist_dir(
+    name = "allmodconfig_arm_dist",
+    data = [":allmodconfig_arm"],
+    dist_dir = "out/allmodconfig_arm/dist",
+    flat = True,
+    visibility = ["//visibility:private"],
+)
+
 # DDK Headers
 # All headers. These are the public targets for DDK modules to use.
 alias(
