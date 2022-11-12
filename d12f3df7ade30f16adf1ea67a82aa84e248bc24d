@@ -34,6 +34,24 @@
       "parentUuid": "8e7259fe_e2236237",
       "revId": "d12f3df7ade30f16adf1ea67a82aa84e248bc24d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21caadfa_9694347f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2022-11-12T00:59:22Z",
+      "side": 1,
+      "message": "I\u0027m not sure the advice to post this patch upstream first is the right approach in this case. It is unlikely that Jens will accept a patch that disables the bio allocation cache. I expect that he will ask to fix the bio allocation code rather than to disable it.\n\nThe polling implementation in the android14-5.15 io_uring implementation is outdated. The io_uring polling code has been rewritten in the upstream kernel compared to the v5.15 kernel. Fixing the upstream bio cache code and backporting it to the v5.15 kernel involves much more risk than disabling the bio caching code.",
+      "parentUuid": "56540592_ec2de9a7",
+      "revId": "d12f3df7ade30f16adf1ea67a82aa84e248bc24d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
