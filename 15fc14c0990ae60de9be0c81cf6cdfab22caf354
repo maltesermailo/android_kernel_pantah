@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a2f70c9f_d503f7e3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 933,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-11-14T09:55:50Z",
+      "side": 1,
+      "message": "Right, it\u0027s fatal if the page-table update fails here so I\u0027d opted to keep things simple for android13-*.",
+      "parentUuid": "bf79b1da_85cc56a4",
+      "range": {
+        "startLine": 932,
+        "startChar": 1,
+        "endLine": 933,
+        "endChar": 25
+      },
+      "revId": "15fc14c0990ae60de9be0c81cf6cdfab22caf354",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b692dd24_e142796d",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-14T08:40:44Z",
       "side": 1,
       "message": "Same thing here I guess ? Though this one would at least be \u0027safe\u0027.",
+      "range": {
+        "startLine": 943,
+        "startChar": 1,
+        "endLine": 944,
+        "endChar": 25
+      },
+      "revId": "15fc14c0990ae60de9be0c81cf6cdfab22caf354",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71e6ac3f_86d36f80",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2022-11-14T09:55:50Z",
+      "side": 1,
+      "message": "I think it would be a bug to change this one, as if the ownership transfer succeeds, we\u0027d then have a race where the guest (on another vCPU) could start using the page before we\u0027d told EL3 about it.\n\nWe could add a decrement to clean up if the page-table update fails, but since that\u0027s fatal it doesn\u0027t feel like it\u0027s worth it to me for android13-*.\n\nI\u0027ll update the android14-5.15 change to be more comprehensive, however.",
+      "parentUuid": "b692dd24_e142796d",
       "range": {
         "startLine": 943,
         "startChar": 1,
