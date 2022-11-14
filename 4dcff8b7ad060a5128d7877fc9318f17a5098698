@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93cb3058_ce5abae9",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-14T14:12:15Z",
+      "side": 1,
+      "message": "kvm_pgtable_hyp_unmap() takes a size argument, so dunno if that loop is needed? Also, I\u0027d recommend checking the return value of that function, maybe with just a WARN_ON(). (IIRC the function returns the number of bytes that have been unmapped upon success, not 0...)",
+      "range": {
+        "startLine": 147,
+        "startChar": 1,
+        "endLine": 147,
+        "endChar": 65
+      },
+      "revId": "4dcff8b7ad060a5128d7877fc9318f17a5098698",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
