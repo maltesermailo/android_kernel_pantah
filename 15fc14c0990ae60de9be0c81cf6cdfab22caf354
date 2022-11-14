@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2ec7654_ecb91118",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 933,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-14T10:28:47Z",
+      "side": 1,
+      "message": "Always feels kind of bad to rely on WARN_ON() to be fatal, but I guess that behaviour won\u0027t change in android-13, so n/m.",
+      "parentUuid": "a2f70c9f_d503f7e3",
+      "range": {
+        "startLine": 932,
+        "startChar": 1,
+        "endLine": 933,
+        "endChar": 25
+      },
+      "revId": "15fc14c0990ae60de9be0c81cf6cdfab22caf354",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b692dd24_e142796d",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "I think it would be a bug to change this one, as if the ownership transfer succeeds, we\u0027d then have a race where the guest (on another vCPU) could start using the page before we\u0027d told EL3 about it.\n\nWe could add a decrement to clean up if the page-table update fails, but since that\u0027s fatal it doesn\u0027t feel like it\u0027s worth it to me for android13-*.\n\nI\u0027ll update the android14-5.15 change to be more comprehensive, however.",
       "parentUuid": "b692dd24_e142796d",
+      "range": {
+        "startLine": 943,
+        "startChar": 1,
+        "endLine": 944,
+        "endChar": 25
+      },
+      "revId": "15fc14c0990ae60de9be0c81cf6cdfab22caf354",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d15ba255_1149c825",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-14T10:28:47Z",
+      "side": 1,
+      "message": "Aha, right, we should just _dec() in the error path to clean things up, but yes we need to proactively inc() to be safe. So yeah, let\u0027s do that in the android14 kernels.",
+      "parentUuid": "71e6ac3f_86d36f80",
       "range": {
         "startLine": 943,
         "startChar": 1,
