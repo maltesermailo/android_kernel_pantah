@@ -16,6 +16,24 @@
       "message": "ISTR the original 13-5.10 series had lots of small patches instead of one gigantic one, which helps a ton with the review. Any reason to no port the individual patches, and maybe just squash the fixes?",
       "revId": "a0c45cc985e5ac793cd27d72309defa7113e4d87",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0f0834f_eb77c072",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-14T14:37:09Z",
+      "side": 1,
+      "message": "Android13.5-10 had around ~60 S2MPU patches with a lot of history that is not relevant to keep moving forward. So initially the plan(discussed with @willdeacon) was to push two new patches, one with IOMMU layer, that can be used with EL2 modules and one with S2MPU driver.\n\nAfter discussion with @dbrazdil, to make it easier to review, we agreed to separate the patches to Android13.5-10 port and new features (Modules and new S2MPU version)\nAnd we can just diff the Android13.5-10  patches against Android13.5-10 code,\nand do proper review for the new code.",
+      "parentUuid": "1f48f6c1_06d2dc10",
+      "revId": "a0c45cc985e5ac793cd27d72309defa7113e4d87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
