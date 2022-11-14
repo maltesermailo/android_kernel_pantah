@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4438f9bd_1136a6e8",
+        "filename": "arch/arm64/mm/ioremap.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-14T13:48:00Z",
+      "side": 1,
+      "message": "It can be 4K, 16K or 64K, and not really any other power of 2, so if we\u0027re going to check this (not sure it\u0027s needed? we should be able trust the hypervisor?), then maybe we can exhaustively list the possible page sizes here.",
+      "range": {
+        "startLine": 120,
+        "startChar": 11,
+        "endLine": 120,
+        "endChar": 61
+      },
+      "revId": "282d550e39a0c6eef10c48fd668768e06bbc22d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
