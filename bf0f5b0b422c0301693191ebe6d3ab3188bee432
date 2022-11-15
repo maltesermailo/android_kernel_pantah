@@ -16,6 +16,24 @@
       "message": "Is only RFCOMM planned? It\u0027s a small part of BT which is needed for file sharing, right? Is there a device which needs BT but not RFCOMM?",
       "revId": "bf0f5b0b422c0301693191ebe6d3ab3188bee432",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b8c37f3_db4916fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-11-15T19:41:08Z",
+      "side": 1,
+      "message": "Everything which can be converted; will be converted is the short answer.\n\n- I am going by the gut feeling as of now and deducing that partitcular feature will never needed during the boot and converting it as module.\n- I am also trying to do this config wise unless few configs are part of one group; and obviously going from leaf of the tree to the root as some options may not visible if the root is not enabled y or m. This gives flexibility in case if we have to revert back in future we can do so at the granular level.\n- Another way this helps is I am collecting these data: go/gki-modules-size-impact,\nand doing granular we can take data out of calculation in future without doing the measurements again.",
+      "parentUuid": "af36fe5b_9b21615a",
+      "revId": "bf0f5b0b422c0301693191ebe6d3ab3188bee432",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
