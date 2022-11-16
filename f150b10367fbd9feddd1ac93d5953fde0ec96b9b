@@ -90,6 +90,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b0417cb_4becf7b2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-11-16T01:31:51Z",
+      "side": 1,
+      "message": "Hmm. `android13-5.15` doesn\u0027t have the patch: \"Fixes: ca927bd22ad8 (\"ANDROID: cpu/hotplug: avoid breaking Android ABI by fusing cpuhp steps\")\" so it\u0027s slightly different (and this Fixes tag should be removed). The previous patch won\u0027t work for it.\n\nIt looks like the patch is only needed in the -lts branch afterall. (android13-5.10-lts too).",
+      "parentUuid": "d314d0c5_0297f52f",
+      "revId": "f150b10367fbd9feddd1ac93d5953fde0ec96b9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "2723b83c_23f2ac3d",
@@ -103,6 +121,24 @@
       "writtenOn": "2022-11-16T01:24:35Z",
       "side": 1,
       "message": "If you want to keep the grotesque hack from the original commit in one place without spilling over its implications elsewhere, just change `random_and_perf_prepare_fusion()` to do something like:\n\n    int (*fn)(unsigned int cpu);\n    fn \u003d perf_event_init_cpu;\n    fn(cpu);\n    fn \u003d random_prepare_cpu;\n    fn(cpu);\n    return 0;\n\nAnd like this you keep this all contained in one place.",
+      "revId": "f150b10367fbd9feddd1ac93d5953fde0ec96b9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b14cfc62_cb152521",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-11-16T01:31:51Z",
+      "side": 1,
+      "message": "Any reason not to to just do what we did for this in android12-5.10:\n```\n#ifdef CONFIG_PERF_EVENTS\n        perf_event_init_cpu(cpu);\n#endif\n```",
+      "parentUuid": "2723b83c_23f2ac3d",
       "revId": "f150b10367fbd9feddd1ac93d5953fde0ec96b9b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
