@@ -90,6 +90,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2723b83c_23f2ac3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402164
+      },
+      "writtenOn": "2022-11-16T01:24:35Z",
+      "side": 1,
+      "message": "If you want to keep the grotesque hack from the original commit in one place without spilling over its implications elsewhere, just change `random_and_perf_prepare_fusion()` to do something like:\n\n    int (*fn)(unsigned int cpu);\n    fn \u003d perf_event_init_cpu;\n    fn(cpu);\n    fn \u003d random_prepare_cpu;\n    fn(cpu);\n    return 0;\n\nAnd like this you keep this all contained in one place.",
+      "revId": "f150b10367fbd9feddd1ac93d5953fde0ec96b9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc443e37_f7e4a246",
