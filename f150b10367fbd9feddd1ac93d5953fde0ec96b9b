@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03352500_9b58c72e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-11-16T00:36:40Z",
+      "side": 1,
+      "message": "You list this patch since it exposed the problem, but isn\u0027t it really a problem with upstream commit 00e16c3d68fce504e880f59c9bdf23b2a4759d6d which didn\u0027t correctly implement the #else case (which you are replacing).\n\nShouldn\u0027t this be submitted upstream?",
+      "revId": "f150b10367fbd9feddd1ac93d5953fde0ec96b9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc443e37_f7e4a246",
+        "filename": "include/linux/perf_event.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1615,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-11-16T00:36:40Z",
+      "side": 1,
+      "message": "Seems like the real bug is the upstream implementation of this #else case, no? It should be fixed upstream.",
+      "revId": "f150b10367fbd9feddd1ac93d5953fde0ec96b9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
