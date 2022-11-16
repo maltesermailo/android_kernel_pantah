@@ -1274,14 +1274,16 @@ int dma_buf_begin_cpu_access_partial(struct dma_buf *dmabuf,
 				     enum dma_data_direction direction,
 				     unsigned int offset, unsigned int len)
 {
-	int ret = 0;
+	int ret;
 
 	if (WARN_ON(!dmabuf))
 		return -EINVAL;
 
-	if (dmabuf->ops->begin_cpu_access_partial)
-		ret = dmabuf->ops->begin_cpu_access_partial(dmabuf, direction,
-							    offset, len);
+	if (!dmabuf->ops->begin_cpu_access_partial)
+		return -EOPNOTSUPP;
+
+	ret = dmabuf->ops->begin_cpu_access_partial(dmabuf, direction,
+						    offset, len);
 
 	/* Ensure that all fences are waited upon - but we first allow
 	 * the native handler the chance to do so more efficiently if it
@@ -1326,15 +1328,13 @@ int dma_buf_end_cpu_access_partial(struct dma_buf *dmabuf,
 				   enum dma_data_direction direction,
 				   unsigned int offset, unsigned int len)
 {
-	int ret = 0;
-
 	WARN_ON(!dmabuf);
 
-	if (dmabuf->ops->end_cpu_access_partial)
-		ret = dmabuf->ops->end_cpu_access_partial(dmabuf, direction,
-							  offset, len);
+	if (!dmabuf->ops->end_cpu_access_partial)
+		return -EOPNOTSUPP;
 
-	return ret;
+	return dmabuf->ops->end_cpu_access_partial(dmabuf, direction,
+						   offset, len);
 }
 EXPORT_SYMBOL_GPL(dma_buf_end_cpu_access_partial);
 
