@@ -143,6 +143,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "03350a43_957f720c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402164
+      },
+      "writtenOn": "2022-11-16T01:35:16Z",
+      "side": 1,
+      "message": "Works too. It\u0027s just less general. The function pointer thing ensures that these functions are never called through a different method than how upstream does it.\n\n\tdiff --git a/kernel/cpu.c b/kernel/cpu.c\n\tindex eed8ad199001..fbcc2d64048e 100644\n\t--- a/kernel/cpu.c\n\t+++ b/kernel/cpu.c\n\t@@ -1683,14 +1683,24 @@ int __boot_cpu_id;\n\t /* Horrific hacks because we can\u0027t add more to cpuhp_hp_states. */\n\t static int random_and_perf_prepare_fusion(unsigned int cpu)\n\t {\n\t-\tperf_event_init_cpu(cpu);\n\t-\trandom_prepare_cpu(cpu);\n\t+\tint (*fn)(unsigned int cpu);\n\t+\tfn \u003d perf_event_init_cpu;\n\t+\tif (fn)\n\t+\t\tfn(cpu);\n\t+\tfn \u003d random_prepare_cpu;\n\t+\tif (fn)\n\t+\t\tfn(cpu);\n\t \treturn 0;\n\t }\n\t static int random_and_workqueue_online_fusion(unsigned int cpu)\n\t {\n\t-\tworkqueue_online_cpu(cpu);\n\t-\trandom_online_cpu(cpu);\n\t+\tint (*fn)(unsigned int cpu);\n\t+\tfn \u003d workqueue_online_cpu;\n\t+\tif (fn)\n\t+\t\tfn(cpu);\n\t+\tfn \u003d random_online_cpu;\n\t+\tif (fn)\n\t+\t\tfn(cpu);\n\t \treturn 0;\n\t }",
+      "parentUuid": "b14cfc62_cb152521",
+      "revId": "f150b10367fbd9feddd1ac93d5953fde0ec96b9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc443e37_f7e4a246",
