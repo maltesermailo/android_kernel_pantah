@@ -52,6 +52,24 @@
       "parentUuid": "9819ba98_2c91f246",
       "revId": "c3448183f47aeef86260304d01d570760e45a4eb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42d1f7fb_09d2d9b4",
+        "filename": "fs/fuse/ioctl.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1370197
+      },
+      "writtenOn": "2022-11-19T00:58:09Z",
+      "side": 1,
+      "message": "Ahh I see..\n\nThat being the case though, I think we should still include it here to be honest. If we just remove it then all subsequent cherry picks will have problems. It seems like this code actually gets refactored/removed later anyway?\n\nIdeally we would just cherry pick the CL that actually introduced it, but the problem is that it modifies file.c instead of ioctl.c, so it doesn\u0027t apply correctly. If you really want, we can cherry pick that CL and then manually put it into this file, but I\u0027m not sure if it\u0027s worth the effort to keep the clean history.\n\nWhat do you think?",
+      "parentUuid": "b97bc316_a161be00",
+      "revId": "c3448183f47aeef86260304d01d570760e45a4eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
