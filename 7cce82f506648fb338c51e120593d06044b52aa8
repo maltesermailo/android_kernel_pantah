@@ -70,6 +70,30 @@
       },
       "revId": "7cce82f506648fb338c51e120593d06044b52aa8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d64e7225_6a7b1394",
+        "filename": "mm/memory.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2708,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-11-21T17:31:57Z",
+      "side": 1,
+      "message": "Yeah, it would have fixed VM_UFFD_WP case except our 5.4 kernel does not include backports to support handle_userfault(vmf, VM_UFFD_WP). So AFAIKT we can drop this patch. Kalesh, please take another look at it and if needed consult with Lokesh.",
+      "parentUuid": "8c5fe02a_441c9ba8",
+      "range": {
+        "startLine": 2708,
+        "startChar": 14,
+        "endLine": 2708,
+        "endChar": 28
+      },
+      "revId": "7cce82f506648fb338c51e120593d06044b52aa8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
