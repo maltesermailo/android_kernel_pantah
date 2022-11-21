@@ -22,6 +22,30 @@
       },
       "revId": "12eb8914c04936c712894c921ccc252f5f14a56d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d8c4361_692a0513",
+        "filename": "mm/memory.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1473,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2022-11-21T18:52:57Z",
+      "side": 0,
+      "message": "Conceptually I think unmapping should not be marked as a VMA change because it does not change the VMA and it does not free the page tables backing it. ftruncate() is a tricky one but at least AFAIKT it does not lead to UAF?",
+      "parentUuid": "fbc88d15_a24c3fcf",
+      "range": {
+        "startLine": 1473,
+        "startChar": 1,
+        "endLine": 1473,
+        "endChar": 21
+      },
+      "revId": "12eb8914c04936c712894c921ccc252f5f14a56d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
