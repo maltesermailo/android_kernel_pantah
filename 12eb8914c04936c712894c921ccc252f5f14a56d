@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbc88d15_a24c3fcf",
+        "filename": "mm/memory.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1473,
+      "author": {
+        "id": 1104430
+      },
+      "writtenOn": "2022-11-21T16:23:04Z",
+      "side": 0,
+      "message": "Hmm... actually, this is probably slightly wrong, because it makes it possible for ftruncate() racing with SPF to map a file page beyond the file size. But I guess that\u0027s not really a significant problem.",
+      "range": {
+        "startLine": 1473,
+        "startChar": 1,
+        "endLine": 1473,
+        "endChar": 21
+      },
+      "revId": "12eb8914c04936c712894c921ccc252f5f14a56d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
