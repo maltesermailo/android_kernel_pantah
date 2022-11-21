@@ -46,6 +46,30 @@
       },
       "revId": "12eb8914c04936c712894c921ccc252f5f14a56d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf093407_123080bf",
+        "filename": "mm/memory.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1473,
+      "author": {
+        "id": 1104430
+      },
+      "writtenOn": "2022-11-21T19:39:58Z",
+      "side": 0,
+      "message": "I believe that\u0027s correct, ftruncate() on normal files shouldn\u0027t lead to UAF. ftruncate() on GPU graphics devices is more important, but AFAIU those aren\u0027t compatible with SPF at all and shouldn\u0027t be opting in to SPF in the first place, so this is probably fine.",
+      "parentUuid": "3d8c4361_692a0513",
+      "range": {
+        "startLine": 1473,
+        "startChar": 1,
+        "endLine": 1473,
+        "endChar": 21
+      },
+      "revId": "12eb8914c04936c712894c921ccc252f5f14a56d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
