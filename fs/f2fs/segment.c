@@ -3303,6 +3303,9 @@ static int __get_segment_type_6(struct f2fs_io_info *fio)
 	if (fio->type == DATA) {
 		struct inode *inode = fio->page->mapping->host;
 
+#ifdef CONFIG_F2FS_FS_DATA_SEPARATION
+		int type;
+#endif
 		if (is_inode_flag_set(inode, FI_ALIGNED_WRITE))
 			return CURSEG_COLD_DATA_PINNED;
 
@@ -3316,6 +3319,12 @@ static int __get_segment_type_6(struct f2fs_io_info *fio)
 		}
 		if (file_is_cold(inode) || f2fs_need_compress_data(inode))
 			return CURSEG_COLD_DATA;
+
+#ifdef CONFIG_F2FS_FS_DATA_SEPARATION
+		type = f2fs_get_data_segment_type(inode, fio->page->index);
+		if (type != NO_CHECK_TYPE)
+			return type;
+#endif
 		if (file_is_hot(inode) ||
 				is_inode_flag_set(inode, FI_HOT_DATA) ||
 				f2fs_is_atomic_file(inode) ||

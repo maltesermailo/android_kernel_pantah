@@ -17,6 +17,13 @@
 #define LAST_AGE_WEIGHT		30
 #define SAME_AGE_REGION		1024
 
+/*
+ * Define data block with age less than 1GB as hot data
+ * define data block with age less than 10GB but more than 1GB as warm data
+ */
+#define DEF_HOT_DATA_AGE_THRESHOLD	262144
+#define DEF_WARM_DATA_AGE_THRESHOLD	2621440
+
 static struct kmem_cache *age_extent_tree_slab;
 static struct kmem_cache *age_extent_node_slab;
 
@@ -29,6 +36,9 @@ static inline void f2fs_inc_data_block_alloc(struct f2fs_sb_info *sbi)
 static void f2fs_init_block_age_info(struct f2fs_sb_info *sbi)
 {
 	atomic64_set(&sbi->total_data_alloc, 0);
+
+	sbi->hot_data_age_threshold = DEF_HOT_DATA_AGE_THRESHOLD;
+	sbi->warm_data_age_threshold = DEF_WARM_DATA_AGE_THRESHOLD;
 }
 
 static inline bool f2fs_may_age_extent_tree(struct inode *inode)
@@ -695,6 +705,25 @@ unsigned long f2fs_count_age_extent_cache(struct f2fs_sb_info *sbi)
 {
 	return atomic_read(&sbi->total_zombie_age_tree) +
 				atomic_read(&sbi->total_age_ext_node);
+}
+
+int f2fs_get_data_segment_type(struct inode *inode, pgoff_t pgofs)
+{
+	struct age_extent_info ei;
+	struct f2fs_sb_info *sbi =  F2FS_I_SB(inode);
+
+	if (f2fs_lookup_age_extent_cache(inode, pgofs, &ei)) {
+		if (ei.age != 0) {
+			if (ei.age <= sbi->hot_data_age_threshold)
+				return CURSEG_HOT_DATA;
+			else if (ei.age <= sbi->warm_data_age_threshold)
+				return CURSEG_WARM_DATA;
+			else
+				return CURSEG_COLD_DATA;
+		}
+	}
+
+	return NO_CHECK_TYPE;
 }
 
 void f2fs_destroy_age_extent_cache(void)

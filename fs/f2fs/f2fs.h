@@ -1785,6 +1785,9 @@ struct f2fs_sb_info {
 
 #ifdef CONFIG_F2FS_FS_DATA_SEPARATION
 	atomic64_t total_data_alloc;
+	/* The threshold used for hot and warm data seperation*/
+	unsigned int hot_data_age_threshold;
+	unsigned int warm_data_age_threshold;
 #endif
 
 	/* Reference to checksum algorithm driver via cryptoapi */
@@ -4159,6 +4162,7 @@ void f2fs_update_age_extent_cache(struct inode *inode, pgoff_t fofs,
 void f2fs_update_data_block_age(struct dnode_of_data *dn);
 void f2fs_truncate_age_extent_cache(struct inode *inode, pgoff_t fofs,
 					unsigned int len);
+int f2fs_get_data_segment_type(struct inode *inode, pgoff_t pgofs);
 int __init f2fs_create_age_extent_cache(void);
 void f2fs_destroy_age_extent_cache(void);
 #endif
