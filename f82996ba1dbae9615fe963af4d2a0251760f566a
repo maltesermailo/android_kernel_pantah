@@ -22,6 +22,30 @@
       },
       "revId": "f82996ba1dbae9615fe963af4d2a0251760f566a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "220e44f7_35dcf5c7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/clock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2022-11-22T14:33:33Z",
+      "side": 1,
+      "message": "Technically there\u0027s no pKVM dependency here. So maybe host_clock() instead of hyp_clock() to explicitly show this is based on the host input to reconstruct the same clock as the host().\n\nIf needed the hyp could have its own clock... that could actually be based on an host input for sync between both of them, but only when the host is still trusted... The only problem is it needs to handle the computation overflow like the host does and it\u0027s a bit annoying to implement here.\n\nDefinitely late for android14... but eventually for a later upstream submission I\u0027ll consider it?",
+      "parentUuid": "3e0ceab7_fc41efd2",
+      "range": {
+        "startLine": 16,
+        "startChar": 43,
+        "endLine": 18,
+        "endChar": 23
+      },
+      "revId": "f82996ba1dbae9615fe963af4d2a0251760f566a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
