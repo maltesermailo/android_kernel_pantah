@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e20185d_107bc178",
+        "filename": "include/linux/mm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 2746,
+      "author": {
+        "id": 1104430
+      },
+      "writtenOn": "2022-11-22T15:14:37Z",
+      "side": 1,
+      "message": "This might cause some KABI weirdness? Old module builds would have used the inline header definition of find_vma(), which means the resulting machine code in modules will be calling __find_vma().\n\nSo modules built against the old kernel will call __find_vma(), so when they run in combination with a newer kernel, they won\u0027t use the vmacache? Well, I guess that\u0027s not really a problem.",
+      "range": {
+        "startLine": 2746,
+        "startChar": 0,
+        "endLine": 2746,
+        "endChar": 81
+      },
+      "revId": "753750f6e6ed7a25badf695a2ec21053ae8274b1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
