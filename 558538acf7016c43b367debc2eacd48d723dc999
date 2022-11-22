@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a6cf336_ac3580bc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1104430
+      },
+      "writtenOn": "2022-11-22T19:26:18Z",
+      "side": 1,
+      "message": "I don\u0027t think VMA refcounting changes that; the protection against concurrent free_pgtables() is that before free_pgtables(), unmap_page_range() will take the page table spinlock after the VMA has been marked as stale, so that a concurrent SPF will either bail out in pte_spinlock() or take the spinlock, making unmap_page_range() wait.",
+      "range": {
+        "startLine": 18,
+        "startChar": 2,
+        "endLine": 21,
+        "endChar": 33
+      },
+      "revId": "558538acf7016c43b367debc2eacd48d723dc999",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
