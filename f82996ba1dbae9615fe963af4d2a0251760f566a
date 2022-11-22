@@ -46,6 +46,30 @@
       },
       "revId": "f82996ba1dbae9615fe963af4d2a0251760f566a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e6aac27_1b3de5cb",
+        "filename": "arch/arm64/kvm/hyp/nvhe/clock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2022-11-22T14:36:57Z",
+      "side": 1,
+      "message": "Ahhhhh just thought... I actually made a 128-bit computation here to avoid having to handle the overflow case... so maybe it would be quite fast to implement something that is only setup once: during the hyp setup.",
+      "parentUuid": "220e44f7_35dcf5c7",
+      "range": {
+        "startLine": 16,
+        "startChar": 43,
+        "endLine": 18,
+        "endChar": 23
+      },
+      "revId": "f82996ba1dbae9615fe963af4d2a0251760f566a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
