@@ -33,6 +33,24 @@
       "message": "Looks like this breaks KMI 😞\nAlso, I\u0027m not seeing any users of this, and it is not exported to modules. Why would we need it?",
       "revId": "a0986a09767b7e3b8d1007dcfa0595ff396159ee",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "668c9087_d1287b23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1905498
+      },
+      "writtenOn": "2022-11-24T14:18:19Z",
+      "side": 1,
+      "message": "To call call this interface function to stop a cpu and return quickly,wait\nfor the end of the work in a separated function cpu_stop_work_wait() for the CPU isolation. we try to use stop_on_cpu() function, it takes too long times, so occurs scheduling timeout on the current cpu which will trigger panic.",
+      "parentUuid": "1cb8689f_3ffd6ee5",
+      "revId": "a0986a09767b7e3b8d1007dcfa0595ff396159ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
