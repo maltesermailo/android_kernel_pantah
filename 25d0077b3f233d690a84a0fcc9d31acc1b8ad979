@@ -234,6 +234,30 @@
       },
       "revId": "25d0077b3f233d690a84a0fcc9d31acc1b8ad979",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7897662d_10340747",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2022-11-25T19:14:19Z",
+      "side": 1,
+      "message": "So actually, we only need to retain the info of the text start addr in the hyp VA.\n\nI made a tiny trick passing this to the caller as a \"token\" and it looks not too bad. It would avoid having to maintain anything either at EL2 or EL1.\n\nJust need to debug and I\u0027ll push an update.",
+      "parentUuid": "745e6d8a_b22f7387",
+      "range": {
+        "startLine": 167,
+        "startChar": 1,
+        "endLine": 168,
+        "endChar": 39
+      },
+      "revId": "25d0077b3f233d690a84a0fcc9d31acc1b8ad979",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
