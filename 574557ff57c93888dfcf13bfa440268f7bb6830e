@@ -109,6 +109,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b1a2a6d6_e3bb642a",
+        "filename": "fs/namespace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1710,
+      "author": {
+        "id": 1941790
+      },
+      "writtenOn": "2022-11-25T13:39:08Z",
+      "side": 1,
+      "message": "We export these symbols for file management. The file management policy determines how some files will be reused later and decides to keep them or drop them after use. Some files are not needed to be written to block device because they are used just once. When a file is deleted, if it is a mountpoint, mount has to be detached. Their page caches are managed in seperate list and are also released. \n\n`_GPL_` is added.",
+      "parentUuid": "cc16626c_e105b357",
+      "range": {
+        "startLine": 1710,
+        "startChar": 0,
+        "endLine": 1710,
+        "endChar": 31
+      },
+      "revId": "574557ff57c93888dfcf13bfa440268f7bb6830e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2a9bb883_3e017b12",
         "filename": "mm/memcontrol.c",
         "patchSetId": 1
