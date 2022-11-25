@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "862d823f_ae8af70e",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2803,
+      "author": {
+        "id": 1743590
+      },
+      "writtenOn": "2022-11-25T23:09:59Z",
+      "side": 1,
+      "message": "I overlooked this: if `cmpxchg` fails, `old_flags` needs to be updated. This applies to the whole 5.10 series. The 5.15 series already has `try_cmpxchg`.",
+      "range": {
+        "startLine": 2803,
+        "startChar": 10,
+        "endLine": 2803,
+        "endChar": 17
+      },
+      "revId": "0d1db16c209a300d3692e02a81a5401f80bf9556",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
