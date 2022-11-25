@@ -142,6 +142,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f882d88_cf68e021",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2022-11-25T19:52:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ea75eab_4260c404",
+      "range": {
+        "startLine": 131,
+        "startChar": 10,
+        "endLine": 132,
+        "endChar": 42
+      },
+      "revId": "25d0077b3f233d690a84a0fcc9d31acc1b8ad979",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de7c44d6_4e8aae62",
@@ -179,6 +203,30 @@
       "side": 1,
       "message": "This is done either in the patch that brings the module enablement or the one that moves it as a privileged call (but depends on fixing bionic\u0027s segfault)",
       "parentUuid": "de7c44d6_4e8aae62",
+      "range": {
+        "startLine": 155,
+        "startChar": 4,
+        "endLine": 155,
+        "endChar": 25
+      },
+      "revId": "25d0077b3f233d690a84a0fcc9d31acc1b8ad979",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfafcf69_770d7ca8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2022-11-25T19:52:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b11ca3ad_94297f2a",
       "range": {
         "startLine": 155,
         "startChar": 4,
@@ -250,6 +298,30 @@
       "side": 1,
       "message": "So actually, we only need to retain the info of the text start addr in the hyp VA.\n\nI made a tiny trick passing this to the caller as a \"token\" and it looks not too bad. It would avoid having to maintain anything either at EL2 or EL1.\n\nJust need to debug and I\u0027ll push an update.",
       "parentUuid": "745e6d8a_b22f7387",
+      "range": {
+        "startLine": 167,
+        "startChar": 1,
+        "endLine": 168,
+        "endChar": 39
+      },
+      "revId": "25d0077b3f233d690a84a0fcc9d31acc1b8ad979",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60091743_7050e620",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2022-11-25T19:52:09Z",
+      "side": 1,
+      "message": "I completely changed the way the info is store/passed to the hyp.",
+      "parentUuid": "7897662d_10340747",
       "range": {
         "startLine": 167,
         "startChar": 1,
