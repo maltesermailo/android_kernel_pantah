@@ -216,6 +216,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "83f0f406_046718f1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/io-pgtable-s2mpu.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T12:07:28Z",
+      "side": 1,
+      "message": "agree get might be more suitable",
+      "parentUuid": "26888212_5c19743f",
+      "range": {
+        "startLine": 94,
+        "startChar": 38,
+        "endLine": 94,
+        "endChar": 43
+      },
+      "revId": "212aa43ce408a45ca0305bb33271ada3860bfb94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "330bf9f1_34163f52",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
         "patchSetId": 16
@@ -250,6 +274,30 @@
       "writtenOn": "2022-11-25T11:47:33Z",
       "side": 1,
       "message": "Did you measure the performance impact of these indirect calls?",
+      "range": {
+        "startLine": 278,
+        "startChar": 1,
+        "endLine": 278,
+        "endChar": 14
+      },
+      "revId": "212aa43ce408a45ca0305bb33271ada3860bfb94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab5ecfc5_df8d8386",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-25T12:07:28Z",
+      "side": 1,
+      "message": "Yes, I didn\u0027t see noticeable changes(other than in variance) average time for MicrodroidBenchmarks is nearly the same(same run with no changes can have+-10% change). \n\nThe initial design was less abstract than that, where ops provided functions as write_l2_entry, which where looped on hundred of times, Benchmarking this showed regressions specially in virtio tests. That is why ops now are very abstract to provide minimum indirection.",
+      "parentUuid": "b09c0957_dc573b1d",
       "range": {
         "startLine": 278,
         "startChar": 1,
