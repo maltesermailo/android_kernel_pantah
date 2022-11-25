@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33344dbb_cd681b72",
+        "filename": "android/abi_gki_aarch64_pixel",
+        "patchSetId": 4
+      },
+      "lineNbr": 1308,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-25T15:22:21Z",
+      "side": 1,
+      "message": "Could you please change the Pixel symbol list this a separate patch?",
+      "range": {
+        "startLine": 1308,
+        "startChar": 2,
+        "endLine": 1308,
+        "endChar": 26
+      },
+      "revId": "25d0077b3f233d690a84a0fcc9d31acc1b8ad979",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "405f018b_bdbed213",
+        "filename": "arch/arm64/include/asm/kvm_asm.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-25T15:22:21Z",
+      "side": 1,
+      "message": "Should we offset this a bit? Maybe __KVM_HOST_SMCCC_FUNC___kvm_hyp_init + 100 or something?\n\nIf the hcalls end up being hardcoded in module code (which would be wrong, but who knows ...), we\u0027ll be in trouble if we add one.",
+      "range": {
+        "startLine": 94,
+        "startChar": 1,
+        "endLine": 94,
+        "endChar": 40
+      },
+      "revId": "25d0077b3f233d690a84a0fcc9d31acc1b8ad979",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "385f5723_11fdf9a1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-25T15:22:21Z",
+      "side": 1,
+      "message": "KVM_HOST_SMCCC_ID(0) is a negative 32bit int I think -- bit 31 is set. My brain is gone for the day, can\u0027t figure out if this actually provides the expected result? If so, urgh, sorry for the noise.",
+      "range": {
+        "startLine": 131,
+        "startChar": 10,
+        "endLine": 132,
+        "endChar": 42
+      },
+      "revId": "25d0077b3f233d690a84a0fcc9d31acc1b8ad979",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de7c44d6_4e8aae62",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-25T15:22:21Z",
+      "side": 1,
+      "message": "This needs to be made privileged, otherwise EL1 can abuse this as a very reliable way of jumping to arbitrary offsets in hypervisor code.",
+      "range": {
+        "startLine": 155,
+        "startChar": 4,
+        "endLine": 155,
+        "endChar": 25
+      },
+      "revId": "25d0077b3f233d690a84a0fcc9d31acc1b8ad979",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0209da10_074d3476",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-25T15:22:21Z",
+      "side": 1,
+      "message": "If we say that registering hypercalls is a privileged op, we could probably punt that computation to EL1 and avoid much of the module metadata tracking at EL2 I presume?",
+      "range": {
+        "startLine": 167,
+        "startChar": 1,
+        "endLine": 168,
+        "endChar": 39
+      },
+      "revId": "25d0077b3f233d690a84a0fcc9d31acc1b8ad979",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
