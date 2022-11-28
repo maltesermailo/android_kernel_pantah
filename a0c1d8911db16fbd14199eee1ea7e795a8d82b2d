@@ -22,6 +22,30 @@
       },
       "revId": "a0c1d8911db16fbd14199eee1ea7e795a8d82b2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e1f7285_ba4e40f5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2022-11-28T17:45:26Z",
+      "side": 1,
+      "message": "The way I split the patches, is to create mpt ops with cfg here.\nAnd then add the new S2MPU version in another patch, I didn\u0027t want to change s2mpu_get_mpt_ops in the v9 patc, so it made sense to do it.\n\nI can update this if it doesn\u0027t look good.",
+      "parentUuid": "43a4335a_7b88abb9",
+      "range": {
+        "startLine": 490,
+        "startChar": 1,
+        "endLine": 495,
+        "endChar": 31
+      },
+      "revId": "a0c1d8911db16fbd14199eee1ea7e795a8d82b2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
