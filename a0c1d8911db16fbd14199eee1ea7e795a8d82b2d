@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43a4335a_7b88abb9",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/s2mpu.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2022-11-28T16:29:06Z",
+      "side": 1,
+      "message": "Maybe a nit, but this is a funny way to do it. You could just specify s2mpu_get_mpt_ops() without a parameter to start and have it return the right ops directly. And then in the patch where you need to distinguish depending on the version you add the parameter.",
+      "range": {
+        "startLine": 490,
+        "startChar": 1,
+        "endLine": 495,
+        "endChar": 31
+      },
+      "revId": "a0c1d8911db16fbd14199eee1ea7e795a8d82b2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
