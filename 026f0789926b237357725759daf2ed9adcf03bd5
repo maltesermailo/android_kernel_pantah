@@ -22,6 +22,30 @@
       },
       "revId": "026f0789926b237357725759daf2ed9adcf03bd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d23e1cb_4ea09124",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3587,
+      "author": {
+        "id": 1971857
+      },
+      "writtenOn": "2022-11-29T13:21:25Z",
+      "side": 1,
+      "message": "To manage tasks that require boosting, it is used to initialize related information when a task is created. So we require this VH at the beginning of this function/before executing other logic in this code.",
+      "parentUuid": "a018d048_331064a8",
+      "range": {
+        "startLine": 3587,
+        "startChar": 0,
+        "endLine": 3587,
+        "endChar": 39
+      },
+      "revId": "026f0789926b237357725759daf2ed9adcf03bd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
