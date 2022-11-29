@@ -11,16 +11,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-package(
-    default_visibility = [
-        "//visibility:public",
-    ],
-)
 
 load("//build/bazel_common_rules/dist:dist.bzl", "copy_to_dist_dir")
 load("//build/kernel/kleaf:common_kernels.bzl", "define_common_kernels", "define_db845c")
 load("//build/kernel/kleaf:kernel.bzl", "ddk_headers", "kernel_build", "kernel_images", "kernel_modules_install")
 load(":modules.bzl", "COMMON_GKI_MODULES_LIST")
+
+package(
+    default_visibility = [
+        "//visibility:public",
+    ],
+)
 
 _aarch64_additional_kmi_symbol_lists = [
     # keep sorted
