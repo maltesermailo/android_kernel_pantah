@@ -250,6 +250,24 @@
       "parentUuid": "2c233116_06649059",
       "revId": "f2a39117c1c6570c343187fb936a205093646673",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bef3823_7a791cd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2022-11-29T12:13:31Z",
+      "side": 1,
+      "message": "This is actually an android-specific issue. This feature is previously merged to android kernel in this patchset：\nhttps://android-review.googlesource.com/c/kernel/common/+/610460 by @connoro@google.com.\nHowever we found some cpufreq transition is not correctly handled, and fix it by @chenzhengding@oppo.com :\nhttps://android-review.googlesource.com/c/kernel/common/+/1878281 .\nAbove fix is not merged to android13-5.15 and caused some issue in OPPO\u0027s product. Please re-consider if it can be merged to android kernel.\n\nThanks.",
+      "parentUuid": "6ef0c84b_c47e60e9",
+      "revId": "f2a39117c1c6570c343187fb936a205093646673",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
