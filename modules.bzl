@@ -1,4 +1,4 @@
-COMMON_GKI_MODULES_LIST = [
+COMMON_GKI_MODULES_LIST = [ 
     # keep sorted
     "drivers/block/zram/zram.ko",
     "drivers/bluetooth/btbcm.ko",
