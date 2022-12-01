@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e91b69cb_84c96352",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-01T20:27:21Z",
+      "side": 1,
+      "message": "Note that we also want to set the priority when we wake up these threads as a result of the ipi (and other?) interrupts.",
+      "revId": "ec51b443b5c7150701cfb704470adddb1e337b86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "626f7264_b5f92c29",
+        "filename": "drivers/trusty/trusty-share.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-01T20:27:21Z",
+      "side": 1,
+      "message": "we don\u0027t want to put this in the interface. If you want this create a separate struct in the linux specific code that contains both struct eg:\n```\nstruct {\n  struct trusty_shared header;\n  struct trusty_percpu_data percpu_data_table[NR_CPUS];\n}\n```",
+      "revId": "ec51b443b5c7150701cfb704470adddb1e337b86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f32a426c_bb450018",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-01T20:27:21Z",
+      "side": 1,
+      "message": "why do you need this? To get the current cpu from a context where you know it won\u0027t change you can call smp_processor_id() (see https://docs.kernel.org/kernel-hacking/hacking.html#smp-processor-id).\n\nIf you are trying to determine which cpu a specific struct trusty_work pointer belongs to there might be helper functions to do that as well, but it might be easier to perform the check in the other direction.\n\nWe could probably also remove the trusty_state pointer from this struct and pass trusty_state to the threads instead of trusty_work.",
+      "revId": "ec51b443b5c7150701cfb704470adddb1e337b86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2032d7c_63ec7828",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-01T20:27:21Z",
+      "side": 1,
+      "message": "does this not always override the priority you selected below?",
+      "revId": "ec51b443b5c7150701cfb704470adddb1e337b86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f2d70d9_4ee443ad",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-01T20:27:21Z",
+      "side": 1,
+      "message": "Why? If we got SM_ERR_NOP_INTERRUPTED the linux scheduler has probably already run as trusty_std_call_helper called local_irq_enable and has now switched back to this thread. If the curr_nice was a lower priority (/larger-nice-value) than req_nice, then linux will already have run other potentially lower priority threads. It we can we should probably disable preemption (with preempt_disable) before the call to trusty_std_call32 and call preempt_enable (which will call the scheduler if needed) after we have updated our priority.",
+      "revId": "ec51b443b5c7150701cfb704470adddb1e337b86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
