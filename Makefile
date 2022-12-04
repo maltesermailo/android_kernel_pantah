@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: GPL-2.0
 VERSION = 5
 PATCHLEVEL = 10
-SUBLEVEL = 151
+SUBLEVEL = 152
 EXTRAVERSION =
 NAME = Dare mighty things
 
@@ -849,7 +849,13 @@ else
 DEBUG_CFLAGS	+= -g
 endif
 
+<<<<<<< HEAD   (acb6a0 Merge 5.10.151 into android13-5.10-lts)
 ifndef CONFIG_AS_IS_LLVM
+=======
+ifeq ($(LLVM_IAS),1)
+KBUILD_AFLAGS	+= -g
+else
+>>>>>>> BRANCH (7d51b4 Linux 5.10.152)
 KBUILD_AFLAGS	+= -Wa,-gdwarf-2
 endif
 
