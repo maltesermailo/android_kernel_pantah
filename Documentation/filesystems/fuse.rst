@@ -405,3 +405,35 @@ This is solved with doing the copy atomically, and allowing abort
 while the page(s) belonging to the write buffer are faulted with
 get_user_pages().  The 'req->locked' flag indicates when the copy is
 taking place, and abort is delayed until this flag is unset.
+
+/sys/fs interface
+=================
+
+fuse's sys/fs interface is currently only used for Android specfic,
+non-upstreamed extensions, specifically fuse-bpf. It is expected that these
+files will be removed once fuse-bpf is upstreamed.
+
+fuse creates the following files in /sys/fs. The contents of each are simple
+numbers represented in ASCII decimal.
+
+Features
+--------
+
+/sys/fs/fuse/fuse_bpf_major_version
+
+Major version of fuse-bpf api. As fuse-bpf is upstreamed, it is likely that
+the uapi will be broken in non-backwards compatible ways. User code should
+check for this version, and only work with the exact result they are built for.
+
+/sys/fs/fuse/fuse_bpf_minor_version
+
+Minor version of fuse-bpf api. This will be increased if new features are
+added, to allow user code to know if they can use a new feature.
+
+/sys/fs/fuse/bpf_prog_type_fuse
+
+bpf_prog_type_fuse defines the program type of bpf programs that may be passed
+to fuse-bpf. For upstream bpf program types, this is a constant defined in a
+contiguous array of constants. Thus we have to append bpf_prog_type_fuse to the
+end of the list, so it may change and therefore its value must be read from this
+file.
