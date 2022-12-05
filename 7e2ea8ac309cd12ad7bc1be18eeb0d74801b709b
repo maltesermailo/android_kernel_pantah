@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52b28708_2cff2619",
+        "filename": "android/abi_gki_aarch64_virtual_device",
+        "patchSetId": 2
+      },
+      "lineNbr": 1441,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2022-12-05T08:20:33Z",
+      "side": 1,
+      "message": "I had to restore to unblock the Cuttlefish prebuilt update; and this one looks like generated on top of it. Should we generate this like there is none exists with the tooling and use that one as baseline going forward?\n\nSince every symbol in this list becomes unprotected, and we don\u0027t really know how the one we have is generated in the past; it will be better to go with the one we know is properly generated with tooling rather than any manual trickery in the past.",
+      "revId": "7e2ea8ac309cd12ad7bc1be18eeb0d74801b709b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
