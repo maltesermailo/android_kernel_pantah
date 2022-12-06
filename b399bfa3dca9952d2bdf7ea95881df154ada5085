@@ -16,6 +16,24 @@
       "message": "Is this an android12-5.10 specific change? Is there a change upstream that can be cherry-picked?",
       "revId": "b399bfa3dca9952d2bdf7ea95881df154ada5085",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b16d0b6_b2d0f079",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1978545
+      },
+      "writtenOn": "2022-12-06T03:47:21Z",
+      "side": 1,
+      "message": "The change is because android hardware health service will register epoll with EPOLLWAKEUP flag [1].  Afterwards, when suspend starts, NETLINK will hold the wakelock because the EPOLLWAKEUP flag registered from health service.\n\nMTK found the problem in Anrdoid T (13?).\nAnd one more key factor is the CAP_BLOCK_SUSPEND capability of health service [2] that may affect suspend flow.\n\n[1] https://android.googlesource.com/platform/hardware/interfaces/+/master/health/utils/libhealthloop/HealthLoop.cpp#69\n[2] https://android-review.googlesource.com/c/platform/hardware/interfaces/+/1461242\n\nCurrently only the patch referenced in my commit message is available but not accepted in upstream.",
+      "parentUuid": "e6353cc7_b02d04e8",
+      "revId": "b399bfa3dca9952d2bdf7ea95881df154ada5085",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
