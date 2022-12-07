@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66c6582d_e18f278a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2022-12-07T18:58:33Z",
+      "side": 1,
+      "message": "Do all these other wake up locations do so by calling trusty_enqueue_nop()? If so, then they would already be covered since the kthread wake is within that function. Is there another case that I\u0027m not thinking of?",
+      "parentUuid": "e91b69cb_84c96352",
+      "revId": "ec51b443b5c7150701cfb704470adddb1e337b86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "626f7264_b5f92c29",
         "filename": "drivers/trusty/trusty-share.h",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2022-12-01T20:27:21Z",
       "side": 1,
       "message": "we don\u0027t want to put this in the interface. If you want this create a separate struct in the linux specific code that contains both struct eg:\n```\nstruct {\n  struct trusty_shared header;\n  struct trusty_percpu_data percpu_data_table[NR_CPUS];\n}\n```",
+      "revId": "ec51b443b5c7150701cfb704470adddb1e337b86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94f69111_aa5fb052",
+        "filename": "drivers/trusty/trusty-share.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2022-12-07T18:58:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "626f7264_b5f92c29",
       "revId": "ec51b443b5c7150701cfb704470adddb1e337b86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "553f0d9d_ce3ee6f2",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2022-12-07T18:58:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f32a426c_bb450018",
+      "revId": "ec51b443b5c7150701cfb704470adddb1e337b86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2032d7c_63ec7828",
@@ -69,6 +123,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1c23394_7882b5f2",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2022-12-07T18:58:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b2032d7c_63ec7828",
+      "revId": "ec51b443b5c7150701cfb704470adddb1e337b86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f2d70d9_4ee443ad",
@@ -82,6 +154,24 @@
       "writtenOn": "2022-12-01T20:27:21Z",
       "side": 1,
       "message": "Why? If we got SM_ERR_NOP_INTERRUPTED the linux scheduler has probably already run as trusty_std_call_helper called local_irq_enable and has now switched back to this thread. If the curr_nice was a lower priority (/larger-nice-value) than req_nice, then linux will already have run other potentially lower priority threads. It we can we should probably disable preemption (with preempt_disable) before the call to trusty_std_call32 and call preempt_enable (which will call the scheduler if needed) after we have updated our priority.",
+      "revId": "ec51b443b5c7150701cfb704470adddb1e337b86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c4a780a_b35b4947",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 1964575
+      },
+      "writtenOn": "2022-12-07T18:58:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3f2d70d9_4ee443ad",
       "revId": "ec51b443b5c7150701cfb704470adddb1e337b86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
