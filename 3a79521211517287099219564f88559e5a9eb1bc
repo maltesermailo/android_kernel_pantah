@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c33e345_bfcb3d2e",
+        "filename": "drivers/trusty/trusty-virtio.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-10T01:05:35Z",
+      "side": 1,
+      "message": "I think we want to bump the priority here as well.",
+      "revId": "3a79521211517287099219564f88559e5a9eb1bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abf26cc9_c84c4b24",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-10T01:05:35Z",
+      "side": 1,
+      "message": "This is a rare case. I don\u0027t think we need to bump the priority here, but I don\u0027t think it would hurt, so we could simplify the code and remove the extra trusty_enqueue_nop param",
+      "revId": "3a79521211517287099219564f88559e5a9eb1bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d9402f8_473452ea",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-10T01:05:35Z",
+      "side": 1,
+      "message": "you are mostly calling trusty_adjust_nice_nopreempt after trusty exist, not when entering trusty so the value in shared can often be wrong when entering trusty since the priority of the calling thread might not be waht you set here",
+      "revId": "3a79521211517287099219564f88559e5a9eb1bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "977a5755_ecbae112",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-10T01:05:35Z",
+      "side": 1,
+      "message": "These are not async calls. They are either synchronous init calls or pre SMC_SC_NOP nop calls into a very old trusty version (without smp support). I don\u0027t think it is necessary to add any special handling here, we can make these calls with the calling threads priority.",
+      "revId": "3a79521211517287099219564f88559e5a9eb1bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e34a3974_075e8adf",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 849,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-10T01:05:35Z",
+      "side": 1,
+      "message": "Is this a cheap call if the priority is already at the requested value?",
+      "revId": "3a79521211517287099219564f88559e5a9eb1bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
