@@ -144,8 +144,13 @@ static int dp_altmode_status_update(struct dp_altmode *dp)
 			dp->state = DP_STATE_CONFIGURE;
 	} else {
 		if (dp->hpd != hpd) {
+<<<<<<< HEAD   (b499ba ANDROID: usb: typec: tcpm: Add vendor hook to modify port sr)
 			drm_connector_oob_hotplug_event(dp->connector_fwnode);
 			dp->hpd = hpd;
+=======
+			dp->hpd = hpd;
+			sysfs_notify(&dp->alt->dev.kobj, "displayport", "hpd");
+>>>>>>> CHANGE (7923a2 BACKPORT: FROMGIT: usb: typec: altmodes/displayport: Add hpd)
 		}
 	}
 
@@ -514,9 +519,18 @@ static ssize_t pin_assignment_show(struct device *dev,
 }
 static DEVICE_ATTR_RW(pin_assignment);
 
+static ssize_t hpd_show(struct device *dev, struct device_attribute *attr, char *buf)
+{
+	struct dp_altmode *dp = dev_get_drvdata(dev);
+
+	return sysfs_emit(buf, "%d\n", dp->hpd);
+}
+static DEVICE_ATTR_RO(hpd);
+
 static struct attribute *dp_altmode_attrs[] = {
 	&dev_attr_configuration.attr,
 	&dev_attr_pin_assignment.attr,
+	&dev_attr_hpd.attr,
 	NULL
 };
 
