@@ -20,7 +20,14 @@ DECLARE_RESTRICTED_HOOK(android_rvh_set_readahead_gfp_mask,
 			TP_PROTO(gfp_t *flags),
 			TP_ARGS(flags), 1);
 
+<<<<<<< HEAD   (8fc7cb ANDROID: timers: Don't run destructive timer tests)
 */
+=======
+DECLARE_RESTRICTED_HOOK(android_rvh_ctl_dirty_rate,
+	TP_PROTO(void *unused),
+	TP_ARGS(unused), 1);
+
+>>>>>>> CHANGE (508ca0 ANDROID: vendor_hooks:vendor hook for control memory dirty r)
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
