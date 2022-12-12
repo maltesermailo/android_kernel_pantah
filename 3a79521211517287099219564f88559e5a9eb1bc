@@ -89,6 +89,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "278383c7_65c8419e",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1956477
+      },
+      "writtenOn": "2022-12-12T20:16:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9d9ac40a_85805102",
+      "revId": "3a79521211517287099219564f88559e5a9eb1bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d9402f8_473452ea",
@@ -138,6 +156,24 @@
       "side": 1,
       "message": "Every NOP call is definitely needed. Every stdcall might also be useful as they do make it into the scheduler on the trusty side, but note that we are not locked to a specific cpu until the local_irq_disable call in trusty_std_call_helper (a TRUSTY_CALL_PREPARE notifier should be a safe place to handle this though). fastcalls should not care.",
       "parentUuid": "e31cb68c_3fb1aabc",
+      "revId": "3a79521211517287099219564f88559e5a9eb1bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7177026c_489d02e8",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1956477
+      },
+      "writtenOn": "2022-12-12T20:16:47Z",
+      "side": 1,
+      "message": "Ok, I think I understand. Does this also mean that the trusty_get_requested_nice() should also be down a few levels in the call stack within trusty_std_call_helper() (instead of in nop_work_func())?",
+      "parentUuid": "649d0afd_c8c51cb2",
       "revId": "3a79521211517287099219564f88559e5a9eb1bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
