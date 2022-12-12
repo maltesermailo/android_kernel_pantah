@@ -16,6 +16,23 @@
       "message": "I\u0027m curious: Is this something that recently broke w/ mainline? Or just recently narrowed to this patch?\n\nI\u0027m always happy to get rid of an ANDROID patch, and it may be that the fw_devlink support upstream made this unnecessary awhile back - but I\u0027d want Sarvana to confirm, as there may be other clk_sync_state users (from commit 44ee1179cbf8) that may be having trouble as well.",
       "revId": "95adafa96667e876e0ed1448a1cba691b03a7bab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08c265a4_40abb1ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2022-12-12T19:41:31Z",
+      "side": 1,
+      "message": "Those log messages generally happen if the clocks/GDSC aren\u0027t set up properly by the bootloader. I\u0027m pretty sure removing these would cause stability issues during boot up (just because it\u0027s booting up once doesn\u0027t mean there aren\u0027t race conditions).",
+      "revId": "95adafa96667e876e0ed1448a1cba691b03a7bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
