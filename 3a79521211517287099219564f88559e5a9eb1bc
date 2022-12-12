@@ -180,6 +180,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b5a5f81b_028f7170",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-12T21:55:05Z",
+      "side": 1,
+      "message": "I don\u0027t think that is necessarily what we want, as functions are also used when other threads call into trusty during setup. I think it is simpler if we don\u0027t modify the priority of threads we don\u0027t own.",
+      "parentUuid": "7177026c_489d02e8",
+      "revId": "3a79521211517287099219564f88559e5a9eb1bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "977a5755_ecbae112",
         "filename": "drivers/trusty/trusty.c",
         "patchSetId": 3

@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "850d0163_a366c896",
+        "filename": "drivers/trusty/trusty-irq.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-12T21:55:05Z",
+      "side": 1,
+      "message": "note that this call comes from an interrupt context. preempt_disable in nop_work_func does not prevent this call form completing.",
+      "revId": "5650e9d4b5d1941bc9c7732a55b94a4da876dbc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30c09c84_6be751ff",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-12T21:55:05Z",
+      "side": 1,
+      "message": "What does task_nice return if current-\u003epolicy !\u003d SCHED_NORMAL. Does trusty_set_actual_nice map it to what we want?",
+      "revId": "5650e9d4b5d1941bc9c7732a55b94a4da876dbc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7829de6_040faec6",
+        "filename": "include/linux/trusty/trusty.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-12T21:55:05Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to add this as a parameter now since all that callers pass true. trusty_enqueue_nop can unconditionally escalate the priority if it it not already at the highest level",
+      "range": {
+        "startLine": 135,
+        "startChar": 72,
+        "endLine": 135,
+        "endChar": 85
+      },
+      "revId": "5650e9d4b5d1941bc9c7732a55b94a4da876dbc2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
