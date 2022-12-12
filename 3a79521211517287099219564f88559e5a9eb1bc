@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef79d262_2800f2a4",
+        "filename": "drivers/trusty/trusty-virtio.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1956477
+      },
+      "writtenOn": "2022-12-12T19:38:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8c33e345_bfcb3d2e",
+      "revId": "3a79521211517287099219564f88559e5a9eb1bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abf26cc9_c84c4b24",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-12-10T01:05:35Z",
       "side": 1,
       "message": "This is a rare case. I don\u0027t think we need to bump the priority here, but I don\u0027t think it would hurt, so we could simplify the code and remove the extra trusty_enqueue_nop param",
+      "revId": "3a79521211517287099219564f88559e5a9eb1bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "228e5405_1d394419",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1956477
+      },
+      "writtenOn": "2022-12-12T19:38:24Z",
+      "side": 1,
+      "message": "The extra param to trusty_enqueue_nop() is needed so that callers outside of this file (irq and virtio) don\u0027t need details of how to manipulate priority in a common way. I can distribute the logic if preferred.",
+      "parentUuid": "abf26cc9_c84c4b24",
       "revId": "3a79521211517287099219564f88559e5a9eb1bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e31cb68c_3fb1aabc",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1956477
+      },
+      "writtenOn": "2022-12-12T19:38:24Z",
+      "side": 1,
+      "message": "There are two values per cpu in Sudhin\u0027s share memory mechanism. My understanding is that one of them is a request from Trusty and the other is for Linux to inform Trusty of the actual priority. Is this correct?\n\nThe intention of this new trusty_set_actual_nice() is to inform Trusty of actual. I think I see what you are getting at with this comment ... should this call to inform trusty be done before every SMC call? Or only every NOP call?",
+      "parentUuid": "7d9402f8_473452ea",
+      "revId": "3a79521211517287099219564f88559e5a9eb1bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "977a5755_ecbae112",
         "filename": "drivers/trusty/trusty.c",
         "patchSetId": 3
@@ -65,6 +119,24 @@
       "writtenOn": "2022-12-10T01:05:35Z",
       "side": 1,
       "message": "These are not async calls. They are either synchronous init calls or pre SMC_SC_NOP nop calls into a very old trusty version (without smp support). I don\u0027t think it is necessary to add any special handling here, we can make these calls with the calling threads priority.",
+      "revId": "3a79521211517287099219564f88559e5a9eb1bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b24225ae_b6011591",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1956477
+      },
+      "writtenOn": "2022-12-12T19:38:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "977a5755_ecbae112",
       "revId": "3a79521211517287099219564f88559e5a9eb1bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -82,6 +154,24 @@
       "writtenOn": "2022-12-10T01:05:35Z",
       "side": 1,
       "message": "Is this a cheap call if the priority is already at the requested value?",
+      "revId": "3a79521211517287099219564f88559e5a9eb1bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c384c59_c0d8b1e8",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 849,
+      "author": {
+        "id": 1956477
+      },
+      "writtenOn": "2022-12-12T19:38:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e34a3974_075e8adf",
       "revId": "3a79521211517287099219564f88559e5a9eb1bc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
