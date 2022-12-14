@@ -15,6 +15,13 @@
 #include <linux/platform_device.h>
 #include <linux/pm_opp.h>
 #include <linux/regulator/consumer.h>
+<<<<<<< HEAD   (66cd99 BACKPORT: UPSTREAM: phy: qcom-qmp: Introduce Kconfig symbols)
+=======
+#include <linux/slab.h>
+#include <linux/thermal.h>
+#include <linux/device.h>
+#include <trace/hooks/cpufreq.h>
+>>>>>>> CHANGE (cb0ff5 ANDROID: cpufreq: add vendor hook in cpufreq_offline)
 
 struct mtk_cpufreq_platform_data {
 	int min_volt_shift;
@@ -610,6 +617,11 @@ static int mtk_cpufreq_exit(struct cpufreq_policy *policy)
 	return 0;
 }
 
+static void mtk_cpufreq_suppress(void *data, struct device *dev, int val)
+{
+	dev_set_uevent_suppress(dev, val);
+}
+
 static struct cpufreq_driver mtk_cpufreq_driver = {
 	.flags = CPUFREQ_NEED_INITIAL_FREQ_CHECK |
 		 CPUFREQ_HAVE_GOVERNOR_PER_POLICY |
@@ -665,6 +677,8 @@ static int mtk_cpufreq_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "failed to register mtk cpufreq driver\n");
 		goto release_dvfs_info_list;
 	}
+
+	ret = register_trace_android_vh_cpufreq_offline(mtk_cpufreq_suppress, NULL);
 
 	return 0;
 

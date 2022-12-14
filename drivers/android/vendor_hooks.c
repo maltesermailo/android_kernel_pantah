@@ -120,6 +120,15 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_freq_table_limits);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpufreq_resolve_freq);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpufreq_fast_switch);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpufreq_target);
+<<<<<<< HEAD   (66cd99 BACKPORT: UPSTREAM: phy: qcom-qmp: Introduce Kconfig symbols)
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpufreq_offline);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_skip_swapcache_flags);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_gfp_zone_flags);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_readahead_gfp_mask);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_readahead_gfp_mask);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_rmqueue_bulk);
+>>>>>>> CHANGE (cb0ff5 ANDROID: cpufreq: add vendor hook in cpufreq_offline)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_preempt_disable);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_preempt_enable);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_irqs_disable);
