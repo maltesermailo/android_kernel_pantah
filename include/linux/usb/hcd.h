@@ -340,7 +340,21 @@ struct hc_driver {
 	int	(*free_streams)(struct usb_hcd *hcd, struct usb_device *udev,
 		struct usb_host_endpoint **eps, unsigned int num_eps,
 		gfp_t mem_flags);
-
+	/* Frees an interrupter from the current client, and makes it available
+	 * for use.
+	 */
+	int (*free_interrupter)(struct usb_hcd *hcd, int intr_num);
+	/* Request an interrupter from the current allocated pool.  Will provide
+	 * the address to the allocated ring.
+	 */
+	phys_addr_t (*update_interrupter)(struct usb_hcd *hcd, int intr_num,
+		dma_addr_t *dma);
+	/* Fetch transfer/ep ring address */
+	phys_addr_t (*get_transfer_resource)(struct usb_device *udev,
+		struct usb_host_endpoint *ep, dma_addr_t *dma);
+	/* Stop transfers on a particular endpoint */
+	int	(*stop_endpoint)(struct usb_hcd *hcd, struct usb_device *udev,
+		struct usb_host_endpoint *ep);
 	/* Bandwidth computation functions */
 	/* Note that add_endpoint() can only be called once per endpoint before
 	 * check_bandwidth() or reset_bandwidth() must be called.

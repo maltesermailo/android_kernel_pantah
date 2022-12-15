@@ -1712,6 +1712,13 @@ static inline void usb_fill_int_urb(struct urb *urb,
 	urb->start_frame = -1;
 }
 
+extern int usb_free_interrupter(struct usb_device *udev, int intr_num);
+extern phys_addr_t usb_set_interruper(struct usb_device *udev,
+						int intr_num, dma_addr_t *dma);
+extern int usb_hcd_stop_endpoint(struct usb_device *udev,
+						struct usb_host_endpoint *ep);
+extern phys_addr_t usb_hcd_get_transfer_resource(struct usb_device *udev,
+						struct usb_host_endpoint *ep, dma_addr_t *dma);
 extern void usb_init_urb(struct urb *urb);
 extern struct urb *usb_alloc_urb(int iso_packets, gfp_t mem_flags);
 extern void usb_free_urb(struct urb *urb);

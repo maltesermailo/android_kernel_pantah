@@ -1579,6 +1579,92 @@ int usb_hcd_submit_urb (struct urb *urb, gfp_t mem_flags)
 	return status;
 }
 
+/**
+ * usb_free_interrupter - free an interrupter
+ * @udev: usb device which requested the interrupter
+ * @intr_num: interrupter number to free
+ *
+ * Release the USB HCD interrupter that was reserved by a USB class driver.
+ **/
+int usb_free_interrupter(struct usb_device *udev, int intr_num)
+{
+	struct usb_hcd *hcd = bus_to_hcd(udev->bus);
+	int ret = 0;
+
+	if (hcd->driver->free_interrupter)
+		ret = hcd->driver->free_interrupter(hcd, intr_num);
+
+	return ret;
+}
+EXPORT_SYMBOL_GPL(usb_free_interrupter);
+
+/**
+ * usb_set_interruper - Reserve an interrupter
+ * @udev: usb device which requested the interrupter
+ * @intr_num: interrupter number to reserve
+ * @dma: iova address to event ring
+ *
+ * Request for a specific interrupter to be reserved for a USB class driver.
+ * This will return the base address to the event ring that was allocated to
+ * the specific interrupter.
+ **/
+phys_addr_t usb_set_interruper(struct usb_device *udev, int intr_num,
+							dma_addr_t *dma)
+{
+	struct usb_hcd *hcd;
+	phys_addr_t pa = 0;
+
+	hcd = bus_to_hcd(udev->bus);
+	if (hcd->driver->update_interrupter)
+		pa = hcd->driver->update_interrupter(hcd, intr_num, dma);
+
+	return pa;
+}
+EXPORT_SYMBOL_GPL(usb_set_interruper);
+
+/**
+ * usb_hcd_get_transfer_resource - Retrieve USB EP resource information
+ * @udev: usb device
+ * @ep: usb ep to retrieve resource information
+ * @dma: iova address to transfer resource
+ *
+ * Request for USB EP transfer resource which is used for submitting
+ * transfers to the USB HCD.
+ **/
+phys_addr_t usb_hcd_get_transfer_resource(struct usb_device *udev,
+				struct usb_host_endpoint *ep, dma_addr_t *dma)
+{
+	struct usb_hcd *hcd;
+	phys_addr_t pa = 0;
+
+	hcd = bus_to_hcd(udev->bus);
+	if (hcd->driver->get_transfer_resource)
+		pa = hcd->driver->get_transfer_resource(udev, ep, dma);
+
+	return pa;
+}
+EXPORT_SYMBOL_GPL(usb_hcd_get_transfer_resource);
+
+/**
+ * usb_hcd_stop_endpoint - Halt USB EP transfers
+ * @udev: usb device
+ * @ep: usb ep to stop
+ *
+ * Stop pending transfers on a specific USB endpoint.
+ **/
+int usb_hcd_stop_endpoint(struct usb_device *udev,
+					struct usb_host_endpoint *ep)
+{
+	struct usb_hcd *hcd = bus_to_hcd(udev->bus);
+	int ret = 0;
+
+	if (hcd->driver->stop_endpoint)
+		ret = hcd->driver->stop_endpoint(hcd, udev, ep);
+
+	return ret;
+}
+EXPORT_SYMBOL_GPL(usb_hcd_stop_endpoint);
+
 /*-------------------------------------------------------------------------*/
 
 /* this makes the hcd giveback() the urb more quickly, by kicking it
