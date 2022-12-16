@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf4a2eb6_6a9baef8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-12-16T19:20:17Z",
+      "side": 1,
+      "message": "ANDROID:",
+      "revId": "45b8bf9c00c8366900a6d5f2eb862e30c4c26fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e08c9f2_b2e5292f",
+        "filename": "arch/arm64/mm/dma-mapping-noalias.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-12-16T19:20:17Z",
+      "side": 1,
+      "message": "So this errata implementation is being applied for all devices with non-coherent DMA? I thought this was going to be limited only to the specific devices that actually need it.",
+      "revId": "45b8bf9c00c8366900a6d5f2eb862e30c4c26fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65f1b0c4_fdd324f7",
+        "filename": "arch/arm64/mm/dma-mapping.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-12-16T19:20:17Z",
+      "side": 1,
+      "message": "Why is this needed? Either way it is always on for GKI builds. Seems pointless.",
+      "revId": "45b8bf9c00c8366900a6d5f2eb862e30c4c26fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d95149e5_4d365fdb",
+        "filename": "arch/arm64/mm/dma-mapping.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-12-16T19:20:17Z",
+      "side": 1,
+      "message": "Should the function be called something like `fix_cortex_A510_erratum_2454944()` since it is only here for this narrow errata case?",
+      "revId": "45b8bf9c00c8366900a6d5f2eb862e30c4c26fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
