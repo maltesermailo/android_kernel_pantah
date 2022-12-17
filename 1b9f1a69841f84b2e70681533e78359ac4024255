@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dd47c24_c0cf42bf",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-17T00:45:19Z",
+      "side": 1,
+      "message": "This will make trusty always run at LINUX_NICE_FOR_TRUSTY_PRIORITY_HIGH if trusty has not been updated which does not seem correct. You might be able to move the use_high_wq module_param into the file where you implemented trusty_get_requested_nice and take it into account there instead. As long as the path in sysfs does not change that might be simpler. On the other hand if use_high_wq changes from false to true, setting the priority of the threads only after trusty gets preempted might not be the best option. It might be better to have a helper function to set the priority based on multiple inputs (use_high_wq, pending nops and trusty priority requests).",
+      "range": {
+        "startLine": 804,
+        "startChar": 22,
+        "endLine": 804,
+        "endChar": 50
+      },
+      "revId": "1b9f1a69841f84b2e70681533e78359ac4024255",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af31b8a6_c02e1084",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-17T00:45:19Z",
+      "side": 1,
+      "message": "You might be undoing the priority boost that trusty_enqueue_nop set here.",
+      "revId": "1b9f1a69841f84b2e70681533e78359ac4024255",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fbf5045_d1f36553",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 850,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-17T00:45:19Z",
+      "side": 1,
+      "message": "It might be useful to have this behind a module parameter (default on) since it is a change in behavior that could use some benchmarking. If it is not always bumping to a high priority though we should make sure we don\u0027t leave the threads at low priority either if trusty goes idle after running low priority work.",
+      "revId": "1b9f1a69841f84b2e70681533e78359ac4024255",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
