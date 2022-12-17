@@ -85,6 +85,46 @@
       "message": "There are symbols in here that are not HID or sensor driver symbols.",
       "revId": "9c11ff265de4d60fd734654e60178bfb1f2337d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fd882b8_603edd14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-17T09:43:42Z",
+      "side": 1,
+      "message": "Please do not enable `sg.ko`.",
+      "revId": "9c11ff265de4d60fd734654e60178bfb1f2337d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "124ebdd8_2a86f1f9",
+        "filename": "android/abi_gki_aarch64_rockchip",
+        "patchSetId": 4
+      },
+      "lineNbr": 2513,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2022-12-17T09:43:42Z",
+      "side": 1,
+      "message": "please do NOT use the SG kernel driver, it is NOT needed for scsi disk accesses.\n\nDo you really support CDROM writers on Android?  Please just remove this module it is not recommended at all for modern systems and has lots of known problems.",
+      "range": {
+        "startLine": 2513,
+        "startChar": 0,
+        "endLine": 2513,
+        "endChar": 19
+      },
+      "revId": "9c11ff265de4d60fd734654e60178bfb1f2337d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
