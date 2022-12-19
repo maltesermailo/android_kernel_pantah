@@ -420,6 +420,24 @@
       "parentUuid": "d95149e5_4d365fdb",
       "revId": "45b8bf9c00c8366900a6d5f2eb862e30c4c26fb8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6caaa6e_08713c51",
+        "filename": "arch/arm64/mm/dma-mapping.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-12-19T17:05:14Z",
+      "side": 1,
+      "message": "#1 sounds good to me, but add comments explaining that this is to install the workaround for erratum 2454944.\n\n\u003e it is still slightly against the overall idea for CPU erratum\n\nIf the intent is for this to align with the \"overall idea for CPU erratum\", then it should be sent upstream. Otherwise it should not require all unaffected partners to take action.",
+      "parentUuid": "2a7f5745_33f3a77a",
+      "revId": "45b8bf9c00c8366900a6d5f2eb862e30c4c26fb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
