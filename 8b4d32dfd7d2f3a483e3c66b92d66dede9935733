@@ -16,6 +16,24 @@
       "message": "You still have a race here if the nop is enqueued from an interrupt handler in this spot.",
       "revId": "8b4d32dfd7d2f3a483e3c66b92d66dede9935733",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29b0c501_1a7d446c",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-19T21:17:50Z",
+      "side": 1,
+      "message": "Some other problems here:\n- The dequeue_nop call made right before this function was called, might have consumed the last nop entry so it would not be visible list_empty check here\n- The nop could have been queued on a different cpu but consumed by this cpu. In that case this thread could be running at a low priority if trusty requested that the previous time it was preempted in the nop_work_func loop.",
+      "parentUuid": "c4e4dc72_feab81f8",
+      "revId": "8b4d32dfd7d2f3a483e3c66b92d66dede9935733",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
