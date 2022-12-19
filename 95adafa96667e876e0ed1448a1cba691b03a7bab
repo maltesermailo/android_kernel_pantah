@@ -68,6 +68,41 @@
       "parentUuid": "6dc23492_48c9e15e",
       "revId": "95adafa96667e876e0ed1448a1cba691b03a7bab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5363a9ca_78444d4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2022-12-19T17:46:29Z",
+      "side": 1,
+      "message": "Also I was wrong in my last observation and I do see tiny bits of junk characters in dmesg on mainline kernel as well and reverting the upstream commit referenced above, https://git.kernel.org/torvalds/c/703db1f5da1, doesn’t fix that.\n\nThis is what I see on today\u0027s linux/master branch:\n\n[    6.991894][    T9] 898000.serial: ttyHS1 at MMIO 0x898000 (irq \u003d 153, base_baud \u003d 0) is a MSM\n[    6.995439][    T1] init: Loading module /lib/modules/videobuf2-dma-contig.ko with args \u0027\u0027\n[    7.005142][    T9] serial serial0: tty port ttyHS1 registered\n[    7.018697][    T9] geni_se_qup ac0000.geniqup: Adding to iommu group 10\n[    7.021389][    T1] init: Loaded kernel module /lib/modules/videobuf2-dma-contig.ko\n[    7.027391][    T9] a84000.serial: ttyMSM0 at MMIO 0xa84000 (irq \u003d 154, base_baud \u003d 0) is a MSM\n[ �nTc�fH       ` Xk�oA�oMo+A�s�        D�f�gf�fH       d �[    7.090749][    T9] printk: console [ttyMSM0] enabled\n[    7.090792][    T1] init: Loading module /lib/modules/venus-enc.ko with args \u0027\u0027\n[    7.095861][    T9] printk: bootconsole [qcom_geni0] disabled\n[    7.090749][    T9] printk: console [ttyMSM0] enabled",
+      "revId": "95adafa96667e876e0ed1448a1cba691b03a7bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72477382_08f65569",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2022-12-19T17:46:29Z",
+      "side": 1,
+      "message": "Hi Saravana, any pointers on how to fix this issue with the (conflicting?) upstream changes?",
+      "parentUuid": "75d80fc5_51c0893d",
+      "revId": "95adafa96667e876e0ed1448a1cba691b03a7bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
