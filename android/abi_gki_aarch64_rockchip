@@ -7,6 +7,7 @@
   __alloc_disk_node
   __alloc_pages_nodemask
   alloc_workqueue
+  anon_inode_getfd
   __arch_copy_from_user
   __arch_copy_to_user
   arm64_const_caps_ready
@@ -71,6 +72,7 @@
   __class_create
   class_destroy
   class_for_each_device
+  __ClearPageMovable
   clk_bulk_disable
   clk_bulk_enable
   clk_bulk_prepare
@@ -651,6 +653,7 @@
   led_trigger_unregister
   __list_add_valid
   __list_del_entry_valid
+  __lock_page
   __log_post_read_mmio
   __log_read_mmio
   __log_write_mmio
@@ -902,6 +905,7 @@
   regcache_sync
   register_pm_notifier
   register_reboot_notifier
+  register_shrinker
   regmap_bulk_read
   regmap_bulk_write
   regmap_field_read
@@ -967,6 +971,8 @@
   seq_putc
   seq_puts
   seq_read
+  set_page_dirty_lock
+  __SetPageMovable
   sg_alloc_table
   sg_alloc_table_from_pages
   sg_free_table
@@ -1060,6 +1066,7 @@
   sysfs_remove_file_ns
   sysfs_remove_group
   sysfs_remove_link
+  sysfs_streq
   system_freezable_wq
   system_long_wq
   system_power_efficient_wq
@@ -1092,8 +1099,10 @@
   typec_switch_register
   typec_switch_unregister
   __udelay
+  unlock_page
   unregister_chrdev_region
   unregister_reboot_notifier
+  unregister_shrinker
   update_devfreq
   up_read
   up_write
@@ -1233,6 +1242,7 @@
   vm_get_page_prot
   vm_map_pages
   vunmap
+  vzalloc
   wait_for_completion
   wait_for_completion_timeout
   __wake_up
@@ -1314,6 +1324,7 @@
   memchr
   of_dma_is_coherent
   of_property_read_variable_u64_array
+  PageMovable
   param_array_ops
   pid_task
   pin_user_pages
@@ -1787,7 +1798,6 @@
   hwrng_unregister
 
 # required by optee.ko
-  anon_inode_getfd
   alloc_pages_exact
   __arm_smccc_hvc
   bus_for_each_dev
@@ -2537,7 +2547,6 @@
 
 # required by videobuf2-cma-sg.ko
   frame_vector_to_pages
-  set_page_dirty_lock
   split_page
   vb2_common_vm_ops
   vb2_create_framevec
@@ -2570,13 +2579,10 @@
   __num_online_cpus
   page_endio
   register_blkdev
-  sysfs_streq
   unregister_blkdev
-  vzalloc
 
 # required by zsmalloc.ko
   alloc_anon_inode
-  __ClearPageMovable
   contig_page_data
   dec_zone_page_state
   inc_zone_page_state
@@ -2585,13 +2591,8 @@
   kern_mount
   kern_unmount
   kill_anon_super
-  __lock_page
   page_mapping
   _raw_read_lock
   _raw_read_unlock
   _raw_write_lock
   _raw_write_unlock
-  register_shrinker
-  __SetPageMovable
-  unlock_page
-  unregister_shrinker
