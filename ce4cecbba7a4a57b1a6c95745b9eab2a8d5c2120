@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "862a09bb_9e9014f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2022-12-20T20:44:40Z",
+      "side": 1,
+      "message": "Build break:\n```\n/buildbot/src/android/common-android14-5.15/out/bazel/output_user_root/aeb46c275a0698cff4a6f516b8783221/sandbox/linux-sandbox/17/execroot/__main__/common/mm/kasan/report_tags.c:58:7: error: GCC does not allow variable declarations in for loop initializers before C99 [-Werror,-Wgcc-compat]\n        for (u64 i \u003d pos - 1; i !\u003d pos - 1 - stack_ring.size; i--) {\n             ^\n1 error generated.\nmake[3]: *** [/buildbot/src/android/common-android14-5.15/out/bazel/output_user_root/aeb46c275a0698cff4a6f516b8783221/sandbox/linux-sandbox/17/execroot/__main__/common/scripts/Makefile.build:288: mm/kasan/report_tags.o] Error 1\nmake[3]: *** Waiting for unfinished jobs....\nmake[2]: *** [/buildbot/src/android/common-android14-5.15/out/bazel/output_user_root/aeb46c275a0698cff4a6f516b8783221/sandbox/linux-sandbox/17/execroot/__main__/common/scripts/Makefile.build:549: mm/kasan] Error 2\nmake[2]: *** Waiting for unfinished jobs....\nmake[1]: *** [/buildbot/src/android/common-android14-5.15/out/bazel/output_user_root/aeb46c275a0698cff4a6f516b8783221/sandbox/linux-sandbox/17/execroot/__main__/common/Makefile:1948: mm] Error 2\nmake[1]: *** Waiting for unfinished jobs....\nusr/include/linux/fuse.h:926: found __[us]{8,16,32,64} type without #include \u003clinux/types.h\u003e\n```",
+      "revId": "ce4cecbba7a4a57b1a6c95745b9eab2a8d5c2120",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
