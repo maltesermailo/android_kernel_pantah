@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d987f611_05bc4e69",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956477
+      },
+      "writtenOn": "2022-12-20T18:46:03Z",
+      "side": 1,
+      "message": "Reworked. Thank you for reviewing.",
+      "revId": "8b4d32dfd7d2f3a483e3c66b92d66dede9935733",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4e4dc72_feab81f8",
@@ -32,6 +49,24 @@
       "side": 1,
       "message": "Some other problems here:\n- The dequeue_nop call made right before this function was called, might have consumed the last nop entry so it would not be visible list_empty check here\n- The nop could have been queued on a different cpu but consumed by this cpu. In that case this thread could be running at a low priority if trusty requested that the previous time it was preempted in the nop_work_func loop.",
       "parentUuid": "c4e4dc72_feab81f8",
+      "revId": "8b4d32dfd7d2f3a483e3c66b92d66dede9935733",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c761a702_5a43438a",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 1956477
+      },
+      "writtenOn": "2022-12-20T18:46:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "29b0c501_1a7d446c",
       "revId": "8b4d32dfd7d2f3a483e3c66b92d66dede9935733",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
