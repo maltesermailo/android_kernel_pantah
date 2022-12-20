@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "766b6572_c955c142",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-20T20:04:23Z",
+      "side": 1,
+      "message": "I don\u0027t understand the changes in this version. It seems to have a lot of regressions",
+      "revId": "e17037c4324cc00da5dcecaac220cc8d2cd3033b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60874215_8df58887",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-20T20:04:23Z",
+      "side": 1,
+      "message": "trusty_std_call_helper gets called from other threads as well as the worker threads. I think I mentioned in a previous version of this patch that we should not change the priority of other threads (and definitely not without restoring it).",
+      "revId": "e17037c4324cc00da5dcecaac220cc8d2cd3033b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dde42131_e66e904c",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 833,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-20T20:04:23Z",
+      "side": 1,
+      "message": "you disabled preemption here so you could make sure a request by trusty to run at a higher priority would take effect before the linux scheduler runs. I don\u0027t see any call to change the priority now though",
+      "revId": "e17037c4324cc00da5dcecaac220cc8d2cd3033b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baa3650e_691ddffb",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-20T20:04:23Z",
+      "side": 1,
+      "message": "Why did you remove the call to change the priority here? We want to boost the priority as soon as possible.",
+      "revId": "e17037c4324cc00da5dcecaac220cc8d2cd3033b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
