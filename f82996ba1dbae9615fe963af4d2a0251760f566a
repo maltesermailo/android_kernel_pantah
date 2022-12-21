@@ -142,6 +142,30 @@
       },
       "revId": "f82996ba1dbae9615fe963af4d2a0251760f566a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "570de4dc_309ab1f3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/clock.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2022-12-21T08:47:39Z",
+      "side": 1,
+      "message": "I\u0027ll have to revert that sadly...\n\nContrary to my original hypothesis, tracing in Android is using the \"boot\" clock. Unlike the sched_clock, the boot clock is never suspended. It is however corrected according to NTP\u0027s values, which means the mult/shift factors can change over time... To stay as align as possible, it is better to send the last known factors before tracing (and then hope for the best as per drifting)",
+      "parentUuid": "11404e9d_fe35f2d9",
+      "range": {
+        "startLine": 16,
+        "startChar": 43,
+        "endLine": 18,
+        "endChar": 23
+      },
+      "revId": "f82996ba1dbae9615fe963af4d2a0251760f566a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
