@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf8727a1_a906bb02",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 798,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-21T21:27:27Z",
+      "side": 1,
+      "message": "we may not have a priority boost if next is set as it could have boosted a different cpu. Also, for the case where we got a trusty interrupt, next will not be set, instead only your wait function will be activated (which you don\u0027t currently have a pointer to here)",
+      "revId": "e4987586bb6020f28cd17fcffac73b7ff92bf021",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80c67b5d_6cba1e8e",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-21T21:27:27Z",
+      "side": 1,
+      "message": "ideally we would always check the current nice value here and boost to LINUX_NICE_FOR_TRUSTY_PRIORITY_NORMAL instead of LINUX_NICE_FOR_TRUSTY_PRIORITY_HIGH if !override_high_prio_nop and current nice is not already a higher priority",
+      "revId": "e4987586bb6020f28cd17fcffac73b7ff92bf021",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "077a1cc1_6ada3099",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 925,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-21T21:27:27Z",
+      "side": 1,
+      "message": "this should have been in the parent CL",
+      "revId": "e4987586bb6020f28cd17fcffac73b7ff92bf021",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68677d78_ba49a282",
+        "filename": "include/linux/trusty/trusty.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-21T21:27:27Z",
+      "side": 1,
+      "message": "The old code used 0 as the normal nice value. We should keep that the same and use a lower priority here, e.g. a nice value of 10.",
+      "revId": "e4987586bb6020f28cd17fcffac73b7ff92bf021",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
