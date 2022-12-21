@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "389a0e78_789cc5e6",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 14
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2022-12-21T22:30:22Z",
+      "side": 1,
+      "message": "this is wrong. override_high_prio_nop should control if we try boost to LINUX_NICE_FOR_TRUSTY_PRIORITY_NORMAL or LINUX_NICE_FOR_TRUSTY_PRIORITY_HIGH not the current priority of the worker. the current priority should be checked that it is a lower priority than the boost target.",
+      "revId": "bbda38b973cd8e15b4f036c9b4143619d9e3fbf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
