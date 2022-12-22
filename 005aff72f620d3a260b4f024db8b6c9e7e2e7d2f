@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15765ef2_ff89006c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2022-12-22T10:36:41Z",
+      "side": 1,
+      "message": "Nit: \"The pKVM memory pool is currently sized to allow page-granularity mapping in the host stage-2 page-table of all the memory as well as up to 1GiB of MMIO range.\" ? To avoid repeating mapping and page-granularity.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 49
+      },
+      "revId": "005aff72f620d3a260b4f024db8b6c9e7e2e7d2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a396b60b_ed9fb44f",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2022-12-22T10:36:41Z",
+      "side": 1,
+      "message": "Nit: Probably worth to have a small comment here to say why we want the biggest section first, which I believe is because of how is handled the unmap in host_stage2_unmap_unmoveable_regs()?",
+      "revId": "005aff72f620d3a260b4f024db8b6c9e7e2e7d2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
