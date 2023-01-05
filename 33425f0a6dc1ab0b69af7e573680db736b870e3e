@@ -34,6 +34,24 @@
       "parentUuid": "b5d66367_75020016",
       "revId": "33425f0a6dc1ab0b69af7e573680db736b870e3e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89cef80b_30732417",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2023-01-05T00:24:03Z",
+      "side": 1,
+      "message": "Ok, so it sounds like it should be on us to fix up `define_common_kernels`, and then rebase this series on top? Understanding that we don\u0027t expect the symbol list generated here to change afterwards.\n\nI was thinking that the symbols present in `android/abi_gki_aarch64` would not need to be specified in vendor lists, but looks like that\u0027s incorrect.",
+      "parentUuid": "18744cb0_ca259584",
+      "revId": "33425f0a6dc1ab0b69af7e573680db736b870e3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
