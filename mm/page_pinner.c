@@ -55,6 +55,7 @@ struct page_pinner_buffer {
 static struct page_pinner_buffer pp_buffer;
 
 static bool page_pinner_enabled;
+DEFINE_STATIC_KEY_FALSE(page_pinner_defined);
 DEFINE_STATIC_KEY_FALSE(page_pinner_inited);
 
 DEFINE_STATIC_KEY_TRUE(failure_tracking);
@@ -99,7 +100,7 @@ static void init_page_pinner(void)
 	pp_buffer.index = 0;
 
 	register_failure_stack();
-	static_branch_enable(&page_pinner_inited);
+	static_branch_enable(&page_pinner_defined);
 }
 
 struct page_ext_operations page_pinner_ops = {
@@ -402,25 +403,48 @@ DEFINE_DEBUGFS_ATTRIBUTE(buffer_size_fops,
 static int __init page_pinner_init(void)
 {
 	struct dentry *pp_debugfs_root;
+	struct dentry *buf, *fail_track, *buf_size;
+	int ret;
 
-	if (!static_branch_unlikely(&page_pinner_inited))
+	if (!static_branch_unlikely(&page_pinner_defined))
 		return 0;
-
-	pr_info("page_pinner enabled\n");
 
 	pp_debugfs_root = debugfs_create_dir("page_pinner", NULL);
 
-	debugfs_create_file("buffer", 0444,
+	buf = debugfs_create_file("buffer", 0444,
 			    pp_debugfs_root, NULL,
 			    &proc_buffer_operations);
+	if (IS_ERR(buf)) {
+		ret = PTR_ERR(buf);
+		goto err_buf;
+	}
 
-	debugfs_create_file("failure_tracking", 0644,
+	fail_track = debugfs_create_file("failure_tracking", 0644,
 			    pp_debugfs_root, NULL,
 			    &failure_tracking_fops);
+	if (IS_ERR(fail_track)) {
+		ret = PTR_ERR(buf);
+		goto err_fail_track;
+	}
 
-	debugfs_create_file("buffer_size", 0644,
+	buf_size = debugfs_create_file("buffer_size", 0644,
 			    pp_debugfs_root, NULL,
 			    &buffer_size_fops);
+	if (IS_ERR(buf_size)) {
+		ret = PTR_ERR(buf_size);
+		goto err_buf_size;
+	}
+
+	static_branch_enable(&page_pinner_inited);
+	pr_info("page_pinner enabled\n");
 	return 0;
+
+err_buf_size:
+	debugfs_remove(fail_track);
+err_fail_track:
+	debugfs_remove(buf);
+err_buf:
+	kvfree(pp_buffer.buffer);
+	return ret;
 }
 late_initcall(page_pinner_init)
