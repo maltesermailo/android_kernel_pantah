@@ -104,6 +104,12 @@ int __pkvm_create_private_mapping(phys_addr_t phys, size_t size,
 
 static unsigned long mod_range_start = ULONG_MAX;
 static unsigned long mod_range_end;
+static unsigned long pending_mod_pages;
+
+bool pkvm_modules_mappings_complete(void)
+{
+	return !pending_mod_pages;
+}
 
 void *__pkvm_alloc_module_va(u64 nr_pages)
 {
@@ -115,6 +121,7 @@ void *__pkvm_alloc_module_va(u64 nr_pages)
 		if (!pkvm_alloc_private_va_range(size, &addr)) {
 			mod_range_start = min(mod_range_start, addr);
 			mod_range_end = max(mod_range_end, addr + size);
+			pending_mod_pages += nr_pages;
 		}
 	}
 	pkvm_modules_unlock();
@@ -134,7 +141,7 @@ int __pkvm_map_module_page(u64 pfn, void *va, enum kvm_pgtable_prot prot)
 	 * allocations between modules being loaded, but in practice that is
 	 * probably going to be allocation initiated by the modules themselves.
 	 */
-	WARN_ON(addr < mod_range_start || mod_range_end <= addr);
+	WARN_ON(addr < mod_range_start || mod_range_end <= addr || !pending_mod_pages);
 
 	if (!pkvm_modules_enabled())
 		goto err;
@@ -144,6 +151,10 @@ int __pkvm_map_module_page(u64 pfn, void *va, enum kvm_pgtable_prot prot)
 		goto err;
 
 	ret = __pkvm_create_mappings(addr, PAGE_SIZE, hyp_pfn_to_phys(pfn), prot);
+	if (ret)
+		goto err;
+
+	pending_mod_pages--;
 err:
 	pkvm_modules_unlock();
 

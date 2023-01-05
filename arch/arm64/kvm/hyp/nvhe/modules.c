@@ -38,12 +38,14 @@ bool pkvm_modules_enabled(void)
 
 int __pkvm_close_module_registration(void)
 {
+	void *addr;
 	int ret;
 
 	pkvm_modules_lock();
 	ret = __pkvm_modules_enabled ? 0 : -EACCES;
 	if (!ret) {
-		void *addr = hyp_fixmap_map(__hyp_pa(&__pkvm_modules_enabled));
+		WARN_ON(!pkvm_modules_mappings_complete());
+		addr = hyp_fixmap_map(__hyp_pa(&__pkvm_modules_enabled));
 		*(bool *)addr = false;
 		hyp_fixmap_unmap();
 	}
