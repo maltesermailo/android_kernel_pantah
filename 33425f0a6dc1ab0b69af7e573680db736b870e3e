@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f1f760ad_e55a35a6",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2023-01-07T01:33:54Z",
+      "side": 1,
+      "message": "It should be like this, where qcom appends theirs to the list.\n```\ndiff --git a/BUILD.bazel b/BUILD.bazel\nindex c89e71f59c41..21325e1cf411 100644\n--- a/BUILD.bazel\n+++ b/BUILD.bazel\n@@ -12,15 +12,28 @@ package(\n     ],\n )\n \n+_aarch64_additional_kmi_symbol_lists \u003d [\n+    # keep sorted\n+]\n+\n define_common_kernels(target_configs \u003d {\n     \"kernel_aarch64\": {\n         \"module_implicit_outs\": COMMON_GKI_MODULES_LIST,\n+        \"kmi_symbol_list\": \"android/abi_gki_aarch64\",\n+        \"additional_kmi_symbol_lists\": _aarch64_additional_kmi_symbol_lists,\n+        \"abi_definition\": \"android/abi_gki_aarch64.xml\",\n     },\n     \"kernel_aarch64_16k\": {\n         \"module_implicit_outs\": COMMON_GKI_MODULES_LIST,\n+        \"kmi_symbol_list\": \"android/abi_gki_aarch64\",\n+        \"additional_kmi_symbol_lists\": _aarch64_additional_kmi_symbol_lists,\n+        \"abi_definition\": \"android/abi_gki_aarch64.xml\",\n     },\n     \"kernel_aarch64_debug\": {\n         \"module_implicit_outs\": COMMON_GKI_MODULES_LIST,\n+        \"kmi_symbol_list\": \"android/abi_gki_aarch64\",\n+        \"additional_kmi_symbol_lists\": _aarch64_additional_kmi_symbol_lists,\n+        \"abi_definition\": \"android/abi_gki_aarch64.xml\",\n     },\n```\n\nbut I had trouble getting the version of kleaf on this branch to work for generating symbol lists (or even building) after these changes. Looks like a bunch of changes from `master-kernel-build-2022` might be needed.",
+      "parentUuid": "c66c17ad_59606402",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 36
+      },
+      "revId": "33425f0a6dc1ab0b69af7e573680db736b870e3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b5d66367_75020016",
         "filename": "BUILD.bazel",
         "patchSetId": 3
