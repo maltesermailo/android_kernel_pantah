@@ -37,6 +37,7 @@ module_param(override_high_prio_nop, bool, 0660);
 struct trusty_work {
 	struct task_struct *nop_thread;
 	wait_queue_head_t nop_event_wait;
+	int signaled_only;
 };
 
 struct trusty_state {
@@ -749,6 +750,8 @@ static bool dequeue_nop(struct trusty_state *s, u32 *args)
 {
 	unsigned long flags;
 	struct trusty_nop *nop = NULL;
+	struct trusty_work *tw = this_cpu_ptr(s->nop_works);
+	bool ret = false;
 
 	spin_lock_irqsave(&s->nop_lock, flags);
 	if (!list_empty(&s->nop_queue)) {
@@ -758,13 +761,18 @@ static bool dequeue_nop(struct trusty_state *s, u32 *args)
 		args[0] = nop->args[0];
 		args[1] = nop->args[1];
 		args[2] = nop->args[2];
+
+		ret = true;
 	} else {
 		args[0] = 0;
 		args[1] = 0;
 		args[2] = 0;
+
+		ret = tw->signaled_only;
 	}
+	tw->signaled_only = false;
 	spin_unlock_irqrestore(&s->nop_lock, flags);
-	return nop;
+	return ret;
 }
 
 static void locked_nop_work_func(struct trusty_state *s)
@@ -786,25 +794,35 @@ enum cpunice_cause {
 	CPUNICE_CAUSE_NOP_ESCALATE,
 };
 
-static void trusty_adjust_nice_nopreempt(struct trusty_state *s, bool next)
+static void trusty_adjust_nice_nocpuirq(struct trusty_state *s, bool signaled)
 {
 	int req_nice, cur_nice;
 	int cause_id = CPUNICE_CAUSE_DEFAULT;
 
+	cur_nice = task_nice(current);
+
 	if (use_high_wq) {
 		req_nice = LINUX_NICE_FOR_TRUSTY_PRIORITY_HIGH;
 		cause_id = CPUNICE_CAUSE_USE_HIGH_WQ;
-	} else if (!override_high_prio_nop && next) {
-		return; /* Do not undo priority boost when there's more */
-	} else if (s->trusty_sched_share_state) {
+	} else if (!signaled && s->trusty_sched_share_state) {
 		req_nice = trusty_get_requested_nice(smp_processor_id(),
 				s->trusty_sched_share_state);
 		cause_id = CPUNICE_CAUSE_TRUSTY_REQ;
 	} else {
-		req_nice = LINUX_NICE_FOR_TRUSTY_PRIORITY_NORMAL;
+		req_nice = cur_nice;
 	}
 
-	cur_nice = task_nice(current);
+	/* escalate when signaled w/o work; boost above request but don't lower */
+	if (!override_high_prio_nop && signaled && req_nice >= cur_nice) {
+		cause_id = CPUNICE_CAUSE_NOP_ESCALATE;
+
+		if (cur_nice == LINUX_NICE_FOR_TRUSTY_PRIORITY_LOW)
+			req_nice = LINUX_NICE_FOR_TRUSTY_PRIORITY_NORMAL;
+		else if (cur_nice == LINUX_NICE_FOR_TRUSTY_PRIORITY_NORMAL)
+			req_nice = LINUX_NICE_FOR_TRUSTY_PRIORITY_HIGH;
+	}
+
+	/* trace entry only if changing */
 	if (req_nice != cur_nice)
 		trace_trusty_change_cpu_nice(cur_nice, req_nice, cause_id);
 
@@ -819,7 +837,14 @@ static void nop_work_func(struct trusty_state *s)
 	u32 args[3];
 	u32 last_arg0;
 
-	dequeue_nop(s, args);
+	next = dequeue_nop(s, args);
+
+	if (next) {
+		local_irq_disable();
+		trusty_adjust_nice_nocpuirq(s, true);
+		local_irq_enable();
+	}
+
 	do {
 		dev_dbg(s->dev, "%s: %x %x %x\n",
 			__func__, args[0], args[1], args[2]);
@@ -834,7 +859,7 @@ static void nop_work_func(struct trusty_state *s)
 
 		if (ret == SM_ERR_NOP_INTERRUPTED) {
 			local_irq_disable();
-			trusty_adjust_nice_nopreempt(s, next);
+			trusty_adjust_nice_nocpuirq(s, false);
 			local_irq_enable();
 
 			next = true;
@@ -860,7 +885,6 @@ void trusty_enqueue_nop(struct device *dev, struct trusty_nop *nop)
 	unsigned long flags;
 	struct trusty_work *tw;
 	struct trusty_state *s = platform_get_drvdata(to_platform_device(dev));
-	int old_nice = 0, new_nice = 0;
 
 	trace_trusty_enqueue_nop(nop);
 	preempt_disable();
@@ -872,16 +896,9 @@ void trusty_enqueue_nop(struct device *dev, struct trusty_nop *nop)
 		if (list_empty(&nop->node))
 			list_add_tail(&nop->node, &s->nop_queue);
 		spin_unlock_irqrestore(&s->nop_lock, flags);
+	} else {
+		tw->signaled_only = true;
 	}
-
-	if (!override_high_prio_nop) {
-		old_nice = task_nice(current);
-		set_user_nice(tw->nop_thread, LINUX_NICE_FOR_TRUSTY_PRIORITY_HIGH);
-		new_nice = LINUX_NICE_FOR_TRUSTY_PRIORITY_HIGH;
-		if (old_nice != new_nice)
-			trace_trusty_change_cpu_nice(old_nice, new_nice,
-					CPUNICE_CAUSE_NOP_ESCALATE);
-		}
 
 	wake_up_interruptible(&tw->nop_event_wait);
 	preempt_enable();
@@ -990,6 +1007,7 @@ static int trusty_probe(struct platform_device *pdev)
 
 		tw->nop_thread = ERR_PTR(-EINVAL);
 		init_waitqueue_head(&tw->nop_event_wait);
+		tw->signaled_only = false;
 	}
 
 	for_each_possible_cpu(cpu) {
