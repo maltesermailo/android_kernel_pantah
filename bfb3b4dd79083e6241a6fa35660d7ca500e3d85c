@@ -94,6 +94,30 @@
       },
       "revId": "bfb3b4dd79083e6241a6fa35660d7ca500e3d85c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03d17e3f_7631e2f3",
+        "filename": "arch/arm64/include/asm/kvm_pkvm_module.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-01-09T14:13:43Z",
+      "side": 0,
+      "message": "`stgdiff` reports a symbol addition if I add a field to the middle of `struct pkvm_module_ops`:\n```\ntype \u0027struct pkvm_module_ops\u0027 changed\n  byte size changed from 176 to 184\n  member \u0027int(* detect_abi_change)()\u0027 was added\n  9 members (\u0027int(* register_illegal_abt_notifier)(void(*)(struct kvm_cpu_context*))\u0027 .. \u0027unsigned long int(* kern_hyp_va)(unsigned long int)\u0027) changed\n    offset changed by 64\n\n```\nso it looks good!",
+      "parentUuid": "39c76b62_f387b0ff",
+      "range": {
+        "startLine": 55,
+        "startChar": 27,
+        "endLine": 55,
+        "endChar": 55
+      },
+      "revId": "bfb3b4dd79083e6241a6fa35660d7ca500e3d85c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
