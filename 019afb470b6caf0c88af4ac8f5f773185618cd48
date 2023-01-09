@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a22fdbf_84c77880",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2023-01-09T04:42:03Z",
+      "side": 1,
+      "message": "Where is this chunk?\n\n```\nindex f4a22e18951d6..02d2172afe89e 100644\n--- a/mm/vmscan.c\n+++ b/mm/vmscan.c\n@@ -5275,6 +5275,7 @@ static void shrink_lruvec(struct lruvec *lruvec, struct scan_control *sc)\n        unsigned long nr_reclaimed \u003d 0;\n        unsigned long nr_to_reclaim \u003d sc-\u003enr_to_reclaim;\n        struct blk_plug plug;\n+       bool do_plug \u003d true;\n        bool scan_adjusted;\n \n        if (lru_gen_enabled()) {\n@@ -5301,7 +5302,9 @@ static void shrink_lruvec(struct lruvec *lruvec, struct scan_control *sc)\n        scan_adjusted \u003d (!cgroup_reclaim(sc) \u0026\u0026 !current_is_kswapd() \u0026\u0026\n                         sc-\u003epriority \u003d\u003d DEF_PRIORITY);\n \n-       blk_start_plug(\u0026plug);\n+       trace_android_vh_shrink_lruvec_blk_plug(\u0026do_plug);\n+       if (do_plug)\n+               blk_start_plug(\u0026plug);\n        while (nr[LRU_INACTIVE_ANON] || nr[LRU_ACTIVE_FILE] ||\n                                        nr[LRU_INACTIVE_FILE]) {\n                unsigned long nr_anon, nr_file, percentage;\n@@ -5373,7 +5376,8 @@ static void shrink_lruvec(struct lruvec *lruvec, struct scan_control *sc)\n \n                scan_adjusted \u003d true;\n        }\n-       blk_finish_plug(\u0026plug);\n+       if (do_plug)\n+               blk_finish_plug(\u0026plug);\n        sc-\u003enr_reclaimed +\u003d nr_reclaimed;\n\n```",
+      "revId": "019afb470b6caf0c88af4ac8f5f773185618cd48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
