@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20f996c5_37d29ef8",
+        "filename": "arch/arm64/include/asm/kvm_pkvm_module.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-01-09T10:17:15Z",
+      "side": 0,
+      "message": "Hmm, so we rely on this being explicit here, with a full definition of the module_ops struct (used in the .init member) for ABI monitoring. Now that pkvm_el2_module ends up in struct module with a forward-declared pkvm_module_ops, I wonder if the tooling would still be able to flag module_ops changes...",
+      "range": {
+        "startLine": 55,
+        "startChar": 27,
+        "endLine": 55,
+        "endChar": 55
+      },
+      "revId": "bfb3b4dd79083e6241a6fa35660d7ca500e3d85c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
