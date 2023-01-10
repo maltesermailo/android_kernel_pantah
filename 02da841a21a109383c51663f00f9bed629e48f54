@@ -22,6 +22,30 @@
       },
       "revId": "02da841a21a109383c51663f00f9bed629e48f54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8a0cbfa_39e3d720",
+        "filename": "mm/page_pinner.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1904204
+      },
+      "writtenOn": "2023-01-10T09:17:11Z",
+      "side": 1,
+      "message": "By the time page_pinner_init() is called, the pp_buffer is already initialized and could be already in use(because page_pinner_inited and failure_tracking are both set) which introduces the race. No?\n\nAnd when pp_buffer is in use, we can\u0027t kfree() the buffer as it might being used. So, I am seting the page_pinner_inited only after it is completely ready to use. And to set this another static variable is defined which tells to the late_init(page_pinner_init) that pp_buffer is properly defined.",
+      "parentUuid": "971903aa_2ea81787",
+      "range": {
+        "startLine": 409,
+        "startChar": 30,
+        "endLine": 409,
+        "endChar": 49
+      },
+      "revId": "02da841a21a109383c51663f00f9bed629e48f54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
