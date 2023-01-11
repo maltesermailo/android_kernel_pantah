@@ -132,6 +132,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eaa01d36_9c474e33",
+        "filename": "arch/arm64/Kconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 739,
+      "author": {
+        "id": 1348429
+      },
+      "writtenOn": "2023-01-11T22:00:50Z",
+      "side": 1,
+      "message": "Originally this config was also guarding additional verification in arch_free_pages (which has been dropped upon request).\nIf I remove the reference to that config option in set_nc() (https://android-review.googlesource.com/c/kernel/common/+/2361905/comment/c9599dab_5f88c156/)\nthis one can be dropped as well.\nNot sure what kind of dynamic setup you have in mind here though?",
+      "parentUuid": "fe8be022_3e4ba7c0",
+      "range": {
+        "startLine": 739,
+        "startChar": 0,
+        "endLine": 739,
+        "endChar": 34
+      },
+      "revId": "c8d88b854f747ad95648b3b9dc4755528c0062c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3433a76e_af3520a0",
         "filename": "arch/arm64/mm/dma-mapping-noalias.c",
         "patchSetId": 4
@@ -320,6 +344,30 @@
       "side": 1,
       "message": "We do not make kernel config changes for GKI kernels, so don\u0027t add new options that are not going to be enabled.",
       "parentUuid": "c16f4597_dfef87c0",
+      "range": {
+        "startLine": 84,
+        "startChar": 56,
+        "endLine": 84,
+        "endChar": 61
+      },
+      "revId": "c8d88b854f747ad95648b3b9dc4755528c0062c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2ea0f51_c42da8de",
+        "filename": "arch/arm64/mm/dma-mapping-noalias.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1348429
+      },
+      "writtenOn": "2023-01-11T22:00:50Z",
+      "side": 1,
+      "message": "Will drop the check for debug config option leaving the warning there.",
+      "parentUuid": "90266d09_4a8b2377",
       "range": {
         "startLine": 84,
         "startChar": 56,
