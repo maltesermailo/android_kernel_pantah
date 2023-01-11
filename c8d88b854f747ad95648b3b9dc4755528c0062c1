@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3badae14_4a5b4d1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-11T14:53:23Z",
+      "side": 1,
+      "message": "Old hardware always has to run on newer kernels, that\u0027s just a fact of life unless you have physically removed all of the hardware from the world 😞\n\nNewer kernels should ALWAYS be able to be updated on running systems with no problems or regressions, that\u0027s the #1 rule in Linux development.  Please get this upstream so we can move to newer kernels over time properly (otherwise you will have to forward port this for the next 20+ years.)",
+      "parentUuid": "06cd137a_27321546",
+      "revId": "c8d88b854f747ad95648b3b9dc4755528c0062c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fe8be022_3e4ba7c0",
         "filename": "arch/arm64/Kconfig",
         "patchSetId": 4
@@ -272,6 +290,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "90266d09_4a8b2377",
+        "filename": "arch/arm64/mm/dma-mapping-noalias.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-11T14:53:23Z",
+      "side": 1,
+      "message": "We do not make kernel config changes for GKI kernels, so don\u0027t add new options that are not going to be enabled.",
+      "parentUuid": "c16f4597_dfef87c0",
+      "range": {
+        "startLine": 84,
+        "startChar": 56,
+        "endLine": 84,
+        "endChar": 61
+      },
+      "revId": "c8d88b854f747ad95648b3b9dc4755528c0062c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "30394503_1ee7cb36",
         "filename": "arch/arm64/mm/dma-mapping-noalias.c",
         "patchSetId": 4
@@ -307,6 +349,30 @@
       "side": 1,
       "message": "That or using IS_BUILTIN maybe ?",
       "parentUuid": "30394503_1ee7cb36",
+      "range": {
+        "startLine": 554,
+        "startChar": 0,
+        "endLine": 554,
+        "endChar": 23
+      },
+      "revId": "c8d88b854f747ad95648b3b9dc4755528c0062c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50fbde43_cee5f616",
+        "filename": "arch/arm64/mm/dma-mapping-noalias.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-01-11T14:53:23Z",
+      "side": 1,
+      "message": "`if (IS_ENABLED(CONFIG_IOMMU_DMA)) {` is better if you don\u0027t want to make a new function.",
+      "parentUuid": "31b9af56_ebe2bf0a",
       "range": {
         "startLine": 554,
         "startChar": 0,
