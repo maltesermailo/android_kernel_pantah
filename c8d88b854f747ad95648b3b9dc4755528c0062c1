@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "00c482d4_86d3459b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056639
+      },
+      "writtenOn": "2023-01-11T18:25:30Z",
+      "side": 1,
+      "message": "\u003e Old hardware always has to run on newer kernels\n\nI\u0027m afraid that\u0027s not the case here. We don\u0027t have access to any affected system running mainline and I\u0027m not aware of any plans to get support for such hardware upstream (or even later than 5.10). So personally I don\u0027t see much value in maintaining an untested workaround in mainline that would look very different from the 5.10 workaround (due to the significant refactoring of the DMA API code since). I appreciate that it makes the problem harder for GKI but the alternative of backporting the DMA API refactoring has significant risks for a multitude of platforms. In discussions with Will D we concluded that we should minimise the core changes as much as possible and add some vendor hooks to make the workaround mostly a vendor responsibility (you do have a point though on the module loading order). This, of course, makes the patchset even more unlike a potential upstream solution.\n\nPlease note that this problematic CPU revision has not been widely deployed (well, it\u0027s still out there but most Arm partners either used a newer CPU version or deployed an ECO fix in hardware).",
+      "parentUuid": "3badae14_4a5b4d1d",
+      "revId": "c8d88b854f747ad95648b3b9dc4755528c0062c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fe8be022_3e4ba7c0",
         "filename": "arch/arm64/Kconfig",
         "patchSetId": 4
