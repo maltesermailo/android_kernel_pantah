@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "06cd137a_27321546",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1348429
+      },
+      "writtenOn": "2023-01-11T13:32:37Z",
+      "side": 1,
+      "message": "The targeted hardware is not intended to run newer kernels, plus the affected subsystems have diverted enough from 5.10 to result in basically two distinctive solution for the erratum, with the upstream one being basically a dead, untested code.",
+      "parentUuid": "44b1f021_c97bbba2",
+      "revId": "c8d88b854f747ad95648b3b9dc4755528c0062c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fe8be022_3e4ba7c0",
         "filename": "arch/arm64/Kconfig",
         "patchSetId": 4
@@ -83,6 +101,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b27d8fc8_c81216d7",
+        "filename": "arch/arm64/mm/dma-mapping-noalias.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1348429
+      },
+      "writtenOn": "2023-01-11T13:32:37Z",
+      "side": 1,
+      "message": "Seems I got stuck in the past!",
+      "parentUuid": "3433a76e_af3520a0",
+      "range": {
+        "startLine": 2,
+        "startChar": 17,
+        "endLine": 2,
+        "endChar": 21
+      },
+      "revId": "c8d88b854f747ad95648b3b9dc4755528c0062c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0cc6f2d7_349b3984",
         "filename": "arch/arm64/mm/dma-mapping-noalias.c",
         "patchSetId": 4
@@ -100,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "055ccd2c_3e57f263",
+        "filename": "arch/arm64/mm/dma-mapping-noalias.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1348429
+      },
+      "writtenOn": "2023-01-11T13:32:37Z",
+      "side": 1,
+      "message": "Noted",
+      "parentUuid": "0cc6f2d7_349b3984",
+      "revId": "c8d88b854f747ad95648b3b9dc4755528c0062c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7e2ac8eb_65902885",
         "filename": "arch/arm64/mm/dma-mapping-noalias.c",
         "patchSetId": 4
@@ -111,6 +171,30 @@
       "writtenOn": "2023-01-11T08:47:41Z",
       "side": 1,
       "message": "so what is going to break in the future based on this assumption?  How is that going to be resolved?",
+      "range": {
+        "startLine": 15,
+        "startChar": 7,
+        "endLine": 15,
+        "endChar": 16
+      },
+      "revId": "c8d88b854f747ad95648b3b9dc4755528c0062c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "001e0ae0_95052cee",
+        "filename": "arch/arm64/mm/dma-mapping-noalias.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1348429
+      },
+      "writtenOn": "2023-01-11T13:32:37Z",
+      "side": 1,
+      "message": "I do not think there is a proper/reasonable way to identify the unintended use of those software bits and prevent it from happening(which I guess would apply to other descriptor bits). The assumption itself should not change - those bits are not really intended to be used with linear map pages.",
+      "parentUuid": "7e2ac8eb_65902885",
       "range": {
         "startLine": 15,
         "startChar": 7,
@@ -146,6 +230,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c16f4597_dfef87c0",
+        "filename": "arch/arm64/mm/dma-mapping-noalias.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1348429
+      },
+      "writtenOn": "2023-01-11T13:32:37Z",
+      "side": 1,
+      "message": "I would expect this to be useful for validating relevant drivers before deploying them, at which point this should not happen. But yes, it might be good idea to keep that around.",
+      "parentUuid": "c9599dab_5f88c156",
+      "range": {
+        "startLine": 84,
+        "startChar": 56,
+        "endLine": 84,
+        "endChar": 61
+      },
+      "revId": "c8d88b854f747ad95648b3b9dc4755528c0062c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "30394503_1ee7cb36",
         "filename": "arch/arm64/mm/dma-mapping-noalias.c",
         "patchSetId": 4
@@ -157,6 +265,30 @@
       "writtenOn": "2023-01-11T08:48:48Z",
       "side": 1,
       "message": "provide a static function above to do this so you do not need an #ifdef in the middle of a .c function as that is not recommended for kernel code.",
+      "range": {
+        "startLine": 554,
+        "startChar": 0,
+        "endLine": 554,
+        "endChar": 23
+      },
+      "revId": "c8d88b854f747ad95648b3b9dc4755528c0062c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31b9af56_ebe2bf0a",
+        "filename": "arch/arm64/mm/dma-mapping-noalias.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1348429
+      },
+      "writtenOn": "2023-01-11T13:32:37Z",
+      "side": 1,
+      "message": "That or using IS_BUILTIN maybe ?",
+      "parentUuid": "30394503_1ee7cb36",
       "range": {
         "startLine": 554,
         "startChar": 0,
