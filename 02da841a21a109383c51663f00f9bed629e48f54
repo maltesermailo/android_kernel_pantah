@@ -70,6 +70,30 @@
       },
       "revId": "02da841a21a109383c51663f00f9bed629e48f54",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96a98c06_ebbdf720",
+        "filename": "mm/page_pinner.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1904204
+      },
+      "writtenOn": "2023-01-11T15:54:55Z",
+      "side": 1,
+      "message": "Okay, got it. This code then assume that init_page_pinner always succeeds.\n\n\u003e\u003eWhat we lose is miss cma allocation failure\nActually I just realized that it helped us to catch an issue internally where we are allowing some readahead file pages to goto cma and then they are getting pinned(because of missing put_page() in the spf path). Some drivers allocating that cma area is showing as failures. Then pp feature came really handy to catch the culprit. \n\nIMO, leaving the code as is better, i.e, __Since we are taking that debugfs nodes never fail to get created, Just advertising the print at the last should suffice I hope__.  This is what you have commented as nit in the initial patch. Sorry for this extended discussion.",
+      "parentUuid": "73ab328c_2ebc22de",
+      "range": {
+        "startLine": 409,
+        "startChar": 30,
+        "endLine": 409,
+        "endChar": 49
+      },
+      "revId": "02da841a21a109383c51663f00f9bed629e48f54",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
