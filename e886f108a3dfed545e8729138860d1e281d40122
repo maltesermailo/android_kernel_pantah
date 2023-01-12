@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9e3bf2b7_9f24e079",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1878105
+      },
+      "writtenOn": "2023-01-12T12:24:09Z",
+      "side": 1,
+      "message": "For power tuning, we need choose new ilb cpu for power saving.",
+      "parentUuid": "d0399811_0d35dcbc",
+      "range": {
+        "startLine": 10,
+        "startChar": 4,
+        "endLine": 10,
+        "endChar": 10
+      },
+      "revId": "e886f108a3dfed545e8729138860d1e281d40122",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c0feab3d_e598b983",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 1
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c3773c0b_533f975d",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 10890,
+      "author": {
+        "id": 1878105
+      },
+      "writtenOn": "2023-01-12T12:24:09Z",
+      "side": 1,
+      "message": "If ilb initial is 0, then when hook is not registered, find ilb will return CPU 0.\nBut when hook is not registered, it should do for_each_cpu_and() to find best ilb cpu, instead of return CPU 0 direct.\n\nWe want to set ilb as nr_cpu_ids by our vendor when ilb cpu not be found.\nSo we set ilb initial is -1.\nIt means anyone doesn\u0027t register the hook or the registered hook doesn\u0027t do anything, instead of ilb cpu not be found by vendor.\n\nThe patch was merged at android13-5.15.\nSo I think we can use same patch for android14-6.1.",
+      "parentUuid": "c0feab3d_e598b983",
+      "range": {
+        "startLine": 10890,
+        "startChar": 11,
+        "endLine": 10890,
+        "endChar": 13
+      },
+      "revId": "e886f108a3dfed545e8729138860d1e281d40122",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fc24a9ea_2024cae6",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 1
@@ -60,6 +108,30 @@
       "writtenOn": "2023-01-09T09:43:14Z",
       "side": 1,
       "message": "that is very specific, why not reference this in your hook?",
+      "range": {
+        "startLine": 10893,
+        "startChar": 32,
+        "endLine": 10893,
+        "endChar": 51
+      },
+      "revId": "e886f108a3dfed545e8729138860d1e281d40122",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d494a9bc_253e127e",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 10893,
+      "author": {
+        "id": 1878105
+      },
+      "writtenOn": "2023-01-12T12:24:09Z",
+      "side": 1,
+      "message": "The struct of nohz is static, we are hard to use this struct to get idle_cpus_mask at our hook.\nSo I think reference it by hook function is better way.\nThis way is same with android13-5.15.",
+      "parentUuid": "fc24a9ea_2024cae6",
       "range": {
         "startLine": 10893,
         "startChar": 32,
