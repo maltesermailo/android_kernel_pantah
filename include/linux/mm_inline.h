@@ -12,6 +12,12 @@
 #undef CREATE_TRACE_POINTS
 #include <trace/hooks/mm.h>
 
+extern struct static_key_true restrict_cma_redirect;
+static inline bool cma_redirect_restricted(void)
+{
+	return static_key_enabled(&restrict_cma_redirect);
+}
+
 /**
  * folio_is_file_lru - Should the folio be on a file LRU or anon LRU?
  * @folio: The folio to test.

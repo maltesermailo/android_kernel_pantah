@@ -207,11 +207,6 @@ static int __init restrict_cma_redirect_setup(char *str)
 }
 __setup("restrict_cma_redirect=", restrict_cma_redirect_setup);
 
-static inline bool cma_redirect_restricted(void)
-{
-	return static_key_enabled(&restrict_cma_redirect);
-}
-
 /*
  * Return true if CMA has pcplist. We use the PCP list for CMA only if
  * this returns true. For now, rather than define a new flag, reuse the
