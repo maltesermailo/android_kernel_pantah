@@ -1362,7 +1362,8 @@ ssize_t incfs_read_merkle_tree_blocks(struct mem_range dst,
 }
 
 int incfs_process_new_data_block(struct data_file *df,
-				 struct incfs_fill_block *block, u8 *data)
+				 struct incfs_fill_block *block, u8 *data,
+				 bool *complete)
 {
 	struct mount_info *mi = NULL;
 	struct backing_file_context *bfc = NULL;
@@ -1415,12 +1416,13 @@ int incfs_process_new_data_block(struct data_file *df,
 		error = incfs_write_data_block_to_backing_file(
 			bfc, range(data, block->data_len), block->block_index,
 			df->df_blockmap_off, flags);
+		if (!error)
+			*complete = atomic_inc_return(&df->df_data_blocks_written)
+				>= df->df_data_block_count;
 		mutex_unlock(&bfc->bc_mutex);
 	}
-	if (!error) {
+	if (!error)
 		notify_pending_reads(mi, segment, block->block_index);
-		atomic_inc(&df->df_data_blocks_written);
-	}
 
 	up_write(&segment->rwsem);
 

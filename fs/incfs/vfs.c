@@ -690,7 +690,7 @@ out:
 	dput(file);
 }
 
-static void maybe_delete_incomplete_file(struct file *f,
+static void delete_incomplete_file(struct file *f,
 					 struct data_file *df)
 {
 	struct backing_file_context *bfc;
@@ -700,26 +700,19 @@ static void maybe_delete_incomplete_file(struct file *f,
 	const struct cred *old_cred = override_creds(mi->mi_owner);
 	int error;
 
-	if (atomic_read(&df->df_data_blocks_written) < df->df_data_block_count)
-		goto out;
-
 	/* Truncate file to remove any preallocated space */
 	bfc = df->df_backing_file_context;
 	if (bfc) {
 		struct file *f = bfc->bc_file;
 
 		if (f) {
-			error = mutex_lock_interruptible(&bfc->bc_mutex);
-			if (!error) {
-				loff_t size = i_size_read(file_inode(f));
+			loff_t size = i_size_read(file_inode(f));
 
-				error = vfs_truncate(&f->f_path, size);
-				if (error)
-					/* No useful action on failure */
-					pr_warn("incfs: Failed to truncate complete file: %d\n",
-						error);
-				mutex_unlock(&bfc->bc_mutex);
-			}
+			error = vfs_truncate(&f->f_path, size);
+			if (error)
+				/* No useful action on failure */
+				pr_warn("incfs: Failed to truncate complete file: %d\n",
+					error);
 		}
 	}
 
@@ -765,6 +758,7 @@ static long ioctl_fill_blocks(struct file *f, void __user *arg)
 	u8 *data_buf = NULL;
 	ssize_t error = 0;
 	int i = 0;
+	bool complete = false;
 
 	if (!df)
 		return -EBADF;
@@ -806,7 +800,7 @@ static long ioctl_fill_blocks(struct file *f, void __user *arg)
 							     data_buf);
 		} else {
 			error = incfs_process_new_data_block(df, &fill_block,
-							     data_buf);
+							data_buf, &complete);
 		}
 		if (error)
 			break;
@@ -815,7 +809,8 @@ static long ioctl_fill_blocks(struct file *f, void __user *arg)
 	if (data_buf)
 		free_pages((unsigned long)data_buf, get_order(data_buf_size));
 
-	maybe_delete_incomplete_file(f, df);
+	if (complete)
+		delete_incomplete_file(f, df);
 
 	/*
 	 * Only report the error if no records were processed, otherwise
