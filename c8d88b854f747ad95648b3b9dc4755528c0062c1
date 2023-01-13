@@ -127,6 +127,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "09bb762a_af23ea3f",
+        "filename": "Documentation/arm64/silicon-errata.rst",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-01-13T11:36:49Z",
+      "side": 1,
+      "message": "We can probably just drop this change, as all it\u0027s going to do is conflict with upstream changes.",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 84
+      },
+      "revId": "c8d88b854f747ad95648b3b9dc4755528c0062c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fe8be022_3e4ba7c0",
         "filename": "arch/arm64/Kconfig",
         "patchSetId": 4
@@ -162,6 +185,30 @@
       "side": 1,
       "message": "Originally this config was also guarding additional verification in arch_free_pages (which has been dropped upon request).\nIf I remove the reference to that config option in set_nc() (https://android-review.googlesource.com/c/kernel/common/+/2361905/comment/c9599dab_5f88c156/)\nthis one can be dropped as well.\nNot sure what kind of dynamic setup you have in mind here though?",
       "parentUuid": "fe8be022_3e4ba7c0",
+      "range": {
+        "startLine": 739,
+        "startChar": 0,
+        "endLine": 739,
+        "endChar": 34
+      },
+      "revId": "c8d88b854f747ad95648b3b9dc4755528c0062c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b62af0eb_f5e5ee31",
+        "filename": "arch/arm64/Kconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 739,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-01-13T11:36:49Z",
+      "side": 1,
+      "message": "Dropping this config option entirely makes sense to me",
+      "parentUuid": "eaa01d36_9c474e33",
       "range": {
         "startLine": 739,
         "startChar": 0,
@@ -214,6 +261,29 @@
         "startChar": 17,
         "endLine": 2,
         "endChar": 21
+      },
+      "revId": "c8d88b854f747ad95648b3b9dc4755528c0062c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f867541d_98388df3",
+        "filename": "arch/arm64/mm/dma-mapping-noalias.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-01-13T11:36:49Z",
+      "side": 1,
+      "message": "Please can you add an Author: line too so people know how to talk to if they run into any issues with this file :)",
+      "range": {
+        "startLine": 2,
+        "startChar": 3,
+        "endLine": 2,
+        "endChar": 12
       },
       "revId": "c8d88b854f747ad95648b3b9dc4755528c0062c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
