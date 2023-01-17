@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59bc97be_aea6c477",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-17T17:22:20Z",
+      "side": 1,
+      "message": "why does this need more than 1 u64?",
+      "revId": "dedbf63df3d583eb48623ed8746a7ece604213ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c354ff06_7ff3fb4c",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-17T17:22:20Z",
+      "side": 1,
+      "message": "why 96? I\u0027d like this to be 16 or less. Please justify the need for so much space here. Can it instead be a single u64 with space alloc\u0027d/freed as needed? Why not?\n\nPlease answer in the commit message.",
+      "revId": "dedbf63df3d583eb48623ed8746a7ece604213ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
