@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1c60f55_0ee740e0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-18T17:59:48Z",
+      "side": 1,
+      "message": "Please comply to contribution guidelines: https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nInclude a description with details about the patch and its motivation. If not submitting upstream, you need to provide rationale for why this must be android-specific.",
+      "revId": "4d2daf9b655aaf54f57a8902f2f2507a60ca32e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2b6e287_d0a703ee",
+        "filename": "drivers/gpu/drm/drm_property.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-18T17:59:48Z",
+      "side": 1,
+      "message": "Why wouldn\u0027t this be needed upstream too?",
+      "revId": "4d2daf9b655aaf54f57a8902f2f2507a60ca32e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4af0f9d4_2351a796",
+        "filename": "include/drm/drm_property.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-18T17:59:48Z",
+      "side": 1,
+      "message": "No, don\u0027t do this. Don\u0027t assume 4k.\n\nThe C file should include the appropriate header to get the real PAGE_SIZE.",
+      "revId": "4d2daf9b655aaf54f57a8902f2f2507a60ca32e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
