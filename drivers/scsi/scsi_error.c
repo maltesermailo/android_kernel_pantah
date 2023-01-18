@@ -337,6 +337,7 @@ enum blk_eh_timer_return scsi_times_out(struct request *req)
 	if (host->eh_deadline != -1 && !host->last_reset)
 		host->last_reset = jiffies;
 
+<<<<<<< HEAD   (bbac37 ANDROID: scsi: sd_zbc: Work around non-compliance)
 	if (host->hostt->eh_timed_out) {
 		switch (host->hostt->eh_timed_out(scmd)) {
 		case SCSI_EH_DONE:
@@ -345,6 +346,21 @@ enum blk_eh_timer_return scsi_times_out(struct request *req)
 			return BLK_EH_RESET_TIMER;
 		case SCSI_EH_NOT_HANDLED:
 			break;
+=======
+	if (host->hostt->eh_timed_out)
+		rtn = host->hostt->eh_timed_out(scmd);
+
+	if (rtn == BLK_EH_DONE) {
+		/*
+		 * If scsi_done() has already set SCMD_STATE_COMPLETE, do not
+		 * modify *scmd.
+		 */
+		if (test_and_set_bit(SCMD_STATE_COMPLETE, &scmd->state))
+			return BLK_EH_DONE;
+		if (scsi_abort_command(scmd) != SUCCESS) {
+			set_host_byte(scmd, DID_TIME_OUT);
+			scsi_eh_scmd_add(scmd);
+>>>>>>> BRANCH (90ffbb Linux 5.15.86)
 		}
 	}
 

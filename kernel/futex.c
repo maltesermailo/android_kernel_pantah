@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (bbac37 ANDROID: scsi: sd_zbc: Work around non-compliance)
 // SPDX-License-Identifier: GPL-2.0-or-later
 /*
  *  Fast Userspace Mutexes (which I call "Futexes!").
@@ -4274,3 +4275,5 @@ static int __init futex_init(void)
 	return 0;
 }
 core_initcall(futex_init);
+=======
+>>>>>>> BRANCH (90ffbb Linux 5.15.86)

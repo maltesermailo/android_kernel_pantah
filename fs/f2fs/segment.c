@@ -1464,7 +1464,11 @@ retry:
 		if (i + 1 < dpolicy->granularity)
 			break;
 
+<<<<<<< HEAD   (bbac37 ANDROID: scsi: sd_zbc: Work around non-compliance)
 		if (i + 1 < dcc->max_ordered_discard && dpolicy->ordered)
+=======
+		if (i + 1 < DEFAULT_DISCARD_GRANULARITY && dpolicy->ordered)
+>>>>>>> BRANCH (90ffbb Linux 5.15.86)
 			return __issue_discard_cmd_orderly(sbi, dpolicy);
 
 		pend_list = &dcc->pend_list[i];
