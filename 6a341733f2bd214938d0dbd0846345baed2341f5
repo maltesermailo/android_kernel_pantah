@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8536d98_fae39417",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-01-23T18:14:35Z",
+      "side": 1,
+      "message": "Add `ANDROID: trusty: ` prefix",
+      "revId": "6a341733f2bd214938d0dbd0846345baed2341f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dc996fe_71317491",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-01-23T18:14:35Z",
+      "side": 1,
+      "message": "We don\u0027t necessarily need to allocate a full linux page for the ffa_tx and ffa_rx buffers. The size needed by el3/el2 determines the minimum size here, not the linux page size. The current code assumes this is 4k, but we may need to update this to discover this with a SMC_FC_FFA_FEATURES call in the future.",
+      "revId": "6a341733f2bd214938d0dbd0846345baed2341f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
