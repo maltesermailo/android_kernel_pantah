@@ -69,6 +69,24 @@
       "parentUuid": "0dc996fe_71317491",
       "revId": "6a341733f2bd214938d0dbd0846345baed2341f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fe5af8f_e175d9ee",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-01-25T18:50:08Z",
+      "side": 1,
+      "message": "I have a slight preference to keep these buffers at 4k for now since that is the closest to the current behavior and lowest risk. The current EL3 code should work fine either way, but I don\u0027t know if pKVM (EL2) has the same flexibility as I have not looked at that code and we don\u0027t currently have tests configured to use it.\n\nThe change to use a buffer size discovered by SMC_FC_FFA_FEATURES should be a separate change and is not really needed now. That would likely only be needed if or when we want to support a hypervisor with a larger page size.",
+      "parentUuid": "edbc9232_aee188e1",
+      "revId": "6a341733f2bd214938d0dbd0846345baed2341f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
