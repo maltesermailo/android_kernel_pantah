@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52a52eb7_b7646415",
+        "filename": "mm/gcma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-01-27T01:38:48Z",
+      "side": 0,
+      "message": "nit: There would be much less churn if you changed this condition to:\n```\n    if (g_page) {\n+        if (!workingset) {\n+            gcma_erase_page(inode, offset, g_page);\n+            goto out_unlock;\n+        }\n        goto copy;  \n    }\n+    if (!workingset)\n+        goto out_unlock;\n    \n```",
+      "range": {
+        "startLine": 612,
+        "startChar": 1,
+        "endLine": 613,
+        "endChar": 12
+      },
+      "revId": "18822040778dfc3dd1accae3a18b37c399884be3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
