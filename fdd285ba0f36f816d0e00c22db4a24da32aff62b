@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c102aa06_ad159738",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1873181
+      },
+      "writtenOn": "2023-01-27T10:47:30Z",
+      "side": 1,
+      "message": "Based on another comment, I\u0027ve reverted to patch set 2.",
+      "parentUuid": "1f33465f_ae615357",
+      "range": {
+        "startLine": 356,
+        "startChar": 25,
+        "endLine": 356,
+        "endChar": 34
+      },
+      "revId": "fdd285ba0f36f816d0e00c22db4a24da32aff62b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "69859bfb_1e781230",
         "filename": "drivers/trusty/trusty.c",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-27T09:57:43Z",
       "side": 1,
       "message": "I think this will fail with pKVM, as the hypervisor is using the same page size as the host (including for the stage-2 mapping) and so will need the rx/tx buffers to be page-sized/aligned. This is enforced by the hypervisor, otherwise things like vCPU allocations from the same page as the rx/tx buffers would be unusable because the page would end up with two sets of permissions (shared for FFA, but donated for vCPUs)!\n\nI think the right thing to do is leave the rx/tx buffer logic using PAGE_SIZE (and kmalloc might not be the best interface for these allocations tbh -- probably better off using the page allocator?).",
+      "range": {
+        "startLine": 616,
+        "startChar": 21,
+        "endLine": 616,
+        "endChar": 34
+      },
+      "revId": "fdd285ba0f36f816d0e00c22db4a24da32aff62b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "709854f3_31619c71",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1873181
+      },
+      "writtenOn": "2023-01-27T10:47:30Z",
+      "side": 1,
+      "message": "Thanks, I\u0027ve reverted to patch set 2.",
+      "parentUuid": "69859bfb_1e781230",
       "range": {
         "startLine": 616,
         "startChar": 21,
