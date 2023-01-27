@@ -94,6 +94,30 @@
       },
       "revId": "4dd4f4230e729905a66820bcc8846b28a87f8e58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0a7689f_e0125e23",
+        "filename": "include/linux/refcount.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-01-27T21:22:42Z",
+      "side": 1,
+      "message": "`The wording \"prevent it from changing\" is rather redundant from my perspective since it depends on the usecase of the caller even though I wanted to use the API for the case.`\n\nSo, sounds like \"freeze\" here really depends on how that refcount is used in other places? In that case the function name should probably reworded to smth like `reset_if_equal()`.",
+      "parentUuid": "133623cc_28303e79",
+      "range": {
+        "startLine": 151,
+        "startChar": 21,
+        "endLine": 151,
+        "endChar": 57
+      },
+      "revId": "4dd4f4230e729905a66820bcc8846b28a87f8e58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
