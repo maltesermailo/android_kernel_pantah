@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad48ecaa_72799f48",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1949205
+      },
+      "writtenOn": "2023-01-29T01:55:07Z",
+      "side": 1,
+      "message": "When the mobile phone is advancing and retreating from the application, the animation playback freezes. After analysis, it is found that it takes a long time to apply for memory in the function drm_property_create_blob, which is about 20ms. The frame rate of the mobile phone screen is 60Hz, and the frame time is 16.66ms, so it will cause frame loss. . In this function, kvzalloc is used to apply for memory. When applying for memory, it will first use the function kmalloc to apply for continuous physical memory. If the continuous application fails, it will return to use vmalloc to apply for virtual memory. When applying for a large physical continuous memory, it may not be able to apply at one time. Hence increased time consuming. We judge here, if the application memory is larger than 1 page, directly use vmalloc to apply, if it is less than 1 page, continue to use kvmalloc to apply. Android has high performance requirements, so it is only integrated into the Android kernel.",
+      "parentUuid": "b1c60f55_0ee740e0",
+      "revId": "4d2daf9b655aaf54f57a8902f2f2507a60ca32e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e2b6e287_d0a703ee",
         "filename": "drivers/gpu/drm/drm_property.c",
         "patchSetId": 1
