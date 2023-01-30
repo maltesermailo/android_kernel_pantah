@@ -16,6 +16,24 @@
       "message": "Hi, Connor\n\nWith this change, it causes boot failures for both the hikey and hikey960 android-mainline builds, not sure if you have any idea about them and give some suggestions.\nWith this commit reverted, the builds could boot to the homescreen.\n\nOn hikey, it seem failed to load the kernel from the firmware\n```\nSynchronous Exception at 0x0000000000000000\nNOTICE:  BL2: v2.0(release):v2.0-310-g37e8ab53\nNOTICE:  BL2: Built : 04:36:37, Nov 30 2018\nNOTICE:  acpu_dvfs_set_freq: set acpu freq success!NOTICE:  BL2: Booting BL31\nNOTICE:  BL31: v2.0(release):v2.0-310-g37e8ab53\nNOTICE:  BL31: Built : 04:36:37,I/TC:  \nI/TC:  OP-TEE version: 3.0.0 #1 Fri Nov 30 04:36:34 UTC 2018 aarch64\nI/TC:  Initialized\nUEFI firmware (version Alpha built at 04:36:05 on Nov 30 2018)\n3h3h3h3hPress ESCAPE for boot options .\n\nSynchronous Exception at 0x00000000388A906C\nNOTICE:  BL2: v2.0(release):v2.0-310-g37e8ab53\nNOTICE:  BL2: Built : 04:36:37, Nov 30 2018\nNOTICE:  acpu_dvfs_set_freq: set acpu freq success!NOTICE:  BL2: Booting BL31\nNOTICE:  BL31: v2.0(release):v2.0-310-g37e8ab53\nNOTICE:  BL31: Built : 04:36:37,I/TC:  \nI/TC:  OP-TEE version: 3.0.0 #1 Fri Nov 30 04:36:34 UTC 2018 aarch64\nI/TC:  Initialized\nUEFI firmware (version Alpha built at 04:36:05 on Nov 30 2018)\n\n```\n\nOn hikey960, it cause the mali_kbase.ko failed to be loaded with error like this:\n```\n[    9.065169][  T122] mali_kbase: disagrees about version of symbol module_layout\n[    9.065325][  T122] ueventd: Failed to insmod \u0027/vendor/lib/modules/mali_kbase.ko\u0027 with args \u0027\u0027: Exec format error\n```\nmali_kbase.ko is build from one external repository instead of the same tree as the kernel.\n\nPlease let me know if you need more information to understand the problem.\n\nThanks,\nYongqin Liu",
       "revId": "68e88a724028c00e5c97f0049295fcb052d6d348",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de67a66d_52cde5e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2023-01-30T18:51:31Z",
+      "side": 1,
+      "message": "Hrm. I\u0027m not super familiar with the BTF details here, but I\u0027d think MODULE_ALLOW_BTF_MISMATCH would allow the mali_kbase.ko to load.  Could you add some debug prints around the logic where the \"mali_kbase: disagrees about version of symbol module_layout\" error crops up?\n\nOn the hikey issue, I really don\u0027t have much of a guess right off, as it seems like its not even getting to the kernel. Hrm. I wonder if the config is growing the kernel size past some of the bootloader\u0027s internal limits? Maybe hikey needs an update for something like: https://github.com/96boards-hikey/edk2/commit/53a99b7e4f39a4dcf5b6a828ee6a49be18c1b0ac\n\nLets move this hikey discussion to a separate email thread, but keep the hikey960 issue here for now.",
+      "parentUuid": "47c5f72e_274c4f63",
+      "revId": "68e88a724028c00e5c97f0049295fcb052d6d348",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
