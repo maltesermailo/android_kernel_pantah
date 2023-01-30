@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f8229ef_1a8f7b77",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-01-30T20:16:39Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c102aa06_ad159738",
+      "range": {
+        "startLine": 356,
+        "startChar": 25,
+        "endLine": 356,
+        "endChar": 34
+      },
+      "revId": "fdd285ba0f36f816d0e00c22db4a24da32aff62b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "69859bfb_1e781230",
@@ -109,6 +133,30 @@
       "side": 1,
       "message": "Page allocation added, instead of kmalloc.",
       "parentUuid": "709854f3_31619c71",
+      "range": {
+        "startLine": 616,
+        "startChar": 21,
+        "endLine": 616,
+        "endChar": 34
+      },
+      "revId": "fdd285ba0f36f816d0e00c22db4a24da32aff62b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06abd3c7_4ebbb334",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-01-30T20:16:39Z",
+      "side": 1,
+      "message": "OK. We can keep this at PAGE_SIZE for now to more easily support pKVM. But I prefer if we keep using the existing apis since we will have to change it to use a dynamic size discovered through SMC_FC_FFA_FEATURES later. pKVM might share the page size with the host (and all the vms?), but other hypervisors might not.",
+      "parentUuid": "e9eb81bb_4467e943",
       "range": {
         "startLine": 616,
         "startChar": 21,
