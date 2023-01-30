@@ -34,6 +34,24 @@
       "parentUuid": "47c5f72e_274c4f63",
       "revId": "68e88a724028c00e5c97f0049295fcb052d6d348",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ffa729c_717129f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-01-30T18:58:16Z",
+      "side": 1,
+      "message": "How is this OOT module being built? Could you point towards the manifest you are using? Setting `MODULE_ALLOW_BTF_MISMATCH` should also set `CONFIG_DEBUG_INFO_BTF_MODULES`. This second option changes the `struct module` layout. Depending on how this `mali_kbase.ko` is built this could be the problem here.",
+      "parentUuid": "de67a66d_52cde5e1",
+      "revId": "68e88a724028c00e5c97f0049295fcb052d6d348",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
