@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c24c5495_aaacfd32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2023-01-31T19:21:56Z",
+      "side": 1,
+      "message": "Doesn\u0027t work with pKVM enabled:\n\n```\n[   17.202450][    T1] init: Loaded kernel module /lib/modules/5.10.107-android13-4-00018-g7800377f82a0/kernel/drivers/trusty/trusty-test.ko\n[   17.212851][    T1] init: Loading module /lib/modules/5.10.107-android13-4-00018-g7800377f82a0/kernel/drivers/trusty/trusty-virtio.ko with args \u0027\u0027\n[   17.227478][    T1] trusty_ipc virtio0: vring0: va(id)  00000000507319fb(ffffffc2) qsz 32 notifyid 1\n[   17.235011][    T1] trusty_ipc virtio0: vring1: va(id)  000000002a579ba4(ffffffc3) qsz 32 notifyid 2\n[   17.244117][    T1] trusty trusty: trusty_transfer_memory: fragment_len 80/80, SMC_FC_FFA_MEM_SHARE failed 0x84000060 0x0 0xfffffffffffffffa\n[   17.256713][    T1] trusty trusty: trusty_transfer_memory: failed -5\n[   17.263045][    T1] trusty_ipc virtio0: trusty_share_memory failed: -5\n[   17.269558][    T1] trusty_ipc virtio0: failed to allocate rx buffer\n[   17.275899][    T1] trusty_ipc: probe of virtio0 failed with error -12\n[   17.282438][    T1] trusty-virtio trusty:virtio: initializing done\n```\n\n\nI will submit this in the meanwhile to continue testing.",
+      "parentUuid": "d19bcacd_594783a6",
+      "revId": "8e3747e75cfa66c9af0e87f111430b991e4fcd16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e6655093_c840c0df",
         "filename": "include/linux/trusty/arm_ffa.h",
         "patchSetId": 6
