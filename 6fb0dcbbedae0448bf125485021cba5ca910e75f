@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf2f073d_cac82950",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-31T17:10:14Z",
+      "side": 1,
+      "message": "Listing all of them is the normal process for device oems/vendors. This case is a little different in the sense that the symbols probably should be just those that are required for the filesystem module from tuxera (not sure if it is or not). I don\u0027t see any reason to trim it down since it is only adding the one symbol to the KMI.",
+      "parentUuid": "d055c212_29619d06",
+      "revId": "6fb0dcbbedae0448bf125485021cba5ca910e75f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ff31482_bfbd1052",
@@ -73,6 +91,30 @@
       "side": 1,
       "message": "This symbol was approved in our similar GKI patch for android13-5.15 so why not approve it here, too?  Please see: https://android-review.googlesource.com/c/kernel/common/+/2325113\n\nBut to answer your question: we do not use this symbol at all or at least not knowingly.  It must be pulled in via something that is getting inlined by the compiler.  Perhaps something in a kernel header file that is marked static inline or a sequence of multiple static inline calls.\n\nGiven you asked we will try to figure out where it is coming from - we have never looked before but it can be non-trivial to find...",
       "parentUuid": "1ff31482_bfbd1052",
+      "range": {
+        "startLine": 224,
+        "startChar": 0,
+        "endLine": 224,
+        "endChar": 45
+      },
+      "revId": "6fb0dcbbedae0448bf125485021cba5ca910e75f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ece5e15c_bb31ddeb",
+        "filename": "android/abi_gki_aarch64_tuxera",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-01-31T17:10:14Z",
+      "side": 1,
+      "message": "This is not a vendor hook, it\u0027s a wrapper function for a hook to allow the hook to be invoked from `static inline void percpu_down_read()`. This must be the first case of `percpu_down_read()` being called from a vendor module, but it doesn\u0027t seem unreasonable to do so.",
+      "parentUuid": "db3aa2c7_89c0c9fd",
       "range": {
         "startLine": 224,
         "startChar": 0,
