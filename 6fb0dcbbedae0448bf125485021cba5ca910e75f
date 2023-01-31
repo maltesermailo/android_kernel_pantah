@@ -39,6 +39,30 @@
       },
       "revId": "6fb0dcbbedae0448bf125485021cba5ca910e75f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db3aa2c7_89c0c9fd",
+        "filename": "android/abi_gki_aarch64_tuxera",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1978086
+      },
+      "writtenOn": "2023-01-31T13:02:16Z",
+      "side": 1,
+      "message": "This symbol was approved in our similar GKI patch for android13-5.15 so why not approve it here, too?  Please see: https://android-review.googlesource.com/c/kernel/common/+/2325113\n\nBut to answer your question: we do not use this symbol at all or at least not knowingly.  It must be pulled in via something that is getting inlined by the compiler.  Perhaps something in a kernel header file that is marked static inline or a sequence of multiple static inline calls.\n\nGiven you asked we will try to figure out where it is coming from - we have never looked before but it can be non-trivial to find...",
+      "parentUuid": "1ff31482_bfbd1052",
+      "range": {
+        "startLine": 224,
+        "startChar": 0,
+        "endLine": 224,
+        "endChar": 45
+      },
+      "revId": "6fb0dcbbedae0448bf125485021cba5ca910e75f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
