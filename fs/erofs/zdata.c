@@ -8,6 +8,8 @@
 #include "compress.h"
 #include <linux/prefetch.h>
 #include <linux/psi.h>
+#include <linux/slab.h>
+#include <linux/cpuhotplug.h>
 
 #include <trace/events/erofs.h>
 
@@ -184,26 +186,152 @@ typedef tagptr1_t compressed_page_t;
 #define tag_compressed_page_justfound(page) \
 	tagptr_fold(compressed_page_t, page, 1)
 
-static struct workqueue_struct *z_erofs_workqueue __read_mostly;
+struct erofs_kthread_worker_pool {
+	struct kthread_worker __rcu **workers;
+	struct kthread_worker *unbound_worker;
+};
+
+static struct erofs_kthread_worker_pool worker_pool;
+DEFINE_SPINLOCK(worker_pool_lock);
+
+static void erofs_destroy_worker_pool(void)
+{
+	unsigned int cpu;
+	struct kthread_worker *worker;
+
+	for_each_possible_cpu(cpu) {
+		worker = rcu_dereference_protected(
+				worker_pool.workers[cpu],
+				1);
+		rcu_assign_pointer(worker_pool.workers[cpu], NULL);
+
+		if (worker)
+			kthread_destroy_worker(worker);
+	}
+
+	if (worker_pool.unbound_worker)
+		kthread_destroy_worker(worker_pool.unbound_worker);
+
+	kfree(worker_pool.workers);
+}
+
+static inline void erofs_set_worker_priority(struct kthread_worker *worker)
+{
+#ifdef CONFIG_EROFS_FS_KTHREAD_HIPRI
+	sched_set_fifo_low(worker->task);
+#else
+	sched_set_normal(worker->task, 0);
+#endif
+}
+
+static int erofs_create_kthread_workers(void)
+{
+	unsigned int cpu;
+	struct kthread_worker *worker;
+
+	for_each_online_cpu(cpu) {
+		worker = kthread_create_worker_on_cpu(cpu, 0, "erofs_worker/%u", cpu);
+		if (IS_ERR(worker)) {
+			erofs_destroy_worker_pool();
+			return -ENOMEM;
+		}
+		erofs_set_worker_priority(worker);
+		rcu_assign_pointer(worker_pool.workers[cpu], worker);
+	}
+
+	worker = kthread_create_worker(0, "erofs_unbound_worker");
+	if (IS_ERR(worker)) {
+		erofs_destroy_worker_pool();
+		return PTR_ERR(worker);
+	}
+	erofs_set_worker_priority(worker);
+	worker_pool.unbound_worker = worker;
+
+	return 0;
+}
+
+static int erofs_init_worker_pool(void)
+{
+	int err;
+
+	worker_pool.workers = kcalloc(num_possible_cpus(),
+			sizeof(struct kthread_worker *), GFP_ATOMIC);
+	if (!worker_pool.workers)
+		return -ENOMEM;
+	err = erofs_create_kthread_workers();
+
+	return err;
+}
+
+#ifdef CONFIG_HOTPLUG_CPU
+static enum cpuhp_state erofs_cpuhp_state;
+static int erofs_cpu_online(unsigned int cpu)
+{
+	struct kthread_worker *worker;
+
+	worker = kthread_create_worker_on_cpu(cpu, 0, "erofs_worker/%u", cpu);
+	if (IS_ERR(worker))
+		return -ENOMEM;
+
+	erofs_set_worker_priority(worker);
+
+	spin_lock(&worker_pool_lock);
+	rcu_assign_pointer(worker_pool.workers[cpu], worker);
+	spin_unlock(&worker_pool_lock);
+
+	synchronize_rcu();
+
+	return 0;
+}
+
+static int erofs_cpu_offline(unsigned int cpu)
+{
+	struct kthread_worker *worker;
+
+	spin_lock(&worker_pool_lock);
+	worker = rcu_dereference_protected(worker_pool.workers[cpu],
+			lockdep_is_held(&worker_pool_lock));
+	rcu_assign_pointer(worker_pool.workers[cpu], NULL);
+	spin_unlock(&worker_pool_lock);
+
+	synchronize_rcu();
+
+	if (worker)
+		kthread_destroy_worker(worker);
+
+	return 0;
+}
+
+static int erofs_cpu_hotplug_init(void)
+{
+	int state;
+
+	state = cpuhp_setup_state_nocalls(CPUHP_AP_ONLINE_DYN,
+			"fs/erofs:online",
+			erofs_cpu_online, erofs_cpu_offline);
+	if (state < 0)
+		return state;
+
+	erofs_cpuhp_state = state;
+
+	return 0;
+}
+
+static void erofs_cpu_hotplug_destroy(void)
+{
+	if (erofs_cpuhp_state)
+		cpuhp_remove_state_nocalls(erofs_cpuhp_state);
+}
+#else /* !CONFIG_HOTPLUG_CPU */
+static inline int erofs_cpu_hotplug_init(void) { return 0; }
+static inline void erofs_cpu_hotplug_destroy(void) {}
+#endif
 
 void z_erofs_exit_zip_subsystem(void)
 {
-	destroy_workqueue(z_erofs_workqueue);
+	erofs_cpu_hotplug_destroy();
+	erofs_destroy_worker_pool();
 	z_erofs_destroy_pcluster_pool();
-}
-
-static inline int z_erofs_init_workqueue(void)
-{
-	const unsigned int onlinecpus = num_possible_cpus();
-
-	/*
-	 * no need to spawn too many threads, limiting threads could minimum
-	 * scheduling overhead, perhaps per-CPU threads should be better?
-	 */
-	z_erofs_workqueue = alloc_workqueue("erofs_unzipd",
-					    WQ_UNBOUND | WQ_HIGHPRI,
-					    onlinecpus + onlinecpus / 4);
-	return z_erofs_workqueue ? 0 : -ENOMEM;
 }
 
 int __init z_erofs_init_zip_subsystem(void)
@@ -211,10 +339,23 @@ int __init z_erofs_init_zip_subsystem(void)
 	int err = z_erofs_create_pcluster_pool();
 
 	if (err)
-		return err;
-	err = z_erofs_init_workqueue();
+		goto out_error_pcluster_pool;
+
+	err = erofs_init_worker_pool();
 	if (err)
-		z_erofs_destroy_pcluster_pool();
+		goto out_error_worker_pool;
+
+	err = erofs_cpu_hotplug_init();
+	if (err < 0)
+		goto out_error_cpuhp_init;
+
+	return err;
+
+out_error_cpuhp_init:
+	erofs_destroy_worker_pool();
+out_error_worker_pool:
+	z_erofs_destroy_pcluster_pool();
+out_error_pcluster_pool:
 	return err;
 }
 
@@ -1143,7 +1284,7 @@ static void z_erofs_decompress_queue(const struct z_erofs_decompressqueue *io,
 	}
 }
 
-static void z_erofs_decompressqueue_work(struct work_struct *work)
+static void z_erofs_decompressqueue_kthread_work(struct kthread_work *work)
 {
 	struct z_erofs_decompressqueue *bgq =
 		container_of(work, struct z_erofs_decompressqueue, u.work);
@@ -1154,6 +1295,20 @@ static void z_erofs_decompressqueue_work(struct work_struct *work)
 
 	erofs_release_pages(&pagepool);
 	kvfree(bgq);
+}
+
+static void erofs_schedule_kthread_work(struct kthread_work *work)
+{
+	struct kthread_worker *worker;
+	unsigned int cpu = raw_smp_processor_id();
+
+	rcu_read_lock();
+	worker = rcu_dereference(worker_pool.workers[cpu]);
+	if (!worker)
+		worker = worker_pool.unbound_worker;
+
+	kthread_queue_work(worker, work);
+	rcu_read_unlock();
 }
 
 static void z_erofs_decompress_kickoff(struct z_erofs_decompressqueue *io,
@@ -1170,15 +1325,15 @@ static void z_erofs_decompress_kickoff(struct z_erofs_decompressqueue *io,
 
 	if (atomic_add_return(bios, &io->pending_bios))
 		return;
-	/* Use workqueue and sync decompression for atomic contexts only */
+	/* Use kthread_workers and sync decompression for atomic contexts only */
 	if (in_atomic() || irqs_disabled()) {
-		queue_work(z_erofs_workqueue, &io->u.work);
+		erofs_schedule_kthread_work(&io->u.work);
 		/* enable sync decompression for readahead */
 		if (sbi->opt.sync_decompress == EROFS_SYNC_DECOMPRESS_AUTO)
 			sbi->opt.sync_decompress = EROFS_SYNC_DECOMPRESS_FORCE_ON;
 		return;
 	}
-	z_erofs_decompressqueue_work(&io->u.work);
+	z_erofs_decompressqueue_kthread_work(&io->u.work);
 }
 
 static struct page *pickup_page_for_submission(struct z_erofs_pcluster *pcl,
@@ -1306,7 +1461,7 @@ jobqueue_init(struct super_block *sb,
 			*fg = true;
 			goto fg_out;
 		}
-		INIT_WORK(&q->u.work, z_erofs_decompressqueue_work);
+		kthread_init_work(&q->u.work, z_erofs_decompressqueue_kthread_work);
 	} else {
 fg_out:
 		q = fgq;
@@ -1500,7 +1655,7 @@ submit_bio_retry:
 
 	/*
 	 * although background is preferred, no one is pending for submission.
-	 * don't issue workqueue for decompression but drop it directly instead.
+	 * don't issue kthread_work for decompression but drop it directly instead.
 	 */
 	if (!*force_fg && !nr_bios) {
 		kvfree(q[JQ_SUBMIT]);

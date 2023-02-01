@@ -108,3 +108,14 @@ config EROFS_FS_ONDEMAND
 	  read support.
 
 	  If unsure, say N.
+
+config EROFS_FS_KTHREAD_HIPRI
+	bool "EROFS high priority percpu kthread workers"
+	depends on EROFS_FS
+	default n
+	help
+	  EROFS uses per cpu kthread workers pool to carry out async work.
+	  This permits EROFS to configure per cpu kthread workers to run
+	  at higher priority.
+
+	  If unsure, say N.
