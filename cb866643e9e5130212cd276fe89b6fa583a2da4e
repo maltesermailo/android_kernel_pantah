@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0ae9bfd_6bcef8af",
+        "filename": "drivers/trusty/trusty-ipc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 2151,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-02-01T02:33:33Z",
+      "side": 1,
+      "message": "I\u0027m not sure it is a good idea to completely override buffer size returned by trusty. I think trusty will silently truncate the message to the size of the destination buffer size which is usually 4k. What I was suggesting earlier was to round up the allocation and share size to PAGE_SIZE, but keep using the value returned by trusty when limiting how much data can be put into the buffer.",
+      "revId": "cb866643e9e5130212cd276fe89b6fa583a2da4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
