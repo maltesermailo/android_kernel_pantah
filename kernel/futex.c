@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (9e6033 ANDROID: Update .xml due to ABI preservation fix)
 // SPDX-License-Identifier: GPL-2.0-or-later
 /*
  *  Fast Userspace Mutexes (which I call "Futexes!").
@@ -4051,3 +4052,5 @@ static int __init futex_init(void)
 	return 0;
 }
 core_initcall(futex_init);
+=======
+>>>>>>> BRANCH (19ff2d Linux 5.10.163)
