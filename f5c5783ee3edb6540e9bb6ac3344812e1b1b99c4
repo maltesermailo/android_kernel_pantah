@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000037547632",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2422143?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "e0980630_171822dc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-02-06T09:29:55Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\n\n```\n      ## android/abi_gki_aarch64_qcom ##\n     @@\n        mmc_cqe_request_done\n        mmc_execute_tuning\n        mmc_get_ext_csd\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (613471 ANDROID: Update the GKI symbol list and ABI XML)\n    +   mmc_get_card\n    +   mmc_hs200_tuning\n    +   mmc_issue_type\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n     +  mmc_hs200_tuning\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (5e05d4 ANDROID: GKI: Update abi_gki_aarch64_qcom symbols.)\n        mmc_of_parse\n        __mmc_poll_for_busy\n        mmc_prepare_busy_cmd\n     @@\n    -   mmc_retune_hold\n    -   mmc_retune_release\n    -   mmc_select_card\n    -+  mmc_select_bus_width\n    -+  mmc_select_hs\n    -+  mmc_select_hs400\n    -+  mmc_select_hs_ddr\n    -+  mmc_select_timing\n    +   mmc_select_hs400\n    +   mmc_select_hs_ddr\n    +   mmc_select_timing\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (613471 ANDROID: Update the GKI symbol list and ABI XML)\n    +   mmc_send_status\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (5e05d4 ANDROID: GKI: Update abi_gki_aarch64_qcom symbols.)\n        mmc_send_tuning\n        mmc_set_bus_mode\n        mmc_set_bus_width\n    -   mmc_set_clock\n    -+  mmc_set_initial_state\n    -   mmc_set_timing\n    -   mmc_wait_for_cmd\n    -   mmput\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 506619300 android-build.ayeaye-python-dispatcher_20230202.05_p0",
+      "revId": "f5c5783ee3edb6540e9bb6ac3344812e1b1b99c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000037547632",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2422143?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "236c638b_c4c504ad",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-02-06T09:29:55Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 506619300 android-build.ayeaye-python-dispatcher_20230202.05_p0",
+      "revId": "f5c5783ee3edb6540e9bb6ac3344812e1b1b99c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
