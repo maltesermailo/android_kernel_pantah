@@ -16,6 +16,24 @@
       "message": "Hi Bart, Greg,\n\nThis series to enable UFS G4 support on android14-5.15 broke RB5 (Qualcomm SM8250). Mani pointed out that the patches adding UFS G4 support also requires corresponding PHY changes that got merged into phy-next. But cherry-picking them onto 5.15 would be not be trivial due to recent PHY drivers refactoring. So either those PHY patches need to be backported with some effort or these UFS patches need to be dropped.",
       "revId": "ac7823b077de23338833165f9d0d1486d82ad7c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5caa6c55_88ed3bdd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2023-02-06T17:14:05Z",
+      "side": 1,
+      "message": "Dropping patches is not possible but reverting patches is possible. Can you please help with identifying the smallest possible set of patches that needs to be reverted?",
+      "parentUuid": "6cd12bb4_ce9c0bc4",
+      "revId": "ac7823b077de23338833165f9d0d1486d82ad7c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
