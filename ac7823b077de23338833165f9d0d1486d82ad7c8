@@ -34,6 +34,24 @@
       "parentUuid": "6cd12bb4_ce9c0bc4",
       "revId": "ac7823b077de23338833165f9d0d1486d82ad7c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c24cd657_e4934b76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2023-02-07T17:48:18Z",
+      "side": 1,
+      "message": "Hi Bart, I checked with Mani and he pointed out that reverting following patches should be enough:\nFROMGIT: scsi: ufs: ufs-qcom: Add support for finding max gear on new platforms (aosp/2392951)\nFROMGIT: scsi: ufs: ufs-qcom: Add support for reinitializing the UFS device (aosp/2392950)\n\nI reverted and smoke tested the tree on DB845c and RB5 with no obvious boot regressions. I suppose it will further break UFS G4 support, but it is broken anyway because of missing phy patches.",
+      "parentUuid": "5caa6c55_88ed3bdd",
+      "revId": "ac7823b077de23338833165f9d0d1486d82ad7c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
