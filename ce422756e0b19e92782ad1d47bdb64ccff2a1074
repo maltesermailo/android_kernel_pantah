@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06580038_3096b47d",
+        "filename": "drivers/remoteproc/remoteproc_sysfs.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-02-10T23:19:59Z",
+      "side": 1,
+      "message": "Let\u0027s go back to PS6. There is no reason to hold the mutex for the `if (sysfs_streq(buf, \"enabled\")) {` since `buf` is invariant so nothing is being protected by this change. The important thing here is that the setting of `recovery_disabled` is atomic with the invocation of the hook.",
+      "revId": "ce422756e0b19e92782ad1d47bdb64ccff2a1074",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
