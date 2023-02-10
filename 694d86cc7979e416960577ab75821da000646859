@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dc886f7_23511124",
+        "filename": "drivers/remoteproc/remoteproc_debugfs.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-02-10T18:51:43Z",
+      "side": 1,
+      "message": "Can you explain how the mutex helps here? This looks like it does nothing at all since whatever is racing with it can still occur immediately before or after recovery_disabled is set to false. Should this really be:\n```\n   mutex_lock(...);\n   if (rproc-\u003erecovery_disabled) {\n     rproc-\u003erecovery_disabled \u003d false;\n     mutex_unlock(...);\n     rproc_trigger_recovery(rproc);\n   } else {\n     mutex_unlock(...);\n   }\n```\n\nDon\u0027t you want to avoid `rproc_trigger_recovery()` if another thread we are racing with gets here first?\n\nThis scenario is not described at all in the commit message. Please add it.",
+      "revId": "694d86cc7979e416960577ab75821da000646859",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b451171b_dfeb02a2",
+        "filename": "drivers/remoteproc/remoteproc_debugfs.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-02-10T18:51:43Z",
+      "side": 1,
+      "message": "This mutex acquisition doesn\u0027t help anything. What race is it intended to fix?",
+      "revId": "694d86cc7979e416960577ab75821da000646859",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
