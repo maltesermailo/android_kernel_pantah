@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc0cf988_786ec7a7",
+        "filename": "drivers/remoteproc/remoteproc_debugfs.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1006514
+      },
+      "writtenOn": "2023-02-10T19:24:44Z",
+      "side": 1,
+      "message": "debug fs isn\u0027t being used as such for in our testing, added lock/unlock to be in sync w/ sysfs interface. Pls let me know if would like me to remove it.",
+      "parentUuid": "1dc886f7_23511124",
+      "revId": "694d86cc7979e416960577ab75821da000646859",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b451171b_dfeb02a2",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-02-10T18:51:43Z",
       "side": 1,
       "message": "This mutex acquisition doesn\u0027t help anything. What race is it intended to fix?",
+      "revId": "694d86cc7979e416960577ab75821da000646859",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8959fdd3_539749d3",
+        "filename": "drivers/remoteproc/remoteproc_debugfs.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1006514
+      },
+      "writtenOn": "2023-02-10T19:24:44Z",
+      "side": 1,
+      "message": "Same explanation as above. Idea is to be in consistent with sysfs interface.",
+      "parentUuid": "b451171b_dfeb02a2",
       "revId": "694d86cc7979e416960577ab75821da000646859",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
