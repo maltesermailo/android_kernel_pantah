@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "28816471_ba1ca2f1",
+        "filename": "drivers/remoteproc/remoteproc_debugfs.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-02-10T19:32:54Z",
+      "side": 1,
+      "message": "You are saying that there is no client/client race issue? It would be OK if `rproc_trigger_recovery()` is called simultaneously on two CPUs? If that\u0027s true, then yes, remove this locking since it does nothing.",
+      "parentUuid": "dc0cf988_786ec7a7",
+      "revId": "694d86cc7979e416960577ab75821da000646859",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b451171b_dfeb02a2",
         "filename": "drivers/remoteproc/remoteproc_debugfs.c",
         "patchSetId": 5
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Same explanation as above. Idea is to be in consistent with sysfs interface.",
       "parentUuid": "b451171b_dfeb02a2",
+      "revId": "694d86cc7979e416960577ab75821da000646859",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "978f046e_b559f414",
+        "filename": "drivers/remoteproc/remoteproc_debugfs.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-02-10T19:32:54Z",
+      "side": 1,
+      "message": "remove the needless mutex acquisition.",
+      "parentUuid": "8959fdd3_539749d3",
       "revId": "694d86cc7979e416960577ab75821da000646859",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
