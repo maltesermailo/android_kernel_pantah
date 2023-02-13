@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9475cb77_bd2bc39a",
+        "filename": "include/trace/hooks/logbuf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2023-02-13T17:25:44Z",
+      "side": 1,
+      "message": "Please remove this, vendor hooks already have mechanism to stub hooks, if tracepoints/vendor hooks are disables.\nOtherwise you risk forgetting to define stubs in #else, like `android_vh_logbuf_pr_cont` in this change.",
+      "revId": "b01bdfa11482b4cf5f582ea9dfde859963aa9644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
