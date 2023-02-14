@@ -707,6 +707,7 @@ static inline bool rwsem_can_spin_on_owner(struct rw_semaphore *sem)
 		ret = false;
 	rcu_read_unlock();
 	preempt_enable();
+	trace_android_vh_rwsem_can_spin_on_owner(sem, &ret, nonspinnable == RWSEM_WR_NONSPINNABLE);
 
 	lockevent_cond_inc(rwsem_opt_fail, !ret);
 	return ret;
@@ -732,6 +733,8 @@ rwsem_spin_on_owner(struct rw_semaphore *sem)
 	struct task_struct *new, *owner;
 	unsigned long flags, new_flags;
 	enum owner_state state;
+	int cnt = 0;
+	bool time_out = false;
 
 	owner = rwsem_owner_flags(sem, &flags);
 	state = rwsem_owner_state(owner, flags);
@@ -740,6 +743,9 @@ rwsem_spin_on_owner(struct rw_semaphore *sem)
 
 	rcu_read_lock();
 	for (;;) {
+		trace_android_vh_rwsem_opt_spin_start(sem, &time_out, &cnt, true);
+		if (time_out)
+			break;
 		/*
 		 * When a waiting writer set the handoff flag, it may spin
 		 * on the owner as well. Once that writer acquires the lock,
@@ -803,6 +809,13 @@ static bool rwsem_optimistic_spin(struct rw_semaphore *sem)
 	int prev_owner_state = OWNER_NULL;
 	int loop = 0;
 	u64 rspin_threshold = 0;
+<<<<<<< HEAD   (5239ef UPSTREAM: drivers/thermal/cpufreq_cooling: Use private callb)
+=======
+	int cnt = 0;
+	bool time_out = false;
+	unsigned long nonspinnable = wlock ? RWSEM_WR_NONSPINNABLE
+					   : RWSEM_RD_NONSPINNABLE;
+>>>>>>> CHANGE (d01f7e ANDROID: vendor_hooks: Add hooks for mutex and rwsem optimis)
 
 	preempt_disable();
 
@@ -819,7 +832,15 @@ static bool rwsem_optimistic_spin(struct rw_semaphore *sem)
 	for (;;) {
 		enum owner_state owner_state;
 
+<<<<<<< HEAD   (5239ef UPSTREAM: drivers/thermal/cpufreq_cooling: Use private callb)
 		owner_state = rwsem_spin_on_owner(sem);
+=======
+		trace_android_vh_rwsem_opt_spin_start(sem, &time_out, &cnt, false);
+		if (time_out)
+			break;
+
+		owner_state = rwsem_spin_on_owner(sem, nonspinnable);
+>>>>>>> CHANGE (d01f7e ANDROID: vendor_hooks: Add hooks for mutex and rwsem optimis)
 		if (!(owner_state & OWNER_SPINNABLE))
 			break;
 
@@ -912,6 +933,7 @@ static bool rwsem_optimistic_spin(struct rw_semaphore *sem)
 		cpu_relax();
 	}
 	osq_unlock(&sem->osq);
+	trace_android_vh_rwsem_opt_spin_finish(sem, taken, wlock);
 done:
 	preempt_enable();
 	lockevent_cond_inc(rwsem_opt_fail, !taken);
