@@ -12,6 +12,7 @@
 struct ufs_hba;
 struct request;
 struct ufshcd_lrb;
+struct scsi_device;
 
 DECLARE_HOOK(android_vh_ufs_fill_prdt,
 	TP_PROTO(struct ufs_hba *hba, struct ufshcd_lrb *lrbp,
@@ -49,7 +50,10 @@ DECLARE_HOOK(android_vh_ufs_check_int_errors,
 	TP_PROTO(struct ufs_hba *hba, bool queue_eh_work),
 	TP_ARGS(hba, queue_eh_work));
 
+<<<<<<< PATCH SET (3806a8 ANDROID: ufs: Add vendor hook for ufs sdev update)
+=======
 struct scsi_device;
+>>>>>>> BASE      (75c846 ANDROID: GKI: Update the ABI representation)
 DECLARE_HOOK(android_vh_ufs_update_sdev,
 	TP_PROTO(struct scsi_device *sdev),
 	TP_ARGS(sdev));
