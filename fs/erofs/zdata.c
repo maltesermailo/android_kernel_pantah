@@ -254,6 +254,23 @@ int __init z_erofs_init_zip_subsystem(void)
 	int err = z_erofs_create_pcluster_pool();
 
 	if (err)
+<<<<<<< PATCH SET (dd4da2 UPSTREAM: erofs: fix an error code in z_erofs_init_zip_subsy)
+<<<<<<< HEAD   (613446 ANDROID: clear memory trylock-bit when page_locked.)
+		return err;
+	err = z_erofs_init_workqueue();
+=======
+		goto out_error_pcluster_pool;
+
+	z_erofs_workqueue = alloc_workqueue("erofs_worker",
+			WQ_UNBOUND | WQ_HIGHPRI, num_possible_cpus());
+	if (!z_erofs_workqueue) {
+		err = -ENOMEM;
+		goto out_error_workqueue_init;
+	}
+
+	err = erofs_init_percpu_workers();
+>>>>>>> CHANGE (b7f503 UPSTREAM: erofs: fix an error code in z_erofs_init_zip_subsy)
+=======
 		goto out_error_pcluster_pool;
 
 	z_erofs_workqueue = alloc_workqueue("erofs_worker",
@@ -262,6 +279,7 @@ int __init z_erofs_init_zip_subsystem(void)
 		goto out_error_workqueue_init;
 
 	err = erofs_init_percpu_workers();
+>>>>>>> BASE      (527d68 BACKPORT: erofs: add per-cpu threads for decompression as an)
 	if (err)
 		goto out_error_pcpu_worker;
 
