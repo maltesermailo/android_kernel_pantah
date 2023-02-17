@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bbbc7fa_ea4f10fb",
+        "filename": "arch/arm64/include/asm/kvm_pkvm_module.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1980590
+      },
+      "writtenOn": "2023-02-17T08:15:08Z",
+      "side": 1,
+      "message": "Could you add new ops to the end of list of pkvm_module_ops?\nActually, our binary module has had same pkvm_module_ops list. So if new ops is added to the middle of list, wrong API is gonna be called.\nPlease take a look kindly.",
+      "revId": "5ae1d03324fc8e880d8aa9c19bd68a6a9bea9b96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
