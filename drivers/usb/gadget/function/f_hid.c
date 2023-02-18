@@ -1292,6 +1292,10 @@ static struct usb_function *hidg_alloc(struct usb_function_instance *fi)
 						 GFP_KERNEL);
 		if (!hidg->report_desc) {
 			put_device(&hidg->dev);
+<<<<<<< HEAD   (56390f ANDROID: fix up struct task_struct ABI change in 5.10.162)
+=======
+			--opts->refcnt;
+>>>>>>> BRANCH (19ff2d Linux 5.10.163)
 			mutex_unlock(&opts->lock);
 			return ERR_PTR(-ENOMEM);
 		}
