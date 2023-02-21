@@ -512,6 +512,144 @@ static int ffa_host_unshare_ranges(struct ffa_mem_region_addr_range *ranges,
 	return ret;
 }
 
+static int __ffa_guest_unshare_ranges(struct ffa_mem_region_addr_range *ranges,
+				      struct pkvm_hyp_vcpu *pkvm_vcpu,
+				      int range_index, int page_index,
+				      u32 nranges)
+{
+	int i, j;
+	u64 ipa_addr;
+
+	for (i = 0; i < range_index; i++) {
+		struct ffa_mem_region_addr_range *range = &ranges[i];
+
+		for (j = 0; j < range->pg_cnt; j++) {
+			ipa_addr = range->address + j * FFA_PAGE_SIZE;
+			if (!PAGE_ALIGNED(ipa_addr))
+				return FFA_RET_DENIED;
+
+			if (__pkvm_guest_unshare_ffa(pkvm_vcpu, ipa_addr))
+				return FFA_RET_DENIED;
+		}
+	}
+
+	if ((page_index > 0 && range_index < nranges)) {
+		struct ffa_mem_region_addr_range *range = &ranges[range_index];
+
+		for (j = page_index - 1; j >= 0; j--) {
+			ipa_addr = range->address + j * FFA_PAGE_SIZE;
+			if (!PAGE_ALIGNED(ipa_addr))
+				return FFA_RET_DENIED;
+
+			if (__pkvm_guest_unshare_ffa(pkvm_vcpu, ipa_addr))
+				return FFA_RET_DENIED;
+		}
+	}
+
+	return 0;
+}
+
+static int ffa_guest_repaint_descriptor(struct ffa_mem_region_addr_range *ranges,
+					u32 nranges, struct kvm_cpu_context *ctxt,
+					u64 vmid)
+{
+	struct kvm_vcpu *vcpu = ctxt->__hyp_running_vcpu;
+	struct pkvm_hyp_vcpu *pkvm_vcpu;
+	int i, ret;
+	struct pkvm_hyp_vm *vm;
+	kvm_pte_t pte;
+
+	if (!vcpu)
+		vcpu = container_of(ctxt, struct kvm_vcpu, arch.ctxt);
+
+	pkvm_vcpu = container_of(vcpu, struct pkvm_hyp_vcpu, vcpu);
+	vm = pkvm_hyp_vcpu_to_hyp_vm(pkvm_vcpu);
+
+	for (i = 0; i < nranges; ++i) {
+		struct ffa_mem_region_addr_range *range = &ranges[i];
+
+		/* TODO: If we have multipple pages in a range,
+		 * patch the descriptor buffer with ffa_entries of one
+		 * page size that point to the physical memory.
+		 */
+		WARN_ON(range->pg_cnt != 1);
+
+		ret = kvm_pgtable_get_leaf(&vm->pgt, range->address, &pte, NULL);
+		if (ret) {
+			return FFA_RET_INVALID_PARAMETERS;
+		}
+
+		range->address = kvm_pte_to_phys(pte);
+	}
+
+	return 0;
+}
+
+static int ffa_guest_share_ranges(struct ffa_mem_region_addr_range *ranges,
+				  u32 nranges, struct kvm_cpu_context *ctxt,
+				  u64 vmid)
+{
+	struct kvm_vcpu *vcpu = ctxt->__hyp_running_vcpu;
+	struct pkvm_hyp_vcpu *pkvm_vcpu;
+	int i, j;
+	u64 ipa_addr;
+
+	if (!vcpu)
+		vcpu = container_of(ctxt, struct kvm_vcpu, arch.ctxt);
+
+	pkvm_vcpu = container_of(vcpu, struct pkvm_hyp_vcpu, vcpu);
+
+	for (i = 0; i < nranges; ++i) {
+		struct ffa_mem_region_addr_range *range = &ranges[i];
+
+		/* Note: a contiguous address range in the Guest IPA space
+		 * is not necessarily contiguous in the Physical memory.
+		 *
+		 * This is why we need to share page by page from the guests.
+		 */
+		for (j = 0; j < range->pg_cnt; j++) {
+			ipa_addr = range->address + j * FFA_PAGE_SIZE;
+
+			if (!PAGE_ALIGNED(ipa_addr))
+				break;
+
+			if (__pkvm_guest_share_ffa(pkvm_vcpu, ipa_addr))
+				break;
+		}
+
+		if (j != range->pg_cnt) {
+			/* Try to unshare everything up until this point, then
+			 * return an error.
+			 */
+			WARN_ON(!__ffa_guest_unshare_ranges(ranges, pkvm_vcpu,
+							    i, j, nranges));
+			return FFA_RET_DENIED;
+		}
+	}
+
+	if (i != nranges) {
+		WARN_ON(!__ffa_guest_unshare_ranges(ranges, pkvm_vcpu,
+						    i, j, nranges));
+		return FFA_RET_DENIED;
+	}
+
+	return 0;
+}
+
+static int ffa_guest_unshare_ranges(struct ffa_mem_region_addr_range *ranges,
+				    u32 nranges, struct kvm_cpu_context *ctxt,
+				    u64 vmid)
+{
+	struct kvm_vcpu *vcpu = ctxt->__hyp_running_vcpu;
+	struct pkvm_hyp_vcpu *pkvm_vcpu;
+
+	if (!vcpu)
+		vcpu = container_of(ctxt, struct kvm_vcpu, arch.ctxt);
+
+	pkvm_vcpu = container_of(vcpu, struct pkvm_hyp_vcpu, vcpu);
+	return __ffa_guest_unshare_ranges(ranges, pkvm_vcpu, 0, 0, nranges);
+}
+
 static void do_ffa_mem_frag_tx(struct arm_smccc_res *res,
 			       struct kvm_cpu_context *ctxt,
 			       u64 vmid)
@@ -628,9 +766,26 @@ static __always_inline void do_ffa_mem_xfer(const u64 func_id,
 	}
 
 	nr_ranges /= sizeof(reg->constituents[0]);
-	ret = ffa_host_share_ranges(reg->constituents, nr_ranges);
-	if (ret)
-		goto out_unlock;
+	if (vmid == 0) {
+		ret = ffa_host_share_ranges(reg->constituents, nr_ranges);
+		if (ret)
+			goto out_unlock;
+	} else {
+		ret = ffa_guest_share_ranges(reg->constituents, nr_ranges,
+					     ctxt, vmid);
+		if (ret)
+			goto out_unlock;
+
+		/* Repaint the TX descriptor buffer with guest PAs only if
+		 * the memory sharing was successful. If something goes
+		 * wrong during spmd_mem_xfer, re-copy the original buffer
+		 * that contain guest IP to gracefully unshare it.
+		 */
+		ret = ffa_guest_repaint_descriptor(reg->constituents, nr_ranges,
+						   ctxt, vmid);
+		if (ret)
+			goto err_unshare;
+	}
 
 	spmd_mem_xfer(res, func_id, len, fraglen);
 	if (fraglen != len) {
@@ -651,7 +806,14 @@ out:
 	return;
 
 err_unshare:
-	WARN_ON(ffa_host_unshare_ranges(reg->constituents, nr_ranges));
+	if (vmid == 0) {
+		WARN_ON(ffa_host_unshare_ranges(reg->constituents, nr_ranges));
+	} else {
+		memcpy(buf, non_secure_el1_buffers[vmid].tx, fraglen);
+		WARN_ON(ffa_guest_unshare_ranges(reg->constituents, nr_ranges,
+						 ctxt, vmid));
+	}
+
 	goto out_unlock;
 }
 
@@ -857,6 +1019,8 @@ bool kvm_guest_ffa_handler(struct pkvm_hyp_vcpu *hyp_vcpu)
 		goto out_handled;
 	case FFA_MEM_SHARE:
 	case FFA_FN64_MEM_SHARE:
+		do_ffa_mem_xfer(FFA_FN64_MEM_SHARE, &res, ctxt, vmid);
+		goto out_handled;
 	case FFA_MEM_RECLAIM:
 	case FFA_MEM_LEND:
 	case FFA_FN64_MEM_LEND:
