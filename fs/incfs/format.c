@@ -25,8 +25,14 @@ struct backing_file_context *incfs_alloc_bfc(struct mount_info *mi,
 		return ERR_PTR(-ENOMEM);
 
 	result->bc_file = get_file(backing_file);
-	result->bc_cred = mi->mi_owner;
+	result->bc_cred = get_cred(mi->mi_owner);
 	mutex_init(&result->bc_mutex);
+
+	if (!result->bc_file || !result->bc_cred) {
+		incfs_free_bfc(result);
+		return ERR_PTR(-EIO);
+	}
+
 	return result;
 }
 
@@ -37,6 +43,9 @@ void incfs_free_bfc(struct backing_file_context *bfc)
 
 	if (bfc->bc_file)
 		fput(bfc->bc_file);
+
+	if (bfc->bc_cred)
+		put_cred(bfc->bc_cred);
 
 	mutex_destroy(&bfc->bc_mutex);
 	kfree(bfc);
