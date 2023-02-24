@@ -714,6 +714,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "273262d8_8e22b27d",
+        "filename": "include/uapi/linux/gzvm_common.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-02-24T06:06:15Z",
+      "side": 1,
+      "message": "Hi Greg and Trilok,\n\nThanks for your comments, and we will be working on them. I have few questions,\n(1) You both agree our driver can reuse KVM’s ioctl definition, am I right?\nThe purpose we copied and renamed from KVM’s is to leverage KVM’s execution flow and we’re not sure if two different driver can use the same ioctl number.\n(2) What do you mean “Why not just invoke open(\"/dev/kvm\",...) directly from the CrosVM when running MTK Hypervisor?”\nMTK hypervisor has its own EL2 ABI, I don’t think it is proper to use /dev/kvm to control MTK hypervisor. Instead, crosvm open (\"/dev/gzvm\") and use ioctl to gzvm driver, then the gzvm driver issue hvc to MTK hypervisor.",
+      "parentUuid": "d6c7712e_733381f6",
+      "range": {
+        "startLine": 182,
+        "startChar": 0,
+        "endLine": 182,
+        "endChar": 45
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4f4177ba_e8e26e8f",
         "filename": "include/uapi/linux/gzvm_common.h",
         "patchSetId": 1
