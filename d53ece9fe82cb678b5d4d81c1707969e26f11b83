@@ -54,6 +54,131 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "279e4913_ee58d94c",
+        "filename": "drivers/virt/geniezone/gzvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2023-02-24T01:27:04Z",
+      "side": 1,
+      "message": "why we add kvm files into the different hypervisor?",
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d583a6eb_67c0022f",
+        "filename": "drivers/virt/geniezone/gzvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2023-02-24T01:27:04Z",
+      "side": 1,
+      "message": "What is the use of version at all? Most of the time it is never used.",
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fabec492_a403e8cc",
+        "filename": "drivers/virt/geniezone/gzvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2023-02-24T01:27:04Z",
+      "side": 1,
+      "message": "why not just use PAGE_SIZE directly?",
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b4d52fe_930750bc",
+        "filename": "drivers/virt/geniezone/gzvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2023-02-24T01:27:04Z",
+      "side": 1,
+      "message": "why this is global at all?",
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6cb2605_012533b9",
+        "filename": "drivers/virt/geniezone/gzvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2023-02-24T01:27:04Z",
+      "side": 1,
+      "message": "I understand that you are trying to minimize the UAPI interface by using the KVM one, but not sure why? Is is strictly needed? You don\u0027t have your own UAPI at all?\n\nWhat if KVM UAPI changes due to additions and breaks your interfaces? or other way round when you want some new interfaces due to your own hypervisor which doesn\u0027t fit into the KVM.",
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98474574_e23b4f9e",
+        "filename": "drivers/virt/geniezone/gzvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2023-02-24T01:27:04Z",
+      "side": 1,
+      "message": "why not just use NR_CPUs?",
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c6ac7e6_33c01f7e",
+        "filename": "drivers/virt/geniezone/gzvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2023-02-24T01:27:04Z",
+      "side": 1,
+      "message": "what happens tomorrow when you run this hypervisor on the different architecture? you are keeping everything into the virt directory but not really separating the architecture specific bits.",
+      "range": {
+        "startLine": 91,
+        "startChar": 1,
+        "endLine": 91,
+        "endChar": 19
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0ea2a8e4_606721e8",
         "filename": "drivers/virt/geniezone/gzvm_main.c",
         "patchSetId": 1
@@ -445,6 +570,63 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e663ae0f_6fa72d52",
+        "filename": "include/uapi/linux/gzvm_common.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2023-02-24T01:27:04Z",
+      "side": 1,
+      "message": "so you do have your own UAPI anyways. Why don\u0027t you send this to kernel.org once for the review? I understand that it needs to go into the ACK, but atleast this approach deserves some review from the upstream maintainers. This will be an overhead to maintain in ACK for few years for the Android upgrades and even at the end we mainline this file into the ACK, it should get reviewed by kernel.org atleast once?",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 27
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa8b6ba3_3276d1c7",
+        "filename": "include/uapi/linux/gzvm_common.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2023-02-24T01:27:04Z",
+      "side": 1,
+      "message": "Please remove TODO from everywhere.",
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0af2159_51f6eecd",
+        "filename": "include/uapi/linux/gzvm_common.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2023-02-24T01:27:04Z",
+      "side": 1,
+      "message": "Why?",
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6fddf87e_38f37cd8",
         "filename": "include/uapi/linux/gzvm_common.h",
         "patchSetId": 1
@@ -462,6 +644,23 @@
         "endLine": 148,
         "endChar": 18
       },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fb7cca7_6d457cfe",
+        "filename": "include/uapi/linux/gzvm_common.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2023-02-24T01:27:04Z",
+      "side": 1,
+      "message": "Why you are tied to GIC? This file looks like architecture specific, so not sure why it is in the include/uapi/linux folder. It should be arch*/include/uapi ?",
       "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -491,6 +690,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d6c7712e_733381f6",
+        "filename": "include/uapi/linux/gzvm_common.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2023-02-24T01:27:04Z",
+      "side": 1,
+      "message": "I agree. This file a copying all of the KVM ioctls and creating the UAPI which doesn\u0027t serve the purpose if the commit is explaining that we are using the kvm ioctls. Why not just invoke open(\"/dev/kvm\",...) directly from the CrosVM when running MTK Hypervisor?\n\nThis approach looks wrong to me atleast at high level.",
+      "parentUuid": "5240604f_bbe00ba3",
+      "range": {
+        "startLine": 182,
+        "startChar": 0,
+        "endLine": 182,
+        "endChar": 45
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4f4177ba_e8e26e8f",
         "filename": "include/uapi/linux/gzvm_common.h",
         "patchSetId": 1
@@ -507,6 +730,29 @@
         "startChar": 7,
         "endLine": 224,
         "endChar": 15
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eae6dd44_8b42f2db",
+        "filename": "include/uapi/linux/gzvm_common.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2023-02-24T01:27:04Z",
+      "side": 1,
+      "message": "again looks like lot of copy paste.. and s/kvm/gzvm - I don\u0027t think we should do this.",
+      "range": {
+        "startLine": 273,
+        "startChar": 8,
+        "endLine": 273,
+        "endChar": 10
       },
       "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
