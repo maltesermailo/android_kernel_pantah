@@ -738,6 +738,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "07f78472_e5eb9d58",
+        "filename": "include/uapi/linux/gzvm_common.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1001801
+      },
+      "writtenOn": "2023-02-24T06:35:21Z",
+      "side": 1,
+      "message": "(1) I don\u0027t agree that you copy the KVM IOCTLs files as is. It doesn\u0027t sound logical to me atleast. What is the gain when you have your own UAPI which will diverge over the time? Why don\u0027t you write your own UAPI w/ IOCTLs and not follow KVM? You have Type-1 hypervisor Vs KVM being Type-2, many semantics differ. \n\n(2) By opening the open(\"/dev/kvm\") I mean, that you somehow trap the access under the /dev/kvm flow in your type-1 hypervisor instead, since you would like to follow the same UAPI. This way you don\u0027t have to copy the UAPI at all. I understand that you have your own SMC calls underneath, but then it defeats the purpose of following KVM UAPI. They will only take you some distance, but later there will be unique needs of MTK hypervisor which won\u0027t be satisfied w/ KVM. In that case your UAPI will start diverging. This may also prevent you to innovate, isn\u0027t it? \n\n(3) I am not worried about the EL2 ABI. I am more worried about the EL1 to EL0 API interface. I understand that you will have EL2 ABI due to Hypervisor and it will keep changing, since there is no freeze or backward compatibility checks on it.",
+      "parentUuid": "273262d8_8e22b27d",
+      "range": {
+        "startLine": 182,
+        "startChar": 0,
+        "endLine": 182,
+        "endChar": 45
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4f4177ba_e8e26e8f",
         "filename": "include/uapi/linux/gzvm_common.h",
         "patchSetId": 1
