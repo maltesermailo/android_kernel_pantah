@@ -128,7 +128,7 @@ hyp_event_write(struct file *filp, const char __user *ubuf, size_t cnt, loff_t *
 	int ret;
 	char c;
 
-	if (cnt != 2)
+	if (cnt != 1 && cnt != 2)
 		return -EINVAL;
 
 	if (get_user(c, ubuf))
@@ -334,7 +334,13 @@ void kvm_hyp_init_events_tracefs(struct dentry *parent)
 		pr_err("Failed to create events/header_page\n");
 
 
-	for (; (unsigned long)event < (unsigned long)__stop_hyp_events; event++) {
+	parent = tracefs_create_dir("hyp", parent);
+	if (!parent) {
+		pr_err("Failed to create tracefs folder for hyp events\n");
+		return;
+	}
+
+	for (; (unsigned long)event < (unsigned long)__hyp_events_end; event++) {
 		event_dir = tracefs_create_dir(event->name, parent);
 		if (!event_dir) {
 			pr_err("Failed to create events/hyp/%s\n", event->name);
