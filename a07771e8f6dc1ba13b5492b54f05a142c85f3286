@@ -26,6 +26,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3abf43dd_31e5c560",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4285,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2023-02-25T00:25:30Z",
+      "side": 1,
+      "message": "task_util is used:\n-Correctly update util_est.ewma during dequeue\n-Better task placement where it does not account for task_util_est\n\nI\u0027ll include more detail on this in the commit text.",
+      "parentUuid": "4fd9d745_b662af8d",
+      "range": {
+        "startLine": 4285,
+        "startChar": 3,
+        "endLine": 4285,
+        "endChar": 34
+      },
+      "revId": "a07771e8f6dc1ba13b5492b54f05a142c85f3286",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9f0e0c7_1115e99a",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 4285,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2023-02-25T00:25:30Z",
+      "side": 1,
+      "message": "task_util",
+      "parentUuid": "4fd9d745_b662af8d",
+      "range": {
+        "startLine": 4285,
+        "startChar": 3,
+        "endLine": 4285,
+        "endChar": 34
+      },
+      "revId": "a07771e8f6dc1ba13b5492b54f05a142c85f3286",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d5ade2dc_1862ea30",
         "filename": "kernel/sched/fair.c",
         "patchSetId": 4
@@ -37,6 +85,30 @@
       "writtenOn": "2023-02-24T22:12:16Z",
       "side": 1,
       "message": "Why do you need this is you are already rolling in util_guest into task_util() and _task_util_est()?",
+      "range": {
+        "startLine": 6103,
+        "startChar": 0,
+        "endLine": 6104,
+        "endChar": 29
+      },
+      "revId": "a07771e8f6dc1ba13b5492b54f05a142c85f3286",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc8de534_6b31eddf",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 6104,
+      "author": {
+        "id": 1937676
+      },
+      "writtenOn": "2023-02-25T00:25:30Z",
+      "side": 1,
+      "message": "This serves as an optimization to update the frequency immediately after an update to util_est. The section below does not guarantee a call into cpufreq_update_util and can depend on:\n-whether the task is migrated on to this rq(not the case)\n-whether the task has decayed\n-whether or not we\u0027ve crossed a PELT period boundary(~1ms)\n\nIn which case we might have to wait until the next scheduler_tick, in the device I\u0027ve been using for testing is up to 4ms.",
+      "parentUuid": "d5ade2dc_1862ea30",
       "range": {
         "startLine": 6103,
         "startChar": 0,
