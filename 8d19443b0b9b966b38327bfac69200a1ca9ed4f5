@@ -22,6 +22,30 @@
       },
       "revId": "8d19443b0b9b966b38327bfac69200a1ca9ed4f5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5056bdd_91427f66",
+        "filename": "kernel/softirq.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2023-02-27T18:53:35Z",
+      "side": 0,
+      "message": "So this patch is dropped in android-mainline.\n\nBut however you\u0027re hitting this, I suspect you probably want the following change:\nhttps://android-review.git.corp.google.com/c/kernel/common/+/2328794\n\nSimilar fixes have already gone into the android-5.15 and android-6.1 trees. But let me know if you continue to see troubles.",
+      "parentUuid": "626a6573_9b78869c",
+      "range": {
+        "startLine": 329,
+        "startChar": 0,
+        "endLine": 329,
+        "endChar": 20
+      },
+      "revId": "8d19443b0b9b966b38327bfac69200a1ca9ed4f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
