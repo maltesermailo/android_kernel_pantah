@@ -40,6 +40,12 @@ DECLARE_RESTRICTED_HOOK(android_rvh_iommu_limit_align_shift,
 		unsigned long *shift),
 	TP_ARGS(iovad, size, shift), 1);
 
+struct iommu_domain;
+DECLARE_RESTRICTED_HOOK(android_rvh_iommu_map_sg,
+	TP_PROTO(struct iommu_domain *domain, unsigned long iova, struct scatterlist *sg,
+		unsigned int nents, int prot, gfp_t gfp, size_t *mapped, int *ret),
+	TP_ARGS(domain, iova, sg, nents, prot, gfp, mapped, ret), 1);
+
 #endif /* _TRACE_HOOK_IOMMU_H */
 
 /* This part must be outside protection */

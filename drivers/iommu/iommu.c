@@ -28,6 +28,7 @@
 #include <linux/module.h>
 #include <linux/cc_platform.h>
 #include <trace/events/iommu.h>
+#include <trace/hooks/iommu.h>
 
 #include "dma-iommu.h"
 
@@ -2438,7 +2439,13 @@ static ssize_t __iommu_map_sg(struct iommu_domain *domain, unsigned long iova,
 	size_t len = 0, mapped = 0;
 	phys_addr_t start;
 	unsigned int i = 0;
-	int ret;
+	int ret = 1;
+
+	trace_android_rvh_iommu_map_sg(domain, iova, sg, nents, prot, gfp, &mapped, &ret);
+	if (ret < 0)
+		goto out_err;
+	if (!ret)
+		return mapped;
 
 	while (i <= nents) {
 		phys_addr_t s_phys = sg_phys(sg);
