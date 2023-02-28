@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50dcfbce_02b194e0",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 6104,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2023-02-28T23:30:54Z",
+      "side": 1,
+      "message": "Instead of \"the code below...\" this would be clearer?\n\nThe normal code path for host thread enqueue doesn\u0027t take into account guest task migrations when updating cpufreq util. So, always update the cpufreq when a vCPU thread has a non-zero util_guest value.",
+      "range": {
+        "startLine": 6104,
+        "startChar": 4,
+        "endLine": 6104,
+        "endChar": 19
+      },
+      "revId": "1836a9ed2f567d83def349f0973c541495a30a10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
