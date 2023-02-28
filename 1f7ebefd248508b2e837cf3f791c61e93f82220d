@@ -16,6 +16,24 @@
       "message": "Isn\u0027t the \"finish\" needed for the `fail:` case too? If not, please add to the commit message what state \"finish\" is intended to clean up.",
       "revId": "1f7ebefd248508b2e837cf3f791c61e93f82220d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe6ba22d_4e07436b",
+        "filename": "kernel/locking/mutex.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2023-02-28T03:31:21Z",
+      "side": 1,
+      "message": "Not needed for my problem. \"finish\" is intended to clean up start time stamp which is recorded in \"start\". That means \"finish\" should match \"start\". However, when \"start\" doesn\u0027t run, \"finish\" is not needed. Here, \"fail\" case runs when \"mutex_can_spin_on_owner\" fails or \"osq_lock\" fails, where \"start\" doesn\u0027t run.",
+      "parentUuid": "9ce4a768_82b5d6a6",
+      "revId": "1f7ebefd248508b2e837cf3f791c61e93f82220d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
