@@ -10,6 +10,8 @@
 #include <asm/insn.h>
 #include <asm/patching.h>
 
+#include <trace/hooks/jump_label.h>
+
 void arch_jump_label_transform(struct jump_entry *entry,
 			       enum jump_label_type type)
 {
@@ -25,6 +27,7 @@ void arch_jump_label_transform(struct jump_entry *entry,
 	}
 
 	aarch64_insn_patch_text_nosync(addr, insn);
+	trace_android_rvh_jump_label_transform_check(addr, insn);
 }
 
 void arch_jump_label_transform_static(struct jump_entry *entry,
