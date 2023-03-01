@@ -34,6 +34,24 @@
       "parentUuid": "9ce4a768_82b5d6a6",
       "revId": "1f7ebefd248508b2e837cf3f791c61e93f82220d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f766d9d4_ddd82a32",
+        "filename": "kernel/locking/mutex.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-03-01T16:48:32Z",
+      "side": 1,
+      "message": "It\u0027s not obvious from the code that it\u0027s impossible to get to `fail:` after \"start\" was called\". Please explain in a comment why this is impossible and therefore a call to \"finish\" is unnecessary.",
+      "parentUuid": "fe6ba22d_4e07436b",
+      "revId": "1f7ebefd248508b2e837cf3f791c61e93f82220d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
