@@ -762,6 +762,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "25bcdc58_2e80a12c",
+        "filename": "include/uapi/linux/gzvm_common.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-02T08:27:43Z",
+      "side": 1,
+      "message": "Hi Trilok, thanks for your explanations.\nLet me put it this way. We only borrow KVM’s naming (e.g., CREATE_VM, CREATE_VCPU, etc.), we do have our own ioctl magic number (that is 0x92 which is hexspeak of GZ, GenieZone) and implementation. And we will prune unused ioctls in the next revision patch as removing TODOs.\n\nWe also followed KVM’s ioctl flow (that is CREATE_VM, SET_USER_MEMORY_REGION, CREATE_DEVICE, CREATE_VCPU, and then RUN), this is because we want to the geniezone hypervisor can smoothly fit in crosvm’s execution flow by using the same flow. We don’t think the flow would be different in type-I or type-II hypervisor.",
+      "parentUuid": "07f78472_e5eb9d58",
+      "range": {
+        "startLine": 182,
+        "startChar": 0,
+        "endLine": 182,
+        "endChar": 45
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4f4177ba_e8e26e8f",
         "filename": "include/uapi/linux/gzvm_common.h",
         "patchSetId": 1
