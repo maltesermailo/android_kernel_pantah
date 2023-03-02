@@ -109,8 +109,11 @@ int __fsverity_verify_signature(const struct inode *inode, const u8 *signature,
 		return err;
 	}
 
+<<<<<<< HEAD   (0b8c60 UPSTREAM: dm verity: stop using WQ_UNBOUND for verify_wq)
 	pr_debug("Valid signature for file digest %s:%*phN\n",
 		 hash_alg->name, hash_alg->digest_size, file_digest);
+=======
+>>>>>>> BRANCH (fff077 fsverity.rst: update git repo URL for fsverity-utils)
 	return 0;
 }
 EXPORT_SYMBOL_GPL(__fsverity_verify_signature);

@@ -4783,9 +4783,16 @@ no_journal:
 		}
 	}
 
+<<<<<<< HEAD   (0b8c60 UPSTREAM: dm verity: stop using WQ_UNBOUND for verify_wq)
 	if (ext4_has_feature_verity(sb) && blocksize != PAGE_SIZE) {
 		ext4_msg(sb, KERN_ERR, "Unsupported blocksize for fs-verity");
 		goto failed_mount_wq;
+=======
+	if (DUMMY_ENCRYPTION_ENABLED(sbi) && !sb_rdonly(sb) &&
+	    !ext4_has_feature_encrypt(sb)) {
+		ext4_set_feature_encrypt(sb);
+		ext4_commit_super(sb);
+>>>>>>> BRANCH (fff077 fsverity.rst: update git repo URL for fsverity-utils)
 	}
 
 	/*
