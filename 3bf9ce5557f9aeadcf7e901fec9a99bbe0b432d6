@@ -33,6 +33,23 @@
       "message": "must be split up and done properly, this will not even build properly I think.",
       "revId": "3bf9ce5557f9aeadcf7e901fec9a99bbe0b432d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a157868e_6afeaa3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-03-07T18:41:57Z",
+      "side": 1,
+      "message": "As Greg mentioned, the export should be in its own patch with a separate patch for the symbol-list changes (update to oppo symbol list and the XML).\n\nYou didn\u0027t update the oppo symbol-list, so your XML update here is meaningless.\n\nAlso, the commit message should explain why you need the export. Is it used by a vendor hook? A network device driver? What feature is it needed for?",
+      "revId": "3bf9ce5557f9aeadcf7e901fec9a99bbe0b432d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
