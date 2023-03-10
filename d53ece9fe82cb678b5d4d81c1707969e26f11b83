@@ -52,6 +52,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ca534f9_6ed15c64",
+        "filename": "drivers/virt/geniezone/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c401ef2f_8d6f42d8",
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "279e4913_ee58d94c",
@@ -65,6 +83,24 @@
       "writtenOn": "2023-02-24T01:27:04Z",
       "side": 1,
       "message": "why we add kvm files into the different hypervisor?",
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72b105cf_5231e9df",
+        "filename": "drivers/virt/geniezone/gzvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "This is because we called gfn_to_pfn_memslot() in order to convert guest ipa to host pa, we don\u0027t want to reinvent a function to do the same thing.",
+      "parentUuid": "279e4913_ee58d94c",
       "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -86,6 +122,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "177d132b_cf6efb03",
+        "filename": "drivers/virt/geniezone/gzvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "d583a6eb_67c0022f",
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fabec492_a403e8cc",
@@ -103,6 +157,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3146c029_ce881058",
+        "filename": "drivers/virt/geniezone/gzvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "Removed as it is not used.",
+      "parentUuid": "fabec492_a403e8cc",
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b4d52fe_930750bc",
@@ -116,6 +188,24 @@
       "writtenOn": "2023-02-24T01:27:04Z",
       "side": 1,
       "message": "why this is global at all?",
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48e4d3bf_593bdafa",
+        "filename": "drivers/virt/geniezone/gzvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "This is because there is a circular reference in the following struct.",
+      "parentUuid": "4b4d52fe_930750bc",
       "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -139,6 +229,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37600f98_0eb964ba",
+        "filename": "drivers/virt/geniezone/gzvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "Same as including kvm_host.h. calling `gfn_to_pfn_memslot` requires kvm_memory_slot parameter, so we have to populate one for it. Do you suggest we copy `gfn_to_pfn_memslot` or reinvent another function to do the same thing?",
+      "parentUuid": "a6cb2605_012533b9",
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "98474574_e23b4f9e",
         "filename": "drivers/virt/geniezone/gzvm.h",
         "patchSetId": 1
@@ -150,6 +258,24 @@
       "writtenOn": "2023-02-24T01:27:04Z",
       "side": 1,
       "message": "why not just use NR_CPUs?",
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a85867cf_4d7806de",
+        "filename": "drivers/virt/geniezone/gzvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "Already change to a constant value to align hypervisor configuration",
+      "parentUuid": "98474574_e23b4f9e",
       "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -167,6 +293,30 @@
       "writtenOn": "2023-02-24T01:27:04Z",
       "side": 1,
       "message": "what happens tomorrow when you run this hypervisor on the different architecture? you are keeping everything into the virt directory but not really separating the architecture specific bits.",
+      "range": {
+        "startLine": 91,
+        "startChar": 1,
+        "endLine": 91,
+        "endChar": 19
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c5856c8_e6eb028c",
+        "filename": "drivers/virt/geniezone/gzvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "GenieZone only supports arm64 for now. Do you suggest us move to arch/arm64/geniezone/ ?",
+      "parentUuid": "9c6ac7e6_33c01f7e",
       "range": {
         "startLine": 91,
         "startChar": 1,
@@ -200,6 +350,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38976cbc_27e99d71",
+        "filename": "drivers/virt/geniezone/gzvm_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "Added code to check 2 capabilities.",
+      "parentUuid": "0ea2a8e4_606721e8",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 11
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4526f31a_3901b658",
@@ -213,6 +387,30 @@
       "writtenOn": "2023-02-21T08:11:31Z",
       "side": 1,
       "message": "ioctls can not return values like this, sorry.",
+      "range": {
+        "startLine": 78,
+        "startChar": 9,
+        "endLine": 78,
+        "endChar": 28
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f03c94a_df92639b",
+        "filename": "drivers/virt/geniezone/gzvm_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "This is removed, and other similar issues are fixed.",
+      "parentUuid": "4526f31a_3901b658",
       "range": {
         "startLine": 78,
         "startChar": 9,
@@ -246,6 +444,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6093441f_dda4e191",
+        "filename": "drivers/virt/geniezone/gzvm_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "Removed because the ioctl is not used.",
+      "parentUuid": "338e6f3d_ce68292b",
+      "range": {
+        "startLine": 83,
+        "startChar": 6,
+        "endLine": 83,
+        "endChar": 15
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e96a6e61_aa64d061",
@@ -259,6 +481,30 @@
       "writtenOn": "2023-02-21T08:11:31Z",
       "side": 1,
       "message": "again, this is not how ioctls work.",
+      "range": {
+        "startLine": 85,
+        "startChar": 8,
+        "endLine": 85,
+        "endChar": 27
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdd48031_25cc2fd5",
+        "filename": "drivers/virt/geniezone/gzvm_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "Same as previous comment, I think ioctl can return a non-negative value as its output.",
+      "parentUuid": "e96a6e61_aa64d061",
       "range": {
         "startLine": 85,
         "startChar": 8,
@@ -292,6 +538,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fb20eb8_7409c052",
+        "filename": "drivers/virt/geniezone/gzvm_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "Now it checks 2 capabilities.",
+      "parentUuid": "c5fb58cd_3d695ef5",
+      "range": {
+        "startLine": 88,
+        "startChar": 9,
+        "endLine": 88,
+        "endChar": 39
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "443b3d2a_8c0ab799",
@@ -315,6 +585,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "19d3c538_e788838c",
+        "filename": "drivers/virt/geniezone/gzvm_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "Replace with ENOIOCTLCMD",
+      "parentUuid": "443b3d2a_8c0ab799",
+      "range": {
+        "startLine": 90,
+        "startChar": 9,
+        "endLine": 90,
+        "endChar": 15
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da70a78d_d944edc9",
@@ -328,6 +622,30 @@
       "writtenOn": "2023-02-21T08:11:31Z",
       "side": 1,
       "message": "no, this is correct as it should be dynamic.",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 36
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e60619c6_f81860ec",
+        "filename": "drivers/virt/geniezone/gzvm_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da70a78d_d944edc9",
       "range": {
         "startLine": 102,
         "startChar": 0,
@@ -363,6 +681,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d002c673_d5312a2a",
+        "filename": "drivers/virt/geniezone/gzvm_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "Acknowledged, we are working on this, and will added in next revision.",
+      "parentUuid": "495502f3_bb52344b",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 52
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1e566207_68c7db89",
         "filename": "drivers/virt/geniezone/gzvm_main.c",
         "patchSetId": 1
@@ -374,6 +716,30 @@
       "writtenOn": "2023-02-21T08:11:31Z",
       "side": 1,
       "message": "please fix.",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 50
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38db5d3e_3541c2f3",
+        "filename": "drivers/virt/geniezone/gzvm_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "Done in `gzvm_probe_conduit()`",
+      "parentUuid": "1e566207_68c7db89",
       "range": {
         "startLine": 113,
         "startChar": 0,
@@ -407,6 +773,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a340e48_812c3f60",
+        "filename": "drivers/virt/geniezone/gzvm_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9f39451_e878496f",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 38
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96d164e4_eaa4b545",
@@ -430,6 +820,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf0b1c4e_fc5184c1",
+        "filename": "drivers/virt/geniezone/gzvm_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "Added error checking",
+      "parentUuid": "96d164e4_eaa4b545",
+      "range": {
+        "startLine": 125,
+        "startChar": 1,
+        "endLine": 125,
+        "endChar": 19
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21ec5f2a_7ec6f13d",
@@ -443,6 +857,30 @@
       "writtenOn": "2023-02-21T08:11:31Z",
       "side": 1,
       "message": "when drivers are successful, they are quiet.",
+      "range": {
+        "startLine": 127,
+        "startChar": 1,
+        "endLine": 127,
+        "endChar": 8
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b806aec_2673f9fd",
+        "filename": "drivers/virt/geniezone/gzvm_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21ec5f2a_7ec6f13d",
       "range": {
         "startLine": 127,
         "startChar": 1,
@@ -478,6 +916,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "525ea477_68679603",
+        "filename": "drivers/virt/geniezone/gzvm_main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "Do you mean when the gzvm module is unload (rmmod), it should shutdown all VM before unregister?",
+      "parentUuid": "4ccc351b_8e74b35a",
+      "range": {
+        "startLine": 135,
+        "startChar": 1,
+        "endLine": 135,
+        "endChar": 16
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6f8c54c7_3abd0191",
         "filename": "drivers/virt/geniezone/gzvm_vcpu.c",
         "patchSetId": 1
@@ -489,6 +951,30 @@
       "writtenOn": "2023-02-21T08:11:31Z",
       "side": 1,
       "message": "if this does nothing, no need for this call at all.",
+      "range": {
+        "startLine": 252,
+        "startChar": 0,
+        "endLine": 252,
+        "endChar": 10
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba6d9195_c392dec9",
+        "filename": "drivers/virt/geniezone/gzvm_vcpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "6f8c54c7_3abd0191",
       "range": {
         "startLine": 252,
         "startChar": 0,
@@ -522,6 +1008,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d75dd774_1c141913",
+        "filename": "drivers/virt/geniezone/gzvm_vm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "Remove those pr_debug for now, will use tracing if we still need it.",
+      "parentUuid": "9cb14ed5_0b372e68",
+      "range": {
+        "startLine": 147,
+        "startChar": 1,
+        "endLine": 147,
+        "endChar": 9
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6a4c5ec_bf29d7bf",
@@ -545,6 +1055,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09fc4937_f49a98d6",
+        "filename": "drivers/virt/geniezone/gzvm_vm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "Replaced with pr_debug",
+      "parentUuid": "b6a4c5ec_bf29d7bf",
+      "range": {
+        "startLine": 386,
+        "startChar": 0,
+        "endLine": 386,
+        "endChar": 53
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56ca8941_9e0a6cb4",
@@ -558,6 +1092,30 @@
       "writtenOn": "2023-02-21T08:11:31Z",
       "side": 1,
       "message": "wrong error value.",
+      "range": {
+        "startLine": 387,
+        "startChar": 9,
+        "endLine": 387,
+        "endChar": 15
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37faec76_04ecb838",
+        "filename": "drivers/virt/geniezone/gzvm_vm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "Replaced with ENOIOCTLCMD",
+      "parentUuid": "56ca8941_9e0a6cb4",
       "range": {
         "startLine": 387,
         "startChar": 9,
@@ -608,6 +1166,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "35bd5c3c_d5d4f6e8",
+        "filename": "include/uapi/linux/gzvm_common.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa8b6ba3_3276d1c7",
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0af2159_51f6eecd",
@@ -621,6 +1197,24 @@
       "writtenOn": "2023-02-24T01:27:04Z",
       "side": 1,
       "message": "Why?",
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf69f37d_f15d298e",
+        "filename": "include/uapi/linux/gzvm_common.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "This struct layout, gzvm_vcpu_run, is shared between VMM, driver, and hypervisor, so add padding to make sure the struct is not packed and also can be reserved for future usage.",
+      "parentUuid": "b0af2159_51f6eecd",
       "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -648,6 +1242,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afba36d2_baf37901",
+        "filename": "include/uapi/linux/gzvm_common.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "6fddf87e_38f37cd8",
+      "range": {
+        "startLine": 148,
+        "startChar": 0,
+        "endLine": 148,
+        "endChar": 18
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7fb7cca7_6d457cfe",
@@ -661,6 +1279,24 @@
       "writtenOn": "2023-02-24T01:27:04Z",
       "side": 1,
       "message": "Why you are tied to GIC? This file looks like architecture specific, so not sure why it is in the include/uapi/linux folder. It should be arch*/include/uapi ?",
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e4161d3_400a8d63",
+        "filename": "include/uapi/linux/gzvm_common.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "GenieZone only supports arm64 for now. Is it ok to move arch specific parts to arch/arm64/include/uapi/asm/gzvm.h",
+      "parentUuid": "7fb7cca7_6d457cfe",
       "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -784,6 +1420,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "acd1793c_a5a74382",
+        "filename": "include/uapi/linux/gzvm_common.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25bcdc58_2e80a12c",
+      "range": {
+        "startLine": 182,
+        "startChar": 0,
+        "endLine": 182,
+        "endChar": 45
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f4177ba_e8e26e8f",
@@ -797,6 +1457,30 @@
       "writtenOn": "2023-02-21T08:11:31Z",
       "side": 1,
       "message": "must be set to 0, right?  Please enforce.",
+      "range": {
+        "startLine": 224,
+        "startChar": 7,
+        "endLine": 224,
+        "endChar": 15
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42db95ad_271eeb4b",
+        "filename": "include/uapi/linux/gzvm_common.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "This struct is removed because it is not used.",
+      "parentUuid": "4f4177ba_e8e26e8f",
       "range": {
         "startLine": 224,
         "startChar": 7,
@@ -830,6 +1514,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23d3daad_69983402",
+        "filename": "include/uapi/linux/gzvm_common.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "eae6dd44_8b42f2db",
+      "range": {
+        "startLine": 273,
+        "startChar": 8,
+        "endLine": 273,
+        "endChar": 10
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23f443a5_28ddbc07",
@@ -853,6 +1561,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bc56107_30c4b65a",
+        "filename": "include/uapi/linux/gzvm_common.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "This struct is removed because it is not used.",
+      "parentUuid": "23f443a5_28ddbc07",
+      "range": {
+        "startLine": 313,
+        "startChar": 8,
+        "endLine": 313,
+        "endChar": 16
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3901537_5eb20c3b",
@@ -866,6 +1598,30 @@
       "writtenOn": "2023-02-21T08:11:31Z",
       "side": 1,
       "message": "bad function name for a userspace visible file.  Please put only in the kernel, OR properly put them in the correct namespace.",
+      "range": {
+        "startLine": 684,
+        "startChar": 0,
+        "endLine": 684,
+        "endChar": 22
+      },
+      "revId": "d53ece9fe82cb678b5d4d81c1707969e26f11b83",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34789f5b_855b1092",
+        "filename": "include/uapi/linux/gzvm_common.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 1983910
+      },
+      "writtenOn": "2023-03-10T08:30:37Z",
+      "side": 1,
+      "message": "Moved to kernel-only header file.",
+      "parentUuid": "d3901537_5eb20c3b",
       "range": {
         "startLine": 684,
         "startChar": 0,
