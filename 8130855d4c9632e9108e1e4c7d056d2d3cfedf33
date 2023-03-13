@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95c5a8a5_2875942e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/setup.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-03-13T11:45:58Z",
+      "side": 1,
+      "message": "Where does the host provision this additional memory?\n\nI think you may need to move `hyp_host_fp_pages()` to `asm/kvm_pkvm.h` so that `kvm_hyp_reserve()` can increase its initial memory donation from EL1.",
+      "range": {
+        "startLine": 64,
+        "startChar": 20,
+        "endLine": 64,
+        "endChar": 42
+      },
+      "revId": "8130855d4c9632e9108e1e4c7d056d2d3cfedf33",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
