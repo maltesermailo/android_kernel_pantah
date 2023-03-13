@@ -35,6 +35,10 @@
 
 #include "power.h"
 
+#define	SUSPEND_TIME_DEBUG	1  // by jay
+
+ktime_t suspend_time, resume_time;  // by jay
+
 const char * const pm_labels[] = {
 	[PM_SUSPEND_TO_IDLE] = "freeze",
 	[PM_SUSPEND_STANDBY] = "standby",
@@ -439,6 +443,12 @@ static int suspend_enter(suspend_state_t state, bool *wakeup)
 	arch_suspend_disable_irqs();
 	BUG_ON(!irqs_disabled());
 
+	// by jay
+	if (SUSPEND_TIME_DEBUG == 1) {
+		suspend_time = ktime_sub(ktime_get(), suspend_time);
+		printk("TOTORO!  Disable non-boot CPUs...\n");
+	}
+
 	system_state = SYSTEM_SUSPEND;
 	error = syscore_suspend();
 	if (!error) {
@@ -454,6 +464,11 @@ static int suspend_enter(suspend_state_t state, bool *wakeup)
 			error = -EBUSY;
 		}
 		syscore_resume();
+	}
+
+	// by jay
+	if (SUSPEND_TIME_DEBUG == 1) {
+		resume_time = ktime_get();
 	}
 
 	system_state = SYSTEM_RUNNING;
@@ -501,6 +516,12 @@ int suspend_devices_and_enter(suspend_state_t state)
 		goto Close;
 
 	suspend_console();
+
+	// by jay
+	if (SUSPEND_TIME_DEBUG == 1) {
+	        suspend_time = ktime_get();
+	}
+
 	suspend_test_start();
 	error = dpm_suspend_start(PMSG_SUSPEND);
 	if (error) {
@@ -523,6 +544,11 @@ int suspend_devices_and_enter(suspend_state_t state)
 	dpm_resume_end(PMSG_RESUME);
 	suspend_test_finish("resume devices");
 	trace_suspend_resume(TPS("resume_console"), state, true);
+	// by jay
+	if (SUSPEND_TIME_DEBUG == 1) {
+		resume_time = ktime_sub(ktime_get(), resume_time);
+		printk("TOTORO!  suspend_time=[%lld]us  resume_time=[%lld]us\n", ktime_to_us(suspend_time), ktime_to_us(resume_time));
+	}
 	resume_console();
 	trace_suspend_resume(TPS("resume_console"), state, false);
 
@@ -587,6 +613,12 @@ static int enter_state(suspend_state_t state)
 
 	pm_pr_dbg("Preparing system for sleep (%s)\n", mem_sleep_labels[state]);
 	pm_suspend_clear_flags();
+
+	// by jay
+	if (SUSPEND_TIME_DEBUG == 1) {
+		//dump_stack();
+	}
+
 	error = suspend_prepare(state);
 	if (error)
 		goto Unlock;
@@ -597,7 +629,21 @@ static int enter_state(suspend_state_t state)
 	trace_suspend_resume(TPS("suspend_enter"), state, false);
 	pm_pr_dbg("Suspending system (%s)\n", mem_sleep_labels[state]);
 	pm_restrict_gfp_mask();
+
+	// by jay
+	if (SUSPEND_TIME_DEBUG == 1) {
+		printk("TOTORO!  suspend_devices_and_enter 111 - enter\n");
+		trace_clock_set_rate("TOTORO_suspend_devices_and_enter", 1, raw_smp_processor_id());
+	}
+
 	error = suspend_devices_and_enter(state);
+
+	// by jay
+	if (SUSPEND_TIME_DEBUG == 1) {
+		trace_clock_set_rate("TOTORO_suspend_devices_and_enter", 0, raw_smp_processor_id());
+		printk("TOTORO!  suspend_devices_and_enter 000 - exit\n");
+	}
+
 	pm_restore_gfp_mask();
 
  Finish:

@@ -35,9 +35,14 @@
 #include <linux/devfreq.h>
 #include <linux/timer.h>
 #include <linux/wakeup_reason.h>
+#include <linux/kallsyms.h>  // by jay
+#include <linux/platform_device.h>  // by jay
 
 #include "../base.h"
 #include "power.h"
+
+#define LATENCY_THRESHOLD	1000	// by jay
+#define SUSPEND_RESUME_DEBUG	1	// by jay
 
 typedef int (*pm_callback_t)(struct device *);
 
@@ -651,7 +656,33 @@ static int device_resume_noirq(struct device *dev, pm_message_t state, bool asyn
 	}
 
 Run:
-	error = dpm_run_callback(callback, dev, state, info);
+	// by jay
+	if (SUSPEND_RESUME_DEBUG == 1) {
+		ktime_t t;
+		t = ktime_get();
+
+		error = dpm_run_callback(callback, dev, state, info);
+
+		t = ktime_sub(ktime_get(), t);
+		if ((long long)ktime_to_us(t) > LATENCY_THRESHOLD) {
+			char buf[128];
+			struct device_driver *drv = dev->driver;
+			sprint_symbol(buf, (unsigned long) callback);
+			if (drv && drv->pm && drv->pm->resume_noirq) {
+				char buf[128];
+				sprint_symbol(buf, (unsigned long) drv->pm->resume_noirq);
+				printk("TOTORO!  %s callback  latency:[%lld]us - name:[%s]  [%s]\n", __FUNCTION__, (long long)ktime_to_us(t), drv->name, buf);
+			} else {
+				if (drv) {
+					printk("TOTORO!  %s callback  latency:[%lld]us - name:[%s]  [%s]\n", __FUNCTION__, (long long)ktime_to_us(t), drv->name, buf);
+				} else {
+					printk("TOTORO!  %s callback  latency:[%lld]us - name:[%s]  [%s]\n", __FUNCTION__, (long long)ktime_to_us(t), "", buf);
+				}
+			}
+		}
+	} else {
+		error = dpm_run_callback(callback, dev, state, info);
+	}
 
 Skip:
 	dev->power.is_noirq_suspended = false;
@@ -805,7 +836,33 @@ static int device_resume_early(struct device *dev, pm_message_t state, bool asyn
 	}
 
 Run:
-	error = dpm_run_callback(callback, dev, state, info);
+	// by jay
+	if (SUSPEND_RESUME_DEBUG == 1) {
+		ktime_t t;
+		t = ktime_get();
+
+		error = dpm_run_callback(callback, dev, state, info);
+
+		t = ktime_sub(ktime_get(), t);
+		if ((long long)ktime_to_us(t) > LATENCY_THRESHOLD) {
+			char buf[128];
+			struct device_driver *drv = dev->driver;
+			sprint_symbol(buf, (unsigned long) callback);
+			if (drv && drv->pm && drv->pm->resume_early) {
+				char buf[128];
+				sprint_symbol(buf, (unsigned long) drv->pm->resume_early);
+				printk("TOTORO!  %s callback  latency:[%lld]us - name:[%s]  [%s]\n", __FUNCTION__, (long long)ktime_to_us(t), drv->name, buf);
+			} else {
+				if (drv) {
+					printk("TOTORO!  %s callback  latency:[%lld]us - name:[%s]  [%s]\n", __FUNCTION__, (long long)ktime_to_us(t), drv->name, buf);
+				} else {
+					printk("TOTORO!  %s callback  latency:[%lld]us - name:[%s]  [%s]\n", __FUNCTION__, (long long)ktime_to_us(t), "", buf);
+				}
+			}
+		}
+	} else {
+		error = dpm_run_callback(callback, dev, state, info);
+	}
 
 Skip:
 	dev->power.is_late_suspended = false;
@@ -964,7 +1021,40 @@ static int device_resume(struct device *dev, pm_message_t state, bool async)
 	}
 
  End:
-	error = dpm_run_callback(callback, dev, state, info);
+	// by jay
+	if (SUSPEND_RESUME_DEBUG == 1) {
+		ktime_t t;
+		t = ktime_get();
+
+		error = dpm_run_callback(callback, dev, state, info);
+
+		t = ktime_sub(ktime_get(), t);
+		if ((long long)ktime_to_us(t) > LATENCY_THRESHOLD) {
+			char buf[128];
+			struct device_driver *drv = dev->driver;
+			sprint_symbol(buf, (unsigned long) callback);
+			if (drv && drv->pm && drv->pm->resume) {
+				char buf[128];
+				sprint_symbol(buf, (unsigned long) drv->pm->resume);
+				printk("TOTORO!  %s callback  latency:[%lld]us - name:[%s]  [%s]\n", __FUNCTION__, (long long)ktime_to_us(t), drv->name, buf);
+			} else {
+				if (drv) {
+					struct platform_driver *pdrv = to_platform_driver(drv);
+					if (pdrv && pdrv->resume) {
+						char buf[128];
+						sprint_symbol(buf, (unsigned long) pdrv->resume);
+						printk("TOTORO!  %s callback  latency:[%lld]us - name:[%s]  [%s]\n", __FUNCTION__, (long long)ktime_to_us(t), drv->name, buf);
+					} else {
+						printk("TOTORO!  %s callback  latency:[%lld]us - name:[%s]  [%s]\n", __FUNCTION__, (long long)ktime_to_us(t), drv->name, buf);
+					}
+				} else {
+					printk("TOTORO!  %s callback  latency:[%lld]us - name:[%s]  [%s]\n", __FUNCTION__, (long long)ktime_to_us(t), "", buf);
+				}
+			}
+		}
+	} else {
+		error = dpm_run_callback(callback, dev, state, info);
+	}
 	dev->power.is_suspended = false;
 
  Unlock:
@@ -1232,7 +1322,33 @@ static int __device_suspend_noirq(struct device *dev, pm_message_t state, bool a
 	}
 
 Run:
-	error = dpm_run_callback(callback, dev, state, info);
+	// by jay
+	if (SUSPEND_RESUME_DEBUG == 1) {
+		ktime_t t;
+		t = ktime_get();
+
+		error = dpm_run_callback(callback, dev, state, info);
+
+		t = ktime_sub(ktime_get(), t);
+		if ((long long)ktime_to_us(t) > LATENCY_THRESHOLD) {
+			char buf[128];
+			struct device_driver *drv = dev->driver;
+			sprint_symbol(buf, (unsigned long) callback);
+			if (drv && drv->pm && drv->pm->suspend_noirq) {
+				char buf[128];
+				sprint_symbol(buf, (unsigned long) drv->pm->suspend_noirq);
+				printk("TOTORO!  %s callback  latency:[%lld]us - name:[%s]  [%s]\n", __FUNCTION__, (long long)ktime_to_us(t), drv->name, buf);
+			} else {
+				if (drv) {
+					printk("TOTORO!  %s callback  latency:[%lld]us - name:[%s]  [%s]\n", __FUNCTION__, (long long)ktime_to_us(t), drv->name, buf);
+				} else {
+					printk("TOTORO!  %s callback  latency:[%lld]us - name:[%s]  [%s]\n", __FUNCTION__, (long long)ktime_to_us(t), "", buf);
+				}
+			}
+		}
+	} else {
+		error = dpm_run_callback(callback, dev, state, info);
+	}
 	if (error) {
 		async_error = error;
 		log_suspend_abort_reason("Device %s failed to %s noirq: error %d",
@@ -1426,7 +1542,33 @@ static int __device_suspend_late(struct device *dev, pm_message_t state, bool as
 	}
 
 Run:
-	error = dpm_run_callback(callback, dev, state, info);
+	// by jay
+	if (SUSPEND_RESUME_DEBUG == 1) {
+		ktime_t t;
+		t = ktime_get();
+
+		error = dpm_run_callback(callback, dev, state, info);
+
+		t = ktime_sub(ktime_get(), t);
+		if ((long long)ktime_to_us(t) > LATENCY_THRESHOLD) {
+			char buf[128];
+			struct device_driver *drv = dev->driver;
+			sprint_symbol(buf, (unsigned long) callback);
+			if (drv && drv->pm && drv->pm->suspend_late) {
+				char buf[128];
+				sprint_symbol(buf, (unsigned long) drv->pm->suspend_late);
+				printk("TOTORO!  %s callback  latency:[%lld]us - name:[%s]  [%s]\n", __FUNCTION__, (long long)ktime_to_us(t), drv->name, buf);
+			} else {
+				if (drv) {
+					printk("TOTORO!  %s callback  latency:[%lld]us - name:[%s]  [%s]\n", __FUNCTION__, (long long)ktime_to_us(t), drv->name, buf);
+				} else {
+					printk("TOTORO!  %s callback  latency:[%lld]us - name:[%s]  [%s]\n", __FUNCTION__, (long long)ktime_to_us(t), "", buf);
+				}
+			}
+		}
+	} else {
+		error = dpm_run_callback(callback, dev, state, info);
+	}
 	if (error) {
 		async_error = error;
 		log_suspend_abort_reason("Device %s failed to %s late: error %d",
@@ -1691,7 +1833,40 @@ static int __device_suspend(struct device *dev, pm_message_t state, bool async)
 		callback = pm_op(dev->driver->pm, state);
 	}
 
-	error = dpm_run_callback(callback, dev, state, info);
+	// by jay
+	if (SUSPEND_RESUME_DEBUG == 1) {
+		ktime_t t;
+		t = ktime_get();
+
+		error = dpm_run_callback(callback, dev, state, info);
+
+		t = ktime_sub(ktime_get(), t);
+		if ((long long)ktime_to_us(t) > LATENCY_THRESHOLD) {
+			char buf[128];
+			struct device_driver *drv = dev->driver;
+			sprint_symbol(buf, (unsigned long) callback);
+			if (drv && drv->pm && drv->pm->suspend) {
+				char buf[128];
+				sprint_symbol(buf, (unsigned long) drv->pm->suspend);
+				printk("TOTORO!  %s callback  latency:[%lld]us - name:[%s]  [%s]\n", __FUNCTION__, (long long)ktime_to_us(t), drv->name, buf);
+			} else {
+				if (drv) {
+					struct platform_driver *pdrv = to_platform_driver(drv);
+					if (pdrv && pdrv->suspend) {
+						char buf[128];
+						sprint_symbol(buf, (unsigned long) pdrv->suspend);
+						printk("TOTORO!  %s callback  latency:[%lld]us - name:[%s]  [%s]\n", __FUNCTION__, (long long)ktime_to_us(t), drv->name, buf);
+					} else {
+						printk("TOTORO!  %s callback  latency:[%lld]us - name:[%s]  [%s]\n", __FUNCTION__, (long long)ktime_to_us(t), drv->name, buf);
+					}
+				} else {
+					printk("TOTORO!  %s callback  latency:[%lld]us - name:[%s]  [%s]\n", __FUNCTION__, (long long)ktime_to_us(t), "", buf);
+				}
+			}
+		}
+	} else {
+		error = dpm_run_callback(callback, dev, state, info);
+	}
 
  End:
 	if (!error) {
