@@ -36598,6 +36598,10 @@ member {
   type_id: 0x1983785b
 }
 member {
+  id: 0x2612b435
+  type_id: 0x1764a0c5
+}
+member {
   id: 0x2629d9f4
   type_id: 0x178917c0
 }
@@ -37383,8 +37387,8 @@ member {
   offset: 96
 }
 member {
-  id: 0x34b145e5
-  type_id: 0x5deb6786
+  id: 0x34be27ed
+  type_id: 0x5dd6efa4
 }
 member {
   id: 0x34c421be
@@ -38793,6 +38797,11 @@ member {
 member {
   id: 0x6d24d29f
   name: "__empty_array"
+  type_id: 0x186c44db
+}
+member {
+  id: 0x3cf3a247
+  name: "__empty_bufs"
   type_id: 0x186c44db
 }
 member {
@@ -200465,6 +200474,14 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x1764a0c5
+  kind: STRUCT
+  definition {
+    member_id: 0x3cf3a247
+    member_id: 0xd0323df9
+  }
+}
+struct_union {
   id: 0x178917c0
   kind: STRUCT
   definition {
@@ -204150,12 +204167,12 @@ struct_union {
   }
 }
 struct_union {
-  id: 0x5deb6786
+  id: 0x5dd6efa4
   kind: UNION
   definition {
     bytesize: 16
     member_id: 0x2c96db22
-    member_id: 0xd0323df9
+    member_id: 0x2612b435
   }
 }
 struct_union {
@@ -226261,7 +226278,7 @@ struct_union {
   name: "io_uring_buf_ring"
   definition {
     bytesize: 16
-    member_id: 0x34b145e5
+    member_id: 0x34be27ed
   }
 }
 struct_union {
@@ -333814,7 +333831,7 @@ elf_symbol {
   name: "hid_ignore"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x6472f954
+  crc: 0x60a463f6
   type_id: 0xfddd6aa8
   full_name: "hid_ignore"
 }
