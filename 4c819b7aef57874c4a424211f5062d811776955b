@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8fcafcfe_e200b70c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-03-15T18:23:16Z",
+      "side": 1,
+      "message": "This change is originally from mediatek and is already included in `android13-5.15`. I don\u0027t know how they are using it, but I can say that Pixel is using this hook as well for scheduler performance tuning. In particular it\u0027s used to help find a more energy efficient CPU. On 5.10 is was called `rvh_cpumask_any_and_distribute` (https://r.android.com/2108045). For 5.15, the driver has been re-worked to re-use this vendor hook from `android13-5.15`.",
+      "parentUuid": "7c9dff77_3297ec0c",
+      "revId": "4c819b7aef57874c4a424211f5062d811776955b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be6b632b_9b930610",
         "filename": "kernel/sched/core.c",
         "patchSetId": 3
