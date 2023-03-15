@@ -33,6 +33,24 @@
       "message": "Why do we need back-to-back hooks? Please just use the previous hook.",
       "revId": "4c819b7aef57874c4a424211f5062d811776955b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c959846_b67d07a8",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2909,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-03-15T18:11:18Z",
+      "side": 1,
+      "message": "The difference between this hook and the other one is that the previous one doesn\u0027t pass in the task_struct pointer which is used to find a more energy efficient cpu. I\u0027m fine with dropping/modifying `trace_android_rvh_set_cpus_allowed_ptr_locked` to take the task_struct pointer so that we only have 1 hook here, but that will require whoever is using it to update their driver on the next KMI breakage window. Do you prefer that?.\n\nNote: both of these hooks are included in `android13-5.15`.",
+      "parentUuid": "be6b632b_9b930610",
+      "revId": "4c819b7aef57874c4a424211f5062d811776955b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
