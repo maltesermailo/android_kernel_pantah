@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a65d157a_719a992e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-03-15T18:46:43Z",
+      "side": 1,
+      "message": "Ok, can you re-write the commit message to describe the use-case for Pixel and why it can\u0027t just be part of a debug kernel?",
+      "parentUuid": "8fcafcfe_e200b70c",
+      "revId": "4c819b7aef57874c4a424211f5062d811776955b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be6b632b_9b930610",
         "filename": "kernel/sched/core.c",
         "patchSetId": 3
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "The difference between this hook and the other one is that the previous one doesn\u0027t pass in the task_struct pointer which is used to find a more energy efficient cpu. I\u0027m fine with dropping/modifying `trace_android_rvh_set_cpus_allowed_ptr_locked` to take the task_struct pointer so that we only have 1 hook here, but that will require whoever is using it to update their driver on the next KMI breakage window. Do you prefer that?.\n\nNote: both of these hooks are included in `android13-5.15`.",
       "parentUuid": "be6b632b_9b930610",
+      "revId": "4c819b7aef57874c4a424211f5062d811776955b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed01460d_a582fb73",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2909,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-03-15T18:46:43Z",
+      "side": 1,
+      "message": "Yes. Since we can change the KMI, we can modify the signature of the existing hook.\n\nI suspect that in android13-5.15, at least one of them was added after KMI freeze so we couldn\u0027t fix it.",
+      "parentUuid": "1c959846_b67d07a8",
       "revId": "4c819b7aef57874c4a424211f5062d811776955b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
