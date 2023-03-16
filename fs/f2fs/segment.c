@@ -194,7 +194,10 @@ void f2fs_abort_atomic_write(struct inode *inode, bool clean)
 
 	release_atomic_write_cnt(inode);
 	clear_inode_flag(inode, FI_ATOMIC_COMMITTED);
+<<<<<<< HEAD   (c392d5 ANDROID: further fix incorrectly submitted KMI update)
 	clear_inode_flag(inode, FI_ATOMIC_REPLACE);
+=======
+>>>>>>> BRANCH (1cc3fc Linux 6.1.18)
 	clear_inode_flag(inode, FI_ATOMIC_FILE);
 	stat_dec_atomic_inode(inode);
 
