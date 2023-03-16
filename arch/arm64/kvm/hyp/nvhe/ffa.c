@@ -927,6 +927,8 @@ static void do_ffa_mem_reclaim(struct arm_smccc_res *res,
 	hyp_spin_lock(&hyp_buffers.lock);
 
 	buf = hyp_buffers.tx;
+
+	/* TODO: Verify if it really matters passing the sender_id here. */
 	*buf = (struct ffa_mem_region) {
 		.sender_id	= HOST_FFA_ID,
 		.handle		= handle,
@@ -976,9 +978,16 @@ static void do_ffa_mem_reclaim(struct arm_smccc_res *res,
 		goto out_unlock;
 
 	reg = (void *)buf + offset;
-	/* If the SPMD was happy, then we should be too. */
-	WARN_ON(ffa_host_unshare_ranges(reg->constituents,
-					reg->addr_range_cnt));
+
+	if (vmid == 0) {
+		/* If the SPMD was happy, then we should be too. */
+		WARN_ON(ffa_host_unshare_ranges(reg->constituents,
+						reg->addr_range_cnt));
+	} else {
+		WARN_ON(ffa_guest_unshare_ranges(reg->constituents,
+						 reg->addr_range_cnt,
+						 ctxt, vmid));
+	}
 out_unlock:
 	hyp_spin_unlock(&hyp_buffers.lock);
 
@@ -1114,6 +1123,8 @@ bool kvm_guest_ffa_handler(struct pkvm_hyp_vcpu *hyp_vcpu)
 		do_ffa_mem_xfer(FFA_FN64_MEM_SHARE, &res, ctxt, vmid);
 		goto out_handled;
 	case FFA_MEM_RECLAIM:
+		do_ffa_mem_reclaim(&res, ctxt, vmid);
+		goto out_handled;
 	case FFA_MEM_LEND:
 	case FFA_FN64_MEM_LEND:
 	case FFA_MEM_FRAG_TX:
