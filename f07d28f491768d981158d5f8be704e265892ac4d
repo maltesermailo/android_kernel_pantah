@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88c88b18_3e7f8552",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-03-17T14:25:29Z",
+      "side": 1,
+      "message": "```\nERROR: modpost: \"drm_atomic_get_old_private_obj_state\" [drivers/gpu/drm/display/drm_display_helper.ko] undefined!\nERROR: modpost: \"debugfs_lookup_and_remove\" [drivers/usb/common/ulpi.ko] undefined!\n```\nthe db845c needs a symbol list update it appears.\n\n```\n$ tools/bazel run //common:db845c_abi_update_symbol_list\n```\nhttps://android.googlesource.com/kernel/build/+/refs/heads/master/kleaf/docs/abi_device.md#update-symbol-list",
+      "revId": "f07d28f491768d981158d5f8be704e265892ac4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
