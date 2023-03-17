@@ -16,6 +16,24 @@
       "message": "Qais, doesn\u0027t this task distribution policy violate EAS principles? Is this an upstream bug. This hook is needed only because the scheduler is making a random (bad) decision about placement.\n\nCan you give a CR+1 if you agree that this hook is the right way to do this?",
       "revId": "6548767eaba49885ef325392ad449b19d662a911",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3eff879d_c1a938a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2023-03-17T19:44:39Z",
+      "side": 1,
+      "message": "Yes this looks like an upstream bug. The issue at hand is that when tasks move between cpusets, the current CPU the task is running on can become invalid (no longer part of the new affinity). And as a fallback a random CPU is picked from the new affinity. Which as you say doesn\u0027t adhere to any of the usual scheduling decision for CPU selection. I\u0027m speculating here, but I think energy efficiency is not the major worry. Capacity awareness which ensures a task goes to a cpu that fits_capacity() or highest spare capacity is broken too. Combine this with prefer_idle tasks who are even more picky about being put on the right CPU - I can see the need.\n\nI will raise this with upstream at some point. But I can\u0027t see this being a straightforward discussion and I think keeping the hook for now is the most sensible way forward.\n\nBy the way, that selection wasn\u0027t always random. It was worse; picking always the first cpu in the new_mask. Server people introduced the random selection to avoid forcing many tasks on the same core and wait for a load balancer to correct it. So this was noticed outside mobile - but their fix is much easier than ours 😞",
+      "parentUuid": "e6ab5b0a_9179886e",
+      "revId": "6548767eaba49885ef325392ad449b19d662a911",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
