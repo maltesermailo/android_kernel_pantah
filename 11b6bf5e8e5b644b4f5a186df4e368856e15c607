@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000040701912",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2483756?revision\u003d4",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "5172b21d_bf289d88",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-03-17T09:58:57Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\n\n```\n      ## android/abi_gki_aarch64_xiaomi ##\n     @@\n    -   __tracepoint_android_vh_alloc_pages_reclaim_bypass\n    -   __traceiter_android_vh_alloc_pages_failure_bypass\n    -   __tracepoint_android_vh_alloc_pages_failure_bypass\n    +   wakeup_sources_read_unlock\n    +   wakeup_sources_walk_start\n    +   wakeup_sources_walk_next\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (fb4b72 ANDROID: GKI: Add Tuxera symbol list)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++\n    ++#required by mi_mempool.ko module\n    ++  __traceiter_android_vh_mmput\n    ++  __tracepoint_android_vh_mmput\n    ++  __traceiter_android_vh_alloc_pages_reclaim_bypass\n    ++  __tracepoint_android_vh_alloc_pages_reclaim_bypass\n    ++  __traceiter_android_vh_alloc_pages_failure_bypass\n    ++  __tracepoint_android_vh_alloc_pages_failure_bypass\n     +\n     +#required by us_prox.ko module\n     +  iio_trigger_alloc\n     +  __iio_trigger_register\n     +  iio_trigger_free\n     +  iio_trigger_unregister\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (26638f ANDROID: GKI: update xiaomi symbol list)\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 517138967 android-build.ayeaye-python-dispatcher_20230316.05_p0",
+      "revId": "11b6bf5e8e5b644b4f5a186df4e368856e15c607",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
