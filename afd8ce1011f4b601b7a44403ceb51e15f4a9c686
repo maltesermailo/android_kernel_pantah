@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71e9d568_0f03fc42",
+        "filename": "android/abi_gki_aarch64_slnk",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-20T13:17:00Z",
+      "side": 1,
+      "message": "drivers should not ever need access to pids or namespaces, sorry.",
+      "range": {
+        "startLine": 5,
+        "startChar": 2,
+        "endLine": 5,
+        "endChar": 20
+      },
+      "revId": "afd8ce1011f4b601b7a44403ceb51e15f4a9c686",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdfec71d_d3b2729a",
+        "filename": "android/abi_gki_aarch64_slnk",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-03-20T13:17:00Z",
+      "side": 1,
+      "message": "drivers should NEVER be opening files off of the filesystem, please fix the driver to use the proper in-kernel apis for configuration instead.\n\nAlso, what wifi driver is this?",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 16
+      },
+      "revId": "afd8ce1011f4b601b7a44403ceb51e15f4a9c686",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
