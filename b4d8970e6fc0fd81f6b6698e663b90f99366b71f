@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e3c5052_71987420",
+        "filename": "kernel/module/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-03-22T12:58:44Z",
+      "side": 1,
+      "message": "This code assumes that all files matching a given pattern are actually to be considered as KMI symbol lists. While that is mostly true, the authoritative list is in BUILD.bazel (kmi_symbol_list + additional_kmi_symbol_lists). The union of all symbol lists is passed as an argument to `CONFIG_UNUSED_KSYMS_WHITELIST` and should be accessible here.\n\nVery likely this also creates a better input as the raw list is deduplicated and does not need postprocessing from `gen_gki_modules_headers.sh`\n\nhttps://cs.android.com/android/kernel/superproject/+/common-android-mainline:build/kernel/kleaf/impl/kernel_config.bzl;l\u003d185",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 83
+      },
+      "revId": "b4d8970e6fc0fd81f6b6698e663b90f99366b71f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21295d1a_14d995df",
+        "filename": "kernel/module/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-03-22T12:58:44Z",
+      "side": 1,
+      "message": "That can just be\n\n```\nelse \n  ABI_PROTECTED_EXPORTS_FILE :\u003d $(wildcard $(srctree)/android/abi_gki_protected_exports_$(ARCH))\nendif\n```",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 5
+      },
+      "revId": "b4d8970e6fc0fd81f6b6698e663b90f99366b71f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deea87ba_105f25eb",
+        "filename": "scripts/gen_gki_modules_headers.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-03-22T12:58:44Z",
+      "side": 1,
+      "message": "likely this block can be reconsidered if using `CONFIG_UNUSED_KSYMS_WHITELIST` as an input instead (see other comment here).",
+      "range": {
+        "startLine": 51,
+        "startChar": 1,
+        "endLine": 70,
+        "endChar": 3
+      },
+      "revId": "b4d8970e6fc0fd81f6b6698e663b90f99366b71f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
