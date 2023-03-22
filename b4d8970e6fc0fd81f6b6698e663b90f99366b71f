@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f2d8928a_a2e077f9",
+        "filename": "kernel/module/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-03-22T22:54:05Z",
+      "side": 1,
+      "message": "\u003e This code assumes that all files matching a given pattern are actually to be considered as KMI symbol lists. While that is mostly true, the authoritative list is in BUILD.bazel (kmi_symbol_list + additional_kmi_symbol_lists).\n\nYes, true. But that\u0027s the assumptions everywhere since symbol lists have been introduced, isn\u0027t it? `build.sh` was using it; `kleaf` is also using that pattern, it served us well until we have `.stg` and others now. Even SAC doc also refers that partner symbols lists should be `abi_gki_aarch64_partner` here: https://source.android.com/docs/core/architecture/kernel/abi-monitor#updating-ack-abi-files\n\n\u003e The union of all symbol lists is passed as an argument to CONFIG_UNUSED_KSYMS_WHITELIST and should be accessible here.\n\nThis was using the raw list before; then something broke; and I tried `CONFIG_UNUSED_KSYMS_WHITELIST` at the time but it\u0027s not set during the `vmlinux` build but only during the `modules` build (based on prints from the Makefile) if I remember correctly. It was causing headers always empty i.e. there is no runtime symbol protection everything is allowed.\n\nIf `CONFIG_UNUSED_KSYMS_WHITELIST` is always guaranteed to point the correct list; and empty value always guaranteed to point that no runtime symbol protection is needed; then we can change this implementation to use `CONFIG_UNUSED_KSYMS_WHITELIST` as make target dependency directly. Config item needs to point to the list in all cases trim/no trim/strict/ no strict/ all cases as long as there is a single symbol list for an arch to make sure headers are non empty and runtime protection is enforced.\n\nI am fine dropping this until `kleaf` is changed to make `CONFIG_UNUSED_KSYMS_WHITELIST` available or forward fix. Let me know.",
+      "parentUuid": "7e3c5052_71987420",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 83
+      },
+      "revId": "b4d8970e6fc0fd81f6b6698e663b90f99366b71f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "21295d1a_14d995df",
         "filename": "kernel/module/Makefile",
         "patchSetId": 4
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8bf2904a_846cb959",
+        "filename": "kernel/module/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-03-22T22:54:05Z",
+      "side": 1,
+      "message": "Done. Probably should do the same for the ABI_SYMBOL_FILES; but since there is already open discussion there; skipping it. Any change here is 2-3 hours manual testing for me to check files are getting generated properly, change in source is triggering re-generation on few different targets; so I would like to do all at once rather than back and forth.",
+      "parentUuid": "21295d1a_14d995df",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 5
+      },
+      "revId": "b4d8970e6fc0fd81f6b6698e663b90f99366b71f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "deea87ba_105f25eb",
         "filename": "scripts/gen_gki_modules_headers.sh",
         "patchSetId": 4
@@ -60,6 +108,30 @@
       "writtenOn": "2023-03-22T12:58:44Z",
       "side": 1,
       "message": "likely this block can be reconsidered if using `CONFIG_UNUSED_KSYMS_WHITELIST` as an input instead (see other comment here).",
+      "range": {
+        "startLine": 51,
+        "startChar": 1,
+        "endLine": 70,
+        "endChar": 3
+      },
+      "revId": "b4d8970e6fc0fd81f6b6698e663b90f99366b71f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87484962_4e458421",
+        "filename": "scripts/gen_gki_modules_headers.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-03-22T22:54:05Z",
+      "side": 1,
+      "message": "No, not really. Raw symbol list pointed by `CONFIG_UNUSED_KSYMS_WHITELIST` is not in byte order sorted and input here is required byte order sorted for the binary search. Also, any text file here is a valid input for header generation purpose but may not be valid for binary search purpose; so irrespective I would like to preprocess the input here. Some one change the format of the file and may not remember about this or may not know about this.",
+      "parentUuid": "deea87ba_105f25eb",
       "range": {
         "startLine": 51,
         "startChar": 1,
