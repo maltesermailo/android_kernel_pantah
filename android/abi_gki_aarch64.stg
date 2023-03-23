@@ -293897,6 +293897,15 @@ elf_symbol {
   full_name: "__page_frag_cache_drain"
 }
 elf_symbol {
+  id: 0xe595f8f9
+  name: "__page_pinner_put_page"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe73b5b79
+  type_id: 0x11388634
+  full_name: "__page_pinner_put_page"
+}
+elf_symbol {
   id: 0xafa216a9
   name: "__pci_register_driver"
   is_defined: true
@@ -315960,6 +315969,15 @@ elf_symbol {
   full_name: "page_mapping"
 }
 elf_symbol {
+  id: 0x44e50ff8
+  name: "page_pinner_inited"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xacfe4142
+  type_id: 0x8e47c273
+  full_name: "page_pinner_inited"
+}
+elf_symbol {
   id: 0x3c537500
   name: "page_relinquish"
   is_defined: true
@@ -329437,6 +329455,10 @@ symbols {
     value: 0x057c7766
   }
   symbol {
+    key: "__page_pinner_put_page"
+    value: 0xe595f8f9
+  }
+  symbol {
     key: "__pci_register_driver"
     value: 0xafa216a9
   }
@@ -339243,6 +339265,10 @@ symbols {
   symbol {
     key: "page_mapping"
     value: 0x4f3e5356
+  }
+  symbol {
+    key: "page_pinner_inited"
+    value: 0x44e50ff8
   }
   symbol {
     key: "page_relinquish"
