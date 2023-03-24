@@ -737,6 +737,8 @@
       <elf-symbol name='__tty_insert_flip_char' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa93df441'/>
       <elf-symbol name='__typec_altmode_register_driver' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2d72e52a'/>
       <elf-symbol name='__udelay' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9e7d6bd0'/>
+      <elf-symbol name='__udp4_lib_lookup' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xcb2c111b'/>
+      <elf-symbol name='__udp6_lib_lookup' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x20c53042'/>
       <elf-symbol name='__uio_register_device' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x27c24536'/>
       <elf-symbol name='__unregister_chrdev' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6bc3fbc0'/>
       <elf-symbol name='__update_load_avg_blocked_se' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfbdf5c3e'/>
@@ -3538,6 +3540,7 @@
       <elf-symbol name='mii_ethtool_set_link_ksettings' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4dd2466b'/>
       <elf-symbol name='mii_link_ok' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x820f4b6c'/>
       <elf-symbol name='mii_nway_restart' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa782262b'/>
+      <elf-symbol name='minmax_running_max' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb911bb58'/>
       <elf-symbol name='mipi_dsi_attach' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfbd4e41c'/>
       <elf-symbol name='mipi_dsi_compression_mode' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x973741eb'/>
       <elf-symbol name='mipi_dsi_create_packet' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x81ce66fa'/>
@@ -5422,6 +5425,7 @@
       <elf-symbol name='tcp_reno_cong_avoid' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe052e0c3'/>
       <elf-symbol name='tcp_reno_ssthresh' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe76d32b'/>
       <elf-symbol name='tcp_reno_undo_cwnd' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x34dbb105'/>
+      <elf-symbol name='tcp_setsockopt' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x83714194'/>
       <elf-symbol name='tcp_slow_start' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa45b71e6'/>
       <elf-symbol name='tcp_unregister_congestion_control' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x227ff6bd'/>
       <elf-symbol name='tcpci_get_tcpm_port' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbe111953'/>
@@ -6956,6 +6960,7 @@
       <elf-symbol name='tracepoint_srcu' size='696' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbf451872'/>
       <elf-symbol name='ttm_bo_glob' size='200' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x685376c6'/>
       <elf-symbol name='tty_std_termios' size='44' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x67b27ec1'/>
+      <elf-symbol name='udp_table' size='24' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x95a67b07'/>
       <elf-symbol name='usb_debug_root' size='8' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbc6f9adc'/>
       <elf-symbol name='usb_hcd_pci_pm_ops' size='192' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x57b277fa'/>
       <elf-symbol name='usb_hcds_loaded' size='8' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc17515d7'/>
@@ -38232,6 +38237,7 @@
       </class-decl>
       <pointer-type-def type-id='6d7d60df' size-in-bits='64' id='515fa1af'/>
       <pointer-type-def type-id='194ac023' size-in-bits='64' id='516294a7'/>
+      <pointer-type-def type-id='0df12a77' size-in-bits='64' id='516bea2f'/>
       <pointer-type-def type-id='b0471e43' size-in-bits='64' id='5173cfa7'/>
       <function-type size-in-bits='64' id='5178491e'>
         <parameter type-id='77e79a4b'/>
@@ -38661,7 +38667,14 @@
         <parameter type-id='a42536cd'/>
         <return type-id='a42536cd'/>
       </function-type>
-      <class-decl name='raw_hashinfo' is-struct='yes' visibility='default' is-declaration-only='yes' id='51ee3086'/>
+      <class-decl name='raw_hashinfo' size-in-bits='16448' is-struct='yes' visibility='default' filepath='include/net/raw.h' line='35' column='1' id='51ee3086'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='lock' type-id='ac16795b' visibility='default' filepath='include/net/raw.h' line='36' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='ht' type-id='a7c26c7b' visibility='default' filepath='include/net/raw.h' line='37' column='1'/>
+        </data-member>
+      </class-decl>
       <pointer-type-def type-id='918531c2' size-in-bits='64' id='51f1236c'/>
       <pointer-type-def type-id='25c33493' size-in-bits='64' id='52006477'/>
       <pointer-type-def type-id='cd1fc343' size-in-bits='64' id='52009e4b'/>
@@ -69763,7 +69776,20 @@
           <var-decl name='private_value' type-id='7359adad' visibility='default' filepath='include/sound/control.h' line='56' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='udp_table' is-struct='yes' visibility='default' is-declaration-only='yes' id='9a516b13'/>
+      <class-decl name='udp_table' size-in-bits='192' is-struct='yes' visibility='default' filepath='include/net/udp.h' line='72' column='1' id='9a516b13'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='hash' type-id='9cc41107' visibility='default' filepath='include/net/udp.h' line='73' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='hash2' type-id='9cc41107' visibility='default' filepath='include/net/udp.h' line='74' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='128'>
+          <var-decl name='mask' type-id='f0981eeb' visibility='default' filepath='include/net/udp.h' line='75' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='160'>
+          <var-decl name='log' type-id='f0981eeb' visibility='default' filepath='include/net/udp.h' line='76' column='1'/>
+        </data-member>
+      </class-decl>
       <pointer-type-def type-id='6661a698' size-in-bits='64' id='9a537bbe'/>
       <pointer-type-def type-id='2bc6669b' size-in-bits='64' id='9a53a8a3'/>
       <function-type size-in-bits='64' id='9a54e634'>
@@ -70665,6 +70691,7 @@
       <array-type-def dimensions='1' type-id='00205383' size-in-bits='3072' id='9cc39ce1'>
         <subrange length='24' type-id='7ff19f0f' id='fdd3342b'/>
       </array-type-def>
+      <pointer-type-def type-id='fa07ab8f' size-in-bits='64' id='9cc41107'/>
       <class-decl name='snd_kcontrol_volatile' size-in-bits='128' is-struct='yes' visibility='default' filepath='include/sound/control.h' line='59' column='1' id='9cd807f4'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='owner' type-id='ed27ccc9' visibility='default' filepath='include/sound/control.h' line='60' column='1'/>
@@ -75654,6 +75681,9 @@
         </data-member>
       </union-decl>
       <typedef-decl name='iova_flush_cb' type-id='53072f48' filepath='include/linux/iova.h' line='41' column='1' id='a7bae79c'/>
+      <array-type-def dimensions='1' type-id='e151255a' size-in-bits='16384' id='a7c26c7b'>
+        <subrange length='256' type-id='7ff19f0f' id='36e5b9fa'/>
+      </array-type-def>
       <function-type size-in-bits='64' id='a7c3e9e0'>
         <parameter type-id='0c65b409'/>
         <parameter type-id='19c2251e'/>
@@ -113557,6 +113587,17 @@
       </class-decl>
       <pointer-type-def type-id='12506762' size-in-bits='64' id='fa013de0'/>
       <pointer-type-def type-id='91f77fa3' size-in-bits='64' id='fa058983'/>
+      <class-decl name='udp_hslot' size-in-bits='128' is-struct='yes' visibility='default' filepath='include/net/udp.h' line='58' column='1' id='fa07ab8f'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='head' type-id='e151255a' visibility='default' filepath='include/net/udp.h' line='59' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='count' type-id='95e97e5e' visibility='default' filepath='include/net/udp.h' line='60' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='96'>
+          <var-decl name='lock' type-id='fb4018a0' visibility='default' filepath='include/net/udp.h' line='61' column='1'/>
+        </data-member>
+      </class-decl>
       <array-type-def dimensions='2' type-id='8f048e17' size-in-bits='304' id='fa0a1f4c'>
         <subrange length='2' type-id='7ff19f0f' id='52efc4ef'/>
         <subrange length='19' type-id='7ff19f0f' id='448ee30f'/>
@@ -121250,6 +121291,30 @@
       <function-decl name='__udelay' mangled-name='__udelay' filepath='arch/arm64/lib/delay.c' line='49' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__udelay'>
         <parameter type-id='7359adad' name='usecs' filepath='arch/arm64/lib/delay.c' line='49' column='1'/>
         <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='__udp4_lib_lookup' mangled-name='__udp4_lib_lookup' filepath='net/ipv4/udp.c' line='486' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__udp4_lib_lookup'>
+        <parameter type-id='a2bff676' name='net' filepath='net/ipv4/udp.c' line='486' column='1'/>
+        <parameter type-id='78a133c2' name='saddr' filepath='net/ipv4/udp.c' line='486' column='1'/>
+        <parameter type-id='84a5c3d4' name='sport' filepath='net/ipv4/udp.c' line='487' column='1'/>
+        <parameter type-id='78a133c2' name='daddr' filepath='net/ipv4/udp.c' line='487' column='1'/>
+        <parameter type-id='84a5c3d4' name='dport' filepath='net/ipv4/udp.c' line='487' column='1'/>
+        <parameter type-id='95e97e5e' name='dif' filepath='net/ipv4/udp.c' line='487' column='1'/>
+        <parameter type-id='95e97e5e' name='sdif' filepath='net/ipv4/udp.c' line='488' column='1'/>
+        <parameter type-id='115daa23' name='udptable' filepath='net/ipv4/udp.c' line='488' column='1'/>
+        <parameter type-id='0fbf3cfd' name='skb' filepath='net/ipv4/udp.c' line='488' column='1'/>
+        <return type-id='f772df6d'/>
+      </function-decl>
+      <function-decl name='__udp6_lib_lookup' mangled-name='__udp6_lib_lookup' filepath='net/ipv6/udp.c' line='218' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__udp6_lib_lookup'>
+        <parameter type-id='a2bff676' name='net' filepath='net/ipv6/udp.c' line='218' column='1'/>
+        <parameter type-id='fea9c20b' name='saddr' filepath='net/ipv6/udp.c' line='219' column='1'/>
+        <parameter type-id='84a5c3d4' name='sport' filepath='net/ipv6/udp.c' line='219' column='1'/>
+        <parameter type-id='fea9c20b' name='daddr' filepath='net/ipv6/udp.c' line='220' column='1'/>
+        <parameter type-id='84a5c3d4' name='dport' filepath='net/ipv6/udp.c' line='220' column='1'/>
+        <parameter type-id='95e97e5e' name='dif' filepath='net/ipv6/udp.c' line='221' column='1'/>
+        <parameter type-id='95e97e5e' name='sdif' filepath='net/ipv6/udp.c' line='221' column='1'/>
+        <parameter type-id='115daa23' name='udptable' filepath='net/ipv6/udp.c' line='221' column='1'/>
+        <parameter type-id='0fbf3cfd' name='skb' filepath='net/ipv6/udp.c' line='222' column='1'/>
+        <return type-id='f772df6d'/>
       </function-decl>
       <function-decl name='__uio_register_device' mangled-name='__uio_register_device' filepath='drivers/uio/uio.c' line='916' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__uio_register_device'>
         <parameter type-id='2730d015' name='owner' filepath='drivers/uio/uio.c' line='916' column='1'/>
@@ -135947,6 +136012,13 @@
         <parameter type-id='f0150b1d' name='mii' filepath='drivers/net/mii.c' line='459' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='minmax_running_max' mangled-name='minmax_running_max' filepath='lib/win_minmax.c' line='67' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='minmax_running_max'>
+        <parameter type-id='516bea2f' name='m' filepath='lib/win_minmax.c' line='67' column='1'/>
+        <parameter type-id='19c2251e' name='win' filepath='lib/win_minmax.c' line='67' column='1'/>
+        <parameter type-id='19c2251e' name='t' filepath='lib/win_minmax.c' line='67' column='1'/>
+        <parameter type-id='19c2251e' name='meas' filepath='lib/win_minmax.c' line='67' column='1'/>
+        <return type-id='19c2251e'/>
+      </function-decl>
       <function-decl name='mipi_dsi_attach' mangled-name='mipi_dsi_attach' filepath='drivers/gpu/drm/drm_mipi_dsi.c' line='323' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='mipi_dsi_attach'>
         <parameter type-id='182be7cc' name='dsi' filepath='drivers/gpu/drm/drm_mipi_dsi.c' line='323' column='1'/>
         <return type-id='95e97e5e'/>
@@ -145629,6 +145701,14 @@
         <parameter type-id='f772df6d' name='sk' filepath='net/ipv4/tcp_cong.c' line='463' column='1'/>
         <return type-id='19c2251e'/>
       </function-decl>
+      <function-decl name='tcp_setsockopt' mangled-name='tcp_setsockopt' filepath='net/ipv4/tcp.c' line='3427' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='tcp_setsockopt'>
+        <parameter type-id='f772df6d' name='sk' filepath='net/ipv4/tcp.c' line='3427' column='1'/>
+        <parameter type-id='95e97e5e' name='level' filepath='net/ipv4/tcp.c' line='3427' column='1'/>
+        <parameter type-id='95e97e5e' name='optname' filepath='net/ipv4/tcp.c' line='3427' column='1'/>
+        <parameter type-id='298d29fd' name='optval' filepath='net/ipv4/tcp.c' line='3427' column='1'/>
+        <parameter type-id='f0981eeb' name='optlen' filepath='net/ipv4/tcp.c' line='3428' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='tcp_slow_start' mangled-name='tcp_slow_start' filepath='net/ipv4/tcp_cong.c' line='396' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='tcp_slow_start'>
         <parameter type-id='de885ea5' name='tp' filepath='net/ipv4/tcp_cong.c' line='396' column='1'/>
         <parameter type-id='19c2251e' name='acked' filepath='net/ipv4/tcp_cong.c' line='396' column='1'/>
@@ -146768,6 +146848,7 @@
         <parameter type-id='78a133c2' name='dst' filepath='net/ipv4/udp.c' line='814' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <var-decl name='udp_table' type-id='9a516b13' mangled-name='udp_table' visibility='default' filepath='net/ipv4/udp.c' line='121' column='1' elf-symbol-id='udp_table'/>
       <function-decl name='ufshcd_alloc_host' mangled-name='ufshcd_alloc_host' filepath='drivers/scsi/ufs/ufshcd.c' line='9196' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='ufshcd_alloc_host'>
         <parameter type-id='fa0b179b' name='dev' filepath='drivers/scsi/ufs/ufshcd.c' line='9196' column='1'/>
         <parameter type-id='f38ff799' name='hba_handle' filepath='drivers/scsi/ufs/ufshcd.c' line='9196' column='1'/>
