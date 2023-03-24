@@ -336230,6 +336230,15 @@ elf_symbol {
   full_name: "gpiochip_unlock_as_irq"
 }
 elf_symbol {
+  id: 0x4825b485
+  name: "gpiod_cansleep"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa8cf0e9c
+  type_id: 0x901afa25
+  full_name: "gpiod_cansleep"
+}
+elf_symbol {
   id: 0xa448ac51
   name: "gpiod_count"
   is_defined: true
@@ -337146,6 +337155,15 @@ elf_symbol {
   crc: 0x0a0acfa3
   type_id: 0x94a6b558
   full_name: "i2c_add_numbered_adapter"
+}
+elf_symbol {
+  id: 0x01f2c038
+  name: "i2c_bit_add_numbered_bus"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd5697baa
+  type_id: 0x94a6b558
+  full_name: "i2c_bit_add_numbered_bus"
 }
 elf_symbol {
   id: 0x949ba632
@@ -371517,6 +371535,10 @@ symbols {
     value: 0x77a0ab63
   }
   symbol {
+    key: "gpiod_cansleep"
+    value: 0x4825b485
+  }
+  symbol {
     key: "gpiod_count"
     value: 0xa448ac51
   }
@@ -371923,6 +371945,10 @@ symbols {
   symbol {
     key: "i2c_add_numbered_adapter"
     value: 0x58fde223
+  }
+  symbol {
+    key: "i2c_bit_add_numbered_bus"
+    value: 0x01f2c038
   }
   symbol {
     key: "i2c_bus_type"
