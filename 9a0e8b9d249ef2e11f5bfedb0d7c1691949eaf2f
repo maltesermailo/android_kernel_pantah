@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4a528d90_d4bbc797",
+        "filename": "android/abi_gki_aarch64_oplus",
+        "patchSetId": 1
+      },
+      "lineNbr": 1587,
+      "author": {
+        "id": 1872346
+      },
+      "writtenOn": "2023-03-27T02:26:28Z",
+      "side": 1,
+      "message": "minmax_running_max is in the file /lib/win_minmax.c , this is a common lib function, in fact not related to network.",
+      "parentUuid": "6c0eefe4_96cbe539",
+      "range": {
+        "startLine": 1587,
+        "startChar": 2,
+        "endLine": 1587,
+        "endChar": 20
+      },
+      "revId": "9a0e8b9d249ef2e11f5bfedb0d7c1691949eaf2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1c484685_d3072b1b",
         "filename": "android/abi_gki_aarch64_oplus",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2023-03-24T14:51:39Z",
       "side": 1,
       "message": "also only for core networking code, why is this needed?",
+      "range": {
+        "startLine": 2659,
+        "startChar": 2,
+        "endLine": 2659,
+        "endChar": 16
+      },
+      "revId": "9a0e8b9d249ef2e11f5bfedb0d7c1691949eaf2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3df7c690_9f0fa912",
+        "filename": "android/abi_gki_aarch64_oplus",
+        "patchSetId": 1
+      },
+      "lineNbr": 2659,
+      "author": {
+        "id": 1872346
+      },
+      "writtenOn": "2023-03-27T02:26:28Z",
+      "side": 1,
+      "message": "Our module is not a driver, is a module related to network function. And the tcp_setsockopt is export to symbol list in original kernel, and i think it can be used by network-relation-module.",
+      "parentUuid": "1c484685_d3072b1b",
       "range": {
         "startLine": 2659,
         "startChar": 2,
