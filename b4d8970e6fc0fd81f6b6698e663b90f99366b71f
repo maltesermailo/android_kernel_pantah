@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5ef9650b_36c178d3",
+        "filename": "kernel/module/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-03-28T09:01:54Z",
+      "side": 1,
+      "message": "| Yes, true. But that\u0027s the assumptions everywhere since symbol lists have been introduced, isn\u0027t it?\n\nWhat is true is that the pattern for symbol lists for arm64 is `abi_gki_aarch64_\u003cpartner\u003e`. Yet, which symbol lists are considered as inputs for the build has always been a defined list: `KMI_SYMBOL_LIST` and `ADDITIONAL_KMI_SYMBOL_LISTS` (https://android.googlesource.com/kernel/build/+/refs/heads/master/build.sh#106). Similarly for Kleaf (https://android.googlesource.com/kernel/build/+/refs/heads/master/kleaf/impl/kernel_build.bzl#274). Sometimes inputs are glob\u0027ed and indeed we do that currently while we transition from build.config Kleaf to avoid the double work, but that is not guaranteed and actually discouraged.\n\nSo, what is the problem if some of the code assumes all files are relevant and some of the code is explicit about it? In the explicit definition, there will be a behaviour change between sandboxed builds (that only see what is declared) and confg\u003dlocal builds (that see everything in the source tree). Globbing leads to different build results in those cases.\n\nCan you please open a bug and provide more context for why `CONFIG_UNUSED_KSYMS_WHITELIST` did not work for you? I would really like to understand and rather solve the issue at its core. And that is not a Kleaf issue per se. `CONFIG_UNUSED_KSYMS_WHITELIST` is a Kconfig option made available to the kernel build and other consumers are using it as well (the kernel build itself for trimming symbols). Let\u0027s figure out why this is not accessible where you need it to be.",
+      "parentUuid": "f2d8928a_a2e077f9",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 83
+      },
+      "revId": "b4d8970e6fc0fd81f6b6698e663b90f99366b71f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "21295d1a_14d995df",
         "filename": "kernel/module/Makefile",
         "patchSetId": 4
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "No, not really. Raw symbol list pointed by `CONFIG_UNUSED_KSYMS_WHITELIST` is not in byte order sorted and input here is required byte order sorted for the binary search. Also, any text file here is a valid input for header generation purpose but may not be valid for binary search purpose; so irrespective I would like to preprocess the input here. Some one change the format of the file and may not remember about this or may not know about this.",
       "parentUuid": "deea87ba_105f25eb",
+      "range": {
+        "startLine": 51,
+        "startChar": 1,
+        "endLine": 70,
+        "endChar": 3
+      },
+      "revId": "b4d8970e6fc0fd81f6b6698e663b90f99366b71f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e512dd4_f14cedfa",
+        "filename": "scripts/gen_gki_modules_headers.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-03-28T09:01:54Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "87484962_4e458421",
       "range": {
         "startLine": 51,
         "startChar": 1,
