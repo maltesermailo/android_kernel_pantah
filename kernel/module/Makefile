@@ -40,8 +40,8 @@ include/generated/gki_module_unprotected.h: $(ALL_KMI_SYMBOLS) \
 	"$(srctree)" \
 	$(ALL_KMI_SYMBOLS)
 
-# Generate symbol list with union of all symbol list for arm64; empty for others
-$(ALL_KMI_SYMBOLS): $(if $(filter arm64,$(ARCH)),$(wildcard $(srctree)/android/abi_gki_aarch64_*),)
+# Copy raw KMI symbol list from CONFIG_UNUSED_KSYMS_WHITELIST if set else empty
+$(ALL_KMI_SYMBOLS): $(CONFIG_UNUSED_KSYMS_WHITELIST)
 	$(if $(strip $^),cat $^ > $(ALL_KMI_SYMBOLS), echo "" > $(ALL_KMI_SYMBOLS))
 
 # ABI protected exports list file specific to ARCH if exists else empty
