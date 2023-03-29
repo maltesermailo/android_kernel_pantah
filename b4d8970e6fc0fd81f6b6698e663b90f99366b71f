@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8cdbd1fb_eab5b812",
+        "filename": "kernel/module/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-03-29T03:25:29Z",
+      "side": 1,
+      "message": "Here is the past discussion on this line: https://b.corp.google.com/issues/262793986#comment13\n\nI tested it again and now it works in all cases for aarch64 but not for the x86_64\nbefore it wasn\u0027t even working for aarch64. This is the part I don\u0027t really like as things may changed on `kleaf` side and we will not be able to know if headers are getting generated empty and everything will be accessible at the runtime.\n\nI am making this CL exclusive for the protected exports and adding the new one (http://aosp/2512578) for the whitelist symbols to make it easy to cherry pick other branches as well as revert; if required. Since there is no conflict for the protected exports part; it also helps unblock this one while we figure out the other one when http://b/275648361 is resolved.",
+      "parentUuid": "5ef9650b_36c178d3",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 83
+      },
+      "revId": "b4d8970e6fc0fd81f6b6698e663b90f99366b71f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "21295d1a_14d995df",
         "filename": "kernel/module/Makefile",
         "patchSetId": 4
@@ -109,6 +133,30 @@
       "side": 1,
       "message": "Done. Probably should do the same for the ABI_SYMBOL_FILES; but since there is already open discussion there; skipping it. Any change here is 2-3 hours manual testing for me to check files are getting generated properly, change in source is triggering re-generation on few different targets; so I would like to do all at once rather than back and forth.",
       "parentUuid": "21295d1a_14d995df",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 5
+      },
+      "revId": "b4d8970e6fc0fd81f6b6698e663b90f99366b71f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54e0cc4e_08d5870c",
+        "filename": "kernel/module/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-03-29T03:25:29Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "8bf2904a_846cb959",
       "range": {
         "startLine": 55,
         "startChar": 0,
