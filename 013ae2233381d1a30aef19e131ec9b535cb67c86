@@ -16,6 +16,40 @@
       "message": "Cherry Pick with rework due to `kernel/module/Makefile` (14-6.1) to `kernel/Makefile` (14-5.15).",
       "revId": "013ae2233381d1a30aef19e131ec9b535cb67c86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be95ab6f_f58b1c38",
+        "filename": "kernel/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-03-31T17:35:14Z",
+      "side": 1,
+      "message": "Kind of annoying that we have to special case arm64, but I agree that since we already use \"aarch64\" in filenames, we need to do something special. Could we instead collapse the ifeq/else cases by doing a s/arm64/aarch64/ string substitution (which wouldn\u0027t affect other archs)? I\u0027m not a Makefile expert, but I think there is a `subst` command that might work.",
+      "revId": "013ae2233381d1a30aef19e131ec9b535cb67c86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dedd9a4b_8fa2729d",
+        "filename": "kernel/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-03-31T17:35:14Z",
+      "side": 1,
+      "message": "doesn\u0027t \"$\u003c\" still do the right thing here? Is this change needed?",
+      "revId": "013ae2233381d1a30aef19e131ec9b535cb67c86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
