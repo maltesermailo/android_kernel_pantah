@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4aaddebc_ab7f9403",
+        "filename": "kernel/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-03-31T18:50:06Z",
+      "side": 1,
+      "message": "Yes, `patsub` will work until we have one more architecture where we need to do this. Since we can control for new arch from the start how it\u0027s named; it shouldn\u0027t be an issue.\n\nEither way, since this is a cherry pick; I\u0027ll do it as an incremental CL; if that\u0027s the preferred way.",
+      "parentUuid": "be95ab6f_f58b1c38",
+      "revId": "013ae2233381d1a30aef19e131ec9b535cb67c86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dedd9a4b_8fa2729d",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-03-31T17:35:14Z",
       "side": 1,
       "message": "doesn\u0027t \"$\u003c\" still do the right thing here? Is this change needed?",
+      "revId": "013ae2233381d1a30aef19e131ec9b535cb67c86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd32379a_1ed7d89b",
+        "filename": "kernel/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-03-31T18:50:06Z",
+      "side": 1,
+      "message": "No. `$\u003c` expands to first dependency and any arch except `arm64` and `aarch64`, `ABI_PROTECTED_EXPORTS_FILE` expands to empty that makes `$\u003c` \u003d `$(srctree)/scripts/gen_gki_modules_headers.sh` which is incorrect as script will be taken as an input list of symbols by the script and that\u0027s wrong as in that case an empty header needs to generated.",
+      "parentUuid": "dedd9a4b_8fa2729d",
       "revId": "013ae2233381d1a30aef19e131ec9b535cb67c86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
