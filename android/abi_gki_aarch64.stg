@@ -1,4 +1,4 @@
-root_id: 0x25a8b173
+root_id: 0x84ea5130
 void {
   id: 0x48b5725f
 }
@@ -292962,6 +292962,11 @@ function {
   parameter_id: 0x1fa7df7c
 }
 function {
+  id: 0x2d456d1f
+  return_type_id: 0x37cc86e2
+  parameter_id: 0x0cc78943
+}
+function {
   id: 0x2d5eecc4
   return_type_id: 0x18456730
   parameter_id: 0x1d19a9d5
@@ -349971,6 +349976,15 @@ elf_symbol {
   full_name: "of_icc_get"
 }
 elf_symbol {
+  id: 0x08284f40
+  name: "of_icc_get_from_provider"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x091669bc
+  type_id: 0x2d456d1f
+  full_name: "of_icc_get_from_provider"
+}
+elf_symbol {
   id: 0xbd1c7f26
   name: "of_icc_xlate_onecell"
   is_defined: true
@@ -367573,7 +367587,7 @@ elf_symbol {
   full_name: "zs_unmap_object"
 }
 symbols {
-  id: 0x25a8b173
+  id: 0x84ea5130
   symbol {
     key: "I_BDEV"
     value: 0x2dddbe52
@@ -380929,6 +380943,10 @@ symbols {
   symbol {
     key: "of_icc_get"
     value: 0x453bec03
+  }
+  symbol {
+    key: "of_icc_get_from_provider"
+    value: 0x08284f40
   }
   symbol {
     key: "of_icc_xlate_onecell"
