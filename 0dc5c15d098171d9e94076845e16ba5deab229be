@@ -19,6 +19,26 @@
       "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/98c25ead5eda5e9d41abe57839ad3e8caf19500c) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d98c25ead5eda5e9d41abe57839ad3e8caf19500c)\n\n```\n      ## arch/x86/kvm/vmx/vmx.c ##\n    -@@ arch/x86/kvm/vmx/vmx.c: void vmx_update_cpu_dirty_logging(struct kvm_vcpu *vcpu)\n    +@@ arch/x86/kvm/vmx/vmx.c: static int vmx_pre_block(struct kvm_vcpu *vcpu)\n    + \tif (pi_pre_block(vcpu))\n    + \t\treturn 1;\n      \n    - static int vmx_pre_block(struct kvm_vcpu *vcpu)\n    - {\n     -\tif (kvm_lapic_hv_timer_in_use(vcpu))\n     -\t\tkvm_lapic_switch_to_sw_timer(vcpu);\n     -\n    @@ arch/x86/kvm/vmx/vmx.c: void vmx_update_cpu_dirty_logging(struct kvm_vcpu *vcpu)\n      {\n     -\tif (kvm_x86_ops.set_hv_timer)\n     -\t\tkvm_lapic_switch_to_hv_timer(vcpu);\n    -+\n    +-\n    + \tpi_post_block(vcpu);\n      }\n      \n    - static void vmx_setup_mce(struct kvm_vcpu *vcpu)\n     \n      ## arch/x86/kvm/x86.c ##\n     @@ arch/x86/kvm/x86.c: out:\n    @@ arch/x86/kvm/x86.c: out:\n     +\t\t\tkvm_lapic_switch_to_sw_timer(vcpu);\n     +\n      \t\tsrcu_read_unlock(\u0026kvm-\u003esrcu, vcpu-\u003esrcu_idx);\n    - \t\tif (vcpu-\u003earch.mp_state \u003d\u003d KVM_MP_STATE_HALTED)\n    - \t\t\tkvm_vcpu_halt(vcpu);\n    -@@ arch/x86/kvm/x86.c: static inline int vcpu_block(struct kvm *kvm, struct kvm_vcpu *vcpu)\n    - \t\t\tkvm_vcpu_block(vcpu);\n    + \t\tkvm_vcpu_block(vcpu);\n      \t\tvcpu-\u003esrcu_idx \u003d srcu_read_lock(\u0026kvm-\u003esrcu);\n      \n     +\t\tif (hv_timer)\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 521474027 android-build.ayeaye-python-dispatcher_20230403.05_p0",
       "revId": "0dc5c15d098171d9e94076845e16ba5deab229be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000042106440",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2525135?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "60a6fc3c_123b500a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-04-05T17:11:49Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/98c25ead5eda5e9d41abe57839ad3e8caf19500c) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d98c25ead5eda5e9d41abe57839ad3e8caf19500c)\n\n```\n      ## arch/x86/kvm/vmx/vmx.c ##\n    -@@ arch/x86/kvm/vmx/vmx.c: void vmx_update_cpu_dirty_logging(struct kvm_vcpu *vcpu)\n    +@@ arch/x86/kvm/vmx/vmx.c: static int vmx_pre_block(struct kvm_vcpu *vcpu)\n    + \tif (pi_pre_block(vcpu))\n    + \t\treturn 1;\n      \n    - static int vmx_pre_block(struct kvm_vcpu *vcpu)\n    - {\n     -\tif (kvm_lapic_hv_timer_in_use(vcpu))\n     -\t\tkvm_lapic_switch_to_sw_timer(vcpu);\n     -\n    @@ arch/x86/kvm/vmx/vmx.c: void vmx_update_cpu_dirty_logging(struct kvm_vcpu *vcpu)\n      {\n     -\tif (kvm_x86_ops.set_hv_timer)\n     -\t\tkvm_lapic_switch_to_hv_timer(vcpu);\n    -+\n    +-\n    + \tpi_post_block(vcpu);\n      }\n      \n    - static void vmx_setup_mce(struct kvm_vcpu *vcpu)\n     \n      ## arch/x86/kvm/x86.c ##\n     @@ arch/x86/kvm/x86.c: out:\n    @@ arch/x86/kvm/x86.c: out:\n     +\t\t\tkvm_lapic_switch_to_sw_timer(vcpu);\n     +\n      \t\tsrcu_read_unlock(\u0026kvm-\u003esrcu, vcpu-\u003esrcu_idx);\n    - \t\tif (vcpu-\u003earch.mp_state \u003d\u003d KVM_MP_STATE_HALTED)\n    - \t\t\tkvm_vcpu_halt(vcpu);\n    -@@ arch/x86/kvm/x86.c: static inline int vcpu_block(struct kvm *kvm, struct kvm_vcpu *vcpu)\n    - \t\t\tkvm_vcpu_block(vcpu);\n    + \t\tkvm_vcpu_block(vcpu);\n      \t\tvcpu-\u003esrcu_idx \u003d srcu_read_lock(\u0026kvm-\u003esrcu);\n      \n     +\t\tif (hv_timer)\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 521474027 android-build.ayeaye-python-dispatcher_20230403.05_p0",
+      "revId": "0dc5c15d098171d9e94076845e16ba5deab229be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
