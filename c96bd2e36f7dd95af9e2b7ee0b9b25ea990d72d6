@@ -34,6 +34,24 @@
       "parentUuid": "5cc789eb_d65baaa3",
       "revId": "c96bd2e36f7dd95af9e2b7ee0b9b25ea990d72d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eab6f07f_f50c2fc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021676
+      },
+      "writtenOn": "2023-04-06T15:14:12Z",
+      "side": 1,
+      "message": "The compiler is doing the right thing, it\u0027s because `sve_cond_update_zcr_vq` is defined as `do {} while (0)` if `CONFIG_ARM64_SVE` is not defined thus the variable becomes unused.",
+      "parentUuid": "c5aaf3c3_210bab23",
+      "revId": "c96bd2e36f7dd95af9e2b7ee0b9b25ea990d72d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
