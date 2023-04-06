@@ -52,6 +52,24 @@
       "parentUuid": "c5aaf3c3_210bab23",
       "revId": "c96bd2e36f7dd95af9e2b7ee0b9b25ea990d72d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec61761a_496c1064",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2023-04-06T15:27:23Z",
+      "side": 1,
+      "message": "CONFIG_ARM64_SVE should gate the code at compile-time via system_supports_sve(). \n\nEven code like the following triggers an unused variable error:\n\nif (0) {\n    int x;\n}\n\nwhich to me seems weird.\n\nAlso, we are setting -Wno-unused-but-set-variable, and even with this flag code such as the following triggers a warning\n\nif (0) {\n   int x \u003d 0;\n}\n\nwhereas code as the following does not trigger a warning with -Wno-unused-but-set-variable:\n\nif (0) {\n   int x;\n   \n   x \u003d 0;\n}\n\nAnyway, this patch should get rid of this warning/error.",
+      "parentUuid": "eab6f07f_f50c2fc6",
+      "revId": "c96bd2e36f7dd95af9e2b7ee0b9b25ea990d72d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
