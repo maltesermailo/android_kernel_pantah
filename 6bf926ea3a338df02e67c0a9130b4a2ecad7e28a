@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bede5af4_4278dde4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2023-04-07T15:16:41Z",
+      "side": 1,
+      "message": "I don\u0027t really see the point in this backport series as it pertains to Android.\n\nAFAIK this was designed for single high throughput flows on 100+ gbps server nics.\n\nI doubt it will provide all that much benefit at the speeds reachable on Android devices.\n\nDo you have some benchmarks with and without this to show the benefit?\n\nFurther at least the ipv6 version of this has all sorts of compatibility consequences (incl. needing to add bpf support for ipv6 jumbograms and the like).  I\u0027m not sure if the ipv4 version won\u0027t run into similar problems.",
+      "revId": "6bf926ea3a338df02e67c0a9130b4a2ecad7e28a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
