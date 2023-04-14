@@ -784,6 +784,7 @@
       <elf-symbol name='__traceiter_workqueue_execute_end' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfd7ca165'/>
       <elf-symbol name='__traceiter_workqueue_execute_start' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x6b629b42'/>
       <elf-symbol name='__traceiter_xdp_exception' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa43592f6'/>
+      <elf-symbol name='__traceiter_xhci_dbg_quirks' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4c549b36'/>
       <elf-symbol name='__traceiter_xhci_urb_giveback' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x640c185c'/>
       <elf-symbol name='__tty_alloc_driver' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe66b186b'/>
       <elf-symbol name='__tty_insert_flip_char' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc5a003b1'/>
@@ -4313,6 +4314,7 @@
       <elf-symbol name='pci_clear_master' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb218eed'/>
       <elf-symbol name='pci_clear_mwi' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb95b9354'/>
       <elf-symbol name='pci_common_swizzle' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x46fc27bc'/>
+      <elf-symbol name='pci_d3cold_disable' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x713ef178'/>
       <elf-symbol name='pci_dev_get' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7bded13e'/>
       <elf-symbol name='pci_dev_present' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7483dc59'/>
       <elf-symbol name='pci_dev_put' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x24e336ed'/>
@@ -6286,6 +6288,7 @@
       <elf-symbol name='usb_driver_release_interface' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7f53d4b6'/>
       <elf-symbol name='usb_driver_set_configuration' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x86a7aed4'/>
       <elf-symbol name='usb_enable_autosuspend' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd8208070'/>
+      <elf-symbol name='usb_enable_intel_xhci_ports' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5c345a24'/>
       <elf-symbol name='usb_ep_alloc_request' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x880d48e4'/>
       <elf-symbol name='usb_ep_autoconfig' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1a36c080'/>
       <elf-symbol name='usb_ep_clear_halt' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9370b708'/>
@@ -6825,7 +6828,9 @@
       <elf-symbol name='xhci_alloc_command' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x405fb948'/>
       <elf-symbol name='xhci_alloc_erst' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf9963727'/>
       <elf-symbol name='xhci_check_bandwidth' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x21f0caf8'/>
+      <elf-symbol name='xhci_dbg_trace' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf61f4e72'/>
       <elf-symbol name='xhci_drop_endpoint' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7dd96c6'/>
+      <elf-symbol name='xhci_ext_cap_init' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x714116b7'/>
       <elf-symbol name='xhci_free_command' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc1cb2268'/>
       <elf-symbol name='xhci_free_erst' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb2fd34e2'/>
       <elf-symbol name='xhci_gen_setup' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xcd3e4d29'/>
@@ -6839,6 +6844,7 @@
       <elf-symbol name='xhci_ring_cmd_db' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x266a7026'/>
       <elf-symbol name='xhci_ring_free' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x498e7db'/>
       <elf-symbol name='xhci_run' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbfa0be83'/>
+      <elf-symbol name='xhci_shutdown' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8f51e920'/>
       <elf-symbol name='xhci_suspend' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2f897687'/>
       <elf-symbol name='xhci_trb_virt_to_dma' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x83e71096'/>
       <elf-symbol name='xp_alloc' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc9bca714'/>
@@ -7340,6 +7346,7 @@
       <elf-symbol name='__tracepoint_workqueue_execute_end' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xecbfa711'/>
       <elf-symbol name='__tracepoint_workqueue_execute_start' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8db61368'/>
       <elf-symbol name='__tracepoint_xdp_exception' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8b7a698b'/>
+      <elf-symbol name='__tracepoint_xhci_dbg_quirks' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1efaa06f'/>
       <elf-symbol name='__tracepoint_xhci_urb_giveback' size='72' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x22847ba7'/>
       <elf-symbol name='_ctype' size='256' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x11089ac7'/>
       <elf-symbol name='_totalram_pages' size='8' type='object-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x944375db'/>
@@ -19992,6 +19999,10 @@
           <var-decl name='android_vendor_data4' type-id='91ce1af9' visibility='default' filepath='include/net/cfg80211.h' line='448' column='1'/>
         </data-member>
       </class-decl>
+      <function-type size-in-bits='64' id='1fff71f5'>
+        <parameter type-id='3b5c2208'/>
+        <return type-id='48b5725f'/>
+      </function-type>
       <function-type size-in-bits='64' id='20047fcf'>
         <parameter type-id='b26c7631'/>
         <parameter type-id='95e97e5e'/>
@@ -44723,6 +44734,7 @@
         <enumerator name='VDSO_CLOCKMODE_MAX' value='3'/>
         <enumerator name='VDSO_CLOCKMODE_TIMENS' value='2147483647'/>
       </enum-decl>
+      <pointer-type-def type-id='1fff71f5' size-in-bits='64' id='5c3e13a1'/>
       <enum-decl name='hdmi_quantization_range' filepath='include/linux/hdmi.h' line='131' column='1' id='5c444b2c'>
         <underlying-type type-id='9cac1fee'/>
         <enumerator name='HDMI_QUANTIZATION_RANGE_DEFAULT' value='0'/>
@@ -130686,6 +130698,11 @@
         <parameter type-id='19c2251e' name='act' filepath='include/trace/events/xdp.h' line='28' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='__traceiter_xhci_dbg_quirks' mangled-name='__traceiter_xhci_dbg_quirks' filepath='drivers/usb/host/./xhci-trace.h' line='48' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__traceiter_xhci_dbg_quirks'>
+        <parameter type-id='eaa32e2f' name='__data' filepath='drivers/usb/host/./xhci-trace.h' line='48' column='1'/>
+        <parameter type-id='3b5c2208' name='vaf' filepath='drivers/usb/host/./xhci-trace.h' line='48' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='__traceiter_xhci_urb_giveback' mangled-name='__traceiter_xhci_urb_giveback' filepath='drivers/usb/host/./xhci-trace.h' line='307' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__traceiter_xhci_urb_giveback'>
         <parameter type-id='eaa32e2f' name='__data' filepath='drivers/usb/host/./xhci-trace.h' line='307' column='1'/>
         <parameter type-id='ab85b8f2' name='urb' filepath='drivers/usb/host/./xhci-trace.h' line='307' column='1'/>
@@ -131140,6 +131157,7 @@
       <var-decl name='__tracepoint_workqueue_execute_end' type-id='4ca0c298' mangled-name='__tracepoint_workqueue_execute_end' visibility='default' filepath='include/trace/events/workqueue.h' line='108' column='1' elf-symbol-id='__tracepoint_workqueue_execute_end'/>
       <var-decl name='__tracepoint_workqueue_execute_start' type-id='4ca0c298' mangled-name='__tracepoint_workqueue_execute_start' visibility='default' filepath='include/trace/events/workqueue.h' line='82' column='1' elf-symbol-id='__tracepoint_workqueue_execute_start'/>
       <var-decl name='__tracepoint_xdp_exception' type-id='4ca0c298' mangled-name='__tracepoint_xdp_exception' visibility='default' filepath='include/trace/events/xdp.h' line='28' column='1' elf-symbol-id='__tracepoint_xdp_exception'/>
+      <var-decl name='__tracepoint_xhci_dbg_quirks' type-id='4ca0c298' mangled-name='__tracepoint_xhci_dbg_quirks' visibility='default' filepath='drivers/usb/host/./xhci-trace.h' line='48' column='1' elf-symbol-id='__tracepoint_xhci_dbg_quirks'/>
       <var-decl name='__tracepoint_xhci_urb_giveback' type-id='4ca0c298' mangled-name='__tracepoint_xhci_urb_giveback' visibility='default' filepath='drivers/usb/host/./xhci-trace.h' line='307' column='1' elf-symbol-id='__tracepoint_xhci_urb_giveback'/>
       <function-decl name='__tty_alloc_driver' mangled-name='__tty_alloc_driver' filepath='drivers/tty/tty_io.c' line='3350' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__tty_alloc_driver'>
         <parameter type-id='f0981eeb' name='lines' filepath='drivers/tty/tty_io.c' line='3350' column='1'/>
@@ -149659,6 +149677,10 @@
         <parameter type-id='8bff8096' name='pinp' filepath='drivers/pci/pci.c' line='3845' column='1'/>
         <return type-id='f9b06939'/>
       </function-decl>
+      <function-decl name='pci_d3cold_disable' mangled-name='pci_d3cold_disable' filepath='drivers/pci/pci.c' line='3065' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pci_d3cold_disable'>
+        <parameter type-id='85196e3f' name='dev' filepath='drivers/pci/pci.c' line='3065' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
       <function-decl name='pci_dev_get' mangled-name='pci_dev_get' filepath='drivers/pci/pci-driver.c' line='1491' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='pci_dev_get'>
         <parameter type-id='85196e3f' name='dev' filepath='drivers/pci/pci-driver.c' line='1491' column='1'/>
         <return type-id='85196e3f'/>
@@ -159775,6 +159797,10 @@
         <parameter type-id='25e60cb2' name='udev' filepath='drivers/usb/core/driver.c' line='1633' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='usb_enable_intel_xhci_ports' mangled-name='usb_enable_intel_xhci_ports' filepath='drivers/usb/host/pci-quirks.c' line='1039' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_enable_intel_xhci_ports'>
+        <parameter type-id='85196e3f' name='xhci_pdev' filepath='drivers/usb/host/pci-quirks.c' line='1039' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
       <function-decl name='usb_ep_alloc_request' mangled-name='usb_ep_alloc_request' filepath='drivers/usb/gadget/udc/core.c' line='175' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='usb_ep_alloc_request'>
         <parameter type-id='63a08bf7' name='ep' filepath='drivers/usb/gadget/udc/core.c' line='175' column='1'/>
         <parameter type-id='3eb7c31c' name='gfp_flags' filepath='drivers/usb/gadget/udc/core.c' line='176' column='1'/>
@@ -162569,10 +162595,21 @@
         <parameter type-id='25e60cb2' name='udev' filepath='drivers/usb/host/xhci.c' line='3021' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='xhci_dbg_trace' mangled-name='xhci_dbg_trace' filepath='drivers/usb/host/xhci-dbg.c' line='22' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='xhci_dbg_trace'>
+        <parameter type-id='0c65b409' name='xhci' filepath='drivers/usb/host/xhci-dbg.c' line='22' column='1'/>
+        <parameter type-id='5c3e13a1' name='trace' filepath='drivers/usb/host/xhci-dbg.c' line='22' column='1'/>
+        <parameter type-id='80f4b756' name='fmt' filepath='drivers/usb/host/xhci-dbg.c' line='23' column='1'/>
+        <parameter is-variadic='yes'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
       <function-decl name='xhci_drop_endpoint' mangled-name='xhci_drop_endpoint' filepath='drivers/usb/host/xhci.c' line='1902' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='xhci_drop_endpoint'>
         <parameter type-id='fc4f83c1' name='hcd' filepath='drivers/usb/host/xhci.c' line='1902' column='1'/>
         <parameter type-id='25e60cb2' name='udev' filepath='drivers/usb/host/xhci.c' line='1902' column='1'/>
         <parameter type-id='15adb516' name='ep' filepath='drivers/usb/host/xhci.c' line='1903' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='xhci_ext_cap_init' mangled-name='xhci_ext_cap_init' filepath='drivers/usb/host/xhci-ext-caps.c' line='84' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='xhci_ext_cap_init'>
+        <parameter type-id='0c65b409' name='xhci' filepath='drivers/usb/host/xhci-ext-caps.c' line='84' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
       <function-decl name='xhci_free_command' mangled-name='xhci_free_command' filepath='drivers/usb/host/xhci-mem.c' line='1795' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='xhci_free_command'>
@@ -162644,6 +162681,10 @@
       <function-decl name='xhci_run' mangled-name='xhci_run' filepath='drivers/usb/host/xhci.c' line='635' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='xhci_run'>
         <parameter type-id='fc4f83c1' name='hcd' filepath='drivers/usb/host/xhci.c' line='635' column='1'/>
         <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='xhci_shutdown' mangled-name='xhci_shutdown' filepath='drivers/usb/host/xhci.c' line='776' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='xhci_shutdown'>
+        <parameter type-id='fc4f83c1' name='hcd' filepath='drivers/usb/host/xhci.c' line='776' column='1'/>
+        <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='xhci_suspend' mangled-name='xhci_suspend' filepath='drivers/usb/host/xhci.c' line='988' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='xhci_suspend'>
         <parameter type-id='0c65b409' name='xhci' filepath='drivers/usb/host/xhci.c' line='988' column='1'/>
