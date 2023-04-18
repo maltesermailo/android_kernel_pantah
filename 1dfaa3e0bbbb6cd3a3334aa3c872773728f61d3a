@@ -16,6 +16,46 @@
       "message": "Upstream first please.",
       "revId": "1dfaa3e0bbbb6cd3a3334aa3c872773728f61d3a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96d4c258_6aefa507",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1149384
+      },
+      "writtenOn": "2023-04-18T01:32:00Z",
+      "side": 1,
+      "message": "reviewing here because the tooling for upstream reviews is hard to use",
+      "revId": "1dfaa3e0bbbb6cd3a3334aa3c872773728f61d3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09f8e37d_d6956da4",
+        "filename": "drivers/input/misc/uinput.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1149384
+      },
+      "writtenOn": "2023-04-18T01:32:00Z",
+      "side": 1,
+      "message": "One concern that I have here is compatibility: not everyone will set a valid timestamp.\n\nSome ideas:\n1) (at the very least) - if timestamp \u003d\u003d 0, don\u0027t set timestamp\n2) (if time is too far into future / past, don\u0027t set timestamp?)\n3) (may be nice to have) - if timestamp hasn\u0027t changed from the last event or after X (\u003d\u003d100 for example?) events, don\u0027t set timestamps.\n\nOtherwise, if ppl don\u0027t zero-initialize their structs, the timestamp will be non-zero garbage, and the check 1) will fail.",
+      "range": {
+        "startLine": 594,
+        "startChar": 2,
+        "endLine": 594,
+        "endChar": 44
+      },
+      "revId": "1dfaa3e0bbbb6cd3a3334aa3c872773728f61d3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
