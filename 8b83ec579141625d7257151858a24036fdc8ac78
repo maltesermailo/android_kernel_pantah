@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "684d0deb_abe22187",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2023-04-19T10:17:11Z",
+      "side": 1,
+      "message": "Hi Sir:\n\npls read the patch from google as above comments\nbb5ee21cc4dd (\"ANDROID: uid_sys_stats: change to use rt_mutex\")\n\nUsing rt_mutex is Google\u0027s own method to avoid delay lantency, I can\u0027t get the patch in google gerrit maybe it is too eayly patch and gerrit only record the patch of uid_sys_stat.c after 2017.",
+      "parentUuid": "11aa0a5a_10c0961e",
+      "revId": "8b83ec579141625d7257151858a24036fdc8ac78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "57531dff_8fa6ef91",
         "filename": "drivers/misc/uid_sys_stats.c",
         "patchSetId": 5
@@ -31,6 +49,30 @@
       "writtenOn": "2023-04-19T09:51:41Z",
       "side": 1,
       "message": "why are you grabbing another lock if rcu_read_lock() is already called?\n\nAre you sure this is correct?  Doesn\u0027t it negate the use of rcu in this code entirely?",
+      "range": {
+        "startLine": 380,
+        "startChar": 0,
+        "endLine": 380,
+        "endChar": 16
+      },
+      "revId": "8b83ec579141625d7257151858a24036fdc8ac78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ce7d4ad_36f57856",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1943715
+      },
+      "writtenOn": "2023-04-19T10:17:11Z",
+      "side": 1,
+      "message": "Hi Sir：\n\nuid_lock is to protect hash_table of uid in uid_sys.c, not task_struct so that we need to take uid_lock.\n\nGoogle\u0027s native lock holding logic has not been changed, I just split the global lock uid_lock to the fine-grained locks for each hlist in hash_table.",
+      "parentUuid": "57531dff_8fa6ef91",
       "range": {
         "startLine": 380,
         "startChar": 0,
