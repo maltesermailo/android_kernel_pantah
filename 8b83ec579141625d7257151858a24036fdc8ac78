@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11aa0a5a_10c0961e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-19T09:51:41Z",
+      "side": 1,
+      "message": "Still have not explained why you must use a rt_mutex and not a normal mutex.",
+      "revId": "8b83ec579141625d7257151858a24036fdc8ac78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57531dff_8fa6ef91",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-04-19T09:51:41Z",
+      "side": 1,
+      "message": "why are you grabbing another lock if rcu_read_lock() is already called?\n\nAre you sure this is correct?  Doesn\u0027t it negate the use of rcu in this code entirely?",
+      "range": {
+        "startLine": 380,
+        "startChar": 0,
+        "endLine": 380,
+        "endChar": 16
+      },
+      "revId": "8b83ec579141625d7257151858a24036fdc8ac78",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
