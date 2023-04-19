@@ -50,11 +50,16 @@
 #include <asm/tlbflush.h>
 #include <asm/ptrace.h>
 #include <asm/virt.h>
+//#include <trace/events/power.h>  // by jay
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/ipi.h>
 #undef CREATE_TRACE_POINTS
 #include <trace/hooks/debug.h>
+
+#define	DEBUG_MAX_CPU_LATENCY	0
+#include <trace/hooks/power.h>  // by jay
+#include "../../../kernel/sched/sched.h"  // by jay
 
 DEFINE_PER_CPU_READ_MOSTLY(int, cpu_number);
 EXPORT_PER_CPU_SYMBOL(cpu_number);
@@ -70,6 +75,84 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(ipi_exit);
 struct secondary_data secondary_data;
 /* Number of CPUs which aren't online, but looping in kernel text. */
 static int cpus_stuck_in_kernel;
+
+// by jay
+#define	LATENCY_SCALE		10  // us
+#define	LATENCY_SCALE_SIZE	250  // us
+static ktime_t cpu0_start_t;
+static ktime_t cpu1_start_t;
+static ktime_t cpu2_start_t;
+static ktime_t cpu3_start_t;
+static ktime_t cpu4_start_t;
+static ktime_t cpu5_start_t;
+static ktime_t cpu6_start_t;
+static ktime_t cpu7_start_t;
+static ktime_t cl0_max_latency;
+static ktime_t cl1_max_latency;
+static ktime_t cl2_max_latency;
+static unsigned long long cl0_latency_counts[LATENCY_SCALE_SIZE];
+static unsigned long long cl1_latency_counts[LATENCY_SCALE_SIZE];
+static unsigned long long cl2_latency_counts[LATENCY_SCALE_SIZE];
+
+// by jay
+int cpu_is_idle(int cpu)
+{
+	struct rq *rq = cpu_rq(cpu);
+	if (rq) {
+		if (rq->nr_running == 0)
+			return 1;
+	}
+	return 0;
+}
+
+// by jay
+void dump_latency_counts(void)
+{
+	int i;
+	unsigned long long total;
+
+	printk("[TOTORO] ==================================\n");
+	printk("[TOTORO] Little cores:\n");
+	total = 0;
+	for (i = 0; i < LATENCY_SCALE_SIZE; i++) {
+		total += cl0_latency_counts[i];
+	}
+	for (i = 0; i < LATENCY_SCALE_SIZE; i++) {
+		printk("[TOTORO]  L: %d - %d us : %llu  %2.2d %%\n", i * LATENCY_SCALE, (i+1) * LATENCY_SCALE, cl0_latency_counts[i], cl0_latency_counts[i]*100/total);
+	}
+
+	total = 0;
+	for (i = 0; i < LATENCY_SCALE_SIZE; i++) {
+		total += cl1_latency_counts[i];
+	}
+	printk("[TOTORO] Middle cores:\n");
+	for (i = 0; i < LATENCY_SCALE_SIZE; i++) {
+		printk("[TOTORO]  M: %d - %d us : %llu  %2.2d %%\n", i * LATENCY_SCALE, (i+1) * LATENCY_SCALE, cl1_latency_counts[i], cl1_latency_counts[i]*100/total);
+	}
+
+	total = 0;
+	for (i = 0; i < LATENCY_SCALE_SIZE; i++) {
+		total += cl2_latency_counts[i];
+	}
+	printk("[TOTORO] Big cores:\n");
+	for (i = 0; i < LATENCY_SCALE_SIZE; i++) {
+		printk("[TOTORO]  B: %d - %d us : %llu  %2.2d %%\n", i * LATENCY_SCALE, (i+1) * LATENCY_SCALE, cl2_latency_counts[i], cl2_latency_counts[i]*100/total);
+	}
+}
+EXPORT_SYMBOL_GPL(dump_latency_counts);
+
+// by jay
+void clean_latency_counts(void)
+{
+	int i;
+
+	for (i = 0; i < LATENCY_SCALE_SIZE; i++) {
+		cl0_latency_counts[i] = 0;
+		cl1_latency_counts[i] = 0;
+		cl2_latency_counts[i] = 0;
+	}
+}
+EXPORT_SYMBOL_GPL(clean_latency_counts);
 
 enum ipi_msg_type {
 	IPI_RESCHEDULE,
@@ -907,6 +990,139 @@ static void do_handle_IPI(int ipinr)
 
 	switch (ipinr) {
 	case IPI_RESCHEDULE:
+		// by jay
+		if (cpu == 0 && cpu0_start_t > 0) {
+			ktime_t t;
+			int index;
+			t = ktime_sub(ktime_get(), cpu0_start_t);
+			if (ktime_to_us(t) > ktime_to_us(cl0_max_latency)) {
+				cl0_max_latency = t;
+				if (DEBUG_MAX_CPU_LATENCY) {
+					pr_info("[TOTORO] cl0_max_latency (us) = %d\n", ktime_to_us(cl0_max_latency));
+				}
+			}
+			index = ktime_to_us(t) / LATENCY_SCALE;
+			if (index >= LATENCY_SCALE_SIZE) {
+				index = LATENCY_SCALE_SIZE-1;
+			}
+			cl0_latency_counts[index]++;
+			cpu0_start_t = 0;
+		} else if (cpu == 1 && cpu1_start_t > 0) {
+			ktime_t t;
+			int index;
+			t = ktime_sub(ktime_get(), cpu1_start_t);
+			if (ktime_to_us(t) > ktime_to_us(cl0_max_latency)) {
+				cl0_max_latency = t;
+				if (DEBUG_MAX_CPU_LATENCY) {
+					pr_info("[TOTORO] cl0_max_latency (us) = %d\n", ktime_to_us(cl0_max_latency));
+				}
+			}
+			index = ktime_to_us(t) / LATENCY_SCALE;
+			if (index >= LATENCY_SCALE_SIZE) {
+				index = LATENCY_SCALE_SIZE-1;
+			}
+			cl0_latency_counts[index]++;
+			cpu1_start_t = 0;
+		} else if (cpu == 2 && cpu2_start_t > 0) {
+			ktime_t t;
+			int index;
+			t = ktime_sub(ktime_get(), cpu2_start_t);
+			if (ktime_to_us(t) > ktime_to_us(cl0_max_latency)) {
+				cl0_max_latency = t;
+				if (DEBUG_MAX_CPU_LATENCY) {
+					pr_info("[TOTORO] cl0_max_latency (us) = %d\n", ktime_to_us(cl0_max_latency));
+				}
+			}
+			index = ktime_to_us(t) / LATENCY_SCALE;
+			if (index >= LATENCY_SCALE_SIZE) {
+				index = LATENCY_SCALE_SIZE-1;
+			}
+			cl0_latency_counts[index]++;
+			cpu2_start_t = 0;
+		} else if (cpu == 3 && cpu3_start_t > 0) {
+			ktime_t t;
+			int index;
+			t = ktime_sub(ktime_get(), cpu3_start_t);
+			if (ktime_to_us(t) > ktime_to_us(cl0_max_latency)) {
+				cl0_max_latency = t;
+				if (DEBUG_MAX_CPU_LATENCY) {
+					pr_info("[TOTORO] cl0_max_latency (us) = %d\n", ktime_to_us(cl0_max_latency));
+				}
+			}
+			index = ktime_to_us(t) / LATENCY_SCALE;
+			if (index >= LATENCY_SCALE_SIZE) {
+				index = LATENCY_SCALE_SIZE-1;
+			}
+			cl0_latency_counts[index]++;
+			cpu3_start_t = 0;
+		} else if (cpu == 4 && cpu4_start_t > 0) {
+			ktime_t t;
+			int index;
+			t = ktime_sub(ktime_get(), cpu4_start_t);
+			if (ktime_to_us(t) > ktime_to_us(cl1_max_latency)) {
+				cl1_max_latency = t;
+				if (DEBUG_MAX_CPU_LATENCY) {
+					pr_info("[TOTORO] cl1_max_latency (us) = %d\n", ktime_to_us(cl1_max_latency));
+				}
+			}
+			index = ktime_to_us(t) / LATENCY_SCALE;
+			if (index >= LATENCY_SCALE_SIZE) {
+				index = LATENCY_SCALE_SIZE-1;
+			}
+			cl1_latency_counts[index]++;
+			cpu4_start_t = 0;
+		} else if (cpu == 5 && cpu5_start_t > 0) {
+			ktime_t t;
+			int index;
+			t = ktime_sub(ktime_get(), cpu5_start_t);
+			if (ktime_to_us(t) > ktime_to_us(cl1_max_latency)) {
+				cl1_max_latency = t;
+				if (DEBUG_MAX_CPU_LATENCY) {
+					pr_info("[TOTORO] cl1_max_latency (us) = %d\n", ktime_to_us(cl1_max_latency));
+				}
+			}
+			index = ktime_to_us(t) / LATENCY_SCALE;
+			if (index >= LATENCY_SCALE_SIZE) {
+				index = LATENCY_SCALE_SIZE-1;
+			}
+			cl1_latency_counts[index]++;
+			cpu5_start_t = 0;
+		} else if (cpu == 6 && cpu6_start_t > 0) {
+			ktime_t t;
+			int index;
+			trace_android_vh_try_to_freeze_todo(0, 0, false);
+			t = ktime_sub(ktime_get(), cpu6_start_t);
+			if (ktime_to_us(t) > ktime_to_us(cl2_max_latency)) {
+				cl2_max_latency = t;
+				if (DEBUG_MAX_CPU_LATENCY) {
+					pr_info("[TOTORO] cl2_max_latency (us) = %d\n", ktime_to_us(cl2_max_latency));
+				}
+			}
+			index = ktime_to_us(t) / LATENCY_SCALE;
+			if (index >= LATENCY_SCALE_SIZE) {
+				index = LATENCY_SCALE_SIZE-1;
+			}
+			cl2_latency_counts[index]++;
+			cpu6_start_t = 0;
+		} else if (cpu == 7 && cpu7_start_t > 0) {
+			ktime_t t;
+			int index;
+			trace_android_vh_try_to_freeze_todo_unfrozen(NULL);
+			t = ktime_sub(ktime_get(), cpu7_start_t);
+			if (ktime_to_us(t) > ktime_to_us(cl2_max_latency)) {
+				cl2_max_latency = t;
+				if (DEBUG_MAX_CPU_LATENCY) {
+					pr_info("[TOTORO] cl2_max_latency (us) = %d\n", ktime_to_us(cl2_max_latency));
+				}
+			}
+			index = ktime_to_us(t) / LATENCY_SCALE;
+			if (index >= LATENCY_SCALE_SIZE) {
+				index = LATENCY_SCALE_SIZE-1;
+			}
+			cl2_latency_counts[index]++;
+			cpu7_start_t = 0;
+		}
+		//printk("[TOTORO] ipi cpu=%d\n", cpu);
 		scheduler_ipi();
 		break;
 
@@ -1022,6 +1238,29 @@ void __init set_smp_ipi_range(int ipi_base, int n)
 
 void smp_send_reschedule(int cpu)
 {
+	// by jay
+	if (cpu_is_idle(cpu)) {
+		if (cpu == 0) {
+			cpu0_start_t = ktime_get();
+		} else if (cpu == 1) {
+			cpu1_start_t = ktime_get();
+		} else if (cpu == 2) {
+			cpu2_start_t = ktime_get();
+		} else if (cpu == 3) {
+			cpu3_start_t = ktime_get();
+		} else if (cpu == 4) {
+			cpu4_start_t = ktime_get();
+		} else if (cpu == 5) {
+			cpu5_start_t = ktime_get();
+		} else if (cpu == 6) {
+			cpu6_start_t = ktime_get();
+			trace_android_vh_try_to_freeze_todo(1, 0, false);
+		} else if (cpu == 7) {
+			cpu7_start_t = ktime_get();
+			trace_android_vh_try_to_freeze_todo_unfrozen(current);
+		}
+		//printk("[TOTORO]  trigger = %d  cpu=%d \n", smp_processor_id(), cpu);
+	}
 	smp_cross_call(cpumask_of(cpu), IPI_RESCHEDULE);
 }
 

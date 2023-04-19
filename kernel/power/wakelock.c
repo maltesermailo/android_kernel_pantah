@@ -35,6 +35,10 @@ struct wakelock {
 
 static struct rb_root wakelocks_tree = RB_ROOT;
 
+// by jay
+extern void dump_latency_counts(void);
+extern void clean_latency_counts(void);
+
 ssize_t pm_show_wakelocks(char *buf, bool show_active)
 {
 	struct rb_node *node;
@@ -52,6 +56,7 @@ ssize_t pm_show_wakelocks(char *buf, bool show_active)
 	len += sysfs_emit_at(buf, len, "\n");
 
 	mutex_unlock(&wakelocks_lock);
+	dump_latency_counts();  // by jay
 	return len;
 }
 
@@ -266,6 +271,11 @@ int pm_wake_unlock(const char *buf)
 
 	if (!len)
 		return -EINVAL;
+
+	// by jay
+	if (!strncmp(buf, "123", 3)) {
+		clean_latency_counts();
+	}
 
 	mutex_lock(&wakelocks_lock);
 
