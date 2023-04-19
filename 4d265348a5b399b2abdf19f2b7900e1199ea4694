@@ -16,6 +16,24 @@
       "message": "No kernel driver should need this symbol.",
       "revId": "4d265348a5b399b2abdf19f2b7900e1199ea4694",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09af45af_95d7fbd9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2003345
+      },
+      "writtenOn": "2023-04-19T12:30:14Z",
+      "side": 1,
+      "message": "This patch was cherry picked from Android13/Android12. \n\nAs discussed in [aosp/1722854](https://android-review.googlesource.com/c/kernel/common/+/1722854), this symbol is used within vendor hook trace_android_vh_sched_setaffinity_early in sched_setaffinity() of core.c.\ndetail please check: [aosp/2543536](https://android-review.googlesource.com/c/kernel/common/+/2543536).\n\nSince the function cpuset_cpus_allowed() is used in sched_setaffinity(), we think it can also be used by vendor hook code, thanks.",
+      "parentUuid": "9355db0e_31363f47",
+      "revId": "4d265348a5b399b2abdf19f2b7900e1199ea4694",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
