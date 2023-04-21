@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "575c31e4_6755439e",
+        "filename": "include/linux/gfp.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-04-21T23:31:15Z",
+      "side": 0,
+      "message": "It would be cleaner if you keep this function as is and rename it into `__gfp_zone` and then call it from a new `gfp_zone` function:\nin .h file:\n```\nstatic inline enum zone_type __gfp_zone(gfp_t flags)\n{\n\tenum zone_type z;\n\tint bit \u003d (__force int) (flags \u0026 GFP_ZONEMASK);\n\n\tz \u003d (GFP_ZONE_TABLE \u003e\u003e (bit * GFP_ZONES_SHIFT)) \u0026\n\t\t\t\t\t ((1 \u003c\u003c GFP_ZONES_SHIFT) - 1);\n\tVM_BUG_ON((GFP_ZONE_BAD \u003e\u003e bit) \u0026 1);\n\treturn z;\n}\n\nenum zone_type gfp_zone(gfp_t flags);\n```\nin .c file:\n```\nenum zone_type gfp_zone(gfp_t flags)\n{\n\ttrace_android_rvh_set_gfp_zone_flags(\u0026flags);\n\treturn __gfp_zone(flags);\n}\n```\n\nSame for `readahead_gfp_mask`",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 1
+      },
+      "revId": "30a947d3175a5672986170a7664a504af3aaa6ea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
