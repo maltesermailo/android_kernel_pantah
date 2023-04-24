@@ -203,6 +203,9 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_tcpm_modify_src_caps);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_typec_tcpm_log);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_gfp_zone_flags);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_readahead_gfp_mask);
+<<<<<<< PATCH SET (417a16 ANDROID: vendor_hooks: add hooks for pruning account)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_account_process_tick_granularity);
+=======
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_mutex_list_add);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_unlock_slowpath);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_wake_finish);
@@ -213,3 +216,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_thread_release);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_has_work_ilocked);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_read_done);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_preset);
+>>>>>>> BASE      (1ca113 FROMLIST: binder: fix UAF caused by faulty buffer cleanup)
