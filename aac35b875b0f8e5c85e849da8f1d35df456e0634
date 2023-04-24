@@ -34,6 +34,24 @@
       "parentUuid": "e2b326bf_eff537cf",
       "revId": "aac35b875b0f8e5c85e849da8f1d35df456e0634",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95aa9f32_5921acef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2023-04-24T19:51:59Z",
+      "side": 1,
+      "message": "Sorry, I was on vacation.  Yes, the three `blk_crypto_*` functions in this change are all intended for use by drivers and were in the KMI in previous GKI versions.  (Note that they\u0027ve been renamed a couple times, so in older kernels they had slightly different names.)\n\nWith UFS, there is also always the question of how responsibilities are divided up between the UFS platform driver (which is a vendor module) and the UFS core (which is built into GKI).  Considering that, needing `blk_crypto_keyslot_index()` is a bit unexpected, since the UFS core already copies the keyslot number into `struct ufshcd_lrb`.  So I am curious why `ufs-qcom.ko` calls `blk_crypto_keyslot_index()` directly...  But anyway, I am okay with leaving it in the KMI for now.",
+      "parentUuid": "1aab439c_99feb84e",
+      "revId": "aac35b875b0f8e5c85e849da8f1d35df456e0634",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
