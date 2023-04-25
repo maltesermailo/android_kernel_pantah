@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "71b5324b_d468e7e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2003165
+      },
+      "writtenOn": "2023-04-25T14:35:14Z",
+      "side": 1,
+      "message": "The term \u0027freqwdg\u0027 represents frequency watchdog implemented by our module. The commit message has been updated. Thank you.",
+      "parentUuid": "4b3d6cac_5c5dc5cd",
+      "range": {
+        "startLine": 9,
+        "startChar": 107,
+        "endLine": 9,
+        "endChar": 114
+      },
+      "revId": "02747b651585f6e9f277085e7004e9745a87e59d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a507195c_0588c68b",
         "filename": "include/trace/hooks/power.h",
         "patchSetId": 5
@@ -37,6 +61,24 @@
       "writtenOn": "2023-04-25T12:17:02Z",
       "side": 1,
       "message": "Please remove this inclusion. Use only forward declarations in this header.",
+      "revId": "02747b651585f6e9f277085e7004e9745a87e59d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d568864_0b3b38d9",
+        "filename": "include/trace/hooks/power.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2003165
+      },
+      "writtenOn": "2023-04-25T14:35:14Z",
+      "side": 1,
+      "message": "If I remove this inclusion, the build will fail due to the following reason: \"variable has an incomplete type of \u0027enum freq_qos_req_type\u0027.\"\nTherefore, I add this inclusion in the same way as demonstrated in [aosp/2201060](https://android-review.googlesource.com/c/2201060).",
+      "parentUuid": "a507195c_0588c68b",
       "revId": "02747b651585f6e9f277085e7004e9745a87e59d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
