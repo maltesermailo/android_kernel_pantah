@@ -114,6 +114,30 @@
       },
       "revId": "1dfaa3e0bbbb6cd3a3334aa3c872773728f61d3a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "306cb1d6_e316528f",
+        "filename": "drivers/input/misc/uinput.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1776761
+      },
+      "writtenOn": "2023-04-26T15:30:30Z",
+      "side": 1,
+      "message": "I\u0027ve added some basic checks so that we only allow positive timestamps which are within a 10sec offset from current time, following the stale event timeout in InputDispatcher (https://cs.android.com/android/platform/superproject/+/master:frameworks/native/services/inputflinger/dispatcher/InputDispatcher.cpp;l\u003d89?q\u003dInputDispatcher.cpp). However, when we send this patch upstream to kenel.org, I\u0027m not sure what opinion the reviewers would have regarding this 10sec offset check, especially since the `input_set_timestamp` API (https://github.com/torvalds/linux/blob/master/include/linux/input.h#L417) doesn\u0027t have any restrictions.",
+      "parentUuid": "09f8e37d_d6956da4",
+      "range": {
+        "startLine": 594,
+        "startChar": 2,
+        "endLine": 594,
+        "endChar": 44
+      },
+      "revId": "1dfaa3e0bbbb6cd3a3334aa3c872773728f61d3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
