@@ -34,6 +34,24 @@
       "parentUuid": "8cc6edc4_632bc9f9",
       "revId": "7c8f5422fc8fc63e440d512327bf829dcfc5a0a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4940fa11_c053a4e5",
+        "filename": "kernel/locking/mutex.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1613258
+      },
+      "writtenOn": "2023-04-27T23:36:14Z",
+      "side": 0,
+      "message": "Yeah, you should not move the code to the header file so that it can be hidden from outside (for possible future changes) and can remain it inlined.  Let\u0027s add a separate wrapper to call it.",
+      "parentUuid": "14b0fa99_4f365164",
+      "revId": "7c8f5422fc8fc63e440d512327bf829dcfc5a0a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
