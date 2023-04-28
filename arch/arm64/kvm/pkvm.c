@@ -448,6 +448,9 @@ static int __init pkvm_firmware_rmem_clear(void)
 		return -EINVAL;
 
 	memset(addr, 0, size);
+	/* Clear so user space doesn't get stale info via IOCTL. */
+	pkvm_firmware_mem = NULL;
+
 	dcache_clean_poc((unsigned long)addr, (unsigned long)addr + size);
 	memunmap(addr);
 	return 0;
@@ -574,6 +577,13 @@ int pkvm_vm_ioctl_enable_cap(struct kvm *kvm, struct kvm_enable_cap *cap)
 	return 0;
 }
 
+int pkvm_report_misconfig(void)
+{
+	if (static_branch_unlikely(&kvm_protected_mode_initialized))
+		return -EACCES;
+
+	return pkvm_firmware_rmem_clear();
+}
 #ifdef CONFIG_MODULES
 static char early_pkvm_modules[COMMAND_LINE_SIZE] __initdata;
 
