@@ -60,8 +60,8 @@
   clk_set_parent
   clk_set_rate
   clk_unprepare
-  clocks_calc_mult_shift
   clockevents_config_and_register
+  clocks_calc_mult_shift
   __clocksource_register_scale
   compat_alloc_user_space
   complete
@@ -71,12 +71,12 @@
   console_lock
   console_unlock
   __const_udelay
+  cpufreq_add_update_util_hook
+  cpufreq_remove_update_util_hook
   cpu_have_feature
   cpu_hwcap_keys
   cpu_hwcaps
   cpumask_next
-  cpufreq_add_update_util_hook
-  cpufreq_remove_update_util_hook
   cpu_number
   __cpu_online_mask
   __cpu_possible_mask
@@ -95,7 +95,6 @@
   __crypto_xor
   csum_ipv6_magic
   csum_partial
-  d_splice_alias
   default_llseek
   delayed_work_timer_fn
   del_timer
@@ -195,6 +194,7 @@
   drm_poll
   drm_read
   drm_release
+  d_splice_alias
   dst_release
   dump_stack
   __dynamic_dev_dbg
@@ -338,8 +338,8 @@
   is_console_locked
   jiffies
   jiffies_to_msecs
-  kernel_kobj
   kasprintf
+  kernel_kobj
   kernel_neon_begin
   kernel_neon_end
   __kfifo_alloc
@@ -574,10 +574,10 @@
   seq_putc
   seq_puts
   seq_read
+  setattr_prepare
   set_nlink
   set_normalized_timespec64
   set_user_nice
-  setattr_prepare
   sg_init_table
   sg_miter_next
   sg_miter_start
@@ -991,6 +991,7 @@
   vsprintf
 
 # required by ims_bridge.ko
+  completion_done
   in4_pton
   in6_pton
   inet_select_addr
@@ -1012,7 +1013,6 @@
   skb_checksum_help
   strim
   xfrm_lookup
-  completion_done
 
 # required by kfifo_buf.ko
   devres_add
@@ -1782,9 +1782,9 @@
   hwspin_lock_unregister
 
 # required by sprd_ipa.ko
-  skb_to_sgvec
   irq_set_affinity_hint
   napi_gro_receive
+  skb_to_sgvec
 
 # required by sprd-saudio.ko
   snd_card_free
@@ -1805,8 +1805,8 @@
 # required by sprd_cpu_cooling.ko
   cpu_down
   cpufreq_get_policy
-  cpu_up
   cpufreq_quick_get
+  cpu_up
   dev_pm_opp_find_freq_exact
   thermal_cooling_device_unregister
   thermal_of_cooling_device_register
@@ -1910,8 +1910,8 @@
   netlink_unicast
   nla_memcpy
   __nla_parse
-  nla_put
   nla_put_64bit
+  nla_put
   nla_put_nohdr
   printk_timed_ratelimit
   register_inet6addr_notifier
@@ -2014,9 +2014,9 @@
   usb_unlink_urb
 
 # required by usb_f_mtp.ko
+  config_group_init_type_name
   usb_os_desc_prepare_interf_dir
   usb_string_id
-  config_group_init_type_name
 
 # required by usbserial.ko
   device_del
@@ -2555,8 +2555,8 @@
 
 # required by snd-soc-sprd-codec-sc2730.ko
   dapm_kcontrol_get_value
-  __kfifo_init
   __kfifo_from_user_r
+  __kfifo_init
   __kfifo_to_user_r
   snd_pcm_rate_bit_to_rate
   snd_soc_bytes_info_ext

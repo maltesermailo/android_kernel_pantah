@@ -1,10 +1,10 @@
 [abi_symbol_list]
 # required by appnv.ko
-  __lock_page
-  sync_blockdev
-  read_cache_page
-  blkdev_put
   blkdev_get_by_path
+  blkdev_put
+  __lock_page
+  read_cache_page
+  sync_blockdev
 
 # required by pt.ko
   input_mt_sync_frame
@@ -29,9 +29,9 @@
   gpiod_set_consumer_name
 
 # required by qpnp-smb5-main.ko
+  emergency_restart
   param_get_uint
   round_jiffies_relative
-  emergency_restart
 
 # required by fj_watchdog.ko
   del_timer
@@ -53,16 +53,16 @@
   snd_pcm_hw_constraint_mask64
 
 # required by camera.ko
-  i2c_unregister_device
-  i2c_smbus_write_byte_data
   i2c_smbus_read_byte_data
+  i2c_smbus_write_byte_data
+  i2c_unregister_device
 
 # required by semi_touch_driver.ko
   vfs_llseek
 
 # required by cdfingerfp.ko
-  wakeup_source_remove
   wakeup_source_add
+  wakeup_source_remove
 
 # required by drv2624-ram.ko
   devm_led_classdev_unregister
@@ -81,16 +81,16 @@
 
 # required by max77729.ko
   i2c_new_dummy_device
-  __irq_alloc_descs
-  i2c_smbus_write_word_data
-  i2c_smbus_write_i2c_block_data
   i2c_smbus_read_i2c_block_data
   i2c_smbus_read_word_data
-  power_supply_register
-  power_supply_unregister
+  i2c_smbus_write_i2c_block_data
+  i2c_smbus_write_word_data
+  __irq_alloc_descs
   mfd_add_devices
   mfd_remove_devices
+  power_supply_register
+  power_supply_unregister
 
 # required by sec.ko
-  strncat
   input_mt_destroy_slots
+  strncat

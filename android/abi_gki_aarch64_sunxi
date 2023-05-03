@@ -1,12 +1,12 @@
 [abi_symbol_list]
 # commonly used symbols
+  __arm_smccc_hvc
+  dev_pm_set_wake_irq
+  down_interruptible
+  kmalloc_order
+  of_find_node_by_type
   pinctrl_get
   pinctrl_gpio_set_config
-  of_find_node_by_type
-  kmalloc_order
-  down_interruptible
-  dev_pm_set_wake_irq
-  __arm_smccc_hvc
 
 # required by ccu-sunxi-ng.ko
   clk_notifier_register
@@ -14,17 +14,17 @@
   reset_controller_register
 
 # required by sunxi_pinctrl.ko
-  handle_fasteoi_irq
-  pinctrl_gpio_direction_output
-  pinctrl_gpio_direction_input
   gpiochip_generic_config
+  handle_fasteoi_irq
+  pinctrl_gpio_direction_input
+  pinctrl_gpio_direction_output
 
 # required by sunxi_uart.ko
   uart_get_divisor
   uart_handle_cts_change
   uart_handle_dcd_change
-  unregister_console
   uart_insert_char
+  unregister_console
 
 # required by timer-sunxi.ko
   clockevents_config_and_register
@@ -61,10 +61,10 @@
   unregister_syscore_ops
 
 # required by tee.ko optee.ko
+  dump_page
   gen_pool_best_fit
   gen_pool_set_algo
   gen_pool_virt_to_phys
-  dump_page
 
 # required by sunxi_nsi.ko
   device_remove_groups
@@ -83,15 +83,15 @@
   __devm_release_region
   snd_dmaengine_pcm_close_release_chan
   snd_dmaengine_pcm_get_chan
+  snd_dmaengine_pcm_open
   snd_dmaengine_pcm_open_request_chan
   snd_dmaengine_pcm_pointer
   snd_dmaengine_pcm_trigger
   snd_hwparams_to_dma_slave_config
   snd_soc_add_card_controls
-  snd_soc_register_card
   snd_soc_dai_set_clkdiv
   snd_soc_dai_set_pll
-  snd_dmaengine_pcm_open
+  snd_soc_register_card
 
 # required by xr829.ko
   bridge_tunnel_header
@@ -104,6 +104,7 @@
   cfg80211_sched_scan_stopped
   cfg80211_tx_mlme_mgmt
   crc32_be
+  device_move
   __dev_kfree_skb_irq
   __hw_addr_init
   __hw_addr_sync
@@ -118,7 +119,6 @@
   round_jiffies_relative
   sdio_align_size
   __sw_hweight16
-  device_move
 
 # required by arc4.ko
   arc4_crypt
@@ -129,8 +129,7 @@
   skcipher_walk_virt
 
 # required by vin_v4l2.ko
-  vb2_plane_cookie
-  v4l2_i2c_subdev_init
+  media_create_pad_link
   media_entity_find_link
   media_entity_remote_pad
   __media_entity_setup_link
@@ -143,13 +142,16 @@
   v4l2_ctrl_cluster
   v4l2_ctrl_new_int_menu
   v4l2_ctrl_subdev_subscribe_event
+  v4l2_ctrl_subscribe_event
   v4l2_event_subdev_unsubscribe
   v4l2_g_ctrl
   v4l2_i2c_new_subdev
+  v4l2_i2c_subdev_init
   v4l2_spi_new_subdev
   v4l_bound_align_image
-  media_create_pad_link
-  v4l2_ctrl_subscribe_event
+  vb2_dma_contig_clear_max_seg_size
+  vb2_dma_contig_memops
+  vb2_dma_contig_set_max_seg_size
   vb2_fop_mmap
   vb2_fop_poll
   vb2_fop_read
@@ -163,9 +165,7 @@
   vb2_ioctl_streamon
   vb2_ops_wait_finish
   vb2_ops_wait_prepare
-  vb2_dma_contig_clear_max_seg_size
-  vb2_dma_contig_memops
-  vb2_dma_contig_set_max_seg_size
+  vb2_plane_cookie
 
 # required by videobuf2-memops.ko
   frame_vector_create
@@ -190,6 +190,8 @@
   generic_error_remove_page
   generic_file_open
   ihold
+  io_schedule
+  is_bad_inode
   load_nls_default
   __lock_page
   make_bad_inode
@@ -198,15 +200,12 @@
   truncate_inode_pages_final
   __vmalloc
   __wait_on_buffer
-  io_schedule
-  is_bad_inode
 
 # required by sunxi-keyboard.ko
   iio_map_array_register
   iio_map_array_unregister
 
 # required by sunxi*.ko
-  __irq_alloc_domain_generic_chips
   clk_unregister_fixed_factor
   clk_unregister_fixed_rate
   clk_unregister_gate
@@ -219,6 +218,7 @@
   filp_close
   get_cpu_idle_time_us
   gov_update_cpu_data
+  __irq_alloc_domain_generic_chips
   irq_gc_ack_set_bit
   irq_gc_mask_clr_bit
   irq_gc_mask_set_bit
@@ -286,9 +286,9 @@
   usb_scuttle_anchored_urbs
 
 # required by uas.ko
-  usb_wait_anchor_empty_timeout
-  usb_free_streams
   usb_alloc_streams
+  usb_free_streams
+  usb_wait_anchor_empty_timeout
 
 # required by echi-pci.ko
   ehci_init_driver

@@ -110,10 +110,10 @@
   bpf_prog_put
   bpf_prog_sub
   bpf_stats_enabled_key
-  bpf_trace_run1
   bpf_trace_run10
   bpf_trace_run11
   bpf_trace_run12
+  bpf_trace_run1
   bpf_trace_run2
   bpf_trace_run3
   bpf_trace_run4
@@ -1103,10 +1103,8 @@
   i2c_register_driver
   i2c_smbus_read_byte
   i2c_smbus_read_byte_data
-  i2c_smbus_read_byte_data
   i2c_smbus_read_i2c_block_data
   i2c_smbus_write_byte
-  i2c_smbus_write_byte_data
   i2c_smbus_write_byte_data
   i2c_smbus_write_i2c_block_data
   __i2c_smbus_xfer
@@ -1538,8 +1536,8 @@
   nf_conntrack_destroy
   nla_memcpy
   __nla_parse
-  nla_put
   nla_put_64bit
+  nla_put
   __nlmsg_put
   no_llseek
   nonseekable_open
@@ -1549,8 +1547,8 @@
   nr_swap_pages
   ns_capable
   nsecs_to_jiffies
-  ns_to_timespec
   ns_to_timespec64
+  ns_to_timespec
   __num_online_cpus
   nvmem_cell_get
   nvmem_cell_put
@@ -2121,7 +2119,6 @@
   scsi_unblock_requests
   sdev_prefix_printk
   __sdhci_add_host
-  __sdhci_set_timeout
   sdhci_add_host
   sdhci_cleanup_host
   sdhci_cqe_disable
@@ -2135,6 +2132,7 @@
   sdhci_remove_host
   sdhci_reset
   sdhci_set_bus_width
+  __sdhci_set_timeout
   sdhci_setup_host
   search_binary_handler
   security_sock_graft
