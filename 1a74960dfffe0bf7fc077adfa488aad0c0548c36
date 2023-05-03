@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76f7ed26_e0a9cd94",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-03T17:48:09Z",
+      "side": 1,
+      "message": "can you add a \"Fixes:\" tag indicating the patch that introduced the issue? Is this fix needed in other ACK branches?",
+      "revId": "1a74960dfffe0bf7fc077adfa488aad0c0548c36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "998ac289_632dd038",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1575,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-03T17:48:09Z",
+      "side": 1,
+      "message": "\"value\" is local so no other entity can change it, so having the lock around the conditional doesn\u0027t protect anything. This would be the same:\n```\n  if (value \u003c 0) {\n    spin_lock_irqsave(\u0026gi-\u003espinlock, flags);\n    value \u003d composite_setup(gadget, c);\n    spin_unlock_irqrestore(\u0026gi-\u003espinlock, flags);\n  }\n```\nDoes this mean that the bug is really in `composite_setup()`? Do we know that this scenario can only happen with Android?",
+      "revId": "1a74960dfffe0bf7fc077adfa488aad0c0548c36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
