@@ -284272,6 +284272,18 @@ function {
   parameter_id: 0x0ee13889
 }
 function {
+  id: 0x5bba2c04
+  return_type_id: 0x18bd6530
+  parameter_id: 0x3b04bead
+  parameter_id: 0xf435685e
+  parameter_id: 0xf435685e
+  parameter_id: 0x1b2ca025
+  parameter_id: 0x1b2ca025
+  parameter_id: 0x344a8f68
+  parameter_id: 0x3e10b518
+  parameter_id: 0xa52a0930
+}
+function {
   id: 0x5bba39c6
   return_type_id: 0x18bd6530
   parameter_id: 0x3b04bead
@@ -309615,6 +309627,15 @@ elf_symbol {
   crc: 0x513072fe
   type_id: 0x1abe6e05
   full_name: "__drm_puts_seq_file"
+}
+elf_symbol {
+  id: 0xca790885
+  name: "__drmm_crtc_alloc_with_planes"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x76f9fa53
+  type_id: 0x5bba2c04
+  full_name: "__drmm_crtc_alloc_with_planes"
 }
 elf_symbol {
   id: 0x347ca344
@@ -356680,6 +356701,10 @@ symbols {
   symbol {
     key: "__drm_puts_seq_file"
     value: 0x817e893f
+  }
+  symbol {
+    key: "__drmm_crtc_alloc_with_planes"
+    value: 0xca790885
   }
   symbol {
     key: "__drmm_universal_plane_alloc"
