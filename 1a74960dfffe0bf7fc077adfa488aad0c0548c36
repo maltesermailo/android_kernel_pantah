@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc9a6cb7_addcbf68",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1957137
+      },
+      "writtenOn": "2023-05-04T18:08:27Z",
+      "side": 1,
+      "message": "Hi Todd,\n\n Sure, will push to all branches once this gerrit is mreged.\n \n \u003e And please add the \"Fixes:\" tag as I asked. I\u0027ve done the work for you now (I wish you had done it):\n \n Sorry for this. I didn\u0027t mention this in my reply as I wanted to fix it in my next version. Will include this tag in next version.",
+      "parentUuid": "564ea8b1_4d327e53",
+      "revId": "1a74960dfffe0bf7fc077adfa488aad0c0548c36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "998ac289_632dd038",
@@ -103,6 +121,24 @@
       "side": 1,
       "message": "\u003e Sure, I can put the spinlock inside the if check\n\nYes, please do. As is, the code causes the reader to assume that the lock is making the conditional atomic with the call to composite_setup() when it is really protecting only composite_setup() from other events.\n\n\u003e Hope my explanation is consistent with the patch and the commit text.\n\nYes, thanks for the explanation. Please add the rationale for android-only to the commit message.",
       "parentUuid": "21828959_f07a10ab",
+      "revId": "1a74960dfffe0bf7fc077adfa488aad0c0548c36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca665eb0_25f8c811",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1575,
+      "author": {
+        "id": 1957137
+      },
+      "writtenOn": "2023-05-04T18:08:27Z",
+      "side": 1,
+      "message": "Sure, will update the commit text with android-only rationale.",
+      "parentUuid": "b8b142ad_aa12ad5a",
       "revId": "1a74960dfffe0bf7fc077adfa488aad0c0548c36",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
