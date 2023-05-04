@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af3ba890_ffbc3155",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1937105
+      },
+      "writtenOn": "2023-05-04T05:37:39Z",
+      "side": 1,
+      "message": "Hi Todd. Only 2 instances were seen in 5.15 android13 branch. So for now I wanted to push only to this branch",
+      "parentUuid": "76f7ed26_e0a9cd94",
+      "revId": "1a74960dfffe0bf7fc077adfa488aad0c0548c36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "998ac289_632dd038",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-05-03T17:48:09Z",
       "side": 1,
       "message": "\"value\" is local so no other entity can change it, so having the lock around the conditional doesn\u0027t protect anything. This would be the same:\n```\n  if (value \u003c 0) {\n    spin_lock_irqsave(\u0026gi-\u003espinlock, flags);\n    value \u003d composite_setup(gadget, c);\n    spin_unlock_irqrestore(\u0026gi-\u003espinlock, flags);\n  }\n```\nDoes this mean that the bug is really in `composite_setup()`? Do we know that this scenario can only happen with Android?",
+      "revId": "1a74960dfffe0bf7fc077adfa488aad0c0548c36",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21828959_f07a10ab",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1575,
+      "author": {
+        "id": 1937105
+      },
+      "writtenOn": "2023-05-04T05:37:39Z",
+      "side": 1,
+      "message": "Sure, I can put the spinlock inside the if check.\n\nAnd regarding the composite setup, here is what I debugged:\n\n1. gi-\u003econnected flag is set to \u00270\u0027 by composite_disconnect indicating that cable is removed / composition is being teared down.\n\n2. If a setup packet comes, it check for the following condition according to today\u0027s code:\n\n1556 \tif (!gi-\u003econnected) {\n1557 \t\tgi-\u003econnected \u003d 1;\n1558 \t\tschedule_work(\u0026gi-\u003ework);\n1559 \t}\n\nSo, if android setup came after composite_disconnect, this value must be \u00271\u0027.\nBut in dumps, I see gi-\u003econnected \u003d 0  indicating that setup packet came first followed by composite disconnect. But somewhere after this check, the thread got delayed/stuck and I am not sure of the reason. And the thread carried on its work after composite disconnect is done and unbind was in progress. So not sure where exactly the control was stuck for a few ms in between,\n\nSo to avoid it, we added a spinlock before calling composite setup. It ensures we don\u0027t run into a fatal crash in two ways:\n\n1. If we hit composite_setup first followed by composite_disconnect, we would have taken the spinlock and disconnect would be waiting for the lock. So the setup packet going to composite_setup will be properly processed before disconnect/unbind.\n\n2. If we hit composite_disconnect first followed by composite_setup, we would still be fine as we only disabled the endpoints and we haven\u0027t done unbind yet. So as soon as composite_disconnect is complteted, the composite_setup is unblocked. We never hit this option, but this is what could happen and we would still not go into crash.\n\nEither ways we would be avoiding a fatal error by checking for this lock. Moreover configfs_composite_setup (upstream counterpart of android_setup) is taking this lock before calling composite_setup).\n\nIt is just the android_setup missing this lock.\n\nHope my explanation is consistent with the patch and the commit text.",
+      "parentUuid": "998ac289_632dd038",
       "revId": "1a74960dfffe0bf7fc077adfa488aad0c0548c36",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
