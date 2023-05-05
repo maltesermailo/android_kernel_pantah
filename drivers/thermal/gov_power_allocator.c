@@ -59,6 +59,8 @@ static inline s64 div_frac(s64 x, s64 y)
  *			governor switches on when this trip point is crossed.
  *			If the thermal zone only has one passive trip point,
  *			@trip_switch_on should be INVALID_TRIP.
+ * @last_switch_on_temp:Record the last switch_on_temp only when trips
+			are writable.
  * @trip_max_desired_temperature:	last passive trip point of the thermal
  *					zone.  The temperature we are
  *					controlling for.
@@ -70,6 +72,9 @@ struct power_allocator_params {
 	s64 err_integral;
 	s32 prev_err;
 	int trip_switch_on;
+#ifdef CONFIG_THERMAL_WRITABLE_TRIPS
+	int last_switch_on_temp;
+#endif
 	int trip_max_desired_temperature;
 	u32 sustainable_power;
 };
@@ -554,6 +559,25 @@ static void get_governor_trips(struct thermal_zone_device *tz,
 	}
 }
 
+#ifdef CONFIG_THERMAL_WRITABLE_TRIPS
+static bool power_allocator_throttle_update(struct thermal_zone_device *tz, int switch_on_temp)
+{
+	bool update;
+	struct power_allocator_params *params = tz->governor_data;
+	int last_switch_on_temp = params->last_switch_on_temp;
+
+	update = (tz->last_temperature >= last_switch_on_temp);
+	params->last_switch_on_temp = switch_on_temp;
+
+	return update;
+}
+#else
+static inline bool power_allocator_throttle_update(struct thermal_zone_device *tz, int switch_on_temp)
+{
+	return false;
+}
+#endif
+
 static void reset_pid_controller(struct power_allocator_params *params)
 {
 	params->err_integral = 0;
@@ -709,12 +733,15 @@ static int power_allocator_throttle(struct thermal_zone_device *tz, int trip_id)
 		return 0;
 
 	ret = __thermal_zone_get_trip(tz, params->trip_switch_on, &trip);
-	if (!ret && (tz->temperature < trip.temperature)) {
-		update = (tz->last_temperature >= trip.temperature);
-		tz->passive = 0;
-		reset_pid_controller(params);
-		allow_maximum_power(tz, update);
-		return 0;
+	if (!ret) {
+		update = power_allocator_throttle_update(tz, trip.temperature);
+		if (tz->temperature < trip.temperature) {
+			update |= (tz->last_temperature >= trip.temperature);
+			tz->passive = 0;
+			reset_pid_controller(params);
+			allow_maximum_power(tz, update);
+			return 0;
+		}
 	}
 
 	tz->passive = 1;
