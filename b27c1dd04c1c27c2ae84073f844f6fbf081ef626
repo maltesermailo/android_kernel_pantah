@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0aabc001_fe5ef1b6",
+        "filename": "make_goals.bzl",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-05-05T17:49:12Z",
+      "side": 1,
+      "message": "Are these variables used elsewhere? If not I\u0027d rather make them private in BUILD.bazel\n\nUnlike modules.bzl (which needs to be consistent with gki_defconfig for the list of in-tree modules), this list should only be used for our GKI. Perhaps you want to share it for device-modified GKI? (e.g. during development). However, for device-modified GKI, they should have their own GKI build config / BUILD files to define MAKE_GOALS, IMO. And if they are using GKI config fragments, then the target is still the one under //common covered by this.",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 22
+      },
+      "revId": "b27c1dd04c1c27c2ae84073f844f6fbf081ef626",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
