@@ -291841,6 +291841,14 @@ function {
   parameter_id: 0x038de60c
 }
 function {
+  id: 0x9b83c6f7
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x0d7ce7cc
+  parameter_id: 0x6720d32f
+  parameter_id: 0x11cfee5a
+}
+function {
   id: 0x9b858538
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -292184,6 +292192,14 @@ function {
   parameter_id: 0x01222f7d
   parameter_id: 0x3e10b518
   parameter_id: 0x4585663f
+}
+function {
+  id: 0x9ba6017c
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x0d7ce7cc
+  parameter_id: 0xf017819f
+  parameter_id: 0x13580d6c
 }
 function {
   id: 0x9ba6ac88
@@ -304458,6 +304474,15 @@ elf_symbol {
   full_name: "__traceiter_android_rvh_update_rt_rq_load_avg"
 }
 elf_symbol {
+  id: 0x09b5cc40
+  name: "__traceiter_android_rvh_usb_dev_suspend"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x32a5514f
+  type_id: 0x9ba6017c
+  full_name: "__traceiter_android_rvh_usb_dev_suspend"
+}
+elf_symbol {
   id: 0x13c17b96
   name: "__traceiter_android_rvh_util_est_update"
   is_defined: true
@@ -305034,6 +305059,15 @@ elf_symbol {
   full_name: "__traceiter_android_vh_si_meminfo"
 }
 elf_symbol {
+  id: 0xbc7bbb37
+  name: "__traceiter_android_vh_sound_usb_support_cpu_suspend"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x9bdad81a
+  type_id: 0x9b83c6f7
+  full_name: "__traceiter_android_vh_sound_usb_support_cpu_suspend"
+}
+elf_symbol {
   id: 0x58e7556b
   name: "__traceiter_android_vh_sync_txn_recvd"
   is_defined: true
@@ -305176,6 +305210,15 @@ elf_symbol {
   crc: 0x68f34378
   type_id: 0x9bb1b638
   full_name: "__traceiter_android_vh_ufs_update_sysfs"
+}
+elf_symbol {
+  id: 0xd0e4682b
+  name: "__traceiter_android_vh_usb_dev_resume"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x0f0c3398
+  type_id: 0x9ba6017c
+  full_name: "__traceiter_android_vh_usb_dev_resume"
 }
 elf_symbol {
   id: 0x08824ed3
@@ -306177,6 +306220,15 @@ elf_symbol {
   full_name: "__tracepoint_android_rvh_update_rt_rq_load_avg"
 }
 elf_symbol {
+  id: 0xbe0b79ae
+  name: "__tracepoint_android_rvh_usb_dev_suspend"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x6590059a
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_rvh_usb_dev_suspend"
+}
+elf_symbol {
   id: 0xa68c0f10
   name: "__tracepoint_android_rvh_util_est_update"
   is_defined: true
@@ -306753,6 +306805,15 @@ elf_symbol {
   full_name: "__tracepoint_android_vh_si_meminfo"
 }
 elf_symbol {
+  id: 0x4ed55b15
+  name: "__tracepoint_android_vh_sound_usb_support_cpu_suspend"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0xeebbff94
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_sound_usb_support_cpu_suspend"
+}
+elf_symbol {
   id: 0x39e68fed
   name: "__tracepoint_android_vh_sync_txn_recvd"
   is_defined: true
@@ -306895,6 +306956,15 @@ elf_symbol {
   crc: 0x91d4e8dc
   type_id: 0x18ccbd2c
   full_name: "__tracepoint_android_vh_ufs_update_sysfs"
+}
+elf_symbol {
+  id: 0x990b2371
+  name: "__tracepoint_android_vh_usb_dev_resume"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x32f2ae2b
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_usb_dev_resume"
 }
 elf_symbol {
   id: 0xe100c3ad
@@ -345977,6 +346047,10 @@ symbols {
     value: 0xfaa2e0a4
   }
   symbol {
+    key: "__traceiter_android_rvh_usb_dev_suspend"
+    value: 0x09b5cc40
+  }
+  symbol {
     key: "__traceiter_android_rvh_util_est_update"
     value: 0x13c17b96
   }
@@ -346233,6 +346307,10 @@ symbols {
     value: 0x95030fb3
   }
   symbol {
+    key: "__traceiter_android_vh_sound_usb_support_cpu_suspend"
+    value: 0xbc7bbb37
+  }
+  symbol {
     key: "__traceiter_android_vh_sync_txn_recvd"
     value: 0x58e7556b
   }
@@ -346295,6 +346373,10 @@ symbols {
   symbol {
     key: "__traceiter_android_vh_ufs_update_sysfs"
     value: 0xcc8dcd0c
+  }
+  symbol {
+    key: "__traceiter_android_vh_usb_dev_resume"
+    value: 0xd0e4682b
   }
   symbol {
     key: "__traceiter_android_vh_use_amu_fie"
@@ -346741,6 +346823,10 @@ symbols {
     value: 0xaa2da792
   }
   symbol {
+    key: "__tracepoint_android_rvh_usb_dev_suspend"
+    value: 0xbe0b79ae
+  }
+  symbol {
     key: "__tracepoint_android_rvh_util_est_update"
     value: 0xa68c0f10
   }
@@ -346997,6 +347083,10 @@ symbols {
     value: 0xfa7ab445
   }
   symbol {
+    key: "__tracepoint_android_vh_sound_usb_support_cpu_suspend"
+    value: 0x4ed55b15
+  }
+  symbol {
     key: "__tracepoint_android_vh_sync_txn_recvd"
     value: 0x39e68fed
   }
@@ -347059,6 +347149,10 @@ symbols {
   symbol {
     key: "__tracepoint_android_vh_ufs_update_sysfs"
     value: 0xaf7a4dba
+  }
+  symbol {
+    key: "__tracepoint_android_vh_usb_dev_resume"
+    value: 0x990b2371
   }
   symbol {
     key: "__tracepoint_android_vh_use_amu_fie"
