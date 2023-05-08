@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f6c6712_a0b75b05",
+        "filename": "drivers/android/process.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2023-05-08T15:45:41Z",
+      "side": 1,
+      "message": "I\u0027m not sure what RustFormatter is complaining about in these Cls...the diff looks the same.",
+      "revId": "cf7f525ca5efc1d16e8ab775055e2a903d1ee218",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "408165a2_59f59908",
+        "filename": "drivers/android/range_alloc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2023-05-08T15:45:41Z",
+      "side": 1,
+      "message": "Perhaps this is why C binder separates Free descriptors from the rest. Oneway spam detection makes oneway reservations O(n) despite the red-black trees.  At least if they were separated it\u0027d be O(n) the allocated descriptors only.",
+      "revId": "cf7f525ca5efc1d16e8ab775055e2a903d1ee218",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3b066db_19f7600b",
+        "filename": "drivers/android/range_alloc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2023-05-08T15:45:41Z",
+      "side": 1,
+      "message": "None of these tests compile now...maybe we can get a temporary (internal) commit with davidgow@\u0027s rust kunit feature.",
+      "revId": "cf7f525ca5efc1d16e8ab775055e2a903d1ee218",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
