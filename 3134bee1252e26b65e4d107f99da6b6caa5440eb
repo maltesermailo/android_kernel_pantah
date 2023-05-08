@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000044443242",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2578318?revision\u003d10",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "daf7f2df_92a5cb95",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-05-08T15:34:44Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/8f40fc0808137c157dd408d2632e63bfca2aecdb) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d8f40fc0808137c157dd408d2632e63bfca2aecdb)\n\n```\n      ## drivers/usb/dwc3/gadget.c ##\n     @@ drivers/usb/dwc3/gadget.c: int dwc3_gadget_set_link_state(struct dwc3 *dwc, enum dwc3_link_state state)\n      \treturn -ETIMEDOUT;\n    @@ drivers/usb/dwc3/gadget.c: int dwc3_gadget_set_link_state(struct dwc3 *dwc, enum\n       * dwc3_ep_inc_trb - increment a trb index.\n       * @index: Pointer to the TRB index to increment.\n     @@ drivers/usb/dwc3/gadget.c: static int dwc3_gadget_soft_disconnect(struct dwc3 *dwc)\n    - \t\tret \u003d wait_for_completion_timeout(\u0026dwc-\u003eep0_in_setup,\n    - \t\t\t\tmsecs_to_jiffies(DWC3_PULL_UP_TIMEOUT));\n    - \t\tif (ret \u003d\u003d 0) {\n    --\t\t\tunsigned int    dir;\n    --\n    + \n      \t\t\tdev_warn(dwc-\u003edev, \"wait for SETUP phase timed out\\n\");\n      \t\t\tspin_lock_irqsave(\u0026dwc-\u003elock, flags);\n     -\t\t\tdir \u003d !!dwc-\u003eep0_expect_in;\n    @@ drivers/usb/dwc3/gadget.c: static int dwc3_gadget_soft_disconnect(struct dwc3 *d\n      \t\t}\n      \t}\n     @@ drivers/usb/dwc3/gadget.c: static void dwc3_gadget_disconnect_interrupt(struct dwc3 *dwc)\n    - \tdwc3_gadget_enable_linksts_evts(dwc, false);\n    + \tdwc-\u003esetup_packet_pending \u003d false;\n      \tusb_gadget_set_state(dwc-\u003egadget, USB_STATE_NOTATTACHED);\n      \n     -\tif (dwc-\u003eep0state !\u003d EP0_SETUP_PHASE) {\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 529417583 android-build.ayeaye-python-dispatcher_20230504.05_p0",
+      "revId": "3134bee1252e26b65e4d107f99da6b6caa5440eb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
