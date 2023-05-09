@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "afde9f51_ca92def1",
+        "filename": "drivers/android/process.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-05-09T07:51:33Z",
+      "side": 1,
+      "message": "I think the RustFormatter lint uses a slightly different configuration than what Rust for Linux uses. (Rust for Linux uses the default config.)",
+      "parentUuid": "3f6c6712_a0b75b05",
+      "revId": "cf7f525ca5efc1d16e8ab775055e2a903d1ee218",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "408165a2_59f59908",
         "filename": "drivers/android/range_alloc.rs",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2023-05-08T15:45:41Z",
       "side": 1,
       "message": "Perhaps this is why C binder separates Free descriptors from the rest. Oneway spam detection makes oneway reservations O(n) despite the red-black trees.  At least if they were separated it\u0027d be O(n) the allocated descriptors only.",
+      "revId": "cf7f525ca5efc1d16e8ab775055e2a903d1ee218",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14849f28_a9247f21",
+        "filename": "drivers/android/range_alloc.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-05-09T07:51:33Z",
+      "side": 1,
+      "message": "My understanding is that it only makes oneway spam detection O(n) when the oneway space is almost filled.",
+      "parentUuid": "408165a2_59f59908",
       "revId": "cf7f525ca5efc1d16e8ab775055e2a903d1ee218",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
