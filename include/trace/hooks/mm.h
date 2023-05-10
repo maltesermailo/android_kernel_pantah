@@ -12,6 +12,11 @@
 struct shmem_inode_info;
 struct folio;
 
+DECLARE_HOOK(android_vh_handle_mm_fault,
+	TP_PROTO(struct vm_area_struct *vma, unsigned long addr,
+		unsigned int flags, vm_fault_t fault),
+	TP_ARGS(vma, addr, flags, fault));
+
 DECLARE_RESTRICTED_HOOK(android_rvh_shmem_get_folio,
 			TP_PROTO(struct shmem_inode_info *info, struct folio **folio),
 			TP_ARGS(info, folio), 2);
