@@ -92,6 +92,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dup_task_struct);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_find_energy_efficient_cpu);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_cpus_allowed_comm);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sched_setaffinity_early);
+<<<<<<< HEAD   (958d0e ANDROID: sched: Add vendor hooks for cpu affinity.)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sched_pelt_multiplier);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_post_init_entity_util_avg);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_attach_entity_load_avg);
@@ -108,3 +109,9 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_load_avg_se);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_load_avg_cfs_rq);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_rt_rq_load_avg_internal);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_map_util_freq);
+||||||| BASE
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_account_process_tick_gran);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_account_process_tick_gran);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_account_task_time);
+>>>>>>> CHANGE (c92b19 ANDROID: vendor_hooks: Add hooks for account process tick)
