@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000044974301",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2591093?revision\u003d4",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "7e696243_97dc0512",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-05-16T10:59:20Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against [change 2539895](https://android-review.googlesource.com/c/2539895)\n\n```\n      ## fs/erofs/zdata.c ##\n     @@ fs/erofs/zdata.c: int __init z_erofs_init_zip_subsystem(void)\n      \n      \tz_erofs_workqueue \u003d alloc_workqueue(\"erofs_worker\",\n      \t\t\tWQ_UNBOUND | WQ_HIGHPRI, num_possible_cpus());\n    --\tif (!z_erofs_workqueue)\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c PATCH SET (ca1654 UPSTREAM: erofs: fix an error code in z_erofs_init_zip_subsy)\n     +\tif (!z_erofs_workqueue) {\n     +\t\terr \u003d -ENOMEM;\n    - \t\tgoto out_error_workqueue_init;\n    ++\t\tgoto out_error_workqueue_init;\n     +\t}\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    + \tif (!z_erofs_workqueue)\n    + \t\tgoto out_error_workqueue_init;\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e BASE      (4b0d70 BACKPORT: erofs: add per-cpu threads for decompression as an)\n      \n      \terr \u003d erofs_init_percpu_workers();\n      \tif (err)\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 532136650 android-build.ayeaye-python-dispatcher_20230515.05_p0",
+      "revId": "645f6ecdb3016a5c97a714b5c2b0cbdd1d7c56a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000044974301",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2591093?revision\u003d4",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "2265dda5_20257aeb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-05-16T10:59:20Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/8d1b80a79452630f157bf634ae9cfcd9f4eed161) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d8d1b80a79452630f157bf634ae9cfcd9f4eed161)\n\n```\n      ## fs/erofs/zdata.c ##\n     @@ fs/erofs/zdata.c: int __init z_erofs_init_zip_subsystem(void)\n      \n      \tz_erofs_workqueue \u003d alloc_workqueue(\"erofs_worker\",\n      \t\t\tWQ_UNBOUND | WQ_HIGHPRI, num_possible_cpus());\n    --\tif (!z_erofs_workqueue)\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c PATCH SET (ca1654 UPSTREAM: erofs: fix an error code in z_erofs_init_zip_subsy)\n     +\tif (!z_erofs_workqueue) {\n     +\t\terr \u003d -ENOMEM;\n    - \t\tgoto out_error_workqueue_init;\n    ++\t\tgoto out_error_workqueue_init;\n     +\t}\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    + \tif (!z_erofs_workqueue)\n    + \t\tgoto out_error_workqueue_init;\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e BASE      (4b0d70 BACKPORT: erofs: add per-cpu threads for decompression as an)\n      \n      \terr \u003d erofs_init_percpu_workers();\n      \tif (err)\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 532136650 android-build.ayeaye-python-dispatcher_20230515.05_p0",
+      "revId": "645f6ecdb3016a5c97a714b5c2b0cbdd1d7c56a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
