@@ -151,7 +151,11 @@ int blk_crypto_init_key(struct blk_crypto_key *blk_key,
 int blk_crypto_start_using_key(struct block_device *bdev,
 			       const struct blk_crypto_key *key);
 
+<<<<<<< HEAD   (7352c1 UPSTREAM: netfilter: nf_tables: deactivate anonymous set fro)
 void blk_crypto_evict_key(struct block_device *bdev,
+=======
+void blk_crypto_evict_key(struct request_queue *q,
+>>>>>>> BRANCH (b0ece6 Linux 5.15.111)
 			  const struct blk_crypto_key *key);
 
 bool blk_crypto_config_supported_natively(struct block_device *bdev,
