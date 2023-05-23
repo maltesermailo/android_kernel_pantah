@@ -492,6 +492,7 @@
       <elf-symbol name='bpf_trace_run9' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x83d8502e'/>
       <elf-symbol name='bpf_warn_invalid_xdp_action' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5c2bcd37'/>
       <elf-symbol name='bprm_change_interp' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb6d43c06'/>
+      <elf-symbol name='br_fdb_find_port' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc1fa0614'/>
       <elf-symbol name='bsearch' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x50a90e8d'/>
       <elf-symbol name='bt_err' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7b8c32f1'/>
       <elf-symbol name='bt_info' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x718b8b7'/>
@@ -158476,6 +158477,14 @@
         <return type-id='48b5725f'/>
       </function-decl>
     </abi-instr>
+    <abi-instr address-size='64' path='net/bridge/br_fdb.c' language='LANG_C89'>
+      <function-decl name='br_fdb_find_port' mangled-name='br_fdb_find_port' filepath='net/bridge/br_fdb.c' line='119' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='br_fdb_find_port'>
+        <parameter type-id='2ce52478' name='br_dev' filepath='net/bridge/br_fdb.c' line='119' column='1'/>
+        <parameter type-id='354f7eb9' name='addr' filepath='net/bridge/br_fdb.c' line='120' column='1'/>
+        <parameter type-id='d315442e' name='vid' filepath='net/bridge/br_fdb.c' line='121' column='1'/>
+        <return type-id='68a2d05b'/>
+      </function-decl>
+    </abi-instr>
     <abi-instr address-size='64' path='net/core/datagram.c' language='LANG_C89'>
       <function-decl name='skb_copy_datagram_iter' mangled-name='skb_copy_datagram_iter' filepath='net/core/datagram.c' line='533' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='skb_copy_datagram_iter'>
         <parameter type-id='11f4a000' name='skb' filepath='net/core/datagram.c' line='533' column='1'/>
@@ -166325,7 +166334,7 @@
           <var-decl name='' type-id='eb542e10' visibility='default' filepath='include/net/mac80211.h' line='1796' column='1'/>
         </data-member>
       </class-decl>
-      <union-decl name='__anonymous_union__25' size-in-bits='160' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1796' column='1' id='eb542e10'>
+      <union-decl name='__anonymous_union__3' size-in-bits='160' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1796' column='1' id='eb542e10'>
         <data-member access='public'>
           <var-decl name='tkip' type-id='5a0ae575' visibility='default' filepath='include/net/mac80211.h' line='1800' column='1'/>
         </data-member>
@@ -166345,7 +166354,7 @@
           <var-decl name='hw' type-id='ea135534' visibility='default' filepath='include/net/mac80211.h' line='1816' column='1'/>
         </data-member>
       </union-decl>
-      <class-decl name='__anonymous_struct__3' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1797' column='1' id='5a0ae575'>
+      <class-decl name='__anonymous_struct__2' size-in-bits='64' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1797' column='1' id='5a0ae575'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='iv32' type-id='19c2251e' visibility='default' filepath='include/net/mac80211.h' line='1798' column='1'/>
         </data-member>
@@ -166353,12 +166362,12 @@
           <var-decl name='iv16' type-id='1dc6a898' visibility='default' filepath='include/net/mac80211.h' line='1799' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__4' size-in-bits='48' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1801' column='1' id='71c656e5'>
+      <class-decl name='__anonymous_struct__3' size-in-bits='48' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1801' column='1' id='71c656e5'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='pn' type-id='cf1a4160' visibility='default' filepath='include/net/mac80211.h' line='1802' column='1'/>
         </data-member>
       </class-decl>
-      <class-decl name='__anonymous_struct__8' size-in-bits='136' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1813' column='1' id='ea135534'>
+      <class-decl name='__anonymous_struct__7' size-in-bits='136' is-struct='yes' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='1813' column='1' id='ea135534'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='seq' type-id='0d8415b5' visibility='default' filepath='include/net/mac80211.h' line='1814' column='1'/>
         </data-member>
@@ -166489,7 +166498,7 @@
         <enumerator name='BAR_RX_EVENT' value='2'/>
         <enumerator name='BA_FRAME_TIMEOUT' value='3'/>
       </enum-decl>
-      <union-decl name='__anonymous_union__26' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='457' column='1' id='2a1a3e21'>
+      <union-decl name='__anonymous_union__4' size-in-bits='128' is-anonymous='yes' visibility='default' filepath='include/net/mac80211.h' line='457' column='1' id='2a1a3e21'>
         <data-member access='public'>
           <var-decl name='rssi' type-id='1569e170' visibility='default' filepath='include/net/mac80211.h' line='458' column='1'/>
         </data-member>
