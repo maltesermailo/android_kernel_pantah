@@ -313340,6 +313340,11 @@ function {
   parameter_id: 0x18bd6530
 }
 function {
+  id: 0xbe7f3441
+  return_type_id: 0x0a747547
+  parameter_id: 0x315b7e01
+}
+function {
   id: 0xbec298be
   return_type_id: 0x3176a085
   parameter_id: 0x347303b4
@@ -336461,6 +336466,15 @@ elf_symbol {
   crc: 0x2151778a
   type_id: 0x1cce8e13
   full_name: "drm_crtc_vblank_reset"
+}
+elf_symbol {
+  id: 0x2ca7efbd
+  name: "drm_crtc_vblank_waitqueue"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xdb4e96be
+  type_id: 0xbe7f3441
+  full_name: "drm_crtc_vblank_waitqueue"
 }
 elf_symbol {
   id: 0x94cd1327
@@ -376059,6 +376073,7 @@ interface {
   symbol_id: 0xa05d587d
   symbol_id: 0x19d409c4
   symbol_id: 0x427db265
+  symbol_id: 0x2ca7efbd
   symbol_id: 0x94cd1327
   symbol_id: 0x9a9fe23f
   symbol_id: 0x6d0482ba
