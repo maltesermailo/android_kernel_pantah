@@ -716,5 +716,11 @@ static inline bool mem_cgroup_swap_full(struct folio *folio)
 }
 #endif
 
+enum swap_entry_type {
+	SWP_WRITEBACK = 1,
+	SWP_SAME,
+	SWP_HUGE,
+};
+
 #endif /* __KERNEL__*/
 #endif /* _LINUX_SWAP_H */
