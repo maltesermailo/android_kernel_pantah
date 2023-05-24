@@ -16,6 +16,24 @@
       "message": "why is this needed here, but not for the android14-6.1 version of this?",
       "revId": "8ff47db713c6f4f67f70028699ac27e02bba6acd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04093d06_0fb44950",
+        "filename": "kernel/sched/cpufreq_schedutil.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2023-05-24T19:03:53Z",
+      "side": 1,
+      "message": "The issue is that on 5.10 we don\u0027t have sched_cpu_util() function - so I had to pull it. But on 5.15 nd 6.1 this function is defined in core.c; so it only depends on CONFIG_SMP.\nBut when I tried to pull up the patches from Viresh that introduced this function, there were conflicts that made me uncomfortable to deal with without more additional testing to verify I don\u0027t accidentally break other things. so I opted to just pull in this function - but it relies on schedutil_cpu_util() function which is defined in cpufreq_schedutil.c instead of core.c like it is in 5.15 and 6.1. This means for 5.10 we need to depend on CONFIG_CPU_FREQ_GOV_SCHEDUTIL.\n\nI expanded the commit message and pushed an updated patch that I did verify it builds against the reported config now.",
+      "parentUuid": "8481ba2a_55578dbe",
+      "revId": "8ff47db713c6f4f67f70028699ac27e02bba6acd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
