@@ -70,6 +70,30 @@
       },
       "revId": "bcdb7eec6730d2a2a5bbd858fa281351f772d14f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "926591e3_d653d10b",
+        "filename": "mm/madvise.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1988826
+      },
+      "writtenOn": "2023-05-25T05:43:50Z",
+      "side": 1,
+      "message": "Yes.\nWould it be better to have a vendor hook to decide behavior?\nSomething like this?\n\n@@ -350,6 +351,8 @@ static int madvise_cold_or_pageout_pte_range(pmd_t *pmd,\n        struct page *page \u003d NULL;\n        LIST_HEAD(page_list);\n        bool pageout_anon_only_filter;\n+       bool allow_writeback \u003d false;\n+       swp_entry_t entry;\n \n        if (fatal_signal_pending(current))\n                return -EINTR;\n@@ -357,6 +360,9 @@ static int madvise_cold_or_pageout_pte_range(pmd_t *pmd,\n        pageout_anon_only_filter \u003d pageout \u0026\u0026 !vma_is_anonymous(vma) \u0026\u0026\n                                        !can_do_file_pageout(vma);\n \n+       if (pageout)\n+               trace_android_vh_madvise_pageout(\u0026allow_writeback);",
+      "parentUuid": "a326486c_7f0059ce",
+      "range": {
+        "startLine": 449,
+        "startChar": 27,
+        "endLine": 449,
+        "endChar": 35
+      },
+      "revId": "bcdb7eec6730d2a2a5bbd858fa281351f772d14f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
