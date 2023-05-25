@@ -2731,6 +2731,9 @@ static int load_module(struct load_info *info, const char __user *uargs,
 	struct module *mod;
 	long err = 0;
 	char *after_dashes;
+	bool is_wlan = false;
+
+	pr_info("VILAS: Module started loading\n");
 
 	/*
 	 * Do the signature check (if any) first. All that
@@ -2899,14 +2902,23 @@ static int load_module(struct load_info *info, const char __user *uargs,
 			goto sysfs_cleanup;
 	}
 
+	if (!strcmp(info->name, "bcmdhd4389")) {
+		is_wlan = true;
+	}
+
 	/* Get rid of temporary copy. */
 	free_copy(info, flags);
 
 	/* Done! */
 	trace_module_load(mod);
 
-	return do_init_module(mod);
+	pr_info("VILAS: Module %s finished loading\n", mod->name);
 
+	if (!is_wlan) {	
+		return do_init_module(mod);
+	} else {
+		return 0;
+	}
  sysfs_cleanup:
 	mod_sysfs_teardown(mod);
  coming_cleanup:
