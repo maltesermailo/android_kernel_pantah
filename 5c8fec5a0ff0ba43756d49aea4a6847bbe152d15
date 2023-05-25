@@ -16,6 +16,24 @@
       "message": "From https://lore.kernel.org/all/a49619b7-2340-2726-8c7e-df6ff0c1793a@gmail.com/: \"Typically extensions to the core require at least one user. So you should\nadd your driver, that makes use of the changes, to the series.\nAnd best explain what\u0027s special with your hardware so that it needs a core\nextension whilst drivers for other hardware are fine with the core as-is.\"\n\nPlease follow the upstream-first policy.",
       "revId": "5c8fec5a0ff0ba43756d49aea4a6847bbe152d15",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b35cca57_700a0e9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1936708
+      },
+      "writtenOn": "2023-05-25T17:38:09Z",
+      "side": 1,
+      "message": "Hi Bart,\n\nThanks for your comment.\n\nWe already had discussions for the same in below patch and were about to post the series but we are facing resistance in the upstream community as they don\u0027t want these hooks.\n\nBut as per the earlier discussions we got the intuition that maintainability was the main concern by upstream (1000+ lines of code) hence we came up with this newer approach of hooks to limit the lines of code in core layer by bringing the complete code inside vendor specific files just by adding two hooks but seems like we need to revive the older thread again in upstream and get the clarity on what direction we need to go in which will take some time. Meanwhile can we please have these patches for the current ACK kernel and meanwhile we\u0027ll continue the discussion with upstream.\n\nhttps://patchwork.kernel.org/project/linux-mmc/patch/20230401165723.19762-2-quic_sartgarg@quicinc.com/",
+      "parentUuid": "e78302bb_9b250076",
+      "revId": "5c8fec5a0ff0ba43756d49aea4a6847bbe152d15",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
