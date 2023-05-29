@@ -16,6 +16,24 @@
       "message": "`bio_crypt_set_ctx()` is only needed by kernel subsystems that provide a storage encryption system, for example fscrypt.  GKI intentionally doesn\u0027t support providing storage encryption systems in vendor modules, as this is an area that needs to be *very* carefully reviewed.  This code is built-in to GKI in order to ensure security, correctness, and updatability.",
       "revId": "dd46dc2855e00c750de99c07d160144081fac9fb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "703fc8d8_7158cf6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1749518
+      },
+      "writtenOn": "2023-05-29T13:48:25Z",
+      "side": 1,
+      "message": "Hi Eric,\nOK, understood. Besides bio_crypt_set_ctx(), Is the symbol __bio_crypt_clone is allowed to export?",
+      "parentUuid": "d26d7db1_9c39b2d7",
+      "revId": "dd46dc2855e00c750de99c07d160144081fac9fb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
