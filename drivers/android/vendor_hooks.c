@@ -415,6 +415,10 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_inactive_ratio);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_hibernation_swap);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_cpu_resume);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_hib_resume_bdev);
+<<<<<<< PATCH SET (98c517 ANDROID: Add vendor hook for page allocation)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_alloc_highpage_movable_gfp_adjust);
+
+=======
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_dma_buf_stats_teardown);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_cold_or_pageout);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_retry);
@@ -428,6 +432,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_direct_io_update_bio);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_loop_prepare_cmd);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_psi_event);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_psi_group);
+>>>>>>> BASE      (76ef69 ANDROID: GKI: Revert "ANDROID: GKI: Enable HCTR2")
 /*
  * For type visibility
  */
