@@ -281054,6 +281054,13 @@ function {
   parameter_id: 0x19c40476
 }
 function {
+  id: 0x16d1bcdb
+  return_type_id: 0x48b5725f
+  parameter_id: 0x1f66cd75
+  parameter_id: 0x6720d32f
+  parameter_id: 0x33756485
+}
+function {
   id: 0x16d5560c
   return_type_id: 0x48b5725f
   parameter_id: 0x19341e7e
@@ -281244,6 +281251,12 @@ function {
   parameter_id: 0x1830dd64
   parameter_id: 0x6720d32f
   parameter_id: 0x6d7f5ff6
+}
+function {
+  id: 0x1713ee74
+  return_type_id: 0x48b5725f
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x33756485
 }
 function {
   id: 0x171a00e6
@@ -288779,6 +288792,13 @@ function {
   parameter_id: 0x3b04bead
   parameter_id: 0x0b30ee00
   parameter_id: 0x4585663f
+}
+function {
+  id: 0x4f8ed2d9
+  return_type_id: 0x18ea6ae3
+  parameter_id: 0x3e10b518
+  parameter_id: 0x6720d32f
+  parameter_id: 0x1253769c
 }
 function {
   id: 0x4fb5a2ed
@@ -325138,6 +325158,15 @@ elf_symbol {
   full_name: "_totalram_pages"
 }
 elf_symbol {
+  id: 0x993e379e
+  name: "_trace_android_vh_record_pcpu_rwsem_starttime"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd76b6e07
+  type_id: 0x1713ee74
+  full_name: "_trace_android_vh_record_pcpu_rwsem_starttime"
+}
+elf_symbol {
   id: 0x86a88093
   name: "_vb2_fop_release"
   is_defined: true
@@ -339715,6 +339744,15 @@ elf_symbol {
   full_name: "filp_close"
 }
 elf_symbol {
+  id: 0x8bbdb127
+  name: "filp_open_block"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe1de814f
+  type_id: 0x4f8ed2d9
+  full_name: "filp_open_block"
+}
+elf_symbol {
   id: 0xeaf15c9b
   name: "find_extend_vma"
   is_defined: true
@@ -344765,6 +344803,15 @@ elf_symbol {
   crc: 0xc6e6031d
   type_id: 0x1b341a0e
   full_name: "iommu_detach_device"
+}
+elf_symbol {
+  id: 0x4c05b91e
+  name: "iommu_dev_disable_feature"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xacef097d
+  type_id: 0x9e5b71a8
+  full_name: "iommu_dev_disable_feature"
 }
 elf_symbol {
   id: 0xa5459730
@@ -351827,6 +351874,15 @@ elf_symbol {
   crc: 0x1414db1e
   type_id: 0x2c22370c
   full_name: "of_nvmem_device_get"
+}
+elf_symbol {
+  id: 0x7e41af4d
+  name: "of_pci_get_max_link_speed"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6626fa1d
+  type_id: 0x909c23c2
+  full_name: "of_pci_get_max_link_speed"
 }
 elf_symbol {
   id: 0x2d5d9d4f
@@ -359444,6 +359500,15 @@ elf_symbol {
   crc: 0xd653b126
   type_id: 0x102bb271
   full_name: "sched_clock"
+}
+elf_symbol {
+  id: 0xe224f61e
+  name: "sched_clock_register"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x86d43be9
+  type_id: 0x16d1bcdb
+  full_name: "sched_clock_register"
 }
 elf_symbol {
   id: 0xd2090791
@@ -374815,6 +374880,7 @@ interface {
   symbol_id: 0x69bac57e
   symbol_id: 0xa5eaf571
   symbol_id: 0x7c570dc6
+  symbol_id: 0x993e379e
   symbol_id: 0x86a88093
   symbol_id: 0xfbb6649f
   symbol_id: 0xa3514d5f
@@ -376434,6 +376500,7 @@ interface {
   symbol_id: 0x9e942fbe
   symbol_id: 0x46b6e531
   symbol_id: 0xb9dc79d0
+  symbol_id: 0x8bbdb127
   symbol_id: 0xeaf15c9b
   symbol_id: 0x02b1ce77
   symbol_id: 0x90d375c5
@@ -376995,6 +377062,7 @@ interface {
   symbol_id: 0xd24a70f6
   symbol_id: 0xe80863b1
   symbol_id: 0xd81a7d03
+  symbol_id: 0x4c05b91e
   symbol_id: 0xa5459730
   symbol_id: 0xe77a1ae2
   symbol_id: 0x0faa1a3d
@@ -377780,6 +377848,7 @@ interface {
   symbol_id: 0xe6c411fe
   symbol_id: 0xc4acef3c
   symbol_id: 0x24945e17
+  symbol_id: 0x7e41af4d
   symbol_id: 0x2d5d9d4f
   symbol_id: 0x99aacdb6
   symbol_id: 0xf330039e
@@ -378626,6 +378695,7 @@ interface {
   symbol_id: 0xe8c754b0
   symbol_id: 0x12fb2fd6
   symbol_id: 0xac6ce0b0
+  symbol_id: 0xe224f61e
   symbol_id: 0xd2090791
   symbol_id: 0xedd0d1ed
   symbol_id: 0xda5d60be
