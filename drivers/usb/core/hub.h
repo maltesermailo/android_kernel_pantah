@@ -73,6 +73,11 @@ struct usb_hub {
 	spinlock_t		irq_urb_lock;
 	struct timer_list	irq_urb_retry;
 	struct usb_port		**ports;
+
+	bool			support_usbbox;
+	int			ovc_status;
+	int			charge_port;
+	int			charge_status;
 };
 
 /**
@@ -109,6 +114,18 @@ struct usb_port {
 	unsigned int is_superspeed:1;
 	unsigned int usb3_lpm_u1_permit:1;
 	unsigned int usb3_lpm_u2_permit:1;
+};
+
+/**
+ * struct usbbox_whitelist - usbbox whitelist
+ * @vid_mask: mask of Vendor ID
+ * @pid_mask: mask of Product ID
+ *
+ * USB BOX white list.
+ */
+struct usbbox_whitelist {
+	u32 vid_mask;
+	u32 pid_mask;
 };
 
 #define to_usb_port(_dev) \

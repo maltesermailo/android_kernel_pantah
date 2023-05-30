@@ -117,6 +117,384 @@ EXPORT_SYMBOL_GPL(ehci_cf_port_reset_rwsem);
 #define HUB_DEBOUNCE_STEP	  25
 #define HUB_DEBOUNCE_STABLE	 100
 
+static void hub_power_on(struct usb_hub *hub, bool do_delay);
+static void hub_notify_ovc_status(struct usb_hub *hub, int status, int port1);
+static void hub_notify_charge_status(struct usb_hub *hub, int status, int port1);
+
+static inline int hub_is_child_of_roothub(struct usb_device *hdev)
+{
+	return  (hdev && hdev->parent &&
+		 (hdev->parent == hdev->bus->root_hub));
+}
+
+static ssize_t ovc_status_show(struct device *dev,
+				       struct device_attribute *attr, char *buf)
+{
+	struct usb_device *hdev = to_usb_device(dev);
+	struct usb_hub *hub;
+	int status;
+	int port;
+	int len;
+
+	if (!hub_is_child_of_roothub(hdev))
+		return 0;
+
+	hub = usb_hub_to_struct_hub(hdev);
+	if (!hub)
+		return 0;
+
+	if (hub->support_usbbox != 1)
+		len = scnprintf(buf, PAGE_SIZE, "%d\n", -1);
+	else {
+
+		len = 0;
+
+		for (port = 1; port <= 2; port++) {
+			status = ((hub->ovc_status) & (1 << port));
+			if (status != 0)
+				buf[len] = '1';
+			else
+				buf[len] = '0';
+			len++;
+		}
+
+		buf[len] = '\n';
+		len++;
+
+	}
+
+	return len;
+}
+
+static ssize_t ovc_status_store(struct device *dev,
+					struct device_attribute *attr,
+					const char *buf, size_t count)
+{
+	struct usb_device *hdev = to_usb_device(dev);
+	struct usb_hub *hub;
+	int kstr_error = -1;
+	int res = 0;
+
+	if (!hub_is_child_of_roothub(hdev))
+		return count;
+
+	hub = usb_hub_to_struct_hub(hdev);
+	if (!hub)
+		return count;
+
+	if ((hub->support_usbbox != 1) || (hub->ovc_status != 1))
+		return count;
+
+	kstr_error = kstrtoint(buf, 0, &res);
+	if ((kstr_error == 0) && (res == 1)) {
+		hub_notify_ovc_status(hub, 0, 0);
+		hub_power_on(hub, true);
+	}
+
+	return count;
+}
+
+static DEVICE_ATTR_RW(ovc_status);
+
+static ssize_t charge_status_show(struct device *dev,
+				       struct device_attribute *attr, char *buf)
+{
+	struct usb_device *hdev = to_usb_device(dev);
+	struct usb_hub *hub;
+	int len;
+
+	if (!hub_is_child_of_roothub(hdev))
+		return 0;
+
+	hub = usb_hub_to_struct_hub(hdev);
+	if (!hub)
+		return 0;
+
+	if ((hub->support_usbbox != 1) || (hub->charge_port == -1))
+		len = scnprintf(buf, PAGE_SIZE, "%d\n", -1);
+	else
+		len = scnprintf(buf, PAGE_SIZE, "%d\n", hub->charge_status);
+
+	return len;
+}
+
+static ssize_t charge_status_store(struct device *dev,
+					struct device_attribute *attr,
+					const char *buf, size_t count)
+{
+	struct usb_device *hdev = to_usb_device(dev);
+	struct usb_hub *hub;
+	int kstr_error = -1;
+	int res = 0;
+
+	if (!hub_is_child_of_roothub(hdev))
+		return count;
+
+	hub = usb_hub_to_struct_hub(hdev);
+	if (!hub)
+		return count;
+
+	if ((hub->support_usbbox != 1) || (hub->charge_port == -1))
+		return count;
+
+	kstr_error = kstrtoint(buf, 0, &res);
+	if ((kstr_error == 0) && ((res == 1) || (res == 0)))
+		hub_notify_charge_status(hub, res, hub->charge_port);
+
+	return count;
+}
+
+static DEVICE_ATTR_RW(charge_status);
+
+
+static void hub_remove_sysfs_files(struct usb_hub *hub)
+{
+	struct device *dev = &hub->hdev->dev;
+
+	if (!hub_is_child_of_roothub(hub->hdev))
+		return;
+
+	sysfs_remove_file(&dev->kobj, &dev_attr_ovc_status.attr);
+	sysfs_remove_file(&dev->kobj, &dev_attr_charge_status.attr);
+
+}
+
+static int hub_create_sysfs_files(struct usb_hub *hub)
+{
+	struct device *dev = &hub->hdev->dev;
+	int ret;
+	int notify;
+
+	if (!hub_is_child_of_roothub(hub->hdev))
+		return 0;
+
+	notify = 1;
+
+	dev_info(hub->intfdev, "Create Overcurrent status sysfs\n");
+	ret = sysfs_create_file(&dev->kobj, &dev_attr_ovc_status.attr);
+	if (ret)
+		dev_warn(hub->intfdev, "Failed to create sysfs of ovc_state");
+	else
+		notify = 0;
+
+	dev_info(hub->intfdev, "Create Charge status sysfs\n");
+	ret = sysfs_create_file(&dev->kobj, &dev_attr_charge_status.attr);
+	if (ret)
+		dev_warn(hub->intfdev, "Failed to create sysfs of charge_state");
+	else
+		notify = 0;
+
+	if (!notify)
+		kobject_uevent(&dev->kobj, KOBJ_CHANGE);
+
+	return notify;
+}
+
+static bool hub_is_usbbox_whitelist_device(struct usb_hub *hub,
+					   struct usbbox_whitelist *list,
+					   int size)
+{
+	struct usb_device_descriptor *desc = &hub->hdev->descriptor;
+	u16 vendor, v_mask, product, p_mask;
+	bool ret = false;
+	int i;
+
+	if (!list || (size == 0))
+		return ret;
+
+	for (i = 0; (ret == 0) && (i < size); i++) {
+		dev_dbg(hub->intfdev,
+			"Check usbbox whitelist (%#x/%#x)\n",
+			list[i].vid_mask, list[i].pid_mask);
+		vendor = (list[i].vid_mask >> 0) & 0xffff;
+		v_mask = (list[i].vid_mask >> 16) & 0xffff;
+		product = (list[i].pid_mask >> 0) & 0xffff;
+		p_mask = (list[i].pid_mask >> 16) & 0xffff;
+
+		ret = ((le16_to_cpu(desc->idVendor) & v_mask) == vendor)
+			&& ((le16_to_cpu(desc->idProduct) & p_mask) == product);
+	}
+
+	return ret;
+}
+
+static void hub_init_support_usb(struct usb_hub *hub)
+{
+	static const char propname[] = "support_usbbox";
+	struct usbbox_whitelist *list;
+	int size;
+	int ret;
+
+	hub->support_usbbox = 0;
+	hub->ovc_status = -1;
+	hub->charge_port = -1;
+	hub->charge_status = -1;
+
+	if (!hub_is_child_of_roothub(hub->hdev))
+		return;
+
+	if (!hub->hdev || !hub->hdev->bus ||
+	    !hub->hdev->bus->sysdev || !hub->hdev->bus->sysdev->of_node)
+		return;
+
+	size = of_property_count_elems_of_size(hub->hdev->bus->sysdev->of_node,
+					       propname,
+					       sizeof(u32));
+
+	if (size < 0)
+		return;
+
+	if (size > 0) {
+		if (size % 2) {
+			dev_err(hub->intfdev,
+				"the property %s must set VID/PID\n", propname);
+			return;
+		}
+
+		list = devm_kzalloc(
+			hub->intfdev,
+			(size / 2) * sizeof(struct usbbox_whitelist),
+			GFP_KERNEL);
+		if (unlikely(!list)) {
+			dev_err(hub->intfdev,
+				"devm_kzalloc(usbbox_whitelist) failed\n");
+			return;
+		}
+
+		ret = of_property_read_u32_array(
+			hub->hdev->bus->sysdev->of_node,
+			propname, (u32 *)list, size);
+
+		if (unlikely(ret)) {
+			dev_err(hub->intfdev,
+				"of_property_read_u32_array(%s) failed\n",
+				propname);
+			devm_kfree(hub->intfdev, list);
+			return;
+		}
+
+		hub->support_usbbox =
+			hub_is_usbbox_whitelist_device(hub, list, size / 2);
+
+		devm_kfree(hub->intfdev, list);
+	} else {
+		/* size == 0 */
+		hub->support_usbbox = 1;
+	}
+
+	if (hub->support_usbbox == 1) {
+		dev_info(hub->intfdev, "Support USB-BOX\n");
+		hub->ovc_status = 0;
+	}
+}
+
+static void hub_notify_ovc_status(struct usb_hub *hub, int status, int port1)
+{
+	struct device *dev;
+	int           bit;
+
+	if ((!hub_is_child_of_roothub(hub->hdev)) || (hub->support_usbbox == 0))
+		return;
+
+	dev = &hub->hdev->dev;
+
+	bit = (hub->ovc_status & (1 << port1));
+
+	dev_info(hub->intfdev, "%s: port%d ovc status:%d.\n",
+		 __func__, port1, status);
+
+	if ((0 == (bit & (status << port1))) || (port1 == 0)) {
+
+		dev_info(hub->intfdev, "%s: port%d (%d -> %d)\n",
+			 __func__, port1, bit, (status << port1));
+
+		if (port1 == 0)
+			hub->ovc_status = 0;
+		else
+			hub->ovc_status |= (status << port1);
+
+		sysfs_notify(&dev->kobj, NULL,
+			     dev_attr_ovc_status.attr.name);
+	}
+}
+
+
+static void hub_init_usbbox_charge_port(struct usb_hub *hub)
+{
+	static const char propname[] = "usbbox_charge_port";
+	int size;
+	int ret;
+	u32 chargeport;
+
+	hub->charge_port = -1;
+	hub->charge_status = -1;
+
+	chargeport = 2;
+
+	if (!hub_is_child_of_roothub(hub->hdev))
+		return;
+
+	if (!hub->hdev || !hub->hdev->bus ||
+	    !hub->hdev->bus->sysdev || !hub->hdev->bus->sysdev->of_node)
+		return;
+
+	if (hub->descriptor->bNbrPorts <= chargeport)
+		return;
+
+	size = of_property_count_elems_of_size(hub->hdev->bus->sysdev->of_node,
+					       propname,
+					       sizeof(u32));
+
+	if (size > 0) {
+
+		ret = of_property_read_u32(
+			hub->hdev->bus->sysdev->of_node,
+			propname, &chargeport);
+
+		if (unlikely(ret)) {
+			dev_err(hub->intfdev,
+				"of_property_read_u32(%s) failed\n",
+				propname);
+			return;
+		}
+
+	}
+
+	if (hub->descriptor->bNbrPorts < chargeport)
+		return;
+
+	hub->charge_port = (int)chargeport;
+	hub->charge_status = 0;
+
+}
+
+static void hub_notify_charge_status(struct usb_hub *hub, int status, int port1)
+{
+	struct device *dev;
+
+	if ((!hub_is_child_of_roothub(hub->hdev)) || (hub->support_usbbox != 1))
+		return;
+
+	if (hub->charge_port != port1)
+		return;
+
+	dev_info(hub->intfdev, "%s: port%d chrarge status:%d.\n",
+		 __func__, port1, status);
+
+	if (hub->charge_status != status) {
+
+		dev = &hub->hdev->dev;
+
+		dev_info(hub->intfdev, "%s: port%d (%d -> %d)\n",
+			 __func__, port1, hub->charge_status, status);
+
+		hub->charge_status = status;
+
+		sysfs_notify(&dev->kobj, NULL,
+			     dev_attr_charge_status.attr.name);
+	}
+}
+
 static void hub_release(struct kref *kref);
 static int usb_reset_and_verify_device(struct usb_device *udev);
 static int hub_port_disable(struct usb_hub *hub, int port1, int set_state);
@@ -1705,6 +2083,7 @@ static void hub_release(struct kref *kref)
 {
 	struct usb_hub *hub = container_of(kref, struct usb_hub, kref);
 
+	hub_remove_sysfs_files(hub);
 	usb_put_dev(hub->hdev);
 	usb_put_intf(to_usb_interface(hub->intfdev));
 	kfree(hub);
@@ -1893,8 +2272,22 @@ static int hub_probe(struct usb_interface *intf, const struct usb_device_id *id)
 		usb_autopm_get_interface_no_resume(intf);
 	}
 
-	if (hub_configure(hub, &desc->endpoint[0].desc) >= 0)
+	hub_create_sysfs_files(hub);
+	hub_init_support_usb(hub);
+
+	if (hub_configure(hub, &desc->endpoint[0].desc) >= 0) {
+		if (hub->support_usbbox == 1) {
+			hub_init_usbbox_charge_port(hub);
+			if (hub->charge_port >= 1)
+				dev_info(hub->intfdev,
+					 "USB-BOX Charge port:%d\n",
+					 hub->charge_port);
+			else
+				dev_info(hub->intfdev,
+					 "USB-BOX Charge port not support.\n");
+		}
 		return 0;
+	}
 
 	hub_disconnect(intf);
 	return -ENODEV;
@@ -2237,8 +2630,12 @@ void usb_disconnect(struct usb_device **pdev)
 		hub = usb_hub_to_struct_hub(udev->parent);
 		port_dev = hub->ports[port1 - 1];
 
-		sysfs_remove_link(&udev->dev.kobj, "port");
-		sysfs_remove_link(&port_dev->dev.kobj, "device");
+		if (udev->dev.kobj.sd) {
+			sysfs_remove_link(&udev->dev.kobj, "port");
+			sysfs_remove_link(&port_dev->dev.kobj, "device");
+		} else
+			dev_info(&udev->dev,
+				 "USB disconnect, udev.kobj.sd is null.\n");
 
 		/*
 		 * As usb_port_runtime_resume() de-references udev, make
@@ -2251,12 +2648,18 @@ void usb_disconnect(struct usb_device **pdev)
 	usb_remove_ep_devs(&udev->ep0);
 	usb_unlock_device(udev);
 
+	if (udev->dev.kobj.sd == NULL) {
+		dev_info(&udev->dev, "device del skip.\n");
+		goto devicedel_skip;
+	}
+
 	/* Unregister the device.  The device driver is responsible
 	 * for de-configuring the device and invoking the remove-device
 	 * notifier chain (used by usbfs and possibly others).
 	 */
 	device_del(&udev->dev);
 
+devicedel_skip:
 	/* Free the device number and delete the parent's children[]
 	 * (or root_hub) pointer.
 	 */
@@ -3040,7 +3443,12 @@ static int hub_port_reset(struct usb_hub *hub, int port1,
 
 done:
 	if (status == 0) {
-		if (port_dev->quirks & USB_PORT_QUIRK_FAST_ENUM)
+		if (hub->hdev && hub->hdev->bus && hub->hdev->bus->sysdev &&
+			hub->hdev->bus->sysdev->of_node &&
+			of_property_read_bool(hub->hdev->bus->sysdev->of_node,
+				"enable_quirk_fast_enum"))
+			usleep_range(10000, 12000);
+		else if (port_dev->quirks & USB_PORT_QUIRK_FAST_ENUM)
 			usleep_range(10000, 12000);
 		else {
 			/* TRSTRCY = 10 ms; plus some extra */
@@ -5263,6 +5671,15 @@ static void hub_port_connect(struct usb_hub *hub, int port1, u16 portstatus,
 			(portchange & USB_PORT_STAT_C_CONNECTION))
 		clear_bit(port1, hub->removed_bits);
 
+	if ((!(portstatus & USB_PORT_STAT_CONNECTION)) &&
+		(portchange & USB_PORT_STAT_C_CONNECTION)) {
+		if ((hub->support_usbbox == 1) && (port1 == hub->charge_port)) {
+			// chargeport disconnected
+			dev_info(&port_dev->dev, "usbbox charge port disconnected\n");
+			hub_notify_charge_status(hub, 0, port1);
+		}
+	}
+
 	if (portchange & (USB_PORT_STAT_C_CONNECTION |
 				USB_PORT_STAT_C_ENABLE)) {
 		status = hub_port_debounce_be_stable(hub, port1);
@@ -5290,8 +5707,16 @@ static void hub_port_connect(struct usb_hub *hub, int port1, u16 portstatus,
 		 */
 		if (hub_is_port_power_switchable(hub)
 				&& !port_is_power_on(hub, portstatus)
-				&& !port_dev->port_owner)
-			set_port_feature(hdev, port1, USB_PORT_FEAT_POWER);
+				&& !port_dev->port_owner) {
+			if ((hub_is_child_of_roothub(hub->hdev)) &&
+			    (hub->support_usbbox == 1) &&
+			    (portchange & USB_PORT_STAT_C_OVERCURRENT) &&
+			    (hub->ovc_status != 0) && (hub->ovc_status != -1))
+				dev_info_ratelimited(&port_dev->dev,
+					 "skip FEAT_POWER in over-current\n");
+			else
+				set_port_feature(hdev, port1, USB_PORT_FEAT_POWER);
+		}
 
 		if (portstatus & USB_PORT_STAT_ENABLE)
 			goto done;
@@ -5412,6 +5837,19 @@ static void hub_port_connect(struct usb_hub *hub, int port1, u16 portstatus,
 		spin_unlock_irq(&device_state_lock);
 		mutex_unlock(&usb_port_peer_mutex);
 
+		if (status == 0) {
+			if ((hub->support_usbbox == 1) && (port1 == hub->charge_port)) {
+				if ((portstatus & USB_PORT_STAT_CONNECTION) &&
+					(portchange & USB_PORT_STAT_C_CONNECTION)) {
+					// chargeport connect
+					dev_info(&port_dev->dev,
+						 "usbbox charge port connect\n");
+					hub_notify_charge_status(hub, 1, port1);
+				}
+				goto chargeport_skip;
+			}
+		}
+
 		/* Run it through the hoops (find a driver, etc) */
 		if (!status) {
 			status = usb_new_device(udev);
@@ -5428,6 +5866,7 @@ static void hub_port_connect(struct usb_hub *hub, int port1, u16 portstatus,
 			}
 		}
 
+chargeport_skip:
 		if (status)
 			goto loop_disable;
 
@@ -5647,8 +6086,17 @@ static void port_event(struct usb_hub *hub, int port1)
 			port_dev->over_current_count);
 		usb_clear_port_feature(hdev, port1,
 				USB_PORT_FEAT_C_OVER_CURRENT);
-		msleep(100);	/* Cool down */
-		hub_power_on(hub, true);
+		if ((hub_is_child_of_roothub(hub->hdev)) &&
+		    (hub->support_usbbox == 1)) {
+			hub_notify_charge_status(hub, 0, port1);
+			hub_notify_ovc_status(hub, 1, port1);
+			hub_port_disable(hub, port1, 1);
+			connect_change = 1;
+			dev_info(&port_dev->dev, "hub_port_disable in over-current\n");
+		} else {
+			msleep(100);	/* Cool down */
+			hub_power_on(hub, true);
+		}
 		hub_port_status(hub, port1, &status, &unused);
 		if (status & USB_PORT_STAT_OVERCURRENT)
 			dev_err(&port_dev->dev, "over-current condition\n");
