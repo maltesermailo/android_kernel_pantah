@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1598bf38_5a3d8796",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-30T16:19:49Z",
+      "side": 1,
+      "message": "ANDROID:",
+      "revId": "e72a667b83de1aea84b7a1ef8571e46a359585e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7cf955d_8e4a7a14",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-30T16:19:49Z",
+      "side": 1,
+      "message": "why is VIRT_DRIVERS needed? It isn\u0027t needed for the other supported hypervisors.\n\nIf it is really needed, then please provide the list of other configs that are enabled via select/default (compare the before/after .config artifacts). What is the memory footprint cost of enabling these configs?",
+      "revId": "e72a667b83de1aea84b7a1ef8571e46a359585e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
