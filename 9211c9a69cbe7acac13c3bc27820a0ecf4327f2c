@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "663eef29_bd82cb93",
+        "filename": "drivers/virt/geniezone/gzvm_main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-05-30T16:10:22Z",
+      "side": 1,
+      "message": "this doesn\u0027t do anything since the default return is 0. Instead:\n```\nreturn gzvm_drv_irqfd_init();\n```",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 13
+      },
+      "revId": "9211c9a69cbe7acac13c3bc27820a0ecf4327f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
