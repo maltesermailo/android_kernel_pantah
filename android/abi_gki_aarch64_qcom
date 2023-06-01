@@ -141,10 +141,10 @@
   bpf_prog_put
   bpf_prog_sub
   bpf_stats_enabled_key
+  bpf_trace_run1
   bpf_trace_run10
   bpf_trace_run11
   bpf_trace_run12
-  bpf_trace_run1
   bpf_trace_run2
   bpf_trace_run3
   bpf_trace_run4
@@ -1873,8 +1873,8 @@
   memremap_pages
   memscan
   mem_section
-  memset64
   memset
+  memset64
   __memset_io
   memstart_addr
   memunmap
@@ -2017,10 +2017,10 @@
   nla_find
   nla_memcpy
   __nla_parse
-  nla_put_64bit
   nla_put
-  nla_reserve_64bit
+  nla_put_64bit
   nla_reserve
+  nla_reserve_64bit
   nla_strscpy
   __nla_validate
   __nlmsg_put
@@ -2159,6 +2159,8 @@
   page_ext_put
   page_is_ram
   page_mapping
+  page_pinner_inited
+  __page_pinner_put_page
   page_pool_alloc_pages
   page_pool_create
   page_pool_destroy
