@@ -22,6 +22,30 @@
       },
       "revId": "c748fab6fcea6fee36572a09477cdf5317ba5bf0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c8313ef_7372d936",
+        "filename": "kernel/fork.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1226,
+      "author": {
+        "id": 1874054
+      },
+      "writtenOn": "2023-06-01T07:32:54Z",
+      "side": 1,
+      "message": "yeah, mmput() is called from do_exit() while mmput_async_fn() is called from binder_alloc_free_page(), we just want to do something with the existing task. So adding here already meets our needs. Also, mmput_async_fn() work through workqueue, which means maybe \u0027current\u0027 can not be get corretly.",
+      "parentUuid": "2af59e47_33657554",
+      "range": {
+        "startLine": 1226,
+        "startChar": 2,
+        "endLine": 1226,
+        "endChar": 29
+      },
+      "revId": "c748fab6fcea6fee36572a09477cdf5317ba5bf0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
