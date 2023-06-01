@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13670634_eaa2e26b",
+        "filename": "fs/proc/meminfo.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-06-01T16:53:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1da52e6c_91df954c",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 0
+      },
+      "revId": "2ac76d8f2a4388710887520f057d9313c4b5e8a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b52ebd70_4bb90b30",
@@ -95,6 +119,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c754c5b_556c3cca",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6059,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-06-01T16:53:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a0fa9d9_bed45f21",
+      "range": {
+        "startLine": 6058,
+        "startChar": 1,
+        "endLine": 6059,
+        "endChar": 26
+      },
+      "revId": "2ac76d8f2a4388710887520f057d9313c4b5e8a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "953bc4e4_c277960c",
@@ -108,6 +156,30 @@
       "writtenOn": "2023-05-26T18:18:08Z",
       "side": 1,
       "message": "Simply do this:\n```\n\tval-\u003etotalram \u003d totalram_pages() + extra_total;\n\tval-\u003esharedram \u003d global_node_page_state(NR_SHMEM);\n\tval-\u003efreeram \u003d global_zone_page_state(NR_FREE_PAGES) + extra_free;\n\tval-\u003ebufferram \u003d nr_blockdev_pages();\n\tval-\u003etotalhigh \u003d totalhigh_pages();\n\tval-\u003efreehigh \u003d nr_free_highpages();\n\tval-\u003emem_unit \u003d PAGE_SIZE;\n+\ttrace_android_vh_si_meminfo_adjust(\u0026val-\u003etotalram, \u0026val-\u003efreeram);\n```",
+      "range": {
+        "startLine": 6069,
+        "startChar": 0,
+        "endLine": 6080,
+        "endChar": 27
+      },
+      "revId": "2ac76d8f2a4388710887520f057d9313c4b5e8a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6994c58_c3ff173f",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6080,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-06-01T16:53:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "953bc4e4_c277960c",
       "range": {
         "startLine": 6069,
         "startChar": 0,
