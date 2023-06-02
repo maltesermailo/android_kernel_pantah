@@ -172,13 +172,6 @@ static struct stack_record **stack_table;
 
 static int __init is_stack_depot_disabled(char *str)
 {
-	int ret;
-
-	ret = kstrtobool(str, &stack_depot_disable);
-	if (!ret && stack_depot_disable) {
-		pr_info("Stack Depot is disabled\n");
-		stack_table = NULL;
-	}
 	return 0;
 }
 early_param("stack_depot_disable", is_stack_depot_disabled);

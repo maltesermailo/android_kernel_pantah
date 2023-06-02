@@ -272,11 +272,10 @@ struct kasan_free_meta {
 #if defined(CONFIG_KASAN_SW_TAGS) || defined(CONFIG_KASAN_HW_TAGS)
 
 struct kasan_stack_ring_entry {
-	void *ptr;
-	size_t size;
-	u32 pid;
+	struct page *page;
+	u64 op;
+	u64 arg;
 	depot_stack_handle_t stack;
-	bool is_free;
 };
 
 struct kasan_stack_ring {

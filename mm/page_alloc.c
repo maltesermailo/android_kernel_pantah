@@ -5681,6 +5681,8 @@ failed:
 }
 EXPORT_SYMBOL_GPL(__alloc_pages_bulk);
 
+extern void kasan_save_stack_info(struct page *page, u64 op, u64 arg);
+
 /*
  * This is the 'heart' of the zoned buddy allocator.
  */
@@ -5743,6 +5745,9 @@ out:
 	}
 
 	trace_mm_page_alloc(page, order, alloc_gfp, ac.migratetype);
+	for (int i = 0; i != 1 << order; ++i)
+		kasan_save_stack_info(page + i, 0, gfp);
+
 	kmsan_alloc_page(page, order, alloc_gfp);
 
 	return page;

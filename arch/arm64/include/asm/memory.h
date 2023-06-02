@@ -348,10 +348,12 @@ static inline void *phys_to_virt(phys_addr_t x)
 })
 #define virt_to_page(x)		pfn_to_page(virt_to_pfn(x))
 #else
+void kasan_save_stack_info(struct page *page, u64 op, u64 arg);
 #define page_to_virt(x)	({						\
 	__typeof__(x) __page = x;					\
 	u64 __idx = ((u64)__page - VMEMMAP_START) / sizeof(struct page);\
 	u64 __addr = PAGE_OFFSET + (__idx * PAGE_SIZE);			\
+	kasan_save_stack_info((struct page *)__page, 4, 0);	        \
 	(void *)__tag_set((const void *)__addr, page_kasan_tag(__page));\
 })
 

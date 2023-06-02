@@ -251,6 +251,7 @@ static inline void clear_highpage_kasan_tagged(struct page *page)
 	page_kasan_tag_reset(page);
 	clear_highpage(page);
 	page_kasan_tag_set(page, tag);
+	kasan_save_stack_info(page, 3, 0);
 }
 
 #ifndef __HAVE_ARCH_TAG_CLEAR_HIGHPAGE

@@ -456,6 +456,8 @@ static int tag_storage_reserve_block(unsigned long block, struct tag_region *reg
 	dcache_inval_poc(block_va, block_va + region->block_size * PAGE_SIZE);
 	for (int i = 0; i != region->block_size; ++i)
 		trace_android_rvh_clean_tag_page(pfn_to_page(block + i));
+	for (int i = 0; i != region->block_size; ++i)
+		kasan_save_stack_info(pfn_to_page(block + i), 2, region->block_size);
 
 	block_pte.pte &= ~PTE_VALID;
 	set_pte(block_ptep, block_pte);
@@ -499,15 +501,16 @@ static int tag_storage_find_block_in_region(struct page *page, unsigned long *bl
 
 }
 
-static int tag_storage_find_block(struct page *page, unsigned long *block,
-				  struct tag_region **region)
+int tag_storage_find_block(struct page *page, unsigned long *block,
+			   struct tag_region **region)
 {
 	int i, ret;
 
 	for (i = 0; i < num_tag_regions; i++) {
 		ret = tag_storage_find_block_in_region(page, block, &tag_regions[i]);
 		if (ret == 0) {
-			*region = &tag_regions[i];
+  			if (region)
+				*region = &tag_regions[i];
 			return 0;
 		}
 	}

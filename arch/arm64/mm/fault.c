@@ -40,6 +40,7 @@
 #include <asm/esr.h>
 #include <asm/kprobes.h>
 #include <asm/mte.h>
+#include <asm/mte_tag_storage.h>
 #include <asm/processor.h>
 #include <asm/sysreg.h>
 #include <asm/system_misc.h>
@@ -308,6 +309,8 @@ static bool __kprobes is_spurious_el1_translation_fault(unsigned long addr,
 	return (dfsc & ESR_ELx_FSC_TYPE) != ESR_ELx_FSC_FAULT;
 }
 
+extern void kasan_print_page_history(struct page *page);
+
 static void die_kernel_fault(const char *msg, unsigned long addr,
 			     unsigned long esr, struct pt_regs *regs)
 {
@@ -315,6 +318,7 @@ static void die_kernel_fault(const char *msg, unsigned long addr,
 
 	pr_alert("Unable to handle kernel %s at virtual address %016lx\n", msg,
 		 addr);
+	kasan_print_page_history(virt_to_page(addr));
 
 	kasan_non_canonical_hook(addr);
 
@@ -532,6 +536,29 @@ static bool is_el0_instruction_abort(unsigned long esr)
 static bool is_write_abort(unsigned long esr)
 {
 	return (esr & ESR_ELx_WNR) && !(esr & ESR_ELx_CM);
+}
+
+static struct page *virt_to_page_but_for_user_pages_as_well(unsigned long addr)
+{
+	unsigned long par, pa;
+	unsigned long flags;
+	struct page *page;
+
+	local_irq_save(flags);
+	__asm__ __volatile__("at s1e1r, %1\n"
+			     "isb\n"
+			     "mrs %0, par_el1\n"
+			     : "=r"(par)
+			     : "r"(addr)
+			     : "memory");
+	local_irq_restore(flags);
+
+	pa = par & 0x00FFFFFFFFFFF000;
+	page = phys_to_page(pa);
+	printk(KERN_ERR "addr = 0x%lx, par = 0x%lx, pa = 0x%lx, page = 0x%lx\n",
+	       (unsigned long)addr, (unsigned long)par, (unsigned long)pa,
+	       (unsigned long)page);
+	return page;
 }
 
 static int __kprobes do_page_fault(unsigned long far, unsigned long esr,
@@ -773,6 +800,10 @@ static int do_sea(unsigned long far, unsigned long esr, struct pt_regs *regs)
 	return 0;
 }
 
+struct tag_region;
+int tag_storage_find_block(struct page *page, unsigned long *block,
+                           struct tag_region **region);
+
 static int do_tag_check_fault(unsigned long far, unsigned long esr,
 			      struct pt_regs *regs)
 {
@@ -782,6 +813,31 @@ static int do_tag_check_fault(unsigned long far, unsigned long esr,
 	 * address.
 	 */
 	far = (__untagged_addr(far) & ~MTE_TAG_MASK) | (far & MTE_TAG_MASK);
+	if (user_mode(regs)) {
+		unsigned long block_pfn;
+  		struct page *page = virt_to_page_but_for_user_pages_as_well(__untagged_addr(far));
+  		u8 tags[128];
+  		char buf[257];
+  		void *addr = page_address(page);
+
+		printk(KERN_ERR "far = 0x%lx\n", far);
+  		mte_copy_page_tags_to_buf(addr, tags);
+		for (int j = 0; j < 128; j++)
+			snprintf(&buf[2 * j], 3, "%02x", tags[j]);
+		printk(KERN_ERR "tags = %s\n", buf);
+
+		dump_page(page, "do_tag_check_fault");
+		kasan_print_page_history(page);
+		if (tag_storage_find_block(page, &block_pfn, 0) == 0) {
+			struct page *block_page = pfn_to_page(block_pfn);
+
+			dump_page(block_page, "do_tag_check_fault block");
+			kasan_print_page_history(block_page);
+		}
+
+  		panic("do_tag_check_fault");
+	}
+
 	do_bad_area(far, esr, regs);
 	return 0;
 }

@@ -215,6 +215,8 @@ void __init kasan_init_hw_tags(void)
 	if (!system_supports_mte())
 		return;
 
+	kasan_init_tags();
+
 	/* If KASAN is disabled via command line, don't initialize it. */
 	if (kasan_arg == KASAN_ARG_OFF)
 		return;
@@ -245,8 +247,6 @@ void __init kasan_init_hw_tags(void)
 		static_branch_enable(&kasan_flag_vmalloc);
 		break;
 	}
-
-	kasan_init_tags();
 
 	/* KASAN is now initialized, enable it. */
 	static_branch_enable(&kasan_flag_enabled);

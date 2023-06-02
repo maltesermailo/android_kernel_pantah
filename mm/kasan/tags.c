@@ -69,18 +69,6 @@ early_param("kasan.stack_ring_size", early_kasan_flag_stack_ring_size);
 
 void __init kasan_init_tags(void)
 {
-	switch (kasan_arg_stacktrace) {
-	case KASAN_ARG_STACKTRACE_DEFAULT:
-		/* Default is specified by kasan_flag_stacktrace definition. */
-		break;
-	case KASAN_ARG_STACKTRACE_OFF:
-		static_branch_disable(&kasan_flag_stacktrace);
-		break;
-	case KASAN_ARG_STACKTRACE_ON:
-		static_branch_enable(&kasan_flag_stacktrace);
-		break;
-	}
-
 	if (kasan_stack_collection_enabled()) {
 		if (!stack_ring.size)
 			stack_ring.size = KASAN_STACK_RING_SIZE_DEFAULT;
@@ -92,16 +80,18 @@ void __init kasan_init_tags(void)
 	}
 }
 
-static void save_stack_info(struct kmem_cache *cache, void *object,
-			gfp_t gfp_flags, bool is_free)
+void kasan_save_stack_info(struct page *page, u64 op, u64 arg)
 {
 	unsigned long flags;
 	depot_stack_handle_t stack;
 	u64 pos;
 	struct kasan_stack_ring_entry *entry;
-	void *old_ptr;
 
-	stack = kasan_save_stack(gfp_flags, true);
+	if (!stack_ring.entries || current->kasan_depth)
+  		return;
+
+	++current->kasan_depth;
+	stack = kasan_save_stack(GFP_KERNEL, true);
 
 	/*
 	 * Prevent save_stack_info() from modifying stack ring
@@ -109,36 +99,27 @@ static void save_stack_info(struct kmem_cache *cache, void *object,
 	 */
 	read_lock_irqsave(&stack_ring.lock, flags);
 
-next:
 	pos = atomic64_fetch_add(1, &stack_ring.pos);
 	entry = &stack_ring.entries[pos % stack_ring.size];
 
-	/* Detect stack ring entry slots that are being written to. */
-	old_ptr = READ_ONCE(entry->ptr);
-	if (old_ptr == STACK_RING_BUSY_PTR)
-		goto next; /* Busy slot. */
-	if (!try_cmpxchg(&entry->ptr, &old_ptr, STACK_RING_BUSY_PTR))
-		goto next; /* Busy slot. */
-
-	WRITE_ONCE(entry->size, cache->object_size);
-	WRITE_ONCE(entry->pid, current->pid);
+	WRITE_ONCE(entry->op, op);
+	WRITE_ONCE(entry->arg, arg);
 	WRITE_ONCE(entry->stack, stack);
-	WRITE_ONCE(entry->is_free, is_free);
 
 	/*
 	 * Paired with smp_load_acquire() in kasan_complete_mode_report_info().
 	 */
-	smp_store_release(&entry->ptr, (s64)object);
+	smp_store_release(&entry->page, (s64)page);
 
 	read_unlock_irqrestore(&stack_ring.lock, flags);
+	--current->kasan_depth;
 }
+EXPORT_SYMBOL(kasan_save_stack_info);
 
 void kasan_save_alloc_info(struct kmem_cache *cache, void *object, gfp_t flags)
 {
-	save_stack_info(cache, object, flags, false);
 }
 
 void kasan_save_free_info(struct kmem_cache *cache, void *object)
 {
-	save_stack_info(cache, object, GFP_NOWAIT, true);
 }

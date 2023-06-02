@@ -323,6 +323,8 @@ static inline void __check_racy_pte_update(struct mm_struct *mm, pte_t *ptep,
 
 #include <asm/android_erratum_pgtable.h>
 
+extern void kasan_save_stack_info(struct page *page, u64 op, u64 arg);
+
 static inline void __set_pte_at(struct mm_struct *mm, unsigned long addr,
 				pte_t *ptep, pte_t pte)
 {
@@ -338,6 +340,11 @@ static inline void __set_pte_at(struct mm_struct *mm, unsigned long addr,
 	if (system_supports_mte() && pte_access_permitted(pte, false) &&
 	    !pte_special(pte) && pte_tagged(pte))
 		mte_sync_tags(&pte);
+
+	if (!pte_special(pte)) {
+		struct page *page = pte_page(pte);
+		kasan_save_stack_info(page, 1, pte_val(pte));
+	}
 
 	__check_racy_pte_update(mm, ptep, pte);
 
