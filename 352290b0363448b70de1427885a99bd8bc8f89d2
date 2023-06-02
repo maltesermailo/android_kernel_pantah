@@ -16,6 +16,24 @@
       "message": "SHouldn\u0027t this be done in the thermal driver itself and not in the governer?",
       "revId": "352290b0363448b70de1427885a99bd8bc8f89d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fe531c5_b8d194eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1928107
+      },
+      "writtenOn": "2023-06-02T05:44:35Z",
+      "side": 1,
+      "message": "Maybe you consider it in another perspective, but I\u0027m not really understand how to do it in thermal driver, I would appreciate it if you reply in details.\n\n\n\nIn traditional ipa policy:\ntz-\u003etemperature \u003c switch_on_temp, ipa reset;\ntz-\u003etemperature \u003e\u003d switch_on_temp, ipa enabled.\n\nThis vendor hook provides a way to enable or disable ipa besides the condition of whether the temperature is smaller than switch_on_temp or not. For example when the temperature is smaller than switch_on_temp but someone wants to enable ipa, he can do that by setting force_enable true.",
+      "parentUuid": "39004a8d_91406084",
+      "revId": "352290b0363448b70de1427885a99bd8bc8f89d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
