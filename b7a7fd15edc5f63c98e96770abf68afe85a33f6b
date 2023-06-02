@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "886641be_0369787d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930676
+      },
+      "writtenOn": "2023-06-02T05:52:45Z",
+      "side": 1,
+      "message": "This patch is causing a kernel panic as below.\n\n[    2.362136] [0:      swapper/0:    0] ------------[ cut here ]------------\n[    2.362293] [0:      swapper/0:    0] WARNING: CPU: 0 PID: 0 at include/trace/hooks/psci.h:19 psci_0_2_cpu_suspend+0x124/0x1d8\n[    2.370686] [0:      swapper/0:    0] Modules linked in:\n[    2.370706] [0:      swapper/0:    0] CPU: 0 PID: 0 Comm: swapper/0 Tainted: G S      W          6.1.25-android14-7-00072-gf10e53af33a0 #1\n[    2.370728] [0:      swapper/0:    0] Hardware name: Samsung ERD9945 board based on S5E9945 (DT)\n[    2.384401] [0:      swapper/0:    0] pstate: 624003c5 (nZCv DAIF +PAN -UAO +TCO -DIT -SSBS BTYPE\u003d--)\n[    2.405579] [0:      swapper/0:    0] pc : psci_0_2_cpu_suspend+0x124/0x1d8\n[    2.421377] [0:      swapper/0:    0] lr : psci_0_2_cpu_suspend+0x88/0x1d8\n[    2.421401] [0:      swapper/0:    0] sp : ffffffd00b1f7b20\n[    2.421411] [0:      swapper/0:    0] x29: ffffffd00b1f7b30\n[    2.436220] [0:      swapper/0:    0]  x28: ffffffd00b217be4 x27: 0000000000000001\n[    2.451757] [0:      swapper/0:    0] x26: 0000000000000000 x25: ffffff8915b689fc x24: 93ffff8837750100\n[    2.462867] [0:      swapper/0:    0] \n[    2.462876] [0:      swapper/0:    0] x23: 000000008cc8e544 x22: 00000000000000c0\n[    2.477797] [0:      swapper/0:    0]  x21: 0000000000010000\n[    2.477815] [0:      swapper/0:    0] x20: 000000008147a038 x19: efffffc000000000 x18: 0000000000000000\n[    2.494983] [0:      swapper/0:    0] \n[    2.494992] [0:      swapper/0:    0] x17: 0000000000000000 x16: 00000000000000ff x15: 0000000000000000\n[    2.512257] [0:      swapper/0:    0] x14: 0000000000000000 x13: ffffffd00b22ae00 x12: ffffffb90a98d000\n[    2.512296] [0:      swapper/0:    0] x11: ffffffd00b1d9850\n[    2.532654] [0:      swapper/0:    0]  x10: 0000000100000001 x9 : efffffc000000000\n[    2.532684] [0:      swapper/0:    0] x8 : 0000000100000001\n[    2.545240] [0:      swapper/0:    0]  x7 : 015001f2b5593519\n[    2.562080] [0:      swapper/0:    0]  x6 : 0000000000310000\n[    2.562098] [0:      swapper/0:    0] x5 : 0000000000000000\n[    2.577009] [0:      swapper/0:    0]  x4 : 0000000000000000 x3 : 0000000000000000\n[    2.592980] [0:      swapper/0:    0] x2 : 0000000000000000 x1 : ffffff8915b66850 x0 : 0000000000000000\n[    2.604264] [0:      swapper/0:    0] \n[    2.604273] [0:      swapper/0:    0] Call trace:\n[    2.604283] [0:      swapper/0:    0]  psci_0_2_cpu_suspend+0x124/0x1d8\n[    2.615809] [0:      swapper/0:    0]  psci_suspend_finisher+0x2c/0x38\n[    2.687249] [0:      swapper/0:    0]  cpu_suspend+0x8c/0x16c\n[    2.692975] [0:      swapper/0:    0]  psci_cpu_suspend_enter+0x54/0x7c\n[    2.706168] [0:      swapper/0:    0]  psci_enter_idle_state+0x64/0x94\n[    2.706191] [0:      swapper/0:    0]  cpuidle_enter_state+0x1dc/0x9b8\n[    2.720403] [0:      swapper/0:    0]  cpuidle_enter+0x58/0x7c\n[    2.720422] [0:      swapper/0:    0]  call_cpuidle+0x30/0x58\n[    2.734030] [0:      swapper/0:    0]  do_idle+0x214/0x2b8\n[    2.745575] [0:      swapper/0:    0]  cpu_startup_entry+0x2c/0x30\n[    2.758074] [0:      swapper/0:    0]  kernel_init+0x0/0x180\n[    2.758099] [0:      swapper/0:    0]  start_kernel+0x0/0x444\n[    2.770747] [0:      swapper/0:    0]  start_kernel+0x368/0x444\n[    2.770767] [0:      swapper/0:    0]  __primary_switched+0xc0/0xc8\n[    2.782903] [0:      swapper/0:    0] Kernel panic - not syncing: kernel: panic_on_warn set ...",
+      "revId": "b7a7fd15edc5f63c98e96770abf68afe85a33f6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
