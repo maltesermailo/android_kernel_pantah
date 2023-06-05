@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000046147056",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2454791?revision\u003d7",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "25c94c29_7896636a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-06-05T17:37:18Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/68f48381d7fdd1cbb9d88c37a4dfbb98ac78226d) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d68f48381d7fdd1cbb9d88c37a4dfbb98ac78226d)\n\n```\n      ## arch/x86/mm/pat/memtype.c ##\n     @@ arch/x86/mm/pat/memtype.c: void track_pfn_insert(struct vm_area_struct *vma, pgprot_t *prot, pfn_t pfn)\n       * can be for the entire vma (in which case pfn, size are zero).\n    @@ include/linux/mm.h: static inline void vm_flags_mod(struct vm_area_struct *vma,\n      }\n      \n      static inline void vma_set_anonymous(struct vm_area_struct *vma)\n    -@@ include/linux/mm.h: static inline void zap_vma_pages(struct vm_area_struct *vma)\n    - }\n    +@@ include/linux/mm.h: void zap_page_range_single(struct vm_area_struct *vma, unsigned long address,\n    + \t\t\t   unsigned long size, struct zap_details *details);\n      void unmap_vmas(struct mmu_gather *tlb, struct maple_tree *mt,\n      \t\tstruct vm_area_struct *start_vma, unsigned long start,\n     -\t\tunsigned long end);\n    @@ mm/memory.c: void unmap_vmas(struct mmu_gather *tlb, struct maple_tree *mt,\n      \t} while ((vma \u003d mas_find(\u0026mas, end_addr - 1)) !\u003d NULL);\n      \tmmu_notifier_invalidate_range_end(\u0026range);\n      }\n    +@@ mm/memory.c: void zap_page_range(struct vm_area_struct *vma, unsigned long start,\n    + \tupdate_hiwater_rss(vma-\u003evm_mm);\n    + \tmmu_notifier_invalidate_range_start(\u0026range);\n    + \tdo {\n    +-\t\tunmap_single_vma(\u0026tlb, vma, start, range.end, NULL);\n    ++\t\tunmap_single_vma(\u0026tlb, vma, start, range.end, NULL, false);\n    + \t} while ((vma \u003d mas_find(\u0026mas, end - 1)) !\u003d NULL);\n    + \tmmu_notifier_invalidate_range_end(\u0026range);\n    + \ttlb_finish_mmu(\u0026tlb);\n     @@ mm/memory.c: void zap_page_range_single(struct vm_area_struct *vma, unsigned long address,\n      \t * unmap \u0027address-end\u0027 not \u0027range.start-range.end\u0027 as range\n      \t * could have been expanded for hugetlb pmd sharing.\n    @@ mm/mmap.c: static inline void remove_mt(struct mm_struct *mm, struct ma_state *m\n      \tfree_pgtables(\u0026tlb, mt, vma, prev ? prev-\u003evm_end : FIRST_USER_ADDRESS,\n      \t\t\t\t next ? next-\u003evm_start : USER_PGTABLES_CEILING);\n      \ttlb_finish_mmu(\u0026tlb);\n    -@@ mm/mmap.c: do_vmi_align_munmap(struct vma_iterator *vmi, struct vm_area_struct *vma,\n    +@@ mm/mmap.c: do_mas_align_munmap(struct ma_state *mas, struct vm_area_struct *vma,\n      \t\t\tmmap_write_downgrade(mm);\n      \t}\n      \n    @@ mm/mmap.c: do_vmi_align_munmap(struct vma_iterator *vmi, struct vm_area_struct *\n      \tmas_set(\u0026mas_detach, start);\n      \tremove_mt(mm, \u0026mas_detach);\n     @@ mm/mmap.c: unmap_and_free_vma:\n    + \tvma-\u003evm_file \u003d NULL;\n      \n    - \t\t/* Undo any partial mapping done by a device driver. */\n    - \t\tunmap_region(mm, \u0026mm-\u003emm_mt, vma, prev, next, vma-\u003evm_start,\n    --\t\t\t     vma-\u003evm_end);\n    -+\t\t\t     vma-\u003evm_end, true);\n    - \t}\n    + \t/* Undo any partial mapping done by a device driver. */\n    +-\tunmap_region(mm, mas.tree, vma, prev, next, vma-\u003evm_start, vma-\u003evm_end);\n    ++\tunmap_region(mm, mas.tree, vma, prev, next, vma-\u003evm_start, vma-\u003evm_end,\n    ++\t\t     true);\n      \tif (file \u0026\u0026 (vm_flags \u0026 VM_SHARED))\n      \t\tmapping_unmap_writable(file-\u003ef_mapping);\n    + free_vma:\n     @@ mm/mmap.c: void exit_mmap(struct mm_struct *mm)\n      \ttlb_gather_mmu_fullmm(\u0026tlb, mm);\n      \t/* update_hiwater_rss(mm) here? but nobody should be looking */\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 537031437 android-build.ayeaye-python-dispatcher_20230601.04_p0",
+      "revId": "c9440c19867fda808350873233a627371711712d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
