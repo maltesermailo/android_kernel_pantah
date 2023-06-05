@@ -97,12 +97,16 @@
   blk_execute_rq_nowait
   __blk_mq_alloc_disk
   blk_mq_alloc_request
+  blk_mq_alloc_request_hctx
   blk_mq_alloc_tag_set
   blk_mq_complete_request
+  blk_mq_destroy_queue
   blk_mq_end_request
   blk_mq_end_request_batch
   blk_mq_free_request
   blk_mq_free_tag_set
+  blk_mq_freeze_queue_wait_timeout
+  blk_mq_init_queue
   blk_mq_map_queues
   blk_mq_quiesce_queue
   blk_mq_requeue_request
@@ -110,8 +114,12 @@
   blk_mq_start_request
   blk_mq_start_stopped_hw_queues
   blk_mq_stop_hw_queue
+  blk_mq_tagset_busy_iter
+  blk_mq_tagset_wait_completed_request
+  blk_mq_unfreeze_queue
   blk_mq_unquiesce_queue
   blk_mq_virtio_map_queues
+  blk_put_queue
   blk_queue_alignment_offset
   blk_queue_flag_clear
   blk_queue_flag_set
@@ -702,9 +710,11 @@
   dev_pm_opp_set_sharing_cpus
   dev_pm_qos_add_notifier
   dev_pm_qos_add_request
+  dev_pm_qos_hide_latency_tolerance
   dev_pm_qos_remove_notifier
   dev_pm_qos_remove_request
   dev_pm_qos_update_request
+  dev_pm_qos_update_user_latency_tolerance
   dev_pm_set_wake_irq
   _dev_printk
   __dev_queue_xmit
@@ -1232,10 +1242,10 @@
   gh_rm_notifier_unregister
   gh_rm_register_platform_ops
   gh_rm_unregister_platform_ops
+  gic_nonsecure_priorities
   gic_v3_cpu_init
   gic_v3_dist_init
   gic_v3_dist_wait_for_rwp
-  gic_nonsecure_priorities
   gov_attr_set_init
   gov_attr_set_put
   governor_sysfs_ops
@@ -3346,8 +3356,8 @@
   __traceiter_android_vh_ftrace_oops_enter
   __traceiter_android_vh_ftrace_oops_exit
   __traceiter_android_vh_ftrace_size_check
-  __traceiter_android_vh_ignore_dmabuf_vmap_bounds
   __traceiter_android_vh_gic_v3_suspend
+  __traceiter_android_vh_ignore_dmabuf_vmap_bounds
   __traceiter_android_vh_ipi_stop
   __traceiter_android_vh_jiffies_update
   __traceiter_android_vh_kswapd_per_node
@@ -3481,8 +3491,8 @@
   __tracepoint_android_vh_ftrace_oops_enter
   __tracepoint_android_vh_ftrace_oops_exit
   __tracepoint_android_vh_ftrace_size_check
-  __tracepoint_android_vh_ignore_dmabuf_vmap_bounds
   __tracepoint_android_vh_gic_v3_suspend
+  __tracepoint_android_vh_ignore_dmabuf_vmap_bounds
   __tracepoint_android_vh_ipi_stop
   __tracepoint_android_vh_jiffies_update
   __tracepoint_android_vh_kswapd_per_node
