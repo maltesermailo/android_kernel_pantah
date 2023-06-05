@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cecc3e13_d3acc110",
+        "filename": "drivers/ufs/core/ufs-mcq.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-06-05T22:32:46Z",
+      "side": 1,
+      "message": "This breaks existing ABI users. The symbol `ufshcd_mcq_poll_cqe_nolock` is used but unexported here.",
+      "revId": "e111d4aba3cdf044d997bb20af7e0ffb3e65426c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
