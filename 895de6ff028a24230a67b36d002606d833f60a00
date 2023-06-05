@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000046123715",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2614996?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "10bdf13e_0c959dc8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-06-05T09:37:05Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/d4ab9bc5f56ec8db0902d335af7bc69f19fbf1ff) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003dd4ab9bc5f56ec8db0902d335af7bc69f19fbf1ff)\n\n```\n      ## kernel/trace/ring_buffer.c ##\n     @@ kernel/trace/ring_buffer.c: rb_reset_tail(struct ring_buffer_per_cpu *cpu_buffer,\n    @@ kernel/trace/ring_buffer.c: rb_reset_tail(struct ring_buffer_per_cpu *cpu_buffer\n      \t/* Set write to end of buffer */\n      \tlength \u003d (tail + length) - BUF_PAGE_SIZE;\n      \tlocal_sub(length, \u0026tail_page-\u003ewrite);\n    +@@ kernel/trace/ring_buffer.c: rb_get_reader_page(struct ring_buffer_per_cpu *cpu_buffer)\n    + \treader \u003d rb_set_head_page(cpu_buffer);\n    + \tif (!reader)\n    + \t\tgoto out;\n    +-\tcpu_buffer-\u003ereader_page-\u003elist.next \u003d rb_list_head(reader-\u003elist.next);\n    ++Update the read_stamp on the first event\tcpu_buffer-\u003ereader_page-\u003elist.next \u003d rb_list_head(reader-\u003elist.next);\n    + \tcpu_buffer-\u003ereader_page-\u003elist.prev \u003d reader-\u003elist.prev;\n    + \n    + \t/*\n     @@ kernel/trace/ring_buffer.c: rb_get_reader_page(struct ring_buffer_per_cpu *cpu_buffer)\n      \tarch_spin_unlock(\u0026cpu_buffer-\u003elock);\n      \tlocal_irq_restore(flags);\n    @@ kernel/trace/ring_buffer.c: rb_get_reader_page(struct ring_buffer_per_cpu *cpu_b\n     +\t * Although, 1 second is pretty much \"forever\"\n     +\t */\n     +#define USECS_WAIT\t1000000\n    -+        for (nr_loops \u003d 0; nr_loops \u003c USECS_WAIT; nr_loops++) {\n    ++\tfor (nr_loops \u003d 0; nr_loops \u003c USECS_WAIT; nr_loops++) {\n     +\t\t/* If the write is past the end of page, a writer is still updating it */\n     +\t\tif (likely(!reader || rb_page_write(reader) \u003c\u003d BUF_PAGE_SIZE))\n     +\t\t\tbreak;\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 537031437 android-build.ayeaye-python-dispatcher_20230601.04_p0",
+      "revId": "895de6ff028a24230a67b36d002606d833f60a00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
