@@ -22,6 +22,30 @@
       },
       "revId": "dda205ece96e809827691cc4a6cc32f7a4f9d785",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d5527ed_ba013408",
+        "filename": "drivers/thermal/gov_power_allocator.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2023-06-07T07:43:42Z",
+      "side": 1,
+      "message": "Hi Greg,\nWe want to flexibly control whether the ipa is turned on or not through in owner driver, not just by switch_on_temp. In addition, the update flag also needs to be adjusted, because we have added our own control logic, so we need to add these three control variables.\nIn kernel5.15, the logic of vendorhook is more complicated, so in 6.1, we use the logic of goto instead to simplify the code.\nIn Android13-kernel5.15, the vendorhook\u0027s gerrit are:\nhttps://android-review.googlesource.com/c/kernel/common/+/2050135\nhttps://android-review.googlesource.com/c/kernel/common/+/2465571",
+      "parentUuid": "772131a6_c0b625fe",
+      "range": {
+        "startLine": 721,
+        "startChar": 2,
+        "endLine": 725,
+        "endChar": 20
+      },
+      "revId": "dda205ece96e809827691cc4a6cc32f7a4f9d785",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
