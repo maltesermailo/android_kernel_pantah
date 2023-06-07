@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fafd2cd3_dc1e8c4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1928107
+      },
+      "writtenOn": "2023-06-07T08:31:44Z",
+      "side": 1,
+      "message": "l",
+      "revId": "dda205ece96e809827691cc4a6cc32f7a4f9d785",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "772131a6_c0b625fe",
@@ -38,6 +55,30 @@
       "side": 1,
       "message": "Hi Greg,\nWe want to flexibly control whether the ipa is turned on or not through in owner driver, not just by switch_on_temp. In addition, the update flag also needs to be adjusted, because we have added our own control logic, so we need to add these three control variables.\nIn kernel5.15, the logic of vendorhook is more complicated, so in 6.1, we use the logic of goto instead to simplify the code.\nIn Android13-kernel5.15, the vendorhook\u0027s gerrit are:\nhttps://android-review.googlesource.com/c/kernel/common/+/2050135\nhttps://android-review.googlesource.com/c/kernel/common/+/2465571",
       "parentUuid": "772131a6_c0b625fe",
+      "range": {
+        "startLine": 721,
+        "startChar": 2,
+        "endLine": 725,
+        "endChar": 20
+      },
+      "revId": "dda205ece96e809827691cc4a6cc32f7a4f9d785",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d861418d_476f3538",
+        "filename": "drivers/thermal/gov_power_allocator.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 1928107
+      },
+      "writtenOn": "2023-06-07T08:31:44Z",
+      "side": 1,
+      "message": "Ok, thank you. I will do it in next patchset.\n\nPlease let me explain why this is needed.\n\n**About force_reset and force_ipa:**\nI have added a vh in android13-5.15, it does the same thing of this patch. link:\nhttps://android-review.googlesource.com/c/kernel/common/+/2050135.\nBut it complicates the conditional statement.\nIn order to make it concise, we just add the flag of enable/reset and use goto logic, but do condition judgment in my driver.\n\n**About update:**\nWhen the user power budget is changed from non-zero to zero, the ipa should be reset even if temperature \u003c switch_on_temp, and force_reset should be true.\nWhile at this time, if the ```update \u003d (tz-\u003elast_temperature \u003e\u003d switch_on_temp); ```update flag would always be false, it can not be reset which means the state of cooling devices can not be reset. At the same time, the allow_maximum_power() and __thermal_cdev_update() are not exported, it is not able to do reset in my driver. So this update flag is needed too.",
+      "parentUuid": "9d5527ed_ba013408",
       "range": {
         "startLine": 721,
         "startChar": 2,
