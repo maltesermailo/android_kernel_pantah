@@ -87,6 +87,24 @@
       "message": "Hi,\n\nAs Jindong said above the community has reverted this patch. Do you plan to revert it? If we don\u0027t revert this patch, adb is working but stops at \"Freezing user space processes\" when suspend.\n\nI tried to revert this patch and applied the two patches below. the problem I mentioned did not occur.\nhttps://patchwork.kernel.org/project/linux-usb/patch/20230601031028.544244-1-badhri@google.com/\nhttps://patchwork.kernel.org/project/linux-usb/patch/20230601031028.544244-2-badhri@google.com/",
       "revId": "d1c3092479951d0a1ed6a2321cb0ba61b88404b7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c4289a3_b97947da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-06-07T14:19:04Z",
+      "side": 1,
+      "message": "Yes, these patches should be backported before the KMI freeze. There has been an active conversation on this patchset upstream though. I assume Badhri is waiting for the final revision to land before doing the backport of the Revert plus the new patches.",
+      "parentUuid": "250d0880_802f0505",
+      "revId": "d1c3092479951d0a1ed6a2321cb0ba61b88404b7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
