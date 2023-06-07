@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000046322867",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2455473?revision\u003d10",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "16343fbf_87fe3bb0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-06-07T14:44:21Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/98e51a2239d9d419d819cd61a2e720ebf19a8b0a) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d98e51a2239d9d419d819cd61a2e720ebf19a8b0a)\n\n```\n      ## mm/internal.h ##\n     @@ mm/internal.h: void folio_activate(struct folio *folio);\n      \n      void free_pgtables(struct mmu_gather *tlb, struct maple_tree *mt,\n      \t\t   struct vm_area_struct *start_vma, unsigned long floor,\n    --\t\t   unsigned long ceiling);\n    -+\t\t   unsigned long ceiling, bool mm_wr_locked);\n    +-\t\t   unsigned long ceiling, unsigned long start_t);\n    ++\t\t   unsigned long ceiling, unsigned long start_t,\n    ++\t\t   bool mm_wr_locked);\n      void pmd_install(struct mm_struct *mm, pmd_t *pmd, pgtable_t *pte);\n      \n      struct zap_details;\n    @@ mm/memory.c: void free_pgd_range(struct mmu_gather *tlb,\n      \n      void free_pgtables(struct mmu_gather *tlb, struct maple_tree *mt,\n      \t\t   struct vm_area_struct *vma, unsigned long floor,\n    --\t\t   unsigned long ceiling)\n    -+\t\t   unsigned long ceiling, bool mm_wr_locked)\n    +-\t\t   unsigned long ceiling, unsigned long start_t)\n    ++\t\t   unsigned long ceiling, unsigned long start_t,\n    ++\t\t   bool mm_wr_locked)\n      {\n    - \tMA_STATE(mas, mt, vma-\u003evm_end, vma-\u003evm_end);\n    + \tMA_STATE(mas, mt, start_t, start_t);\n      \n     @@ mm/memory.c: void free_pgtables(struct mmu_gather *tlb, struct maple_tree *mt,\n      \t\t * Hide vma from rmap and truncate_pagecache before freeing\n    @@ mm/memory.c: void free_pgtables(struct mmu_gather *tlb, struct maple_tree *mt,\n      ## mm/mmap.c ##\n     @@ mm/mmap.c: static void unmap_region(struct mm_struct *mm, struct maple_tree *mt,\n      \tupdate_hiwater_rss(mm);\n    - \tunmap_vmas(\u0026tlb, mt, vma, start, end, mm_wr_locked);\n    + \tunmap_vmas(\u0026tlb, mt, vma, start, end, start_t, end_t, mm_wr_locked);\n      \tfree_pgtables(\u0026tlb, mt, vma, prev ? prev-\u003evm_end : FIRST_USER_ADDRESS,\n    --\t\t\t\t next ? next-\u003evm_start : USER_PGTABLES_CEILING);\n    -+\t\t\t\t next ? next-\u003evm_start : USER_PGTABLES_CEILING,\n    -+\t\t\t\t mm_wr_locked);\n    +-\t\t      next ? next-\u003evm_start : USER_PGTABLES_CEILING, start_t);\n    ++\t\t      next ? next-\u003evm_start : USER_PGTABLES_CEILING, start_t,\n    ++\t\t      mm_wr_locked);\n      \ttlb_finish_mmu(\u0026tlb);\n      }\n      \n     @@ mm/mmap.c: void exit_mmap(struct mm_struct *mm)\n    - \tset_bit(MMF_OOM_SKIP, \u0026mm-\u003eflags);\n      \tmmap_write_lock(mm);\n    + \tmt_clear_in_rcu(\u0026mm-\u003emm_mt);\n      \tfree_pgtables(\u0026tlb, \u0026mm-\u003emm_mt, vma, FIRST_USER_ADDRESS,\n    --\t\t      USER_PGTABLES_CEILING);\n    -+\t\t      USER_PGTABLES_CEILING, true);\n    +-\t\t      USER_PGTABLES_CEILING, vma-\u003evm_end);\n    ++\t\t      USER_PGTABLES_CEILING, vma-\u003evm_end, true);\n      \ttlb_finish_mmu(\u0026tlb);\n      \n      \t/*\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 538163655 android-build.ayeaye-python-dispatcher_20230606.02_p0",
+      "revId": "9cc64c7fb9aee77d9bb471307eb2e0d5e8e6f986",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
