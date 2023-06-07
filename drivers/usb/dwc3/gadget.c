@@ -2541,16 +2541,19 @@ static int dwc3_gadget_pullup(struct usb_gadget *g, int is_on)
 	 */
 	ret = pm_runtime_get_sync(dwc->dev);
 	if (!ret || ret < 0) {
+		pr_err("[Ray] %s: no resume, just put first\n", __func__);
 		pm_runtime_put(dwc->dev);
 		return 0;
 	}
 
 	if (dwc->pullups_connected == is_on) {
+		pr_err("[Ray] %s: duplicate operation\n", __func__);
 		pm_runtime_put(dwc->dev);
 		return 0;
 	}
 
 	if (!is_on) {
+		pr_err("[Ray] %s: pull down\n", __func__);
 		ret = dwc3_gadget_soft_disconnect(dwc);
 	} else {
 		/*
@@ -2561,9 +2564,11 @@ static int dwc3_gadget_pullup(struct usb_gadget *g, int is_on)
 		 */
 		dwc3_core_soft_reset(dwc);
 
+		pr_err("[Ray] %s: pull up\n", __func__);
 		dwc3_event_buffers_setup(dwc);
 		__dwc3_gadget_start(dwc);
 		ret = dwc3_gadget_run_stop(dwc, true, false);
+		pr_err("[Ray] %s: run_stop\n", __func__);
 	}
 
 	pm_runtime_put(dwc->dev);
@@ -3606,6 +3611,9 @@ static void dwc3_endpoint_interrupt(struct dwc3 *dwc,
 		dwc3_gadget_endpoint_stream_event(dep, event);
 		break;
 	case DWC3_DEPEVT_RXTXFIFOEVT:
+		break;
+	default:
+		dev_err(dwc->dev, "unknown endpoint event %d\n", event->endpoint_event);
 		break;
 	}
 }

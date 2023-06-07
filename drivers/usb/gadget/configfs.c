@@ -305,6 +305,7 @@ static ssize_t gadget_dev_desc_UDC_store(struct config_item *item,
 	mutex_lock(&gi->lock);
 
 	if (!strlen(name) || strcmp(name, "none") == 0) {
+		pr_err("[Ray] %s: set none\n", __func__);
 		ret = unregister_gadget(gi);
 		if (ret)
 			goto err;
@@ -315,6 +316,7 @@ static ssize_t gadget_dev_desc_UDC_store(struct config_item *item,
 			goto err;
 		}
 		gi->composite.gadget_driver.udc_name = name;
+		pr_err("[Ray] %s: set UDC:%s\n", __func__, name);
 		ret = usb_gadget_probe_driver(&gi->composite.gadget_driver);
 		if (ret) {
 			gi->composite.gadget_driver.udc_name = NULL;
