@@ -22,6 +22,30 @@
       },
       "revId": "1ab4b930dc20cdc8601e53d37366f5f4f0fdd1e8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7baba034_32e6b2a5",
+        "filename": "android/abi_gki_aarch64_rtkstb",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1795686
+      },
+      "writtenOn": "2023-06-09T15:58:00Z",
+      "side": 1,
+      "message": "The drivers that use the \"device_for_each_child\" function are \"rpmsg_ctrl\" and \"rpmsg_char,\" and these two drivers are not maintained by us.\nSource code files:\n\ndrivers/rpmsg/rpmsg_char.c\ndrivers/rpmsg/rpmsg_ctrl.c\n\nAdditionally, the usage of \"driver_for_each_device\" and \"bus_for_each_dev\" is demonstrated as follows:\n``` \nstatic void __exit rtk_hdmi_exit(void)\n{\n\tint err;\n\n\terr \u003d driver_for_each_device(\u0026rtk_hdmi_driver.driver,\n\t\t\tNULL, NULL, rtk_hdmi_exit_callback);\n\tif (err)\n\t\tpr_err(\"%s fail\", __func__);\n\n\tplatform_driver_unregister(\u0026rtk_hdmi_driver);\n}\n\nmodule_exit(rtk_hdmi_exit);\n``` \n-----\n```\nstatic int __optee_unregister_device(struct device *dev, void *data)\n{\n\tif (!strncmp(dev_name(dev), \"optee-ta\", strlen(\"optee-ta\")))\n\t\tdevice_unregister(dev);\n\n\treturn 0;\n}\n\nvoid optee_unregister_devices(void)\n{\n\tbus_for_each_dev(\u0026tee_bus_type, NULL, NULL,\n\t\t\t __optee_unregister_device);\n}\n```",
+      "parentUuid": "074de6a6_e4d40e52",
+      "range": {
+        "startLine": 57,
+        "startChar": 2,
+        "endLine": 57,
+        "endChar": 23
+      },
+      "revId": "1ab4b930dc20cdc8601e53d37366f5f4f0fdd1e8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
