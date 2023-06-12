@@ -1094,6 +1094,8 @@ static int v4l_querycap(const struct v4l2_ioctl_ops *ops,
 
 	ret = ops->vidioc_querycap(file, fh, cap);
 
+	pr_err("micya: in v4l_querycap %s, ret: %i", vfd->name, ret);
+
 	/*
 	 * Drivers must not change device_caps, so check for this and
 	 * warn if this happened.
@@ -2090,6 +2092,9 @@ static int v4l_reqbufs(const struct v4l2_ioctl_ops *ops,
 	struct v4l2_requestbuffers *p = arg;
 	int ret = check_fmt(file, p->type);
 
+	struct video_device *vfd = video_devdata(file);
+	pr_err("micya: in v4l_reqbufs %s, ret: %i", vfd->name, ret);
+
 	if (ret)
 		return ret;
 
@@ -2112,6 +2117,9 @@ static int v4l_qbuf(const struct v4l2_ioctl_ops *ops,
 {
 	struct v4l2_buffer *p = arg;
 	int ret = check_fmt(file, p->type);
+
+	struct video_device *vfd = video_devdata(file);
+	pr_err("micya: in v4l_qbuf %s, ret %i", vfd->name, ret);
 
 	return ret ? ret : ops->vidioc_qbuf(file, fh, p);
 }
@@ -2984,14 +2992,21 @@ static long __video_do_ioctl(struct file *file,
 	int dev_debug = vfd->dev_debug;
 	long ret = -ENOTTY;
 
+	pr_err("micya: in __video_do_ioctl %s, cmd: %i", vfd->name, cmd);
+	pr_err("micya: is VIDIOC_REQBUFS: %d", cmd == VIDIOC_REQBUFS);
+
 	if (ops == NULL) {
 		pr_warn("%s: has no ioctl_ops.\n",
+				video_device_node_name(vfd));
+		pr_err("micya: %s has no ioctl_ops.\n",
 				video_device_node_name(vfd));
 		return ret;
 	}
 
 	if (test_bit(V4L2_FL_USES_V4L2_FH, &vfd->flags))
 		vfh = file->private_data;
+
+	pr_err("micya: after test_bit %s, cmd: %i", vfd->name, cmd);
 
 	/*
 	 * We need to serialize streamon/off with queueing new requests.
@@ -3007,6 +3022,8 @@ static long __video_do_ioctl(struct file *file,
 			return -ERESTARTSYS;
 	}
 
+	pr_err("micya: after supports_requests %s, cmd: %i", vfd->name, cmd);
+
 	lock = v4l2_ioctl_get_lock(vfd, vfh, cmd, arg);
 
 	if (lock && mutex_lock_interruptible(lock)) {
@@ -3020,17 +3037,23 @@ static long __video_do_ioctl(struct file *file,
 		goto unlock;
 	}
 
+	pr_err("micya: after is_registered %s, cmd: %i", vfd->name, cmd);
+
 	if (v4l2_is_known_ioctl(cmd)) {
 		info = &v4l2_ioctls[_IOC_NR(cmd)];
 
 		if (!test_bit(_IOC_NR(cmd), vfd->valid_ioctls) &&
-		    !((info->flags & INFO_FL_CTRL) && vfh && vfh->ctrl_handler))
+		    !((info->flags & INFO_FL_CTRL) && vfh && vfh->ctrl_handler)) {
+			pr_err("micya: vfd->valid_ioctls %d", test_bit(_IOC_NR(cmd), vfd->valid_ioctls));
 			goto done;
+		}
 
 		if (vfh && (info->flags & INFO_FL_PRIO)) {
 			ret = v4l2_prio_check(vfd->prio, vfh->prio);
-			if (ret)
+			if (ret) {
+				pr_err("micya: priority check: %i vs %i", v4l2_prio_max(vfd->prio), vfh->prio);
 				goto done;
+			}
 		}
 	} else {
 		default_info.ioctl = cmd;
@@ -3038,6 +3061,8 @@ static long __video_do_ioctl(struct file *file,
 		default_info.debug = v4l_print_default;
 		info = &default_info;
 	}
+
+	pr_err("micya: after is_known_ioctl %s, cmd: %i", vfd->name, cmd);
 
 	write_only = _IOC_DIR(cmd) == _IOC_WRITE;
 	if (info != &default_info) {
@@ -3049,8 +3074,11 @@ static long __video_do_ioctl(struct file *file,
 			vfh ? v4l2_prio_check(vfd->prio, vfh->prio) >= 0 : 0,
 			cmd, arg);
 	}
+	
+	pr_err("micya: after func %s, cmd: %i", vfd->name, cmd);
 
 done:
+	pr_err("micya: done %s, cmd: %i", vfd->name, cmd);
 	if (dev_debug & (V4L2_DEV_DEBUG_IOCTL | V4L2_DEV_DEBUG_IOCTL_ARG)) {
 		if (!(dev_debug & V4L2_DEV_DEBUG_STREAMING) &&
 		    (cmd == VIDIOC_QBUF || cmd == VIDIOC_DQBUF))
@@ -3070,6 +3098,7 @@ done:
 	}
 
 unlock:
+	pr_err("micya: unlock %s, cmd: %i", vfd->name, cmd);
 	if (lock)
 		mutex_unlock(lock);
 	if (req_queue_lock)
