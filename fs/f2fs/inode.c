@@ -463,7 +463,10 @@ static int do_read_inode(struct inode *inode)
 
 	/* Need all the flag bits */
 	f2fs_init_read_extent_tree(inode, node_page);
+<<<<<<< HEAD   (ec2dae ANDROID: add memset32 to db835c list of exported symbols nee)
 	f2fs_init_age_extent_tree(inode);
+=======
+>>>>>>> BRANCH (fa7464 Linux 6.1.29)
 
 	if (!sanity_check_inode(inode, node_page)) {
 		f2fs_put_page(node_page, 1);
