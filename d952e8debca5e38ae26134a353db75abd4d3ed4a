@@ -16,6 +16,23 @@
       "message": "Hi google, this patch is merged in android12-5.10 and android14-5.15. We also need it in android13-5.15. As the original patch cherry-pick to android13-5.15 is abandoned that I can\u0027t restore it(https://android-review.googlesource.com/c/kernel/common/+/2361662), I push this new one and use a different Change-Id. Can you reopen the original one and get it merged to make the consistent Change-Id? Or should we just work on this new patch?",
       "revId": "d952e8debca5e38ae26134a353db75abd4d3ed4a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d02786f_f760f454",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1928204
+      },
+      "writtenOn": "2023-06-12T12:47:47Z",
+      "side": 1,
+      "message": "BTW, when I build kernel only adding this patch. I got following error messages. I don\u0027t know why this happened. Can you give me some advise?\n\nbuild command:\ntools/bazel run //common:kernel_aarch64_abi_update_symbol_list\n\nerror log:\nERROR: /data/oven/android13-5.15/common/BUILD.bazel:45:22: Building kernel kernel_aarch64_notrim failed: (Exit 2): bash failed: error executing command (from target //common:kernel_aarch64_notrim) /bin/bash -c ... (remaining 1 argument skipped)\n\nUse --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging\nusr/include/linux/fuse.h:944: found __[us]{8,16,32,64} type without #include \u003clinux/types.h\u003e\nWARNING: modpost: EXPORT symbol \"__tracepoint_mm_vmscan_direct_reclaim_begin\" [vmlinux] version generation failed, symbol will not be versioned.\nIs \"__tracepoint_mm_vmscan_direct_reclaim_begin\" prototyped in \u003casm/asm-prototypes.h\u003e?\nld.lld: error: relocation R_AARCH64_ABS32 cannot be used against symbol \u0027__crc___tracepoint_mm_vmscan_direct_reclaim_begin\u0027; recompile with -fPIC\n\u003e\u003e\u003e defined in vmlinux.o\n\u003e\u003e\u003e referenced by ld-temp.o\n\u003e\u003e\u003e               vmlinux.o:(___kcrctab_gpl+__tracepoint_mm_vmscan_direct_reclaim_begin+0x0)\npahole: .tmp_vmlinux.btf: No such file or directory\nld.lld: error: .btf.vmlinux.bin.o: unknown file type\nmake[1]: *** [/data/oven/android13-5.15/out/bazel/output_user_root/4e1b044f017b820b0e71320473b0ad74/sandbox/linux-sandbox/40/execroot/__main__/common/Makefile:1290: vmlinux] Error 1\nmake: *** [Makefile:244: __sub-make] Error 2\nTarget //common:kernel_aarch64_abi_update_symbol_list failed to build\nUse --verbose_failures to see the command lines of failed build steps.\nERROR: /data/oven/android13-5.15/common/BUILD.bazel:45:22 Extracting symbols //common:kernel_aarch64_abi_extracted_symbols failed: (Exit 2): bash failed: error executing command (from target //common:kernel_aarch64_notrim) /bin/bash -c ... (remaining 1 argument skipped)\n\nUse --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging\nINFO: Elapsed time: 1524.925s, Critical Path: 1517.09s\nINFO: 5 processes: 3 internal, 2 linux-sandbox.\nFAILED: Build did NOT complete successfully\nFAILED: Build did NOT complete successfully\n\nThanks.",
+      "revId": "d952e8debca5e38ae26134a353db75abd4d3ed4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
