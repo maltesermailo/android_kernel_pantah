@@ -33,6 +33,24 @@
       "message": "You must include the use of the hook in this patch.",
       "revId": "ba00c391b124686f9409f80854ab69492520e16a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88cbeac0_f6d3b7be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-06-13T03:13:56Z",
+      "side": 1,
+      "message": "The way you posted this patch tells me that you are heading in the wrong direction.\n\nPlease refer to https://b.corp.google.com/issues/286444744#comment10. https://android-review.googlesource.com/2614990 should be the very first patch in your series, rebased on top of android13-5.15 and it should match https://lkml.kernel.org/r/1683782550-25799-1-git-send-email-zhaoyang.huang@unisoc.com exactly. Next https://android-review.googlesource.com/2614991 should be placed on top of https://android-review.googlesource.com/2614990 and then this patch should be placed on top of https://android-review.googlesource.com/2614991. This patch would modify rmqueue_buddy() to use the new hook. Then you post the rest as I described in https://b.corp.google.com/issues/286444744#comment10",
+      "parentUuid": "04ab7bb9_a5e489b3",
+      "revId": "ba00c391b124686f9409f80854ab69492520e16a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
