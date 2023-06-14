@@ -1965,6 +1965,69 @@ static int bpf_test_lookup_postfilter(const char *mount_dir)
 	return result;
 }
 
+static int bpf_test_read_while_umount(const char *mount_dir)
+{
+	const char *file_name = "file";
+	const int num_files = 1;
+	const off_t file_len = 65536;
+	const off_t read_len = 4096;
+
+	int result = TEST_FAILURE;
+	int i;
+	int file_fd = -1;
+	int src_fd = -1;
+	int fuse_dev = -1;
+	FUSE_DECLARE_DAEMON;
+
+	for (i = 0; i < num_files; ++i) {
+		TEST(file_fd = s_creat(s_path(s(ft_src),
+					      s_cat(s(file_name), s_itoa(i))),
+				       0777),
+		     file_fd != -1);
+		TESTSYSCALL(fallocate(file_fd, 0, 0, file_len));
+		TESTSYSCALL(close(file_fd));
+	}
+
+	TEST(src_fd = open(ft_src, O_DIRECTORY | O_RDONLY | O_CLOEXEC),
+	     src_fd != -1);
+	TESTEQUAL(mount_fuse_no_init(mount_dir, -1, src_fd, &fuse_dev), 0);
+	FUSE_START_DAEMON();
+	if (action) {
+		int fd = -1;
+
+		TESTSYSCALL(close(fuse_dev));
+		fuse_dev = -1;
+
+		for (i = 0; i < num_files; ++i) {
+			TEST(fd = s_open(s_path(s(mount_dir),
+						s_cat(s(file_name), s_itoa(i))),
+					 O_RDONLY),
+			     fd != -1);
+			TESTSYSCALL(readahead(fd, 0, read_len));
+			TESTSYSCALL(close(fd));
+		}
+	} else {
+		DECL_FUSE_IN(read);
+
+		TESTFUSEINITFLAGS(FUSE_ASYNC_READ);
+
+		for (i = 0; i < num_files; ++i ) {
+			usleep(100000);
+			TESTFUSEIN(FUSE_READ, read_in);
+			//TESTFUSEOUTERROR(-EIO);
+			exit(TEST_SUCCESS);
+		}
+		exit(TEST_SUCCESS);
+	}
+	FUSE_END_DAEMON();
+
+	close(fuse_dev);
+	umount(mount_dir);
+	close(src_fd);
+	close(file_fd);
+	return result;
+}
+
 static void parse_range(const char *ranges, bool *run_test, size_t tests)
 {
 	size_t i;
@@ -2091,6 +2154,7 @@ int main(int argc, char *argv[])
 		MAKE_TEST(bpf_test_no_readdirplus_without_nodeid),
 		MAKE_TEST(bpf_test_revalidate_handle_backing_fd),
 		MAKE_TEST(bpf_test_lookup_postfilter),
+		MAKE_TEST(bpf_test_read_while_umount),
 	};
 #undef MAKE_TEST
 

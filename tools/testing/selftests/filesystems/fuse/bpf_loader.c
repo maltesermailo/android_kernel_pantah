@@ -144,6 +144,14 @@ struct s s_pathn(size_t n, struct s s1, ...)
 	return s1;
 }
 
+struct s s_itoa(int n)
+{
+	char buffer[10];
+
+	snprintf(buffer, sizeof(buffer), "%d", n);
+	return s(buffer);
+}
+
 int s_link(struct s src_pathname, struct s dst_pathname)
 {
 	int res;

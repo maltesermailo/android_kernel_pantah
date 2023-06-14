@@ -44,6 +44,7 @@ struct s s_splitright(struct s s1, char c);
 struct s s_word(struct s s1, char c, size_t n);
 struct s s_path(struct s s1, struct s s2);
 struct s s_pathn(size_t n, struct s s1, ...);
+struct s s_itoa(int n);
 int s_link(struct s src_pathname, struct s dst_pathname);
 int s_symlink(struct s src_pathname, struct s dst_pathname);
 int s_mkdir(struct s pathname, mode_t mode);
@@ -275,10 +276,10 @@ int delete_dir_tree(const char *dir_path, bool remove_root);
 		TESTFUSEOUT1(fuse_init_out, ((struct fuse_init_out) {	\
 			.major = FUSE_KERNEL_VERSION,			\
 			.minor = FUSE_KERNEL_MINOR_VERSION,		\
-			.max_readahead = 4096,				\
+			.max_readahead = 65536,				\
 			.flags = fuse_connection_flags,			\
 			.max_background = 0,				\
-			.congestion_threshold = 0,			\
+			.congestion_threshold = 4096,			\
 			.max_write = 4096,				\
 			.time_gran = 1000,				\
 			.max_pages = 12,				\
