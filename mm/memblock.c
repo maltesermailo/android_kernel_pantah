@@ -687,7 +687,8 @@ int __init_memblock memblock_add_node(phys_addr_t base, phys_addr_t size,
  */
 int __init_memblock memblock_add(phys_addr_t base, phys_addr_t size)
 {
-	phys_addr_t end = base + size - 1;
+	phys_addr_t size2 = size;
+	phys_addr_t end = base + memblock_cap_size(base, &size2) - 1;
 
 	memblock_dbg("%s: [%pa-%pa] %pS\n", __func__,
 		     &base, &end, (void *)_RET_IP_);
@@ -788,7 +789,8 @@ static int __init_memblock memblock_remove_range(struct memblock_type *type,
 
 int __init_memblock memblock_remove(phys_addr_t base, phys_addr_t size)
 {
-	phys_addr_t end = base + size - 1;
+	phys_addr_t size2 = size;
+	phys_addr_t end = base + memblock_cap_size(base, &size2) - 1;
 
 	memblock_dbg("%s: [%pa-%pa] %pS\n", __func__,
 		     &base, &end, (void *)_RET_IP_);
@@ -806,7 +808,8 @@ int __init_memblock memblock_remove(phys_addr_t base, phys_addr_t size)
  */
 int __init_memblock memblock_free(phys_addr_t base, phys_addr_t size)
 {
-	phys_addr_t end = base + size - 1;
+	phys_addr_t size2 = size;
+	phys_addr_t end = base + memblock_cap_size(base, &size2) - 1;
 
 	memblock_dbg("%s: [%pa-%pa] %pS\n", __func__,
 		     &base, &end, (void *)_RET_IP_);
@@ -820,7 +823,8 @@ EXPORT_SYMBOL_GPL(memblock_free);
 
 int __init_memblock memblock_reserve(phys_addr_t base, phys_addr_t size)
 {
-	phys_addr_t end = base + size - 1;
+	phys_addr_t size2 = size;
+	phys_addr_t end = base + memblock_cap_size(base, &size2) - 1;
 
 	memblock_dbg("%s: [%pa-%pa] %pS\n", __func__,
 		     &base, &end, (void *)_RET_IP_);
@@ -831,7 +835,8 @@ int __init_memblock memblock_reserve(phys_addr_t base, phys_addr_t size)
 #ifdef CONFIG_HAVE_MEMBLOCK_PHYS_MAP
 int __init_memblock memblock_physmem_add(phys_addr_t base, phys_addr_t size)
 {
-	phys_addr_t end = base + size - 1;
+	phys_addr_t size2 = size;
+	phys_addr_t end = base + memblock_cap_size(base, &size2) - 1;
 
 	memblock_dbg("%s: [%pa-%pa] %pS\n", __func__,
 		     &base, &end, (void *)_RET_IP_);
