@@ -199,6 +199,24 @@
       "parentUuid": "5c98d319_d3a67b77",
       "revId": "d952e8debca5e38ae26134a353db75abd4d3ed4a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a5e9585_4ff42c27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-06-16T13:38:15Z",
+      "side": 1,
+      "message": "That looks like a cascading issue starting with modversion having trouble to compute a version:\n\n```\nWARNING: modpost: EXPORT symbol \"__tracepoint_mm_vmscan_direct_reclaim_begin\" [vmlinux] version generation failed, symbol will not be versioned.\nIs \"__tracepoint_mm_vmscan_direct_reclaim_begin\" prototyped in \u003casm/asm-prototypes.h\u003e?\nld.lld: error: relocation R_AARCH64_ABS32 cannot be used against symbol \u0027__crc___tracepoint_mm_vmscan_direct_reclaim_begin\u0027; recompile with -fPIC\n\u003e\u003e\u003e defined in vmlinux.o\n\u003e\u003e\u003e referenced by irqbypass.c\n\u003e\u003e\u003e               vmlinux.o:(___kcrctab_gpl+__tracepoint_mm_vmscan_direct_reclaim_begin+0x0)\nld.lld: error: relocation R_AARCH64_ABS32 cannot be used against symbol \u0027__crc___tracepoint_mm_vmscan_direct_reclaim_begin\u0027; recompile with -fPIC\n\u003e\u003e\u003e defined in vmlinux.o\n\u003e\u003e\u003e referenced by irqbypass.c\n\u003e\u003e\u003e               vmlinux.o:(___kcrctab_gpl+__tracepoint_mm_vmscan_direct_reclaim_begin+0x0)\nmake[1]: *** [/ws/android/kernel/aosp/common-android13-5.15/common/Makefile:1290: vmlinux] Error 1\n```\n\nI am no expert in how trace events / trace points are defined, but it looks to me as if the prototype definition through `DEFINE_EVENT` is insufficient to satisfy modversion.",
+      "parentUuid": "d46d10df_1950e7ee",
+      "revId": "d952e8debca5e38ae26134a353db75abd4d3ed4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
