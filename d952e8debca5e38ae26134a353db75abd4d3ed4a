@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad3b6f67_abee219b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1928204
+      },
+      "writtenOn": "2023-06-16T01:57:20Z",
+      "side": 1,
+      "message": "As I mentioned above, when I cherry-picked the patch from former android12-5.10 branch, I got this error.\n\nAn error occurred\nCould not perform action: Cherry-pick with Change-Id Ie66a3c87484a364a918c19b8e044c82f1afd6749 could not update the existing change 2361662 in destination branch refs/heads/android13-5.15 of project kernel/common, because the change was closed (ABANDONED)\n\nI think it is because someone has submitted the cherry-pick patch and it was abondoned finally, which is https://android-review.googlesource.com/c/kernel/common/+/2361662. I can\u0027t do anything to the old one so I pushed this new patch. Can you reopen the old one and get it merged to make the consistent Change-Id? Or should we just work on this new patch?",
+      "parentUuid": "d5a83ebe_b52029d2",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 68
+      },
+      "revId": "d952e8debca5e38ae26134a353db75abd4d3ed4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c2b75175_51cb1fc5",
@@ -89,6 +113,24 @@
       "side": 1,
       "message": "I mean, in a separate follow-up patch.",
       "parentUuid": "dabba7ef_01f6a81e",
+      "revId": "d952e8debca5e38ae26134a353db75abd4d3ed4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c98d319_d3a67b77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1928204
+      },
+      "writtenOn": "2023-06-16T01:57:20Z",
+      "side": 1,
+      "message": "I get it. But when I build kernel only adding this patch, I got following error messages. I don\u0027t know why this happened. Can you give me some advise?\n\nbuild command:\ntools/bazel run //common:kernel_aarch64_abi_update_symbol_list\n\nerror log:\nERROR: /data/oven/android13-5.15/common/BUILD.bazel:45:22: Building kernel kernel_aarch64_notrim failed: (Exit 2): bash failed: error executing command (from target //common:kernel_aarch64_notrim) /bin/bash -c ... (remaining 1 argument skipped)\n\nUse --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging\nusr/include/linux/fuse.h:944: found [us]{8,16,32,64} type without #include \u003clinux/types.h\u003e\nWARNING: modpost: EXPORT symbol \"tracepoint_mm_vmscan_direct_reclaim_begin\" [vmlinux] version generation failed, symbol will not be versioned.\nIs \"tracepoint_mm_vmscan_direct_reclaim_begin\" prototyped in \u003casm/asm-prototypes.h\u003e?\nld.lld: error: relocation R_AARCH64_ABS32 cannot be used against symbol \u0027crc___tracepoint_mm_vmscan_direct_reclaim_begin\u0027; recompile with -fPIC\n\ndefined in vmlinux.o\nreferenced by ld-temp.o\nvmlinux.o:(_kcrctab_gpl+tracepoint_mm_vmscan_direct_reclaim_begin+0x0)\npahole: .tmp_vmlinux.btf: No such file or directory\nld.lld: error: .btf.vmlinux.bin.o: unknown file type\nmake[1]: * [/data/oven/android13-5.15/out/bazel/output_user_root/4e1b044f017b820b0e71320473b0ad74/sandbox/linux-sandbox/40/execroot/main/common/Makefile:1290: vmlinux] Error 1\nmake: * [Makefile:244: __sub-make] Error 2\nTarget //common:kernel_aarch64_abi_update_symbol_list failed to build\nUse --verbose_failures to see the command lines of failed build steps.\nERROR: /data/oven/android13-5.15/common/BUILD.bazel:45:22 Extracting symbols //common:kernel_aarch64_abi_extracted_symbols failed: (Exit 2): bash failed: error executing command (from target //common:kernel_aarch64_notrim) /bin/bash -c ... (remaining 1 argument skipped)\n\nUse --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging\nINFO: Elapsed time: 1524.925s, Critical Path: 1517.09s\nINFO: 5 processes: 3 internal, 2 linux-sandbox.\nFAILED: Build did NOT complete successfully\nFAILED: Build did NOT complete successfully\n\n\nWhen the build issue is solved, I will push the symbol list \u0026 ABI update at once.\nThanks.",
+      "parentUuid": "5112e5ba_e93dc76d",
       "revId": "d952e8debca5e38ae26134a353db75abd4d3ed4a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
