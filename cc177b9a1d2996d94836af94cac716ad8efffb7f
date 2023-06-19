@@ -50,6 +50,59 @@
       "message": "Also, these are arm32 symbols, no new code, nor anything for arm64 should ever be calling them.",
       "revId": "cc177b9a1d2996d94836af94cac716ad8efffb7f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8585dfa_a3aa1939",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1684042
+      },
+      "writtenOn": "2023-06-19T23:41:43Z",
+      "side": 1,
+      "message": "Our PowerManager method was changed from s2r, and we have to implement gic distributor function : Save \u0026 Restore without cpu_cluster_pm_enter / exit. \n\nWe cannot add some vendor hook to call notifier, so we want to call that function (notifier) directly.\n\nSo, following your comment, any SOC (Using GIC400 - irq-gic.c inkernel driver) cannot save / restore it\u0027s SPI distributor SFRs when it doesn\u0027t implement \"CPU_CLUSTER_PM_ENTER \u0026 EXIT\" notifier. \u003c- Our PM driver is implementing this.\n\nAnyway, I also agree with your comment. Thanks.",
+      "parentUuid": "e03bcd64_6335a4d1",
+      "revId": "cc177b9a1d2996d94836af94cac716ad8efffb7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a57fd892_68d62147",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1684042
+      },
+      "writtenOn": "2023-06-19T23:41:43Z",
+      "side": 1,
+      "message": "This ABI exposure is not good design.",
+      "revId": "cc177b9a1d2996d94836af94cac716ad8efffb7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a930366a_64422986",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1684042
+      },
+      "writtenOn": "2023-06-19T23:41:43Z",
+      "side": 1,
+      "message": "Hmm, but I think define is only in kernel/cpu_pm.c, and it can be called and works.(only calls notifiers - cpu_cluster_pm_enter - CPU cluster low power entry notifier) \n\nBut I know what you mean, : no more direct call in ARM64. \nOK. I think I have to show your comment and let our PM members know \"we cannot call notifier without platform PM sequence\".\n\nThanks.",
+      "parentUuid": "c3baf7a3_ee8f028f",
+      "revId": "cc177b9a1d2996d94836af94cac716ad8efffb7f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
