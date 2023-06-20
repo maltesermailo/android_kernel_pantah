@@ -5107,6 +5107,9 @@ static void lru_gen_shrink_node(struct pglist_data *pgdat, struct scan_control *
 {
 	struct blk_plug plug;
 	unsigned long reclaimed = sc->nr_reclaimed;
+	bool do_plug = true;
+
+	trace_android_vh_lru_gen_shrink_node_blk_plug(&do_plug);
 
 	VM_WARN_ON_ONCE(!global_reclaim(sc));
 
@@ -5120,7 +5123,8 @@ static void lru_gen_shrink_node(struct pglist_data *pgdat, struct scan_control *
 
 	lru_add_drain();
 
-	blk_start_plug(&plug);
+	if (do_plug)
+		blk_start_plug(&plug);
 
 	set_mm_walk(pgdat, false);
 
@@ -5139,7 +5143,8 @@ static void lru_gen_shrink_node(struct pglist_data *pgdat, struct scan_control *
 
 	clear_mm_walk();
 
-	blk_finish_plug(&plug);
+	if (do_plug)
+		blk_finish_plug(&plug);
 done:
 	/* kswapd should never fail */
 	pgdat->kswapd_failures = 0;
