@@ -5031,13 +5031,16 @@ restart:
 static void lru_gen_shrink_lruvec(struct lruvec *lruvec, struct scan_control *sc)
 {
 	struct blk_plug plug;
+	bool do_plug = true;
 
 	VM_WARN_ON_ONCE(global_reclaim(sc));
 	VM_WARN_ON_ONCE(!sc->may_writepage || !sc->may_unmap);
 
 	lru_add_drain();
 
-	blk_start_plug(&plug);
+	trace_android_vh_lru_gen_shrink_lruvec_blk_plug(&do_plug);
+	if (do_plug)
+		blk_start_plug(&plug);
 
 	set_mm_walk(NULL, false);
 
@@ -5046,7 +5049,8 @@ static void lru_gen_shrink_lruvec(struct lruvec *lruvec, struct scan_control *sc
 
 	clear_mm_walk();
 
-	blk_finish_plug(&plug);
+	if (do_plug)
+		blk_finish_plug(&plug);
 }
 
 #else /* !CONFIG_MEMCG */

@@ -137,6 +137,9 @@ DECLARE_HOOK(android_vh_si_meminfo,
 DECLARE_HOOK(android_vh_scan_pages_max_isolated,
 	TP_PROTO(int *max_isolated),
 	TP_ARGS(max_isolated));
+DECLARE_HOOK(android_vh_lru_gen_shrink_lruvec_blk_plug,
+	TP_PROTO(bool *do_plug),
+	TP_ARGS(do_plug));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
