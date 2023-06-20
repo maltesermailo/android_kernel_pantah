@@ -134,6 +134,9 @@ DECLARE_HOOK(android_vh_mem_cgroup_css_offline,
 DECLARE_HOOK(android_vh_si_meminfo,
 	TP_PROTO(struct sysinfo *val),
 	TP_ARGS(val));
+DECLARE_HOOK(android_vh_scan_pages_max_isolated,
+	TP_PROTO(int *max_isolated),
+	TP_ARGS(max_isolated));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */

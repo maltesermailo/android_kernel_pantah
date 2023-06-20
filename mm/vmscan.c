@@ -4535,6 +4535,10 @@ static int scan_pages(struct lruvec *lruvec, struct scan_control *sc,
 	int remaining = MAX_LRU_BATCH;
 	struct lru_gen_page *lrugen = &lruvec->lrugen;
 	struct mem_cgroup *memcg = lruvec_memcg(lruvec);
+	int max_isolated = 0;
+
+	// Set max_isolated (eg. max_isolated = SWAP_CLUSTER_MAX);
+	trace_android_vh_scan_pages_max_isolated(&max_isolated);
 
 	VM_WARN_ON_ONCE(!list_empty(list));
 
@@ -4569,6 +4573,9 @@ static int scan_pages(struct lruvec *lruvec, struct scan_control *sc,
 				skipped += delta;
 			}
 
+			if (max_isolated && max(isolated, skipped) >= max_isolated)
+				break;
+
 			if (!--remaining || max(isolated, skipped) >= MIN_LRU_BATCH)
 				break;
 		}
@@ -4577,6 +4584,9 @@ static int scan_pages(struct lruvec *lruvec, struct scan_control *sc,
 			list_splice(&moved, head);
 			__count_zid_vm_events(PGSCAN_SKIP, zone, skipped);
 		}
+
+		if (max_isolated && isolated >= max_isolated)
+			break;
 
 		if (!remaining || isolated >= MIN_LRU_BATCH)
 			break;
