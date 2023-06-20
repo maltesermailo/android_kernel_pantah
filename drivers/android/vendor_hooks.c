@@ -357,3 +357,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_uid);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_user);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_scan_pages_max_isolated);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lru_gen_shrink_lruvec_blk_plug);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_evict_pages_blk_plug);

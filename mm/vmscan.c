@@ -4713,6 +4713,8 @@ static int evict_pages(struct lruvec *lruvec, struct scan_control *sc, int swapp
 	bool skip_retry = false;
 	struct mem_cgroup *memcg = lruvec_memcg(lruvec);
 	struct pglist_data *pgdat = lruvec_pgdat(lruvec);
+	struct blk_plug plug;
+	bool do_plug = false;
 
 	spin_lock_irq(&lruvec->lru_lock);
 
@@ -4727,7 +4729,13 @@ static int evict_pages(struct lruvec *lruvec, struct scan_control *sc, int swapp
 
 	if (list_empty(&list))
 		return scanned;
+
+	trace_android_vh_evict_pages_blk_plug(&do_plug);
+
 retry:
+	if (do_plug)
+		blk_start_plug(&plug);
+
 	reclaimed = shrink_page_list(&list, pgdat, sc, &stat, false);
 	sc->nr_reclaimed += reclaimed;
 
@@ -4775,6 +4783,9 @@ retry:
 	__count_vm_events(PGSTEAL_ANON + type, reclaimed);
 
 	spin_unlock_irq(&lruvec->lru_lock);
+
+	if (do_plug)
+		blk_finish_plug(&plug);
 
 	mem_cgroup_uncharge_list(&list);
 	free_unref_page_list(&list);
