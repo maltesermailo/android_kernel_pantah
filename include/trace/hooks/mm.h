@@ -146,6 +146,9 @@ DECLARE_HOOK(android_vh_evict_pages_blk_plug,
 DECLARE_HOOK(android_vh_lru_gen_shrink_node_blk_plug,
 	TP_PROTO(bool *do_plug),
 	TP_ARGS(do_plug));
+DECLARE_HOOK(android_vh_lru_gen_seq_write_blk_plug,
+	TP_PROTO(bool *do_plug),
+	TP_ARGS(do_plug));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */

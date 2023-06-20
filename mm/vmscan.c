@@ -5704,6 +5704,9 @@ static ssize_t lru_gen_seq_write(struct file *file, const char __user *src,
 		.reclaim_idx = MAX_NR_ZONES - 1,
 		.gfp_mask = GFP_KERNEL,
 	};
+	bool do_plug = true;
+
+	trace_android_vh_lru_gen_seq_write_blk_plug(&do_plug);
 
 	buf = kvmalloc(len + 1, GFP_KERNEL);
 	if (!buf)
@@ -5716,7 +5719,8 @@ static ssize_t lru_gen_seq_write(struct file *file, const char __user *src,
 
 	set_task_reclaim_state(current, &sc.reclaim_state);
 	flags = memalloc_noreclaim_save();
-	blk_start_plug(&plug);
+	if (do_plug)
+		blk_start_plug(&plug);
 	if (!set_mm_walk(NULL, true)) {
 		err = -ENOMEM;
 		goto done;
@@ -5752,7 +5756,8 @@ static ssize_t lru_gen_seq_write(struct file *file, const char __user *src,
 	}
 done:
 	clear_mm_walk();
-	blk_finish_plug(&plug);
+	if (do_plug)
+		blk_finish_plug(&plug);
 	memalloc_noreclaim_restore(flags);
 	set_task_reclaim_state(current, NULL);
 
