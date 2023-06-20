@@ -16,6 +16,23 @@
       "message": "let\u0027s wait until the next kabi update is merged and then this can be regenerated so that we do not have merge issues.  Give us a few days please...",
       "revId": "a3f4b21e91b16fb2401413b1e44fcbc8d424e519",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9aa1364_2e3a1887",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-06-20T15:33:58Z",
+      "side": 1,
+      "message": "Why weren\u0027t all the ABI differences listed in the commit log?\n\nI\u0027m getting this output:\n```\nINFO: ABI DIFFERENCES HAVE BEEN DETECTED!\nINFO: 3 function symbol(s) added\n  \u0027void ufshcd_mcq_config_mac(struct ufs_hba*, u32)\u0027\n  \u0027void ufshcd_mcq_make_queues_operational(struct ufs_hba*)\u0027\n  \u0027u32 ufshcd_mcq_read_cqis(struct ufs_hba*, int)\u0027\n\nfunction symbol \u0027int ufshcd_alloc_host(struct device*, struct ufs_hba**)\u0027 changed\n  CRC changed from 0x73a53dd to 0x770f3061\n\nfunction symbol \u0027void ufshcd_auto_hibern8_update(struct ufs_hba*, u32)\u0027 changed\n  CRC changed from 0x9acf22d9 to 0x42139434\n\nfunction symbol \u0027int ufshcd_bkops_ctrl(struct ufs_hba*, enum bkops_status)\u0027 changed\n  CRC changed from 0x1bfeb6eb to 0xa899f4ee\n\n... 32 omitted; 35 symbols have only CRC changes\n\ntype \u0027struct ufs_hba\u0027 changed\n  byte size changed from 5336 to 5328\n  46 members (\u0027ktime_t last_dme_cmd_tstamp\u0027 .. \u0027u64 android_oem_data1\u0027) changed\n    offset changed by -64\n\ntype \u0027struct ufs_dev_cmd\u0027 changed\n  byte size changed from 128 to 120\n  member \u0027struct cq_entry* cqe\u0027 was removed\n```\n\nThese are not only additions but significant modifications to the ABI too. Now we are past the deadline for the KMI freeze updates.",
+      "revId": "a3f4b21e91b16fb2401413b1e44fcbc8d424e519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
