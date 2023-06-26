@@ -124,6 +124,24 @@
       "parentUuid": "28b0cd09_a6c2360e",
       "revId": "7144ba62dc69374318f7f1b431969d2944dbb369",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b2663f4_399b8600",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2023-06-26T16:43:52Z",
+      "side": 1,
+      "message": "Sorry I was away. The problem we are facing today is that we have a situation where an RT task must migrate while it\u0027s running and this is the function that implements that. Note that ADPF means that the performance requirement can change at runtime so the decision made at wake up is no longer correct after running for a short period of time. So at wake up it correctly goes to little core, but then we realize it has a heavy piece of work to do and must move to a bigger core. I hope for 6.1 we would have had a discussion about the problem upstream and either moved to a better alternative or fixed it upstream and pulled the backport to 6.1. But for today; I couldn\u0027t find a simpler way to fix the problem out of tree. Thanks!",
+      "parentUuid": "5c6c4c4b_254cde86",
+      "revId": "7144ba62dc69374318f7f1b431969d2944dbb369",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
