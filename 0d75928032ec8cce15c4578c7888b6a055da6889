@@ -19,6 +19,26 @@
       "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/b7898396f4bbe160f546d0c5e9fa17cca9a7d153) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003db7898396f4bbe160f546d0c5e9fa17cca9a7d153)\n\n```\n    - ## include/sound/soc.h ##\n    -@@ include/sound/soc.h: struct snd_soc_card {\n    - \tstruct mutex pcm_mutex;\n    - \tenum snd_soc_pcm_subclass pcm_subclass;\n    - \n    --\tspinlock_t dpcm_lock;\n    --\n    - \tint (*probe)(struct snd_soc_card *card);\n    - \tint (*late_probe)(struct snd_soc_card *card);\n    - \tint (*remove)(struct snd_soc_card *card);\n    +    Bug: 287928097\n    +    Bug: 277241308\n    +    Link: https://lore.kernel.org/all/20230511120841.2096524-4-yixuanjiang@google.com\n    +    Change-Id: Iae88cee86073874889591ea0619609d6d4103645\n    +    Signed-off-by: Yixuan Jiang \u003cyixuanjiang@google.com\u003e\n     \n      ## sound/soc/soc-core.c ##\n     @@ sound/soc/soc-core.c: int snd_soc_register_card(struct snd_soc_card *card)\n    @@ sound/soc/soc-pcm.c: static void soc_pcm_codec_params_fixup(struct snd_pcm_hw_pa\n      \t/* clear the corresponding DAIs parameters when going to be inactive */\n      \tfor_each_rtd_dais(rtd, i, dai) {\n     @@ sound/soc/soc-pcm.c: static int soc_pcm_hw_clean(struct snd_pcm_substream *substream, int rollback)\n    - \t\tif (snd_soc_dai_stream_valid(dai, substream-\u003estream))\n    - \t\t\tsnd_soc_dai_hw_free(dai, substream, rollback);\n    + \t\tsnd_soc_dai_hw_free(dai, substream, rollback);\n    + \t}\n      \n     -\tmutex_unlock(\u0026rtd-\u003ecard-\u003epcm_mutex);\n      \treturn 0;\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 542564694 android-build.ayeaye-python-dispatcher_20230622.04_p0",
       "revId": "0d75928032ec8cce15c4578c7888b6a055da6889",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000047634337",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2639514?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "2ec52360_64d119a7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-06-27T03:41:29Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/b7898396f4bbe160f546d0c5e9fa17cca9a7d153) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003db7898396f4bbe160f546d0c5e9fa17cca9a7d153)\n\n```\n    - ## include/sound/soc.h ##\n    -@@ include/sound/soc.h: struct snd_soc_card {\n    - \tstruct mutex pcm_mutex;\n    - \tenum snd_soc_pcm_subclass pcm_subclass;\n    - \n    --\tspinlock_t dpcm_lock;\n    --\n    - \tint (*probe)(struct snd_soc_card *card);\n    - \tint (*late_probe)(struct snd_soc_card *card);\n    - \tint (*remove)(struct snd_soc_card *card);\n    +    Bug: 287928097\n    +    Bug: 277241308\n    +    Link: https://lore.kernel.org/all/20230511120841.2096524-4-yixuanjiang@google.com\n    +    Change-Id: Iae88cee86073874889591ea0619609d6d4103645\n    +    Signed-off-by: Yixuan Jiang \u003cyixuanjiang@google.com\u003e\n     \n      ## sound/soc/soc-core.c ##\n     @@ sound/soc/soc-core.c: int snd_soc_register_card(struct snd_soc_card *card)\n    @@ sound/soc/soc-pcm.c: static void soc_pcm_codec_params_fixup(struct snd_pcm_hw_pa\n      \t/* clear the corresponding DAIs parameters when going to be inactive */\n      \tfor_each_rtd_dais(rtd, i, dai) {\n     @@ sound/soc/soc-pcm.c: static int soc_pcm_hw_clean(struct snd_pcm_substream *substream, int rollback)\n    - \t\tif (snd_soc_dai_stream_valid(dai, substream-\u003estream))\n    - \t\t\tsnd_soc_dai_hw_free(dai, substream, rollback);\n    + \t\tsnd_soc_dai_hw_free(dai, substream, rollback);\n    + \t}\n      \n     -\tmutex_unlock(\u0026rtd-\u003ecard-\u003epcm_mutex);\n      \treturn 0;\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 542564694 android-build.ayeaye-python-dispatcher_20230622.04_p0",
+      "revId": "0d75928032ec8cce15c4578c7888b6a055da6889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
