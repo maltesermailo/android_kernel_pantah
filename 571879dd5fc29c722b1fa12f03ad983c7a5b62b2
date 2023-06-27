@@ -34,6 +34,24 @@
       "parentUuid": "56827a5f_ba7803b7",
       "revId": "571879dd5fc29c722b1fa12f03ad983c7a5b62b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c30522d_c6b3c9e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2023-06-27T15:15:18Z",
+      "side": 1,
+      "message": "I did a bad job in the past aosp/2477486. I thought when it go via LTS this will be sorted then.\n\nSo to make sure I do it actually correctly this time. The required steps are:\n\n1. Use ANDROID_KABI_RESERVE(1) for the new field.\n2. Use ANDROID_KABI_USE() to define this field.\n3. Fold this change into this patch.\n4. Rest of the patches should be the same since this is the only ABI breakage issue IIUC.\n\nThanks!",
+      "parentUuid": "2f2e4a33_35ba9eef",
+      "revId": "571879dd5fc29c722b1fa12f03ad983c7a5b62b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
