@@ -105,6 +105,24 @@
       "parentUuid": "607fa700_0eeac501",
       "revId": "a3f4b21e91b16fb2401413b1e44fcbc8d424e519",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7b5fba9_ec5de412",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2023-06-28T16:29:48Z",
+      "side": 1,
+      "message": "The patchset can still be merged but it needs to be modified to not break the KMI. I believe this might be easy to achieve in this case. Can you modify the patches to _NOT_ remove from `struct ufs_dev_cmd` member `struct cq_entry* cqe`? I think this should make your patchset KMI compliant.",
+      "parentUuid": "f66cfa77_9a8a79af",
+      "revId": "a3f4b21e91b16fb2401413b1e44fcbc8d424e519",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
