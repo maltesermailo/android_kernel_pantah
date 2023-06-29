@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b17225c1_273c54e0",
+        "filename": "mm/slab_common.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1004,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-06-29T20:23:04Z",
+      "side": 1,
+      "message": "The name of this hook is quite meaningless. How about placing it after that `if` block and naming it something like: `trace_android_vh_slab_page_alloced(page, size, flags)` like this:\n\n```\n\tpage \u003d alloc_pages(flags, order);\n\tif (likely(page)) {\n\t\t...\n\t}\n\ttrace_android_vh_slab_page_alloced(page, size, flags);\n\t...\n}\n```\n\nThis way it can be used for other purposes.",
+      "range": {
+        "startLine": 1004,
+        "startChar": 2,
+        "endLine": 1004,
+        "endChar": 34
+      },
+      "revId": "7b7ce21a4431d00bf9be77305980f20e0e09a808",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
