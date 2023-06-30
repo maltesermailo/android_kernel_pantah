@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d1b9821_89ba552f",
+        "filename": "mm/slab_common.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-06-30T17:20:14Z",
+      "side": 1,
+      "message": "kmalloc_order() is an exported function and can be used by drivers. In that case any driver will be able to trigger trace_android_vh_slab_page_alloced and you will account that as a slab allocation. Is that your intention? I would suggest having this as a separate tracepoint so that it differs from the one in `alloc_slab_page`",
+      "range": {
+        "startLine": 1006,
+        "startChar": 1,
+        "endLine": 1006,
+        "endChar": 35
+      },
+      "revId": "55a01b5dce9b7621921d79758984f1f4884d793b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
