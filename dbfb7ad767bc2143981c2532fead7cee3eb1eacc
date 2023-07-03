@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d8a4fcb_0455e7a3",
+        "filename": "include/uapi/linux/gzvm.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-07-03T11:37:32Z",
+      "side": 1,
+      "message": "Fixed. Thank you for the reminder.",
+      "parentUuid": "da709e54_4fb33884",
+      "range": {
+        "startLine": 72,
+        "startChar": 1,
+        "endLine": 72,
+        "endChar": 16
+      },
+      "revId": "dbfb7ad767bc2143981c2532fead7cee3eb1eacc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99a8c347_4f7bf910",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bec3d204_21a506a4",
+        "filename": "include/uapi/linux/gzvm.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-07-03T11:37:32Z",
+      "side": 1,
+      "message": "Yes. We\u0027ve used it with function like `kzalloc` to set to 0 and checked.",
+      "parentUuid": "99a8c347_4f7bf910",
+      "range": {
+        "startLine": 94,
+        "startChar": 1,
+        "endLine": 94,
+        "endChar": 18
+      },
+      "revId": "dbfb7ad767bc2143981c2532fead7cee3eb1eacc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ff655c5_b4a8ac2b",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-06-15T20:59:53Z",
       "side": 1,
       "message": "fix it to what?  Why?  Are you checking this padding?  If not, it will never be able to be used in the future.",
+      "range": {
+        "startLine": 143,
+        "startChar": 2,
+        "endLine": 143,
+        "endChar": 20
+      },
+      "revId": "dbfb7ad767bc2143981c2532fead7cee3eb1eacc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8cc1d6d_46763bc9",
+        "filename": "include/uapi/linux/gzvm.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-07-03T11:37:32Z",
+      "side": 1,
+      "message": "We\u0027re fixing it to a reasonable size future-proof for keeping the same struct size when adding new variables in the union is needed.",
+      "parentUuid": "4ff655c5_b4a8ac2b",
       "range": {
         "startLine": 143,
         "startChar": 2,
