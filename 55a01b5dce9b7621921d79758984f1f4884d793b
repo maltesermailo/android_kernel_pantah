@@ -22,6 +22,30 @@
       },
       "revId": "55a01b5dce9b7621921d79758984f1f4884d793b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42417f03_d3e931fa",
+        "filename": "mm/slab_common.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 2011105
+      },
+      "writtenOn": "2023-07-04T09:37:52Z",
+      "side": 1,
+      "message": "You are right! The tracking setting point in `kmalloc_order()` is my intention that memory statistics when the driver uses kmalloc for slab allocation. I think there should be a good tracking supplementary point here.\n\nAnd your suggestion is good, here should also be different from `alloc_slab_page`. I will restore the previous vh `android_vh_slab_check_show` in `alloc_slab_page` only as a slab check, and keep the current hook function in kmalloc to make more attempts. Do you think this is okay and have any new ideas or suggestions for it?",
+      "parentUuid": "8d1b9821_89ba552f",
+      "range": {
+        "startLine": 1006,
+        "startChar": 1,
+        "endLine": 1006,
+        "endChar": 35
+      },
+      "revId": "55a01b5dce9b7621921d79758984f1f4884d793b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
