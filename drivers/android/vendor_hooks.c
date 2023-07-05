@@ -411,9 +411,40 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_del_page_from_lrulist);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_traversal_lruvec);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_page_should_be_protected);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mark_page_accessed);
+<<<<<<< HEAD   (aaca6b ANDROID: GKI: Add initialization for rwsem's oem_data and ve)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_cold_pageout_skip);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_ffu_update_cid);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_uid);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_user);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_modify_thermal_cpu_get_power);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_page_cache_forced_ra);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_reclaim_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_failure_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpufreq_acct_update_power);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rmqueue);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_inactive_ratio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_hibernation_swap);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_cpu_resume);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_hib_resume_bdev);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_highpage_movable_gfp_adjust);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_anon_gfp_adjust);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_dma_buf_stats_teardown);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_cold_or_pageout);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_cold_or_pageout_abort);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_retry);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_encrypt_page);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_init_aes_encrypt);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_skip_swap_map_write);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_post_image_save);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dm_update_clone_bio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ctl_dirty_rate);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_direct_io_update_bio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_loop_prepare_cmd);
+>>>>>>> CHANGE (024628 ANDROID: vendor_hook: Add hook to abort reclaim and compacti)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_psi_event);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_psi_group);
+<<<<<<< HEAD   (aaca6b ANDROID: GKI: Add initialization for rwsem's oem_data and ve)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_sdio_pm_flag_set);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_read_lazy_flag);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_tsk_need_resched_lazy);
@@ -427,3 +458,16 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_resume_begin);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_resume_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_early_resume_begin);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_enable_thermal_genl_check);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rmqueue_smallest_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_one_page_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_use_cma_first_check);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_slab_page_alloced);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_kmalloc_order_alloced);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_compact_finished);
+/*
+ * For type visibility
+ */
+const struct readahead_control *GKI_struct_readahead_control;
+EXPORT_SYMBOL_GPL(GKI_struct_readahead_control);
+>>>>>>> CHANGE (024628 ANDROID: vendor_hook: Add hook to abort reclaim and compacti)
