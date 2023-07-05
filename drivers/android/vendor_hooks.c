@@ -444,11 +444,16 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mark_page_accessed);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_cold_pageout_skip);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_psi_event);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_psi_group);
+<<<<<<< HEAD   (54dcbf ANDROID: gki_config: Disable CONFIG_DEBUG_STACK_USAGE)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tcp_sock_error);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tcp_fastsyn);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tcp_state_change);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tcp_select_window);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tcp_update_rtt);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_psi_update_triggers);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_cold_or_pageout_abort);
+>>>>>>> CHANGE (dd2c5e ANDROID: vendor_hook: Add hook to abort reclaim and compacti)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_sdio_pm_flag_set);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tcp_v4_connect);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tcp_v6_connect);
@@ -467,6 +472,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_resume_begin);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_resume_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_early_resume_begin);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_enable_thermal_genl_check);
+<<<<<<< HEAD   (54dcbf ANDROID: gki_config: Disable CONFIG_DEBUG_STACK_USAGE)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_get_log_usertype);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_hievent_to_jank);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ogki_hievent_create);
@@ -502,6 +508,16 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_udp_unicast_rcv_skb);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_udp6_unicast_rcv_skb);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ogki_kmem_cache_create_usercopy);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_init_adjust_zone_wmark);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_pr_set_vma_name_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_compact_finished);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rebalance_anon_lru_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_debug_show_areas);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_contig_range_not_isolated);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_warn_alloc_tune_ratelimit);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_warn_alloc_show_mem_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_use_vm_swappiness);
+>>>>>>> CHANGE (dd2c5e ANDROID: vendor_hook: Add hook to abort reclaim and compacti)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fsnotify_open);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_retry);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_group_exit);
