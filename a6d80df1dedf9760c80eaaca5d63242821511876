@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "773d8b7f_34ba79b5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-07-05T19:51:02Z",
+      "side": 1,
+      "message": "Should be `UPSTREAM: dma-remap: use kvmalloc_array/kvfree for larger dma memory remap`",
+      "range": {
+        "startLine": 7,
+        "startChar": 8,
+        "endLine": 7,
+        "endChar": 9
+      },
+      "revId": "a6d80df1dedf9760c80eaaca5d63242821511876",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e22a750_0153a732",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-07-05T19:51:02Z",
+      "side": 1,
+      "message": "Should match the upstream commit message:\n```\nIf dma_direct_alloc() alloc memory in size of 64MB, the inner function\n    dma_common_contiguous_remap() will allocate 128KB memory by invoking\n    the function kmalloc_array(). and the kmalloc_array seems to fail to try to\n    allocate 128KB mem.\n    \n    Call trace:\n    [14977.928623] qcrosvm: page allocation failure: order:5, mode:0x40cc0\n    [14977.928638] dump_backtrace.cfi_jt+0x0/0x8\n    [14977.928647] dump_stack_lvl+0x80/0xb8\n    [14977.928652] warn_alloc+0x164/0x200\n    [14977.928657] __alloc_pages_slowpath+0x9f0/0xb4c\n    [14977.928660] __alloc_pages+0x21c/0x39c\n    [14977.928662] kmalloc_order+0x48/0x108\n    [14977.928666] kmalloc_order_trace+0x34/0x154\n    [14977.928668] __kmalloc+0x548/0x7e4\n    [14977.928673] dma_direct_alloc+0x11c/0x4f8\n    [14977.928678] dma_alloc_attrs+0xf4/0x138\n    [14977.928680] gh_vm_ioctl_set_fw_name+0x3c4/0x610 [gunyah]\n    [14977.928698] gh_vm_ioctl+0x90/0x14c [gunyah]\n    [14977.928705] __arm64_sys_ioctl+0x184/0x210\n    \n    work around by doing kvmalloc_array instead.\n    \n    Signed-off-by: Gao Xu \u003cgaoxu2@hihonor.com\u003e\n    Reviewed-by: Suren Baghdasaryan \u003csurenb@google.com\u003e\n    Signed-off-by: Christoph Hellwig \u003chch@lst.de\u003e\n```\nAfter that add:\n```\nBug: 279161171\n(cherry picked from commit 51ff97d54f02b4444dfc42e380ac4c058e12d5dd)\nChange-Id: I665c0a2b06f5a97cef297c1d5a6618373b513299\nSigned-off-by: Dezhi Huang \u003chuangdezhi@hihonor.com\u003e\n```\n\nPlenty of examples in AOSP, for instance here: https://android-review.git.corp.google.com/c/kernel/common/+/2648663",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 44
+      },
+      "revId": "a6d80df1dedf9760c80eaaca5d63242821511876",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
