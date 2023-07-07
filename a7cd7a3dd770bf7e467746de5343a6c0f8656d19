@@ -16,6 +16,24 @@
       "message": "It looks like this patch causes a crash:\n```\nPanic log:\n[  236.389422][    C0] Unable to handle kernel paging request at virtual address ffffffc112dad130\n[  236.398396][    C0] Mem abort info:\n[  236.402054][    C0]   ESR \u003d 0x0000000096000005\n[  236.406751][    C0]   EC \u003d 0x25: DABT (current EL), IL \u003d 32 bits\n[  236.413012][    C0]   SET \u003d 0, FnV \u003d 0\n[  236.416877][    C0]   EA \u003d 0, S1PTW \u003d 0\n[  236.420913][    C0]   FSC \u003d 0x05: level 1 translation fault\n[  236.426677][    C0] Data abort info:\n[  236.430432][    C0]   ISV \u003d 0, ISS \u003d 0x00000005\n[  236.435021][    C0]   CM \u003d 0, WnR \u003d 0\n[  236.438711][    C0] swapper pgtable: 4k pages, 39-bit VAs, pgdp\u003d000000008204c000\n[  236.446253][    C0] [ffffffc112dad130] pgd\u003d0000000000000000, p4d\u003d0000000000000000, pud\u003d0000000000000000\n[  236.455781][    C0] Internal error: Oops: 0000000096000005 [#1] PREEMPT SMP\n…\n[  236.684934][    C0] CPU: 0 PID: 1824 Comm: RenderThread Tainted: G         C OE      6.1.25-android14-11-00106-g8aea35f10913-ab10346598 #1\n[  236.697394][    C0] Hardware name: NXP i.MX8ULP EVK (DT)\n[  236.702719][    C0] pstate: 80400005 (Nzcv daif +PAN -UAO -TCO -DIT -SSBS BTYPE\u003d--)\n[  236.710403][    C0] pc : __memcpy+0x1a0/0x230\n[  236.714805][    C0] lr : retire_capture_urb+0x1d8/0x220\n[  236.720058][    C0] sp : ffffffc008003d90\n[  236.724075][    C0] x29: ffffffc008003db0 x28: 00000000ffffffc0 x27: 0000000000000040\n[  236.731936][    C0] x26: ffffffc012dad180 x25: ffffff804649fc00 x24: ffffff803ebacfe4\n[  236.739800][    C0] x23: 0000000000000000 x22: ffffff800626d390 x21: 0000000000000004\n[  236.747663][    C0] x20: 0000000000000040 x19: ffffff800626d2e8 x18: ffffffc008005040\n[  236.755528][    C0] x17: 00000000ceb13bd2 x16: 00000000ceb13bd2 x15: 0000000000004000\n[  236.763390][    C0] x14: 00000000017a0ec0 x13: 0000000000000004 x12: 000000000e1700a2\n[  236.771251][    C0] x11: 0000000000000000 x10: 0000000000000001 x9 : ffffffc01454e000\n[  236.779106][    C0] x8 : 0000000000000000 x7 : 0000000000000000 x6 : 0000000000000000\n[  236.786963][    C0] x5 : ffffffc11454e000 x4 : ffffffc112dad140 x3 : ffffffd98b3b2960\n[  236.794832][    C0] x2 : 00000000ffffffc0 x1 : ffffffc012dad180 x0 : ffffffc01454e040\n[  236.802699][    C0] Call trace:\n[  236.805850][    C0]  __memcpy+0x1a0/0x230\n[  236.809884][    C0]  snd_complete_urb+0x3dc/0x624\n[  236.814611][    C0]  __usb_hcd_giveback_urb+0xb0/0x138\n[  236.819773][    C0]  usb_giveback_urb_bh+0x88/0x19c\n[  236.824669][    C0]  tasklet_action_common+0x1ac/0x4bc\n[  236.829825][    C0]  tasklet_hi_action+0x24/0x34\n[  236.834461][    C0]  __do_softirq+0x11c/0x430\n[  236.838836][    C0]  ____do_softirq+0x10/0x20\n[  236.843218][    C0]  call_on_irq_stack+0x40/0x74\n[  236.847857][    C0]  do_softirq_own_stack+0x1c/0x2c\n[  236.852754][    C0]  __irq_exit_rcu+0x6c/0xcc\n[  236.857142][    C0]  irq_exit_rcu+0x10/0x1c\n[  236.861352][    C0]  el0_interrupt+0x54/0x1d8\n[  236.865736][    C0]  __el0_irq_handler_common+0x18/0x28\n[  236.870993][    C0]  el0t_64_irq_handler+0x10/0x1c\n[  236.875805][    C0]  el0t_64_irq+0x1a0/0x1a4\n[  236.880109][    C0] Code: a93e24a8 a93f2caa d65f03c0 d503201f (a97f348c)\n[  236.886923][    C0] ---[ end trace 0000000000000000 ]---\n[  236.930916][    C0] Kernel panic - not syncing: Oops: Fatal exception in interrupt\n[  236.938539][    C0] SMP: stopping secondary CPUs\n[  236.943184][    C0] Kernel Offset: 0x1982a00000 from 0xffffffc008000000\n[  236.949812][    C0] PHYS_OFFSET: 0x80000000\n[  236.954004][    C0] CPU features: 0x00,00000000,00100184,0000421b\n```",
       "revId": "a7cd7a3dd770bf7e467746de5343a6c0f8656d19",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41247d13_fd5c4cc0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-07-07T00:43:59Z",
+      "side": 1,
+      "message": "Looks like this was fixed by aosp/2644733.",
+      "parentUuid": "f8d20064_84fd043d",
+      "revId": "a7cd7a3dd770bf7e467746de5343a6c0f8656d19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
