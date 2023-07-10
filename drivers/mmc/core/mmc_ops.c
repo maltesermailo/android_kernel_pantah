@@ -636,6 +636,12 @@ int mmc_switch(struct mmc_card *card, u8 set, u8 index, u8 value,
 }
 EXPORT_SYMBOL_GPL(mmc_switch);
 
+void mmc_check_tuning_addr(struct mmc_data *data, dma_addr_t buf_dma_addr)
+{
+	BUG_ON(data->tuning_buf_phys != buf_dma_addr);
+}
+EXPORT_SYMBOL_GPL(mmc_check_tuning_addr);
+
 int mmc_send_tuning(struct mmc_host *host, u32 opcode, int *cmd_error)
 {
 	struct mmc_request mrq = {};
@@ -680,6 +686,8 @@ int mmc_send_tuning(struct mmc_host *host, u32 opcode, int *cmd_error)
 	data.sg = &sg;
 	data.sg_len = 1;
 	sg_init_one(&sg, data_buf, size);
+	data.tuning_buf_virt = data_buf;
+	data.tuning_buf_phys = virt_to_phys(data_buf);
 
 	mmc_wait_for_req(host, &mrq);
 
@@ -700,6 +708,8 @@ int mmc_send_tuning(struct mmc_host *host, u32 opcode, int *cmd_error)
 		err = -EIO;
 
 out:
+	data.tuning_buf_virt = NULL;
+	data.tuning_buf_phys = 0ULL;
 	kfree(data_buf);
 	return err;
 }

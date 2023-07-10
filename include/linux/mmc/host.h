@@ -678,6 +678,7 @@ static inline void mmc_debugfs_err_stats_inc(struct mmc_host *host,
 }
 
 int mmc_send_tuning(struct mmc_host *host, u32 opcode, int *cmd_error);
+void mmc_check_tuning_addr(struct mmc_data *data, dma_addr_t buf_dma_addr);
 int mmc_send_abort_tuning(struct mmc_host *host, u32 opcode);
 int mmc_get_ext_csd(struct mmc_card *card, u8 **new_ext_csd);
 

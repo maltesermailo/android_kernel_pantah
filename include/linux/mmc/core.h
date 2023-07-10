@@ -138,6 +138,8 @@ struct mmc_data {
 	int			sg_count;	/* mapped sg entries */
 	struct scatterlist	*sg;		/* I/O scatter list */
 	s32			host_cookie;	/* host private data */
+	u8			*tuning_buf_virt;
+	phys_addr_t		tuning_buf_phys;
 };
 
 struct mmc_host;
