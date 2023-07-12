@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000048633109",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2655077?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "15f8b033_1c1562de",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-07-12T13:19:41Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/e994f5b677ee016a2535d9df826315122da1ae65) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003de994f5b677ee016a2535d9df826315122da1ae65)\n\n```\n      ## fs/squashfs/block.c ##\n     @@\n      #include \u003clinux/fs.h\u003e\n    @@ fs/squashfs/block.c\n      #include \u003clinux/slab.h\u003e\n     +#include \u003clinux/pagemap.h\u003e\n      #include \u003clinux/string.h\u003e\n    + #include \u003clinux/buffer_head.h\u003e\n      #include \u003clinux/bio.h\u003e\n    - \n     @@ fs/squashfs/block.c: static int copy_bio_to_actor(struct bio *bio,\n      \treturn copied_bytes;\n      }\n    @@ fs/squashfs/block.c: static int copy_bio_to_actor(struct bio *bio,\n     +\t\t\ttail_to_cache \u003d page;\n     +\n     +\t\tif (!bio || idx !\u003d end_idx) {\n    -+\t\t\tstruct bio *new \u003d bio_alloc_clone(bdev, fullbio,\n    ++\t\t\tstruct bio *new \u003d bio_clone_fast(fullbio,\n     +\t\t\t\t\t\t\t  GFP_NOIO, \u0026fs_bio_set);\n     +\n     +\t\t\tif (bio) {\n    @@ fs/squashfs/super.c: static int squashfs_fill_super(struct super_block *sb, stru\n      \tif (IS_ERR(msblk-\u003estream)) {\n      \t\terr \u003d PTR_ERR(msblk-\u003estream);\n     @@ fs/squashfs/super.c: failed_mount:\n    - \tsquashfs_cache_delete(msblk-\u003eblock_cache);\n      \tsquashfs_cache_delete(msblk-\u003efragment_cache);\n      \tsquashfs_cache_delete(msblk-\u003eread_page);\n    + \tsquashfs_decompressor_destroy(msblk);\n     +\tif (msblk-\u003ecache_mapping)\n     +\t\tiput(msblk-\u003ecache_mapping-\u003ehost);\n    - \tmsblk-\u003ethread_ops-\u003edestroy(msblk);\n      \tkfree(msblk-\u003einode_lookup_table);\n      \tkfree(msblk-\u003efragment_index);\n    + \tkfree(msblk-\u003eid_table);\n     @@ fs/squashfs/super.c: static void squashfs_put_super(struct super_block *sb)\n    - \t\tsquashfs_cache_delete(sbi-\u003eblock_cache);\n      \t\tsquashfs_cache_delete(sbi-\u003efragment_cache);\n      \t\tsquashfs_cache_delete(sbi-\u003eread_page);\n    + \t\tsquashfs_decompressor_destroy(sbi);\n     +\t\tif (sbi-\u003ecache_mapping)\n     +\t\t\tiput(sbi-\u003ecache_mapping-\u003ehost);\n    - \t\tsbi-\u003ethread_ops-\u003edestroy(sbi);\n      \t\tkfree(sbi-\u003eid_table);\n      \t\tkfree(sbi-\u003efragment_index);\n    + \t\tkfree(sbi-\u003emeta_index);\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 544328428 android-build.ayeaye-python-dispatcher_20230629.03_p0",
+      "revId": "52c974ac844a87698f7519e2e576eb03bbbfeb55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
