@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2e8b8f0_906d70b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-07-12T17:14:31Z",
+      "side": 1,
+      "message": "The `gzvm.ko` itself is around 89k(\u003dm), and if it\u0027s built-in, it would increase around 64k of the size of kernel image due to possible trimming on the symbols(\u003dy).",
+      "parentUuid": "783c3b44_17a402fa",
+      "revId": "c622f0da8cdb9145e1e87fa3921386c75ed7dfee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a824cff1_ad30e182",
@@ -55,6 +73,30 @@
       "side": 1,
       "message": "This should be \"\u003dm\" to make it a GKI module. Is there a reason it can\u0027t be?",
       "parentUuid": "a824cff1_ad30e182",
+      "range": {
+        "startLine": 734,
+        "startChar": 0,
+        "endLine": 734,
+        "endChar": 17
+      },
+      "revId": "c622f0da8cdb9145e1e87fa3921386c75ed7dfee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bd2e0a5_37953c0e",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-07-12T17:14:31Z",
+      "side": 1,
+      "message": "Sure, this could be a module. The configuration modification is moved to around line 552 in patchset 5 from the result generating from `menuconfig`.",
+      "parentUuid": "ae89603f_9b0aaeb4",
       "range": {
         "startLine": 734,
         "startChar": 0,
