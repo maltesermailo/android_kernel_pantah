@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16053adc_e95e9bd5",
+        "filename": "arch/arm64/geniezone/gzvm_arch_common.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-07-12T17:06:42Z",
+      "side": 1,
+      "message": "Since GenieZone hypervisor only support aarch64, and we don\u0027t have the plan to be portable to other architecture in the near future. Remove the comment here.",
+      "parentUuid": "17a3a78b_832df55b",
+      "range": {
+        "startLine": 81,
+        "startChar": 49,
+        "endLine": 81,
+        "endChar": 57
+      },
+      "revId": "de9f75386d82f6e2a8e8f0a491581dd48d67e2de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50806123_db52ab45",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d32d871_9e6699dc",
+        "filename": "drivers/virt/geniezone/gzvm_irqfd.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-07-12T17:06:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50806123_db52ab45",
+      "range": {
+        "startLine": 226,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 9
+      },
+      "revId": "de9f75386d82f6e2a8e8f0a491581dd48d67e2de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44e9bbcd_d509ac65",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-07-03T19:32:00Z",
       "side": 1,
       "message": "must be zero.\n\nAnd why not documented above?\n\nAnd where is this tested?",
+      "range": {
+        "startLine": 256,
+        "startChar": 34,
+        "endLine": 256,
+        "endChar": 37
+      },
+      "revId": "de9f75386d82f6e2a8e8f0a491581dd48d67e2de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "088cb235_9b7038d3",
+        "filename": "include/uapi/linux/gzvm.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-07-12T17:06:42Z",
+      "side": 1,
+      "message": "This padding is reserved for future-proof and not use it now. Thus no further testing would be conducted here.",
+      "parentUuid": "44e9bbcd_d509ac65",
       "range": {
         "startLine": 256,
         "startChar": 34,
