@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000048700415",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2655960?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "b4456505_9a3b68d8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-07-13T02:20:12Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 547503078 android-build.ayeaye-python-dispatcher_20230712.03_p0",
+      "revId": "e4a09b73a0a9452e899e210b6a7cb75d526abdd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000048700415",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2655960?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "8b6c5f79_8882a861",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-07-13T02:20:12Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against [change 2648505](https://r.android.com/c/2648505) on branch android13-5.15.\n\n```\n      ## drivers/android/vendor_hooks.c ##\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_highpage_movable_gfp_adjust);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_anon_gfp_adjust);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_cpu_resume);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_hib_resume_bdev);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_dma_buf_stats_teardown);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_cold_or_pageout);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_cold_or_pageout_abort);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_retry);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_encrypt_page);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_init_aes_encrypt);\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_one_page_bypass);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_use_cma_first_check);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_slab_page_alloced);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_kmalloc_order_alloced);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_direct_io_update_bio);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_loop_prepare_cmd);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_psi_event);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_psi_group);\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (63dc3a FROMGIT: pstore: Revert pmsg_lock back to a normal mutex)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rmqueue_smallest_bypass);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_one_page_bypass);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_use_cma_first_check);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_slab_page_alloced);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_kmalloc_order_alloced);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_compact_finished);\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (024628 ANDROID: vendor_hook: Add hook to abort reclaim and compacti)\n      /*\n       * For type visibility\n       */\n     \n      ## include/trace/hooks/mm.h ##\n    -@@ include/trace/hooks/mm.h: DECLARE_HOOK(android_vh_slab_page_alloced,\n    - DECLARE_HOOK(android_vh_kmalloc_order_alloced,\n    -         TP_PROTO(struct page *page, size_t size, gfp_t flags),\n    -         TP_ARGS(page, size, flags));\n    +@@ include/trace/hooks/mm.h: DECLARE_HOOK(android_vh_madvise_cold_or_pageout,\n    + DECLARE_RESTRICTED_HOOK(android_rvh_ctl_dirty_rate,\n    + \tTP_PROTO(void *unused),\n    + \tTP_ARGS(unused), 1);\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (63dc3a FROMGIT: pstore: Revert pmsg_lock back to a normal mutex)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++DECLARE_HOOK(android_vh_rmqueue_smallest_bypass,\n    ++\tTP_PROTO(struct page **page, struct zone *zone, int order, int migratetype),\n    ++\tTP_ARGS(page, zone, order, migratetype));\n    ++DECLARE_HOOK(android_vh_free_one_page_bypass,\n    ++\tTP_PROTO(struct page *page, struct zone *zone, int order, int migratetype,\n    ++\t\tint fpi_flags, bool *bypass),\n    ++\tTP_ARGS(page, zone, order, migratetype, fpi_flags, bypass));\n    ++DECLARE_HOOK(android_vh_use_cma_first_check,\n    ++\tTP_PROTO(bool *use_cma_first_check),\n    ++\tTP_ARGS(use_cma_first_check));\n    ++DECLARE_HOOK(android_vh_alloc_highpage_movable_gfp_adjust,\n    ++        TP_PROTO(gfp_t *gfp_mask),\n    ++        TP_ARGS(gfp_mask));\n    ++DECLARE_HOOK(android_vh_anon_gfp_adjust,\n    ++\tTP_PROTO(gfp_t *gfp_mask),\n    ++\tTP_ARGS(gfp_mask));\n    ++DECLARE_HOOK(android_vh_slab_page_alloced,\n    ++\tTP_PROTO(struct page *page, size_t size, gfp_t flags),\n    ++\tTP_ARGS(page, size, flags));\n    ++DECLARE_HOOK(android_vh_kmalloc_order_alloced,\n    ++        TP_PROTO(struct page *page, size_t size, gfp_t flags),\n    ++        TP_ARGS(page, size, flags));\n     +DECLARE_HOOK(android_vh_compact_finished,\n     +\tTP_PROTO(bool *abort_compact),\n     +\tTP_ARGS(abort_compact));\n     +DECLARE_HOOK(android_vh_madvise_cold_or_pageout_abort,\n     +\tTP_PROTO(struct vm_area_struct *vma, bool *abort_madvise),\n     +\tTP_ARGS(vma, abort_madvise));\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (024628 ANDROID: vendor_hook: Add hook to abort reclaim and compacti)\n      #endif /* _TRACE_HOOK_MM_H */\n      \n      /* This part must be outside protection */\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 547503078 android-build.ayeaye-python-dispatcher_20230712.03_p0",
+      "revId": "e4a09b73a0a9452e899e210b6a7cb75d526abdd8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
