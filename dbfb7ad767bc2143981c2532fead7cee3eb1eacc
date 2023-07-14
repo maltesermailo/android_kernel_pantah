@@ -121,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a2afc8e1_a2432fa4",
+        "filename": "include/uapi/linux/gzvm.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2023-07-14T02:14:21Z",
+      "side": 1,
+      "message": "My apologies. Let my rephrase the saying to this again.\n\nThe `paddingd1[3]` used here is for future-proof only. Thus it\u0027s not used now, and we don\u0027t really care the content just set to 0 by default using `kzalloc`. Perhaps we shall remove the \"must be\" term in the corresponding comment.\n\nPlease let us know if there\u0027re any better ways to declare such kind of padding variables for future-proof, either for fixing the struct size or leaving rooms for alignment.",
+      "parentUuid": "088ed702_c1c8203e",
+      "range": {
+        "startLine": 94,
+        "startChar": 1,
+        "endLine": 94,
+        "endChar": 18
+      },
+      "revId": "dbfb7ad767bc2143981c2532fead7cee3eb1eacc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4ff655c5_b4a8ac2b",
         "filename": "include/uapi/linux/gzvm.h",
         "patchSetId": 6
