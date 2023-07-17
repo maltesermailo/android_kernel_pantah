@@ -1,0 +1,64 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000048931148",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2651484?revision\u003d4",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "0d7ad588_943356e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-07-17T07:29:01Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/f9d36cf445ffff0b913ba187a3eff78028f9b1fb) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003df9d36cf445ffff0b913ba187a3eff78028f9b1fb)\n\n```\n      ## kernel/time/tick-broadcast.c ##\n     @@ kernel/time/tick-broadcast.c: static __cacheline_aligned_in_smp DEFINE_RAW_SPINLOCK(tick_broadcast_lock);\n      #ifdef CONFIG_TICK_ONESHOT\n    @@ kernel/time/tick-broadcast.c: static inline ktime_t tick_get_next_period(void)\n      \t\tcpumask_copy(tmpmask, tick_broadcast_mask);\n     +\t\t/* Remove the local CPU as it is obviously not idle */\n      \t\tcpumask_clear_cpu(cpu, tmpmask);\n    --\t\tcpumask_or(tick_broadcast_oneshot_mask,\n    --\t\t\t   tick_broadcast_oneshot_mask, tmpmask);\n     +\t\tcpumask_or(tick_broadcast_oneshot_mask, tick_broadcast_oneshot_mask, tmpmask);\n      \n     -\t\tif (was_periodic \u0026\u0026 !cpumask_empty(tmpmask)) {\n     -\t\t\tktime_t nextevt \u003d tick_get_next_period();\n    +-\n    +-\t\t\tcpumask_or(tick_broadcast_oneshot_mask,\n    +-\t\t\t\t\ttick_broadcast_oneshot_mask, tmpmask);\n     +\t\t/*\n     +\t\t * Ensure that the oneshot broadcast handler will wake the\n     +\t\t * CPUs which are still waiting for periodic broadcast.\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 547772451 android-build.ayeaye-python-dispatcher_20230713.03_p0",
+      "revId": "04d152b6e95eb41d2b86c212f81af06a7fd849ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000048931148",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2651484?revision\u003d4",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "4ea9b555_158a0e02",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-07-17T07:29:01Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 547772451 android-build.ayeaye-python-dispatcher_20230713.03_p0",
+      "revId": "04d152b6e95eb41d2b86c212f81af06a7fd849ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000048931148",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2651484?revision\u003d4",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "44f92470_8d5c8608",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-07-17T07:29:01Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against [change 2648660](https://r.android.com/c/2648660) on branch android13-5.15.\n\n```\n      ## kernel/time/tick-broadcast.c ##\n     @@ kernel/time/tick-broadcast.c: static __cacheline_aligned_in_smp DEFINE_RAW_SPINLOCK(tick_broadcast_lock);\n    @@ kernel/time/tick-broadcast.c: static inline ktime_t tick_get_next_period(void)\n      \t\tcpumask_copy(tmpmask, tick_broadcast_mask);\n     +\t\t/* Remove the local CPU as it is obviously not idle */\n      \t\tcpumask_clear_cpu(cpu, tmpmask);\n    --\t\tcpumask_or(tick_broadcast_oneshot_mask,\n    --\t\t\t   tick_broadcast_oneshot_mask, tmpmask);\n     +\t\tcpumask_or(tick_broadcast_oneshot_mask, tick_broadcast_oneshot_mask, tmpmask);\n      \n     -\t\tif (was_periodic \u0026\u0026 !cpumask_empty(tmpmask)) {\n     -\t\t\tktime_t nextevt \u003d tick_get_next_period();\n    +-\n    +-\t\t\tcpumask_or(tick_broadcast_oneshot_mask,\n    +-\t\t\t\t\ttick_broadcast_oneshot_mask, tmpmask);\n     +\t\t/*\n     +\t\t * Ensure that the oneshot broadcast handler will wake the\n     +\t\t * CPUs which are still waiting for periodic broadcast.\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 547772451 android-build.ayeaye-python-dispatcher_20230713.03_p0",
+      "revId": "04d152b6e95eb41d2b86c212f81af06a7fd849ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
