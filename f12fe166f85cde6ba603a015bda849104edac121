@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000048938142",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2655960?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "cb3a255d_f54ca72e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-07-17T09:29:53Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against [change 2648505](https://r.android.com/c/2648505) on branch android13-5.15.\n\n```\n      ## drivers/android/vendor_hooks.c ##\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_highpage_movable_gfp_adjust);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_anon_gfp_adjust);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_cpu_resume);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_hib_resume_bdev);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_dma_buf_stats_teardown);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_cold_or_pageout);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_madvise_cold_or_pageout_abort);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_retry);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_encrypt_page);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_init_aes_encrypt);\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_one_page_bypass);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_use_cma_first_check);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_slab_page_alloced);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_kmalloc_order_alloced);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_direct_io_update_bio);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_loop_prepare_cmd);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_psi_event);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_psi_group);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rmqueue_smallest_bypass);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_one_page_bypass);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_use_cma_first_check);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_slab_page_alloced);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_kmalloc_order_alloced);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_compact_finished);\n      /*\n       * For type visibility\n       */\n     \n      ## include/trace/hooks/mm.h ##\n    -@@ include/trace/hooks/mm.h: DECLARE_HOOK(android_vh_slab_page_alloced,\n    - DECLARE_HOOK(android_vh_kmalloc_order_alloced,\n    -         TP_PROTO(struct page *page, size_t size, gfp_t flags),\n    -         TP_ARGS(page, size, flags));\n    +@@ include/trace/hooks/mm.h: DECLARE_HOOK(android_vh_madvise_cold_or_pageout,\n    + DECLARE_RESTRICTED_HOOK(android_rvh_ctl_dirty_rate,\n    + \tTP_PROTO(void *unused),\n    + \tTP_ARGS(unused), 1);\n    ++DECLARE_HOOK(android_vh_rmqueue_smallest_bypass,\n    ++\tTP_PROTO(struct page **page, struct zone *zone, int order, int migratetype),\n    ++\tTP_ARGS(page, zone, order, migratetype));\n    ++DECLARE_HOOK(android_vh_free_one_page_bypass,\n    ++\tTP_PROTO(struct page *page, struct zone *zone, int order, int migratetype,\n    ++\t\tint fpi_flags, bool *bypass),\n    ++\tTP_ARGS(page, zone, order, migratetype, fpi_flags, bypass));\n    ++DECLARE_HOOK(android_vh_use_cma_first_check,\n    ++\tTP_PROTO(bool *use_cma_first_check),\n    ++\tTP_ARGS(use_cma_first_check));\n    ++DECLARE_HOOK(android_vh_alloc_highpage_movable_gfp_adjust,\n    ++        TP_PROTO(gfp_t *gfp_mask),\n    ++        TP_ARGS(gfp_mask));\n    ++DECLARE_HOOK(android_vh_anon_gfp_adjust,\n    ++\tTP_PROTO(gfp_t *gfp_mask),\n    ++\tTP_ARGS(gfp_mask));\n    ++DECLARE_HOOK(android_vh_slab_page_alloced,\n    ++\tTP_PROTO(struct page *page, size_t size, gfp_t flags),\n    ++\tTP_ARGS(page, size, flags));\n    ++DECLARE_HOOK(android_vh_kmalloc_order_alloced,\n    ++        TP_PROTO(struct page *page, size_t size, gfp_t flags),\n    ++        TP_ARGS(page, size, flags));\n     +DECLARE_HOOK(android_vh_compact_finished,\n     +\tTP_PROTO(bool *abort_compact),\n     +\tTP_ARGS(abort_compact));\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 547772451 android-build.ayeaye-python-dispatcher_20230713.03_p0",
+      "revId": "f12fe166f85cde6ba603a015bda849104edac121",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000048938142",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2655960?revision\u003d3",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "74d48138_82753709",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-07-17T09:29:53Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 547772451 android-build.ayeaye-python-dispatcher_20230713.03_p0",
+      "revId": "f12fe166f85cde6ba603a015bda849104edac121",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
