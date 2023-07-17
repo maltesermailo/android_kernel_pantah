@@ -34,6 +34,24 @@
       "parentUuid": "4bef82ab_addec04a",
       "revId": "9462e9dadedfc4a531123db88c46b2854097506d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce193069_adde347e",
+        "filename": "include/uapi/linux/gzvm.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-07-17T19:41:51Z",
+      "side": 1,
+      "message": "Then the api is broken and can NEVER be used in the future.\n\nTo make it future proof, you HAVE to set it to zero AND verify that the fields are set to zero, otherwise any changes in the future just will not work at all.\n\nThis is documented in the kernel documentation, and should not be a new thing.",
+      "parentUuid": "aa098cf6_ea870034",
+      "revId": "9462e9dadedfc4a531123db88c46b2854097506d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
