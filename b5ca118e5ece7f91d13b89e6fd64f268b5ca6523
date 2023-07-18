@@ -16,6 +16,24 @@
       "message": "wait, the module protection needs to remain, @ramjiyani@google.com ?",
       "revId": "b5ca118e5ece7f91d13b89e6fd64f268b5ca6523",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dee8da77_1a54f2b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-07-18T00:32:16Z",
+      "side": 1,
+      "message": "Thanks. Yes, we need to keep those files; so protected modules are not being overridden even during the development phase.\n\nPlease spare these files from this CL:\n\n```\nandroid/abi_gki_protected_exports_aarch64 \nandroid/abi_gki_protected_exports_x86_64 \nandroid/gki_aarch64_protected_modules \nandroid/gki_x86_64_protected_modules\n```\n\nAlso, we may want to spare  `android/abi_gki_aarch64_pixel`, it\u0027s possible this branch is being used somewhere for this and that list is being maintained even without trimming. @willmcvicker@google.com may be able to confirm this.\n\nSame for `db845c` but that list is not part of the CL. So, not an issue.\n\nIt\u0027s probably also a good idea to have the fresh lists generated for any `abi_gki_aarch64_\u003cPARTNER\u003e` left for this branch to remove any stale symbols.",
+      "parentUuid": "2a42fd14_b72a022f",
+      "revId": "b5ca118e5ece7f91d13b89e6fd64f268b5ca6523",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
