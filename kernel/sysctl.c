@@ -1557,6 +1557,12 @@ int proc_dou8vec_minmax(struct ctl_table *table, int write,
 	return -ENOSYS;
 }
 
+int proc_dou16vec_minmax(struct ctl_table *table, int write,
+			void *buffer, size_t *lenp, loff_t *ppos)
+{
+	return -ENOSYS;
+}
+
 int proc_dointvec_jiffies(struct ctl_table *table, int write,
 		    void *buffer, size_t *lenp, loff_t *ppos)
 {
