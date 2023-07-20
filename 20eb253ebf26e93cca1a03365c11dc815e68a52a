@@ -22,6 +22,30 @@
       },
       "revId": "20eb253ebf26e93cca1a03365c11dc815e68a52a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f15a49d_819eed6e",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3177,
+      "author": {
+        "id": 1372253
+      },
+      "writtenOn": "2023-07-20T01:46:51Z",
+      "side": 1,
+      "message": "IMO，NO as rmqueue_fallback actually steal whole page block to desired page block and then let rmqueue_smallest retry which can not be done via vh",
+      "parentUuid": "317d753d_79220c6b",
+      "range": {
+        "startLine": 3177,
+        "startChar": 2,
+        "endLine": 3177,
+        "endChar": 39
+      },
+      "revId": "20eb253ebf26e93cca1a03365c11dc815e68a52a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
