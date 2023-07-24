@@ -2665,15 +2665,16 @@ static int fallbacks[MIGRATE_TYPES][3] = {
 };
 
 #ifdef CONFIG_CMA
-static __always_inline struct page *__rmqueue_cma_fallback(struct zone *zone,
+struct page *__rmqueue_cma_fallback(struct zone *zone,
 					unsigned int order)
 {
 	return __rmqueue_smallest(zone, order, MIGRATE_CMA);
 }
 #else
-static inline struct page *__rmqueue_cma_fallback(struct zone *zone,
+struct page *__rmqueue_cma_fallback(struct zone *zone,
 					unsigned int order) { return NULL; }
 #endif
+EXPORT_SYMBOL_GPL(__rmqueue_cma_fallback);
 
 /*
  * Move the free pages in a range to the freelist tail of the requested type.
