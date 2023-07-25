@@ -505,3 +505,32 @@ int lookuppostfilter_test(struct fuse_bpf_args *fa)
 		return FUSE_BPF_BACKING;
 	}
 }
+
+SEC("test_create_remove")
+int createremovebpf_test(struct fuse_bpf_args *fa)
+{
+	bpf_printk("opcode: %d", fa->opcode);
+	switch (fa->opcode) {
+	case FUSE_LOOKUP | FUSE_PREFILTER: {
+		return FUSE_BPF_BACKING | FUSE_BPF_POST_FILTER;
+	}
+
+	case FUSE_LOOKUP | FUSE_POSTFILTER: {
+		const char *name = fa->in_args[0].value;
+		struct fuse_entry_bpf_out *febo = fa->out_args[1].value;
+
+		bpf_printk("Lookup postfilter: %s", name);
+		febo->bpf_action = FUSE_ACTION_REMOVE;
+		return 0;
+	}
+
+	case FUSE_OPEN | FUSE_PREFILTER: {
+		return -EIO;
+	}
+
+	default:
+		return FUSE_BPF_BACKING;
+	}
+}
+
+
