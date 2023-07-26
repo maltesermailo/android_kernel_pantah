@@ -253,8 +253,8 @@ int fuse_create_open_backing(
 
 	inode = fuse_iget_backing(dir->i_sb, target_nodeid,
 			fuse_entry->backing_path.dentry->d_inode);
-	if (IS_ERR(inode)) {
-		err = PTR_ERR(inode);
+	if (!inode) {
+		err = -EIO;
 		goto out;
 	}
 
@@ -269,10 +269,12 @@ int fuse_create_open_backing(
 		goto out;
 	}
 
+	inode = NULL;
 	entry = newent ? newent : entry;
 	err = finish_open(file, entry, fuse_open_file_backing);
 
 out:
+	iput(inode);
 	dput(backing_dentry);
 	return err;
 }
