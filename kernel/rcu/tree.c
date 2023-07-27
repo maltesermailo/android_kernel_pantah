@@ -3020,6 +3020,10 @@ __call_rcu_common(struct rcu_head *head, rcu_callback_t func, bool lazy_in)
 	}
 }
 
+/* Enable lazy rcu at boot time */
+static bool enable_rcu_lazy;
+module_param(enable_rcu_lazy, bool, 0444);
+
 #ifdef CONFIG_RCU_LAZY
 /**
  * call_rcu_flush() - Queue RCU callback for invocation after grace period, and
@@ -3043,7 +3047,7 @@ __call_rcu_common(struct rcu_head *head, rcu_callback_t func, bool lazy_in)
  */
 void call_rcu_flush(struct rcu_head *head, rcu_callback_t func)
 {
-	return __call_rcu_common(head, func, false);
+	return __call_rcu_common(head, func, !enable_rcu_lazy);
 }
 EXPORT_SYMBOL_GPL(call_rcu_flush);
 #endif
@@ -3094,7 +3098,7 @@ EXPORT_SYMBOL_GPL(call_rcu_flush);
  */
 void call_rcu(struct rcu_head *head, rcu_callback_t func)
 {
-	return __call_rcu_common(head, func, IS_ENABLED(CONFIG_RCU_LAZY));
+	return __call_rcu_common(head, func, IS_ENABLED(CONFIG_RCU_LAZY) && enable_rcu_lazy);
 }
 EXPORT_SYMBOL_GPL(call_rcu);
 
