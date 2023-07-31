@@ -3293,8 +3293,14 @@
       <elf-symbol name='irq_work_queue' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd36ebd12'/>
       <elf-symbol name='irq_work_queue_on' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf64a80c9'/>
       <elf-symbol name='irq_work_run' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x541bd60a'/>
+<<<<<<< HEAD   (c4191b ANDROID: GKI: add symbol list file for moto)
       <elf-symbol name='irq_work_sync' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf361a95b'/>
       <elf-symbol name='is_bad_inode' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2d628931'/>
+=======
+      <elf-symbol name='irq_work_sync' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc672a391'/>
+      <elf-symbol name='is_ashmem_file' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4bef6e5f'/>
+      <elf-symbol name='is_bad_inode' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8da8fb9d'/>
+>>>>>>> CHANGE (983b80 ANDROID: ABI: Update oplus symbol list  ashmem: is_ashmem_fi)
       <elf-symbol name='is_console_locked' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x944a564d'/>
       <elf-symbol name='is_dma_buf_file' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xabcf70c3'/>
       <elf-symbol name='is_swap_slot_cache_enabled' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x98575c12'/>
@@ -135013,8 +135019,18 @@
         <parameter type-id='44bef697' name='work' filepath='kernel/irq_work.c' line='197' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+<<<<<<< HEAD   (c4191b ANDROID: GKI: add symbol list file for moto)
       <function-decl name='is_bad_inode' mangled-name='is_bad_inode' filepath='fs/bad_inode.c' line='225' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='is_bad_inode'>
         <parameter type-id='7e666abe' name='inode' filepath='fs/bad_inode.c' line='225' column='1'/>
+=======
+      <var-decl name='irqchip_fwnode_ops' type-id='2eb8da02' mangled-name='irqchip_fwnode_ops' visibility='default' filepath='kernel/irq/irqdomain.c' line='55' column='1' elf-symbol-id='irqchip_fwnode_ops'/>
+      <function-decl name='is_ashmem_file' mangled-name='is_ashmem_file' filepath='drivers/staging/android/ashmem.c' line='940' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='is_ashmem_file'>
+        <parameter type-id='77e79a4b' name='file' filepath='drivers/staging/android/ashmem.c' line='940' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='is_bad_inode' mangled-name='is_bad_inode' filepath='fs/bad_inode.c' line='233' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='is_bad_inode'>
+        <parameter type-id='7e666abe' name='inode' filepath='fs/bad_inode.c' line='233' column='1'/>
+>>>>>>> CHANGE (983b80 ANDROID: ABI: Update oplus symbol list  ashmem: is_ashmem_fi)
         <return type-id='b50a4934'/>
       </function-decl>
       <function-decl name='is_console_locked' mangled-name='is_console_locked' filepath='kernel/printk/printk.c' line='2394' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='is_console_locked'>
