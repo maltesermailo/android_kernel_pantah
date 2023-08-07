@@ -1242,10 +1242,14 @@ static int cros_typec_probe(struct platform_device *pdev)
 
 	typec->dev = dev;
 
+	/*
+	 * If the parent ec device has not been probed yet, defer the probe of
+	 * this driver until later.
+	 */
 	typec->ec = dev_get_drvdata(pdev->dev.parent);
 	if (!typec->ec) {
-		dev_err(dev, "couldn't find parent EC device\n");
-		return -ENODEV;
+		dev_warn(dev, "couldn't find parent EC device, defering\n");
+		return -EPROBE_DEFER;
 	}
 
 	platform_set_drvdata(pdev, typec);
