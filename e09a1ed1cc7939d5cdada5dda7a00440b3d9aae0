@@ -69,6 +69,24 @@
       "parentUuid": "1508b502_8091ed91",
       "revId": "e09a1ed1cc7939d5cdada5dda7a00440b3d9aae0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b735f22d_9f08279f",
+        "filename": "BUILD.bazel",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-08-09T21:38:45Z",
+      "side": 1,
+      "message": "SGTM\n\nOn a second thought, I would rather replace this with\n\n```\nalias(\n    name \u003d \"gki_system_dlkm_modules\",\n    actual \u003d \"gki_system_dlkm_modules_arm64\",\n    deprecation \u003d \"...\"\n)\nalias(\n    name \u003d \"android/gki_system_dlkm_modules\",\n    actual \u003d \"android/gki_system_dlkm_modules_arm64\",\n    deprecation \u003d \"...\"\n)\n```",
+      "parentUuid": "6ff81f10_1b974308",
+      "revId": "e09a1ed1cc7939d5cdada5dda7a00440b3d9aae0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
