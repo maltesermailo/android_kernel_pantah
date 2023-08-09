@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d0124ebb_19db84bc",
+        "filename": "include/trace/hooks/io_pgtable_arm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2032297
+      },
+      "writtenOn": "2023-08-09T02:50:54Z",
+      "side": 1,
+      "message": "Ok, I\u0027ll use \"struct io_pgtable *\" instead in the next patch set",
+      "parentUuid": "dd251a61_5fafc493",
+      "range": {
+        "startLine": 15,
+        "startChar": 11,
+        "endLine": 15,
+        "endChar": 21
+      },
+      "revId": "32ea34916f78a5189b2ad97de3bb0bee9e78dab4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aba2fa5c_19feb0be",
         "filename": "kernel/dma/mapping.c",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2023-08-08T07:31:14Z",
       "side": 1,
       "message": "please just use the normal dma platform operations for this, there should not be any need to hook this allocation for any device.",
+      "range": {
+        "startLine": 501,
+        "startChar": 1,
+        "endLine": 501,
+        "endChar": 47
+      },
+      "revId": "32ea34916f78a5189b2ad97de3bb0bee9e78dab4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3d067a4_b6f1484a",
+        "filename": "kernel/dma/mapping.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 2032297
+      },
+      "writtenOn": "2023-08-09T02:50:54Z",
+      "side": 1,
+      "message": "We configure PBHA value in dts because of GKI. If we move the hook to the SMMU\u0027s operations, we don\u0027t have a good way to get device information.",
+      "parentUuid": "aba2fa5c_19feb0be",
       "range": {
         "startLine": 501,
         "startChar": 1,
