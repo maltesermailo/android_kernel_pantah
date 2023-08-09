@@ -22,6 +22,30 @@
       },
       "revId": "1c14524b5806f4da3f8381e0562182e32db6302f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9196acf6_fe071367",
+        "filename": "include/net/netns/nftables.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-08-09T06:49:35Z",
+      "side": 0,
+      "message": "Commit `11352851944c (\"netfilter: nf_tables: use net_generic infra for transaction data\")` caused this to change.\n\nAnd it is not fixed up as it turns out that no one has asked for this structure to be part of the ABI yet.  So yes, if it were in a tracked symbol, we would have had to revert the change, but because that did not happen, we did not.\n\nNote, not all usages of `ANDROID_KABI_RESERVE()` are used in structures that are in the abi, we did that for protection for when/if they are added in the future, padding common structures based on prior changes in other releases/branches and distros (RHEL, SLES).",
+      "parentUuid": "ccbaa616_63f87299",
+      "range": {
+        "startLine": 13,
+        "startChar": 1,
+        "endLine": 13,
+        "endChar": 21
+      },
+      "revId": "1c14524b5806f4da3f8381e0562182e32db6302f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
