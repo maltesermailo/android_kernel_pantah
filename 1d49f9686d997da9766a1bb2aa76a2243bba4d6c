@@ -1,0 +1,64 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000050820290",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2703782?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "94e96175_2c7da046",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-08-10T21:05:10Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 555163688 android-build.ayeaye-python-dispatcher_20230809.05_p0",
+      "revId": "1d49f9686d997da9766a1bb2aa76a2243bba4d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000050820290",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2703782?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "ed8a61b7_b6ce079e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-08-10T21:05:10Z",
+      "side": 1,
+      "message": "Original change \u0027aosp/2703907\u0027 for this cherry pick, on base branch \u0027android13-5.10\u0027 is NOT MERGED.\nPlease merge the original change.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 555163688 android-build.ayeaye-python-dispatcher_20230809.05_p0",
+      "revId": "1d49f9686d997da9766a1bb2aa76a2243bba4d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000050820290",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2703782?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "ec0695ae_04346a0c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-08-10T21:05:10Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against [change 2703907](https://r.android.com/c/2703907) on branch android13-5.10.\n\n```\n      ## drivers/usb/gadget/udc/core.c ##\n     @@ drivers/usb/gadget/udc/core.c: EXPORT_SYMBOL_GPL(usb_gadget_disconnect);\n    @@ drivers/usb/gadget/udc/core.c: static void usb_gadget_remove_driver(struct usb_u\n     +\tmutex_unlock(\u0026connect_lock);\n     +\n      \tudc-\u003edriver-\u003eunbind(udc-\u003egadget);\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (0e5dcb ANDROID: KVM: arm64: Move addr_is_allowed_memory() check int)\n    + \tusb_gadget_udc_stop(udc);\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n     +\n     +\tmutex_lock(\u0026connect_lock);\n    - \tusb_gadget_udc_stop_locked(udc);\n    - \tmutex_unlock(\u0026connect_lock);\n    ++\tusb_gadget_udc_stop_locked(udc);\n    ++\tmutex_unlock(\u0026connect_lock);\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (5faa18 BACKPORT: USB: Gadget: core: Help prevent panic during UVC u)\n      \n    + \tudc-\u003edriver \u003d NULL;\n    + \tudc-\u003egadget-\u003edev.driver \u003d NULL;\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 555163688 android-build.ayeaye-python-dispatcher_20230809.05_p0",
+      "revId": "1d49f9686d997da9766a1bb2aa76a2243bba4d6c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
