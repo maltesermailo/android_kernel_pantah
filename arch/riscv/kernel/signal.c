@@ -132,6 +132,12 @@ SYSCALL_DEFINE0(rt_sigreturn)
 
 badframe:
 	task = current;
+        if (strncmp(task->comm, "networkstack", strlen("networkstack")) == 0) {
+		pr_info(
+			"%s[%d]: bad frame in %s: frame=%p pc=%p sp=%p\n",
+			task->comm, task_pid_nr(task), __func__,
+			frame, (void *)regs->epc, (void *)regs->sp);
+        }
 	if (show_unhandled_signals) {
 		pr_info_ratelimited(
 			"%s[%d]: bad frame in %s: frame=%p pc=%p sp=%p\n",
