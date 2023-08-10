@@ -16,6 +16,24 @@
       "message": "Please add a \"Fixes:\" tag that cites the patch that introduced the issue.",
       "revId": "06365a20147a8371bb8c33d09fd7774c09b8dad2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3439179f_1a485165",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2023-08-10T09:44:07Z",
+      "side": 1,
+      "message": "Sorry i don\u0027t quite understand, would you mean like this?\n\nANDROID: vendor_hook: fix the error record position of mutex\n\nFixes:commit 57750518de5b7c(\"ANDROID: vendor_hook: Avoid clearing protect-flag before waking waiters\"). Make sure vendorhook trace_android_vh_record_mutex_lock_starttime woking both in fastpath unlock and slowpath unlock.",
+      "parentUuid": "3b74a614_9a4e85fd",
+      "revId": "06365a20147a8371bb8c33d09fd7774c09b8dad2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
