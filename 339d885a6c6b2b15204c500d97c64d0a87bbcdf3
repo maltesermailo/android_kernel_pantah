@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d456aba3_ac14d853",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1041813
+      },
+      "writtenOn": "2023-08-12T04:27:15Z",
+      "side": 1,
+      "message": "Hi, Ramji\n\nthis change causes ptp_kvm.ko loading problem like this, could you please help check?\n```\n    [    6.469028][    T1] init: Loaded kernel module /lib/modules/ptp.ko\n    [    6.475623][    T1] init: Loading module /lib/modules/ptp_kvm.ko with args \u0027\u0027\n    [    6.517160][    T1] init: Failed to insmod \u0027/lib/modules/ptp_kvm.ko\u0027 with args \u0027\u0027: Operation not supported on transport endpoint\n    [    6.528869][    T1] init: LoadWithAliases was unable to load ptp_kvm, tried: ptp_kvm\n    [    6.538164][    T1] init: Failed to load kernel modules\n    [    6.544232][    T1] init: InitFatalReboot: signal 6\n```",
+      "revId": "339d885a6c6b2b15204c500d97c64d0a87bbcdf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
