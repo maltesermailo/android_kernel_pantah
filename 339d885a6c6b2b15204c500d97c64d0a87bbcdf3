@@ -34,6 +34,24 @@
       "parentUuid": "d456aba3_ac14d853",
       "revId": "339d885a6c6b2b15204c500d97c64d0a87bbcdf3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fdad5e7_81ca2886",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-08-14T21:58:25Z",
+      "side": 1,
+      "message": "Test notes on the `qemu` where KVM is not available due to `x86_64` host is emulating `arm64` guest. Probably `-enable-kvm` will work if the host is also `arm64` to test.\n\n```\nroot@debian:~# uname -a\nLinux debian 6.1.25-android15-0-maybe-dirty #1 SMP PREEMPT Thu Jan  1 00:00:00 UTC 1970 aarch64 GNU/Linux\nroot@debian:~# dmesg | grep kvm-arm\n[    0.000000] KVM is not available. Ignoring kvm-arm.mode\n[    0.000000] Kernel command line: console\u003dttynull stack_depot_disable\u003don cgroup_disable\u003dpressure kasan.page_alloc.sample\u003d10 kasan.stacktrace\u003doff kvm-arm.mode\u003dprotected bootconfig ioremap_guard root\u003d/dev/vda2 console\u003dttyAMA0\nroot@debian:~# lsmod\nModule                  Size  Used by\nroot@debian:~# \nroot@debian:~# modprobe ptp_kvm\n[  207.788047][  T439] pps_core: LinuxPPS API ver. 1 registered\n[  207.788540][  T439] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti \u003cgiometti@linux.it\u003e\n[  207.826138][  T439] PTP clock support registered\nmodprobe: ERROR: could not insert \u0027ptp_kvm\u0027: Operation not supported\nroot@debian:~# lsmod\nModule                  Size  Used by\nptp                    53248  0\npps_core               32768  1 ptp\n```",
+      "parentUuid": "42ee8a56_a6209eba",
+      "revId": "339d885a6c6b2b15204c500d97c64d0a87bbcdf3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
