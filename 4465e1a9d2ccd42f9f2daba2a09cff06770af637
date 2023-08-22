@@ -16,6 +16,24 @@
       "message": "These are not something a driver should be touching AND they are gone in newer kernel versions so please never rely on these functions for any functionality.",
       "revId": "4465e1a9d2ccd42f9f2daba2a09cff06770af637",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd3e32cd_473fa1f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2023-08-22T08:38:48Z",
+      "side": 1,
+      "message": "Oh, I see that, it has been removed from kernel-6.4. Can we just add a new hook like below:\nvoid __noreturn do_exit(long code)\n{\n    ...\n    trace_android_rvh_do_exit(tsk);\n    ...\n    exit_signals(tsk);\n}\n\nBackGround threads are limited in silver cores and have low priority, these threads will become percpu-rwsem-readers when call exit_signals()-\u003ecgroup_threadgroup_change_begin(). One of them running/runnable too long in the read critical section, will affect the \"OomAdjuster\" doing attach cgroup as a writer and cause performance-issues.",
+      "parentUuid": "3180f445_d7c36702",
+      "revId": "4465e1a9d2ccd42f9f2daba2a09cff06770af637",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
