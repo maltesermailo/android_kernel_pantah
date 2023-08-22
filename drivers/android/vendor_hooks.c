@@ -99,6 +99,7 @@
 #include <trace/hooks/pci.h>
 #include <trace/hooks/suspend.h>
 #include <trace/hooks/dmabuf.h>
+#include <trace/hooks/cpuinfo.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -430,3 +431,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_early_resume_begin);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_reclaim_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_failure_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rebuild_root_domains_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpuinfo_get_hwinfo);
