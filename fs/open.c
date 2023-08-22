@@ -34,6 +34,11 @@
 #include <linux/compat.h>
 
 #include "internal.h"
+
+#define CREATE_TRACE_POINTS
+#include <trace/events/fs.h>
+
+#undef CREATE_TRACE_POINTS
 #include <trace/hooks/syscall_check.h>
 
 int do_truncate(struct dentry *dentry, loff_t length, unsigned int time_attrs,
@@ -1221,6 +1226,13 @@ static long do_sys_openat2(int dfd, const char __user *filename,
 		} else {
 			fsnotify_open(f);
 			fd_install(fd, f);
+			/*
+			 * Add a tracepoint for open.
+			 *
+			 * If you see a merge conflict, put this code below
+			 * fsnotify_open in the same function.
+			 */
+			trace_do_sys_open(tmp->name, how->flags,how->mode);
 		}
 	}
 	putname(tmp);
