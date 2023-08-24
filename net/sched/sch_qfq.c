@@ -433,12 +433,15 @@ static int qfq_change_class(struct Qdisc *sch, u32 classid, u32 parentid,
 	} else {
 		/* MTU size is user controlled */
 		lmax = psched_mtu(qdisc_dev(sch));
+<<<<<<< HEAD   (146397 Merge 5.15.122 into android13-5.15-lts)
 		if (lmax < QFQ_MIN_LMAX || lmax > QFQ_MAX_LMAX) {
 			NL_SET_ERR_MSG_MOD(extack,
 					   "MTU size out of bounds for qfq");
 			return -EINVAL;
 		}
 	}
+=======
+>>>>>>> BRANCH (07610c ANDROID: ABI: Update oplus symbol list)
 
 	inv_w = ONE_FP / weight;
 	weight = ONE_FP / inv_w;

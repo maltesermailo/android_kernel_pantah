@@ -212,9 +212,12 @@ static ssize_t ntfs_list_ea(struct ntfs_inode *ni, char *buffer,
 	for (ret = 0, off = 0; off < size; off += ea_size) {
 		ea = Add2Ptr(ea_all, off);
 		ea_size = unpacked_ea_size(ea);
+<<<<<<< HEAD   (146397 Merge 5.15.122 into android13-5.15-lts)
 
 		if (!ea->name_len)
 			break;
+=======
+>>>>>>> BRANCH (07610c ANDROID: ABI: Update oplus symbol list)
 
 		if (buffer) {
 			if (ret + ea->name_len + 1 > bytes_per_buffer) {
