@@ -100,10 +100,20 @@ struct scmi_clk_proto_ops {
 	ANDROID_KABI_RESERVE(1);
 };
 
+struct scmi_perf_domain_info {
+	char name[SCMI_MAX_STR_SIZE];
+	bool set_perf;
+};
+
 /**
  * struct scmi_perf_proto_ops - represents the various operations provided
  *	by SCMI Performance Protocol
  *
+<<<<<<< HEAD   (1e97d7 ANDROID: GKI: Add initial sunxi symbol list)
+=======
+ * @num_domains_get: gets the number of supported performance domains
+ * @info_get: get the information of a performance domain
+>>>>>>> CHANGE (742d32 BACKPORT: firmware: arm_scmi: Extend perf protocol ops to ge)
  * @limits_set: sets limits on the performance level of a domain
  * @limits_get: gets limits on the performance level of a domain
  * @level_set: sets the performance level of a domain
@@ -123,6 +133,12 @@ struct scmi_clk_proto_ops {
  *	or in some other (abstract) scale
  */
 struct scmi_perf_proto_ops {
+<<<<<<< HEAD   (1e97d7 ANDROID: GKI: Add initial sunxi symbol list)
+=======
+	int (*num_domains_get)(const struct scmi_protocol_handle *ph);
+	const struct scmi_perf_domain_info __must_check *(*info_get)
+		(const struct scmi_protocol_handle *ph, u32 domain);
+>>>>>>> CHANGE (742d32 BACKPORT: firmware: arm_scmi: Extend perf protocol ops to ge)
 	int (*limits_set)(const struct scmi_protocol_handle *ph, u32 domain,
 			  u32 max_perf, u32 min_perf);
 	int (*limits_get)(const struct scmi_protocol_handle *ph, u32 domain,
