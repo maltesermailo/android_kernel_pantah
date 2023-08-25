@@ -33,6 +33,23 @@
       "message": "We want to fix issues highlighted in the discussion here -\nhttps://lore.kernel.org/lkml/1617706753-25349-1-git-send-email-pkondeti@codeaurora.org/",
       "revId": "90ad3ea43e0016b32f376f1213f2c92139f28fa0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbf54f62_f63addf0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-08-25T17:08:06Z",
+      "side": 1,
+      "message": "This breaks the build:\n`\n...group.c:2960:3: error: call to undeclared function \u0027trace_android_rvh_cgroup_force_kthread_migration\u0027; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\ntrace_android_rvh_cgroup_force_kthread_migration(tsk, dst_cgrp, \u0026force_migration);\n^\n1 error generated.\n`\n\nPlease build and test your changes before submitting.",
+      "revId": "90ad3ea43e0016b32f376f1213f2c92139f28fa0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
