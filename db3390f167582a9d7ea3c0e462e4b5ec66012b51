@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbeac797_87f0600d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-08-25T20:25:29Z",
+      "side": 1,
+      "message": "Commit:\n\n\u003e Add config in gki_config to enable gzvm driver by default\n\nShould be: enable gzvm driver as protected GKI module.\n\n`arch/arm64/geniezone/gzvm.ko` needs to be added in `common/modules.bzl`.\n\n`CONFIG_MTK_GZVM` needs to be disable in `gki_defconfig` for `x86_64`.\n\n `arch/arm64/geniezone/gzvm.ko` needs to be added in gki_aarch64_protected_modules` and `abi_gki_protected_exports_aarch64` needs to be updated accordingly.\n\nI\u0027ll take over this CL and see it through. `CR-2` until then.",
+      "revId": "db3390f167582a9d7ea3c0e462e4b5ec66012b51",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
