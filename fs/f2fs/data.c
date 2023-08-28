@@ -1584,6 +1584,7 @@ next_block:
 			if (err)
 				goto sync_out;
 			map->m_flags |= F2FS_MAP_NEW;
+<<<<<<< HEAD   (0f373c UPSTREAM: f2fs: support SEEK_DATA and SEEK_HOLE for compress)
 			blkaddr = dn.data_blkaddr;
 		} else {
 			if (f2fs_compressed_file(inode) &&
@@ -1603,6 +1604,45 @@ next_block:
 				goto sync_out;
 			if (flag == F2FS_GET_BLOCK_FIEMAP &&
 						blkaddr == NULL_ADDR) {
+||||||| BASE
+	} else if (is_hole) {
+		if (f2fs_compressed_file(inode) &&
+		    f2fs_sanity_check_cluster(&dn) &&
+		    (flag != F2FS_GET_BLOCK_FIEMAP ||
+		     IS_ENABLED(CONFIG_F2FS_CHECK_FS))) {
+			err = -EFSCORRUPTED;
+			f2fs_handle_error(sbi,
+					ERROR_CORRUPTED_CLUSTER);
+			goto sync_out;
+		}
+
+		switch (flag) {
+		case F2FS_GET_BLOCK_PRECACHE:
+			goto sync_out;
+		case F2FS_GET_BLOCK_BMAP:
+			map->m_pblk = 0;
+			goto sync_out;
+		case F2FS_GET_BLOCK_FIEMAP:
+			if (blkaddr == NULL_ADDR) {
+=======
+	} else if (is_hole) {
+		if (f2fs_compressed_file(inode) &&
+		    f2fs_sanity_check_cluster(&dn)) {
+			err = -EFSCORRUPTED;
+			f2fs_handle_error(sbi,
+					ERROR_CORRUPTED_CLUSTER);
+			goto sync_out;
+		}
+
+		switch (flag) {
+		case F2FS_GET_BLOCK_PRECACHE:
+			goto sync_out;
+		case F2FS_GET_BLOCK_BMAP:
+			map->m_pblk = 0;
+			goto sync_out;
+		case F2FS_GET_BLOCK_FIEMAP:
+			if (blkaddr == NULL_ADDR) {
+>>>>>>> CHANGE (24492c UPSTREAM: f2fs: compress: do sanity check on cluster when CO)
 				if (map->m_next_pgofs)
 					*map->m_next_pgofs = pgofs + 1;
 				goto sync_out;
