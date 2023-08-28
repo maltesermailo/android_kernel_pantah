@@ -8159,6 +8159,11 @@ pointer_reference {
   pointee_type_id: 0x76017ae6
 }
 pointer_reference {
+  id: 0x171be96c
+  kind: POINTER
+  pointee_type_id: 0x762f432d
+}
+pointer_reference {
   id: 0x171ed6f4
   kind: POINTER
   pointee_type_id: 0x763bbd4c
@@ -272378,6 +272383,12 @@ function {
   parameter_id: 0xf435685e
 }
 function {
+  id: 0x93b5b685
+  return_type_id: 0x6720d32f
+  parameter_id: 0x39a4e83f
+  parameter_id: 0x171be96c
+}
+function {
   id: 0x93b5eea7
   return_type_id: 0x6720d32f
   parameter_id: 0x391f15ea
@@ -316601,6 +316612,15 @@ elf_symbol {
   full_name: "iio_device_unregister"
 }
 elf_symbol {
+  id: 0x83815ff1
+  name: "iio_get_channel_type"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x375302a1
+  type_id: 0x93b5b685
+  full_name: "iio_get_channel_type"
+}
+elf_symbol {
   id: 0x01f28688
   name: "iio_get_time_ns"
   is_defined: true
@@ -345969,6 +345989,7 @@ interface {
   symbol_id: 0xd50bc6e1
   symbol_id: 0x70513762
   symbol_id: 0xe0909072
+  symbol_id: 0x83815ff1
   symbol_id: 0x01f28688
   symbol_id: 0x23b23c74
   symbol_id: 0x88fdf87a
