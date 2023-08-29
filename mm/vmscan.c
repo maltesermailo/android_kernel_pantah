@@ -2455,6 +2455,112 @@ static inline void calculate_pressure_balance(struct scan_control *sc,
 	unsigned long anon_cost, file_cost, total_cost;
 	unsigned long ap, fp;
 
+<<<<<<< HEAD   (a527dc6296086cbd0e329c8881d5fd2e1e5b0222 ANDROID: ABI: add initial symbol list for exynos)
+||||||| BASE   (d28ab9d5f400994d12dc5b2ebd5812a683fa7779 ANDROID: GKI: net: add oem data for rtt statistics.)
+	/* If we have no swap space, do not bother scanning anon folios. */
+	if (!sc->may_swap || !can_reclaim_anon_pages(memcg, pgdat->node_id, sc)) {
+		scan_balance = SCAN_FILE;
+		goto out;
+	}
+
+	/*
+	 * Global reclaim will swap to prevent OOM even with no
+	 * swappiness, but memcg users want to use this knob to
+	 * disable swapping for individual groups completely when
+	 * using the memory controller's swap limit feature would be
+	 * too expensive.
+	 */
+	if (cgroup_reclaim(sc) && !swappiness) {
+		scan_balance = SCAN_FILE;
+		goto out;
+	}
+
+	/*
+	 * Do not apply any pressure balancing cleverness when the
+	 * system is close to OOM, scan both anon and file equally
+	 * (unless the swappiness setting disagrees with swapping).
+	 */
+	if (!sc->priority && swappiness) {
+		scan_balance = SCAN_EQUAL;
+		goto out;
+	}
+
+	/*
+	 * If the system is almost out of file pages, force-scan anon.
+	 */
+	if (sc->file_is_tiny) {
+		scan_balance = SCAN_ANON;
+		goto out;
+	}
+
+	trace_android_rvh_set_balance_anon_file_reclaim(&balance_anon_file_reclaim);
+
+	/*
+	 * If there is enough inactive page cache, we do not reclaim
+	 * anything from the anonymous working right now. But when balancing
+	 * anon and page cache files for reclaim, allow swapping of anon pages
+	 * even if there are a number of inactive file cache pages.
+	 */
+	if (!balance_anon_file_reclaim && sc->cache_trim_mode) {
+		scan_balance = SCAN_FILE;
+		goto out;
+	}
+
+	scan_balance = SCAN_FRACT;
+=======
+	/* If we have no swap space, do not bother scanning anon folios. */
+	if (!sc->may_swap || !can_reclaim_anon_pages(memcg, pgdat->node_id, sc)) {
+		scan_balance = SCAN_FILE;
+		goto out;
+	}
+
+
+	trace_android_vh_tune_swappiness(&swappiness);
+	/*
+	 * Global reclaim will swap to prevent OOM even with no
+	 * swappiness, but memcg users want to use this knob to
+	 * disable swapping for individual groups completely when
+	 * using the memory controller's swap limit feature would be
+	 * too expensive.
+	 */
+	if (cgroup_reclaim(sc) && !swappiness) {
+		scan_balance = SCAN_FILE;
+		goto out;
+	}
+
+	/*
+	 * Do not apply any pressure balancing cleverness when the
+	 * system is close to OOM, scan both anon and file equally
+	 * (unless the swappiness setting disagrees with swapping).
+	 */
+	if (!sc->priority && swappiness) {
+		scan_balance = SCAN_EQUAL;
+		goto out;
+	}
+
+	/*
+	 * If the system is almost out of file pages, force-scan anon.
+	 */
+	if (sc->file_is_tiny) {
+		scan_balance = SCAN_ANON;
+		goto out;
+	}
+
+	trace_android_rvh_set_balance_anon_file_reclaim(&balance_anon_file_reclaim);
+
+	/*
+	 * If there is enough inactive page cache, we do not reclaim
+	 * anything from the anonymous working right now. But when balancing
+	 * anon and page cache files for reclaim, allow swapping of anon pages
+	 * even if there are a number of inactive file cache pages.
+	 */
+	if (!balance_anon_file_reclaim && sc->cache_trim_mode) {
+		scan_balance = SCAN_FILE;
+		goto out;
+	}
+
+	scan_balance = SCAN_FRACT;
+>>>>>>> CHANGE (ed42257de1936449c72615cda997d1ffca113bd4 ANDROID: vendor_hooks: Add tune swappiness hook in get_scan_)
 	/*
 	 * Calculate the pressure balance between anon and file pages.
 	 *
