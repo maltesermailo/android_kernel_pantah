@@ -287,6 +287,15 @@ DECLARE_HOOK(android_vh_get_swap_page,
 	TP_PROTO(struct page *page, swp_entry_t *entry,
 		struct swap_slots_cache *cache, bool *found),
 	TP_ARGS(page, entry, cache, found));
+DECLARE_RESTRICTED_HOOK(android_rvh_add_to_avail_list,
+	TP_PROTO(struct swap_info_struct *p, bool *skip),
+	TP_ARGS(p, skip), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_del_from_avail_list,
+	TP_PROTO(struct swap_info_struct *p, bool *skip),
+	TP_ARGS(p, skip), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh___cgroup_throttle_swaprate,
+	TP_PROTO(int nid, bool *skip),
+	TP_ARGS(nid, skip), 1);
 DECLARE_HOOK(android_vh_madvise_cold_or_pageout,
 	TP_PROTO(struct vm_area_struct *vma, bool *allow_shared),
 	TP_ARGS(vma, allow_shared));
@@ -299,9 +308,12 @@ DECLARE_HOOK(android_vh_account_swap_pages,
 DECLARE_HOOK(android_vh_unuse_swap_page,
 	TP_PROTO(struct swap_info_struct *si, struct page *page),
 	TP_ARGS(si, page));
+DECLARE_HOOK(android_vh_swap_avail_heads_init,
+	TP_PROTO(struct plist_head *swap_avail_heads),
+	TP_ARGS(swap_avail_heads));
 DECLARE_HOOK(android_vh_init_swap_info_struct,
-	TP_PROTO(struct swap_info_struct *p, struct plist_head *swap_avail_heads),
-	TP_ARGS(p, swap_avail_heads));
+	TP_PROTO(struct swap_info_struct *p),
+	TP_ARGS(p));
 DECLARE_HOOK(android_vh_si_swapinfo,
 	TP_PROTO(struct swap_info_struct *si, bool *skip),
 	TP_ARGS(si, skip));
