@@ -16,6 +16,24 @@
       "message": "We should have an i386 one as well for virtual_device_i386.",
       "revId": "b0e30c021b79d9cb9a67b12a94d1fe2f61126f14",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51f18807_7ee31d6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-08-30T23:55:20Z",
+      "side": 1,
+      "message": "Yes, but probably we will never need it. Should we wait until we need it?\n\nThe reason I am not foreseeing the need is mostly for `x86_64` we either disable what is not applicable and being added for `arm64` in `gki_defconfig`. So, not seeing something which will be added as a exclusively for `x86_64` as we just try to keep it with the `arm64` `gki_deconfig` and never proactively converting things to module for that arch.",
+      "parentUuid": "4f1e3641_0bdc9ab3",
+      "revId": "b0e30c021b79d9cb9a67b12a94d1fe2f61126f14",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
