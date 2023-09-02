@@ -1121,7 +1121,10 @@ static void z_erofs_do_decompressed_bvec(struct z_erofs_decompress_backend *be,
 	if (!((bvec->offset + be->pcl->pageofs_out) & ~PAGE_MASK) &&
 	    (bvec->end == PAGE_SIZE ||
 	     bvec->offset + bvec->end == be->pcl->length)) {
+<<<<<<< HEAD   (33086a Merge 6.1.44 into android14-6.1-lts)
 
+=======
+>>>>>>> BRANCH (1321ab Linux 6.1.45)
 		pgnr = (bvec->offset + be->pcl->pageofs_out) >> PAGE_SHIFT;
 		DBG_BUGON(pgnr >= be->nr_pages);
 		if (!be->decompressed_pages[pgnr]) {
