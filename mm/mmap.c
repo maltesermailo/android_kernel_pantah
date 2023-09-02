@@ -2557,7 +2557,10 @@ do_mas_align_munmap(struct ma_state *mas, struct vm_area_struct *vma,
 			error = mas_store_gfp(&mas_detach, split, GFP_KERNEL);
 			if (error)
 				goto munmap_gather_failed;
+<<<<<<< HEAD   (79ad05 Merge 6.1.38 into android14-6.1-lts)
 			vma_mark_detached(split, true);
+=======
+>>>>>>> BRANCH (a456e1 Linux 6.1.39)
 			if (split->vm_flags & VM_LOCKED)
 				locked_vm += vma_pages(split);
 
