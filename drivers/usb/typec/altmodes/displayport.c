@@ -559,8 +559,17 @@ int dp_altmode_probe(struct typec_altmode *alt)
 	const struct typec_altmode *port = typec_altmode_get_partner(alt);
 	struct dp_altmode *dp;
 	int ret;
+	int port_cap, partner_cap;
 
 	/* FIXME: Port can only be DFP_U. */
+
+	/* Make sure that we port and partner can resolve into source and sink */
+	port_cap = DP_CAP_CAPABILITY(port->vdo);
+	partner_cap = DP_CAP_CAPABILITY(alt->vdo);
+	if (!((port_cap & DP_CAP_DFP_D) && (partner_cap & DP_CAP_UFP_D)) &&
+	    !((port_cap & DP_CAP_UFP_D) && (partner_cap & DP_CAP_DFP_D))) {
+		return -ENODEV;
+	}
 
 	/* Make sure we have compatiple pin configurations */
 	if (!(DP_CAP_PIN_ASSIGN_DFP_D(port->vdo) &
