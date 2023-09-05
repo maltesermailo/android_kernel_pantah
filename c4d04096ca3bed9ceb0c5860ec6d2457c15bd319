@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000052818175",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2740173?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "293075b6_c7c48bde",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-09-05T13:10:49Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/4a18419f71cdf9155d2d2a6c79546f720978b990) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d4a18419f71cdf9155d2d2a6c79546f720978b990)\n\n```\n      ## fs/exec.c ##\n     @@ fs/exec.c: int setup_arg_pages(struct linux_binprm *bprm,\n    @@ mm/huge_memory.c: bool move_huge_pmd(struct vm_area_struct *vma, unsigned long o\n     -int change_huge_pmd(struct vm_area_struct *vma, pmd_t *pmd,\n     -\t\tunsigned long addr, pgprot_t newprot, unsigned long cp_flags)\n     +int change_huge_pmd(struct mmu_gather *tlb, struct vm_area_struct *vma,\n    -+\t\t    pmd_t *pmd, unsigned long addr, pgprot_t newprot,\n    -+\t\t    unsigned long cp_flags)\n    ++\t\tpmd_t *pmd, unsigned long addr, pgprot_t newprot,\n    ++\t\tunsigned long cp_flags)\n      {\n      \tstruct mm_struct *mm \u003d vma-\u003evm_mm;\n      \tspinlock_t *ptl;\n    @@ mm/mempolicy.c: unlock:\n     +\t\t\t\t       MM_CP_PROT_NUMA);\n      \tif (nr_updated)\n      \t\tcount_vm_numa_events(NUMA_PTE_UPDATES, nr_updated);\n    - \n     +\ttlb_finish_mmu(\u0026tlb);\n    -+\n    + \n      \treturn nr_updated;\n      }\n    - #else\n     \n      ## mm/mprotect.c ##\n     @@\n    @@ mm/mprotect.c: static inline unsigned long change_pmd_range(struct vm_area_struc\n     -\t\tthis_pages \u003d change_pte_range(vma, pmd, addr, next, newprot,\n     -\t\t\t\t\t      cp_flags);\n     +\t\tthis_pages \u003d change_pte_range(tlb, vma, pmd, addr, next,\n    -+\t\t\t\t\t      newprot, cp_flags);\n    ++\t\t\t\tnewprot, cp_flags);\n      \t\tpages +\u003d this_pages;\n      next:\n      \t\tcond_resched();\n    @@ mm/mprotect.c: static int do_mprotect_pkey(unsigned long start, size_t len,\n      \tstart \u003d untagged_addr(start);\n      \n     @@ mm/mprotect.c: static int do_mprotect_pkey(unsigned long start, size_t len,\n    - \telse\n    - \t\tprev \u003d vma-\u003evm_prev;\n    + \tif (start \u003e vma-\u003evm_start)\n    + \t\tprev \u003d vma;\n      \n     +\ttlb_gather_mmu(\u0026tlb, current-\u003emm);\n      \tfor (nstart \u003d start ; ; ) {\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 561648837 android-build.ayeaye-python-dispatcher_20230831.05_p0",
+      "revId": "c4d04096ca3bed9ceb0c5860ec6d2457c15bd319",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
