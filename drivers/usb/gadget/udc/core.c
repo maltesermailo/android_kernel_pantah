@@ -37,6 +37,7 @@ static struct bus_type gadget_bus_type;
  * @vbus: for udcs who care about vbus status, this value is real vbus status;
  * for udcs who do not care about vbus status, this value is always true
  * @started: the UDC's started state. True if the UDC had started.
+<<<<<<< HEAD   (19779f Merge 6.1.27 into android15-6.1)
  * @allow_connect: Indicates whether UDC is allowed to be pulled up.
  * Set/cleared by gadget_(un)bind_driver() after gadget driver is bound or
  * unbound.
@@ -45,6 +46,12 @@ static struct bus_type gadget_bus_type;
  * usb_gadget_connect_locked(), usb_gadget_disconnect_locked(),
  * usb_udc_connect_control_locked(), usb_gadget_udc_start_locked() and
  * usb_gadget_udc_stop_locked() are called with this lock held.
+=======
+ * @connect_lock: protects udc->vbus, udc->started, gadget->connect, gadget->deactivate related
+ * functions. usb_gadget_connect_locked, usb_gadget_disconnect_locked,
+ * usb_udc_connect_control_locked, usb_gadget_udc_start_locked, usb_gadget_udc_stop_locked are
+ * called with this lock held.
+>>>>>>> BRANCH (bf4ad6 Linux 6.1.28)
  *
  * This represents the internal data structure which is used by the UDC-class
  * to hold information about udc driver and gadget together.
@@ -56,8 +63,11 @@ struct usb_udc {
 	struct list_head		list;
 	bool				vbus;
 	bool				started;
+<<<<<<< HEAD   (19779f Merge 6.1.27 into android15-6.1)
 	bool				allow_connect;
 	struct work_struct		vbus_work;
+=======
+>>>>>>> BRANCH (bf4ad6 Linux 6.1.28)
 	struct mutex			connect_lock;
 };
 
@@ -671,6 +681,10 @@ out:
 }
 EXPORT_SYMBOL_GPL(usb_gadget_vbus_disconnect);
 
+<<<<<<< HEAD   (19779f Merge 6.1.27 into android15-6.1)
+=======
+/* Internal version of usb_gadget_connect needs to be called with connect_lock held. */
+>>>>>>> BRANCH (bf4ad6 Linux 6.1.28)
 static int usb_gadget_connect_locked(struct usb_gadget *gadget)
 	__must_hold(&gadget->udc->connect_lock)
 {
@@ -681,12 +695,26 @@ static int usb_gadget_connect_locked(struct usb_gadget *gadget)
 		goto out;
 	}
 
+<<<<<<< HEAD   (19779f Merge 6.1.27 into android15-6.1)
 	if (gadget->deactivated || !gadget->udc->allow_connect || !gadget->udc->started) {
+=======
+	if (gadget->connected)
+		goto out;
+
+	if (gadget->deactivated || !gadget->udc->started) {
+>>>>>>> BRANCH (bf4ad6 Linux 6.1.28)
 		/*
+<<<<<<< HEAD   (19779f Merge 6.1.27 into android15-6.1)
 		 * If the gadget isn't usable (because it is deactivated,
 		 * unbound, or not yet started), we only save the new state.
 		 * The gadget will be connected automatically when it is
 		 * activated/bound/started.
+=======
+		 * If gadget is deactivated we only save new state.
+		 * Gadget will be connected automatically after activation.
+		 *
+		 * udc first needs to be started before gadget can be pulled up.
+>>>>>>> BRANCH (bf4ad6 Linux 6.1.28)
 		 */
 		gadget->connected = true;
 		goto out;
@@ -724,6 +752,10 @@ int usb_gadget_connect(struct usb_gadget *gadget)
 }
 EXPORT_SYMBOL_GPL(usb_gadget_connect);
 
+<<<<<<< HEAD   (19779f Merge 6.1.27 into android15-6.1)
+=======
+/* Internal version of usb_gadget_disconnect needs to be called with connect_lock held. */
+>>>>>>> BRANCH (bf4ad6 Linux 6.1.28)
 static int usb_gadget_disconnect_locked(struct usb_gadget *gadget)
 	__must_hold(&gadget->udc->connect_lock)
 {
@@ -741,6 +773,8 @@ static int usb_gadget_disconnect_locked(struct usb_gadget *gadget)
 		/*
 		 * If gadget is deactivated we only save new state.
 		 * Gadget will stay disconnected after activation.
+		 *
+		 * udc should have been started before gadget being pulled down.
 		 */
 		gadget->connected = false;
 		goto out;
@@ -808,6 +842,7 @@ int usb_gadget_deactivate(struct usb_gadget *gadget)
 	if (gadget->deactivated)
 		goto unlock;
 
+	mutex_lock(&gadget->udc->connect_lock);
 	if (gadget->connected) {
 		ret = usb_gadget_disconnect_locked(gadget);
 		if (ret)
@@ -823,6 +858,10 @@ int usb_gadget_deactivate(struct usb_gadget *gadget)
 
 unlock:
 	mutex_unlock(&gadget->udc->connect_lock);
+<<<<<<< HEAD   (19779f Merge 6.1.27 into android15-6.1)
+=======
+out:
+>>>>>>> BRANCH (bf4ad6 Linux 6.1.28)
 	trace_usb_gadget_deactivate(gadget, ret);
 
 	return ret;
@@ -848,6 +887,7 @@ int usb_gadget_activate(struct usb_gadget *gadget)
 	if (!gadget->deactivated)
 		goto unlock;
 
+	mutex_lock(&gadget->udc->connect_lock);
 	gadget->deactivated = false;
 
 	/*
@@ -1099,13 +1139,23 @@ EXPORT_SYMBOL_GPL(usb_gadget_set_state);
 /* ------------------------------------------------------------------------- */
 
 /* Acquire connect_lock before calling this function. */
+<<<<<<< HEAD   (19779f Merge 6.1.27 into android15-6.1)
 static int usb_udc_connect_control_locked(struct usb_udc *udc) __must_hold(&udc->connect_lock)
+=======
+static void usb_udc_connect_control_locked(struct usb_udc *udc) __must_hold(&udc->connect_lock)
+>>>>>>> BRANCH (bf4ad6 Linux 6.1.28)
 {
+<<<<<<< HEAD   (19779f Merge 6.1.27 into android15-6.1)
 	int ret;
 
 	if (udc->vbus)
 		ret = usb_gadget_connect_locked(udc->gadget);
+=======
+	if (udc->vbus && udc->started)
+		usb_gadget_connect_locked(udc->gadget);
+>>>>>>> BRANCH (bf4ad6 Linux 6.1.28)
 	else
+<<<<<<< HEAD   (19779f Merge 6.1.27 into android15-6.1)
 		ret = usb_gadget_disconnect_locked(udc->gadget);
 
 	return ret;
@@ -1118,6 +1168,9 @@ static void vbus_event_work(struct work_struct *work)
 	mutex_lock(&udc->connect_lock);
 	usb_udc_connect_control_locked(udc);
 	mutex_unlock(&udc->connect_lock);
+=======
+		usb_gadget_disconnect_locked(udc->gadget);
+>>>>>>> BRANCH (bf4ad6 Linux 6.1.28)
 }
 
 /**
@@ -1141,10 +1194,16 @@ void usb_udc_vbus_handler(struct usb_gadget *gadget, bool status)
 {
 	struct usb_udc *udc = gadget->udc;
 
+	mutex_lock(&udc->connect_lock);
 	if (udc) {
 		udc->vbus = status;
+<<<<<<< HEAD   (19779f Merge 6.1.27 into android15-6.1)
 		schedule_work(&udc->vbus_work);
+=======
+		usb_udc_connect_control_locked(udc);
+>>>>>>> BRANCH (bf4ad6 Linux 6.1.28)
 	}
+	mutex_unlock(&udc->connect_lock);
 }
 EXPORT_SYMBOL_GPL(usb_udc_vbus_handler);
 
@@ -1581,11 +1640,15 @@ static int gadget_bind_driver(struct device *dev)
 		goto err_start;
 	}
 	usb_gadget_enable_async_callbacks(udc);
+<<<<<<< HEAD   (19779f Merge 6.1.27 into android15-6.1)
 	udc->allow_connect = true;
 	ret = usb_udc_connect_control_locked(udc);
 	if (ret)
 		goto err_connect_control;
 
+=======
+	usb_udc_connect_control_locked(udc);
+>>>>>>> BRANCH (bf4ad6 Linux 6.1.28)
 	mutex_unlock(&udc->connect_lock);
 
 	kobject_uevent(&udc->dev.kobj, KOBJ_CHANGE);
@@ -1623,8 +1686,11 @@ static void gadget_unbind_driver(struct device *dev)
 
 	kobject_uevent(&udc->dev.kobj, KOBJ_CHANGE);
 
+<<<<<<< HEAD   (19779f Merge 6.1.27 into android15-6.1)
 	udc->allow_connect = false;
 	cancel_work_sync(&udc->vbus_work);
+=======
+>>>>>>> BRANCH (bf4ad6 Linux 6.1.28)
 	mutex_lock(&udc->connect_lock);
 	usb_gadget_disconnect_locked(gadget);
 	usb_gadget_disable_async_callbacks(udc);
@@ -1633,8 +1699,11 @@ static void gadget_unbind_driver(struct device *dev)
 	mutex_unlock(&udc->connect_lock);
 
 	udc->driver->unbind(gadget);
+<<<<<<< HEAD   (19779f Merge 6.1.27 into android15-6.1)
 
 	mutex_lock(&udc->connect_lock);
+=======
+>>>>>>> BRANCH (bf4ad6 Linux 6.1.28)
 	usb_gadget_udc_stop_locked(udc);
 	mutex_unlock(&udc->connect_lock);
 
