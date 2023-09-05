@@ -40,11 +40,10 @@ static struct bus_type gadget_bus_type;
  * @allow_connect: Indicates whether UDC is allowed to be pulled up.
  * Set/cleared by gadget_(un)bind_driver() after gadget driver is bound or
  * unbound.
- * @connect_lock: protects udc->started, gadget->connect,
- * gadget->allow_connect and gadget->deactivate. The routines
- * usb_gadget_connect_locked(), usb_gadget_disconnect_locked(),
- * usb_udc_connect_control_locked(), usb_gadget_udc_start_locked() and
- * usb_gadget_udc_stop_locked() are called with this lock held.
+ * @connect_lock: protects udc->vbus, udc->started, gadget->connect, gadget->deactivate related
+ * functions. usb_gadget_connect_locked, usb_gadget_disconnect_locked,
+ * usb_udc_connect_control_locked, usb_gadget_udc_start_locked, usb_gadget_udc_stop_locked are
+ * called with this lock held.
  *
  * This represents the internal data structure which is used by the UDC-class
  * to hold information about udc driver and gadget together.
@@ -671,6 +670,7 @@ out:
 }
 EXPORT_SYMBOL_GPL(usb_gadget_vbus_disconnect);
 
+/* Internal version of usb_gadget_connect needs to be called with connect_lock held. */
 static int usb_gadget_connect_locked(struct usb_gadget *gadget)
 	__must_hold(&gadget->udc->connect_lock)
 {
@@ -681,12 +681,15 @@ static int usb_gadget_connect_locked(struct usb_gadget *gadget)
 		goto out;
 	}
 
-	if (gadget->deactivated || !gadget->udc->allow_connect || !gadget->udc->started) {
+	if (gadget->connected)
+		goto out;
+
+	if (gadget->deactivated || !gadget->udc->started) {
 		/*
-		 * If the gadget isn't usable (because it is deactivated,
-		 * unbound, or not yet started), we only save the new state.
-		 * The gadget will be connected automatically when it is
-		 * activated/bound/started.
+		 * If gadget is deactivated we only save new state.
+		 * Gadget will be connected automatically after activation.
+		 *
+		 * udc first needs to be started before gadget can be pulled up.
 		 */
 		gadget->connected = true;
 		goto out;
@@ -724,6 +727,7 @@ int usb_gadget_connect(struct usb_gadget *gadget)
 }
 EXPORT_SYMBOL_GPL(usb_gadget_connect);
 
+/* Internal version of usb_gadget_disconnect needs to be called with connect_lock held. */
 static int usb_gadget_disconnect_locked(struct usb_gadget *gadget)
 	__must_hold(&gadget->udc->connect_lock)
 {
@@ -741,6 +745,8 @@ static int usb_gadget_disconnect_locked(struct usb_gadget *gadget)
 		/*
 		 * If gadget is deactivated we only save new state.
 		 * Gadget will stay disconnected after activation.
+		 *
+		 * udc should have been started before gadget being pulled down.
 		 */
 		gadget->connected = false;
 		goto out;
@@ -808,6 +814,7 @@ int usb_gadget_deactivate(struct usb_gadget *gadget)
 	if (gadget->deactivated)
 		goto unlock;
 
+	mutex_lock(&gadget->udc->connect_lock);
 	if (gadget->connected) {
 		ret = usb_gadget_disconnect_locked(gadget);
 		if (ret)
@@ -848,6 +855,7 @@ int usb_gadget_activate(struct usb_gadget *gadget)
 	if (!gadget->deactivated)
 		goto unlock;
 
+	mutex_lock(&gadget->udc->connect_lock);
 	gadget->deactivated = false;
 
 	/*
@@ -1141,10 +1149,12 @@ void usb_udc_vbus_handler(struct usb_gadget *gadget, bool status)
 {
 	struct usb_udc *udc = gadget->udc;
 
+	mutex_lock(&udc->connect_lock);
 	if (udc) {
 		udc->vbus = status;
-		schedule_work(&udc->vbus_work);
+		usb_udc_connect_control_locked(udc);
 	}
+	mutex_unlock(&udc->connect_lock);
 }
 EXPORT_SYMBOL_GPL(usb_udc_vbus_handler);
 
@@ -1634,7 +1644,6 @@ static void gadget_unbind_driver(struct device *dev)
 
 	udc->driver->unbind(gadget);
 
-	mutex_lock(&udc->connect_lock);
 	usb_gadget_udc_stop_locked(udc);
 	mutex_unlock(&udc->connect_lock);
 
