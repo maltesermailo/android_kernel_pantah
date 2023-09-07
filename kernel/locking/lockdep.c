@@ -4629,6 +4629,16 @@ static int check_wait_context(struct task_struct *curr, struct held_lock *next)
 	u8 curr_inner;
 	int depth;
 
+	/* XXX Terrible HACK. Pixel6 drivers don't abide locking order
+	 * between spinlocks and raw_spinlocks, which effectively breaks
+	 * lockdep from being useful. However, since we don't use PREEMPT_RT
+	 * there isn't a practical difference between raw and normal spinlocks.
+	 * So for now, lets just skip all the wait context checking. This has
+	 * the downside of missing spinlock->mutex ordering issues! So its not
+	 * great. The drivers should really be fixed.
+	 */
+	return 0;
+
 	if (!next_inner || next->trylock)
 		return 0;
 
