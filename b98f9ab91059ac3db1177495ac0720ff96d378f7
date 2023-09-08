@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95f0825a_ec6128fb",
+        "filename": "BUILD.bazel",
+        "patchSetId": 5
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2023-09-08T10:11:06Z",
+      "side": 1,
+      "message": "It looks like the defconfig fragments are largely the same. In fact it is hard to spot the difference. That also makes them prone to diverge. Suggestion:\n\nCreate one common fragment for all architectures.\n\n`tools/testing/kunit/configs/android/kunit_defconfig`\n\nAdditionally `tools/testing/kunit/configs/android/kunit_clk_defconfig` that is applied to riscv64 and aarch64.\n\nThat makes it clear there is common configuration and what additional configuration applies where.",
+      "range": {
+        "startLine": 583,
+        "startChar": 28,
+        "endLine": 583,
+        "endChar": 87
+      },
+      "revId": "b98f9ab91059ac3db1177495ac0720ff96d378f7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
