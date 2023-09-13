@@ -1,0 +1,151 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000053525445",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2747422?revision\u003d2",
+      "fixSuggestions": [
+        {
+          "fixId": "a9736a17_f75b18e6",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 451,
+                "startChar": 0,
+                "endLine": 451,
+                "endChar": 0
+              },
+              "replacement": "    \"arch/arm64/crypto/aes-ce-ccm.ko\",\n    \"arch/arm64/crypto/sha1-ce.ko\",\n    \"crypto/cfb.ko\",\n    \"crypto/ofb.ko\",\n    \"crypto/sm3.ko\",\n    \"crypto/sm4.ko\",\n    \"crypto/twofish_common.ko\",\n    \"crypto/twofish_generic.ko\",\n    \"drivers/char/hw_random/optee-rng.ko\",\n    \"drivers/char/hw_random/rockchip-rng.ko\",\n    \"drivers/clk/clk-pwm.ko\",\n    \"drivers/clk/clk-rk808.ko\",\n    \"drivers/clk/clk-scmi.ko\",\n    \"drivers/clk/rockchip/clk-link.ko\",\n    \"drivers/clk/rockchip/clk-out.ko\",\n    \"drivers/clk/rockchip/clk-px30.ko\",\n    \"drivers/clk/rockchip/clk-rk3399.ko\",\n    \"drivers/clk/rockchip/clk-rk3562.ko\",\n    \"drivers/clk/rockchip/clk-rk3568.ko\",\n    \"drivers/clk/rockchip/clk-rk3588.ko\",\n    \"drivers/clk/rockchip/clk-rockchip.ko\",\n    \"drivers/clk/rockchip/regmap/clk-rk618.ko\",\n    \"drivers/clk/rockchip/regmap/clk-rk628.ko\",\n    \"drivers/clk/rockchip/regmap/clk-rockchip-regmap.ko\",\n    \"drivers/clocksource/timer-rockchip.ko\",\n    \"drivers/cpufreq/cpufreq-dt.ko\",\n    \"drivers/cpufreq/cpufreq_ondemand.ko\",\n    \"drivers/cpufreq/cpufreq_userspace.ko\",\n    \"drivers/cpufreq/rockchip-cpufreq.ko\",\n    \"drivers/crypto/rockchip/cryptodev_linux/cryptodev.ko\",\n    \"drivers/crypto/rockchip/rk_crypto.ko\",\n    \"drivers/devfreq/event/rockchip-dfi.ko\",\n    \"drivers/devfreq/event/rockchip-nocp.ko\",\n    \"drivers/devfreq/rockchip_bus.ko\",\n    \"drivers/devfreq/rockchip_dmc.ko\",\n    \"drivers/devfreq/rockchip_dmc_common.ko\",\n    \"drivers/dma-buf/heaps/cma_heap.ko\",\n    \"drivers/dma-buf/heaps/system_heap.ko\",\n    \"drivers/dma-buf/sw_sync.ko\",\n    \"drivers/dma/pl330.ko\",\n    \"drivers/firmware/rockchip_sip.ko\",\n    \"drivers/gpio/gpio-rockchip.ko\",\n    \"drivers/gpu/arm/bifrost/bifrost_kbase.ko\",\n    \"drivers/gpu/drm/bridge/analogix/analogix_dp.ko\",\n    \"drivers/gpu/drm/bridge/display-connector.ko\",\n    \"drivers/gpu/drm/bridge/maxim-max96745.ko\",\n    \"drivers/gpu/drm/bridge/maxim-max96755f.ko\",\n    \"drivers/gpu/drm/bridge/rk1000.ko\",\n    \"drivers/gpu/drm/bridge/rk630-tve.ko\",\n    \"drivers/gpu/drm/bridge/rohm-bu18rl82.ko\",\n    \"drivers/gpu/drm/bridge/rohm-bu18tl82.ko\",\n    \"drivers/gpu/drm/bridge/sii902x.ko\",\n    \"drivers/gpu/drm/bridge/synopsys/dw-hdmi.ko\",\n    \"drivers/gpu/drm/bridge/synopsys/dw-hdmi-cec.ko\",\n    \"drivers/gpu/drm/bridge/synopsys/dw-hdmi-hdcp.ko\",\n    \"drivers/gpu/drm/bridge/synopsys/dw-hdmi-i2s-audio.ko\",\n    \"drivers/gpu/drm/bridge/synopsys/dw-hdmi-qp.ko\",\n    \"drivers/gpu/drm/bridge/synopsys/dw-hdmi-qp-cec.ko\",\n    \"drivers/gpu/drm/bridge/synopsys/dw-hdmi-qp-i2s-audio.ko\",\n    \"drivers/gpu/drm/bridge/synopsys/dw-mipi-dsi.ko\",\n    \"drivers/gpu/drm/display/drm_display_helper.ko\",\n    \"drivers/gpu/drm/drm_dma_helper.ko\",\n    \"drivers/gpu/drm/panel/panel-simple.ko\",\n    \"drivers/gpu/drm/rockchip/dw_hdcp2.ko\",\n    \"drivers/gpu/drm/rockchip/rk618/rk618_dither.ko\",\n    \"drivers/gpu/drm/rockchip/rk618/rk618_dsi.ko\",\n    \"drivers/gpu/drm/rockchip/rk618/rk618_hdmi.ko\",\n    \"drivers/gpu/drm/rockchip/rk618/rk618_lvds.ko\",\n    \"drivers/gpu/drm/rockchip/rk618/rk618_rgb.ko\",\n    \"drivers/gpu/drm/rockchip/rk618/rk618_scaler.ko\",\n    \"drivers/gpu/drm/rockchip/rk618/rk618_vif.ko\",\n    \"drivers/gpu/drm/rockchip/rk628/rk628_combrxphy.ko\",\n    \"drivers/gpu/drm/rockchip/rk628/rk628_combtxphy.ko\",\n    \"drivers/gpu/drm/rockchip/rk628/rk628_dsi.ko\",\n    \"drivers/gpu/drm/rockchip/rk628/rk628_gvi.ko\",\n    \"drivers/gpu/drm/rockchip/rk628/rk628_hdmi.ko\",\n    \"drivers/gpu/drm/rockchip/rk628/rk628_hdmirx.ko\",\n    \"drivers/gpu/drm/rockchip/rk628/rk628_lvds.ko\",\n    \"drivers/gpu/drm/rockchip/rk628/rk628_post_process.ko\",\n    \"drivers/gpu/drm/rockchip/rk628/rk628_rgb.ko\",\n    \"drivers/gpu/drm/rockchip/rockchipdrm.ko\",\n    \"drivers/headset_observe/rk_headset.ko\",\n    \"drivers/headset_observe/rk_headset_irq_hook_adc.ko\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 452,
+                "startChar": 0,
+                "endLine": 452,
+                "endChar": 0
+              },
+              "replacement": "    \"drivers/hid/hid-a4tech.ko\",\n    \"drivers/hid/hid-alps.ko\",\n    \"drivers/hid/hid-appleir.ko\",\n    \"drivers/hid/hid-aureal.ko\",\n    \"drivers/hid/hid-axff.ko\",\n    \"drivers/hid/hid-belkin.ko\",\n    \"drivers/hid/hid-cherry.ko\",\n    \"drivers/hid/hid-chicony.ko\",\n    \"drivers/hid/hid-cypress.ko\",\n    \"drivers/hid/hid-dr.ko\",\n    \"drivers/hid/hid-emsff.ko\",\n    \"drivers/hid/hid-ezkey.ko\",\n    \"drivers/hid/hid-gaff.ko\",\n    \"drivers/hid/hid-gyration.ko\",\n    \"drivers/hid/hid-holtek-kbd.ko\",\n    \"drivers/hid/hid-holtek-mouse.ko\",\n    \"drivers/hid/hid-holtekff.ko\",\n    \"drivers/hid/hid-icade.ko\",\n    \"drivers/hid/hid-kensington.ko\",\n    \"drivers/hid/hid-keytouch.ko\",\n    \"drivers/hid/hid-kye.ko\",\n    \"drivers/hid/hid-lcpower.ko\",\n    \"drivers/hid/hid-led.ko\",\n    \"drivers/hid/hid-lenovo.ko\",\n    \"drivers/hid/hid-monterey.ko\",\n    \"drivers/hid/hid-ntrig.ko\",\n    \"drivers/hid/hid-ortek.ko\",\n    \"drivers/hid/hid-petalynx.ko\",\n    \"drivers/hid/hid-pl.ko\",\n    \"drivers/hid/hid-primax.ko\",\n    \"drivers/hid/hid-saitek.ko\",\n    \"drivers/hid/hid-samsung.ko\",\n    \"drivers/hid/hid-sjoy.ko\",\n    \"drivers/hid/hid-speedlink.ko\",\n    \"drivers/hid/hid-steelseries.ko\",\n    \"drivers/hid/hid-sunplus.ko\",\n    \"drivers/hid/hid-thrustmaster.ko\",\n    \"drivers/hid/hid-tivo.ko\",\n    \"drivers/hid/hid-tmff.ko\",\n    \"drivers/hid/hid-topseed.ko\",\n    \"drivers/hid/hid-twinhan.ko\",\n    \"drivers/hid/hid-waltop.ko\",\n    \"drivers/hid/hid-zpff.ko\",\n    \"drivers/hid/hid-zydacron.ko\",\n    \"drivers/hid/i2c-hid/i2c-hid.ko\",\n    \"drivers/hid/i2c-hid/i2c-hid-of.ko\",\n    \"drivers/i2c/busses/i2c-gpio.ko\",\n    \"drivers/i2c/busses/i2c-rk3x.ko\",\n    \"drivers/i2c/i2c-dev.ko\",\n    \"drivers/i2c/i2c-mux.ko\",\n    \"drivers/iio/adc/rockchip_saradc.ko\",\n    \"drivers/iio/buffer/industrialio-buffer-cb.ko\",\n    \"drivers/iio/buffer/industrialio-triggered-buffer.ko\",\n    \"drivers/iio/buffer/kfifo_buf.ko\",\n    \"drivers/iio/light/ucs12cm0.ko\",\n    \"drivers/iio/light/vl6180.ko\",\n    \"drivers/input/keyboard/adc-keys.ko\",\n    \"drivers/input/misc/rk805-pwrkey.ko\",\n    \"drivers/input/remotectl/rockchip_pwm_remotectl.ko\",\n    \"drivers/input/sensors/accel/bma2xx.ko\",\n    \"drivers/input/sensors/accel/da223.ko\",\n    \"drivers/input/sensors/accel/kxtj9.ko\",\n    \"drivers/input/sensors/accel/lis3dh.ko\",\n    \"drivers/input/sensors/accel/lsm303d.ko\",\n    \"drivers/input/sensors/accel/lsm330_acc.ko\",\n    \"drivers/input/sensors/accel/mc3230.ko\",\n    \"drivers/input/sensors/accel/mma7660.ko\",\n    \"drivers/input/sensors/accel/mma8452.ko\",\n    \"drivers/input/sensors/accel/mpu6500_acc.ko\",\n    \"drivers/input/sensors/accel/mpu6880_acc.ko\",\n    \"drivers/input/sensors/accel/mxc6655xa.ko\",\n    \"drivers/input/sensors/accel/sc7660.ko\",\n    \"drivers/input/sensors/accel/sc7a20.ko\",\n    \"drivers/input/sensors/accel/sc7a30.ko\",\n    \"drivers/input/sensors/compass/ak8963.ko\",\n    \"drivers/input/sensors/compass/ak8975.ko\",\n    \"drivers/input/sensors/gyro/ewtsa.ko\",\n    \"drivers/input/sensors/gyro/l3g20d.ko\",\n    \"drivers/input/sensors/gyro/l3g4200d.ko\",\n    \"drivers/input/sensors/gyro/lsm330_gyro.ko\",\n    \"drivers/input/sensors/gyro/mpu6500_gyro.ko\",\n    \"drivers/input/sensors/gyro/mpu6880_gyro.ko\",\n    \"drivers/input/sensors/hall/mh248.ko\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 453,
+                "startChar": 0,
+                "endLine": 453,
+                "endChar": 0
+              },
+              "replacement": "    \"drivers/input/sensors/lsensor/cm3218.ko\",\n    \"drivers/input/sensors/lsensor/ls_stk3410.ko\",\n    \"drivers/input/sensors/lsensor/ls_ucs14620.ko\",\n    \"drivers/input/sensors/psensor/ps_stk3410.ko\",\n    \"drivers/input/sensors/psensor/ps_ucs14620.ko\",\n    \"drivers/input/sensors/sensor_dev.ko\",\n    \"drivers/input/touchscreen/elan/tp_elan_5515.ko\",\n    \"drivers/input/touchscreen/gsl3673-ts.ko\",\n    \"drivers/input/touchscreen/gslx680-pad.ko\",\n    \"drivers/input/touchscreen/gt1x/gt1x-ts.ko\",\n    \"drivers/iommu/rockchip_iommu.ko\",\n    \"drivers/leds/leds-gpio.ko\",\n    \"drivers/leds/leds-rgb13h.ko\",\n    \"drivers/leds/trigger/ledtrig-backlight.ko\",\n    \"drivers/leds/trigger/ledtrig-default-on.ko\",\n    \"drivers/leds/trigger/ledtrig-heartbeat.ko\",\n    \"drivers/media/common/videobuf2/videobuf2-cma-sg.ko\",\n    \"drivers/media/i2c/aw36518.ko\",\n    \"drivers/media/i2c/aw8601.ko\",\n    \"drivers/media/i2c/cn3927v.ko\",\n    \"drivers/media/i2c/dw9714.ko\",\n    \"drivers/media/i2c/fp5510.ko\",\n    \"drivers/media/i2c/gc2145.ko\",\n    \"drivers/media/i2c/gc2385.ko\",\n    \"drivers/media/i2c/gc4c33.ko\",\n    \"drivers/media/i2c/gc8034.ko\",\n    \"drivers/media/i2c/imx415.ko\",\n    \"drivers/media/i2c/lt6911uxc.ko\",\n    \"drivers/media/i2c/lt7911d.ko\",\n    \"drivers/media/i2c/nvp6188.ko\",\n    \"drivers/media/i2c/otp_eeprom.ko\",\n    \"drivers/media/i2c/ov02b10.ko\",\n    \"drivers/media/i2c/ov13850.ko\",\n    \"drivers/media/i2c/ov13855.ko\",\n    \"drivers/media/i2c/ov50c40.ko\",\n    \"drivers/media/i2c/ov5695.ko\",\n    \"drivers/media/i2c/ov8858.ko\",\n    \"drivers/media/i2c/rk628/rk628-bt1120.ko\",\n    \"drivers/media/i2c/rk628/rk628-csi.ko\",\n    \"drivers/media/i2c/rk628/video-rk628.ko\",\n    \"drivers/media/i2c/rk_ircut.ko\",\n    \"drivers/media/i2c/s5k3l6xx.ko\",\n    \"drivers/media/i2c/s5kjn1.ko\",\n    \"drivers/media/i2c/sgm3784.ko\",\n    \"drivers/media/i2c/thcv244.ko\",\n    \"drivers/media/platform/rockchip/cif/video_rkcif.ko\",\n    \"drivers/media/platform/rockchip/hdmirx/rockchip-hdmirx.ko\",\n    \"drivers/media/platform/rockchip/isp/video_rkisp.ko\",\n    \"drivers/media/platform/rockchip/isp1/video_rkisp1.ko\",\n    \"drivers/media/platform/rockchip/ispp/video_rkispp.ko\",\n    \"drivers/media/v4l2-core/v4l2-async.ko\",\n    \"drivers/media/v4l2-core/v4l2-fwnode.ko\",\n    \"drivers/mfd/max96745.ko\",\n    \"drivers/mfd/max96755f.ko\",\n    \"drivers/mfd/rk1000-core.ko\",\n    \"drivers/mfd/rk618.ko\",\n    \"drivers/mfd/rk628.ko\",\n    \"drivers/mfd/rk630.ko\",\n    \"drivers/mfd/rk630-i2c.ko\",\n    \"drivers/mfd/rk806-core.ko\",\n    \"drivers/mfd/rk806-spi.ko\",\n    \"drivers/mfd/rk808.ko\",\n    \"drivers/mmc/core/pwrseq_simple.ko\",\n    \"drivers/mmc/host/cqhci.ko\",\n    \"drivers/mmc/host/dw_mmc.ko\",\n    \"drivers/mmc/host/dw_mmc-pltfm.ko\",\n    \"drivers/mmc/host/dw_mmc-rockchip.ko\",\n    \"drivers/mmc/host/mmc_hsq.ko\",\n    \"drivers/mmc/host/sdhci-of-arasan.ko\",\n    \"drivers/mmc/host/sdhci-of-dwcmshc.ko\",\n    \"drivers/net/ethernet/stmicro/stmmac/dwmac-rockchip.ko\",\n    \"drivers/net/ethernet/stmicro/stmmac/stmmac.ko\",\n    \"drivers/net/ethernet/stmicro/stmmac/stmmac-platform.ko\",\n    \"drivers/net/pcs/pcs_xpcs.ko\",\n    \"drivers/net/phy/rockchip.ko\",\n    \"drivers/net/phy/smsc.ko\",\n    \"drivers/net/usb/cdc_mbim.ko\",\n    \"drivers/net/usb/dm9601.ko\",\n    \"drivers/net/usb/gl620a.ko\",\n    \"drivers/net/usb/kalmia.ko\",\n    \"drivers/net/usb/mcs7830.ko\",\n    \"drivers/net/usb/plusb.ko\",\n    \"drivers/net/usb/smsc75xx.ko\",\n    \"drivers/net/usb/smsc95xx.ko\",\n    \"drivers/net/wireless/rockchip_wlan/rkwifi/bcmdhd/bcmdhd.ko\",\n    \"drivers/nvmem/nvmem-rockchip-otp.ko\",\n    \"drivers/nvmem/nvmem_rockchip_efuse.ko\",\n    \"drivers/pci/controller/dwc/pcie-dw-rockchip.ko\",\n    \"drivers/pci/controller/pcierockchiphost.ko\",\n    \"drivers/pci/pcie/aspm_ext.ko\",\n    \"drivers/phy/rockchip/phy-rockchip-csi2-dphy.ko\",\n    \"drivers/phy/rockchip/phy-rockchip-csi2-dphy-hw.ko\",\n    \"drivers/phy/rockchip/phy-rockchip-dp.ko\",\n    \"drivers/phy/rockchip/phy-rockchip-emmc.ko\",\n    \"drivers/phy/rockchip/phy-rockchip-inno-dsidphy.ko\",\n    \"drivers/phy/rockchip/phy-rockchip-inno-hdmi-phy.ko\",\n    \"drivers/phy/rockchip/phy-rockchip-inno-usb2.ko\",\n    \"drivers/phy/rockchip/phy-rockchip-inno-usb3.ko\",\n    \"drivers/phy/rockchip/phy-rockchip-mipi-rx.ko\",\n    \"drivers/phy/rockchip/phy-rockchip-naneng-combphy.ko\",\n    \"drivers/phy/rockchip/phy-rockchip-naneng-edp.ko\",\n    \"drivers/phy/rockchip/phy-rockchip-pcie.ko\",\n    \"drivers/phy/rockchip/phy-rockchip-samsung-dcphy.ko\",\n    \"drivers/phy/rockchip/phy-rockchip-samsung-hdptx.ko\",\n    \"drivers/phy/rockchip/phy-rockchip-samsung-hdptx-hdmi.ko\",\n    \"drivers/phy/rockchip/phy-rockchip-snps-pcie3.ko\",\n    \"drivers/phy/rockchip/phy-rockchip-typec.ko\",\n    \"drivers/phy/rockchip/phy-rockchip-usb.ko\",\n    \"drivers/phy/rockchip/phy-rockchip-usbdp.ko\",\n    \"drivers/pinctrl/pinctrl-max96745.ko\",\n    \"drivers/pinctrl/pinctrl-max96755f.ko\",\n    \"drivers/pinctrl/pinctrl-rk628.ko\",\n    \"drivers/pinctrl/pinctrl-rk805.ko\",\n    \"drivers/pinctrl/pinctrl-rk806.ko\",\n    \"drivers/pinctrl/pinctrl-rockchip.ko\",\n    \"drivers/power/reset/reboot-mode.ko\",\n    \"drivers/power/reset/syscon-reboot-mode.ko\",\n    \"drivers/power/supply/bq25700_charger.ko\",\n    \"drivers/power/supply/bq25890_charger.ko\",\n    \"drivers/power/supply/cw2015_battery.ko\",\n    \"drivers/power/supply/cw2017_battery.ko\",\n    \"drivers/power/supply/cw221x_battery.ko\",\n    \"drivers/power/supply/rk817_battery.ko\",\n    \"drivers/power/supply/rk817_charger.ko\",\n    \"drivers/power/supply/rk818_battery.ko\",\n    \"drivers/power/supply/rk818_charger.ko\",\n    \"drivers/power/supply/sc89890_charger.ko\",\n    \"drivers/power/supply/sgm41542_charger.ko\",\n    \"drivers/power/supply/test_power.ko\",\n    \"drivers/pwm/pwm-rockchip.ko\",\n    \"drivers/regulator/act8865-regulator.ko\",\n    \"drivers/regulator/fan53555.ko\",\n    \"drivers/regulator/gpio-regulator.ko\",\n    \"drivers/regulator/lp8752.ko\",\n    \"drivers/regulator/mp8865-regulator.ko\",\n    \"drivers/regulator/pwm-regulator.ko\",\n    \"drivers/regulator/rk806-regulator.ko\",\n    \"drivers/regulator/rk808-regulator.ko\",\n    \"drivers/regulator/rk860x-regulator.ko\",\n    \"drivers/regulator/tps65132-regulator.ko\",\n    \"drivers/regulator/wl2868c-regulator.ko\",\n    \"drivers/regulator/xz3216.ko\",\n    \"drivers/rknpu/rknpu.ko\",\n    \"drivers/rtc/rtc-hym8563.ko\",\n    \"drivers/rtc/rtc-rk808.ko\",\n    \"drivers/scsi/sg.ko\",\n    \"drivers/soc/rockchip/fiq_debugger/fiq_debugger.ko\",\n    \"drivers/soc/rockchip/fiq_debugger/rk_fiq_debugger.ko\",\n    \"drivers/soc/rockchip/grf.ko\",\n    \"drivers/soc/rockchip/io-domain.ko\",\n    \"drivers/soc/rockchip/pm_domains.ko\",\n    \"drivers/soc/rockchip/ram_vendor_storage.ko\",\n    \"drivers/soc/rockchip/rk_vendor_storage.ko\",\n    \"drivers/soc/rockchip/rockchip-cpuinfo.ko\",\n    \"drivers/soc/rockchip/rockchip_debug.ko\",\n    \"drivers/soc/rockchip/rockchip_ipa.ko\",\n    \"drivers/soc/rockchip/rockchip_opp_select.ko\",\n    \"drivers/soc/rockchip/rockchip_pm_config.ko\",\n    \"drivers/soc/rockchip/rockchip_pvtm.ko\",\n    \"drivers/soc/rockchip/rockchip_system_monitor.ko\",\n    \"drivers/spi/spi-rockchip.ko\",\n    \"drivers/spi/spidev.ko\",\n    \"drivers/tee/optee/optee.ko\",\n    \"drivers/tee/tee.ko\",\n    \"drivers/thermal/rockchip_thermal.ko\",\n    \"drivers/usb/class/cdc-wdm.ko\",\n    \"drivers/usb/class/usblp.ko\",\n    \"drivers/usb/dwc2/dwc2.ko\",\n    \"drivers/usb/host/ohci-hcd.ko\",\n    \"drivers/usb/host/ohci-platform.ko\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 454,
+                "startChar": 0,
+                "endLine": 455,
+                "endChar": 0
+              },
+              "replacement": "    \"drivers/usb/typec/tcpm/fusb302.ko\",\n    \"drivers/usb/typec/tcpm/tcpci_husb311.ko\",\n    \"drivers/video/backlight/pwm_bl.ko\",\n    \"drivers/video/rockchip/iep/iep.ko\",\n    \"drivers/video/rockchip/mpp/rk_vcodec.ko\",\n    \"drivers/video/rockchip/rga3/rga3.ko\",\n    \"drivers/watchdog/dw_wdt.ko\",\n    \"net/mac80211/mac80211.ko\",\n    \"net/rfkill/rfkill-rk.ko\",\n    \"net/wireless/cfg80211.ko\",\n    \"sound/soc/codecs/aw883xx/snd-soc-aw883xx.ko\",\n    \"sound/soc/codecs/snd-soc-bt-sco.ko\",\n    \"sound/soc/codecs/snd-soc-cx2072x.ko\",\n    \"sound/soc/codecs/snd-soc-dummy-codec.ko\",\n    \"sound/soc/codecs/snd-soc-es7202.ko\",\n    \"sound/soc/codecs/snd-soc-es7210.ko\",\n    \"sound/soc/codecs/snd-soc-es7243e.ko\",\n    \"sound/soc/codecs/snd-soc-es8311.ko\",\n    \"sound/soc/codecs/snd-soc-es8316.ko\",\n    \"sound/soc/codecs/snd-soc-es8323.ko\",\n    \"sound/soc/codecs/snd-soc-es8326.ko\",\n    \"sound/soc/codecs/snd-soc-es8396.ko\",\n    \"sound/soc/codecs/snd-soc-hdmi-codec.ko\",\n    \"sound/soc/codecs/snd-soc-rk-codec-digital.ko\",\n    \"sound/soc/codecs/snd-soc-rk-dsm.ko\",\n    \"sound/soc/codecs/snd-soc-rk3328.ko\",\n    \"sound/soc/codecs/snd-soc-rk817.ko\",\n    \"sound/soc/codecs/snd-soc-rl6231.ko\",\n    \"sound/soc/codecs/snd-soc-rt5640.ko\",\n    \"sound/soc/codecs/snd-soc-spdif-rx.ko\",\n    \"sound/soc/codecs/snd-soc-spdif-tx.ko\",\n    \"sound/soc/generic/snd-soc-simple-card.ko\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 456,
+                "startChar": 0,
+                "endLine": 463,
+                "endChar": 0
+              },
+              "replacement": "    \"sound/soc/rockchip/snd-soc-rockchip-hdmi.ko\",\n    \"sound/soc/rockchip/snd-soc-rockchip-i2s.ko\",\n    \"sound/soc/rockchip/snd-soc-rockchip-i2s-tdm.ko\",\n    \"sound/soc/rockchip/snd-soc-rockchip-multicodecs.ko\",\n    \"sound/soc/rockchip/snd-soc-rockchip-pdm.ko\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 464,
+                "startChar": 0,
+                "endLine": 517,
+                "endChar": 0
+              },
+              "replacement": "    \"sound/soc/rockchip/snd-soc-rockchip-spdif.ko\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 518,
+                "startChar": 0,
+                "endLine": 831,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 853,
+                "startChar": 0,
+                "endLine": 854,
+                "endChar": 0
+              },
+              "replacement": "    #    visibility \u003d [\"//visibility:private\"],\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 859,
+                "startChar": 0,
+                "endLine": 860,
+                "endChar": 0
+              },
+              "replacement": "    #    kernel_modules \u003d _ROCKCHIP_MODULE_OUTS,\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 883,
+                "startChar": 0,
+                "endLine": 883,
+                "endChar": 0
+              },
+              "replacement": "        \":kernel_aarch64\",\n        \":kernel_aarch64_additional_artifacts\",\n        \":kernel_aarch64_modules\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 885,
+                "startChar": 0,
+                "endLine": 885,
+                "endChar": 0
+              },
+              "replacement": "        \":rockchip_merged_kernel_uapi_headers\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 886,
+                "startChar": 0,
+                "endLine": 890,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "7d20b0ef_341eae77",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-09-13T06:28:30Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "69c37a000fb690233e06679dc56ec7b6a38a4045",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
