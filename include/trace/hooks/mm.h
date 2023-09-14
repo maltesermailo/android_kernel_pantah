@@ -19,6 +19,7 @@
 #include <trace/hooks/vendor_hooks.h>
 
 #ifdef __GENKSYMS__
+#include <linux/cma.h>
 #include <linux/types.h>
 #include <linux/mm.h>
 #include <linux/oom.h>
@@ -31,6 +32,7 @@ struct slabinfo;
 struct track;
 struct address_space;
 struct page_vma_mapped_walk;
+struct cma;
 
 DECLARE_RESTRICTED_HOOK(android_rvh_set_skip_swapcache_flags,
 			TP_PROTO(gfp_t *flags),
