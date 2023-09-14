@@ -16,6 +16,24 @@
       "message": "Is returning \"success\" the right code here?",
       "revId": "b4d31131566322b362daabf71b81d9342cdadfc6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d465915_d898aba2",
+        "filename": "drivers/thermal/thermal_netlink.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2023-09-14T23:49:44Z",
+      "side": 1,
+      "message": "yes, the idea is that you want to ignore these events and not send a uevent that will wake up userspace.",
+      "parentUuid": "99369aec_4fe96017",
+      "revId": "b4d31131566322b362daabf71b81d9342cdadfc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
