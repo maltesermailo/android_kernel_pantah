@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: GPL-2.0-or-later
+
+load("//build/kernel/kleaf:kernel.bzl", "kernel_dtstree")
+
+kernel_dtstree(
+    name = "mydt",
+    srcs = glob([
+        "*.dts",
+        "*.dtsi",
+    ]) + [
+        "Makefile",
+    ],
+    visibility = ["//common:__subpackages__"],
+)

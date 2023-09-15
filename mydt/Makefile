@@ -1,0 +1,2 @@
+dtb-y += \
+        test.dtb

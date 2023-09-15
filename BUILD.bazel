@@ -826,3 +826,16 @@ ddk_headers(
     includes = [],
     visibility = ["//visibility:private"],
 )
+
+kernel_build(
+    name = "my-kernel",
+    build_config = "//common:build.config.gki.aarch64",
+    dtstree = "//common/mydt",
+    outs = [],
+    make_goals = [
+        "Image",
+        "modules",
+        "dtbs",
+    ],
+    module_outs = get_gki_modules_list("arm64"),
+)
