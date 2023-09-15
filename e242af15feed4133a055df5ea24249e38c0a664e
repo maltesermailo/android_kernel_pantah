@@ -16,6 +16,24 @@
       "message": "@tkjos@google.com\n\nCould you please help review it?\nI\u0027m not sure which ACK reviewer is suited for this.\nThe reason why we need these patch is that we have platform using 32 bits kernel.\nIf a user program intends to utilize these features, it must either check the corresponding flags or blindly use them, which may result in illegal instruction errors.",
       "revId": "e242af15feed4133a055df5ea24249e38c0a664e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d0f6c1d_95d79659",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1576997
+      },
+      "writtenOn": "2023-09-15T02:38:48Z",
+      "side": 1,
+      "message": "Sorry that I have to correct the previous description.\n\nWe have platforms that utilizes a 32-bit kernel with armv8.2+dotprod CPU.\nThe user program intends to use the dotprod feature.\nHowever, not all armv8.2 cores support dotprod.\nTherefore, we need to export the feature flags to the user, allowing them to check if the feature is supported or not.",
+      "parentUuid": "e2fe5eac_9cde2dca",
+      "revId": "e242af15feed4133a055df5ea24249e38c0a664e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
