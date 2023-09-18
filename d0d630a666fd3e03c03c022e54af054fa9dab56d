@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000053882161",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2752036?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "593f5501_7c9b9a2f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-09-18T03:58:32Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against [change 2747453](https://r.android.com/c/2747453) on branch android12-5.10.\n\n```\n      ## android/abi_gki_aarch64_xiaomi ##\n     @@\n    -   ufshcd_update_evt_hist\n    -   utf16s_to_utf8s\n    -   wait_for_completion_io_timeout\n    +   mempool_resize\n    +   mempool_alloc_pages\n    +   mempool_free_pages\n     +  nr_free_buffer_pages\n     +  mmc_set_blocklen\n    ++\n    ++#required by mq-deadline module\n    ++  blk_mq_debugfs_rq_show\n    ++  seq_list_start\n    ++  seq_list_next\n    ++  __blk_mq_debugfs_rq_show\n      \n    - #required by mq-deadline module\n    -   blk_mq_debugfs_rq_show\n    + #required by cs35l41 module\n    +   regmap_raw_write_async\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 565696072 android-build.ayeaye-python-dispatcher_20230914.00_p1",
+      "revId": "d0d630a666fd3e03c03c022e54af054fa9dab56d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000053882161",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2752036?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "d831d8c4_e3bb8a2c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-09-18T03:58:32Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 565696072 android-build.ayeaye-python-dispatcher_20230914.00_p1",
+      "revId": "d0d630a666fd3e03c03c022e54af054fa9dab56d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
