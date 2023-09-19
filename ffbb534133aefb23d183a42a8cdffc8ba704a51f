@@ -16,6 +16,23 @@
       "message": "Dear Todd,\n\nCould you help my vendor hook patch, add a vendor hook so that we can reimplement function xhci_urb_suitable_for_idt(). Thanks",
       "revId": "ffbb534133aefb23d183a42a8cdffc8ba704a51f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34c82236_36d79ed6",
+        "filename": "drivers/usb/host/xhci.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2240,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-09-19T17:54:18Z",
+      "side": 1,
+      "message": "why do you need both ret and bypass. How about this instead:\n```\n  bool ret \u003d 0;\n\n  _trace_android_vh_xhci_urb_suitable_bypass(urb, \u0026ret);\n  if (ret)\n    return ret;\n```",
+      "revId": "ffbb534133aefb23d183a42a8cdffc8ba704a51f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
