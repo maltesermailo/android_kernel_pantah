@@ -46,6 +46,30 @@
       },
       "revId": "c16fbce9b2659d0c9fc4f323dda31b4cbb611766",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b15df3ec_f4fe5b65",
+        "filename": "drivers/base/dd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2023-09-19T01:40:13Z",
+      "side": 1,
+      "message": "I believe it is a distinctive feature of the pKVM security model that the hypervisor distrusts the host after a certain point in the boot process. This is why we need to ensure relevant devices are probed before `pkvm_drop_host_privileges()` runs i.e. while the host is still trusted.\n\nI understand that with KVM, the hypervisor always trusts the host which is why there is no need to expedite the device probing process.",
+      "parentUuid": "728806e8_79433884",
+      "range": {
+        "startLine": 761,
+        "startChar": 77,
+        "endLine": 761,
+        "endChar": 80
+      },
+      "revId": "c16fbce9b2659d0c9fc4f323dda31b4cbb611766",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
