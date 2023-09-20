@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e76cb78_b74f30b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962105
+      },
+      "writtenOn": "2023-09-20T02:18:42Z",
+      "side": 1,
+      "message": "Dear Todd,\n\nDue to USB firmware feature, we need to implement this function ourselves, otherwise CTS testing will fail.\n\nCould you help review again? Thanks very much!",
+      "revId": "ffbb534133aefb23d183a42a8cdffc8ba704a51f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34c82236_36d79ed6",
@@ -31,6 +48,24 @@
       "writtenOn": "2023-09-19T17:54:18Z",
       "side": 1,
       "message": "why do you need both ret and bypass. How about this instead:\n```\n  bool ret \u003d 0;\n\n  _trace_android_vh_xhci_urb_suitable_bypass(urb, \u0026ret);\n  if (ret)\n    return ret;\n```",
+      "revId": "ffbb534133aefb23d183a42a8cdffc8ba704a51f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2786985d_f3ec6135",
+        "filename": "drivers/usb/host/xhci.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2240,
+      "author": {
+        "id": 1962105
+      },
+      "writtenOn": "2023-09-20T02:18:42Z",
+      "side": 1,
+      "message": "Dear Todd,\n\nThanks for you review.\n\nTRACE_SYSTEM is defined in xhci_trace.h(#define TRACE_SYSTEM xhci hcd),\n\nTRACE_SYSTEM is also defined in include/trace/books/usb.h (#define TRACE_SYSTEM usb),\n\ndrivers/USB/host/xhci.h(#include \"xhci.h\") is referenced in drivers/USB/host/xhci trace.h,\n\nso if use vendor hook (#include \u003ctrace/books/usb.h\u003e) in drivers/usb/host/xhci.h, it will compile fail,\n\nso we need to use _trace_android_vh_xhci_urb_suitable_bypass() to solve this problem.\n\nRefer to the submitted patch: https://android-review.googlesource.com/c/kernel/common/ +/2226459",
+      "parentUuid": "34c82236_36d79ed6",
       "revId": "ffbb534133aefb23d183a42a8cdffc8ba704a51f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
