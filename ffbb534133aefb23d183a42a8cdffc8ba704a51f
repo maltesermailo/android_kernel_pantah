@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5fa8e91d_c15035a5",
+        "filename": "drivers/usb/host/xhci.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1416,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-09-20T17:47:54Z",
+      "side": 1,
+      "message": "drop \"bypass\" from the arg list and the hook. Just use \"ret\"",
+      "revId": "ffbb534133aefb23d183a42a8cdffc8ba704a51f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "34c82236_36d79ed6",
         "filename": "drivers/usb/host/xhci.h",
         "patchSetId": 1
@@ -66,6 +83,41 @@
       "side": 1,
       "message": "Dear Todd,\n\nThanks for you review.\n\nTRACE_SYSTEM is defined in xhci_trace.h(#define TRACE_SYSTEM xhci hcd),\n\nTRACE_SYSTEM is also defined in include/trace/books/usb.h (#define TRACE_SYSTEM usb),\n\ndrivers/USB/host/xhci.h(#include \"xhci.h\") is referenced in drivers/USB/host/xhci trace.h,\n\nso if use vendor hook (#include \u003ctrace/books/usb.h\u003e) in drivers/usb/host/xhci.h, it will compile fail,\n\nso we need to use _trace_android_vh_xhci_urb_suitable_bypass() to solve this problem.\n\nRefer to the submitted patch: https://android-review.googlesource.com/c/kernel/common/ +/2226459",
       "parentUuid": "34c82236_36d79ed6",
+      "revId": "ffbb534133aefb23d183a42a8cdffc8ba704a51f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc1fc25a_45b1ec9e",
+        "filename": "drivers/usb/host/xhci.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2240,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-09-20T17:47:54Z",
+      "side": 1,
+      "message": "I don\u0027t understand why this has anything to do with my comment. I\u0027m suggesting that your stub function doesn\u0027t need the bypass argument. You can definitely redefine the hook to only have the urb and ret arguments.\n\nI\u0027m fine with wrapping the hook in this function call.",
+      "parentUuid": "2786985d_f3ec6135",
+      "revId": "ffbb534133aefb23d183a42a8cdffc8ba704a51f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9647d610_0acbc5de",
+        "filename": "include/trace/hooks/usb.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-09-20T17:47:54Z",
+      "side": 1,
+      "message": "drop bypass from the arg list",
       "revId": "ffbb534133aefb23d183a42a8cdffc8ba704a51f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
