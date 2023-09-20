@@ -94,6 +94,29 @@
       },
       "revId": "c16fbce9b2659d0c9fc4f323dda31b4cbb611766",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39080c77_1672b607",
+        "filename": "drivers/base/dd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-09-20T13:50:21Z",
+      "side": 1,
+      "message": "The lack of locking here makes me pretty uneasy, but since we only have one caller and that runs from `device_initcall_sync`, I suppose it\u0027s fine...",
+      "range": {
+        "startLine": 767,
+        "startChar": 0,
+        "endLine": 777,
+        "endChar": 38
+      },
+      "revId": "c16fbce9b2659d0c9fc4f323dda31b4cbb611766",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
