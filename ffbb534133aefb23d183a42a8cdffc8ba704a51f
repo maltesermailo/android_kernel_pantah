@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "587628c0_28fe79b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-09-21T06:43:47Z",
+      "side": 1,
+      "message": "Ok, your point is that your bypass case might return 0 or 1 so my suggestion needed a tweak. How about this slight adjustment to your suggestion:\n```\nint ret \u003d 1;\n\n_trace_android_vh_xhci_urb_suitable_bypass(urb, \u0026ret);\nif (ret \u003c\u003d 0)\n  return ret \u003d\u003d 0;\n```",
+      "parentUuid": "6eb53320_ebdb40a2",
+      "revId": "ffbb534133aefb23d183a42a8cdffc8ba704a51f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5fa8e91d_c15035a5",
         "filename": "drivers/usb/host/xhci.c",
         "patchSetId": 1
