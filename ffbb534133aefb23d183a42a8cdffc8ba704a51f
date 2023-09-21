@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6eb53320_ebdb40a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962105
+      },
+      "writtenOn": "2023-09-21T02:28:51Z",
+      "side": 1,
+      "message": "Dear Toddy,\n\nThank you very much for your reply. \nWe would like to fully implement in my sub function. Assuming we adopt your solution, we may encounter this problem, when ret is false, the program will continue to run the function instead of directly returning false, however, we expect to directly return false.\n\nAnother solution is as follows:\nint ret \u003d 1;\n_trace_android_vh_xhci_urb_suitable_bypass(urb, \u0026ret);\nif (ret \u003c 0)\n    return false;\nelse if (ret \u003d\u003d 0)\n    return true;\n\nSo could you help review again? What solution should we adopt? Thanks!",
+      "revId": "ffbb534133aefb23d183a42a8cdffc8ba704a51f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5fa8e91d_c15035a5",
         "filename": "drivers/usb/host/xhci.c",
         "patchSetId": 1
