@@ -8,8 +8,7 @@
 # We cannot go as far as adding -Wpedantic since it emits too many warnings.
 UAPI_CFLAGS := -std=c90 -Wall -Werror=implicit-function-declaration
 
-# In theory, we do not care -m32 or -m64 for header compile tests.
-# It is here just because CONFIG_CC_CAN_LINK is tested with -m32 or -m64.
+# Preserve the target architecture.
 UAPI_CFLAGS += $(filter -m32 -m64 --target=%, $(KBUILD_CFLAGS))
 
 # USERCFLAGS might contain sysroot location for CC.
@@ -82,10 +81,9 @@ always-y := $(patsubst $(obj)/%.h,%.hdrtest, $(shell find $(obj) -name '*.h' 2>/
 # Include the header twice to detect missing include guard.
 quiet_cmd_hdrtest = HDRTEST $<
       cmd_hdrtest = \
-		$(CC) $(c_flags) -fsyntax-only -x c /dev/null \
-			$(if $(filter-out $(no-header-test), $*.h), -include $< -include $<); \
 		$(PERL) $(srctree)/$(src)/headers_check.pl $(obj) $(SRCARCH) $<; \
-		touch $@
+		$(CC) $(c_flags) -o $@ -c -x c \
+			$(if $(filter-out $(no-header-test), $*.h), -g -fdebug-macro -fno-eliminate-unused-debug-types -include $< $<, /dev/null)
 
 $(obj)/%.hdrtest: $(obj)/%.h FORCE
 	$(call if_changed_dep,hdrtest)
