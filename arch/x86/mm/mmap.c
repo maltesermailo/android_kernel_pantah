@@ -43,7 +43,7 @@ static unsigned long stack_maxrandom_size(unsigned long task_size)
 	unsigned long max = 0;
 	if (current->flags & PF_RANDOMIZE) {
 		max = (-1UL) & __STACK_RND_MASK(task_size == task_size_32bit());
-		max <<= PAGE_SHIFT;
+		max <<= PAGE_SHIFT_16K;
 	}
 
 	return max;
@@ -71,7 +71,7 @@ static unsigned long arch_rnd(unsigned int rndbits)
 {
 	if (!(current->flags & PF_RANDOMIZE))
 		return 0;
-	return (get_random_long() & ((1UL << rndbits) - 1)) << PAGE_SHIFT;
+	return (get_random_long() & ((1UL << rndbits) - 1)) << PAGE_SHIFT_16K;
 }
 
 unsigned long arch_mmap_rnd(void)
@@ -102,7 +102,7 @@ static unsigned long mmap_base(unsigned long rnd, unsigned long task_size,
 	else if (gap > gap_max)
 		gap = gap_max;
 
-	return PAGE_ALIGN(task_size - gap - rnd);
+	return PAGE_ALIGN_16K(task_size - gap - rnd);
 }
 
 static unsigned long mmap_legacy_base(unsigned long rnd,
