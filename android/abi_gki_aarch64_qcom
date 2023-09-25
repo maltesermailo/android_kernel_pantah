@@ -94,9 +94,9 @@
   bit_wait
   bit_wait_timeout
   __blk_alloc_disk
-  blkdev_get_by_dev
   blk_crypto_keyslot_index
   blk_crypto_register
+  blkdev_get_by_dev
   blk_execute_rq
   blk_execute_rq_nowait
   __blk_mq_alloc_disk
@@ -343,7 +343,6 @@
   contig_page_data
   _copy_from_iter
   copy_from_kernel_nofault
-  copy_page
   __copy_overflow
   copy_page
   _copy_to_iter
@@ -740,22 +739,6 @@
   divider_recalc_rate
   divider_ro_round_rate_parent
   divider_round_rate_parent
-  dm_bufio_client_create
-  dm_bufio_client_destroy
-  dm_bufio_mark_buffer_dirty
-  dm_bufio_new
-  dm_bufio_read
-  dm_bufio_release
-  dm_bufio_write_dirty_buffers
-  dm_disk
-  dm_get_device
-  dm_kobject_release
-  dm_read_arg_group
-  dm_register_target
-  dm_shift_arg
-  dm_table_get_md
-  dm_table_get_mode
-  dm_unregister_target
   dma_alloc_attrs
   dma_alloc_noncontiguous
   dma_alloc_pages
@@ -833,6 +816,22 @@
   dma_unmap_sg_attrs
   dma_vmap_noncontiguous
   dma_vunmap_noncontiguous
+  dm_bufio_client_create
+  dm_bufio_client_destroy
+  dm_bufio_mark_buffer_dirty
+  dm_bufio_new
+  dm_bufio_read
+  dm_bufio_release
+  dm_bufio_write_dirty_buffers
+  dm_disk
+  dm_get_device
+  dm_kobject_release
+  dm_read_arg_group
+  dm_register_target
+  dm_shift_arg
+  dm_table_get_md
+  dm_table_get_mode
+  dm_unregister_target
   do_trace_netlink_extack
   do_trace_rcu_torture_read
   double_rq_lock
@@ -3180,6 +3179,7 @@
   strchrnul
   strcmp
   strcpy
+  strcspn
   stream_open
   strim
   string_get_size
@@ -3923,10 +3923,10 @@
   vhost_add_used_and_signal
   vhost_dev_check_owner
   vhost_dev_cleanup
+  vhost_dev_flush
   vhost_dev_init
   vhost_dev_ioctl
   vhost_dev_stop
-  vhost_dev_flush
   vhost_disable_notify
   vhost_enable_notify
   vhost_get_vq_desc
@@ -4011,6 +4011,7 @@
   wait_for_completion_interruptible_timeout
   wait_for_completion_killable
   wait_for_completion_timeout
+  wait_for_device_probe
   __wait_rcu_gp
   wait_woken
   __wake_up
