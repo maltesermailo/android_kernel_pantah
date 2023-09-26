@@ -16,6 +16,7 @@ struct mutex;
 struct rt_mutex;
 struct rw_semaphore;
 struct task_struct;
+struct percpu_rw_semaphore;
 #else
 /* struct mutex */
 #include <linux/mutex.h>
@@ -25,6 +26,8 @@ struct task_struct;
 #include <linux/rwsem.h>
 /* struct task_struct */
 #include <linux/sched.h>
+/* struct percpu_rw_semaphore */
+#include <linux/percpu-rwsem.h>
 #endif /* __GENKSYMS__ */
 DECLARE_HOOK(android_vh_mutex_wait_start,
 	TP_PROTO(struct mutex *lock),
@@ -98,6 +101,10 @@ DECLARE_HOOK(android_vh_record_rwsem_lock_starttime,
 DECLARE_HOOK(android_vh_record_pcpu_rwsem_starttime,
 	TP_PROTO(struct task_struct *tsk, unsigned long settime_jiffies),
 	TP_ARGS(tsk, settime_jiffies));
+DECLARE_HOOK(android_vh_percpu_rwsem_wq_add,
+	TP_PROTO(struct percpu_rw_semaphore *sem, bool reader),
+	TP_ARGS(sem, reader));
+
 
 /* macro versions of hooks are no longer required */
 
