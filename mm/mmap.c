@@ -801,7 +801,12 @@ int __vma_adjust(struct vm_area_struct *vma, unsigned long start,
 	}
 	if (end != vma->vm_end) {
 		if (vma->vm_end > end) {
+<<<<<<< HEAD   (f68d4f ANDROID: uid_sys_stat: instead update_io_stats_uid_locked to)
 			if (adjust_next >= 0 && !insert) {
+=======
+			if ((vma->vm_end + adjust_next != end) &&
+			    (!insert || (insert->vm_start != end))) {
+>>>>>>> BRANCH (a456e1 Linux 6.1.39)
 				vma_mas_szero(&mas, end, vma->vm_end);
 				mas_reset(&mas);
 				VM_WARN_ON(insert &&
@@ -2534,7 +2539,10 @@ do_mas_align_munmap(struct ma_state *mas, struct vm_area_struct *vma,
 			error = mas_store_gfp(&mas_detach, split, GFP_KERNEL);
 			if (error)
 				goto munmap_gather_failed;
+<<<<<<< HEAD   (f68d4f ANDROID: uid_sys_stat: instead update_io_stats_uid_locked to)
 			vma_mark_detached(split, true);
+=======
+>>>>>>> BRANCH (a456e1 Linux 6.1.39)
 			if (split->vm_flags & VM_LOCKED)
 				locked_vm += vma_pages(split);
 
