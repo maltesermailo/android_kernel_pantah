@@ -5580,9 +5580,21 @@ retry_avoidcopy:
 	 * If no-one else is actually using this page, we're the exclusive
 	 * owner and can reuse this page.
 	 */
+<<<<<<< HEAD   (6a8cf1 ANDROID: GKI: Update symbol list for bcmstb)
 	if (page_mapcount(old_page) == 1 && PageAnon(old_page)) {
 		if (!PageAnonExclusive(old_page))
 			page_move_anon_rmap(old_page, vma);
+||||||| BASE
+	if (folio_mapcount(old_folio) == 1 && folio_test_anon(old_folio)) {
+		if (!PageAnonExclusive(&old_folio->page))
+			page_move_anon_rmap(&old_folio->page, vma);
+=======
+	if (folio_mapcount(old_folio) == 1 && folio_test_anon(old_folio)) {
+		if (!PageAnonExclusive(&old_folio->page)) {
+			page_move_anon_rmap(&old_folio->page, vma);
+			SetPageAnonExclusive(&old_folio->page);
+		}
+>>>>>>> CHANGE (87eeda UPSTREAM: mm/rmap: move SetPageAnonExclusive() out of page_m)
 		if (likely(!unshare))
 			set_huge_ptep_writable(vma, haddr, ptep);
 
