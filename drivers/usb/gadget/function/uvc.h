@@ -155,6 +155,9 @@ struct uvc_device {
 	/* Events */
 	unsigned int event_length;
 	unsigned int event_setup_out : 1;
+
+        /* Max number of uvc requests allocated to send to the ep*/
+        unsigned int streaming_max_uvcrequests;
 };
 
 static inline struct uvc_device *to_uvc(struct usb_function *f)

@@ -793,6 +793,9 @@ The uvc function provides these attributes in its function directory:
 	streaming_maxpacket maximum packet size this endpoint is capable of
 			    sending or receiving when this configuration is
 			    selected
+        streaming_max_uvcrequests upper bound for the number of uvc requests
+                            the gadget driver will allocate for sending to
+                            the endpoint.
 	function_name       name of the interface
 	=================== ================================================
 

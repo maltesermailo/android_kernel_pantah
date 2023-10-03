@@ -45,6 +45,7 @@ static int uvc_queue_setup(struct vb2_queue *vq,
 	struct uvc_video_queue *queue = vb2_get_drv_priv(vq);
 	struct uvc_video *video = container_of(queue, struct uvc_video, queue);
 	unsigned int req_size;
+        unsigned int max_uvc_requests;
 	unsigned int nreq;
 
 	if (*nbuffers > UVC_MAX_VIDEO_BUFFERS)
@@ -54,6 +55,8 @@ static int uvc_queue_setup(struct vb2_queue *vq,
 
 	sizes[0] = video->imagesize;
 
+        max_uvc_requests = video->uvc->streaming_max_uvcrequests;
+
 	req_size = video->ep->maxpacket
 		 * max_t(unsigned int, video->ep->maxburst, 1)
 		 * (video->ep->mult);
@@ -62,7 +65,7 @@ static int uvc_queue_setup(struct vb2_queue *vq,
 	 * into fewer requests for smaller framesizes.
 	 */
 	nreq = DIV_ROUND_UP(DIV_ROUND_UP(sizes[0], 2), req_size);
-	nreq = clamp(nreq, 4U, 64U);
+	nreq = clamp(nreq, 4U, max_uvc_requests);
 	video->uvc_num_requests = nreq;
 
 	return 0;
