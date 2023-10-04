@@ -12,6 +12,7 @@
 #include <linux/slab.h>
 #include <linux/gzvm_drv.h>
 #include <linux/debugfs.h>
+#include <trace/hooks/gzvm.h>
 #include "gzvm_common.h"
 
 static DEFINE_MUTEX(gzvm_list_lock);
@@ -323,6 +324,8 @@ static void gzvm_destroy_vm(struct gzvm *gzvm)
 
 	pr_debug("VM-%u is going to be destroyed\n", gzvm->vm_id);
 
+	trace_android_vh_gzvm_destroy(gzvm);
+
 	mutex_lock(&gzvm->lock);
 
 	gzvm_vm_irqfd_release(gzvm);
@@ -517,6 +520,8 @@ static struct gzvm *gzvm_create_vm(unsigned long vm_type)
 	gzvm = kzalloc(sizeof(*gzvm), GFP_KERNEL);
 	if (!gzvm)
 		return ERR_PTR(-ENOMEM);
+
+	trace_android_vh_gzvm_create(gzvm);
 
 	ret = gzvm_arch_create_vm(vm_type);
 	if (ret < 0) {
