@@ -61,6 +61,7 @@
 #include <trace/hooks/regmap.h>
 #include <trace/hooks/suspend.h>
 #include <trace/hooks/fsnotify.h>
+#include <trace/hooks/gzvm.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -347,3 +348,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_fault_pre_folio_locked);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_folio_mapped);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_remove_rmap_ptes);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_adjust_swap_info_flags);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_gzvm_vcpu_exit_reason);
