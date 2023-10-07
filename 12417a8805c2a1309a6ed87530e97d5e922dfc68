@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f5bc685_ff57b161",
+        "filename": "fs/fuse/dev.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2330,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2023-10-07T00:27:07Z",
+      "side": 1,
+      "message": "Is this ever not going to be the credentials that the userspace daemon runs in? I was planning to have something like this happen in the response to FUSE_INIT",
+      "range": {
+        "startLine": 2330,
+        "startChar": 20,
+        "endLine": 2330,
+        "endChar": 60
+      },
+      "revId": "12417a8805c2a1309a6ed87530e97d5e922dfc68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a4b5998_8d0445d4",
+        "filename": "fs/fuse/fuse_i.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 2049,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2023-10-07T00:27:07Z",
+      "side": 1,
+      "message": "Feels odd to have the security model decided by a bpf program. It should be the same whether the bpf program is present or not, otherwise things become strange in direct passthrough mode.\n\nIdeally, we\u0027d have this act as though it was being done on behalf of the daemon, as it would if it were acting like normal fuse.",
+      "range": {
+        "startLine": 2049,
+        "startChar": 2,
+        "endLine": 2049,
+        "endChar": 39
+      },
+      "revId": "12417a8805c2a1309a6ed87530e97d5e922dfc68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
