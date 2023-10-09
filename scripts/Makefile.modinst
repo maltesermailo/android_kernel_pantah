@@ -39,7 +39,7 @@ __modinst: $(modules)
 # Installation
 #
 quiet_cmd_install = INSTALL $@
-      cmd_install = mkdir -p $(dir $@); cp $< $@
+      cmd_install = mkdir -p $(dir $@); cp $< $@;
 
 # Strip
 #
@@ -89,6 +89,9 @@ $(dst)/%.ko: $(extmod_prefix)%.ko FORCE
 	$(call cmd,install)
 	$(call cmd,strip)
 	$(call cmd,sign)
+	if [ -f $(patsubst %.ko,%.gb,$<) ]; then \
+		cp $(patsubst %.ko,%.gb,$<) $(patsubst %.ko,%.gb,$@); \
+	fi
 
 ifneq ($(KBUILD_EXTMOD),)
 $(dst)/modules.order.$(extmod_suffix): $(MODORDER) FORCE
