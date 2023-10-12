@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b30553c6_6c555f05",
+        "filename": "fs/fuse/dir.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2023-10-12T18:54:31Z",
+      "side": 1,
+      "message": "fuse_handle_backing assumes new_backing_inode is initialized, which it is not if you remove these lines.\n\nI don\u0027t think this fix is correct even if you null out new_backing_inode, mind. fuse_handle_backing is designed to replace the existing backing file with the replacement, so you have to set it to fi-\u003ebacking first.",
+      "range": {
+        "startLine": 202,
+        "startChar": 37,
+        "endLine": 202,
+        "endChar": 54
+      },
+      "revId": "07d9704e6ddcb815d43bcf455aaffced8810db6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
