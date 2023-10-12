@@ -34,6 +34,24 @@
       "parentUuid": "88272fd4_f9cd0bcf",
       "revId": "9d59a90f894ffa7ed3565618da7bd59e1ff4a990",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8eae9d27_26c3de0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2023-10-12T16:18:27Z",
+      "side": 1,
+      "message": "I implemented the ioprio cgroup controller myself. It has been implemented in such a way that runtime overhead is minimal. From blkcg_set_ioprio():\n\n        struct ioprio_blkcg *blkcg \u003d ioprio_blkcg_from_bio(bio);\n\n\tif (!blkcg || blkcg-\u003eprio_policy \u003d\u003d POLICY_NO_CHANGE)\n\t\treturn;\n\nThe default policy is POLICY_NO_CHANGE. For the default policy, the only overhead that is added to the hot path is an array lookup, six pointer dereferences and an if-statement. I expect that this overhead won\u0027t be measurable.",
+      "parentUuid": "867b963f_69dafe1a",
+      "revId": "9d59a90f894ffa7ed3565618da7bd59e1ff4a990",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
