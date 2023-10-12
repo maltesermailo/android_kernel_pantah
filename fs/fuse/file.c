@@ -2657,8 +2657,11 @@ static int fuse_file_flock(struct file *file, int cmd, struct file_lock *fl)
 
 #ifdef CONFIG_FUSE_BPF
 	/* TODO - this is simply passthrough, not a proper BPF filter */
-	if (ff->backing_file)
+	if (ff->backing_file) {
+		pr_info("We do not expect this code to be running!!!!!!");
+		BUG_ON(true);
 		return fuse_file_flock_backing(file, cmd, fl);
+	}
 #endif
 
 	if (fc->no_flock) {
