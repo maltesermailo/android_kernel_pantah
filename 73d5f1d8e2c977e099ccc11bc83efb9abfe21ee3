@@ -16,6 +16,24 @@
       "message": "OK, but this driver will run in some guests as well as in the host. Will those guests also use the same page size as the host? In other words can we leave this TODO as a TODO?",
       "revId": "73d5f1d8e2c977e099ccc11bc83efb9abfe21ee3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a565434_04617587",
+        "filename": "drivers/trusty/trusty.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2023-10-13T11:03:02Z",
+      "side": 1,
+      "message": "4k guests on 16k host is an experimental feature which pKVM will have to handle.\nFor non-protected VMs I don\u0027t think we have a use case yet for supporting guest to Trustzone communication.",
+      "parentUuid": "3d14bc24_242987a0",
+      "revId": "73d5f1d8e2c977e099ccc11bc83efb9abfe21ee3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
