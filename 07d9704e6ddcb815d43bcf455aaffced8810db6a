@@ -22,6 +22,30 @@
       },
       "revId": "07d9704e6ddcb815d43bcf455aaffced8810db6a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "901894e5_5ca65c52",
+        "filename": "fs/fuse/dir.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1961260
+      },
+      "writtenOn": "2023-10-16T12:22:14Z",
+      "side": 1,
+      "message": "Thanks for your review. According to your reply, fuse_handle_backing receives fi-\u003ebacking_inode as an input param and replaces it with backing_file-\u003ef_inode. \nHowever, when new_backing_inode \u003d NULL, the origin codes listed below lead to panic in function ihold.\n\nnew_backing_inode \u003d fi-\u003ebacking_inode;\nihold(new_backing_inode);  // Actually ihold(NULL)\n\nvoid ihold(struct inode *inode)\n{\n     WARN_ON(atomic_inc_return(\u0026inode-\u003ei_count) \u003c 2); // NULL pointer dereference occurs when inode is NULL\n}\n\nTo avoid the panic, is it a good idea to check whether new_backing_inode is NULL or not before ihold(new_backing_inode);",
+      "parentUuid": "b30553c6_6c555f05",
+      "range": {
+        "startLine": 202,
+        "startChar": 37,
+        "endLine": 202,
+        "endChar": 54
+      },
+      "revId": "07d9704e6ddcb815d43bcf455aaffced8810db6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
