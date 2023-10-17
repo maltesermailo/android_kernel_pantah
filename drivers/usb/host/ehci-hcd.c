@@ -759,7 +759,11 @@ restart:
 			INCR(ehci->stats.normal);
 		} else {
 			/* Force to check port status */
+<<<<<<< HEAD   (4f9476 Merge 6.1.54 into android14-6.1-lts)
 			if (ehci->has_fsl_port_bug)
+=======
+			if (ehci->has_ci_pec_bug)
+>>>>>>> BRANCH (d23900 Linux 6.1.55)
 				status |= STS_PCD;
 			INCR(ehci->stats.error);
 		}
