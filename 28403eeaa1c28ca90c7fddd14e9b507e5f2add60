@@ -51,6 +51,24 @@
       "parentUuid": "55f15c12_7af30ec0",
       "revId": "28403eeaa1c28ca90c7fddd14e9b507e5f2add60",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3474bdae_6959f1b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1150933
+      },
+      "writtenOn": "2023-10-17T18:42:04Z",
+      "side": 1,
+      "message": "I just checked the upstream tree and found that all users of `for_each_domain()` are contained within the directory `kernel/sched`, and none of those compilation units can be built into loadable modules. Therefore, upstream is likely to reject this change with the argument that it\u0027s not needed to enable any upstream use cases.\n\nI\u0027m afraid that we would need to carry this change in the Android tree in order to enable vendor modules to use `for_each_domain()`.",
+      "parentUuid": "70c4ba93_fb981907",
+      "revId": "28403eeaa1c28ca90c7fddd14e9b507e5f2add60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
