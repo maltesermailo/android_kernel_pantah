@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0346696e_b09557d5",
+        "filename": "tools/testing/BUILD.bazel",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2023-10-18T22:49:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5eae5a1_ffd995d1",
+      "revId": "77ec79a1d862f117e276807fab0f8de4b4bda792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "377b715b_189b2a2e",
@@ -49,6 +67,30 @@
       "writtenOn": "2023-10-05T20:17:46Z",
       "side": 1,
       "message": "Please, use a proper rule, not a genrule.\n\ngo/kleaf-no-genrule\n\nAt the bare minimum, at least replace it with hermetic_genrule. (Though in your case, you are only using `echo`, so it is technically not breaking hermeticity.) \n\nI strongly recommend to not even use hermetic_genrule, but a proper rule().\n\nAlso, when defining the rule, perhaps put the rule definition in build/kernel/kleaf so it can be reused in other branches. This rule looks generic enough (it just dumps paths of all of its sources) that it can be used elsewhere.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 7
+      },
+      "revId": "77ec79a1d862f117e276807fab0f8de4b4bda792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "669775d1_518a044c",
+        "filename": "tools/testing/BUILD.bazel",
+        "patchSetId": 10
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2023-10-18T22:49:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "377b715b_189b2a2e",
       "range": {
         "startLine": 10,
         "startChar": 0,
@@ -177,6 +219,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5791fa81_da3da338",
+        "filename": "tools/testing/selftests/BUILD.bazel",
+        "patchSetId": 10
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2023-10-18T22:49:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2f1f67ff_c05d2a38",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 1
+      },
+      "revId": "77ec79a1d862f117e276807fab0f8de4b4bda792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1acecc14_f1c37a90",
@@ -190,6 +256,24 @@
       "writtenOn": "2023-10-05T20:17:46Z",
       "side": 1,
       "message": "Add x86_64 too, since this is for x86_64 only",
+      "revId": "77ec79a1d862f117e276807fab0f8de4b4bda792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9faf82c_13522af2",
+        "filename": "tools/testing/selftests/BUILD.bazel",
+        "patchSetId": 10
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2023-10-18T22:49:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1acecc14_f1c37a90",
       "revId": "77ec79a1d862f117e276807fab0f8de4b4bda792",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -211,6 +295,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b04a4f3_17a94e03",
+        "filename": "tools/testing/selftests/BUILD.bazel",
+        "patchSetId": 10
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2023-10-18T22:49:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4f7c51f5_375a42dc",
+      "revId": "77ec79a1d862f117e276807fab0f8de4b4bda792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d6febab_ab7cb35e",
@@ -224,6 +326,24 @@
       "writtenOn": "2023-10-05T20:17:46Z",
       "side": 1,
       "message": "no riscv?",
+      "revId": "77ec79a1d862f117e276807fab0f8de4b4bda792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c06afa32_0002219f",
+        "filename": "tools/testing/selftests/BUILD.bazel",
+        "patchSetId": 10
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2023-10-18T22:49:45Z",
+      "side": 1,
+      "message": "In platform we only have test suits built for x86_64 and arm64: https://android-build.corp.google.com/build_explorer/branch_dashboard/git_udc-qpr1-release/build_id/10903494/?activeTarget\u003dtest_suites_x86_64\n\nWill keep this configuration as starting point.",
+      "parentUuid": "0d6febab_ab7cb35e",
       "revId": "77ec79a1d862f117e276807fab0f8de4b4bda792",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
