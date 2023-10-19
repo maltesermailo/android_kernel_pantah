@@ -1,0 +1,261 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb9af7d6_cafe09b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-10-19T20:28:23Z",
+      "side": 1,
+      "message": "I only provided comments from Bazel / Kleaf\u0027s point of view.\n\nThere are some aspects on this CL that I did not put a comment on, e.g.:\n\n- Should there be a `kselftest()` rule in build/kernel/kleaf, or should the complication stay in each branch?\n- Should the Android test XML files be generated or checked-in? Should these files be in build/kernel/kleaf or branch-specific?",
+      "revId": "42fae23d29ef7c9485d7cee4fca434df471476b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8158b502_2f4918dc",
+        "filename": "BUILD.bazel",
+        "patchSetId": 31
+      },
+      "lineNbr": 838,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-10-19T20:28:23Z",
+      "side": 1,
+      "message": "visibility private\n\n(same for all targets defined below)",
+      "revId": "42fae23d29ef7c9485d7cee4fca434df471476b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29bd928b_4cec781f",
+        "filename": "BUILD.bazel",
+        "patchSetId": 31
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-10-19T20:28:23Z",
+      "side": 1,
+      "message": "nit: since you are only supporting x86_64 / arm64 (and probably riscv64), consider also adding a compatible statement on the cpus. You may use the following to express multiple architectures:\n\nhttps://bazel.build/extending/platforms#expressive-constraints\n\n(just a nit, feel free to ignore this)",
+      "revId": "42fae23d29ef7c9485d7cee4fca434df471476b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dc792f1_07d8933d",
+        "filename": "BUILD.bazel",
+        "patchSetId": 31
+      },
+      "lineNbr": 896,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-10-19T20:28:23Z",
+      "side": 1,
+      "message": "visibility private here as well, unless there are some other targets depending on it.\n\nIt doesn\u0027t need to be public to be built on command line.",
+      "revId": "42fae23d29ef7c9485d7cee4fca434df471476b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4893a34a_ea552fd1",
+        "filename": "abi.bzl",
+        "patchSetId": 31
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-10-19T20:28:23Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 15,
+        "startChar": 4,
+        "endLine": 15,
+        "endChar": 9
+      },
+      "revId": "42fae23d29ef7c9485d7cee4fca434df471476b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a1caa69_ea978565",
+        "filename": "abi.bzl",
+        "patchSetId": 31
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-10-19T20:28:23Z",
+      "side": 1,
+      "message": "If you intend to only use this in this package only, please add visibility:\n\nhttps://bazel.build/concepts/visibility#load-visibility\n\nOr consider moving this to build/kernel/kleaf/ and don\u0027t add visibility. Or consider moving this to build/kernel/kleaf/impl and expose it via kernel.bzl.",
+      "revId": "42fae23d29ef7c9485d7cee4fca434df471476b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84a694f2_0daaa9a2",
+        "filename": "abi.bzl",
+        "patchSetId": 31
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-10-19T20:28:23Z",
+      "side": 1,
+      "message": "no riscv?\n\nAlso hide with underscore prefix `_ALL_ABIS` unless you need to load it elsewhere",
+      "revId": "42fae23d29ef7c9485d7cee4fca434df471476b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0080ec8_1022ae2f",
+        "filename": "abi.bzl",
+        "patchSetId": 31
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-10-19T20:28:23Z",
+      "side": 1,
+      "message": "Does paths.join work? (You might want to read its implementation first)",
+      "range": {
+        "startLine": 32,
+        "startChar": 25,
+        "endLine": 32,
+        "endChar": 65
+      },
+      "revId": "42fae23d29ef7c9485d7cee4fca434df471476b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe8c2386_a35595b1",
+        "filename": "abi.bzl",
+        "patchSetId": 31
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-10-19T20:28:23Z",
+      "side": 1,
+      "message": "Default should be None for macros.\n\nhttps://android.googlesource.com/kernel/build/+/refs/heads/main/kleaf/docs/kleaf_development.md\n\nInside the implementation you can `if abis \u003d\u003d None: abis \u003d ALL_ABIS`",
+      "range": {
+        "startLine": 37,
+        "startChar": 56,
+        "endLine": 37,
+        "endChar": 64
+      },
+      "revId": "42fae23d29ef7c9485d7cee4fca434df471476b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c848c794_5f731372",
+        "filename": "abi.bzl",
+        "patchSetId": 31
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-10-19T20:28:23Z",
+      "side": 1,
+      "message": "Quote this with three backticks please.\n\nThis is markdown format.",
+      "range": {
+        "startLine": 41,
+        "startChar": 6,
+        "endLine": 45,
+        "endChar": 7
+      },
+      "revId": "42fae23d29ef7c9485d7cee4fca434df471476b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4762d9b4_4dd1ffef",
+        "filename": "abi.bzl",
+        "patchSetId": 31
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-10-19T20:28:23Z",
+      "side": 1,
+      "message": "Please mention that this is \n\n```\n[non-configurable](https://bazel.build/docs/configurable-attributes)\n```",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 19
+      },
+      "revId": "42fae23d29ef7c9485d7cee4fca434df471476b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3708fad9_bb6aa8eb",
+        "filename": "abi.bzl",
+        "patchSetId": 31
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-10-19T20:28:23Z",
+      "side": 1,
+      "message": "Please mention that this is \"non-configurable\"",
+      "range": {
+        "startLine": 52,
+        "startChar": 8,
+        "endLine": 52,
+        "endChar": 12
+      },
+      "revId": "42fae23d29ef7c9485d7cee4fca434df471476b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "318ba456_8fbcb108",
+        "filename": "tools/testing/selftests/config_arm64.xml",
+        "patchSetId": 31
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-10-19T20:28:23Z",
+      "side": 1,
+      "message": "nit: This is very Android specific, right?\n\nPerhaps put it in tools/testing/selftests/android/? This way it is unlikely to collide with upstream",
+      "revId": "42fae23d29ef7c9485d7cee4fca434df471476b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
