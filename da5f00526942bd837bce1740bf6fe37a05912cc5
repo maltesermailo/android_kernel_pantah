@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4e522aa_b828ed88",
+        "filename": "abi.bzl",
+        "patchSetId": 33
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-10-24T18:22:45Z",
+      "side": 1,
+      "message": "`visibility(\"private\")`?\n\nIf that doesn\u0027t work, this should be:\n\n```\nLabel(\":x\").removesuffix(\":x\")\n```\n\n(optionally add `+ \"/...\"` at the end)\n\nbecause:\n\n- You don\u0027t know the name of the current package (it may be common, or something else)\n- You don\u0027t know if the current package is in the top level repository `@`. If it is in a sub-repository, then the expression becomes `@repo_name//common/...`.",
+      "range": {
+        "startLine": 21,
+        "startChar": 12,
+        "endLine": 21,
+        "endChar": 26
+      },
+      "revId": "da5f00526942bd837bce1740bf6fe37a05912cc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
