@@ -55,6 +55,11 @@ struct inet_skb_parm {
 #define IPSKB_DOREDIRECT	BIT(5)
 #define IPSKB_FRAG_PMTU		BIT(6)
 #define IPSKB_L3SLAVE		BIT(7)
+<<<<<<< HEAD   (e7b204 Merge 92de8497c342 ("rtc: ds1685: use EXPORT_SYMBOL_GPL for )
+=======
+#define IPSKB_NOPOLICY		BIT(8)
+#define IPSKB_MULTIPATH		BIT(9)
+>>>>>>> BRANCH (5452d1 Linux 5.10.195)
 
 	u16			frag_max_size;
 };
