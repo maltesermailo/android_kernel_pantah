@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57a2b876_20078ac8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-24T23:18:41Z",
+      "side": 1,
+      "message": "Please create a patch on top of this one that adds the new symbol to your symbol list.",
+      "revId": "924e0995aa794f221df670847ab501284b2215d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "583d838b_8a8bb460",
+        "filename": "kernel/power/suspend.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-10-24T23:18:41Z",
+      "side": 1,
+      "message": "It would be nice to use an existing tracepoint instead of adding a hook here, but `trace_suspend_resume` won\u0027t work since it is used in many places so the handler would have to filter by interpreting the TPS() string.",
+      "revId": "924e0995aa794f221df670847ab501284b2215d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
