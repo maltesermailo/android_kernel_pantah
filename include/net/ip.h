@@ -55,6 +55,11 @@ struct inet_skb_parm {
 #define IPSKB_DOREDIRECT	BIT(5)
 #define IPSKB_FRAG_PMTU		BIT(6)
 #define IPSKB_L3SLAVE		BIT(7)
+<<<<<<< HEAD   (6d962c Merge f71b0b4a497e ("modules: only allow symbol_get of EXPOR)
+=======
+#define IPSKB_NOPOLICY		BIT(8)
+#define IPSKB_MULTIPATH		BIT(9)
+>>>>>>> BRANCH (5452d1 Linux 5.10.195)
 
 	u16			frag_max_size;
 };
