@@ -1703,11 +1703,19 @@ call_ad(struct net *net, struct sock *ctnl, struct sk_buff *skb,
 
 	do {
 		if (retried) {
+<<<<<<< HEAD   (0a427f Revert "net: add sysctl accept_ra_min_rtr_lft")
 			__ip_set_get_netlink(set);
 			nfnl_unlock(NFNL_SUBSYS_IPSET);
 			cond_resched();
 			nfnl_lock(NFNL_SUBSYS_IPSET);
 			__ip_set_put_netlink(set);
+=======
+			__ip_set_get(set);
+			nfnl_unlock(NFNL_SUBSYS_IPSET);
+			cond_resched();
+			nfnl_lock(NFNL_SUBSYS_IPSET);
+			__ip_set_put(set);
+>>>>>>> BRANCH (edbf18 ANDROID: GKI: Update MTKOTT symbol list)
 		}
 
 		ip_set_lock(set);

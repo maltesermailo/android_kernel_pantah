@@ -159,8 +159,20 @@ int typec_altmode_attention(struct typec_altmode *adev, u32 vdo)
 	struct altmode *partner = to_altmode(adev)->partner;
 	struct typec_altmode *pdev;
 
+<<<<<<< HEAD   (0a427f Revert "net: add sysctl accept_ra_min_rtr_lft")
 	if (!partner)
 		return -ENODEV;
+=======
+	/*
+	 * If partner is NULL then a NULL pointer error occurs when
+	 * dereferencing pdev and its operations. The original upstream commit
+	 * changes the return type so the tcpm can log when this occurs, but
+	 * due to KMI restrictions we can only silently prevent the error for
+	 * now.
+	 */
+	if (!partner)
+		return;
+>>>>>>> BRANCH (edbf18 ANDROID: GKI: Update MTKOTT symbol list)
 
 	pdev = &partner->adev;
 
