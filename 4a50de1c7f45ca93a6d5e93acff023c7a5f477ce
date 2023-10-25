@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fa7d503_a4917754",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 34
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-10-25T18:16:47Z",
+      "side": 1,
+      "message": "Taking a step back, how much code do you save by creating an abi.bzl? Following the guideline of `DAMP` build files, you might be better off just listing the copy_file in BUILD.bazel directly",
+      "revId": "4a50de1c7f45ca93a6d5e93acff023c7a5f477ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78bb6a38_2a2fcf91",
+        "filename": "abi.bzl",
+        "patchSetId": 34
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2023-10-25T18:16:47Z",
+      "side": 1,
+      "message": "nit: kwargs should be passed to all instantiated targets (except visibility, because you want to hide these internal targets). This is because the caller may call with `tags` etc.\n\n```\nprivate_kwargs \u003d kwargs | {\n    \"visibility\": [\"//visibility:private\"]\n}\n\ncopy_file(\n    ...\n    **private_kwargs\n)\n```",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 18
+      },
+      "revId": "4a50de1c7f45ca93a6d5e93acff023c7a5f477ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
