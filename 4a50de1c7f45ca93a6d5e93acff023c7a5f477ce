@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "78a1d79f_fcaab2f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 34
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2023-10-25T19:15:13Z",
+      "side": 1,
+      "message": "Yes I\u0027m aware of the DAMP rule but there will be too many individual targets. We will eventually map the corresponding soong targets in Android.bp here. https://cs.android.com/android/platform/superproject/main/+/main:external/linux-kselftest/Android.bp?q\u003dandroid.bp%20file:selftest, and in addition consider the composition increase when we support more abi.\n\nGoing forward this abi rule may be used by other tests because that creates a standard directory structure compatible with tradefed testdir structure. But let\u0027s put it here as private for now. We may later move it to a proper place when need comes.",
+      "parentUuid": "0ea94db9_f530e318",
+      "revId": "4a50de1c7f45ca93a6d5e93acff023c7a5f477ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78bb6a38_2a2fcf91",
@@ -49,6 +67,30 @@
       "writtenOn": "2023-10-25T18:16:47Z",
       "side": 1,
       "message": "nit: kwargs should be passed to all instantiated targets (except visibility, because you want to hide these internal targets). This is because the caller may call with `tags` etc.\n\n```\nprivate_kwargs \u003d kwargs | {\n    \"visibility\": [\"//visibility:private\"]\n}\n\ncopy_file(\n    ...\n    **private_kwargs\n)\n```",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 18
+      },
+      "revId": "4a50de1c7f45ca93a6d5e93acff023c7a5f477ce",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6def3221_b56c75ac",
+        "filename": "abi.bzl",
+        "patchSetId": 34
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2023-10-25T19:15:13Z",
+      "side": 1,
+      "message": "These args are meant to be forwarded to cc_binary. I\u0027ve added visibility per https://bazel.build/extending/macros#conventions. We can always add more attributes to control the copy_file target later.",
+      "parentUuid": "78bb6a38_2a2fcf91",
       "range": {
         "startLine": 29,
         "startChar": 0,
