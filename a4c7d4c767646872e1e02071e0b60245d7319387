@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000057171780",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2803553?revision\u003d2",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "c602133c_20ed96a8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-10-25T09:24:58Z",
+      "side": 1,
+      "message": "[Experimental] Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against [change 2796347](https://r.android.com/c/2796347) on branch android14-6.1.\n\n```\n      ## include/linux/hid.h ##\n     @@ include/linux/hid.h: struct hid_device {\t\t\t\t\t\t\t/* device report descriptor */\n    - \t__s32 battery_max;\n    - \t__s32 battery_report_type;\n    - \t__s32 battery_report_id;\n    --\t__s32 battery_charge_status;\n    - \tenum hid_battery_status battery_status;\n    - \tbool battery_avoid_query;\n    - \tktime_t battery_ratelimit_time;\n    -@@ include/linux/hid.h: struct hid_device {\t\t\t\t\t\t\t/* device report descriptor */\n      \n      \tunsigned int id;\t\t\t\t\t\t/* system unique id */\n      \n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 576126622 android-build.ayeaye-python-dispatcher_20231024.04_p0",
+      "revId": "a4c7d4c767646872e1e02071e0b60245d7319387",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
