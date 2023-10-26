@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (b783e8 ANDROID: Update the ABI symbol list)
 /* SPDX-License-Identifier: GPL-2.0-only */
 /*
  * Copyright (C) 2018 HUAWEI, Inc.
@@ -175,3 +176,5 @@ static inline void z_erofs_onlinepage_endio(struct page *page)
 #define Z_EROFS_ONSTACK_PAGES		32
 
 #endif
+=======
+>>>>>>> BRANCH (e8ac95 Revert "arm64: errata: Mitigate Ampere1 erratum AC03_CPU_38 )

@@ -1703,11 +1703,19 @@ call_ad(struct net *net, struct sock *ctnl, struct sk_buff *skb,
 
 	do {
 		if (retried) {
+<<<<<<< HEAD   (b783e8 ANDROID: Update the ABI symbol list)
 			__ip_set_get_netlink(set);
 			nfnl_unlock(NFNL_SUBSYS_IPSET);
 			cond_resched();
 			nfnl_lock(NFNL_SUBSYS_IPSET);
 			__ip_set_put_netlink(set);
+=======
+			__ip_set_get(set);
+			nfnl_unlock(NFNL_SUBSYS_IPSET);
+			cond_resched();
+			nfnl_lock(NFNL_SUBSYS_IPSET);
+			__ip_set_put(set);
+>>>>>>> BRANCH (e8ac95 Revert "arm64: errata: Mitigate Ampere1 erratum AC03_CPU_38 )
 		}
 
 		ip_set_lock(set);

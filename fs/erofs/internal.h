@@ -254,10 +254,16 @@ struct erofs_buf {
 
 #define ROOT_NID(sb)		((sb)->root_nid)
 
+<<<<<<< HEAD   (b783e8 ANDROID: Update the ABI symbol list)
 #define erofs_blknr(sb, addr)	((addr) >> (sb)->s_blocksize_bits)
 #define erofs_blkoff(sb, addr)	((addr) & ((sb)->s_blocksize - 1))
 #define erofs_pos(sb, blk)	((erofs_off_t)(blk) << (sb)->s_blocksize_bits)
 #define erofs_iblks(i)	(round_up((i)->i_size, i_blocksize(i)) >> (i)->i_blkbits)
+=======
+#define erofs_blknr(addr)       ((addr) / EROFS_BLKSIZ)
+#define erofs_blkoff(addr)      ((addr) % EROFS_BLKSIZ)
+#define blknr_to_addr(nr)       ((erofs_off_t)(nr) * EROFS_BLKSIZ)
+>>>>>>> BRANCH (e8ac95 Revert "arm64: errata: Mitigate Ampere1 erratum AC03_CPU_38 )
 
 #define EROFS_FEATURE_FUNCS(name, compat, feature) \
 static inline bool erofs_sb_has_##name(struct erofs_sb_info *sbi) \
@@ -324,6 +330,17 @@ struct erofs_inode {
 };
 
 #define EROFS_I(ptr)	container_of(ptr, struct erofs_inode, vfs_inode)
+<<<<<<< HEAD   (b783e8 ANDROID: Update the ABI symbol list)
+=======
+
+static inline erofs_off_t erofs_iloc(struct inode *inode)
+{
+	struct erofs_sb_info *sbi = EROFS_I_SB(inode);
+
+	return blknr_to_addr(sbi->meta_blkaddr) +
+		(EROFS_I(inode)->nid << sbi->islotbits);
+}
+>>>>>>> BRANCH (e8ac95 Revert "arm64: errata: Mitigate Ampere1 erratum AC03_CPU_38 )
 
 static inline erofs_off_t erofs_iloc(struct inode *inode)
 {

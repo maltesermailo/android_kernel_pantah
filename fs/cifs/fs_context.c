@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (b783e8 ANDROID: Update the ABI symbol list)
 // SPDX-License-Identifier: GPL-2.0-or-later
 /*
  *   Copyright (C) 2020, Microsoft Corporation.
@@ -1764,3 +1765,5 @@ void smb3_update_mnt_flags(struct cifs_sb_info *cifs_sb)
 
 	return;
 }
+=======
+>>>>>>> BRANCH (e8ac95 Revert "arm64: errata: Mitigate Ampere1 erratum AC03_CPU_38 )

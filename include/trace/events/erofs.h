@@ -66,8 +66,13 @@ TRACE_EVENT(erofs_fill_inode,
 	TP_fast_assign(
 		__entry->dev		= inode->i_sb->s_dev;
 		__entry->nid		= EROFS_I(inode)->nid;
+<<<<<<< HEAD   (b783e8 ANDROID: Update the ABI symbol list)
 		__entry->blkaddr	= erofs_blknr(inode->i_sb, erofs_iloc(inode));
 		__entry->ofs		= erofs_blkoff(inode->i_sb, erofs_iloc(inode));
+=======
+		__entry->blkaddr	= erofs_blknr(erofs_iloc(inode));
+		__entry->ofs		= erofs_blkoff(erofs_iloc(inode));
+>>>>>>> BRANCH (e8ac95 Revert "arm64: errata: Mitigate Ampere1 erratum AC03_CPU_38 )
 	),
 
 	TP_printk("dev = (%d,%d), nid = %llu, blkaddr %u ofs %u",

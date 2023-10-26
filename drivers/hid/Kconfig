@@ -1262,8 +1262,12 @@ config HID_MCP2221
 
 config HID_KUNIT_TEST
 	tristate "KUnit tests for HID" if !KUNIT_ALL_TESTS
+<<<<<<< HEAD   (b783e8 ANDROID: Update the ABI symbol list)
 	depends on KUNIT=y
 	depends on HID_BATTERY_STRENGTH
+=======
+	depends on KUNIT
+>>>>>>> BRANCH (e8ac95 Revert "arm64: errata: Mitigate Ampere1 erratum AC03_CPU_38 )
 	depends on HID_UCLOGIC
 	default KUNIT_ALL_TESTS
 	help

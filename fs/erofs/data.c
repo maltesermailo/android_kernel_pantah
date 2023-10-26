@@ -101,7 +101,11 @@ static int erofs_map_blocks_flatmode(struct inode *inode,
 		map->m_plen = erofs_pos(sb, lastblk) - offset;
 	} else if (tailendpacking) {
 		map->m_pa = erofs_iloc(inode) + vi->inode_isize +
+<<<<<<< HEAD   (b783e8 ANDROID: Update the ABI symbol list)
 			vi->xattr_isize + erofs_blkoff(sb, offset);
+=======
+			vi->xattr_isize + erofs_blkoff(offset);
+>>>>>>> BRANCH (e8ac95 Revert "arm64: errata: Mitigate Ampere1 erratum AC03_CPU_38 )
 		map->m_plen = inode->i_size - offset;
 
 		/* inline data should be located in the same meta block */
