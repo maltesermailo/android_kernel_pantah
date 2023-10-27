@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "23c0a05a_db657da3",
+        "filename": "fs/fuse/dev.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2330,
+      "author": {
+        "id": 1044551
+      },
+      "writtenOn": "2023-10-27T18:09:35Z",
+      "side": 1,
+      "message": "I agree with Daniel - the only correct security model is that backing operations are done with the fuse_daemon creds. So there\u0027s no need to have an ioctl called from FUSE_INIT, instead we should simply use the creds of the FUSE_INIT responder.\n\nIf there is no FUSE_INIT and hence no daemon (not currently possible in Android, but a future possibility) then the creds should be set to the mounter creds. Either way, the creds should always be set and there should be no defaulting to the user\u0027s creds. This would otherwise allow a mounter with an appropriate BPF to see, or even change, files they have no rights to by remounting files and hoping/prodding an app with correct permissions to access them. (This is not an issue for Android since Android locks down which BPFs can be used and restricts mounting to vold, but it is the correct general design.)",
+      "parentUuid": "cec2c868_e33312a9",
+      "range": {
+        "startLine": 2330,
+        "startChar": 20,
+        "endLine": 2330,
+        "endChar": 60
+      },
+      "revId": "12417a8805c2a1309a6ed87530e97d5e922dfc68",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1a4b5998_8d0445d4",
         "filename": "fs/fuse/fuse_i.h",
         "patchSetId": 4
