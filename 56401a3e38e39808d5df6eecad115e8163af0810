@@ -86,6 +86,42 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e4d243c_9548ddd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1957137
+      },
+      "writtenOn": "2023-10-27T03:21:24Z",
+      "side": 1,
+      "message": "Thanks for the reference and information.",
+      "parentUuid": "af312bda_bae3062a",
+      "revId": "56401a3e38e39808d5df6eecad115e8163af0810",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd62cdb6_273c6d64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1957137
+      },
+      "writtenOn": "2023-10-27T03:21:24Z",
+      "side": 1,
+      "message": "My bad, let me upload a new patchset.",
+      "parentUuid": "4efbfff5_41cbd8b4",
+      "revId": "56401a3e38e39808d5df6eecad115e8163af0810",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd646c09_ee516683",
@@ -239,6 +275,30 @@
       "side": 1,
       "message": "checkpatch isn\u0027t always correct - usually surrounding style is more important",
       "parentUuid": "0ced2c18_d5107999",
+      "range": {
+        "startLine": 1202,
+        "startChar": 10,
+        "endLine": 1202,
+        "endChar": 13
+      },
+      "revId": "56401a3e38e39808d5df6eecad115e8163af0810",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be785898_7b0e7be6",
+        "filename": "drivers/usb/gadget/function/f_ncm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1202,
+      "author": {
+        "id": 1957137
+      },
+      "writtenOn": "2023-10-27T03:21:24Z",
+      "side": 1,
+      "message": "Acknowledged.\nOne more reason I left it like this was it was \"unsigned\" only before.",
+      "parentUuid": "93fb6ad4_14c8e783",
       "range": {
         "startLine": 1202,
         "startChar": 10,
@@ -498,6 +558,30 @@
       "side": 1,
       "message": "my point is that this (probably) isn\u0027t the mtu\n\nafaict the mtu\n\nis max_segment_size - ETH_HLEN - 4-bytes-of-crc-if-present.",
       "parentUuid": "492a651e_7c3e8b87",
+      "range": {
+        "startLine": 1462,
+        "startChar": 2,
+        "endLine": 1462,
+        "endChar": 63
+      },
+      "revId": "56401a3e38e39808d5df6eecad115e8163af0810",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "199652d3_0c31662f",
+        "filename": "drivers/usb/gadget/function/f_ncm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1462,
+      "author": {
+        "id": 1957137
+      },
+      "writtenOn": "2023-10-27T03:21:24Z",
+      "side": 1,
+      "message": "Do you suggest we go with (max_seg_size - ETH_HLEN - 4) then ?\nAnd one thing I forgot is that I moved this mtu setting to just before where registering net device which is more appropriate. Will include that change in next patchset.",
+      "parentUuid": "28b5b56c_25afab17",
       "range": {
         "startLine": 1462,
         "startChar": 2,
