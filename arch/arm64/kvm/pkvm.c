@@ -53,6 +53,37 @@ static void __init sort_memblock_regions(void)
 	     NULL);
 }
 
+static void __init merge_memblock_regions(void)
+{
+	int read = 0, write = 0, nr_unmerged = *hyp_memblock_nr_ptr;
+	u64 addr, size;
+
+	while (read < nr_unmerged) {
+		struct memblock_region *reg = &hyp_memory[read];
+
+		addr = reg->base;
+		size = reg->size;
+
+		while ((read + 1 < nr_unmerged)) {
+			reg = &hyp_memory[read + 1];
+
+			if (reg->base != (addr + size))
+				break;
+
+			size += reg->size;
+			(*hyp_memblock_nr_ptr)--;
+			read++;
+		}
+
+		reg = &hyp_memory[write];
+		reg->base = addr;
+		reg->size = size;
+
+		read++;
+		write++;
+	}
+}
+
 static int __init register_memblock_regions(void)
 {
 	struct memblock_region *reg;
@@ -65,6 +96,7 @@ static int __init register_memblock_regions(void)
 		(*hyp_memblock_nr_ptr)++;
 	}
 	sort_memblock_regions();
+	merge_memblock_regions();
 
 	return 0;
 }
