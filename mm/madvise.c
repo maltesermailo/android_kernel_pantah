@@ -10,6 +10,7 @@
 #include <linux/pagemap.h>
 #include <linux/syscalls.h>
 #include <linux/mempolicy.h>
+#include <linux/page16.h>
 #include <linux/page-isolation.h>
 #include <linux/page_idle.h>
 #include <linux/userfaultfd_k.h>
@@ -1431,9 +1432,12 @@ int do_madvise(struct mm_struct *mm, unsigned long start, size_t len_in, int beh
 	if (!madvise_behavior_valid(behavior))
 		return -EINVAL;
 
-	if (!PAGE_ALIGNED(start))
+	if (!__PAGE_ALIGNED(start)) {
+		LOG_16K("madvise: start addr (0x%08lx) is not aligned", start);
+		LOG_16K_DEBUG_INFO();
 		return -EINVAL;
-	len = PAGE_ALIGN(len_in);
+	}
+	len = __PAGE_ALIGN(len_in);
 
 	/* Check to see whether len was rounded up from small -ve to zero */
 	if (len_in && !len)

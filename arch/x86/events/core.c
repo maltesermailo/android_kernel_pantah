@@ -2923,6 +2923,71 @@ perf_callchain_user(struct perf_callchain_entry_ctx *entry, struct pt_regs *regs
 	pagefault_enable();
 }
 
+// TODO
+// typedef bool (*stack_trace_consume_fn)(void *cookie, unsigned long addr);
+/*
+void arch_stack_walk_user_16k(stack_trace_consume_fn consume_entry, void *cookie,
+						  struct task_struct *task)
+{
+	struct pt_regs *regs = task_pt_regs(task);
+	struct stack_frame frame;
+	const struct stack_frame __user *fp = (void __user *)regs->bp;
+	unsigned long addr = regs->ip;
+
+
+	if (regs && !consume_entry(cookie, addr))
+		return;
+
+	if (regs->flags & (X86_VM_MASK | PERF_EFLAGS_VM))
+		return;
+
+	if (!nmi_uaccess_okay())
+		return;
+
+	if (!user_64bit_mode(regs))
+		return;
+
+	pagefault_disable();
+
+	while (valid_user_frame(fp, sizeof(frame))) {
+		if (__get_user(frame.next_frame, &fp->next_frame))
+			break;
+
+		if (__get_user(frame.return_address, &fp->return_address))
+			break;
+
+		addr = frame.return_address;
+
+		if (!addr || !consume_entry(cookie, addr))
+			break;
+
+		fp = (void __user *)frame.next_frame;
+	}
+
+	pagefault_enable();
+}
+
+bool consume_user_stack_entry(void *cookie, unsigned long addr)
+{
+	pr_info("    <0x%08lx>", addr);
+
+	return true;
+}
+
+void dumpstack_user(struct task_struct *task)
+{
+
+	struct pt_regs *regs = task_pt_regs(task);
+
+	pr_info("---- User Stacktrace Begin ---");
+	arch_stack_walk(consume_user_stack_entry, NULL, task);
+
+	arch_stack_walk_user(consume_user_stack_entry, NULL, regs);
+	pr_info("---- User Stacktrace End ---");
+}
+EXPORT_SYMBOL_GPL(dumpstack_user);
+*/
+
 /*
  * Deal with code segment offsets for the various execution modes:
  *
