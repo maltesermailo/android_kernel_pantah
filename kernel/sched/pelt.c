@@ -24,6 +24,7 @@
  *  Author: Vincent Guittot <vincent.guittot@linaro.org>
  */
 
+#include <trace/hooks/sched.h>
 #include <linux/sched.h>
 #include "sched.h"
 #include "pelt.h"
@@ -241,6 +242,8 @@ int ___update_load_sum(u64 now, struct sched_avg *sa,
 		return 0;
 
 	sa->last_update_time += delta << 10;
+
+	trace_android_rvh_update_load_sum(sa, &delta, &sched_pelt_lshift);
 
 	/*
 	 * running is a subset of runnable (weight) so running can't be set if
