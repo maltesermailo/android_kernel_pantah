@@ -40,6 +40,7 @@
 #include <linux/uprobes.h>
 #include <linux/notifier.h>
 #include <linux/memory.h>
+#include <linux/page16.h>
 #include <linux/printk.h>
 #include <linux/userfaultfd_k.h>
 #include <linux/moduleparam.h>
@@ -64,14 +65,14 @@
 #endif
 
 #ifdef CONFIG_HAVE_ARCH_MMAP_RND_BITS
-const int mmap_rnd_bits_min = CONFIG_ARCH_MMAP_RND_BITS_MIN;
-const int mmap_rnd_bits_max = CONFIG_ARCH_MMAP_RND_BITS_MAX;
-int mmap_rnd_bits __read_mostly = CONFIG_ARCH_MMAP_RND_BITS;
+const int mmap_rnd_bits_min = __MMAP_RND_BITS(CONFIG_ARCH_MMAP_RND_BITS_MIN);
+const int mmap_rnd_bits_max = __MMAP_RND_BITS(CONFIG_ARCH_MMAP_RND_BITS_MAX);
+int mmap_rnd_bits __read_mostly = __MMAP_RND_BITS(CONFIG_ARCH_MMAP_RND_BITS);
 #endif
 #ifdef CONFIG_HAVE_ARCH_MMAP_RND_COMPAT_BITS
-const int mmap_rnd_compat_bits_min = CONFIG_ARCH_MMAP_RND_COMPAT_BITS_MIN;
-const int mmap_rnd_compat_bits_max = CONFIG_ARCH_MMAP_RND_COMPAT_BITS_MAX;
-int mmap_rnd_compat_bits __read_mostly = CONFIG_ARCH_MMAP_RND_COMPAT_BITS;
+const int mmap_rnd_compat_bits_min = __MMAP_RND_BITS(CONFIG_ARCH_MMAP_RND_COMPAT_BITS_MIN);
+const int mmap_rnd_compat_bits_max = __MMAP_RND_BITS(CONFIG_ARCH_MMAP_RND_COMPAT_BITS_MAX);
+int mmap_rnd_compat_bits __read_mostly = __MMAP_RND_BITS(CONFIG_ARCH_MMAP_RND_COMPAT_BITS);
 #endif
 
 static bool ignore_rlimit_data;
@@ -215,8 +216,8 @@ SYSCALL_DEFINE1(brk, unsigned long, brk)
 			      mm->end_data, mm->start_data))
 		goto out;
 
-	newbrk = PAGE_ALIGN(brk);
-	oldbrk = PAGE_ALIGN(mm->brk);
+	newbrk = __PAGE_ALIGN(brk);
+	oldbrk = __PAGE_ALIGN(mm->brk);
 	if (oldbrk == newbrk) {
 		mm->brk = brk;
 		goto success;
@@ -259,10 +260,10 @@ SYSCALL_DEFINE1(brk, unsigned long, brk)
 	 * expansion area
 	 */
 	mas_set(&mas, oldbrk);
-	next = mas_find(&mas, newbrk - 1 + PAGE_SIZE + stack_guard_gap);
+	next = mas_find(&mas, newbrk - 1 + __PAGE_SIZE + stack_guard_gap);
 	if (next) {
 		vma_start_write(next);
-		if (newbrk + PAGE_SIZE > vm_start_gap(next))
+		if (newbrk + __PAGE_SIZE > vm_start_gap(next))
 			goto out;
 	}
 
@@ -1232,10 +1233,10 @@ struct anon_vma *find_mergeable_anon_vma(struct vm_area_struct *vma)
  */
 static inline unsigned long round_hint_to_min(unsigned long hint)
 {
-	hint &= PAGE_MASK;
+	hint &= __PAGE_MASK;
 	if (((void *)hint != NULL) &&
 	    (hint < mmap_min_addr))
-		return PAGE_ALIGN(mmap_min_addr);
+		return __PAGE_ALIGN(mmap_min_addr);
 	return hint;
 }
 
@@ -1296,6 +1297,8 @@ unsigned long do_mmap(struct file *file, unsigned long addr,
 			unsigned long flags, unsigned long pgoff,
 			unsigned long *populate, struct list_head *uf)
 {
+	bool map_special = flags & __MAP_SPECIAL;
+	unsigned long old_len;
 	struct mm_struct *mm = current->mm;
 	vm_flags_t vm_flags;
 	int pkey = 0;
@@ -1324,9 +1327,12 @@ unsigned long do_mmap(struct file *file, unsigned long addr,
 		addr = round_hint_to_min(addr);
 
 	/* Careful about overflows.. */
-	len = PAGE_ALIGN(len);
+	len = (map_special) ? PAGE_ALIGN(len) : __PAGE_ALIGN(len);
 	if (!len)
 		return -ENOMEM;
+
+	/* Save the requested len */
+	old_len = len;
 
 	/* offset overflow? */
 	if ((pgoff + (len >> PAGE_SHIFT)) < pgoff)
@@ -1358,7 +1364,7 @@ unsigned long do_mmap(struct file *file, unsigned long addr,
 	 * to. we assume access permissions have been handled by the open
 	 * of the memory object, so we don't do any here.
 	 */
-	vm_flags = calc_vm_prot_bits(prot, pkey) | calc_vm_flag_bits(flags) |
+	vm_flags = calc_vm_prot_bits(prot, pkey) | __calc_vm_flag_bits(flags) |
 			mm->def_flags | VM_MAYREAD | VM_MAYWRITE | VM_MAYEXEC;
 
 	if (flags & MAP_LOCKED)
@@ -1374,6 +1380,8 @@ unsigned long do_mmap(struct file *file, unsigned long addr,
 
 		if (!file_mmap_ok(file, inode, pgoff, len))
 			return -EOVERFLOW;
+
+		__filemap_len(inode, pgoff, &len, !map_special);
 
 		flags_mask = LEGACY_MAP_MASK | file->f_op->mmap_supported_flags;
 
@@ -1468,6 +1476,9 @@ unsigned long do_mmap(struct file *file, unsigned long addr,
 	    ((vm_flags & VM_LOCKED) ||
 	     (flags & (MAP_POPULATE | MAP_NONBLOCK)) == MAP_POPULATE))
 		*populate = len;
+
+	__filemap_fixup(addr, prot, old_len, len);
+
 	return addr;
 }
 
@@ -1627,6 +1638,8 @@ static unsigned long unmapped_area(struct vm_unmapped_area_info *info)
 
 	/* Adjust search length to account for worst case alignment overhead */
 	length = info->length + info->align_mask;
+	/* Adjust search length to account for 16K alignment */
+	length += ((1 << (__PAGE_SHIFT - PAGE_SHIFT)) - 1) << PAGE_SHIFT;
 	if (length < info->length)
 		return -ENOMEM;
 
@@ -1653,7 +1666,7 @@ retry:
 		}
 	}
 
-	return gap;
+	return __PAGE_ALIGN(gap);
 }
 
 /**
@@ -1674,6 +1687,8 @@ static unsigned long unmapped_area_topdown(struct vm_unmapped_area_info *info)
 	MA_STATE(mas, &current->mm->mm_mt, 0, 0);
 	/* Adjust search length to account for worst case alignment overhead */
 	length = info->length + info->align_mask;
+	/* Adjust search length to account for 16K alignment */
+	length += ((1 << (__PAGE_SHIFT - PAGE_SHIFT)) - 1) << PAGE_SHIFT;
 	if (length < info->length)
 		return -ENOMEM;
 
@@ -1702,7 +1717,7 @@ retry:
 		}
 	}
 
-	return gap;
+	return __PAGE_ALIGN(gap);
 }
 
 /*
@@ -2107,7 +2122,7 @@ int expand_downwards(struct vm_area_struct *vma, unsigned long address)
 	if (!(vma->vm_flags & VM_GROWSDOWN))
 		return -EFAULT;
 
-	address &= PAGE_MASK;
+	address &= __PAGE_MASK;
 	if (address < mmap_min_addr || address < FIRST_USER_ADDRESS)
 		return -EPERM;
 
@@ -2183,7 +2198,7 @@ int expand_downwards(struct vm_area_struct *vma, unsigned long address)
 }
 
 /* enforced gap between the expanding stack and other mappings. */
-unsigned long stack_guard_gap = 256UL<<PAGE_SHIFT;
+unsigned long stack_guard_gap = 64UL<<__PAGE_SHIFT;
 
 static int __init cmdline_parse_stack_guard_gap(char *p)
 {
@@ -3014,6 +3029,15 @@ EXPORT_SYMBOL(vm_munmap);
 SYSCALL_DEFINE2(munmap, unsigned long, addr, size_t, len)
 {
 	addr = untagged_addr(addr);
+
+	if (__offset_in_page(addr)) {
+		LOG_16K("munmap unaligned addr 0x%08lx", addr);
+		LOG_16K_DEBUG_INFO();
+		return -EINVAL;
+	}
+
+	len = __PAGE_ALIGN(len);
+
 	profile_munmap(addr);
 	return __vm_munmap(addr, len, true);
 }

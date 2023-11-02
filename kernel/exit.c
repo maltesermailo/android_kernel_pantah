@@ -13,6 +13,7 @@
 #include <linux/sched/task.h>
 #include <linux/sched/task_stack.h>
 #include <linux/sched/cputime.h>
+#include <linux/sched/debug.h>
 #include <linux/interrupt.h>
 #include <linux/module.h>
 #include <linux/capability.h>
@@ -804,6 +805,75 @@ static void synchronize_group_exit(struct task_struct *tsk, long code)
 	spin_unlock_irq(&sighand->siglock);
 }
 
+void LOG_16K_DEBUG_INFO(void)
+{
+	struct pt_regs *regs = task_pt_regs(current);
+	unsigned long long addr = regs->ip;
+	struct mm_struct *mm = current->mm;
+	struct vm_area_struct *vma = NULL;
+	struct file *file = NULL;
+	char *pathname = NULL;
+	int flags = 0;
+	int ret = 0;
+
+	unsigned long long pgoff = 0;
+	unsigned long ino = 0;
+	dev_t dev = 0;
+
+
+	ret = mmap_read_lock_killable(mm);
+	if (ret)
+		return;
+
+	vma = find_vma(mm, addr);
+	if (!vma) {
+		pr_err("DEBUG 16K: could not find mapping VMA\n");
+		goto done;
+	}
+
+	flags = vma->vm_flags;
+
+	if (!(flags & VM_EXEC))
+		goto done;
+
+	file = vma->vm_file;
+	if (file) {
+		struct inode *inode = file_inode(file);
+		char buf[128] = {0};
+
+		pathname = d_path(&file->f_path, buf, 128);
+
+		pgoff = ((loff_t)vma->vm_pgoff) << PAGE_SHIFT;
+		dev = inode->i_sb->s_dev;
+		ino = inode->i_ino;
+	}
+
+	pr_info("DEBUG 16K: User Context: RIP: 0x%08llx, RBP: 0x%08llx RSP: 0x%08llx\n",
+			(unsigned long long)regs->ip,
+			(unsigned long long)regs->bp,
+			(unsigned long long)regs->sp
+		);
+
+	pr_info("DEBUG 16K:    %s-%d:  MAPS: 0x%08llx - 0x%08llx  %c%c%c%c  0x%08llx  %02u:%02u  %08lu  %s\n",
+			current->comm,
+			task_pid_nr(current),
+			(unsigned long long)vma->vm_start,
+			(unsigned long long)vma->vm_end,
+			flags & VM_READ ? 'r' : '-',
+			flags & VM_WRITE ? 'w' : '-',
+			flags & VM_EXEC ? 'x' : '-',
+			flags & VM_MAYSHARE ? 's' : 'p',
+			pgoff,
+			MAJOR(dev),
+			MINOR(dev),
+			ino,
+			pathname
+		);
+
+done:
+	mmap_read_unlock(mm);
+}
+
 void __noreturn do_exit(long code)
 {
 	struct task_struct *tsk = current;
@@ -835,11 +905,12 @@ void __noreturn do_exit(long code)
 	if (group_dead) {
 		/*
 		 * If the last thread of global init has exited, panic
-		 * immediately to get a useable coredump.
+		 * immediately to get a usable coredump.
 		 */
-		if (unlikely(is_global_init(tsk)))
+		if (unlikely(is_global_init(tsk))) {
 			panic("Attempted to kill init! exitcode=0x%08x\n",
 				tsk->signal->group_exit_code ?: (int)code);
+}
 
 #ifdef CONFIG_POSIX_TIMERS
 		hrtimer_cancel(&tsk->signal->real_timer);

@@ -128,3 +128,22 @@ void arch_stack_walk_user(stack_trace_consume_fn consume_entry, void *cookie,
 	}
 }
 
+bool consume_user_stack_entry(void *cookie, unsigned long addr)
+{
+	pr_info("DEBUG 16K:    <0x%08lx>", addr);
+
+	return true;
+}
+
+void dumpstack_user(struct task_struct *task)
+{
+
+	struct pt_regs *regs = task_pt_regs(task);
+
+	pr_info("DEBUG 16K: ---- User Stacktrace Begin ---");
+
+	arch_stack_walk_user(consume_user_stack_entry, NULL, regs);
+
+	pr_info("DEBUG 16K: ---- User Stacktrace End ---");
+}
+EXPORT_SYMBOL_GPL(dumpstack_user);

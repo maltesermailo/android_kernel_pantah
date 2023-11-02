@@ -14,6 +14,7 @@
 #include <linux/shm.h>
 #include <linux/ksm.h>
 #include <linux/mman.h>
+#include <linux/page16.h>
 #include <linux/swap.h>
 #include <linux/capability.h>
 #include <linux/fs.h>
@@ -927,11 +928,14 @@ SYSCALL_DEFINE5(mremap, unsigned long, addr, unsigned long, old_len,
 		return ret;
 
 
-	if (offset_in_page(addr))
+	if (__offset_in_page(addr)) {
+		LOG_16K("mremap: addr is not aligned 0x%08lx", addr);
+		LOG_16K_DEBUG_INFO();
 		return ret;
+	}
 
-	old_len = PAGE_ALIGN(old_len);
-	new_len = PAGE_ALIGN(new_len);
+	old_len = __PAGE_ALIGN(old_len);
+	new_len = __PAGE_ALIGN(new_len);
 
 	/*
 	 * We allow a zero old-len as a special case
