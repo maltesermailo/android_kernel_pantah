@@ -24,6 +24,14 @@
  *  Author: Vincent Guittot <vincent.guittot@linaro.org>
  */
 
+<<<<<<< HEAD   (5c8e59 ANDROID: Update the ABI symbol list)
+=======
+#include <linux/sched.h>
+#include <trace/hooks/sched.h>
+#include "sched.h"
+#include "pelt.h"
+
+>>>>>>> CHANGE (984523 ANDROID: sched: Add vendor hook for update_load_sum)
 /*
  * Approximate:
  *   val * y^n,    where y^32 ~= 0.5 (~1 scheduling period)
@@ -201,6 +209,8 @@ ___update_load_sum(u64 now, struct sched_avg *sa,
 		return 0;
 
 	sa->last_update_time += delta << 10;
+
+	trace_android_rvh_update_load_sum(sa, &delta, &sched_pelt_lshift);
 
 	/*
 	 * running is a subset of runnable (weight) so running can't be set if
