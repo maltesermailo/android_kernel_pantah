@@ -33,6 +33,24 @@
       "message": "In https://b.corp.google.com/issues/288216516#comment5 we asked you to work with upstream to solve the issues properly, without the need for vendor hooks. What has been done since then?",
       "revId": "ef8076ac0a79b7d18ec7d28170b523fd17ca2be3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9d5de0e_02f311e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1928204
+      },
+      "writtenOn": "2023-11-02T09:12:11Z",
+      "side": 1,
+      "message": "Hi Suren,\nWe discussed about upstream and we found it is really hard. In our codes, we will use the hooks like this:\n\u0027\u0027\u0027\nvoid vendor_hook_callback_func()\n{\n    if (current_is_key_task())\n        do_our_optimize_work();\n}\n\u0027\u0027\u0027\nWe rely on external symbol \u0027current_is_key_task\u0027 to determine which thread is important for user experience. That symbol is provided by other kernel module and works with user-space strategy. These codes belong to different groups, we don\u0027t have ownership. So we can\u0027t upstream our feature unless they upstream theirs and we still need these hooks.",
+      "parentUuid": "8de87552_dc5778da",
+      "revId": "ef8076ac0a79b7d18ec7d28170b523fd17ca2be3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
