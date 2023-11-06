@@ -53,6 +53,9 @@ DECLARE_HOOK(android_vh_vmscan_kswapd_done,
 	TP_PROTO(int node_id, unsigned int highest_zoneidx, unsigned int alloc_order,
 	        unsigned int reclaim_order),
 	TP_ARGS(node_id, highest_zoneidx, alloc_order, reclaim_order));
+DECLARE_HOOK(android_vh_kswapd_load_stat,
+	TP_PROTO(unsigned int alloc_order, u64 stime, bool is_end),
+	TP_ARGS(alloc_order, stime, is_end));
 #endif /* _TRACE_HOOK_VMSCAN_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
