@@ -233,7 +233,7 @@ asmlinkage void __noreturn __kvm_host_psci_cpu_entry(bool is_cpu_on)
 	struct psci_boot_args *boot_args;
 	struct kvm_cpu_context *host_ctxt;
 
-	trace_hyp_enter();
+	__hyp_enter();
 
 	host_ctxt = &this_cpu_ptr(&kvm_host_data)->host_ctxt;
 
@@ -249,7 +249,12 @@ asmlinkage void __noreturn __kvm_host_psci_cpu_entry(bool is_cpu_on)
 		release_boot_args(boot_args);
 
 	pkvm_psci_notify(PKVM_PSCI_CPU_ENTRY, host_ctxt);
+<<<<<<< HEAD   (8fb4fb ANDROID: KVM: arm64: Temporary fix for stage2 refcounting is)
 	trace_hyp_exit();
+=======
+
+	__hyp_exit();
+>>>>>>> CHANGE (e9355b ANDROID: KVM: arm64: Notify pKVM modules when entering/exiti)
 	__host_enter(host_ctxt);
 }
 
