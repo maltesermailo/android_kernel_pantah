@@ -51,6 +51,24 @@
       "parentUuid": "cf422489_baed08b7",
       "revId": "b54d32f136d51893a6698875af41804f1d075a5c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09c7cd4e_1dc46c27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1900056
+      },
+      "writtenOn": "2023-11-10T20:29:47Z",
+      "side": 1,
+      "message": "Unfortunately the jitter isn\u0027t expected. The whole stream should be delayed by 8ms, but there should be no inter-frame jitter. The frames should go out every 33ms as expected. \n\nThe jitter is \"introduced\" because the async workqueue can\u0027t keep the backpressure. There is too much variability in system scheduling to maintain the cadence.\n\nIn my analysis, I was using a device with nothing else running on it, but we still saw system latencies upwards of 8ms. I didn\u0027t think that would be an issue, as long as we didn\u0027t see an ISOC miss, but it did mean the interval between frames could be jitter-y.\n\njchowdhary@ has an upstream proposal that should fix this issue: https://lore.kernel.org/all/99384044-0d14-4ebe-9109-8a5557e64449@google.com/\n\nAkash, I would recommend following the thread, and replying with your test results on there. We can make sure that the new patch meets the jitter criteria.\n\nReverting this patch causes too many flickers on basically all hosts, so I am inclined to keep this patch around unless there is a very strong reason to revert it. Between corrupted frames visible to the user and imperceptibly jittery frames, I think it is better to prioritize the user experience.",
+      "parentUuid": "146d935f_b1eb8057",
+      "revId": "b54d32f136d51893a6698875af41804f1d075a5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
