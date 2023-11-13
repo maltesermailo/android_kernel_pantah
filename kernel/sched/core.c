@@ -7224,14 +7224,14 @@ void set_user_nice(struct task_struct *p, long nice)
 	struct rq_flags rf;
 	struct rq *rq;
 
+	rq = task_rq_lock(p, &rf);
 	trace_android_rvh_set_user_nice(p, &nice, &allowed);
 	if ((task_nice(p) == nice || nice < MIN_NICE || nice > MAX_NICE) && !allowed)
-		return;
+		goto out_unlock;
 	/*
 	 * We have to be careful, if called from sys_setpriority(),
 	 * the task might be in the middle of scheduling on another CPU.
 	 */
-	rq = task_rq_lock(p, &rf);
 	update_rq_clock(rq);
 
 	/*
