@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "565ec279_ca8a599a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 2071,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-11-14T14:45:41Z",
+      "side": 1,
+      "message": "Since we already checked that page[j] is module-owned, could we do a j++ before going round again?\n\nThat said, it strikes me as odd for a module to pass in a range of pages that aren\u0027t consistently module-owned or pristine, so perhaps it would be simpler just to enforce that the range is homogeneous to start with?",
+      "range": {
+        "startLine": 2071,
+        "startChar": 1,
+        "endLine": 2071,
+        "endChar": 2
+      },
+      "revId": "308a226e75af931ed8ced6509b9835cffd3c5c4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4ed0f09e_d48ffb7b",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 5
