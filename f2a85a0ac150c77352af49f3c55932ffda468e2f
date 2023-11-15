@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33360cb3_2d4d6d89",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2023-11-15T08:47:22Z",
+      "side": 1,
+      "message": "I was thinking about this on the train home, and we should probably still return `false` in the case where we\u0027re writing the _exact same_ PTE, otherwise concurrent translation faults could get stuck in a livelock as they repeatedly fault/unmap/map the same page forever.\n\nThe host fault handler special-cases the `-EAGAIN` return value in this case iirc and just returns back to EL1.",
+      "range": {
+        "startLine": 653,
+        "startChar": 9,
+        "endLine": 653,
+        "endChar": 13
+      },
+      "revId": "f2a85a0ac150c77352af49f3c55932ffda468e2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
