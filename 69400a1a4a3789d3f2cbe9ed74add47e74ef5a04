@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "029cee7b_f5f92180",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961338
+      },
+      "writtenOn": "2023-11-17T05:35:14Z",
+      "side": 1,
+      "message": "in commit-message, you should add which commit occur this problem.\nif the patch is a revert-patch , you also add revert tag\n\nhere a google example:\n\ncommit 3420cae8dda2f8088c32d52abbce5e9232154d8d\nAuthor: André Draszik \u003cdraszik@google.com\u003e\nDate:   Wed Oct 25 14:26:51 2023 +0100\n\n    ANDROID: Revert \"usb: typec: tcpm: not sink vbus if operational current is 0mA\"\n\n    This reverts commit 803b1c8a0cea58cccde16eba31d285956f4c920c.\n\n    Prevents Pixel from charging. Revert while we investigate the issue.\n\n    Test: adb shell cat /sys/class/power_supply/battery/status\n    Bug: 307718635\n    Change-Id: I9e8c6c62aac25cf41ac37c1d6bda696d8ecaf4aa\n    Signed-off-by: André Draszik \u003cdraszik@google.com\u003e",
+      "revId": "69400a1a4a3789d3f2cbe9ed74add47e74ef5a04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
