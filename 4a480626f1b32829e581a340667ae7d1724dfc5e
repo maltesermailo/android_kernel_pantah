@@ -2,6 +2,26 @@
   "comments": [
     {
       "robotId": "ayeaye",
+      "robotRunId": "AR00000000000059548445",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2838855?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "15ba2cb6_a0b9994b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-11-20T16:51:07Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 583022920 android-build.ayeaye-python-dispatcher_20231116.04_p0",
+      "revId": "4a480626f1b32829e581a340667ae7d1724dfc5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
       "robotRunId": "AR00000000000059548421",
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2838855?revision\u003d1",
       "fixSuggestions": [
@@ -82,6 +102,93 @@
         "id": 1757831
       },
       "writtenOn": "2023-11-20T16:51:00Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "4a480626f1b32829e581a340667ae7d1724dfc5e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000059548421",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2838855?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "52aadcc3_b15f4533",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 692,
+                "startChar": 0,
+                "endLine": 692,
+                "endChar": 0
+              },
+              "replacement": "        \":kunit_gen_config\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 693,
+                "startChar": 0,
+                "endLine": 694,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 702,
+                "startChar": 0,
+                "endLine": 702,
+                "endChar": 0
+              },
+              "replacement": "        \":kunit_gen_config\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 703,
+                "startChar": 0,
+                "endLine": 704,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 977,
+                "startChar": 0,
+                "endLine": 978,
+                "endChar": 0
+              },
+              "replacement": "        \":kunit_tests_x86_64\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 986,
+                "startChar": 0,
+                "endLine": 987,
+                "endChar": 0
+              },
+              "replacement": "        \":kunit_tests_arm64\",\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "20d14963_bb4e12e1",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-11-20T16:51:07Z",
       "side": 1,
       "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
       "revId": "4a480626f1b32829e581a340667ae7d1724dfc5e",
