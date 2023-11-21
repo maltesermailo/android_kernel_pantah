@@ -1,0 +1,51 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000059597986",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2835950?revision\u003d5",
+      "fixSuggestions": [
+        {
+          "fixId": "4e7bd320_7b9279b0",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "abi.bzl",
+              "range": {
+                "startLine": 82,
+                "startChar": 0,
+                "endLine": 85,
+                "endChar": 0
+              },
+              "replacement": "        name \u003d name,\n        visibility \u003d visibility,\n        **kwargs\n"
+            },
+            {
+              "path": "abi.bzl",
+              "range": {
+                "startLine": 136,
+                "startChar": 0,
+                "endLine": 140,
+                "endChar": 0
+              },
+              "replacement": "        name \u003d name,\n        visibility \u003d visibility,\n        out \u003d out,\n        **kwargs\n"
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "d26e27da_77d800ac",
+        "filename": "abi.bzl",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-11-21T01:10:52Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier abi.bzl` to format the file, or apply the suggested fix.",
+      "revId": "30339711ac469d06ccac44efd2af63c99682699d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
