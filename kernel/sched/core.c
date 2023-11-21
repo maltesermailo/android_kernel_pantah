@@ -7319,6 +7319,10 @@ void set_user_nice(struct task_struct *p, long nice)
 
 	update_rq_clock(rq);
 
+	trace_android_rvh_set_user_nice_locked(p, &nice, &allowed);
+	if ((task_nice(p) == nice || nice < MIN_NICE || nice > MAX_NICE) && !allowed)
+		goto out_unlock;
+
 	/*
 	 * The RT priorities are set via sched_setscheduler(), but we still
 	 * allow the 'normal' nice value to be set - but as expected
