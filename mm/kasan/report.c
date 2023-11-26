@@ -556,9 +556,74 @@ void kasan_report_async(void)
 }
 #endif /* CONFIG_KASAN_HW_TAGS */
 
+<<<<<<< HEAD   (4a9eba Merge branch 'android14-5.15' into branch 'android14-5.15-lt)
 #ifdef CONFIG_KASAN_INLINE
+=======
+static void __kasan_report(unsigned long addr, size_t size, bool is_write,
+				unsigned long ip)
+{
+	struct kasan_access_info info;
+	void *tagged_addr;
+	void *untagged_addr;
+	unsigned long flags;
+
+#if IS_ENABLED(CONFIG_KUNIT)
+	if (current->kunit_test)
+		kasan_update_kunit_status(current->kunit_test);
+#endif /* IS_ENABLED(CONFIG_KUNIT) */
+
+	disable_trace_on_warning();
+
+	tagged_addr = (void *)addr;
+	untagged_addr = kasan_reset_tag(tagged_addr);
+
+	info.access_addr = tagged_addr;
+	if (addr_has_metadata(untagged_addr))
+		info.first_bad_addr =
+			kasan_find_first_bad_addr(tagged_addr, size);
+	else
+		info.first_bad_addr = untagged_addr;
+	info.access_size = size;
+	info.is_write = is_write;
+	info.ip = ip;
+
+	start_report(&flags);
+
+	print_error_description(&info);
+	if (addr_has_metadata(untagged_addr))
+		kasan_print_tags(get_tag(tagged_addr), info.first_bad_addr);
+	pr_err("\n");
+
+	if (addr_has_metadata(untagged_addr)) {
+		print_address_description(untagged_addr, get_tag(tagged_addr));
+		pr_err("\n");
+		print_memory_metadata(info.first_bad_addr);
+	} else {
+		dump_stack_lvl(KERN_ERR);
+	}
+
+	end_report(&flags, addr);
+}
+
+bool kasan_report(unsigned long addr, size_t size, bool is_write,
+			unsigned long ip)
+{
+	unsigned long flags = user_access_save();
+	bool ret = false;
+
+	if (likely(report_enabled())) {
+		__kasan_report(addr, size, is_write, ip);
+		ret = true;
+	}
+
+	user_access_restore(flags);
+
+	return ret;
+}
+
+>>>>>>> BRANCH (80529b Linux 5.15.138)
 /*
- * With CONFIG_KASAN_INLINE, accesses to bogus pointers (outside the high
+ * With CONFIG_KASAN, accesses to bogus pointers (outside the high
  * canonical half of the address space) cause out-of-bounds shadow memory reads
  * before the actual access. For addresses in the low canonical half of the
  * address space, as well as most non-canonical addresses, that out-of-bounds
@@ -594,4 +659,3 @@ void kasan_non_canonical_hook(unsigned long addr)
 	pr_alert("KASAN: %s in range [0x%016lx-0x%016lx]\n", bug_type,
 		 orig_addr, orig_addr + KASAN_GRANULE_SIZE - 1);
 }
-#endif
