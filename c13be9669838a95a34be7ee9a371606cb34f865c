@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37bdf418_21042acb",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2023-11-27T19:33:50Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem like the correct fix, because this patch makes the original bio\u0027s I/O priority be propagated to the work thread that happens to be processing the work item, not directly to the bio(s) that the work issues to the verity hash tree.  Worker threads in Linux do not belong to a single workqueue, so this change may affect the I/O priority of unrelated work items on the system.  For documentation about how workqueues in Linux work, see https://www.kernel.org/doc/html/next/core-api/workqueue.html.\n\nI think the correct fix would be to directly propagate the I/O priority from the original bio to the hash tree bio(s), without changing the worker thread\u0027s default I/O priority.  This would require changing dm-bufio, as dm-bufio is where the bios to the verity hash tree get allocated and submitted.\n\nAlso, as usual, please work with upstream directly.  There is nothing Android-specific here.  AOSP only becomes relevant later on when asking for a backport.",
+      "range": {
+        "startLine": 579,
+        "startChar": 0,
+        "endLine": 580,
+        "endChar": 42
+      },
+      "revId": "c13be9669838a95a34be7ee9a371606cb34f865c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
