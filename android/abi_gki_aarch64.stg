@@ -279312,6 +279312,14 @@ function {
   parameter_id: 0x38d23361
 }
 function {
+  id: 0x90e2d95d
+  return_type_id: 0x6720d32f
+  parameter_id: 0x310ec01d
+  parameter_id: 0x498e6bfd
+  parameter_id: 0x18bd6530
+  parameter_id: 0x6720d32f
+}
+function {
   id: 0x90e31e42
   return_type_id: 0x6720d32f
   parameter_id: 0x358ff5b7
@@ -346555,6 +346563,15 @@ elf_symbol {
   full_name: "regulator_get_drvdata"
 }
 elf_symbol {
+  id: 0xc92def38
+  name: "regulator_get_linear_step"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xee708b17
+  type_id: 0xceb0f977
+  full_name: "regulator_get_linear_step"
+}
+elf_symbol {
   id: 0xdd41811b
   name: "regulator_get_mode"
   is_defined: true
@@ -350849,6 +350866,15 @@ elf_symbol {
   crc: 0xa0eae826
   type_id: 0x0280f6cc
   full_name: "smp_call_function"
+}
+elf_symbol {
+  id: 0x824ee5eb
+  name: "smp_call_function_any"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8efd59ac
+  type_id: 0x90e2d95d
+  full_name: "smp_call_function_any"
 }
 elf_symbol {
   id: 0xdf906b66
@@ -367404,6 +367430,7 @@ interface {
   symbol_id: 0x0fbaa7b3
   symbol_id: 0xfd198070
   symbol_id: 0x4a781b7f
+  symbol_id: 0xc92def38
   symbol_id: 0xdd41811b
   symbol_id: 0x0118b55f
   symbol_id: 0x4e97a73b
@@ -367881,6 +367908,7 @@ interface {
   symbol_id: 0xcb37c2fd
   symbol_id: 0x57adf54a
   symbol_id: 0xf46be251
+  symbol_id: 0x824ee5eb
   symbol_id: 0xdf906b66
   symbol_id: 0x4c674d1e
   symbol_id: 0x1f9b728b
