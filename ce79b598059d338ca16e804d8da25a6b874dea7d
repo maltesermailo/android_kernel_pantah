@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf8eb7a1_9a840a37",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 7198,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-11-28T16:49:47Z",
+      "side": 1,
+      "message": "We can just reduce this to:\n```\nif (!allowed)\n```\nsince the handler can ensure that `nice` is in range and we\u0027ll have this check above on the original value of `nice`.",
+      "revId": "ce79b598059d338ca16e804d8da25a6b874dea7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
