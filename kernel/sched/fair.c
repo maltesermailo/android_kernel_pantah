@@ -3942,6 +3942,7 @@ static inline unsigned long task_util_est(struct task_struct *p)
 	return max(task_util(p), _task_util_est(p));
 }
 
+<<<<<<< HEAD   (0da9a7 Merge branch 'android13-5.10' into branch 'android13-5.10-lt)
 #ifdef CONFIG_UCLAMP_TASK
 static inline unsigned long uclamp_task_util(struct task_struct *p,
 					     unsigned long uclamp_min,
@@ -3967,6 +3968,8 @@ static inline unsigned long uclamp_task_util(struct task_struct *p,
 }
 #endif
 
+=======
+>>>>>>> BRANCH (6db6ca Linux 5.10.201)
 static inline void util_est_enqueue(struct cfs_rq *cfs_rq,
 				    struct task_struct *p)
 {
@@ -6915,7 +6918,12 @@ static int find_energy_efficient_cpu(struct task_struct *p, int prev_cpu, int sy
 	if (!sd)
 		goto fail;
 
+<<<<<<< HEAD   (0da9a7 Merge branch 'android13-5.10' into branch 'android13-5.10-lt)
 	if (!uclamp_task_util(p, p_util_min, p_util_max))
+=======
+	sync_entity_load_avg(&p->se);
+	if (!task_util_est(p) && p_util_min == 0)
+>>>>>>> BRANCH (6db6ca Linux 5.10.201)
 		goto unlock;
 
 	latency_sensitive = uclamp_latency_sensitive(p);
