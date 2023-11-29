@@ -123,6 +123,24 @@
       "parentUuid": "d70295bb_59da0cde",
       "revId": "51e40cf8f9bcda37824040e252483471fa7c6000",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c08343da_9562efd2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2023-11-29T17:33:27Z",
+      "side": 1,
+      "message": "Please help with verifying whether the patch below combined with setting prio_aging_expire to zero solves the reported issue:\n```\ndiff --git a/block/mq-deadline.c b/block/mq-deadline.c\nindex f958e79277b8..2590918c0fc6 100644\n--- a/block/mq-deadline.c\n+++ b/block/mq-deadline.c\n@@ -125,7 +125,18 @@ deadline_rb_root(struct dd_per_prio *per_prio, struct request *rq)\n  */\n static u8 dd_rq_ioclass(struct request *rq)\n {\n-\treturn IOPRIO_PRIO_CLASS(req_get_ioprio(rq));\n+\tstruct deadline_data *dd \u003d rq-\u003eq-\u003eelevator-\u003eelevator_data;\n+\n+\treturn dd-\u003eprio_aging_expire ? IOPRIO_PRIO_CLASS(req_get_ioprio(rq)) :\n+\t\t\t\t       IOPRIO_CLASS_NONE;\n+}\n+\n+static u8 dd_bio_ioclass(struct request_queue *q, struct bio *bio)\n+{\n+\tstruct deadline_data *dd \u003d q-\u003eelevator-\u003eelevator_data;\n+\n+\treturn dd-\u003eprio_aging_expire ? IOPRIO_PRIO_CLASS(bio-\u003ebi_ioprio) :\n+\t\t\t\t       IOPRIO_CLASS_NONE;\n }\n \n /*\n@@ -744,7 +755,7 @@ static int dd_request_merge(struct request_queue *q, struct request **rq,\n \t\t\t    struct bio *bio)\n {\n \tstruct deadline_data *dd \u003d q-\u003eelevator-\u003eelevator_data;\n-\tconst u8 ioprio_class \u003d IOPRIO_PRIO_CLASS(bio-\u003ebi_ioprio);\n+\tconst u8 ioprio_class \u003d dd_bio_ioclass(q, bio);\n \tconst enum dd_prio prio \u003d ioprio_class_to_prio[ioprio_class];\n \tstruct dd_per_prio *per_prio \u003d \u0026dd-\u003eper_prio[prio];\n \tsector_t sector \u003d bio_end_sector(bio);\n@@ -798,8 +809,6 @@ static void dd_insert_request(struct blk_mq_hw_ctx *hctx, struct request *rq,\n \tstruct request_queue *q \u003d hctx-\u003equeue;\n \tstruct deadline_data *dd \u003d q-\u003eelevator-\u003eelevator_data;\n \tconst enum dd_data_dir data_dir \u003d rq_data_dir(rq);\n-\tu16 ioprio \u003d req_get_ioprio(rq);\n-\tu8 ioprio_class \u003d IOPRIO_PRIO_CLASS(ioprio);\n \tstruct dd_per_prio *per_prio;\n \tenum dd_prio prio;\n \n@@ -811,7 +820,7 @@ static void dd_insert_request(struct blk_mq_hw_ctx *hctx, struct request *rq,\n \t */\n \tblk_req_zone_write_unlock(rq);\n \n-\tprio \u003d ioprio_class_to_prio[ioprio_class];\n+\tprio \u003d ioprio_class_to_prio[dd_rq_ioclass(rq)];\n \tper_prio \u003d \u0026dd-\u003eper_prio[prio];\n \tif (!rq-\u003eelv.priv[0]) {\n \t\tper_prio-\u003estats.inserted++;\n\n```",
+      "parentUuid": "6cda6a79_bc476a25",
+      "revId": "51e40cf8f9bcda37824040e252483471fa7c6000",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
