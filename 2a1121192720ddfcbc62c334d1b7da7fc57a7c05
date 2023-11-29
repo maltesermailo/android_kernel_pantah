@@ -16,6 +16,24 @@
       "message": "This line was in the original code as:\n```\nif (task_nice(p) \u003d\u003d nice || nice \u003c MIN_NICE || nice \u003e MAX_NICE)\n```\nso let\u0027s keep keep this line to align with the upstream version since it avoides the lock acquisition and `update_rq_clock` if nothing is attached to the hook.",
       "revId": "2a1121192720ddfcbc62c334d1b7da7fc57a7c05",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a8d41fe_f3cdcdd7",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 7191,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2023-11-29T07:26:16Z",
+      "side": 0,
+      "message": "Right, should keep the original upstream code, thanks for the reminding!",
+      "parentUuid": "4ba03e0a_5871ff13",
+      "revId": "2a1121192720ddfcbc62c334d1b7da7fc57a7c05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
