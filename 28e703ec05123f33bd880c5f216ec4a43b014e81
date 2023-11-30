@@ -16,6 +16,24 @@
       "message": "Hi, Greg, Lee\n\nIt seems this change caused the db845c ethernet not work.\nwhen I reverted all the following 3 changes:\n    52ecdc264d63 UPSTREAM: USB: core: Fix race by not overwriting udev-\u003edescriptor in hub_port_init()\n    a7f103722b57 UPSTREAM: USB: core: Change usb_get_device_descriptor() API\n    28e703ec0512 UPSTREAM: USB: core: Unite old scheme and new scheme descriptor reads\n\nthe ethernet works again with eth0 listed in the output of ifconfig command, but if I only reverted 52ecdc264d63 and a7f103722b57, then the problem is still there without eth0 listed.\n\nI tried to revert 28e703ec0512 only to confirm my guess, but it failed, 52ecdc264d63 and a7f103722b57 need to be reverted too to revert a7f103722b57.\n\nCould you please help check if there is a issue, or something for db845c needs to be updated.\n\nThanks,\nYongqin Liu",
       "revId": "28e703ec05123f33bd880c5f216ec4a43b014e81",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3437e046_7739a11b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-11-30T09:00:14Z",
+      "side": 1,
+      "message": "Can you try the -lts branch instead?  There are more changes there than were backported here for this issue and perhaps the issue is resolved there?\n\nAlso, what specific problem is happening?  Can you create a bug for it and we can track it there, or better yet, if this is an issue upstream, we can discuss and fix it there first?",
+      "parentUuid": "18fbd767_ac1ff373",
+      "revId": "28e703ec05123f33bd880c5f216ec4a43b014e81",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
