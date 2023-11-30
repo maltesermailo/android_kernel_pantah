@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e92f96a7_3a02ac2b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2023-11-30T23:20:48Z",
+      "side": 1,
+      "message": "nit: should we add new structures (...\"abstractions\", if they were common to the kernel...) independently of their usage?  Here and in other commits...\n\nI don\u0027t have a strong opinion.  It\u0027s nice to see the abstractions alongside their usage, especially in lieu of tests that can show their use.\n\nI would be happy to add doctests, assuming we can rebase this on a tree that supports them (IDK if that is possible at this juncture)",
+      "range": {
+        "startLine": 31,
+        "startChar": 18,
+        "endLine": 31,
+        "endChar": 36
+      },
+      "revId": "e98af1ca887a6f68ba14778cf869cb4b239e4138",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7ca8595_f5b6530c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2023-11-30T23:20:48Z",
+      "side": 1,
+      "message": "I\u0027m not sure if you\u0027re looking for full-blown code review and modifications, or if the intention is more to land these in the android branch \"as is\" w.r.t. the RFC.\n\nIf the former...probably could use doc comments on all the `pub(crate)` methods, no? (at least the most important ones)",
+      "revId": "e98af1ca887a6f68ba14778cf869cb4b239e4138",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7653c96b_a21f7b88",
+        "filename": "drivers/android/process.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2023-11-30T23:20:48Z",
+      "side": 1,
+      "message": "nit: I prefer verbosity...but that\u0027s just me.  Wasn\u0027t sure if \"ret\" meant \"return\" until I read the next few lines.",
+      "range": {
+        "startLine": 197,
+        "startChar": 12,
+        "endLine": 197,
+        "endChar": 15
+      },
+      "revId": "e98af1ca887a6f68ba14778cf869cb4b239e4138",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "913006c8_55dd2008",
+        "filename": "drivers/android/process.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2023-11-30T23:20:48Z",
+      "side": 1,
+      "message": "nit: TODO(explanation of what\u0027s coming))",
+      "range": {
+        "startLine": 206,
+        "startChar": 8,
+        "endLine": 206,
+        "endChar": 24
+      },
+      "revId": "e98af1ca887a6f68ba14778cf869cb4b239e4138",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39b8663a_6cc645e6",
+        "filename": "drivers/android/process.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2023-11-30T23:20:48Z",
+      "side": 1,
+      "message": "why is this `Result\u003ci32\u003e` if it is always `0`?",
+      "range": {
+        "startLine": 257,
+        "startChar": 11,
+        "endLine": 257,
+        "endChar": 12
+      },
+      "revId": "e98af1ca887a6f68ba14778cf869cb4b239e4138",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22775ace_cc6cd05a",
+        "filename": "drivers/android/thread.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2023-11-30T23:20:48Z",
+      "side": 1,
+      "message": "curious: what is the reasoning for the `use` statement here, as opposed to the top?",
+      "range": {
+        "startLine": 40,
+        "startChar": 8,
+        "endLine": 40,
+        "endChar": 54
+      },
+      "revId": "e98af1ca887a6f68ba14778cf869cb4b239e4138",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
