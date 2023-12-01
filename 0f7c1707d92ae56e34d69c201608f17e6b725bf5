@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff211d43_d2c99bb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-01T23:36:08Z",
+      "side": 1,
+      "message": "Changes to ufs-mediatek.c are fine since it is your vendor module.",
+      "revId": "0f7c1707d92ae56e34d69c201608f17e6b725bf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c54981a9_e97a936e",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5250,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-01T23:36:08Z",
+      "side": 1,
+      "message": "Does this change the default behavior? Can we be sure that cmd-\u003eresult is NULL in all other cases for all OEMs?\n\nI think it would be safest to create a new hook to use instead of the existing one that returns a bool:\n```\ntrace_android_vh_ufs_compl_command(hba, lrbp); // you\u0027d ignore this one\ntrace_android_vh_ufs_compl_check_done(hba, lrbp, \u0026done); // use this instead\nif (done)\n    return;\n```",
+      "revId": "0f7c1707d92ae56e34d69c201608f17e6b725bf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5990cc4b_aad01f88",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 6374,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-01T23:36:08Z",
+      "side": 1,
+      "message": "This suppresses debugging info that might be useful for other OEMs. Should this also be governed by a vendor hook?",
+      "revId": "0f7c1707d92ae56e34d69c201608f17e6b725bf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "259afe11_9b0846a0",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 6455,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-01T23:36:08Z",
+      "side": 1,
+      "message": "use a vendor hook here since this changes default behavior",
+      "revId": "0f7c1707d92ae56e34d69c201608f17e6b725bf5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
