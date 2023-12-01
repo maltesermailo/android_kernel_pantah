@@ -16,6 +16,24 @@
       "message": "Sorry, but this has been rejected in the past, no code should work differently if tracing is enabled or disabled, no driver should ever care about this.",
       "revId": "80d1c99e4eb0a3c7a838bd76035b18bb173da092",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79ce654e_19397629",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3159410
+      },
+      "writtenOn": "2023-12-01T02:17:29Z",
+      "side": 1,
+      "message": "Hi, thank you for your reply, but we have specific needs and we hope you can give us some suggestions\n\nBackground: After the trace is enabled, it controls the peripheral register to trigger interrupt pulses for specific GPIO of the peripheral. The system detects the interval between interrupt functions to determine the performance of the peripheral\n\nRequirement: Frequent triggering of interrupts can increase system load and power consumption. It is hoped that through the \"tracing_is_on\" function, relevant interrupts will only be triggered when trace is turned on. Conversely, when trace is turned off, peripheral will not trigger interrupts to save performance and power consumption",
+      "parentUuid": "0d98178d_56b5be49",
+      "revId": "80d1c99e4eb0a3c7a838bd76035b18bb173da092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
