@@ -41,6 +41,40 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ed785e4_67837015",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-12-01T21:10:50Z",
+      "side": 1,
+      "message": "Posting a couple of minor comments for now. I have not finished looking at this.",
+      "revId": "e98af1ca887a6f68ba14778cf869cb4b239e4138",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfd584d3_3df149f1",
+        "filename": "drivers/android/defs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-12-01T21:10:50Z",
+      "side": 1,
+      "message": "I don\u0027t know if there are different norms for rust code or some autoformatter involved here, but I would avoid making white-space changes to unrelated code even if they are an improvement. It can create unnecessary merge conflicts. In this case you added this code in the previous patch though, so you should move the cleanup to that patch.",
+      "revId": "e98af1ca887a6f68ba14778cf869cb4b239e4138",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7653c96b_a21f7b88",
@@ -54,6 +88,30 @@
       "writtenOn": "2023-11-30T23:20:48Z",
       "side": 1,
       "message": "nit: I prefer verbosity...but that\u0027s just me.  Wasn\u0027t sure if \"ret\" meant \"return\" until I read the next few lines.",
+      "range": {
+        "startLine": 197,
+        "startChar": 12,
+        "endLine": 197,
+        "endChar": 15
+      },
+      "revId": "e98af1ca887a6f68ba14778cf869cb4b239e4138",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2557dbb4_693e97cc",
+        "filename": "drivers/android/process.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-12-01T21:10:50Z",
+      "side": 1,
+      "message": "`ret` is a very common name for a return code in Linux.\n\nOn an older kernel version I have checked out I get:\n```\n$ git grep -w \"ret \u003d\" | wc -l\n168991\n```\n\nI don\u0027t know that all of them are actually storing a return code, but all the lines I looked at either stored a return value it got from a function or one that it planned to return (in many cases both). I don\u0027t know of any other name that would be more familiar to a Linux kernel developer. Another name I often see in other code bases is `res`, but this is an other of magnitude less common in the Linux kernel.\n\nThis is probably an overly lengthy response to a `nit:` comment, but I don\u0027t think this name needs to be changed.",
+      "parentUuid": "7653c96b_a21f7b88",
       "range": {
         "startLine": 197,
         "startChar": 12,
