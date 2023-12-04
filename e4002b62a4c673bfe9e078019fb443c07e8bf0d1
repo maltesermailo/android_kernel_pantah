@@ -1,0 +1,274 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f40ee1e5_92425e1f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2023-12-04T22:04:21Z",
+      "side": 1,
+      "message": "should they? that\u0027s also confusing, since there\u0027s real things (like netd) running as root...",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 58
+      },
+      "revId": "e4002b62a4c673bfe9e078019fb443c07e8bf0d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b06842ae_5e0ce6cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2023-12-04T22:04:21Z",
+      "side": 1,
+      "message": "These are just loose comments, mostly trying to point out the various issues.\n\nThis isn\u0027t even mentioning the fact bpf offloads make this code not even trigger events at the right times... which simply cannot be fixed with this iptables based approach, because iptables simply doesn\u0027t even see such packets.\n\nAlso as you know, we basically have no test coverage for this, and we\u0027d need to backport this to all the other ACK branches... and wait for months and months for devices to actually pick it up.\n\nIf we\u0027re going to go to the effort of fixing something, and then cherrypicking ahoying, and testing... we should try to fix more than just this one nit.",
+      "revId": "e4002b62a4c673bfe9e078019fb443c07e8bf0d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ef28520_46cbf201",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2023-12-04T22:04:21Z",
+      "side": 1,
+      "message": "it\u0027s possible this should actually be kuid_t...\nto delay conversion to userspace uids until we\u0027re actually delivering the message and know who it is for...",
+      "range": {
+        "startLine": 58,
+        "startChar": 1,
+        "endLine": 58,
+        "endChar": 6
+      },
+      "revId": "e4002b62a4c673bfe9e078019fb443c07e8bf0d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "703d377c_46b3f4d2",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2023-12-04T22:04:21Z",
+      "side": 1,
+      "message": "perhaps this should be extended with \u0026\u0026 uid !\u003d invalid",
+      "range": {
+        "startLine": 129,
+        "startChar": 5,
+        "endLine": 129,
+        "endChar": 10
+      },
+      "revId": "e4002b62a4c673bfe9e078019fb443c07e8bf0d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a566a06_fe21689a",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2023-12-04T22:04:21Z",
+      "side": 1,
+      "message": "with conversion to userspace uids only happening here... based on the userns of the receiving process",
+      "range": {
+        "startLine": 130,
+        "startChar": 2,
+        "endLine": 130,
+        "endChar": 64
+      },
+      "revId": "e4002b62a4c673bfe9e078019fb443c07e8bf0d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ab4143d_d3028bcf",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2023-12-04T22:04:21Z",
+      "side": 1,
+      "message": "in the context this is running... what is current_user_ns() ?\nwell it\u0027s the user_ns of current thread, but is current thread relevant to this code?",
+      "range": {
+        "startLine": 149,
+        "startChar": 31,
+        "endLine": 149,
+        "endChar": 46
+      },
+      "revId": "e4002b62a4c673bfe9e078019fb443c07e8bf0d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ab243f7_777c8042",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2023-12-04T22:04:21Z",
+      "side": 1,
+      "message": "likely we should be using an invalid uid, not root\n\nalso this is a pretty illogical spot to be clearing things...",
+      "range": {
+        "startLine": 149,
+        "startChar": 1,
+        "endLine": 149,
+        "endChar": 67
+      },
+      "revId": "e4002b62a4c673bfe9e078019fb443c07e8bf0d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "880aedfa_b2e37f07",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2023-12-04T22:04:21Z",
+      "side": 1,
+      "message": "this value looks like garbage too, it should likely be -1 or some invalid uid",
+      "range": {
+        "startLine": 342,
+        "startChar": 20,
+        "endLine": 342,
+        "endChar": 21
+      },
+      "revId": "e4002b62a4c673bfe9e078019fb443c07e8bf0d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6e6c3a7_251d180c",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2023-12-04T22:04:21Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 411,
+        "startChar": 20,
+        "endLine": 411,
+        "endChar": 21
+      },
+      "revId": "e4002b62a4c673bfe9e078019fb443c07e8bf0d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d8d5fe6_d117fa12",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2023-12-04T22:04:21Z",
+      "side": 1,
+      "message": "info_timer-\u003euid should likely be cleared here",
+      "range": {
+        "startLine": 456,
+        "startChar": 0,
+        "endLine": 456,
+        "endChar": 1
+      },
+      "revId": "e4002b62a4c673bfe9e078019fb443c07e8bf0d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "086f6da3_eb3d7686",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2023-12-04T22:04:21Z",
+      "side": 1,
+      "message": "this is wrong, it should likely be derived from skb, so it should be\n\ndev_net[(]skb-\u003edev[)]-\u003euser_ns\n\n(or we should store raw kuid, and delay translation till later)",
+      "range": {
+        "startLine": 463,
+        "startChar": 38,
+        "endLine": 463,
+        "endChar": 55
+      },
+      "revId": "e4002b62a4c673bfe9e078019fb443c07e8bf0d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b418010b_2dac0408",
+        "filename": "net/netfilter/xt_IDLETIMER.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2023-12-04T22:04:21Z",
+      "side": 1,
+      "message": "this is potentially (not 100% sure) the wrong uid...\n(think dns sockets owned by netd on behalf of users)",
+      "range": {
+        "startLine": 464,
+        "startChar": 10,
+        "endLine": 464,
+        "endChar": 20
+      },
+      "revId": "e4002b62a4c673bfe9e078019fb443c07e8bf0d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
