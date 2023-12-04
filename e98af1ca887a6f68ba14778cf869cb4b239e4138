@@ -147,6 +147,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dae2b59b_0e1546d5",
+        "filename": "drivers/android/process.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-12-04T22:20:22Z",
+      "side": 1,
+      "message": "flush is called by Linux when a file is closed (see https://docs.kernel.org/filesystems/vfs.html#struct-file-operations). Since the binder driver normally has threads blocked in an ioctl, we need to wake up all those threads and tell them to return to user-space so that Linux can release the reference the ioctl has on the binder file. If this close call was the last reference to the file, then Linux will call release. If there are other references to the file and the process is still alive user-space will call back into the ioctl. The flush operation needed to be deferred since it was not safe to grab the global binder lock in this context. With the global binder lock eliminated, deferring this might no longer be needed though. See https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d861a0dcc397f3e94024cc311086799393ec517df for the original patch that added this.",
+      "parentUuid": "913006c8_55dd2008",
+      "range": {
+        "startLine": 206,
+        "startChar": 8,
+        "endLine": 206,
+        "endChar": 24
+      },
+      "revId": "e98af1ca887a6f68ba14778cf869cb4b239e4138",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "39b8663a_6cc645e6",
         "filename": "drivers/android/process.rs",
         "patchSetId": 1
