@@ -22,6 +22,30 @@
       },
       "revId": "f2a85a0ac150c77352af49f3c55932ffda468e2f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60dc53a8_dc9000b0",
+        "filename": "arch/arm64/kvm/hyp/pgtable.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2023-12-04T11:35:32Z",
+      "side": 1,
+      "message": "The EL2 host abort handler actually uses a custom walker to check the state of the page before calling into here, so we should bail out back to the host before that becomes an issue.\n\nOn an unrelated note, I thought stage2_map_walker_try_leaf() would actually fail to do TLB inval properly when e.g. restricting permissions, which is the reason why we were doing a full unmap-\u003emap cycle, but I was clearly wrong, so the CL looks alright to me!",
+      "parentUuid": "33360cb3_2d4d6d89",
+      "range": {
+        "startLine": 653,
+        "startChar": 9,
+        "endLine": 653,
+        "endChar": 13
+      },
+      "revId": "f2a85a0ac150c77352af49f3c55932ffda468e2f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
