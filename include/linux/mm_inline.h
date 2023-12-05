@@ -234,19 +234,18 @@ static inline bool lru_gen_add_folio(struct lruvec *lruvec, struct folio *folio,
 	 * There are three common cases for this page:
 	 * 1. If it's hot, e.g., freshly faulted in or previously hot and
 	 *    migrated, add it to the youngest generation.
-	 * 2. If it's cold but can't be evicted immediately, i.e., an anon page
-	 *    not in swapcache or a dirty page pending writeback, add it to the
-	 *    second oldest generation.
-	 * 3. Everything else (clean, cold) is added to the oldest generation.
+	 * 2. If it's cold and clean, e.g., from folio_rotate_reclaimable(),
+	 *    add it to the oldest generation.
+	 * 3. Everything else, i.e., those can't be or shouldn't be evicted
+	 *    immediately, add it to the second youngest/oldest generation,
+	 *    depending on the number of generations.
 	 */
 	if (folio_test_active(folio))
 		seq = lrugen->max_seq;
-	else if ((type == LRU_GEN_ANON && !folio_test_swapcache(folio)) ||
-		 (folio_test_reclaim(folio) &&
-		  (folio_test_dirty(folio) || folio_test_writeback(folio))))
-		seq = lrugen->min_seq[type] + 1;
-	else
+	else if (reclaiming)
 		seq = lrugen->min_seq[type];
+	else
+		seq = min(lrugen->max_seq - 1, lrugen->min_seq[type] + 1);
 
 	gen = lru_gen_from_seq(seq);
 	flags = (gen + 1UL) << LRU_GEN_PGOFF;
