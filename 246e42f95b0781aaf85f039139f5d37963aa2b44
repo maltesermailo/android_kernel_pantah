@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c875593_1ea601cc",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-05T17:32:38Z",
+      "side": 1,
+      "message": "scsi_unblock_requests() is already part of the KMI so you can do this yourself in your vendor module. No need to export this function.",
+      "revId": "246e42f95b0781aaf85f039139f5d37963aa2b44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32bbff92_08668413",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5242,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-05T17:32:38Z",
+      "side": 1,
+      "message": "Add space: `if (done) {`",
+      "revId": "246e42f95b0781aaf85f039139f5d37963aa2b44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9e5e409_469b107b",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 5243,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-05T17:32:38Z",
+      "side": 1,
+      "message": "This can be done in the vh handler. Reduce to:\n```\nif (done)\n  return;\n```",
+      "revId": "246e42f95b0781aaf85f039139f5d37963aa2b44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa9a683d_5aceb7c2",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 6056,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-05T17:32:38Z",
+      "side": 1,
+      "message": "Should be `if (err_handled)`",
+      "revId": "246e42f95b0781aaf85f039139f5d37963aa2b44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a36aef0d_950c8211",
+        "filename": "drivers/scsi/ufs/ufshcd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 6453,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-05T17:32:38Z",
+      "side": 1,
+      "message": "Should be:\n```\nif (err_check)\n    ufshcd_check_errors(hba, hba-\u003eerrors);\n```",
+      "revId": "246e42f95b0781aaf85f039139f5d37963aa2b44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
