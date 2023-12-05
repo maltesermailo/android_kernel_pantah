@@ -467,6 +467,61 @@ struct binder_proc {
 	bool oneway_spam_detection_enabled;
 };
 
+struct binder_proc_wrap {
+	struct binder_proc proc;
+	spinlock_t lock;
+};
+
+static inline struct binder_proc *
+binder_proc_entry(struct binder_alloc *alloc)
+{
+	return container_of(alloc, struct binder_proc, alloc);
+}
+
+static inline struct binder_proc_wrap *
+proc_wrap_entry(struct binder_alloc *alloc)
+{
+	return container_of(binder_proc_entry(alloc),
+			struct binder_proc_wrap, proc);
+}
+
+static inline void proc_wrap_lock_init(struct binder_alloc *alloc)
+{
+	spin_lock_init(&proc_wrap_entry(alloc)->lock);
+}
+
+static inline void proc_wrap_lock(struct binder_alloc *alloc)
+{
+	spin_lock(&proc_wrap_entry(alloc)->lock);
+}
+
+static inline void proc_wrap_unlock(struct binder_alloc *alloc)
+{
+	spin_unlock(&proc_wrap_entry(alloc)->lock);
+}
+
+static inline int proc_wrap_trylock(struct binder_alloc *alloc)
+{
+	return spin_trylock(&proc_wrap_entry(alloc)->lock);
+}
+
+/**
+ * binder_alloc_get_free_async_space() - get free space available for async
+ * @alloc:	binder_alloc for this proc
+ *
+ * Return:	the bytes remaining in the address-space for async transactions
+ */
+static inline size_t
+binder_alloc_get_free_async_space(struct binder_alloc *alloc)
+{
+	size_t free_async_space;
+
+	proc_wrap_lock(alloc);
+	free_async_space = alloc->free_async_space;
+	proc_wrap_unlock(alloc);
+	return free_async_space;
+}
+
 /**
  * struct binder_thread - binder thread bookkeeping
  * @proc:                 binder process for this thread
