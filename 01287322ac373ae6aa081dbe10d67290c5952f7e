@@ -16,6 +16,29 @@
       "message": "hi, sir\n\nPlease help to review. thanks.",
       "revId": "01287322ac373ae6aa081dbe10d67290c5952f7e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fcf0841_2cac879d",
+        "filename": "mm/util.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2023-12-06T22:34:50Z",
+      "side": 1,
+      "message": "Can you use the `trace_android_vh_kvmalloc_node_use_vmalloc` tracepoint at line 611 instead of adding a new one? It passes the `size` and you should be able to adjust `kmalloc_flags` using it.",
+      "range": {
+        "startLine": 627,
+        "startChar": 1,
+        "endLine": 627,
+        "endChar": 39
+      },
+      "revId": "01287322ac373ae6aa081dbe10d67290c5952f7e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
