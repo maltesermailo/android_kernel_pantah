@@ -1869,6 +1869,8 @@ int mmc_attach_sd(struct mmc_host *host)
 		goto remove_card;
 
 	mmc_claim_host(host);
+
+	trace_android_vh_mmc_attach_sd(host, ocr, 0);
 	return 0;
 
 remove_card:
@@ -1881,5 +1883,6 @@ err:
 	pr_err("%s: error %d whilst initialising SD card\n",
 		mmc_hostname(host), err);
 
+	trace_android_vh_mmc_attach_sd(host, ocr, err);
 	return err;
 }
