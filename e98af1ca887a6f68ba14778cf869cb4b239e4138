@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "9154dba0_69f8a046",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-12-07T11:26:22Z",
+      "side": 1,
+      "message": "The only reason I didn\u0027t add this together with the user is that the patch becomes really massive if I do that. Otherwise, I would agree with you.",
+      "parentUuid": "e92f96a7_3a02ac2b",
+      "range": {
+        "startLine": 31,
+        "startChar": 18,
+        "endLine": 31,
+        "endChar": 36
+      },
+      "revId": "e98af1ca887a6f68ba14778cf869cb4b239e4138",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d7ca8595_f5b6530c",
@@ -71,6 +95,24 @@
       "writtenOn": "2023-12-01T21:10:50Z",
       "side": 1,
       "message": "I don\u0027t know if there are different norms for rust code or some autoformatter involved here, but I would avoid making white-space changes to unrelated code even if they are an improvement. It can create unnecessary merge conflicts. In this case you added this code in the previous patch though, so you should move the cleanup to that patch.",
+      "revId": "e98af1ca887a6f68ba14778cf869cb4b239e4138",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a01e162_d9740652",
+        "filename": "drivers/android/defs.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-12-07T11:26:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfd584d3_3df149f1",
       "revId": "e98af1ca887a6f68ba14778cf869cb4b239e4138",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -192,6 +234,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd8a9b42_4bcb4dd3",
+        "filename": "drivers/android/process.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-12-07T11:26:22Z",
+      "side": 1,
+      "message": "We return this back to the C side. This used to be a trait impl, but I removed the trait to reduce the number of dependencies.",
+      "parentUuid": "39b8663a_6cc645e6",
+      "range": {
+        "startLine": 257,
+        "startChar": 11,
+        "endLine": 257,
+        "endChar": 12
+      },
+      "revId": "e98af1ca887a6f68ba14778cf869cb4b239e4138",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22775ace_cc6cd05a",
@@ -205,6 +271,30 @@
       "writtenOn": "2023-11-30T23:20:48Z",
       "side": 1,
       "message": "curious: what is the reasoning for the `use` statement here, as opposed to the top?",
+      "range": {
+        "startLine": 40,
+        "startChar": 8,
+        "endLine": 40,
+        "endChar": 54
+      },
+      "revId": "e98af1ca887a6f68ba14778cf869cb4b239e4138",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6eb4e76b_a3524d9f",
+        "filename": "drivers/android/thread.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2023-12-07T11:26:22Z",
+      "side": 1,
+      "message": "Either is fine. It\u0027s somewhat common to import something in a function if it\u0027s just needed there.",
+      "parentUuid": "22775ace_cc6cd05a",
       "range": {
         "startLine": 40,
         "startChar": 8,
