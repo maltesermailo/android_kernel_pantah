@@ -71,6 +71,73 @@
       "robotId": "ayeaye",
       "robotRunId": "AR00000000000061071104",
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/2863195?revision\u003d1",
+      "fixSuggestions": [
+        {
+          "fixId": "73a0fde3_7f4ce2a2",
+          "description": "Buildifier Suggestion",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 1248,
+                "startChar": 0,
+                "endLine": 1248,
+                "endChar": 0
+              },
+              "replacement": "        \":kselftest_size_test_get_size_x86_64\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 1252,
+                "startChar": 0,
+                "endLine": 1253,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 1277,
+                "startChar": 0,
+                "endLine": 1277,
+                "endChar": 0
+              },
+              "replacement": "        \":kselftest_size_test_get_size_arm64\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 1281,
+                "startChar": 0,
+                "endLine": 1282,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "key": {
+        "uuid": "39bc1be3_71f38a63",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-12-07T13:46:13Z",
+      "side": 1,
+      "message": "File is not formatted. Run `buildifier BUILD.bazel` to format the file, or apply the suggested fix.",
+      "revId": "229bec28da578406e40296c1a419cedd3e64a1a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000061071104",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2863195?revision\u003d1",
       "fixSuggestions": [],
       "key": {
         "uuid": "6899710e_9cd6e065",
@@ -82,6 +149,32 @@
         "id": 1757831
       },
       "writtenOn": "2023-12-07T13:46:07Z",
+      "side": 1,
+      "message": "Loaded symbol \"sh_binary_with_abi\" is unused. Please remove it.\nTo disable the warning, add \u0027@unused\u0027 in a comment. http://go/buildifier-warnings#load",
+      "range": {
+        "startLine": 19,
+        "startChar": 40,
+        "endLine": 19,
+        "endChar": 58
+      },
+      "revId": "229bec28da578406e40296c1a419cedd3e64a1a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000061071104",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2863195?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "ba3049a9_afb8b3fa",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2023-12-07T13:46:13Z",
       "side": 1,
       "message": "Loaded symbol \"sh_binary_with_abi\" is unused. Please remove it.\nTo disable the warning, add \u0027@unused\u0027 in a comment. http://go/buildifier-warnings#load",
       "range": {
