@@ -652,6 +652,7 @@ retry:
 		mm_flags |= FAULT_FLAG_TRIED;
 		goto retry;
 	}
+	trace_android_vh_record_do_page_fault_done(mm, fault);
 	mmap_read_unlock(mm);
 
 done:
