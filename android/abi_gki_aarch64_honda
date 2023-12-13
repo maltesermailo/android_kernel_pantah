@@ -1,0 +1,14 @@
+[abi_symbol_list]
+# commonly used by vendor-specific kernel modules
+  __bitmap_subset
+  devres_find
+  input_device_enabled
+  pvclock_gtod_register_notifier
+  refcount_dec_if_one
+# commonly required by ledtrig-*.ko modules
+  led_blink_set_oneshot
+  led_set_brightness_nosleep
+# required by ledtrig-netdev.ko module
+  led_stop_software_blink
+# required by ledtrig-heartbeat.ko module
+  avenrun
