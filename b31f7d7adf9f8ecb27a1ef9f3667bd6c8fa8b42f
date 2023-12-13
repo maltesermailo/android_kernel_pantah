@@ -16,6 +16,23 @@
       "message": "It looks like this branch is not ready to accept symbol list additions yet.",
       "revId": "b31f7d7adf9f8ecb27a1ef9f3667bd6c8fa8b42f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc2c57df_053bf6fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2023-12-13T19:36:53Z",
+      "side": 1,
+      "message": "Until we are ready to take in symbol list changes; doing below will expedite this change.\n\nPlease regenerate the symbol list using tooling with a blank list as starting point on top of https://r.android.com/2871674 \u0026 https://r.android.com/2871675.\n\nYou will also need to add the symbol list in `BUILD.bazel` filegroup `aarch64_additional_kmi_symbol_lists` with this CL. https://r.android.com/2871674 is adding the filegroup.\n\nThanks,  \nRamji",
+      "revId": "b31f7d7adf9f8ecb27a1ef9f3667bd6c8fa8b42f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
