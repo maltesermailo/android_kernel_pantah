@@ -250,6 +250,7 @@ static void lru_gen_refault(struct folio *folio, void *shadow)
 	int memcg_id;
 	bool workingset;
 	unsigned long token;
+    unsigned long flags;
 	unsigned long min_seq;
 	struct lruvec *lruvec;
 	struct lru_gen_folio *lrugen;
@@ -286,6 +287,7 @@ static void lru_gen_refault(struct folio *folio, void *shadow)
 	atomic_long_add(delta, &lrugen->refaulted[hist][type][tier]);
 	mod_lruvec_state(lruvec, WORKINGSET_ACTIVATE_BASE + type, delta);
 
+	flags = min_t(unsigned long, refs, BIT(LRU_REFS_WIDTH) - 1) << LRU_REFS_PGOFF;
 	/*
 	 * Count the following two cases as stalls:
 	 * 1. For pages accessed through page tables, hotter pages pushed out
@@ -294,9 +296,11 @@ static void lru_gen_refault(struct folio *folio, void *shadow)
 	 *    they would have been protected by sort_folio().
 	 */
 	if (lru_gen_in_fault() || refs == BIT(LRU_REFS_WIDTH) - 1) {
-		set_mask_bits(&folio->flags, 0, LRU_REFS_MASK | BIT(PG_workingset));
+		flags |= BIT(PG_workingset);
 		mod_lruvec_state(lruvec, WORKINGSET_RESTORE_BASE + type, delta);
 	}
+	if (flags)
+		set_mask_bits(&folio->flags, 0, flags);
 unlock:
 	rcu_read_unlock();
 }
