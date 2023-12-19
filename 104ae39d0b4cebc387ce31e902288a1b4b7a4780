@@ -104,6 +104,24 @@
       "parentUuid": "ef75b176_26788e50",
       "revId": "104ae39d0b4cebc387ce31e902288a1b4b7a4780",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee5c7ddf_b976173f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-12-19T08:24:39Z",
+      "side": 1,
+      "message": "As TH shows, some targets now require an SPI symbol to be added to their symbol lists as enabling this option now requires that to be present.\n\nWhich means that the functionality here has changed in unknown ways, this really needs to be researched to determine that you are not breaking anything, as the ABI for this branch is frozen and can not change.  Requiring vendors to start relying on new symbols like this, means that the core internal changed by enabling the option, which is not good and can cause problems.",
+      "parentUuid": "2e510864_2435b119",
+      "revId": "104ae39d0b4cebc387ce31e902288a1b4b7a4780",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
