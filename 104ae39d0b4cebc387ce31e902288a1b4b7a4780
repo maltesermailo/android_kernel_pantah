@@ -68,6 +68,42 @@
       "message": "breaks the build as you need to add some symbols to the kernel export list in order for other systems to work properly.",
       "revId": "104ae39d0b4cebc387ce31e902288a1b4b7a4780",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e510864_2435b119",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1973315
+      },
+      "writtenOn": "2023-12-19T01:38:20Z",
+      "side": 1,
+      "message": "when I tested ABI difference enabling SPI_SLAVE, there is no abi differences for android14-6.1\n\n$ ./tools/bazel run //common:kernel_aarch64_abi_update      \nINFO: Analyzed target //common:kernel_aarch64_abi_update (1 packages loaded, 86369 targets configured).                          \nINFO: Found 1 target...                                                                                                          \n[544 / 552] 2 actions running                                                                                                    \nINFO: From [stg] Comparing Kernel ABI @//common:kernel_aarch64_abi_diff:                                                         \nINFO:                                                                                                                            \nTarget //common:kernel_aarch64_abi_update up-to-date:                                                                            \n  bazel-bin/common/kernel_aarch64_abi_update.sh                                                                                  \nINFO: Elapsed time: 197.215s, Critical Path: 178.70s                                                                             \nINFO: 9 processes: 1 internal, 8 linux-sandbox.                                                                                  \nINFO: Build completed successfully, 9 total actions                                                                              \nINFO: Running command line: bazel-bin/common/kernel_aarch64_abi_update.sh                                                        \nINFO:",
+      "parentUuid": "5761c369_b8f28e35",
+      "revId": "104ae39d0b4cebc387ce31e902288a1b4b7a4780",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a303c962_cc3f1ea5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1973315
+      },
+      "writtenOn": "2023-12-19T01:38:20Z",
+      "side": 1,
+      "message": "spi_slave_abort will be exported when enabling SPI_SLAVE\u003dy.\nspi_slave_abort is not registered to the abi symbol list until SPI_SLAVE_TIME, SPI_SLAVE_SYSTEM_CONTROL, SPIDEV enables as module(\u003dm).",
+      "parentUuid": "ef75b176_26788e50",
+      "revId": "104ae39d0b4cebc387ce31e902288a1b4b7a4780",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
