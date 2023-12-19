@@ -70,6 +70,30 @@
       },
       "revId": "591bf69e47a4c8dbf8318fda8ad6464d0b95d546",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d84d451_870273a5",
+        "filename": "android/abi_gki_aarch64_honda",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2005211
+      },
+      "writtenOn": "2023-12-19T01:18:06Z",
+      "side": 1,
+      "message": "I think that symbol is always needed to load the vendor modules with GKI image, we would like to debug our system with GKI image. Is my understanding wrong?\n\nThe reason why I put this symbol which already exported in another list is because I\u0027ve just noticed that it\u0027s done and I think that there is no limitation to export same symbol with multiple list that is seen a lot.",
+      "parentUuid": "caa1a2b8_bf383094",
+      "range": {
+        "startLine": 9,
+        "startChar": 23,
+        "endLine": 9,
+        "endChar": 40
+      },
+      "revId": "591bf69e47a4c8dbf8318fda8ad6464d0b95d546",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
