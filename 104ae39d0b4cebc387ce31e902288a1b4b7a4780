@@ -122,6 +122,24 @@
       "parentUuid": "2e510864_2435b119",
       "revId": "104ae39d0b4cebc387ce31e902288a1b4b7a4780",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83f9aacd_8071633c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1973315
+      },
+      "writtenOn": "2023-12-19T09:02:22Z",
+      "side": 1,
+      "message": "Unfortunately, I couldn\u0027t access Treehugger Presubmit Explainer (https://android-review.git.corp.google.com/c/kernel/common/+/2879768/1?tab\u003dchecks\u0026checksPatchset\u003d1\u0026checksRunsSelected\u003dTreehugger%20Presubmit%20Explainer)\nI think I have no permission for that.\nSo, I couldn\u0027t find why it makes fails exactly.\n\nI guess some your test targets enable CONFIG_SPIDEV\u003dm or some drivers call \"spi_slave_abort\". I thought the patch should be splited to gki_defconfig and adding spi_slave_abort to our symbol list\n\nif there is no KMI broken with this change and passes Treehugger Robot,\nis it okay to make a single patch which enables gki_defconfig and adds new symbol to symbol list?",
+      "parentUuid": "ee5c7ddf_b976173f",
+      "revId": "104ae39d0b4cebc387ce31e902288a1b4b7a4780",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
