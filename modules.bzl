@@ -8,6 +8,11 @@ This module contains a full list of kernel modules
 
 _COMMON_GKI_MODULES_LIST = [
     # keep sorted
+<<<<<<< PATCH SET (d861b8 ANDROID: fix signing modules with BoringSSL)
+    "crypto/sha1_generic.ko",
+    "drivers/android/memhealth.ko",
+=======
+>>>>>>> BASE      (d8fb60 Reapply "crypto: pkcs7 - remove sha1 support")
     "drivers/block/zram/zram.ko",
     "drivers/bluetooth/btbcm.ko",
     "drivers/bluetooth/btqca.ko",
