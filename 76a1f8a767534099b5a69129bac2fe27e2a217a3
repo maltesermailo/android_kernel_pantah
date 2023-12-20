@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64083d5d_e9c7edb3",
+        "filename": "rust/kernel/rbtree.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2023-12-20T22:12:57Z",
+      "side": 1,
+      "message": "Is this a good choice? It seems to match a minority of the existing uses for rb_trees in the Linux kernel. Returning an error and leaving the tree untouched if the key already exists seems to be the more common behavior needed.",
+      "revId": "76a1f8a767534099b5a69129bac2fe27e2a217a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
