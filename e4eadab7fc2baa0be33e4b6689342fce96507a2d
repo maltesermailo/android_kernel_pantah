@@ -86,6 +86,24 @@
       "message": "Dear Greg,\n\nMany vendors have used vendor hook funtions in other drivers as well as mmc driver and managed some confidential and vendor-specific codes in them until android14-5.15. But the vh functions is not merged from android14-6.1, we are having difficulty managing the code using the vh functions. We would like to ask if you should at least maintain backward compatibility. We do not want to add new vh function, just ask to maintain the existing vh functions. Please do not repeat speaking upstream, consider each vendor\u0027s difficulties in managing confidential \u0026 vendor-specific codes which can\u0027t be upstream. That is why the vh functions exist.\n\nWe don\u0027t think requesting backward compatibility is a difficult requirement. \nWe look forward to positive feedback.\n\nThanks.",
       "revId": "e4eadab7fc2baa0be33e4b6689342fce96507a2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18501535_def8bc6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2023-12-22T08:29:42Z",
+      "side": 1,
+      "message": "We do NOT maintain backwards compatibility with vendor hooks at all, they need to be justified for each new kernel version, as always.\n\nPlease work to get your needed changes upstream, we can not take vendor hooks for forever without this work happening, that is not what vendor hooks are for at all.",
+      "parentUuid": "3422fca9_f361b2a0",
+      "revId": "e4eadab7fc2baa0be33e4b6689342fce96507a2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
