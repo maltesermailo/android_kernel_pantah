@@ -33,6 +33,24 @@
       "message": "Why is this needed and why not send the specific changes upstream first?",
       "revId": "f624c2a3b52b90662a43ae6778b0755560d8e896",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b020dfe7_d03cbbaa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1965130
+      },
+      "writtenOn": "2023-12-25T01:01:36Z",
+      "side": 1,
+      "message": "for question1: This hook is for adjusting CPU capacity. In common kernel, current CPU capacity is scaled by frequency, but it will sometime overestimate. Through this hook, vendors who are familiar with CPU characteristic can provide accurate capacity for the kernel.\nfor question2: There is currently a discussion about dynamically updating CPU capacity, which requires further enhancements to fulfill our specific requirements. For instance, we need the runtime to calculate the capacity for each performance state, instead of it being directly proportional to the CPU frequency. Before this patch is completed, due to product schedule, we still need this hook function on Android15-6.6. thanks!",
+      "parentUuid": "dc968367_931d8089",
+      "revId": "f624c2a3b52b90662a43ae6778b0755560d8e896",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
