@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3120ed37_777dfa0a",
+        "filename": "kernel/module/main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1244,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-30T23:56:52Z",
+      "side": 1,
+      "message": "They are the same from the core kernel point of view. You can do both of these things in your hook. Both are `foo(mod)` - there is no reason why these are both needed.",
+      "parentUuid": "4c904a4b_8cfa22eb",
+      "revId": "95648bb02e68fa034162a9aefbfd706ab99f8c3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fef07146_c924f3bf",
         "filename": "kernel/module/main.c",
         "patchSetId": 2
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "They are different usage.\n\ntrace_android_rvh_set_module_permit_after_init() sets the module property in s2 page table by refering the module_enable_ro().\n\ntrace_android_rvh_set_module_init_rw_nx() sets the module property to rw,nx because init section will be freed later.",
       "parentUuid": "fef07146_c924f3bf",
+      "revId": "95648bb02e68fa034162a9aefbfd706ab99f8c3f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4578ae9f_91e838a1",
+        "filename": "kernel/module/main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2614,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2023-12-30T23:56:52Z",
+      "side": 1,
+      "message": "why can\u0027t you do both of these in one of the two? Please provide more information in the commit message to explain.",
+      "parentUuid": "94d11729_a6c1ea19",
       "revId": "95648bb02e68fa034162a9aefbfd706ab99f8c3f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
