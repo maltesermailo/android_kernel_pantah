@@ -52,6 +52,24 @@
       "parentUuid": "0b32151c_e09a529c",
       "revId": "6ba437274161f519f95806c4ee0666019f8e6347",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c616b21_62e6c9c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1973315
+      },
+      "writtenOn": "2024-01-04T01:11:56Z",
+      "side": 1,
+      "message": "\"Maintain a stable KMI\"[1] says \"No KMI stability is maintained for android-mainline\"\nand I couldn\u0027t find android directory in android-mainline branch of kernel/common[2].\n\nI tried to update symbol list for android-mainline with ABI monitoring guide[3]\nbut it said \"no such target \u0027//common:kernel_aarch64_abi_update_symbol_list\u0027\"\n\nIs there any changes for symbol list of android-mainline branch?\n\n[1]:https://source.android.com/docs/core/architecture/kernel/stable-kmi\n[2]:https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline\n[3]:https://android.googlesource.com/kernel/build/+/refs/heads/master/kleaf/docs/abi.md",
+      "parentUuid": "ef12e756_e04cfa25",
+      "revId": "6ba437274161f519f95806c4ee0666019f8e6347",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
