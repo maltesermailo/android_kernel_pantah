@@ -16,6 +16,24 @@
       "message": "Is this a good choice? It seems to match a minority of the existing uses for rb_trees in the Linux kernel. Returning an error and leaving the tree untouched if the key already exists seems to be the more common behavior needed.",
       "revId": "76a1f8a767534099b5a69129bac2fe27e2a217a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67cbe350_bf1d2912",
+        "filename": "rust/kernel/rbtree.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-01-04T10:39:07Z",
+      "side": 1,
+      "message": "Hmm. This matches the APIs in the Rust standard library for [`HashMap::insert`](https://doc.rust-lang.org/stable/std/collections/hash_map/struct.HashMap.html#method.insert) and [`BTreeMap::insert`](https://doc.rust-lang.org/stable/alloc/collections/btree_map/struct.BTreeMap.html#method.insert), and I believe that this is why this behavior was chosen. Thoughts?",
+      "parentUuid": "64083d5d_e9c7edb3",
+      "revId": "76a1f8a767534099b5a69129bac2fe27e2a217a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
