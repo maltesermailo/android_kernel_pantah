@@ -34,6 +34,24 @@
       "parentUuid": "9a9d9198_f0080ded",
       "revId": "5d28797eda119a09b25473c5822c1aec08419a26",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1db4febd_9e641a89",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-01-04T21:36:31Z",
+      "side": 1,
+      "message": "I think there is value in having multiple patches and this once could probably be split up even more. I think it is best to reject one way transactions until you have all the patches that make it safe to send them though. If you can easily fail transactions if there is one currently running, that would be one way to provide partial functionality here where user-space would get an error instead of potentially crash the recipient if tries to send more than one one-way transaction at a time to a node. Another option would be to not allow more than one thread per process until later in the patch stack.",
+      "parentUuid": "3c706f36_bba8d54d",
+      "revId": "5d28797eda119a09b25473c5822c1aec08419a26",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
