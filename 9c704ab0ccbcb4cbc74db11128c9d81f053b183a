@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5e8f38e5_86a9272d",
+        "filename": "drivers/android/process.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-01-05T14:16:48Z",
+      "side": 1,
+      "message": "Yes, I can add type annotations to the variables.",
+      "parentUuid": "4b5cf691_ed23140d",
+      "revId": "9c704ab0ccbcb4cbc74db11128c9d81f053b183a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "26c11e5a_d1e0aad6",
         "filename": "drivers/android/process.rs",
         "patchSetId": 3
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "240dbe49_87a8712e",
+        "filename": "drivers/android/process.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-01-05T14:16:48Z",
+      "side": 1,
+      "message": "As mentioned elsewhere, the RBTree doesn\u0027t support that yet.",
+      "parentUuid": "26c11e5a_d1e0aad6",
+      "revId": "9c704ab0ccbcb4cbc74db11128c9d81f053b183a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3fa7f8b4_5bd9a682",
         "filename": "drivers/android/process.rs",
         "patchSetId": 3
@@ -48,6 +84,24 @@
       "writtenOn": "2023-12-20T21:35:48Z",
       "side": 1,
       "message": "Is that actually possible? This function is only called to get the binder thread object for the current thread which should not have been added by any other thread. aosp/404738 made the C driver have the same end result for this error case, but that was a simplification instead of a requirement. It would be equally valid to return an error here. The C version handles the allocation path with a single extra tree traversal over the old global lock version, but this rust version seems to use two extra traversals. Why can\u0027t the rb tree insert function handle the error case instead?",
+      "revId": "9c704ab0ccbcb4cbc74db11128c9d81f053b183a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "428b3520_1cee0fdc",
+        "filename": "drivers/android/process.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-01-05T14:16:48Z",
+      "side": 1,
+      "message": "It looks like it isn\u0027t possible to hit this branch, because it\u0027s always called with `id` being the current thread id. However, I\u0027d prefer to keep it to future-proof in case this method is used with different ids in the future.\n\nThat said, I will fix it so that it only needs to traverse the tree once.",
+      "parentUuid": "3fa7f8b4_5bd9a682",
       "revId": "9c704ab0ccbcb4cbc74db11128c9d81f053b183a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
