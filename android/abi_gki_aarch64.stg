@@ -295928,6 +295928,14 @@ function {
   parameter_id: 0x00c72527
 }
 function {
+  id: 0x1c33c003
+  return_type_id: 0x48b5725f
+  parameter_id: 0x32caaf24
+  parameter_id: 0x064d6086
+  parameter_id: 0x064d6086
+  parameter_id: 0x6720d32f
+}
+function {
   id: 0x1c362eb2
   return_type_id: 0x48b5725f
   parameter_id: 0x32a623d7
@@ -369381,6 +369389,15 @@ elf_symbol {
   full_name: "l2tp_xmit_skb"
 }
 elf_symbol {
+  id: 0x17e9fb87
+  name: "led_blink_set_oneshot"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4161bcf8
+  type_id: 0x1c33c003
+  full_name: "led_blink_set_oneshot"
+}
+elf_symbol {
   id: 0x709f7fc8
   name: "led_classdev_flash_register_ext"
   is_defined: true
@@ -369478,6 +369495,15 @@ elf_symbol {
   crc: 0x851e8f16
   type_id: 0x91a53d53
   full_name: "led_set_flash_timeout"
+}
+elf_symbol {
+  id: 0xe0c4a1c1
+  name: "led_stop_software_blink"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2e5a3d0d
+  type_id: 0x1c2afa5a
+  full_name: "led_stop_software_blink"
 }
 elf_symbol {
   id: 0x1874c9e3
@@ -402972,6 +402998,7 @@ interface {
   symbol_id: 0x8066cf3a
   symbol_id: 0x8f6761e2
   symbol_id: 0x20069858
+  symbol_id: 0x17e9fb87
   symbol_id: 0x709f7fc8
   symbol_id: 0xa58e6f5d
   symbol_id: 0xfe24eb71
@@ -402983,6 +403010,7 @@ interface {
   symbol_id: 0x2e74d698
   symbol_id: 0x7bbb8d5f
   symbol_id: 0xa18d331b
+  symbol_id: 0xe0c4a1c1
   symbol_id: 0x1874c9e3
   symbol_id: 0xef448c0c
   symbol_id: 0x678fcec9
