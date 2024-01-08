@@ -16,6 +16,24 @@
       "message": "Wait, this is an internal-to-the-kernel structure that can not be used by any kernel module, so putting a new field in here is not going to work at all as you do not have access to this structure definition (it is not in include/).\n\nSo how was this even tested?",
       "revId": "a21d59ac21fa6cdfbb701123e200d68338cf4c58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2fd085d_4b532f37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-08T18:45:47Z",
+      "side": 1,
+      "message": "This is no doubt to support scheduler vendor hook implementations. They can include this file.\n\nPeter-TY: please provide more context for this in the commit message - what feature needs this? what vendor hook handler needs it?",
+      "parentUuid": "2f1dc511_7239fa17",
+      "revId": "a21d59ac21fa6cdfbb701123e200d68338cf4c58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
