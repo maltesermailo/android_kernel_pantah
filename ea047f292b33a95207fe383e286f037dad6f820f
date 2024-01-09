@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d10a2c29_e6529499",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2024-01-09T05:56:33Z",
+      "side": 1,
+      "message": "Hi Greg and Todd\n\nNow the hung-task will check all threads\u0027UN state, however, sometimes some threads such kernel threads, maybe no need to check it\u0027s status.\n\nAnd in android, some thread is import for the system, such as system-server, and we want to just check the important threads rather than all the threads, because sometime the tasks are too much.\n\nSo use the vendor-hook to peform vendor-specific hung-task.\n\nThanks!",
+      "parentUuid": "c2c1320e_7660587f",
+      "revId": "ea047f292b33a95207fe383e286f037dad6f820f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba4bc372_2d36870a",
