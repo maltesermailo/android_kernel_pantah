@@ -312,6 +312,12 @@ static void nft_rhash_gc(struct work_struct *work)
 	nft_net = net_generic(net, nf_tables_net_id);
 	gc_seq = READ_ONCE(nft_net->gc_seq);
 
+<<<<<<< HEAD   (57a399 UPSTREAM: nvmet-tcp: Fix a possible UAF in queue intializati)
+=======
+	if (nft_set_gc_is_pending(set))
+		goto done;
+
+>>>>>>> BRANCH (a70444 ANDROID: GKI: fix crc issue in include/net/addrconf.h)
 	gc = nft_trans_gc_alloc(set, gc_seq, GFP_KERNEL);
 	if (!gc)
 		goto done;
@@ -321,12 +327,18 @@ static void nft_rhash_gc(struct work_struct *work)
 
 	while ((he = rhashtable_walk_next(&hti))) {
 		if (IS_ERR(he)) {
+<<<<<<< HEAD   (57a399 UPSTREAM: nvmet-tcp: Fix a possible UAF in queue intializati)
 			if (PTR_ERR(he) != -EAGAIN) {
 				nft_trans_gc_destroy(gc);
 				gc = NULL;
 				goto try_later;
 			}
 			continue;
+=======
+			nft_trans_gc_destroy(gc);
+			gc = NULL;
+			goto try_later;
+>>>>>>> BRANCH (a70444 ANDROID: GKI: fix crc issue in include/net/addrconf.h)
 		}
 
 		/* Ruleset has been updated, try later. */
