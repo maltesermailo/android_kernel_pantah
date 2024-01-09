@@ -161,4 +161,9 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_init);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_wake);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_write_finished);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_rwsem_list_add);
+<<<<<<< HEAD   (f62607aa89509bcda2fc90a13a027fa9da9e017e ANDROID: ABI: update symbol list for mtk)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_futex_plist_add);
+||||||| BASE   (78cf7a145c200d185e2370c712abd8235d1bd5aa ANDROID: rwsem: Add vendor hook to the rw-semaphore)
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_downgrade_wake_finish);
+>>>>>>> CHANGE (c75073626f3df79bafa5f90824e7dde0b9049584 ANDROID: vendor_hooks: Add android_vh_rwsem_downgrade_wake_f)
