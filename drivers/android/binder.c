@@ -5021,7 +5021,10 @@ static void binder_release_work(struct binder_proc *proc,
 				"undelivered TRANSACTION_ERROR: %u\n",
 				e->cmd);
 		} break;
+<<<<<<< HEAD   (6246b8 UPSTREAM: netfilter: nf_tables: skip set commit for deleted/)
 		case BINDER_WORK_TRANSACTION_PENDING:
+=======
+>>>>>>> BRANCH (39420a ANDROID: GKI: fix crc issue in include/net/addrconf.h)
 		case BINDER_WORK_TRANSACTION_ONEWAY_SPAM_SUSPECT:
 		case BINDER_WORK_TRANSACTION_COMPLETE: {
 			binder_debug(BINDER_DEBUG_DEAD_TRANSACTION,
