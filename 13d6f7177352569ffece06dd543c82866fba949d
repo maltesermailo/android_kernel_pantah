@@ -16,6 +16,24 @@
       "message": "I think it would be safer to log an error message here than, blindly allowing this. If you get here two threads are sharing the same id and the driver will not behave correctly.",
       "revId": "13d6f7177352569ffece06dd543c82866fba949d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae711042_73f40698",
+        "filename": "drivers/android/process.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-01-10T09:36:07Z",
+      "side": 1,
+      "message": "Okay, I can do that. How about I also change the method to not take the ID so that its API can only be used to get the current thread?",
+      "parentUuid": "c9f8c022_97fb0736",
+      "revId": "13d6f7177352569ffece06dd543c82866fba949d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
