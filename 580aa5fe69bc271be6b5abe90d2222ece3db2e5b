@@ -16,6 +16,24 @@
       "message": "Does not even build properly 😞",
       "revId": "580aa5fe69bc271be6b5abe90d2222ece3db2e5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe43c572_a1186b74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-01-11T16:03:12Z",
+      "side": 1,
+      "message": "```\ncommon/drivers/usb/dwc3/gadget.c:2034:5: error: implicit declaration of function \u0027dwc3_ep0_reset_state\u0027 [-Werror,-Wimplicit-function-declaration]\n                                dwc3_ep0_reset_state(dwc);\n                                ^\ncommon/drivers/usb/dwc3/gadget.c:2034:5: note: did you mean \u0027dwc3_ep0_out_start\u0027?\ncommon/drivers/usb/dwc3/gadget.h:112:6: note: \u0027dwc3_ep0_out_start\u0027 declared here\nvoid dwc3_ep0_out_start(struct dwc3 *dwc);\n     ^\n1 error generated.\n```",
+      "parentUuid": "a9a31c53_67144356",
+      "revId": "580aa5fe69bc271be6b5abe90d2222ece3db2e5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
