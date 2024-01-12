@@ -3633,8 +3633,10 @@ static int reserve_compress_blocks(struct dnode_of_data *dn, pgoff_t count)
 			return ret;
 
 		for (i = 0; i < cluster_size; i++, dn->ofs_in_node++) {
-			if (f2fs_data_blkaddr(dn) == NULL_ADDR)
-				f2fs_set_data_blkaddr(dn, NEW_ADDR);
+			if (f2fs_data_blkaddr(dn) == NULL_ADDR) {
+				dn->data_blkaddr = NEW_ADDR;
+				f2fs_set_data_blkaddr(dn);
+			}
 		}
 
 		f2fs_i_compr_blocks_update(dn->inode, compr_blocks, true);
