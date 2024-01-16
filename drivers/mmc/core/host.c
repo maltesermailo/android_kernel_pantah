@@ -492,7 +492,11 @@ EXPORT_SYMBOL(mmc_remove_host);
  */
 void mmc_free_host(struct mmc_host *host)
 {
+<<<<<<< HEAD   (782f2a UPSTREAM: fsverity: skip PKCS#7 parser when keyring is empty)
 	mmc_crypto_free_host(host);
+=======
+	cancel_delayed_work_sync(&host->detect);
+>>>>>>> BRANCH (abc2dd Linux 4.19.305)
 	mmc_pwrseq_free(host);
 	put_device(&host->class_dev);
 }
