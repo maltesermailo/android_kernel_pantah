@@ -16,6 +16,121 @@
       "message": "LGTM, adding maze@ on CC since he was involved in v1 of the patch.",
       "revId": "9c26aea9607d42a5b0eeef49f38f5abc281c2f13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9c86393_899e6743",
+        "filename": "drivers/usb/gadget/function/f_ncm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2024-01-17T20:43:17Z",
+      "side": 1,
+      "message": "space missing before to",
+      "range": {
+        "startLine": 125,
+        "startChar": 3,
+        "endLine": 125,
+        "endChar": 21
+      },
+      "revId": "9c26aea9607d42a5b0eeef49f38f5abc281c2f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "834e0265_4ac65edb",
+        "filename": "drivers/usb/gadget/function/f_ncm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2024-01-17T20:43:17Z",
+      "side": 1,
+      "message": "spurious space",
+      "range": {
+        "startLine": 126,
+        "startChar": 62,
+        "endLine": 126,
+        "endChar": 64
+      },
+      "revId": "9c26aea9607d42a5b0eeef49f38f5abc281c2f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e6bd3f9_944dc582",
+        "filename": "drivers/usb/gadget/function/f_ncm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1522,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2024-01-17T20:43:17Z",
+      "side": 1,
+      "message": "this appears to be incorrect endianwise\nmax_segment_size is u16, wMaxSegmentSize is I believe little endian,\nas such this should be cpu_to_le16() wrapped\n\n(note the deleted line 199)",
+      "range": {
+        "startLine": 1522,
+        "startChar": 0,
+        "endLine": 1522,
+        "endChar": 55
+      },
+      "revId": "9c26aea9607d42a5b0eeef49f38f5abc281c2f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cb4ffab_219fe336",
+        "filename": "drivers/usb/gadget/function/f_ncm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1661,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2024-01-17T20:43:17Z",
+      "side": 1,
+      "message": "side note: in general there\u0027s no need to do this in the locked section, which would simplify the code by getting rid of 2 gotos",
+      "range": {
+        "startLine": 1654,
+        "startChar": 0,
+        "endLine": 1661,
+        "endChar": 2
+      },
+      "revId": "9c26aea9607d42a5b0eeef49f38f5abc281c2f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "381b320c_5b772e9d",
+        "filename": "drivers/usb/gadget/function/f_ncm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1720,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2024-01-17T20:43:17Z",
+      "side": 1,
+      "message": "this appears to be wrong, this should be a direct assignment\nboth ETH_FRAME_LEN and max_segment_size are native endian.\n\nso this is wrong on big endian.",
+      "range": {
+        "startLine": 1720,
+        "startChar": 26,
+        "endLine": 1720,
+        "endChar": 37
+      },
+      "revId": "9c26aea9607d42a5b0eeef49f38f5abc281c2f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
