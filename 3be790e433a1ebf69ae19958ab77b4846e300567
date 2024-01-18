@@ -139,6 +139,26 @@
       "message": "Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/c90012ac85c24547e5c3468ef00aabf44aa7332d) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003dc90012ac85c24547e5c3468ef00aabf44aa7332d)\n\n```\n      ## lib/test_user_copy.c ##\n     @@ lib/test_user_copy.c: static int test_check_nonzero_user(char *kmem, char __user *umem, size_t size)\n    @@ lib/test_user_copy.c: static int test_check_nonzero_user(char *kmem, char __user\n      \t */\n      \n      \tmemset(kmem, 0x0, size);\n    -@@ lib/test_user_copy.c: static int test_copy_struct_from_user(char *kmem, char __user *umem,\n    - \tsize_t ksize, usize;\n    - \n    - \tumem_src \u003d kmalloc(size, GFP_KERNEL);\n    --\tif ((ret |\u003d test(umem_src \u003d\u003d NULL, \"kmalloc failed\")))\n    -+\tret \u003d test(umem_src \u003d\u003d NULL, \"kmalloc failed\");\n    -+\tif (ret)\n    - \t\tgoto out_free;\n    - \n    - \texpected \u003d kmalloc(size, GFP_KERNEL);\n    --\tif ((ret |\u003d test(expected \u003d\u003d NULL, \"kmalloc failed\")))\n    -+\tret \u003d test(expected \u003d\u003d NULL, \"kmalloc failed\");\n    -+\tif (ret)\n    - \t\tgoto out_free;\n    - \n    - \t/* Fill umem with a fixed byte pattern. */\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 598818833 android-build.ayeaye-python-dispatcher_20240116.04_p0",
       "revId": "3be790e433a1ebf69ae19958ab77b4846e300567",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000065355763",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2916927?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "2b617466_669550b5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-01-18T12:46:10Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/c90012ac85c24547e5c3468ef00aabf44aa7332d) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003dc90012ac85c24547e5c3468ef00aabf44aa7332d)\n\n```\n      ## lib/test_user_copy.c ##\n     @@ lib/test_user_copy.c: static int test_check_nonzero_user(char *kmem, char __user *umem, size_t size)\n    @@ lib/test_user_copy.c: static int test_check_nonzero_user(char *kmem, char __user\n      \t */\n      \n      \tmemset(kmem, 0x0, size);\n    -@@ lib/test_user_copy.c: static int test_copy_struct_from_user(char *kmem, char __user *umem,\n    - \tsize_t ksize, usize;\n    - \n    - \tumem_src \u003d kmalloc(size, GFP_KERNEL);\n    --\tif ((ret |\u003d test(umem_src \u003d\u003d NULL, \"kmalloc failed\")))\n    -+\tret \u003d test(umem_src \u003d\u003d NULL, \"kmalloc failed\");\n    -+\tif (ret)\n    - \t\tgoto out_free;\n    - \n    - \texpected \u003d kmalloc(size, GFP_KERNEL);\n    --\tif ((ret |\u003d test(expected \u003d\u003d NULL, \"kmalloc failed\")))\n    -+\tret \u003d test(expected \u003d\u003d NULL, \"kmalloc failed\");\n    -+\tif (ret)\n    - \t\tgoto out_free;\n    - \n    - \t/* Fill umem with a fixed byte pattern. */\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\nAyeAye - CL 598818833 android-build.ayeaye-python-dispatcher_20240116.04_p0",
+      "revId": "3be790e433a1ebf69ae19958ab77b4846e300567",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
