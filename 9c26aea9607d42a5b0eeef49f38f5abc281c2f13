@@ -41,6 +41,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6bdec5b_7582165a",
+        "filename": "drivers/usb/gadget/function/f_ncm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1957137
+      },
+      "writtenOn": "2024-01-18T07:54:38Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b9c86393_899e6743",
+      "range": {
+        "startLine": 125,
+        "startChar": 3,
+        "endLine": 125,
+        "endChar": 21
+      },
+      "revId": "9c26aea9607d42a5b0eeef49f38f5abc281c2f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "834e0265_4ac65edb",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-01-17T20:43:17Z",
       "side": 1,
       "message": "spurious space",
+      "range": {
+        "startLine": 126,
+        "startChar": 62,
+        "endLine": 126,
+        "endChar": 64
+      },
+      "revId": "9c26aea9607d42a5b0eeef49f38f5abc281c2f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98e99c41_1e648d6e",
+        "filename": "drivers/usb/gadget/function/f_ncm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1957137
+      },
+      "writtenOn": "2024-01-18T07:54:38Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "834e0265_4ac65edb",
       "range": {
         "startLine": 126,
         "startChar": 62,
@@ -87,6 +135,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d2b4e9a_47d11d76",
+        "filename": "drivers/usb/gadget/function/f_ncm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1522,
+      "author": {
+        "id": 1957137
+      },
+      "writtenOn": "2024-01-18T07:54:38Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2e6bd3f9_944dc582",
+      "range": {
+        "startLine": 1522,
+        "startChar": 0,
+        "endLine": 1522,
+        "endChar": 55
+      },
+      "revId": "9c26aea9607d42a5b0eeef49f38f5abc281c2f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3cb4ffab_219fe336",
@@ -110,6 +182,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17c2d2ea_244425b3",
+        "filename": "drivers/usb/gadget/function/f_ncm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1661,
+      "author": {
+        "id": 1957137
+      },
+      "writtenOn": "2024-01-18T07:54:38Z",
+      "side": 1,
+      "message": "Was following the procedure already used in u_ether_configfs.h whereing the fucntionality is usually done in locked section.\n\nhttps://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/drivers/usb/gadget/function/u_ether_configfs.h?h\u003dv6.7",
+      "parentUuid": "3cb4ffab_219fe336",
+      "range": {
+        "startLine": 1654,
+        "startChar": 0,
+        "endLine": 1661,
+        "endChar": 2
+      },
+      "revId": "9c26aea9607d42a5b0eeef49f38f5abc281c2f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "381b320c_5b772e9d",
@@ -123,6 +219,30 @@
       "writtenOn": "2024-01-17T20:43:17Z",
       "side": 1,
       "message": "this appears to be wrong, this should be a direct assignment\nboth ETH_FRAME_LEN and max_segment_size are native endian.\n\nso this is wrong on big endian.",
+      "range": {
+        "startLine": 1720,
+        "startChar": 26,
+        "endLine": 1720,
+        "endChar": 37
+      },
+      "revId": "9c26aea9607d42a5b0eeef49f38f5abc281c2f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5323d4e5_6c41a8a8",
+        "filename": "drivers/usb/gadget/function/f_ncm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1720,
+      "author": {
+        "id": 1957137
+      },
+      "writtenOn": "2024-01-18T07:54:38Z",
+      "side": 1,
+      "message": "Hi Maciej. Let me fix it up on upstream.\nRemoving the cpu_to_le16 here and adding it above.\nLast time I pushed code for review in ACK, this was not mentioned in review, so I thought this was fine. Sorry for that.",
+      "parentUuid": "381b320c_5b772e9d",
       "range": {
         "startLine": 1720,
         "startChar": 26,
