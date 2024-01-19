@@ -275,6 +275,30 @@
       },
       "revId": "9c26aea9607d42a5b0eeef49f38f5abc281c2f13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d08bab58_d0cac4c7",
+        "filename": "drivers/usb/gadget/function/f_ncm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1720,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2024-01-19T00:17:47Z",
+      "side": 1,
+      "message": "actually it\u0027s right there...\nhttps://android-review.git.corp.google.com/c/kernel/common/+/2797354\n\n#1720\nMaciej Żenczykowski\nPatchset 1\nOct 19\nthis conversion looks wrong, drop it\n\n(opts-\u003emax_segment_size is native endian, not little endian)\n\nKrishna PSSNV\nPatchset 1\nOct 19\nActually I didn\u0027t add it in v1 and it worked. Added it in this patch after suggestions from usptream,",
+      "parentUuid": "d744971e_22cca786",
+      "range": {
+        "startLine": 1720,
+        "startChar": 26,
+        "endLine": 1720,
+        "endChar": 37
+      },
+      "revId": "9c26aea9607d42a5b0eeef49f38f5abc281c2f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
