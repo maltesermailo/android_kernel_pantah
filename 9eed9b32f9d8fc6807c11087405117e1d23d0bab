@@ -118,6 +118,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a0b3ed1c_6d4f86ea",
+        "filename": "BUILD.bazel",
+        "patchSetId": 5
+      },
+      "lineNbr": 2364,
+      "author": {
+        "id": 1942600
+      },
+      "writtenOn": "2024-01-22T21:23:56Z",
+      "side": 1,
+      "message": "We can\u0027t have the two outs collide as before. Otherwise we end up with:\n```\nError in pkg_zip_impl: generated file \u0027tests.zip\u0027 in rule \u0027tests_zip_arm64\u0027 conflicts with existing generated file from rule \u0027tests_zip_x86_64\u0027, defined at /usr/local/google/home/joefradley/dev/android-kernel/common-android-mainline/common/BUILD.bazel:2365:8\n```",
+      "parentUuid": "71ed15b5_8523ff04",
+      "range": {
+        "startLine": 2364,
+        "startChar": 11,
+        "endLine": 2364,
+        "endChar": 27
+      },
+      "revId": "9eed9b32f9d8fc6807c11087405117e1d23d0bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c5a585b2_589c5b03",
         "filename": "BUILD.bazel",
         "patchSetId": 5
