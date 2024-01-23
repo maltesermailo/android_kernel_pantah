@@ -4892,20 +4892,22 @@ static bool sort_folio(struct lruvec *lruvec, struct folio *folio, struct scan_c
 	}
 
 	/* protected */
-	if (tier > tier_idx) {
-		int hist = lru_hist_from_seq(lrugen->min_seq[type]);
-
+	if (tier > tier_idx || refs + workingset == BIT(LRU_REFS_WIDTH)) {
 		gen = folio_inc_gen(lruvec, folio, false);
-		list_move_tail(&folio->lru, &lrugen->folios[gen][type][zone]);
+		list_move(&folio->lru, &lrugen->folios[gen][type][zone]);
 
-		WRITE_ONCE(lrugen->protected[hist][type][tier - 1],
-			   lrugen->protected[hist][type][tier - 1] + delta);
+		if (refs + workingset != BIT(LRU_REFS_WIDTH)) {
+			int hist = lru_hist_from_seq(lrugen->min_seq[type]);
+
+			WRITE_ONCE(lrugen->protected[hist][type][tier - 1],
+			lrugen->protected[hist][type][tier - 1] + delta);
+		}
+
 		return true;
 	}
 
 	/* ineligible */
-	if (refs + workingset == BIT(LRU_REFS_WIDTH) ||
-	    zone > sc->reclaim_idx || skip_cma(folio, sc)) {
+	if (zone > sc->reclaim_idx || skip_cma(folio, sc)) {
 		gen = folio_inc_gen(lruvec, folio, false);
 		list_move_tail(&folio->lru, &lrugen->folios[gen][type][zone]);
 		return true;
