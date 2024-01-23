@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f421896_aff5d146",
+        "filename": "BUILD.bazel",
+        "patchSetId": 11
+      },
+      "lineNbr": 2069,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2024-01-23T00:57:05Z",
+      "side": 1,
+      "message": "Add as separate filegroups, or (I see why you wanted to remove kselftest_gen_config earlier):\n\nRemove :kselftest_gen_config, but have something like:\nkselftest_gen_config_arm --\u003e for arm and arm64, currently supports arm64 only\nkselftest_gen_config_x86 --\u003e for x86 and x86_64, currently supports x86_64 only",
+      "range": {
+        "startLine": 2069,
+        "startChar": 10,
+        "endLine": 2069,
+        "endChar": 30
+      },
+      "revId": "f8f428a8452f896f328cb8f0c79275b868c154e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fae1b08b_8a67161f",
+        "filename": "BUILD.bazel",
+        "patchSetId": 11
+      },
+      "lineNbr": 2142,
+      "author": {
+        "id": 1990655
+      },
+      "writtenOn": "2024-01-23T00:57:05Z",
+      "side": 1,
+      "message": "remove those lines.",
+      "range": {
+        "startLine": 2141,
+        "startChar": 7,
+        "endLine": 2142,
+        "endChar": 32
+      },
+      "revId": "f8f428a8452f896f328cb8f0c79275b868c154e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
