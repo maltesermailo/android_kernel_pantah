@@ -15,11 +15,36 @@
 #include <uapi/linux/android/binderfs.h>
 #include "binder_alloc.h"
 
+/**
+ * struct binder_report_list - information to report an abnormal binder transaction
+ * @report:         the report to be copied to user space
+ * @list:           list of reports
+ */
+struct binder_report_list {
+	struct binder_report report;
+	struct list_head list;
+};
+
+/**
+ * struct binder_context - information about a binder domain
+ * @binder_context_mgr_node: the binder  node of the context manager
+ * @context_mgr_node_lock:   the lock protecting the context manager node
+ * @binder_context_mgr_uid:  the uid of the context manager
+ * @name:                    the name of the binder context
+ * @report_flags:            what kinds of abnormal transactiosn are reported
+ * @report_count:            the current number of unread binder reports
+ * @report_wait:             waitqueue of process waiting for binder reports
+ * @report_list:             list of reports of abnormal binder transactions
+ */
 struct binder_context {
 	struct binder_node *binder_context_mgr_node;
 	struct mutex context_mgr_node_lock;
 	kuid_t binder_context_mgr_uid;
 	const char *name;
+	uint32_t report_flags;
+	uint32_t report_count;
+	wait_queue_head_t report_wait;
+	struct list_head reports;
 };
 
 /**

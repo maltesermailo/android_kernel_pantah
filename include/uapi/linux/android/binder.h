@@ -284,6 +284,21 @@ struct binder_frozen_status_info {
 	__u32            async_recv;
 };
 
+struct binder_report {
+	__u32	err;	/* returned transaction error */
+	__u32	from;	/* sender pid */
+	__u32	to;	/* target pid */
+	__u32	flags;	/* transaction flags */
+	__u32	code;	/* tranaction code */
+	__u32	size;	/* transaction data size */
+};
+
+enum report_flags {
+	REPORT_FAILED	= 0x1,	/* failed txn */
+	REPORT_DELAYED	= 0x2,	/* delayed txn */
+	REPORT_SPAMMING	= 0x4,	/* spamming txn */
+};
+
 #define BINDER_WRITE_READ		_IOWR('b', 1, struct binder_write_read)
 #define BINDER_SET_IDLE_TIMEOUT		_IOW('b', 3, __s64)
 #define BINDER_SET_MAX_THREADS		_IOW('b', 5, __u32)
@@ -297,6 +312,8 @@ struct binder_frozen_status_info {
 #define BINDER_FREEZE			_IOW('b', 14, struct binder_freeze_info)
 #define BINDER_GET_FROZEN_INFO		_IOWR('b', 15, struct binder_frozen_status_info)
 #define BINDER_ENABLE_ONEWAY_SPAM_DETECTION	_IOW('b', 16, __u32)
+#define BINDER_ENABLE_REPORT		_IOW('b', 18, __u32)
+#define BINDER_GET_REPORT		_IOWR('b', 19, struct binder_report)
 
 /*
  * NOTE: Two special error codes you should check for when calling
