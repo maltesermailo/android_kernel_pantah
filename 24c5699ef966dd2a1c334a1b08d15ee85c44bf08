@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56a8db06_e341b137",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1045980
+      },
+      "writtenOn": "2024-01-23T00:07:12Z",
+      "side": 1,
+      "message": "Risk: Minimal. This patch is a no-op for 4K filesystems, since their max\nfilesize of ~4TB is well below the ~16TB limit this sets. This would\nprovide an additional restriction on 16k filesystems with files in the\nrange of ~16TB to ~70TB, causing that data to be inaccessible. Data\nlarger than that was already unreachable due to u32 indexing, and could\nonly have been constructed artificially.",
+      "revId": "24c5699ef966dd2a1c334a1b08d15ee85c44bf08",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
