@@ -3096,6 +3096,30 @@ static void binder_set_txn_from_error(struct binder_transaction *t, int id,
 	binder_thread_dec_tmpref(from);
 }
 
+static inline bool binder_report_enabled(struct binder_context *context,
+		uint32_t mask)
+{
+	return (context->report_flags & mask) != 0;
+}
+
+static void binder_add_report(struct binder_context *context, int err,
+		int from, int to, int flags, int code, int size)
+{
+	struct binder_report_list *report;
+	report = kzalloc(sizeof(*report), GFP_KERNEL);
+	report->report.err = err;
+	report->report.from = from;
+	report->report.to = to;
+	report->report.flags = flags;
+	report->report.code = code;
+	report->report.size = size;
+	mutex_lock(&context->context_mgr_node_lock);
+	list_add_tail(&report->list, &context->reports);
+	context->report_count++;
+	mutex_unlock(&context->context_mgr_node_lock);
+	wake_up_interruptible(&context->report_wait);
+}
+
 static void binder_transaction(struct binder_proc *proc,
 			       struct binder_thread *thread,
 			       struct binder_transaction_data *tr, int reply,
@@ -3803,10 +3827,12 @@ static void binder_transaction(struct binder_proc *proc,
 		return_error_line = __LINE__;
 		goto err_copy_data_failed;
 	}
-	if (t->buffer->oneway_spam_suspect)
+	if (t->buffer->oneway_spam_suspect) {
 		tcomplete->type = BINDER_WORK_TRANSACTION_ONEWAY_SPAM_SUSPECT;
-	else
+
+	} else {
 		tcomplete->type = BINDER_WORK_TRANSACTION_COMPLETE;
+	}
 	t->work.type = BINDER_WORK_TRANSACTION;
 
 	if (reply) {
@@ -3864,8 +3890,17 @@ static void binder_transaction(struct binder_proc *proc,
 		 * process and is put in a pending queue, waiting for the target
 		 * process to be unfrozen.
 		 */
-		if (return_error == BR_TRANSACTION_PENDING_FROZEN)
+		if (return_error == BR_TRANSACTION_PENDING_FROZEN) {
 			tcomplete->type = BINDER_WORK_TRANSACTION_PENDING;
+			if (binder_report_enabled(context, REPORT_DELAYED))
+				binder_add_report(context,
+						BR_TRANSACTION_PENDING_FROZEN,
+						proc->pid,
+						target_proc ? target_proc->pid :
+						0,
+						tr->flags, tr->code,
+						tr->data_size);
+		}
 		binder_enqueue_thread_work(thread, tcomplete);
 		if (return_error &&
 		    return_error != BR_TRANSACTION_PENDING_FROZEN)
@@ -3927,6 +3962,12 @@ err_invalid_target_handle:
 		binder_dec_node_tmpref(target_node);
 	}
 
+
+	if (binder_report_enabled(context, REPORT_FAILED))
+		binder_add_report(context, return_error, proc->pid,
+				target_proc ? target_proc->pid :
+				(target_thread ? target_thread->pid : 0),
+				tr->flags, tr->code, tr->data_size);
 	binder_debug(BINDER_DEBUG_FAILED_TRANSACTION,
 		     "%d:%d transaction %s to %d:%d failed %d/%d/%d, size %lld-%lld line %d\n",
 		     proc->pid, thread->pid, reply ? "reply" :
@@ -5567,6 +5608,53 @@ static int binder_ioctl_get_extended_error(struct binder_thread *thread,
 	return 0;
 }
 
+static int binder_ioctl_enable_report(struct binder_proc *proc, uint32_t flags)
+{
+	struct binder_context *context = proc->context;
+	struct binder_report_list *pos, *tmp;
+
+	pr_info("Set binder report flags %u for %s\n", flags, context->name);
+
+	/* Nothing to do if the flags are the same */
+	if (flags == context->report_flags)
+		return 0;
+
+	mutex_lock(&context->context_mgr_node_lock);
+	/* Clean up the outdated reports */
+	list_for_each_entry_safe(pos, tmp, &context->reports, list) {
+		list_del(&pos->list);
+		kfree(pos);
+	}
+	/* Update the report flags */
+	context->report_flags = flags;
+	mutex_unlock(&context->context_mgr_node_lock);
+
+	return 0;
+}
+
+static int binder_ioctl_get_report(struct binder_proc *proc,
+		struct binder_report_list **report)
+{
+	int ret;
+	struct binder_context *context = proc->context;
+	struct binder_report_list *first;
+	if (context->report_count == 0) {
+		ret = wait_event_interruptible(context->report_wait,
+				context->report_count > 0);
+		if (ret < 0)
+			return ret;
+	}
+	mutex_lock(&context->context_mgr_node_lock);
+	first = list_first_entry(&context->reports, struct binder_report_list,
+			list);
+	list_del(&first->list);
+	*report = first;
+	context->report_count--;
+	mutex_unlock(&context->context_mgr_node_lock);
+
+	return 0;
+}
+
 static long binder_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 {
 	int ret;
@@ -5780,6 +5868,32 @@ static long binder_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 		if (ret < 0)
 			goto err;
 		break;
+	case BINDER_ENABLE_REPORT: {
+		uint32_t flags;
+		if (copy_from_user(&flags, ubuf, sizeof(flags))) {
+			ret = -EFAULT;
+			goto err;
+		}
+		ret = binder_ioctl_enable_report(proc, flags);
+		if (ret)
+			goto err;
+		break;
+	}
+	case BINDER_GET_REPORT: {
+		struct binder_report_list *report;
+		ret = binder_ioctl_get_report(proc, &report);
+		if (ret < 0)
+			goto err;
+
+		/* Copy binder_report, excluding list_head */
+		if (copy_to_user(ubuf, report, sizeof(struct binder_report))) {
+			kfree(report);
+			ret = -EFAULT;
+			goto err;
+		}
+		kfree(report);
+		break;
+	}
 	default:
 		ret = -EINVAL;
 		goto err;
@@ -6796,6 +6910,8 @@ static int __init init_binder_device(const char *name)
 	binder_device->context.binder_context_mgr_uid = INVALID_UID;
 	binder_device->context.name = name;
 	mutex_init(&binder_device->context.context_mgr_node_lock);
+	init_waitqueue_head(&binder_device->context.report_wait);
+	INIT_LIST_HEAD(&binder_device->context.reports);
 
 	ret = misc_register(&binder_device->miscdev);
 	if (ret < 0) {
@@ -6815,7 +6931,6 @@ static int __init binder_init(void)
 	struct binder_device *device;
 	struct hlist_node *tmp;
 	char *device_names = NULL;
-
 	ret = binder_alloc_shrinker_init();
 	if (ret)
 		return ret;
