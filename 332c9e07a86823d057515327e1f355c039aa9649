@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000065943987",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2926458?revision\u003d1",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "96e875f6_eba81382",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-01-24T11:14:05Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/ace30fb21af5f1be1605db72c16040b95b1557ef) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003dace30fb21af5f1be1605db72c16040b95b1557ef)\n\n```\n      ## include/linux/damon.h ##\n     @@ include/linux/damon.h: struct damon_addr_range {\n       * @ar:\t\t\tThe address range of the region.\n    @@ include/linux/damon.h: int damon_set_regions(struct damon_target *t, struct damo\n     +void damon_update_region_access_rate(struct damon_region *r, bool accessed,\n     +\t\tstruct damon_attrs *attrs);\n      \n    - struct damos_filter *damos_new_filter(enum damos_filter_type type,\n    - \t\tbool matching);\n    + struct damos *damon_new_scheme(struct damos_access_pattern *pattern,\n    + \t\t\tenum damos_action action, struct damos_quota *quota,\n     \n      ## mm/damon/core.c ##\n     @@ mm/damon/core.c: unsigned int damon_moving_sum(unsigned int mvsum, unsigned int nomvsum,\n    @@ mm/damon/core.c: unsigned int damon_moving_sum(unsigned int mvsum, unsigned int\n     \n      ## mm/damon/paddr.c ##\n     @@ mm/damon/paddr.c: out:\n    - \treturn accessed;\n    + \treturn result.accessed;\n      }\n      \n     -static void __damon_pa_check_access(struct damon_region *r)\n    @@ mm/damon/paddr.c: out:\n     +\t\tstruct damon_attrs *attrs)\n      {\n      \tstatic unsigned long last_addr;\n    - \tstatic unsigned long last_folio_sz \u003d PAGE_SIZE;\n    + \tstatic unsigned long last_page_sz \u003d PAGE_SIZE;\n     @@ mm/damon/paddr.c: static void __damon_pa_check_access(struct damon_region *r)\n    - \t/* If the region is in the last checked page, reuse the result */\n    - \tif (ALIGN_DOWN(last_addr, last_folio_sz) \u003d\u003d\n    - \t\t\t\tALIGN_DOWN(r-\u003esampling_addr, last_folio_sz)) {\n    --\t\tdamon_update_region_access_rate(r, last_accessed);\n    -+\t\tdamon_update_region_access_rate(r, last_accessed, attrs);\n    - \t\treturn;\n      \t}\n      \n    - \tlast_accessed \u003d damon_pa_young(r-\u003esampling_addr, \u0026last_folio_sz);\n    + \tlast_accessed \u003d damon_pa_young(r-\u003esampling_addr, \u0026last_page_sz);\n     -\tdamon_update_region_access_rate(r, last_accessed);\n     +\tdamon_update_region_access_rate(r, last_accessed, attrs);\n      \n    @@ mm/damon/vaddr.c: static bool damon_va_young(struct mm_struct *mm, unsigned long\n     +\t\t\t\tstruct damon_attrs *attrs)\n      {\n      \tstatic unsigned long last_addr;\n    - \tstatic unsigned long last_folio_sz \u003d PAGE_SIZE;\n    + \tstatic unsigned long last_page_sz \u003d PAGE_SIZE;\n      \tstatic bool last_accessed;\n      \n      \tif (!mm) {\n    @@ mm/damon/vaddr.c: static bool damon_va_young(struct mm_struct *mm, unsigned long\n      \t\treturn;\n      \t}\n      \n    - \t/* If the region is in the last checked page, reuse the result */\n    - \tif (same_target \u0026\u0026 (ALIGN_DOWN(last_addr, last_folio_sz) \u003d\u003d\n    - \t\t\t\tALIGN_DOWN(r-\u003esampling_addr, last_folio_sz))) {\n    --\t\tdamon_update_region_access_rate(r, last_accessed);\n    -+\t\tdamon_update_region_access_rate(r, last_accessed, attrs);\n    - \t\treturn;\n    +@@ mm/damon/vaddr.c: static void __damon_va_check_access(struct mm_struct *mm,\n      \t}\n      \n    - \tlast_accessed \u003d damon_va_young(mm, r-\u003esampling_addr, \u0026last_folio_sz);\n    + \tlast_accessed \u003d damon_va_young(mm, r-\u003esampling_addr, \u0026last_page_sz);\n     -\tdamon_update_region_access_rate(r, last_accessed);\n     +\tdamon_update_region_access_rate(r, last_accessed, attrs);\n      \n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "332c9e07a86823d057515327e1f355c039aa9649",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
