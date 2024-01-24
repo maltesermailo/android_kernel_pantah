@@ -164,6 +164,7 @@
   component_master_add_with_match
   component_master_del
   component_unbind_all
+  console_printk
   console_trylock
   console_unlock
   __const_udelay
@@ -190,6 +191,8 @@
   cpuhp_tasks_frozen
   cpu_hwcap_keys
   cpu_hwcaps
+  cpuidle_pause_and_lock
+  cpuidle_resume_and_unlock
   cpumask_next
   cpumask_next_wrap
   cpu_number
@@ -202,14 +205,11 @@
   cpus_read_unlock
   crc32_le
   crypto_alloc_base
-  crypto_alloc_shash
   crypto_comp_compress
   crypto_comp_decompress
   crypto_destroy_tfm
   crypto_has_alg
   __crypto_memneq
-  crypto_shash_final
-  crypto_shash_update
   _ctype
   current_work
   debugfs_attr_read
@@ -330,6 +330,7 @@
   dev_open
   dev_pm_opp_add
   dev_pm_opp_find_freq_ceil
+  dev_pm_opp_find_freq_floor
   dev_pm_opp_get_voltage
   dev_pm_opp_of_add_table
   dev_pm_opp_of_remove_table
@@ -392,6 +393,7 @@
   dma_fence_context_alloc
   dma_fence_default_wait
   dma_fence_enable_sw_signaling
+  dma_fence_free
   dma_fence_get_status
   dma_fence_get_stub
   dma_fence_init
@@ -450,7 +452,6 @@
   down_trylock
   down_write
   down_write_trylock
-  d_path
   dql_completed
   dql_reset
   drain_workqueue
@@ -462,6 +463,10 @@
   drm_atomic_bridge_chain_enable
   drm_atomic_bridge_chain_pre_enable
   drm_atomic_get_crtc_state
+  drm_atomic_helper_bridge_destroy_state
+  drm_atomic_helper_bridge_duplicate_state
+  drm_atomic_helper_bridge_propagate_bus_fmt
+  drm_atomic_helper_bridge_reset
   drm_atomic_helper_check
   drm_atomic_helper_check_plane_state
   drm_atomic_helper_cleanup_planes
@@ -474,6 +479,7 @@
   drm_atomic_helper_connector_duplicate_state
   drm_atomic_helper_connector_reset
   drm_atomic_helper_crtc_destroy_state
+  __drm_atomic_helper_crtc_duplicate_state
   drm_atomic_helper_crtc_duplicate_state
   drm_atomic_helper_crtc_reset
   drm_atomic_helper_disable_plane
@@ -508,6 +514,7 @@
   drm_connector_set_path_property
   drm_connector_unregister
   drm_connector_update_edid_property
+  drm_crtc_add_crc_entry
   drm_crtc_arm_vblank_event
   drm_crtc_cleanup
   __drm_crtc_commit_free
@@ -563,7 +570,9 @@
   drm_dp_mst_allocate_vcpi
   drm_dp_mst_deallocate_vcpi
   drm_dp_mst_detect_port
+  drm_dp_mst_get_port_malloc
   drm_dp_mst_hpd_irq
+  drm_dp_mst_put_port_malloc
   drm_dp_mst_reset_vcpi_slots
   drm_dp_mst_topology_mgr_init
   drm_dp_mst_topology_mgr_set_mst
@@ -643,6 +652,7 @@
   drm_mode_create_scaling_mode_property
   drm_mode_crtc_set_gamma_size
   drm_mode_duplicate
+  drm_mode_object_find
   drm_mode_object_get
   drm_mode_object_put
   drm_mode_probed_add
@@ -679,6 +689,8 @@
   drm_printf
   __drm_printfn_info
   __drm_printfn_seq_file
+  drm_property_create
+  drm_property_create_blob
   drm_property_create_enum
   drm_property_create_range
   __drm_puts_seq_file
@@ -734,12 +746,14 @@
   fasync_helper
   __fdget
   fd_install
+  fget
   _find_first_bit
   _find_first_zero_bit
   find_get_pid
   _find_next_bit
   __find_vma
   finish_wait
+  firmware_request_nowarn
   flow_block_cb_setup_simple
   flow_keys_basic_dissector
   flow_rule_match_basic
@@ -748,6 +762,7 @@
   flow_rule_match_vlan
   flush_dcache_page
   flush_delayed_work
+  flush_signals
   flush_work
   flush_workqueue
   fput
@@ -803,13 +818,10 @@
   get_random_bytes
   get_random_u32
   __get_task_comm
-  get_task_mm
   get_task_pid
   get_unused_fd_flags
-  get_user_pages
   get_user_pages_fast
   get_vaddr_frames
-  get_zeroed_page
   gic_nonsecure_priorities
   gpiochip_generic_free
   gpiochip_generic_request
@@ -817,10 +829,12 @@
   gpiochip_lock_as_irq
   gpiochip_unlock_as_irq
   gpiod_direction_input
+  gpiod_direction_output
   gpiod_direction_output_raw
   gpiod_get_raw_value
   gpiod_set_raw_value
   gpiod_set_raw_value_cansleep
+  gpiod_set_value
   gpiod_set_value_cansleep
   gpiod_to_irq
   gpio_free
@@ -966,6 +980,7 @@
   irq_modify_status
   irq_of_parse_and_map
   __irq_resolve_mapping
+  irq_set_affinity
   irq_set_affinity_hint
   irq_set_chained_handler_and_data
   irq_set_chip_and_handler_name
@@ -1021,13 +1036,13 @@
   kstrtobool_from_user
   kstrtoint
   kstrtoint_from_user
-  kstrtol_from_user
   kstrtoll
   kstrtou16
   kstrtou8
   kstrtouint
   kstrtouint_from_user
   kstrtoull
+  kthread_bind
   kthread_create_on_node
   kthread_flush_work
   kthread_flush_worker
@@ -1097,7 +1112,6 @@
   misc_deregister
   misc_register
   __mmdrop
-  mmput
   mmu_notifier_synchronize
   mod_delayed_work_on
   mod_timer
@@ -1105,7 +1119,6 @@
   module_put
   __msecs_to_jiffies
   msleep
-  msleep_interruptible
   __mutex_init
   mutex_is_locked
   mutex_lock
@@ -1176,11 +1189,11 @@
   of_device_is_compatible
   of_dma_controller_free
   of_dma_controller_register
-  of_dma_is_coherent
   of_drm_find_bridge
   of_drm_find_panel
   of_find_compatible_node
   of_find_device_by_node
+  of_find_i2c_device_by_node
   of_find_matching_node_and_match
   of_find_mipi_dsi_host_by_node
   of_find_node_by_name
@@ -1433,6 +1446,7 @@
   platform_get_irq
   platform_get_irq_byname
   platform_get_irq_byname_optional
+  platform_get_irq_optional
   platform_get_resource
   platform_get_resource_byname
   __platform_register_drivers
@@ -1572,7 +1586,6 @@
   regulator_set_voltage
   regulator_unregister
   release_firmware
-  release_pages
   __release_region
   remap_pfn_range
   remap_vmalloc_range
@@ -1601,6 +1614,7 @@
   schedule_timeout
   scnprintf
   scsi_block_when_processing_errors
+  scsi_dma_unmap
   __scsi_execute
   scsi_print_sense_hdr
   scsi_schedule_eh
@@ -1630,9 +1644,6 @@
   sg_free_table_chained
   sg_init_one
   sg_init_table
-  sg_miter_next
-  sg_miter_start
-  sg_miter_stop
   sg_next
   __sg_page_iter_next
   __sg_page_iter_start
@@ -1699,6 +1710,7 @@
   snd_soc_info_enum_double
   snd_soc_info_volsw
   snd_soc_jack_report
+  snd_soc_new_compress
   snd_soc_of_get_dai_link_codecs
   snd_soc_of_get_dai_name
   snd_soc_of_parse_audio_routing
@@ -1730,6 +1742,7 @@
   start_backtrace
   static_key_slow_dec
   static_key_slow_inc
+  stpcpy
   strcasecmp
   strcat
   strchr
@@ -1749,7 +1762,6 @@
   strnstr
   strpbrk
   strrchr
-  strscpy
   strsep
   strstr
   subsys_system_register
@@ -1780,6 +1792,7 @@
   sysfs_remove_link
   sysfs_streq
   sysrq_mask
+  system_freezable_wq
   system_freezing_cnt
   system_state
   system_unbound_wq
@@ -1930,11 +1943,14 @@
   uart_write_wakeup
   __ubsan_handle_cfi_check_fail_abort
   __udelay
+  ufshcd_auto_hibern8_update
   ufshcd_config_pwr_mode
   ufshcd_dme_get_attr
+  ufshcd_dme_set_attr
   ufshcd_dump_regs
   ufshcd_link_recovery
   ufshcd_pltfrm_init
+  ufshcd_release
   ufshcd_remove
   ufshcd_shutdown
   ufshcd_system_resume
@@ -2105,7 +2121,6 @@
   vunmap
   vzalloc
   wait_for_completion
-  wait_for_completion_interruptible
   wait_for_completion_interruptible_timeout
   wait_for_completion_killable
   wait_for_completion_timeout
