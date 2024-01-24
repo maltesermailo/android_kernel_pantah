@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000065929926",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/2925050?revision\u003d6",
+      "fixSuggestions": [],
+      "key": {
+        "uuid": "0233ca68_09dc5aae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-01-24T08:25:08Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. These are the differences between the original change and this cherry-pick:\nChecked against UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/0567461a7a6ecb12692e3bbb97e86ff9d39a2837) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d0567461a7a6ecb12692e3bbb97e86ff9d39a2837)\n\n```\n      ## drivers/android/binder.c ##\n     @@ drivers/android/binder.c: binder_find_outdated_transaction_ilocked(struct binder_transaction *t,\n    @@ drivers/android/binder.c: retry:\n      \t\t\telse\n      \t\t\t\tcmd \u003d BR_TRANSACTION_COMPLETE;\n      \t\t\tbinder_inner_proc_unlock(proc);\n    +@@ drivers/android/binder.c: static void binder_release_work(struct binder_proc *proc,\n    + \t\t\t\t\"undelivered TRANSACTION_ERROR: %u\\n\",\n    + \t\t\t\te-\u003ecmd);\n    + \t\t} break;\n    ++\t\tcase BINDER_WORK_TRANSACTION_PENDING:\n    + \t\tcase BINDER_WORK_TRANSACTION_ONEWAY_SPAM_SUSPECT:\n    + \t\tcase BINDER_WORK_TRANSACTION_COMPLETE: {\n    + \t\t\tbinder_debug(BINDER_DEBUG_DEAD_TRANSACTION,\n     @@ drivers/android/binder.c: static const char * const binder_return_strings[] \u003d {\n      \t\"BR_FAILED_REPLY\",\n      \t\"BR_FROZEN_REPLY\",\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "926513cf117bf2e5310e608acc30b86246ab5c44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
