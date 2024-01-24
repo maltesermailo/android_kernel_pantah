@@ -16,6 +16,24 @@
       "message": "Why is this so urgent that we need to take it as FROM* into android-mainline? Can we wait for it to land upstream?",
       "revId": "4a26692d8bd01415e57a8c90c565512308f816c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e4327d8_a5857786",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-01-24T19:13:42Z",
+      "side": 1,
+      "message": "So, since the patches landed in 6.1, this change has gotten added to Paul\u0027s RCU tree: https://git.kernel.org/pub/scm/linux/kernel/git/paulmck/linux-rcu.git/commit/?h\u003drcu/next\u0026id\u003df5026c746efabbd5f022b2713ed86df290fa279d\n\nSo it should be landing upstream soon. We can change it to FROMGIT (it was originally FROMGIT, but then Paul reworked his tree dropping it shortly, so I had Qais change it to FROMLIST, but now its back in the maintainer tree).\n\n\nMostly this is needed so we can disable lazy rcu by default, and enable it conditionally for evaluations on the product branches. For upstream, we could leave this out and have lazyrcu enabled by default, or not enable the config for android-mainline, but I\u0027d like to keep as much consistency between android-mainline and android15-6.6 so its easier to compare performance results between those trees.",
+      "parentUuid": "e8344e83_32bfc42e",
+      "revId": "4a26692d8bd01415e57a8c90c565512308f816c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
