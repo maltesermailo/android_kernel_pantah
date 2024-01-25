@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d455439_e25a9361",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-25T00:48:13Z",
+      "side": 1,
+      "message": "change to \"Bug: 322143898\"",
+      "revId": "f1048633f0910a1d1571359104d836a9bca42071",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d66df87e_6544dc5c",
@@ -14,6 +31,23 @@
       "writtenOn": "2024-01-24T23:15:00Z",
       "side": 1,
       "message": "Please disable in all gki_defconfig files. For this branch, delete from arch/x86/configs/gki_defconfig. Some branches like android14-6.1 will also need it disabled in arch/riscv/configs/gki_defconfig.",
+      "revId": "f1048633f0910a1d1571359104d836a9bca42071",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28a0c0b1_d6b3ab83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-25T00:48:13Z",
+      "side": 1,
+      "message": "Build-break:\n```\n--- common/arch/arm64/configs/gki_defconfig    2024-01-24 23:17:22.564742131 +0000\n...oid/common-android14-5.15/out/bazel/output_user_root/c126e7d3c13484ebc27ab7dd47bee034/sandbox/linux-sandbox/27/execroot/__main__/out/android14-5.15/common/defconfig    2024-01-24 23:18:08.080879829 +0000\n@@ -453,7 +453,6 @@\n CONFIG_BPF_LIRC_MODE2\u003dy\n CONFIG_RC_DECODERS\u003dy\n CONFIG_RC_DEVICES\u003dy\n-# CONFIG_MEDIA_CEC_RC is not set\n # CONFIG_MEDIA_ANALOG_TV_SUPPORT is not set\n # CONFIG_MEDIA_DIGITAL_TV_SUPPORT is not set\n # CONFIG_MEDIA_RADIO_SUPPORT is not set\nERROR: savedefconfig does not match common/arch/arm64/configs/gki_defconfig\nUse --verbose_failures to see the command lines of failed build steps.\nINFO: Elapsed time: 41.170s, Critical Path: 14.47s\nINFO: 699 processes: 673 internal, 25 linux-sandbox, 1 local.\nERROR: Build did NOT complete successfully\n```\nPlease fix",
       "revId": "f1048633f0910a1d1571359104d836a9bca42071",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
