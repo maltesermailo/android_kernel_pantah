@@ -70,6 +70,24 @@
       "parentUuid": "e83620fd_38c07ced",
       "revId": "8897d0bcd9f6ff47d4761342d267dc64c529f946",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08544306_2c85892b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-01-29T09:46:28Z",
+      "side": 1,
+      "message": "Please follow the guidelines at:\n\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nSpecifically, a `BACKPORT:` tag needs you to:\n\n\"add comments about the changes under the (cherry picked from commit ...) line\"\n\nSo you might have something like:\n\n(Cherry picked from commit 0db211ec0f1d32b93486e8f6565249ad4d1bece5 stable/linux.git linux-6.1.y)\n[Qi Feng: Cherry-picked from -stable backport]\n\nFollowed by your Signed-off-by line.\n\nThere are examples of this in the README that I have linked to twice in this comment thread. Please have a look at them.",
+      "parentUuid": "a36118d4_d7106be6",
+      "revId": "8897d0bcd9f6ff47d4761342d267dc64c529f946",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
