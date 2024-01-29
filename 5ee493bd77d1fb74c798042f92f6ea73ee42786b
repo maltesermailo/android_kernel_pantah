@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b62c78a8_2b670906",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-01-29T23:20:34Z",
+      "side": 1,
+      "message": "They are needed for devices that initially shipped with a 4.19 kernel using sdcardfs but now are uprevving to anderoid13-5.15. There shouldn\u0027t be any new sdcardfs cases - I\u0027m pretty sure we already test for no sdcardfs (drosen@ please confirm) so this uprev case will get an exception similar to the GKI exception for devices that launched with 4.19.\n\nIf all these symbols really are needed, then as Greg says they must be exported only for filesystems. Follow the pattern used for other filesystems:\n\nexport symbol vfs_foo:\n```\nEXPORT_SYMBOL_NS_GPL(vfs_foo, ANDROID_GKI_VFS_EXPORT_ONLY);\n```\n\nenable import of vfs symbols for sdcardfs:\n```\nMODULE_IMPORT_NS(ANDROID_GKI_VFS_EXPORT_ONLY);\n```",
+      "parentUuid": "56423993_7e2b7aa9",
+      "revId": "5ee493bd77d1fb74c798042f92f6ea73ee42786b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6f481498_3614c936",
         "filename": "fs/read_write.c",
         "patchSetId": 3
