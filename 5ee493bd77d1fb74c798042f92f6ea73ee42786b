@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd17a6de_21003425",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-29T22:57:54Z",
+      "side": 1,
+      "message": "These symbols aren\u0027t ok to export, sorry.\n\nFor older kernels I can understand needing sdcardfs, but why for newer ones?",
+      "revId": "5ee493bd77d1fb74c798042f92f6ea73ee42786b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f481498_3614c936",
+        "filename": "fs/read_write.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-01-29T22:57:54Z",
+      "side": 1,
+      "message": "if this was ok, all new exports MUST be EXPORT_SYMBOL_GPL() for obvious reasons.",
+      "range": {
+        "startLine": 495,
+        "startChar": 0,
+        "endLine": 495,
+        "endChar": 13
+      },
+      "revId": "5ee493bd77d1fb74c798042f92f6ea73ee42786b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
