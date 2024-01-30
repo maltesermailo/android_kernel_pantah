@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3b49d15f_0578e802",
+        "filename": "fs/fs_struct.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1975505
+      },
+      "writtenOn": "2024-01-30T02:51:48Z",
+      "side": 1,
+      "message": "Hi @drosen@google.com\nCould you help check if we can remove the dependency set_fs_pwd?\n\nAs before, sdcardfs call set_fs_pwd before call filp_open, and we have replaced filp_open with lookup_one_len_unlocked and vfs_create.\n\nHi @gregkh@google.com\nCould copy_fs_struct and free_fs_struct be exported?",
+      "parentUuid": "3c55f36a_703eb6ad",
+      "range": {
+        "startLine": 49,
+        "startChar": 21,
+        "endLine": 49,
+        "endChar": 31
+      },
+      "revId": "f08ec344606fe46e4ed578287a2cb6473c6b24d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73c86c97_e80fe172",
         "filename": "fs/read_write.c",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2024-01-30T02:09:51Z",
       "side": 1,
       "message": "again, no one should ever be calling this, including a filesystem, Please make the filesystem work with the existing exports, new ones like this, and vfs_write, are not ok to export for obvious reasons.",
+      "range": {
+        "startLine": 495,
+        "startChar": 21,
+        "endLine": 495,
+        "endChar": 29
+      },
+      "revId": "f08ec344606fe46e4ed578287a2cb6473c6b24d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d60f4e0_20c8f3c1",
+        "filename": "fs/read_write.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1975505
+      },
+      "writtenOn": "2024-01-30T02:51:48Z",
+      "side": 1,
+      "message": "Thanks for your suggestion and we will try with kernel_read/kernel_write like ecryptfs.",
+      "parentUuid": "73c86c97_e80fe172",
       "range": {
         "startLine": 495,
         "startChar": 21,
