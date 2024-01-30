@@ -122,6 +122,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa30e52b_8ecc3d4b",
+        "filename": "fs/fs_struct.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1975505
+      },
+      "writtenOn": "2024-01-30T15:02:11Z",
+      "side": 1,
+      "message": "Hi, Greg\n\n@drosen@google.com introduced this dependency by [commit](https://android.googlesource.com/kernel/common/+/e520ac67aca1f1ebb8e95eff3a8e637c628c945c). It is a requirement from Android, and other filesystemes don\u0027t have this requirement.\n\nAll threads of the process share a same `fs_struct`, so we can not modify the `current-\u003efs-\u003eumask` directly.",
+      "parentUuid": "9e1682ad_25b827de",
+      "range": {
+        "startLine": 49,
+        "startChar": 21,
+        "endLine": 49,
+        "endChar": 31
+      },
+      "revId": "f08ec344606fe46e4ed578287a2cb6473c6b24d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73c86c97_e80fe172",
         "filename": "fs/read_write.c",
         "patchSetId": 4
