@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5d2a2b9e_92b3b6c4",
+        "filename": "fs/fs_struct.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1975505
+      },
+      "writtenOn": "2024-01-30T03:17:45Z",
+      "side": 1,
+      "message": "As before, sdcardfs called copy_fs_struct/free_fs_struct to set umask to 0 temporarily before calling vfs_create.\n\nIs there any solution could replace it?\n\nBy the way, is it okay if we just add the existing exported symbols to abi?",
+      "parentUuid": "63fdcd0e_2c9dd216",
+      "range": {
+        "startLine": 49,
+        "startChar": 21,
+        "endLine": 49,
+        "endChar": 31
+      },
+      "revId": "f08ec344606fe46e4ed578287a2cb6473c6b24d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73c86c97_e80fe172",
         "filename": "fs/read_write.c",
         "patchSetId": 4
