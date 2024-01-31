@@ -2776,9 +2776,12 @@ static void __split_huge_page(struct page *page, struct list_head *list,
 }
 
 /* Racy check whether the huge page can be split */
-bool can_split_folio(struct folio *folio, int *pextra_pins)
+static bool can_split_folio(struct folio *folio, int *pextra_pins)
 {
 	int extra_pins;
+
+	if (!folio_can_split(folio))
+		return false;
 
 	/* Additional pins from page cache */
 	if (folio_test_anon(folio))
@@ -2831,6 +2834,13 @@ int split_huge_page_to_list(struct page *page, struct list_head *list)
 	}
 
 	if (folio_test_writeback(folio))
+		return -EBUSY;
+
+	/*
+	 * Racy check if we can split the page, before unmap_folio() will
+	 * split PMDs
+	 */
+	if (!can_split_folio(folio, &extra_pins))
 		return -EBUSY;
 
 	if (folio_test_anon(folio)) {
@@ -2890,15 +2900,6 @@ int split_huge_page_to_list(struct page *page, struct list_head *list)
 			end = shmem_fallocend(mapping->host, end);
 	}
 
-	/*
-	 * Racy check if we can split the page, before unmap_folio() will
-	 * split PMDs
-	 */
-	if (!can_split_folio(folio, &extra_pins)) {
-		ret = -EAGAIN;
-		goto out_unlock;
-	}
-
 	unmap_folio(folio);
 
 	/* block interrupt reentry in xa_lock and spinlock */
@@ -2950,7 +2951,6 @@ fail:
 		ret = -EAGAIN;
 	}
 
-out_unlock:
 	if (anon_vma) {
 		anon_vma_unlock_write(anon_vma);
 		put_anon_vma(anon_vma);
@@ -2994,6 +2994,7 @@ void deferred_split_folio(struct folio *folio)
 	unsigned long flags;
 
 	VM_BUG_ON_FOLIO(folio_order(folio) < 2, folio);
+	VM_WARN_ON_ONCE_FOLIO(!folio_can_split(folio), folio);
 
 	/*
 	 * The try_to_unmap() in page reclaim path might reach here too,

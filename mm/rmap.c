@@ -1477,7 +1477,7 @@ void page_remove_rmap(struct page *page, struct vm_area_struct *vma,
 		 * page of the folio is unmapped and at least one page
 		 * is still mapped.
 		 */
-		if (folio_test_large(folio) && folio_test_anon(folio))
+		if (folio_test_large(folio) && folio_test_anon(folio) && folio_can_split(folio))
 			if (!compound || nr < nr_pmdmapped)
 				deferred_split_folio(folio);
 	}

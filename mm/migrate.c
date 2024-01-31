@@ -2020,7 +2020,7 @@ struct folio *alloc_migration_target(struct folio *src, unsigned long private)
 		order = folio_order(src);
 	}
 	zidx = zone_idx(folio_zone(src));
-	if (is_highmem_idx(zidx) || zidx == ZONE_MOVABLE)
+	if (zidx > ZONE_NORMAL)
 		gfp_mask |= __GFP_HIGHMEM;
 
 	return __folio_alloc(gfp_mask, order, nid, mtc->nmask);
@@ -2522,7 +2522,7 @@ static int numamigrate_isolate_page(pg_data_t *pgdat, struct page *page)
 			if (managed_zone(pgdat->node_zones + z))
 				break;
 		}
-		wakeup_kswapd(pgdat->node_zones + z, 0, order, ZONE_MOVABLE);
+		wakeup_kswapd(pgdat->node_zones + z, 0, order, z);
 		return 0;
 	}
 

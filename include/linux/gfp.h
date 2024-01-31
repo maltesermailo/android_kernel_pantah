@@ -87,8 +87,8 @@ static inline bool gfpflags_allow_blocking(const gfp_t gfp_flags)
  * GFP_ZONES_SHIFT must be <= 2 on 32 bit platforms.
  */
 
-#if defined(CONFIG_ZONE_DEVICE) && (MAX_NR_ZONES-1) <= 4
-/* ZONE_DEVICE is not a valid GFP zone specifier */
+#if MAX_NR_ZONES - 2 - IS_ENABLED(CONFIG_ZONE_DEVICE) <= 4
+/* zones beyond ZONE_MOVABLE are not valid GFP zone specifiers */
 #define GFP_ZONES_SHIFT 2
 #else
 #define GFP_ZONES_SHIFT ZONES_SHIFT
@@ -134,7 +134,27 @@ static inline enum zone_type gfp_zone(gfp_t flags)
 	z = (GFP_ZONE_TABLE >> (bit * GFP_ZONES_SHIFT)) &
 					 ((1 << GFP_ZONES_SHIFT) - 1);
 	VM_BUG_ON((GFP_ZONE_BAD >> bit) & 1);
+
+	if ((flags & GFP_TRANSHUGE_LIGHT) == GFP_TRANSHUGE_LIGHT)
+		return LAST_VIRT_ZONE;
+
 	return z;
+}
+
+extern int zone_nomerge_order __read_mostly;
+extern int zone_nosplit_order __read_mostly;
+
+static inline enum zone_type gfp_order_zone(gfp_t flags, int order)
+{
+	enum zone_type zid = gfp_zone(flags);
+
+	if (zid >= ZONE_NOMERGE && order != zone_nomerge_order)
+		zid = ZONE_NOMERGE - 1;
+
+	if (zid >= ZONE_NOSPLIT && order < zone_nosplit_order)
+		zid = ZONE_NOSPLIT - 1;
+
+	return zid;
 }
 
 /*
