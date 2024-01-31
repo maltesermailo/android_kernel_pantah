@@ -132,10 +132,30 @@ static inline enum zone_type __gfp_zone(gfp_t flags)
 	z = (GFP_ZONE_TABLE >> (bit * GFP_ZONES_SHIFT)) &
 					 ((1 << GFP_ZONES_SHIFT) - 1);
 	VM_BUG_ON((GFP_ZONE_BAD >> bit) & 1);
+
+	if ((flags & (__GFP_MOVABLE | __GFP_COMP)) == (__GFP_MOVABLE | __GFP_COMP))
+		return LAST_VIRT_ZONE;
+
 	return z;
 }
 
 enum zone_type gfp_zone(gfp_t flags);
+
+extern int zone_nomerge_order __read_mostly;
+extern int zone_nosplit_order __read_mostly;
+
+static inline enum zone_type gfp_order_zone(gfp_t flags, int order)
+{
+	enum zone_type zid = gfp_zone(flags);
+
+	if (zid >= ZONE_NOMERGE && order != zone_nomerge_order)
+		zid = ZONE_NOMERGE - 1;
+
+	if (zid >= ZONE_NOSPLIT && order < zone_nosplit_order)
+		zid = ZONE_NOSPLIT - 1;
+
+	return zid;
+}
 
 /*
  * There is only one page-allocator function, and two main namespaces to
