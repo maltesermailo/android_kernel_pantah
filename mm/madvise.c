@@ -400,7 +400,7 @@ static int madvise_cold_or_pageout_pte_range(pmd_t *pmd,
 			err = split_folio(folio);
 			folio_unlock(folio);
 			folio_put(folio);
-			if (!err)
+			if (err >= 0)
 				goto regular_folio;
 			return 0;
 		}
@@ -436,6 +436,7 @@ huge_unlock:
 regular_folio:
 #endif
 	tlb_change_page_size(tlb, PAGE_SIZE);
+restart:
 	start_pte = pte = pte_offset_map_lock(vma->vm_mm, pmd, addr, &ptl);
 	if (!start_pte)
 		return 0;
@@ -522,8 +523,10 @@ split:
 			err = split_folio(folio);
 			folio_unlock(folio);
 			folio_put(folio);
-			if (err)
+			if (err < 0)
 				break;
+			if (err)
+				goto restart;
 			start_pte = pte =
 				pte_offset_map_lock(mm, pmd, addr, &ptl);
 			if (!start_pte)
@@ -691,6 +694,7 @@ static int madvise_free_pte_range(pmd_t *pmd, unsigned long addr,
 			return 0;
 
 	tlb_change_page_size(tlb, PAGE_SIZE);
+restart:
 	start_pte = pte = pte_offset_map_lock(mm, pmd, addr, &ptl);
 	if (!start_pte)
 		return 0;
@@ -744,8 +748,10 @@ static int madvise_free_pte_range(pmd_t *pmd, unsigned long addr,
 			err = split_folio(folio);
 			folio_unlock(folio);
 			folio_put(folio);
-			if (err)
+			if (err < 0)
 				break;
+			if (err)
+				goto restart;
 			start_pte = pte =
 				pte_offset_map_lock(mm, pmd, addr, &ptl);
 			if (!start_pte)
