@@ -22,6 +22,30 @@
       },
       "revId": "7a56f2977c3623ecb60ea9d9ea7d9ea2ca6ce571",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48516c14_9a092b60",
+        "filename": "mm/memory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3728,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-02-13T19:29:48Z",
+      "side": 1,
+      "message": "Yeah, 5.10 handles this in a bit more efficient way, detecting that PTE changed from under us (someone else swapped the entry), so no need to retry. But I don\u0027t want to add more legacy code here to optimize this corner case. We will simply retry under mmap_lock and if someone already swapped in this page we will find it and treat as a minor pagefault.",
+      "parentUuid": "21179668_308c571e",
+      "range": {
+        "startLine": 3727,
+        "startChar": 0,
+        "endLine": 3728,
+        "endChar": 24
+      },
+      "revId": "7a56f2977c3623ecb60ea9d9ea7d9ea2ca6ce571",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
