@@ -16,6 +16,24 @@
       "message": "I\u0027m eager to drop what we can of the techdebt here, but I also don\u0027t have much context around the original motivation for the change.",
       "revId": "3e7f6e22d5d3e61827b6902c4030d288df362e9d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fbf37dd_9aa0ac45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004907
+      },
+      "writtenOn": "2024-02-13T15:30:28Z",
+      "side": 1,
+      "message": "The only thing that the original patch did was to trim some log messages. With upstream if you got a wakeup event (like a keyboard press) while waiting for kernel tasks to freeze, it would look like this:\n\n```\nFreezing of tasks aborted after 0.775 seconds (1 tasks refusing to freeze, wq_busy\u003d0):\ntask:kswapd0         state:D stack:    0 pid:  161 ppid:     2 flags:0x00000008\nCall trace:\n __switch_to+0xf4/0x1f4\n __schedule+0x44c/0xb80\n schedule+0x5c/0x10c\n schedule_timeout+0xac/0x320\n msleep+0x34/0x48\n kswapd+0x2ec/0x484\n kthread+0x138/0x1e0\n ret_from_fork+0x10/0x20\n```\n\nAfter the original change, you\u0027d have instead just:\n```\nFreezing of tasks aborted after 0.775 seconds\n```\n\nThe upstream message was possibly confusing since the \"cause\" of the wakeup was the keypress and the task fingered above \"kswapd\" wasn\u0027t really to blame. I assume that the person who wrote the patch originally was trying to clear up this confusion since that\u0027s the only thing that makes sense. Why else would you remove this information from the logs?\n\nHowever:\n* The upstream message doesn\u0027t actually say that those tasks were responsible for waking up the system. If the system took over 20 seconds then it would have said that the freezing of tasks \"failed\" instead of \"aborted\" and _that_ would have meant that the tasks were responsible.\n* In any case where the time printed is anything significant then is probably useful to know. In general freezing of kernel tasks should not take more than a second (hopefully nowhere near a second, actually). So even if those tasks weren\u0027t directly responsible they\u0027re still good to know about.",
+      "parentUuid": "cc7ab26e_ee2793c6",
+      "revId": "3e7f6e22d5d3e61827b6902c4030d288df362e9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
