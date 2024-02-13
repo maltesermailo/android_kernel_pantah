@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21179668_308c571e",
+        "filename": "mm/memory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3728,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-02-13T19:21:33Z",
+      "side": 1,
+      "message": "Do we need the retry if not same? \n\nIn 5.10 pte_unmap_same() takes the vmf-\u003eptl lock but I didn\u0027t find similar protection in 5.15?",
+      "range": {
+        "startLine": 3727,
+        "startChar": 0,
+        "endLine": 3728,
+        "endChar": 24
+      },
+      "revId": "7a56f2977c3623ecb60ea9d9ea7d9ea2ca6ce571",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
