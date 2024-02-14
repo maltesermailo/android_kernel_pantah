@@ -220,6 +220,8 @@ struct binder_transaction_log_entry {
 struct binder_transaction_log {
 	atomic_t cur;
 	bool full;
+	int poll_event;
+	wait_queue_head_t wait;
 	struct binder_transaction_log_entry entry[32];
 };
 
@@ -3925,6 +3927,8 @@ err_invalid_target_handle:
 		smp_wmb();
 		WRITE_ONCE(e->debug_id_done, t_debug_id);
 		WRITE_ONCE(fe->debug_id_done, t_debug_id);
+		binder_transaction_log_failed.poll_event = EPOLLIN;
+		wake_up_interruptible(&binder_transaction_log_failed.wait);
 	}
 
 	BUG_ON(thread->return_error.cmd != BR_OK);
@@ -6674,6 +6678,21 @@ static int transaction_log_show(struct seq_file *m, void *unused)
 	return 0;
 }
 
+static __poll_t
+transaction_log_poll(struct file *filp, struct poll_table_struct *wait)
+{
+	struct seq_file *m = filp->private_data;
+	struct binder_transaction_log *log;
+	int events;
+
+	log = m->private;
+	poll_wait(filp, &log->wait, wait);
+	events = log->poll_event;
+	log->poll_event = 0;
+
+	return events;
+}
+
 const struct file_operations binder_fops = {
 	.owner = THIS_MODULE,
 	.poll = binder_poll,
@@ -6768,6 +6787,9 @@ static int __init binder_init(void)
 
 	atomic_set(&binder_transaction_log.cur, ~0U);
 	atomic_set(&binder_transaction_log_failed.cur, ~0U);
+	init_waitqueue_head(&binder_transaction_log_failed.wait);
+	/* force-insert the ->poll() callback - FIXME */
+	((struct file_operations *)&transaction_log_fops)->poll = transaction_log_poll;
 
 	binder_debugfs_dir_entry_root = debugfs_create_dir("binder", NULL);
 
