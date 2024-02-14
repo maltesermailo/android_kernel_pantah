@@ -808,6 +808,10 @@ static int z_erofs_register_pcluster(struct z_erofs_decompress_frontend *fe)
 
 	if (ztailpacking) {
 		pcl->obj.index = 0;	/* which indicates ztailpacking */
+<<<<<<< HEAD   (afd6cc ANDROID: KVM: arm64: Invoke the POST callback walker on the )
+=======
+		pcl->tailpacking_size = map->m_plen;
+>>>>>>> BRANCH (eb3e29 Linux 6.6.16)
 	} else {
 		pcl->obj.index = erofs_blknr(sb, map->m_pa);
 
