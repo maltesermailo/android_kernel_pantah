@@ -240,8 +240,8 @@ static void *guest_s2_zalloc_page(void *mc)
 
 	memset(addr, 0, PAGE_SIZE);
 	p = hyp_virt_to_page(addr);
-	memset(p, 0, sizeof(*p));
 	p->refcount = 1;
+	p->order = 0;
 
 	return addr;
 }
@@ -590,6 +590,14 @@ static kvm_pte_t kvm_init_invalid_leaf_owner(enum pkvm_component_id owner_id)
 	return FIELD_PREP(KVM_INVALID_PTE_OWNER_MASK, owner_id);
 }
 
+static void __host_update_page_state(phys_addr_t addr, u64 size, enum pkvm_page_state state)
+{
+	phys_addr_t end = addr + size;
+
+	for (; addr < end; addr += PAGE_SIZE)
+		hyp_phys_to_page(addr)->host_state = state;
+}
+
 int host_stage2_set_owner_locked(phys_addr_t addr, u64 size, enum pkvm_component_id owner_id)
 {
 	kvm_pte_t annotation;
@@ -608,6 +616,16 @@ int host_stage2_set_owner_locked(phys_addr_t addr, u64 size, enum pkvm_component
 
 	prot = owner_id == PKVM_ID_HOST ? PKVM_HOST_MEM_PROT : 0;
 	pkvm_iommu_host_stage2_idmap(addr, addr + size, prot);
+
+	if (!addr_is_memory(addr))
+		return 0;
+
+	/* Don't forget to update the vmemmap tracking for the host */
+	if (owner_id == PKVM_ID_HOST)
+		__host_update_page_state(addr, size, PKVM_PAGE_OWNED);
+	else
+		__host_update_page_state(addr, size, PKVM_NOPAGE);
+
 	return 0;
 }
 
@@ -650,8 +668,6 @@ static bool host_stage2_pte_is_counted(kvm_pte_t pte, u32 level)
 
 #define DEFERRED_MEMATTR_NOTE	(1ULL << 24)
 #ifdef CONFIG_ANDROID_ARM64_WORKAROUND_DMA_BEYOND_POC
-static enum pkvm_page_state host_get_page_state(kvm_pte_t pte, u64 addr);
-
 int __pkvm_host_set_stage2_memattr(phys_addr_t phys, bool force_nc)
 {
 	kvm_pte_t pte;
@@ -679,7 +695,7 @@ int __pkvm_host_set_stage2_memattr(phys_addr_t phys, bool force_nc)
 		default:
 			ret = -EPERM;
 		}
-	} else if (host_get_page_state(pte, phys) != PKVM_PAGE_OWNED) {
+	} else if (hyp_phys_to_page(phys)->host_state != PKVM_PAGE_OWNED) {
 		ret = -EPERM;
 	}
 
@@ -779,6 +795,7 @@ static int host_stage2_idmap(struct kvm_vcpu_fault_info *fault, u64 addr)
 				return ret;
 			break;
 		default:
+			WARN_ON(!(hyp_phys_to_page(addr)->host_state & PKVM_NOPAGE));
 			return -EPERM;
 		}
 	}
@@ -984,24 +1001,19 @@ static int check_page_state_range(struct kvm_pgtable *pgt, u64 addr, u64 size,
 	return kvm_pgtable_walk(pgt, addr, size, &walker);
 }
 
-static enum pkvm_page_state host_get_page_state(kvm_pte_t pte, u64 addr)
+static enum pkvm_page_state host_get_mmio_page_state(kvm_pte_t pte, u64 addr)
 {
-	bool is_memory = addr_is_memory(addr);
 	enum pkvm_page_state state = 0;
 	enum kvm_pgtable_prot prot;
 
-	if (is_memory && hyp_phys_to_page(addr)->flags & MODULE_OWNED_PAGE)
-	       return PKVM_MODULE_DONT_TOUCH;
-
-	if (is_memory && !addr_is_allowed_memory(addr))
-		return PKVM_NOPAGE;
+	WARN_ON(addr_is_memory(addr));
 
 	if (!kvm_pte_valid(pte) && pte)
 		return PKVM_NOPAGE;
 
 	prot = kvm_pgtable_stage2_pte_prot(pte);
 	if (kvm_pte_valid(pte)) {
-		if ((prot & KVM_PGTABLE_PROT_RWX) != default_host_prot(is_memory))
+		if ((prot & KVM_PGTABLE_PROT_RWX) != PKVM_HOST_MMIO_PROT)
 			state = PKVM_PAGE_RESTRICTED_PROT;
 	}
 
@@ -1013,18 +1025,44 @@ static int __host_check_page_state_range(u64 addr, u64 size,
 {
 	struct check_walk_data d = {
 		.desired	= state,
-		.get_page_state	= host_get_page_state,
+		.get_page_state	= host_get_mmio_page_state,
 	};
+	struct memblock_region *reg;
+	struct kvm_mem_range range;
+	u64 end = addr + size;
+
+	/* Can't check the state of both MMIO and memory regions at once */
+	reg = find_mem_range(addr, &range);
+	if (!is_in_mem_range(end - 1, &range))
+		return -EINVAL;
 
 	hyp_assert_lock_held(&host_mmu.lock);
-	return check_page_state_range(&host_mmu.pgt, addr, size, &d);
+
+	/* MMIO state is still in the page-table */
+	if (!reg)
+		return check_page_state_range(&host_mmu.pgt, addr, size, &d);
+
+	if (reg->flags & MEMBLOCK_NOMAP)
+		return -EPERM;
+
+	for (; addr < end; addr += PAGE_SIZE) {
+		if (hyp_phys_to_page(addr)->host_state != state)
+			return -EPERM;
+	}
+
+	/*
+	 * All memory pages with restricted permissions will already be covered
+	 * by other states (e.g. PKVM_MODULE_OWNED_PAGE), so no need to retrieve
+	 * the PKVM_PAGE_RESTRICTED_PROT state from the PTE.
+	 */
+
+	return 0;
 }
 
 static int __host_set_page_state_range(u64 addr, u64 size,
 				       enum pkvm_page_state state)
 {
 	bool update_iommu = true;
-	enum kvm_pgtable_prot prot = pkvm_mkstate(PKVM_HOST_MEM_PROT, state);
 
 	/*
 	 * Sharing and unsharing host pages shouldn't change the IOMMU page tables,
@@ -1036,7 +1074,16 @@ static int __host_set_page_state_range(u64 addr, u64 size,
 	if ((state == PKVM_PAGE_OWNED) || (state == PKVM_PAGE_SHARED_OWNED))
 		update_iommu = false;
 
-	return host_stage2_idmap_locked(addr, size, prot, update_iommu);
+	if (hyp_phys_to_page(addr)->host_state & PKVM_NOPAGE) {
+		int ret = host_stage2_idmap_locked(addr, size, PKVM_HOST_MEM_PROT, update_iommu);
+
+		if (ret)
+			return ret;
+	}
+
+	__host_update_page_state(addr, size, state);
+
+	return 0;
 }
 
 static int host_request_owned_transition(u64 *completer_addr,
@@ -2051,11 +2098,11 @@ int module_change_host_page_prot_range(u64 pfn, enum kvm_pgtable_prot prot, u64 
 	 * Modules can only modify pages they already own, and pristine host
 	 * pages. The entire range must be consistently one or the other.
 	 */
-	if (page->flags & MODULE_OWNED_PAGE) {
+	if (page->host_state & PKVM_MODULE_OWNED_PAGE) {
 		/* The entire range must be module-owned. */
 		ret = -EPERM;
 		for (i = 1; i < nr_pages; i++) {
-			if (!(page[i].flags & MODULE_OWNED_PAGE))
+			if (!(page[i].host_state & PKVM_MODULE_OWNED_PAGE))
 				goto unlock;
 		}
 	} else {
@@ -2080,9 +2127,9 @@ update:
 
 	for (i = 0; i < nr_pages; i++) {
 		if (prot != KVM_PGTABLE_PROT_RWX)
-			page[i].flags |= MODULE_OWNED_PAGE;
+			page[i].host_state |= PKVM_MODULE_OWNED_PAGE;
 		else
-			page[i].flags &= ~MODULE_OWNED_PAGE;
+			page[i].host_state &= ~PKVM_MODULE_OWNED_PAGE;
 	}
 
 unlock:
@@ -2291,7 +2338,7 @@ void drain_hyp_pool(struct pkvm_hyp_vm *vm, struct kvm_hyp_memcache *mc)
 	void *addr = hyp_alloc_pages(&vm->pool, 0);
 
 	while (addr) {
-		memset(hyp_virt_to_page(addr), 0, sizeof(struct hyp_page));
+		hyp_page_ref_dec(hyp_virt_to_page(addr));
 		push_hyp_memcache(mc, addr, hyp_virt_to_phys);
 		WARN_ON(__pkvm_hyp_donate_host(hyp_virt_to_pfn(addr), 1));
 		addr = hyp_alloc_pages(&vm->pool, 0);
