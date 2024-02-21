@@ -613,17 +613,35 @@ static kvm_pte_t kvm_init_invalid_leaf_owner(u8 owner_id)
 	return FIELD_PREP(KVM_INVALID_PTE_OWNER_MASK, owner_id);
 }
 
+static void __host_update_page_state(phys_addr_t addr, u64 size, enum pkvm_page_state state)
+{
+	phys_addr_t end = addr + size;
+
+	for (; addr < end; addr += PAGE_SIZE)
+		hyp_phys_to_page(addr)->host_state = state;
+}
+
+
 int host_stage2_set_owner_locked(phys_addr_t addr, u64 size, u8 owner_id)
 {
 	kvm_pte_t annotation;
+	int ret;
 
 	if (owner_id > KVM_MAX_OWNER_ID)
 		return -EINVAL;
 
 	annotation = kvm_init_invalid_leaf_owner(owner_id);
 
-	return host_stage2_try(kvm_pgtable_stage2_annotate, &host_mmu.pgt,
-			       addr, size, &host_s2_pool, annotation);
+	ret = host_stage2_try(kvm_pgtable_stage2_annotate, &host_mmu.pgt,
+			      addr, size, &host_s2_pool, annotation);
+	if (ret)
+		return ret;
+
+	/* Don't forget to update the vmemmap tracking for the host */
+	if (owner_id == PKVM_ID_HOST && addr_is_memory(addr))
+		__host_update_page_state(addr, size, PKVM_PAGE_OWNED);
+
+	return 0;
 }
 
 static bool host_stage2_force_pte(u64 addr, u64 end, enum kvm_pgtable_prot prot)
@@ -853,14 +871,14 @@ static int check_page_state_range(struct kvm_pgtable *pgt, u64 addr, u64 size,
 static enum pkvm_page_state host_get_page_state(kvm_pte_t pte, u64 addr)
 {
 	bool is_memory = addr_is_memory(addr);
-	enum pkvm_page_state state = 0;
+	enum pkvm_page_state state = is_memory ? hyp_phys_to_page(addr)->host_state : 0;
 	enum kvm_pgtable_prot prot;
 
 	if (is_memory && !addr_is_allowed_memory(addr))
 		return PKVM_NOPAGE;
 
-	if (is_memory && hyp_phys_to_page(addr)->flags & MODULE_OWNED_PAGE)
-	       return PKVM_MODULE_DONT_TOUCH;
+	if (state & PKVM_MODULE_OWNED_PAGE)
+		return PKVM_MODULE_OWNED_PAGE;
 
 	if (!kvm_pte_valid(pte) && pte)
 		return PKVM_NOPAGE;
@@ -868,10 +886,10 @@ static enum pkvm_page_state host_get_page_state(kvm_pte_t pte, u64 addr)
 	prot = kvm_pgtable_stage2_pte_prot(pte);
 	if (kvm_pte_valid(pte)) {
 		if ((prot & KVM_PGTABLE_PROT_RWX) != default_host_prot(is_memory))
-			state = PKVM_PAGE_RESTRICTED_PROT;
+			state |= PKVM_PAGE_RESTRICTED_PROT;
 	}
 
-	return state | pkvm_getstate(prot);
+	return state;
 }
 
 static int __host_check_page_state_range(u64 addr, u64 size,
@@ -889,9 +907,13 @@ static int __host_check_page_state_range(u64 addr, u64 size,
 static int __host_set_page_state_range(u64 addr, u64 size,
 				       enum pkvm_page_state state)
 {
-	enum kvm_pgtable_prot prot = pkvm_mkstate(PKVM_HOST_MEM_PROT, state);
+	int ret = host_stage2_idmap_locked(addr, size, PKVM_HOST_MEM_PROT);
+	if (ret)
+		return ret;
 
-	return host_stage2_idmap_locked(addr, size, prot);
+	__host_update_page_state(addr, size, state);
+
+	return 0;
 }
 
 static int host_request_owned_transition(u64 *completer_addr,
@@ -1906,11 +1928,11 @@ int module_change_host_page_prot(u64 pfn, enum kvm_pgtable_prot prot, u64 nr_pag
 	 * Modules can only modify pages they already own, and pristine host
 	 * pages. The entire range must be consistently one or the other.
 	 */
-	if (page->flags & MODULE_OWNED_PAGE) {
+	if (page->host_state & PKVM_MODULE_OWNED_PAGE) {
 		/* The entire range must be module-owned. */
 		ret = -EPERM;
 		for (i = 1; i < nr_pages; i++) {
-			if (!(page[i].flags & MODULE_OWNED_PAGE))
+			if (!(page[i].host_state & PKVM_MODULE_OWNED_PAGE))
 				goto unlock;
 		}
 	} else {
@@ -1935,9 +1957,9 @@ update:
 
 	for (i = 0; i < nr_pages; i++) {
 		if (prot != KVM_PGTABLE_PROT_RWX)
-			page[i].flags |= MODULE_OWNED_PAGE;
+			page[i].host_state |= PKVM_MODULE_OWNED_PAGE;
 		else
-			page[i].flags &= ~MODULE_OWNED_PAGE;
+			page[i].host_state &= ~PKVM_MODULE_OWNED_PAGE;
 	}
 
 unlock:
