@@ -1710,3 +1710,21 @@ bool kvm_hyp_handle_hvc64(struct kvm_vcpu *vcpu, u64 *exit_code)
 
 	return false;
 }
+
+#ifdef CONFIG_NVHE_EL2_DEBUG
+int pkvm_stage2_snapshot_by_handle(struct kvm_pgtable_snapshot *snap,
+				   pkvm_handle_t handle)
+{
+	int ret = -EINVAL;
+	struct pkvm_hyp_vm *vm;
+
+	hyp_read_lock(&vm_table_lock);
+	vm = get_vm_by_handle(handle);
+	if (vm) {
+		ret = __pkvm_guest_stage2_snapshot(snap, vm);
+	}
+
+	hyp_read_unlock(&vm_table_lock);
+	return ret;
+}
+#endif /* CONFIG_NVHE_EL2_DEBUG */
