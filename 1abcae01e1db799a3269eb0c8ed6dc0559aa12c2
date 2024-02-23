@@ -16,6 +16,24 @@
       "message": "I would really avoid something like this.\n\nFirst `strcmp` isn\u0027t super safe. Then playing with dentries is probably not something you want to do.\n\nIt\u0027ll just be nicer to have two separate set of fops. But you can keep the _open/_close common.",
       "revId": "1abcae01e1db799a3269eb0c8ed6dc0559aa12c2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dee4239_5926c8f1",
+        "filename": "arch/arm64/kvm/ptdump.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-02-23T09:37:18Z",
+      "side": 1,
+      "message": "`I would really avoid something like this.` - What is your concern ?\n`strcmp` - In this context it should be safe because the kernel should do the right thing for placing zeros at the end of `d_iname`\n\nThere are some other places in the kernel that are using the same approach:\nhttps://elixir.bootlin.com/linux/latest/source/drivers/gpu/drm/i915/i915_debugfs_params.c#L14\n\n`It\u0027ll just be nicer to have two separate set of fops. But you can keep the _open/_close common.` - Initially I wanted to do it in this way but then you will need separate open/close because you have to pass a different `kvm_pgtable_debugfs_show` callback.",
+      "parentUuid": "9259c20f_b538ff5d",
+      "revId": "1abcae01e1db799a3269eb0c8ed6dc0559aa12c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
