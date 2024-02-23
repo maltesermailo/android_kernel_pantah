@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9259c20f_b538ff5d",
+        "filename": "arch/arm64/kvm/ptdump.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-23T09:16:45Z",
+      "side": 1,
+      "message": "I would really avoid something like this.\n\nFirst `strcmp` isn\u0027t super safe. Then playing with dentries is probably not something you want to do.\n\nIt\u0027ll just be nicer to have two separate set of fops. But you can keep the _open/_close common.",
+      "revId": "1abcae01e1db799a3269eb0c8ed6dc0559aa12c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
