@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c914b0ed_33acea26",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-26T14:38:44Z",
+      "side": 1,
+      "message": "I know you like pkvm, but we\u0027ve got a lot of it here!",
+      "range": {
+        "startLine": 7,
+        "startChar": 44,
+        "endLine": 7,
+        "endChar": 77
+      },
+      "revId": "34ed01807e305bb0af5bb6a6e52fb66a68b4514f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "030b3da8_a4441cb2",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/mem_protect.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-26T14:38:44Z",
+      "side": 1,
+      "message": "Is adding this just some refactoring? If so, I\u0027d prefer to drop this patch, as I think the new code is more difficult to reason about at the caller. \n\nFor example, with this whole series applied, there are three callers of this new function: one of them passes `NULL` for the memcache and the other two pass 0 for the `dirty_size`. I think that indicates that the abstraction isn\u0027t quite right.",
+      "range": {
+        "startLine": 116,
+        "startChar": 5,
+        "endLine": 116,
+        "endChar": 33
+      },
+      "revId": "34ed01807e305bb0af5bb6a6e52fb66a68b4514f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
