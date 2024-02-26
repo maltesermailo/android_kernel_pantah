@@ -50,7 +50,11 @@
 #include <trace/hooks/rwsem.h>
 #include <trace/hooks/futex.h>
 #include <trace/hooks/topology.h>
+<<<<<<< PATCH SET (51a69f ANDROID: Add vendor hook for setting ioprio)
+#include <trace/hooks/ioprio.h>
+=======
 #include <trace/hooks/thermal.h>
+>>>>>>> BASE      (17142d ANDROID: iommu: add vendor hooks for change dma property)
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -68,6 +72,9 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_arch_set_freq_scale);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_transaction_init);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_set_priority);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_restore_priority);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_bio_set_ioprio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_bio_set_ioprio_ipu);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_bio_set_ioprio_iter);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_idle_enter);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_idle_exit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mpam_set);
