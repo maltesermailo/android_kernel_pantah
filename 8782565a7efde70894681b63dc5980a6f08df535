@@ -16,6 +16,23 @@
       "message": "Missing change to riscv gki_defconfig for 6.6",
       "revId": "8782565a7efde70894681b63dc5980a6f08df535",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "693f6ecf_6b54411f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2024-02-26T09:21:34Z",
+      "side": 1,
+      "message": "Hi Quentin\n\nHas this impact on performance been verified? In fact, this will not only delete cpu.shares, but also cpu.idle.\n\nIn unisoc platform, we will adjust cpu.shares for some scenarios to improve the performance of top-app/foreground process.\n\nThanks!",
+      "revId": "8782565a7efde70894681b63dc5980a6f08df535",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
