@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a11c1cc4_b9b3bc01",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-02-26T01:38:41Z",
+      "side": 1,
+      "message": "if",
+      "range": {
+        "startLine": 10,
+        "startChar": 32,
+        "endLine": 10,
+        "endChar": 34
+      },
+      "revId": "966cdcc37c0d99dec557a2dc3de9fc7886fcc200",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2741ab4_224f6520",
+        "filename": "mm/page_size_compat.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-02-26T01:38:41Z",
+      "side": 1,
+      "message": "why do you need to pass `is_aligned` as a parameter instead of directly doing:\n\n```\nif (___PAGE_ALIGNED(addr))\n    return true;\n    \nif (static_branch_unlikely(\u0026page_shift_compat_enabled))\n\tpgcompat_err(\"%s: addr (0x%08lx) not page aligned\", func, addr);\n\nreturn false;\n```",
+      "range": {
+        "startLine": 45,
+        "startChar": 1,
+        "endLine": 46,
+        "endChar": 14
+      },
+      "revId": "966cdcc37c0d99dec557a2dc3de9fc7886fcc200",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
