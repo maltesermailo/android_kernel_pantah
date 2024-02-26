@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04c4eb07_cdfdeae0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1275,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-02-26T13:24:54Z",
+      "side": 1,
+      "message": "bikeshedding: nit: feel-free-to-ignore:\n\ndesired_state (since it\u0027s difficult to follow later on what desired is)",
+      "revId": "9d2af08811c187fc389de69679f252b3dae04d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "691e4dc8_4b672d18",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1303,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-02-26T13:24:54Z",
+      "side": 1,
+      "message": "should this be\n\n    (state \u0026 PKVM_NOPAGE) ? -EFAULT : -EINVAL;\n?",
+      "revId": "9d2af08811c187fc389de69679f252b3dae04d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a06ba71_c7062d08",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1309,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-02-26T13:24:54Z",
+      "side": 1,
+      "message": "Is there a chance that phys \u003d\u003d 0 might not be allowed?",
+      "revId": "9d2af08811c187fc389de69679f252b3dae04d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd77f01c_377fb9c7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1316,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-02-26T13:24:54Z",
+      "side": 1,
+      "message": "GENMASK instead?",
+      "revId": "9d2af08811c187fc389de69679f252b3dae04d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11d1cac9_84cd97a4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1324,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-02-26T13:24:54Z",
+      "side": 1,
+      "message": "just checking, you do check this for potential overflows earlier, right?",
+      "revId": "9d2af08811c187fc389de69679f252b3dae04d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
