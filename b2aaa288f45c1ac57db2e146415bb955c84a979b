@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d39ecb12_ce2c305a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-26T16:01:54Z",
+      "side": 1,
+      "message": "Since this is a static initialiser rather than e.g. container_of(), I think it would be clearer it it used like:\n\n`io_pgtable_init_from_domain(\u0026iopt, iommu, domain, domain_id);`",
+      "range": {
+        "startLine": 16,
+        "startChar": 8,
+        "endLine": 16,
+        "endChar": 22
+      },
+      "revId": "b2aaa288f45c1ac57db2e146415bb955c84a979b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f41c72ac_b9f5c86c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-26T16:01:54Z",
+      "side": 1,
+      "message": "Can you use an rwlock and atomic refcount on the domain for this ? I just wonder because this strikes me as being pretty similar to how we handle the vm table on the CPU side.",
+      "range": {
+        "startLine": 88,
+        "startChar": 1,
+        "endLine": 88,
+        "endChar": 14
+      },
+      "revId": "b2aaa288f45c1ac57db2e146415bb955c84a979b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2b5029e_57c538eb",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-26T16:01:54Z",
+      "side": 1,
+      "message": "This is basically just setting `refs` to zero, right? Maybe add a comment?",
+      "range": {
+        "startLine": 130,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 36
+      },
+      "revId": "b2aaa288f45c1ac57db2e146415bb955c84a979b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d82c088_51b95129",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-26T16:01:54Z",
+      "side": 1,
+      "message": "If we care about this, shouldn\u0027t we also check for overflow when incrementing the reference on the attach path? (although using the atomics will happen to solve this)",
+      "range": {
+        "startLine": 176,
+        "startChar": 16,
+        "endLine": 176,
+        "endChar": 33
+      },
+      "revId": "b2aaa288f45c1ac57db2e146415bb955c84a979b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1774727_da601056",
+        "filename": "include/kvm/iommu.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-26T16:01:54Z",
+      "side": 1,
+      "message": "This is a bit scary as the alignment requirement isn\u0027t the same as `hyp_spinlock_t`. Why do we need the `unused` array at all?\n\nFor the CPU-side structures, we have separate definitions for the hypervisor and the host (e.g. `pkvm_hyp_vcpu` vs `kvm_vcpu`).",
+      "range": {
+        "startLine": 30,
+        "startChar": 1,
+        "endLine": 30,
+        "endChar": 3
+      },
+      "revId": "b2aaa288f45c1ac57db2e146415bb955c84a979b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f28178a8_abb62d6d",
+        "filename": "include/kvm/iommu.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-02-26T16:01:54Z",
+      "side": 1,
+      "message": "If a single-level table is sufficient for now, let\u0027s start with that rather than add code that won\u0027t get tested?",
+      "range": {
+        "startLine": 54,
+        "startChar": 3,
+        "endLine": 54,
+        "endChar": 59
+      },
+      "revId": "b2aaa288f45c1ac57db2e146415bb955c84a979b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
