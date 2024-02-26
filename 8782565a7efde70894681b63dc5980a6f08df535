@@ -33,6 +33,24 @@
       "message": "Hi Quentin\n\nHas this impact on performance been verified? In fact, this will not only delete cpu.shares, but also cpu.idle.\n\nIn unisoc platform, we will adjust cpu.shares for some scenarios to improve the performance of top-app/foreground process.\n\nThanks!",
       "revId": "8782565a7efde70894681b63dc5980a6f08df535",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fd71e1b_4d6308d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-02-26T18:05:53Z",
+      "side": 1,
+      "message": "Hi,\n\nI was unaware that unisoc made use of cpu.shares in that way. If there is a legitimate use-case that depends on cpu.shares, I don\u0027t think we hold a very strong case for disabling it. Thanks for the feedback, I\u0027ll abandon this patch now.",
+      "parentUuid": "693f6ecf_6b54411f",
+      "revId": "8782565a7efde70894681b63dc5980a6f08df535",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
