@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d763cf53_1e25db98",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1275,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-27T19:18:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04c4eb07_cdfdeae0",
+      "revId": "9d2af08811c187fc389de69679f252b3dae04d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "691e4dc8_4b672d18",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-02-26T13:24:54Z",
       "side": 1,
       "message": "should this be\n\n    (state \u0026 PKVM_NOPAGE) ? -EFAULT : -EINVAL;\n?",
+      "revId": "9d2af08811c187fc389de69679f252b3dae04d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49145702_e74c1799",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1303,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-27T19:18:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "691e4dc8_4b672d18",
       "revId": "9d2af08811c187fc389de69679f252b3dae04d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab3a703e_2563a8bc",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1309,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-27T19:18:40Z",
+      "side": 1,
+      "message": "Hum good point... I\u0027d probably do better to use another value... Maybe `PHYS_ADDR_MAX` ?",
+      "parentUuid": "3a06ba71_c7062d08",
+      "revId": "9d2af08811c187fc389de69679f252b3dae04d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd77f01c_377fb9c7",
@@ -69,6 +123,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5947868e_0cdd1716",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1316,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-27T19:18:40Z",
+      "side": 1,
+      "message": "`GENMASK(kvm_granule_shift(level) - 1, 0);` right?",
+      "parentUuid": "dd77f01c_377fb9c7",
+      "revId": "9d2af08811c187fc389de69679f252b3dae04d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11d1cac9_84cd97a4",
@@ -82,6 +154,24 @@
       "writtenOn": "2024-02-26T13:24:54Z",
       "side": 1,
       "message": "just checking, you do check this for potential overflows earlier, right?",
+      "revId": "9d2af08811c187fc389de69679f252b3dae04d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "306813a5_9078e2f0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1324,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-27T19:18:40Z",
+      "side": 1,
+      "message": "`size` can\u0027t overflow, as the number of granule we can add is limited.\n\nif `phys_start + data-\u003esize` overflows, we would get `!\u003d phys` and return -E2BIG.\n\nAFAICT, we\u0027re all covered here!",
+      "parentUuid": "11d1cac9_84cd97a4",
       "revId": "9d2af08811c187fc389de69679f252b3dae04d7b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
