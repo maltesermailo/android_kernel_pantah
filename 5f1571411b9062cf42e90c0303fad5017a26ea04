@@ -16,6 +16,24 @@
       "message": "That appears to create an inconsistency with the implementations on other branches, such as 14-6.1. See https://r.android.com/q/I9a315cfb414fd34e0ef7a2cf9d57df50d4dd984f\n\nIs that a good idea? It will make upgrades harder.",
       "revId": "5f1571411b9062cf42e90c0303fad5017a26ea04",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dae53fc_4bcf1367",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3278615
+      },
+      "writtenOn": "2024-02-27T02:43:39Z",
+      "side": 1,
+      "message": "I\u0027m unclear how to find out the futex-owner by the hooks added by liujie.\nFor transsion side, there are many hang issues caused by system_server\nwatchdog thread blocked in futex_wait for a long time as below backtrace:\n\nwatchdog S 17697.055545 1455 18672 7866 0x40404040 0x4000800 1432 476739536489057\n\u003cffffff9afd489eb0\u003e __switch_to+0x134/0x150\n\u003cffffff9afe5d91f4\u003e __schedule+0x794/0x8c4\n\u003cffffff9afe5d9398\u003e schedule+0x74/0x94\n\u003cffffff9afd574e70\u003e futex_wait_queue_me+0x138/0x1b8\n\u003cffffff9afd571ffc\u003e futex_wait+0x120/0x2d0\n\u003cffffff9afd570700\u003e do_futex+0x114/0x18f0\n\u003cffffff9afd573e64\u003e __arm64_sys_futex+0x154/0x1d4\n\u003cffffff9afd49b764\u003e el0_svc_common+0x9c/0x164\n\u003cffffff9afd49b6ac\u003e el0_svc_handler+0x68/0x84\n\u003cffffff9afd483d08\u003e el0_svc+0x8/0x300\n\nAfter investigation, almost of futex hang issues are casued by watchdog\nthread blocked in art mutex locks, which transfer the lock state\nas futex word by futex_wait syscall to kernel layer.\nWe found the art mutex lock owner tid is recorded in 4 bytes offset to futex uaddr in contention situation, so it\u0027s easy to get the futex owner tid by\ndump the futex uaddr directly in kernel layer if this patch can be accepted.\n\n1) For art exlusive mutex, the owner tid is recorded in 4 bytes offset in exclusive_owner_:\n(gdb) ptype/o struct Mutex\n/* offset      |    size */  type \u003d class art::Mutex : public art::BaseMutex {\n                             private:\n/*     20      |       4 */    art::AtomicInteger state_and_contenders_;\n                               static const int32_t kHeldMask;\n                               static const int32_t kContenderShift;\n                               static const int32_t kContenderIncrement;\n/*     24      |       4 */    class art::Atomic\u003cint\u003e [with T \u003d int] : public std::__1::atomic\u003cT\u003e {\n\n                                   /* total size (bytes):    4 */\n                               } exclusive_owner_;\n                               \n2) For art shared mutex, wthe owner tid is also recorded in 4 bytes offset in exclusive_owner_:\n(gdb) ptype/o struct ReaderWriterMutex\n/* offset      |    size */  type \u003d class art::ReaderWriterMutex : public art::BaseMutex {\n                             private:\n/*     20      |       4 */    art::AtomicInteger state_;\n/*     24      |       4 */    class art::Atomic\u003cint\u003e [with T \u003d int] : public std::__1::atomic\u003cT\u003e {\n\n                                   /* total size (bytes):    4 */\n                               } exclusive_owner_;\n                               \n                                                              \nPlease help assess my patch request on android15-6.1 branch.\n\nThanks",
+      "parentUuid": "c298ac5d_765478e8",
+      "revId": "5f1571411b9062cf42e90c0303fad5017a26ea04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
