@@ -16,6 +16,24 @@
       "message": "This would set SMCCC_RET_INVALID_PARAMETER if pkvm_handle_empty_memcache() fails. Is that the desired behavior?",
       "revId": "6329addb20a4df63d281fc89e8bfccb41e71261b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b212c7a7_614909cc",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1504,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-27T19:18:17Z",
+      "side": 1,
+      "message": "Yeah, IIUC, we don\u0027t have any other error available... so that\u0027s a way of telling the guest something went wrong with that HVC.",
+      "parentUuid": "f36e03d0_29f4e907",
+      "revId": "6329addb20a4df63d281fc89e8bfccb41e71261b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
