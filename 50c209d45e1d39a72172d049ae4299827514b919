@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "114660f5_190a8df7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2024-02-27T08:58:25Z",
+      "side": 1,
+      "message": "We have omitted 2 of the 3 previously upstreamed vendor hooks. However, we may still need the remaining one for handling under development use cases, such as triggering the next generation of hardware via paravirtualization based on MMIO. Therefore, the exit reason couldn\u0027t be well-defined for drivers that are not yet upstreamed-ready. Here\u0027s the pseudo code for the above-mentioned scenario.\n\n```\n// vendor hook attached in the host kernel\nvoid xxxxxx {\n\tswitch (vcpu-\u003erun.exit_reason) {\n\tcase GZVM_EXIT_MMIO:\n\t\tif (mmio address belongs to proprietary para-virtualizaed device) {\n\t\t\tXXX_dev_handle_mmio_request();\n\t\t\tneed_userspace \u003d false;\n\t\t}\n\t\tbreak;\n\tdefault:\n\t\tbreak;\n\t}\n}\n```\n\nfor the guest VM(Microdroid)\n```\n// proprietary para-virtualizaed driver running in guest \nvoid XXX_dev_handle_request()\n{\n\tpopulate_request_data_in_shared_mem();\n\twrite_mmio(XXX_DEV_REG_TRIGGER):\n}\n```",
+      "parentUuid": "f375e2c9_8c53ab0a",
+      "revId": "50c209d45e1d39a72172d049ae4299827514b919",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6ccb54cc_d13a8550",
         "filename": "drivers/virt/geniezone/gzvm_vcpu.c",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2024-01-11T09:05:24Z",
       "side": 1,
       "message": "not needed to be changed.",
+      "revId": "50c209d45e1d39a72172d049ae4299827514b919",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "530f3679_a8dff5f5",
+        "filename": "drivers/virt/geniezone/gzvm_vcpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2024-02-27T08:58:25Z",
+      "side": 1,
+      "message": "Noted, would be removed.",
+      "parentUuid": "6ccb54cc_d13a8550",
       "revId": "50c209d45e1d39a72172d049ae4299827514b919",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
