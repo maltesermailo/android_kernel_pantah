@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7430eef_28018de2",
+        "filename": "arch/arm64/include/asm/kvm_asm.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-27T16:27:11Z",
+      "side": 1,
+      "message": "I wouldn\u0027t add the mouthfull \"hyp_alloc_mgt\" , the host shouldn\u0027t care how the hypervisor handles its allocation.\n\nProbably we could keep `hyp_alloc_refill`, add `hyp_iommu_refill` and then just a common `hyp_reclaimable` and `hyp_reclaim` that would be common to all \"allocators\"?",
+      "revId": "3df824c032f71adb4e80a9b45c131a105b1f4496",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9db4b5fa_91da3040",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 1312,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-27T16:27:11Z",
+      "side": 1,
+      "message": "I wouldn\u0027t expose that, just keep separated HVCs to refill, while `reclaim` and `reclaimable` are common.",
+      "revId": "3df824c032f71adb4e80a9b45c131a105b1f4496",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90b6b841_71e14862",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-27T16:27:11Z",
+      "side": 1,
+      "message": "I don\u0027t think the cast `(struct hyp_mgt_allocator_ops)` is necessary.",
+      "revId": "3df824c032f71adb4e80a9b45c131a105b1f4496",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8e4b800_26844cf4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc_mgt.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-27T16:27:11Z",
+      "side": 1,
+      "message": "nit: `return ops-\u003erefill ? ops-\u003erefill(host_mc) : 0;` ?",
+      "revId": "3df824c032f71adb4e80a9b45c131a105b1f4496",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a1ed623_4e80ac7f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc_mgt.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-02-27T16:27:11Z",
+      "side": 1,
+      "message": "As nothing is registered dynamically and I\u0027m sure Quentin would say \"let\u0027s keep the code as minimal as possible\" 😊 ... I wonder if simply in the hyp-main.c file you could for a common set of HVCs \"hyp_reclaimable/hyp_reclaim\" where you empty one cache then the other?\n\nIOW, probably most of this file could go into hyp-main.c\n\nSorry I know that\u0027s quite a big refactor. But I see only two clients here. and it feels a bit too much.",
+      "revId": "3df824c032f71adb4e80a9b45c131a105b1f4496",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
