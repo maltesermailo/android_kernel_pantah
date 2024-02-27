@@ -34,6 +34,29 @@
       "parentUuid": "c298ac5d_765478e8",
       "revId": "5f1571411b9062cf42e90c0303fad5017a26ea04",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce38ee48_ba369558",
+        "filename": "kernel/futex/waitwake.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-02-27T15:48:51Z",
+      "side": 1,
+      "message": "passing userspace pointers to hooks is risky, what about all of the existing users of this hook?  What are they going to do with this information?",
+      "range": {
+        "startLine": 650,
+        "startChar": 35,
+        "endLine": 650,
+        "endChar": 40
+      },
+      "revId": "5f1571411b9062cf42e90c0303fad5017a26ea04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
