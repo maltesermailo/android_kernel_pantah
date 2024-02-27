@@ -27,11 +27,14 @@
 #include <linux/compat.h>
 #include <linux/module.h>
 #include <linux/time_namespace.h>
+#include <linux/suspend.h>
 
 #include "posix-timers.h"
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/alarmtimer.h>
+
+static const char alarmtimer_group_name[] = "alarmtimer";
 
 /**
  * struct alarm_base - Alarm timer bases
@@ -62,6 +65,145 @@ static DEFINE_SPINLOCK(freezer_delta_lock);
 static struct rtc_timer		rtctimer;
 static struct rtc_device	*rtcdev;
 static DEFINE_SPINLOCK(rtcdev_lock);
+
+/* Duration to check for soonest alarm during kernel suspend */
+static unsigned long suspend_alarm_pending_window_ms = 1200 * MSEC_PER_SEC;
+unsigned int failed_suspend_count = 0;
+
+static ssize_t suspend_alarm_pending_window_show(struct kobject *kobj,
+					struct kobj_attribute *attr, char *buf)
+{
+	return sysfs_emit(buf, "%lu\n", suspend_alarm_pending_window_ms);
+}
+
+static ssize_t suspend_alarm_pending_window_store(struct kobject *kobj,
+			struct kobj_attribute *attr, const char *buf, size_t n)
+{
+	unsigned long val;
+
+	if (kstrtoul(buf, 10, &val))
+		return -EINVAL;
+
+	suspend_alarm_pending_window_ms = val;
+
+	return n;
+}
+
+static struct kobj_attribute suspend_alarm_pending_window =
+			__ATTR_RW(suspend_alarm_pending_window);
+
+static ssize_t failed_suspend_count_show(struct kobject *kobj,
+					struct kobj_attribute *attr, char *buf)
+{
+	unsigned int val = failed_suspend_count;
+	failed_suspend_count = 0;
+	return sysfs_emit(buf, "%u\n", val);
+}
+
+static struct kobj_attribute failed_suspend_count_attr =
+			__ATTR_RO(failed_suspend_count);
+
+static struct attribute *alarmtimer_attrs[] = {
+	&suspend_alarm_pending_window.attr,
+	&failed_suspend_count_attr.attr,
+	NULL,
+};
+
+static const struct attribute_group alarmtimer_attr_group = {
+	.name   = alarmtimer_group_name,
+	.attrs  = alarmtimer_attrs,
+};
+
+/**
+ * alarmtimer_sysfs_add - Adds sysfs attributes for alarmtimer
+ *
+ * Returns 0 if successful, non-zero value for error.
+ */
+static int alarmtimer_sysfs_add(void)
+{
+	int ret = sysfs_create_group(kernel_kobj, &alarmtimer_attr_group);
+
+	if (ret)
+		pr_warn("[%s] failed to create a sysfs group\n", __func__);
+
+	return ret;
+}
+
+/**
+ * alarmtimer_get_soonest - Finds the soonest alarm to expire among the
+ * alarm bases.
+ * @min: ptr to relative time to the soonest alarm to expire
+ * @expires: ptr to absolute time of the soonest alarm to expire
+ * @type: ptr to alarm type
+ *
+ * Returns true if soonest alarm was found, returns false if don't care.
+ */
+static bool alarmtimer_get_soonest(ktime_t *min, ktime_t *expires, int *type)
+{
+	unsigned long flags;
+	int i;
+
+	/* Find the soonest timer to expire */
+	for (i = 0; i < ALARM_NUMTYPE; i++) {
+		struct alarm_base *base = &alarm_bases[i];
+		struct timerqueue_node *next;
+		ktime_t delta;
+
+		spin_lock_irqsave(&base->lock, flags);
+		next = timerqueue_getnext(&base->timerqueue);
+		spin_unlock_irqrestore(&base->lock, flags);
+		if (!next)
+			continue;
+		delta = ktime_sub(next->expires, base->get_ktime());
+		if (*min == 0 || delta < *min) {
+			*expires = next->expires;
+			*min = delta;
+			*type = i;
+		}
+	}
+
+	if (*min == 0)
+		return false;
+
+	return true;
+}
+
+static int alarmtimer_pm_callback(struct notifier_block *nb,
+				  unsigned long mode, void *_unused)
+{
+	struct rtc_device *rtc;
+	ktime_t min, expires;
+	int type;
+
+	switch (mode) {
+	case PM_SUSPEND_PREPARE:
+		rtc = alarmtimer_get_rtcdev();
+		/* If we have no rtcdev, just return */
+		if (!rtc)
+			return NOTIFY_DONE;
+
+		min = KTIME_MAX;
+
+		/* Find the soonest timer to expire */
+		if (!alarmtimer_get_soonest(&min, &expires, &type))
+			return NOTIFY_DONE;
+
+		if (ktime_to_ns(min) <
+		    suspend_alarm_pending_window_ms * NSEC_PER_MSEC) {
+			failed_suspend_count++;
+			pr_warn("Suspend abort due to imminent alarm\n");
+			pm_wakeup_event(&rtc->dev,
+					suspend_alarm_pending_window_ms);
+			return notifier_from_errno(-ETIME);
+		}
+	}
+
+	return NOTIFY_DONE;
+}
+
+static struct notifier_block alarmtimer_pm_notifier = {
+	.notifier_call = alarmtimer_pm_callback,
+};
 
 /**
  * alarmtimer_get_rtcdev - Return selected rtcdevice
@@ -99,8 +241,11 @@ static int alarmtimer_rtc_add_device(struct device *dev,
 
 	pdev = platform_device_register_data(dev, "alarmtimer",
 					     PLATFORM_DEVID_AUTO, NULL, 0);
-	if (!IS_ERR(pdev))
+	if (!IS_ERR(pdev)) {
 		device_init_wakeup(&pdev->dev, true);
+		if (alarmtimer_sysfs_add())
+			pr_warn("[%s] Failed to add alarmtimer sysfs attributes\n", __func__);
+	}
 
 	spin_lock_irqsave(&rtcdev_lock, flags);
 	if (!IS_ERR(pdev) && !rtcdev) {
@@ -127,6 +272,7 @@ unlock:
 static inline void alarmtimer_rtc_timer_init(void)
 {
 	rtc_timer_init(&rtctimer, NULL, NULL);
+	register_pm_notifier(&alarmtimer_pm_notifier);
 }
 
 static struct class_interface alarmtimer_rtc_interface = {
@@ -242,7 +388,7 @@ EXPORT_SYMBOL_GPL(alarm_expires_remaining);
 static int alarmtimer_suspend(struct device *dev)
 {
 	ktime_t min, now, expires;
-	int i, ret, type;
+	int ret, type;
 	struct rtc_device *rtc;
 	unsigned long flags;
 	struct rtc_time tm;
@@ -259,30 +405,16 @@ static int alarmtimer_suspend(struct device *dev)
 	if (!rtc)
 		return 0;
 
-	/* Find the soonest timer to expire*/
-	for (i = 0; i < ALARM_NUMTYPE; i++) {
-		struct alarm_base *base = &alarm_bases[i];
-		struct timerqueue_node *next;
-		ktime_t delta;
-
-		spin_lock_irqsave(&base->lock, flags);
-		next = timerqueue_getnext(&base->timerqueue);
-		spin_unlock_irqrestore(&base->lock, flags);
-		if (!next)
-			continue;
-		delta = ktime_sub(next->expires, base->get_ktime());
-		if (!min || (delta < min)) {
-			expires = next->expires;
-			min = delta;
-			type = i;
-		}
-	}
-	if (min == 0)
+	/* Find the soonest timer to expire */
+	if (!alarmtimer_get_soonest(&min, &expires, &type))
 		return 0;
 
-	if (ktime_to_ns(min) < 2 * NSEC_PER_SEC) {
-		pm_wakeup_event(dev, 2 * MSEC_PER_SEC);
-		return -EBUSY;
+	if (ktime_to_ns(min) <
+	    suspend_alarm_pending_window_ms * NSEC_PER_MSEC) {
+		failed_suspend_count++;
+		pr_warn("Suspend abort due to imminent alarm\n");
+		pm_wakeup_event(dev, suspend_alarm_pending_window_ms);
+		return -ETIME;
 	}
 
 	trace_alarmtimer_suspend(expires, type);
