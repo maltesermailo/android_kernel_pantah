@@ -6742,12 +6742,18 @@ int __alloc_contig_migrate_range(struct compact_control *cc,
 
 		if (trace_mm_alloc_contig_migrate_range_info_enabled()) {
 			total_reclaimed += nr_reclaimed;
+<<<<<<< HEAD   (4e0ffc Revert "ANDROID: Prune default dependencies for kernel_build)
 			list_for_each_entry(page, &cc->migratepages, lru) {
 				struct folio *folio = page_folio(page);
 
 				total_mapped += folio_mapped(folio) *
 						folio_nr_pages(folio);
 			}
+||||||| BASE
+=======
+			list_for_each_entry(page, &cc->migratepages, lru)
+				total_mapped += page_mapcount(page);
+>>>>>>> CHANGE (17640c BACKPORT: UPSTREAM: mm: add alloc_contig_migrate_range alloc)
 		}
 
 		ret = migrate_pages(&cc->migratepages, alloc_migration_target,
@@ -6785,6 +6791,7 @@ int __alloc_contig_migrate_range(struct compact_control *cc,
 						 total_reclaimed,
 						 total_mapped);
 	return (ret < 0) ? ret : 0;
+<<<<<<< HEAD   (4e0ffc Revert "ANDROID: Prune default dependencies for kernel_build)
 }
 
 static void split_free_pages(struct list_head *list)
@@ -6810,6 +6817,9 @@ static void split_free_pages(struct list_head *list)
 				list_add_tail(&page[i].lru, &list[0]);
 		}
 	}
+||||||| BASE
+=======
+>>>>>>> CHANGE (17640c BACKPORT: UPSTREAM: mm: add alloc_contig_migrate_range alloc)
 }
 
 /**
