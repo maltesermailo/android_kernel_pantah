@@ -22,6 +22,30 @@
       },
       "revId": "3d904db5fd29e35b4a9f8b8fc8ac24f3afca5cd6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b8dd466_53bdc67b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-28T14:34:47Z",
+      "side": 1,
+      "message": "The SMMU manual says that the CPU and the SMMU should have the same OAS, and we used to check that.\n\nHowever, we can\u0027t use `get_kvm_ipa_limit` from modules, and if the OAS is different that the OAS, that won\u0027t undermine the security of the system so this check can be relaxed.",
+      "parentUuid": "ef891a0b_25ff4e6e",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 0
+      },
+      "revId": "3d904db5fd29e35b4a9f8b8fc8ac24f3afca5cd6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
