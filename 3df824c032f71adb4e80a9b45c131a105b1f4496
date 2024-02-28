@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c46610ef_b11bf889",
+        "filename": "arch/arm64/include/asm/kvm_asm.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-28T18:04:43Z",
+      "side": 1,
+      "message": "I think the idea was to have unified interface for the allocator which includes refill.\nOther wise it feels a bit strange having different refill and reclaim interfaces.",
+      "parentUuid": "f7430eef_28018de2",
+      "revId": "3df824c032f71adb4e80a9b45c131a105b1f4496",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9db4b5fa_91da3040",
         "filename": "arch/arm64/include/asm/kvm_host.h",
         "patchSetId": 7
@@ -52,6 +70,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96f363ba_291d4dca",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-28T18:04:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90b6b841_71e14862",
+      "revId": "3df824c032f71adb4e80a9b45c131a105b1f4496",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c8e4b800_26844cf4",
@@ -69,6 +105,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3853edc_f7d5d077",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc_mgt.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-28T18:04:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8e4b800_26844cf4",
+      "revId": "3df824c032f71adb4e80a9b45c131a105b1f4496",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a1ed623_4e80ac7f",
@@ -82,6 +136,24 @@
       "writtenOn": "2024-02-27T16:27:11Z",
       "side": 1,
       "message": "As nothing is registered dynamically and I\u0027m sure Quentin would say \"let\u0027s keep the code as minimal as possible\" 😊 ... I wonder if simply in the hyp-main.c file you could for a common set of HVCs \"hyp_reclaimable/hyp_reclaim\" where you empty one cache then the other?\n\nIOW, probably most of this file could go into hyp-main.c\n\nSorry I know that\u0027s quite a big refactor. But I see only two clients here. and it feels a bit too much.",
+      "revId": "3df824c032f71adb4e80a9b45c131a105b1f4496",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbd3cd99_5e421dd9",
+        "filename": "arch/arm64/kvm/hyp/nvhe/alloc_mgt.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-28T18:04:43Z",
+      "side": 1,
+      "message": "I think it\u0027s cleaner to separate it in a file, but that also depends on the other points about refill, but no strong opinion.",
+      "parentUuid": "2a1ed623_4e80ac7f",
       "revId": "3df824c032f71adb4e80a9b45c131a105b1f4496",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
