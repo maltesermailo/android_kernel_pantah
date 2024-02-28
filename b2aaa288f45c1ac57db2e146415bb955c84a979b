@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b191a8f0_83e8f5ed",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-28T17:43:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d39ecb12_ce2c305a",
+      "range": {
+        "startLine": 16,
+        "startChar": 8,
+        "endLine": 16,
+        "endChar": 22
+      },
+      "revId": "b2aaa288f45c1ac57db2e146415bb955c84a979b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f41c72ac_b9f5c86c",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e52692f9_52dd2b68",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-28T17:43:59Z",
+      "side": 1,
+      "message": "We use in the next patches atomic locks for map/unmap which is the hot path.\n\nFor alloc_domain which it is decoupled from the IOMMU, we use a separate lock.",
+      "parentUuid": "f41c72ac_b9f5c86c",
+      "range": {
+        "startLine": 88,
+        "startChar": 1,
+        "endLine": 88,
+        "endChar": 14
+      },
+      "revId": "b2aaa288f45c1ac57db2e146415bb955c84a979b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f2b5029e_57c538eb",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
         "patchSetId": 5
@@ -60,6 +108,30 @@
       "writtenOn": "2024-02-26T16:01:54Z",
       "side": 1,
       "message": "This is basically just setting `refs` to zero, right? Maybe add a comment?",
+      "range": {
+        "startLine": 130,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 36
+      },
+      "revId": "b2aaa288f45c1ac57db2e146415bb955c84a979b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e46f3441_8d85f9cb",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-28T17:43:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2b5029e_57c538eb",
       "range": {
         "startLine": 130,
         "startChar": 0,
@@ -95,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b66a715d_da3b3d02",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-28T17:43:59Z",
+      "side": 1,
+      "message": "We do check `domain-\u003erefs \u003d\u003d UINT_MAX` before incrementing.",
+      "parentUuid": "3d82c088_51b95129",
+      "range": {
+        "startLine": 176,
+        "startChar": 16,
+        "endLine": 176,
+        "endChar": 33
+      },
+      "revId": "b2aaa288f45c1ac57db2e146415bb955c84a979b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a1774727_da601056",
         "filename": "include/kvm/iommu.h",
         "patchSetId": 5
@@ -118,6 +214,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c237ded9_d1835d5f",
+        "filename": "include/kvm/iommu.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-28T17:43:59Z",
+      "side": 1,
+      "message": "The host will initialize this array, so it need to be the same. \n\nAlthough, we don\u0027t need the spin_lock, this is just for the size as the host allocate it.\n\nI guess changing that from array to `u32` + `BUILD_BUG_ON` sizes at least guarantee not alignment issues",
+      "parentUuid": "a1774727_da601056",
+      "range": {
+        "startLine": 30,
+        "startChar": 1,
+        "endLine": 30,
+        "endChar": 3
+      },
+      "revId": "b2aaa288f45c1ac57db2e146415bb955c84a979b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f28178a8_abb62d6d",
         "filename": "include/kvm/iommu.h",
         "patchSetId": 5
@@ -129,6 +249,30 @@
       "writtenOn": "2024-02-26T16:01:54Z",
       "side": 1,
       "message": "If a single-level table is sufficient for now, let\u0027s start with that rather than add code that won\u0027t get tested?",
+      "range": {
+        "startLine": 54,
+        "startChar": 3,
+        "endLine": 54,
+        "endChar": 59
+      },
+      "revId": "b2aaa288f45c1ac57db2e146415bb955c84a979b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "462ec85b_2b428739",
+        "filename": "include/kvm/iommu.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-28T17:43:59Z",
+      "side": 1,
+      "message": "I believe it\u0027s not, we can have larger linear table based on some heuristics though. But I believe the current approach is the best for scalability.",
+      "parentUuid": "f28178a8_abb62d6d",
       "range": {
         "startLine": 54,
         "startChar": 3,
