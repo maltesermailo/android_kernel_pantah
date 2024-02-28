@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a12ff61_c92c00d2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1425,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2024-02-28T10:47:15Z",
+      "side": 1,
+      "message": "nit: the combination of initializing in-line and separately isn\u0027t very consistent. It might be tidier to have something like:\n\n    struct kvm_hyp_req *req;\n    int min_pages;\n    \n    req \u003d pkvm_hyp_req_reserve(hyp_vcpu, KVM_HYP_REQ_TYPE_MEM);\n    ...",
+      "revId": "fd17320a7cdc273cb9f88d72252ea7177fc4da25",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
