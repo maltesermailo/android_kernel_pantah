@@ -22,6 +22,30 @@
       },
       "revId": "ea3fb88f3bf67dfd0bf008accd458ad29e833bb7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a488fc6b_ec3059a0",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-kvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2024-02-28T11:07:04Z",
+      "side": 1,
+      "message": "I think you are referring to `BACKPORT: FROMLIST: iommu/arm-smmu-v3: Extract driver-specific bits from probe function`\n\nI belive the main reason for that is that `arm_smmu_device_hw_probe` only has the smmu as an arg and not the IOMMU ops, so it can\u0027t set it.\n\nWe can pass `kvm_arm_smmu_ops`to probe, but that add dependency between probe and `iommu_ops`",
+      "parentUuid": "ce7972b0_5f4c677b",
+      "range": {
+        "startLine": 588,
+        "startChar": 0,
+        "endLine": 593,
+        "endChar": 0
+      },
+      "revId": "ea3fb88f3bf67dfd0bf008accd458ad29e833bb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
