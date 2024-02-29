@@ -70,6 +70,30 @@
       },
       "revId": "d91996ff6f2dcb81c3333053f56a64a2d818f7e4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d48353cd_5c4704fc",
+        "filename": "drivers/virt/geniezone/gzvm_vcpu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1999082
+      },
+      "writtenOn": "2024-02-29T07:01:46Z",
+      "side": 0,
+      "message": "Yes, the logic change is something we expected here, along with the submitted vendor hook.\n\nIf the vendor hook is attached, the vCPU would check out in a cohesive manner whenever it exits for some latest and not-yet upstreamed exit reasons, such as paravirtualization.\n\nIf the vendor hook is not attached, we found out that we don\u0027t really need the `goto` syntax to maintain the same semantics. Since the `need_userspace` variable would be set to `true`, the while loop would end, and the code snippet(`do_something()`) would be executed regardless, without explicitly using the `goto out` in the default case in the `switch`. We would align our LKML patch accordingly without the vendor hook part.\n\nas-is:\n```\nstatic long gzvm_vcpu_run(struct gzvm_vcpu *vcpu, void __user *argp)\n{\n    bool need_userspace \u003d false;\n\n    while (!need_userspace) {\n        switch (exit_reason) {\n            // snip\n            default:\n                need_userspace \u003d true;\n                goto out;\n        }\n    }\n\nout:\n    do_something();\n    return 0;\n}\n```\n\nto-be:\n```\nstatic long gzvm_vcpu_run(struct gzvm_vcpu *vcpu, void __user *argp)\n{\n    bool need_userspace \u003d false;\n\n    while (!need_userspace) {\n        switch (exit_reason) {\n            // snip\n            default:\n                need_userspace \u003d true;\n        }\n    }\n\n    do_something();\n    return 0;\n}\n```",
+      "parentUuid": "9438cc80_1a85819e",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 12
+      },
+      "revId": "d91996ff6f2dcb81c3333053f56a64a2d818f7e4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
