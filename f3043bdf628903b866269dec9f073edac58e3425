@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67c199a0_67b656f4",
+        "filename": "drivers/android/binder/process.rs",
+        "patchSetId": 10
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2024-02-29T18:07:33Z",
+      "side": 1,
+      "message": "I missed these two lines just above before.  Now that I look at this again, I think an Entry/Vacant API is most appropriate, and I\u0027m willing to try that if it makes sense.\n\nIf the entry is there, we return it, else the API could preallocate a slot at that index, which we\u0027d insert after.",
+      "range": {
+        "startLine": 595,
+        "startChar": 12,
+        "endLine": 597,
+        "endChar": 13
+      },
+      "revId": "f3043bdf628903b866269dec9f073edac58e3425",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
