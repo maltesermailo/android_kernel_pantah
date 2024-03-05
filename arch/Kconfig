@@ -1425,6 +1425,11 @@ config ARCH_HAVE_TRACE_MMIO_ACCESS
 config DYNAMIC_SIGFRAME
 	bool
 
+config LINKER_SCRIPT_MERGE_SECTIONS
+	bool "Enable section merging in linker script"
+	help
+	  Explicitly invoke merging of module's split sections in linker script.
+
 # Select, if arch has a named attribute group bound to NUMA device nodes.
 config HAVE_ARCH_NODE_DEV_GROUP
 	bool
