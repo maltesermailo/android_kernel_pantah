@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fde9d70_c796e37d",
+        "filename": "drivers/android/binder/process.rs",
+        "patchSetId": 12
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2024-03-07T13:20:40Z",
+      "side": 1,
+      "message": "Still not sure this is right, but maybe it\u0027s fine.\n\nIf the thread exists we return as before (out of curiosity, why was the previous call wrapped in a scope `{ ... }`?)\n\nIf not, we call the new `insert` API, which would fail if there was a race, and someone else inserted a value in between.  Right?\n\nAnd since we never use the `inner` lock, an allocation inside `insert` is fine?",
+      "range": {
+        "startLine": 594,
+        "startChar": 7,
+        "endLine": 598,
+        "endChar": 62
+      },
+      "revId": "55f26bcf29e13e86d45c5cef9152d94d9dfb7972",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
