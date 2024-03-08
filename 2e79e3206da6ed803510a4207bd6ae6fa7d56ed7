@@ -22,6 +22,30 @@
       },
       "revId": "2e79e3206da6ed803510a4207bd6ae6fa7d56ed7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0d7aa54_60398115",
+        "filename": "drivers/android/binder/process.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-03-08T10:28:24Z",
+      "side": 0,
+      "message": "Yes, it was for ensuring that `inner` was dropped before allocating a new thread. But you no longer hold that lock, so you don\u0027t need the scope.",
+      "parentUuid": "9c4488d3_f76106d5",
+      "range": {
+        "startLine": 586,
+        "startChar": 8,
+        "endLine": 591,
+        "endChar": 8
+      },
+      "revId": "2e79e3206da6ed803510a4207bd6ae6fa7d56ed7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

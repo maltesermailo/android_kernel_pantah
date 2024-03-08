@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "530ec6c3_c6ffe948",
+        "filename": "drivers/android/binder/process.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-03-08T10:28:24Z",
+      "side": 1,
+      "message": "You can move this cast into the block with `current.pid() as usize`.\n\nAnd it might be worth to check for negative values and return an error in that case.",
+      "revId": "5985e51d05e44589d6c1a1a24812efe2efeb1635",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95732bf4_f632f7b1",
+        "filename": "drivers/android/binder/process.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-03-08T10:28:24Z",
+      "side": 1,
+      "message": "I\u0027d like to print an error to the console if this fails. You can do that with a match.",
+      "revId": "5985e51d05e44589d6c1a1a24812efe2efeb1635",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "217b4f57_b62f79b2",
         "filename": "drivers/android/binder/process.rs",
         "patchSetId": 14
@@ -14,6 +48,30 @@
       "writtenOn": "2024-03-07T20:56:28Z",
       "side": 1,
       "message": "This is another spot I left commented out of paranoia that I\u0027d be introducing some nuanced bug since `take` is no longer necessary.",
+      "range": {
+        "startLine": 1196,
+        "startChar": 8,
+        "endLine": 1196,
+        "endChar": 49
+      },
+      "revId": "5985e51d05e44589d6c1a1a24812efe2efeb1635",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "771edeae_04651598",
+        "filename": "drivers/android/binder/process.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 1196,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-03-08T10:28:24Z",
+      "side": 1,
+      "message": "It\u0027s okay like this.",
+      "parentUuid": "217b4f57_b62f79b2",
       "range": {
         "startLine": 1196,
         "startChar": 8,
