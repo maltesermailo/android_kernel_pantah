@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "42478e35_168bb6fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-03-08T20:06:10Z",
+      "side": 1,
+      "message": "The commit hash is immutable. It\u0027s just in a fork of the kernel that\u0027s not going upstream (and which has now been frozen).",
+      "parentUuid": "d45c52fc_ea140f38",
+      "revId": "8ef951ca453907ca61fac60be03627dac0e86bff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "965dc60f_ac3a9e1c",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "have you tested locally to run the `//common:kernel_aarch64_abi_dist` target in order to check for the ABI incompatibilities?",
       "parentUuid": "965dc60f_ac3a9e1c",
+      "revId": "8ef951ca453907ca61fac60be03627dac0e86bff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aef29fdd_a6740ffe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-03-08T20:06:10Z",
+      "side": 1,
+      "message": "It definitely reduced the incompatibilities, but there are still some instances of \"type \u0027xyz\u0027 changed, was only declared, is now fully defined\".\n\nSee the full log at [go/paste/4561446131728384](https://paste.googleplex.com/4561446131728384).",
+      "parentUuid": "f99d78d1_877277f0",
       "revId": "8ef951ca453907ca61fac60be03627dac0e86bff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
