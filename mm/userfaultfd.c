@@ -664,6 +664,9 @@ retry:
 		if (unlikely(err == -ENOENT)) {
 			void *page_kaddr;
 
+			if (copied && mmap_lock_is_contended(dst_mm))
+				break;
+
 			mmap_read_unlock(dst_mm);
 			BUG_ON(!page);
 
@@ -689,7 +692,7 @@ retry:
 			if (fatal_signal_pending(current))
 				err = -EINTR;
 		}
-		if (err)
+		if (err || mmap_lock_is_contended(dst_mm))
 			break;
 	}
 
