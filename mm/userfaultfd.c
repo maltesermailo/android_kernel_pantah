@@ -559,15 +559,25 @@ static __always_inline ssize_t __mcopy_atomic(struct mm_struct *dst_mm,
 	copied = 0;
 	page = NULL;
 retry:
-	mmap_read_lock(dst_mm);
+	err = -EAGAIN;
+	if (mode & UFFDIO_MODE_MMAP_TRYLOCK) {
+		if (!mmap_read_trylock(dst_mm))
+			goto out;
+	} else {
+		mmap_read_lock(dst_mm);
+	}
 
 	/*
 	 * If memory mappings are changing because of non-cooperative
 	 * operation (e.g. mremap) running in parallel, bail out and
 	 * request the user to retry later
 	 */
+<<<<<<< HEAD   (78e051 ANDROID: GKI: fix ABI breakage in struct ipv6_devconf)
 	err = -EAGAIN;
 	if (mmap_changing && READ_ONCE(*mmap_changing))
+=======
+	if (mmap_changing && atomic_read(mmap_changing))
+>>>>>>> CHANGE (367353 ANDROID: userfaultfd: add MMAP_TRYLOCK mode for COPY/ZEROPAG)
 		goto out_unlock;
 
 	/*
@@ -708,10 +718,14 @@ ssize_t mcopy_atomic(struct mm_struct *dst_mm, unsigned long dst_start,
 }
 
 ssize_t mfill_zeropage(struct mm_struct *dst_mm, unsigned long start,
+<<<<<<< HEAD   (78e051 ANDROID: GKI: fix ABI breakage in struct ipv6_devconf)
 		       unsigned long len, bool *mmap_changing)
+=======
+		       unsigned long len, atomic_t *mmap_changing, __u64 mode)
+>>>>>>> CHANGE (367353 ANDROID: userfaultfd: add MMAP_TRYLOCK mode for COPY/ZEROPAG)
 {
 	return __mcopy_atomic(dst_mm, start, 0, len, MCOPY_ATOMIC_ZEROPAGE,
-			      mmap_changing, 0);
+			      mmap_changing, mode);
 }
 
 ssize_t mcopy_continue(struct mm_struct *dst_mm, unsigned long start,
