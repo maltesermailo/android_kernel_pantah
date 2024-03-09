@@ -22,6 +22,30 @@
       },
       "revId": "449f60e03413e96769a3a4eb34591e01c52a846f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c9fff25_26a55551",
+        "filename": "crypto/fips140-module.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2024-03-09T00:38:58Z",
+      "side": 1,
+      "message": "Yes, I\u0027ll add that.  Thanks.\n\nBy the way, as you probably noticed, this code is a bit over-simplistic in that it just undoes the patch on every 4 bytes in the .text section, instead of using the .eh_frame section to ignore parts of .text that shouldn\u0027t be patched, as the kernel does (https://android.googlesource.com/kernel/common/+/refs/heads/android14-6.1/arch/arm64/kernel/patch-scs.c).  This was enough to get the integrity check passing.  Let me know if you think the .eh_frame parsing should be implemented now anyway.  I think it\u0027s complex enough that we should leave it out until it\u0027s shown to be needed in some case.",
+      "parentUuid": "0b998068_c0d8b16c",
+      "range": {
+        "startLine": 375,
+        "startChar": 7,
+        "endLine": 375,
+        "endChar": 19
+      },
+      "revId": "449f60e03413e96769a3a4eb34591e01c52a846f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
