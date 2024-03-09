@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b998068_c0d8b16c",
+        "filename": "crypto/fips140-module.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2024-03-09T00:25:40Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this also be gated behind `CONFIG_UNWIND_PATCH_PAC_INTO_SCS`? Otherwise if the kernel was just built with `CONFIG_SHADOW_CALL_STACK`, you\u0027ll end up \"unpatching\" instructions that were never patched.",
+      "range": {
+        "startLine": 375,
+        "startChar": 7,
+        "endLine": 375,
+        "endChar": 19
+      },
+      "revId": "449f60e03413e96769a3a4eb34591e01c52a846f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
