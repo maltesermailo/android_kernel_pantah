@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d29d050b_01f3c5f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-03-10T19:09:20Z",
+      "side": 1,
+      "message": "Where did this name come from? We have a `debug_low_async_space_locked()` but that is separate.",
+      "range": {
+        "startLine": 7,
+        "startChar": 36,
+        "endLine": 7,
+        "endChar": 72
+      },
+      "revId": "6e97a783e272e1b2a59d3b627d0a316e32db6cb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91329218_b5ededbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-03-10T19:09:20Z",
+      "side": 1,
+      "message": "hmmm, I think we could instead cherry-pick the `trace_android_vh_binder_alloc_new_buf_locked()` vendor hook and modify it to add the behavior of the `should_fail`. This sounds like a cleaner approach to me.",
+      "revId": "6e97a783e272e1b2a59d3b627d0a316e32db6cb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bd06cab_81b82150",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-03-10T19:09:20Z",
+      "side": 1,
+      "message": "Why do you need to pass the pid? The allocation is always charged to the `current-\u003etgid` thread which you can use behind your hook.",
+      "range": {
+        "startLine": 412,
+        "startChar": 13,
+        "endLine": 412,
+        "endChar": 16
+      },
+      "revId": "6e97a783e272e1b2a59d3b627d0a316e32db6cb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69708e3f_9084bf42",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-03-10T19:09:20Z",
+      "side": 1,
+      "message": "Why do you log the size? It gives the incorrect impression that this parameter is somehow a determining factor when failing the buffer allocation. However, it is not even passed to your hook above.",
+      "range": {
+        "startLine": 415,
+        "startChar": 29,
+        "endLine": 415,
+        "endChar": 37
+      },
+      "revId": "6e97a783e272e1b2a59d3b627d0a316e32db6cb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
