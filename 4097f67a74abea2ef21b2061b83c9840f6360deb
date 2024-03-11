@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a409b084_c121ed7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1553428
+      },
+      "writtenOn": "2024-03-11T03:02:47Z",
+      "side": 1,
+      "message": "merge two vendor hook from 14-6.1 with one vendor hook with the sould_fail behavior\n\nFrom:\n\ttrace_android_vh_binder_alloc_new_buf_locked(size, \u0026alloc-\u003efree_async_space, is_async);\n        trace_android_vh_binder_detect_low_async_space_locked(is_async, \u0026alloc-\u003efree_async_space, pid, \u0026should_fail);\n        if (should_fail) {\n            binder_alloc_debug(BINDER_DEBUG_BUFFER_ALLOC,\n\t\t\t     \"%d: binder_alloc_buf size %zd failed, not allowed to alloc more async space\\n\",\n\t\t\t      alloc-\u003epid, size);\n            return ERR_PTR(-EPERM);\n        }\nTo:\n\n\ttrace_android_vh_binder_alloc_new_buf_locked(size, \u0026alloc-\u003efree_async_space, is_async, \u0026should_fail);\n\tif (should_fail) {\n            binder_alloc_debug(BINDER_DEBUG_BUFFER_ALLOC,\n\t\t\t     \"%d: binder_alloc_buf failed, not allowed to alloc more async space\\n\",\n\t\t\t      alloc-\u003epid);\n            return ERR_PTR(-EPERM);\n\t}\n\t\npleaes help review the new patch",
+      "revId": "4097f67a74abea2ef21b2061b83c9840f6360deb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
