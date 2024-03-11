@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6b3ea195_f243a60b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1553428
+      },
+      "writtenOn": "2024-03-11T02:01:38Z",
+      "side": 1,
+      "message": "in 14-6.1, the trace_android_vh_binder_alloc_new_buf_locked is already taken without the should_fail behavior, so we use a different name",
+      "parentUuid": "d29d050b_01f3c5f0",
+      "range": {
+        "startLine": 7,
+        "startChar": 36,
+        "endLine": 7,
+        "endChar": 72
+      },
+      "revId": "6e97a783e272e1b2a59d3b627d0a316e32db6cb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "91329218_b5ededbf",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -37,6 +61,24 @@
       "writtenOn": "2024-03-10T19:09:20Z",
       "side": 1,
       "message": "hmmm, I think we could instead cherry-pick the `trace_android_vh_binder_alloc_new_buf_locked()` vendor hook and modify it to add the behavior of the `should_fail`. This sounds like a cleaner approach to me.",
+      "revId": "6e97a783e272e1b2a59d3b627d0a316e32db6cb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8e80261_21b25d07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1553428
+      },
+      "writtenOn": "2024-03-11T02:01:38Z",
+      "side": 1,
+      "message": "i would rename the vendor hook to trace_android_vh_binder_alloc_new_buf_locked, with the should_fail behavior.",
+      "parentUuid": "91329218_b5ededbf",
       "revId": "6e97a783e272e1b2a59d3b627d0a316e32db6cb0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -66,6 +108,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c1634bb_329a4f0e",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1553428
+      },
+      "writtenOn": "2024-03-11T02:01:38Z",
+      "side": 1,
+      "message": "ok, i will remove this pid",
+      "parentUuid": "9bd06cab_81b82150",
+      "range": {
+        "startLine": 412,
+        "startChar": 13,
+        "endLine": 412,
+        "endChar": 16
+      },
+      "revId": "6e97a783e272e1b2a59d3b627d0a316e32db6cb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "69708e3f_9084bf42",
         "filename": "drivers/android/binder_alloc.c",
         "patchSetId": 3
@@ -77,6 +143,30 @@
       "writtenOn": "2024-03-10T19:09:20Z",
       "side": 1,
       "message": "Why do you log the size? It gives the incorrect impression that this parameter is somehow a determining factor when failing the buffer allocation. However, it is not even passed to your hook above.",
+      "range": {
+        "startLine": 415,
+        "startChar": 29,
+        "endLine": 415,
+        "endChar": 37
+      },
+      "revId": "6e97a783e272e1b2a59d3b627d0a316e32db6cb0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2db58a3d_7d0b616e",
+        "filename": "drivers/android/binder_alloc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1553428
+      },
+      "writtenOn": "2024-03-11T02:01:38Z",
+      "side": 1,
+      "message": "okay, i would remove this size logging.",
+      "parentUuid": "69708e3f_9084bf42",
       "range": {
         "startLine": 415,
         "startChar": 29,
