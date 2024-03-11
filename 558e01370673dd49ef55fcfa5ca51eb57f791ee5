@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "069bd190_38ae9fe8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-03-11T23:18:52Z",
+      "side": 1,
+      "message": "Wait what? Which is the thread sending the transaction? Thread-A is RT and calls into Thread-B which is CFS. What is the problem again?",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 115
+      },
+      "revId": "558e01370673dd49ef55fcfa5ca51eb57f791ee5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "4d021dc7_dc948a0d",
@@ -14,6 +37,29 @@
       "writtenOn": "2024-03-11T09:53:39Z",
       "side": 1,
       "message": "can u tell me how to find a bug",
+      "revId": "558e01370673dd49ef55fcfa5ca51eb57f791ee5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ce50f36_dad1bcc6",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-03-11T23:18:52Z",
+      "side": 1,
+      "message": "What will be the values of `t-\u003esaved_priority` when you skip this? Also, what will happen when we later call `binder_restore_priority(thread, \u0026t-\u003esaved_priority)` with these unset values?",
+      "range": {
+        "startLine": 817,
+        "startChar": 5,
+        "endLine": 817,
+        "endChar": 9
+      },
       "revId": "558e01370673dd49ef55fcfa5ca51eb57f791ee5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
