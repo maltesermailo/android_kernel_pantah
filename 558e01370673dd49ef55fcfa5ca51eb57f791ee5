@@ -62,6 +62,30 @@
       },
       "revId": "558e01370673dd49ef55fcfa5ca51eb57f791ee5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e37869b_50841e1c",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2024-03-12T12:57:53Z",
+      "side": 1,
+      "message": "Hi, Carlos, thanks for your review(*￣︶￣).\nIf the thread that initiates binder_transaction is the rt thread, we will set the \"user-aware property\" attribute for the peer thread and use it in the OEM scheduling strategy. In this case, we skip the native inheritance priority policy, because the inherited priority will affect the OEM scheduling policy\u0027s judgment of the \"user-aware property\" attribute.",
+      "parentUuid": "0ce50f36_dad1bcc6",
+      "range": {
+        "startLine": 817,
+        "startChar": 5,
+        "endLine": 817,
+        "endChar": 9
+      },
+      "revId": "558e01370673dd49ef55fcfa5ca51eb57f791ee5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
