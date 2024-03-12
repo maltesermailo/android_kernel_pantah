@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ae588ab_bca92745",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/ffa.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-03-12T23:05:58Z",
+      "side": 1,
+      "message": "This adds quite a lot of calls to the default \"passthrough\" case. Have you checked that all of those calls are safe? Unless a call is blocked by `ffa_call_supported()`, then it will go straight to TZ.",
+      "range": {
+        "startLine": 12,
+        "startChar": 25,
+        "endLine": 12,
+        "endChar": 29
+      },
+      "revId": "faa9b6c4b91068fe4b3f0e359e0f77d82599f175",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
