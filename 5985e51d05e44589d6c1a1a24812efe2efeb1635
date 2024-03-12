@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "99a9adf3_5dd2ce03",
+        "filename": "drivers/android/binder/process.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-03-12T09:30:32Z",
+      "side": 1,
+      "message": "I would change the xarray function to take usize instead of u64. An `unsigned long` actually does correspond to a usize, it\u0027s just that bindgen will pick either u64 or u32 as appropriate rather than use the `usize` type. I believe we have a conversion method on xarray for `usize -\u003e c_ulong`?",
+      "parentUuid": "0d29b62b_c1cb9487",
+      "revId": "5985e51d05e44589d6c1a1a24812efe2efeb1635",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "95732bf4_f632f7b1",
         "filename": "drivers/android/binder/process.rs",
         "patchSetId": 14
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Done, I think.  Not sure my style is idiomatic there?",
       "parentUuid": "95732bf4_f632f7b1",
+      "revId": "5985e51d05e44589d6c1a1a24812efe2efeb1635",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7be0799_87d3cb0e",
+        "filename": "drivers/android/binder/process.rs",
+        "patchSetId": 14
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-03-12T09:30:32Z",
+      "side": 1,
+      "message": "You can reuse the error message from my version.\n\nAlso, I only want to print that error if the error is EBUSY. The allocation failure is a separate issue IMO.",
+      "parentUuid": "e61dec9e_fe93e45a",
       "revId": "5985e51d05e44589d6c1a1a24812efe2efeb1635",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
