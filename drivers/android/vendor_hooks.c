@@ -55,6 +55,7 @@
 #include <trace/hooks/softlockup.h>
 #include <trace/hooks/power.h>
 #include <trace/hooks/gzvm.h>
+#include <trace/hooks/signal.h>
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -185,3 +186,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_panic_unhandled);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_gzvm_vcpu_exit_reason);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_mutex_list_add);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_unlock_slowpath);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_send_sig_info);
