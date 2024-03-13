@@ -22,6 +22,30 @@
       },
       "revId": "faa9b6c4b91068fe4b3f0e359e0f77d82599f175",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82450bfc_f4dbb50f",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/ffa.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-03-13T08:26:44Z",
+      "side": 1,
+      "message": "My change fixes the identification range according to the reserved numbers from the spec, it doesn\u0027t alter the previous behavior. \nhttps://android.googlesource.com/kernel/common/+/refs/heads/android15-6.6/arch/arm64/kvm/hyp/nvhe/ffa.c#654 returns false for an out of range value which defaults to passthrough (https://android.googlesource.com/kernel/common/+/refs/heads/android15-6.6/arch/arm64/kvm/hyp/nvhe/ffa.c#686)",
+      "parentUuid": "9ae588ab_bca92745",
+      "range": {
+        "startLine": 12,
+        "startChar": 25,
+        "endLine": 12,
+        "endChar": 29
+      },
+      "revId": "faa9b6c4b91068fe4b3f0e359e0f77d82599f175",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
