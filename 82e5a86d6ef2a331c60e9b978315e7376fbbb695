@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "183e53be_0f559a82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-03-13T17:43:58Z",
+      "side": 1,
+      "message": "Build failure:\n```\nSymbols missing from the ksymtab:\n  __traceiter_android_vh_binder_wakeup_ilocked\n  __tracepoint_android_vh_binder_wakeup_ilocked\n```\nThis hook is not defined in android15-6.6. Please drop the symbols from this patch - and please test your patches before submitting.",
+      "revId": "82e5a86d6ef2a331c60e9b978315e7376fbbb695",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
