@@ -39,6 +39,26 @@
       "tag": "",
       "revId": "f91d081f60fd3a471d4b1667ad6a2ecdfc9e6808",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000071204751",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3002722?revision\u003d1",
+      "key": {
+        "uuid": "d8d9b360_90f2f36f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-03-13T15:48:09Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/d47f9717e5cfd0dd8c0ba2ecfa47c38d140f1bb6) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003dd47f9717e5cfd0dd8c0ba2ecfa47c38d140f1bb6).\n\n```\n    - ## block/mq-deadline.c ##\n    -@@ block/mq-deadline.c: static void dd_depth_updated(struct blk_mq_hw_ctx *hctx)\n    + ## block/mq-deadline-main.c ##\n    +@@ block/mq-deadline-main.c: static void dd_depth_updated(struct blk_mq_hw_ctx *hctx)\n      \tstruct request_queue *q \u003d hctx-\u003equeue;\n      \tstruct deadline_data *dd \u003d q-\u003eelevator-\u003eelevator_data;\n      \tstruct blk_mq_tags *tags \u003d hctx-\u003esched_tags;\n    -+\tunsigned int shift \u003d tags-\u003ebitmap_tags.sb.shift;\n    ++\tunsigned int shift \u003d tags-\u003ebitmap_tags-\u003esb.shift;\n      \n     -\tdd-\u003easync_depth \u003d max(1UL, 3 * q-\u003enr_requests / 4);\n     +\tdd-\u003easync_depth \u003d max(1U, 3 * (1U \u003c\u003c shift)  / 4);\n      \n    - \tsbitmap_queue_min_shallow_depth(\u0026tags-\u003ebitmap_tags, dd-\u003easync_depth);\n    + \tsbitmap_queue_min_shallow_depth(tags-\u003ebitmap_tags, dd-\u003easync_depth);\n      }\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "f91d081f60fd3a471d4b1667ad6a2ecdfc9e6808",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
