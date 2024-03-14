@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "30a98089_cf41dd49",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2024-03-14T09:59:24Z",
+      "side": 1,
+      "message": "Hi Carlos,\nOK, the subject is updated.\nANDROID: vendor_hooks: add hooks to move certain scenarios\u0027 work to a fixed binder thread",
+      "parentUuid": "bdaec1c9_10393a24",
+      "range": {
+        "startLine": 7,
+        "startChar": 23,
+        "endLine": 7,
+        "endChar": 59
+      },
+      "revId": "6fda91696d31bf4672a4267fd31fb4aac3cd7951",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "297506e5_27646f84",
         "filename": "/COMMIT_MSG",
         "patchSetId": 6
@@ -37,6 +61,30 @@
       "writtenOn": "2024-03-12T00:43:14Z",
       "side": 1,
       "message": "Sorry, I don\u0027t understand this part. Can you please explain a bit more?",
+      "range": {
+        "startLine": 25,
+        "startChar": 1,
+        "endLine": 27,
+        "endChar": 58
+      },
+      "revId": "6fda91696d31bf4672a4267fd31fb4aac3cd7951",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb6d9214_693cf7fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2024-03-14T09:59:24Z",
+      "side": 1,
+      "message": "Hi, Carlos, thanks for your review.\nIn this hook, We will mark process which need to set up vip thread and set the maximum number of VIP threads, So we need to expand one ioctl cmd for binder driver ,this is the internal logic of the hook.",
+      "parentUuid": "297506e5_27646f84",
       "range": {
         "startLine": 25,
         "startChar": 1,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bb5e3f16_b9bb0a04",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 4664,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2024-03-14T09:59:24Z",
+      "side": 1,
+      "message": "Hi, Carlos, thanks for your review! It\u0027s a mistake, and is updated! Here we find things to do in vip thread. If it is a VIP thread and the todo list of the thread is empty, look for vip binder_work in the todo of the proc.",
+      "parentUuid": "d061acd7_d5dc0d8a",
+      "range": {
+        "startLine": 4664,
+        "startChar": 50,
+        "endLine": 4664,
+        "endChar": 55
+      },
+      "revId": "6fda91696d31bf4672a4267fd31fb4aac3cd7951",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9bcae880_832394af",
         "filename": "drivers/android/binder.c",
         "patchSetId": 6
@@ -83,6 +155,30 @@
       "writtenOn": "2024-03-12T00:43:14Z",
       "side": 1,
       "message": "why would you need to pass current? it\u0027s a global.",
+      "range": {
+        "startLine": 5779,
+        "startChar": 35,
+        "endLine": 5779,
+        "endChar": 42
+      },
+      "revId": "6fda91696d31bf4672a4267fd31fb4aac3cd7951",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6b004ea_1d611cf9",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 5779,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2024-03-14T09:59:24Z",
+      "side": 1,
+      "message": "Hi, Carlos~ thanks for your review~\nThe purpose of the first parameter of this hook is to pass the caller task. In this case, the caller task is current. It\u0027s a good idea to get current task struct in our internal logic. However, in order to be consistent with 6.1, can it be maintained?",
+      "parentUuid": "9bcae880_832394af",
       "range": {
         "startLine": 5779,
         "startChar": 35,
