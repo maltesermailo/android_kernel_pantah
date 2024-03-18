@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2ab672cf_63619599",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-03-18T09:10:57Z",
+      "side": 1,
+      "message": "No, the problem comes from a patch that was merged later. \n\nActually we do not even need it for android15-6.1, but happy to apply it anyway just to align the support.",
+      "parentUuid": "ef52433f_6e02d346",
+      "revId": "40007a64e0de9b045d13f6db5e1f6a5136daa461",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6ed3dcb3_cb3e1ce0",
         "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
         "patchSetId": 1
@@ -31,6 +49,30 @@
       "writtenOn": "2024-03-11T16:43:21Z",
       "side": 1,
       "message": "We could probably leave this to the caller as well and then just pass `host_ctxt-\u003eregs` into `handle_host_dynamic_hcall()`",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 43
+      },
+      "revId": "40007a64e0de9b045d13f6db5e1f6a5136daa461",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ee58072_92fabd81",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-03-18T09:10:57Z",
+      "side": 1,
+      "message": "Ack and done!\n\nNotice though, I\u0027ll change a bit the behaviour for partners modules!",
+      "parentUuid": "6ed3dcb3_cb3e1ce0",
       "range": {
         "startLine": 162,
         "startChar": 0,
