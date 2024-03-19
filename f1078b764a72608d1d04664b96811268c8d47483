@@ -33,6 +33,24 @@
       "message": "I assume this is porting the code that was added in https://lore.kernel.org/lkml/5ac8c0d09392290be789423f0dd78a520b830fab.1682333709.git.zhangchuang3@xiaomi.com/ / aosp/2595586. That code looks wrong though if you are printing an entry in the transaction log. If the transaction has already completed the elapsed time should not be printed relative to the time the log was read, but relative to when the transaction completed.\n\nI have not checked if the rust version has that codepath yet though",
       "revId": "f1078b764a72608d1d04664b96811268c8d47483",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92432342_3cd44de7",
+        "filename": "drivers/android/binder/transaction.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-03-19T09:02:05Z",
+      "side": 1,
+      "message": "The transaction log isn\u0027t implemented yet, but thanks for pointing that out. I\u0027ll make sure to avoid this codepath in the transaction log.",
+      "parentUuid": "040fe695_87257253",
+      "revId": "f1078b764a72608d1d04664b96811268c8d47483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
