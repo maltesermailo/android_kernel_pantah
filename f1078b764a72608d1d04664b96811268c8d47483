@@ -69,6 +69,24 @@
       "parentUuid": "92432342_3cd44de7",
       "revId": "f1078b764a72608d1d04664b96811268c8d47483",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99125f89_8b989718",
+        "filename": "drivers/android/binder/transaction.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-03-19T15:41:35Z",
+      "side": 1,
+      "message": "Note the C patch by Zhang only logs in-flight transactions. This is why it makes sense to log the time relative to read. It is there to quickly identify blocked/slow transactions. This info has been useful during ANRs.",
+      "parentUuid": "5543fb2b_287c84ea",
+      "revId": "f1078b764a72608d1d04664b96811268c8d47483",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
