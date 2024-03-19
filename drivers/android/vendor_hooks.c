@@ -58,6 +58,11 @@
 #include <trace/hooks/power.h>
 #include <trace/hooks/gzvm.h>
 #include <trace/hooks/signal.h>
+<<<<<<< PATCH SET (4b0a95 ANDROID: mm: Add vendor hook for __oom_kill_process)
+#include <trace/hooks/compaction.h>
+#include <trace/hooks/oom.h>
+=======
+>>>>>>> BASE      (a7e37f ANDROID: 16K: Remove unescessary err log in randomize_page())
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -212,3 +217,12 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_signal_whether_wake);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_check);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_freeze_whether_wake);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_percpu_rwsem_wq_add);
+<<<<<<< PATCH SET (4b0a95 ANDROID: mm: Add vendor hook for __oom_kill_process)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_compaction_exit);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_compaction_try_to_compact_exit);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_vmscan_kswapd_done);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_direct_reclaim_enter);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_direct_reclaim_exit);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_get_victim);
+=======
+>>>>>>> BASE      (a7e37f ANDROID: 16K: Remove unescessary err log in randomize_page())
