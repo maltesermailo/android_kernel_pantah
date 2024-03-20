@@ -16,6 +16,23 @@
       "message": "Should not be needed by any driver.",
       "revId": "71f068b71687d0b4cd398a86213df924a9dc47d5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30544c1d_9e8e2d19",
+        "filename": "arch/arm64/kernel/process.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-03-20T16:28:05Z",
+      "side": 1,
+      "message": "The commit message says you are exporting `get_wchan`, but you are exporting `__get_wchan`. In previous branches, `get_wchan` was exported. Why is this changed to the internal version? Please answer by updating the commit message to say why the internal version is needed.\n\nAlso please update the commit message to indicate what driver needs this access. If it is to implement a vendor hook, then say which vendor hook.",
+      "revId": "71f068b71687d0b4cd398a86213df924a9dc47d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
