@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8577935_f35f2279",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-03-20T19:21:59Z",
+      "side": 1,
+      "message": "I\u0027m a bit ambivalent about these sorts of helper macros. They do clean up the code a bit, but they also obscure things a bit. So one who is unfamiliar with the code still has to scroll up to see what they are really doing.\n\nNot an objection, but just something to consider.",
+      "revId": "a90b22f101c34868bd4ce73b2dff4a284663c44b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b4e443b_ee51c8f2",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-03-20T19:21:59Z",
+      "side": 1,
+      "message": "I like this one, though I\u0027d probably use a static inline instead of a macro there.",
+      "revId": "a90b22f101c34868bd4ce73b2dff4a284663c44b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc4d8e8e_3ebf525f",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-03-20T19:21:59Z",
+      "side": 1,
+      "message": "Is this really the same as what was there before?",
+      "revId": "a90b22f101c34868bd4ce73b2dff4a284663c44b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42d4c2fa_9a71e256",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-03-20T19:21:59Z",
+      "side": 1,
+      "message": "This isn\u0027t quite the same logic as what the for loop before has. I do like the simplification, but think a `break` would probably more correct then `continue`.\n\nAlso I\u0027d lower the uid_entry check to be below the point where it is set in the loop rather then checking the previous iteration.",
+      "revId": "a90b22f101c34868bd4ce73b2dff4a284663c44b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0384532e_23b470d3",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-03-20T19:21:59Z",
+      "side": 1,
+      "message": "This seems a bit odd.\n\nSo uid_entry is initialized as null, but if uid_entry is somehow left set the last time through the loop, we continue - which will iterate to the next bkt and uid_entry will still remain set, which will iterate to the next bucket, and on...\n\nIt seems like you might as well break there, which is what the original for loop was doing.\n\nI do think it would be cleaner to check `if (uid_entry)` and break after the for_each_uid_entry() loop which sets it, so you don\u0027t have to logically think about the previous iteration.",
+      "revId": "a90b22f101c34868bd4ce73b2dff4a284663c44b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
