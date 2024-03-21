@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d69d93d6_0b2d8574",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2024-03-21T02:20:52Z",
+      "side": 1,
+      "message": "Maybe for those partners who are unfamliliar with the cose,they can understand the general purpose better than the original code.",
+      "parentUuid": "f8577935_f35f2279",
+      "revId": "a90b22f101c34868bd4ce73b2dff4a284663c44b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b4e443b_ee51c8f2",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-03-20T19:21:59Z",
       "side": 1,
       "message": "I like this one, though I\u0027d probably use a static inline instead of a macro there.",
+      "revId": "a90b22f101c34868bd4ce73b2dff4a284663c44b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f30963b_1d283f2c",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2024-03-21T02:20:52Z",
+      "side": 1,
+      "message": "All right.",
+      "parentUuid": "5b4e443b_ee51c8f2",
       "revId": "a90b22f101c34868bd4ce73b2dff4a284663c44b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bcb149e2_c69bfd40",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2024-03-21T02:20:52Z",
+      "side": 1,
+      "message": "I think so:\n\nhash_for_each_possible(hash_table, uid_entry, hash, uid)\n -\u003e  bkt \u003d hash_min(uid, HASH_BITS(hash_table)\n    -\u003e hlist_for_each_entry(uid_entry, \u0026hash_table[bkt])], hash)\n \nfor_each_uid_entry(uid_entry, bkt) \n -\u003e hlist_for_each_entry(uid_entry, \u0026hash_table[bkt], hash)",
+      "parentUuid": "bc4d8e8e_3ebf525f",
+      "revId": "a90b22f101c34868bd4ce73b2dff4a284663c44b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "42d4c2fa_9a71e256",
         "filename": "drivers/misc/uid_sys_stats.c",
         "patchSetId": 1
@@ -71,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bc8d04cb_05327675",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2024-03-21T02:20:52Z",
+      "side": 1,
+      "message": "At the beginning, here is the macro:hash_for_each in the function, which would check obj if is NULL, so we retain the check.\n\n126  #define hash_for_each(name, bkt, obj, member)\t\t\t\t\\\n127  \tfor ((bkt) \u003d 0, obj \u003d NULL; obj \u003d\u003d NULL \u0026\u0026 (bkt) \u003c HASH_SIZE(name);\\\n128  \t\t\t(bkt)++)\\\n129  \t\thlist_for_each_entry(obj, \u0026name[bkt], member)\n\n\nBut in fact, I think the uid_entry check is unnecessary.\nBecause during for_each_uid_entry-\u003ehlist_for_each_entry, if uid_entry never be NULL, the macro will appear an infinite loop.\n\n1038  #define hlist_for_each_entry(pos, head, member)\t\t\t\t\\\n1039  \tfor (pos \u003d hlist_entry_safe((head)-\u003efirst, typeof(*(pos)), member);\\\n1040  \t     pos;\t\t\t\t\t\t\t\\\n1041  \t     pos \u003d hlist_entry_safe((pos)-\u003emember.next, typeof(*(pos)), member))",
+      "parentUuid": "42d4c2fa_9a71e256",
+      "revId": "a90b22f101c34868bd4ce73b2dff4a284663c44b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0384532e_23b470d3",
         "filename": "drivers/misc/uid_sys_stats.c",
         "patchSetId": 1
@@ -82,6 +154,24 @@
       "writtenOn": "2024-03-20T19:21:59Z",
       "side": 1,
       "message": "This seems a bit odd.\n\nSo uid_entry is initialized as null, but if uid_entry is somehow left set the last time through the loop, we continue - which will iterate to the next bkt and uid_entry will still remain set, which will iterate to the next bucket, and on...\n\nIt seems like you might as well break there, which is what the original for loop was doing.\n\nI do think it would be cleaner to check `if (uid_entry)` and break after the for_each_uid_entry() loop which sets it, so you don\u0027t have to logically think about the previous iteration.",
+      "revId": "a90b22f101c34868bd4ce73b2dff4a284663c44b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "678ceb1e_57947ba8",
+        "filename": "drivers/misc/uid_sys_stats.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1940250
+      },
+      "writtenOn": "2024-03-21T02:20:52Z",
+      "side": 1,
+      "message": "At the beginning, here is the macro:hash_for_each in the function, which would check obj if is NULL, so we retain the check.\n\n126 #define hash_for_each(name, bkt, obj, member)\n127 for ((bkt) \u003d 0, obj \u003d NULL; obj \u003d\u003d NULL \u0026\u0026 (bkt) \u003c HASH_SIZE(name);\n128 (bkt)++)\n129 hlist_for_each_entry(obj, \u0026name[bkt], member)\n\nBut in fact, I think the uid_entry check is unnecessary.\nBecause during for_each_uid_entry-\u003ehlist_for_each_entry, if uid_entry never be NULL, the macro will appear an infinite loop.\n\n1038 #define hlist_for_each_entry(pos, head, member)\n1039 for (pos \u003d hlist_entry_safe((head)-\u003efirst, typeof((pos)), member);\n1040 pos;\n1041 pos \u003d hlist_entry_safe((pos)-\u003emember.next, typeof((pos)), member))",
+      "parentUuid": "0384532e_23b470d3",
       "revId": "a90b22f101c34868bd4ce73b2dff4a284663c44b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
