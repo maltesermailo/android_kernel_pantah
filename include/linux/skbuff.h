@@ -37,7 +37,14 @@
 #endif
 #include <net/net_debug.h>
 #include <net/dropreason-core.h>
+<<<<<<< HEAD   (99d39c ANDROID: db845c: publish the tests.zip package)
 #include <net/netmem.h>
+||||||| BASE
+#include <linux/android_kabi.h>
+=======
+#include <linux/android_kabi.h>
+#include <linux/android_vendor.h>
+>>>>>>> CHANGE (c4b030 ANDROID: GKI: add vendor padding variable in struct skb_shar)
 
 /**
  * DOC: skb checksums
@@ -613,6 +620,17 @@ struct skb_shared_info {
 	 * remains valid until skb destructor */
 	void *		destructor_arg;
 
+<<<<<<< HEAD   (99d39c ANDROID: db845c: publish the tests.zip package)
+||||||| BASE
+	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
+
+=======
+	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
+	ANDROID_OEM_DATA_ARRAY(1, 3);
+
+>>>>>>> CHANGE (c4b030 ANDROID: GKI: add vendor padding variable in struct skb_shar)
 	/* must be last field, see pskb_expand_head() */
 	skb_frag_t	frags[MAX_SKB_FRAGS];
 };
