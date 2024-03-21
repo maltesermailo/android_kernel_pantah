@@ -69,6 +69,7 @@
 #include <linux/net_tstamp.h>
 #include <net/l3mdev.h>
 #include <uapi/linux/socket.h>
+#include <linux/android_vendor.h>
 
 /*
  * This structure really needs to be cleaned up.
@@ -576,9 +577,14 @@ struct sock {
 	netns_tracker		ns_tracker;
 	struct xarray		sk_user_frags;
 
+<<<<<<< HEAD   (c6fe049e686d85af592f533d5eb6239068750c8a Merge b3039c526f3e ("mm: introduce deferred freeing for kern)
 #if IS_ENABLED(CONFIG_PROVE_LOCKING) && IS_ENABLED(CONFIG_MODULES)
 	struct module		*sk_owner;
 #endif
+||||||| BASE   (5b139068a778e98e39bee254ff2cec6461ce869b UPSTREAM: PCI: dwc: Don't wait for link up if driver can det)
+=======
+	ANDROID_OEM_DATA(1);
+>>>>>>> CHANGE (4f4653983273a4449592c301233927e74b8f6743 ANDROID: GKI: add vendor padding variable in struct sock)
 };
 
 struct sock_bh_locked {
