@@ -303874,6 +303874,11 @@ function {
   parameter_id: 0x3fa672fd
 }
 function {
+  id: 0x58e2fbd2
+  return_type_id: 0x18bd6530
+  parameter_id: 0x39d1288c
+}
+function {
   id: 0x590737f8
   return_type_id: 0x295c7202
   parameter_id: 0x2936263d
@@ -310725,6 +310730,13 @@ function {
   parameter_id: 0x4585663f
   parameter_id: 0x914dbfdc
   parameter_id: 0x6d7f5ff6
+}
+function {
+  id: 0x92c44c32
+  return_type_id: 0x6720d32f
+  parameter_id: 0x3b49ed35
+  parameter_id: 0x6720d32f
+  parameter_id: 0x295c7202
 }
 function {
   id: 0x92c4ddf1
@@ -379310,6 +379322,15 @@ elf_symbol {
   full_name: "pci_clear_master"
 }
 elf_symbol {
+  id: 0x97a2a455
+  name: "pci_clear_mwi"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x46452a94
+  type_id: 0x14e1f000
+  full_name: "pci_clear_mwi"
+}
+elf_symbol {
   id: 0x04525af5
   name: "pci_dev_get"
   is_defined: true
@@ -380039,6 +380060,15 @@ elf_symbol {
   full_name: "pci_set_master"
 }
 elf_symbol {
+  id: 0xfc86cde9
+  name: "pci_set_mwi"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xb8102db0
+  type_id: 0x99f942bc
+  full_name: "pci_set_mwi"
+}
+elf_symbol {
   id: 0xe770d8d1
   name: "pci_set_power_state"
   is_defined: true
@@ -380118,6 +380148,15 @@ elf_symbol {
   crc: 0x021a9de2
   type_id: 0x18efced4
   full_name: "pci_walk_bus"
+}
+elf_symbol {
+  id: 0x35548641
+  name: "pci_write_config_byte"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x9e4ddd45
+  type_id: 0x92c44c32
+  full_name: "pci_write_config_byte"
 }
 elf_symbol {
   id: 0x6d6403f6
@@ -383061,6 +383100,15 @@ elf_symbol {
   crc: 0xec2e1c8f
   type_id: 0x91cb6689
   full_name: "proc_doulongvec_minmax"
+}
+elf_symbol {
+  id: 0x7a8a2031
+  name: "proc_get_parent_data"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x5cbd50ed
+  type_id: 0x58e2fbd2
+  full_name: "proc_get_parent_data"
 }
 elf_symbol {
   id: 0xd27c5bdf
@@ -408636,6 +408684,7 @@ interface {
   symbol_id: 0x1540c319
   symbol_id: 0x06548b7e
   symbol_id: 0xe99b6d83
+  symbol_id: 0x97a2a455
   symbol_id: 0x04525af5
   symbol_id: 0x9252d1d7
   symbol_id: 0x4f0ba1d7
@@ -408717,6 +408766,7 @@ interface {
   symbol_id: 0x53d0da35
   symbol_id: 0xc62d75dd
   symbol_id: 0x9595d229
+  symbol_id: 0xfc86cde9
   symbol_id: 0xe770d8d1
   symbol_id: 0xa321b388
   symbol_id: 0x958eb206
@@ -408726,6 +408776,7 @@ interface {
   symbol_id: 0xa01539e9
   symbol_id: 0x46d93e48
   symbol_id: 0x0bb33843
+  symbol_id: 0x35548641
   symbol_id: 0x6d6403f6
   symbol_id: 0x52200b18
   symbol_id: 0x0ce26450
@@ -409053,6 +409104,7 @@ interface {
   symbol_id: 0x499b7b9e
   symbol_id: 0x712f800b
   symbol_id: 0x37c95360
+  symbol_id: 0x7a8a2031
   symbol_id: 0xd27c5bdf
   symbol_id: 0xe2f2f3da
   symbol_id: 0xeb5eabdb
