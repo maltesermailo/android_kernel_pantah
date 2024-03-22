@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bff6679_83c661fb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-03-22T13:41:43Z",
+      "side": 1,
+      "message": "\u003e Cherry pick is not clean. Checked against UPSTREAM.\n\u003e UPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/8c1cbec9db1ab044167a7594c88bb5906c9d3ee4) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d8c1cbec9db1ab044167a7594c88bb5906c9d3ee4).\n\u003e \n\u003e ```\n\u003e       ## drivers/usb/host/xhci-mem.c ##\n\u003e      @@ drivers/usb/host/xhci-mem.c: int xhci_mem_init(struct xhci_hcd *xhci, gfp_t flags)\n\u003e       \t\t\t\"// Set ERST base address for ir_set 0 \u003d 0x%llx\",\n\u003e     @@ drivers/usb/host/xhci-mem.c: int xhci_mem_init(struct xhci_hcd *xhci, gfp_t flag\n\u003e       \txhci_write_64(xhci, val_64, \u0026xhci-\u003eir_set-\u003eerst_base);\n\u003e       \n\u003e       \t/* Set the event ring dequeue address */\n\u003e     -\n\u003e     - ## drivers/usb/host/xhci.h ##\n\u003e     -@@ drivers/usb/host/xhci.h: struct xhci_intr_reg {\n\u003e     - /* Preserve bits 16:31 of erst_size */\n\u003e     - #define\tERST_SIZE_MASK\t\t(0xffff \u003c\u003c 16)\n\u003e     - \n\u003e     -+/* erst_base bitmasks */\n\u003e     -+#define ERST_BASE_RSVDP\t\t(0x3f)\n\u003e     -+\n\u003e     - /* erst_dequeue bitmasks */\n\u003e     - /* Dequeue ERST Segment Index (DESI) - Segment number (or alias)\n\u003e     -  * where the current dequeue pointer lies.  This is an optional HW hint.\n\u003e     -@@ drivers/usb/host/xhci.h: struct xhci_hcd {\n\u003e     - \tu8\t\tsbrn;\n\u003e     - \tu16\t\thci_version;\n\u003e     - \tu8\t\tmax_slots;\n\u003e     --\tu8\t\tmax_interrupters;\n\u003e     -+\tu16\t\tmax_interrupters;\n\u003e     - \tu8\t\tmax_ports;\n\u003e     - \tu8\t\tisoc_threshold;\n\u003e     - \t/* imod_interval in ns (I * 250ns) */\n\u003e ```\n\u003e \n\u003e \n\u003e Please refer to the contribution guidelines for details:\n\u003e https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nPlease fix. Should this rather be \"BACKPORT\"?",
+      "parentUuid": "fe986d51_b6b8b390",
+      "revId": "24c768523b581b65cc733f6c6a473112285754b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
