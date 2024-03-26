@@ -73,6 +73,7 @@
 
 #include <linux/cacheflush.h>
 
+#include "binder_genl.h"
 #include "binder_internal.h"
 #include "binder_trace.h"
 #include "binder_pick_impl.h"
@@ -3810,10 +3811,16 @@ static void binder_transaction(struct binder_proc *proc,
 		return_error_line = __LINE__;
 		goto err_copy_data_failed;
 	}
-	if (t->buffer->oneway_spam_suspect)
+	if (t->buffer->oneway_spam_suspect) {
 		tcomplete->type = BINDER_WORK_TRANSACTION_ONEWAY_SPAM_SUSPECT;
-	else
+		if (binder_report_enabled(BINDER_REPORT_SPAM))
+			binder_send_report(context, BR_ONEWAY_SPAM_SUSPECT, proc->pid, thread->pid,
+					target_proc ? target_proc->pid : 0,
+					target_thread ? target_thread->pid : 0,
+					reply, tr->flags, tr->code, tr->data_size);
+	} else {
 		tcomplete->type = BINDER_WORK_TRANSACTION_COMPLETE;
+	}
 	t->work.type = BINDER_WORK_TRANSACTION;
 
 	if (reply) {
@@ -3871,8 +3878,17 @@ static void binder_transaction(struct binder_proc *proc,
 		 * process and is put in a pending queue, waiting for the target
 		 * process to be unfrozen.
 		 */
-		if (return_error == BR_TRANSACTION_PENDING_FROZEN)
+		if (return_error == BR_TRANSACTION_PENDING_FROZEN) {
 			tcomplete->type = BINDER_WORK_TRANSACTION_PENDING;
+			if (binder_report_enabled(BINDER_REPORT_DELAYED))
+				binder_send_report(context, return_error,
+						proc->pid, thread->pid,
+						target_proc ? target_proc->pid : 0,
+						target_thread ? target_thread->pid : 0,
+						reply, tr->flags, tr->code,
+						tr->data_size);
+
+		}
 		binder_enqueue_thread_work(thread, tcomplete);
 		if (return_error &&
 		    return_error != BR_TRANSACTION_PENDING_FROZEN)
@@ -3933,6 +3949,13 @@ err_invalid_target_handle:
 		binder_dec_node(target_node, 1, 0);
 		binder_dec_node_tmpref(target_node);
 	}
+
+
+	if (binder_report_enabled(BINDER_REPORT_FAILED))
+		binder_send_report(context, return_error, proc->pid, thread->pid,
+				target_proc ? target_proc->pid : 0,
+				target_thread ? target_thread->pid : 0,
+				reply, tr->flags, tr->code, tr->data_size);
 
 	binder_debug(BINDER_DEBUG_FAILED_TRANSACTION,
 		     "%d:%d transaction %s to %d:%d failed %d/%d/%d, size %lld-%lld line %d\n",
@@ -6845,6 +6868,9 @@ static int __init binder_init(void)
 	binder_driver_initialized = true;
 
 	ret = binder_alloc_shrinker_init();
+	if (ret)
+		return ret;
+	ret = binder_init_genl();
 	if (ret)
 		return ret;
 
