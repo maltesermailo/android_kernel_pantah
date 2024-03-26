@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cef23b13_3b7ee3ec",
+        "filename": "drivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c",
+        "patchSetId": 32
+      },
+      "lineNbr": 935,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-03-26T12:16:09Z",
+      "side": 1,
+      "message": "I think you have a lock ordering problem here, as the TLBI code takes the spin_lock after the rwlock, whereas this is the other way around.",
+      "range": {
+        "startLine": 935,
+        "startChar": 1,
+        "endLine": 935,
+        "endChar": 14
+      },
+      "revId": "a10416aab5a2f3f6e08317a991be4a547341514b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
