@@ -100,14 +100,6 @@ static void ffa_set_retval(struct kvm_cpu_context *ctxt,
 	cpu_reg(ctxt, 3) = res->a3;
 }
 
-static bool is_ffa_call(u64 func_id)
-{
-	return ARM_SMCCC_IS_FAST_CALL(func_id) &&
-	       ARM_SMCCC_OWNER_NUM(func_id) == ARM_SMCCC_OWNER_STANDARD &&
-	       ARM_SMCCC_FUNC_NUM(func_id) >= FFA_MIN_FUNC_NUM &&
-	       ARM_SMCCC_FUNC_NUM(func_id) <= FFA_MAX_FUNC_NUM;
-}
-
 static int ffa_map_hyp_buffers(u64 ffa_page_count)
 {
 	struct arm_smccc_res res;
@@ -653,6 +645,9 @@ bool kvm_host_ffa_handler(struct kvm_cpu_context *host_ctxt, u32 func_id)
 	 */
 	if (!is_ffa_call(func_id))
 		return false;
+
+	trace_ffa_call(func_id, cpu_reg(host_ctxt, 1), cpu_reg(host_ctxt, 2),
+		       cpu_reg(host_ctxt, 3));
 
 	switch (func_id) {
 	case FFA_FEATURES:
