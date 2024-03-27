@@ -4,6 +4,7 @@
 load("@bazel_skylib//lib:paths.bzl", "paths")
 load("@bazel_skylib//rules:copy_file.bzl", "copy_file")
 load("@bazel_skylib//rules:write_file.bzl", "write_file")
+load("@rules_pkg//pkg:install.bzl", "pkg_install")
 load(
     "@rules_pkg//pkg:mappings.bzl",
     "pkg_filegroup",
@@ -842,7 +843,14 @@ pkg_filegroup(
         ":kunit_x86_64_test_config",
     ],
     prefix = _KUNIT_DIR,
-    #visibility = ["//visibility:private"],
+    visibility = ["//visibility:private"],
+)
+
+pkg_install(
+    name = "kunit_tests_x86_64_dist",
+    srcs = [
+       ":kunit_tests_x86_64_pkg_files",
+    ],
 )
 
 # DDK Headers
