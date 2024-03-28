@@ -16,6 +16,24 @@
       "message": "I understand it might be appropriate to move this comment. But the is_ffa_call() makes complete sense to keep into this function. It avoids having to expose is_ffa_call outside of this file.",
       "revId": "3460e85adb57202f1a48a53a4e890c216b6b6198",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c24440a_9b10cf0a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-03-28T18:03:31Z",
+      "side": 0,
+      "message": "We need `is_ffa_call` outside anyway because it will be used by the guest handling in an upcoming series.",
+      "parentUuid": "c95cc2df_8a0557bc",
+      "revId": "3460e85adb57202f1a48a53a4e890c216b6b6198",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
