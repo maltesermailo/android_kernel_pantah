@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a82505c8_46eb27cf",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-03-28T18:17:59Z",
+      "side": 1,
+      "message": "How about \n\n```\n  u64 arg1 \u003d cpu_reg(hots_ctxt, 1), arg2 \u003d cpu_reg(host_ctxt, 2), arg3 \u003d cpu_reg...\n  int err \u003d 0;\n\n  switch(func_id) {\n  ....\n  }\n\n ffa_set_retval(host_ctxt, \u0026res);\n err \u003d res.a0 ? 0 : res.a2;\nunhandled:\n trace_ffa_call(func_id, arg1, arg2, arg3, arg4, handled, err);\n \n return handled;\n```",
+      "parentUuid": "d50034c0_658da737",
+      "revId": "77096cfbd58713faa75f3041a96b695d13afb065",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f4449298_d50ca86b",
         "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
         "patchSetId": 6
