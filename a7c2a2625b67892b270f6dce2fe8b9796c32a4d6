@@ -16,6 +16,24 @@
       "message": "Do we really to have two events here? if it is not handled, it\u0027ll be forwarded below. And we probably don\u0027t need to print any of the cpu_reg again, do we?\n\nHow about we just keep a single event, logged into kvm_host_ffa_handler()\n\nwith the events `func_id` `arg1` `arg2` `arg3` `arg4` `err` `handled`\n\nerr would be one of the FFA error codes and `handled` if we tried to handle it?",
       "revId": "a7c2a2625b67892b270f6dce2fe8b9796c32a4d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b0462d2_f4698324",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1705,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-03-28T11:49:03Z",
+      "side": 1,
+      "message": "There is also a case where it is not handled because it is rejected. In this case `handled` is true and the error codes are set in the registers from the `kvm_host_ffa_handler` handler. I think we need two of them because the one in `kvm_host_ffa_handler` also logs the arguments of the initial call",
+      "parentUuid": "e07e7835_e0a07da2",
+      "revId": "a7c2a2625b67892b270f6dce2fe8b9796c32a4d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
