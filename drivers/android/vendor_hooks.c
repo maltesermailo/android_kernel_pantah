@@ -64,8 +64,20 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_read_wait_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_read_wait_finish);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_write_wait_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_write_wait_finish);
+<<<<<<< HEAD   (45eb1231c1bbff6e98dd118b7a88ecac16145e91 ANDROID: vendor_hooks: add hooks in rwsem read trylock)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_set_priority);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_restore_priority);
+||||||| BASE   (379b99745e88dccba1c91591ef3bff576924bd40 ANDROID: Disable CONFIG_SHADOW_CALL_STACK for TV GKI)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_opt_spin_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_opt_spin_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_can_spin_on_owner);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_opt_spin_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_opt_spin_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_can_spin_on_owner);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_direct_rsteal);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_optimistic_rspin);
+>>>>>>> CHANGE (4f0fccc35a9fb82f2e25badcb24bca171512444d ANDROID: vendor_hook: Add hooks to support reader optimistic)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_idle_enter);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_idle_exit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mpam_set);
