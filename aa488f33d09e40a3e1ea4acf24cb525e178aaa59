@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40e8ecc0_27d35cf4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-03-28T13:38:42Z",
+      "side": 1,
+      "message": "properly wrap this at 72 columns.\n\nBut most importantly, please explain why you need this.  No driver should EVER be touching this function, nor do scheduling stuff, so why would anyone need access to this?  Nothing else in the kernel needs it, which is why it is not exported, as it should not be called.",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 159
+      },
+      "revId": "aa488f33d09e40a3e1ea4acf24cb525e178aaa59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7583e824_7559baa8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-03-28T13:38:42Z",
+      "side": 1,
+      "message": "needs a new bug, this one is closed.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 14
+      },
+      "revId": "aa488f33d09e40a3e1ea4acf24cb525e178aaa59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a448d9bf_48042186",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-03-28T13:38:42Z",
+      "side": 1,
+      "message": "Should not be needed in 5.6, vendor has had long enough to get the needed upstream changes merged properly, which has not happened here at all.",
+      "revId": "aa488f33d09e40a3e1ea4acf24cb525e178aaa59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
