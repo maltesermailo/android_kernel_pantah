@@ -21,6 +21,7 @@
 #include <linux/vmstat.h>
 #include <linux/writeback.h>
 #include <linux/page-flags.h>
+#include <linux/android_kabi.h>
 
 struct mem_cgroup;
 struct obj_cgroup;
@@ -139,6 +140,8 @@ struct mem_cgroup_per_node {
 	bool			on_tree;
 	struct mem_cgroup	*memcg;		/* Back pointer, we cannot */
 						/* use container_of	   */
+
+	ANDROID_KABI_RESERVE(1);
 };
 
 struct mem_cgroup_threshold {
@@ -332,6 +335,10 @@ struct mem_cgroup {
 	/* per-memcg mm_struct list */
 	struct lru_gen_mm_list mm_list;
 #endif
+
+	// These must be before the flexible array member nodeinfo below
+	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
 
 	struct mem_cgroup_per_node *nodeinfo[];
 };
