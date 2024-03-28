@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d2dbba2_c7b175d2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-03-28T16:53:53Z",
+      "side": 1,
+      "message": "Problem is ffa_set_retval() above will override this, so we wouldn\u0027t log the arguments for the ff-a func, would we?\n\nAlso, I don\u0027t believe we care about cpu_reg(0). \n\nFinally, how about the error code? :)",
+      "revId": "77096cfbd58713faa75f3041a96b695d13afb065",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4449298_d50ca86b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1705,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-03-28T16:53:53Z",
+      "side": 1,
+      "message": "Nit: new line",
+      "revId": "77096cfbd58713faa75f3041a96b695d13afb065",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
