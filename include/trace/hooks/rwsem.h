@@ -31,6 +31,7 @@ DECLARE_HOOK(android_vh_rwsem_downgrade_wake_finish,
 DECLARE_HOOK(android_vh_rwsem_wake_finish,
 	TP_PROTO(struct rw_semaphore *sem),
 	TP_ARGS(sem));
+<<<<<<< HEAD   (15178d63ac5e12f88da687fd2195ae6091d7cbf2 UPSTREAM: PCI/ASPM: Fix L1SS saving)
 DECLARE_HOOK(android_vh_record_rwsem_reader_owned,
 	TP_PROTO(struct rw_semaphore *sem,
 		 struct list_head *wlist),
@@ -47,6 +48,15 @@ DECLARE_HOOK(android_vh_clear_rwsem_writer_owned,
 DECLARE_HOOK(android_vh_rwsem_read_trylock_failed,
 	TP_PROTO(struct rw_semaphore *sem, long *cntp, int *ret),
 	TP_ARGS(sem, cntp, ret));
+||||||| BASE
+=======
+DECLARE_HOOK(android_vh_rwsem_direct_rsteal,
+	TP_PROTO(struct rw_semaphore *sem, bool *steal),
+	TP_ARGS(sem, steal));
+DECLARE_HOOK(android_vh_rwsem_optimistic_rspin,
+	TP_PROTO(struct rw_semaphore *sem, long *adjustment, bool *rspin),
+	TP_ARGS(sem, adjustment, rspin));
+>>>>>>> CHANGE (abe0af2abe51fae4fb072c8d7124aaa37f1da574 ANDROID: vendor_hook: Add hooks to support reader optimistic)
 #endif /* _TRACE_HOOK_RWSEM_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
