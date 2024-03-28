@@ -48331,6 +48331,12 @@ member {
   offset: 1024
 }
 member {
+  id: 0xd671c41e
+  name: "android_oem_data1"
+  type_id: 0x92233392
+  offset: 1408
+}
+member {
   id: 0xd671ce1e
   name: "android_oem_data1"
   type_id: 0x92233392
@@ -214249,7 +214255,7 @@ struct_union {
   kind: STRUCT
   name: "binder_transaction"
   definition {
-    bytesize: 176
+    bytesize: 184
     member_id: 0x661f35a2
     member_id: 0xd6a6b240
     member_id: 0xff7ac5f9
@@ -214273,6 +214279,7 @@ struct_union {
     member_id: 0x694e1473
     member_id: 0x2d1feaf8
     member_id: 0xed700f2f
+    member_id: 0xd671c41e
   }
 }
 struct_union {
@@ -332658,7 +332665,7 @@ elf_symbol {
   name: "__traceiter_binder_transaction_received"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x1f7dbed5
+  crc: 0xf407bbf8
   type_id: 0x9ba51920
   full_name: "__traceiter_binder_transaction_received"
 }
