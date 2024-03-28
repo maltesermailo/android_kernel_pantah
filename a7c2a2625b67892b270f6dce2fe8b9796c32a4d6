@@ -52,6 +52,24 @@
       "parentUuid": "6b0462d2_f4698324",
       "revId": "a7c2a2625b67892b270f6dce2fe8b9796c32a4d6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02f6fe8d_ffe25702",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1705,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-03-28T12:04:09Z",
+      "side": 1,
+      "message": "So we have the following cases:\n\n1. The hypervisor handles it.\n\ntrace_ffa_call - will print the args of the request\ntrace_ffa_call_ret - will print the return codes from the TZ\n\n2. The hypervisor rejects the call.\n\ntrace_ffa_call - will print the args of the request\ntrace_ffa_call_ret - prints the rejected code in which case it is only a0 and a2 register used\n\n3. The hypervisor forwards the call.\n\ntrace_ffa_call and trace_ffa_call_ret will print the same thing. The only difference being the handled argument.\n\nBecause of case 1 we need both of the events. Please let me know if this clarifies or I am missing something.",
+      "parentUuid": "73e8e66f_4b771fd7",
+      "revId": "a7c2a2625b67892b270f6dce2fe8b9796c32a4d6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
