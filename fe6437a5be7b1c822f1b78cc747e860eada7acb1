@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28f12f07_640a8938",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-03-29T21:49:19Z",
+      "side": 1,
+      "message": "Any reason why vendor hooks are not used for this?",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 62
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f7f6e89_67a3b9ad",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2186,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-03-29T21:49:19Z",
+      "side": 1,
+      "message": "I think this should be `!cma_fallback_restricted()`",
+      "range": {
+        "startLine": 2186,
+        "startChar": 6,
+        "endLine": 2186,
+        "endChar": 31
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "209cb387_527a6f09",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2704,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-03-29T21:49:19Z",
+      "side": 1,
+      "message": "`!cma_fallback_restricted()`",
+      "range": {
+        "startLine": 2704,
+        "startChar": 7,
+        "endLine": 2704,
+        "endChar": 32
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdff2619_94059bb0",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2705,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-03-29T21:49:19Z",
+      "side": 1,
+      "message": "does this guarantee that `migratetype \u003d\u003d MIGRATE_MOVABLE` ?",
+      "range": {
+        "startLine": 2705,
+        "startChar": 7,
+        "endLine": 2705,
+        "endChar": 30
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1d90255_721c6a05",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2777,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-03-29T21:49:19Z",
+      "side": 1,
+      "message": "You might want to make this function inlined, otherwise you don\u0027t get the full benefit of the static key. Or you might want to check cma_fallback_restricted() before calling this function.",
+      "range": {
+        "startLine": 2777,
+        "startChar": 0,
+        "endLine": 2777,
+        "endChar": 41
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03fdf504_458ea601",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2777,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-03-29T21:49:19Z",
+      "side": 1,
+      "message": "Looks like you always use `__rmqueue_pcplist_cma()` in combination with `__rmqueue_pcplist()` (as a fallback). Why not implement this logic inside `__rmqueue_pcplist()`? You could rename current `__rmqueue_pcplist()` into `___rmqueue_pcplist()` and then have:\n```\n__rmqueue_pcplist(...)\n{\n    if (cma_fallback_restricted() \u0026\u0026 alloc_flags \u0026 ALLOC_CMA) {\n        struct page *page;\n        struct list_head *cmalist;\n        cmalist \u003d \u0026pcp-\u003elists[order_to_pindex(migratetype, order)];\n        page \u003d ___rmqueue_pcplist(zone, order, get_cma_migrate_type(),\n\t\t\t\t\t alloc_flags, pcp, cmalist);\n        if (page) return page;\n    }\n    return ___rmqueue_pcplist(zone, order, migratetype, alloc_flags,\n\t\t\t\t\t pcp, list);\n}\n```\nThis way you don\u0027t need code changes at the call sites in `rmqueue_pcplist` and `__alloc_pages_bulk`",
+      "range": {
+        "startLine": 2777,
+        "startChar": 20,
+        "endLine": 2777,
+        "endChar": 41
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30cc43ed_6011e85a",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2786,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-03-29T21:49:19Z",
+      "side": 1,
+      "message": "`!cma_fallback_restricted()`",
+      "range": {
+        "startLine": 2786,
+        "startChar": 5,
+        "endLine": 2786,
+        "endChar": 30
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1c31df8_4fd93377",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2787,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-03-29T21:49:19Z",
+      "side": 1,
+      "message": "should this also be get_cma_migrate_type() ?",
+      "range": {
+        "startLine": 2787,
+        "startChar": 37,
+        "endLine": 2787,
+        "endChar": 48
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c27f07b6_b28e8b75",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3126,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-03-29T21:49:19Z",
+      "side": 1,
+      "message": "again, it\u0027s better to check this flag first as it\u0027s a static key.",
+      "range": {
+        "startLine": 3126,
+        "startChar": 6,
+        "endLine": 3126,
+        "endChar": 32
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
