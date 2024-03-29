@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5415b171_537539dd",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-03-29T17:09:03Z",
+      "side": 1,
+      "message": "should be:\n```\nbool has_work \u003d thread-\u003eprocess_todo ||\n```",
+      "revId": "fa192ff878101a190cbd2caf5a8079e3eebd170e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56b1a35b_b3f6d15b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 5013,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-03-29T17:09:03Z",
+      "side": 1,
+      "message": "\"the user-space code...\" comment no longer makes sense since is now referring to `force_spawn`. It should still refer to `BINDER_LOOPER_STATE_*`\n\nMaybe put `force_spawn ||` at the beginning of the conditional and leave the end of it how it was.",
+      "revId": "fa192ff878101a190cbd2caf5a8079e3eebd170e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
