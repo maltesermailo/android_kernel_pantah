@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "888dc83d_c5ee9cac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1955535
+      },
+      "writtenOn": "2024-03-30T07:32:00Z",
+      "side": 1,
+      "message": "Thanks for the comments. I have a couple of questions in the responses.",
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28f12f07_640a8938",
@@ -14,6 +31,30 @@
       "writtenOn": "2024-03-29T21:49:19Z",
       "side": 1,
       "message": "Any reason why vendor hooks are not used for this?",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 62
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44df1303_106daa44",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1955535
+      },
+      "writtenOn": "2024-03-30T07:32:00Z",
+      "side": 1,
+      "message": "I thought we would end up needing several hooks - one in each of the places we currently check restrict_cma_fallback. Can we initialize the global, restrict_cma_fallback once using a vendor hook sometime early in the boot?",
+      "parentUuid": "28f12f07_640a8938",
       "range": {
         "startLine": 190,
         "startChar": 0,
@@ -49,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4df4de4a_aeb6be8f",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2186,
+      "author": {
+        "id": 1955535
+      },
+      "writtenOn": "2024-03-30T07:32:00Z",
+      "side": 1,
+      "message": "If the flag is false, we want to keep the default ACK behavior. If the flag is true we want to have the new behavior (ie use the CMA region only for callers that set __GFP_CMA).",
+      "parentUuid": "0f7f6e89_67a3b9ad",
+      "range": {
+        "startLine": 2186,
+        "startChar": 6,
+        "endLine": 2186,
+        "endChar": 31
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "209cb387_527a6f09",
         "filename": "mm/page_alloc.c",
         "patchSetId": 2
@@ -72,6 +137,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5e7478e8_2ba1a66e",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2704,
+      "author": {
+        "id": 1955535
+      },
+      "writtenOn": "2024-03-30T07:32:00Z",
+      "side": 1,
+      "message": "Same as above. Maybe it is confusing because we have \u0027restricted\u0027 in\nthe variable name but then proceed to try cma_fallback()?",
+      "parentUuid": "209cb387_527a6f09",
+      "range": {
+        "startLine": 2704,
+        "startChar": 7,
+        "endLine": 2704,
+        "endChar": 32
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cdff2619_94059bb0",
         "filename": "mm/page_alloc.c",
         "patchSetId": 2
@@ -83,6 +172,30 @@
       "writtenOn": "2024-03-29T21:49:19Z",
       "side": 1,
       "message": "does this guarantee that `migratetype \u003d\u003d MIGRATE_MOVABLE` ?",
+      "range": {
+        "startLine": 2705,
+        "startChar": 7,
+        "endLine": 2705,
+        "endChar": 30
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abc20d3b_2b9b9c7d",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2705,
+      "author": {
+        "id": 1955535
+      },
+      "writtenOn": "2024-03-30T07:32:00Z",
+      "side": 1,
+      "message": "Yes. gfp_to_alloc_flags_cma() sets ALLOC_CMA only if migratetype is MIGRATE_MOVABLE.",
+      "parentUuid": "cdff2619_94059bb0",
       "range": {
         "startLine": 2705,
         "startChar": 7,
@@ -141,6 +254,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a9ec8de9_920241e6",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2777,
+      "author": {
+        "id": 1955535
+      },
+      "writtenOn": "2024-03-30T07:32:00Z",
+      "side": 1,
+      "message": "Ok. I will try that.",
+      "parentUuid": "03fdf504_458ea601",
+      "range": {
+        "startLine": 2777,
+        "startChar": 20,
+        "endLine": 2777,
+        "endChar": 41
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12a5b2c1_cbaf2c99",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2777,
+      "author": {
+        "id": 1955535
+      },
+      "writtenOn": "2024-03-30T07:32:00Z",
+      "side": 1,
+      "message": "Ok.",
+      "parentUuid": "f1d90255_721c6a05",
+      "range": {
+        "startLine": 2777,
+        "startChar": 0,
+        "endLine": 2777,
+        "endChar": 41
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "30cc43ed_6011e85a",
         "filename": "mm/page_alloc.c",
         "patchSetId": 2
@@ -152,6 +313,30 @@
       "writtenOn": "2024-03-29T21:49:19Z",
       "side": 1,
       "message": "`!cma_fallback_restricted()`",
+      "range": {
+        "startLine": 2786,
+        "startChar": 5,
+        "endLine": 2786,
+        "endChar": 30
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40bef5ab_f408293a",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2786,
+      "author": {
+        "id": 1955535
+      },
+      "writtenOn": "2024-03-30T07:32:00Z",
+      "side": 1,
+      "message": "We want the new behavior only when cma_fallback_restricted is true.",
+      "parentUuid": "30cc43ed_6011e85a",
       "range": {
         "startLine": 2786,
         "startChar": 5,
@@ -187,6 +372,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7801fc8f_a568cf50",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2787,
+      "author": {
+        "id": 1955535
+      },
+      "writtenOn": "2024-03-30T07:32:00Z",
+      "side": 1,
+      "message": "I am keeping it consistent with the corresponding commit f60c5572d20a in ACK6.1. CMA does not yet have a PCP list in this commit - the next patch\nadds that and fixes up this quirk.",
+      "parentUuid": "c1c31df8_4fd93377",
+      "range": {
+        "startLine": 2787,
+        "startChar": 37,
+        "endLine": 2787,
+        "endChar": 48
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c27f07b6_b28e8b75",
         "filename": "mm/page_alloc.c",
         "patchSetId": 2
@@ -198,6 +407,30 @@
       "writtenOn": "2024-03-29T21:49:19Z",
       "side": 1,
       "message": "again, it\u0027s better to check this flag first as it\u0027s a static key.",
+      "range": {
+        "startLine": 3126,
+        "startChar": 6,
+        "endLine": 3126,
+        "endChar": 32
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cf78255_e2984570",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3126,
+      "author": {
+        "id": 1955535
+      },
+      "writtenOn": "2024-03-30T07:32:00Z",
+      "side": 1,
+      "message": "ok",
+      "parentUuid": "c27f07b6_b28e8b75",
       "range": {
         "startLine": 3126,
         "startChar": 6,
