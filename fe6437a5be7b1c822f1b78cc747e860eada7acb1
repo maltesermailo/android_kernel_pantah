@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c7e3426e_d5ca0f50",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-02T20:31:30Z",
+      "side": 1,
+      "message": "Hmm. Depending on when you need this flag. I don\u0027t think vendor hook would work for early boot but if you don\u0027t need it during early boot then yes, the approach with a vendor hook setting a global flag would be preferable.",
+      "parentUuid": "44df1303_106daa44",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 62
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0f7f6e89_67a3b9ad",
         "filename": "mm/page_alloc.c",
         "patchSetId": 2
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "If the flag is false, we want to keep the default ACK behavior. If the flag is true we want to have the new behavior (ie use the CMA region only for callers that set __GFP_CMA).",
       "parentUuid": "0f7f6e89_67a3b9ad",
+      "range": {
+        "startLine": 2186,
+        "startChar": 6,
+        "endLine": 2186,
+        "endChar": 31
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "714f6ea1_a21cc01f",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2186,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-02T20:31:30Z",
+      "side": 1,
+      "message": "Then you need to rethink the name of this flag. \n```\nif (cma_fallback_restricted())\n    page \u003d __rmqueue_cma_fallback(zone, order);\n```\ndoes not make sense to me.",
+      "parentUuid": "4df4de4a_aeb6be8f",
       "range": {
         "startLine": 2186,
         "startChar": 6,
@@ -161,6 +209,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bec13e82_4be28438",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2704,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-02T20:31:30Z",
+      "side": 1,
+      "message": "Correct. The name does not represent he logic it implements.",
+      "parentUuid": "5e7478e8_2ba1a66e",
+      "range": {
+        "startLine": 2704,
+        "startChar": 7,
+        "endLine": 2704,
+        "endChar": 32
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cdff2619_94059bb0",
         "filename": "mm/page_alloc.c",
         "patchSetId": 2
@@ -196,6 +268,30 @@
       "side": 1,
       "message": "Yes. gfp_to_alloc_flags_cma() sets ALLOC_CMA only if migratetype is MIGRATE_MOVABLE.",
       "parentUuid": "cdff2619_94059bb0",
+      "range": {
+        "startLine": 2705,
+        "startChar": 7,
+        "endLine": 2705,
+        "endChar": 30
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f54a52f4_bcdf24b0",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2705,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-02T20:31:30Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "abc20d3b_2b9b9c7d",
       "range": {
         "startLine": 2705,
         "startChar": 7,
@@ -384,6 +480,30 @@
       "side": 1,
       "message": "I am keeping it consistent with the corresponding commit f60c5572d20a in ACK6.1. CMA does not yet have a PCP list in this commit - the next patch\nadds that and fixes up this quirk.",
       "parentUuid": "c1c31df8_4fd93377",
+      "range": {
+        "startLine": 2787,
+        "startChar": 37,
+        "endLine": 2787,
+        "endChar": 48
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b77af80_22b38a74",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2787,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-02T20:31:30Z",
+      "side": 1,
+      "message": "Hmm. This is quite confusing. Maybe consider refactoring so that there is no such discrepancy and you don\u0027t need to fixup this later?",
+      "parentUuid": "7801fc8f_a568cf50",
       "range": {
         "startLine": 2787,
         "startChar": 37,
