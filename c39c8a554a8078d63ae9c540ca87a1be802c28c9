@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "864d237a_e02b0695",
+        "filename": "arch/arm64/include/asm/kvm_hypevents.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-04-02T16:03:44Z",
+      "side": 1,
+      "message": "I plan to reuse it for the guest series as well 😊",
+      "parentUuid": "72ebb028_092f9aea",
+      "revId": "c39c8a554a8078d63ae9c540ca87a1be802c28c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ac991855_41b41c19",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 9
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0110df19_4b622928",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-04-02T16:03:44Z",
+      "side": 1,
+      "message": "In which way verbose ? we already know that we are talking about the host because we are in the host handler.",
+      "parentUuid": "ac991855_41b41c19",
+      "revId": "c39c8a554a8078d63ae9c540ca87a1be802c28c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d9c6b0d1_edf0b11d",
         "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
         "patchSetId": 9
@@ -65,6 +101,24 @@
       "writtenOn": "2024-04-02T15:59:05Z",
       "side": 1,
       "message": "Could we keep is_ffa_call() in the host_ffa_handler() func? That would keep this change to the minimum size. and I do not think it increases readability.",
+      "revId": "c39c8a554a8078d63ae9c540ca87a1be802c28c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57164266_8e821a22",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1703,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-04-02T16:03:44Z",
+      "side": 1,
+      "message": "The change is not necessarily for readability. We skip entering the function in the end and we make `is_ffa_call` reusable for the guest ff-a patch series.",
+      "parentUuid": "d9c6b0d1_edf0b11d",
       "revId": "c39c8a554a8078d63ae9c540ca87a1be802c28c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
