@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0f580e6a_9526ea4a",
+        "filename": "arch/arm64/include/asm/kvm_hypevents.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-04-02T16:25:03Z",
+      "side": 1,
+      "message": "We\u0027ll probably need a separated event for the guest_ffa event. We do not want to leak to the host anything the guest is doing. Hence the necessary distinction.\n\nThe guest event will have to be guarded by NVHE_EL2_DEBUG.",
+      "parentUuid": "864d237a_e02b0695",
+      "revId": "c39c8a554a8078d63ae9c540ca87a1be802c28c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ac991855_41b41c19",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 9
@@ -90,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2cc7d3a5_c50a2e40",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-04-02T16:25:03Z",
+      "side": 1,
+      "message": "I do understand and agree with your argument about the choice of this variable name. What I meant is this is almost a third of this function modified without bringing any useful change.\n\nIf I\u0027m happy with a little bit of bikeshedding, I am less convinced here as this is upstream code (and also this is not the only function that is using host_ctxt).\n\nI\u0027m just trying to think about how maintainable this will be once we\u0027ll be applying this patch on the next Android version.\n\nBut if you\u0027re happy with taking the risk of clashing in a following version, this is fine by me.",
+      "parentUuid": "0110df19_4b622928",
+      "revId": "c39c8a554a8078d63ae9c540ca87a1be802c28c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d9c6b0d1_edf0b11d",
         "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
         "patchSetId": 9
@@ -119,6 +155,24 @@
       "side": 1,
       "message": "The change is not necessarily for readability. We skip entering the function in the end and we make `is_ffa_call` reusable for the guest ff-a patch series.",
       "parentUuid": "d9c6b0d1_edf0b11d",
+      "revId": "c39c8a554a8078d63ae9c540ca87a1be802c28c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ed2955f_55ed2781",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1703,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-04-02T16:25:03Z",
+      "side": 1,
+      "message": "Then this probably belongs to that ff-a patch series. Which I believe is not planned for Android15.",
+      "parentUuid": "57164266_8e821a22",
       "revId": "c39c8a554a8078d63ae9c540ca87a1be802c28c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
