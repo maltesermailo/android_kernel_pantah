@@ -33,6 +33,24 @@
       "message": "@cmllamas@google.com, this looks like a workaround for b/298520209. Seems better to fix than to use hooks for a workaround...",
       "revId": "4acfb5ec75316428cd8faa26fae1f58185794fe3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d70d0dd_ea4cd1c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945041
+      },
+      "writtenOn": "2024-04-02T09:26:31Z",
+      "side": 1,
+      "message": "We found that when the server is the process of system_server, it will have many references, and the traversal will be time-consuming. There are not so many references to other servers, so the default method is still used to create binder_ref for other servers. We will first conduct experiments to see whether bitmap replacing red-black tree traversal will bring additional overhead in ordinary low-load scenarios. If not, we will upstream later.",
+      "parentUuid": "d90a9130_95d6e1c6",
+      "revId": "4acfb5ec75316428cd8faa26fae1f58185794fe3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
