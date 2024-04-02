@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43ea01ee_bbc5a1b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-04-02T15:59:05Z",
+      "side": 1,
+      "message": "Beside those two comments, happy to merge this trace event!",
+      "revId": "c39c8a554a8078d63ae9c540ca87a1be802c28c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac991855_41b41c19",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-04-02T15:59:05Z",
+      "side": 1,
+      "message": "I am not convinced by that hots_ctxt -\u003e ctxt change.\n\nIt just make this patch way more verbose than we\u0027d expect.",
+      "revId": "c39c8a554a8078d63ae9c540ca87a1be802c28c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9c6b0d1_edf0b11d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1703,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-04-02T15:59:05Z",
+      "side": 1,
+      "message": "Could we keep is_ffa_call() in the host_ffa_handler() func? That would keep this change to the minimum size. and I do not think it increases readability.",
+      "revId": "c39c8a554a8078d63ae9c540ca87a1be802c28c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
