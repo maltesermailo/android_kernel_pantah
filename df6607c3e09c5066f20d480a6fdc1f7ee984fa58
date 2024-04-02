@@ -16,6 +16,23 @@
       "message": "Breaks KMI so needs to wait for 2024-04-10 KMI update",
       "revId": "df6607c3e09c5066f20d480a6fdc1f7ee984fa58",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56454e40_fc9150db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-04-02T17:20:21Z",
+      "side": 1,
+      "message": "We got a checkpatch error:\n```\nFROM_SIGN_OFF_MISMATCH: From:/Signed-off-by: email name mismatch: \u0027From: lfc \u003clfc@oppo.com\u003e\u0027 !\u003d \u0027Signed-off-by: Fuchun Liao \u003clfc@oppo.com\u003e\u0027\n```\n\nPlease make sure to fix your git config. You are likely missing a `$ git config --global user.name \"Fuchun Liao\"` or similar and then signing your patches with `git commit --signoff` as opposed to doing it manually?",
+      "revId": "df6607c3e09c5066f20d480a6fdc1f7ee984fa58",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
