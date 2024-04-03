@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e900f72a_1a558fd5",
+        "filename": "include/linux/netdevice.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 2170,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-04-03T17:23:42Z",
+      "side": 1,
+      "message": "I do not think this is correct, you are only adding this for the one part of the build that does CRC checking, NOT the normal build where you want access to this symbol.  So take out the #ifdef?",
+      "range": {
+        "startLine": 2170,
+        "startChar": 0,
+        "endLine": 2170,
+        "endChar": 19
+      },
+      "revId": "3ef350d049bfee5618b8cf366bfb517a661fe0c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46897184_fb7dae0f",
+        "filename": "include/linux/netdevice.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 2254,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-04-03T17:23:42Z",
+      "side": 1,
+      "message": "same here.",
+      "range": {
+        "startLine": 2254,
+        "startChar": 0,
+        "endLine": 2254,
+        "endChar": 19
+      },
+      "revId": "3ef350d049bfee5618b8cf366bfb517a661fe0c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
