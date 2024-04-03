@@ -1662,12 +1662,19 @@ static int insert_ppage(struct kvm *kvm, struct kvm_pinned_page *ppage)
 	return 0;
 }
 
-static int pkvm_relax_perms(struct kvm *kvm, u64 pfn, u64 gfn,
+static int __pkvm_relax_perms_call(u64 pfn, u64 gfn, u8 order, void *args)
+{
+	enum kvm_pgtable_prot prot = (enum kvm_pgtable_prot)args;
+
+	return kvm_call_hyp_nvhe(__pkvm_host_relax_guest_perms, gfn, order, prot);
+}
+
+static int pkvm_relax_perms(struct kvm_vcpu *vcpu, u64 pfn, u64 gfn, u8 order,
 			    enum kvm_pgtable_prot prot)
 {
+	bool dirty = prot & KVM_PGTABLE_PROT_W;
 	struct kvm_pinned_page *ppage;
-	int ret;
-
+	struct kvm *kvm = vcpu->kvm;
 
 	ppage = find_ppage(kvm, gfn << PAGE_SHIFT);
 
@@ -1684,13 +1691,25 @@ static int pkvm_relax_perms(struct kvm *kvm, u64 pfn, u64 gfn,
 	if (!folio_test_swapbacked(page_folio(ppage->page)))
 		return -EIO;
 
-	ret = kvm_call_hyp_nvhe(__pkvm_host_relax_guest_perms, gfn, prot);
-	if (ret)
-		return ret;
+	if (dirty) {
+		struct kvm_hyp_memcache *hyp_memcache = &vcpu->arch.stage2_mc;
+		int ret = topup_hyp_memcache(hyp_memcache,
+					     kvm_mmu_cache_min_pages(&kvm->arch.mmu), 0);
 
-	ppage->dirty |= !!(prot & KVM_PGTABLE_PROT_W);
+		if (ret)
+			return ret;
 
-	return 0;
+		ret = kvm_call_hyp_nvhe(__pkvm_host_dirty_log_guest, gfn);
+		if (ret)
+			return ret;
+
+		ppage->dirty = true;
+
+		return 0;
+	}
+
+	return pkvm_call_hyp_nvhe_ppage(ppage, __pkvm_relax_perms_call,
+					(void *)prot, false);
 }
 
 static int pkvm_mem_abort(struct kvm_vcpu *vcpu, phys_addr_t fault_ipa,
@@ -2116,7 +2135,8 @@ static int user_mem_abort(struct kvm_vcpu *vcpu, phys_addr_t fault_ipa,
 			prot &= ~KVM_NV_GUEST_MAP_SZ;
 			ret = kvm_pgtable_stage2_relax_perms(pgt, fault_ipa, prot, flags);
 		} else {
-			ret = pkvm_relax_perms(kvm, pfn, gfn, prot);
+			ret = pkvm_relax_perms(vcpu, pfn, gfn,
+					       get_order(fault_granule), prot);
 		}
 	} else {
 		ret = kvm_pgtable_stage2_map(pgt, fault_ipa, vma_pagesize,
