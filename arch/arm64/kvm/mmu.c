@@ -16,6 +16,7 @@
 #include <asm/kvm_arm.h>
 #include <asm/kvm_mmu.h>
 #include <asm/kvm_pgtable.h>
+#include <asm/kvm_pkvm.h>
 #include <asm/kvm_ras.h>
 #include <asm/kvm_asm.h>
 #include <asm/kvm_emulate.h>
@@ -304,14 +305,20 @@ INTERVAL_TREE_DEFINE(struct kvm_pinned_page, node, u64, __subtree_last,
 		     __pinned_page_start, __pinned_page_end, ,
 		     kvm_pinned_pages);
 
+static int __pkvm_unmap_guest_call(u64 pfn, u64 gfn, u8 order, void *args)
+{
+	struct kvm *kvm = args;
+
+	return kvm_call_hyp_nvhe(__pkvm_host_unmap_guest, kvm->arch.pkvm.handle,
+				 gfn, order);
+}
+
 static int pkvm_unmap_guest(struct kvm *kvm, struct kvm_pinned_page *ppage)
 {
 	struct mm_struct *mm = kvm->mm;
 	int ret;
 
-	ret = kvm_call_hyp_nvhe(__pkvm_host_unmap_guest,
-				kvm->arch.pkvm.handle,
-				ppage->ipa >> PAGE_SHIFT);
+	ret = pkvm_call_hyp_nvhe_ppage(ppage, __pkvm_unmap_guest_call, kvm, true);
 	if (ret)
 		return ret;
 
