@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e3c8c638_9e9cc1e9",
+        "filename": "arch/arm64/include/asm/kvm_hypevents.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-04-03T18:10:00Z",
+      "side": 1,
+      "message": "This doesn\u0027t look like a good userspace interface. First, a user wouldn\u0027t get any feedback as if that tracing support logging events from the guest (compared to just looking into the events/ folder), also it wouldn\u0027t allow then to distinguish what issued the FFA call.\n\nAlso, guarding events behind an option is something which is already done for the host tracing.",
+      "parentUuid": "36e7acbb_f2cdca54",
+      "revId": "c39c8a554a8078d63ae9c540ca87a1be802c28c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ac991855_41b41c19",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 9
