@@ -227,6 +227,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f7fdcf7_4bee09ad",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2186,
+      "author": {
+        "id": 1955535
+      },
+      "writtenOn": "2024-04-03T05:18:30Z",
+      "side": 1,
+      "message": "Between this and the next patch  there are two logical changes.\n\n1. By default in upstream/ACK all movable allocations are candidates for being redirected to the CMA region (__rmqueue()). Instead, we want to redirect only movable allocations marked with __GFP_CMA. Within this patch, all changes are related to this logical change.\n\n2. Include pcp list for CMA allocations (next patch) - for this the flag/helper is cma_has_pcplist().\n\ncma_has_pcplist() internally uses the same command line option as 1 but that is  opaque to its users and we could use a separate command line option or vendor hook.\n\nI am still looking for a good place to add the vendor hooks for 1 (and 2).\n\nWould cma_redirect_restricted() or restrict_cma_redirect() work for #1 - with comments detailing what \"restrict\" means?",
+      "parentUuid": "83a92e3a_f295f5ed",
+      "range": {
+        "startLine": 2186,
+        "startChar": 6,
+        "endLine": 2186,
+        "endChar": 31
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "209cb387_527a6f09",
         "filename": "mm/page_alloc.c",
         "patchSetId": 2
