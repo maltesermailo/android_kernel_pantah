@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5eee03d7_a086cbe9",
+        "filename": "include/linux/netdevice.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 2170,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-04-03T19:28:12Z",
+      "side": 1,
+      "message": "Please remove the GENKSYMS part. That\u0027s only used when you need to update a struct without break the CRC values. Since this branch is not KMI frozen, you can break the KMI and change the CRCs when needed.",
+      "parentUuid": "287fdafc_4fdd5b6e",
+      "range": {
+        "startLine": 2170,
+        "startChar": 0,
+        "endLine": 2170,
+        "endChar": 19
+      },
+      "revId": "3ef350d049bfee5618b8cf366bfb517a661fe0c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "46897184_fb7dae0f",
         "filename": "include/linux/netdevice.h",
         "patchSetId": 4
