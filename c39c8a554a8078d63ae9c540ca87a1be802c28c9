@@ -71,6 +71,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36e7acbb_f2cdca54",
+        "filename": "arch/arm64/include/asm/kvm_hypevents.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-04-03T09:24:33Z",
+      "side": 1,
+      "message": "I agree but in this case we will guard the caller of the `trace_ffa_call` function from the guest handler.",
+      "parentUuid": "0f580e6a_9526ea4a",
+      "revId": "c39c8a554a8078d63ae9c540ca87a1be802c28c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac991855_41b41c19",
@@ -124,6 +142,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a3ea59c_f2d6fb96",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-04-03T09:24:33Z",
+      "side": 1,
+      "message": "I am already touching this function by re-writing the fall through statements. I can tackle the upcoming clashes if required.",
+      "parentUuid": "2cc7d3a5_c50a2e40",
+      "revId": "c39c8a554a8078d63ae9c540ca87a1be802c28c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9c6b0d1_edf0b11d",
@@ -173,6 +209,24 @@
       "side": 1,
       "message": "Then this probably belongs to that ff-a patch series. Which I believe is not planned for Android15.",
       "parentUuid": "57164266_8e821a22",
+      "revId": "c39c8a554a8078d63ae9c540ca87a1be802c28c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c4a5bdc_0934dd9a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1703,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-04-03T09:24:33Z",
+      "side": 1,
+      "message": "ACK, I removed the change.",
+      "parentUuid": "1ed2955f_55ed2781",
       "revId": "c39c8a554a8078d63ae9c540ca87a1be802c28c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
