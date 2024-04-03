@@ -69,6 +69,24 @@
       "parentUuid": "2d70d0dd_ea4cd1c4",
       "revId": "4acfb5ec75316428cd8faa26fae1f58185794fe3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9061ab42_7e612d22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2024-04-03T07:48:06Z",
+      "side": 1,
+      "message": "This optimization plan only targets the system_server process, because the current test is that the services provided by system_server create a lot of new binder_refs during the application startup switching process. I think this is not elegant enough. However, we have not conducted sufficient experiments on whether it is reasonable for all processes to use this method when creating their binder_ref, and whether it will improve performance. So I think it is more reasonable to use hooks first. If we bring this solution to the market and test that there is no problem with all processes, then upstream. Do you think this is feasible?",
+      "parentUuid": "1c3cc6aa_69df83d7",
+      "revId": "4acfb5ec75316428cd8faa26fae1f58185794fe3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
