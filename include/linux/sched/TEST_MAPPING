@@ -4,15 +4,18 @@
       "path": "frameworks/base/packages/PackageInstaller"
     },
     {
-      "path": "packages/modules/AdServices/sdksandbox"
+      "path": "frameworks/base/core/java/android/content/pm"
     },
     {
-      "path": "frameworks/base/core/java/android/content"
+      "path": "frameworks/base/services/core/java/com/android/server"
+    },
+    {
+      "path": "frameworks/base/core/java/com/android/internal/app"
     }
  ],
   "presubmit": [
     {
-      "name": "CtsPackageInstallTestCases",
+      "name": "CtsSilentUpdateHostTestCases",
       "options": [
         {
           "exclude-annotation": "com.android.testutils.SkipPresubmit"
@@ -22,7 +25,7 @@
   ],
   "presubmit-large": [
     {
-      "name": "CtsContentTestCases",
+      "name": "CtsSuspendAppsTestCases",
       "options": [
         {
           "exclude-annotation": "com.android.testutils.SkipPresubmit"
