@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "287fdafc_4fdd5b6e",
+        "filename": "include/linux/netdevice.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 2170,
+      "author": {
+        "id": 1889091
+      },
+      "writtenOn": "2024-04-03T18:15:39Z",
+      "side": 1,
+      "message": "Thanks Greg. I see, it is only defined when preprocessing files by genksyms. In normal build where `__GENKSYMS__` is not defined, these pointers will be available via else case, aren\u0027t they?\n\nIn case, you missed it this is the cherry-pick of the https://r.android.com/2583658 fix from `android14-6.1`.\n\nI can change it to removing the `CONFIG_WIRELESS_EXT` instead, if you prefer. My original intention was to not modify the cherry-pick. Please, let me know?",
+      "parentUuid": "e900f72a_1a558fd5",
+      "range": {
+        "startLine": 2170,
+        "startChar": 0,
+        "endLine": 2170,
+        "endChar": 19
+      },
+      "revId": "3ef350d049bfee5618b8cf366bfb517a661fe0c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "46897184_fb7dae0f",
         "filename": "include/linux/netdevice.h",
         "patchSetId": 4
