@@ -35,6 +35,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c30f3262_5e293857",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1955535
+      },
+      "writtenOn": "2024-04-05T17:48:18Z",
+      "side": 1,
+      "message": "Thanks for the comments. I tried to address them all. Will push the new version shortly.",
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28f12f07_640a8938",
@@ -96,6 +113,30 @@
       "side": 1,
       "message": "Hmm. Depending on when you need this flag. I don\u0027t think vendor hook would work for early boot but if you don\u0027t need it during early boot then yes, the approach with a vendor hook setting a global flag would be preferable.",
       "parentUuid": "44df1303_106daa44",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 62
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dee139d7_03398b49",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1955535
+      },
+      "writtenOn": "2024-04-05T17:48:18Z",
+      "side": 1,
+      "message": "It is a one-time setting and doesn\u0027t depend on any local context like other vendor hooks. We considered setting in one of our modules but we would still need to export the symbol from mm/page_alloc.c. So have left it as a command line option (and updated the changelog with this reasoning).",
+      "parentUuid": "c7e3426e_d5ca0f50",
       "range": {
         "startLine": 190,
         "startChar": 0,
@@ -249,6 +290,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b296061_28bee139",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2186,
+      "author": {
+        "id": 1955535
+      },
+      "writtenOn": "2024-04-05T17:48:18Z",
+      "side": 1,
+      "message": "I have renamed the flag/helper to cma_restrict_redirect() with more detailed comments.",
+      "parentUuid": "6f7fdcf7_4bee09ad",
+      "range": {
+        "startLine": 2186,
+        "startChar": 6,
+        "endLine": 2186,
+        "endChar": 31
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "209cb387_527a6f09",
@@ -310,6 +375,30 @@
       "side": 1,
       "message": "Correct. The name does not represent he logic it implements.",
       "parentUuid": "5e7478e8_2ba1a66e",
+      "range": {
+        "startLine": 2704,
+        "startChar": 7,
+        "endLine": 2704,
+        "endChar": 32
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dfafc11_b6373ac0",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2704,
+      "author": {
+        "id": 1955535
+      },
+      "writtenOn": "2024-04-05T17:48:18Z",
+      "side": 1,
+      "message": "Renamed to cma_restrict_redirect()",
+      "parentUuid": "bec13e82_4be28438",
       "range": {
         "startLine": 2704,
         "startChar": 7,
@@ -485,6 +574,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5ae08a0_5c4532a1",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2777,
+      "author": {
+        "id": 1955535
+      },
+      "writtenOn": "2024-04-05T17:48:18Z",
+      "side": 1,
+      "message": "Yes, it is cleaner.",
+      "parentUuid": "a9ec8de9_920241e6",
+      "range": {
+        "startLine": 2777,
+        "startChar": 20,
+        "endLine": 2777,
+        "endChar": 41
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e10ed61a_eb04c1f0",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2777,
+      "author": {
+        "id": 1955535
+      },
+      "writtenOn": "2024-04-05T17:48:18Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "12a5b2c1_cbaf2c99",
+      "range": {
+        "startLine": 2777,
+        "startChar": 0,
+        "endLine": 2777,
+        "endChar": 41
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30cc43ed_6011e85a",
@@ -522,6 +659,30 @@
       "side": 1,
       "message": "We want the new behavior only when cma_fallback_restricted is true.",
       "parentUuid": "30cc43ed_6011e85a",
+      "range": {
+        "startLine": 2786,
+        "startChar": 5,
+        "endLine": 2786,
+        "endChar": 30
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99585edb_5a294e6b",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2786,
+      "author": {
+        "id": 1955535
+      },
+      "writtenOn": "2024-04-05T17:48:18Z",
+      "side": 1,
+      "message": "Renamed the interface to try and address this.",
+      "parentUuid": "40bef5ab_f408293a",
       "range": {
         "startLine": 2786,
         "startChar": 5,
@@ -603,6 +764,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55968be0_93d29aa9",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2787,
+      "author": {
+        "id": 1955535
+      },
+      "writtenOn": "2024-04-05T17:48:18Z",
+      "side": 1,
+      "message": "Your next comment of using ___rmqueue_pcplist_cma() helped with cleaning up this also",
+      "parentUuid": "1b77af80_22b38a74",
+      "range": {
+        "startLine": 2787,
+        "startChar": 37,
+        "endLine": 2787,
+        "endChar": 48
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c27f07b6_b28e8b75",
@@ -640,6 +825,30 @@
       "side": 1,
       "message": "ok",
       "parentUuid": "c27f07b6_b28e8b75",
+      "range": {
+        "startLine": 3126,
+        "startChar": 6,
+        "endLine": 3126,
+        "endChar": 32
+      },
+      "revId": "fe6437a5be7b1c822f1b78cc747e860eada7acb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31c3184d_b1265808",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3126,
+      "author": {
+        "id": 1955535
+      },
+      "writtenOn": "2024-04-05T17:48:18Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7cf78255_e2984570",
       "range": {
         "startLine": 3126,
         "startChar": 6,
