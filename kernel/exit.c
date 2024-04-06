@@ -829,13 +829,12 @@ void __noreturn do_exit(long code)
 	io_uring_files_cancel();
 	exit_signals(tsk);  /* sets PF_EXITING */
 
-	trace_android_vh_exit_check(current);
-
 	/* sync mm's RSS info before statistics gathering */
 	if (tsk->mm)
 		sync_mm_rss(tsk->mm);
 	acct_update_integrals(tsk);
 	group_dead = atomic_dec_and_test(&tsk->signal->live);
+	trace_android_vh_exit_check(tsk, code, group_dead);
 	if (group_dead) {
 		/*
 		 * If the last thread of global init has exited, panic

@@ -90,8 +90,8 @@ DECLARE_HOOK(android_vh_exit_signal_whether_wake,
 	TP_ARGS(p, wake));
 
 DECLARE_HOOK(android_vh_exit_check,
-	TP_PROTO(struct task_struct *p),
-	TP_ARGS(p));
+	TP_PROTO(struct task_struct *tsk, long code, int group_dead),
+	TP_ARGS(tsk, code, group_dead));
 
 DECLARE_HOOK(android_vh_freeze_whether_wake,
 	TP_PROTO(struct task_struct *t, bool *wake),
