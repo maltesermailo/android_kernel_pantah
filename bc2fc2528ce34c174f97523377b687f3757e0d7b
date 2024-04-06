@@ -25,6 +25,26 @@
       "robotRunId": "AR00000000000073859096",
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/3029984?revision\u003d2",
       "key": {
+        "uuid": "3fe5727e_8dfd304f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-06T02:00:25Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "bc2fc2528ce34c174f97523377b687f3757e0d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000073859096",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3029984?revision\u003d2",
+      "key": {
         "uuid": "44478baf_d2484a31",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -46,6 +66,50 @@
       "fixSuggestions": [
         {
           "fixId": "73d45dac_a569ea71",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 10,
+                "startChar": 0,
+                "endLine": 10,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Kalesh Singh \u003ckaleshsingh@google.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "revId": "bc2fc2528ce34c174f97523377b687f3757e0d7b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000073859096",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3029984?revision\u003d2",
+      "key": {
+        "uuid": "ed7353e5_71e91b8a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-06T02:00:25Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Kalesh Singh \u003ckaleshsingh@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 4,
+        "startChar": 0,
+        "endLine": 4,
+        "endChar": 0
+      },
+      "tag": "",
+      "fixSuggestions": [
+        {
+          "fixId": "1ef08a77_d5175101",
           "description": "Add author\u0027s Signed-off-by",
           "replacements": [
             {
