@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000073919946",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3030703?revision\u003d1",
+      "key": {
+        "uuid": "a9b74ab3_9b634d57",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-07T22:43:59Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/72ba14deb40a9e9668ec5e66a341ed657e5215c2) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d72ba14deb40a9e9668ec5e66a341ed657e5215c2).\n\n```\n      ## include/trace/events/oom.h ##\n     @@\n    @@ mm/oom_kill.c\n      \n      #include \u003casm/tlb.h\u003e\n      #include \"internal.h\"\n    -@@ mm/oom_kill.c: static inline void queue_oom_reaper(struct task_struct *tsk)\n    +@@ mm/oom_kill.c: static void __mark_oom_victim(struct task_struct *tsk)\n       */\n      static void mark_oom_victim(struct task_struct *tsk)\n      {\n     +\tconst struct cred *cred;\n    - \tstruct mm_struct *mm \u003d tsk-\u003emm;\n    - \n    ++\n      \tWARN_ON(oom_killer_disabled);\n    + \t/* OOM killer might race with memcg OOM */\n    + \tif (test_and_set_tsk_thread_flag(tsk, TIF_MEMDIE))\n     @@ mm/oom_kill.c: static void mark_oom_victim(struct task_struct *tsk)\n      \t */\n      \t__thaw_task(tsk);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "f3db7d5a26b18b479ca20ab3a1531435691d0f96",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
