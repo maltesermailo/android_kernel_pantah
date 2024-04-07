@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12092071_a5818b8b",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 3017,
+      "author": {
+        "id": 1905376
+      },
+      "writtenOn": "2024-04-07T11:58:16Z",
+      "side": 1,
+      "message": "Maybe this can be simplified to:\n{\nstruct task_group *tg \u003d task_group(p);\n\nreturn tg-\u003elatency_sensitive;\n}",
+      "range": {
+        "startLine": 3010,
+        "startChar": 1,
+        "endLine": 3017,
+        "endChar": 30
+      },
+      "revId": "25cacc5168d38b1734fae0c62385aa8d1044cf49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
