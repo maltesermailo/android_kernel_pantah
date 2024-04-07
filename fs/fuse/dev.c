@@ -23,8 +23,13 @@
 #include <linux/splice.h>
 #include <linux/sched.h>
 
+<<<<<<< HEAD   (62297a ANDROID: rust: security: mark Rust wrappers of security_bind)
 #define CREATE_TRACE_POINTS
 #include "fuse_trace.h"
+||||||| BASE
+=======
+#include <trace/hooks/fuse.h>
+>>>>>>> CHANGE (e520c2 ANDROID: vendor_hooks: add vendor hooks for fuse request)
 
 MODULE_ALIAS_MISCDEV(FUSE_MINOR);
 MODULE_ALIAS("devname:fuse");
@@ -313,8 +318,17 @@ static void fuse_send_one(struct fuse_iqueue *fiq, struct fuse_req *req)
 	req->in.h.len = sizeof(struct fuse_in_header) +
 		fuse_len_args(req->args->in_numargs,
 			      (struct fuse_arg *) req->args->in_args);
+<<<<<<< HEAD   (62297a ANDROID: rust: security: mark Rust wrappers of security_bind)
 	trace_fuse_request_send(req);
 	fiq->ops->send_req(fiq, req);
+||||||| BASE
+	list_add_tail(&req->list, &fiq->pending);
+	fiq->ops->wake_pending_and_unlock(fiq, sync);
+=======
+	list_add_tail(&req->list, &fiq->pending);
+	trace_android_vh_queue_request_and_unlock(&fiq->waitq, sync);
+	fiq->ops->wake_pending_and_unlock(fiq, sync);
+>>>>>>> CHANGE (e520c2 ANDROID: vendor_hooks: add vendor hooks for fuse request)
 }
 
 void fuse_queue_forget(struct fuse_conn *fc, struct fuse_forget_link *forget,
@@ -402,6 +416,7 @@ void fuse_request_end(struct fuse_req *req)
 	} else {
 		/* Wake up waiter sleeping in request_wait_answer() */
 		wake_up(&req->waitq);
+		trace_android_vh_fuse_request_end(current);
 	}
 
 	if (test_bit(FR_ASYNC, &req->flags))
