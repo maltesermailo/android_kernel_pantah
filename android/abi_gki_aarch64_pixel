@@ -6,8 +6,10 @@
   add_uevent_var
   add_wait_queue
   adjust_managed_page_count
+  aead_register_instance
   aes_encrypt
   aes_expandkey
+  ahash_register_instance
   alarm_cancel
   alarm_init
   alarm_start_relative
@@ -258,6 +260,7 @@
   cpufreq_table_index_unsorted
   cpufreq_this_cpu_can_update
   cpufreq_update_util_data
+  cpu_have_feature
   cpu_hotplug_disable
   cpu_hotplug_enable
   __cpuhp_remove_state
@@ -294,29 +297,74 @@
   crypto_aead_encrypt
   crypto_aead_setauthsize
   crypto_aead_setkey
+  crypto_ahash_finup
+  crypto_ahash_setkey
+  crypto_alg_list
+  crypto_alg_sem
   crypto_alloc_aead
   crypto_alloc_base
+  crypto_alloc_rng
   crypto_alloc_shash
   crypto_alloc_skcipher
   crypto_alloc_sync_skcipher
+  crypto_attr_alg_name
+  crypto_check_attr_type
+  crypto_cipher_encrypt_one
+  crypto_cipher_setkey
   crypto_comp_compress
   crypto_comp_decompress
   crypto_destroy_tfm
+  crypto_drop_spawn
+  crypto_get_default_null_skcipher
+  crypto_grab_aead
+  crypto_grab_ahash
+  crypto_grab_shash
+  crypto_grab_skcipher
+  crypto_grab_spawn
   crypto_has_alg
+  crypto_inst_setname
   __crypto_memneq
+  crypto_put_default_null_skcipher
+  crypto_register_aead
+  crypto_register_aeads
+  crypto_register_ahash
+  crypto_register_ahashes
+  crypto_register_alg
+  crypto_register_algs
   crypto_register_notifier
+  crypto_register_rng
+  crypto_register_rngs
   crypto_register_shash
+  crypto_register_shashes
+  crypto_register_skcipher
+  crypto_register_skciphers
+  crypto_register_template
+  crypto_register_templates
+  crypto_remove_spawns
   crypto_req_done
+  crypto_rng_reset
+  crypto_shash_alg_has_setkey
   crypto_shash_digest
   crypto_shash_final
   crypto_shash_finup
   crypto_shash_setkey
+  crypto_shash_tfm_digest
   crypto_shash_update
   crypto_skcipher_decrypt
   crypto_skcipher_encrypt
   crypto_skcipher_setkey
+  crypto_spawn_tfm
+  crypto_spawn_tfm2
+  crypto_unregister_aead
+  crypto_unregister_alg
   crypto_unregister_notifier
+  crypto_unregister_rng
+  crypto_unregister_rngs
   crypto_unregister_shash
+  crypto_unregister_shashes
+  crypto_unregister_skciphers
+  crypto_unregister_template
+  crypto_unregister_templates
   __crypto_xor
   csum_ipv6_magic
   csum_partial
@@ -904,6 +952,7 @@
   __folio_put
   folio_wait_bit
   fortify_panic
+  fpsimd_context_busy
   fput
   frame_vector_create
   frame_vector_destroy
@@ -1199,6 +1248,7 @@
   irq_set_chip_data
   irq_set_irq_type
   irq_set_irq_wake
+  irq_stat
   irq_to_desc
   irq_work_queue
   irq_work_sync
@@ -1214,6 +1264,8 @@
   kernel_cpustat
   kernel_getsockname
   kernel_kobj
+  kernel_neon_begin
+  kernel_neon_end
   kernel_param_lock
   kernel_param_unlock
   kernel_recvmsg
@@ -1261,6 +1313,7 @@
   kobj_sysfs_ops
   krealloc
   ksize
+  ksoftirqd
   kstat
   kstrdup
   kstrndup
@@ -1610,6 +1663,7 @@
   pci_wake_from_d3
   pci_write_config_dword
   pci_write_config_word
+  pcpu_nr_pages
   __per_cpu_offset
   perf_aux_output_begin
   perf_aux_output_end
@@ -1900,6 +1954,7 @@
   __rht_bucket_nested
   rht_bucket_nested
   rht_bucket_nested_insert
+  rng_is_initialized
   __root_device_register
   root_device_unregister
   root_task_group
@@ -1923,6 +1978,8 @@
   rtnl_trylock
   rtnl_unlock
   runqueues
+  scatterwalk_ffwd
+  scatterwalk_map_and_copy
   sched_clock
   sched_feat_keys
   sched_setattr_nocheck
@@ -2001,7 +2058,10 @@
   __sg_page_iter_next
   __sg_page_iter_start
   sg_pcopy_from_buffer
+  shash_free_singlespawn_instance
+  shash_register_instance
   shmem_file_setup
+  si_meminfo
   simple_attr_open
   simple_attr_read
   simple_attr_release
@@ -2046,6 +2106,12 @@
   skb_set_owner_w
   skb_store_bits
   skb_trim
+  skcipher_alloc_instance_simple
+  skcipher_register_instance
+  skcipher_walk_aead_decrypt
+  skcipher_walk_aead_encrypt
+  skcipher_walk_done
+  skcipher_walk_virt
   sk_free
   skip_spaces
   smp_call_function
@@ -2345,6 +2411,9 @@
   __traceiter_android_rvh_update_rt_rq_load_avg
   __traceiter_android_rvh_usb_dev_suspend
   __traceiter_android_rvh_util_fits_cpu
+  __traceiter_android_vh_aes_decrypt
+  __traceiter_android_vh_aes_encrypt
+  __traceiter_android_vh_aes_expandkey
   __traceiter_android_vh_arch_set_freq_scale
   __traceiter_android_vh_audio_usb_offload_connect
   __traceiter_android_vh_binder_restore_priority
@@ -2367,6 +2436,7 @@
   __traceiter_android_vh_rmqueue
   __traceiter_android_vh_scheduler_tick
   __traceiter_android_vh_setscheduler_uclamp
+  __traceiter_android_vh_sha256
   __traceiter_android_vh_si_meminfo_adjust
   __traceiter_android_vh_sound_usb_support_cpu_suspend
   __traceiter_android_vh_sysrq_crash
@@ -2468,6 +2538,9 @@
   __tracepoint_android_rvh_update_rt_rq_load_avg
   __tracepoint_android_rvh_usb_dev_suspend
   __tracepoint_android_rvh_util_fits_cpu
+  __tracepoint_android_vh_aes_decrypt
+  __tracepoint_android_vh_aes_encrypt
+  __tracepoint_android_vh_aes_expandkey
   __tracepoint_android_vh_arch_set_freq_scale
   __tracepoint_android_vh_audio_usb_offload_connect
   __tracepoint_android_vh_binder_restore_priority
@@ -2490,6 +2563,7 @@
   __tracepoint_android_vh_rmqueue
   __tracepoint_android_vh_scheduler_tick
   __tracepoint_android_vh_setscheduler_uclamp
+  __tracepoint_android_vh_sha256
   __tracepoint_android_vh_si_meminfo_adjust
   __tracepoint_android_vh_sound_usb_support_cpu_suspend
   __tracepoint_android_vh_sysrq_crash
@@ -2749,11 +2823,13 @@
   virtqueue_kick_prepare
   virtqueue_notify
   vmalloc
+  vmalloc_nr_pages
   vmalloc_to_page
   vmalloc_user
   vmap
   vmf_insert_pfn_prot
   vm_iomap_memory
+  vm_node_stat
   vprintk
   vprintk_emit
   vring_del_virtqueue
