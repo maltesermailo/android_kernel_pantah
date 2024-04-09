@@ -59,6 +59,26 @@
       "tag": "",
       "revId": "fd16669b182b380350effa5566f6739882da6f65",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000074091310",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3033493?revision\u003d1",
+      "key": {
+        "uuid": "f9e8349b_e275f979",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-09T12:51:15Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/2c6841c88201e13967583f0f8a9f9b54b9cde404) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d2c6841c88201e13967583f0f8a9f9b54b9cde404).\n\n```\n      ## net/tls/tls_sw.c ##\n     @@ net/tls/tls_sw.c: static void tls_decrypt_done(crypto_completion_data_t *data, int err)\n    @@ net/tls/tls_sw.c: trim_sgl:\n      \t\t\tcopied \u003d 0;\n      \t\t}\n      \t}\n    -@@ net/tls/tls_sw.c: void tls_sw_splice_eof(struct socket *sock)\n    - \tssize_t copied \u003d 0;\n    - \tbool retrying \u003d false;\n    - \tint ret \u003d 0;\n    --\tint pending;\n    - \n    - \tif (!ctx-\u003eopen_rec)\n    - \t\treturn;\n    -@@ net/tls/tls_sw.c: retry:\n    - \t}\n    - \n    - \t/* Wait for pending encryptions to get completed */\n    --\tspin_lock_bh(\u0026ctx-\u003eencrypt_compl_lock);\n    --\tctx-\u003easync_notify \u003d true;\n    --\n    --\tpending \u003d atomic_read(\u0026ctx-\u003eencrypt_pending);\n    --\tspin_unlock_bh(\u0026ctx-\u003eencrypt_compl_lock);\n    --\tif (pending)\n    --\t\tcrypto_wait_req(-EINPROGRESS, \u0026ctx-\u003easync_wait);\n    --\telse\n    --\t\treinit_completion(\u0026ctx-\u003easync_wait.completion);\n    --\n    --\t/* There can be no concurrent accesses, since we have no pending\n    --\t * encrypt operations\n    --\t */\n    --\tWRITE_ONCE(ctx-\u003easync_notify, false);\n    --\n    --\tif (ctx-\u003easync_wait.err)\n    -+\tif (tls_encrypt_async_wait(ctx))\n    - \t\tgoto unlock;\n    - \n    - \t/* Transmit if any encryptions have completed */\n     @@ net/tls/tls_sw.c: put_on_rx_list:\n      \n      recv_end:\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "fd16669b182b380350effa5566f6739882da6f65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
