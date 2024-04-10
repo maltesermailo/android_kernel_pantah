@@ -21,6 +21,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4f5c09ac_2d839f43",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2024-04-10T15:23:29Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4bff6679_83c661fb",
+      "revId": "24c768523b581b65cc733f6c6a473112285754b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a60e476f_2fb1e144",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -49,6 +67,42 @@
       "writtenOn": "2024-03-22T18:40:49Z",
       "side": 1,
       "message": "Fix build breaks (and in the future, build and test before submitting!)\n```\nERROR: /mnt/disks/build-disk/src/android/common-android14-6.1/common/BUILD.bazel:131:22: Building kernel (lto\u003ddefault;trim) @//common:kernel_aarch64 failed: (Exit 2): bash failed: error executing KernelBuild command (from target //common:kernel_aarch64) /bin/bash -c ... (remaining 1 argument skipped)\n\nUse --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging\n/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/32/execroot/__main__/common/drivers/usb/host/xhci-mem.c:1905:1: error: unknown type name \u0027stattic\u0027; did you mean \u0027static\u0027?\nstattic void\n^~~~~~~\nstatic\n/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/32/execroot/__main__/common/drivers/usb/host/xhci-mem.c:1906:51: error: declaration of \u0027struct xhci_interrupter\u0027 will not be visible outside of this function [-Werror,-Wvisibility]\nxhci_free_interrupt(struct xhci_hcd *xhci, struct xhci_interrupter *ir)\n                                                  ^\n/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/32/execroot/__main__/common/drivers/usb/host/xhci-mem.c:1916:50: error: incomplete definition of type \u0027struct xhci_interrupter\u0027\n        erst_size \u003d sizeof(struct xhci_erst_entry) * (ir-\u003eerst.num_entries);\n                                                      ~~^\n/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/32/execroot/__main__/common/drivers/usb/host/xhci-mem.c:1906:51: note: forward declaration of \u0027struct xhci_interrupter\u0027\nxhci_free_interrupt(struct xhci_hcd *xhci, struct xhci_interrupter *ir)\n                                                  ^\n/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/32/execroot/__main__/common/drivers/usb/host/xhci-mem.c:1917:8: error: incomplete definition of type \u0027struct xhci_interrupter\u0027\n        if (ir-\u003eerst.entries)\n            ~~^\n/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/32/execroot/__main__/common/drivers/usb/host/xhci-mem.c:1906:51: note: forward declaration of \u0027struct xhci_interrupter\u0027\nxhci_free_interrupt(struct xhci_hcd *xhci, struct xhci_interrupter *ir)\n                                                  ^\n/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/32/execroot/__main__/common/drivers/usb/host/xhci-mem.c:1919:9: error: incomplete definition of type \u0027struct xhci_interrupter\u0027\n                                  ir-\u003eerst.entries,\n                                  ~~^\n/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/32/execroot/__main__/common/drivers/usb/host/xhci-mem.c:1906:51: note: forward declaration of \u0027struct xhci_interrupter\u0027\nxhci_free_interrupt(struct xhci_hcd *xhci, struct xhci_interrupter *ir)\n                                                  ^\n/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/32/execroot/__main__/common/drivers/usb/host/xhci-mem.c:1920:9: error: incomplete definition of type \u0027struct xhci_interrupter\u0027\n                                  ir-\u003eerst.erst_dma_addr);\n                                  ~~^\n/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/32/execroot/__main__/common/drivers/usb/host/xhci-mem.c:1906:51: note: forward declaration of \u0027struct xhci_interrupter\u0027\nxhci_free_interrupt(struct xhci_hcd *xhci, struct xhci_interrupter *ir)\n                                                  ^\n/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/32/execroot/__main__/common/drivers/usb/host/xhci-mem.c:1921:4: error: incomplete definition of type \u0027struct xhci_interrupter\u0027\n        ir-\u003eerst.entries \u003d NULL;\n        ~~^\n/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/32/execroot/__main__/common/drivers/usb/host/xhci-mem.c:1906:51: note: forward declaration of \u0027struct xhci_interrupter\u0027\nxhci_free_interrupt(struct xhci_hcd *xhci, struct xhci_interrupter *ir)\n                                                  ^\n/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/32/execroot/__main__/common/drivers/usb/host/xhci-mem.c:1928:17: error: incomplete definition of type \u0027struct xhci_interrupter\u0027\n        tmp \u003d readl(\u0026ir-\u003eir_set-\u003eerst_size);\n                     ~~^\n/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/32/execroot/__main__/common/drivers/usb/host/xhci-mem.c:1906:51: note: forward declaration of \u0027struct xhci_interrupter\u0027\nxhci_free_interrupt(struct xhci_hcd *xhci, struct xhci_interrupter *ir)\n                                                  ^\n/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/32/execroot/__main__/common/drivers/usb/host/xhci-mem.c:1930:17: error: incomplete definition of type \u0027struct xhci_interrupter\u0027\n        writel(tmp, \u0026ir-\u003eir_set-\u003eerst_size);\n                     ~~^\n/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/32/execroot/__main__/common/drivers/usb/host/xhci-mem.c:1906:51: note: forward declaration of \u0027struct xhci_interrupter\u0027\nxhci_free_interrupt(struct xhci_hcd *xhci, struct xhci_interrupter *ir)\n                                                  ^\n... 120 lines skipped ...\n/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/32/execroot/__main__/common/include/linux/dma-mapping.h:93:54: note: expanded from macro \u0027DMA_BIT_MASK\u0027\n#define DMA_BIT_MASK(n) (((n) \u003d\u003d 64) ? ~0ULL : ((1ULL\u003c\u003c(n))-1))\n                                                     ^ ~~~\n14 errors generated.\nmake[5]: *** [/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/32/execroot/__main__/common/scripts/Makefile.build:250: drivers/usb/host/xhci.o] Error 1\nmake[4]: *** [/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/32/execroot/__main__/common/scripts/Makefile.build:500: drivers/usb/host] Error 2\nmake[4]: *** Waiting for unfinished jobs....\nmake[3]: *** [/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/32/execroot/__main__/common/scripts/Makefile.build:500: drivers/usb] Error 2\nmake[3]: *** Waiting for unfinished jobs....\nmake[2]: *** [/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/32/execroot/__main__/common/scripts/Makefile.build:500: drivers] Error 2\nmake[2]: *** Waiting for unfinished jobs....\nmake[1]: *** [/mnt/disks/build-disk/src/android/common-android14-6.1/out/bazel/output_user_root/27ef06e50cb42a9d447d7f2f757478b6/sandbox/linux-sandbox/32/execroot/__main__/common/Makefile:2057: .] Error 2\nmake: *** [Makefile:256: __sub-make] Error 2\nUse --verbose_failures to see the command lines of failed build steps.\nERROR: /mnt/disks/build-disk/src/android/common-android14-6.1/common/BUILD.bazel:131:22 Middleman _middlemen/common_Skernel_Uaarch64_Utest-runfiles failed: (Exit 2): bash failed: error executing KernelBuild command (from target //common:kernel_aarch64) /bin/bash -c ... (remaining 1 argument skipped)\n\n```",
+      "revId": "24c768523b581b65cc733f6c6a473112285754b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24d6b6ee_bd1004c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2024-04-10T15:23:29Z",
+      "side": 1,
+      "message": "understood, will do.",
+      "parentUuid": "a60e476f_2fb1e144",
+      "revId": "24c768523b581b65cc733f6c6a473112285754b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "716c909f_473f73e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2024-04-10T15:23:29Z",
+      "side": 1,
+      "message": "apologies, will take care of it.",
+      "parentUuid": "5c88b7be_3683da74",
       "revId": "24c768523b581b65cc733f6c6a473112285754b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
