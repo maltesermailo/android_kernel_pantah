@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4621abb_6358b3f7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-04-10T19:25:49Z",
+      "side": 1,
+      "message": "Same comment as the other change:\n\nCommit message needs more details:\n1) Why are these hooks needed\n2) What benefit is gained by adding these hooks\n3) What is the deprecation plan for these hooks (what functionality would you need to get upstream to no longer need these, and what steps have you taken to do so)\n\nIf you have any sensitive details for the above, you can share those in the bug.",
+      "revId": "ca681441cf00a45ad868e7f9a57fd0c7cad1c65b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06f6cfcf_a50d3609",
+        "filename": "kernel/sched/vendor_hooks.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-04-10T19:25:49Z",
+      "side": 1,
+      "message": "Why do you need _rt specific hooks? \n\nCould you not utilize the android_rvh_enqueue_task/android_rvh_dequeue_task hooks and handle the rt case via something like `if (rt_prio(p-\u003eprio))` ?",
+      "revId": "ca681441cf00a45ad868e7f9a57fd0c7cad1c65b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
