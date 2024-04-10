@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16bd8261_a3bac89a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1936867
+      },
+      "writtenOn": "2024-04-10T15:52:13Z",
+      "side": 1,
+      "message": "ult;trim) @//common:kernel_aarch64 failed: (Exit 1): b\nash failed: error executing KernelBuildKmiSymbolListStrictMode command (from target //common:kernel_aarch64) /bin/bash -c ... (remaining 1 argument skipped)\n\nUse --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging\nSymbols missing from the ksymtab:\n  xhci_check_trb_in_td_math\nTarget //common:kernel_aarch64_dist failed to build\nUse --verbose_failures to see the command lines of failed build steps.\n\nseems require KMI change here. will push one for this.",
+      "revId": "bcffd9f24fa248f12e64ee8220044db87c219013",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
