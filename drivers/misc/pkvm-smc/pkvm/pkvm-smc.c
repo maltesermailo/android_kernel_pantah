@@ -14,6 +14,7 @@
 #include <define_events.h>
 
 const struct pkvm_module_ops *pkvm_ops;
+bool permissive;
 
 #ifdef CONFIG_TRACING
 extern char __hyp_event_ids_start[];
@@ -39,6 +40,9 @@ static bool deny_smc(struct user_pt_regs *regs)
 {
 	trace_filtered_smc(regs->regs[0], regs->regs[1], regs->regs[2], regs->regs[3],
 			   regs->regs[4], regs->regs[5], regs->regs[6], regs->regs[7]);
+	if (permissive)
+		return false;
+
 	regs->regs[0] = SMCCC_RET_NOT_SUPPORTED;
 	return true;
 }
