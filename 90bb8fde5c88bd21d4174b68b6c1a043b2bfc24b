@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "938b62ed_f3ff08c6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-04-11T02:39:15Z",
+      "side": 1,
+      "message": "consistency optimaton? Maybe something like:\n```\nANDROID: vendor_hooks: optimize available descriptor lookup\n```",
+      "range": {
+        "startLine": 7,
+        "startChar": 52,
+        "endLine": 7,
+        "endChar": 73
+      },
+      "revId": "90bb8fde5c88bd21d4174b68b6c1a043b2bfc24b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "097e80a4_0870f7cc",
@@ -14,6 +37,29 @@
       "writtenOn": "2024-04-02T15:53:50Z",
       "side": 1,
       "message": "-1 for now since we are looking into a solution for performance",
+      "revId": "90bb8fde5c88bd21d4174b68b6c1a043b2bfc24b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92549f34_d7cc6b08",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1279,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-04-11T02:39:15Z",
+      "side": 1,
+      "message": "Lets try to avoid passing the reference and the node. I believe this could be achieved and still keep the same functionality. In theory you should only need to lookup your bitmap and populate that value in new_ref-\u003edata.desc then let current code take care of where to insert the new_ref.",
+      "range": {
+        "startLine": 1279,
+        "startChar": 1,
+        "endLine": 1279,
+        "endChar": 34
+      },
       "revId": "90bb8fde5c88bd21d4174b68b6c1a043b2bfc24b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
