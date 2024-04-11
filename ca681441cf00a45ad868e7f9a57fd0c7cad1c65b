@@ -33,6 +33,24 @@
       "message": "Why do you need _rt specific hooks? \n\nCould you not utilize the android_rvh_enqueue_task/android_rvh_dequeue_task hooks and handle the rt case via something like `if (rt_prio(p-\u003eprio))` ?",
       "revId": "ca681441cf00a45ad868e7f9a57fd0c7cad1c65b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06ffe5f9_5b193381",
+        "filename": "kernel/sched/vendor_hooks.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 3334410
+      },
+      "writtenOn": "2024-04-11T06:58:33Z",
+      "side": 1,
+      "message": "Your suggestion is very good. I will abandon this patch.",
+      "parentUuid": "06f6cfcf_a50d3609",
+      "revId": "ca681441cf00a45ad868e7f9a57fd0c7cad1c65b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
