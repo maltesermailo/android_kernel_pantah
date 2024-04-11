@@ -66,6 +66,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "542c1839_b5ef7d95",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1279,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2024-04-11T08:45:42Z",
+      "side": 1,
+      "message": "The purpose of adding new_ref is to insert it into refs_by_desc later. If I don\u0027t pass this parameter, then I need to add a new hook here.\nrb_insert_color(\u0026new_ref-\u003erb_node_desc, \u0026proc-\u003erefs_by_desc);\n\nThe node is passed to reinitialize new_ref-\u003edata.desc when the bitmap is abnormal.\nnew_ref-\u003edata.desc \u003d (node \u003d\u003d context-\u003ebinder_context_mgr_node) ? 0 : 1;",
+      "parentUuid": "92549f34_d7cc6b08",
+      "range": {
+        "startLine": 1279,
+        "startChar": 1,
+        "endLine": 1279,
+        "endChar": 34
+      },
+      "revId": "90bb8fde5c88bd21d4174b68b6c1a043b2bfc24b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "75b78789_36bab7ed",
         "filename": "drivers/android/binder.c",
         "patchSetId": 4
@@ -77,6 +101,30 @@
       "writtenOn": "2024-04-11T02:55:14Z",
       "side": 1,
       "message": "I assume you can replace this with proc and ref-\u003edata.desc parameters",
+      "range": {
+        "startLine": 1328,
+        "startChar": 38,
+        "endLine": 1328,
+        "endChar": 41
+      },
+      "revId": "90bb8fde5c88bd21d4174b68b6c1a043b2bfc24b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8d8ead1_55428565",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1328,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2024-04-11T08:45:42Z",
+      "side": 1,
+      "message": "Yes, but it seems more convenient to pass ref here, and there is only one parameter. If you object to this approach, we can change it",
+      "parentUuid": "75b78789_36bab7ed",
       "range": {
         "startLine": 1328,
         "startChar": 38,
@@ -123,6 +171,30 @@
       "writtenOn": "2024-04-11T02:55:14Z",
       "side": 1,
       "message": "huh? where is this being used?",
+      "range": {
+        "startLine": 228,
+        "startChar": 29,
+        "endLine": 228,
+        "endChar": 56
+      },
+      "revId": "90bb8fde5c88bd21d4174b68b6c1a043b2bfc24b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e030c4f_0ba2dd54",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2024-04-11T08:45:42Z",
+      "side": 1,
+      "message": "We need to release the bitmap memory applied in ANDROID_OEM_DATA(1) before releasing binder_proc.",
+      "parentUuid": "8d42200c_c031ac87",
       "range": {
         "startLine": 228,
         "startChar": 29,
