@@ -90,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4f8ce13e_00973665",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1279,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-04-11T16:52:34Z",
+      "side": 1,
+      "message": "I\u0027m not sure I follow. Why couldn\u0027t you jump to line 1282 and let that code insert the new ref?\n\nWhether the node is the context manager could be 100% determined outside of the hook.",
+      "parentUuid": "542c1839_b5ef7d95",
+      "range": {
+        "startLine": 1279,
+        "startChar": 1,
+        "endLine": 1279,
+        "endChar": 34
+      },
+      "revId": "90bb8fde5c88bd21d4174b68b6c1a043b2bfc24b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "75b78789_36bab7ed",
         "filename": "drivers/android/binder.c",
         "patchSetId": 4
@@ -137,6 +161,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "514443af_ca8f9d8c",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1328,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-04-11T16:52:34Z",
+      "side": 1,
+      "message": "Yes, as stated above please lets try to make ref and node obscure structures to vendor hooks.",
+      "parentUuid": "c8d8ead1_55428565",
+      "range": {
+        "startLine": 1328,
+        "startChar": 38,
+        "endLine": 1328,
+        "endChar": 41
+      },
+      "revId": "90bb8fde5c88bd21d4174b68b6c1a043b2bfc24b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4a420d60_d847368e",
         "filename": "drivers/android/binder.c",
         "patchSetId": 4
@@ -148,6 +196,30 @@
       "writtenOn": "2024-04-11T02:55:14Z",
       "side": 1,
       "message": "nit: could this please be shortened a bit, maybe to `trace_android_vh_binder_desc_init` ?",
+      "range": {
+        "startLine": 5918,
+        "startChar": 25,
+        "endLine": 5918,
+        "endChar": 44
+      },
+      "revId": "90bb8fde5c88bd21d4174b68b6c1a043b2bfc24b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "713f244a_60c5762e",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 5918,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-04-11T16:52:34Z",
+      "side": 1,
+      "message": "it seems this is no longer needed now that we have trace_android_vh_binder_preset() passing proc below?",
+      "parentUuid": "4a420d60_d847368e",
       "range": {
         "startLine": 5918,
         "startChar": 25,
