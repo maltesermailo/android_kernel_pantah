@@ -138,6 +138,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a6cc1791_ebd63573",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1279,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-04-12T03:17:08Z",
+      "side": 1,
+      "message": "ok, this is the part I still don\u0027t understand. Isn\u0027t the bitmap allocated in proc-\u003ebitmap and I assume you use the desc_id as the index into the bitmap. Why not clear this bit ahead of time before exiting the hook and doing the insert? This is a point of no-return anyways.",
+      "parentUuid": "1c969644_9edaaf4e",
+      "range": {
+        "startLine": 1279,
+        "startChar": 1,
+        "endLine": 1279,
+        "endChar": 34
+      },
+      "revId": "90bb8fde5c88bd21d4174b68b6c1a043b2bfc24b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "75b78789_36bab7ed",
         "filename": "drivers/android/binder.c",
         "patchSetId": 4
