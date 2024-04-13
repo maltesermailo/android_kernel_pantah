@@ -97,7 +97,7 @@ static inline void push_hyp_memcache(struct kvm_hyp_memcache *mc,
 				     unsigned long order)
 {
 	*p = mc->head;
-	mc->head = FIELD_PREP(HYP_MC_PTR_MASK, to_pa(p)) |
+	mc->head = (to_pa(p) & HYP_MC_PTR_MASK) |
 		   FIELD_PREP(HYP_MC_ORDER_MASK, order);
 	mc->nr_pages++;
 }
@@ -106,7 +106,7 @@ static inline void *pop_hyp_memcache(struct kvm_hyp_memcache *mc,
 				     void *(*to_va)(phys_addr_t phys),
 				     unsigned long *order)
 {
-	phys_addr_t *p = to_va(FIELD_GET(HYP_MC_PTR_MASK, mc->head));
+	phys_addr_t *p = to_va(mc->head & HYP_MC_PTR_MASK);
 
 	if (!mc->nr_pages)
 		return NULL;
