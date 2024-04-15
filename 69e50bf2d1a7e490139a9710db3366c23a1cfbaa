@@ -16,6 +16,24 @@
       "message": "do we have a plan for getting all these out-of-tree 16k patches upstream?",
       "revId": "69e50bf2d1a7e490139a9710db3366c23a1cfbaa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e84caed8_c99c6ca9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-04-15T17:36:18Z",
+      "side": 1,
+      "message": "Hi Todd, I don\u0027t think these can be upstreamed.\n\nThey are only to help android in the transition stage from 4kB to 16kB since we need to maintain compatibility for apps.\n\nThese issues don\u0027t exist if we could switch everything to 16kB in one go.\n\nOnce both userspace and kernel have moved to 16kB, we can drop these from ACK kernels.",
+      "parentUuid": "1bd6befd_b4139521",
+      "revId": "69e50bf2d1a7e490139a9710db3366c23a1cfbaa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
