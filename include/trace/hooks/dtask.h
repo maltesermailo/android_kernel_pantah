@@ -77,6 +77,21 @@ DECLARE_HOOK(android_vh_rwsem_can_spin_on_owner,
 DECLARE_HOOK(android_vh_sched_show_task,
 	TP_PROTO(struct task_struct *task),
 	TP_ARGS(task));
+<<<<<<< HEAD   (db3398 ANDROID: GKI: Update symbol list for vivo)
+=======
+DECLARE_HOOK(android_vh_percpu_rwsem_wq_add,
+	TP_PROTO(struct percpu_rw_semaphore *sem, bool reader),
+	TP_ARGS(sem, reader));
+DECLARE_HOOK(android_vh_percpu_rwsem_down_read,
+	TP_PROTO(struct percpu_rw_semaphore *sem, bool try, bool *ret),
+	TP_ARGS(sem, try, ret));
+DECLARE_HOOK(android_vh_percpu_rwsem_up_write,
+	TP_PROTO(struct percpu_rw_semaphore *sem),
+	TP_ARGS(sem));
+DECLARE_RESTRICTED_HOOK(android_rvh_percpu_rwsem_wait_complete,
+	TP_PROTO(struct percpu_rw_semaphore *sem, long state, bool *complete),
+	TP_ARGS(sem, state, complete), 1);
+>>>>>>> CHANGE (458cdb ANDROID: GKI: add percpu_rwsem vendor hooks)
 
 struct mutex_waiter;
 DECLARE_HOOK(android_vh_alter_mutex_list_add,
