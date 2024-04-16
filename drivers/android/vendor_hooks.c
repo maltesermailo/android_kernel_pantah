@@ -47,6 +47,7 @@
 #include <trace/hooks/dtask.h>
 #include <trace/hooks/ftrace_dump.h>
 #include <trace/hooks/traps.h>
+#include <trace/hooks/patching.h>
 #include <trace/hooks/fault.h>
 #include <trace/hooks/regmap.h>
 #include <trace/hooks/hung_task.h>
@@ -271,4 +272,9 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_proc_transaction);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_new_ref);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_del_ref);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_logbuf_pr_cont);
+<<<<<<< HEAD
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_slowpath);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_aarch64_patch_text_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_aarch64_patch_text_finish);
+>>>>>>> 4fbd911d959d... ANDROID: arm64: add vendor hooks for text patching
