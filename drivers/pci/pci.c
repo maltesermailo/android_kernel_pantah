@@ -31,7 +31,11 @@
 #include <linux/vmalloc.h>
 #include <asm/dma.h>
 #include <linux/aer.h>
+<<<<<<< HEAD   (30b706 Merge 5.10.214 into android13-5.10-lts)
 #include <trace/hooks/pci.h>
+=======
+#include <linux/bitfield.h>
+>>>>>>> BRANCH (e2e4e7 Linux 5.10.215)
 #include "pci.h"
 
 DEFINE_MUTEX(pci_slot_mutex);
@@ -4576,13 +4580,10 @@ EXPORT_SYMBOL(pci_wait_for_pending_transaction);
  */
 bool pcie_has_flr(struct pci_dev *dev)
 {
-	u32 cap;
-
 	if (dev->dev_flags & PCI_DEV_FLAGS_NO_FLR_RESET)
 		return false;
 
-	pcie_capability_read_dword(dev, PCI_EXP_DEVCAP, &cap);
-	return cap & PCI_EXP_DEVCAP_FLR;
+	return FIELD_GET(PCI_EXP_DEVCAP_FLR, dev->devcap) == 1;
 }
 EXPORT_SYMBOL_GPL(pcie_has_flr);
 
