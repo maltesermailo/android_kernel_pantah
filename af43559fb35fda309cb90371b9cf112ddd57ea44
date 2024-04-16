@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10cf24c7_d51cfd91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-04-16T12:36:41Z",
+      "side": 1,
+      "message": "I\u0027m not sure I completely follow the flow here, so apologies if I\u0027m talking rubbish, but here goes:\n\n- If a device is using SWIOTLB, then the DMA transactions emitted by the device will target a SWIOTLB buffer\n\n- The DMA/SWIOTLB code then copies data to/from the SWIOTLB buffer into... where? The uncached heap, I presume?\n\nIn which case, using the uncached system heap is probably pointless and slow, as the CPU will bounce using a non-cacheable mapping. Furthermore, we still have `DMA_ATTR_SKIP_CPU_SYNC` set, so it\u0027s not clear to me that the SWIOTLB code will always do the right thing because (afaict), that will be cacheable and needs the cache maintenance (e.g. see `swiotlb_map()`).\n\nIs my understanding correct?",
+      "revId": "af43559fb35fda309cb90371b9cf112ddd57ea44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
