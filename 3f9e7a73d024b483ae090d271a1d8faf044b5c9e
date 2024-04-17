@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cb8404c_321e2045",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-17T01:40:23Z",
+      "side": 1,
+      "message": "Why `unlikely`? This will negatively affect anyone that uses restrict_cma_redirect. Unless you know it\u0027s going to be disabled most of the time use `if (static_key_enabled())`",
+      "range": {
+        "startLine": 209,
+        "startChar": 8,
+        "endLine": 209,
+        "endChar": 30
+      },
+      "revId": "3f9e7a73d024b483ae090d271a1d8faf044b5c9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25f57587_5fdf9145",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2818,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-17T01:40:23Z",
+      "side": 1,
+      "message": "nit: Maybe `cma_migratetype`",
+      "range": {
+        "startLine": 2818,
+        "startChar": 6,
+        "endLine": 2818,
+        "endChar": 8
+      },
+      "revId": "3f9e7a73d024b483ae090d271a1d8faf044b5c9e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
