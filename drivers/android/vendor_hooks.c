@@ -34,6 +34,7 @@
 #include <trace/hooks/gic_v3.h>
 #include <trace/hooks/remoteproc.h>
 #include <trace/hooks/timer.h>
+#include <trace/hooks/topology.h>
 #include <trace/hooks/fpsimd.h>
 #include <trace/hooks/dtask.h>
 #include <trace/hooks/ftrace_dump.h>
@@ -116,3 +117,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_look_around_migrate_folio);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_test_clear_look_around_ref);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_arm64_serror_panic);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_sea);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpu_capacity_show);

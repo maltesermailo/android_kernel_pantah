@@ -27,6 +27,7 @@
 
 #undef CREATE_TRACE_POINTS
 #include <trace/hooks/sched.h>
+#include <trace/hooks/topology.h>
 
 static DEFINE_PER_CPU(struct scale_freq_data __rcu *, sft_data);
 static struct cpumask scale_freq_counters_mask;
@@ -217,8 +218,10 @@ static ssize_t cpu_capacity_show(struct device *dev,
 				 char *buf)
 {
 	struct cpu *cpu = container_of(dev, struct cpu, dev);
+	unsigned long capacity = topology_get_cpu_scale(cpu->dev.id);
 
-	return sysfs_emit(buf, "%lu\n", topology_get_cpu_scale(cpu->dev.id));
+	trace_android_rvh_cpu_capacity_show(&capacity, cpu->dev.id);
+	return sysfs_emit(buf, "%lu\n", capacity);
 }
 
 static void update_topology_flags_workfn(struct work_struct *work);
