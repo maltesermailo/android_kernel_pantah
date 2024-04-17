@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc5bbc31_ad338934",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2199,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-17T17:35:12Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9da9d90d_edae2b64",
+      "range": {
+        "startLine": 2198,
+        "startChar": 2,
+        "endLine": 2199,
+        "endChar": 59
+      },
+      "revId": "9d0c966c2b47c2760eaeb689e0de459ad014a760",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0326b11_cde0396b",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "The check is: If (cma is NOT restricted OR __GFP_CMA is set) right ?\n\nIf cma is not restricted, __GFP_CMA doesn\u0027t matter and we retain existing (upstream) behavior.\n\nIf cma is restricted, the first part of the check will be false. The second part will only be true for allocations that have __GFP_CMA - rather than all movable allocations right? We pick allocations that will have __GFP_CMA (eg: readahead which we can easily discard). i.e cma is restricted, we want the ACK6.1 behavior.",
       "parentUuid": "c0326b11_cde0396b",
+      "range": {
+        "startLine": 3134,
+        "startChar": 5,
+        "endLine": 3134,
+        "endChar": 57
+      },
+      "revId": "9d0c966c2b47c2760eaeb689e0de459ad014a760",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a71ca43_93852905",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3134,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-17T17:35:12Z",
+      "side": 1,
+      "message": "Ah, ok. This cma_redirect_restricted concept is still confusing to me but I see what you mean here. Ok, that seems to work.",
+      "parentUuid": "f9d14984_a514b8c2",
       "range": {
         "startLine": 3134,
         "startChar": 5,
