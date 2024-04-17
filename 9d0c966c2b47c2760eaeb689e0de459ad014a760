@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97aa51d1_a3ade993",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2199,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-17T01:23:14Z",
+      "side": 1,
+      "message": "I would think you want to fallback to __rmqueue() when __rmqueue_cma_fallback() fails (similar to how you do that in rmqueue_buddy() and in __rmqueue_pcplist()), no?",
+      "range": {
+        "startLine": 2198,
+        "startChar": 2,
+        "endLine": 2199,
+        "endChar": 59
+      },
+      "revId": "9d0c966c2b47c2760eaeb689e0de459ad014a760",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0326b11_cde0396b",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 3134,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-04-17T01:23:14Z",
+      "side": 1,
+      "message": "I don\u0027t think this condition is written correctly. if `cma_redirect_restricted()\u003d\u003dTRUE` it will always yield `TRUE` even when `(gfp_mask \u0026 __GFP_CMA) \u003d\u003d 0`. Is that what you expect? If so, please update the comment above which says `set ALLOC_CMA only for movable allocations that have __GFP_CMA` because that\u0027s not what happens here.",
+      "range": {
+        "startLine": 3134,
+        "startChar": 5,
+        "endLine": 3134,
+        "endChar": 57
+      },
+      "revId": "9d0c966c2b47c2760eaeb689e0de459ad014a760",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
