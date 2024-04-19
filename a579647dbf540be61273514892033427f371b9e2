@@ -93,6 +93,30 @@
       },
       "revId": "a579647dbf540be61273514892033427f371b9e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cfcddec_337db56b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1302,
+      "author": {
+        "id": 1866058
+      },
+      "writtenOn": "2024-04-19T01:46:15Z",
+      "side": 1,
+      "message": "It is okay to remove this hook, but I need to pass in the ref parameter in the previous hook. Is this okay? I can do this if you agree\ntrace_android_vh_binder_find_desc(proc, \u0026new_ref-\u003edata.desc, \u0026create_desc);\n\u003d\u003d》\ntrace_android_vh_binder_find_desc(proc, new_ref, \u0026create_desc);",
+      "parentUuid": "3f2e2039_6d36e726",
+      "range": {
+        "startLine": 1302,
+        "startChar": 1,
+        "endLine": 1302,
+        "endChar": 39
+      },
+      "revId": "a579647dbf540be61273514892033427f371b9e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
