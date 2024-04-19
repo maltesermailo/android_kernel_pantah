@@ -1316,7 +1316,11 @@ static void use_dmio(struct dm_buffer *b, enum req_op op, sector_t sector,
 		io_req.mem.ptr.vma = (char *)b->data + offset;
 	}
 
+<<<<<<< HEAD   (7b90f9 ANDROID: softirq: add tasklet to LONG_SOFTIRQ_MASK)
 	r = dm_io(&io_req, 1, &region, NULL, ioprio);
+=======
+	r = dm_io(&io_req, 1, &region, NULL, IOPRIO_DEFAULT);
+>>>>>>> BRANCH (5c7587 Linux 6.6.23)
 	if (unlikely(r))
 		b->end_io(b, errno_to_blk_status(r));
 }
