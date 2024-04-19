@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2d8983ce_eb6a24d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-04-19T15:56:04Z",
+      "side": 1,
+      "message": "Any chance you can test these patches instead of the vendor hook?",
+      "parentUuid": "fb929c90_87324fd1",
+      "revId": "a579647dbf540be61273514892033427f371b9e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3f2e2039_6d36e726",
         "filename": "drivers/android/binder.c",
         "patchSetId": 8
@@ -109,6 +127,30 @@
       "side": 1,
       "message": "It is okay to remove this hook, but I need to pass in the ref parameter in the previous hook. Is this okay? I can do this if you agree\ntrace_android_vh_binder_find_desc(proc, \u0026new_ref-\u003edata.desc, \u0026create_desc);\n\u003d\u003d》\ntrace_android_vh_binder_find_desc(proc, new_ref, \u0026create_desc);",
       "parentUuid": "3f2e2039_6d36e726",
+      "range": {
+        "startLine": 1302,
+        "startChar": 1,
+        "endLine": 1302,
+        "endChar": 39
+      },
+      "revId": "a579647dbf540be61273514892033427f371b9e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2531bcda_de6d973b",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1302,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-04-19T15:56:04Z",
+      "side": 1,
+      "message": "I would prefer you drop the unnecessary \"fall-back\" logic that requires you to either pass `new_ref` or add an extra \"clear_bit\" hook. That would be my first option.\n\nHowever, if you decide to keep this redundancy and complicate things then please keep the extra hook. I would rather have the extra hook than expose the \u0027struct binder_ref\u0027 to the ABI monitoring.",
+      "parentUuid": "4cfcddec_337db56b",
       "range": {
         "startLine": 1302,
         "startChar": 1,
