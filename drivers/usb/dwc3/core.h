@@ -1330,10 +1330,15 @@ struct dwc3 {
  * struct dwc3_vendor - contains parameters without modifying the format of DWC3 core
  * @dwc: contains dwc3 core reference
  * @suspended: set to track suspend event due to U3/L2.
+ * @num_usb2_ports: number of USB2 ports
+ * @num_usb3_ports: number of USB3 ports
  */
 struct dwc3_vendor {
 	struct dwc3	dwc;
 	unsigned	suspended:1;
+	u8		num_usb2_ports;
+	u8		num_usb3_ports;
+
 };
 
 #define INCRX_BURST_MODE 0
