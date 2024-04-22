@@ -112,6 +112,7 @@ void vma_set_pad_pages(struct vm_area_struct *vma,
 	if (!is_pgsize_migration_enabled())
 		return;
 
+	vma->vm_flags = vma->vm_flags & ~VM_PAD_MASK;
 	vma->vm_flags |= (nr_pages << VM_PAD_SHIFT);
 }
 
@@ -268,6 +269,74 @@ void show_map_pad_vma(struct vm_area_struct *vma, struct vm_area_struct *pad,
 
 	kfree(pad);
 	kfree(vma);
+}
+
+/*
+ * When splitting a padding VMA there are a couple of cases to handle.
+ *
+ * Given:
+ *
+ *     | DDDDPPPP |
+ *
+ * where:
+ *     - D represents 1 pad of data;
+ *     - P represents 1 page of padding;
+ *     - | represents the boundaries (start/end) of the VMA
+ *
+ *
+ * 1) Split exactly at the padding boundary
+ *
+ *     | DDDDPPPP | --> | DDDD | PPPP |
+ *
+ *     - Remove padding flags from the first VMA.
+ *     - Remove padding flags from the second VMA.
+ *     - Make the second VMA PROT_NONE
+ *
+ * 2) Split within the padding area
+ *
+ *     | DDDDPPPP | --> | DDDDPP | PP |
+ *
+ *     - Subtract the length of the second VMA from the first VMA's padding.
+ *     - Remove padding flags from the second VMA.
+ *     - Make the second VMA PROT_NONE
+ *
+ * 3) Split within the data area
+ *
+ *     | DDDDPPPP | --> | DD | DDPPPP |
+ *
+ *     - Remove padding flags from the first VMA.
+ */
+void split_pad_vma(struct vm_area_struct *vma,
+		  struct vm_area_struct *new, unsigned long addr, int new_below)
+{
+	unsigned long nr_pad_pages = vma_pad_pages(vma);
+	unsigned long nr_vma2_pages;
+	struct vm_area_struct *first;
+	struct vm_area_struct *second;
+
+	if (!nr_pad_pages)
+		return;
+
+	if (new_below) {
+		first = new;
+		second = vma;
+	} else {
+		first = vma;
+		second = new;
+	}
+
+	nr_vma2_pages = vma_pages(second);
+
+	if (nr_vma2_pages == nr_pad_pages) { 			/* Case 1 */
+		first->vm_flags = first->vm_flags & ~VM_PAD_MASK;
+		second->vm_flags = second->vm_flags & ~VM_PAD_MASK;
+		second->vm_flags = second->vm_flags & ~(VM_READ|VM_WRITE|VM_EXEC);
+	} else if (nr_vma2_pages < nr_pad_pages) { 		/* Case 2 */
+		vma_set_pad_pages(first, nr_pad_pages - nr_vma2_pages);
+		second->vm_flags = second->vm_flags & ~VM_PAD_MASK;
+	} else { 						/* Case 3 */
+		first->vm_flags = first->vm_flags & ~VM_PAD_MASK;
+	}
 }
 #endif /* PAGE_SIZE == SZ_4K */
 #endif /* CONFIG_64BIT */

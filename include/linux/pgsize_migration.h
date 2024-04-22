@@ -61,6 +61,9 @@ extern struct vm_area_struct *get_data_vma(struct vm_area_struct *vma);
 extern void show_map_pad_vma(struct vm_area_struct *vma,
 			     struct vm_area_struct *pad,
 			     struct seq_file *m, show_pad_vma_fn func);
+
+extern void split_pad_vma(struct vm_area_struct *vma,
+		  struct vm_area_struct *new, unsigned long addr, int new_below);
 #else /* PAGE_SIZE != SZ_4K || !defined(CONFIG_64BIT) */
 static inline void vma_set_pad_pages(struct vm_area_struct *vma,
 				     unsigned long nr_pages)
@@ -90,6 +93,11 @@ static inline struct vm_area_struct *get_data_vma(struct vm_area_struct *vma)
 static inline void show_map_pad_vma(struct vm_area_struct *vma,
 				    struct vm_area_struct *pad,
 				    struct seq_file *m, show_pad_vma_fn func)
+{
+}
+
+static inline void split_pad_vma(struct vm_area_struct *vma,
+		  struct vm_area_struct *new, unsigned long addr, int new_below)
 {
 }
 #endif /* PAGE_SIZE == SZ_4K && defined(CONFIG_64BIT) */
