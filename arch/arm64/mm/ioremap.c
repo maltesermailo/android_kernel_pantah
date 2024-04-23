@@ -86,7 +86,7 @@ void kvm_init_ioremap_services(void)
 	arm_smccc_1_1_invoke(ARM_SMCCC_VENDOR_HYP_KVM_MMIO_GUARD_INFO_FUNC_ID,
 			     0, 0, 0, &res);
 	granule = res.a0;
-	if (granule > PAGE_SIZE || !granule || (granule & (granule - 1))) {
+	if (!granule || (granule & (granule - 1))) {
 		pr_warn("KVM MMIO guard initialization failed: "
 			"guard granule (%lu), page size (%lu)\n",
 			granule, PAGE_SIZE);
