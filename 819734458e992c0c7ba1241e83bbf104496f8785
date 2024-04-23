@@ -70,6 +70,24 @@
       "parentUuid": "931bf01b_0b3bcbcc",
       "revId": "819734458e992c0c7ba1241e83bbf104496f8785",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef76bff5_2e6ad7f8",
+        "filename": "arch/arm64/mm/ioremap.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-04-23T16:10:32Z",
+      "side": 1,
+      "message": "When the stage-2 page size is bigger than the stage-1 page size, we have to be careful not to over-share data with the host (e.g. from unrelated guest pages that happen to sit next to the one being shared).\n\nSo removing this check will mean we need extra logic on the share/unshare paths, where we might not be able to fail gracefully (and therefore may need to bounce the data?).",
+      "parentUuid": "453c7c7f_47d719b1",
+      "revId": "819734458e992c0c7ba1241e83bbf104496f8785",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
