@@ -16,6 +16,24 @@
       "message": "Q: What is the rationale here for rejecting a hypervisor granule that is smaller than the guest kernel page size ?",
       "revId": "819734458e992c0c7ba1241e83bbf104496f8785",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7017b5b6_9a17cf8c",
+        "filename": "arch/arm64/mm/ioremap.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1729538
+      },
+      "writtenOn": "2024-04-23T12:59:39Z",
+      "side": 1,
+      "message": "We only reject hypervisor granule sizes that are *larger* than the guest\u0027s own page size or not a power of two. I don\u0027t see that we\u0027re failing the init when the hypervisor page size is smaller than the guest\u0027s.",
+      "parentUuid": "63d05b4f_c7b8be84",
+      "revId": "819734458e992c0c7ba1241e83bbf104496f8785",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
