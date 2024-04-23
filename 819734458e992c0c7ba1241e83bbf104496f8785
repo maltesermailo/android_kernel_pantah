@@ -106,6 +106,24 @@
       "parentUuid": "ef76bff5_2e6ad7f8",
       "revId": "819734458e992c0c7ba1241e83bbf104496f8785",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f154e421_13376429",
+        "filename": "arch/arm64/mm/ioremap.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-04-23T17:41:10Z",
+      "side": 1,
+      "message": "Imagine we have a 16KiB stage-2 and a 4KiB stage-1. If the guest wants to share a 4KiB buffer with the host and we silently share 16KiB instead, then the host can now write to 12KiB of guest data that the guest did not want to share (and may include things like function pointers).\n\nSo the share/unshare logic in the guest should at least reject requests that aren\u0027t an exact multiple/alignment of the stage-2 page size.",
+      "parentUuid": "a4c25423_c6db5298",
+      "revId": "819734458e992c0c7ba1241e83bbf104496f8785",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
