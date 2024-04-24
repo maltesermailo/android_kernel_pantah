@@ -124,6 +124,24 @@
       "parentUuid": "a4c25423_c6db5298",
       "revId": "819734458e992c0c7ba1241e83bbf104496f8785",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67789fae_a92b0e11",
+        "filename": "arch/arm64/mm/ioremap.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-04-24T07:54:06Z",
+      "side": 1,
+      "message": "We can modify the `sharing/unsharing` hvcs to accept the number of bytes as argument and from there we can enforce the size of the share to be hypervisor PAGE_SIZE aligned. If it\u0027s not hyp PAGE_SIZE aligned then we can decline the request.",
+      "parentUuid": "f154e421_13376429",
+      "revId": "819734458e992c0c7ba1241e83bbf104496f8785",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
