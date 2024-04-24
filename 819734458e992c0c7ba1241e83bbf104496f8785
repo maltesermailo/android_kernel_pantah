@@ -142,6 +142,24 @@
       "parentUuid": "f154e421_13376429",
       "revId": "819734458e992c0c7ba1241e83bbf104496f8785",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41fe50db_2bdc38e8",
+        "filename": "arch/arm64/mm/ioremap.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-04-24T16:44:52Z",
+      "side": 1,
+      "message": "https://android-review.git.corp.google.com/c/kernel/common/+/2969569 and friend already implement this for both MMIO_GUARD and MEMSHARE.\n\nThe \"granule\" size is stored and for every guest share/unshare guard/unguard, the guest makes sure the range is aligned with the granule size.\n\nThat gives a chance for the guest to succeed even though its page size is not aligned with the hyp\u0027s",
+      "parentUuid": "67789fae_a92b0e11",
+      "revId": "819734458e992c0c7ba1241e83bbf104496f8785",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
