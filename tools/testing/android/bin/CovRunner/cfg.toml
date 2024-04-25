@@ -1,0 +1,12 @@
+[env]
+build_target = "aosp_cf_x86_64_phone-trunk_staging-userdebug"
+android_serial = "127.0.0.1:60797"
+[path]
+kernel_tree = "~/android-kernel"
+platform_tree = "~/aosp-main"
+output_dir = "~/android-kernel/common/tools/testing/android/bin/CovRunner/cov"
+[test]
+module = "CtsTelecomTestCases"
+class = [
+    "android.telecom.cts.AccessibilitySystemActionTest"
+]
