@@ -25,7 +25,6 @@
 #include <linux/perf_event.h>
 #include <linux/preempt.h>
 #include <linux/hugetlb.h>
-#include <linux/gfp_types.h>
 
 #include <asm/acpi.h>
 #include <asm/bug.h>
@@ -974,7 +973,7 @@ NOKPROBE_SYMBOL(do_debug_exception);
 struct folio *vma_alloc_zeroed_movable_folio(struct vm_area_struct *vma,
 						unsigned long vaddr)
 {
-	gfp_t flags = GFP_HIGHUSER_MOVABLE | __GFP_ZERO | __GFP_CMA;
+	gfp_t flags = GFP_HIGHUSER_MOVABLE | __GFP_ZERO;
 
 	/*
 	 * If the page is mapped with PROT_MTE, initialise the tags at the

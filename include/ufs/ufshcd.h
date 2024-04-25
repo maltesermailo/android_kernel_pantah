@@ -26,7 +26,6 @@
 #include <ufs/ufs_quirks.h>
 #include <ufs/ufshci.h>
 #include <linux/android_kabi.h>
-#include <linux/android_vendor.h>
 
 #define UFSHCD "ufshcd"
 
@@ -1109,8 +1108,6 @@ struct ufs_hba {
 	struct ufs_hw_queue *uhq;
 	struct ufs_hw_queue *dev_cmd_queue;
 	struct ufshcd_mcq_opr_info_t mcq_opr[OPR_MAX];
-
-	ANDROID_OEM_DATA(1);
 };
 
 /**

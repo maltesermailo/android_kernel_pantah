@@ -14,7 +14,6 @@
 #include <linux/bitops.h>
 #include <linux/types.h>
 #include <linux/android_kabi.h>
-#include <linux/android_vendor.h>
 #include <uapi/scsi/scsi_bsg_ufs.h>
 
 /*
@@ -580,7 +579,6 @@ struct ufs_dev_info {
 	/* UFS EXT_IID Enable */
 	bool	b_ext_iid_en;
 
-	ANDROID_OEM_DATA(1);
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
 };

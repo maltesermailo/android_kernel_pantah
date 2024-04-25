@@ -44,15 +44,9 @@ extern void **kvm_nvhe_sym(kvm_hyp_iommu_domains);
 
 struct kvm_hyp_iommu_domain {
 	struct io_pgtable	*pgtable;
-	unsigned int		refs;
+	atomic_t		refs;
 	pkvm_handle_t		domain_id;
 	void			*priv;
-#ifdef __KVM_NVHE_HYPERVISOR__
-	hyp_spinlock_t		lock;
-#else
-	/* see kvm_hyp_iommu.lock */
-	u32			unused;
-#endif
 };
 
 /*

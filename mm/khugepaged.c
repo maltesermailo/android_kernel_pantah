@@ -1137,9 +1137,6 @@ static int collapse_huge_page(struct mm_struct *mm, unsigned long address,
 	 * Prevent all access to pagetables with the exception of
 	 * gup_fast later handled by the ptep_clear_flush and the VM
 	 * handled by the anon_vma lock + PG_lock.
-	 *
-	 * UFFDIO_MOVE is prevented to race as well thanks to the
-	 * mmap_lock.
 	 */
 	mmap_write_lock(mm);
 	result = hugepage_vma_revalidate(mm, address, true, &vma, cc);
@@ -2604,7 +2601,7 @@ static void set_recommended_min_free_kbytes(void)
 	 * MIGRATE_TYPES we care about.
 	 */
 	recommended_min += pageblock_nr_pages * nr_zones *
-			   MIGRATE_FALLBACKS * MIGRATE_FALLBACKS;
+			   MIGRATE_PCPTYPES * MIGRATE_PCPTYPES;
 
 	/* don't ever allow to reserve more than 5% of the lowmem */
 	recommended_min = min(recommended_min,

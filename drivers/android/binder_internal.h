@@ -161,8 +161,6 @@ struct binder_work {
 		BINDER_WORK_DEAD_BINDER_AND_CLEAR,
 		BINDER_WORK_CLEAR_DEATH_NOTIFICATION,
 	} type;
-
-	ANDROID_OEM_DATA(1);
 };
 
 struct binder_error {

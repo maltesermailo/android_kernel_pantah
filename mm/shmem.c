@@ -316,7 +316,7 @@ static void shmem_disable_quotas(struct super_block *sb)
 		dquot_quota_off(sb, type);
 }
 
-static struct dquot __rcu **shmem_get_dquots(struct inode *inode)
+static struct dquot **shmem_get_dquots(struct inode *inode)
 {
 	return SHMEM_I(inode)->i_dquot;
 }
@@ -1899,7 +1899,7 @@ static int shmem_swapin_folio(struct inode *inode, pgoff_t index,
 	 * Some architectures may have to restore extra metadata to the
 	 * folio after reading from swap.
 	 */
-	arch_swap_restore(folio_swap(swap, folio), folio);
+	arch_swap_restore(swap, folio);
 
 	if (shmem_should_replace_folio(folio, gfp)) {
 		error = shmem_replace_folio(&folio, gfp, info, index);
