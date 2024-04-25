@@ -359,6 +359,7 @@ DECLARE_RESTRICTED_HOOK(android_rvh_detach_entity_load_avg,
 	TP_PROTO(struct cfs_rq *cfs_rq, struct sched_entity *se),
 	TP_ARGS(cfs_rq, se), 1);
 
+<<<<<<< HEAD   (412d29 ANDROID: Fuse: Fix Passthrough and Cache Coherency)
 DECLARE_RESTRICTED_HOOK(android_rvh_update_load_avg,
 	TP_PROTO(u64 now, struct cfs_rq *cfs_rq, struct sched_entity *se),
 	TP_ARGS(now, cfs_rq, se), 1);
@@ -404,6 +405,12 @@ DECLARE_RESTRICTED_HOOK(android_rvh_update_load_avg_cfs_rq,
 DECLARE_RESTRICTED_HOOK(android_rvh_update_rt_rq_load_avg_internal,
 	TP_PROTO(u64 now, struct rq *rq, int running, int *ret),
 	TP_ARGS(now, rq, running, ret), 1);
+||||||| BASE
+=======
+DECLARE_HOOK(android_vh_reweight_entity,
+	TP_PROTO(struct sched_entity *se),
+	TP_ARGS(se));
+>>>>>>> CHANGE (4b0d17 ANDROID: vendor_hooks: Add hooks in reweight_entity)
 /* macro versions of hooks are no longer required */
 
 #endif /* _TRACE_HOOK_SCHED_H */
