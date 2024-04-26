@@ -39,6 +39,26 @@
       "tag": "",
       "revId": "40058b18d978272ee4b04aa021cd860020e5f599",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000075928528",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3050802?revision\u003d9",
+      "key": {
+        "uuid": "83591a3a_2b770066",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-26T02:44:26Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/3485b88390b0af9e05dc2c3f57e9936f41e159a0) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d3485b88390b0af9e05dc2c3f57e9936f41e159a0).\n\n```\n      ## Documentation/admin-guide/mm/transhuge.rst ##\n     @@ Documentation/admin-guide/mm/transhuge.rst: components:\n         the two is using hugepages just because of the fact the TLB miss is\n    @@ include/linux/huge_mm.h: static inline bool folio_test_pmd_mappable(struct folio\n      static inline void folio_prep_large_rmappable(struct folio *folio) {}\n     \n      ## mm/huge_memory.c ##\n    -@@ mm/huge_memory.c: static unsigned long deferred_split_scan(struct shrinker *shrink,\n    +@@ mm/huge_memory.c: static struct shrinker deferred_split_shrinker;\n      static atomic_t huge_zero_refcount;\n      struct page *huge_zero_page __read_mostly;\n      unsigned long huge_zero_pfn __read_mostly \u003d ~0UL;\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "40058b18d978272ee4b04aa021cd860020e5f599",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
