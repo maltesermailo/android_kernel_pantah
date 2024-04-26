@@ -19,6 +19,26 @@
       "tag": "",
       "revId": "d75771a68b6c64dc83902a7952d8b2e34af6db92",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000075946828",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3063686?revision\u003d2",
+      "key": {
+        "uuid": "bb1cb2ae_5324c8bd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-04-26T05:27:45Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/cf503cc665c442ce9893cb12561c57a328465e29) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003dcf503cc665c442ce9893cb12561c57a328465e29).\n\n```\n      ## mm/memory.c ##\n     @@ mm/memory.c: static vm_fault_t wp_page_copy(struct vm_fault *vmf)\n      \tint page_copied \u003d 0;\n      \tstruct mmu_notifier_range range;\n    - \tvm_fault_t ret;\n    + \tint ret;\n     +\tbool pfn_is_zero;\n      \n      \tdelayacct_wpcopy_start();\n      \n     @@ mm/memory.c: static vm_fault_t wp_page_copy(struct vm_fault *vmf)\n    - \tif (unlikely(ret))\n    - \t\tgoto out;\n    + \tif (unlikely(anon_vma_prepare(vma)))\n    + \t\tgoto oom;\n      \n     -\tif (is_zero_pfn(pte_pfn(vmf-\u003eorig_pte))) {\n     -\t\tnew_folio \u003d vma_alloc_zeroed_movable_folio(vma, vmf-\u003eaddress);\n     -\t\tif (!new_folio)\n     -\t\t\tgoto oom;\n     -\t} else {\n    +-\t\tnew_folio \u003d vma_alloc_folio(GFP_HIGHUSER_MOVABLE, 0, vma,\n    +-\t\t\t\tvmf-\u003eaddress, false);\n    +-\t\tif (!new_folio)\n    +-\t\t\tgoto oom;\n     +\tpfn_is_zero \u003d is_zero_pfn(pte_pfn(vmf-\u003eorig_pte));\n     +\tnew_folio \u003d folio_prealloc(mm, vma, vmf-\u003eaddress, pfn_is_zero);\n     +\tif (!new_folio)\n     +\t\tgoto oom;\n     +\n     +\tif (!pfn_is_zero) {\n    - \t\tint err;\n    --\t\tnew_folio \u003d vma_alloc_folio(GFP_HIGHUSER_MOVABLE, 0, vma,\n    --\t\t\t\tvmf-\u003eaddress, false);\n    --\t\tif (!new_folio)\n    --\t\t\tgoto oom;\n      \n    - \t\terr \u003d __wp_page_copy_user(\u0026new_folio-\u003epage, vmf-\u003epage, vmf);\n    - \t\tif (err) {\n    + \t\tret \u003d __wp_page_copy_user(\u0026new_folio-\u003epage, vmf-\u003epage, vmf);\n    + \t\tif (ret) {\n     @@ mm/memory.c: static vm_fault_t wp_page_copy(struct vm_fault *vmf)\n      \t\tkmsan_copy_page_meta(\u0026new_folio-\u003epage, vmf-\u003epage);\n      \t}\n    @@ mm/memory.c: static vm_fault_t wp_page_copy(struct vm_fault *vmf)\n     -oom_free_new:\n     -\tfolio_put(new_folio);\n      oom:\n    - \tret \u003d VM_FAULT_OOM;\n    - out:\n    + \tif (old_folio)\n    + \t\tfolio_put(old_folio);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "d75771a68b6c64dc83902a7952d8b2e34af6db92",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
