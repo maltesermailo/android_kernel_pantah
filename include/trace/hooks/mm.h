@@ -187,6 +187,7 @@ DECLARE_HOOK(android_vh_mem_cgroup_css_online,
 DECLARE_HOOK(android_vh_mem_cgroup_css_offline,
 	TP_PROTO(struct cgroup_subsys_state *css, struct mem_cgroup *memcg),
 	TP_ARGS(css, memcg));
+<<<<<<< HEAD   (514bdc UPSTREAM: perf/core: Fix potential NULL deref)
 DECLARE_HOOK(android_vh_rmqueue_smallest_bypass,
 	TP_PROTO(struct page **page, struct zone *zone, int order, int migratetype),
 	TP_ARGS(page, zone, order, migratetype));
@@ -206,6 +207,48 @@ DECLARE_HOOK(android_vh_look_around,
 	TP_ARGS(pvmw, folio, vma, referenced));
 
 DECLARE_HOOK(android_vh_mm_alloc_pages_direct_reclaim_enter,
+=======
+DECLARE_HOOK(android_vh_save_track_hash,
+	TP_PROTO(bool alloc, struct track *p),
+	TP_ARGS(alloc, p));
+DECLARE_HOOK(android_vh_should_fault_around,
+	TP_PROTO(struct vm_fault *vmf, bool *should_around),
+	TP_ARGS(vmf, should_around));
+DECLARE_HOOK(android_vh_kmalloc_slab,
+	TP_PROTO(unsigned int index, gfp_t flags, struct kmem_cache **s),
+	TP_ARGS(index, flags, s));
+DECLARE_HOOK(android_vh_adjust_kvmalloc_flags,
+	TP_PROTO(unsigned int order, gfp_t *alloc_flags),
+	TP_ARGS(order, alloc_flags));
+DECLARE_HOOK(android_vh_alloc_pages_slowpath,
+	TP_PROTO(gfp_t gfp_mask, unsigned int order, unsigned long delta),
+	TP_ARGS(gfp_mask, order, delta));
+DECLARE_HOOK(android_vh_alloc_pages_slowpath_start,
+	TP_PROTO(u64 *stime),
+	TP_ARGS(stime));
+DECLARE_HOOK(android_vh_alloc_pages_slowpath_end,
+	TP_PROTO(gfp_t *gfp_mask, unsigned int order, unsigned long alloc_start,
+		u64 stime, unsigned long did_some_progress,
+		unsigned long pages_reclaimed, int retry_loop_count),
+	TP_ARGS(gfp_mask, order, alloc_start, stime, did_some_progress,
+		pages_reclaimed, retry_loop_count));
+DECLARE_HOOK(android_vh_dm_bufio_shrink_scan_bypass,
+	TP_PROTO(unsigned long dm_bufio_current_allocated, bool *bypass),
+	TP_ARGS(dm_bufio_current_allocated, bypass));
+DECLARE_HOOK(android_vh_cleanup_old_buffers_bypass,
+	TP_PROTO(unsigned long dm_bufio_current_allocated,
+		unsigned long *max_age_hz,
+		bool *bypass),
+	TP_ARGS(dm_bufio_current_allocated, max_age_hz, bypass));
+DECLARE_HOOK(android_vh_mmap_region,
+	TP_PROTO(struct vm_area_struct *vma, unsigned long addr),
+	TP_ARGS(vma, addr));
+DECLARE_HOOK(android_vh_try_to_unmap_one,
+	TP_PROTO(struct folio *folio, struct vm_area_struct *vma,
+		unsigned long addr, void *arg, bool ret),
+	TP_ARGS(folio, vma, addr, arg, ret));
+DECLARE_HOOK(android_vh_mm_direct_reclaim_enter,
+>>>>>>> CHANGE (65ebb0 ANDROID: vendor_hooks: add hook to perform targeted memory m)
 	TP_PROTO(unsigned int order),
 	TP_ARGS(order));
 DECLARE_HOOK(android_vh_mm_alloc_pages_direct_reclaim_exit,
