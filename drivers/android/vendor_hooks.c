@@ -276,6 +276,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_gfp_zone_flags);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_readahead_gfp_mask);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alter_mutex_list_add);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_unlock_slowpath);
+<<<<<<< HEAD   (514bdc UPSTREAM: perf/core: Fix potential NULL deref)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_wake_finish);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tune_fault_around_bytes);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_adjust_alloc_flags);
@@ -289,6 +290,10 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_read_done);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_preset);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_uid);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_user);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_track_hash);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_should_fault_around);
+>>>>>>> CHANGE (65ebb0 ANDROID: vendor_hooks: add hook to perform targeted memory m)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_id_remove);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_css_offline);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_css_online);
