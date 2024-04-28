@@ -440,3 +440,8 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_shrink_node);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_vmalloc_stack);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_show_stack_hash);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_calc_alloc_flags);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_shmem_swapin_folio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_wp_page);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_swap_page);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_anonymous_page);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_uprobes_uprobe_write);
