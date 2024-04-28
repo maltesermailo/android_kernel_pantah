@@ -1730,6 +1730,7 @@ static unsigned int shrink_folio_list(struct list_head *folio_list,
 	unsigned int pgactivate = 0;
 	bool do_demote_pass;
 	struct swap_iocb *plug = NULL;
+	bool shrink_bypass = false;
 
 	memset(stat, 0, sizeof(*stat));
 	cond_resched();
@@ -1747,6 +1748,10 @@ retry:
 
 		folio = lru_to_folio(folio_list);
 		list_del(&folio->lru);
+
+		trace_android_vh_shrink_folio_bypass(folio, &shrink_bypass);
+		if (shrink_bypass)
+			goto keep;
 
 		if (!folio_trylock(folio))
 			goto keep;

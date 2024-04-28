@@ -72,6 +72,15 @@ DECLARE_HOOK(android_vh_mem_cgroup_css_offline,
 DECLARE_HOOK(android_vh_save_track_hash,
 	TP_PROTO(bool alloc, struct track *p),
 	TP_ARGS(alloc, p));
+
+struct vm_fault;
+DECLARE_HOOK(android_vh_should_fault_around,
+	TP_PROTO(struct vm_fault *vmf, bool *should_around),
+	TP_ARGS(vmf, should_around));
+DECLARE_HOOK(android_vh_do_swap_page,
+	TP_PROTO(struct vm_fault *vmf, vm_fault_t ret),
+	TP_ARGS(vmf, ret));
+
 DECLARE_HOOK(android_vh_kmalloc_slab,
 	TP_PROTO(unsigned int index, gfp_t flags, struct kmem_cache **s),
 	TP_ARGS(index, flags, s));
