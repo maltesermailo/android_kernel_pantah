@@ -16,6 +16,24 @@
       "message": "With this change, will cause a user space video application(e.g. uvc-gadget-fps) to be unable to display the still image formats on the Amcap app.\ntest case:\n1.push uvc-gadget-fps and picture to board\n2.connect adb wifi\n3.setprop sys.usb.config diag,uvc,adb\n4. ./data/uvc-gadget-fps -d /dev/video2 -i /data/image-360p.jpg -f 0\n5.open amcap app to select uvc camera(There will be a black screen with no still image formats displayed.)",
       "revId": "d6f794bc2a40337b82387e6f5f21009ec8b299e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61a8a421_4dc894cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121338
+      },
+      "writtenOn": "2024-04-29T19:18:18Z",
+      "side": 1,
+      "message": "Is uvc-gadget-fps source code available , did you mean uvc-gadget ? The AOSP webcam service is still able to stream frames - I\u0027d be curious to know what uvc-gadget-fps does so its getting affected. Other apps host apps that we\u0027ve tested don\u0027t seem to have the problem that amcap does as your\u0027re suggesting.",
+      "parentUuid": "4ebe9862_84b95a5b",
+      "revId": "d6f794bc2a40337b82387e6f5f21009ec8b299e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
