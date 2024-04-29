@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ebe9862_84b95a5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3192152
+      },
+      "writtenOn": "2024-04-29T12:24:40Z",
+      "side": 1,
+      "message": "With this change, will cause a user space video application(e.g. uvc-gadget-fps) to be unable to display the still image formats on the Amcap app.\ntest case:\n1.push uvc-gadget-fps and picture to board\n2.connect adb wifi\n3.setprop sys.usb.config diag,uvc,adb\n4. ./data/uvc-gadget-fps -d /dev/video2 -i /data/image-360p.jpg -f 0\n5.open amcap app to select uvc camera(There will be a black screen with no still image formats displayed.)",
+      "revId": "d6f794bc2a40337b82387e6f5f21009ec8b299e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
