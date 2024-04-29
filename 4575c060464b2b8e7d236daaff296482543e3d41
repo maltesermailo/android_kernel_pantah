@@ -129,6 +129,30 @@
       },
       "revId": "4575c060464b2b8e7d236daaff296482543e3d41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fedd7e1d_4e5a6cbd",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2024-04-29T20:43:49Z",
+      "side": 1,
+      "message": "Conceptually I think the direct DMA path should set it.\n`iommu_dma_map_sg` uses `dev_use_sg_swiotlb` to decide to take `iommu_dma_map_sg_swiotlb` where `sg_dma_mark_swiotlb` is called. However there isn\u0027t currently an equivalent check for `dma_direct_map_sg`, so `dma_direct_map_page` is the only place where it\u0027s currently known if `swiotlb_map` will be called or not in the direct DMA path. So we could try to move the SWIOTLB checks from `dma_direct_map_page` to a similar helper function like `dev_use_sg_swiotlb` in order to not duplicate the checks.\nI think `dev_use_sg_swiotlb` is also a little bit broken though, because it doesn\u0027t respect the `force_bounce` flag in `struct device`, so I also had to make this change to test with the IOMMU path:\n```\n+++ b/drivers/iommu/dma-iommu.c\n@@ -633,6 +633,7 @@ static bool dev_use_sg_swiotlb(struct device *dev, struct scatterlist *sg,\n                                return true;\n        }\n \n+       if (dev-\u003edma_io_tlb_mem) return dev-\u003edma_io_tlb_mem-\u003eforce_bounce;\n        return false;\n }\n```",
+      "parentUuid": "42f61b42_50214ec1",
+      "range": {
+        "startLine": 72,
+        "startChar": 31,
+        "endLine": 72,
+        "endChar": 49
+      },
+      "revId": "4575c060464b2b8e7d236daaff296482543e3d41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
