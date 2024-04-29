@@ -105,6 +105,30 @@
       },
       "revId": "4575c060464b2b8e7d236daaff296482543e3d41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42f61b42_50214ec1",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2024-04-29T17:48:22Z",
+      "side": 1,
+      "message": "I wonder if there would be concerns about just setting but not using `SG_DMA_SWIOTLB` in the direct DMA path. This flag is set and used in the dma-iommu path for the sync operations. Do you think we should do something similar in the direct DMA path?",
+      "parentUuid": "4f35fb25_86291b10",
+      "range": {
+        "startLine": 72,
+        "startChar": 31,
+        "endLine": 72,
+        "endChar": 49
+      },
+      "revId": "4575c060464b2b8e7d236daaff296482543e3d41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
