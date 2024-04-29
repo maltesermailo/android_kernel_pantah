@@ -2813,8 +2813,17 @@ ufshcd_prepare_req_desc_hdr(struct ufs_hba *hba, struct ufshcd_lrb *lrbp,
  * @cmd: SCSI command
  * @upiu_flags: flags
  */
+<<<<<<< HEAD   (b300cda13ba0ea4ed936b40f4c31e01eaaa0e812 FROMGIT: scsi: sg: Don't use GFP_ATOMIC in sg_start_req())
 static void ufshcd_prepare_utp_scsi_cmd_upiu(struct scsi_cmnd *cmd,
 					     u8 upiu_flags)
+||||||| BASE   (332671c0781ff004b5abfdb1edfe05d1c2a06755 ANDROID: scsi: ufs: Support IO traces for zoned block device)
+static
+void ufshcd_prepare_utp_scsi_cmd_upiu(struct ufshcd_lrb *lrbp, u8 upiu_flags)
+=======
+static
+void ufshcd_prepare_utp_scsi_cmd_upiu(struct ufshcd_lrb *lrbp, u8 upiu_flags,
+				      u8 iid)
+>>>>>>> CHANGE (28c108aa56a37d8dbc634378b7bc828bb3465f88 ANDROID: scsi: ufs: Add UFSHCD_ANDROID_QUIRK_SET_IID_TO_ONE)
 {
 	struct ufshcd_lrb *lrbp = scsi_cmd_priv(cmd);
 	const int tag = scsi_cmd_to_rq(cmd)->tag;
@@ -2825,7 +2834,14 @@ static void ufshcd_prepare_utp_scsi_cmd_upiu(struct scsi_cmnd *cmd,
 		.transaction_code = UPIU_TRANSACTION_COMMAND,
 		.flags = upiu_flags,
 		.lun = lrbp->lun,
+<<<<<<< HEAD   (b300cda13ba0ea4ed936b40f4c31e01eaaa0e812 FROMGIT: scsi: sg: Don't use GFP_ATOMIC in sg_start_req())
 		.task_tag = tag,
+||||||| BASE   (332671c0781ff004b5abfdb1edfe05d1c2a06755 ANDROID: scsi: ufs: Support IO traces for zoned block device)
+		.task_tag = lrbp->task_tag,
+=======
+		.task_tag = lrbp->task_tag,
+		.iid = iid,
+>>>>>>> CHANGE (28c108aa56a37d8dbc634378b7bc828bb3465f88 ANDROID: scsi: ufs: Add UFSHCD_ANDROID_QUIRK_SET_IID_TO_ONE)
 		.command_set_type = UPIU_COMMAND_SET_TYPE_SCSI,
 	};
 
@@ -2846,7 +2862,13 @@ static void ufshcd_prepare_utp_scsi_cmd_upiu(struct scsi_cmnd *cmd,
  * @upiu_flags: flags
  */
 static void ufshcd_prepare_utp_query_req_upiu(struct ufs_hba *hba,
+<<<<<<< HEAD   (b300cda13ba0ea4ed936b40f4c31e01eaaa0e812 FROMGIT: scsi: sg: Don't use GFP_ATOMIC in sg_start_req())
 				struct scsi_cmnd *cmd, u8 upiu_flags)
+||||||| BASE   (332671c0781ff004b5abfdb1edfe05d1c2a06755 ANDROID: scsi: ufs: Support IO traces for zoned block device)
+				struct ufshcd_lrb *lrbp, u8 upiu_flags)
+=======
+			struct ufshcd_lrb *lrbp, u8 upiu_flags, u8 iid)
+>>>>>>> CHANGE (28c108aa56a37d8dbc634378b7bc828bb3465f88 ANDROID: scsi: ufs: Add UFSHCD_ANDROID_QUIRK_SET_IID_TO_ONE)
 {
 	struct ufshcd_lrb *lrbp = scsi_cmd_priv(cmd);
 	struct utp_upiu_req *ucd_req_ptr = lrbp->ucd_req_ptr;
@@ -2859,7 +2881,14 @@ static void ufshcd_prepare_utp_query_req_upiu(struct ufs_hba *hba,
 		.transaction_code = UPIU_TRANSACTION_QUERY_REQ,
 		.flags = upiu_flags,
 		.lun = lrbp->lun,
+<<<<<<< HEAD   (b300cda13ba0ea4ed936b40f4c31e01eaaa0e812 FROMGIT: scsi: sg: Don't use GFP_ATOMIC in sg_start_req())
 		.task_tag = tag,
+||||||| BASE   (332671c0781ff004b5abfdb1edfe05d1c2a06755 ANDROID: scsi: ufs: Support IO traces for zoned block device)
+		.task_tag = lrbp->task_tag,
+=======
+		.task_tag = lrbp->task_tag,
+		.iid = iid,
+>>>>>>> CHANGE (28c108aa56a37d8dbc634378b7bc828bb3465f88 ANDROID: scsi: ufs: Add UFSHCD_ANDROID_QUIRK_SET_IID_TO_ONE)
 		.query_function = query->request.query_func,
 		/* Data segment length only need for WRITE_DESC */
 		.data_segment_length =
@@ -2878,7 +2907,13 @@ static void ufshcd_prepare_utp_query_req_upiu(struct ufs_hba *hba,
 		memcpy(ucd_req_ptr + 1, query->descriptor, len);
 }
 
+<<<<<<< HEAD   (b300cda13ba0ea4ed936b40f4c31e01eaaa0e812 FROMGIT: scsi: sg: Don't use GFP_ATOMIC in sg_start_req())
 static inline void ufshcd_prepare_utp_nop_upiu(struct scsi_cmnd *cmd)
+||||||| BASE   (332671c0781ff004b5abfdb1edfe05d1c2a06755 ANDROID: scsi: ufs: Support IO traces for zoned block device)
+static inline void ufshcd_prepare_utp_nop_upiu(struct ufshcd_lrb *lrbp)
+=======
+static inline void ufshcd_prepare_utp_nop_upiu(struct ufshcd_lrb *lrbp, u8 iid)
+>>>>>>> CHANGE (28c108aa56a37d8dbc634378b7bc828bb3465f88 ANDROID: scsi: ufs: Add UFSHCD_ANDROID_QUIRK_SET_IID_TO_ONE)
 {
 	struct ufshcd_lrb *lrbp = scsi_cmd_priv(cmd);
 	struct utp_upiu_req *ucd_req_ptr = lrbp->ucd_req_ptr;
@@ -2888,7 +2923,14 @@ static inline void ufshcd_prepare_utp_nop_upiu(struct scsi_cmnd *cmd)
 
 	ucd_req_ptr->header = (struct utp_upiu_header){
 		.transaction_code = UPIU_TRANSACTION_NOP_OUT,
+<<<<<<< HEAD   (b300cda13ba0ea4ed936b40f4c31e01eaaa0e812 FROMGIT: scsi: sg: Don't use GFP_ATOMIC in sg_start_req())
 		.task_tag = tag,
+||||||| BASE   (332671c0781ff004b5abfdb1edfe05d1c2a06755 ANDROID: scsi: ufs: Support IO traces for zoned block device)
+		.task_tag = lrbp->task_tag,
+=======
+		.task_tag = lrbp->task_tag,
+		.iid = iid,
+>>>>>>> CHANGE (28c108aa56a37d8dbc634378b7bc828bb3465f88 ANDROID: scsi: ufs: Add UFSHCD_ANDROID_QUIRK_SET_IID_TO_ONE)
 	};
 }
 
@@ -2903,16 +2945,33 @@ static inline void ufshcd_prepare_utp_nop_upiu(struct scsi_cmnd *cmd)
 static int ufshcd_compose_devman_upiu(struct ufs_hba *hba,
 				      struct scsi_cmnd *cmd)
 {
+<<<<<<< HEAD   (b300cda13ba0ea4ed936b40f4c31e01eaaa0e812 FROMGIT: scsi: sg: Don't use GFP_ATOMIC in sg_start_req())
 	struct ufshcd_lrb *lrbp = scsi_cmd_priv(cmd);
+||||||| BASE   (332671c0781ff004b5abfdb1edfe05d1c2a06755 ANDROID: scsi: ufs: Support IO traces for zoned block device)
+=======
+	u8 iid = !!(hba->android_quirks & UFSHCD_ANDROID_QUIRK_SET_IID_TO_ONE);
+>>>>>>> CHANGE (28c108aa56a37d8dbc634378b7bc828bb3465f88 ANDROID: scsi: ufs: Add UFSHCD_ANDROID_QUIRK_SET_IID_TO_ONE)
 	u8 upiu_flags;
 	int ret = 0;
 
 	ufshcd_prepare_req_desc_hdr(hba, lrbp, &upiu_flags, DMA_NONE, 0);
 
 	if (hba->dev_cmd.type == DEV_CMD_TYPE_QUERY)
+<<<<<<< HEAD   (b300cda13ba0ea4ed936b40f4c31e01eaaa0e812 FROMGIT: scsi: sg: Don't use GFP_ATOMIC in sg_start_req())
 		ufshcd_prepare_utp_query_req_upiu(hba, cmd, upiu_flags);
+||||||| BASE   (332671c0781ff004b5abfdb1edfe05d1c2a06755 ANDROID: scsi: ufs: Support IO traces for zoned block device)
+		ufshcd_prepare_utp_query_req_upiu(hba, lrbp, upiu_flags);
+=======
+		ufshcd_prepare_utp_query_req_upiu(hba, lrbp, upiu_flags, iid);
+>>>>>>> CHANGE (28c108aa56a37d8dbc634378b7bc828bb3465f88 ANDROID: scsi: ufs: Add UFSHCD_ANDROID_QUIRK_SET_IID_TO_ONE)
 	else if (hba->dev_cmd.type == DEV_CMD_TYPE_NOP)
+<<<<<<< HEAD   (b300cda13ba0ea4ed936b40f4c31e01eaaa0e812 FROMGIT: scsi: sg: Don't use GFP_ATOMIC in sg_start_req())
 		ufshcd_prepare_utp_nop_upiu(cmd);
+||||||| BASE   (332671c0781ff004b5abfdb1edfe05d1c2a06755 ANDROID: scsi: ufs: Support IO traces for zoned block device)
+		ufshcd_prepare_utp_nop_upiu(lrbp);
+=======
+		ufshcd_prepare_utp_nop_upiu(lrbp, iid);
+>>>>>>> CHANGE (28c108aa56a37d8dbc634378b7bc828bb3465f88 ANDROID: scsi: ufs: Add UFSHCD_ANDROID_QUIRK_SET_IID_TO_ONE)
 	else
 		ret = -EINVAL;
 
@@ -2938,7 +2997,14 @@ static void ufshcd_comp_scsi_upiu(struct ufs_hba *hba, struct scsi_cmnd *cmd)
 				    cmd->sc_data_direction, 0);
 	if (ioprio_class == IOPRIO_CLASS_RT)
 		upiu_flags |= UPIU_CMD_FLAGS_CP;
+<<<<<<< HEAD   (b300cda13ba0ea4ed936b40f4c31e01eaaa0e812 FROMGIT: scsi: sg: Don't use GFP_ATOMIC in sg_start_req())
 	ufshcd_prepare_utp_scsi_cmd_upiu(cmd, upiu_flags);
+||||||| BASE   (332671c0781ff004b5abfdb1edfe05d1c2a06755 ANDROID: scsi: ufs: Support IO traces for zoned block device)
+	ufshcd_prepare_utp_scsi_cmd_upiu(lrbp, upiu_flags);
+=======
+	ufshcd_prepare_utp_scsi_cmd_upiu(lrbp, upiu_flags,
+		!!(hba->android_quirks & UFSHCD_ANDROID_QUIRK_SET_IID_TO_ONE));
+>>>>>>> CHANGE (28c108aa56a37d8dbc634378b7bc828bb3465f88 ANDROID: scsi: ufs: Add UFSHCD_ANDROID_QUIRK_SET_IID_TO_ONE)
 }
 
 static void ufshcd_init_lrb(struct ufs_hba *hba, struct scsi_cmnd *cmd)
