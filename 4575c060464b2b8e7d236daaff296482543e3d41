@@ -153,6 +153,30 @@
       },
       "revId": "4575c060464b2b8e7d236daaff296482543e3d41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8f3f95d_bc13ba6a",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2024-04-29T23:02:38Z",
+      "side": 1,
+      "message": "I agree that the direct DMA path should be calling `sg_dma_mark_swiotlb()`. I like the idea of moving those checks out to a helper function. We can make the code behave similarly to the dma-iommu path as long as it ends up cleaning up the direct DMA code.\n\nMy earlier comment was just that if we set the flag in the direct DMA path, and our only justification is so we can do it to support an out of tree feature (uncached system heap), then that may lower the patch\u0027s chances of being accepted.\n\nGood catch on not honoring the `force_bounce` usage on the dma-iommu path. Might be a good idea to submit that as a bug fix?",
+      "parentUuid": "fedd7e1d_4e5a6cbd",
+      "range": {
+        "startLine": 72,
+        "startChar": 31,
+        "endLine": 72,
+        "endChar": 49
+      },
+      "revId": "4575c060464b2b8e7d236daaff296482543e3d41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
