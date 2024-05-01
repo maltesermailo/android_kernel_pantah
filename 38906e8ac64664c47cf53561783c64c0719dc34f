@@ -19,6 +19,26 @@
       "tag": "",
       "revId": "38906e8ac64664c47cf53561783c64c0719dc34f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000076394923",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3065682?revision\u003d2",
+      "key": {
+        "uuid": "e7a5b5c3_a6767d94",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-01T07:11:08Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/2227a957e1d5b1941be4e4207879ec74f4bb37f8) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d2227a957e1d5b1941be4e4207879ec74f4bb37f8).\n\n```\n      ## include/linux/sched.h ##\n     @@ include/linux/sched.h: struct sched_entity {\n    @@ kernel/sched/fair.c: static inline bool __entity_less(struct rb_node *a, const s\n      \n      /*\n       * Enqueue an entity into the rb-tree:\n    -@@ kernel/sched/fair.c: RB_DECLARE_CALLBACKS(static, min_deadline_cb, struct sched_entity,\n    - static void __enqueue_entity(struct cfs_rq *cfs_rq, struct sched_entity *se)\n    +@@ kernel/sched/fair.c: static void __enqueue_entity(struct cfs_rq *cfs_rq, struct sched_entity *se)\n      {\n    + \ttrace_android_rvh_enqueue_entity(cfs_rq, se);\n      \tavg_vruntime_add(cfs_rq, se);\n     -\tse-\u003emin_deadline \u003d se-\u003edeadline;\n     +\tse-\u003emin_vruntime \u003d se-\u003evruntime;\n    @@ kernel/sched/fair.c: RB_DECLARE_CALLBACKS(static, min_deadline_cb, struct sched_\n      \n      static void __dequeue_entity(struct cfs_rq *cfs_rq, struct sched_entity *se)\n      {\n    + \ttrace_android_rvh_dequeue_entity(cfs_rq, se);\n      \trb_erase_augmented_cached(\u0026se-\u003erun_node, \u0026cfs_rq-\u003etasks_timeline,\n     -\t\t\t\t  \u0026min_deadline_cb);\n     +\t\t\t\t  \u0026min_vruntime_cb);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "38906e8ac64664c47cf53561783c64c0719dc34f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
