@@ -502,9 +502,10 @@ struct sched_avg {
 	u32				util_sum;
 	u32				period_contrib;
 	unsigned long			load_avg;
-	unsigned long			runnable_avg;
-	unsigned long			util_avg;
+	u32				runnable_avg;
+	u32				util_avg;
 	struct util_est			util_est;
+	ANDROID_VENDOR_DATA(1);
 } ____cacheline_aligned;
 
 struct sched_statistics {
