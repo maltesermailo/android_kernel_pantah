@@ -253,6 +253,30 @@
       },
       "revId": "6e40816cd5df4d656f7b9e661a7728a6c678990e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9294470_a3ed37bc",
+        "filename": "android/abi_gki_aarch64_exynosauto",
+        "patchSetId": 1
+      },
+      "lineNbr": 859,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-05-02T16:14:49Z",
+      "side": 1,
+      "message": "are you sure this is due to IPVLAN? I built the IPVLAN driver and there is no dependency on __invalidate_device (which is a block device symbol defined in block/bdev.c). Please check where that dependency came from and point us to the actual code that creates this dependency for you.",
+      "parentUuid": "89fe960c_ea5cf61f",
+      "range": {
+        "startLine": 859,
+        "startChar": 2,
+        "endLine": 859,
+        "endChar": 21
+      },
+      "revId": "6e40816cd5df4d656f7b9e661a7728a6c678990e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
