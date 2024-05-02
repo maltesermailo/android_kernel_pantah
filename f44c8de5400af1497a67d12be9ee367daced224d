@@ -16,6 +16,24 @@
       "message": "Why this can\u0027t be sent upstream? \n\nAlso this doesn\u0027t compile contrary to what is mentioned in the `Test:` section.",
       "revId": "f44c8de5400af1497a67d12be9ee367daced224d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5536ff56_bf252c32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1941381
+      },
+      "writtenOn": "2024-05-02T03:32:51Z",
+      "side": 1,
+      "message": "Dear google,\nWe would like to have this vh provide some blkcg throttling information to FW for policy adjusting which could be hardly upstreamed.\n\nPlease find bellow for the compile result which I am not sure is build pass.\n\n~/a15-6.6$ tools/bazel run common:kernel_aarch64_abi_update -- --commit\nINFO: Analyzed target //common:kernel_aarch64_abi_update (0 packages loaded, 0 targets configured).\nINFO: Found 1 target...\nTarget //common:kernel_aarch64_abi_update up-to-date:\n  bazel-bin/common/kernel_aarch64_abi_update.sh\nINFO: Elapsed time: 3.223s, Critical Path: 1.10s\nINFO: 1 process: 1 internal.\nINFO: Build completed successfully, 1 total action\nINFO: Running command line: bazel-bin/common/kernel_aarch64_abi_update.sh --commit\nHEAD detached at 9657423ee9bc\nnothing to commit, working tree clean",
+      "parentUuid": "82aa80d2_5b3def67",
+      "revId": "f44c8de5400af1497a67d12be9ee367daced224d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
