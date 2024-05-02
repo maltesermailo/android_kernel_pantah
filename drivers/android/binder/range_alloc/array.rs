@@ -18,7 +18,7 @@ use crate::range_alloc::{FreedRange, Range};
 /// keeps track of allocations made in the mmap. For each allocation, we store a descriptor that
 /// has metadata related to the allocation. We also keep track of available free space.
 pub(super) struct ArrayRangeAllocator<T> {
-    ranges: Vec<Range<T>>,
+    pub(super) ranges: Vec<Range<T>>,
     size: usize,
     free_oneway_space: usize,
 }
