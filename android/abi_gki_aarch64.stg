@@ -286567,6 +286567,11 @@ function {
   parameter_id: 0x33756485
 }
 function {
+  id: 0x40ff39b0
+  return_type_id: 0x1ce51dde
+  parameter_id: 0x14e7280b
+}
+function {
   id: 0x416927bc
   return_type_id: 0x00c83ba6
   parameter_id: 0x2cac4c27
@@ -311714,6 +311719,12 @@ function {
   parameter_id: 0xe8034002
 }
 function {
+  id: 0xa7ea77a4
+  return_type_id: 0xfc0e1dbd
+  parameter_id: 0x00c83ba6
+  parameter_id: 0x3e10b518
+}
+function {
   id: 0xa7f744cd
   return_type_id: 0xfc0e1dbd
   parameter_id: 0x07f9a52e
@@ -335157,6 +335168,15 @@ elf_symbol {
   namespace: "DMA_BUF"
   type_id: 0x10aa5f7a
   full_name: "dma_buf_put"
+}
+elf_symbol {
+  id: 0x77d18a9c
+  name: "dma_buf_set_name"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xfd5bfd62
+  type_id: 0xa7ea77a4
+  full_name: "dma_buf_set_name"
 }
 elf_symbol {
   id: 0xd0deb542
@@ -365895,6 +365915,24 @@ elf_symbol {
   full_name: "spmi_controller_remove"
 }
 elf_symbol {
+  id: 0xe77ae602
+  name: "spmi_device_add"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x300c80c2
+  type_id: 0x9ab9a458
+  full_name: "spmi_device_add"
+}
+elf_symbol {
+  id: 0xda6e9ac9
+  name: "spmi_device_alloc"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xe3104b1c
+  type_id: 0x40ff39b0
+  full_name: "spmi_device_alloc"
+}
+elf_symbol {
   id: 0xbc1bec89
   name: "spmi_device_from_of"
   is_defined: true
@@ -377784,6 +377822,7 @@ interface {
   symbol_id: 0xdcb8ed3c
   symbol_id: 0x4ec1de19
   symbol_id: 0xe5cfd7ac
+  symbol_id: 0x77d18a9c
   symbol_id: 0xd0deb542
   symbol_id: 0x68016e57
   symbol_id: 0xe8233473
@@ -381198,6 +381237,8 @@ interface {
   symbol_id: 0xc1ff3a0f
   symbol_id: 0xb9875bdb
   symbol_id: 0x494d6bbb
+  symbol_id: 0xe77ae602
+  symbol_id: 0xda6e9ac9
   symbol_id: 0xbc1bec89
   symbol_id: 0x75b6f1be
   symbol_id: 0xa9e263e3
