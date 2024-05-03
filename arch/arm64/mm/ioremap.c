@@ -98,7 +98,8 @@ void kvm_init_ioremap_services(void)
 	if (res.a0 == SMCCC_RET_SUCCESS) {
 		guard_granule = granule;
 		static_branch_enable(&ioremap_guard_key);
-		pr_info("Using KVM MMIO guard for ioremap\n");
+		pr_info("Using KVM MMIO guard for ioremap guard_granule=%lx\n",
+			guard_granule);
 	} else {
 		pr_warn("KVM MMIO guard registration failed (%ld)\n", res.a0);
 	}
@@ -150,15 +151,18 @@ void ioremap_phys_range_hook(phys_addr_t phys_addr, size_t size, pgprot_t prot)
 		arm_smccc_1_1_hvc(ARM_SMCCC_VENDOR_HYP_KVM_MMIO_GUARD_MAP_FUNC_ID,
 				  phys_addr, prot, &res);
 		if (res.a0 != SMCCC_RET_SUCCESS) {
-			pr_warn_ratelimited("Failed to register %llx\n",
-					    phys_addr);
+			pr_warn_ratelimited("Failed to register %llx reason: %lx\n",
+					    phys_addr, res.a0);
 			xa_erase(&ioremap_guard_array, guard_fn);
 			kfree(ref);
 			goto out;
 		}
 
 	next:
-		size -= guard_granule;
+		if (size >= guard_granule)
+			size -= guard_granule;
+		else
+			size = 0;
 		phys_addr += guard_granule;
 	}
 out:
@@ -204,7 +208,10 @@ void iounmap_phys_range_hook(phys_addr_t phys_addr, size_t size)
 		}
 
 	next:
-		size -= guard_granule;
+		if (size >= guard_granule)
+			size -= guard_granule;
+		else
+			size = 0;
 		phys_addr += guard_granule;
 	}
 out:
