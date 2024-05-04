@@ -70,6 +70,30 @@
       },
       "revId": "074a6f49ba47a762a35a8a795beefa0f82d936b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12ff9f4f_d9ea15dc",
+        "filename": "block/blk-core.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 838,
+      "author": {
+        "id": 1372253
+      },
+      "writtenOn": "2024-05-04T09:00:12Z",
+      "side": 1,
+      "message": "1. Current userspace entry can not expose the details of a bio or request(pages within) which we need to make further decision.\n2. Polling the userspace\u0027s entry by DAEMON process consumes too much time we want especially for UI process.\n3. Block maintainer refuse all of these ideas as they don\u0027t want have the helper function touch page/folio\n\nI would like humbly ask your permission for either this one or https://android-review.googlesource.com/c/kernel/common/+/2974157 which you have denied previously. UNISOC do have some unique scenarios as we have to face some extremely low memory device and low speed flash materials which could have the IO pressure is very high. Thank you very much.",
+      "parentUuid": "0e5ca763_aab81417",
+      "range": {
+        "startLine": 838,
+        "startChar": 1,
+        "endLine": 838,
+        "endChar": 17
+      },
+      "revId": "074a6f49ba47a762a35a8a795beefa0f82d936b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
