@@ -133,7 +133,7 @@ static inline enum zone_type __gfp_zone(gfp_t flags)
 					 ((1 << GFP_ZONES_SHIFT) - 1);
 	VM_BUG_ON((GFP_ZONE_BAD >> bit) & 1);
 
-	if ((flags & (__GFP_MOVABLE | __GFP_COMP)) == (__GFP_MOVABLE | __GFP_COMP))
+	if (flags & __GFP_COMP)
 		return LAST_VIRT_ZONE;
 
 	return z;

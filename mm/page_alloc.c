@@ -3909,6 +3909,9 @@ gfp_to_alloc_flags(gfp_t gfp_mask, unsigned int order)
 
 	alloc_flags = gfp_to_alloc_flags_cma(gfp_mask, alloc_flags);
 
+	if (!(gfp_mask & __GFP_DIRECT_RECLAIM) && gfp_order_zone(gfp_mask, order) > ZONE_MOVABLE)
+		alloc_flags |= ALLOC_KSWAPD;
+
 	return alloc_flags;
 }
 
