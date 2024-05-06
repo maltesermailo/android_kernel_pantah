@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90ac471d_8630d8db",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1944206
+      },
+      "writtenOn": "2024-05-06T14:23:26Z",
+      "side": 1,
+      "message": "At both call sites, `Allocation::new` makes me feel like we are creating new allocations.  Does it make sense to have another method on `Allocation` that defaults `oneway_spam_detected` to false and just updates `offset`, `size`, and `ptr`? (I\u0027m assuming we could leave the existing `process` field alone since it\u0027s just getting cloned here).",
+      "range": {
+        "startLine": 11,
+        "startChar": 16,
+        "endLine": 11,
+        "endChar": 46
+      },
+      "revId": "5009dbbd468cd47549beaa4db18cef74f3c2d378",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
