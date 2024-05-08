@@ -46,6 +46,12 @@ DECLARE_RESTRICTED_HOOK(android_rvh_udpv6_recvmsg,
 	TP_ARGS(sk, msg, len, flags, addr_len), 1);
 DECLARE_RESTRICTED_HOOK(android_rvh_tcp_select_window,
 	TP_PROTO(struct sock *sk, u32 *new_win), TP_ARGS(sk, new_win), 1);
+DECLARE_HOOK(android_vh_udp_unicast_rcv_skb,
+        TP_PROTO(struct sk_buff *skb, struct sock *sk),
+        TP_ARGS(skb, sk));
+DECLARE_HOOK(android_vh_udp6_unicast_rcv_skb,
+        TP_PROTO(struct sk_buff *skb, struct sock *sk),
+        TP_ARGS(skb, sk));
 DECLARE_RESTRICTED_HOOK(android_rvh_inet_sock_create,
 	TP_PROTO(struct sock *sk), TP_ARGS(sk), 1);
 DECLARE_RESTRICTED_HOOK(android_rvh_inet_sock_release,
