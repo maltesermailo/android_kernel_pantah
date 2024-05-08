@@ -33,6 +33,23 @@
       "message": "I just enabled the IPVLAN and NF_TARGET_TTL module in fragment file , and when we built the android, it threw this error.\n\nERROR: Differences between ksymtab and symbol list detected!\nSymbols missing from ksymtab:\nSymbols missing from symbol list:\n__invalidate_device\nblk_mq_unique_tag\ndev_forward_skb\ndev_mc_sync\ndev_pre_changeaddr_notify\ndev_set_allmulti\ndev_uc_sync\nip6_route_input_lookup\nip_route_input_noref\nnetdev_is_rx_handler_busy\nnetlink_capable\nnla_strcmp\nnla_strdup\nregister_inet6addr_validator_notifier\nregister_inetaddr_validator_notifier\nsk_set_memalloc\nsock_sendmsg\nunregister_inet6addr_validator_notifier\nunregister_inetaddr_validator_notifier\nHence, we have added this symbol also in our whitelisting. After adding these symbols locally, we were able to run both the drivers.\nThanks",
       "revId": "b566956233b81f7b58461a4b97d26d9e34aacb19",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c77f30f_456b55d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3371323
+      },
+      "writtenOn": "2024-05-08T08:46:00Z",
+      "side": 1,
+      "message": "I just enabled the IPVLAN and NF_TARGET_TTL module in fragment file , and when we built the android, it threw this error.\nERROR: Differences between ksymtab and symbol list detected!\nSymbols missing from ksymtab:\nSymbols missing from symbol list:\n\n__invalidate_device\nblk_mq_unique_tag\ndev_forward_skb\ndev_mc_sync\ndev_pre_changeaddr_notify\ndev_set_allmulti\ndev_uc_sync\nip6_route_input_lookup\nip_route_input_noref\nnetdev_is_rx_handler_busy\nnetlink_capable\nnla_strcmp\nnla_strdup\nregister_inet6addr_validator_notifier\nregister_inetaddr_validator_notifier\nsk_set_memalloc\nsock_sendmsg\nunregister_inet6addr_validator_notifier\nunregister_inetaddr_validator_notifier\nHence, we have added this symbol also in our whitelisting. After adding these symbols locally, we were able to run both the drivers.\nThanks",
+      "revId": "b566956233b81f7b58461a4b97d26d9e34aacb19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
