@@ -9,6 +9,9 @@
  *
  * Author: Will Deacon <will@kernel.org>
  */
+
+#define pr_fmt(fmt) "mem_encrypt: " fmt
+
 #include <linux/arm-smccc.h>
 #include <linux/mem_encrypt.h>
 #include <linux/memory.h>
@@ -73,8 +76,10 @@ void kvm_init_memshare_services(void)
 
 	arm_smccc_1_1_invoke(ARM_SMCCC_VENDOR_HYP_KVM_HYP_MEMINFO_FUNC_ID,
 			     0, 0, 0, &res);
-	if (res.a0 > PAGE_SIZE) /* Includes error codes */
+	if (!PAGE_ALIGNED(res.a0)) {
+		pr_err("%lu failed init memshare services", res.a0);
 		return;
+	}
 
 	memshare_granule_sz = res.a0;
 }
@@ -85,10 +90,15 @@ static int arm_smccc_share_unshare_page(u32 func_id, phys_addr_t phys)
 
 	while (phys < end) {
 		struct arm_smccc_res res;
+		phys = ALIGN(phys, memshare_granule_sz);
 
 		arm_smccc_1_1_invoke(func_id, phys, 0, 0, &res);
-		if (res.a0 != SMCCC_RET_SUCCESS)
+		if (res.a0 != SMCCC_RET_SUCCESS) {
+			pr_err("%s phys 0x%llx failed reason %ld",
+			       func_id == ARM_SMCCC_VENDOR_HYP_KVM_MEM_SHARE_FUNC_ID ?
+			       "share" : "unshare", phys, (ssize_t)res.a0);
 			return -EPERM;
+		}
 
 		phys += memshare_granule_sz;
 	}
@@ -107,7 +117,7 @@ static int set_memory_xcrypted(u32 func_id, unsigned long start, int numpages)
 		if (err)
 			return err;
 
-		addr += PAGE_SIZE;
+		addr += memshare_granule_sz;
 	}
 
 	return 0;
@@ -115,7 +125,8 @@ static int set_memory_xcrypted(u32 func_id, unsigned long start, int numpages)
 
 int set_memory_encrypted(unsigned long addr, int numpages)
 {
-	if (!memshare_granule_sz || WARN_ON(!PAGE_ALIGNED(addr)))
+	if (!memshare_granule_sz || WARN_ON(!PAGE_ALIGNED(addr)) ||
+	    !IS_ALIGNED(numpages << PAGE_SHIFT, memshare_granule_sz))
 		return 0;
 
 	return set_memory_xcrypted(ARM_SMCCC_VENDOR_HYP_KVM_MEM_UNSHARE_FUNC_ID,
@@ -125,7 +136,8 @@ EXPORT_SYMBOL_GPL(set_memory_encrypted);
 
 int set_memory_decrypted(unsigned long addr, int numpages)
 {
-	if (!memshare_granule_sz || WARN_ON(!PAGE_ALIGNED(addr)))
+	if (!memshare_granule_sz || WARN_ON(!PAGE_ALIGNED(addr)) ||
+	    !IS_ALIGNED(numpages << PAGE_SHIFT, memshare_granule_sz))
 		return 0;
 
 	return set_memory_xcrypted(ARM_SMCCC_VENDOR_HYP_KVM_MEM_SHARE_FUNC_ID,
