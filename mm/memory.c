@@ -5183,7 +5183,17 @@ static inline bool should_fault_around(struct vm_fault *vmf)
 static vm_fault_t do_read_fault(struct vm_fault *vmf)
 {
 	vm_fault_t ret = 0;
+<<<<<<< HEAD   (865e7e ANDROID: 16K: x86_64: Disable userfaultfd)
 	struct folio *folio;
+||||||| BASE
+
+	trace_android_vh_tune_fault_around_bytes(&fault_around_bytes);
+=======
+
+	trace_android_vh_tune_fault_around_bytes(&fault_around_bytes);
+	trace_android_rvh_do_read_fault(vmf->vma->vm_file, vmf->pgoff,
+					&fault_around_bytes);
+>>>>>>> CHANGE (29a00a ANDROID: mm: Add restricted vendor hook in do_read_fault())
 
 	/*
 	 * Let's call ->map_pages() first and use ->fault() as fallback

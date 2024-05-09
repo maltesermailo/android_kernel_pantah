@@ -496,6 +496,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_udp_v4_connect);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_udp_v6_connect);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_read_lazy_flag);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_tsk_need_resched_lazy);
+<<<<<<< HEAD   (865e7e ANDROID: 16K: x86_64: Disable userfaultfd)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_usb_dev_suspend);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_usb_dev_resume);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_usb_new_device_added);
@@ -618,3 +619,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rmqueue);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_get_folio);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_compaction_begin);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_compaction_end);
+||||||| BASE
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_read_fault);
+>>>>>>> CHANGE (29a00a ANDROID: mm: Add restricted vendor hook in do_read_fault())
