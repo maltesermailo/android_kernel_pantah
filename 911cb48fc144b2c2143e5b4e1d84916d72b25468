@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000077437951",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3082226?revision\u003d1",
+      "key": {
+        "uuid": "13a40db0_96033510",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-10T08:17:53Z",
+      "side": 1,
+      "message": "Please **attach an open respin request bug** to this change. Refer the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "911cb48fc144b2c2143e5b4e1d84916d72b25468",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000077437951",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3082226?revision\u003d1",
+      "key": {
+        "uuid": "52ca4acb_e39d58f7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-10T08:17:53Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against base branch android14-6.1.\nBase branch change: [3027990](https://android-review.googlesource.com/c/3027990).\n\n```\n      ## tools/testing/selftests/vm/userfaultfd.c ##\n     @@ tools/testing/selftests/vm/userfaultfd.c: static void shmem_check_pmd_mapping(void *p, int expect_nr_hpages)\n    @@ tools/testing/selftests/vm/userfaultfd.c: static void uffd_test_ctx_clear(void)\n      {\n      \tunsigned long nr, cpu;\n      \n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (496d64 UPSTREAM: userfaultfd: fix return error if mmap_changing is )\n    + \tuffd_test_ctx_clear();\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n     +\tif (uffd_test_case_ops \u0026\u0026 uffd_test_case_ops-\u003epre_alloc)\n     +\t\tuffd_test_case_ops-\u003epre_alloc();\n    -+\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (a5d504 BACKPORT: selftests/mm: add uffd_test_case_ops to allow test)\n    + \n      \tuffd_test_ops-\u003eallocate_area((void **)\u0026area_src, true);\n      \tuffd_test_ops-\u003eallocate_area((void **)\u0026area_dst, false);\n      \n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "911cb48fc144b2c2143e5b4e1d84916d72b25468",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
