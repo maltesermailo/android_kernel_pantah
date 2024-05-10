@@ -52,6 +52,24 @@
       "parentUuid": "61a8a421_4dc894cd",
       "revId": "d6f794bc2a40337b82387e6f5f21009ec8b299e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "faaebfa8_9b943917",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3192152
+      },
+      "writtenOn": "2024-05-10T06:06:41Z",
+      "side": 1,
+      "message": "Hi @jchowdhary@google.com,data transfer is unavailable is that the req_ready list has always been empty when testing mjpeg static images.\ncall trace:\nuvc_v4l2_streamon-\u003euvcg_video_enable-\u003euvc_video_alloc_requests-\u003euvc_video_complete-\u003euvcg_video_usb_req_queue-\u003ereturn uvcg_video_ep_queue\nFor isoc uvc transfer,we can see is_bulk is set to 0,when video-\u003eis_enabled is true, since req_ready list is empty, then this queue to enpoint, and call uvcg_video_ep_queue this function. Through check code and see will never to be add request to req_ready list, it cause uvcg_video_pump function will not be called, that mean we need always queue to ep, so will not execute list_add_tail function to add req_ready list, then cause data transfer is unavailble. \nBelow code will never to be execute for mjpg still image when use isoc transfer:\n        /*\n\t * If we\u0027re not queuing to the ep, for isoc we\u0027re queuing\n\t * to the req_ready list, otherwise req_free.\n\t */\n\tlist \u003d is_bulk ? \u0026video-\u003ereq_free : \u0026video-\u003ereq_ready;\n\tlist_add_tail(\u0026req-\u003elist, list);\n\treturn 0;",
+      "parentUuid": "5fce0a73_8a51b3de",
+      "revId": "d6f794bc2a40337b82387e6f5f21009ec8b299e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
