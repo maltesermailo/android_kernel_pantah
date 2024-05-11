@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "826763cc_cba3665a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2024-05-11T21:27:06Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Cherry pick is not clean. Checked against UPSTREAM.\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\nOwner: android-kernel-team@google.com\n\nCherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/549e91a9bbaa0ee480f59357868421a61d369770) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d549e91a9bbaa0ee480f59357868421a61d369770).\n\n```\n      ## drivers/ufs/core/ufshcd.c ##\n     @@ drivers/ufs/core/ufshcd.c: static int ufshcd_queuecommand(struct Scsi_Host *host, struct scsi_cmnd *cmd)\n    @@ drivers/ufs/core/ufshcd.c: static int ufshcd_exec_dev_cmd(struct ufs_hba *hba,\n      \terr \u003d ufshcd_compose_dev_cmd(hba, lrbp, cmd_type, tag);\n      \tif (unlikely(err))\n      \t\tgoto out;\n    -@@ drivers/ufs/core/ufshcd.c: static void ufshcd_release_scsi_cmd(struct ufs_hba *hba,\n    - \tstruct scsi_cmnd *cmd \u003d lrbp-\u003ecmd;\n    +@@ drivers/ufs/core/ufshcd.c: void ufshcd_release_scsi_cmd(struct ufs_hba *hba,\n      \n      \tscsi_dma_unmap(cmd);\n    + \tufshcd_crypto_clear_prdt(hba, lrbp);\n     -\tlrbp-\u003ecmd \u003d NULL;\t/* Mark the command as completed. */\n      \tufshcd_release(hba);\n      \tufshcd_clk_scaling_update_busy(hba);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "251afd2b5c5dc65bf74fc83c12df5f33dfa141ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
