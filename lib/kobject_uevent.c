@@ -28,6 +28,7 @@
 #include <net/sock.h>
 #include <net/netlink.h>
 #include <net/net_namespace.h>
+#include <trace/hooks/kobject_uevent.h>
 
 
 u64 uevent_seqnum;
@@ -592,6 +593,7 @@ int kobject_uevent_env(struct kobject *kobj, enum kobject_action action,
 	}
 	retval = kobject_uevent_net_broadcast(kobj, env, action_string,
 					      devpath);
+	trace_android_vh_log_uevent(devpath, action);
 	mutex_unlock(&uevent_sock_mutex);
 
 #ifdef CONFIG_UEVENT_HELPER
