@@ -9155,6 +9155,7 @@ static int ufshcd_setup_clocks(struct ufs_hba *hba, bool on)
 					clki->name, on ? "en" : "dis");
 		}
 	}
+	trace_android_vh_ufs_setup_clocks(on);
 
 	ret = ufshcd_vops_setup_clocks(hba, on, POST_CHANGE);
 	if (ret)

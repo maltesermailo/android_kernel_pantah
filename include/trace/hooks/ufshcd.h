@@ -88,6 +88,9 @@ DECLARE_HOOK(android_vh_ufs_err_check_ctrl,
 		 bool *err_check),
 	TP_ARGS(hba, err_check));
 
+DECLARE_HOOK(android_vh_ufs_setup_clocks,
+	TP_PROTO(bool state),
+	TP_ARGS(state));
 #endif /* _TRACE_HOOK_UFSHCD_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
