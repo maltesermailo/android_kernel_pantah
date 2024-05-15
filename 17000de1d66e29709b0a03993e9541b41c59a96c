@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c871cb2_dc8c6dea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026921
+      },
+      "writtenOn": "2024-05-15T08:45:14Z",
+      "side": 1,
+      "message": "In addition, MtpDescriptors.cpp in the mtp service has made the following settings in order to improve the transmission rate under usb3.0 mode.\n\n102 const struct usb_ss_ep_comp_descriptor ss_sink_comp \u003d {\n103 .bLength \u003d sizeof(ss_sink_comp),\n104 .bDescriptorType \u003d USB_DT_SS_ENDPOINT_COMP,\n105.bMaxBurst \u003d 6,\n106};\n107\n108 const struct usb_ss_ep_comp_descriptor ss_source_comp \u003d {\n109 .bLength \u003d sizeof(ss_source_comp),\n110 .bDescriptorType \u003d USB_DT_SS_ENDPOINT_COMP,\n111.bMaxBurst \u003d 6,\n112};",
+      "revId": "17000de1d66e29709b0a03993e9541b41c59a96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a03e6e71_244cba3a",
@@ -31,6 +48,30 @@
       "writtenOn": "2024-05-15T07:48:26Z",
       "side": 1,
       "message": "why did we set value `6` ?\n\nAs per my understanding, higher bMaxBurst values can demand more processing power for handling bursts. Have you done performance analysis with this change ?",
+      "range": {
+        "startLine": 174,
+        "startChar": 27,
+        "endLine": 174,
+        "endChar": 28
+      },
+      "revId": "17000de1d66e29709b0a03993e9541b41c59a96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b6ce127_4ac8e1c6",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 2026921
+      },
+      "writtenOn": "2024-05-15T08:45:14Z",
+      "side": 1,
+      "message": "Function config_ep_by_speed_and_alt will add one based on the original maxburst.\n\n257  \tif (g-\u003espeed \u003e\u003d USB_SPEED_SUPER) {\n258  \t\tswitch (usb_endpoint_type(_ep-\u003edesc)) {\n259  \t\tcase USB_ENDPOINT_XFER_ISOC:\n260  \t\t\t/* mult: bits 1:0 of bmAttributes */\n261  \t\t\t_ep-\u003emult \u003d (comp_desc-\u003ebmAttributes \u0026 0x3) + 1;\n262  \t\t\tfallthrough;\n263  \t\tcase USB_ENDPOINT_XFER_BULK:\n264  \t\tcase USB_ENDPOINT_XFER_INT:\n265  \t\t\t_ep-\u003emaxburst \u003d comp_desc-\u003ebMaxBurst + 1;\n266  \t\t\tbreak;\n\n\n\nIn function dwc3_gadget_resize_tx_fifos, when maxburset is 7, num_fifo can take the maximum value of 6\n\n861  \tif (dep-\u003eendpoint.maxburst \u003e 6 \u0026\u0026\n862  \t    (usb_endpoint_xfer_bulk(dep-\u003eendpoint.desc) ||\n863  \t     usb_endpoint_xfer_isoc(dep-\u003eendpoint.desc)) \u0026\u0026 DWC3_IP_IS(DWC31))\n864  \t\tnum_fifos \u003d dwc-\u003etx_fifo_resize_max_num;\n\nIn addition, MtpDescriptors.cpp in the mtp service has made the following settings in order to improve the transmission rate under usb3.0 mode.\n\n102 const struct usb_ss_ep_comp_descriptor ss_sink_comp \u003d {\n103 .bLength \u003d sizeof(ss_sink_comp),\n104 .bDescriptorType \u003d USB_DT_SS_ENDPOINT_COMP,\n105.bMaxBurst \u003d 6,\n106};\n107\n108 const struct usb_ss_ep_comp_descriptor ss_source_comp \u003d {\n109 .bLength \u003d sizeof(ss_source_comp),\n110 .bDescriptorType \u003d USB_DT_SS_ENDPOINT_COMP,\n111.bMaxBurst \u003d 6,\n112};",
+      "parentUuid": "a03e6e71_244cba3a",
       "range": {
         "startLine": 174,
         "startChar": 27,
