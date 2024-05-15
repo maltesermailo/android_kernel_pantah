@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000077870314",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3078628?revision\u003d5",
+      "key": {
+        "uuid": "aabbaead_f214b256",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-15T07:17:14Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/c8ed7439af7af36412f8ced3979772cf3a529ec4).\n\n```\n      ## drivers/android/vendor_hooks.c ##\n     @@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_send_uic_command);\n    @@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_send\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_clock_scaling);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cgroup_attach);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_iommu_setup_dma_ops);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_iommu_iovad_alloc_iova);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_iommu_alloc_insert_iova);\n     \n      ## drivers/ufs/core/ufshcd.c ##\n     @@ drivers/ufs/core/ufshcd.c: static int ufshcd_devfreq_target(struct device *dev,\n    @@ drivers/ufs/core/ufshcd.c: static int ufshcd_devfreq_target(struct device *dev,\n      \t\tgoto out; /* no state change required */\n     \n      ## include/trace/hooks/ufshcd.h ##\n    -@@ include/trace/hooks/ufshcd.h: DECLARE_HOOK(android_vh_ufs_update_sdev,\n    - \tTP_PROTO(struct scsi_device *sdev),\n    - \tTP_ARGS(sdev));\n    +@@ include/trace/hooks/ufshcd.h: DECLARE_HOOK(android_vh_ufs_err_check_ctrl,\n    + \t\t bool *err_check),\n    + \tTP_ARGS(hba, err_check));\n      \n     +DECLARE_HOOK(android_vh_ufs_clock_scaling,\n     +\t\tTP_PROTO(struct ufs_hba *hba, bool *force_out, bool *force_scaling, bool *scale_up),\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "5b8f53e3c0766d080cb7c53b279da8d4052cae4c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
