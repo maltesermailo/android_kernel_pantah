@@ -16,6 +16,29 @@
       "message": "Pls review",
       "revId": "17000de1d66e29709b0a03993e9541b41c59a96c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a03e6e71_244cba3a",
+        "filename": "drivers/usb/gadget/function/f_accessory.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1883512
+      },
+      "writtenOn": "2024-05-15T07:48:26Z",
+      "side": 1,
+      "message": "why did we set value `6` ?\n\nAs per my understanding, higher bMaxBurst values can demand more processing power for handling bursts. Have you done performance analysis with this change ?",
+      "range": {
+        "startLine": 174,
+        "startChar": 27,
+        "endLine": 174,
+        "endChar": 28
+      },
+      "revId": "17000de1d66e29709b0a03993e9541b41c59a96c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
