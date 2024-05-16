@@ -34,6 +34,24 @@
       "parentUuid": "3d87623c_4775149d",
       "revId": "5b4ef09d26581f7fb55f6da803780eb39534964c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4317ef07_e539b393",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-05-16T14:05:12Z",
+      "side": 1,
+      "message": "irq numbers are already available in userspace, no need to hook every single irq twice, that is going to be a huge performance impact for no real gain as the information can be gotten elsewhere (i.e. your drivers know the irq numbers for themselves, have them save that information in the panic log if needed.",
+      "parentUuid": "8370fea0_4678b659",
+      "revId": "5b4ef09d26581f7fb55f6da803780eb39534964c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
