@@ -64,6 +64,7 @@
 #include <trace/hooks/cpuinfo.h>
 #include <trace/hooks/dmabuf.h>
 #include <trace/hooks/signal.h>
+#include <trace/hooks/cmabitmap.h>
 #include <trace/hooks/compaction.h>
 #include <trace/hooks/madvise.h>
 #include <trace/events/android_vendor_lmk.h>
@@ -76,6 +77,7 @@
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_send_sig_info);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_killed_process);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_arch_set_freq_scale);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_bitmap_find_best_next_area);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_transaction_init);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_set_priority);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_restore_priority);
