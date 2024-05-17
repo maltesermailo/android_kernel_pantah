@@ -19,6 +19,26 @@
       "tag": "",
       "revId": "2a2d34ba29e13c5bfa197c62a23761503243ffbb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000078088771",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3081464?revision\u003d3",
+      "key": {
+        "uuid": "b7b120bd_90bab071",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-17T08:38:53Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/1900daeefd3ebde61199649143085a2dfdebf55c) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d1900daeefd3ebde61199649143085a2dfdebf55c).\n\n```\n      ## Documentation/usb/gadget-testing.rst ##\n     @@ Documentation/usb/gadget-testing.rst: Function-specific configfs interface\n      The function name to use when creating the function directory is \"ncm\".\n    @@ Documentation/usb/gadget-testing.rst: Function-specific configfs interface\n      values: qmult is 5, dev_addr and host_addr are randomly selected.\n     \n      ## drivers/usb/gadget/function/f_ncm.c ##\n    -@@ drivers/usb/gadget/function/f_ncm.c: static inline struct f_ncm *func_to_ncm(struct usb_function *f)\n    +@@ drivers/usb/gadget/function/f_ncm.c: static inline unsigned ncm_bitrate(struct usb_gadget *g)\n      /* Delay for the transmit to wait before sending an unfilled NTB frame. */\n      #define TX_TIMEOUT_NSECS\t300000\n      \n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "2a2d34ba29e13c5bfa197c62a23761503243ffbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
