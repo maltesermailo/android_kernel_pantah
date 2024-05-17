@@ -52,6 +52,24 @@
       "parentUuid": "8370fea0_4678b659",
       "revId": "5b4ef09d26581f7fb55f6da803780eb39534964c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2cf9209_f426fb3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3358448
+      },
+      "writtenOn": "2024-05-17T06:49:58Z",
+      "side": 1,
+      "message": "It\u0027s too late to acquire irq number in userspace when system panic in kernelspace. This solution has already been tested on our platform, and the time cost is acceptable. When system panic, we dump the memory to see whether interruption storm happended and which irq entered but not exit.\nIt\u0027s not a good solution to modify every driver\u0027s code to record irq number. Also, native kernel driver code cannot be modified.",
+      "parentUuid": "4317ef07_e539b393",
+      "revId": "5b4ef09d26581f7fb55f6da803780eb39534964c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
