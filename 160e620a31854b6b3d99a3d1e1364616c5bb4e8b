@@ -1485,6 +1485,26 @@
       "robotRunId": "AR00000000000078194283",
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/3094025?revision\u003d1",
       "key": {
+        "uuid": "0bf133c2_b835e4c2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-17T17:37:59Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "160e620a31854b6b3d99a3d1e1364616c5bb4e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000078194283",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3094025?revision\u003d1",
+      "key": {
         "uuid": "3ea1f714_0117ac21",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -4718,6 +4738,50 @@
       "fixSuggestions": [
         {
           "fixId": "d750e2bb_43b7587c",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 69,
+                "startChar": 0,
+                "endLine": 69,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Christoph Lameter (Ampere) \u003ccl@gentwo.org\u003e\n"
+            }
+          ]
+        }
+      ],
+      "revId": "160e620a31854b6b3d99a3d1e1364616c5bb4e8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000078194283",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3094025?revision\u003d1",
+      "key": {
+        "uuid": "5eeb80d5_7d7e908a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-17T17:37:59Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Christoph Lameter (Ampere) \u003ccl@gentwo.org\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 0
+      },
+      "tag": "",
+      "fixSuggestions": [
+        {
+          "fixId": "9785563c_1c1b2fce",
           "description": "Add author\u0027s Signed-off-by",
           "replacements": [
             {
