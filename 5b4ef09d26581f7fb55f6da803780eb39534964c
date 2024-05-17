@@ -106,6 +106,24 @@
       "parentUuid": "74f88e2e_f9e4572e",
       "revId": "5b4ef09d26581f7fb55f6da803780eb39534964c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a0095ad_dc361620",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-05-17T09:11:36Z",
+      "side": 1,
+      "message": "In eng version you do not have to use the gki kernel, please just put this type of change there.  It is a VERY dangerous hook to have, I do not recommend it be present at all, sorry.\n\nAnd again, you have this information (irq number) in userspace, trying to log every irq at runtime is an impossible task that is not really useful at all.  Do so in the drivers you think have problems if you really want to.",
+      "parentUuid": "bfc9f2fb_5d49da41",
+      "revId": "5b4ef09d26581f7fb55f6da803780eb39534964c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
