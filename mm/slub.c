@@ -3239,6 +3239,8 @@ redo:
 out:
 	slab_post_alloc_hook(s, objcg, gfpflags, 1, &object, init);
 
+	trace_android_vh_slab_alloc_node(object, addr, s);
+
 	return object;
 }
 
@@ -3517,7 +3519,9 @@ static __always_inline void slab_free(struct kmem_cache *s, struct page *page,
 	 * to remove objects, whose reuse must be delayed.
 	 */
 	if (slab_free_freelist_hook(s, &head, &tail, &cnt))
-		do_slab_free(s, page, head, tail, cnt, addr);
+		do_slab_free(s, slab, head, tail, cnt, addr);
+
+	trace_android_vh_slab_free(addr, s);
 }
 
 #ifdef CONFIG_KASAN_GENERIC
