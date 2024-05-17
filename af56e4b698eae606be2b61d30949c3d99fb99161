@@ -39,6 +39,46 @@
       "tag": "",
       "revId": "af56e4b698eae606be2b61d30949c3d99fb99161",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000078240207",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3093401?revision\u003d4",
+      "key": {
+        "uuid": "40433be8_f0f196fd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-17T14:29:48Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/252025c8673836f3c46e2b940c81fc8e1fe4d5ab).\n\n```\n      ## drivers/android/vendor_hooks.c ##\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tmpfile_secctx);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tmpfile_create_check_inode);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tmpfile_send_open);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_swap_page_spf);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_transaction_received);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_oem_binder_struct);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_special_task);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_free_buf);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_init);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_add_bypass);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_finish);\n    @@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tmpfile_\n       */\n     \n      ## include/trace/hooks/mm.h ##\n    -@@ include/trace/hooks/mm.h: DECLARE_HOOK(android_vh_do_swap_page_spf,\n    - DECLARE_HOOK(android_vh_tune_fault_around_bytes,\n    - \tTP_PROTO(unsigned long *fault_around_bytes),\n    - \tTP_ARGS(fault_around_bytes));\n    +@@ include/trace/hooks/mm.h: DECLARE_HOOK(android_vh_alloc_pages_entry,\n    + DECLARE_HOOK(android_vh_isolate_freepages,\n    + \tTP_PROTO(struct compact_control *cc, struct page *page, bool *bypass),\n    + \tTP_ARGS(cc, page, bypass));\n     +DECLARE_HOOK(android_vh_swapmem_gather_init,\n     +\tTP_PROTO(struct mm_struct *mm),\n     +\tTP_ARGS(mm));\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "af56e4b698eae606be2b61d30949c3d99fb99161",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000078240207",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3093401?revision\u003d4",
+      "key": {
+        "uuid": "a996fd41_f8b2fa4b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-17T14:29:48Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against base branch android13-5.15.\nBase branch change: [3088371](https://android-review.googlesource.com/c/3088371).\n\n```\n      ## drivers/android/vendor_hooks.c ##\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tmpfile_secctx);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tmpfile_create_check_inode);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tmpfile_send_open);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_swap_page_spf);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_transaction_received);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_oem_binder_struct);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_special_task);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_free_buf);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_init);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_add_bypass);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_finish);\n    @@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tmpfile_\n       */\n     \n      ## include/trace/hooks/mm.h ##\n    -@@ include/trace/hooks/mm.h: DECLARE_HOOK(android_vh_do_swap_page_spf,\n    - DECLARE_HOOK(android_vh_tune_fault_around_bytes,\n    - \tTP_PROTO(unsigned long *fault_around_bytes),\n    - \tTP_ARGS(fault_around_bytes));\n    +@@ include/trace/hooks/mm.h: DECLARE_HOOK(android_vh_alloc_pages_entry,\n    + DECLARE_HOOK(android_vh_isolate_freepages,\n    + \tTP_PROTO(struct compact_control *cc, struct page *page, bool *bypass),\n    + \tTP_ARGS(cc, page, bypass));\n     +DECLARE_HOOK(android_vh_swapmem_gather_init,\n     +\tTP_PROTO(struct mm_struct *mm),\n     +\tTP_ARGS(mm));\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "af56e4b698eae606be2b61d30949c3d99fb99161",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
