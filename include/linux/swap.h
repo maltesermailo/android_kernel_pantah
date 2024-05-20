@@ -254,11 +254,12 @@ struct swap_cluster_info {
 				 * elements correspond to the swap
 				 * cluster
 				 */
-	unsigned int data:24;
+	unsigned int count:16;
 	unsigned int flags:8;
+	struct list_head next;
 };
 #define CLUSTER_FLAG_FREE 1 /* This cluster is free */
-#define CLUSTER_FLAG_NEXT_NULL 2 /* This cluster has no next cluster */
+
 
 /*
  * The first page in the swap file is the swap header, which is always marked
@@ -267,11 +268,6 @@ struct swap_cluster_info {
  * a sentinel to indicate cpu_next is not valid in swap_info_struct.
  */
 #define SWAP_NEXT_NULL	0
-
-struct swap_cluster_list {
-	struct swap_cluster_info head;
-	struct swap_cluster_info tail;
-};
 
 /*
  * The in-memory structure used to track swap areas.
@@ -285,7 +281,7 @@ struct swap_info_struct {
 	unsigned int	max;		/* extent of the swap_map */
 	unsigned char *swap_map;	/* vmalloc'ed array of usage counts */
 	struct swap_cluster_info *cluster_info; /* cluster info. Only for SSD */
-	struct swap_cluster_list free_clusters; /* free clusters list */
+	struct list_head free_clusters; /* free clusters list */
 	unsigned int lowest_bit;	/* index of first free in swap_map */
 	unsigned int highest_bit;	/* index of last free in swap_map */
 	unsigned int pages;		/* total of usable pages of swap */
@@ -324,7 +320,7 @@ struct swap_info_struct {
 					 * list.
 					 */
 	struct work_struct discard_work; /* discard worker */
-	struct swap_cluster_list discard_clusters; /* discard clusters list */
+	struct list_head discard_clusters; /* discard clusters list */
 	struct plist_node avail_lists[]; /*
 					   * entries in swap_avail_heads, one
 					   * entry per node.
