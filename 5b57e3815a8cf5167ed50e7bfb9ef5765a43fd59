@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000078533944",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3094878?revision\u003d1",
+      "key": {
+        "uuid": "7108e368_1682f495",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-21T02:08:43Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/23f2a9f5f13426263f557ff67ce8f4e3f7965d12).\n\n```\n    - ## drivers/usb/gadget/function/f_accessory.c ##\n    -@@ drivers/usb/gadget/function/f_accessory.c: static struct usb_ss_ep_comp_descriptor acc_superspeedplus_comp_desc \u003d {\n    + ## drivers/usb/gadget/function/android_f_accessory.c ##\n    +@@ drivers/usb/gadget/function/android_f_accessory.c: static struct usb_ss_ep_comp_descriptor acc_superspeedplus_comp_desc \u003d {\n      \t.bDescriptorType        \u003d USB_DT_SS_ENDPOINT_COMP,\n      \n      \t/* the following 2 values can be tweaked if necessary */\n    @@ drivers/usb/gadget/function/f_accessory.c: static struct usb_ss_ep_comp_descript\n      \t/* .bmAttributes \u003d      0, */\n      };\n      \n    -@@ drivers/usb/gadget/function/f_accessory.c: static struct usb_ss_ep_comp_descriptor acc_superspeed_comp_desc \u003d {\n    +@@ drivers/usb/gadget/function/android_f_accessory.c: static struct usb_ss_ep_comp_descriptor acc_superspeed_comp_desc \u003d {\n      \t.bDescriptorType        \u003d USB_DT_SS_ENDPOINT_COMP,\n      \n      \t/* the following 2 values can be tweaked if necessary */\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "5b57e3815a8cf5167ed50e7bfb9ef5765a43fd59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
