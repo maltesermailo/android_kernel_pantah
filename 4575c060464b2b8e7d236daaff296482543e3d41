@@ -201,6 +201,30 @@
       },
       "revId": "4575c060464b2b8e7d236daaff296482543e3d41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8897474_cd851749",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2024-05-21T21:25:24Z",
+      "side": 1,
+      "message": "So `sg_dma_is_swiotlb` does not work for dma-direct, and a [patch](https://lore.kernel.org/all/20240503183713.1557480-1-tjmercier@google.com/) I sent out to make it work was rejected. We can still avoid the `iommu_iova_to_phys` by checking if we get a domain first from `iommu_get_domain_for_dev` and then call `sg_dma_is_swiotlb`. Buf for `!CONFIG_NEED_SG_DMA_FLAGS` or dma-direct we still need to check every address.",
+      "parentUuid": "36c3a932_a5192c1e",
+      "range": {
+        "startLine": 72,
+        "startChar": 31,
+        "endLine": 72,
+        "endChar": 49
+      },
+      "revId": "4575c060464b2b8e7d236daaff296482543e3d41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
