@@ -16,6 +16,24 @@
       "message": "Please provide more details about the issue this is solving and why CFI needs to be suppressed.",
       "revId": "c3aaa8213625c1ccef654a12ec98a944c62bd16a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df17e897_c9c49f57",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1902286
+      },
+      "writtenOn": "2024-05-21T07:13:56Z",
+      "side": 1,
+      "message": "On resume from hibernation, swsusp_arch_resume function ends with a call to a noreturn function (hibernate_exit), \nwhich restores the saved CPU state and resumes the execution from where it was hibernated. \nThis is essentially a one-way operation that transitions the system from hibernated state to a running state.\nKernel panic is observed because of CFI failure for swsusp_arch_resume.\n\n[   88.327077][  T174] PM: hibernation: Configured hibernation resume from disk to 271581280\n[   88.335584][  T174] PM: hibernation: Hibernation starting point\n[   88.341714][  T174] PM: hibernation: hibernation resume starting point\n[   88.348458][  T174] PM: hibernation: Hibernation image partition 259:96 present\n[   88.356001][  T174] PM: hibernation: Looking for hibernation image.\n[   88.421240][  T174] PM: Image sector 16384\n[   88.425784][  T174] PM: Image signature found, resuming\n[   88.431192][  T174] PM: hibernation: resume from hibernation\n[   88.437050][  T174] PM: hibernation: Preparing processes for hibernation restore.\n[   88.444801][  T174] Freezing user space processes ... (elapsed 0.001 seconds) done.\n[   88.453959][  T174] OOM killer disabled.\n[   88.458021][  T174] Freezing remaining freezable tasks ... (elapsed 0.001 seconds) done.\n[   88.467567][  T174] PM: hibernation: Loading hibernation image.\n[   88.489318][  T174] PM: Using 3 thread(s) for decompression\n[   88.495080][  T174] PM: Loading and decompressing image data (86784 pages)...\n[   88.502443][  T174] hibernate: Hibernated on CPU 0 [mpidr:0x0]\n[   88.891025][  T174] PM: Image loading progress:   0%\n[   89.110872][  T174] PM: Image loading progress:  10%\n[   89.162984][  T174] PM: Image loading progress:  20%\n[   89.391477][  T174] PM: Image loading progress:  30%\n[   89.513754][  T174] PM: Image loading progress:  40%\n[   89.779646][  T174] PM: Image loading progress:  50%\n[   89.832067][  T174] PM: Image loading progress:  60%\n[   89.882680][  T174] PM: Image loading progress:  70%\n[   89.934716][  T174] PM: Image loading progress:  80%\n[   89.985367][  T174] PM: Image loading progress:  90%\n[   90.037332][  T174] PM: Image loading progress: 100%\n[   90.042602][  T174] PM: Image loading done\n[   90.046851][  T174] PM: hibernation: Read 347136 kbytes in 1.54 seconds (225.41 MB/s)\n[   90.077128][  T174] Disabling non-boot CPUs ...\n[   90.082568][  T174] psci: CPU1 killed (polled 0 ms)\n[   90.089211][  T174] psci: CPU2 killed (polled 0 ms)\n[   90.095642][  T174] psci: CPU3 killed (polled 0 ms)\n[   90.101563][  T174] Kernel panic - not syncing: CFI failure (target: 0x1000)\n[   90.101563][  T174] CPU: 0 PID: 174 Comm: busybox Not tainted 5.10.185-perf-19168-gd61825039d97-dirty #1\n[   90.101563][  T174] Hardware name: Qualcomm Technologies, Inc (DT)\n[   90.101563][  T174] Call trace:\n[   90.101563][  T174]  dump_backtrace.cfi_jt+0x0/0x8\n[   90.101563][  T174]  show_stack+0x1c/0x2c\n[   90.101563][  T174]  dump_stack_lvl+0xdc/0x138\n[   90.101563][  T174]  panic+0x184/0x424\n[   90.101563][  T174]  __ubsan_handle_cfi_check_fail_abort+0x0/0x18\n[   90.101563][  T174]  __cfi_slowpath+0x180/0x1a4\n[   90.101563][  T174]  swsusp_arch_resume+0x698/0x73c\n[   90.101563][  T174]  resume_target_kernel+0xe8/0x18c\n[   90.101563][  T174]  load_image_and_restore+0xc4/0xfc\n[   90.101563][  T174]  software_resume+0x224/0x2d0\n[   90.101563][  T174]  resume_store+0xbc/0xc0\n[   90.101563][  T174]  kobj_attr_store+0x38/0x88\n[   90.101563][  T174]  sysfs_kf_write+0x64/0xc0\n[   90.101563][  T174]  kernfs_fop_write_iter+0x108/0x1d0\n[   90.101563][  T174]  vfs_write+0x2f4/0x368\n[   90.101563][  T174]  ksys_write+0x7c/0xec\n[   90.101563][  T174]  __arm64_sys_write+0x20/0x30\n[   90.101563][  T174]  el0_svc_common.llvm.8957475808249286746+0xd0/0x1e0\n[   90.101563][  T174]  do_el0_svc+0x28/0x98\n[   90.101563][  T174]  el0_svc+0x14/0x24\n[   90.101563][  T174]  el0_sync_handler+0x88/0xec\n[   90.101563][  T174]  el0_sync+0x1ac/0x1c0",
+      "parentUuid": "8ec43ec1_5c0ec3ce",
+      "revId": "c3aaa8213625c1ccef654a12ec98a944c62bd16a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
