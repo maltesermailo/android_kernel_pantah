@@ -19,6 +19,26 @@
       "tag": "",
       "revId": "a8d02e41fba28b81f16ff5f693002c9b481041c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000078864708",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3075538?revision\u003d10",
+      "key": {
+        "uuid": "c57f77ad_39de12fc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-22T22:17:08Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/6bd14aee0bd25525ab229acd9bfe536dd8642364) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d6bd14aee0bd25525ab229acd9bfe536dd8642364).\n\n```\n      ## include/linux/ieee80211.h ##\n    -@@ include/linux/ieee80211.h: static inline int ieee80211_mle_get_link_id(const u8 *data)\n    +@@ include/linux/ieee80211.h: static inline u8 ieee80211_mle_common_size(const u8 *data)\n      \n      /**\n       * ieee80211_mle_get_bss_param_ch_cnt - returns the BSS parameter change count\n    @@ net/mac80211/mlme.c: static bool ieee80211_assoc_config_link(struct ieee80211_li\n     -\t\t\t\tieee80211_mle_get_bss_param_ch_cnt(elems-\u003eml_basic);\n     +\t\t\tlink-\u003eu.mgd.bss_param_ch_cnt \u003d bss_param_ch_cnt;\n      \t\t}\n    - \t} else if (elems-\u003eparse_error \u0026 IEEE80211_PARSE_ERR_DUP_NEST_ML_BASIC ||\n    - \t\t   !elems-\u003eprof ||\n    + \t} else if (!elems-\u003eprof ||\n    + \t\t   !(elems-\u003eprof-\u003econtrol \u0026 prof_bss_param_ch_present)) {\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "a8d02e41fba28b81f16ff5f693002c9b481041c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
