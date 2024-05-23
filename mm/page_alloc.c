@@ -4492,6 +4492,7 @@ __alloc_pages_slowpath(gfp_t gfp_mask, unsigned int order,
 	unsigned int zonelist_iter_cookie;
 	int reserve_flags;
 	unsigned long alloc_start = jiffies;
+<<<<<<< HEAD   (71f8c6 UPSTREAM: thermal/netlink: Prevent userspace segmentation fa)
 	unsigned long pages_reclaimed = 0;
 	int retry_loop_count = 0;
 	u64 stime = 0;
@@ -4515,6 +4516,12 @@ __alloc_pages_slowpath(gfp_t gfp_mask, unsigned int order,
 		WARN_ON_ONCE(current->flags & PF_MEMALLOC);
 	}
 	trace_android_vh_alloc_pages_slowpath_start(&stime);
+||||||| BASE
+	bool should_alloc_retry = false;
+=======
+	bool should_alloc_retry = false;
+	unsigned long direct_reclaim_retries = 0;
+>>>>>>> CHANGE (8ef6fe ANDROID: vendor hooks: Add hooks to adjust page alloc water )
 
 restart:
 	compaction_retries = 0;
@@ -4556,6 +4563,9 @@ restart:
 
 	if (alloc_flags & ALLOC_KSWAPD)
 		wake_all_kswapds(order, gfp_mask, ac);
+
+	if (can_direct_reclaim && !direct_reclaim_retries && !(current->flags & PF_MEMALLOC))
+		trace_android_vh_alloc_pages_adjust_wmark(gfp_mask, order, &alloc_flags);
 
 	/*
 	 * The adjusted alloc_flags might result in immediate success, so try
@@ -4655,6 +4665,35 @@ retry:
 	if (current->flags & PF_MEMALLOC)
 		goto nopage;
 
+<<<<<<< HEAD   (71f8c6 UPSTREAM: thermal/netlink: Prevent userspace segmentation fa)
+||||||| BASE
+	trace_android_vh_should_alloc_pages_retry(gfp_mask, order, &alloc_flags,
+		ac->migratetype, ac->preferred_zoneref->zone, &page, &should_alloc_retry);
+	if (should_alloc_retry)
+		goto retry;
+
+	trace_android_vh_alloc_pages_reclaim_bypass(gfp_mask, order,
+		alloc_flags, ac->migratetype, &page);
+
+	if (page)
+		goto got_pg;
+
+=======
+	trace_android_vh_should_alloc_pages_retry(gfp_mask, order, &alloc_flags,
+		ac->migratetype, ac->preferred_zoneref->zone, &page, &should_alloc_retry);
+	if (should_alloc_retry)
+		goto retry;
+
+	trace_android_vh_alloc_pages_reclaim_bypass(gfp_mask, order,
+		alloc_flags, ac->migratetype, &page);
+
+	if (page)
+		goto got_pg;
+
+	if (direct_reclaim_retries < ULONG_MAX)
+		direct_reclaim_retries++;
+
+>>>>>>> CHANGE (8ef6fe ANDROID: vendor hooks: Add hooks to adjust page alloc water )
 	/* Try direct reclaim and then allocating */
 	page = __alloc_pages_direct_reclaim(gfp_mask, order, alloc_flags, ac,
 							&did_some_progress);
@@ -4679,6 +4718,9 @@ retry:
 	if (costly_order && (!can_compact ||
 			     !(gfp_mask & __GFP_RETRY_MAYFAIL)))
 		goto nopage;
+
+	trace_android_vh_alloc_pages_reset_wmark(gfp_mask, order,
+		&alloc_flags, &did_some_progress, &no_progress_loops, direct_reclaim_retries);
 
 	if (should_reclaim_retry(gfp_mask, order, ac, alloc_flags,
 				 did_some_progress > 0, &no_progress_loops))
