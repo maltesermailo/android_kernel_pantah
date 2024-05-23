@@ -2,7 +2,10 @@
 #undef TRACE_SYSTEM
 #define TRACE_SYSTEM mm
 
+#ifdef CREATE_TRACE_POINTS
 #define TRACE_INCLUDE_PATH trace/hooks
+#define UNDEF_TRACE_INCLUDE_PATH
+#endif
 
 #if !defined(_TRACE_HOOK_MM_H) || defined(TRACE_HEADER_MULTI_READ)
 #define _TRACE_HOOK_MM_H
@@ -95,7 +98,38 @@ DECLARE_HOOK(android_vh_count_workingset_refault,
 DECLARE_HOOK(android_vh_calc_alloc_flags,
 	TP_PROTO(gfp_t gfp_mask, unsigned int *alloc_flags,
 		bool *bypass),
+<<<<<<< HEAD   (678561 ANDROID: Add the pixel symbols from Linux 5.*)
 	TP_ARGS(gfp_mask, alloc_flags, bypass));
+||||||| BASE
+	TP_ARGS(gfp_mask, order, alloc_flags, migratetype, did_some_progress, bypass));
+DECLARE_HOOK(android_vh_save_vmalloc_stack,
+	TP_PROTO(unsigned long flags, struct vm_struct *vm),
+	TP_ARGS(flags, vm));
+DECLARE_HOOK(android_vh_show_stack_hash,
+	TP_PROTO(struct seq_file *m, struct vm_struct *v),
+	TP_ARGS(m, v));
+=======
+	TP_ARGS(gfp_mask, order, alloc_flags, migratetype, did_some_progress, bypass));
+DECLARE_HOOK(android_vh_save_vmalloc_stack,
+	TP_PROTO(unsigned long flags, struct vm_struct *vm),
+	TP_ARGS(flags, vm));
+DECLARE_HOOK(android_vh_show_stack_hash,
+	TP_PROTO(struct seq_file *m, struct vm_struct *v),
+	TP_ARGS(m, v));
+DECLARE_HOOK(android_vh_update_page_mapcount,
+	TP_PROTO(struct page *page, bool inc_size, bool compound,
+			int *first_mapping, bool *success),
+	TP_ARGS(page, inc_size, compound, first_mapping, success));
+DECLARE_HOOK(android_vh_add_page_to_lrulist,
+	TP_PROTO(struct folio *folio, bool compound, enum lru_list lru),
+	TP_ARGS(folio, compound, lru));
+DECLARE_HOOK(android_vh_del_page_from_lrulist,
+	TP_PROTO(struct folio *folio, bool compound, enum lru_list lru),
+	TP_ARGS(folio, compound, lru));
+DECLARE_HOOK(android_vh_show_mapcount_pages,
+	TP_PROTO(void *unused),
+	TP_ARGS(unused));
+>>>>>>> CHANGE (d9c8bb ANDROID: vendor_hooks: account page-mapcount)
 
 DECLARE_HOOK(android_vh_should_fault_around,
 	TP_PROTO(struct vm_fault *vmf, bool *should_around),

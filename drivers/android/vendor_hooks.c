@@ -264,6 +264,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sk_free);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_enable_thermal_genl_check);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_entry);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_count_workingset_refault);
+<<<<<<< HEAD   (678561 ANDROID: Add the pixel symbols from Linux 5.*)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sk_clone_lock);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_unref_folios_to_pcp_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_fail);
@@ -273,3 +274,38 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_modify_scan_control);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_should_continue_reclaim);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_async_psi_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cma_alloc_retry);
+||||||| BASE
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_reclaim_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_failure_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_adjust_wmark);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_reset_wmark);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_fiq_dump);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_add_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_uid);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_user);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_vmalloc_stack);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_show_stack_hash);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_reclaim_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_failure_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_adjust_wmark);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_reset_wmark);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_fiq_dump);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_add_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_uid);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_user);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_save_vmalloc_stack);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_show_stack_hash);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_show_mapcount_pages);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_update_page_mapcount);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_add_page_to_lrulist);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_del_page_from_lrulist);
+>>>>>>> CHANGE (d9c8bb ANDROID: vendor_hooks: account page-mapcount)
