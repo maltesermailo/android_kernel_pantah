@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000079093671",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3093456?revision\u003d5",
+      "key": {
+        "uuid": "ae53ff64_1b18efa6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-24T06:02:22Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/130c4dcbe8c79595a6ca2e69be9f01411201aa92) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d130c4dcbe8c79595a6ca2e69be9f01411201aa92).\n\n```\n      ## drivers/usb/gadget/function/f_uvc.c ##\n     @@ drivers/usb/gadget/function/f_uvc.c: static struct usb_interface_descriptor uvc_control_intf \u003d {\n      \t.bDescriptorType\t\u003d USB_DT_INTERFACE,\n    @@ drivers/usb/gadget/function/f_uvc.c: uvc_copy_descriptors(struct uvc_device *uvc\n     -\t      + uvc_interrupt_ep.bLength + uvc_interrupt_cs_ep.bLength\n      \t      + uvc_streaming_intf_alt0.bLength;\n      \n    --\tif (speed \u003d\u003d USB_SPEED_SUPER) {\n    --\t\tbytes +\u003d uvc_ss_interrupt_comp.bLength;\n    +-\tif (speed \u003d\u003d USB_SPEED_SUPER ||\n    +-\t    speed \u003d\u003d USB_SPEED_SUPER_PLUS) {\n    +-\t\tbytes +\u003d uvc_ss_control_comp.bLength;\n     -\t\tn_desc \u003d 6;\n     -\t} else {\n     -\t\tn_desc \u003d 5;\n    @@ drivers/usb/gadget/function/f_uvc.c: uvc_copy_descriptors(struct uvc_device *uvc\n      \tuvc_control_header-\u003ebInCollection \u003d 1;\n      \tuvc_control_header-\u003ebaInterfaceNr[0] \u003d uvc-\u003estreaming_intf;\n      \n    --\tUVC_COPY_DESCRIPTOR(mem, dst, \u0026uvc_interrupt_ep);\n    --\tif (speed \u003d\u003d USB_SPEED_SUPER)\n    --\t\tUVC_COPY_DESCRIPTOR(mem, dst, \u0026uvc_ss_interrupt_comp);\n    +-\tUVC_COPY_DESCRIPTOR(mem, dst, \u0026uvc_control_ep);\n    +-\tif (speed \u003d\u003d USB_SPEED_SUPER\n    +-\t    || speed \u003d\u003d USB_SPEED_SUPER_PLUS)\n    +-\t\tUVC_COPY_DESCRIPTOR(mem, dst, \u0026uvc_ss_control_comp);\n     +\tif (uvc-\u003eenable_interrupt_ep) {\n     +\t\tUVC_COPY_DESCRIPTOR(mem, dst, \u0026uvc_interrupt_ep);\n     +\t\tif (speed \u003d\u003d USB_SPEED_SUPER)\n    @@ drivers/usb/gadget/function/f_uvc.c: uvc_function_bind(struct usb_configuration\n     -\tuvc-\u003einterrupt_ep \u003d ep;\n     +\tuvc-\u003eenable_interrupt_ep \u003d opts-\u003eenable_interrupt_ep;\n      \n    - \tif (gadget_is_superspeed(c-\u003ecdev-\u003egadget))\n    - \t\tep \u003d usb_ep_autoconfig_ss(cdev-\u003egadget, \u0026uvc_ss_streaming_ep,\n    + \tep \u003d usb_ep_autoconfig(cdev-\u003egadget, \u0026uvc_fs_streaming_ep);\n    + \tif (!ep) {\n     \n      ## drivers/usb/gadget/function/uvc.h ##\n     @@ drivers/usb/gadget/function/uvc.h: struct uvc_device {\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "2ad325a39b1a2b2fa88d65563fbbb398545c5644",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
