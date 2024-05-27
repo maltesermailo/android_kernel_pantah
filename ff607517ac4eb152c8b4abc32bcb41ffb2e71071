@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab905404_e5f9dfac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-05-27T09:09:45Z",
+      "side": 1,
+      "message": "This series breaks the KMI:\n\n```\ntype \u0027struct scmi_protocol\u0027 changed\n  byte size changed from 48 to 56\n  member \u0027unsigned int supported_version\u0027 was added\n\ntype \u0027struct scmi_protocol_handle\u0027 changed\n  member changed from \u0027int(* set_priv)(const struct scmi_protocol_handle*, void*)\u0027 to \u0027int(* set_priv)(const struct scmi_protocol_handle*, void*, u32)\u0027\n    type changed from \u0027int(*)(const struct scmi_protocol_handle*, void*)\u0027 to \u0027int(*)(const struct scmi_protocol_handle*, void*, u32)\u0027\n      pointed-to type changed from \u0027int(const struct scmi_protocol_handle*, void*)\u0027 to \u0027int(const struct scmi_protocol_handle*, void*, u32)\u0027\n        parameter 3 of type \u0027u32\u0027 was added\n\ntype \u0027struct scmi_proto_helpers_ops\u0027 changed\n  byte size changed from 40 to 48\n  member \u0027int(* get_max_msg_size)(const struct scmi_protocol_handle*)\u0027 was added\n```\n\nIt might be too late to get this series into shape before the KMI freeze. \n\nThe next KMI update is scheduled for June 5, 2024 with cut-off date Friday, May 31, 2024.",
+      "revId": "ff607517ac4eb152c8b4abc32bcb41ffb2e71071",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37ab8b1a_bf5a8a06",
+        "filename": "drivers/pinctrl/freescale/pinctrl-imx-scmi.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-05-27T09:09:45Z",
+      "side": 1,
+      "message": "checkpatch has to say:\n\n```\nWARNING:ENOTSUPP: ENOTSUPP is not a SUSV4 error code, prefer EOPNOTSUPP\n#262: FILE: drivers/pinctrl/freescale/pinctrl-imx-scmi.c:191:\n```\n\nBut I am not familiar with this code.",
+      "range": {
+        "startLine": 191,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 19
+      },
+      "revId": "ff607517ac4eb152c8b4abc32bcb41ffb2e71071",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
