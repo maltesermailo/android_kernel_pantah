@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b27ab13b_e7e3d105",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2024-05-27T12:59:25Z",
+      "side": 1,
+      "message": "Thank you for taking a stab at it. Selinux is not happy with the adb-remount though and run into the following fatal crash:\n\n[   13.747646][    T1] init: Opening SELinux policy\n[   13.757870][    T1] init: Loading SELinux policy\n[   13.783160][    T1] SELinux:  policy capability network_peer_controls\u003d1\n[   13.789990][    T1] SELinux:  policy capability open_perms\u003d1\n[   13.795813][    T1] SELinux:  policy capability extended_socket_class\u003d1\n[   13.802616][    T1] SELinux:  policy capability always_check_network\u003d0\n[   13.809321][    T1] SELinux:  policy capability cgroup_seclabel\u003d0\n[   13.815575][    T1] SELinux:  policy capability nnp_nosuid_transition\u003d1\n[   13.822369][    T1] SELinux:  policy capability genfs_seclabel_symlinks\u003d0\n[   13.829347][    T1] SELinux:  policy capability ioctl_skip_cloexec\u003d0\n[   13.835908][    T1] SELinux:  policy capability userspace_initial_context\u003d0\n[   13.851075][   T57] audit: type\u003d1400 audit(6252.039:2): avc:  denied  { getattr } for  pid\u003d1 comm\u003d\"init\" name\u003d\"upper\" dev\u003d\"dm-6\" ino\u003d19 scontext\u003du:r:kernel:s0 tcontext\u003du:object_r:system_dlkm_file:s0 tclass\u003ddir permissive\u003d1\n[   13.900953][   T57] audit: type\u003d1403 audit(6252.091:3): auid\u003d4294967295 ses\u003d4294967295 lsm\u003dselinux res\u003d1\n[   13.910727][   T57] audit: type\u003d1404 audit(6252.091:4): enforcing\u003d1 old_enforcing\u003d0 auid\u003d4294967295 ses\u003d4294967295 enabled\u003d1 old-enabled\u003d1 lsm\u003dselinux res\u003d1\n[   13.933024][    T1] selinux: SELinux: Loaded file context from:\n[   13.939143][    T1] selinux:                 /system/etc/selinux/plat_file_contexts\n[   13.945771][    T1] selinux:                 /vendor/etc/selinux/vendor_file_contexts\n[   13.957632][   T57] audit: type\u003d1400 audit(6252.147:5): avc:  denied  { read } for  pid\u003d1 comm\u003d\"init\" path\u003d\"/lib64/bootstrap/libc.so\" dev\u003d\"dm-0\" ino\u003d18414668 scontext\u003du:r:kernel:s0 tcontext\u003du:object_r:system_bootstrap_lib_file:s0 tclass\u003dfile permissive\u003d0\n[   13.958092][    T1] Kernel panic - not syncing: Attempted to kill init! exitcode\u003d0x00000100\n[   13.958099][    T1] CPU: 5 PID: 1 Comm: init Tainted: G        W   E      6.9.0-mainline-00037-g70995de21f31 #2\n[   13.958106][    T1] Hardware name: Qualcomm Technologies, Inc. Robotics RB5 (DT)\n[   13.958108][    T1] Call trace:\n[   13.958110][    T1]  dump_backtrace+0x94/0xec\n[   13.958120][    T1]  show_stack+0x18/0x24\n[   13.958125][    T1]  dump_stack_lvl+0x38/0x90\n[   13.958134][    T1]  dump_stack+0x18/0x24\n[   13.958138][    T1]  panic+0x37c/0x398\n[   13.958146][    T1]  do_exit+0x894/0x9dc\n[   13.958155][    T1]  do_group_exit+0x34/0x90\n[   13.958162][    T1]  pid_child_should_wake+0x0/0x6c\n[   13.958168][    T1]  invoke_syscall+0x44/0x108\n[   13.958176][    T1]  el0_svc_common.constprop.0+0x40/0xe0\n[   13.958183][    T1]  do_el0_svc+0x1c/0x28\n[   13.958190][    T1]  el0_svc+0x34/0xfc\n[   13.958197][    T1]  el0t_64_sync_handler+0xc0/0xc4\n[   13.958202][    T1]  el0t_64_sync+0x1a0/0x1a4\n[   13.958208][    T1] SMP: stopping secondary CPUs\n[   14.180759][    T1] Kernel Offset: 0x2084e80000 from 0xffffffc080000000\n[   14.180763][    T1] PHYS_OFFSET: 0x80000000\n[   14.180765][    T1] CPU features: 0x4,0000040b,80100528,4200720b\n[   14.180770][    T1] Memory Limit: none\n\nThis patch works fine in Selinux\u003dpermissive mode. `audit2allow` suggests a handful of \"kernel \u003ccomm\u003e:fd\" denials to be fixed.",
+      "revId": "a9894b339678168fd8dd5599347c785ad5c876a2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
