@@ -49,6 +49,7 @@
 #include <trace/hooks/ftrace_dump.h>
 #include <trace/hooks/traps.h>
 #include <trace/hooks/fault.h>
+#include <trace/hooks/strict_rwx.h>
 #include <trace/hooks/regmap.h>
 #include <trace/hooks/hung_task.h>
 #include <trace/hooks/rwsem.h>
@@ -158,6 +159,8 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_psci_tos_resident_on);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_psci_cpu_suspend);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_iommu_iovad_init_alloc_algo);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_iommu_limit_align_shift);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_mod_text_enable_ro);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_mod_init_text_enable_ro);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ptype_head);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_allow_domain_state);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpuidle_psci_enter);
