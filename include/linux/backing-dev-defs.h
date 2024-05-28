@@ -158,6 +158,17 @@ struct bdi_writeback {
 		struct rcu_head rcu;
 	};
 #endif
+<<<<<<< HEAD   (ed4225 ANDROID: vendor_hooks: Add tune swappiness hook in get_scan_)
+||||||| BASE
+
+	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
+=======
+
+	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
+	ANDROID_OEM_DATA_ARRAY(1, 2);
+>>>>>>> CHANGE (7789c9 ANDROID: fs: Add ANDROID OEM DATA ARRAY in struct bdi_writeb)
 };
 
 struct backing_dev_info {
