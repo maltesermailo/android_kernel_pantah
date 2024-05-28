@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "256417ea_e33572bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2024-05-28T02:54:21Z",
+      "side": 1,
+      "message": "hello Matthias,\n\nThis patch does not need to be modified, and I think we can meet the deadline of Friday, May 31, 2024 to get it done. I added this patch to justify breaking KMI.\nThe patch is not built-in and I can modularize it. So I can abandon this patch. please receive other patches before cut-off date Friday, May 31, 2024. \n\nI\u0027ll abandon it for now and I\u0027ll add it if we need it.",
+      "parentUuid": "ab905404_e5f9dfac",
+      "revId": "ff607517ac4eb152c8b4abc32bcb41ffb2e71071",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "37ab8b1a_bf5a8a06",
         "filename": "drivers/pinctrl/freescale/pinctrl-imx-scmi.c",
         "patchSetId": 1
@@ -31,6 +49,30 @@
       "writtenOn": "2024-05-27T09:09:45Z",
       "side": 1,
       "message": "checkpatch has to say:\n\n```\nWARNING:ENOTSUPP: ENOTSUPP is not a SUSV4 error code, prefer EOPNOTSUPP\n#262: FILE: drivers/pinctrl/freescale/pinctrl-imx-scmi.c:191:\n```\n\nBut I am not familiar with this code.",
+      "range": {
+        "startLine": 191,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 19
+      },
+      "revId": "ff607517ac4eb152c8b4abc32bcb41ffb2e71071",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db8f9e88_06a279f5",
+        "filename": "drivers/pinctrl/freescale/pinctrl-imx-scmi.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2024-05-28T02:54:21Z",
+      "side": 1,
+      "message": "This doesn\u0027t need to be moved. It\u0027s required by the pinctrl maitainer.",
+      "parentUuid": "37ab8b1a_bf5a8a06",
       "range": {
         "startLine": 191,
         "startChar": 0,
