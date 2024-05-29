@@ -16,6 +16,24 @@
       "message": "https://android.googlesource.com/kernel/common/+/refs/heads/android15-6.6/drivers/soc/tegra/cbb/Makefile\nIf I am reading this correctly, even though this kconfig entry is tristate, the makefile only supports built-in. So won\u0027t removing this make cbb entirely unavailable?",
       "revId": "7e0958a8f38991a9d3f7edb75863e7f440826114",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73037be6_0bffd167",
+        "filename": "drivers/soc/tegra/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 3386406
+      },
+      "writtenOn": "2024-05-29T14:59:33Z",
+      "side": 0,
+      "message": "Yes, looks like this one\u0027s a bit iffy. Locally I set CONFIG_SOC_TEGRA_CBB to m in our fragment config, which would still evaluate to true in the `ifdef CONFIG_SOC_TEGRA_CBB`, so I think removing the config entirely would make cbb unavailable, but setting it to m still allows it to be built as built-in (even though we\u0027d expect it to be module in that case)",
+      "parentUuid": "b8bfce86_22554320",
+      "revId": "7e0958a8f38991a9d3f7edb75863e7f440826114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
