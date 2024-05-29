@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000079471027",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3075626?revision\u003d5",
+      "key": {
+        "uuid": "7fc60b09_41d4bcbb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-05-29T01:45:43Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/d0f95894fda7d4f895b29c1097f92d7fee278cb2) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003dd0f95894fda7d4f895b29c1097f92d7fee278cb2).\n\n```\n      ## net/netlink/af_netlink.c ##\n     @@ net/netlink/af_netlink.c: static void netlink_overrun(struct sock *sk)\n    - \tif (!nlk_test_bit(RECV_NO_ENOBUFS, sk)) {\n    + \tif (!(nlk-\u003eflags \u0026 NETLINK_F_RECV_NO_ENOBUFS)) {\n      \t\tif (!test_and_set_bit(NETLINK_S_CONGESTED,\n      \t\t\t\t      \u0026nlk_sk(sk)-\u003estate)) {\n     -\t\t\tsk-\u003esk_err \u003d ENOBUFS;\n    @@ net/netlink/af_netlink.c: static int netlink_recvmsg(struct socket *sock, struct\n      \t\t}\n      \t}\n     @@ net/netlink/af_netlink.c: void netlink_ack(struct sk_buff *in_skb, struct nlmsghdr *nlh, int err,\n    - err_bad_put:\n    - \tnlmsg_free(skb);\n    - err_skb:\n    --\tNETLINK_CB(in_skb).sk-\u003esk_err \u003d ENOBUFS;\n    -+\tWRITE_ONCE(NETLINK_CB(in_skb).sk-\u003esk_err, ENOBUFS);\n    - \tsk_error_report(NETLINK_CB(in_skb).sk);\n    - }\n    - EXPORT_SYMBOL(netlink_ack);\n    + \n    + \tskb \u003d nlmsg_new(payload + tlvlen, GFP_KERNEL);\n    + \tif (!skb) {\n    +-\t\tNETLINK_CB(in_skb).sk-\u003esk_err \u003d ENOBUFS;\n    ++\t\tWRITE_ONCE(NETLINK_CB(in_skb).sk-\u003esk_err, ENOBUFS);\n    + \t\tsk_error_report(NETLINK_CB(in_skb).sk);\n    + \t\treturn;\n    + \t}\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "556a987051b21f1165b73d55e0091713648e76d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
