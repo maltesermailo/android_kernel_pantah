@@ -16,6 +16,24 @@
       "message": "why is it ok to remove this? Is this because a macro changed that removes this dependence?",
       "revId": "de7ae7a17c0a224ae5d3f2c12a782ba54c204b2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "867aa06c_9ce86234",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1786831
+      },
+      "writtenOn": "2024-05-29T05:15:04Z",
+      "side": 1,
+      "message": "of_machine_compatible_match() works with a table of strings.\nof_machine_is_compatible() is a simplier version with only one string.\n\nYou can find out why with this patch below. Our latest drivers/pinctrl/freescale/pinctrl-imx-scmi.c driver called of_machine_compatible_match, so I made the commit\nhttps://android-review.googlesource.com/c/kernel/common/+/3103688/1",
+      "parentUuid": "f5272490_94770fbf",
+      "revId": "de7ae7a17c0a224ae5d3f2c12a782ba54c204b2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
