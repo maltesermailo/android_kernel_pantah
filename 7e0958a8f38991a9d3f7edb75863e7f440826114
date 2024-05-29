@@ -34,6 +34,24 @@
       "parentUuid": "b8bfce86_22554320",
       "revId": "7e0958a8f38991a9d3f7edb75863e7f440826114",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bfe4ad0_a5e9be8c",
+        "filename": "drivers/soc/tegra/Kconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1637924
+      },
+      "writtenOn": "2024-05-29T16:04:07Z",
+      "side": 0,
+      "message": "Yes, and since the main kernel image is required to be a prebuilt from google, everything that\u0027s built-in has to be enabled in the gki defconfig. Anything that evaluates to \u003dy in a fragment will not be available once a prebuilt boot image is used.",
+      "parentUuid": "73037be6_0bffd167",
+      "revId": "7e0958a8f38991a9d3f7edb75863e7f440826114",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
