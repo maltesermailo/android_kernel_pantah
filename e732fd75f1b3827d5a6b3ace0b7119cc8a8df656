@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1d0478b_17e952f1",
+        "filename": "include/linux/mmc/host.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-05-30T20:41:09Z",
+      "side": 1,
+      "message": "this changes the KMI so it needs to wait for the June 5 KMI update",
+      "fixSuggestions": [
+        {
+          "fixId": "6f419874_c44d366d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/mmc/host.h",
+              "range": {
+                "startLine": 528,
+                "startChar": 0,
+                "endLine": 529,
+                "endChar": 0
+              },
+              "replacement": "\tbool\t\t\tcqe_recovery_reset_always; /* for testing */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e732fd75f1b3827d5a6b3ace0b7119cc8a8df656",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
