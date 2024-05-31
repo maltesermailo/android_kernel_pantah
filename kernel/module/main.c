@@ -1157,9 +1157,12 @@ static const struct kernel_symbol *resolve_symbol(struct module *mod,
 	 *    it has to be an unsigned module and not signed GKI module
 	 *    to protect symbols exported by signed GKI modules.
 	 */
-	if (!mod->sig_ok &&
+	bool is_vendor_module = !mod->sig_ok;
+	bool is_vendor_exported_symbol = fsa.owner && !fsa.owner->sig_ok;
+
+	if (is_vendor_module &&
 	    !gki_is_module_unprotected_symbol(name) &&
-	    fsa.owner && fsa.owner->sig_ok) {
+	    !is_vendor_exported_symbol) {
 		fsa.sym = ERR_PTR(-EACCES);
 		goto getname;
 	}
