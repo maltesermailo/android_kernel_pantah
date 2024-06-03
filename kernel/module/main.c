@@ -1151,18 +1151,20 @@ static const struct kernel_symbol *resolve_symbol(struct module *mod,
 
 	/*
 	 * ANDROID: GKI:
-	 * In case of an unsigned module symbol resolves only if:
-	 * 1. Symbol is in the list of unprotected symbol list OR
-	 * 2. If symbol owner is not NULL i.e. owner is another module;
-	 *    it has to be an unsigned module and not signed GKI module
-	 *    to protect symbols exported by signed GKI modules.
+	 * In case of an unsigned module symbol resolves only if one of the
+	 * following conditions is satisfied:
+	 *
+	 * 1. Symbol owner is not NULL i.e. owner is another module; it has
+	 *    to be an unsigned module and not signed GKI module to protect
+	 *    symbols exported by signed GKI modules.
+	 * 2. Symbol is in the list of unprotected symbol list.
 	 */
 	bool is_vendor_module = !mod->sig_ok;
 	bool is_vendor_exported_symbol = fsa.owner && !fsa.owner->sig_ok;
 
 	if (is_vendor_module &&
-	    !gki_is_module_unprotected_symbol(name) &&
-	    !is_vendor_exported_symbol) {
+	    !is_vendor_exported_symbol &&
+	    !gki_is_module_unprotected_symbol(name)) {
 		fsa.sym = ERR_PTR(-EACCES);
 		goto getname;
 	}
