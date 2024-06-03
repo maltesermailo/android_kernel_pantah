@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c670b41_846687cb",
+        "filename": "kernel/module/main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1160,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-06-03T12:23:30Z",
+      "side": 1,
+      "message": "I have no objection to this, but watch out if you attempt to backport this, it will break the build to declare variables in the middle of a function for older kernel versions.",
+      "range": {
+        "startLine": 1160,
+        "startChar": 1,
+        "endLine": 1160,
+        "endChar": 5
+      },
+      "revId": "250931b8b3d97b9d7d18fcc0c5d863113e2810b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
