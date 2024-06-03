@@ -218,7 +218,8 @@ impl kernel::Module for BinderModule {
             }
 
             if !binder_use_rust {
-                return Ok(Self {});
+                // If we're not in use, unload ourselves
+                return Err(kernel::error::code::ENOPARAM)
             }
             binder_driver_initialized = true;
         }
