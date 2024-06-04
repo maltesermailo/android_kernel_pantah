@@ -16,6 +16,24 @@
       "message": "There seems to be an actual build failure in db845c build:\n```\nThese symbols are missing from the symbol list and are not available at runtime for unsigned modules:\n  of_machine_compatible_match required by [\u0027msm.ko\u0027]\n```",
       "revId": "e05a3562b6a5ae4b27a1edbee0f621c5a577935a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cf2660f_4f094dd2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-06-04T21:21:01Z",
+      "side": 1,
+      "message": "fwiw, this fixed the issue for me:\n```\n$ git diff\ndiff --git a/android/abi_gki_aarch64_db845c b/android/abi_gki_aarch64_db845c\nindex 64640e7eda6c..c3259ff977e0 100644\n--- a/android/abi_gki_aarch64_db845c\n+++ b/android/abi_gki_aarch64_db845c\n@@ -1561,6 +1561,7 @@\n   of_graph_get_next_endpoint\n   of_graph_get_remote_port_parent\n   of_icc_get\n+  of_machine_compatible_match\n   of_property_read_u64_index\n   param_ops_ullong\n   phy_calibrate\n```",
+      "parentUuid": "04f968f3_fd8a75de",
+      "revId": "e05a3562b6a5ae4b27a1edbee0f621c5a577935a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
