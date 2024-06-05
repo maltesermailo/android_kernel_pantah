@@ -5,8 +5,7 @@ BAZEL=tools/bazel
 BIN_DIR=common/tools/testing/android/bin
 ACLOUD=$BIN_DIR/acloudb.sh
 TRADEFED=prebuilts/tradefed/filegroups/tradefed/tradefed.sh
-TESTSDIR=bazel-bin/common/
-LOG_DIR=${TMPDIR:-/tmp}/kselftest_$USER/$(date +%Y%m%d_%H%M%S)
+TESTSDIR=/tmp/kunit_tests
 JDK_PATH=prebuilts/jdk/jdk11/linux-x86
 
 print_help() {
@@ -22,12 +21,11 @@ print_help() {
     echo "                        If serial is specified, cuttlefish device launch will be skipped"
     echo "  -t, --test=TEST_NAME  The test target name. Can be repeated"
     echo "                        If test is not specified, all kselftests will be run"
-    echo "  --gcov                Collect coverage data from the test result"
     echo "  -h, --help            Display this help message and exit"
     echo ""
     echo "Examples:"
     echo "$0"
-    echo "$0 -t kselftest_size_test_get_size -t kselftest_binderfs_binderfs_test"
+    echo "$0 -t regmap-kunit.ko -t lib_test.ko"
     echo "$0 -s 127.0.0.1:45549"
     echo ""
     exit 0
@@ -38,10 +36,9 @@ LAUNCH_CVD=true
 KILL_CVD=true
 DIST_DIR=/tmp/kernel_dist
 SERIAL_NUMBER=
-MODULE_NAME="selftests"
+MODULE_NAME="kunit"
 TEST_FILTERS=
 SELECTED_TESTS=
-GCOV=false
 
 while test $# -gt 0; do
     case "$1" in
@@ -112,24 +109,15 @@ while test $# -gt 0; do
             TEST_FILTERS+="--include-filter '$MODULE_NAME $TEST_NAME'"
             shift
             ;;
-        --gcov)
-            GCOV=true
-            shift
-            ;;
         *)
             ;;
     esac
 done
 
 if $BUILD_KERNEL; then
-    BUILD_FLAGS=
-    if $GCOV; then
-        BUILD_FLAGS+=" --gcov"
-    fi
     echo "Building kernel..."
     # TODO: add support to build kernel for physical device
-    $BAZEL run $BUILD_FLAGS //common-modules/virtual-device:virtual_device_x86_64_dist -- \
-     --dist_dir=$DIST_DIR
+    $BAZEL run //common-modules/virtual-device:virtual_device_x86_64_dist --  --dist_dir=$DIST_DIR
 fi
 
 if $LAUNCH_CVD; then
@@ -151,13 +139,14 @@ fi
 
 echo "Get abi from device $SERIAL_NUMBER"
 ABI=$(adb -s $SERIAL_NUMBER shell getprop ro.product.cpu.abi)
-echo "Building kselftests according to device $SERIAL_NUMBER ro.product.cpu.abi $ABI ..."
+echo "Building kunit tests according to device $SERIAL_NUMBER ro.product.cpu.abi $ABI ..."
+# $ tools/bazel run -- //common:kunit_tests_x86_64_install -v --destdir /tmp/kunit_tests
 case $ABI in
 	arm64*)
-		$BAZEL build //common:kselftest_tests_arm64
+		$BAZEL run //common:kunit_tests_arm64_install -- -v --destdir $TESTSDIR
 		;;
 	x86_64*)
-		$BAZEL build //common:kselftest_tests_x86_64
+		$BAZEL run //common:kunit_tests_x86_64_install -- -v --destdir $TESTSDIR
 		;;
 	*)
 		echo "$ABI not supported"
@@ -166,7 +155,7 @@ case $ABI in
 esac
 
 if [ -z "$SELECTED_TESTS" ]; then
-    echo "Running all kselftests with device $SERIAL_NUMBER..."
+    echo "Running all KUnit tests with device $SERIAL_NUMBER..."
     TEST_FILTERS="--include-filter $MODULE_NAME"
 else
     echo "Running $SELECTED_TESTS with device $SERIAL_NUMBER ..."
@@ -174,26 +163,13 @@ fi
 
 tf_cli="JAVA_HOME=$JDK_PATH PATH=$JDK_PATH/bin:$PATH $TRADEFED run commandAndExit \
 template/local_min --template:map test=suite/test_mapping_suite \
-$TEST_FILTERS --tests-dir=$TESTSDIR --log-file-path=$LOG_DIR \
---primary-abi-only -s $SERIAL_NUMBER"
+$TEST_FILTERS --tests-dir=$TESTSDIR --primary-abi-only -s $SERIAL_NUMBER"
 
-if $GCOV; then
-    tf_cli+=" --coverage --coverage-toolchain GCOV_KERNEL --auto-collect GCOV_KERNEL_COVERAGE"
-fi
-
-echo "Running tradefed command: $tf_cli"
+echo "Runing tradefed command: $tf_cli"
 
 eval $tf_cli
 
-echo "Test finished. Log directory: $LOG_DIR"
-
 if $LAUNCH_CVD && $KILL_CVD; then
-    echo "Deleting cvd instance $INSTANCE_NAME ..."
+    echo "Test finished. Deleting cvd instance $INSTANCE_NAME ..."
     $ACLOUD delete --instance-names $INSTANCE_NAME
-fi
-
-if $GCOV; then
-    echo "Creating tracefile ..."
-    common/tools/testing/android/bin/create-tracefile.py -t $LOG_DIR -o $LOG_DIR/cov.info && \
-    echo "Created tracefile at $LOG_DIR/cov.info"
 fi
