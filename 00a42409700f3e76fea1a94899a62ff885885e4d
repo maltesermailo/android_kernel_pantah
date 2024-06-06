@@ -51,6 +51,24 @@
       "parentUuid": "b9a71841_36af2aa5",
       "revId": "00a42409700f3e76fea1a94899a62ff885885e4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd9a849e_74fa5e5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-06-06T02:50:36Z",
+      "side": 1,
+      "message": "You shouldn\u0027t change it manually. Instead, it is better to fix your git configuration.\n\nMake sure you have the correct name/email set. Something like:\n```\n$ git config --global user.name \"John Doe\"\n$ git config --global user.email johndoe@example.com\n```\n\nThen reset the author of this commit. Something like:\n```\n$ git commit --amend --reset-author --no-edit\n```\n\nNow, make sure to re-sign with your user info.\n```\n$ git commit --amend --signoff\n```\n\nNow the `Author:` and `Signed-off-by:` fields should match your user config.",
+      "parentUuid": "d64c71f7_52592d1d",
+      "revId": "00a42409700f3e76fea1a94899a62ff885885e4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
