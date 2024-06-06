@@ -289,3 +289,5 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_direct_reclaim_enter);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_direct_reclaim_exit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_may_oom_exit);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_vmscan_kswapd_done);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_read_lazy_flag);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_tsk_need_resched_lazy);
