@@ -16,6 +16,41 @@
       "message": "Please review the code, thank you",
       "revId": "6973315181efcab5ad42f3509d798865fad06461",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b893e55_86e1b05b",
+        "filename": "include/linux/android_debug_symbols.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-06-07T16:56:35Z",
+      "side": 1,
+      "message": "Please add a comment in the commit message explaining why each of these is important to add to the list of debug symbols",
+      "fixSuggestions": [
+        {
+          "fixId": "d5e86a39_d3dff2a3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/android_debug_symbols.h",
+              "range": {
+                "startLine": 24,
+                "startChar": 0,
+                "endLine": 25,
+                "endChar": 0
+              },
+              "replacement": "\tADS_SLAB_MUTEX, /* for debugging slab mutex */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6973315181efcab5ad42f3509d798865fad06461",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
