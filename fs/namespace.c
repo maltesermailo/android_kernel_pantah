@@ -37,6 +37,7 @@
 
 #include "pnode.h"
 #include "internal.h"
+#include <trace/hooks/blk.h>
 
 /* Maximum number of mounts in a mount namespace */
 static unsigned int sysctl_mount_max __read_mostly = 100000;
@@ -3657,10 +3658,34 @@ static int do_new_mount_fc(struct fs_context *fc, const struct path *mountpoint,
 
 	mnt_warn_timestamp_expiry(mountpoint, mnt);
 
+<<<<<<< HEAD   (ba857eb99ec955367580dc1c301b326e13ef6524 ANDROID: GKI: add trusty symbol list)
 	LOCK_MOUNT(mp, mountpoint);
 	error = do_add_mount(real_mount(mnt), &mp, mnt_flags);
 	if (!error)
 		retain_and_null_ptr(mnt); // consumed on success
+||||||| BASE   (73e2a7d3979e26b61b2ba5cde04b42cd322a8ed8 FROMLIST: mm: percpu: increase PERCPU_MODULE_RESERVE to avoi)
+	mp = lock_mount(mountpoint);
+	if (IS_ERR(mp)) {
+		mntput(mnt);
+		return PTR_ERR(mp);
+	}
+	error = do_add_mount(real_mount(mnt), mp, mountpoint, mnt_flags);
+	unlock_mount(mp);
+	if (error < 0)
+		mntput(mnt);
+=======
+	mp = lock_mount(mountpoint);
+	if (IS_ERR(mp)) {
+		mntput(mnt);
+		return PTR_ERR(mp);
+	}
+	error = do_add_mount(real_mount(mnt), mp, mountpoint, mnt_flags);
+	unlock_mount(mp);
+	if (error < 0)
+		mntput(mnt);
+	else
+		trace_android_vh_do_new_mount_fc(mountpoint, mnt);
+>>>>>>> CHANGE (b67f210ad77b15cc6371b66aae9600b648ccc05b ANDROID: vendor hooks: add vendor hooks for do_new_mount)
 	return error;
 }
 

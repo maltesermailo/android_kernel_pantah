@@ -340,6 +340,37 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_resume_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_early_resume_begin);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_vmscan_kswapd_done);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_customize_alloc_gfp);
+<<<<<<< HEAD   (ba857eb99ec955367580dc1c301b326e13ef6524 ANDROID: GKI: add trusty symbol list)
+||||||| BASE   (73e2a7d3979e26b61b2ba5cde04b42cd322a8ed8 FROMLIST: mm: percpu: increase PERCPU_MODULE_RESERVE to avoi)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_kcompactd_cpu_online);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_adjust_swap_info_flags);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_direct_reclaim_begin);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_direct_reclaim_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_read_fault);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_alloc_pages_reclaim_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_alloc_pages_reclaim_cycle_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_throttle_direct_reclaim_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_update_uid_stats);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_append_total_power);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_bd_link_disk_holder);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_new_ref);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_del_ref);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_kcompactd_cpu_online);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_adjust_swap_info_flags);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_direct_reclaim_begin);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_direct_reclaim_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_read_fault);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_alloc_pages_reclaim_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_alloc_pages_reclaim_cycle_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_throttle_direct_reclaim_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_update_uid_stats);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_append_total_power);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_bd_link_disk_holder);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_new_mount_fc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_new_ref);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_del_ref);
+>>>>>>> CHANGE (b67f210ad77b15cc6371b66aae9600b648ccc05b ANDROID: vendor hooks: add vendor hooks for do_new_mount)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fsnotify_open);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_init_adjust_zone_wmark);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_add_lru_folio_activate);
