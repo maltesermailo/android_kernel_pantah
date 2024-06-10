@@ -34,6 +34,24 @@
       "parentUuid": "f3c3e1ec_b181bafe",
       "revId": "66f75a57846f4e5bef6a9aa57a8e0485eace2abd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa0b1561_9ef1df42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-06-10T18:20:05Z",
+      "side": 1,
+      "message": "Yes, that\u0027s what I was referring to. Unfortunately, tt seems the ABI is impacted by the updates to that ops: \n```\ntype \u0027struct dma_heap_ops\u0027 changed\n  member changed from \u0027struct dma_buf*(* allocate)(struct dma_heap*, unsigned long, unsigned long, unsigned long)\u0027 to \u0027struct dma_buf*(* allocate)(struct dma_heap*, unsigned long, u32, u64)\u0027\n    type changed from \u0027struct dma_buf*(*)(struct dma_heap*, unsigned long, unsigned long, unsigned long)\u0027 to \u0027struct dma_buf*(*)(struct dma_heap*, unsigned long, u32, u64)\u0027\n      pointed-to type changed from \u0027struct dma_buf*(struct dma_heap*, unsigned long, unsigned long, unsigned long)\u0027 to \u0027struct dma_buf*(struct dma_heap*, unsigned long, u32, u64)\u0027\n        parameter 3 type changed from \u0027unsigned long\u0027 to \u0027u32\u0027 \u003d \u0027__u32\u0027 \u003d \u0027unsigned int\u0027\n          resolved type changed from \u0027unsigned long\u0027 to \u0027unsigned int\u0027\n        parameter 4 type changed from \u0027unsigned long\u0027 to \u0027u64\u0027 \u003d \u0027__u64\u0027 \u003d \u0027unsigned long long\u0027\n          resolved type changed from \u0027unsigned long\u0027 to \u0027unsigned long long\u0027\n```\n\nSo I\u0027ve uploaded one more patch to fix it. Hopefully that is the last one needed.",
+      "parentUuid": "9a543194_d1c7ccdf",
+      "revId": "66f75a57846f4e5bef6a9aa57a8e0485eace2abd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
