@@ -16,6 +16,29 @@
       "message": "No objection from me on this.",
       "revId": "abfb1d2ee7a7b0918bcad067a0d0056f09504a30",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "301a62dc_23d4c275",
+        "filename": "drivers/dma-buf/heaps/system_heap.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2024-06-10T18:05:19Z",
+      "side": 1,
+      "message": "Does this seem a bit cleaner?\n\n```suggestion\n\t\tif (domain) {\n\t\t\tif (IS_ENABLED(CONFIG_NEED_SG_DMA_FLAGS) \u0026\u0026 sg_dma_is_swiotlb(table-\u003esgl))\n\t\t\t\treturn true;\n\t\t\tpaddr \u003d iommu_iova_to_phys(domain, sg_dma_address(sg));\n\t\t} else {\n\t\t\tpaddr \u003d dma_to_phys(dev, sg_dma_address(sg));\n\t\t}\n\n\t\tif (is_swiotlb_buffer(dev, paddr))\n\t\t        return true;\n```",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 3
+      },
+      "revId": "abfb1d2ee7a7b0918bcad067a0d0056f09504a30",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
