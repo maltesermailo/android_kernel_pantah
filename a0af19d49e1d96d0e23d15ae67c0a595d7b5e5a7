@@ -16,6 +16,24 @@
       "message": "Can someone explain why the patch is reverted?",
       "revId": "a0af19d49e1d96d0e23d15ae67c0a595d7b5e5a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "227146f4_212a87d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1950675
+      },
+      "writtenOn": "2024-06-11T06:00:55Z",
+      "side": 1,
+      "message": "This is to allow KUnit tests to run via the kunit.py script, which relies on built-in tests. Despite this being reverted, KUnit tests will still not run unless kunit.enable\u003d1 is passed on the command-line, and if they do run, will taint the kernel. This seems to align well with the KUnit test modules, which similarly can only run if kunit.enable\u003d1 and will taint the kernel. This also brings us back in line with what\u0027s done upstream.\n\nIf this is an issue, it wouldn\u0027t be a problem to put built-in tests behind another kconfig option, but personally I doubt it\u0027s necessary.",
+      "parentUuid": "96ca8f4b_6888ead6",
+      "revId": "a0af19d49e1d96d0e23d15ae67c0a595d7b5e5a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
