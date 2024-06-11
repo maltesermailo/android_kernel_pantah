@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c623fcf_3edc80d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-06-11T16:26:24Z",
+      "side": 1,
+      "message": "Hi Matthias,\n\nIt\u0027s not upstream since this is a very Android case where we need to provide x86 emulators (16kb page size) to the app ecosystem. \n\nUpstream x86 doesn\u0027t have any support for 16k.",
+      "parentUuid": "17683d01_c6391787",
+      "revId": "57aebf6c732cdbe30037c0948c6c7b232a99e6b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8cb34f6c_0cd734af",
@@ -78,6 +96,30 @@
       "writtenOn": "2024-06-11T08:24:40Z",
       "side": 1,
       "message": "I am not really familiar with this code, but:\nChanging this so subtly and creating an inconsistency with very similar code above (L1988) without any commentary sounds like a bug to happen later ...",
+      "range": {
+        "startLine": 2086,
+        "startChar": 12,
+        "endLine": 2086,
+        "endChar": 23
+      },
+      "revId": "57aebf6c732cdbe30037c0948c6c7b232a99e6b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51c4c545_71b406ac",
+        "filename": "mm/mmap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2086,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-06-11T16:26:24Z",
+      "side": 1,
+      "message": "`__PAGE_SIZE \u003d\u003d PAGE_SIZE` in all cases except in the x86 16k emulator. It is done this way to minimize diff with upstream and reduce the conflicts in future merges. \n\nThe rest is abstracted in `mm/page_size_compat.c` `inlude/linux/page_size_compat.h`\n\n\nThe similar code above is not used in android only parisc and ia64 architectures, we could make it consistent, but I prefer to avoid the adding delta unecessarily.",
+      "parentUuid": "6b8b6057_07bc2ac3",
       "range": {
         "startLine": 2086,
         "startChar": 12,
