@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "17683d01_c6391787",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-06-11T08:24:40Z",
+      "side": 1,
+      "message": "This code is upstream, right? Should it not be changed there? Can you explain (in the commit message) why this is ANDROID specific?",
+      "revId": "57aebf6c732cdbe30037c0948c6c7b232a99e6b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8cb34f6c_0cd734af",
         "filename": "mm/mmap.c",
         "patchSetId": 2
@@ -43,6 +60,29 @@
         "startChar": 12,
         "endLine": 1988,
         "endChar": 21
+      },
+      "revId": "57aebf6c732cdbe30037c0948c6c7b232a99e6b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b8b6057_07bc2ac3",
+        "filename": "mm/mmap.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2086,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-06-11T08:24:40Z",
+      "side": 1,
+      "message": "I am not really familiar with this code, but:\nChanging this so subtly and creating an inconsistency with very similar code above (L1988) without any commentary sounds like a bug to happen later ...",
+      "range": {
+        "startLine": 2086,
+        "startChar": 12,
+        "endLine": 2086,
+        "endChar": 23
       },
       "revId": "57aebf6c732cdbe30037c0948c6c7b232a99e6b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
