@@ -34,6 +34,24 @@
       "parentUuid": "96ca8f4b_6888ead6",
       "revId": "a0af19d49e1d96d0e23d15ae67c0a595d7b5e5a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9b4a6f4_c339775c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1759937
+      },
+      "writtenOn": "2024-06-11T22:30:50Z",
+      "side": 1,
+      "message": "I agreed with this approach. User should be able to run kunit.py on Android common kernel. I just found abnormal log on both origin/linux-6.6.y and aosp/android15-6.6 with\n\n$ ./tools/testing/kunit/kunit.py run --kconfig_add CONFIG_KUNIT_EXAMPLE_TEST\u003dn --kconfig_add CONFIG_KUNIT_ALL_TESTS\u003dn --raw_output\u003dall\n...\nKTAP version 1\n1..0\nreboot: System halted\n\nI will look for it. Thanks.",
+      "parentUuid": "227146f4_212a87d7",
+      "revId": "a0af19d49e1d96d0e23d15ae67c0a595d7b5e5a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
