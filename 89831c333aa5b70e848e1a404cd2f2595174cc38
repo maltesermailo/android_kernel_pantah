@@ -70,6 +70,30 @@
       },
       "revId": "89831c333aa5b70e848e1a404cd2f2595174cc38",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "786a293e_a7ceb70d",
+        "filename": "include/linux/swap.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-06-13T23:28:02Z",
+      "side": 1,
+      "message": "I checked it locally it does affect the ABI:\n\n```sh\ntype \u0027struct swap_cluster_info\u0027 changed\n  byte size changed from 8 to 12\n  member \u0027unsigned int reserved:1\u0027 was added\n  member \u0027unsigned int flags:4\u0027 was added\n```\n\nI\u0027d like to keep it as is for the same reason as https://android-review.googlesource.com/c/kernel/common/+/3131283/comments/c08d785c_d7320bcd\n\nSince these will be replaced soon",
+      "parentUuid": "d279873f_96067335",
+      "range": {
+        "startLine": 268,
+        "startChar": 14,
+        "endLine": 268,
+        "endChar": 22
+      },
+      "revId": "89831c333aa5b70e848e1a404cd2f2595174cc38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
