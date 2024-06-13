@@ -499,8 +499,13 @@ out:
 		spin_lock(&sbi->stat_lock);
 		if (t > (unsigned long)(sbi->user_block_count -
 				F2FS_OPTION(sbi).root_reserved_blocks -
+<<<<<<< HEAD   (dc5396 Merge branch 'android15-6.6' into branch 'android15-6.6-lts')
 				SEGS_TO_BLKS(sbi,
 				SM_I(sbi)->additional_reserved_segments))) {
+=======
+				(SM_I(sbi)->additional_reserved_segments <<
+					sbi->log_blocks_per_seg))) {
+>>>>>>> BRANCH (140cf9 Linux 6.6.33)
 			spin_unlock(&sbi->stat_lock);
 			return -EINVAL;
 		}

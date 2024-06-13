@@ -301,7 +301,11 @@ static unsigned int get_max_cost(struct f2fs_sb_info *sbi,
 
 	/* LFS */
 	if (p->gc_mode == GC_GREEDY)
+<<<<<<< HEAD   (dc5396 Merge branch 'android15-6.6' into branch 'android15-6.6-lts')
 		return SEGS_TO_BLKS(sbi, 2 * p->ofs_unit);
+=======
+		return 2 * BLKS_PER_SEG(sbi) * p->ofs_unit;
+>>>>>>> BRANCH (140cf9 Linux 6.6.33)
 	else if (p->gc_mode == GC_CB)
 		return UINT_MAX;
 	else if (p->gc_mode == GC_AT)
@@ -1989,9 +1993,12 @@ int f2fs_gc_range(struct f2fs_sb_info *sbi,
 	unsigned int segno;
 	unsigned int gc_secs = dry_run_sections;
 
+<<<<<<< HEAD   (dc5396 Merge branch 'android15-6.6' into branch 'android15-6.6-lts')
 	if (unlikely(f2fs_cp_error(sbi)))
 		return -EIO;
 
+=======
+>>>>>>> BRANCH (140cf9 Linux 6.6.33)
 	for (segno = start_seg; segno <= end_seg; segno += SEGS_PER_SEC(sbi)) {
 		struct gc_inode_list gc_list = {
 			.ilist = LIST_HEAD_INIT(gc_list.ilist),
@@ -2087,7 +2094,11 @@ static void update_sb_metadata(struct f2fs_sb_info *sbi, int secs)
 	raw_sb->segment_count = cpu_to_le32(segment_count + segs);
 	raw_sb->segment_count_main = cpu_to_le32(segment_count_main + segs);
 	raw_sb->block_count = cpu_to_le64(block_count +
+<<<<<<< HEAD   (dc5396 Merge branch 'android15-6.6' into branch 'android15-6.6-lts')
 			(long long)SEGS_TO_BLKS(sbi, segs));
+=======
+			(long long)(segs << sbi->log_blocks_per_seg));
+>>>>>>> BRANCH (140cf9 Linux 6.6.33)
 	if (f2fs_is_multi_device(sbi)) {
 		int last_dev = sbi->s_ndevs - 1;
 		int dev_segs =
@@ -2103,7 +2114,11 @@ static void update_sb_metadata(struct f2fs_sb_info *sbi, int secs)
 static void update_fs_metadata(struct f2fs_sb_info *sbi, int secs)
 {
 	int segs = secs * SEGS_PER_SEC(sbi);
+<<<<<<< HEAD   (dc5396 Merge branch 'android15-6.6' into branch 'android15-6.6-lts')
 	long long blks = SEGS_TO_BLKS(sbi, segs);
+=======
+	long long blks = (long long)segs << sbi->log_blocks_per_seg;
+>>>>>>> BRANCH (140cf9 Linux 6.6.33)
 	long long user_block_count =
 				le64_to_cpu(F2FS_CKPT(sbi)->user_block_count);
 
@@ -2145,7 +2160,11 @@ int f2fs_resize_fs(struct file *filp, __u64 block_count)
 		int last_dev = sbi->s_ndevs - 1;
 		__u64 last_segs = FDEV(last_dev).total_segments;
 
+<<<<<<< HEAD   (dc5396 Merge branch 'android15-6.6' into branch 'android15-6.6-lts')
 		if (block_count + SEGS_TO_BLKS(sbi, last_segs) <=
+=======
+		if (block_count + (last_segs << sbi->log_blocks_per_seg) <=
+>>>>>>> BRANCH (140cf9 Linux 6.6.33)
 								old_block_count)
 			return -EINVAL;
 	}

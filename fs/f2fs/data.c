@@ -3874,7 +3874,11 @@ static int f2fs_migrate_blocks(struct inode *inode, block_t start_blk,
 
 	if (!blkcnt)
 		return 0;
+<<<<<<< HEAD   (dc5396 Merge branch 'android15-6.6' into branch 'android15-6.6-lts')
 	end_sec = end_blk / blk_per_sec;
+=======
+	end_sec = secidx + (blkcnt - 1) / blk_per_sec;
+>>>>>>> BRANCH (140cf9 Linux 6.6.33)
 
 	f2fs_down_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
 	filemap_invalidate_lock(inode->i_mapping);
@@ -3884,7 +3888,11 @@ static int f2fs_migrate_blocks(struct inode *inode, block_t start_blk,
 
 	for (; secidx <= end_sec; secidx++) {
 		unsigned int blkofs_end = secidx == end_sec ?
+<<<<<<< HEAD   (dc5396 Merge branch 'android15-6.6' into branch 'android15-6.6-lts')
 				end_blk % blk_per_sec : blk_per_sec - 1;
+=======
+			(blkcnt - 1) % blk_per_sec : blk_per_sec - 1;
+>>>>>>> BRANCH (140cf9 Linux 6.6.33)
 
 		f2fs_down_write(&sbi->pin_sem);
 
@@ -4076,6 +4084,10 @@ static int f2fs_swap_activate(struct swap_info_struct *sis, struct file *file,
 
 	f2fs_precache_extents(inode);
 
+	ret = filemap_fdatawrite(inode->i_mapping);
+	if (ret < 0)
+		return ret;
+
 	ret = check_swap_activate(sis, file, span);
 	if (ret < 0)
 		return ret;
@@ -4226,9 +4238,12 @@ static int f2fs_iomap_begin(struct inode *inode, loff_t offset, loff_t length,
 		return -EINVAL;
 
 	if (map.m_flags & F2FS_MAP_MAPPED) {
+<<<<<<< HEAD   (dc5396 Merge branch 'android15-6.6' into branch 'android15-6.6-lts')
 		if (WARN_ON_ONCE(map.m_pblk == NEW_ADDR))
 			return -EINVAL;
 
+=======
+>>>>>>> BRANCH (140cf9 Linux 6.6.33)
 		iomap->length = blks_to_bytes(inode, map.m_len);
 		iomap->type = IOMAP_MAPPED;
 		iomap->flags |= IOMAP_F_MERGED;

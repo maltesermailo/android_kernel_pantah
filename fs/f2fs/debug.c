@@ -135,7 +135,11 @@ static void update_general_status(struct f2fs_sb_info *sbi)
 	si->cur_ckpt_time = sbi->cprc_info.cur_time;
 	si->peak_ckpt_time = sbi->cprc_info.peak_time;
 	spin_unlock(&sbi->cprc_info.stat_lock);
+<<<<<<< HEAD   (dc5396 Merge branch 'android15-6.6' into branch 'android15-6.6-lts')
 	si->total_count = BLKS_TO_SEGS(sbi, (int)sbi->user_block_count);
+=======
+	si->total_count = (int)sbi->user_block_count / BLKS_PER_SEG(sbi);
+>>>>>>> BRANCH (140cf9 Linux 6.6.33)
 	si->rsvd_segs = reserved_segments(sbi);
 	si->overp_segs = overprovision_segments(sbi);
 	si->valid_count = valid_user_blocks(sbi);

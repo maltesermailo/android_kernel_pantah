@@ -3768,9 +3768,15 @@ static void init_sb_info(struct f2fs_sb_info *sbi)
 	sbi->segs_per_sec = le32_to_cpu(raw_super->segs_per_sec);
 	sbi->secs_per_zone = le32_to_cpu(raw_super->secs_per_zone);
 	sbi->total_sections = le32_to_cpu(raw_super->section_count);
+<<<<<<< HEAD   (dc5396 Merge branch 'android15-6.6' into branch 'android15-6.6-lts')
 	sbi->total_node_count = SEGS_TO_BLKS(sbi,
 			((le32_to_cpu(raw_super->segment_count_nat) / 2) *
 			NAT_ENTRY_PER_BLOCK));
+=======
+	sbi->total_node_count =
+		((le32_to_cpu(raw_super->segment_count_nat) / 2) *
+		NAT_ENTRY_PER_BLOCK) << sbi->log_blocks_per_seg;
+>>>>>>> BRANCH (140cf9 Linux 6.6.33)
 	F2FS_ROOT_INO(sbi) = le32_to_cpu(raw_super->root_ino);
 	F2FS_NODE_INO(sbi) = le32_to_cpu(raw_super->node_ino);
 	F2FS_META_INO(sbi) = le32_to_cpu(raw_super->meta_ino);

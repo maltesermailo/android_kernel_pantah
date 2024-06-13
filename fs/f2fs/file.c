@@ -838,8 +838,12 @@ static bool f2fs_force_buffered_io(struct inode *inode, int rw)
 	 * for blkzoned device, fallback direct IO to buffered IO, so
 	 * all IOs can be serialized by log-structured write.
 	 */
+<<<<<<< HEAD   (dc5396 Merge branch 'android15-6.6' into branch 'android15-6.6-lts')
 	if (f2fs_sb_has_blkzoned(sbi) && (rw == WRITE) &&
 	    !f2fs_is_pinned_file(inode))
+=======
+	if (f2fs_sb_has_blkzoned(sbi) && (rw == WRITE))
+>>>>>>> BRANCH (140cf9 Linux 6.6.33)
 		return true;
 	if (is_sbi_flag_set(sbi, SBI_CP_DISABLED))
 		return true;
@@ -3269,7 +3273,11 @@ static int f2fs_ioc_set_pin_file(struct file *filp, unsigned long arg)
 		goto done;
 	}
 
+<<<<<<< HEAD   (dc5396 Merge branch 'android15-6.6' into branch 'android15-6.6-lts')
 	if (F2FS_HAS_BLOCKS(inode)) {
+=======
+	if (f2fs_sb_has_blkzoned(sbi) && F2FS_HAS_BLOCKS(inode)) {
+>>>>>>> BRANCH (140cf9 Linux 6.6.33)
 		ret = -EFBIG;
 		goto out;
 	}

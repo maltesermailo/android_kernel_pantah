@@ -451,8 +451,13 @@ static inline bool excess_dirty_threshold(struct f2fs_sb_info *sbi)
 	unsigned int nodes = get_pages(sbi, F2FS_DIRTY_NODES);
 	unsigned int meta = get_pages(sbi, F2FS_DIRTY_META);
 	unsigned int imeta = get_pages(sbi, F2FS_DIRTY_IMETA);
+<<<<<<< HEAD   (dc5396 Merge branch 'android15-6.6' into branch 'android15-6.6-lts')
 	unsigned int threshold =
 		SEGS_TO_BLKS(sbi, (factor * DEFAULT_DIRTY_THRESHOLD));
+=======
+	unsigned int threshold = (factor * DEFAULT_DIRTY_THRESHOLD) <<
+				sbi->log_blocks_per_seg;
+>>>>>>> BRANCH (140cf9 Linux 6.6.33)
 	unsigned int global_threshold = threshold * 3 / 2;
 
 	if (dents >= threshold || qdata >= threshold ||
@@ -2654,7 +2659,11 @@ static int is_next_segment_free(struct f2fs_sb_info *sbi,
  * Find a new segment from the free segments bitmap to right order
  * This function should be returned with success, otherwise BUG
  */
+<<<<<<< HEAD   (dc5396 Merge branch 'android15-6.6' into branch 'android15-6.6-lts')
 static int get_new_segment(struct f2fs_sb_info *sbi,
+=======
+static void get_new_segment(struct f2fs_sb_info *sbi,
+>>>>>>> BRANCH (140cf9 Linux 6.6.33)
 			unsigned int *newseg, bool new_sec, bool pinning)
 {
 	struct free_segmap_info *free_i = FREE_I(sbi);
@@ -2668,11 +2677,14 @@ static int get_new_segment(struct f2fs_sb_info *sbi,
 
 	spin_lock(&free_i->segmap_lock);
 
+<<<<<<< HEAD   (dc5396 Merge branch 'android15-6.6' into branch 'android15-6.6-lts')
 	if (time_to_inject(sbi, FAULT_NO_SEGMENT)) {
 		ret = -ENOSPC;
 		goto out_unlock;
 	}
 
+=======
+>>>>>>> BRANCH (140cf9 Linux 6.6.33)
 	if (!new_sec && ((*newseg + 1) % SEGS_PER_SEC(sbi))) {
 		segno = find_next_zero_bit(free_i->free_segmap,
 			GET_SEG_FROM_SEC(sbi, hint + 1), *newseg + 1);
@@ -2694,10 +2706,14 @@ find_other_zone:
 	if (secno >= MAIN_SECS(sbi)) {
 		secno = find_first_zero_bit(free_i->free_secmap,
 							MAIN_SECS(sbi));
+<<<<<<< HEAD   (dc5396 Merge branch 'android15-6.6' into branch 'android15-6.6-lts')
 		if (secno >= MAIN_SECS(sbi)) {
 			ret = -ENOSPC;
 			goto out_unlock;
 		}
+=======
+		f2fs_bug_on(sbi, secno >= MAIN_SECS(sbi));
+>>>>>>> BRANCH (140cf9 Linux 6.6.33)
 	}
 	segno = GET_SEG_FROM_SEC(sbi, secno);
 	zoneno = GET_ZONE_FROM_SEC(sbi, secno);
@@ -2813,17 +2829,28 @@ static int new_curseg(struct f2fs_sb_info *sbi, int type, bool new_sec)
 	struct curseg_info *curseg = CURSEG_I(sbi, type);
 	unsigned int segno = curseg->segno;
 	bool pinning = type == CURSEG_COLD_DATA_PINNED;
+<<<<<<< HEAD   (dc5396 Merge branch 'android15-6.6' into branch 'android15-6.6-lts')
 	int ret;
+=======
+>>>>>>> BRANCH (140cf9 Linux 6.6.33)
 
 	if (curseg->inited)
 		write_sum_page(sbi, curseg->sum_blk, GET_SUM_BLOCK(sbi, segno));
 
 	segno = __get_next_segno(sbi, type);
+<<<<<<< HEAD   (dc5396 Merge branch 'android15-6.6' into branch 'android15-6.6-lts')
 	ret = get_new_segment(sbi, &segno, new_sec, pinning);
 	if (ret) {
 		if (ret == -ENOSPC)
 			curseg->segno = NULL_SEGNO;
 		return ret;
+=======
+	get_new_segment(sbi, &segno, new_sec, pinning);
+	if (new_sec && pinning &&
+	    !f2fs_valid_pinned_area(sbi, START_BLOCK(sbi, segno))) {
+		__set_free(sbi, segno);
+		return -EAGAIN;
+>>>>>>> BRANCH (140cf9 Linux 6.6.33)
 	}
 
 	curseg->next_segno = segno;
@@ -3129,9 +3156,14 @@ static int __allocate_new_segment(struct f2fs_sb_info *sbi, int type,
 
 allocate:
 	old_segno = curseg->segno;
+<<<<<<< HEAD   (dc5396 Merge branch 'android15-6.6' into branch 'android15-6.6-lts')
 	err = new_curseg(sbi, type, true);
 	if (err)
 		return err;
+=======
+	if (new_curseg(sbi, type, true))
+		return -EAGAIN;
+>>>>>>> BRANCH (140cf9 Linux 6.6.33)
 	stat_inc_seg_type(sbi, curseg);
 	locate_dirty_segment(sbi, old_segno);
 	return 0;
@@ -3148,6 +3180,31 @@ int f2fs_allocate_new_section(struct f2fs_sb_info *sbi, int type, bool force)
 	f2fs_up_read(&SM_I(sbi)->curseg_lock);
 
 	return ret;
+<<<<<<< HEAD   (dc5396 Merge branch 'android15-6.6' into branch 'android15-6.6-lts')
+=======
+}
+
+int f2fs_allocate_pinning_section(struct f2fs_sb_info *sbi)
+{
+	int err;
+	bool gc_required = true;
+
+retry:
+	f2fs_lock_op(sbi);
+	err = f2fs_allocate_new_section(sbi, CURSEG_COLD_DATA_PINNED, false);
+	f2fs_unlock_op(sbi);
+
+	if (f2fs_sb_has_blkzoned(sbi) && err && gc_required) {
+		f2fs_down_write(&sbi->gc_lock);
+		f2fs_gc_range(sbi, 0, GET_SEGNO(sbi, FDEV(0).end_blk), true, 1);
+		f2fs_up_write(&sbi->gc_lock);
+
+		gc_required = false;
+		goto retry;
+	}
+
+	return err;
+>>>>>>> BRANCH (140cf9 Linux 6.6.33)
 }
 
 int f2fs_allocate_pinning_section(struct f2fs_sb_info *sbi)
@@ -3626,7 +3683,10 @@ int f2fs_allocate_data_block(struct f2fs_sb_info *sbi, struct page *page,
 		    !((curseg->segno + 1) % sbi->segs_per_sec)) {
 			write_sum_page(sbi, curseg->sum_blk,
 					GET_SUM_BLOCK(sbi, curseg->segno));
+<<<<<<< HEAD   (dc5396 Merge branch 'android15-6.6' into branch 'android15-6.6-lts')
 			reset_curseg_fields(curseg);
+=======
+>>>>>>> BRANCH (140cf9 Linux 6.6.33)
 			goto skip_new_segment;
 		}
 
@@ -3723,6 +3783,7 @@ static void do_write_page(struct f2fs_summary *sum, struct f2fs_io_info *fio)
 	if (keep_order)
 		f2fs_down_read(&fio->sbi->io_order_lock);
 
+<<<<<<< HEAD   (dc5396 Merge branch 'android15-6.6' into branch 'android15-6.6-lts')
 	if (f2fs_allocate_data_block(fio->sbi, fio->page, fio->old_blkaddr,
 			&fio->new_blkaddr, sum, type, fio)) {
 		if (fscrypt_inode_uses_fs_layer_crypto(fio->page->mapping->host))
@@ -3732,6 +3793,10 @@ static void do_write_page(struct f2fs_summary *sum, struct f2fs_io_info *fio)
 			f2fs_del_fsync_node_entry(fio->sbi, fio->page);
 		goto out;
 	}
+=======
+	f2fs_allocate_data_block(fio->sbi, fio->page, fio->old_blkaddr,
+			&fio->new_blkaddr, sum, type, fio);
+>>>>>>> BRANCH (140cf9 Linux 6.6.33)
 	if (GET_SEGNO(fio->sbi, fio->old_blkaddr) != NULL_SEGNO)
 		f2fs_invalidate_internal_cache(fio->sbi, fio->old_blkaddr);
 

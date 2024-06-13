@@ -1812,6 +1812,7 @@ struct f2fs_sb_info {
 };
 
 /* Definitions to access f2fs_sb_info */
+<<<<<<< HEAD   (dc5396 Merge branch 'android15-6.6' into branch 'android15-6.6-lts')
 #define SEGS_TO_BLKS(sbi, segs)					\
 		((segs) << (sbi)->log_blocks_per_seg)
 #define BLKS_TO_SEGS(sbi, blks)					\
@@ -1820,6 +1821,14 @@ struct f2fs_sb_info {
 #define BLKS_PER_SEG(sbi)	((sbi)->blocks_per_seg)
 #define BLKS_PER_SEC(sbi)	(SEGS_TO_BLKS(sbi, (sbi)->segs_per_sec))
 #define SEGS_PER_SEC(sbi)	((sbi)->segs_per_sec)
+=======
+#define BLKS_PER_SEG(sbi)					\
+	((sbi)->blocks_per_seg)
+#define BLKS_PER_SEC(sbi)					\
+	((sbi)->segs_per_sec << (sbi)->log_blocks_per_seg)
+#define SEGS_PER_SEC(sbi)					\
+	((sbi)->segs_per_sec)
+>>>>>>> BRANCH (140cf9 Linux 6.6.33)
 
 __printf(3, 4)
 void f2fs_printk(struct f2fs_sb_info *sbi, bool limit_rate, const char *fmt, ...);
@@ -3706,7 +3715,11 @@ int f2fs_allocate_segment_for_resize(struct f2fs_sb_info *sbi, int type,
 					unsigned int start, unsigned int end);
 int f2fs_allocate_new_section(struct f2fs_sb_info *sbi, int type, bool force);
 int f2fs_allocate_pinning_section(struct f2fs_sb_info *sbi);
+<<<<<<< HEAD   (dc5396 Merge branch 'android15-6.6' into branch 'android15-6.6-lts')
 int f2fs_allocate_new_segments(struct f2fs_sb_info *sbi);
+=======
+void f2fs_allocate_new_segments(struct f2fs_sb_info *sbi);
+>>>>>>> BRANCH (140cf9 Linux 6.6.33)
 int f2fs_trim_fs(struct f2fs_sb_info *sbi, struct fstrim_range *range);
 bool f2fs_exist_trim_candidates(struct f2fs_sb_info *sbi,
 					struct cp_control *cpc);

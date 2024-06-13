@@ -100,10 +100,20 @@ static inline void sanity_check_seg_type(struct f2fs_sb_info *sbi,
 	NULL_SEGNO : GET_L2R_SEGNO(FREE_I(sbi),			\
 		GET_SEGNO_FROM_SEG0(sbi, blk_addr)))
 #define CAP_BLKS_PER_SEC(sbi)					\
+<<<<<<< HEAD   (dc5396 Merge branch 'android15-6.6' into branch 'android15-6.6-lts')
 	(BLKS_PER_SEC(sbi) - (sbi)->unusable_blocks_per_sec)
+=======
+	(SEGS_PER_SEC(sbi) * BLKS_PER_SEG(sbi) -		\
+	 (sbi)->unusable_blocks_per_sec)
+>>>>>>> BRANCH (140cf9 Linux 6.6.33)
 #define CAP_SEGS_PER_SEC(sbi)					\
+<<<<<<< HEAD   (dc5396 Merge branch 'android15-6.6' into branch 'android15-6.6-lts')
 	(SEGS_PER_SEC(sbi) -					\
 	BLKS_TO_SEGS(sbi, (sbi)->unusable_blocks_per_sec))
+=======
+	(SEGS_PER_SEC(sbi) - ((sbi)->unusable_blocks_per_sec >>	\
+	(sbi)->log_blocks_per_seg))
+>>>>>>> BRANCH (140cf9 Linux 6.6.33)
 #define GET_SEC_FROM_SEG(sbi, segno)				\
 	(((segno) == -1) ? -1 : (segno) / SEGS_PER_SEC(sbi))
 #define GET_SEG_FROM_SEC(sbi, secno)				\
@@ -903,7 +913,11 @@ static inline int nr_pages_to_skip(struct f2fs_sb_info *sbi, int type)
 	if (type == DATA)
 		return BLKS_PER_SEG(sbi);
 	else if (type == NODE)
+<<<<<<< HEAD   (dc5396 Merge branch 'android15-6.6' into branch 'android15-6.6-lts')
 		return SEGS_TO_BLKS(sbi, 8);
+=======
+		return 8 * BLKS_PER_SEG(sbi);
+>>>>>>> BRANCH (140cf9 Linux 6.6.33)
 	else if (type == META)
 		return 8 * BIO_MAX_VECS;
 	else
