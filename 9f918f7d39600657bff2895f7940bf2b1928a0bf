@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9a8791e_5ab83f9a",
+        "filename": "mm/memblock.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2012,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-06-13T17:31:25Z",
+      "side": 1,
+      "message": "memblock_memsize_mod_kernel_size() which is not an __init_memblock function is using this variable which is marked as __initdata_memblock. You can\u0027t do that, the variable will be freed after init and memblock_memsize_mod_kernel_size() can be used after that. Presubmits correctly generate this error:\n\n```\nWARNING: modpost: vmlinux: section mismatch in reference: memblock_memsize_mod_kernel_size+0x13 (section: .text) -\u003e memblock_debug (section: .meminit.data)\nWARNING: modpost: vmlinux: section mismatch in reference: memblock_memsize_mod_kernel_size+0x29 (section: .text) -\u003e memsize_memap (section: .meminit.data)\nWARNING: modpost: vmlinux: section mismatch in reference: memblock_memsize_mod_reusable_size+0x13 (section: .text) -\u003e memblock_debug (section: .meminit.data)\nWARNING: modpost: vmlinux: section mismatch in reference: memblock_memsize_mod_reusable_size+0x29 (section: .text) -\u003e memsize_kinit (section: .meminit.data)\nERROR: modpost: Section mismatches detected.\nSet CONFIG_SECTION_MISMATCH_WARN_ONLY\u003dy to allow them.\n```",
+      "range": {
+        "startLine": 2012,
+        "startChar": 26,
+        "endLine": 2012,
+        "endChar": 45
+      },
+      "revId": "9f918f7d39600657bff2895f7940bf2b1928a0bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
