@@ -39,6 +39,41 @@
       "message": "@chriscli@google.com swap.h isn\u0027t going to change in v2 right?",
       "revId": "5beec4f003254589375b6f11ff0da6248a3bc7a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b944ca9_7e5c6313",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2052564
+      },
+      "writtenOn": "2024-06-14T20:45:00Z",
+      "side": 1,
+      "message": "I will post the v2 version upstream soon.",
+      "revId": "5beec4f003254589375b6f11ff0da6248a3bc7a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a972a91a_beffec5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2052564
+      },
+      "writtenOn": "2024-06-14T20:45:00Z",
+      "side": 1,
+      "message": "swap.h is going to be changed to address the issue nonfull list might contain cluster that is on the current per cpu next allocation cluster. It needs to know when a cluster is on or off the per cpu next allocation. Stealing from the per cpu next cluster is not a big deal, current swap code has many path can leading stealing by other means. The whole code is struct around brute force scanning and stealing. I would like to eventually get rid of the brute force scanning.\n\nThat is why it now has a cluster-\u003estate, to keep track of the 5 state of the cluster can be in.\n\nLet me just post the V2 upstream. I was doing some last touch up on the comment and commit message etc.",
+      "parentUuid": "3d8e13b0_f2b88cc1",
+      "revId": "5beec4f003254589375b6f11ff0da6248a3bc7a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
