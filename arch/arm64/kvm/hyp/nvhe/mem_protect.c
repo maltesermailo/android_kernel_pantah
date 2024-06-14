@@ -336,6 +336,7 @@ int kvm_guest_prepare_stage2(struct pkvm_hyp_vm *vm, void *pgd)
 struct relinquish_data {
 	enum pkvm_page_state expected_state;
 	u64 pa;
+	u32 level;
 };
 
 static int relinquish_walker(const struct kvm_pgtable_visit_ctx *ctx,
@@ -363,6 +364,7 @@ static int relinquish_walker(const struct kvm_pgtable_visit_ctx *ctx,
 	}
 
 	data->pa = phys;
+	data->level = ctx->level;
 
 	return 0;
 }
@@ -378,6 +380,8 @@ int __pkvm_guest_relinquish_to_host(struct pkvm_hyp_vcpu *vcpu,
 	};
 	struct pkvm_hyp_vm *vm = pkvm_hyp_vcpu_to_hyp_vm(vcpu);
 	int ret;
+	struct kvm_hyp_memcache *mc = &vcpu->vcpu.arch.stage2_mc;
+	u64 granule;
 
 	host_lock_component();
 	guest_lock_component(vm);
@@ -395,11 +399,23 @@ int __pkvm_guest_relinquish_to_host(struct pkvm_hyp_vcpu *vcpu,
 	if (ret || !data.pa)
 		goto end;
 
+	granule = kvm_granule_size(data.level);
 	/* Zap the guest stage2 pte and return ownership to the host */
-	ret = kvm_pgtable_stage2_annotate(&vm->pgt, ipa, PAGE_SIZE,
-					  &vcpu->vcpu.arch.stage2_mc, 0);
+	ret = kvm_pgtable_stage2_annotate(&vm->pgt, ipa, PAGE_SIZE, mc, 0);
 	if (ret)
 		goto end;
+
+	if (granule != PAGE_SIZE) {
+		u64 start = ALIGN_DOWN(ipa, granule);
+		u64 end = start + granule;
+		u64 shift = ipa - start;
+		u64 end_size = end - (ipa + PAGE_SIZE);
+		enum kvm_pgtable_prot prot = pkvm_mkstate(KVM_PGTABLE_PROT_RWX, PKVM_PAGE_OWNED);
+
+		WARN_ON(kvm_pgtable_stage2_map(&vm->pgt, start, shift, data.pa, prot, mc, 0));
+		WARN_ON(kvm_pgtable_stage2_map(&vm->pgt, ipa + PAGE_SIZE, end_size,
+					       data.pa + shift + PAGE_SIZE, prot, mc, 0));
+	}
 
 	WARN_ON(host_stage2_set_owner_locked(data.pa, PAGE_SIZE, PKVM_ID_HOST));
 end:
