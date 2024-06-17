@@ -119,6 +119,26 @@
       "tag": "",
       "revId": "3efbe42b694ad6e94fadb3e1c279a7f19d01c9a1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000081687529",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3132181?revision\u003d1",
+      "key": {
+        "uuid": "9f2b83ae_97c89087",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-17T19:23:53Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/57629741518b30501e7a653bb9ca05b929550651).\n\n```\n      ## include/trace/hooks/sched.h ##\n     @@ include/trace/hooks/sched.h: DECLARE_HOOK(android_vh_setscheduler_uclamp,\n    @@ include/trace/hooks/sched.h: DECLARE_HOOK(android_vh_setscheduler_uclamp,\n      \n     +DECLARE_HOOK(android_vh_uclamp_validate,\n     +\tTP_PROTO(struct task_struct *p, const struct sched_attr *attr,\n    -+\t\t bool user, int *ret, bool *done),\n    -+\tTP_ARGS(p, attr, user, ret, done));\n    ++\t\t int *ret, bool *done),\n    ++\tTP_ARGS(p, attr, ret, done));\n     +\n      DECLARE_HOOK(android_vh_update_topology_flags_workfn,\n      \tTP_PROTO(void *unused),\n    @@ kernel/sched/core.c: static int uclamp_validate(struct task_struct *p,\n     +\tbool done \u003d false;\n     +\tint ret \u003d 0;\n     +\n    -+\ttrace_android_vh_uclamp_validate(p, attr, user, \u0026ret, \u0026done);\n    ++\ttrace_android_vh_uclamp_validate(p, attr, \u0026ret, \u0026done);\n     +\tif (done)\n     +\t\treturn ret;\n      \n    @@ kernel/sched/core.c: static int uclamp_validate(struct task_struct *p,\n      \t\tutil_min \u003d attr-\u003esched_util_min;\n     \n      ## kernel/sched/vendor_hooks.c ##\n    -@@ kernel/sched/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_irqtime_account_process_tick);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_post_init_entity_util_avg);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_effective_cpu_util);\n    +@@ kernel/sched/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpu_cgroup_css_free);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_reweight_entity);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_context_switch);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmput);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_uclamp_validate);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "3efbe42b694ad6e94fadb3e1c279a7f19d01c9a1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
