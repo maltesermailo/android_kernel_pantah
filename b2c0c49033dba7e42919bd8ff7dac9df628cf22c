@@ -59,6 +59,26 @@
       "tag": "",
       "revId": "b2c0c49033dba7e42919bd8ff7dac9df628cf22c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000081687534",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3132192?revision\u003d1",
+      "key": {
+        "uuid": "9b88cc6b_76093158",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-17T18:13:05Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/10558542a1f4889711cde9e72d79bc607935adb1).\n\n```\n      ## kernel/sched/fair.c ##\n    -@@ kernel/sched/fair.c: static inline int task_fits_cpu(struct task_struct *p, int cpu)\n    - \treturn (util_fits_cpu(util, uclamp_min, uclamp_max, cpu) \u003e 0);\n    +@@ kernel/sched/fair.c: static inline int is_misfit_task(struct task_struct *p, struct rq *rq,\n    + \treturn 1;\n      }\n      \n     -static inline void update_misfit_status(struct task_struct *p, struct rq *rq)\n     +inline void update_misfit_status(struct task_struct *p, struct rq *rq)\n      {\n      \tbool need_update \u003d true;\n    - \n    + \tmisfit_reason_t reason;\n     @@ kernel/sched/fair.c: static inline void update_misfit_status(struct task_struct *p, struct rq *rq)\n    - \t */\n      \trq-\u003emisfit_task_load \u003d max_t(unsigned long, task_h_load(p), 1);\n    + \trq-\u003emisfit_reason \u003d reason;\n      }\n     +EXPORT_SYMBOL_GPL(update_misfit_status);\n      \n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "b2c0c49033dba7e42919bd8ff7dac9df628cf22c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
