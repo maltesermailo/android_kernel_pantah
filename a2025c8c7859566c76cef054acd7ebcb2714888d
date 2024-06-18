@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22b3a320_6f0fc8e7",
+        "filename": "kernel/sched/rt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1851,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-06-18T17:19:30Z",
+      "side": 1,
+      "message": "Should this call be made under the \"if (rq-\u003ecurr-\u003esched_class...\" check?\n\nOr even better, would it make more sense to add it just to the top of update_rt_rq_load_avg rather than around its users?",
+      "revId": "a2025c8c7859566c76cef054acd7ebcb2714888d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
