@@ -1,6 +1,11 @@
 # SPDX-License-Identifier: GPL-2.0
+<<<<<<< HEAD   (4e570c ANDROID: abi_gki_aarch64_qcom: Add hibernation APIs)
 CFLAGS += -D_FILE_OFFSET_BITS=64 -Wall -Werror -Wno-deprecated-declarations -I../.. -I../../../../.. -fno-omit-frame-pointer -fsanitize=address -g
 LDLIBS := -llz4 -lzstd -lcrypto -lpthread -fsanitize=address
+=======
+CFLAGS += -D_FILE_OFFSET_BITS=64 -Wall -Wno-deprecated-declarations -Werror -I../.. -I../../../../.. -fno-omit-frame-pointer -g
+LDLIBS := -llz4 -lzstd -lcrypto -lpthread
+>>>>>>> CHANGE (e0bd44 ANDROID: Incremental fs: Retry page faults on non-fatal erro)
 TEST_GEN_PROGS := incfs_test incfs_stress incfs_perf
 
 include ../../lib.mk
