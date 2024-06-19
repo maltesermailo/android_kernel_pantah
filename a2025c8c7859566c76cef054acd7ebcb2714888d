@@ -70,6 +70,24 @@
       "parentUuid": "1811b028_3dd2a402",
       "revId": "a2025c8c7859566c76cef054acd7ebcb2714888d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bf1cb87_999ab71d",
+        "filename": "kernel/sched/rt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1851,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2024-06-19T02:14:36Z",
+      "side": 1,
+      "message": "It is because the update_rt_rq_load_avg is calculating the overall rt util of a cpu, so as long as the next task is rt, it does not need to update here, while trace_android_rvh_update_rt_rq_load_avg is calculating the util of a rt task, so it needs to update whenever a rt task is scheduled.",
+      "parentUuid": "e8699670_5277da7c",
+      "revId": "a2025c8c7859566c76cef054acd7ebcb2714888d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
