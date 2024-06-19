@@ -47,11 +47,30 @@
 #include <trace/hooks/signal.h>
 #include <trace/hooks/hung_task.h>
 #include <trace/hooks/topology.h>
+<<<<<<< HEAD   (8db071f0f68c4583eac0b33a5b3a1437e4f9762b ANDROID: GKI: Update qcom symbol list)
 #include <trace/hooks/mm.h>
 #include <trace/hooks/fault.h>
 #include <trace/hooks/ftrace_dump.h>
 #include <trace/hooks/dtask.h>
 #include <trace/hooks/psci.h>
+||||||| BASE   (e1456ad867a392906405d934b0e27c9fde3119f1 ANDROID: add vendor hooks for getting information of dtask)
+#include <trace/hooks/rwsem.h>
+#include <trace/hooks/bl_hib.h>
+#include <trace/hooks/futex.h>
+#include <trace/hooks/bug.h>
+#include <trace/hooks/logbuf.h>
+#include <trace/hooks/regmap.h>
+#include <trace/hooks/softlockup.h>
+=======
+#include <trace/hooks/thermal.h>
+#include <trace/hooks/rwsem.h>
+#include <trace/hooks/bl_hib.h>
+#include <trace/hooks/futex.h>
+#include <trace/hooks/bug.h>
+#include <trace/hooks/logbuf.h>
+#include <trace/hooks/regmap.h>
+#include <trace/hooks/softlockup.h>
+>>>>>>> CHANGE (d513fa226c29a5b1ebffa062469fbc9ae7dd0327 ANDROID: thermal: Add vendor thermal genl check)
 #include <trace/hooks/power.h>
 #include <trace/hooks/rwsem.h>
 #include <trace/hooks/futex.h>
@@ -480,6 +499,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_flush_wq_wait_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_flush_wq_wait_finish);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_flush_work_wait_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_flush_work_wait_finish);
+<<<<<<< HEAD   (8db071f0f68c4583eac0b33a5b3a1437e4f9762b ANDROID: GKI: Update qcom symbol list)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_task_mem);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_charge);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_file_open);
@@ -496,3 +516,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_swap_page);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_anonymous_page);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_uprobes_uprobe_write);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_swap_bio_charge);
+||||||| BASE   (e1456ad867a392906405d934b0e27c9fde3119f1 ANDROID: add vendor hooks for getting information of dtask)
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_enable_thermal_genl_check);
+>>>>>>> CHANGE (d513fa226c29a5b1ebffa062469fbc9ae7dd0327 ANDROID: thermal: Add vendor thermal genl check)
