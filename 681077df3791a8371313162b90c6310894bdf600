@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000081909694",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3138934?revision\u003d1",
+      "key": {
+        "uuid": "550527ee_79b02388",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-19T03:25:07Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/188c41744ddcccef6daf6dcd4d6a444dabdc2f94).\n\n```\n      ## drivers/android/vendor_hooks.c ##\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_logbuf_pr_cont);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_slowpath);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmap_region);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_unmap_one);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_oem_binder_struct);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_special_task);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_free_buf);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_buffer_release);\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (db3398 ANDROID: GKI: Update symbol list for vivo)\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_set_flag);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_delayacct_clear_flag);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_delayacct_init);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_signal_whether_wake);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_check);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_freeze_whether_wake);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_vmscan_kswapd_done);\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_ioctl_end);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_looper_exited);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_spawn_new_thread);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_has_special_work_ilocked);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_logbuf);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_shrink_slab);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cpufreq_acct_update_power);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_signal);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_folio_look_around_ref);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_look_around);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_look_around_migrate_folio);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_test_clear_look_around_ref);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_dma_buf_release);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_perf_huristic_ctrl);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_send_command_post_change);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_abort_success_ctrl);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_compl_rsp_check_done);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_err_handler);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_err_check_ctrl);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_err_print_ctrl);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_proc_transaction);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_new_ref);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_del_ref);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_logbuf_pr_cont);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_slowpath);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmap_region);\n    ++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_unmap_one);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_record_rwsem_reader_owned);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_rwsem_reader_owned);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_record_rwsem_writer_owned);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_rwsem_writer_owned);\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (188c41 ANDROID: vendor_hooks: add hooks in rwsem)\n     \n      ## include/trace/hooks/rwsem.h ##\n     @@ include/trace/hooks/rwsem.h: DECLARE_HOOK(android_vh_rwsem_direct_rsteal,\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "681077df3791a8371313162b90c6310894bdf600",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
