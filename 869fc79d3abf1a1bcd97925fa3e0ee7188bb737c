@@ -459,6 +459,26 @@
       "tag": "",
       "revId": "869fc79d3abf1a1bcd97925fa3e0ee7188bb737c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000081910379",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3138934?revision\u003d2",
+      "key": {
+        "uuid": "83cb13df_ebe6e355",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-19T19:55:43Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/188c41744ddcccef6daf6dcd4d6a444dabdc2f94).\n\n```\n      ## drivers/android/vendor_hooks.c ##\n    -@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_logbuf_pr_cont);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_slowpath);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmap_region);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_try_to_unmap_one);\n    +@@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_finish);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_init);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_finish);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmc_init_queue);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_record_rwsem_reader_owned);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_rwsem_reader_owned);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_record_rwsem_writer_owned);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_rwsem_writer_owned);\n    + /*\n    +  * For type visibility\n    +  */\n     \n      ## include/trace/hooks/rwsem.h ##\n     @@ include/trace/hooks/rwsem.h: DECLARE_HOOK(android_vh_rwsem_direct_rsteal,\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "869fc79d3abf1a1bcd97925fa3e0ee7188bb737c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
