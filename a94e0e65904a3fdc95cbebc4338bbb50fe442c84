@@ -59,6 +59,26 @@
       "tag": "",
       "revId": "a94e0e65904a3fdc95cbebc4338bbb50fe442c84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000082046111",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3131697?revision\u003d2",
+      "key": {
+        "uuid": "3d5b45f6_6740d05d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-20T14:21:22Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/5af2e235b0d5b797e9531a00c50058319130e156) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d5af2e235b0d5b797e9531a00c50058319130e156).\n\n```\n      ## drivers/bluetooth/btmrvl_main.c ##\n     @@ drivers/bluetooth/btmrvl_main.c: int btmrvl_process_event(struct btmrvl_private *priv, struct sk_buff *skb)\n    @@ include/net/bluetooth/hci_core.h: struct hci_chan {\n      \tunsigned int\tsent;\n      \t__u8\t\tstate;\n     -\tbool\t\tamp;\n    - };\n      \n    - struct hci_conn_params {\n    + \tANDROID_KABI_RESERVE(1);\n    + };\n     @@ include/net/bluetooth/hci_core.h: static inline void hci_conn_hash_add(struct hci_dev *hdev, struct hci_conn *c)\n      \tcase ACL_LINK:\n      \t\th-\u003eacl_num++;\n    @@ net/bluetooth/hci_core.c: int hci_register_dev(struct hci_dev *hdev)\n     -\t */\n     -\tswitch (hdev-\u003edev_type) {\n     -\tcase HCI_PRIMARY:\n    --\t\tid \u003d ida_alloc_max(\u0026hci_index_ida, HCI_MAX_ID - 1, GFP_KERNEL);\n    +-\t\tid \u003d ida_simple_get(\u0026hci_index_ida, 0, HCI_MAX_ID, GFP_KERNEL);\n     -\t\tbreak;\n     -\tcase HCI_AMP:\n    --\t\tid \u003d ida_alloc_range(\u0026hci_index_ida, 1, HCI_MAX_ID - 1,\n    --\t\t\t\t     GFP_KERNEL);\n    +-\t\tid \u003d ida_simple_get(\u0026hci_index_ida, 1, HCI_MAX_ID, GFP_KERNEL);\n     -\t\tbreak;\n     -\tdefault:\n     -\t\treturn -EINVAL;\n    @@ net/bluetooth/hci_event.c: static void hci_num_comp_pkts_evt(struct hci_dev *hde\n      \t\t\t\tstruct sk_buff *skb)\n      {\n     @@ net/bluetooth/hci_event.c: static const struct hci_ev {\n    - \t/* [0x3e \u003d HCI_EV_LE_META] */\n    - \tHCI_EV_REQ_VL(HCI_EV_LE_META, hci_le_meta_evt,\n    - \t\t      sizeof(struct hci_ev_le_meta), HCI_MAX_EVENT_SIZE),\n    + \t       hci_disconn_phylink_complete_evt,\n    + \t       sizeof(struct hci_ev_disconn_phy_link_complete)),\n    + #endif\n     -\t/* [0x48 \u003d HCI_EV_NUM_COMP_BLOCKS] */\n     -\tHCI_EV(HCI_EV_NUM_COMP_BLOCKS, hci_num_comp_blocks_evt,\n     -\t       sizeof(struct hci_ev_num_comp_blocks)),\n    @@ net/bluetooth/hci_sync.c: int hci_stop_discovery_sync(struct hci_dev *hdev)\n     -\tif (conn-\u003etype \u003d\u003d AMP_LINK)\n     -\t\treturn hci_disconnect_phy_link_sync(hdev, conn-\u003ehandle, reason);\n     -\n    - \tif (test_bit(HCI_CONN_BIG_CREATED, \u0026conn-\u003eflags)) {\n    - \t\t/* This is a BIS connection, hci_conn_del will\n    - \t\t * do the necessary cleanup.\n    + \tmemset(\u0026cp, 0, sizeof(cp));\n    + \tcp.handle \u003d cpu_to_le16(conn-\u003ehandle);\n    + \tcp.reason \u003d reason;\n     \n      ## net/bluetooth/l2cap_core.c ##\n     @@ net/bluetooth/l2cap_core.c: static inline int l2cap_command_rej(struct l2cap_conn *conn,\n    - }\n      \n    - static void l2cap_connect(struct l2cap_conn *conn, struct l2cap_cmd_hdr *cmd,\n    --\t\t\t  u8 *data, u8 rsp_code, u8 amp_id)\n    -+\t\t\t  u8 *data, u8 rsp_code)\n    + static struct l2cap_chan *l2cap_connect(struct l2cap_conn *conn,\n    + \t\t\t\t\tstruct l2cap_cmd_hdr *cmd,\n    +-\t\t\t\t\tu8 *data, u8 rsp_code, u8 amp_id)\n    ++\t\t\t\t\tu8 *data, u8 rsp_code)\n      {\n      \tstruct l2cap_conn_req *req \u003d (struct l2cap_conn_req *) data;\n      \tstruct l2cap_conn_rsp rsp;\n    -@@ net/bluetooth/l2cap_core.c: static void l2cap_connect(struct l2cap_conn *conn, struct l2cap_cmd_hdr *cmd,\n    +@@ net/bluetooth/l2cap_core.c: static struct l2cap_chan *l2cap_connect(struct l2cap_conn *conn,\n      \t\t\t\tstatus \u003d L2CAP_CS_AUTHOR_PEND;\n      \t\t\t\tchan-\u003eops-\u003edefer(chan);\n      \t\t\t} else {\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "a94e0e65904a3fdc95cbebc4338bbb50fe442c84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
