@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e513eb00_d7c8bb6b",
+        "filename": "drivers/android/binder/process.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-06-21T09:00:56Z",
+      "side": 1,
+      "message": "`max_threads` is the max number of threads the driver will request, not the max number of threads that can participate in the thread pool. Other threads can (and will) join the thread pool with BC_ENTER_LOOPER.",
+      "revId": "5ca8d53de74dbdfccb391e64d62cc22d7ad24649",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "234646d6_43f67a1a",
+        "filename": "drivers/android/binder/process.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-06-21T09:00:56Z",
+      "side": 1,
+      "message": "This is detecting a user-space bug. The C version of the driver calls binder_user_error which will (by default) print an error message and optionally pause the driver to help debug the issue. While the pause part is rarely used, I think we should at least keep the error message around, and the helper function/macro that clearly distinguish this from a driver error.",
+      "revId": "5ca8d53de74dbdfccb391e64d62cc22d7ad24649",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c5ca3cc_b55fcbcd",
+        "filename": "drivers/android/binder/process.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-06-21T09:00:56Z",
+      "side": 1,
+      "message": "The C version of the driver does not touch requested_threads and requested_threads_started if BINDER_LOOPER_STATE_ENTERED is set. This should not affect a correct user-space client, but if you want to match the behavior of the C version this could be improved.",
+      "revId": "5ca8d53de74dbdfccb391e64d62cc22d7ad24649",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56aa5020_0f608116",
+        "filename": "drivers/android/binder/process.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-06-21T09:00:56Z",
+      "side": 1,
+      "message": "Why does this move in this CL? I think you should either reorder it in the original CL, or not move it here.",
+      "revId": "5ca8d53de74dbdfccb391e64d62cc22d7ad24649",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6042880e_c03dea37",
+        "filename": "drivers/android/binder/process.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-06-21T09:00:56Z",
+      "side": 1,
+      "message": "TODO: actually check if another thread is needed? As is, this function requests a new thread every time it is called until the max count it reached.",
+      "revId": "5ca8d53de74dbdfccb391e64d62cc22d7ad24649",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c355f309_82236e81",
+        "filename": "drivers/android/binder/process.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-06-21T09:00:56Z",
+      "side": 1,
+      "message": "I don\u0027t think you should modify the state in a function named `needs_thread`. When I read the code that calls `needs_thread`, I don\u0027t expect a state change. Also, if someone reorders or adds the condition to the if statement that calls needs_thread requested_thread_count could get incremented without sending a request to user-space. Technically even the C driver is not ideal here because it also increments requested_threads before call put_user (which could fail)",
+      "revId": "5ca8d53de74dbdfccb391e64d62cc22d7ad24649",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02031eff_1c13e338",
+        "filename": "drivers/android/binder/thread.rs",
+        "patchSetId": 20
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2024-06-21T09:00:56Z",
+      "side": 1,
+      "message": "What is this for? We always put a noop placeholder at the start of the buffer. If this call is interrupted, it is still there when resumed, but your `has_noop_placeholder` is false at that point. I\u0027m not sure we ever get here with read_consumed !\u003d 0 though. The C driver does not update read_consumed when returning -EINTR (with only a noop in the buffer), so read_consumed will still be 0 when the ioctl is resumed. If any of the later CLs add a -EINTR return path where read_consumed !\u003d 0, then this variable can trigger a failure to request a new thread when a new thread is needed.",
+      "revId": "5ca8d53de74dbdfccb391e64d62cc22d7ad24649",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
