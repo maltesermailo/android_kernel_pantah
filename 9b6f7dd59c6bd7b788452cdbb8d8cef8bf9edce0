@@ -16,6 +16,24 @@
       "message": "Unfortunately, we have run into trouble with long symbol names independently of Rust.\n\nLong symbol --\u003e vendor hook / tracepoint --\u003e too long symbol.\n\nSo I don\u0027t think it\u0027s a good idea to disable this unconditionally.\n\nIs there some matching you can do to detect likely Rust mangled names?",
       "revId": "9b6f7dd59c6bd7b788452cdbb8d8cef8bf9edce0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb65bbda_63c41b8a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-06-24T15:17:43Z",
+      "side": 1,
+      "message": "Rust mangled names start with a leading `_R` - would that be a tight enough filter for you, or do I need to check more precisely?",
+      "parentUuid": "f7b72920_25ff7c9d",
+      "revId": "9b6f7dd59c6bd7b788452cdbb8d8cef8bf9edce0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
