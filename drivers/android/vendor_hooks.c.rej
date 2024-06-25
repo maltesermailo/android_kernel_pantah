@@ -1,0 +1,11 @@
+--- drivers/android/vendor_hooks.c
++++ drivers/android/vendor_hooks.c
+@@ -417,3 +417,8 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_hibernate_save_cmp_len);
+ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_read_lazy_flag);
+ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_tsk_need_resched_lazy);
+ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_read_fault);
++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_shmem_swapin_folio);
++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_wp_page);
++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_swap_page);
++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_anonymous_page);
++EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_uprobes_replace_page);
