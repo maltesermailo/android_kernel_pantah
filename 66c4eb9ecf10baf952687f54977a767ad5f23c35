@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e8a4fdf0_bb3f4057",
+        "filename": "kernel/sched/psi.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1297,
+      "author": {
+        "id": 1868565
+      },
+      "writtenOn": "2024-06-25T07:42:33Z",
+      "side": 1,
+      "message": "IIUC, we should remove privileged check in psi_trigger_create(). and I also remove some relative code of privileged here. is that correct?",
+      "parentUuid": "e77759a5_dcd38ddb",
+      "range": {
+        "startLine": 1291,
+        "startChar": 0,
+        "endLine": 1297,
+        "endChar": 46
+      },
+      "revId": "66c4eb9ecf10baf952687f54977a767ad5f23c35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ada32c06_13d74663",
         "filename": "kernel/sched/psi.c",
         "patchSetId": 2
@@ -54,6 +78,30 @@
       "writtenOn": "2024-06-24T20:37:24Z",
       "side": 1,
       "message": "Change here and in all following proc_create() calls to `0`. This will result in a change similar to https://android-review.googlesource.com/c/kernel/common/+/2494541 revert.",
+      "range": {
+        "startLine": 1656,
+        "startChar": 29,
+        "endLine": 1656,
+        "endChar": 33
+      },
+      "revId": "66c4eb9ecf10baf952687f54977a767ad5f23c35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe0b1e74_20e9f647",
+        "filename": "kernel/sched/psi.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1656,
+      "author": {
+        "id": 1868565
+      },
+      "writtenOn": "2024-06-25T07:42:33Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ada32c06_13d74663",
       "range": {
         "startLine": 1656,
         "startChar": 29,
