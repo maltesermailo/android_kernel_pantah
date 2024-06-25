@@ -59,6 +59,26 @@
       "tag": "",
       "revId": "11eecc1750e482dff7793ec41dded469bf97e75b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000082500953",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3144798?revision\u003d1",
+      "key": {
+        "uuid": "ddfbf5b4_69679fed",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-06-25T18:00:07Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/4c1097df5d9bca84a1922adc752794db9b615a3e).\n\n```\n      ## kernel/sched/core.c ##\n     @@ kernel/sched/core.c: asmlinkage __visible void __sched preempt_schedule_irq(void)\n      int default_wake_function(wait_queue_entry_t *curr, unsigned mode, int wake_flags,\n      \t\t\t  void *key)\n      {\n    --\tWARN_ON_ONCE(IS_ENABLED(CONFIG_SCHED_DEBUG) \u0026\u0026 wake_flags \u0026 ~WF_SYNC);\n    -+\tWARN_ON_ONCE(IS_ENABLED(CONFIG_SCHED_DEBUG) \u0026\u0026 wake_flags \u0026 ~(WF_SYNC | WF_ANDROID_VENDOR));\n    +-\tWARN_ON_ONCE(IS_ENABLED(CONFIG_SCHED_DEBUG) \u0026\u0026 wake_flags \u0026 ~(WF_SYNC|WF_CURRENT_CPU));\n    ++\tWARN_ON_ONCE(IS_ENABLED(CONFIG_SCHED_DEBUG) \u0026\u0026 wake_flags \u0026 ~(WF_SYNC|WF_CURRENT_CPU|WF_ANDROID_VENDOR));\n      \treturn try_to_wake_up(curr-\u003eprivate, mode, wake_flags);\n      }\n      EXPORT_SYMBOL(default_wake_function);\n     \n      ## kernel/sched/sched.h ##\n     @@ kernel/sched/sched.h: static inline int task_on_rq_migrating(struct task_struct *p)\n    - #define WF_FORK\t\t\t0x02\t\t/* Child wakeup after fork */\n    - #define WF_MIGRATED\t\t0x04\t\t/* Internal use, task got migrated */\n    - #define WF_ON_CPU\t\t0x08\t\t/* Wakee is on_cpu */\n    -+#define WF_ANDROID_VENDOR\t0x1000\t\t/* Vendor specific for Android */\n    + #define WF_MIGRATED     0x20 /* Internal use, task got migrated */\n    + #define WF_CURRENT_CPU  0x40 /* Prefer to move the wakee to the current CPU. */\n      \n    - /*\n    -  * To aid in avoiding the subversion of \"niceness\" due to uneven distribution\n    ++#define WF_ANDROID_VENDOR\t0x1000 /* Vendor specific for Android */\n    ++\n    + #ifdef CONFIG_SMP\n    + static_assert(WF_EXEC \u003d\u003d SD_BALANCE_EXEC);\n    + static_assert(WF_FORK \u003d\u003d SD_BALANCE_FORK);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "11eecc1750e482dff7793ec41dded469bf97e75b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
