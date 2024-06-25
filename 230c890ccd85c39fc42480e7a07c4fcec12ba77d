@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd1b9679_f421ad0e",
+        "filename": "drivers/android/binder/trace.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-06-25T20:40:31Z",
+      "side": 1,
+      "message": "Does *this* need a `c_ulong` cast (written as `as _`)? `arg` is `u64`, but `rust_binder_ioctl` is declared as needing a `c_ulong`, which is a `u64` on 64-bit platforms but usually a 32-bit value on 32-bit platforms.",
+      "revId": "230c890ccd85c39fc42480e7a07c4fcec12ba77d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
