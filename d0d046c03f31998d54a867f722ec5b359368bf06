@@ -118,6 +118,30 @@
       },
       "revId": "d0d046c03f31998d54a867f722ec5b359368bf06",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a66942e_e5c340c5",
+        "filename": "drivers/irqchip/irq-gic-v3.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1372,
+      "author": {
+        "id": 1902286
+      },
+      "writtenOn": "2024-06-26T11:29:46Z",
+      "side": 1,
+      "message": "Hi Greg. I\u0027ve checked again, it\u0027s not possible to return from hook because register_trace expects function with void return type.\n \nregister_trace_##name(void (*probe)(data_proto), void *data)\n\nIt can only be returned from here.",
+      "parentUuid": "b73d087a_342d4213",
+      "range": {
+        "startLine": 1372,
+        "startChar": 0,
+        "endLine": 1372,
+        "endChar": 10
+      },
+      "revId": "d0d046c03f31998d54a867f722ec5b359368bf06",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
