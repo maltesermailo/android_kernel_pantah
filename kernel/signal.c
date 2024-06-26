@@ -2318,6 +2318,18 @@ static int ptrace_stop(int exit_code, int why, unsigned long message,
 		do_notify_parent_cldstop(current, false, why);
 
 	/*
+	 * If tracee is exiting and the tracer is frozen, don't wait
+	 * for the tracer to get unfrozen and ack. Per ptrace(2)
+	 * manual, the tracer cannot assume that the ptrace-stopped
+	 * tracee exists, so exiting now should not be an issue.
+	 */
+	if (current->ptrace && (exit_code >> 8) == PTRACE_EVENT_EXIT &&
+	    cgroup_task_frozen(current->parent)) {
+		read_unlock(&tasklist_lock);
+		goto skip_wait;
+	}
+
+	/*
 	 * Don't want to allow preemption here, because
 	 * sys_ptrace() needs this task to be inactive.
 	 *
@@ -2330,6 +2342,7 @@ static int ptrace_stop(int exit_code, int why, unsigned long message,
 	schedule();
 	cgroup_leave_frozen(true);
 
+skip_wait:
 	/*
 	 * We are back.  Now reacquire the siglock before touching
 	 * last_siginfo, so that we are sure to have synchronized with
