@@ -16,6 +16,24 @@
       "message": "Does *this* need a `c_ulong` cast (written as `as _`)? `arg` is `u64`, but `rust_binder_ioctl` is declared as needing a `c_ulong`, which is a `u64` on 64-bit platforms but usually a 32-bit value on 32-bit platforms.",
       "revId": "230c890ccd85c39fc42480e7a07c4fcec12ba77d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d34d959f_8fac0545",
+        "filename": "drivers/android/binder/trace.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-06-26T08:12:00Z",
+      "side": 1,
+      "message": "I guess we probably want to use `usize` instead of `u64` throughout this patch. Though that would require a cast here since `c_ulong` is conditionally u32 or u64 instead of just being usize.",
+      "parentUuid": "dd1b9679_f421ad0e",
+      "revId": "230c890ccd85c39fc42480e7a07c4fcec12ba77d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
