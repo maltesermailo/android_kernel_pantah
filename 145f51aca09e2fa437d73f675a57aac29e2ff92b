@@ -22,6 +22,30 @@
       },
       "revId": "145f51aca09e2fa437d73f675a57aac29e2ff92b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80b0aa94_64de8b9d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2024-06-27T20:53:15Z",
+      "side": 1,
+      "message": "I think what I wrote here is correct.  `__attribute__((__no_sanitize__(\"cfi\")))` disables cfi but not kcfi.  I tested this by building the following program using `clang -fsanitize\u003dkcfi`:\n\n```\n__attribute__((__no_sanitize__(\"cfi\"))) void nocfi(void (*f)(void))              \n{                                                                                \n        f();                                                                     \n}                                                                                \n                                                                                 \n__attribute__((__no_sanitize__(\"kcfi\"))) void nokcfi(void (*f)(void))            \n{                                                                                \n        f();                                                                     \n}                                                                                                                                                                \n```\n\n`nocfi()` includes the kcfi check but `nokcfi()` doesn\u0027t.\n\n```\n0000000000000010 \u003cnocfi\u003e:\n  10:   41 ba f4 98 bf 5a       mov    $0x5abf98f4,%r10d\n  16:   44 03 57 fc             add    -0x4(%rdi),%r10d\n  1a:   74 02                   je     1e \u003cnocfi+0xe\u003e\n  1c:   0f 0b                   ud2\n  1e:   ff e7                   jmp    *%rdi\n\n0000000000000030 \u003cnokcfi\u003e:\n  30:   ff e7                   jmp    *%rdi\n```\n\nSo disabling \"cfi\" in kernel code stopped doing anything when the kernel switched from \"cfi\" to \"kcfi\" (though as you pointed out, it was redundant here due to being part of `__init` anyway).",
+      "parentUuid": "5b5825b1_cd256427",
+      "range": {
+        "startLine": 11,
+        "startChar": 56,
+        "endLine": 12,
+        "endChar": 36
+      },
+      "revId": "145f51aca09e2fa437d73f675a57aac29e2ff92b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
