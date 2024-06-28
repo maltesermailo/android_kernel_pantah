@@ -260,7 +260,11 @@ void unix_gc(void)
 			__set_bit(UNIX_GC_MAYBE_CYCLE, &u->gc_flags);
 
 			if (sk->sk_state == TCP_LISTEN) {
+<<<<<<< HEAD   (51e9ab UPSTREAM: af_unix: Fix garbage collector racing against conn)
 				unix_state_lock(sk);
+=======
+				unix_state_lock_nested(sk, U_LOCK_GC_LISTENER);
+>>>>>>> BRANCH (428aae Merge 5.4.276 into android12-5.4-lts)
 				unix_state_unlock(sk);
 			}
 		}
