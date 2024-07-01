@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6d58a67_d69a5add",
+        "filename": "mm/madvise.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-07-01T23:21:54Z",
+      "side": 1,
+      "message": "You named the hook so that it reflects your usecase but other vendors might use it for some other cases. It\u0027s better not name them according to the code logic where they are placed. In here I think something like `trace_android_vh_madvise_cold_or_pageout(page, pageout)` would be more generic. Feel free to describe your usecase in the changelog though. That is always useful for us to understand why it\u0027s needed.",
+      "range": {
+        "startLine": 416,
+        "startChar": 2,
+        "endLine": 416,
+        "endChar": 42
+      },
+      "revId": "a8f32925710da8e711b3c3d8b8889513e7bbdb3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
