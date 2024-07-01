@@ -127,9 +127,13 @@ struct Qdisc {
 
 	struct rcu_head		rcu;
 	netdevice_tracker	dev_tracker;
+<<<<<<< HEAD   (b9dbfe ANDROID: fix up crc generation for uart functions)
 
 	ANDROID_KABI_RESERVE(1);
 
+=======
+	struct lock_class_key	root_lock_key;
+>>>>>>> BRANCH (61945f Linux 6.6.36)
 	/* private data */
 	long privdata[] ____cacheline_aligned;
 };
