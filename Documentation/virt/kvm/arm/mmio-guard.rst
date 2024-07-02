@@ -27,6 +27,12 @@ will result in an exception being delivered to the guest.
 This relies on a set of hypercalls defined in the KVM-specific range,
 using the HVC64 calling convention.
 
+When KVM_FUNC_HAS_RANGE is set, RGUARD_MAP and RGUARD_UNMAP HVCs are
+available. Those HVCs take a number of granules as an argument and
+return (r1) how many of them have been processed. If no error occured
+but less granules have been processed than required, the caller can try
+again, skipping what has already been covered.
+
 * ARM_SMCCC_KVM_FUNC_MMIO_GUARD_INFO
 
     ==============    ========    ================================
@@ -34,7 +40,9 @@ using the HVC64 calling convention.
     Arguments:        r1-r3       Reserved / Must be zero
     Return Values:    (int64)     NOT_SUPPORTED(-1) on error, or
                       (uint64)    Protection Granule (PG) size in
-                                  bytes (r0)
+                                  bytes (r0). KVM_FUNC_HAS_RANGE is
+                                  set (r1) if RGUARD_MAP and
+                                  RGUARD_UNMAP HVCs are available.
     ==============    ========    ================================
 
 * ARM_SMCCC_KVM_FUNC_MMIO_GUARD_ENROLL
