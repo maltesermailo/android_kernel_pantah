@@ -85,6 +85,26 @@
       "robotRunId": "AR00000000000083245326",
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/3156610?revision\u003d2",
       "key": {
+        "uuid": "00375c3b_579aa42c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-02T16:51:57Z",
+      "side": 1,
+      "message": "Commit does not have a valid tag, such as ANDROID:\n\nANDROID: Patch only relevant for Android, unlikely to be upstreamed\nUPSTREAM: Unmodified patch from upstream, needs reference to upstream sha\nBACKPORT: Modified patch from upstream, needs reference to upstream sha\nFROMGIT: Patch from an upstream git repository, needs reference to upstream sha\nFROMLIST: Patch from an upstream mailing list, needs URL to upstream\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "3130abaa7be97b92a82459a141ebd1744f9fd749",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000083245326",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3156610?revision\u003d2",
+      "key": {
         "uuid": "846bef06_f1c9d996",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -238,6 +258,50 @@
       "fixSuggestions": [
         {
           "fixId": "f2ed2b7e_c75de3dd",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 11,
+                "startChar": 0,
+                "endLine": 11,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Aleksei Vetrov \u003cvvvvvv@google.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3130abaa7be97b92a82459a141ebd1744f9fd749",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000083245326",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3156610?revision\u003d2",
+      "key": {
+        "uuid": "a9033b7c_7498c198",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-02T16:51:57Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Aleksei Vetrov \u003cvvvvvv@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 0
+      },
+      "tag": "",
+      "fixSuggestions": [
+        {
+          "fixId": "f05652bd_61f90a81",
           "description": "Add author\u0027s Signed-off-by",
           "replacements": [
             {
