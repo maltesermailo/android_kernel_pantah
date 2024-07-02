@@ -1,4 +1,13 @@
 # SPDX-License-Identifier: GPL-2.0-only
+
+config BUILT_WITH_DDK
+	bool
+	default n
+	help
+	  Select this to indicate the module was built as DDK module.
+
+	  Say N if unsure.
+
 config CC_VERSION_TEXT
 	string
 	default "$(CC_VERSION_TEXT)"
