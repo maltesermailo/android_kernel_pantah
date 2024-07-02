@@ -19,6 +19,13 @@ DECLARE_RESTRICTED_HOOK(android_rvh_fiq_dump,
 	TP_PROTO(struct pt_regs *regs),
 	TP_ARGS(regs), 1);
 
+DECLARE_RESTRICTED_HOOK(android_rvh_irq_enter,
+	TP_PROTO(unsigned int irq),
+	TP_ARGS(irq), 1);
+DECLARE_RESTRICTED_HOOK(android_rvh_irq_exit,
+	TP_PROTO(unsigned int irq),
+	TP_ARGS(irq), 1);
+
 #endif /* _TRACE_HOOK_GIC_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>

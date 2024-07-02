@@ -15,6 +15,7 @@
 #include <linux/maple_tree.h>
 #include <linux/irqdomain.h>
 #include <linux/sysfs.h>
+#include <trace/hooks/gic.h>
 
 #include "internals.h"
 
@@ -659,6 +660,14 @@ void irq_init_desc(unsigned int irq)
 
 #endif /* !CONFIG_SPARSE_IRQ */
 
+static int irq_hook = -1;
+static int __init setup_irq_hook(char *str)
+{
+	get_option(&str, &irq_hook);
+	return 1;
+}
+__setup("irq_hook=", setup_irq_hook);
+
 int handle_irq_desc(struct irq_desc *desc)
 {
 	struct irq_data *data;
@@ -670,7 +679,11 @@ int handle_irq_desc(struct irq_desc *desc)
 	if (WARN_ON_ONCE(!in_hardirq() && handle_enforce_irqctx(data)))
 		return -EPERM;
 
+	if (unlikely(irq_hook > 0))
+		trace_android_rvh_irq_enter(data->hwirq);
 	generic_handle_irq_desc(desc);
+	if (unlikely(irq_hook > 0))
+		trace_android_rvh_irq_exit(data->hwirq);
 	return 0;
 }
 
