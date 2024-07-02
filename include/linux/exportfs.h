@@ -221,8 +221,12 @@ struct export_operations {
 #define EXPORT_OP_NOATOMIC_ATTR		(0x10) /* Filesystem cannot supply
 						  atomic attribute updates
 						*/
+<<<<<<< HEAD   (a1243d Merge 2a3073d58382 ("Revert "tracing/trigger: Fix to return )
 #define EXPORT_OP_SYNC_LOCKS		(0x20) /* Filesystem can't do
 						  asychronous blocking locks */
+=======
+#define EXPORT_OP_FLUSH_ON_CLOSE	(0x20) /* fs flushes file data on close */
+>>>>>>> BRANCH (fc1021 Revert "lockd: introduce safe async lock op")
 	unsigned long	flags;
 };
 

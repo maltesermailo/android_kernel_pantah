@@ -470,6 +470,12 @@ nlmsvc_lock(struct svc_rqst *rqstp, struct nlm_file *file,
 	    struct nlm_host *host, struct nlm_lock *lock, int wait,
 	    struct nlm_cookie *cookie, int reclaim)
 {
+<<<<<<< HEAD   (a1243d Merge 2a3073d58382 ("Revert "tracing/trigger: Fix to return )
+=======
+#if IS_ENABLED(CONFIG_SUNRPC_DEBUG)
+	struct inode		*inode = nlmsvc_file_inode(file);
+#endif
+>>>>>>> BRANCH (fc1021 Revert "lockd: introduce safe async lock op")
 	struct nlm_block	*block = NULL;
 	struct inode		*inode = nlmsvc_file_inode(file);
 	int			error;
@@ -484,7 +490,11 @@ nlmsvc_lock(struct svc_rqst *rqstp, struct nlm_file *file,
 				(long long)lock->fl.fl_end,
 				wait);
 
+<<<<<<< HEAD   (a1243d Merge 2a3073d58382 ("Revert "tracing/trigger: Fix to return )
 	if (inode->i_sb->s_export_op->flags & EXPORT_OP_SYNC_LOCKS) {
+=======
+	if (nlmsvc_file_file(file)->f_op->lock) {
+>>>>>>> BRANCH (fc1021 Revert "lockd: introduce safe async lock op")
 		async_block = wait;
 		wait = 0;
 	}
