@@ -16,6 +16,24 @@
       "message": "THat is a substantial reduction in file size. Is that alright?",
       "revId": "eba9d083b49144fa5325b6a92132dfe458e13574",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4d9e374_7722055e",
+        "filename": "android/abi_gki_aarch64.stg",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2024-07-03T11:51:28Z",
+      "side": 1,
+      "message": "Yes! There were 147 duplicate types in STG because of this issue, now they are all gone.\nUsed this to check: `cat android/abi_gki_aarch64.stg | grep -A4 \"struct_union\" | grep \"name:\" | sort -k2 | uniq -c | sort -n`",
+      "parentUuid": "352922f9_3fd8538e",
+      "revId": "eba9d083b49144fa5325b6a92132dfe458e13574",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
