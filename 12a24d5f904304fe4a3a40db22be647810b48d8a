@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1954ac29_0cf1e69a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-07-04T06:53:33Z",
+      "side": 1,
+      "message": "please use a miscdevice instead of your own class.",
+      "revId": "12a24d5f904304fe4a3a40db22be647810b48d8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f554eb9e_aa4e8a20",
+        "filename": "drivers/misc/pkvm-smc/pkvm-guest-smc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-07-04T06:53:33Z",
+      "side": 1,
+      "message": "`KBUILD_MODNAME`?",
+      "range": {
+        "startLine": 14,
+        "startChar": 33,
+        "endLine": 14,
+        "endChar": 42
+      },
+      "revId": "12a24d5f904304fe4a3a40db22be647810b48d8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaff3208_0864dcf4",
+        "filename": "drivers/misc/pkvm-smc/pkvm-guest-smc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-07-04T06:53:33Z",
+      "side": 1,
+      "message": "ioctl definitions need to go in a uapi .h file, not buried in a .c file, they will stagnate here and userspace will never know what they are.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 65
+      },
+      "revId": "12a24d5f904304fe4a3a40db22be647810b48d8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7abb1c6e_86d7c082",
+        "filename": "drivers/misc/pkvm-smc/pkvm-guest-smc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-07-04T06:53:33Z",
+      "side": 1,
+      "message": "please, just use the misc class device for a single major/minor number like this.  No need for your own class, that will make this code much simpler as well.\n\nAs proof, you never clean this class up on unload 😞",
+      "range": {
+        "startLine": 132,
+        "startChar": 7,
+        "endLine": 132,
+        "endChar": 21
+      },
+      "revId": "12a24d5f904304fe4a3a40db22be647810b48d8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
