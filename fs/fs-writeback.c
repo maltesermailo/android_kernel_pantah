@@ -133,13 +133,14 @@ static bool inode_io_list_move_locked(struct inode *inode,
 	return false;
 }
 
-static void wb_wakeup(struct bdi_writeback *wb)
+void wb_wakeup(struct bdi_writeback *wb)
 {
 	spin_lock_irq(&wb->work_lock);
 	if (test_bit(WB_registered, &wb->state))
 		mod_delayed_work(bdi_wq, &wb->dwork, 0);
 	spin_unlock_irq(&wb->work_lock);
 }
+EXPORT_SYMBOL_GPL(wb_wakeup);
 
 static void finish_writeback_work(struct bdi_writeback *wb,
 				  struct wb_writeback_work *work)
@@ -1384,7 +1385,7 @@ static bool inode_dirtied_after(struct inode *inode, unsigned long t)
  * Move expired (dirtied before dirtied_before) dirty inodes from
  * @delaying_queue to @dispatch_queue.
  */
-static int move_expired_inodes(struct list_head *delaying_queue,
+int move_expired_inodes(struct list_head *delaying_queue,
 			       struct list_head *dispatch_queue,
 			       unsigned long dirtied_before)
 {
@@ -1434,6 +1435,7 @@ static int move_expired_inodes(struct list_head *delaying_queue,
 out:
 	return moved;
 }
+EXPORT_SYMBOL_GPL(move_expired_inodes);
 
 /*
  * Queue all expired dirty inodes for io, eldest first.
