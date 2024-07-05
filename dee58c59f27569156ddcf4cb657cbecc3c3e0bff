@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7ebcc62_ef63218e",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-07-05T09:11:51Z",
+      "side": 1,
+      "message": "Please put it in the right order.\n\n```\n--- common/arch/arm64/configs/gki_defconfig\t2024-07-04 13:08:08.350443566 +0000\n+++ common/arch/arm64/configs/gki_defconfig\t2024-07-04 13:08:54.557332655 +0000\n@@ -71,6 +71,7 @@\n CONFIG_CMDLINE\u003d\"console\u003dttynull stack_depot_disable\u003don cgroup_disable\u003dpressure kasan.page_alloc.sample\u003d10 kasan.stacktrace\u003doff bootconfig ioremap_guard kvm-arm.mode\u003dprotected\"\n CONFIG_CMDLINE_EXTEND\u003dy\n # CONFIG_DMI is not set\n+CONFIG_HIBERNATION\u003dy\n CONFIG_PM_WAKELOCKS\u003dy\n CONFIG_PM_WAKELOCKS_LIMIT\u003d0\n # CONFIG_PM_WAKELOCKS_GC is not set\n@@ -741,4 +742,3 @@\n CONFIG_HIST_TRIGGERS\u003dy\n CONFIG_PID_IN_CONTEXTIDR\u003dy\n # CONFIG_RUNTIME_TESTING_MENU is not set\n-CONFIG_HIBERNATION\u003dy\n```",
+      "revId": "dee58c59f27569156ddcf4cb657cbecc3c3e0bff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
