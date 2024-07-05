@@ -37,6 +37,10 @@ static DEFINE_PER_CPU(struct pkvm_hyp_vm *, __current_vm);
 
 static struct kvm_pgtable_pte_ops host_s2_pte_ops;
 static bool host_stage2_force_pte(u64 addr, u64 end, enum kvm_pgtable_prot prot);
+static bool host_stage2_always_pte(u64 addr, u64 end, enum kvm_pgtable_prot prot)
+{
+	return true;
+}
 static bool host_stage2_pte_is_counted(kvm_pte_t pte, u32 level);
 static bool guest_stage2_force_pte_cb(u64 addr, u64 end,
 				      enum kvm_pgtable_prot prot);
@@ -2453,6 +2457,30 @@ int host_stage2_get_leaf(phys_addr_t phys, kvm_pte_t *ptep, u32 *level)
 
 	host_lock_component();
 	ret = kvm_pgtable_get_leaf(&host_mmu.pgt, phys, ptep, level);
+	host_unlock_component();
+
+	return ret;
+}
+
+int host_stage2_no_block(void)
+{
+	struct memblock_region *reg;
+	int i, ret = 0;
+
+	host_lock_component();
+	if (host_s2_pte_ops.force_pte_cb == host_stage2_always_pte)
+		goto exit;
+
+	host_s2_pte_ops.force_pte_cb = host_stage2_always_pte;
+
+	for (i = 0; i < hyp_memblock_nr; i++) {
+		reg = &hyp_memory[i];
+		ret = kvm_pgtable_stage2_break_blocks(&host_mmu.pgt, reg->base,
+						      reg->size, &host_s2_pool);
+		if (ret)
+			goto exit;
+	}
+exit:
 	host_unlock_component();
 
 	return ret;

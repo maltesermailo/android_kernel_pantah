@@ -1344,3 +1344,59 @@ void kvm_pgtable_stage2_destroy(struct kvm_pgtable *pgt)
 	pgt->mm_ops->free_pages_exact(pgt->pgd, pgd_sz);
 	pgt->pgd = NULL;
 }
+
+struct block_breaker_data {
+	void			*memcache;
+	struct kvm_pgtable	*pgt;
+};
+
+static int stage2_block_breaker_walker(u64 addr, u64 end, u32 level, kvm_pte_t *ptep,
+				       enum kvm_pgtable_walk_flags flag,
+				       void * const arg)
+{
+	struct block_breaker_data *data = arg;
+	kvm_pte_t pte = *ptep, *table, *childp;
+	struct kvm_pgtable *pgt = data->pgt;
+	struct kvm_pgtable_mm_ops *mm_ops = pgt->mm_ops;
+	u64 pa, granule;
+	int i;
+
+	if (!kvm_pte_valid(pte) || level == (KVM_PGTABLE_MAX_LEVELS - 1))
+		return 0;
+
+	table = mm_ops->zalloc_page(data->memcache);
+	if (!table)
+		return -ENOMEM;
+
+	granule = kvm_granule_size(level + 1);
+	pa = kvm_pte_to_phys(pte);
+	childp = table;
+	for (i = 0; i < PTRS_PER_PTE; ++i, ++childp, pa += granule)
+		*childp = kvm_init_valid_leaf_pte(pa, pte, level + 1);
+
+	if (pgt->pte_ops->pte_is_counted_cb(pte, level))
+		stage2_put_pte(ptep, pgt->mmu, addr, level, mm_ops);
+	else
+		stage2_clear_pte(ptep, pgt->mmu, addr, level);
+
+	kvm_set_table_pte(ptep, table, mm_ops);
+	mm_ops->get_page(ptep);
+
+	return 0;
+}
+
+int kvm_pgtable_stage2_break_blocks(struct kvm_pgtable *pgt, u64 addr, u64 size,
+				    void *mc)
+{
+	struct block_breaker_data data = {
+		.memcache	= mc,
+		.pgt		= pgt,
+	};
+	struct kvm_pgtable_walker walker = {
+		.cb	= stage2_block_breaker_walker,
+		.flags	= KVM_PGTABLE_WALK_LEAF,
+		.arg	= &data,
+	};
+
+	return kvm_pgtable_walk(pgt, addr, size, &walker);
+}

@@ -112,6 +112,8 @@ void drain_hyp_pool(struct pkvm_hyp_vm *vm, struct kvm_hyp_memcache *mc);
 void psci_mem_protect_inc(u64 n);
 void psci_mem_protect_dec(u64 n);
 
+int host_stage2_no_block(void);
+
 static __always_inline void __load_host_stage2(void)
 {
 	if (static_branch_likely(&kvm_protected_mode_initialized))
