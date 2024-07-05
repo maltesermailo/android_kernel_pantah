@@ -16,6 +16,24 @@
       "message": "What driver is calling these, these are internal networking symbols that no driver should be calling at all.",
       "revId": "35fc9242108e384da8001c814a46ca7be923ca57",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c723b37d_17509f71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1684650
+      },
+      "writtenOn": "2024-07-05T02:37:17Z",
+      "side": 1,
+      "message": "We will call the inline function \"dst_output\". If CONFIG_RETPOLINE is set to \"y\", this function requires the address of ip6_output and ip_output.\n\nstatic inline int dst_output(struct net *net, struct sock *sk, struct sk_buff *skb)\n{\n\treturn INDIRECT_CALL_INET(skb_dst(skb)-\u003eoutput,ip6_output, ip_output, net, sk, skb);\n}\n\nThere are some other drivers that call dst_output, such as the virtual routing and forwarding module (code located in drivers/net/vrf.c).",
+      "parentUuid": "eb5a0015_370f8c8f",
+      "revId": "35fc9242108e384da8001c814a46ca7be923ca57",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
