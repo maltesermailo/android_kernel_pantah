@@ -588,6 +588,7 @@ out:
 
 static inline unsigned int order_to_pindex(int migratetype, int order)
 {
+<<<<<<< HEAD   (f67208 ANDROID: fix up tty_operations ABI break)
 #ifdef CONFIG_CMA
 	/*
 	 * We shouldn't get here for MIGRATE_CMA if those pages don't
@@ -596,11 +597,17 @@ static inline unsigned int order_to_pindex(int migratetype, int order)
 	 */
 	VM_BUG_ON(!cma_has_pcplist() && migratetype == MIGRATE_CMA);
 #endif
+=======
+	bool __maybe_unused movable;
+>>>>>>> BRANCH (8fa96e Linux 6.6.37)
 
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
 	if (order > PAGE_ALLOC_COSTLY_ORDER) {
 		VM_BUG_ON(order != pageblock_order);
-		return NR_LOWORDER_PCP_LISTS;
+
+		movable = migratetype == MIGRATE_MOVABLE;
+
+		return NR_LOWORDER_PCP_LISTS + movable;
 	}
 #else
 	VM_BUG_ON(order > PAGE_ALLOC_COSTLY_ORDER);
@@ -614,7 +621,7 @@ static inline int pindex_to_order(unsigned int pindex)
 	int order = pindex / MIGRATE_PCPTYPES;
 
 #ifdef CONFIG_TRANSPARENT_HUGEPAGE
-	if (pindex == NR_LOWORDER_PCP_LISTS)
+	if (pindex >= NR_LOWORDER_PCP_LISTS)
 		order = pageblock_order;
 #else
 	VM_BUG_ON(order > PAGE_ALLOC_COSTLY_ORDER);
