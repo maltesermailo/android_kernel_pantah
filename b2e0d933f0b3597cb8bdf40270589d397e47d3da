@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce57ff18_d3d7946d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-07-11T15:16:42Z",
+      "side": 1,
+      "message": "This patch was never merged upstream, so can\u0027t be called a backport. Should be `FROMLIST`. However I see that in 6.8 kernel `register_shm_helper` function was completely changed not to use `pin_user_pages_fast` at all (see [1]). It would be better to backport that upstream patch and see if that fixes your issue.\n\n[1] 7bdee4157591 (\"tee: Use iov_iter to better support shared buffer registration\")",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "b2e0d933f0b3597cb8bdf40270589d397e47d3da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf3ded59_56fed2b9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-07-11T15:16:42Z",
+      "side": 1,
+      "message": "This should be at the end of the changelog, right before Change-Id tag.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 14
+      },
+      "revId": "b2e0d933f0b3597cb8bdf40270589d397e47d3da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
