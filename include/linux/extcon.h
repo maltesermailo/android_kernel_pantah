@@ -136,8 +136,18 @@
 
 /* Properties of EXTCON_TYPE_JACK. */
 #define EXTCON_PROP_JACK_MIN		100
-#define EXTCON_PROP_JACK_MAX		100
+#define EXTCON_PROP_JACK_MAX		101
 #define EXTCON_PROP_JACK_CNT (EXTCON_PROP_JACK_MAX - EXTCON_PROP_JACK_MIN + 1)
+
+/* Properties of EXTCON_TYPE_JACK.
+ *
+ * - EXTCON_PROP_JACK_POLE (Pole Type)
+ * @type:       integer (intval)
+ * @value:      1 (no audio) or 2 (3 pole) or 4 (4 pole, SBU1 MIC) or 8 (4 pole, SBU2 MIC)
+ * @default:    1 (no audio)
+ *
+ */
+#define EXTCON_PROP_JACK_POLE		100
 
 /*
  * Properties of EXTCON_TYPE_DISP.
