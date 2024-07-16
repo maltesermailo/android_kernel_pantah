@@ -266,6 +266,178 @@
 #define SMCCC_RET_NOT_REQUIRED			-2
 #define SMCCC_RET_INVALID_PARAMETER		-3
 
+/**
+ * WIP
+ */
+/* For Power Management */
+#define SMC_CMD_SLEEP			(-3)
+#define SMC_CMD_CPU1BOOT		(-4)
+#define SMC_CMD_CPU0AFTR		(-5)
+#define SMC_CMD_SAVE			(-6)
+#define SMC_CMD_SHUTDOWN		(-7)
+
+#define SMC_CMD_CPUMAP			(-10)
+
+/* For Accessing CP15/SFR (General) */
+#define SMC_CMD_REG			(-101)
+
+/* For setting memory for debug */
+#define SMC_CMD_SET_DEBUG_MEM		(-120)
+#define SMC_CMD_GET_LOCKUP_REASON	(-121)
+#define SMC_CMD_KERNEL_PANIC_NOTICE	(0x8200007A)
+#define SMC_CMD_SET_SEH_ADDRESS		(-123)
+#define SMC_CMD_LOCKUP_NOTICE		(0x8200007C)
+#define SMC_CMD_GET_SJTAG_STATUS	(0x8200012E)
+
+/* For protecting kernel text area */
+#define SMC_CMD_PROTECT_KERNEL_TEXT	(-125)
+
+/* For Security Dump Manager */
+#define SMC_CMD_DUMP_SECURE_REGION	(-130)
+#define SMC_CMD_FLUSH_SECDRAM		(-131)
+
+/* For D-GPIO/D-TZPC */
+#define SMC_CMD_PREPARE_PD_ONOFF	(0x82000410)
+
+/* For accessing privileged registers */
+#define SMC_CMD_PRIV_REG		(0x82000504)
+
+/* For FMP/SMU Ctrl */
+#define SMC_CMD_FMP_SECURITY		(0xC2001810)
+#define SMC_CMD_FMP_DISK_KEY_STORED	(0xC2001820)
+#define SMC_CMD_FMP_DISK_KEY_SET	(0xC2001830)
+#define SMC_CMD_FMP_DISK_KEY_CLEAR	(0xC2001840)
+#define SMC_CMD_SMU			(0xC2001850)
+#define SMC_CMD_FMP_SMU_RESUME		(0xC2001860)
+#define SMC_CMD_FMP_SMU_DUMP		(0xC2001870)
+#define SMC_CMD_UFS_LOG			(0xC2001880)
+#define SMC_CMD_FMP_USE_OTP_KEY		(0xC2001890)
+
+/* SMU IDs (third parameter to FMP/SMU Ctrls) */
+#define SMU_EMBEDDED			0
+#define SMU_UFSCARD			1
+#define SMU_SDCARD			2
+
+/* SMU commands (second parameter to SMC_CMD_SMU) */
+#define SMU_INIT			0
+#define SMU_SET				1
+#define SMU_ABORT			2
+
+/* Fourth parameter to SMC_CMD_FMP_SECURITY */
+#define CFG_DESCTYPE_3			3
+
+/* Command ID for smc */
+#define SMC_PROTECTION_SET		(0x82002010)
+#define SMC_DRM_FW_LOADING		(0x82002011)
+#define SMC_DCPP_SUPPORT		(0x82002012)
+#define SMC_DRM_HISTOGRAM_SEC		(0x82002013)
+#define SMC_DRM_HISTOGRAM_BINS_SEC	(0x82002014)
+#define SMC_DRM_SECBUF_PROT		(0x82002020)
+#define SMC_DRM_SECBUF_UNPROT		(0x82002021)
+#define SMC_DRM_G2D_CMD_DATA		(0x8200202d)
+#define SMC_DRM_SECBUF_CFW_PROT		(0x82002030)
+#define SMC_DRM_SECBUF_CFW_UNPROT	(0x82002031)
+#define SMC_DRM_DPU_CRC_SEC		(0x82002070)
+#define SMC_DRM_PPMP_PROT		(0x82002110)
+#define SMC_DRM_PPMP_UNPROT		(0x82002111)
+#define SMC_DRM_PPMP_MFCFW_PROT		(0x82002112)
+#define SMC_DRM_PPMP_MFCFW_UNPROT	(0x82002113)
+#define SMC_DRM_G3D_PPCFW_RESTORE	(0x8200211C)
+#define SMC_DRM_G3D_PPCFW_OFF		(0x8200211D)
+#define MC_FC_SET_CFW_PROT		(0x82002040)
+#define SMC_DRM_SEC_SMMU_INFO		(0x820020D0)
+#define MC_FC_DRM_SET_CFW_PROT		(0x10000000)
+
+/* Deprecated */
+#define SMC_DRM_MAKE_PGTABLE		(0x81000003)
+#define SMC_DRM_CLEAR_PGTABLE		(0x81000004)
+#define SMC_MEM_PROT_SET		(0x81000005)
+#define SMC_DRM_SECMEM_INFO		(0x81000006)
+#define SMC_DRM_VIDEO_PROC		(0x81000007)
+
+/* Parameter for smc */
+#define SMC_PROTECTION_ENABLE		(1)
+#define SMC_PROTECTION_DISABLE		(0)
+
+/* For DTRNG Access */
+#define SMC_CMD_RANDOM			(0x82001012)
+
+/* For Secure log information */
+#define SMC_CMD_SEC_LOG_INFO		(0x82000610)
+
+/* For EL3 debug cmd */
+#define SIP_SVD_GS_DEBUG_CMD		(0x82000612)
+
+/* Debug commands */
+#define CMD_ASSERT			0x0
+#define CMD_PANIC			0x1
+#define CMD_ECC				0xecc
+
+/* For PPMPU fail information */
+#define SMC_CMD_GET_PPMPU_FAIL_INFO	(0x8200211A)
+#define SMC_CMD_CHECK_PPMPU_CH_NUM	(0x8200211B)
+
+/* For MMCache flush */
+#define SMC_CMD_MM_CACHE_OPERATION	(0x82000720)
+
+/* MACRO for SMC_CMD_REG */
+#define SMC_REG_CLASS_CP15		(0x0 << 30)
+#define SMC_REG_CLASS_SFR_W		(0x1 << 30)
+#define SMC_REG_CLASS_SFR_R		(0x3 << 30)
+#define SMC_REG_CLASS_MASK		(0x3 << 30)
+#define SMC_REG_ID_SFR_W(ADDR)		(SMC_REG_CLASS_SFR_W | ((ADDR) >> 2))
+#define SMC_REG_ID_SFR_R(ADDR)		(SMC_REG_CLASS_SFR_R | ((ADDR) >> 2))
+
+/* op type for SMC_CMD_SAVE and SMC_CMD_SHUTDOWN */
+#define OP_TYPE_CORE			(0x0)
+#define OP_TYPE_CLUSTER			(0x1)
+
+/* Power State required for SMC_CMD_SAVE and SMC_CMD_SHUTDOWN */
+#define SMC_POWERSTATE_SLEEP		(0x0)
+#define SMC_POWERSTATE_IDLE		(0x1)
+#define SMC_POWERSTATE_SWITCH		(0x2)
+
+/*
+ * For SMC CMD for SRPMB
+ */
+#define SMC_SRPMB_WSM			(0x82003811)
+
+/* For DTRNG Access */
+#define HWRNG_INIT			(0x0)
+#define HWRNG_EXIT			(0x1)
+#define HWRNG_GET_DATA			(0x2)
+#define HWRNG_RESUME			(0x3)
+
+/* For CFW group */
+#define CFW_DISP_RW			(3)
+#define CFW_VPP0			(5)
+#define CFW_VPP1			(6)
+
+#define SMC_TZPC_OK			(2)
+
+#define PROT_MFC			(0)
+#define PROT_MSCL0			(1)
+#define PROT_MSCL1			(2)
+
+#define PROT_L0				(3)
+#define PROT_L1				(4)
+#define PROT_L2				(5)
+
+#define PROT_G3D			(12)
+#define PROT_JPEG			(13)
+#define PROT_G2D			(14)
+#define PROT_MFC1			(23)
+
+/* secure SysMMU SFR access */
+enum sec_sysmmu_sfr_access_t {
+	SEC_SMMU_SFR_READ,
+	SEC_SMMU_SFR_WRITE,
+};
+
+/**
+ * WIP end
+ */
+
 #ifndef __ASSEMBLY__
 
 #include <linux/linkage.h>
