@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d929630_1bf1470e",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1385,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-07-16T16:55:15Z",
+      "side": 1,
+      "message": "Any reason you can\u0027t export and use `destroy_large_folio()` instead?\n\nOr implement this one as:\n```\nvoid free_hpage(struct page *page, fpi_t fpi_flags)\n{\n\t__free_pages_ok(page, HPAGE_PMD_ORDER, fpi_flags);\n}\nEXPORT_SYMBOL_GPL(free_hpage);\n```",
+      "range": {
+        "startLine": 1385,
+        "startChar": 5,
+        "endLine": 1385,
+        "endChar": 18
+      },
+      "revId": "aaacec1f92885cfa3b0ac107e5fbca944976a40d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e2aca5e_27b4e153",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1401,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-07-16T16:55:15Z",
+      "side": 1,
+      "message": "You are skipping `free_pages_prepare()` which will invalidate memcg accounting, page owner and kasan.",
+      "revId": "aaacec1f92885cfa3b0ac107e5fbca944976a40d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eddbc46d_a6b67f14",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1717,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-07-16T16:55:15Z",
+      "side": 1,
+      "message": "How about:\n```\nvoid prep_new_hpage(struct page *page, gfp_t gfp_flags, unsigned int alloc_flags)\n{\n\treturn prep_new_page(page, HPAGE_PMD_ORDER, gfp_flags, alloc_flags);\n}\nEXPORT_SYMBOL_GPL(prep_new_hpage);\n```",
+      "range": {
+        "startLine": 1695,
+        "startChar": 0,
+        "endLine": 1717,
+        "endChar": 34
+      },
+      "revId": "aaacec1f92885cfa3b0ac107e5fbca944976a40d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
