@@ -205,7 +205,11 @@ void topology_update_hw_pressure(const struct cpumask *cpus,
 	trace_hw_pressure_update(cpu, pressure);
 
 	for_each_cpu(cpu, cpus) {
+<<<<<<< HEAD   (13adfb BACKPORT: arch/topology: Fix variable naming to avoid shadow)
 		WRITE_ONCE(per_cpu(hw_pressure, cpu), pressure);
+=======
+		WRITE_ONCE(per_cpu(hw_pressure, cpu), hw_pressure);
+>>>>>>> BRANCH (43f4bc Merge 590103732442 ("Merge tag 'for-linus' of https://github)
 		trace_android_rvh_update_thermal_stats(cpu);
 	}
 }
