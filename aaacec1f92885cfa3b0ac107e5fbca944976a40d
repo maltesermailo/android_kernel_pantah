@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90489b82_950e7cf7",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1385,
+      "author": {
+        "id": 1988826
+      },
+      "writtenOn": "2024-07-17T02:49:27Z",
+      "side": 1,
+      "message": "Got it.",
+      "parentUuid": "3d929630_1bf1470e",
+      "range": {
+        "startLine": 1385,
+        "startChar": 5,
+        "endLine": 1385,
+        "endChar": 18
+      },
+      "revId": "aaacec1f92885cfa3b0ac107e5fbca944976a40d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e2aca5e_27b4e153",
@@ -41,6 +65,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bb021ee_75e0cbb6",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1401,
+      "author": {
+        "id": 1988826
+      },
+      "writtenOn": "2024-07-17T02:49:27Z",
+      "side": 1,
+      "message": "Yes, it\u0027s intended and handled via vendor module.",
+      "parentUuid": "1e2aca5e_27b4e153",
+      "revId": "aaacec1f92885cfa3b0ac107e5fbca944976a40d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eddbc46d_a6b67f14",
@@ -54,6 +96,30 @@
       "writtenOn": "2024-07-16T16:55:15Z",
       "side": 1,
       "message": "How about:\n```\nvoid prep_new_hpage(struct page *page, gfp_t gfp_flags, unsigned int alloc_flags)\n{\n\treturn prep_new_page(page, HPAGE_PMD_ORDER, gfp_flags, alloc_flags);\n}\nEXPORT_SYMBOL_GPL(prep_new_hpage);\n```",
+      "range": {
+        "startLine": 1695,
+        "startChar": 0,
+        "endLine": 1717,
+        "endChar": 34
+      },
+      "revId": "aaacec1f92885cfa3b0ac107e5fbca944976a40d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1b66a61_d07466ee",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1717,
+      "author": {
+        "id": 1988826
+      },
+      "writtenOn": "2024-07-17T02:49:27Z",
+      "side": 1,
+      "message": "Got it.",
+      "parentUuid": "eddbc46d_a6b67f14",
       "range": {
         "startLine": 1695,
         "startChar": 0,
