@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000084777281",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3179179?revision\u003d1",
+      "key": {
+        "uuid": "62f9c1ed_0a590c7c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-17T06:26:01Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/77277e4ba4a66f2b345dd727f4850c7c606bf442).\n\n```\n      ## include/trace/hooks/sched.h ##\n     @@ include/trace/hooks/sched.h: DECLARE_RESTRICTED_HOOK(android_rvh_util_fits_cpu,\n    @@ kernel/cgroup/cpuset.c: void rebuild_sched_domains(void)\n       * update_tasks_cpumask - Update the cpumasks of tasks in the cpuset.\n       * @cs: the cpuset in which each task\u0027s cpus_allowed mask needs to be changed\n     @@ kernel/cgroup/cpuset.c: static void update_tasks_cpumask(struct cpuset *cs, struct cpumask *new_cpus)\n    + \twhile ((task \u003d css_task_iter_next(\u0026it))) {\n    + \t\tconst struct cpumask *possible_mask \u003d task_cpu_possible_mask(task);\n      \n    - \t\tcpumask_and(new_cpus, cs-\u003eeffective_cpus,\n    - \t\t\t    task_cpu_possible_mask(task));\n    --\t\tset_cpus_allowed_ptr(task, new_cpus);\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (41bf0d ANDROID: Use -fomit-frame-pointer for x86_ptrace_syscall_x86)\n    + \t\tif (top_cs) {\n    + \t\t\t/*\n    + \t\t\t * Percpu kthreads in top_cpuset are ignored\n    +@@ kernel/cgroup/cpuset.c: static void update_tasks_cpumask(struct cpuset *cs, struct cpumask *new_cpus)\n    + \t\t\tcpumask_and(new_cpus, possible_mask, cs-\u003eeffective_cpus);\n    + \t\t}\n    + \t\tset_cpus_allowed_ptr(task, new_cpus);\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++\t\tcpumask_and(new_cpus, cs-\u003eeffective_cpus,\n    ++\t\t\t    task_cpu_possible_mask(task));\n     +\t\tupdate_cpus_allowed(cs, task, new_cpus);\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (77277e ANDROID: sched/cpuset: Add vendor hook to change tasks affin)\n      \t}\n      \tcss_task_iter_end(\u0026it);\n      }\n    @@ kernel/sched/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_find_busie\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_sched_setaffinity);\n     +EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_cpus_allowed);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_build_sched_domains);\n    - EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_check_preempt_tick);\n      EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_check_preempt_wakeup_ignore);\n    + EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_replace_next_task_fair);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "f092b5c700352e5ed5f2f3f8d6f1bd02b2328f1d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
