@@ -16,6 +16,24 @@
       "message": "Why is this patch different from the original https://lore.kernel.org/linux-mm/20240521023957.2587005-8-jaewon31.kim@samsung.com/ ?",
       "revId": "9fd42e52dcf3502e092a1794d0f3d3d68a8aaef1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b07c66f_b1990bed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1809745
+      },
+      "writtenOn": "2024-07-17T01:31:40Z",
+      "side": 1,
+      "message": "change #1 : memblock_memsize_record_add\n\nAs I decided not to track the early param in\nhttps://lore.kernel.org/linux-mm/20240521023957.2587005-6-jaewon31.kim@samsung.com/ except a function, the related memblock_memsize_record_[add|remove] was simplified.\n\nchange #2 : memblock_add_range\n\nThe change memblock_add_range in the discarded https://lore.kernel.org/linux-mm/20240521023957.2587005-6-jaewon31.kim@samsung.com/ was merged here.\n\nchange #3 : memblock_memsize_detect_hole \n\nBecause https://android-review.googlesource.com/c/kernel/common/+/3091138/9 sets the default state to none, I wanted to remove code before the early_memblock_memsize. And I found memblock_memsize_detect_hole can be moved from early_init_dt_scan_nodes to early_init_fdt_scan_reserved_mem.\n\nShould I keep the the original ones and add additional commit which moves or removes code?",
+      "parentUuid": "517dce8d_cbafaf4c",
+      "revId": "9fd42e52dcf3502e092a1794d0f3d3d68a8aaef1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
