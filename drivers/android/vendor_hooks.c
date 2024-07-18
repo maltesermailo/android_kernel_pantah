@@ -434,3 +434,34 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_record_rwsem_reader_owned);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_rwsem_reader_owned);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_record_rwsem_writer_owned);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_rwsem_writer_owned);
+<<<<<<< HEAD   (8962b1 UPSTREAM: dma-buf: heaps: Fix off-by-one in CMA heap fault h)
+||||||| BASE
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_pr_set_vma_name_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_folio_trylock);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_get_folio_trylock_result);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_trylock_clear);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_trylock_set);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_handle_trylock_failed_folio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_hibernate_state);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_add_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_finish);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_pr_set_vma_name_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_folio_trylock);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_get_folio_trylock_result);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_trylock_clear);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_trylock_set);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_handle_trylock_failed_folio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_hibernate_state);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_add_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_finish);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_read_fault);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_read);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_map_pages);
+>>>>>>> CHANGE (eda4e9 ANDROID: mm: add vendor hook in fault and read file)
