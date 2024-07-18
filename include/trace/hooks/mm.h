@@ -119,28 +119,16 @@ DECLARE_HOOK(android_vh_page_should_be_protected,
 	TP_PROTO(struct page *page, bool *should_protect),
 	TP_ARGS(page, should_protect));
 DECLARE_HOOK(android_vh_mark_page_accessed,
-	TP_PROTO(struct page *page),
-	TP_ARGS(page));
-DECLARE_HOOK(android_vh_alloc_pages_reclaim_bypass,
-	TP_PROTO(gfp_t gfp_mask, int order, int alloc_flags,
-	int migratetype, struct page **page),
-	TP_ARGS(gfp_mask, order, alloc_flags, migratetype, page));
-DECLARE_HOOK(android_vh_alloc_pages_failure_bypass,
-	TP_PROTO(gfp_t gfp_mask, int order, int alloc_flags,
-	int migratetype, struct page **page),
-	TP_ARGS(gfp_mask, order, alloc_flags, migratetype, page));
-DECLARE_HOOK(android_vh_save_track_hash,
-	TP_PROTO(bool alloc, struct track *p),
-	TP_ARGS(alloc, p));
-DECLARE_HOOK(android_vh_rmqueue,
-	TP_PROTO(struct zone *preferred_zone, struct zone *zone,
-		unsigned int order, gfp_t gfp_flags,
-		unsigned int alloc_flags, int migratetype),
-	TP_ARGS(preferred_zone, zone, order,
-		gfp_flags, alloc_flags, migratetype));
-DECLARE_HOOK(android_vh_kmalloc_slab,
-	TP_PROTO(unsigned int index, gfp_t flags, struct kmem_cache **s),
-	TP_ARGS(index, flags, s));
+DECLARE_HOOK(android_vh_do_read_fault,
+	TP_PROTO(struct vm_fault *vmf, unsigned long fault_around_bytes),
+	TP_ARGS(vmf, fault_around_bytes));
+DECLARE_HOOK(android_vh_filemap_read,
+	TP_PROTO(struct file *file, loff_t pos, size_t size),
+	TP_ARGS(file, pos, size));
+DECLARE_HOOK(android_vh_filemap_map_pages,
+	TP_PROTO(struct file *file, pgoff_t first_pgoff,
+		pgoff_t last_pgoff, vm_fault_t ret),
+	TP_ARGS(file, first_pgoff, last_pgoff, ret));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
