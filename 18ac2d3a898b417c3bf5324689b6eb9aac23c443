@@ -33,6 +33,24 @@
       "message": "and memblock_memsize_enable_tracking() here.",
       "revId": "18ac2d3a898b417c3bf5324689b6eb9aac23c443",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94308191_371753c4",
+        "filename": "drivers/of/fdt.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1337,
+      "author": {
+        "id": 1809745
+      },
+      "writtenOn": "2024-07-18T01:22:46Z",
+      "side": 1,
+      "message": "Yes I think it is not needed. It was kind of the old code I made. And I found that is not needed. The memblock_memsize_disable|enable_tracking is used not to track the kernel size between the disable and the enable. I intended doing the tracking manually instead. Removing that is more reasonable to allow tracking the kernel size.",
+      "parentUuid": "6ff02ff1_edf429e3",
+      "revId": "18ac2d3a898b417c3bf5324689b6eb9aac23c443",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
