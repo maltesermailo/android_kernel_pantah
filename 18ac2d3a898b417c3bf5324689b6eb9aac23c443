@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "456d5643_75f6e529",
+        "filename": "drivers/of/fdt.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1331,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-07-18T17:15:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f3c6e82_07594331",
+      "revId": "18ac2d3a898b417c3bf5324689b6eb9aac23c443",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ff02ff1_edf429e3",
@@ -49,6 +67,75 @@
       "side": 1,
       "message": "Yes I think it is not needed. It was kind of the old code I made. And I found that is not needed. The memblock_memsize_disable|enable_tracking is used not to track the kernel size between the disable and the enable. I intended doing the tracking manually instead. Removing that is more reasonable to allow tracking the kernel size.",
       "parentUuid": "6ff02ff1_edf429e3",
+      "revId": "18ac2d3a898b417c3bf5324689b6eb9aac23c443",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8efd59fa_4afca6f8",
+        "filename": "drivers/of/fdt.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1337,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-07-18T17:15:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94308191_371753c4",
+      "revId": "18ac2d3a898b417c3bf5324689b6eb9aac23c443",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0eaaaf3a_ae0fe34d",
+        "filename": "include/linux/memblock.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-07-18T17:15:44Z",
+      "side": 1,
+      "message": "```\nextern void __init memblock_memsize_enable_tracking(void);\nextern void __init memblock_memsize_disable_tracking(void);\n```",
+      "range": {
+        "startLine": 610,
+        "startChar": 0,
+        "endLine": 611,
+        "endChar": 52
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "78776fc8_df15276b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/memblock.h",
+              "range": {
+                "startLine": 610,
+                "startChar": 0,
+                "endLine": 612,
+                "endChar": 0
+              },
+              "replacement": "extern void __init memblock_memsize_enable_tracking(void);\nextern void __init memblock_memsize_disable_tracking(void);\n"
+            },
+            {
+              "path": "include/linux/memblock.h",
+              "range": {
+                "startLine": 617,
+                "startChar": 0,
+                "endLine": 619,
+                "endChar": 0
+              },
+              "replacement": "static inline void __init memblock_memsize_enable_tracking(void){ }\nstatic inline void __init memblock_memsize_disable_tracking(void){ }\n"
+            }
+          ]
+        }
+      ],
       "revId": "18ac2d3a898b417c3bf5324689b6eb9aac23c443",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
