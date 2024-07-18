@@ -138,6 +138,30 @@
       ],
       "revId": "18ac2d3a898b417c3bf5324689b6eb9aac23c443",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f715166e_10dba5c3",
+        "filename": "include/linux/memblock.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1809745
+      },
+      "writtenOn": "2024-07-18T23:19:17Z",
+      "side": 1,
+      "message": "Oh. I\u0027d like to know if that is prefix only for readability or linker actually uses?\n\nAnd do I have to add all those missing keyword of __init_memblock and __init?\n\nextern void [__init_memblock] memblock_memsize_record\nextern void [__init] memblock_memsize_detect_hole\nextern void [__init] memblock_memsize_enable_tracking\nextern void [__init] memblock_memsize_disable_tracking\nextern void [__init] memblock_memsize_mod_memmap_size\nextern void [__init] memblock_memsize_kernel_code_data",
+      "parentUuid": "0eaaaf3a_ae0fe34d",
+      "range": {
+        "startLine": 610,
+        "startChar": 0,
+        "endLine": 611,
+        "endChar": 52
+      },
+      "revId": "18ac2d3a898b417c3bf5324689b6eb9aac23c443",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
