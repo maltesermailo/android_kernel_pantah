@@ -39,6 +39,26 @@
       "tag": "",
       "revId": "6f61666ab18fc7a9e13e01f842a382c1b4925de5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000085119966",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3185061?revision\u003d1",
+      "key": {
+        "uuid": "77baf2bd_438d8481",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-19T18:00:46Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/c75b369e72da0283a20f794c0070c478b490f453).\n\n```\n      ## fs/userfaultfd.c ##\n     @@ fs/userfaultfd.c: static inline long userfaultfd_get_blocking_state(unsigned int flags)\n    @@ include/linux/userfaultfd_k.h: extern int sysctl_unprivileged_userfaultfd;\n      /*\n     \n      ## mm/internal.h ##\n    -@@ mm/internal.h: void activate_page(struct page *page);\n    +@@ mm/internal.h: vm_fault_t do_swap_page(struct vm_fault *vmf);\n      extern struct vm_area_struct *get_vma(struct mm_struct *mm,\n      \t\t\t\t      unsigned long addr);\n      extern void put_vma(struct vm_area_struct *vma);\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "6f61666ab18fc7a9e13e01f842a382c1b4925de5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
