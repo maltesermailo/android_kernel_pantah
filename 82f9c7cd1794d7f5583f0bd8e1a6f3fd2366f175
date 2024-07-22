@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a5fd490_e6b54070",
+        "filename": "include/trace/hooks/net.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-22T16:14:07Z",
+      "side": 1,
+      "message": "Please define an enum with the different reasons instead of hardcoding the values.",
+      "range": {
+        "startLine": 58,
+        "startChar": 27,
+        "endLine": 58,
+        "endChar": 37
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "cf890e30_16b8b1cf",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/trace/hooks/net.h",
+              "range": {
+                "startLine": 57,
+                "startChar": 0,
+                "endLine": 57,
+                "endChar": 0
+              },
+              "replacement": "enum android_vh_tcp_state_change_reason {\n\tANDROID_VH_TCP_STATE_CHANGE_REASON_NONE \u003d 0,\n\tANDROID_VH_TCP_STATE_CHANGE_REASON_CONNECT \u003d 1,\n\tANDROID_VH_TCP_STATE_CHANGE_REASON_CLOSE \u003d 2,\n\tANDROID_VH_TCP_STATE_CHANGE_REASON_ABORT \u003d 3,\n\tANDROID_VH_TCP_STATE_CHANGE_REASON_ERROR \u003d 4,\n\tANDROID_VH_TCP_STATE_CHANGE_REASON_TIMEOUT \u003d 5,\n\tANDROID_VH_TCP_STATE_CHANGE_REASON_UNRECOGNIZED \u003d 6,\n};\n"
+            },
+            {
+              "path": "include/trace/hooks/net.h",
+              "range": {
+                "startLine": 58,
+                "startChar": 0,
+                "endLine": 59,
+                "endChar": 0
+              },
+              "replacement": "\tTP_PROTO(struct sock *sk, enum android_vh_tcp_state_change_reason reason, int state),\n\tTP_ARGS(sk, reason, state));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "82f9c7cd1794d7f5583f0bd8e1a6f3fd2366f175",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d4d860f_ab2593f2",
+        "filename": "net/ipv4/tcp_timer.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-22T16:14:07Z",
+      "side": 1,
+      "message": "should this move down to line 295 so you aren\u0027t calling this back-to-back in the expired case?",
+      "revId": "82f9c7cd1794d7f5583f0bd8e1a6f3fd2366f175",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
