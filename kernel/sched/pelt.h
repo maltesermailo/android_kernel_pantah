@@ -1,3 +1,4 @@
+#include <trace/hooks/sched.h>
 #ifdef CONFIG_SMP
 #include "sched-pelt.h"
 
@@ -95,6 +96,8 @@ static inline void _update_idle_rq_clock_pelt(struct rq *rq)
  */
 static inline void update_rq_clock_pelt(struct rq *rq, s64 delta)
 {
+	int ret = 0;
+
 	if (unlikely(is_idle_task(rq->curr))) {
 		_update_idle_rq_clock_pelt(rq);
 		return;
@@ -116,6 +119,10 @@ static inline void update_rq_clock_pelt(struct rq *rq, s64 delta)
 	 * Scale the elapsed time to reflect the real amount of
 	 * computation
 	 */
+	trace_android_rvh_update_rq_clock_pelt(rq, delta, &ret);
+	if (ret)
+		return;
+
 	delta = cap_scale(delta, arch_scale_cpu_capacity(cpu_of(rq)));
 	delta = cap_scale(delta, arch_scale_freq_capacity(cpu_of(rq)));
 
