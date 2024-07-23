@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80dd8734_9c06992c",
+        "filename": "mm/memblock.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2195,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-07-23T03:45:43Z",
+      "side": 1,
+      "message": "This is wrong because it\u0027s now being used from a non-init function. This patch should also remove `__init_memblock` from this function here and also in the memblock.h.",
+      "range": {
+        "startLine": 2195,
+        "startChar": 12,
+        "endLine": 2195,
+        "endChar": 27
+      },
+      "revId": "cdf57c2e1f803af2724c693f9981070fdd44fe9a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
