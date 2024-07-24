@@ -26569,6 +26569,11 @@ pointer_reference {
   pointee_type_id: 0xca2c0eb3
 }
 pointer_reference {
+  id: 0x381ecdbd
+  kind: POINTER
+  pointee_type_id: 0xca3bd069
+}
+pointer_reference {
   id: 0x381f3165
   kind: POINTER
   pointee_type_id: 0xca3c230a
@@ -32852,6 +32857,11 @@ qualified {
   id: 0xca2c0eb3
   qualifier: CONST
   qualified_type_id: 0x58f78c47
+}
+qualified {
+  id: 0xca3bd069
+  qualifier: CONST
+  qualified_type_id: 0x58a8f72f
 }
 qualified {
   id: 0xca4769cf
@@ -82751,6 +82761,12 @@ member {
   name: "edid"
   type_id: 0x2669d715
   offset: 256
+}
+member {
+  id: 0x31d48c89
+  name: "edid"
+  type_id: 0x31fe2b41
+  offset: 64
 }
 member {
   id: 0xabec48fb
@@ -229948,6 +229964,16 @@ struct_union {
   }
 }
 struct_union {
+  id: 0x58a8f72f
+  kind: STRUCT
+  name: "drm_edid"
+  definition {
+    bytesize: 16
+    member_id: 0xd98a291a
+    member_id: 0x31d48c89
+  }
+}
+struct_union {
   id: 0x91901b03
   kind: STRUCT
   name: "drm_encoder"
@@ -300631,6 +300657,12 @@ function {
   parameter_id: 0x3e10b518
 }
 function {
+  id: 0x1abf9365
+  return_type_id: 0x381ecdbd
+  parameter_id: 0x31b5a66f
+  parameter_id: 0x249959de
+}
+function {
   id: 0x1ac748a8
   return_type_id: 0x48b5725f
   parameter_id: 0x2f0e69de
@@ -301281,6 +301313,12 @@ function {
   return_type_id: 0x48b5725f
   parameter_id: 0x2131312a
   parameter_id: 0xc0a0d1f0
+}
+function {
+  id: 0x1bd78f42
+  return_type_id: 0x381ecdbd
+  parameter_id: 0x391f15ea
+  parameter_id: 0xf435685e
 }
 function {
   id: 0x1bd82ebd
@@ -312137,6 +312175,12 @@ function {
   parameter_id: 0x33756485
   parameter_id: 0xf435685e
   parameter_id: 0x0ab1f084
+}
+function {
+  id: 0x910df182
+  return_type_id: 0x6720d32f
+  parameter_id: 0x31b5a66f
+  parameter_id: 0x381ecdbd
 }
 function {
   id: 0x910e1f0a
@@ -324610,6 +324654,11 @@ function {
   parameter_id: 0x18bd6530
   parameter_id: 0x3e10b518
   parameter_id: 0x11cfee5a
+}
+function {
+  id: 0x9b5412ab
+  return_type_id: 0x31fe2b41
+  parameter_id: 0x381ecdbd
 }
 function {
   id: 0x9b54acf0
@@ -366378,6 +366427,15 @@ elf_symbol {
   full_name: "drm_do_get_edid"
 }
 elf_symbol {
+  id: 0xe795db35
+  name: "drm_edid_alloc"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x79c00fa2
+  type_id: 0x1bd78f42
+  full_name: "drm_edid_alloc"
+}
+elf_symbol {
   id: 0xef8e6384
   name: "drm_edid_block_valid"
   is_defined: true
@@ -366385,6 +366443,15 @@ elf_symbol {
   crc: 0xd13f9985
   type_id: 0xff1209e9
   full_name: "drm_edid_block_valid"
+}
+elf_symbol {
+  id: 0xb2ef9a9d
+  name: "drm_edid_connector_update"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa90534e2
+  type_id: 0x910df182
+  full_name: "drm_edid_connector_update"
 }
 elf_symbol {
   id: 0xc74638be
@@ -366421,6 +366488,24 @@ elf_symbol {
   crc: 0x8d72789e
   type_id: 0xf06a3ce3
   full_name: "drm_edid_is_valid"
+}
+elf_symbol {
+  id: 0x2396487e
+  name: "drm_edid_raw"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x4489a5e9
+  type_id: 0x9b5412ab
+  full_name: "drm_edid_raw"
+}
+elf_symbol {
+  id: 0xf7be00e0
+  name: "drm_edid_read_ddc"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x5364fe50
+  type_id: 0x1abf9365
+  full_name: "drm_edid_read_ddc"
 }
 elf_symbol {
   id: 0x9ff39d6a
@@ -414449,11 +414534,15 @@ interface {
   symbol_id: 0x2b8a2bbd
   symbol_id: 0xae21a946
   symbol_id: 0xf35c98a3
+  symbol_id: 0xe795db35
   symbol_id: 0xef8e6384
+  symbol_id: 0xb2ef9a9d
   symbol_id: 0xc74638be
   symbol_id: 0xd5cd8e9b
   symbol_id: 0x7ee897fe
   symbol_id: 0x903baf1e
+  symbol_id: 0x2396487e
+  symbol_id: 0xf7be00e0
   symbol_id: 0x9ff39d6a
   symbol_id: 0x2dd89a0f
   symbol_id: 0x6ea79777
