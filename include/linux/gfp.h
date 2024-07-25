@@ -6,6 +6,7 @@
 
 #include <linux/mmzone.h>
 #include <linux/topology.h>
+#include <linux/memory_hotplug.h>
 
 struct vm_area_struct;
 
@@ -136,7 +137,9 @@ static inline enum zone_type __gfp_zone(gfp_t flags)
 	VM_BUG_ON((GFP_ZONE_BAD >> bit) & 1);
 
 	if ((flags & __GFP_COMP) &&
-	    (!static_branch_unlikely(&movablecore_enabled) || (flags & __GFP_MOVABLE)))
+	    ((!static_branch_unlikely(&movablecore_enabled) &&
+			mhp_default_online_type != MMOP_ONLINE_MOVABLE) ||
+				(flags & __GFP_MOVABLE)))
 		return LAST_VIRT_ZONE;
 
 	return z;
