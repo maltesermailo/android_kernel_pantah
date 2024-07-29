@@ -2,6 +2,26 @@
   "comments": [
     {
       "robotId": "ayeaye",
+      "robotRunId": "AR00000000000086188287",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3198372?revision\u003d1",
+      "key": {
+        "uuid": "edbdf331_db603761",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-29T18:57:52Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/22f9005179dae8a45bbdbccc888608c1bb8b80fa).\n\n```\n      ## BUILD.bazel ##\n     @@\n    @@ BUILD.bazel: cc_binary_with_abi(\n      cc_library(\n          name \u003d \"kselftest_mm_vm_util\",\n          srcs \u003d [\"tools/testing/selftests/mm/vm_util.c\"],\n    --    hdrs \u003d [\"tools/testing/selftests/mm/vm_util.h\"],\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (688747 FROMLIST: xhci: dbc: fix handling ClearFeature Halt requests)\n    +     hdrs \u003d [\"tools/testing/selftests/mm/vm_util.h\"],\n    +     copts \u003d [\n    +         \"-D_GNU_SOURCE\",\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n     +    hdrs \u003d [\n     +        \"include/uapi/linux/fs.h\",\n     +        \"tools/testing/selftests/mm/vm_util.h\",\n     +    ],\n    -     copts \u003d _KSELFTEST_COPTS,\n    ++    copts \u003d _KSELFTEST_COPTS,\n     +    includes \u003d [\n     +        \"include/uapi/\",\n     +        \"tools/testing/selftests\",\n    -+    ],\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (22f900 ANDROID: Build GKI with CONFIG_KUNIT\u003dm)\n    +     ],\n          visibility \u003d [\"//visibility:private\"],\n          deps \u003d [\n    -         \":kselftest_headers_lib\",\n     @@ BUILD.bazel: pkg_files(\n      \n      pkg_zip(\n    @@ BUILD.bazel: pkg_files(\n      ## arch/arm64/configs/gki_defconfig ##\n     @@\n      CONFIG_UAPI_HEADER_TEST\u003dy\n    - CONFIG_LOCALVERSION\u003d\"-4k\"\n      CONFIG_AUDIT\u003dy\n     +CONFIG_TIME_KUNIT_TEST\u003dm\n      CONFIG_NO_HZ\u003dy\n    @@ arch/arm64/configs/gki_defconfig: CONFIG_STAGING\u003dy\n     +CONFIG_CLK_GATE_KUNIT_TEST\u003dm\n      CONFIG_HWSPINLOCK\u003dy\n      # CONFIG_SUN50I_ERRATUM_UNKNOWN1 is not set\n    - CONFIG_IOMMU_IO_PGTABLE_ARMV7S\u003dy\n    -@@ arch/arm64/configs/gki_defconfig: CONFIG_MEMORY\u003dy\n    + CONFIG_MAILBOX\u003dy\n    +@@ arch/arm64/configs/gki_defconfig: CONFIG_PM_DEVFREQ_EVENT\u003dy\n      CONFIG_IIO\u003dy\n      CONFIG_IIO_BUFFER\u003dy\n      CONFIG_IIO_TRIGGER\u003dy\n     +CONFIG_IIO_FORMAT_KUNIT_TEST\u003dm\n      CONFIG_PWM\u003dy\n    + CONFIG_GENERIC_PHY\u003dy\n      CONFIG_POWERCAP\u003dy\n    - CONFIG_IDLE_INJECT\u003dy\n    -@@ arch/arm64/configs/gki_defconfig: CONFIG_LIBNVDIMM\u003dy\n    +@@ arch/arm64/configs/gki_defconfig: CONFIG_INTERCONNECT\u003dy\n      CONFIG_EXT4_FS\u003dy\n      CONFIG_EXT4_FS_POSIX_ACL\u003dy\n      CONFIG_EXT4_FS_SECURITY\u003dy\n    @@ arch/x86/configs/gki_defconfig: CONFIG_SONY_FF\u003dy\n     +CONFIG_HID_KUNIT_TEST\u003dm\n      CONFIG_USB_HIDDEV\u003dy\n      CONFIG_USB_ANNOUNCE_NEW_DEVICES\u003dy\n    - CONFIG_USB_MON\u003dm\n    + CONFIG_USB_XHCI_HCD\u003dy\n     @@ arch/x86/configs/gki_defconfig: CONFIG_LEDS_TRIGGER_TRANSIENT\u003dy\n      CONFIG_EDAC\u003dy\n      CONFIG_RTC_CLASS\u003dy\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "e27d049139f57e8c62b4410809ce2a7fce17253f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
       "robotRunId": "AR00000000000086188229",
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/3198372?revision\u003d1",
       "key": {
@@ -14,6 +34,32 @@
         "id": 1757831
       },
       "writtenOn": "2024-07-29T18:56:48Z",
+      "side": 1,
+      "message": "syntax error near \u003c\u003c",
+      "range": {
+        "startLine": 1453,
+        "startChar": 3,
+        "endLine": 1453,
+        "endChar": 3
+      },
+      "tag": "",
+      "revId": "e27d049139f57e8c62b4410809ce2a7fce17253f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000086188229",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3198372?revision\u003d1",
+      "key": {
+        "uuid": "a93a4410_be6df1dd",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 1453,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-29T18:57:52Z",
       "side": 1,
       "message": "syntax error near \u003c\u003c",
       "range": {
