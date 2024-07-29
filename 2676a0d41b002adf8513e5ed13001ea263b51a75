@@ -1,0 +1,62 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fcd61f7_01d60754",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-29T16:59:56Z",
+      "side": 1,
+      "message": "\"ensure\"",
+      "range": {
+        "startLine": 10,
+        "startChar": 24,
+        "endLine": 10,
+        "endChar": 29
+      },
+      "revId": "2676a0d41b002adf8513e5ed13001ea263b51a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d9bf11a_66735ff0",
+        "filename": "include/trace/hooks/net.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-07-29T16:59:56Z",
+      "side": 1,
+      "message": "enum instead?",
+      "fixSuggestions": [
+        {
+          "fixId": "8296fd17_89fccb6b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/trace/hooks/net.h",
+              "range": {
+                "startLine": 10,
+                "startChar": 0,
+                "endLine": 14,
+                "endChar": 0
+              },
+              "replacement": "enum tcp_state_change_reason {\n\tTCP_STATE_CHANGE_REASON_NORMAL \u003d 0,\n\tTCP_STATE_CHANGE_REASON_SYN_RST \u003d 1,\n\tTCP_STATE_CHANGE_REASON_SYN_TIMEOUT \u003d 2,\n\tTCP_STATE_CHANGE_REASON_RETRANSMIT \u003d 3,\n};\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2676a0d41b002adf8513e5ed13001ea263b51a75",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
