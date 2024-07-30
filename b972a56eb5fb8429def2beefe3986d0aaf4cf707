@@ -51,6 +51,24 @@
       "parentUuid": "e4b8d57c_a79ffe48",
       "revId": "b972a56eb5fb8429def2beefe3986d0aaf4cf707",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a90a515_172863e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3548918
+      },
+      "writtenOn": "2024-07-30T09:04:10Z",
+      "side": 1,
+      "message": "We hear from Qualcomm that \nthe following 2 patches are necessary \nin order to fix UFS reset issue.\n(As far as we know, Qualcomm hear it from Google.)\n\nhttps://lore.kernel.org/linux-scsi/20230517223157.1068210-3-bvanassche@acm.org/\nhttps://lore.kernel.org/r/20240411071444.51873-1-hy50.seo@samsung.com\n\nThe purpose of this respin is to have GKI 14-6.1-2024-01 \nwith these 2 patches(acm patch and samsung patch).\n\n3195742 is the cherry pick from 3197291.\n\nWhen 3197291 is upload on 14-6.1, \nthe acm patch is already included in base environment.\nSo 3197291 have only samsung patch.\n\nHowever,\nGKI 14-6.1-2024-01 doesn\u0027t include this acm patch.\n\nThat is why we would like to include acm patch in this respin.\n\nCould you please help us how we can include acm patch in this respin\nin addition to samsung patch?",
+      "parentUuid": "568792a7_9de6a77d",
+      "revId": "b972a56eb5fb8429def2beefe3986d0aaf4cf707",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
