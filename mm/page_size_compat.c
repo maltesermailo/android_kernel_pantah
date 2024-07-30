@@ -138,3 +138,22 @@ void ___filemap_fixup(unsigned long addr, unsigned long prot, unsigned long old_
 					MAP_PRIVATE|MAP_ANONYMOUS|MAP_FIXED|__MAP_NO_COMPAT,
 					0, 0, &populate, NULL);
 }
+
+/*
+ * Folds any anon fixup entries created by ___filemap_fixup()
+ * into the previous mapping so that /proc/<pid>/[s]maps don't
+ * show unaliged entries.
+ */
+void __fold_filemap_fixup_entry(struct vma_iterator *iter, unsigned long *end)
+{
+	struct vm_area_struct *next_vma = vma_next(iter);
+
+	if (!next_vma || !(next_vma->vm_flags & __VM_NO_COMPAT)) {
+		/* Rewind iter */
+		vma_prev(iter);
+		return;
+	}
+
+	/* Adjust the end */
+	*end = next_vma->vm_end;
+}
