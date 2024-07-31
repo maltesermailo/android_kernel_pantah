@@ -179,6 +179,26 @@
       "tag": "",
       "revId": "d786171264f43ed9f3e88be39d3aa0625ed04859",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000086445101",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3199661?revision\u003d1",
+      "key": {
+        "uuid": "1c37821c_8f7a5074",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-07-31T08:15:40Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/01a5ad81637672940844052404678678a0ec8854) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d01a5ad81637672940844052404678678a0ec8854).\n\n```\n      ## mm/kasan/report.c ##\n     @@ mm/kasan/report.c: void kasan_report_invalid_free(void *ptr, unsigned long ip, enum kasan_report_ty\n    @@ mm/kasan/report.c: void kasan_report_invalid_free(void *ptr, unsigned long ip, e\n      \tinfo.type \u003d type;\n      \tinfo.access_addr \u003d ptr;\n      \tinfo.access_size \u003d 0;\n    -@@ mm/kasan/report.c: bool kasan_report(const void *addr, size_t size, bool is_write,\n    +@@ mm/kasan/report.c: bool kasan_report(unsigned long addr, size_t size, bool is_write,\n      \n      \tstart_report(\u0026irq_flags, true);\n      \n     -\tmemset(\u0026info, 0, sizeof(info));\n     +\t__memset(\u0026info, 0, sizeof(info));\n      \tinfo.type \u003d KASAN_REPORT_ACCESS;\n    - \tinfo.access_addr \u003d addr;\n    + \tinfo.access_addr \u003d ptr;\n      \tinfo.access_size \u003d size;\n     \n      ## mm/kasan/shadow.c ##\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "d786171264f43ed9f3e88be39d3aa0625ed04859",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
