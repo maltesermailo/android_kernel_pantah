@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c65204c_c7b55e8d",
+        "filename": "include/trace/hooks/net.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-01T16:45:22Z",
+      "side": 1,
+      "message": "_reason_ should be `enum tcp_state_change_reason`",
+      "range": {
+        "startLine": 68,
+        "startChar": 27,
+        "endLine": 68,
+        "endChar": 30
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "10ef9441_790f7cf9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/trace/hooks/net.h",
+              "range": {
+                "startLine": 68,
+                "startChar": 0,
+                "endLine": 69,
+                "endChar": 0
+              },
+              "replacement": "\tTP_PROTO(struct sock *sk, enum tcp_state_change_reason reason, int state), TP_ARGS(sk, reason, state));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5d47bb9dee41e3e359a8a97795b2c5c8f5bf4ff8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
