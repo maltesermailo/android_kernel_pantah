@@ -1,0 +1,24 @@
+{
+  "comments": [
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000086628347",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3203954?revision\u003d1",
+      "key": {
+        "uuid": "c3d5ff0a_889402a8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-08-01T11:22:47Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/b7353e047d529c74a146b0b84490f194d178b23f).\n\n```\n      ## android/abi_gki_aarch64_xiaomi ##\n    -@@ android/abi_gki_aarch64_xiaomi: folio_total_mapcount\n    - __tracepoint_android_rvh_update_cpus_allowed\n    - __traceiter_android_rvh_update_cpus_allowed\n    - \n    +@@ android/abi_gki_aarch64_xiaomi: __tracepoint_android_vh_page_should_be_protected\n    + __traceiter_android_vh_page_referenced_check_bypass\n    + __tracepoint_android_vh_page_referenced_check_bypass\n    + folio_total_mapcount\n    ++\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD   (0218a9 Merge 6.6.43 into android15-6.6-lts)\n    ++\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n    ++\n    ++#required by speed_ui.ko\n    ++__tracepoint_android_rvh_update_cpus_allowed\n    ++__traceiter_android_rvh_update_cpus_allowed\n    ++\n     +# required by xring_pmt.ko\n     +__traceiter_android_rvh_armv8pmu_counter_overflowed\n     +__traceiter_android_rvh_perf_rotate_context\n     +__tracepoint_android_rvh_armv8pmu_counter_overflowed\n     +__tracepoint_android_rvh_perf_rotate_context\n     +\n    - #required by mi_async_reclaim.ko\n    - __traceiter_android_vh_handle_trylock_failed_folio\n    - __tracepoint_android_vh_handle_trylock_failed_folio\n    ++#required by mi_async_reclaim.ko\n    ++__traceiter_android_vh_handle_trylock_failed_folio\n    ++__tracepoint_android_vh_handle_trylock_failed_folio\n    ++__traceiter_android_vh_folio_trylock_set\n    ++__tracepoint_android_vh_folio_trylock_set\n    ++__traceiter_android_vh_folio_trylock_clear\n    ++__tracepoint_android_vh_folio_trylock_clear\n    ++__traceiter_android_vh_get_folio_trylock_result\n    ++__tracepoint_android_vh_get_folio_trylock_result\n    ++__traceiter_android_vh_do_folio_trylock\n    ++__tracepoint_android_vh_do_folio_trylock\n    ++reclaim_pages\n    ++\u003e\u003e\u003e\u003e\u003e\u003e\u003e CHANGE (b7353e ANDROID: GKI: update symbol list file for xiaomi)\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "0d6f64093b362ee5479f09ec94ccceec2ae00a95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
