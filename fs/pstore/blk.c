@@ -200,6 +200,18 @@ static ssize_t psblk_generic_blk_write(const char *buf, size_t bytes,
 }
 
 /*
+ * This function is exact replica of psblk_genenric_blk_write,
+ * except it allows writes even when interrupts are disabled
+ * and cpu executes in interrupt context.
+ */
+static ssize_t psblk_generic_blk_panic_write(const char *buf, size_t bytes,
+		loff_t pos)
+{
+	/* Console/Ftrace backend may handle buffer until flush dirty zones */
+	return kernel_write(psblk_file, buf, bytes, &pos);
+}
+
+/*
  * This takes its configuration only from the module parameters now.
  */
 static int __register_pstore_blk(struct pstore_device_info *dev,
@@ -305,6 +317,7 @@ static int __init __best_effort_init(void)
 
 	best_effort_dev->zone.read = psblk_generic_blk_read;
 	best_effort_dev->zone.write = psblk_generic_blk_write;
+	best_effort_dev->zone.panic_write = psblk_generic_blk_panic_write;
 
 	ret = __register_pstore_blk(best_effort_dev,
 				    early_boot_devpath(blkdev));
@@ -345,7 +358,7 @@ static int __init pstore_blk_init(void)
 
 	return ret;
 }
-late_initcall(pstore_blk_init);
+module_init(pstore_blk_init);
 
 static void __exit pstore_blk_exit(void)
 {
