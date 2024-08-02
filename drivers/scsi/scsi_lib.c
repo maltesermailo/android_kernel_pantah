@@ -217,10 +217,9 @@ int __scsi_execute(struct scsi_device *sdev, const unsigned char *cmd,
 	int ret;
 	bool skip = false;
 
-	trace_android_rvh__scsi_execute(&skip, &ret, sdev, cmd,
-					  data_direction, buffer, bufflen, sense,
-					  sshdr, timeout, retries, flags,
-					  rq_flags, resid);
+	trace_android_rvh__scsi_execute(&skip, &ret, sdev, cmd, data_direction,
+					buffer, bufflen, sense, sshdr, timeout,
+					retries, flags, rq_flags, resid);
 	if (skip)
 		return ret;
 
