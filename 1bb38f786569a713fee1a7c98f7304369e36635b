@@ -59,6 +59,26 @@
       "tag": "",
       "revId": "1bb38f786569a713fee1a7c98f7304369e36635b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000087082515",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3206335?revision\u003d1",
+      "key": {
+        "uuid": "d235fadc_a08f273a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-08-06T08:04:40Z",
+      "side": 1,
+      "message": "Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/c2274b908db05529980ec056359fae916939fdaa) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003dc2274b908db05529980ec056359fae916939fdaa).\n\n```\n      ## kernel/trace/ring_buffer.c ##\n    -@@ kernel/trace/ring_buffer.c: static void rb_check_bpage(struct ring_buffer_per_cpu *cpu_buffer,\n    +@@ kernel/trace/ring_buffer.c: static int rb_check_bpage(struct ring_buffer_per_cpu *cpu_buffer,\n       *\n       * As a safety measure we check to make sure the data pages have not\n       * been corrupted.\n    @@ kernel/trace/ring_buffer.c: static void rb_check_bpage(struct ring_buffer_per_cp\n     + * is invoked with concurrent readers which can swap in a new reader page then\n     + * the caller should take cpu_buffer-\u003ereader_lock.\n       */\n    - static void rb_check_pages(struct ring_buffer_per_cpu *cpu_buffer)\n    + static int rb_check_pages(struct ring_buffer_per_cpu *cpu_buffer)\n      {\n     @@ kernel/trace/ring_buffer.c: int ring_buffer_resize(struct trace_buffer *buffer, unsigned long size,\n      \t\t */\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "1bb38f786569a713fee1a7c98f7304369e36635b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
