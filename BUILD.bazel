@@ -2326,3 +2326,19 @@ pkg_zip(
     out = "test_mappings.zip",
     visibility = ["//visibility:public"],
 )
+
+py_binary(
+    name = "create-tracefile",
+    srcs = [
+        "tools/testing/android/bin/create-tracefile.py",
+    ],
+    srcs_version = "PY3",
+    visibility = ["//visibility:private"],
+)
+
+copy_to_dist_dir(
+    name = "coverage_tools_dist",
+    data = [":create-tracefile"],
+    dist_dir = "out/coverage/dist",
+    flat = True,
+)

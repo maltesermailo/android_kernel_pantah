@@ -338,29 +338,26 @@ def unpack_gcov_tar(file_path: str, output_dir: str) -> str:
   return test_dest_dir
 
 
-def get_parent_path(path: str, levels_up: int) -> str:
-  """Goes up a specified number of levels from a given path.
-
-  Args:
-    path: The path to find desired ancestor.
-    levels_up: The number of levels up to go.
-
-  Returns:
-    The desired ancestor of the given path.
-  """
-  p = pathlib.Path(path)
-  for _ in range(levels_up):
-    p = p.parent
-  return str(p)
-
-
 def get_kernel_repo_dir() -> str:
-  this_script_full_path = os.path.abspath(__file__)
+  """Find the root of the kernel source tree.
 
-  # Assume this script is placed this many places from
-  # the base kernel repo directory, e.g.:
-  # kernel_repo/common/tools/testing/android/bin/<this_script>
-  return get_parent_path(this_script_full_path, 6)
+  This script may be located at:
+  <repo_dir>/common/tools/testing/android/bin/<this_script>
+  <repo_dir>/out/coverage/dist/<this_script>
+
+  This function finds <repo_dir> by checking the existence of <repo_dir>/out.
+  It should be created when the user generates gcno files.
+  """
+  repo_dir = os.path.abspath(__file__)
+  for level in range(6):
+    repo_dir = os.path.dirname(repo_dir)
+    if os.path.isdir(os.path.join(repo_dir, "out")):
+      return repo_dir
+  logging.error("Unable to find the root directory of the source tree."
+                " If this script is in the source tree, build the kernel with"
+                " --gcov first. If this is not in the source tree, specify"
+                " --gcno-dir and --llvm-cov.")
+  sys.exit(-1)
 
 
 def build_config(llvm_cov_path: str, tmp_dir: str) -> {}:
