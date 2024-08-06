@@ -46,6 +46,30 @@
       },
       "revId": "1ec9c144581b07c6cbe3a18184f8fc15194c9f55",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "160ee2cf_b33db918",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1659389
+      },
+      "writtenOn": "2024-08-06T01:08:58Z",
+      "side": 1,
+      "message": "Hi Matthias, Todd, This bug only happens in android12-5.10 due to the cherry-pick, and the upstream don\u0027t have this bug, so this fix only need by this android kernel branch. A few patches are skipped when cherry-pick this one (3ff2080a11c5), those patch already update smc_send_message() which cause this bug.\n\nIf cherry pick all the patches needed, it will be much more complicated and affect more function, I think this fix is simple and with smallest affcect.",
+      "parentUuid": "e22a2ba1_ba181ca8",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 95
+      },
+      "revId": "1ec9c144581b07c6cbe3a18184f8fc15194c9f55",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
