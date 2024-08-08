@@ -514,6 +514,10 @@ static void reset_value(struct kvm_vcpu *vcpu, const struct sys_reg_desc_reset *
 /* Specify the register's reset value. */
 #define RESET_VAL(REG, RESET_VAL) {  REG, reset_value, RESET_VAL }
 
+#define RESET_ZERO(REG) RESET_VAL(REG, 0)
+
+#define RESET_UNKNOWN(REG) RESET_VAL(REG, 0x1de7ec7edbadc0deULL)
+
 /* Specify a function that calculates the register's reset value. */
 #define RESET_FUNC(REG, RESET_FUNC) {  REG, RESET_FUNC, 0 }
 
@@ -525,18 +529,18 @@ static const struct sys_reg_desc_reset pvm_sys_reg_reset_vals[] = {
 	RESET_FUNC(MPIDR_EL1, reset_mpidr),
 	RESET_VAL(SCTLR_EL1, 0x00C50078),
 	RESET_FUNC(ACTLR_EL1, reset_actlr),
-	RESET_VAL(CPACR_EL1, 0),
-	RESET_VAL(ZCR_EL1, 0),
-	RESET_VAL(TCR_EL1, 0),
-	RESET_VAL(VBAR_EL1, 0),
-	RESET_VAL(CONTEXTIDR_EL1, 0),
+	RESET_ZERO(CPACR_EL1),
+	RESET_ZERO(ZCR_EL1),
+	RESET_ZERO(TCR_EL1),
+	RESET_ZERO(VBAR_EL1),
+	RESET_ZERO(CONTEXTIDR_EL1),
 	RESET_FUNC(AMAIR_EL1, reset_amair_el1),
-	RESET_VAL(CNTKCTL_EL1, 0),
-	RESET_VAL(MDSCR_EL1, 0),
-	RESET_VAL(MDCCINT_EL1, 0),
-	RESET_VAL(DISR_EL1, 0),
-	RESET_VAL(PMCCFILTR_EL0, 0),
-	RESET_VAL(PMUSERENR_EL0, 0),
+	RESET_ZERO(CNTKCTL_EL1),
+	RESET_ZERO(MDSCR_EL1),
+	RESET_ZERO(MDCCINT_EL1),
+	RESET_ZERO(DISR_EL1),
+	RESET_ZERO(PMCCFILTR_EL0),
+	RESET_ZERO(PMUSERENR_EL0),
 };
 
 /*
