@@ -5,8 +5,6 @@
  */
 
 #include <linux/linkage.h>
-#include <linux/stringify.h>
-#include <asm/alternative.h>
 #include <asm/page_types.h>
 #include <asm/kexec.h>
 #include <asm/processor-flags.h>
@@ -147,15 +145,16 @@ SYM_CODE_START_LOCAL_NOALIGN(identity_mapped)
 	 * Set cr4 to a known state:
 	 *  - physical address extension enabled
 	 *  - 5-level paging, if it was enabled before
-	 *  - Machine check exception on TDX guest, if it was enabled before.
-	 *    Clearing MCE might not be allowed in TDX guests, depending on setup.
-	 *
-	 * Use R13 that contains the original CR4 value, read in relocate_kernel().
-	 * PAE is always set in the original CR4.
 	 */
-	andl	$(X86_CR4_PAE | X86_CR4_LA57), %r13d
-	ALTERNATIVE "", __stringify(orl $X86_CR4_MCE, %r13d), X86_FEATURE_TDX_GUEST
-	movq	%r13, %cr4
+	movl	$X86_CR4_PAE, %eax
+	testq	$X86_CR4_LA57, %r13
+	jz	1f
+	orl	$X86_CR4_LA57, %eax
+1:
+	movq	%rax, %cr4
+
+	jmp 1f
+1:
 
 	/* Flush the TLB (needed?) */
 	movq	%r9, %cr3
@@ -166,9 +165,9 @@ SYM_CODE_START_LOCAL_NOALIGN(identity_mapped)
 	 * used by kexec. Flush the caches before copying the kernel.
 	 */
 	testq	%r12, %r12
-	jz .Lsme_off
+	jz 1f
 	wbinvd
-.Lsme_off:
+1:
 
 	movq	%rcx, %r11
 	call	swap_pages
@@ -188,7 +187,7 @@ SYM_CODE_START_LOCAL_NOALIGN(identity_mapped)
 	 */
 
 	testq	%r11, %r11
-	jnz .Lrelocate
+	jnz 1f
 	xorl	%eax, %eax
 	xorl	%ebx, %ebx
 	xorl    %ecx, %ecx
@@ -209,7 +208,7 @@ SYM_CODE_START_LOCAL_NOALIGN(identity_mapped)
 	ret
 	int3
 
-.Lrelocate:
+1:
 	popq	%rdx
 	leaq	PAGE_SIZE(%r10), %rsp
 	ANNOTATE_RETPOLINE_SAFE
