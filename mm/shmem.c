@@ -2250,7 +2250,7 @@ static vm_fault_t shmem_fault(struct vm_fault *vmf)
 	if (err)
 		return vmf_error(err);
 	if (folio)
-		vmf->page = folio_file_page(folio, vmf->pgoff);
+		vmf->page = &folio->page;
 	return ret;
 }
 
