@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a000f15_7eadabd0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2024-08-12T22:15:21Z",
+      "side": 1,
+      "message": "This is ready for review. I added a comment to ovl_create_or_link() since the necessity for the put_cred() behavior was extremely non-obvious in the original patches, and got even more obscure now that the guts of the function have been factored out.\n\nI ran adb-remount-test.sh on android14-6.1 and android15-6.6 to compare the results. 6.1 passes cleanly. 6.6 shows a handful of getattr sepolicy denials that are very difficult for me to reproduce outside of the test. This patch is at parity with 6.6 and shows the same handful of getattr denials.\n\nThis patch does not address upstream feedback. That\u0027s still on my todo list, but for the benefit of folks downstream of android-mainline, we should get this in now as it\u0027s at parity with android15-6.6.",
+      "revId": "25e2bad42589a3cfa5d5bb7ed90afea96c78bc84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
