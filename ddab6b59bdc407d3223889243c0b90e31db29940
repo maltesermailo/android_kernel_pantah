@@ -33,6 +33,24 @@
       "message": "Why can\u0027t this just be a vendor module?",
       "revId": "ddab6b59bdc407d3223889243c0b90e31db29940",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50ac2a21_ee3a11bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-08-12T15:40:58Z",
+      "side": 1,
+      "message": "I believe the issue is that with NETFILTER enabled selecting IPVLAN also enables IPVLAN_L3S and NET_L3_MASTER_DEV. The last option in particular has a bunch of built-in ifdefs dependencies.",
+      "parentUuid": "70cd1411_11f8a04d",
+      "revId": "ddab6b59bdc407d3223889243c0b90e31db29940",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
