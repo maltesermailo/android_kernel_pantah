@@ -3,6 +3,92 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fe5d5a88_5cb68b1c",
+        "filename": "include/linux/pagemap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-08-12T22:53:19Z",
+      "side": 1,
+      "message": "And then include:\n\n```\n#undef CREATE_TRACE_POINTS\n#include \u003ctrace/hooks/mm.h\u003e\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "d2d6e512_de49e934",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/pagemap.h",
+              "range": {
+                "startLine": 18,
+                "startChar": 0,
+                "endLine": 18,
+                "endChar": 0
+              },
+              "replacement": "#undef CREATE_TRACE_POINTS\n#include \u003ctrace/hooks/mm.h\u003e\n"
+            }
+          ]
+        }
+      ],
+      "revId": "427094fc51b62c017453ad8ee9325a534764beb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa8b2856_13eeae52",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-08-12T22:53:19Z",
+      "side": 1,
+      "message": "If you want to call this tracehook from within a header file, add the same `#ifdef CREATE_TRACE_POINTS` section from https://android-review.git.corp.google.com/c/kernel/common/+/3066703/26/include/trace/hooks/mm.h.",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 38
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "28788cde_469bccbd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/trace/hooks/mm.h",
+              "range": {
+                "startLine": 7,
+                "startChar": 0,
+                "endLine": 7,
+                "endChar": 0
+              },
+              "replacement": "#ifdef CREATE_TRACE_POINTS\n#include \u003ctrace/define_trace.h\u003e\n#endif\n\n"
+            },
+            {
+              "path": "include/trace/hooks/mm.h",
+              "range": {
+                "startLine": 251,
+                "startChar": 0,
+                "endLine": 253,
+                "endChar": 0
+              },
+              "replacement": "#ifdef CREATE_TRACE_POINTS\nDECLARE_EVENT_CLASS(mm_event,\n\tTP_PROTO(struct page *page, struct vm_area_struct *vma,\n\t\tunsigned long address),\n\tTP_ARGS(page, vma, address),\n\tTP_STRUCT__entry(\n\t\t__field(unsigned long, address)\n\t\t__field(unsigned long, pfn)\n\t\t__field(unsigned long, vma)\n\t\t__field(unsigned long, page)\n\t),\n\tTP_fast_assign(\n\t\t__entry-\u003eaddress \u003d address;\n\t\t__entry-\u003epfn \u003d page_to_pfn(page);\n\t\t__entry-\u003evma \u003d (unsigned long)vma;\n\t\t__entry-\u003epage \u003d (unsigned long)page;\n\t),\n\tTP_printk(\"address\u003d%pS pfn\u003d%lx vma\u003d%lx page\u003d%lx\",\n\t\t(void *)__entry-\u003eaddress, __entry-\u003epfn, __entry-\u003evma,\n\t\t__entry-\u003epage)\n);\nDEFINE_EVENT(mm_event, mm_do_anonymous_page,\n\tTP_PROTO(struct vm_area_struct *vma, struct page *page),\n\tTP_ARGS(vma, page));\nDEFINE_EVENT(mm_event, mm_do_swap_page,\n\tTP_PROTO(struct folio *folio, pte_t *pte, struct vm_fault *vmf,\n\t\tswp_entry_t entry),\n\tTP_ARGS(folio, pte, vmf, entry));\nDEFINE_EVENT(mm_event, mm_do_wp_page,\n\tTP_PROTO(struct folio *folio),\n\tTP_ARGS(folio));\nDEFINE_EVENT(mm_event, mm_uprobes_replace_page,\n\tTP_PROTO(struct folio *new_folio, struct folio *old_folio),\n\tTP_ARGS(new_folio, old_folio));\nDEFINE_EVENT(mm_event, mm_shmem_swapin_folio,\n\tTP_PROTO(struct folio *folio),\n\tTP_ARGS(folio));\nDEFINE_EVENT(mm_event, mm_madvise_cold_or_pageout_page,\n\tTP_PROTO(bool pageout, struct page *page),\n\tTP_ARGS(pageout, page));\n#endif\n"
+            }
+          ]
+        }
+      ],
+      "revId": "427094fc51b62c017453ad8ee9325a534764beb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7fa6cebb_61027df1",
         "filename": "mm/filemap.c",
         "patchSetId": 1
