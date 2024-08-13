@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4310d28_e3e895a0",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1808,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-08-13T17:02:57Z",
+      "side": 1,
+      "message": "Can we declare this inside the loop, and change things around so we have:\n\n```\nwhile (size) {\n    phys_addr_t map_ipa \u003d fault_ipa;\n    \n    ...\n    \n    err \u003d pkvm_mem_abort(vcpu, \u0026map_ipa, memslot, hva, \u0026page_size);\n    \n    ...\n    fault_ipa \u003d map_ipa + page_size;\n}\n```\n\nWhat do you think?",
+      "range": {
+        "startLine": 1808,
+        "startChar": 2,
+        "endLine": 1808,
+        "endChar": 16
+      },
+      "revId": "cba06f349facceeed4d450ee615c6c9e1351aaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a913b213_5e26608e",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1840,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-08-13T17:02:57Z",
+      "side": 1,
+      "message": "I personally find `(fault_ipa + page_size) - fault_ipa_orig` to be more intuitive, but it\u0027s up to you. A comment wouldn\u0027t hurt!",
+      "range": {
+        "startLine": 1840,
+        "startChar": 24,
+        "endLine": 1840,
+        "endChar": 64
+      },
+      "revId": "cba06f349facceeed4d450ee615c6c9e1351aaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fc6d962_ee0bbd5c",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1841,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-08-13T17:02:57Z",
+      "side": 1,
+      "message": "How can this happen?",
+      "range": {
+        "startLine": 1841,
+        "startChar": 6,
+        "endLine": 1841,
+        "endChar": 22
+      },
+      "revId": "cba06f349facceeed4d450ee615c6c9e1351aaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
