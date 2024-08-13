@@ -35,6 +35,7 @@
 #include <scsi/scsi_dh.h>
 
 #include <trace/events/scsi.h>
+#include <trace/hooks/scsi.h>
 
 #include "scsi_debugfs.h"
 #include "scsi_priv.h"
@@ -214,6 +215,13 @@ int __scsi_execute(struct scsi_device *sdev, const unsigned char *cmd,
 	struct request *req;
 	struct scsi_request *rq;
 	int ret;
+	bool skip = false;
+
+	trace_android_rvh__scsi_execute(&skip, &ret, sdev, cmd, data_direction,
+					buffer, bufflen, sense, sshdr, timeout,
+					retries, flags, rq_flags, resid);
+	if (skip)
+		return ret;
 
 	req = blk_get_request(sdev->request_queue,
 			data_direction == DMA_TO_DEVICE ?
