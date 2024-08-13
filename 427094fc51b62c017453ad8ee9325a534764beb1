@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb999502_6d1354df",
+        "filename": "include/linux/pagemap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-08-13T02:18:58Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fe5d5a88_5cb68b1c",
+      "revId": "427094fc51b62c017453ad8ee9325a534764beb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa8b2856_13eeae52",
@@ -87,6 +105,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b35c6098_445fa441",
+        "filename": "include/trace/hooks/mm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-08-13T02:18:58Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fa8b2856_13eeae52",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 38
+      },
+      "revId": "427094fc51b62c017453ad8ee9325a534764beb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7fa6cebb_61027df1",
@@ -100,6 +142,30 @@
       "writtenOn": "2024-08-12T21:11:51Z",
       "side": 1,
       "message": "I believe you should be able to call vendor hook directly without creating such wrappers, see https://android-review.git.corp.google.com/c/kernel/common/+/3066703/26/include/linux/mm_inline.h for example.",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 0
+      },
+      "revId": "427094fc51b62c017453ad8ee9325a534764beb1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be7ef455_0e618b4c",
+        "filename": "mm/filemap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2024-08-13T02:18:58Z",
+      "side": 1,
+      "message": "I took a look at this one and it\u0027s a bit more complicated that the previous example because the dwc3/trace.c file indirectly includes pagemap.h. That means if we undef CREATE_TRACE_POINTS, then we are also undefining the dwc3 traces. Let\u0027s go with this solution for now and I can see if I can follow-up with a better fix.",
+      "parentUuid": "7fa6cebb_61027df1",
       "range": {
         "startLine": 63,
         "startChar": 0,
