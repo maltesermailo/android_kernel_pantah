@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0538e62a_91d494b9",
+        "filename": "mm/internal.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 742,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-08-13T16:31:43Z",
+      "side": 1,
+      "message": "If this function is used by a module, it should not be declared in `mm/internal.h`. `include/linux/compaction.h` is more appropriate for it.",
+      "range": {
+        "startLine": 742,
+        "startChar": 0,
+        "endLine": 742,
+        "endChar": 12
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "46271656_48ddf1c5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/internal.h",
+              "range": {
+                "startLine": 741,
+                "startChar": 0,
+                "endLine": 744,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "e9211dd5437a27a09693afec0e9c7e47187daa6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
