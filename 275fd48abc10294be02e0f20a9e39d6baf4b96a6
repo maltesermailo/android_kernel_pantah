@@ -16,6 +16,24 @@
       "message": "This increment is racy. There\u0027s no serialization, so if two watchdog timers fire and both try to increment it at the same time, you could end up not incrementing the value as much as you\u0027d expect. An atomic inc operation might be better here?",
       "revId": "275fd48abc10294be02e0f20a9e39d6baf4b96a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a73a14be_50153e43",
+        "filename": "kernel/workqueue.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 6411,
+      "author": {
+        "id": 1982050
+      },
+      "writtenOn": "2024-08-13T08:07:40Z",
+      "side": 1,
+      "message": "If I read the code properly, I think only one `wq_watchdog_timer` will work at a time. So I don\u0027t think the race problem you\u0027re worried about will happen.",
+      "parentUuid": "723a2c2c_faab3d74",
+      "revId": "275fd48abc10294be02e0f20a9e39d6baf4b96a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
