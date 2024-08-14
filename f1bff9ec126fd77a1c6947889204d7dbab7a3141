@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e868691_166063a9",
+        "filename": "include/linux/compaction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-08-14T16:55:44Z",
+      "side": 1,
+      "message": "Ugh. You would still have to include `mm/internal.h`... Not good.\nI wonder if you can export and use `compact_zone_order()` instead?",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 23
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8a453eef_66603baf",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/compaction.h",
+              "range": {
+                "startLine": 101,
+                "startChar": 0,
+                "endLine": 107,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "f1bff9ec126fd77a1c6947889204d7dbab7a3141",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
