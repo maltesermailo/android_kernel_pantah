@@ -25,6 +25,28 @@ DECLARE_HOOK(android_vh_udp_v4_connect,
 	TP_ARGS(sk, daddr, dport, family));
 DECLARE_HOOK(android_vh_udp_v6_connect,
 	TP_PROTO(struct sock *sk, struct sockaddr_in6 *sin6), TP_ARGS(sk, sin6));
+<<<<<<< HEAD   (2bd9a9 ANDROID: misc: pkvm_smc: Add permissive option)
+||||||| BASE
+DECLARE_HOOK(android_vh_tcp_rtt_estimator,
+	TP_PROTO(struct sock *sk, long mrtt_us), TP_ARGS(sk, mrtt_us));
+DECLARE_HOOK(android_vh_udp_enqueue_schedule_skb,
+	TP_PROTO(struct sock *sk, struct sk_buff *skb), TP_ARGS(sk, skb));
+DECLARE_HOOK(android_vh_build_skb_around,
+	TP_PROTO(struct sk_buff *skb), TP_ARGS(skb));
+=======
+DECLARE_HOOK(android_vh_inet_create,
+	TP_PROTO(struct sock *sk, bool err), TP_ARGS(sk, err));
+DECLARE_HOOK(android_vh_uplink_send_msg,
+	TP_PROTO(struct sock *sk), TP_ARGS(sk));
+DECLARE_HOOK(android_vh_sock_create,
+	TP_PROTO(struct sock *sk), TP_ARGS(sk));
+DECLARE_HOOK(android_vh_tcp_rtt_estimator,
+	TP_PROTO(struct sock *sk, long mrtt_us), TP_ARGS(sk, mrtt_us));
+DECLARE_HOOK(android_vh_udp_enqueue_schedule_skb,
+	TP_PROTO(struct sock *sk, struct sk_buff *skb), TP_ARGS(sk, skb));
+DECLARE_HOOK(android_vh_build_skb_around,
+	TP_PROTO(struct sk_buff *skb), TP_ARGS(skb));
+>>>>>>> CHANGE (0d9cb9 ANDROID: GKI: Add hooks for socket management.)
 DECLARE_HOOK(android_vh_tcp_write_timeout_estab_retrans,
 	TP_PROTO(struct sock *sk), TP_ARGS(sk));
 DECLARE_HOOK(android_vh_tcp_connect,
