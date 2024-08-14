@@ -481,8 +481,16 @@ static bool brcm_avs_is_firmware_loaded(struct private_data *priv)
 static unsigned int brcm_avs_cpufreq_get(unsigned int cpu)
 {
 	struct cpufreq_policy *policy = cpufreq_cpu_get(cpu);
+<<<<<<< HEAD   (e787d6 Revert "cpufreq: brcmstb-avs-cpufreq: add check for cpufreq_)
 	struct private_data *priv = policy->driver_data;
 
+=======
+	struct private_data *priv;
+
+	if (!policy)
+		return 0;
+	priv = policy->driver_data;
+>>>>>>> BRANCH (764929 x86/static_call: Add support for Jcc tail-calls)
 	cpufreq_cpu_put(policy);
 
 	return brcm_avs_get_frequency(priv->base);
