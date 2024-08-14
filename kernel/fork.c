@@ -116,8 +116,13 @@
 #define CREATE_TRACE_POINTS
 #include <trace/events/task.h>
 
+<<<<<<< HEAD   (809fb9 ANDROID: Specify temporary directory to create-tracefile.py)
 #undef CREATE_TRACE_POINTS
 #include <trace/hooks/sched.h>
+=======
+#include <kunit/visibility.h>
+
+>>>>>>> BRANCH (670641 Merge tag 'gfs2-v6.10-rc1-fixes' of git://git.kernel.org/pub)
 /*
  * Minimum number of threads to boot the kernel
  */
@@ -1345,6 +1350,7 @@ struct mm_struct *mm_alloc(void)
 	memset(mm, 0, sizeof(*mm));
 	return mm_init(mm, current, current_user_ns());
 }
+EXPORT_SYMBOL_IF_KUNIT(mm_alloc);
 
 static inline void __mmput(struct mm_struct *mm)
 {

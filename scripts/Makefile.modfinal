@@ -43,8 +43,13 @@ quiet_cmd_btf_ko = BTF [M] $@
 	if [ ! -f $(mixed-build-prefix)vmlinux ]; then					\
 		printf "Skipping BTF generation for %s due to unavailability of $(mixed-build-prefix)vmlinux\n" $@ 1>&2; \
 	else								\
+<<<<<<< HEAD   (809fb9 ANDROID: Specify temporary directory to create-tracefile.py)
 		LLVM_OBJCOPY="$(OBJCOPY)" $(PAHOLE) -J $(PAHOLE_FLAGS) --btf_base $(mixed-build-prefix)vmlinux $@; \
 		$(RESOLVE_BTFIDS) -b $(mixed-build-prefix)vmlinux $@; 			\
+=======
+		LLVM_OBJCOPY="$(OBJCOPY)" $(PAHOLE) -J $(PAHOLE_FLAGS) $(MODULE_PAHOLE_FLAGS) --btf_base vmlinux $@; \
+		$(RESOLVE_BTFIDS) -b vmlinux $@; 			\
+>>>>>>> BRANCH (670641 Merge tag 'gfs2-v6.10-rc1-fixes' of git://git.kernel.org/pub)
 	fi;
 
 # Same as newer-prereqs, but allows to exclude specified extra dependencies
