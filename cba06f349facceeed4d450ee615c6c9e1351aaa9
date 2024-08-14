@@ -164,6 +164,30 @@
       },
       "revId": "cba06f349facceeed4d450ee615c6c9e1351aaa9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18c99ae0_f74b7d9f",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1841,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2024-08-14T12:53:15Z",
+      "side": 1,
+      "message": "Yes it does, hence the 0x1000 (map_ipa - fault_ipa)\n\nso `size - (page_size - (map_ipa - fault_ipa))` which becomes in my example \n\n4K - (2MB - (0x201000 - 0x200000)).\n\nActually, I forgot your comment about (fault_ipa + page_size) - map_size. I\u0027ll update that!",
+      "parentUuid": "5e5b23e5_8b399fa0",
+      "range": {
+        "startLine": 1841,
+        "startChar": 6,
+        "endLine": 1841,
+        "endChar": 22
+      },
+      "revId": "cba06f349facceeed4d450ee615c6c9e1351aaa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
