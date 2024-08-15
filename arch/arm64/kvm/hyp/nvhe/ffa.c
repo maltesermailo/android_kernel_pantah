@@ -984,6 +984,55 @@ out_handled:
 	return true;
 }
 
+static void kvm_guest_clear_transfer(struct ffa_mem_transfer *transfer, struct pkvm_hyp_vcpu *vcpu)
+{
+	struct ffa_translation *translation, *tmp;
+
+	list_for_each_entry_safe(translation, tmp, &transfer->translations, node) {
+		WARN_ON(__pkvm_guest_unshare_ffa(vcpu, translation->ipa));
+		list_del(&translation->node);
+		hyp_free(translation);
+	}
+}
+
+int kvm_guest_reclaim_dying_guest_pages(struct pkvm_hyp_vm *vm, enum pkvm_component_id borrower_id,
+					u64 ipa)
+{
+	int ret = 0;
+	struct pkvm_hyp_vcpu *hyp_vcpu = vm->vcpus[0];
+	struct kvm_vcpu *vcpu = &hyp_vcpu->vcpu;
+	unsigned int vm_handle = vm_handle_to_idx(vcpu->kvm->arch.pkvm.handle) + 1;
+	struct ffa_mem_transfer *transfer, *tmp;
+	struct arm_smccc_res res;
+
+	if (borrower_id == PKVM_ID_HYP) {
+		WARN_ON(__pkvm_guest_unshare_hyp(vm->vcpus[0], ipa));
+
+		hyp_spin_lock(&hyp_buffers.lock);
+		endp_buffers[vm_handle].tx = NULL;
+		endp_buffers[vm_handle].rx = NULL;
+		hyp_spin_unlock(&hyp_buffers.lock);
+		return 0;
+	}
+
+	hyp_spin_lock(&hyp_buffers.lock);
+	list_for_each_entry_safe(transfer, tmp, &endp_buffers[vm_handle].xfer_list, node) {
+		ffa_mem_reclaim(&res, HANDLE_LOW(transfer->ffa_handle),
+				      HANDLE_HIGH(transfer->ffa_handle), 0);
+		if (res.a0 != FFA_SUCCESS) {
+			ret = 1;
+			continue;
+		}
+
+		kvm_guest_clear_transfer(transfer, hyp_vcpu);
+		list_del(&transfer->node);
+		hyp_free(transfer);
+	}
+	hyp_spin_unlock(&hyp_buffers.lock);
+
+	return ret;
+}
+
 static int hyp_ffa_post_init(void)
 {
 	size_t min_rxtx_sz;

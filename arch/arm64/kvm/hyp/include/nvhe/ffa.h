@@ -25,4 +25,6 @@ static inline bool is_ffa_call(u64 func_id)
 	       ARM_SMCCC_FUNC_NUM(func_id) <= FFA_MAX_FUNC_NUM;
 }
 
+int kvm_guest_reclaim_dying_guest_pages(struct pkvm_hyp_vm *vm, enum pkvm_component_id borrower_id,
+					u64 ipa);
 #endif /* __KVM_HYP_FFA_H */
