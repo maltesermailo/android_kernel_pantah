@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "026eaa9c_e1ea63c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-16T20:53:36Z",
+      "side": 1,
+      "message": "This patch breaks the KMI. Please refactor to avoid the changes to `struct net_device` and `struct netns_ipv4`:\n```\ntype \u0027struct net_device\u0027 changed\n  member \u0027const struct l3mdev_ops* l3mdev_ops\u0027 was added\n  46 members (\u0027const struct ndisc_ops* ndisc_ops\u0027 .. \u0027struct hlist_node index_hlist\u0027) changed\n    offset changed by 64\n\ntype \u0027struct netns_ipv4\u0027 changed\n  member \u0027u8 sysctl_raw_l3mdev_accept\u0027 was added\n  5 members (\u0027u8 sysctl_tcp_early_demux\u0027 .. \u0027u8 sysctl_tcp_fwmark_accept\u0027) changed\n    offset changed by 8\n  member \u0027u8 sysctl_tcp_l3mdev_accept\u0027 was added\n  member \u0027u8 sysctl_tcp_mtu_probing\u0027 changed\n    offset changed by 16\n  55 members (\u0027int sysctl_tcp_mtu_probe_floor\u0027 .. \u0027unsigned int sysctl_tcp_child_ehash_entries\u0027) changed\n    offset changed by 32\n  14 members (\u0027unsigned long sysctl_tcp_comp_sack_delay_ns\u0027 .. \u0027u8 sysctl_fib_notify_on_flag_change\u0027) changed\n    offset changed by 64\n  member \u0027u8 sysctl_udp_l3mdev_accept\u0027 was added\n  member \u0027u8 sysctl_igmp_llm_reports\u0027 changed\n    offset changed by 72\n  14 members (\u0027int sysctl_igmp_max_memberships\u0027 .. \u0027u64 android_kabi_reserved1\u0027) changed\n    offset changed by 64\n```",
+      "revId": "16d994d752c02757c8d4eaf0bdd4bba043442c0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
