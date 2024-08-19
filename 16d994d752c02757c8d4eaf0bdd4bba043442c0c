@@ -69,6 +69,24 @@
       "parentUuid": "998497c0_eb801ed0",
       "revId": "16d994d752c02757c8d4eaf0bdd4bba043442c0c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc1f9435_e1ced6ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003247
+      },
+      "writtenOn": "2024-08-19T20:46:15Z",
+      "side": 1,
+      "message": "That (CONFIG_NET_L3_MASTER_DEV) is pretty worrying.\n\nThe out-of-tree Android special dealing with per-interface routing tables may (or may not) be negatively affected by that.\nie. the patch that does:\n\n-               .fc_table \u003d l3mdev_fib_table(dev) ? : RT6_TABLE_PREFIX,\n+               .fc_table \u003d l3mdev_fib_table(dev) ? : addrconf_rt_table(dev, RT6_TABLE_PREFIX),\n\nfor example:\n    commit 20599bae2f4432c7c0c95851e0c7c3b5562356a9\n    ANDROID: net: ipv6: autoconf routes into per-device tables\n\nNote that include/net/l3mdev.h:258 if not CONFIG_NET_L3_MASTER_DEV:\n\nstatic inline u32 l3mdev_fib_table(const struct net_device *dev) { return 0; }",
+      "parentUuid": "324ea98c_349ce347",
+      "revId": "16d994d752c02757c8d4eaf0bdd4bba043442c0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
