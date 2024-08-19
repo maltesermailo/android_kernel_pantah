@@ -25,6 +25,26 @@
       "robotRunId": "AR00000000000088641623",
       "url": "https://android-build.googleplex.com/builds/treetop/android-review/3227942?revision\u003d2",
       "key": {
+        "uuid": "48410cb3_3f94182c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-08-19T10:01:30Z",
+      "side": 1,
+      "message": "Commit needs to contain a properly formatted Bug: or Fixes: line.\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "tag": "",
+      "revId": "37ca4f2587b1ef794819594d204bc38afb91d73b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000088641623",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3227942?revision\u003d2",
+      "key": {
         "uuid": "a34069b5_f51dff09",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -46,6 +66,50 @@
       "fixSuggestions": [
         {
           "fixId": "db24394c_af428afd",
+          "description": "Add author\u0027s Signed-off-by",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 12,
+                "startChar": 0,
+                "endLine": 12,
+                "endChar": 0
+              },
+              "replacement": "Signed-off-by: Sid Nayyar \u003csidnayyar@google.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "revId": "37ca4f2587b1ef794819594d204bc38afb91d73b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "robotId": "ayeaye",
+      "robotRunId": "AR00000000000088641623",
+      "url": "https://android-build.googleplex.com/builds/treetop/android-review/3227942?revision\u003d2",
+      "key": {
+        "uuid": "a7e2cb32_09bbb7bf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1757831
+      },
+      "writtenOn": "2024-08-19T10:01:30Z",
+      "side": 1,
+      "message": "Commit is not signed off by the author!\n\nMissing tag: Signed-off-by: Sid Nayyar \u003csidnayyar@google.com\u003e\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 0
+      },
+      "tag": "",
+      "fixSuggestions": [
+        {
+          "fixId": "759ea814_af236132",
           "description": "Add author\u0027s Signed-off-by",
           "replacements": [
             {
