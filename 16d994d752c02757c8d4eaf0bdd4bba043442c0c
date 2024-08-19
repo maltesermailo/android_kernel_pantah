@@ -51,6 +51,24 @@
       "message": ".",
       "revId": "16d994d752c02757c8d4eaf0bdd4bba043442c0c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "324ea98c_349ce347",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-08-19T20:00:51Z",
+      "side": 1,
+      "message": "I gave a possible solution in the bug. The problem is that adding these configs changes these KMI stable types. It appears that adding them causes CONFIG_NET_L3_MASTER_DEV to become enabled that adds these fields. Perhaps you can suppress CONFIG_NET_L3_MASTER_DEV.",
+      "parentUuid": "998497c0_eb801ed0",
+      "revId": "16d994d752c02757c8d4eaf0bdd4bba043442c0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
