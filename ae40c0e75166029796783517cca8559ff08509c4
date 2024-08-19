@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2146a81f_5f96db9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-08-19T18:44:03Z",
+      "side": 1,
+      "message": "I don\u0027t know why you had to abandon original https://android-review.googlesource.com/c/kernel/common/+/3210870 and re-post this change. Please don\u0027t do that in the future. It loses previous comments and makes the review harded.",
+      "revId": "ae40c0e75166029796783517cca8559ff08509c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f16d44c2_32372bae",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-08-19T18:44:03Z",
+      "side": 1,
+      "message": "This one does not need to be here. Just move it to line 608 like this:\n\n```\n\tif (order \u003e PAGE_ALLOC_COSTLY_ORDER) {\n\t\tunsigned int expected_order \u003d pageblock_order;\n\n\t\ttrace_android_vh_customize_thp_pcp_order(\u0026expected_order);\n\t\tVM_BUG_ON(order !\u003d expected_order);\n\t\treturn NR_LOWORDER_PCP_LISTS;\n\t}\n```",
+      "range": {
+        "startLine": 595,
+        "startChar": 1,
+        "endLine": 595,
+        "endChar": 44
+      },
+      "revId": "ae40c0e75166029796783517cca8559ff08509c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
