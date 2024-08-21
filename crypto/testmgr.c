@@ -293,10 +293,6 @@ struct test_sg_division {
  *				      the @key_offset
  * @finalization_type: what finalization function to use for hashes
  * @nosimd: execute with SIMD disabled?  Requires !CRYPTO_TFM_REQ_MAY_SLEEP.
- *	    This applies to the parts of the operation that aren't controlled
- *	    individually by @nosimd_setkey or @src_divs[].nosimd.
- * @nosimd_setkey: set the key (if applicable) with SIMD disabled?  Requires
- *		   !CRYPTO_TFM_REQ_MAY_SLEEP.
  */
 struct testvec_config {
 	const char *name;
@@ -310,7 +306,6 @@ struct testvec_config {
 	bool key_offset_relative_to_alignmask;
 	enum finalization_type finalization_type;
 	bool nosimd;
-	bool nosimd_setkey;
 };
 
 #define TESTVEC_CONFIG_NAMELEN	192
@@ -538,8 +533,7 @@ static bool valid_testvec_config(const struct testvec_config *cfg)
 	    cfg->finalization_type == FINALIZATION_TYPE_DIGEST)
 		return false;
 
-	if ((cfg->nosimd || cfg->nosimd_setkey ||
-	     (flags & SGDIVS_HAVE_NOSIMD)) &&
+	if ((cfg->nosimd || (flags & SGDIVS_HAVE_NOSIMD)) &&
 	    (cfg->req_flags & CRYPTO_TFM_REQ_MAY_SLEEP))
 		return false;
 
@@ -847,10 +841,7 @@ static int prepare_keybuf(const u8 *key, unsigned int ksize,
 	return 0;
 }
 
-/*
- * Like setkey_f(tfm, key, ksize), but sometimes misalign the key.
- * In addition, run the setkey function in no-SIMD context if requested.
- */
+/* Like setkey_f(tfm, key, ksize), but sometimes misalign the key */
 #define do_setkey(setkey_f, tfm, key, ksize, cfg, alignmask)		\
 ({									\
 	const u8 *keybuf, *keyptr;					\
@@ -859,11 +850,7 @@ static int prepare_keybuf(const u8 *key, unsigned int ksize,
 	err = prepare_keybuf((key), (ksize), (cfg), (alignmask),	\
 			     &keybuf, &keyptr);				\
 	if (err == 0) {							\
-		if ((cfg)->nosimd_setkey)				\
-			crypto_disable_simd_for_test();			\
 		err = setkey_f((tfm), keyptr, (ksize));			\
-		if ((cfg)->nosimd_setkey)				\
-			crypto_reenable_simd_for_test();		\
 		kfree(keybuf);						\
 	}								\
 	err;								\
@@ -916,20 +903,14 @@ static unsigned int generate_random_length(struct rnd_state *rng,
 
 	switch (prandom_u32_below(rng, 4)) {
 	case 0:
-		len %= 64;
-		break;
+		return len % 64;
 	case 1:
-		len %= 256;
-		break;
+		return len % 256;
 	case 2:
-		len %= 1024;
-		break;
+		return len % 1024;
 	default:
-		break;
+		return len;
 	}
-	if (len && prandom_u32_below(rng, 4) == 0)
-		len = rounddown_pow_of_two(len);
-	return len;
 }
 
 /* Flip a random bit in the given nonempty data buffer */
@@ -1025,8 +1006,6 @@ static char *generate_random_sgl_divisions(struct rnd_state *rng,
 
 		if (div == &divs[max_divs - 1] || prandom_bool(rng))
 			this_len = remaining;
-		else if (prandom_u32_below(rng, 4) == 0)
-			this_len = (remaining + 1) / 2;
 		else
 			this_len = prandom_u32_inclusive(rng, 1, remaining);
 		div->proportion_of_total = this_len;
@@ -1139,15 +1118,9 @@ static void generate_random_testvec_config(struct rnd_state *rng,
 		break;
 	}
 
-	if (!(cfg->req_flags & CRYPTO_TFM_REQ_MAY_SLEEP)) {
-		if (prandom_bool(rng)) {
-			cfg->nosimd = true;
-			p += scnprintf(p, end - p, " nosimd");
-		}
-		if (prandom_bool(rng)) {
-			cfg->nosimd_setkey = true;
-			p += scnprintf(p, end - p, " nosimd_setkey");
-		}
+	if (!(cfg->req_flags & CRYPTO_TFM_REQ_MAY_SLEEP) && prandom_bool(rng)) {
+		cfg->nosimd = true;
+		p += scnprintf(p, end - p, " nosimd");
 	}
 
 	p += scnprintf(p, end - p, " src_divs=[");
@@ -5615,6 +5588,12 @@ static const struct alg_test_desc alg_test_descs[] = {
 		.fips_allowed = 1,
 		.suite = {
 			.hash = __VECS(sha512_tv_template)
+		}
+	}, {
+		.alg = "sm2",
+		.test = alg_test_akcipher,
+		.suite = {
+			.akcipher = __VECS(sm2_tv_template)
 		}
 	}, {
 		.alg = "sm3",

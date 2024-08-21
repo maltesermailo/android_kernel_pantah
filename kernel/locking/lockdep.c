@@ -4917,9 +4917,6 @@ EXPORT_SYMBOL_GPL(lockdep_init_map_type);
 struct lock_class_key __lockdep_no_validate__;
 EXPORT_SYMBOL_GPL(__lockdep_no_validate__);
 
-struct lock_class_key __lockdep_no_track__;
-EXPORT_SYMBOL_GPL(__lockdep_no_track__);
-
 #ifdef CONFIG_PROVE_LOCKING
 void lockdep_set_lock_cmp_fn(struct lockdep_map *lock, lock_cmp_fn cmp_fn,
 			     lock_print_fn print_fn)
@@ -5002,9 +4999,6 @@ static int __lock_acquire(struct lockdep_map *lock, unsigned int subclass,
 	u64 chain_key;
 
 	if (unlikely(!debug_locks))
-		return 0;
-
-	if (unlikely(lock->key == &__lockdep_no_track__))
 		return 0;
 
 	if (!prove_locking || lock->key == &__lockdep_no_validate__)
@@ -5769,8 +5763,7 @@ void lock_release(struct lockdep_map *lock, unsigned long ip)
 
 	trace_lock_release(lock, ip);
 
-	if (unlikely(!lockdep_enabled() ||
-		     lock->key == &__lockdep_no_track__))
+	if (unlikely(!lockdep_enabled()))
 		return;
 
 	raw_local_irq_save(flags);

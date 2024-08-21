@@ -17,8 +17,7 @@ typedef void (*io_timer_fn)(struct io_timer *);
 
 struct io_timer {
 	io_timer_fn		fn;
-	void			*fn2;
-	u64			expire;
+	unsigned long		expire;
 };
 
 /* Amount to buffer up on a percpu counter */

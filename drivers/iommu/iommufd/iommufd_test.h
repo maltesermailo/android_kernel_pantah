@@ -22,7 +22,6 @@ enum {
 	IOMMU_TEST_OP_MOCK_DOMAIN_FLAGS,
 	IOMMU_TEST_OP_DIRTY,
 	IOMMU_TEST_OP_MD_CHECK_IOTLB,
-	IOMMU_TEST_OP_TRIGGER_IOPF,
 };
 
 enum {
@@ -128,13 +127,6 @@ struct iommu_test_cmd {
 			__u32 id;
 			__u32 iotlb;
 		} check_iotlb;
-		struct {
-			__u32 dev_id;
-			__u32 pasid;
-			__u32 grpid;
-			__u32 perm;
-			__u64 addr;
-		} trigger_iopf;
 	};
 	__u32 last;
 };

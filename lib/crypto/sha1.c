@@ -137,5 +137,4 @@ void sha1_init(__u32 *buf)
 }
 EXPORT_SYMBOL(sha1_init);
 
-MODULE_DESCRIPTION("SHA-1 Algorithm");
 MODULE_LICENSE("GPL");

@@ -224,11 +224,6 @@ static int decode_layoutget(struct xdr_stream *xdr, struct rpc_rqst *req,
 				 encode_attrs_maxsz)
 #define decode_setattr_maxsz	(op_decode_hdr_maxsz + \
 				 nfs4_fattr_bitmap_maxsz)
-#define encode_delegattr_maxsz	(op_encode_hdr_maxsz + \
-				 encode_stateid_maxsz + \
-				nfs4_fattr_bitmap_maxsz + \
-				2*nfstime4_maxsz)
-#define decode_delegattr_maxsz	(decode_setattr_maxsz)
 #define encode_read_maxsz	(op_encode_hdr_maxsz + \
 				 encode_stateid_maxsz + 3)
 #define decode_read_maxsz	(op_decode_hdr_maxsz + 2 + pagepad_maxsz)
@@ -763,14 +758,12 @@ static int decode_layoutget(struct xdr_stream *xdr, struct rpc_rqst *req,
 				encode_sequence_maxsz + \
 				encode_putfh_maxsz + \
 				encode_layoutreturn_maxsz + \
-				encode_delegattr_maxsz + \
 				encode_delegreturn_maxsz + \
 				encode_getattr_maxsz)
 #define NFS4_dec_delegreturn_sz (compound_decode_hdr_maxsz + \
 				decode_sequence_maxsz + \
 				decode_putfh_maxsz + \
 				decode_layoutreturn_maxsz + \
-				decode_delegattr_maxsz + \
 				decode_delegreturn_maxsz + \
 				decode_getattr_maxsz)
 #define NFS4_enc_getacl_sz	(compound_encode_hdr_maxsz + \
@@ -1067,10 +1060,9 @@ static void encode_nops(struct compound_hdr *hdr)
 	*hdr->nops_p = htonl(hdr->nops);
 }
 
-static void encode_nfs4_stateid(struct xdr_stream *xdr,
-				const nfs4_stateid *stateid)
+static void encode_nfs4_stateid(struct xdr_stream *xdr, const nfs4_stateid *stateid)
 {
-	encode_opaque_fixed(xdr, stateid->data, NFS4_STATEID_SIZE);
+	encode_opaque_fixed(xdr, stateid, NFS4_STATEID_SIZE);
 }
 
 static void encode_nfs4_verifier(struct xdr_stream *xdr, const nfs4_verifier *verf)
@@ -1476,18 +1468,20 @@ static void encode_opentype(struct xdr_stream *xdr, const struct nfs_openargs *a
 	}
 }
 
-static inline void encode_delegation_type(struct xdr_stream *xdr, u32 delegation_type)
+static inline void encode_delegation_type(struct xdr_stream *xdr, fmode_t delegation_type)
 {
 	__be32 *p;
 
 	p = reserve_space(xdr, 4);
 	switch (delegation_type) {
-	case NFS4_OPEN_DELEGATE_NONE:
-	case NFS4_OPEN_DELEGATE_READ:
-	case NFS4_OPEN_DELEGATE_WRITE:
-	case NFS4_OPEN_DELEGATE_READ_ATTRS_DELEG:
-	case NFS4_OPEN_DELEGATE_WRITE_ATTRS_DELEG:
-		*p = cpu_to_be32(delegation_type);
+	case 0:
+		*p = cpu_to_be32(NFS4_OPEN_DELEGATE_NONE);
+		break;
+	case FMODE_READ:
+		*p = cpu_to_be32(NFS4_OPEN_DELEGATE_READ);
+		break;
+	case FMODE_WRITE|FMODE_READ:
+		*p = cpu_to_be32(NFS4_OPEN_DELEGATE_WRITE);
 		break;
 	default:
 		BUG();
@@ -1503,7 +1497,7 @@ static inline void encode_claim_null(struct xdr_stream *xdr, const struct qstr *
 	encode_string(xdr, name->len, name->name);
 }
 
-static inline void encode_claim_previous(struct xdr_stream *xdr, u32 type)
+static inline void encode_claim_previous(struct xdr_stream *xdr, fmode_t type)
 {
 	__be32 *p;
 
@@ -1739,33 +1733,6 @@ static void encode_setattr(struct xdr_stream *xdr, const struct nfs_setattrargs 
 	encode_nfs4_stateid(xdr, &arg->stateid);
 	encode_attrs(xdr, arg->iap, arg->label, NULL, server,
 			server->attr_bitmask);
-}
-
-static void encode_delegattr(struct xdr_stream *xdr,
-		const nfs4_stateid *stateid,
-		const struct nfs4_delegattr *attr,
-		struct compound_hdr *hdr)
-{
-	uint32_t bitmap[3] = { 0 };
-	uint32_t len = 0;
-	__be32 *p;
-
-	encode_op_hdr(xdr, OP_SETATTR, encode_delegattr_maxsz, hdr);
-	encode_nfs4_stateid(xdr, stateid);
-	if (attr->atime_set) {
-		bitmap[2] |= FATTR4_WORD2_TIME_DELEG_ACCESS;
-		len += (nfstime4_maxsz << 2);
-	}
-	if (attr->mtime_set) {
-		bitmap[2] |= FATTR4_WORD2_TIME_DELEG_MODIFY;
-		len += (nfstime4_maxsz << 2);
-	}
-	xdr_encode_bitmap4(xdr, bitmap, ARRAY_SIZE(bitmap));
-	xdr_stream_encode_opaque_inline(xdr, (void **)&p, len);
-	if (bitmap[2] & FATTR4_WORD2_TIME_DELEG_ACCESS)
-		p = xdr_encode_nfstime4(p, &attr->atime);
-	if (bitmap[2] & FATTR4_WORD2_TIME_DELEG_MODIFY)
-		p = xdr_encode_nfstime4(p, &attr->mtime);
 }
 
 static void encode_setclientid(struct xdr_stream *xdr, const struct nfs4_setclientid *setclientid, struct compound_hdr *hdr)
@@ -2138,7 +2105,7 @@ static void encode_test_stateid(struct xdr_stream *xdr,
 {
 	encode_op_hdr(xdr, OP_TEST_STATEID, decode_test_stateid_maxsz, hdr);
 	encode_uint32(xdr, 1);
-	encode_nfs4_stateid(xdr, &args->stateid);
+	encode_nfs4_stateid(xdr, args->stateid);
 }
 
 static void encode_free_stateid(struct xdr_stream *xdr,
@@ -2845,8 +2812,6 @@ static void nfs4_xdr_enc_delegreturn(struct rpc_rqst *req,
 	encode_putfh(xdr, args->fhandle, &hdr);
 	if (args->lr_args)
 		encode_layoutreturn(xdr, args->lr_args, &hdr);
-	if (args->sattr_args)
-		encode_delegattr(xdr, args->stateid, args->sattr_args, &hdr);
 	if (args->bitmask)
 		encode_getfattr(xdr, args->bitmask, &hdr);
 	encode_delegreturn(xdr, args->stateid, &hdr);
@@ -4338,28 +4303,6 @@ static int decode_attr_xattrsupport(struct xdr_stream *xdr, uint32_t *bitmap,
 	return 0;
 }
 
-static int decode_attr_open_arguments(struct xdr_stream *xdr, uint32_t *bitmap,
-		struct nfs4_open_caps *res)
-{
-	memset(res, 0, sizeof(*res));
-	if (unlikely(bitmap[2] & (FATTR4_WORD2_OPEN_ARGUMENTS - 1U)))
-		return -EIO;
-	if (likely(bitmap[2] & FATTR4_WORD2_OPEN_ARGUMENTS)) {
-		if (decode_bitmap4(xdr, res->oa_share_access, ARRAY_SIZE(res->oa_share_access)) < 0)
-			return -EIO;
-		if (decode_bitmap4(xdr, res->oa_share_deny, ARRAY_SIZE(res->oa_share_deny)) < 0)
-			return -EIO;
-		if (decode_bitmap4(xdr, res->oa_share_access_want, ARRAY_SIZE(res->oa_share_access_want)) < 0)
-			return -EIO;
-		if (decode_bitmap4(xdr, res->oa_open_claim, ARRAY_SIZE(res->oa_open_claim)) < 0)
-			return -EIO;
-		if (decode_bitmap4(xdr, res->oa_createmode, ARRAY_SIZE(res->oa_createmode)) < 0)
-			return -EIO;
-		bitmap[2] &= ~FATTR4_WORD2_OPEN_ARGUMENTS;
-	}
-	return 0;
-}
-
 static int verify_attr_len(struct xdr_stream *xdr, unsigned int savep, uint32_t attrlen)
 {
 	unsigned int attrwords = XDR_QUADLEN(attrlen);
@@ -4533,8 +4476,6 @@ static int decode_server_caps(struct xdr_stream *xdr, struct nfs4_server_caps_re
 		goto xdr_error;
 	if ((status = decode_attr_exclcreat_supported(xdr, bitmap,
 				res->exclcreat_bitmask)) != 0)
-		goto xdr_error;
-	if ((status = decode_attr_open_arguments(xdr, bitmap, &res->open_caps)) != 0)
 		goto xdr_error;
 	status = verify_attr_len(xdr, savep, attrlen);
 xdr_error:
@@ -5207,12 +5148,13 @@ static int decode_space_limit(struct xdr_stream *xdr,
 }
 
 static int decode_rw_delegation(struct xdr_stream *xdr,
-		struct nfs4_open_delegation *res)
+		uint32_t delegation_type,
+		struct nfs_openres *res)
 {
 	__be32 *p;
 	int status;
 
-	status = decode_delegation_stateid(xdr, &res->stateid);
+	status = decode_delegation_stateid(xdr, &res->delegation);
 	if (unlikely(status))
 		return status;
 	p = xdr_inline_decode(xdr, 4);
@@ -5220,57 +5162,52 @@ static int decode_rw_delegation(struct xdr_stream *xdr,
 		return -EIO;
 	res->do_recall = be32_to_cpup(p);
 
-	switch (res->open_delegation_type) {
+	switch (delegation_type) {
 	case NFS4_OPEN_DELEGATE_READ:
-	case NFS4_OPEN_DELEGATE_READ_ATTRS_DELEG:
-		res->type = FMODE_READ;
+		res->delegation_type = FMODE_READ;
 		break;
 	case NFS4_OPEN_DELEGATE_WRITE:
-	case NFS4_OPEN_DELEGATE_WRITE_ATTRS_DELEG:
-		res->type = FMODE_WRITE|FMODE_READ;
+		res->delegation_type = FMODE_WRITE|FMODE_READ;
 		if (decode_space_limit(xdr, &res->pagemod_limit) < 0)
 				return -EIO;
 	}
 	return decode_ace(xdr, NULL);
 }
 
-static int decode_no_delegation(struct xdr_stream *xdr,
-		struct nfs4_open_delegation *res)
+static int decode_no_delegation(struct xdr_stream *xdr, struct nfs_openres *res)
 {
 	__be32 *p;
+	uint32_t why_no_delegation;
 
 	p = xdr_inline_decode(xdr, 4);
 	if (unlikely(!p))
 		return -EIO;
-	res->why_no_delegation = be32_to_cpup(p);
-	switch (res->why_no_delegation) {
+	why_no_delegation = be32_to_cpup(p);
+	switch (why_no_delegation) {
 		case WND4_CONTENTION:
 		case WND4_RESOURCE:
-			p = xdr_inline_decode(xdr, 4);
-			if (unlikely(!p))
-				return -EIO;
-			res->will_notify = be32_to_cpup(p);
+			xdr_inline_decode(xdr, 4);
+			/* Ignore for now */
 	}
 	return 0;
 }
 
-static int decode_delegation(struct xdr_stream *xdr,
-		struct nfs4_open_delegation *res)
+static int decode_delegation(struct xdr_stream *xdr, struct nfs_openres *res)
 {
 	__be32 *p;
+	uint32_t delegation_type;
 
 	p = xdr_inline_decode(xdr, 4);
 	if (unlikely(!p))
 		return -EIO;
-	res->open_delegation_type = be32_to_cpup(p);
-	switch (res->open_delegation_type) {
+	delegation_type = be32_to_cpup(p);
+	res->delegation_type = 0;
+	switch (delegation_type) {
 	case NFS4_OPEN_DELEGATE_NONE:
 		return 0;
 	case NFS4_OPEN_DELEGATE_READ:
 	case NFS4_OPEN_DELEGATE_WRITE:
-	case NFS4_OPEN_DELEGATE_READ_ATTRS_DELEG:
-	case NFS4_OPEN_DELEGATE_WRITE_ATTRS_DELEG:
-		return decode_rw_delegation(xdr, res);
+		return decode_rw_delegation(xdr, delegation_type, res);
 	case NFS4_OPEN_DELEGATE_NONE_EXT:
 		return decode_no_delegation(xdr, res);
 	}
@@ -5311,7 +5248,7 @@ static int decode_open(struct xdr_stream *xdr, struct nfs_openres *res)
 	for (; i < NFS4_BITMAP_SIZE; i++)
 		res->attrset[i] = 0;
 
-	return decode_delegation(xdr, &res->delegation);
+	return decode_delegation(xdr, res);
 xdr_error:
 	dprintk("%s: Bitmap too large! Length = %u\n", __func__, bmlen);
 	return -EIO;
@@ -5541,11 +5478,6 @@ static int decode_setattr(struct xdr_stream *xdr)
 	if (decode_bitmap4(xdr, NULL, 0) >= 0)
 		return 0;
 	return -EIO;
-}
-
-static int decode_delegattr(struct xdr_stream *xdr)
-{
-	return decode_setattr(xdr);
 }
 
 static int decode_setclientid(struct xdr_stream *xdr, struct nfs4_setclientid_res *res)
@@ -7117,12 +7049,6 @@ static int nfs4_xdr_dec_delegreturn(struct rpc_rqst *rqstp,
 	if (res->lr_res) {
 		status = decode_layoutreturn(xdr, res->lr_res);
 		res->lr_ret = status;
-		if (status)
-			goto out;
-	}
-	if (res->sattr_res) {
-		status = decode_delegattr(xdr);
-		res->sattr_ret = status;
 		if (status)
 			goto out;
 	}

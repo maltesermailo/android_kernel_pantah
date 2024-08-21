@@ -1336,7 +1336,10 @@ got:
 		}
 	}
 
-	ext4_update_inode_fsync_trans(handle, inode, 1);
+	if (ext4_handle_valid(handle)) {
+		ei->i_sync_tid = handle->h_transaction->t_tid;
+		ei->i_datasync_tid = handle->h_transaction->t_tid;
+	}
 
 	err = ext4_mark_inode_dirty(handle, inode);
 	if (err) {

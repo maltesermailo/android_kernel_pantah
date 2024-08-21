@@ -431,5 +431,4 @@ static struct platform_driver uctrl_driver = {
 
 module_platform_driver(uctrl_driver);
 
-MODULE_DESCRIPTION("Tadpole TS102 Microcontroller driver");
 MODULE_LICENSE("GPL");
