@@ -20,7 +20,6 @@
 #include <linux/module.h>
 #include <linux/init.h>
 #include <linux/async.h>
-#include <linux/cleanup.h>
 #include <linux/delay.h>
 #include <linux/pm.h>
 #include <linux/bitops.h>
@@ -324,9 +323,9 @@ static inline struct snd_soc_dapm_widget *dapm_cnew_widget(
 	const struct snd_soc_dapm_widget *_widget,
 	const char *prefix)
 {
-	struct snd_soc_dapm_widget *w __free(kfree) = kmemdup(_widget,
-							      sizeof(*_widget),
-							      GFP_KERNEL);
+	struct snd_soc_dapm_widget *w;
+
+	w = kmemdup(_widget, sizeof(*_widget), GFP_KERNEL);
 	if (!w)
 		return NULL;
 
@@ -334,18 +333,20 @@ static inline struct snd_soc_dapm_widget *dapm_cnew_widget(
 		w->name = kasprintf(GFP_KERNEL, "%s %s", prefix, _widget->name);
 	else
 		w->name = kstrdup_const(_widget->name, GFP_KERNEL);
-	if (!w->name)
+	if (!w->name) {
+		kfree(w);
 		return NULL;
+	}
 
 	if (_widget->sname) {
 		w->sname = kstrdup_const(_widget->sname, GFP_KERNEL);
 		if (!w->sname) {
 			kfree_const(w->name);
+			kfree(w);
 			return NULL;
 		}
 	}
-
-	return_ptr(w);
+	return w;
 }
 
 struct dapm_kcontrol_data {
@@ -3856,7 +3857,7 @@ EXPORT_SYMBOL_GPL(snd_soc_dapm_new_control);
  */
 int snd_soc_dapm_new_controls(struct snd_soc_dapm_context *dapm,
 	const struct snd_soc_dapm_widget *widget,
-	unsigned int num)
+	int num)
 {
 	int i;
 	int ret = 0;
@@ -3882,10 +3883,11 @@ snd_soc_dai_link_event_pre_pmu(struct snd_soc_dapm_widget *w,
 	struct snd_soc_dapm_path *path;
 	struct snd_soc_dai *source, *sink;
 	struct snd_soc_pcm_runtime *rtd = snd_soc_substream_to_rtd(substream);
+	struct snd_pcm_hw_params *params = NULL;
 	const struct snd_soc_pcm_stream *config = NULL;
 	struct snd_pcm_runtime *runtime = NULL;
 	unsigned int fmt;
-	int ret;
+	int ret = 0;
 
 	/*
 	 * NOTE
@@ -3896,14 +3898,15 @@ snd_soc_dai_link_event_pre_pmu(struct snd_soc_dapm_widget *w,
 	 * stuff that increases stack usage.
 	 * So, we use kzalloc()/kfree() for params in this function.
 	 */
-	struct snd_pcm_hw_params *params __free(kfree) = kzalloc(sizeof(*params),
-								 GFP_KERNEL);
+	params = kzalloc(sizeof(*params), GFP_KERNEL);
 	if (!params)
 		return -ENOMEM;
 
 	runtime = kzalloc(sizeof(*runtime), GFP_KERNEL);
-	if (!runtime)
-		return -ENOMEM;
+	if (!runtime) {
+		ret = -ENOMEM;
+		goto out;
+	}
 
 	substream->runtime = runtime;
 
@@ -3913,7 +3916,7 @@ snd_soc_dai_link_event_pre_pmu(struct snd_soc_dapm_widget *w,
 
 		ret = snd_soc_dai_startup(source, substream);
 		if (ret < 0)
-			return ret;
+			goto out;
 
 		snd_soc_dai_activate(source, substream->stream);
 	}
@@ -3924,7 +3927,7 @@ snd_soc_dai_link_event_pre_pmu(struct snd_soc_dapm_widget *w,
 
 		ret = snd_soc_dai_startup(sink, substream);
 		if (ret < 0)
-			return ret;
+			goto out;
 
 		snd_soc_dai_activate(sink, substream->stream);
 	}
@@ -3939,14 +3942,16 @@ snd_soc_dai_link_event_pre_pmu(struct snd_soc_dapm_widget *w,
 	config = rtd->dai_link->c2c_params + rtd->c2c_params_select;
 	if (!config) {
 		dev_err(w->dapm->dev, "ASoC: link config missing\n");
-		return -EINVAL;
+		ret = -EINVAL;
+		goto out;
 	}
 
 	/* Be a little careful as we don't want to overflow the mask array */
 	if (!config->formats) {
 		dev_warn(w->dapm->dev, "ASoC: Invalid format was specified\n");
 
-		return -EINVAL;
+		ret = -EINVAL;
+		goto out;
 	}
 
 	fmt = ffs(config->formats) - 1;
@@ -3967,7 +3972,7 @@ snd_soc_dai_link_event_pre_pmu(struct snd_soc_dapm_widget *w,
 
 		ret = snd_soc_dai_hw_params(source, substream, params);
 		if (ret < 0)
-			return ret;
+			goto out;
 
 		dapm_update_dai_unlocked(substream, params, source);
 	}
@@ -3978,7 +3983,7 @@ snd_soc_dai_link_event_pre_pmu(struct snd_soc_dapm_widget *w,
 
 		ret = snd_soc_dai_hw_params(sink, substream, params);
 		if (ret < 0)
-			return ret;
+			goto out;
 
 		dapm_update_dai_unlocked(substream, params, sink);
 	}
@@ -3988,7 +3993,11 @@ snd_soc_dai_link_event_pre_pmu(struct snd_soc_dapm_widget *w,
 	runtime->channels = params_channels(params);
 	runtime->rate = params_rate(params);
 
-	return 0;
+out:
+	/* see above NOTE */
+	kfree(params);
+
+	return ret;
 }
 
 static int snd_soc_dai_link_event(struct snd_soc_dapm_widget *w,

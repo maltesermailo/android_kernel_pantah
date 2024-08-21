@@ -592,8 +592,6 @@ struct ufs_dev_info {
 	enum ufs_rtc_time rtc_type;
 	time64_t rtc_time_baseline;
 	u32 rtc_update_period;
-
-	u8 rtt_cap; /* bDeviceRTTCap */
 };
 
 /*

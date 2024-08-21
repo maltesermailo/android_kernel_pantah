@@ -10,8 +10,6 @@
 #include "iommu-priv.h"
 
 static DEFINE_MUTEX(iommu_sva_lock);
-static struct iommu_domain *iommu_sva_domain_alloc(struct device *dev,
-						   struct mm_struct *mm);
 
 /* Allocate a PASID for the mm within range (inclusive) */
 static struct iommu_mm_data *iommu_alloc_mm_data(struct mm_struct *mm, struct device *dev)
@@ -293,8 +291,8 @@ static int iommu_sva_iopf_handler(struct iopf_group *group)
 	return 0;
 }
 
-static struct iommu_domain *iommu_sva_domain_alloc(struct device *dev,
-						   struct mm_struct *mm)
+struct iommu_domain *iommu_sva_domain_alloc(struct device *dev,
+					    struct mm_struct *mm)
 {
 	const struct iommu_ops *ops = dev_iommu_ops(dev);
 	struct iommu_domain *domain;

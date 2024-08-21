@@ -220,6 +220,4 @@ static struct platform_driver clk_mt8188_infra_ao_drv = {
 	},
 };
 module_platform_driver(clk_mt8188_infra_ao_drv);
-
-MODULE_DESCRIPTION("MediaTek MT8188 infracfg clocks driver");
 MODULE_LICENSE("GPL");

@@ -277,25 +277,15 @@ acpi_evaluate_integer(acpi_handle handle,
 
 EXPORT_SYMBOL(acpi_evaluate_integer);
 
-int acpi_get_local_u64_address(acpi_handle handle, u64 *addr)
-{
-	acpi_status status;
-
-	status = acpi_evaluate_integer(handle, METHOD_NAME__ADR, NULL, addr);
-	if (ACPI_FAILURE(status))
-		return -ENODATA;
-	return 0;
-}
-EXPORT_SYMBOL(acpi_get_local_u64_address);
-
 int acpi_get_local_address(acpi_handle handle, u32 *addr)
 {
-	u64 adr;
-	int ret;
+	unsigned long long adr;
+	acpi_status status;
 
-	ret = acpi_get_local_u64_address(handle, &adr);
-	if (ret < 0)
-		return ret;
+	status = acpi_evaluate_integer(handle, METHOD_NAME__ADR, NULL, &adr);
+	if (ACPI_FAILURE(status))
+		return -ENODATA;
+
 	*addr = (u32)adr;
 	return 0;
 }

@@ -984,7 +984,7 @@ int bnxt_qplib_create_qp(struct bnxt_qplib_res *res, struct bnxt_qplib_qp *qp)
 	u16 nsge;
 
 	if (res->dattr)
-		qp->is_host_msn_tbl = _is_host_msn_table(res->dattr->dev_cap_flags2);
+		qp->dev_cap_flags = res->dattr->dev_cap_flags;
 
 	sq->dbinfo.flags = 0;
 	bnxt_qplib_rcfw_cmd_prep((struct cmdq_base *)&req,
@@ -1002,7 +1002,7 @@ int bnxt_qplib_create_qp(struct bnxt_qplib_res *res, struct bnxt_qplib_qp *qp)
 			 sizeof(struct sq_psn_search_ext) :
 			 sizeof(struct sq_psn_search);
 
-		if (qp->is_host_msn_tbl) {
+		if (BNXT_RE_HW_RETX(qp->dev_cap_flags)) {
 			psn_sz = sizeof(struct sq_msn_search);
 			qp->msn = 0;
 		}
@@ -1016,7 +1016,7 @@ int bnxt_qplib_create_qp(struct bnxt_qplib_res *res, struct bnxt_qplib_qp *qp)
 	hwq_attr.aux_depth = psn_sz ? bnxt_qplib_set_sq_size(sq, qp->wqe_mode)
 				    : 0;
 	/* Update msn tbl size */
-	if (qp->is_host_msn_tbl && psn_sz) {
+	if (BNXT_RE_HW_RETX(qp->dev_cap_flags) && psn_sz) {
 		hwq_attr.aux_depth = roundup_pow_of_two(bnxt_qplib_set_sq_size(sq, qp->wqe_mode));
 		qp->msn_tbl_sz = hwq_attr.aux_depth;
 		qp->msn = 0;
@@ -1637,7 +1637,7 @@ static void bnxt_qplib_fill_psn_search(struct bnxt_qplib_qp *qp,
 	if (!swq->psn_search)
 		return;
 	/* Handle MSN differently on cap flags  */
-	if (qp->is_host_msn_tbl) {
+	if (BNXT_RE_HW_RETX(qp->dev_cap_flags)) {
 		bnxt_qplib_fill_msn_search(qp, wqe, swq);
 		return;
 	}
@@ -1819,7 +1819,7 @@ int bnxt_qplib_post_send(struct bnxt_qplib_qp *qp,
 	}
 
 	swq = bnxt_qplib_get_swqe(sq, &wqe_idx);
-	bnxt_qplib_pull_psn_buff(qp, sq, swq, qp->is_host_msn_tbl);
+	bnxt_qplib_pull_psn_buff(qp, sq, swq, BNXT_RE_HW_RETX(qp->dev_cap_flags));
 
 	idx = 0;
 	swq->slot_idx = hwq->prod;
@@ -2009,7 +2009,7 @@ int bnxt_qplib_post_send(struct bnxt_qplib_qp *qp,
 		rc = -EINVAL;
 		goto done;
 	}
-	if (!qp->is_host_msn_tbl || msn_update) {
+	if (!BNXT_RE_HW_RETX(qp->dev_cap_flags) || msn_update) {
 		swq->next_psn = sq->psn & BTH_PSN_MASK;
 		bnxt_qplib_fill_psn_search(qp, wqe, swq);
 	}

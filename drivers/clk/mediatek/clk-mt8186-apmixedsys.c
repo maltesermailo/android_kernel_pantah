@@ -192,6 +192,4 @@ static struct platform_driver clk_mt8186_apmixed_drv = {
 	},
 };
 module_platform_driver(clk_mt8186_apmixed_drv);
-
-MODULE_DESCRIPTION("MediaTek MT8186 apmixedsys clocks driver");
 MODULE_LICENSE("GPL");

@@ -61,6 +61,4 @@ static struct platform_driver clk_mt8365_vdec_drv = {
 	},
 };
 module_platform_driver(clk_mt8365_vdec_drv);
-
-MODULE_DESCRIPTION("MediaTek MT8365 Video Decoders clocks driver");
 MODULE_LICENSE("GPL");

@@ -5946,8 +5946,9 @@ static unsigned int mergeable_min_buf_len(struct virtnet_info *vi, struct virtqu
 
 static int virtnet_find_vqs(struct virtnet_info *vi)
 {
-	struct virtqueue_info *vqs_info;
+	vq_callback_t **callbacks;
 	struct virtqueue **vqs;
+	const char **names;
 	int ret = -ENOMEM;
 	int total_vqs;
 	bool *ctx;
@@ -5964,9 +5965,12 @@ static int virtnet_find_vqs(struct virtnet_info *vi)
 	vqs = kcalloc(total_vqs, sizeof(*vqs), GFP_KERNEL);
 	if (!vqs)
 		goto err_vq;
-	vqs_info = kcalloc(total_vqs, sizeof(*vqs_info), GFP_KERNEL);
-	if (!vqs_info)
-		goto err_vqs_info;
+	callbacks = kmalloc_array(total_vqs, sizeof(*callbacks), GFP_KERNEL);
+	if (!callbacks)
+		goto err_callback;
+	names = kmalloc_array(total_vqs, sizeof(*names), GFP_KERNEL);
+	if (!names)
+		goto err_names;
 	if (!vi->big_packets || vi->mergeable_rx_bufs) {
 		ctx = kcalloc(total_vqs, sizeof(*ctx), GFP_KERNEL);
 		if (!ctx)
@@ -5977,22 +5981,24 @@ static int virtnet_find_vqs(struct virtnet_info *vi)
 
 	/* Parameters for control virtqueue, if any */
 	if (vi->has_cvq) {
-		vqs_info[total_vqs - 1].name = "control";
+		callbacks[total_vqs - 1] = NULL;
+		names[total_vqs - 1] = "control";
 	}
 
 	/* Allocate/initialize parameters for send/receive virtqueues */
 	for (i = 0; i < vi->max_queue_pairs; i++) {
-		vqs_info[rxq2vq(i)].callback = skb_recv_done;
-		vqs_info[txq2vq(i)].callback = skb_xmit_done;
+		callbacks[rxq2vq(i)] = skb_recv_done;
+		callbacks[txq2vq(i)] = skb_xmit_done;
 		sprintf(vi->rq[i].name, "input.%u", i);
 		sprintf(vi->sq[i].name, "output.%u", i);
-		vqs_info[rxq2vq(i)].name = vi->rq[i].name;
-		vqs_info[txq2vq(i)].name = vi->sq[i].name;
+		names[rxq2vq(i)] = vi->rq[i].name;
+		names[txq2vq(i)] = vi->sq[i].name;
 		if (ctx)
-			vqs_info[rxq2vq(i)].ctx = true;
+			ctx[rxq2vq(i)] = true;
 	}
 
-	ret = virtio_find_vqs(vi->vdev, total_vqs, vqs, vqs_info, NULL);
+	ret = virtio_find_vqs_ctx(vi->vdev, total_vqs, vqs, callbacks,
+				  names, ctx, NULL);
 	if (ret)
 		goto err_find;
 
@@ -6014,8 +6020,10 @@ static int virtnet_find_vqs(struct virtnet_info *vi)
 err_find:
 	kfree(ctx);
 err_ctx:
-	kfree(vqs_info);
-err_vqs_info:
+	kfree(names);
+err_names:
+	kfree(callbacks);
+err_callback:
 	kfree(vqs);
 err_vq:
 	return ret;

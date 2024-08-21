@@ -1777,28 +1777,13 @@ static struct qmc_chan *qmc_chan_get_from_qmc(struct device_node *qmc_np, unsign
 	return qmc_chan;
 }
 
-int qmc_chan_count_phandles(struct device_node *np, const char *phandles_name)
-{
-	int count;
-
-	/* phandles are fixed args phandles with one arg */
-	count = of_count_phandle_with_args(np, phandles_name, NULL);
-	if (count < 0)
-		return count;
-
-	return count / 2;
-}
-EXPORT_SYMBOL(qmc_chan_count_phandles);
-
-struct qmc_chan *qmc_chan_get_byphandles_index(struct device_node *np,
-					       const char *phandles_name,
-					       int index)
+struct qmc_chan *qmc_chan_get_byphandle(struct device_node *np, const char *phandle_name)
 {
 	struct of_phandle_args out_args;
 	struct qmc_chan *qmc_chan;
 	int ret;
 
-	ret = of_parse_phandle_with_fixed_args(np, phandles_name, 1, index,
+	ret = of_parse_phandle_with_fixed_args(np, phandle_name, 1, 0,
 					       &out_args);
 	if (ret < 0)
 		return ERR_PTR(ret);
@@ -1812,7 +1797,7 @@ struct qmc_chan *qmc_chan_get_byphandles_index(struct device_node *np,
 	of_node_put(out_args.np);
 	return qmc_chan;
 }
-EXPORT_SYMBOL(qmc_chan_get_byphandles_index);
+EXPORT_SYMBOL(qmc_chan_get_byphandle);
 
 struct qmc_chan *qmc_chan_get_bychild(struct device_node *np)
 {
@@ -1842,10 +1827,9 @@ static void devm_qmc_chan_release(struct device *dev, void *res)
 	qmc_chan_put(*qmc_chan);
 }
 
-struct qmc_chan *devm_qmc_chan_get_byphandles_index(struct device *dev,
-						    struct device_node *np,
-						    const char *phandles_name,
-						    int index)
+struct qmc_chan *devm_qmc_chan_get_byphandle(struct device *dev,
+					     struct device_node *np,
+					     const char *phandle_name)
 {
 	struct qmc_chan *qmc_chan;
 	struct qmc_chan **dr;
@@ -1854,7 +1838,7 @@ struct qmc_chan *devm_qmc_chan_get_byphandles_index(struct device *dev,
 	if (!dr)
 		return ERR_PTR(-ENOMEM);
 
-	qmc_chan = qmc_chan_get_byphandles_index(np, phandles_name, index);
+	qmc_chan = qmc_chan_get_byphandle(np, phandle_name);
 	if (!IS_ERR(qmc_chan)) {
 		*dr = qmc_chan;
 		devres_add(dev, dr);
@@ -1864,7 +1848,7 @@ struct qmc_chan *devm_qmc_chan_get_byphandles_index(struct device *dev,
 
 	return qmc_chan;
 }
-EXPORT_SYMBOL(devm_qmc_chan_get_byphandles_index);
+EXPORT_SYMBOL(devm_qmc_chan_get_byphandle);
 
 struct qmc_chan *devm_qmc_chan_get_bychild(struct device *dev,
 					   struct device_node *np)

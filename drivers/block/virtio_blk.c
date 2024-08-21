@@ -964,7 +964,8 @@ static int init_vq(struct virtio_blk *vblk)
 {
 	int err;
 	unsigned short i;
-	struct virtqueue_info *vqs_info;
+	vq_callback_t **callbacks;
+	const char **names;
 	struct virtqueue **vqs;
 	unsigned short num_vqs;
 	unsigned short num_poll_vqs;
@@ -1001,26 +1002,28 @@ static int init_vq(struct virtio_blk *vblk)
 	if (!vblk->vqs)
 		return -ENOMEM;
 
-	vqs_info = kcalloc(num_vqs, sizeof(*vqs_info), GFP_KERNEL);
+	names = kmalloc_array(num_vqs, sizeof(*names), GFP_KERNEL);
+	callbacks = kmalloc_array(num_vqs, sizeof(*callbacks), GFP_KERNEL);
 	vqs = kmalloc_array(num_vqs, sizeof(*vqs), GFP_KERNEL);
-	if (!vqs_info || !vqs) {
+	if (!names || !callbacks || !vqs) {
 		err = -ENOMEM;
 		goto out;
 	}
 
 	for (i = 0; i < num_vqs - num_poll_vqs; i++) {
-		vqs_info[i].callback = virtblk_done;
+		callbacks[i] = virtblk_done;
 		snprintf(vblk->vqs[i].name, VQ_NAME_LEN, "req.%u", i);
-		vqs_info[i].name = vblk->vqs[i].name;
+		names[i] = vblk->vqs[i].name;
 	}
 
 	for (; i < num_vqs; i++) {
+		callbacks[i] = NULL;
 		snprintf(vblk->vqs[i].name, VQ_NAME_LEN, "req_poll.%u", i);
-		vqs_info[i].name = vblk->vqs[i].name;
+		names[i] = vblk->vqs[i].name;
 	}
 
 	/* Discover virtqueues and write information to configuration.  */
-	err = virtio_find_vqs(vdev, num_vqs, vqs, vqs_info, &desc);
+	err = virtio_find_vqs(vdev, num_vqs, vqs, callbacks, names, &desc);
 	if (err)
 		goto out;
 
@@ -1032,7 +1035,8 @@ static int init_vq(struct virtio_blk *vblk)
 
 out:
 	kfree(vqs);
-	kfree(vqs_info);
+	kfree(callbacks);
+	kfree(names);
 	if (err)
 		kfree(vblk->vqs);
 	return err;

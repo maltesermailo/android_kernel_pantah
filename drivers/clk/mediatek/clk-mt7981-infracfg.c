@@ -204,6 +204,4 @@ static struct platform_driver clk_mt7981_infracfg_drv = {
 	},
 };
 module_platform_driver(clk_mt7981_infracfg_drv);
-
-MODULE_DESCRIPTION("MediaTek MT7981 infracfg clocks driver");
 MODULE_LICENSE("GPL");

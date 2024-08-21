@@ -106,6 +106,4 @@ static struct platform_driver clk_mt6779_mm_drv = {
 };
 
 module_platform_driver(clk_mt6779_mm_drv);
-
-MODULE_DESCRIPTION("MediaTek MT6779 MultiMedia mdp/ddp clocks driver");
 MODULE_LICENSE("GPL");

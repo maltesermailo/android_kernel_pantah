@@ -100,7 +100,6 @@ static struct platform_driver clk_mt8188_wpe_drv = {
 		.of_match_table = of_match_clk_mt8188_wpe,
 	},
 };
-module_platform_driver(clk_mt8188_wpe_drv);
 
-MODULE_DESCRIPTION("MediaTek MT8188 Warp Engine clocks driver");
+module_platform_driver(clk_mt8188_wpe_drv);
 MODULE_LICENSE("GPL");

@@ -45,7 +45,6 @@ static struct platform_driver clk_mt8188_ccu_drv = {
 		.of_match_table = of_match_clk_mt8188_ccu,
 	},
 };
-module_platform_driver(clk_mt8188_ccu_drv);
 
-MODULE_DESCRIPTION("MediaTek MT8188 Camera Control Unit clocks driver");
+module_platform_driver(clk_mt8188_ccu_drv);
 MODULE_LICENSE("GPL");

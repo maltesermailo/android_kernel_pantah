@@ -894,6 +894,4 @@ static struct platform_driver clk_mt8167_drv = {
 	},
 };
 module_platform_driver(clk_mt8167_drv);
-
-MODULE_DESCRIPTION("MediaTek MTì8167 main clocks driver");
 MODULE_LICENSE("GPL");

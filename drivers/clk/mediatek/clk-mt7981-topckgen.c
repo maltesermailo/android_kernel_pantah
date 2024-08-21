@@ -420,6 +420,4 @@ static struct platform_driver clk_mt7981_topckgen_drv = {
 	},
 };
 module_platform_driver(clk_mt7981_topckgen_drv);
-
-MODULE_DESCRIPTION("MediaTek MT7981 top clock generators driver");
 MODULE_LICENSE("GPL");

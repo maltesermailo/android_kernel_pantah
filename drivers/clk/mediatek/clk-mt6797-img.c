@@ -50,6 +50,4 @@ static struct platform_driver clk_mt6797_img_drv = {
 	},
 };
 module_platform_driver(clk_mt6797_img_drv);
-
-MODULE_DESCRIPTION("MediaTek MT6797 imgsys clocks driver");
 MODULE_LICENSE("GPL");

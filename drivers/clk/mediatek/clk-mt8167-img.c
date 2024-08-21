@@ -53,6 +53,4 @@ static struct platform_driver clk_mt8167_imgsys_drv = {
 	},
 };
 module_platform_driver(clk_mt8167_imgsys_drv);
-
-MODULE_DESCRIPTION("MediaTek MT8167 imgsys clocks driver");
 MODULE_LICENSE("GPL");

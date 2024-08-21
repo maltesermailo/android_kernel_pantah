@@ -76,6 +76,4 @@ static struct platform_driver clk_mt2712_bdp_drv = {
 	},
 };
 module_platform_driver(clk_mt2712_bdp_drv);
-
-MODULE_DESCRIPTION("MediaTek MT2712 BDP clocks driver");
 MODULE_LICENSE("GPL");

@@ -61,6 +61,4 @@ static struct platform_driver clk_mt8167_audsys_drv = {
 	},
 };
 module_platform_driver(clk_mt8167_audsys_drv);
-
-MODULE_DESCRIPTION("MediaTek MT8167 audio clocks driver");
 MODULE_LICENSE("GPL");

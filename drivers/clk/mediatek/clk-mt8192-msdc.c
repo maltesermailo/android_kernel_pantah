@@ -63,6 +63,4 @@ static struct platform_driver clk_mt8192_msdc_drv = {
 	},
 };
 module_platform_driver(clk_mt8192_msdc_drv);
-
-MODULE_DESCRIPTION("MediaTek MT8192 MMC/SD Controller clocks driver");
 MODULE_LICENSE("GPL");

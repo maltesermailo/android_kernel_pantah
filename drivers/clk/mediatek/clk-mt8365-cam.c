@@ -55,6 +55,4 @@ static struct platform_driver clk_mt8365_cam_drv = {
 	},
 };
 module_platform_driver(clk_mt8365_cam_drv);
-
-MODULE_DESCRIPTION("MediaTek MT8365 Camera clocks driver");
 MODULE_LICENSE("GPL");

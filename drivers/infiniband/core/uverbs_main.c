@@ -1114,8 +1114,7 @@ static int ib_uverbs_add_one(struct ib_device *device)
 	struct ib_uverbs_device *uverbs_dev;
 	int ret;
 
-	if (!device->ops.alloc_ucontext ||
-	    device->type == RDMA_DEVICE_TYPE_SMI)
+	if (!device->ops.alloc_ucontext)
 		return -EOPNOTSUPP;
 
 	uverbs_dev = kzalloc(sizeof(*uverbs_dev), GFP_KERNEL);

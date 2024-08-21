@@ -597,13 +597,18 @@ static void tas2781_hda_remove_controls(struct tas2781_hda *tas_hda)
 {
 	struct hda_codec *codec = tas_hda->priv->codec;
 
-	snd_ctl_remove(codec->card, tas_hda->dsp_prog_ctl);
-	snd_ctl_remove(codec->card, tas_hda->dsp_conf_ctl);
+	if (tas_hda->dsp_prog_ctl)
+		snd_ctl_remove(codec->card, tas_hda->dsp_prog_ctl);
+
+	if (tas_hda->dsp_conf_ctl)
+		snd_ctl_remove(codec->card, tas_hda->dsp_conf_ctl);
 
 	for (int i = ARRAY_SIZE(tas_hda->snd_ctls) - 1; i >= 0; i--)
-		snd_ctl_remove(codec->card, tas_hda->snd_ctls[i]);
+		if (tas_hda->snd_ctls[i])
+			snd_ctl_remove(codec->card, tas_hda->snd_ctls[i]);
 
-	snd_ctl_remove(codec->card, tas_hda->prof_ctl);
+	if (tas_hda->prof_ctl)
+		snd_ctl_remove(codec->card, tas_hda->prof_ctl);
 }
 
 static void tasdev_fw_ready(const struct firmware *fmw, void *context)
@@ -701,20 +706,20 @@ static int tas2781_hda_bind(struct device *dev, struct device *master,
 	void *master_data)
 {
 	struct tas2781_hda *tas_hda = dev_get_drvdata(dev);
-	struct hda_component_parent *parent = master_data;
-	struct hda_component *comp;
+	struct hda_component *comps = master_data;
 	struct hda_codec *codec;
 	unsigned int subid;
 	int ret;
 
-	comp = hda_component_from_index(parent, tas_hda->priv->index);
-	if (!comp)
+	if (!comps || tas_hda->priv->index < 0 ||
+		tas_hda->priv->index >= HDA_MAX_COMPONENTS)
 		return -EINVAL;
 
-	if (comp->dev)
+	comps = &comps[tas_hda->priv->index];
+	if (comps->dev)
 		return -EBUSY;
 
-	codec = parent->codec;
+	codec = comps->codec;
 	subid = codec->core.subsystem_id >> 16;
 
 	switch (subid) {
@@ -728,13 +733,13 @@ static int tas2781_hda_bind(struct device *dev, struct device *master,
 
 	pm_runtime_get_sync(dev);
 
-	comp->dev = dev;
+	comps->dev = dev;
 
-	strscpy(comp->name, dev_name(dev), sizeof(comp->name));
+	strscpy(comps->name, dev_name(dev), sizeof(comps->name));
 
 	ret = tascodec_init(tas_hda->priv, codec, THIS_MODULE, tasdev_fw_ready);
 	if (!ret)
-		comp->playback_hook = tas2781_hda_playback_hook;
+		comps->playback_hook = tas2781_hda_playback_hook;
 
 	pm_runtime_mark_last_busy(dev);
 	pm_runtime_put_autosuspend(dev);
@@ -746,14 +751,13 @@ static void tas2781_hda_unbind(struct device *dev,
 	struct device *master, void *master_data)
 {
 	struct tas2781_hda *tas_hda = dev_get_drvdata(dev);
-	struct hda_component_parent *parent = master_data;
-	struct hda_component *comp;
+	struct hda_component *comps = master_data;
+	comps = &comps[tas_hda->priv->index];
 
-	comp = hda_component_from_index(parent, tas_hda->priv->index);
-	if (comp && (comp->dev == dev)) {
-		comp->dev = NULL;
-		memset(comp->name, 0, sizeof(comp->name));
-		comp->playback_hook = NULL;
+	if (comps->dev == dev) {
+		comps->dev = NULL;
+		memset(comps->name, 0, sizeof(comps->name));
+		comps->playback_hook = NULL;
 	}
 
 	tas2781_hda_remove_controls(tas_hda);
@@ -830,7 +834,7 @@ static int tas2781_hda_i2c_probe(struct i2c_client *clt)
 	pm_runtime_set_active(tas_hda->dev);
 	pm_runtime_enable(tas_hda->dev);
 
-	tasdevice_reset(tas_hda->priv);
+	tas2781_reset(tas_hda->priv);
 
 	ret = component_add(tas_hda->dev, &tas2781_hda_comp_ops);
 	if (ret) {
@@ -925,7 +929,7 @@ static int tas2781_system_resume(struct device *dev)
 		tas_hda->priv->tasdevice[i].cur_prog = -1;
 		tas_hda->priv->tasdevice[i].cur_conf = -1;
 	}
-	tasdevice_reset(tas_hda->priv);
+	tas2781_reset(tas_hda->priv);
 	tasdevice_prmg_load(tas_hda->priv, tas_hda->priv->cur_prog);
 
 	/* If calibrated data occurs error, dsp will still work with default
