@@ -147,6 +147,7 @@ define_common_kernels(target_configs = {
         "kmi_symbol_list_strict_mode": False,
         "module_implicit_outs": get_gki_modules_list("arm64"),
         "make_goals": _GKI_AARCH64_MAKE_GOALS,
+        "build_gki_artifacts": True,
     },
     "kernel_aarch64_debug": {
         "kmi_symbol_list_strict_mode": False,
