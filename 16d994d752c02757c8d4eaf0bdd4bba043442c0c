@@ -141,6 +141,23 @@
       "parentUuid": "82afe348_c5e41acf",
       "revId": "16d994d752c02757c8d4eaf0bdd4bba043442c0c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5517489_567ee2ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3371323
+      },
+      "writtenOn": "2024-08-22T04:23:19Z",
+      "side": 1,
+      "message": "I am checking the default android config and there I found this CONFIG_NET_L3_MASTER_DEV is already enabled as \u003dy and IPVLAN is not dependent on this. Anyways, I am trying to disable this.\n\nKindly clarify if I am missing anything. Below is the menuconfig output:\n\n Symbol: IPVLAN [\u003dm]                                                                                                                                   │\n  │ Type  : tristate                                                                                                                                      │\n  │ Defined at drivers/net/Kconfig:200                                                                                                                    │\n  │   Prompt: IP-VLAN support                                                                                                                             │\n  │   Depends on: NETDEVICES [\u003dy] \u0026\u0026 NET_CORE [\u003dy] \u0026\u0026 INET [\u003dy] \u0026\u0026 (IPV6 [\u003dy] || !IPV6 [\u003dy])                                                              │\n  │   Location:                                                                                                                                           │\n  │     -\u003e Device Drivers                                                                                                                                 │\n  │       -\u003e Network device support (NETDEVICES [\u003dy])                                                                                                     │\n  │         -\u003e Network core driver support (NET_CORE [\u003dy])                                                                                                │\n  │ (1)       -\u003e IP-VLAN support (IPVLAN [\u003dm])                                                                                                            │\n  │                                                                                                                                                       │\n  │                                                                                                                                                       │\n  │ Symbol: IPVLAN_L3S [\u003dy]                                                                                                                               │\n  │ Type  : bool                                                                                                                                          │\n  │ Defined at drivers/net/Kconfig:194                                                                                                                    │\n  │   Depends on: NETDEVICES [\u003dy] \u0026\u0026 NET_CORE [\u003dy] \u0026\u0026 NETFILTER [\u003dy] \u0026\u0026 IPVLAN [\u003dm]                                                                       │\n  │ Selects: NET_L3_MASTER_DEV [\u003dy]",
+      "revId": "16d994d752c02757c8d4eaf0bdd4bba043442c0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
