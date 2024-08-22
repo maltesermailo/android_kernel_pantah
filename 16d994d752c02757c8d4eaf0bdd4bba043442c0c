@@ -123,6 +123,24 @@
       "parentUuid": "bc1f9435_e1ced6ea",
       "revId": "16d994d752c02757c8d4eaf0bdd4bba043442c0c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41925cd3_08bff16d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3371323
+      },
+      "writtenOn": "2024-08-22T02:45:51Z",
+      "side": 1,
+      "message": "We are using this IPVLAN driver to create virtual interfaces for actual physical interface, which can be used by apps. \nI shall try to supress that CONFIG_L3, and check if something breaks in functionality.\n\n\nKindly provide answers to my below queries:\n1. Can you please let me know, if I can enable this CONFIG_IPVLAN\u003dm and CONFIG_IF_TARGET_TTL\u003dm , inside vendor fragment file. Does fragment file overwrite the configs of gki_defconfig?\nKindly provide the documentation or steps to enable. I tried once, but it crashes on device. module gets compiled even through fragment file, but when i run command to use it, it gets crashed. \n\n2. I dont want to modify gki_defconfig for all those configs, kindly suggest how we can enable or disable the CONFIG if those CONFIG are not as per our need in gki_defconfig file. For example: if something is disabled in gki_defconfig, can I enable it for our use case. \n\n3. Can you maintain a separate gki_defconfig for all vendors?  I have seen some Qualcom CONFIG (CONFIG_**_QCOM_**) being merged in gki_defconfig and those CONFIG are not relevant for Samsung, now if we want to disable those configs, should we push the patches to Google?  But it is a kind of never-ending process, other vendors will keep adding their CONFIG in gki_defconfig, and Samsung will keep raising request to remove those.\nCan you please provide a solution for this?",
+      "parentUuid": "82afe348_c5e41acf",
+      "revId": "16d994d752c02757c8d4eaf0bdd4bba043442c0c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
