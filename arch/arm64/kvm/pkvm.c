@@ -887,6 +887,10 @@ static int pkvm_map_module_sections(struct pkvm_mod_sec_mapping *secs_map, void 
 	int i, ret;
 
 	for (i = 0; i < nr_secs; i++) {
+		/* Skip empty section. */
+		if (!(secs_map[i].sec->end - secs_map[i].sec->start))
+			continue;
+
 		offset = secs_map[i].sec->start - secs_map[0].sec->start;
 		ret = pkvm_map_module_section(&secs_map[i], hyp_va_base + offset);
 		if (ret) {
@@ -896,13 +900,6 @@ static int pkvm_map_module_sections(struct pkvm_mod_sec_mapping *secs_map, void 
 	}
 
 	return 0;
-}
-static int __pkvm_cmp_mod_sec(const void *p1, const void *p2)
-{
-	struct pkvm_mod_sec_mapping const *s1 = p1;
-	struct pkvm_mod_sec_mapping const *s2 = p2;
-
-	return s1->sec->start < s2->sec->start ? -1 : s1->sec->start > s2->sec->start;
 }
 
 int __pkvm_load_el2_module(struct module *this, unsigned long *token)
@@ -918,7 +915,7 @@ int __pkvm_load_el2_module(struct module *this, unsigned long *token)
 	void *start, *end, *hyp_va;
 	struct arm_smccc_res res;
 	kvm_nvhe_reloc_t *endrel;
-	int ret, i, secs_first;
+	int ret, i;
 	size_t offset, size;
 
 	/* The pKVM hyp only allows loading before it is fully initialized */
@@ -937,13 +934,7 @@ int __pkvm_load_el2_module(struct module *this, unsigned long *token)
 		return -ENODEV;
 	}
 
-	/* Missing or empty module sections are placed first */
-	sort(secs_map, ARRAY_SIZE(secs_map), sizeof(secs_map[0]), __pkvm_cmp_mod_sec, NULL);
-	for (secs_first = 0; secs_first < ARRAY_SIZE(secs_map); secs_first++) {
-		start = secs_map[secs_first].sec->start;
-		if (start)
-			break;
-	}
+	start = secs_map[0].sec->start;
 	end = secs_map[ARRAY_SIZE(secs_map) - 1].sec->end;
 	size = end - start;
 
@@ -983,8 +974,7 @@ int __pkvm_load_el2_module(struct module *this, unsigned long *token)
 	if (ret)
 		kvm_err("Failed to init module events: %d\n", ret);
 
-	ret = pkvm_map_module_sections(secs_map + secs_first, hyp_va,
-				       ARRAY_SIZE(secs_map) - secs_first);
+	ret = pkvm_map_module_sections(secs_map, hyp_va, ARRAY_SIZE(secs_map));
 	if (ret) {
 		kvm_err("Failed to map EL2 module page: %d\n", ret);
 		module_put(this);
