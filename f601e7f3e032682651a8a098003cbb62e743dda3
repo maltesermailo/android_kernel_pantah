@@ -16,6 +16,29 @@
       "message": "Looks okay to me, but I wonder why it was implemented the more complex way in the first place. Perhaps I\u0027m missing something?",
       "revId": "f601e7f3e032682651a8a098003cbb62e743dda3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67740fce_0fbe7d0c",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 937,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2024-08-27T09:45:41Z",
+      "side": 1,
+      "message": "This will force the text section to be loaded first, but if that\u0027s at odds with the kernel section loading then I think it will break the relocs.",
+      "range": {
+        "startLine": 937,
+        "startChar": 0,
+        "endLine": 937,
+        "endChar": 32
+      },
+      "revId": "f601e7f3e032682651a8a098003cbb62e743dda3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
