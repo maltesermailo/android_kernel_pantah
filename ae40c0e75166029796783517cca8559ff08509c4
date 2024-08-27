@@ -81,6 +81,30 @@
       },
       "revId": "ae40c0e75166029796783517cca8559ff08509c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c7dff1d_5cc3960f",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-08-27T15:59:41Z",
+      "side": 1,
+      "message": "Because in this case `unsigned int expected_order` is defined at the beginning of the block (starts at line 607), so all C compilers will be fine with that. At the line 643 there is no new block, that\u0027s why we had to define `allowed_order` at the line 638 with `__maybe_unused`. Here we don\u0027t need to do that.",
+      "parentUuid": "aa80c078_b9b93629",
+      "range": {
+        "startLine": 595,
+        "startChar": 1,
+        "endLine": 595,
+        "endChar": 44
+      },
+      "revId": "ae40c0e75166029796783517cca8559ff08509c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
