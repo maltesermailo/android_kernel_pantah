@@ -861,7 +861,22 @@ static void stage2_unmap_put_pte(const struct kvm_pgtable_visit_ctx *ctx,
 	 * valid. Depending on the system support, defer the TLB maintenance
 	 * for the same until the entire unmap walk is completed.
 	 */
+<<<<<<< HEAD   (d247f8 Merge branch 'android15-6.6' into android15-6.6-lts)
 	stage2_unmap_clear_pte(ctx, mmu);
+=======
+	if (kvm_pte_valid(ctx->old)) {
+		kvm_clear_pte(ctx->ptep);
+
+		if (kvm_pte_table(ctx->old, ctx->level)) {
+			kvm_call_hyp(__kvm_tlb_flush_vmid_ipa, mmu, ctx->addr,
+				     0);
+		} else if (!stage2_unmap_defer_tlb_flush(pgt)) {
+			kvm_call_hyp(__kvm_tlb_flush_vmid_ipa, mmu, ctx->addr,
+				     ctx->level);
+		}
+	}
+
+>>>>>>> BRANCH (4c1a2d Linux 6.6.47)
 	mm_ops->put_page(ctx->ptep);
 }
 
