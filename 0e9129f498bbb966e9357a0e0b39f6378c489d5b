@@ -34,6 +34,24 @@
       "parentUuid": "211105e5_edd35d7d",
       "revId": "0e9129f498bbb966e9357a0e0b39f6378c489d5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbf3100b_24327707",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2024-08-28T16:37:56Z",
+      "side": 1,
+      "message": "\u003e Are you sure we still support cgroups v1?\n\nYes, definitely. cpu, cpuset, blkio are all mandatory v1 cgroup controllers on Android. These are all used by system_server (and a few other services) to set limits based on application state. memcg is currently v1 and optional, but will soon become v2 and optional. Freezer is the only cgroup v2 functionality currently used.",
+      "parentUuid": "103bd114_b25e3435",
+      "revId": "0e9129f498bbb966e9357a0e0b39f6378c489d5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
