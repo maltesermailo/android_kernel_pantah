@@ -52,6 +52,24 @@
       "parentUuid": "d0866f68_55ef3cab",
       "revId": "d2b5da0ec34770636e822cd8579e7cd4f85855ca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1bb99d2_c25c8042",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1953271
+      },
+      "writtenOn": "2024-08-29T11:00:55Z",
+      "side": 1,
+      "message": "Yes this is a manual process for now.\n\nThis is actually a special case since we want to export all the symbols provided by `kunit.ko`, rather than just exporting symbols which are required by a kunit test.\n\nI think this list should be generatable, but I will have to look into it separately since it might require us to add a script to find out all symbols exported by a module.",
+      "parentUuid": "7bdd5351_16f146e5",
+      "revId": "d2b5da0ec34770636e822cd8579e7cd4f85855ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
