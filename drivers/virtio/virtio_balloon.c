@@ -6,7 +6,6 @@
  *  Copyright 2008 Rusty Russell IBM Corporation
  */
 
-#include "linux/dev_printk.h"
 #include <linux/virtio.h>
 #include <linux/virtio_balloon.h>
 #include <linux/swap.h>
@@ -27,14 +26,8 @@
  * Balloon device works in 4K page units.  So each page is pointed to by
  * multiple balloon pages.  All memory counters in this driver are in balloon
  * page units.
- *
- * With hugepage allocation, we need to treat 1 page == 1 balloon page at least
- * for x86 which is the current prototype target.
  */
-#define VIRTIO_BALLOON_PAGES_PER_PAGE 1
-/*
 #define VIRTIO_BALLOON_PAGES_PER_PAGE (unsigned)(PAGE_SIZE >> VIRTIO_BALLOON_PFN_SHIFT)
-*/
 #define VIRTIO_BALLOON_ARRAY_PFNS_MAX 256
 /* Maximum number of (4k) pages to deflate on OOM notifications. */
 #define VIRTIO_BALLOON_OOM_NR_PAGES 256
@@ -133,9 +126,6 @@ struct virtio_balloon {
 	/* Free page reporting device */
 	struct virtqueue *reporting_vq;
 	struct page_reporting_dev_info pr_dev_info;
-
-	/* order to use for hugepage allocation, 0 => 4k, 1 => 8k, 2 => 16k, etc. */
-	unsigned int hugepage_order;
 };
 
 static const struct virtio_device_id id_table[] = {
@@ -214,9 +204,8 @@ static void set_page_pfns(struct virtio_balloon *vb,
 	 * Note that the first pfn points at start of the page.
 	 */
 	for (i = 0; i < VIRTIO_BALLOON_PAGES_PER_PAGE; i++)
-		pfns[i] = cpu_to_virtio32(
-			vb->vdev,
-			(page_to_balloon_pfn(page) >> vb->hugepage_order) + i);
+		pfns[i] = cpu_to_virtio32(vb->vdev,
+					  page_to_balloon_pfn(page) + i);
 }
 
 static unsigned fill_balloon(struct virtio_balloon *vb, size_t num)
@@ -231,7 +220,7 @@ static unsigned fill_balloon(struct virtio_balloon *vb, size_t num)
 
 	for (num_pfns = 0; num_pfns < num;
 	     num_pfns += VIRTIO_BALLOON_PAGES_PER_PAGE) {
-		struct page *page = balloon_page_alloc(vb->hugepage_order);
+		struct page *page = balloon_page_alloc();
 
 		if (!page) {
 			dev_info_ratelimited(&vb->vdev->dev,
@@ -256,7 +245,7 @@ static unsigned fill_balloon(struct virtio_balloon *vb, size_t num)
 		vb->num_pages += VIRTIO_BALLOON_PAGES_PER_PAGE;
 		if (!virtio_has_feature(vb->vdev,
 					VIRTIO_BALLOON_F_DEFLATE_ON_OOM))
-			adjust_managed_page_count(page, -(1 << vb->hugepage_order));
+			adjust_managed_page_count(page, -1);
 		vb->num_pfns += VIRTIO_BALLOON_PAGES_PER_PAGE;
 	}
 
@@ -277,7 +266,7 @@ static void release_pages_balloon(struct virtio_balloon *vb,
 	list_for_each_entry_safe(page, next, pages, lru) {
 		if (!virtio_has_feature(vb->vdev,
 					VIRTIO_BALLOON_F_DEFLATE_ON_OOM))
-			adjust_managed_page_count(page, (1 << vb->hugepage_order));
+			adjust_managed_page_count(page, 1);
 		list_del(&page->lru);
 		put_page(page); /* balloon reference */
 	}
@@ -487,14 +476,17 @@ static void update_balloon_stats_func(struct work_struct *work)
 	stats_handle_request(vb);
 }
 
-static s64 update_balloon_size_internal(struct virtio_balloon *vb)
+static void update_balloon_size_func(struct work_struct *work)
 {
+	struct virtio_balloon *vb;
 	s64 diff;
 
+	vb = container_of(work, struct virtio_balloon,
+			  update_balloon_size_work);
 	diff = towards_target(vb);
 
 	if (!diff)
-		return diff;
+		return;
 
 	if (diff > 0)
 		diff -= fill_balloon(vb, diff);
@@ -502,17 +494,7 @@ static s64 update_balloon_size_internal(struct virtio_balloon *vb)
 		diff += leak_balloon(vb, -diff);
 	update_balloon_size(vb);
 
-	return diff;
-}
-
-static void update_balloon_size_func(struct work_struct *work)
-{
-	struct virtio_balloon *vb;
-
-	vb = container_of(work, struct virtio_balloon,
-			  update_balloon_size_work);
-
-	if (update_balloon_size_internal(vb))
+	if (diff)
 		queue_work(system_freezable_wq, work);
 }
 
@@ -923,10 +905,6 @@ static int virtballoon_probe(struct virtio_device *vdev)
 	mutex_init(&vb->balloon_lock);
 	init_waitqueue_head(&vb->acked);
 	vb->vdev = vdev;
-	/* Set the hugepage_order provided by the hypervisor */
-	virtio_cread_le(vb->vdev, struct virtio_balloon_config, hugepage_order,
-			&vb->hugepage_order);
-	dev_info_ratelimited(&vdev->dev, "allocation using order=%d", vb->hugepage_order);
 
 	balloon_devinfo_init(&vb->vb_dev_info);
 
@@ -1026,23 +1004,8 @@ static int virtballoon_probe(struct virtio_device *vdev)
 
 	virtio_device_ready(vdev);
 
-	if (towards_target(vb)) {
-		s64 diff = -1;
-		do {
-			s64 new_diff = update_balloon_size_internal(vb);
-			/* The BUG below will be triggered if the balloon couldn't make any
-			 * progress with the initial inflation.
-			 * Explicit crash because there shouldn't be any failure at this stage.
-			 * The reasons this BUG could trigger if:
-			 *  * the initial target is too aggressive
-			 *  * virtio-balloon is not being loaded at the 1st stage init
-			 * Both are considered programming bugs and should be fixed.
-			 */
-			BUG_ON(new_diff == diff);
-			diff = new_diff;
-		} while (diff != 0);
-	}
-	dev_info_ratelimited(&vdev->dev, "initial allocation done");
+	if (towards_target(vb))
+		virtballoon_changed(vdev);
 	return 0;
 
 out_unregister_oom:
