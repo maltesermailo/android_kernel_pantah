@@ -13,6 +13,7 @@
  * Please use one of the three interfaces below.
  */
 extern u64 sched_clock(void);
+extern u64 get_dup_sched_clock(void);
 
 #if defined(CONFIG_ARCH_WANTS_NO_INSTR) || defined(CONFIG_GENERIC_SCHED_CLOCK)
 extern u64 sched_clock_noinstr(void);
@@ -35,6 +36,8 @@ extern void sched_clock_init(void);
 #ifndef CONFIG_HAVE_UNSTABLE_SCHED_CLOCK
 static inline void sched_clock_tick(void)
 {
+	if (smp_processor_id() == 0)	/* update dup sched clock*/
+		sched_clock();
 }
 
 static inline void clear_sched_clock_stable(void)

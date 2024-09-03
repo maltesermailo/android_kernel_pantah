@@ -101,6 +101,7 @@ unsigned long long noinstr sched_clock_noinstr(void)
 	return res;
 }
 
+#ifdef CONFIG_HAVE_UNSTABLE_SCHED_CLOCK
 unsigned long long notrace sched_clock(void)
 {
 	unsigned long long ns;
@@ -109,6 +110,44 @@ unsigned long long notrace sched_clock(void)
 	preempt_enable_notrace();
 	return ns;
 }
+
+unsigned long long notrace get_dup_sched_clock(void)
+{
+	return sched_clock();
+}
+#else
+static u64 dup_sched_clock;
+static inline void update_dup_sched_clock(u64 *maxval, u64 newval)
+{
+	u64 oldval;
+
+	do {
+		oldval = READ_ONCE(*maxval);
+		if (unlikely(oldval >= newval))
+			break;
+	} while (cmpxchg(maxval, oldval, newval) != oldval);
+}
+
+unsigned long long notrace sched_clock(void)
+{
+	unsigned long long ns;
+
+	preempt_disable_notrace();
+	ns = sched_clock_noinstr();
+	update_dup_sched_clock(&dup_sched_clock, ns);
+	preempt_enable_notrace();
+	return ns;
+}
+
+unsigned long long notrace get_dup_sched_clock(void)
+{
+	if (likely(dup_sched_clock))
+		return dup_sched_clock;
+
+	return sched_clock();
+}
+#endif
+EXPORT_SYMBOL_GPL(get_dup_sched_clock);
 
 /*
  * Updating the data required to read the clock.
