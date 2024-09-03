@@ -547,3 +547,10 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_should_fault_around);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_read_fault);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_read);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_map_pages);
+<<<<<<< HEAD   (47909498d6058ee12b13bdfee22c80b73a979254 ANDROID: binder: fix minimum node priority comparison)
+||||||| BASE   (b3f67f41e42261ca5553d1eac0175746b72ab027 ANDROID: GKI: Update GKI symbol list with fwnode and v2l ent)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_tsk_need_resched_lazy);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_tsk_need_resched_lazy);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_init_adjust_zone_wmark);
+>>>>>>> CHANGE (3f6d3a4e6c22ad0c195ddb3307609c1f3d523acc ANDROID: vendor_hooks: add hook for adjusting a more suitabl)

@@ -330,6 +330,45 @@ DECLARE_HOOK(android_vh_page_cache_miss,
 		pgoff_t start, pgoff_t len,
 		pgoff_t index, bool buffer),
 	TP_ARGS(file, start, len, index, buffer));
+<<<<<<< HEAD   (47909498d6058ee12b13bdfee22c80b73a979254 ANDROID: binder: fix minimum node priority comparison)
+||||||| BASE   (b3f67f41e42261ca5553d1eac0175746b72ab027 ANDROID: GKI: Update GKI symbol list with fwnode and v2l ent)
+DECLARE_HOOK(android_vh_lru_cache_add_page_activate,
+	TP_PROTO(struct page *page, bool *bypass),
+	TP_ARGS(page, bypass));
+DECLARE_HOOK(android_vh_filemap_fault_pre_page_locked,
+	TP_PROTO(struct page *page),
+	TP_ARGS(page));
+DECLARE_HOOK(android_vh_filemap_page_mapped,
+	TP_PROTO(struct page *page),
+	TP_ARGS(page));
+DECLARE_HOOK(android_vh_zap_pte_range_page_remove_rmap,
+	TP_PROTO(struct page *page),
+	TP_ARGS(page));
+DECLARE_HOOK(android_vh_filemap_add_to_page_cache,
+	TP_PROTO(struct address_space *mapping, struct page *page,
+		pgoff_t offset),
+	TP_ARGS(mapping, page, offset));
+=======
+DECLARE_HOOK(android_vh_lru_cache_add_page_activate,
+	TP_PROTO(struct page *page, bool *bypass),
+	TP_ARGS(page, bypass));
+DECLARE_HOOK(android_vh_filemap_fault_pre_page_locked,
+	TP_PROTO(struct page *page),
+	TP_ARGS(page));
+DECLARE_HOOK(android_vh_filemap_page_mapped,
+	TP_PROTO(struct page *page),
+	TP_ARGS(page));
+DECLARE_HOOK(android_vh_zap_pte_range_page_remove_rmap,
+	TP_PROTO(struct page *page),
+	TP_ARGS(page));
+DECLARE_HOOK(android_vh_filemap_add_to_page_cache,
+	TP_PROTO(struct address_space *mapping, struct page *page,
+		pgoff_t offset),
+	TP_ARGS(mapping, page, offset));
+DECLARE_HOOK(android_vh_init_adjust_zone_wmark,
+	TP_PROTO(struct zone *zone, u64 interval),
+	TP_ARGS(zone, interval));
+>>>>>>> CHANGE (3f6d3a4e6c22ad0c195ddb3307609c1f3d523acc ANDROID: vendor_hooks: add hook for adjusting a more suitabl)
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
