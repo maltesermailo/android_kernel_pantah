@@ -34,6 +34,47 @@
       "parentUuid": "41e180b4_988147f6",
       "revId": "c516048b1949bb2984959c7634c52c6ac000507f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7fc5dd8_e8f046e3",
+        "filename": "include/trace/events/mmflags.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2024-09-04T18:00:20Z",
+      "side": 1,
+      "message": "You are missing `#define IF_HAVE_PG_OEM_RESERVED(flag,string)` here. See https://android-review.googlesource.com/c/kernel/common/+/3152197/7/include/trace/events/mmflags.h#104",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 38
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f6382779_227d5258",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/trace/events/mmflags.h",
+              "range": {
+                "startLine": 96,
+                "startChar": 0,
+                "endLine": 96,
+                "endChar": 0
+              },
+              "replacement": "#define IF_HAVE_PG_OEM_RESERVED(flag,string)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c516048b1949bb2984959c7634c52c6ac000507f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
