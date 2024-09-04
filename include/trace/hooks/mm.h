@@ -123,6 +123,10 @@ DECLARE_HOOK(android_vh_watermark_ok,
 DECLARE_HOOK(android_vh_gfp_to_alloc_flags,
 	TP_PROTO(gfp_t gfp_mask, unsigned int order, unsigned int *alloc_flags),
 	TP_ARGS(gfp_mask, order, alloc_flags));
+DECLARE_HOOK(android_vh_migration_target_bypass,
+	TP_PROTO(struct page *page, bool *bypass),
+	TP_ARGS(page, bypass));
+
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */

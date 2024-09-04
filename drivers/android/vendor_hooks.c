@@ -241,3 +241,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_reserve_highatomic_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pagetypeinfo_show);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_watermark_ok);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_gfp_to_alloc_flags);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_migration_target_bypass);
