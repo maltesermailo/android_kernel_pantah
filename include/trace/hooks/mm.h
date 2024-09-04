@@ -390,6 +390,9 @@ DECLARE_HOOK(android_vh_customize_thp_gfp_orders,
 DECLARE_HOOK(android_vh_init_adjust_zone_wmark,
 	TP_PROTO(struct zone *zone, u64 interval),
 	TP_ARGS(zone, interval));
+DECLARE_HOOK(android_vh_suitable_migration_target_bypass,
+	TP_PROTO(struct page *page, bool *bypass),
+	TP_ARGS(page, bypass));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
