@@ -14,10 +14,14 @@
 #include <linux/cred.h>
 #include <linux/errname.h>
 #include <linux/ethtool.h>
+<<<<<<< HEAD   (02da46 Merge 'android-mainline' (v6.11-rc5) into 'android-mainline-)
 #include <linux/fdtable.h>
 #include <linux/file.h>
 #include <linux/firmware.h>
 #include <linux/fs.h>
+=======
+#include <linux/firmware.h>
+>>>>>>> BRANCH (c00559 Merge tag 'v6.11-rc5' into android-mainline)
 #include <linux/jiffies.h>
 #include <linux/list_lru.h>
 #include <linux/mdio.h>

@@ -375,9 +375,14 @@ $(obj)/core.o: private skip_clippy = 1
 $(obj)/core.o: private skip_flags = -Wunreachable_pub
 $(obj)/core.o: private rustc_objcopy = $(foreach sym,$(redirect-intrinsics),--redefine-sym $(sym)=__rust$(sym))
 $(obj)/core.o: private rustc_target_flags = $(core-cfgs)
+<<<<<<< HEAD   (02da46 Merge 'android-mainline' (v6.11-rc5) into 'android-mainline-)
 $(obj)/core.o: $(RUST_LIB_SRC)/core/src/lib.rs \
     $(wildcard $(objtree)/include/config/RUSTC_VERSION_TEXT) FORCE
 	+$(call if_changed_rule,rustc_library)
+=======
+$(obj)/core.o: $(RUST_LIB_SRC)/core/src/lib.rs FORCE
+	+$(call if_changed_dep,rustc_library)
+>>>>>>> BRANCH (c00559 Merge tag 'v6.11-rc5' into android-mainline)
 ifneq ($(or $(CONFIG_X86_64),$(CONFIG_X86_32)),)
 $(obj)/core.o: scripts/target.json
 endif

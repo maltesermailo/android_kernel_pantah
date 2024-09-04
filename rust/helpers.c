@@ -23,7 +23,10 @@
 #include <kunit/test-bug.h>
 #include <linux/bug.h>
 #include <linux/build_bug.h>
+<<<<<<< HEAD   (02da46 Merge 'android-mainline' (v6.11-rc5) into 'android-mainline-)
 #include <linux/cred.h>
+=======
+>>>>>>> BRANCH (c00559 Merge tag 'v6.11-rc5' into android-mainline)
 #include <linux/device.h>
 #include <linux/err.h>
 #include <linux/errname.h>

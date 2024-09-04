@@ -31,12 +31,18 @@ pub mod arch;
 #[cfg(CONFIG_BLOCK)]
 pub mod block;
 mod build_assert;
+<<<<<<< HEAD   (02da46 Merge 'android-mainline' (v6.11-rc5) into 'android-mainline-)
 pub mod cred;
+=======
+>>>>>>> BRANCH (c00559 Merge tag 'v6.11-rc5' into android-mainline)
 pub mod device;
 pub mod error;
 #[cfg(CONFIG_RUST_FW_LOADER_ABSTRACTIONS)]
 pub mod firmware;
+<<<<<<< HEAD   (02da46 Merge 'android-mainline' (v6.11-rc5) into 'android-mainline-)
 pub mod fs;
+=======
+>>>>>>> BRANCH (c00559 Merge tag 'v6.11-rc5' into android-mainline)
 pub mod init;
 pub mod ioctl;
 #[cfg(CONFIG_KUNIT)]

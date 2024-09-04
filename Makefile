@@ -982,6 +982,7 @@ CC_FLAGS_CFI	:= -fsanitize=kcfi
 ifdef CONFIG_CFI_ICALL_NORMALIZE_INTEGERS
 	CC_FLAGS_CFI	+= -fsanitize-cfi-icall-experimental-normalize-integers
 endif
+<<<<<<< HEAD   (02da46 Merge 'android-mainline' (v6.11-rc5) into 'android-mainline-)
 ifdef CONFIG_RUST
 	# Always pass -Zsanitizer-cfi-normalize-integers as CONFIG_RUST selects
 	# CONFIG_CFI_ICALL_NORMALIZE_INTEGERS.
@@ -989,6 +990,8 @@ ifdef CONFIG_RUST
 	KBUILD_RUSTFLAGS += $(RUSTC_FLAGS_CFI)
 	export RUSTC_FLAGS_CFI
 endif
+=======
+>>>>>>> BRANCH (c00559 Merge tag 'v6.11-rc5' into android-mainline)
 KBUILD_CFLAGS	+= $(CC_FLAGS_CFI)
 export CC_FLAGS_CFI
 endif
