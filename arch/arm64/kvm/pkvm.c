@@ -816,13 +816,13 @@ unsigned long pkvm_el2_mod_kern_va(unsigned long addr)
 	struct pkvm_el2_module *mod;
 
 	list_for_each_entry(mod, &pkvm_modules, node) {
+		unsigned long hyp_va = (unsigned long)mod->hyp_va;
 		size_t len = (unsigned long)mod->sections.end -
 			     (unsigned long)mod->sections.start;
 
-		if (addr >= (unsigned long)mod->token &&
-		    addr < (unsigned long)mod->token + len)
+		if (addr >= hyp_va && addr < (hyp_va + len))
 			return (unsigned long)mod->sections.start +
-				(addr - mod->token);
+				(addr - hyp_va);
 	}
 
 	return 0;
@@ -965,12 +965,12 @@ int __pkvm_load_el2_module(struct module *this, unsigned long *token)
 	if (token)
 		*token = (unsigned long)hyp_va;
 
-	mod->token = (unsigned long)hyp_va;
+	mod->hyp_va = hyp_va;
 	mod->sections.start = start;
 	mod->sections.end = end;
 
 	endrel = (void *)mod->relocs + mod->nr_relocs * sizeof(*endrel);
-	kvm_apply_hyp_module_relocations(start, hyp_va, mod->relocs, endrel);
+	kvm_apply_hyp_module_relocations(mod, mod->relocs, endrel);
 
 	/*
 	 * Exclude EL2 module sections from kmemleak before making them

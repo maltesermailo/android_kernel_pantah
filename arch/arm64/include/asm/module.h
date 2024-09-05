@@ -27,12 +27,12 @@ struct pkvm_el2_module {
 	unsigned int nr_hyp_events;
 	kvm_nvhe_reloc_t *relocs;
 	struct list_head node;
-	unsigned long token;
+	void *hyp_va;
 	unsigned int nr_relocs;
 	int (*init)(const struct pkvm_module_ops *ops);
 };
 
-void kvm_apply_hyp_module_relocations(void *mod_start, void *hyp_va,
+void kvm_apply_hyp_module_relocations(struct pkvm_el2_module *mod,
 				      kvm_nvhe_reloc_t *begin,
 				      kvm_nvhe_reloc_t *end);
 
