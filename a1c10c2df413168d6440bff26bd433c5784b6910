@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "195a088a_7af0d839",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3538642
+      },
+      "writtenOn": "2024-09-05T02:05:54Z",
+      "side": 1,
+      "message": "Modified",
+      "parentUuid": "3e3201e2_16b5a412",
+      "range": {
+        "startLine": 9,
+        "startChar": 1,
+        "endLine": 9,
+        "endChar": 100
+      },
+      "revId": "a1c10c2df413168d6440bff26bd433c5784b6910",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "365c5c13_24b3f98d",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-09-04T17:37:59Z",
       "side": 1,
       "message": "This will falsely claim that the memory resources of the process are released while swap cache pages are still not freed. This will result is faster but partial freeing of process\u0027 memory resources but it can also cause LMKD to kill more processes instead of waiting for all memory resources of a killed process to be released. Have you considered this side-effect?",
+      "range": {
+        "startLine": 11,
+        "startChar": 24,
+        "endLine": 11,
+        "endChar": 97
+      },
+      "revId": "a1c10c2df413168d6440bff26bd433c5784b6910",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c701c6a_5489780d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 3538642
+      },
+      "writtenOn": "2024-09-05T02:05:54Z",
+      "side": 1,
+      "message": "We use an asynchronous kworker to complete the release of swaps, which\ncan speed up the release of memory and swap entries for the exiting\nprocesses, as this can avoid the situation of delayed release caused by\na large number of runnables for the exiting processes. Especially for\nmulti exiting processes scenarios, it can also reduce the CPU resources\noccupied by multiple exiting processes.\n\nThe asynchronous kworker can release swap entries faster and no issues\nof delayed release were found.",
+      "parentUuid": "365c5c13_24b3f98d",
       "range": {
         "startLine": 11,
         "startChar": 24,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7da652db_e83be8ec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 3538642
+      },
+      "writtenOn": "2024-09-05T02:05:54Z",
+      "side": 1,
+      "message": "Solved.\nhttps://android-review.googlesource.com/c/kernel/common/+/3256396",
+      "parentUuid": "bae19019_f0fb847a",
+      "range": {
+        "startLine": 15,
+        "startChar": 11,
+        "endLine": 15,
+        "endChar": 52
+      },
+      "revId": "a1c10c2df413168d6440bff26bd433c5784b6910",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be1f7297_ff088fbc",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-09-04T17:40:20Z",
       "side": 1,
       "message": "How are `trace_android_vh_oom_swapmem_gather_init()`/`trace_android_vh_oom_swapmem_gather_finish()` different from `trace_android_vh_swapmem_gather_init()`/`trace_android_vh_swapmem_gather_finish()` ?",
+      "range": {
+        "startLine": 531,
+        "startChar": 1,
+        "endLine": 531,
+        "endChar": 41
+      },
+      "revId": "a1c10c2df413168d6440bff26bd433c5784b6910",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a9d42ac_08d3c1c5",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 3538642
+      },
+      "writtenOn": "2024-09-05T02:05:54Z",
+      "side": 1,
+      "message": "Same.",
+      "parentUuid": "be1f7297_ff088fbc",
       "range": {
         "startLine": 531,
         "startChar": 1,
