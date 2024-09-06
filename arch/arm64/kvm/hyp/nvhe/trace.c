@@ -445,6 +445,7 @@ err:
 	return ret;
 }
 
+<<<<<<< HEAD   (268505 ANDROID: GKI: Update symbol list for Amlogic)
 static int rb_setup_bpage_backing(struct hyp_trace_pack *pack)
 {
 	unsigned long start = kern_hyp_va(pack->backing.start);
@@ -509,8 +510,11 @@ int __pkvm_rb_update_footers(int cpu)
 }
 
 int __pkvm_rb_swap_reader_page(int cpu)
+=======
+int __pkvm_swap_reader_tracing(unsigned int cpu)
+>>>>>>> CHANGE (85f95e ANDROID: KVM: arm64: Fix CPU type for swap_reader_tracing HV)
 {
-	struct hyp_rb_per_cpu *cpu_buffer = per_cpu_ptr(&trace_rb, cpu);
+	struct hyp_rb_per_cpu *cpu_buffer;
 	int ret = 0;
 
 	if (cpu >= hyp_nr_cpus)

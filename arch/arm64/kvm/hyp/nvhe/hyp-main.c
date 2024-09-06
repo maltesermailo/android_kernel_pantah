@@ -1174,7 +1174,11 @@ static void handle___pkvm_iommu_pm_notify(struct kvm_cpu_context *host_ctxt)
 
 static void handle___pkvm_iommu_finalize(struct kvm_cpu_context *host_ctxt)
 {
+<<<<<<< HEAD   (268505 ANDROID: GKI: Update symbol list for Amlogic)
 	DECLARE_REG(int, err, host_ctxt, 1);
+=======
+	DECLARE_REG(unsigned int, cpu, host_ctxt, 1);
+>>>>>>> CHANGE (85f95e ANDROID: KVM: arm64: Fix CPU type for swap_reader_tracing HV)
 
 	cpu_reg(host_ctxt, 1) = __pkvm_iommu_finalize(err);
 }
