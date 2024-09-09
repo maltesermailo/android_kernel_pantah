@@ -369,9 +369,6 @@ static struct file *memfd_filp_create(const char *name, size_t len, unsigned int
 	if (error < 0)
 		return ERR_PTR(error);
 
-	if (len > MFD_NAME_MAX_LEN + 1)
-		return -EINVAL;
-
 	file_name = memfd_create_name(name, len);
 	if (!file_name)
 		return ERR_PTR(-ENOMEM);
