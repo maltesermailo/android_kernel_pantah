@@ -270,6 +270,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_folio_look_around_ref);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_look_around);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_look_around_migrate_folio);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_test_clear_look_around_ref);
+<<<<<<< HEAD   (7e57c2 ANDROID: vendor_hooks: add hook in __mutex_unlock_slowpath())
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_el1_undef);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_el1_bti);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_el1_fpac);
@@ -277,6 +278,40 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_handle_bad_stack);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_panic_unhandled);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_arm64_serror_panic);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_sea);
+||||||| BASE
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_perf_huristic_ctrl);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_send_command_post_change);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_abort_success_ctrl);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_compl_rsp_check_done);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_err_handler);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_err_check_ctrl);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_err_print_ctrl);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_proc_transaction);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_new_ref);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_del_ref);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_logbuf_pr_cont);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_slowpath);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_slowpath_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_slowpath_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmap_region);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_throttle_direct_reclaim_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_perf_huristic_ctrl);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_send_command_post_change);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_abort_success_ctrl);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_compl_rsp_check_done);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_err_handler);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_err_check_ctrl);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_err_print_ctrl);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_proc_transaction);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_new_ref);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_binder_del_ref);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_logbuf_pr_cont);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_slowpath);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_slowpath_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_slowpath_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mmap_region);
+>>>>>>> CHANGE (5596cd ANDROID: vendor hooks: skip mem reclaim throttle to speed up)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tcp_write_timeout_estab_retrans);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_tcp_connect);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_inet_csk_clone_lock);

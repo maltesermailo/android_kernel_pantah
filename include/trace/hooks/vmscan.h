@@ -18,9 +18,30 @@ DECLARE_RESTRICTED_HOOK(android_rvh_set_balance_anon_file_reclaim,
 DECLARE_HOOK(android_vh_check_folio_look_around_ref,
 	TP_PROTO(struct folio *folio, int *skip),
 	TP_ARGS(folio, skip));
+<<<<<<< HEAD   (7e57c2 ANDROID: vendor_hooks: add hook in __mutex_unlock_slowpath())
 DECLARE_HOOK(android_vh_tune_swappiness,
 	TP_PROTO(int *swappiness),
 	TP_ARGS(swappiness));
+||||||| BASE
+DECLARE_HOOK(android_vh_do_shrink_slab,
+	TP_PROTO(struct shrinker *shrinker, long *freeable),
+	TP_ARGS(shrinker, freeable));
+DECLARE_HOOK(android_vh_vmscan_kswapd_done,
+	TP_PROTO(int node_id, unsigned int highest_zoneidx, unsigned int alloc_order,
+	        unsigned int reclaim_order),
+	TP_ARGS(node_id, highest_zoneidx, alloc_order, reclaim_order));
+=======
+DECLARE_HOOK(android_vh_do_shrink_slab,
+	TP_PROTO(struct shrinker *shrinker, long *freeable),
+	TP_ARGS(shrinker, freeable));
+DECLARE_HOOK(android_vh_throttle_direct_reclaim_bypass,
+	TP_PROTO(bool *bypass),
+	TP_ARGS(bypass));
+DECLARE_HOOK(android_vh_vmscan_kswapd_done,
+	TP_PROTO(int node_id, unsigned int highest_zoneidx, unsigned int alloc_order,
+	        unsigned int reclaim_order),
+	TP_ARGS(node_id, highest_zoneidx, alloc_order, reclaim_order));
+>>>>>>> CHANGE (5596cd ANDROID: vendor hooks: skip mem reclaim throttle to speed up)
 DECLARE_HOOK(android_vh_shrink_folio_list,
 	TP_PROTO(struct folio *folio, bool dirty, bool writeback,
 		bool *activate, bool *keep),
