@@ -936,6 +936,7 @@ nfsd(void *vrqstp)
 
 	current->fs->umask = 0;
 
+<<<<<<< HEAD   (99ada5 Revert "bpf, sockmap: Convert schedule_work into delayed_wor)
 	/*
 	 * thread is spawned with all signals set to SIG_IGN, re-enable
 	 * the ones that will bring down the thread
@@ -947,6 +948,9 @@ nfsd(void *vrqstp)
 
 	nfsdstats.th_cnt++;
 	mutex_unlock(&nfsd_mutex);
+=======
+	atomic_inc(&nfsdstats.th_cnt);
+>>>>>>> BRANCH (c61bd2 Linux 5.15.160)
 
 	set_freezable();
 
@@ -970,11 +974,15 @@ nfsd(void *vrqstp)
 		validate_process_creds();
 	}
 
+<<<<<<< HEAD   (99ada5 Revert "bpf, sockmap: Convert schedule_work into delayed_wor)
 	/* Clear signals before calling svc_exit_thread() */
 	flush_signals(current);
 
 	mutex_lock(&nfsd_mutex);
 	nfsdstats.th_cnt --;
+=======
+	atomic_dec(&nfsdstats.th_cnt);
+>>>>>>> BRANCH (c61bd2 Linux 5.15.160)
 
 out:
 	rqstp->rq_server = NULL;
