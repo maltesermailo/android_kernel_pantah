@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae4e6745_364c8a55",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1004907
+      },
+      "writtenOn": "2024-09-10T16:19:04Z",
+      "side": 1,
+      "message": "Define \"upstream\". If you mean AOSP then, yes, we should enable the module there.\n\nThis is just a config change, though, so mainline Linux wouldn\u0027t need it. The code is all in mainline:\n```\n$ git grep \"config GOOGLE_MEMCONSOLE_COREBOOT\\|config GOOGLE_COREBOOT_TABLE\\|config GOOGLE_FIRMWARE\" linux/master \nlinux/master:drivers/firmware/google/Kconfig:menuconfig GOOGLE_FIRMWARE\nlinux/master:drivers/firmware/google/Kconfig:config GOOGLE_COREBOOT_TABLE\nlinux/master:drivers/firmware/google/Kconfig:config GOOGLE_MEMCONSOLE_COREBOOT\n```",
+      "parentUuid": "3ad1c4e0_df44183d",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 57
+      },
+      "revId": "cf82322e1f25b53701e3ce9320bd7bb3831020be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "934e366e_13ed2578",
