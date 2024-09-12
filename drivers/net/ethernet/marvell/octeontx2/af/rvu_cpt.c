@@ -632,7 +632,9 @@ int rvu_mbox_handler_cpt_inline_ipsec_cfg(struct rvu *rvu,
 	return ret;
 }
 
-static bool is_valid_offset(struct rvu *rvu, struct cpt_rd_wr_reg_msg *req)
+static bool validate_and_update_reg_offset(struct rvu *rvu,
+					   struct cpt_rd_wr_reg_msg *req,
+					   u64 *reg_offset)
 {
 	u64 offset = req->reg_offset;
 	int blkaddr, num_lfs, lf;
@@ -662,6 +664,11 @@ static bool is_valid_offset(struct rvu *rvu, struct cpt_rd_wr_reg_msg *req)
 				req->hdr.pcifunc, lf);
 		if (lf < 0)
 			return false;
+
+		/* Translate local LF's offset to global CPT LF's offset to
+		 * access LFX register.
+		 */
+		*reg_offset = (req->reg_offset & 0xFF000) + (lf << 3);
 
 		return true;
 	} else if (!(req->hdr.pcifunc & RVU_PFVF_FUNC_MASK)) {
@@ -696,6 +703,12 @@ int rvu_mbox_handler_cpt_rd_wr_register(struct rvu *rvu,
 					struct cpt_rd_wr_reg_msg *req,
 					struct cpt_rd_wr_reg_msg *rsp)
 {
+<<<<<<< HEAD   (b26f2f UPSTREAM: USB: media: uvcvideo: Skip parsing frames of type )
+||||||| BASE
+	u64 offset = req->reg_offset;
+=======
+	u64 offset = req->reg_offset;
+>>>>>>> CHANGE (4cdfe8 Merge tag 'android15-6.6.50_r00' into android15-6.6)
 	int blkaddr;
 
 	blkaddr = validate_and_get_cpt_blkaddr(req->blkaddr);
@@ -707,6 +720,24 @@ int rvu_mbox_handler_cpt_rd_wr_register(struct rvu *rvu,
 	    !is_cpt_vf(rvu, req->hdr.pcifunc))
 		return CPT_AF_ERR_ACCESS_DENIED;
 
+<<<<<<< HEAD   (b26f2f UPSTREAM: USB: media: uvcvideo: Skip parsing frames of type )
+||||||| BASE
+	if (!is_valid_offset(rvu, req))
+		return CPT_AF_ERR_ACCESS_DENIED;
+
+	/* Translate local LF used by VFs to global CPT LF */
+	lf = rvu_get_lf(rvu, &rvu->hw->block[blkaddr], req->hdr.pcifunc,
+			(offset & 0xFFF) >> 3);
+
+	/* Translate local LF's offset to global CPT LF's offset */
+	offset &= 0xFF000;
+	offset += lf << 3;
+
+=======
+	if (!validate_and_update_reg_offset(rvu, req, &offset))
+		return CPT_AF_ERR_ACCESS_DENIED;
+
+>>>>>>> CHANGE (4cdfe8 Merge tag 'android15-6.6.50_r00' into android15-6.6)
 	rsp->reg_offset = req->reg_offset;
 	rsp->ret_val = req->ret_val;
 	rsp->is_write = req->is_write;

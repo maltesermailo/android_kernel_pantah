@@ -3765,7 +3765,13 @@ static struct rockchip_pin_bank rk3328_pin_banks[] = {
 	PIN_BANK_IOMUX_FLAGS(0, 32, "gpio0", 0, 0, 0, 0),
 	PIN_BANK_IOMUX_FLAGS(1, 32, "gpio1", 0, 0, 0, 0),
 	PIN_BANK_IOMUX_FLAGS(2, 32, "gpio2", 0,
+<<<<<<< HEAD   (b26f2f UPSTREAM: USB: media: uvcvideo: Skip parsing frames of type )
 			     IOMUX_WIDTH_3BIT,
+||||||| BASE
+			     0,
+=======
+			     IOMUX_WIDTH_2BIT,
+>>>>>>> CHANGE (4cdfe8 Merge tag 'android15-6.6.50_r00' into android15-6.6)
 			     IOMUX_WIDTH_3BIT,
 			     0),
 	PIN_BANK_IOMUX_FLAGS(3, 32, "gpio3",

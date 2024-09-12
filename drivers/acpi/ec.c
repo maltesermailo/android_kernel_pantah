@@ -1487,6 +1487,8 @@ static int ec_install_handlers(struct acpi_ec *ec, struct acpi_device *device,
 	acpi_ec_start(ec, false);
 
 	if (!test_bit(EC_FLAGS_EC_HANDLER_INSTALLED, &ec->flags)) {
+		acpi_handle scope_handle = ec == first_ec ? ACPI_ROOT_OBJECT : ec->handle;
+
 		acpi_ec_enter_noirq(ec);
 		status = acpi_install_address_space_handler_no_reg(ec->handle,
 								   ACPI_ADR_SPACE_EC,
@@ -1501,7 +1503,16 @@ static int ec_install_handlers(struct acpi_ec *ec, struct acpi_device *device,
 	}
 
 	if (call_reg && !test_bit(EC_FLAGS_EC_REG_CALLED, &ec->flags)) {
+<<<<<<< HEAD   (b26f2f UPSTREAM: USB: media: uvcvideo: Skip parsing frames of type )
 		acpi_execute_reg_methods(ec->handle, ACPI_ADR_SPACE_EC);
+||||||| BASE
+		acpi_execute_reg_methods(scope_handle, ACPI_ADR_SPACE_EC);
+		if (scope_handle != ec->handle)
+			acpi_execute_orphan_reg_method(ec->handle, ACPI_ADR_SPACE_EC);
+
+=======
+		acpi_execute_reg_methods(ec->handle, ACPI_UINT32_MAX, ACPI_ADR_SPACE_EC);
+>>>>>>> CHANGE (4cdfe8 Merge tag 'android15-6.6.50_r00' into android15-6.6)
 		set_bit(EC_FLAGS_EC_REG_CALLED, &ec->flags);
 	}
 
@@ -1707,6 +1718,12 @@ static void acpi_ec_remove(struct acpi_device *device)
 		ec_remove_handlers(ec);
 		acpi_ec_free(ec);
 	}
+}
+
+void acpi_ec_register_opregions(struct acpi_device *adev)
+{
+	if (first_ec && first_ec->handle != adev->handle)
+		acpi_execute_reg_methods(adev->handle, 1, ACPI_ADR_SPACE_EC);
 }
 
 static acpi_status

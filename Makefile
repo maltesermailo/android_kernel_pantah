@@ -1,7 +1,13 @@
 # SPDX-License-Identifier: GPL-2.0
 VERSION = 6
 PATCHLEVEL = 6
+<<<<<<< HEAD   (b26f2f UPSTREAM: USB: media: uvcvideo: Skip parsing frames of type )
 SUBLEVEL = 30
+||||||| BASE
+SUBLEVEL = 46
+=======
+SUBLEVEL = 50
+>>>>>>> CHANGE (4cdfe8 Merge tag 'android15-6.6.50_r00' into android15-6.6)
 EXTRAVERSION =
 NAME = Hurr durr I'ma ninja sloth
 

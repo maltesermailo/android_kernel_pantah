@@ -872,6 +872,7 @@ static void ata_gen_passthru_sense(struct ata_queued_cmd *qc)
 	} else {
 		/*
 		 * ATA PASS-THROUGH INFORMATION AVAILABLE
+<<<<<<< HEAD   (b26f2f UPSTREAM: USB: media: uvcvideo: Skip parsing frames of type )
 		 * Always in descriptor format sense.
 		 */
 		scsi_build_sense(cmd, 1, RECOVERED_ERROR, 0, 0x1D);
@@ -931,6 +932,20 @@ static void ata_gen_passthru_sense(struct ata_queued_cmd *qc)
 		desc[9] = tf->lbal;
 		desc[10] = tf->lbam;
 		desc[11] = tf->lbah;
+||||||| BASE
+=======
+		 *
+		 * Note: we are supposed to call ata_scsi_set_sense(), which
+		 * respects the D_SENSE bit, instead of unconditionally
+		 * generating the sense data in descriptor format. However,
+		 * because hdparm, hddtemp, and udisks incorrectly assume sense
+		 * data in descriptor format, without even looking at the
+		 * RESPONSE CODE field in the returned sense data (to see which
+		 * format the returned sense data is in), we are stuck with
+		 * being bug compatible with older kernels.
+		 */
+		scsi_build_sense(cmd, 1, RECOVERED_ERROR, 0, 0x1D);
+>>>>>>> CHANGE (4cdfe8 Merge tag 'android15-6.6.50_r00' into android15-6.6)
 	}
 }
 

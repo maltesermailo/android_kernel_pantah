@@ -624,8 +624,37 @@ int smb2_query_path_info(const unsigned int xid,
 		if (rc || !data->reparse_point)
 			goto out;
 
+<<<<<<< HEAD   (b26f2f UPSTREAM: USB: media: uvcvideo: Skip parsing frames of type )
 		create_options |= OPEN_REPARSE_POINT;
 		/* Failed on a symbolic link - query a reparse point info */
+||||||| BASE
+		cmds[num_cmds++] = SMB2_OP_QUERY_WSL_EA;
+		/*
+		 * Skip SMB2_OP_GET_REPARSE if symlink already parsed in create
+		 * response.
+		 */
+		if (data->reparse.tag != IO_REPARSE_TAG_SYMLINK)
+			cmds[num_cmds++] = SMB2_OP_GET_REPARSE;
+
+		oparms = CIFS_OPARMS(cifs_sb, tcon, full_path,
+				     FILE_READ_ATTRIBUTES | FILE_READ_EA,
+				     FILE_OPEN, create_options |
+				     OPEN_REPARSE_POINT, ACL_NO_MODE);
+=======
+		cmds[num_cmds++] = SMB2_OP_QUERY_WSL_EA;
+		/*
+		 * Skip SMB2_OP_GET_REPARSE if symlink already parsed in create
+		 * response.
+		 */
+		if (data->reparse.tag != IO_REPARSE_TAG_SYMLINK)
+			cmds[num_cmds++] = SMB2_OP_GET_REPARSE;
+
+		oparms = CIFS_OPARMS(cifs_sb, tcon, full_path,
+				     FILE_READ_ATTRIBUTES |
+				     FILE_READ_EA | SYNCHRONIZE,
+				     FILE_OPEN, create_options |
+				     OPEN_REPARSE_POINT, ACL_NO_MODE);
+>>>>>>> CHANGE (4cdfe8 Merge tag 'android15-6.6.50_r00' into android15-6.6)
 		cifs_get_readable_path(tcon, full_path, &cfile);
 		rc = smb2_compound_op(xid, tcon, cifs_sb, full_path,
 				      FILE_READ_ATTRIBUTES, FILE_OPEN,
@@ -886,3 +915,184 @@ smb2_set_file_info(struct inode *inode, const char *full_path,
 	cifs_put_tlink(tlink);
 	return rc;
 }
+<<<<<<< HEAD   (b26f2f UPSTREAM: USB: media: uvcvideo: Skip parsing frames of type )
+||||||| BASE
+
+struct inode *smb2_get_reparse_inode(struct cifs_open_info_data *data,
+				     struct super_block *sb,
+				     const unsigned int xid,
+				     struct cifs_tcon *tcon,
+				     const char *full_path,
+				     struct kvec *reparse_iov,
+				     struct kvec *xattr_iov)
+{
+	struct cifs_open_parms oparms;
+	struct cifs_sb_info *cifs_sb = CIFS_SB(sb);
+	struct cifsFileInfo *cfile;
+	struct inode *new = NULL;
+	struct kvec in_iov[2];
+	int cmds[2];
+	int rc;
+
+	oparms = CIFS_OPARMS(cifs_sb, tcon, full_path,
+			     SYNCHRONIZE | DELETE |
+			     FILE_READ_ATTRIBUTES |
+			     FILE_WRITE_ATTRIBUTES,
+			     FILE_CREATE,
+			     CREATE_NOT_DIR | OPEN_REPARSE_POINT,
+			     ACL_NO_MODE);
+	if (xattr_iov)
+		oparms.ea_cctx = xattr_iov;
+
+	cmds[0] = SMB2_OP_SET_REPARSE;
+	in_iov[0] = *reparse_iov;
+	in_iov[1].iov_base = data;
+	in_iov[1].iov_len = sizeof(*data);
+
+	if (tcon->posix_extensions) {
+		cmds[1] = SMB2_OP_POSIX_QUERY_INFO;
+		cifs_get_writable_path(tcon, full_path, FIND_WR_ANY, &cfile);
+		rc = smb2_compound_op(xid, tcon, cifs_sb, full_path, &oparms,
+				      in_iov, cmds, 2, cfile, NULL, NULL, NULL);
+		if (!rc) {
+			rc = smb311_posix_get_inode_info(&new, full_path,
+							 data, sb, xid);
+		}
+	} else {
+		cmds[1] = SMB2_OP_QUERY_INFO;
+		cifs_get_writable_path(tcon, full_path, FIND_WR_ANY, &cfile);
+		rc = smb2_compound_op(xid, tcon, cifs_sb, full_path, &oparms,
+				      in_iov, cmds, 2, cfile, NULL, NULL, NULL);
+		if (!rc) {
+			rc = cifs_get_inode_info(&new, full_path,
+						 data, sb, xid, NULL);
+		}
+	}
+	return rc ? ERR_PTR(rc) : new;
+}
+
+int smb2_query_reparse_point(const unsigned int xid,
+			     struct cifs_tcon *tcon,
+			     struct cifs_sb_info *cifs_sb,
+			     const char *full_path,
+			     u32 *tag, struct kvec *rsp,
+			     int *rsp_buftype)
+{
+	struct cifs_open_parms oparms;
+	struct cifs_open_info_data data = {};
+	struct cifsFileInfo *cfile;
+	struct kvec in_iov = { .iov_base = &data, .iov_len = sizeof(data), };
+	int rc;
+
+	cifs_dbg(FYI, "%s: path: %s\n", __func__, full_path);
+
+	cifs_get_readable_path(tcon, full_path, &cfile);
+	oparms = CIFS_OPARMS(cifs_sb, tcon, full_path, FILE_READ_ATTRIBUTES,
+			     FILE_OPEN, OPEN_REPARSE_POINT, ACL_NO_MODE);
+	rc = smb2_compound_op(xid, tcon, cifs_sb,
+			      full_path, &oparms, &in_iov,
+			      &(int){SMB2_OP_GET_REPARSE}, 1,
+			      cfile, NULL, NULL, NULL);
+	if (rc)
+		goto out;
+
+	*tag = data.reparse.tag;
+	*rsp = data.reparse.io.iov;
+	*rsp_buftype = data.reparse.io.buftype;
+	memset(&data.reparse.io.iov, 0, sizeof(data.reparse.io.iov));
+	data.reparse.io.buftype = CIFS_NO_BUFFER;
+out:
+	cifs_free_open_info(&data);
+	return rc;
+}
+=======
+
+struct inode *smb2_get_reparse_inode(struct cifs_open_info_data *data,
+				     struct super_block *sb,
+				     const unsigned int xid,
+				     struct cifs_tcon *tcon,
+				     const char *full_path,
+				     struct kvec *reparse_iov,
+				     struct kvec *xattr_iov)
+{
+	struct cifs_open_parms oparms;
+	struct cifs_sb_info *cifs_sb = CIFS_SB(sb);
+	struct cifsFileInfo *cfile;
+	struct inode *new = NULL;
+	struct kvec in_iov[2];
+	int cmds[2];
+	int rc;
+
+	oparms = CIFS_OPARMS(cifs_sb, tcon, full_path,
+			     SYNCHRONIZE | DELETE |
+			     FILE_READ_ATTRIBUTES |
+			     FILE_WRITE_ATTRIBUTES,
+			     FILE_CREATE,
+			     CREATE_NOT_DIR | OPEN_REPARSE_POINT,
+			     ACL_NO_MODE);
+	if (xattr_iov)
+		oparms.ea_cctx = xattr_iov;
+
+	cmds[0] = SMB2_OP_SET_REPARSE;
+	in_iov[0] = *reparse_iov;
+	in_iov[1].iov_base = data;
+	in_iov[1].iov_len = sizeof(*data);
+
+	if (tcon->posix_extensions) {
+		cmds[1] = SMB2_OP_POSIX_QUERY_INFO;
+		cifs_get_writable_path(tcon, full_path, FIND_WR_ANY, &cfile);
+		rc = smb2_compound_op(xid, tcon, cifs_sb, full_path, &oparms,
+				      in_iov, cmds, 2, cfile, NULL, NULL, NULL);
+		if (!rc) {
+			rc = smb311_posix_get_inode_info(&new, full_path,
+							 data, sb, xid);
+		}
+	} else {
+		cmds[1] = SMB2_OP_QUERY_INFO;
+		cifs_get_writable_path(tcon, full_path, FIND_WR_ANY, &cfile);
+		rc = smb2_compound_op(xid, tcon, cifs_sb, full_path, &oparms,
+				      in_iov, cmds, 2, cfile, NULL, NULL, NULL);
+		if (!rc) {
+			rc = cifs_get_inode_info(&new, full_path,
+						 data, sb, xid, NULL);
+		}
+	}
+	return rc ? ERR_PTR(rc) : new;
+}
+
+int smb2_query_reparse_point(const unsigned int xid,
+			     struct cifs_tcon *tcon,
+			     struct cifs_sb_info *cifs_sb,
+			     const char *full_path,
+			     u32 *tag, struct kvec *rsp,
+			     int *rsp_buftype)
+{
+	struct cifs_open_parms oparms;
+	struct cifs_open_info_data data = {};
+	struct cifsFileInfo *cfile;
+	struct kvec in_iov = { .iov_base = &data, .iov_len = sizeof(data), };
+	int rc;
+
+	cifs_dbg(FYI, "%s: path: %s\n", __func__, full_path);
+
+	cifs_get_readable_path(tcon, full_path, &cfile);
+	oparms = CIFS_OPARMS(cifs_sb, tcon, full_path,
+			     FILE_READ_ATTRIBUTES | FILE_READ_EA | SYNCHRONIZE,
+			     FILE_OPEN, OPEN_REPARSE_POINT, ACL_NO_MODE);
+	rc = smb2_compound_op(xid, tcon, cifs_sb,
+			      full_path, &oparms, &in_iov,
+			      &(int){SMB2_OP_GET_REPARSE}, 1,
+			      cfile, NULL, NULL, NULL);
+	if (rc)
+		goto out;
+
+	*tag = data.reparse.tag;
+	*rsp = data.reparse.io.iov;
+	*rsp_buftype = data.reparse.io.buftype;
+	memset(&data.reparse.io.iov, 0, sizeof(data.reparse.io.iov));
+	data.reparse.io.buftype = CIFS_NO_BUFFER;
+out:
+	cifs_free_open_info(&data);
+	return rc;
+}
+>>>>>>> CHANGE (4cdfe8 Merge tag 'android15-6.6.50_r00' into android15-6.6)
