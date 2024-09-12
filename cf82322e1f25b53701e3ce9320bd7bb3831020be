@@ -168,6 +168,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "82a56c89_db76a9bc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2024-09-12T13:28:03Z",
+      "side": 1,
+      "message": "\u003e Why wouldn\u0027t we make this a GKI module? There\u0027s nothing board-specific here.\n\n1. If the entire code is already in mainline, for GKI we can simply enable it as in-tree vendor module and submit ABI update when GKI branch is open. That\u0027s it.\n\n2. We can try to make it GKI modules (there would be no need to extend ABI) but then we need to convince the Android team to include that in their build system and take care of releasing it. The basic criterion is how many users we have for this module, not necessarily being hw-agnostic I guess...",
+      "parentUuid": "a60ddc94_cd985b93",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 57
+      },
+      "revId": "cf82322e1f25b53701e3ce9320bd7bb3831020be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "934e366e_13ed2578",
