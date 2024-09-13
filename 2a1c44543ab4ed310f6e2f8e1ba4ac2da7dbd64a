@@ -16,6 +16,23 @@
       "message": "Hi Yifan,\n\nNot sure you are the right reviewer but since you been helpful on https://android-review.googlesource.com/c/kernel/common/+/3265858/1 I\u0027ve added you here as well.",
       "revId": "2a1c44543ab4ed310f6e2f8e1ba4ac2da7dbd64a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68a46468_1eeaea17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-09-13T19:23:00Z",
+      "side": 1,
+      "message": "This enables a bunch of configs:\n```\nCONFIG_ARCH_MESON\u003dy\nCONFIG_MESON_SM\u003dy\nCONFIG_HW_RANDOM_MESON\u003dy\nCONFIG_PINCTRL_MESON\u003dy\nCONFIG_PINCTRL_MESON_GXBB\u003dy\nCONFIG_PINCTRL_MESON_GXL\u003dy\nCONFIG_PINCTRL_MESON8_PMX\u003dy\nCONFIG_PINCTRL_MESON_AXG\u003dy\nCONFIG_PINCTRL_MESON_AXG_PMX\u003dy\nCONFIG_PINCTRL_MESON_G12A\u003dy\nCONFIG_PINCTRL_MESON_A1\u003dy\nCONFIG_PINCTRL_MESON_S4\u003dy\nCONFIG_PINCTRL_AMLOGIC_C3\u003dy\nCONFIG_PINCTRL_AMLOGIC_T7\u003dy\nCONFIG_AMLOGIC_THERMAL\u003dy\nCONFIG_USB_DWC3_MESON_G12A\u003dy\nCONFIG_COMMON_CLK_MESON_REGMAP\u003dy\nCONFIG_COMMON_CLK_MESON_DUALDIV\u003dy\nCONFIG_COMMON_CLK_MESON_MPLL\u003dy\nCONFIG_COMMON_CLK_MESON_PLL\u003dy\nCONFIG_COMMON_CLK_MESON_VID_PLL_DIV\u003dy\nCONFIG_COMMON_CLK_MESON_VCLK\u003dy\nCONFIG_COMMON_CLK_MESON_CLKC_UTILS\u003dy\nCONFIG_COMMON_CLK_MESON_AO_CLKC\u003dy\nCONFIG_COMMON_CLK_MESON_EE_CLKC\u003dy\nCONFIG_COMMON_CLK_MESON_CPU_DYNDIV\u003dy\nCONFIG_COMMON_CLK_GXBB\u003dy\nCONFIG_COMMON_CLK_AXG\u003dy\nCONFIG_COMMON_CLK_C3_PLL\u003dy\nCONFIG_COMMON_CLK_C3_PERIPHERALS\u003dy\nCONFIG_COMMON_CLK_G12A\u003dy\nCONFIG_COMMON_CLK_S4_PLL\u003dy\nCONFIG_COMMON_CLK_S4_PERIPHERALS\u003dy\nCONFIG_MESON_CLK_MEASURE\u003dy\nCONFIG_MESON_GX_SOCINFO\u003dy\nCONFIG_MESON_GX_PM_DOMAINS\u003dy\nCONFIG_MESON_EE_PM_DOMAINS\u003dy\nCONFIG_MESON_SECURE_PM_DOMAINS\u003dy\nCONFIG_MESON_SARADC\u003dy\nCONFIG_MESON_IRQ_GPIO\u003dy\nCONFIG_RESET_MESON\u003dy\nCONFIG_PHY_MESON8B_USB2\u003dy\nCONFIG_PHY_MESON_GXL_USB2\u003dy\nCONFIG_PHY_MESON_G12A_MIPI_DPHY_ANALOG\u003dy\nCONFIG_PHY_MESON_G12A_USB2\u003dy\nCONFIG_PHY_MESON_G12A_USB3_PCIE\u003dy\nCONFIG_PHY_MESON_AXG_PCIE\u003dy\nCONFIG_PHY_MESON_AXG_MIPI_PCIE_ANALOG\u003dy\nCONFIG_PHY_MESON_AXG_MIPI_DPHY\u003dy\n```\n\nPlease file a bug for this and add a \"Bug:\" tag to the patch citing it. The bug needs to contain:\n- Impact on kernel size (text/data/bss)\n- A statement for each individual config about why it is needed (would prefer to just enable the ones needed instead of all of them)\n- For the required ones, can they be made to be tristate instead of bool?\n- A statement of why this will not impact any other partners",
+      "revId": "2a1c44543ab4ed310f6e2f8e1ba4ac2da7dbd64a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
