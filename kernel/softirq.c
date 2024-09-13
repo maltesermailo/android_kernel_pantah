@@ -505,6 +505,7 @@ static inline bool lockdep_softirq_start(void) { return false; }
 static inline void lockdep_softirq_end(bool in_hardirq) { }
 #endif
 
+<<<<<<< HEAD   (e6fb3b Revert "binder: fix max_thread type inconsistency")
 static inline __u32 softirq_deferred_for_rt(__u32 *pending)
 {
 	__u32 deferred = 0;
@@ -517,6 +518,9 @@ static inline __u32 softirq_deferred_for_rt(__u32 *pending)
 }
 
 asmlinkage __visible void __softirq_entry __do_softirq(void)
+=======
+static void handle_softirqs(bool ksirqd)
+>>>>>>> BRANCH (4878aa Linux 5.15.161)
 {
 	unsigned long end = jiffies + MAX_SOFTIRQ_TIME;
 	unsigned long old_flags = current->flags;
@@ -574,9 +578,13 @@ restart:
 		pending >>= softirq_bit;
 	}
 
+<<<<<<< HEAD   (e6fb3b Revert "binder: fix max_thread type inconsistency")
 	__this_cpu_write(active_softirqs, 0);
 	if (!IS_ENABLED(CONFIG_PREEMPT_RT) &&
 	    __this_cpu_read(ksoftirqd) == current)
+=======
+	if (!IS_ENABLED(CONFIG_PREEMPT_RT) && ksirqd)
+>>>>>>> BRANCH (4878aa Linux 5.15.161)
 		rcu_softirq_qs();
 
 	local_irq_disable();
@@ -597,6 +605,11 @@ restart:
 	lockdep_softirq_end(in_hardirq);
 	softirq_handle_end();
 	current_restore_flags(old_flags, PF_MEMALLOC);
+}
+
+asmlinkage __visible void __softirq_entry __do_softirq(void)
+{
+	handle_softirqs(false);
 }
 
 /**
@@ -934,7 +947,7 @@ static void run_ksoftirqd(unsigned int cpu)
 		 * We can safely run softirq on inline stack, as we are not deep
 		 * in the task stack here.
 		 */
-		__do_softirq();
+		handle_softirqs(true);
 		ksoftirqd_run_end();
 		cond_resched();
 		return;

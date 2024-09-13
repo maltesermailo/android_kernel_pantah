@@ -2090,18 +2090,26 @@ sk_dst_get(struct sock *sk)
 
 static inline void __dst_negative_advice(struct sock *sk)
 {
+<<<<<<< HEAD   (e6fb3b Revert "binder: fix max_thread type inconsistency")
 	/* *** ANDROID FIXUP ***
 	 * See b/343727534 for more details why this typedef is needed here.
 	 * *** ANDROID FIXUP ***
 	 */
 	android_dst_ops_negative_advice_new_t negative_advice;
 
+=======
+>>>>>>> BRANCH (4878aa Linux 5.15.161)
 	struct dst_entry *dst = __sk_dst_get(sk);
 
+<<<<<<< HEAD   (e6fb3b Revert "binder: fix max_thread type inconsistency")
 	if (dst && dst->ops->negative_advice) {
 		negative_advice = (android_dst_ops_negative_advice_new_t)dst->ops->negative_advice;
 		negative_advice(sk, dst);
 	}
+=======
+	if (dst && dst->ops->negative_advice)
+		dst->ops->negative_advice(sk, dst);
+>>>>>>> BRANCH (4878aa Linux 5.15.161)
 }
 
 static inline void dst_negative_advice(struct sock *sk)
