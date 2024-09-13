@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c19cf5a_0451b9d3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3627929
+      },
+      "writtenOn": "2024-09-13T02:20:57Z",
+      "side": 1,
+      "message": "Our company will test the emission codes of different infrared remote control, one of which is to test the longest code of infrared remote control. The test found that due to the length of the code, the data was not transferred to the PWM driver because it did not meet the kernel requirements in this judgment condition. By adding IR_MAX_DURATION, it can meet kernel requirements and transmit data normally.\n/kernel-6.6/drivers/media/rc/lirc_dev.c\nstatic ssize_t lirc_transmit(\n\n\n for (i \u003d 0; i \u003c count; i++) {\n if (txbuf[i] \u003e IR_MAX_DURATION - duration || !txbuf[i]) {\n ret \u003d -EINVAL;",
+      "parentUuid": "00be0735_04ef9983",
+      "revId": "95e763106032d55c9f845f107a407abbb9819c4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "859ba5b0_36352b19",
