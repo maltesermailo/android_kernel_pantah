@@ -7203,12 +7203,12 @@ static bool throttle_direct_reclaim(gfp_t gfp_mask, struct zonelist *zonelist,
 	if (!pgdat)
 		goto out;
 
-	/* Account for the throttling */
-	count_vm_event(PGSCAN_DIRECT_THROTTLE);
-
 	trace_android_vh_throttle_direct_reclaim_bypass(&bypass);
 	if (bypass)
 		goto out;
+
+	/* Account for the throttling */
+	count_vm_event(PGSCAN_DIRECT_THROTTLE);
 
 	/*
 	 * If the caller cannot enter the filesystem, it's possible that it
