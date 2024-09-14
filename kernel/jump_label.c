@@ -199,7 +199,7 @@ void static_key_disable_cpuslocked(struct static_key *key)
 	}
 
 	jump_label_lock();
-	if (atomic_cmpxchg(&key->enabled, 1, 0))
+	if (atomic_cmpxchg(&key->enabled, 1, 0) == 1)
 		jump_label_update(key);
 	jump_label_unlock();
 }
@@ -239,8 +239,13 @@ static void __static_key_slow_dec_cpuslocked(struct static_key *key)
 	if (static_key_slow_try_dec(key))
 		return;
 
+<<<<<<< HEAD   (20739a Revert "leds: trigger: Remove unused function led_trigger_re)
 	jump_label_lock();
 	if (atomic_dec_and_test(&key->enabled))
+=======
+	guard(mutex)(&jump_label_mutex);
+	if (atomic_cmpxchg(&key->enabled, 1, 0) == 1)
+>>>>>>> BRANCH (117ac4 Linux 6.1.105)
 		jump_label_update(key);
 	jump_label_unlock();
 }
