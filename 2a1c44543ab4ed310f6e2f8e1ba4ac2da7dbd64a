@@ -51,6 +51,42 @@
       "parentUuid": "d4f3aa83_1a129759",
       "revId": "2a1c44543ab4ed310f6e2f8e1ba4ac2da7dbd64a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef47285d_eaa9a59f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491413
+      },
+      "writtenOn": "2024-09-15T07:29:27Z",
+      "side": 1,
+      "message": "Hi Todd,\n\nThank you for the review.\n\nLooking at:\n- https://android-review.googlesource.com/c/kernel/common/+/1413343\n- https://android-review.googlesource.com/c/kernel/common/+/1125191\n\nI assumed that it was mandatory to enable the relevant `CONFIG_ARCH_*` in gki_defconfig.\n\nNow that I look a bit closer at this, I can see that some fragments enable `CONFIG_ARCH_*\u003dy` (such as `rockpi4_gki.fragment`).\n\nSo my initial assumption was probably wrong.\n\nIt seems better if I can avoid patching `gki_defconfig`, to not impact any other partners.\n\nThis CL will be abandoned.\nI will replace it with the solution Yifan suggested (using only a fragment).",
+      "parentUuid": "68a46468_1eeaea17",
+      "revId": "2a1c44543ab4ed310f6e2f8e1ba4ac2da7dbd64a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5b425c8_9bb67b90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1491413
+      },
+      "writtenOn": "2024-09-15T07:29:27Z",
+      "side": 1,
+      "message": "Hi Yifan,\n\nThank you for the review and the suggestions.\nNot patching `gki_defconfig` seems indeed a better solution.\n\nI will abandon this CL and implement this via a defconfig fragment only.",
+      "parentUuid": "aaf7b497_b44b969a",
+      "revId": "2a1c44543ab4ed310f6e2f8e1ba4ac2da7dbd64a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
