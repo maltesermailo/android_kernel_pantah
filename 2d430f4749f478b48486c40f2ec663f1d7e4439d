@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca1a7851_a94f8ecf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3237198
+      },
+      "writtenOn": "2024-09-21T14:05:11Z",
+      "side": 1,
+      "message": "If we want these TCP congestion control algo to be built as DLKM, then it needs to config as m, (e.g: CONFIG_TCP_CONG_BBR\u003dm)\n\nThen it also needs to add the related built *.ko to modules.bzl.\n\nThe build error message will indicates the correct sequence and name for the added kernel module.",
+      "revId": "2d430f4749f478b48486c40f2ec663f1d7e4439d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
