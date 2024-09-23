@@ -16,6 +16,24 @@
       "message": "Adding these exports to the symbol list causes many internal f2fs types to be brought into the KMI:\n```\n42 type(s) changed from ABSENT to FULLY_DEFINED:\n  enum iostat_type\n  enum page_type\n  enum req_op\n  enum temp_type\n  struct atgc_management\n  struct ckpt_req_control\n  struct curseg_info\n  struct dirty_seglist_info\n  struct discard_cmd_control\n  struct extent_tree_info\n  struct f2fs_bio_info\n  struct f2fs_checkpoint\n  struct f2fs_dev_info\n  struct f2fs_device\n  struct f2fs_extra_info\n  struct f2fs_gc_kthread\n  struct f2fs_io_info\n  struct f2fs_journal\n  struct f2fs_mount_info\n  struct f2fs_nat_entry\n  struct f2fs_nm_info\n  struct f2fs_rwsem\n  struct f2fs_sb_info\n  struct f2fs_sit_entry\n  struct f2fs_sm_info\n  struct f2fs_stat_info\n  struct f2fs_summary\n  struct f2fs_summary_block\n  struct f2fs_super_block\n  struct flush_cmd_control\n  struct free_segmap_info\n  struct fscrypt_dummy_policy\n  struct inode_management\n  struct iostat_lat_info\n  struct nat_journal\n  struct nat_journal_entry\n  struct sec_entry\n  struct seg_entry\n  struct sit_info\n  struct sit_journal\n  struct sit_journal_entry\n  struct summary_footer\n```\n\nCan this be done some other way that doesn\u0027t require all of f2fs internals to be part of the interface?",
       "revId": "d2d9bcf9af74482748552a7f4ab94bcaeee0d487",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46e9c052_5db019be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2032918
+      },
+      "writtenOn": "2024-09-23T09:12:51Z",
+      "side": 1,
+      "message": "we have delete these 2 export symbol,pls help review",
+      "parentUuid": "ea9167e1_8e2e1c42",
+      "revId": "d2d9bcf9af74482748552a7f4ab94bcaeee0d487",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
