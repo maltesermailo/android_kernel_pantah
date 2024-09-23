@@ -34,6 +34,24 @@
       "parentUuid": "10937855_df6f2c7e",
       "revId": "2c33f3680800ab75081ba6a14dfa8c2df3702c7d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50114bf6_4fa28ba3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-09-23T17:06:08Z",
+      "side": 1,
+      "message": "It looks like somehow you have replaced the author for this CL as seen by git by yourself. Downloading this patch and doing git log gives me this:\n\n```\ncommit 90f669c9450f26ad028101c8eeb32283d6b24c00 (HEAD)\nAuthor: Vinay Gannevaram \u003cquic_vganneva@quicinc.com\u003e\nDate:   Wed Nov 29 18:20:43 2023 +0530\n```\n\nBut the `Author: ` field should clearly be `Vinayak Yadawad \u003cvinayak.yadawad@broadcom.com\u003e` (see how the upstream patch has that set correctly: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003daa0887c4f18e280f8c2aa6964af602bd16c37f54)\n\nSo please fix the authorship on this CL, thanks.",
+      "parentUuid": "24bfa6b1_1bb89cae",
+      "revId": "2c33f3680800ab75081ba6a14dfa8c2df3702c7d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
