@@ -218,6 +218,7 @@ noinstr int cpuidle_enter_state(struct cpuidle_device *dev,
 	struct cpuidle_state *target_state;
 	bool broadcast;
 	ktime_t time_start, time_end;
+        unsigned long predicted_sleep_length_ns;
 
 	instrumentation_begin();
 
@@ -257,6 +258,8 @@ noinstr int cpuidle_enter_state(struct cpuidle_device *dev,
 	trace_cpu_idle(index, dev->cpu);
 	time_start = ns_to_ktime(local_clock_noinstr());
 
+        predicted_sleep_length_ns = teo_cpu_get_predicted_sleep_length(dev->cpu);
+
 	stop_critical_timings();
 	if (!(target_state->flags & CPUIDLE_FLAG_RCU_IDLE)) {
 		ct_cpuidle_enter();
@@ -290,6 +293,7 @@ noinstr int cpuidle_enter_state(struct cpuidle_device *dev,
 	sched_clock_idle_wakeup_event();
 	time_end = ns_to_ktime(local_clock_noinstr());
 	trace_cpu_idle(PWR_EVENT_EXIT, dev->cpu);
+        trace_cpu_idle_predicted_sleep_length(dev->cpu, index, predicted_sleep_length_ns, time_end - time_start);
 	trace_android_vh_cpu_idle_exit(entered_state, dev);
 
 	/* The cpu is no longer idle or about to enter idle. */
