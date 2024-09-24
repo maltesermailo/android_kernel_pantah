@@ -22,10 +22,18 @@ DECLARE_HOOK(android_vh_wq_lockup_pool,
 DECLARE_RESTRICTED_HOOK(android_rvh_alloc_and_link_pwqs,
 	TP_PROTO(struct workqueue_struct *wq, int *ret, bool *skip),
 	TP_ARGS(wq, ret, skip), 1);
+
+DECLARE_RESTRICTED_HOOK(android_rvh_alloc_workqueue,
+	TP_PROTO(struct workqueue_struct *wq, unsigned int *flags, int *max_active),
+	TP_ARGS(wq, flags, max_active), 1);
 #else
 DECLARE_HOOK(android_rvh_alloc_and_link_pwqs,
 	TP_PROTO(struct workqueue_struct *wq, int *ret, bool *skip),
 	TP_ARGS(wq, ret, skip));
+
+DECLARE_HOOK(android_rvh_alloc_workqueue,
+	TP_PROTO(struct workqueue_struct *wq, unsigned int *flags, int *max_active),
+	TP_ARGS(wq, flags, max_active));
 #endif
 
 #endif /* _TRACE_HOOK_WQLOCKUP_H */
