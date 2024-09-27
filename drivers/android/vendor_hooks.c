@@ -440,4 +440,10 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_vmscan_kswapd_wake);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_vmscan_kswapd_done);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_customize_alloc_gfp);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_kcompactd_cpu_online);
+<<<<<<< PATCH SET (e04327 ANDROID: mm: add vendor hook for direct reclaim)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_direct_reclaim_begin);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_direct_reclaim_end);
+||||||| BASE
+=======
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_do_read_fault);
+>>>>>>> BASE      (b3a827 ANDROID: ABI: update symbol list for xiaomi)
