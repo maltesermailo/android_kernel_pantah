@@ -680,7 +680,27 @@ static void stage2_put_pte(kvm_pte_t *ptep, struct kvm_s2_mmu *mmu, u64 addr,
 	 * Clear the existing PTE, and perform break-before-make with
 	 * TLB maintenance if it was valid.
 	 */
+<<<<<<< HEAD   (0450b5 ANDROID: fix up abi break in arm64 cpu_hwcaps)
 	stage2_clear_pte(ptep, mmu, addr, level);
+||||||| BASE
+	if (kvm_pte_valid(*ptep)) {
+		kvm_clear_pte(ptep);
+		kvm_call_hyp(__kvm_tlb_flush_vmid_ipa, mmu, addr, level);
+	}
+
+=======
+	kvm_pte_t pte = *ptep;
+
+	if (kvm_pte_valid(pte)) {
+		kvm_clear_pte(ptep);
+
+		if (kvm_pte_table(pte, level))
+			level = 0;
+
+		kvm_call_hyp(__kvm_tlb_flush_vmid_ipa, mmu, addr, level);
+	}
+
+>>>>>>> BRANCH (ee5e09 Linux 6.1.106)
 	mm_ops->put_page(ptep);
 }
 
