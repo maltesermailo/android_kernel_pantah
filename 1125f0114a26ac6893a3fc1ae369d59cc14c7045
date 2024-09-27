@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19955e16_d6589e3e",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-09-27T22:09:54Z",
+      "side": 1,
+      "message": "Should these two lines be reversed to guarantee no overflow? `-\u003d old_size` should always be legal, because `old_size` is currently in the `lru_count`. Since `new_size` is supposed to be smaller than `old_size`, it should be legal to `+\u003d new_size` afterwards.\n\nHowever, if you imagine a case where a range was 2.1 GB in size and was decreased to 2.05 GB in size, `+\u003d new_size` would technically overflow. This won\u0027t cause a bug in practice, because Rust unsigned overflow is defined, but if sanitizers are turned on it could trip.",
+      "revId": "1125f0114a26ac6893a3fc1ae369d59cc14c7045",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42248e53_6c46eb94",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-09-27T22:09:54Z",
+      "side": 1,
+      "message": "Style nit:\n```\nif let Some(_list_node) \u003d unsafe { self.lru_list.remove(range) } {\n  self.lru_count -\u003d range.size(self)\n}\n```",
+      "revId": "1125f0114a26ac6893a3fc1ae369d59cc14c7045",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
