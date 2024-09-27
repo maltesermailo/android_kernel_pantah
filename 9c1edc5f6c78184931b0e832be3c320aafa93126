@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87dd1e2a_50196a9b",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-09-27T18:58:52Z",
+      "side": 1,
+      "message": "Nit: Consider `get_or_insert_with`?",
+      "revId": "9c1edc5f6c78184931b0e832be3c320aafa93126",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b7905cf_9c218ca5",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-09-27T18:58:52Z",
+      "side": 1,
+      "message": "There\u0027s a get_file/fput pair in the C version of this driver around the next chunk, but I think it was actually cruft that failed to be removed, which is why we don\u0027t need it anymore:\n\nhttps://patchwork.freedesktop.org/patch/399360/\n\nI think I see how this happened, and it actually papered over a bug.\nOriginally, there was no `vma_set_file` helper, and the `ashmem` driver did:\n```\nget_file(asma-\u003efile)\nvma-\u003evm_file \u003d asma-\u003efile\n```\nworking with the condition that the `vma` didn\u0027t have a file in it before. This was to maintain the invariant that `vma` needs to have a ref to `vma-\u003evmfile`.\n\nThey also needed to `shmem_set_file`, which required a ref be held, so they put that in between the `get_file` and the `vma-\u003evmfile`.\n\nThey added the function `vma_set_file` which would incref the file going in, and decref any existing file. This means that instead of `vma-\u003evm_file \u003d asma-\u003efile` being the reference consumer, now an explicit `fput()` was added, because the `get_file()` needed to be held for `shmem_set_file`.\n\nFinally, `shmem_set_file` got replaced by `shmem_zero_setup`, and at this point, `get_file()` and `fput()` were not required, but the author didn\u0027t notice they could be removed.",
+      "revId": "9c1edc5f6c78184931b0e832be3c320aafa93126",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7c99f72_670b0ff6",
+        "filename": "drivers/staging/android/shmem.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-09-27T18:58:52Z",
+      "side": 1,
+      "message": "97fbfef6bd597888485b653175fb846c6998b60c staging: android: ashmem: lseek failed due to no FMODE_LSEEK.\n\nadded this, since they started using the VFS implementation of `lseek` rather than a custom hook, and the VFS version actually checks the permissions.\n\ne7478158e1378325907edfdd960eca98a1be405b fs: clear or set FMODE_LSEEK based on llseek function\n\nthen made it so that if `lseek` is implemented, then `FMODE_LSEEK` will be set on pseudo-files by default. As you pointed out, `llseek` is implemented on `shmem` files, so you can drop both this TODO and the flag set.",
+      "revId": "9c1edc5f6c78184931b0e832be3c320aafa93126",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f22158e0_7e5cf45b",
+        "filename": "drivers/staging/android/shmem.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-09-27T18:58:52Z",
+      "side": 1,
+      "message": "Took me a second to make sure the Rust usage of the lockdep API here matched - not in this change stack, but I suspect we probably want to improve the kernel crate\u0027s sync API here.",
+      "revId": "9c1edc5f6c78184931b0e832be3c320aafa93126",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "430bbe8d_c96fe5f8",
+        "filename": "drivers/staging/android/shmem.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-09-27T18:58:52Z",
+      "side": 1,
+      "message": "Similarly, we should probably build an ergonomic `Once` or `Lazy` at some point.",
+      "revId": "9c1edc5f6c78184931b0e832be3c320aafa93126",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a70a34e_fe6b2069",
+        "filename": "drivers/staging/android/shmem.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-09-27T18:58:52Z",
+      "side": 1,
+      "message": "Nit: These are technically missing safetydocs, though it\u0027s moderately obvious why it\u0027s OK.",
+      "revId": "9c1edc5f6c78184931b0e832be3c320aafa93126",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "993f3358_f11d3692",
+        "filename": "rust/kernel/sync.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1416371
+      },
+      "writtenOn": "2024-09-27T18:58:52Z",
+      "side": 1,
+      "message": "Yeah, this matches my earlier nit - we probably shouldn\u0027t have to handle raw pointers to kernel locks outside the `sync` module.",
+      "revId": "9c1edc5f6c78184931b0e832be3c320aafa93126",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
