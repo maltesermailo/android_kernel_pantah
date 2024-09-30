@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "acfd4401_e07c3bb3",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-09-30T09:15:50Z",
+      "side": 1,
+      "message": "Done. Like userspace Android, we always enable panic on overflow in the kernel, so it would in fact trip.",
+      "parentUuid": "19955e16_d6589e3e",
+      "revId": "1125f0114a26ac6893a3fc1ae369d59cc14c7045",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42248e53_6c46eb94",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-09-27T22:09:54Z",
       "side": 1,
       "message": "Style nit:\n```\nif let Some(_list_node) \u003d unsafe { self.lru_list.remove(range) } {\n  self.lru_count -\u003d range.size(self)\n}\n```",
+      "revId": "1125f0114a26ac6893a3fc1ae369d59cc14c7045",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e3815be_0be57353",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-09-30T09:15:50Z",
+      "side": 1,
+      "message": "We return `ret` after the if, so that won\u0027t work. I think using `is_some()` is fine when you don\u0027t need to inspect the inner value.",
+      "parentUuid": "42248e53_6c46eb94",
       "revId": "1125f0114a26ac6893a3fc1ae369d59cc14c7045",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
