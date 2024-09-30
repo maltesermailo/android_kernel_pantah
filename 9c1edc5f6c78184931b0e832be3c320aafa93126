@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "50447252_8ead6abd",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-09-30T09:18:47Z",
+      "side": 1,
+      "message": "I can\u0027t use that method because creating the file is fallible.",
+      "parentUuid": "87dd1e2a_50196a9b",
+      "revId": "9c1edc5f6c78184931b0e832be3c320aafa93126",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6b7905cf_9c218ca5",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-09-27T18:58:52Z",
       "side": 1,
       "message": "97fbfef6bd597888485b653175fb846c6998b60c staging: android: ashmem: lseek failed due to no FMODE_LSEEK.\n\nadded this, since they started using the VFS implementation of `lseek` rather than a custom hook, and the VFS version actually checks the permissions.\n\ne7478158e1378325907edfdd960eca98a1be405b fs: clear or set FMODE_LSEEK based on llseek function\n\nthen made it so that if `lseek` is implemented, then `FMODE_LSEEK` will be set on pseudo-files by default. As you pointed out, `llseek` is implemented on `shmem` files, so you can drop both this TODO and the flag set.",
+      "revId": "9c1edc5f6c78184931b0e832be3c320aafa93126",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9e91ee1_e8286241",
+        "filename": "drivers/staging/android/shmem.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-09-30T09:18:47Z",
+      "side": 1,
+      "message": "See aosp/3283444.",
+      "parentUuid": "d7c99f72_670b0ff6",
       "revId": "9c1edc5f6c78184931b0e832be3c320aafa93126",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -99,6 +135,24 @@
       "writtenOn": "2024-09-27T18:58:52Z",
       "side": 1,
       "message": "Nit: These are technically missing safetydocs, though it\u0027s moderately obvious why it\u0027s OK.",
+      "revId": "9c1edc5f6c78184931b0e832be3c320aafa93126",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b73d0b4c_043e116b",
+        "filename": "drivers/staging/android/shmem.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-09-30T09:18:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a70a34e_fe6b2069",
       "revId": "9c1edc5f6c78184931b0e832be3c320aafa93126",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
