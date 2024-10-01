@@ -31,12 +31,17 @@
 
 #define NFSDDBG_FACILITY	NFSDDBG_SVC
 
+<<<<<<< HEAD   (b5cefc Merge 2197b23eda2b ("sunrpc: don't change ->sv_stats if it d)
 bool inter_copy_offload_enable;
 EXPORT_SYMBOL_GPL(inter_copy_offload_enable);
 module_param(inter_copy_offload_enable, bool, 0644);
 MODULE_PARM_DESC(inter_copy_offload_enable,
 		 "Enable inter server to server copy offload. Default: false");
 
+||||||| BASE
+=======
+atomic_t			nfsd_th_cnt = ATOMIC_INIT(0);
+>>>>>>> BRANCH (751777 nfsd: make svc_stat per-network namespace instead of global)
 extern struct svc_program	nfsd_program;
 static int			nfsd(void *vrqstp);
 #if defined(CONFIG_NFSD_V2_ACL) || defined(CONFIG_NFSD_V3_ACL)
@@ -93,7 +98,6 @@ unsigned long	nfsd_drc_max_mem;
 unsigned long	nfsd_drc_mem_used;
 
 #if defined(CONFIG_NFSD_V2_ACL) || defined(CONFIG_NFSD_V3_ACL)
-static struct svc_stat	nfsd_acl_svcstats;
 static const struct svc_version *nfsd_acl_version[] = {
 	[2] = &nfsd_acl_version2,
 	[3] = &nfsd_acl_version3,
@@ -108,15 +112,11 @@ static struct svc_program	nfsd_acl_program = {
 	.pg_vers		= nfsd_acl_version,
 	.pg_name		= "nfsacl",
 	.pg_class		= "nfsd",
-	.pg_stats		= &nfsd_acl_svcstats,
 	.pg_authenticate	= &svc_set_client,
 	.pg_init_request	= nfsd_acl_init_request,
 	.pg_rpcbind_set		= nfsd_acl_rpcbind_set,
 };
 
-static struct svc_stat	nfsd_acl_svcstats = {
-	.program	= &nfsd_acl_program,
-};
 #endif /* defined(CONFIG_NFSD_V2_ACL) || defined(CONFIG_NFSD_V3_ACL) */
 
 static const struct svc_version *nfsd_version[] = {
@@ -141,7 +141,6 @@ struct svc_program		nfsd_program = {
 	.pg_vers		= nfsd_version,		/* version table */
 	.pg_name		= "nfsd",		/* program name */
 	.pg_class		= "nfsd",		/* authentication class */
-	.pg_stats		= &nfsd_svcstats,	/* version table */
 	.pg_authenticate	= &svc_set_client,	/* export authentication */
 	.pg_init_request	= nfsd_init_request,
 	.pg_rpcbind_set		= nfsd_rpcbind_set,
@@ -649,9 +648,18 @@ int nfsd_create_serv(struct net *net)
 	if (nfsd_max_blksize == 0)
 		nfsd_max_blksize = nfsd_get_default_max_blksize();
 	nfsd_reset_versions(nn);
+<<<<<<< HEAD   (b5cefc Merge 2197b23eda2b ("sunrpc: don't change ->sv_stats if it d)
 	nn->nfsd_serv = svc_create_pooled(&nfsd_program, nfsd_max_blksize,
 						&nfsd_thread_sv_ops);
 	if (nn->nfsd_serv == NULL)
+||||||| BASE
+	serv = svc_create_pooled(&nfsd_program, nfsd_max_blksize, nfsd);
+	if (serv == NULL)
+=======
+	serv = svc_create_pooled(&nfsd_program, &nn->nfsd_svcstats,
+				 nfsd_max_blksize, nfsd);
+	if (serv == NULL)
+>>>>>>> BRANCH (751777 nfsd: make svc_stat per-network namespace instead of global)
 		return -ENOMEM;
 	init_completion(&nn->nfsd_shutdown_complete);
 
@@ -938,6 +946,7 @@ nfsd(void *vrqstp)
 
 	current->fs->umask = 0;
 
+<<<<<<< HEAD   (b5cefc Merge 2197b23eda2b ("sunrpc: don't change ->sv_stats if it d)
 	/*
 	 * thread is spawned with all signals set to SIG_IGN, re-enable
 	 * the ones that will bring down the thread
@@ -949,6 +958,11 @@ nfsd(void *vrqstp)
 
 	nfsdstats.th_cnt++;
 	mutex_unlock(&nfsd_mutex);
+||||||| BASE
+	atomic_inc(&nfsdstats.th_cnt);
+=======
+	atomic_inc(&nfsd_th_cnt);
+>>>>>>> BRANCH (751777 nfsd: make svc_stat per-network namespace instead of global)
 
 	set_freezable();
 
@@ -972,11 +986,17 @@ nfsd(void *vrqstp)
 		validate_process_creds();
 	}
 
+<<<<<<< HEAD   (b5cefc Merge 2197b23eda2b ("sunrpc: don't change ->sv_stats if it d)
 	/* Clear signals before calling svc_exit_thread() */
 	flush_signals(current);
 
 	mutex_lock(&nfsd_mutex);
 	nfsdstats.th_cnt --;
+||||||| BASE
+	atomic_dec(&nfsdstats.th_cnt);
+=======
+	atomic_dec(&nfsd_th_cnt);
+>>>>>>> BRANCH (751777 nfsd: make svc_stat per-network namespace instead of global)
 
 out:
 	rqstp->rq_server = NULL;

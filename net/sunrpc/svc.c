@@ -421,8 +421,16 @@ __svc_init_bc(struct svc_serv *serv)
  * Create an RPC service
  */
 static struct svc_serv *
+<<<<<<< HEAD   (b5cefc Merge 2197b23eda2b ("sunrpc: don't change ->sv_stats if it d)
 __svc_create(struct svc_program *prog, unsigned int bufsize, int npools,
 	     const struct svc_serv_ops *ops)
+||||||| BASE
+__svc_create(struct svc_program *prog, unsigned int bufsize, int npools,
+	     int (*threadfn)(void *data))
+=======
+__svc_create(struct svc_program *prog, struct svc_stat *stats,
+	     unsigned int bufsize, int npools, int (*threadfn)(void *data))
+>>>>>>> BRANCH (751777 nfsd: make svc_stat per-network namespace instead of global)
 {
 	struct svc_serv	*serv;
 	unsigned int vers;
@@ -433,8 +441,16 @@ __svc_create(struct svc_program *prog, unsigned int bufsize, int npools,
 		return NULL;
 	serv->sv_name      = prog->pg_name;
 	serv->sv_program   = prog;
+<<<<<<< HEAD   (b5cefc Merge 2197b23eda2b ("sunrpc: don't change ->sv_stats if it d)
 	serv->sv_nrthreads = 1;
 	serv->sv_stats     = prog->pg_stats;
+||||||| BASE
+	kref_init(&serv->sv_refcnt);
+	serv->sv_stats     = prog->pg_stats;
+=======
+	kref_init(&serv->sv_refcnt);
+	serv->sv_stats     = stats;
+>>>>>>> BRANCH (751777 nfsd: make svc_stat per-network namespace instead of global)
 	if (bufsize > RPCSVC_MAXPAYLOAD)
 		bufsize = RPCSVC_MAXPAYLOAD;
 	serv->sv_max_payload = bufsize? bufsize : 4096;
@@ -489,18 +505,58 @@ struct svc_serv *
 svc_create(struct svc_program *prog, unsigned int bufsize,
 	   const struct svc_serv_ops *ops)
 {
+<<<<<<< HEAD   (b5cefc Merge 2197b23eda2b ("sunrpc: don't change ->sv_stats if it d)
 	return __svc_create(prog, bufsize, /*npools*/1, ops);
+||||||| BASE
+	return __svc_create(prog, bufsize, 1, threadfn);
+=======
+	return __svc_create(prog, NULL, bufsize, 1, threadfn);
+>>>>>>> BRANCH (751777 nfsd: make svc_stat per-network namespace instead of global)
 }
 EXPORT_SYMBOL_GPL(svc_create);
 
+<<<<<<< HEAD   (b5cefc Merge 2197b23eda2b ("sunrpc: don't change ->sv_stats if it d)
 struct svc_serv *
 svc_create_pooled(struct svc_program *prog, unsigned int bufsize,
 		  const struct svc_serv_ops *ops)
+||||||| BASE
+/**
+ * svc_create_pooled - Create an RPC service with pooled threads
+ * @prog: the RPC program the new service will handle
+ * @bufsize: maximum message size for @prog
+ * @threadfn: a function to service RPC requests for @prog
+ *
+ * Returns an instantiated struct svc_serv object or NULL.
+ */
+struct svc_serv *svc_create_pooled(struct svc_program *prog,
+				   unsigned int bufsize,
+				   int (*threadfn)(void *data))
+=======
+/**
+ * svc_create_pooled - Create an RPC service with pooled threads
+ * @prog: the RPC program the new service will handle
+ * @stats: the stats struct if desired
+ * @bufsize: maximum message size for @prog
+ * @threadfn: a function to service RPC requests for @prog
+ *
+ * Returns an instantiated struct svc_serv object or NULL.
+ */
+struct svc_serv *svc_create_pooled(struct svc_program *prog,
+				   struct svc_stat *stats,
+				   unsigned int bufsize,
+				   int (*threadfn)(void *data))
+>>>>>>> BRANCH (751777 nfsd: make svc_stat per-network namespace instead of global)
 {
 	struct svc_serv *serv;
 	unsigned int npools = svc_pool_map_get();
 
+<<<<<<< HEAD   (b5cefc Merge 2197b23eda2b ("sunrpc: don't change ->sv_stats if it d)
 	serv = __svc_create(prog, bufsize, npools, ops);
+||||||| BASE
+	serv = __svc_create(prog, bufsize, npools, threadfn);
+=======
+	serv = __svc_create(prog, stats, bufsize, npools, threadfn);
+>>>>>>> BRANCH (751777 nfsd: make svc_stat per-network namespace instead of global)
 	if (!serv)
 		goto out_err;
 	return serv;

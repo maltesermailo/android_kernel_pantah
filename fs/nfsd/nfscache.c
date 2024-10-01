@@ -396,7 +396,13 @@ out:
  */
 int nfsd_cache_lookup(struct svc_rqst *rqstp)
 {
+<<<<<<< HEAD   (b5cefc Merge 2197b23eda2b ("sunrpc: don't change ->sv_stats if it d)
 	struct nfsd_net *nn = net_generic(SVC_NET(rqstp), nfsd_net_id);
+||||||| BASE
+	struct nfsd_net		*nn;
+=======
+	struct nfsd_net		*nn = net_generic(SVC_NET(rqstp), nfsd_net_id);
+>>>>>>> BRANCH (751777 nfsd: make svc_stat per-network namespace instead of global)
 	struct svc_cacherep	*rp, *found;
 	__be32			xid = rqstp->rq_xid;
 	__wsum			csum;
@@ -407,7 +413,13 @@ int nfsd_cache_lookup(struct svc_rqst *rqstp)
 
 	rqstp->rq_cacherep = NULL;
 	if (type == RC_NOCACHE) {
+<<<<<<< HEAD   (b5cefc Merge 2197b23eda2b ("sunrpc: don't change ->sv_stats if it d)
 		nfsdstats.rcnocache++;
+||||||| BASE
+		nfsd_stats_rc_nocache_inc();
+=======
+		nfsd_stats_rc_nocache_inc(nn);
+>>>>>>> BRANCH (751777 nfsd: make svc_stat per-network namespace instead of global)
 		goto out;
 	}
 
@@ -417,7 +429,14 @@ int nfsd_cache_lookup(struct svc_rqst *rqstp)
 	 * Since the common case is a cache miss followed by an insert,
 	 * preallocate an entry.
 	 */
+<<<<<<< HEAD   (b5cefc Merge 2197b23eda2b ("sunrpc: don't change ->sv_stats if it d)
 	rp = nfsd_reply_cache_alloc(rqstp, csum, nn);
+||||||| BASE
+	nn = net_generic(SVC_NET(rqstp), nfsd_net_id);
+	rp = nfsd_cacherep_alloc(rqstp, csum, nn);
+=======
+	rp = nfsd_cacherep_alloc(rqstp, csum, nn);
+>>>>>>> BRANCH (751777 nfsd: make svc_stat per-network namespace instead of global)
 	if (!rp)
 		goto out;
 
@@ -433,6 +452,18 @@ int nfsd_cache_lookup(struct svc_rqst *rqstp)
 	rqstp->rq_cacherep = rp;
 	rp->c_state = RC_INPROG;
 
+<<<<<<< HEAD   (b5cefc Merge 2197b23eda2b ("sunrpc: don't change ->sv_stats if it d)
+||||||| BASE
+	freed = nfsd_cacherep_dispose(&dispose);
+	trace_nfsd_drc_gc(nn, freed);
+
+	nfsd_stats_rc_misses_inc();
+=======
+	freed = nfsd_cacherep_dispose(&dispose);
+	trace_nfsd_drc_gc(nn, freed);
+
+	nfsd_stats_rc_misses_inc(nn);
+>>>>>>> BRANCH (751777 nfsd: make svc_stat per-network namespace instead of global)
 	atomic_inc(&nn->num_drc_entries);
 	nn->drc_mem_usage += sizeof(*rp);
 
@@ -446,7 +477,15 @@ out:
 
 found_entry:
 	/* We found a matching entry which is either in progress or done. */
+<<<<<<< HEAD   (b5cefc Merge 2197b23eda2b ("sunrpc: don't change ->sv_stats if it d)
 	nfsdstats.rchits++;
+||||||| BASE
+	nfsd_reply_cache_free_locked(NULL, rp, nn);
+	nfsd_stats_rc_hits_inc();
+=======
+	nfsd_reply_cache_free_locked(NULL, rp, nn);
+	nfsd_stats_rc_hits_inc(nn);
+>>>>>>> BRANCH (751777 nfsd: make svc_stat per-network namespace instead of global)
 	rtn = RC_DROPIT;
 
 	/* Request being processed */
@@ -590,11 +629,35 @@ static int nfsd_reply_cache_stats_show(struct seq_file *m, void *v)
 	seq_printf(m, "num entries:           %u\n",
 			atomic_read(&nn->num_drc_entries));
 	seq_printf(m, "hash buckets:          %u\n", 1 << nn->maskbits);
+<<<<<<< HEAD   (b5cefc Merge 2197b23eda2b ("sunrpc: don't change ->sv_stats if it d)
 	seq_printf(m, "mem usage:             %u\n", nn->drc_mem_usage);
 	seq_printf(m, "cache hits:            %u\n", nfsdstats.rchits);
 	seq_printf(m, "cache misses:          %u\n", nfsdstats.rcmisses);
 	seq_printf(m, "not cached:            %u\n", nfsdstats.rcnocache);
 	seq_printf(m, "payload misses:        %u\n", nn->payload_misses);
+||||||| BASE
+	seq_printf(m, "mem usage:             %lld\n",
+		   percpu_counter_sum_positive(&nn->counter[NFSD_NET_DRC_MEM_USAGE]));
+	seq_printf(m, "cache hits:            %lld\n",
+		   percpu_counter_sum_positive(&nfsdstats.counter[NFSD_STATS_RC_HITS]));
+	seq_printf(m, "cache misses:          %lld\n",
+		   percpu_counter_sum_positive(&nfsdstats.counter[NFSD_STATS_RC_MISSES]));
+	seq_printf(m, "not cached:            %lld\n",
+		   percpu_counter_sum_positive(&nfsdstats.counter[NFSD_STATS_RC_NOCACHE]));
+	seq_printf(m, "payload misses:        %lld\n",
+		   percpu_counter_sum_positive(&nn->counter[NFSD_NET_PAYLOAD_MISSES]));
+=======
+	seq_printf(m, "mem usage:             %lld\n",
+		   percpu_counter_sum_positive(&nn->counter[NFSD_STATS_DRC_MEM_USAGE]));
+	seq_printf(m, "cache hits:            %lld\n",
+		   percpu_counter_sum_positive(&nn->counter[NFSD_STATS_RC_HITS]));
+	seq_printf(m, "cache misses:          %lld\n",
+		   percpu_counter_sum_positive(&nn->counter[NFSD_STATS_RC_MISSES]));
+	seq_printf(m, "not cached:            %lld\n",
+		   percpu_counter_sum_positive(&nn->counter[NFSD_STATS_RC_NOCACHE]));
+	seq_printf(m, "payload misses:        %lld\n",
+		   percpu_counter_sum_positive(&nn->counter[NFSD_STATS_PAYLOAD_MISSES]));
+>>>>>>> BRANCH (751777 nfsd: make svc_stat per-network namespace instead of global)
 	seq_printf(m, "longest chain len:     %u\n", nn->longest_chain);
 	seq_printf(m, "cachesize at longest:  %u\n", nn->longest_chain_cachesize);
 	return 0;

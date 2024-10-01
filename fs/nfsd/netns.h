@@ -10,6 +10,16 @@
 
 #include <net/net_namespace.h>
 #include <net/netns/generic.h>
+<<<<<<< HEAD   (b5cefc Merge 2197b23eda2b ("sunrpc: don't change ->sv_stats if it d)
+||||||| BASE
+#include <linux/percpu_counter.h>
+#include <linux/siphash.h>
+=======
+#include <linux/nfs4.h>
+#include <linux/percpu_counter.h>
+#include <linux/siphash.h>
+#include <linux/sunrpc/stats.h>
+>>>>>>> BRANCH (751777 nfsd: make svc_stat per-network namespace instead of global)
 
 /* Hash tables for nfs4_clientid state */
 #define CLIENT_HASH_BITS                 4
@@ -21,6 +31,38 @@
 struct cld_net;
 struct nfsd4_client_tracking_ops;
 
+<<<<<<< HEAD   (b5cefc Merge 2197b23eda2b ("sunrpc: don't change ->sv_stats if it d)
+||||||| BASE
+enum {
+	/* cache misses due only to checksum comparison failures */
+	NFSD_NET_PAYLOAD_MISSES,
+	/* amount of memory (in bytes) currently consumed by the DRC */
+	NFSD_NET_DRC_MEM_USAGE,
+	NFSD_NET_COUNTERS_NUM
+};
+
+=======
+enum {
+	/* cache misses due only to checksum comparison failures */
+	NFSD_STATS_PAYLOAD_MISSES,
+	/* amount of memory (in bytes) currently consumed by the DRC */
+	NFSD_STATS_DRC_MEM_USAGE,
+	NFSD_STATS_RC_HITS,		/* repcache hits */
+	NFSD_STATS_RC_MISSES,		/* repcache misses */
+	NFSD_STATS_RC_NOCACHE,		/* uncached reqs */
+	NFSD_STATS_FH_STALE,		/* FH stale error */
+	NFSD_STATS_IO_READ,		/* bytes returned to read requests */
+	NFSD_STATS_IO_WRITE,		/* bytes passed in write requests */
+#ifdef CONFIG_NFSD_V4
+	NFSD_STATS_FIRST_NFS4_OP,	/* count of individual nfsv4 operations */
+	NFSD_STATS_LAST_NFS4_OP = NFSD_STATS_FIRST_NFS4_OP + LAST_NFS4_OP,
+#define NFSD_STATS_NFS4_OP(op)	(NFSD_STATS_FIRST_NFS4_OP + (op))
+	NFSD_STATS_WDELEG_GETATTR,	/* count of getattr conflict with wdeleg */
+#endif
+	NFSD_STATS_COUNTERS_NUM
+};
+
+>>>>>>> BRANCH (751777 nfsd: make svc_stat per-network namespace instead of global)
 /*
  * Represents a nfsd "container". With respect to nfsv4 state tracking, the
  * fields of interest are the *_id_hashtbls and the *_name_tree. These track
@@ -158,11 +200,22 @@ struct nfsd_net {
 	/* total number of entries */
 	atomic_t                 num_drc_entries;
 
+<<<<<<< HEAD   (b5cefc Merge 2197b23eda2b ("sunrpc: don't change ->sv_stats if it d)
 	/* cache misses due only to checksum comparison failures */
 	unsigned int             payload_misses;
 
 	/* amount of memory (in bytes) currently consumed by the DRC */
 	unsigned int             drc_mem_usage;
+||||||| BASE
+	/* Per-netns stats counters */
+	struct percpu_counter    counter[NFSD_NET_COUNTERS_NUM];
+=======
+	/* Per-netns stats counters */
+	struct percpu_counter    counter[NFSD_STATS_COUNTERS_NUM];
+
+	/* sunrpc svc stats */
+	struct svc_stat          nfsd_svcstats;
+>>>>>>> BRANCH (751777 nfsd: make svc_stat per-network namespace instead of global)
 
 	/* longest hash chain seen */
 	unsigned int             longest_chain;

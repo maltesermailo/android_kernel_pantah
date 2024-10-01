@@ -327,7 +327,14 @@ out:
 __be32
 fh_verify(struct svc_rqst *rqstp, struct svc_fh *fhp, umode_t type, int access)
 {
+<<<<<<< HEAD   (b5cefc Merge 2197b23eda2b ("sunrpc: don't change ->sv_stats if it d)
 	struct svc_export *exp;
+||||||| BASE
+	struct svc_export *exp = NULL;
+=======
+	struct nfsd_net *nn = net_generic(SVC_NET(rqstp), nfsd_net_id);
+	struct svc_export *exp = NULL;
+>>>>>>> BRANCH (751777 nfsd: make svc_stat per-network namespace instead of global)
 	struct dentry	*dentry;
 	__be32		error;
 
@@ -400,7 +407,13 @@ skip_pseudoflavor_check:
 	}
 out:
 	if (error == nfserr_stale)
+<<<<<<< HEAD   (b5cefc Merge 2197b23eda2b ("sunrpc: don't change ->sv_stats if it d)
 		nfsdstats.fh_stale++;
+||||||| BASE
+		nfsd_stats_fh_stale_inc(exp);
+=======
+		nfsd_stats_fh_stale_inc(nn, exp);
+>>>>>>> BRANCH (751777 nfsd: make svc_stat per-network namespace instead of global)
 	return error;
 }
 
