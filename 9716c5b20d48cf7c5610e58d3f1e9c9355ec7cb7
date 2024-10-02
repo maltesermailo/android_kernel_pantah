@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1677e7a_8a27b254",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981286
+      },
+      "writtenOn": "2024-10-02T09:14:45Z",
+      "side": 1,
+      "message": "I think those edit brings this merge in line with my version, and I don\u0027t see any build errors locally",
+      "revId": "9716c5b20d48cf7c5610e58d3f1e9c9355ec7cb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8bbb10e9_b6882df1",
@@ -14,6 +31,98 @@
       "writtenOn": "2024-10-02T08:43:33Z",
       "side": 1,
       "message": "the number of dashes should match the length of the string above",
+      "revId": "9716c5b20d48cf7c5610e58d3f1e9c9355ec7cb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8ca1110_26628a2d",
+        "filename": "Documentation/kbuild/modules.rst",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1981286
+      },
+      "writtenOn": "2024-10-02T09:14:45Z",
+      "side": 1,
+      "message": "```suggestion\n-------------------------\n```",
+      "range": {
+        "startLine": 324,
+        "startChar": 0,
+        "endLine": 324,
+        "endChar": 29
+      },
+      "revId": "9716c5b20d48cf7c5610e58d3f1e9c9355ec7cb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1ff8125_7059900a",
+        "filename": "scripts/Makefile.modfinal",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1981286
+      },
+      "writtenOn": "2024-10-02T09:14:45Z",
+      "side": 1,
+      "message": "the comma here should be dropped, we are prefixing vmlinux with $(mixed-build-prefix), i.e. it should be:\n```\n$(mixed-build-prefix)vmlinux\n```\n\n\n```suggestion\n%.ko: %.o %.mod.o $(extmod_prefix).module-common.o scripts/module.lds $(and $(CONFIG_DEBUG_INFO_BTF_MODULES),$(KBUILD_BUILTIN),$(mixed-build-prefix)vmlinux) FORCE\n```",
+      "range": {
+        "startLine": 62,
+        "startChar": 127,
+        "endLine": 62,
+        "endChar": 156
+      },
+      "revId": "9716c5b20d48cf7c5610e58d3f1e9c9355ec7cb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e325fd8e_0dbc26b4",
+        "filename": "scripts/Makefile.modfinal",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1981286
+      },
+      "writtenOn": "2024-10-02T09:14:45Z",
+      "side": 1,
+      "message": "this should be\n\n```suggestion\n\t+$(call if_changed_except,ld_ko_o,$(mixed-build-prefix)vmlinux))\n```",
+      "range": {
+        "startLine": 63,
+        "startChar": 35,
+        "endLine": 63,
+        "endChar": 42
+      },
+      "revId": "9716c5b20d48cf7c5610e58d3f1e9c9355ec7cb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3141f24_f8345abf",
+        "filename": "scripts/Makefile.modinst",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1981286
+      },
+      "writtenOn": "2024-10-02T09:14:45Z",
+      "side": 1,
+      "message": "I think the standalone % here should be removed. We are prefixing the original with $(mixed-build-prefix), i.e. it should be\n\n```suggestion\n$(addprefix $(MODLIB)/, modules.builtin modules.builtin.modinfo modules.builtin.ranges): $(MODLIB)/%: $(mixed-build-prefix)% FORCE\n```",
+      "range": {
+        "startLine": 38,
+        "startChar": 102,
+        "endLine": 38,
+        "endChar": 132
+      },
       "revId": "9716c5b20d48cf7c5610e58d3f1e9c9355ec7cb7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
