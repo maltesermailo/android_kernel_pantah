@@ -8831,6 +8831,7 @@ static void check_preempt_wakeup_fair(struct rq *rq, struct task_struct *p, int 
 	struct cfs_rq *cfs_rq = task_cfs_rq(curr);
 	int cse_is_idle, pse_is_idle;
 	bool ignore = false;
+	bool preempt = false;
 
 	if (unlikely(se == pse))
 		return;
@@ -8900,6 +8901,12 @@ static void check_preempt_wakeup_fair(struct rq *rq, struct task_struct *p, int 
 	if (do_preempt_short(cfs_rq, pse, se) && se->vlag == se->deadline)
 		se->vlag = se->deadline + 1;
 
+	trace_android_rvh_check_preempt_wakeup_fair(rq, p, &preempt, &ignore,
+				wake_flags, se, pse);
+	if (preempt)
+		goto preempt;
+	if (ignore)
+		return;
 	/*
 	 * If @p has become the most eligible task, force preemption.
 	 */
