@@ -11357,9 +11357,15 @@ static struct sched_group *sched_balance_find_src_group(struct lb_env *env)
 	if (busiest->group_type == group_misfit_task)
 		goto force_balance;
 
+	if (sched_energy_enabled()) {
+		int out_balance = 1;
+
+		trace_android_rvh_sched_balance_find_src_group(sds.busiest, env->dst_rq,
+					&out_balance);
 	if (!is_rd_overutilized(env->dst_rq->rd) &&
-	    rcu_dereference(env->dst_rq->rd->pd))
+	    rcu_dereference(env->dst_rq->rd->pd) && out_balance)
 		goto out_balanced;
+	}
 
 	/* ASYM feature bypasses nice load balance check */
 	if (busiest->group_type == group_asym_packing)
