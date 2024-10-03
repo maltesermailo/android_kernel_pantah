@@ -117,10 +117,132 @@ static void dw_pci_setup_msi_msg(struct irq_data *d, struct msi_msg *msg)
 		(int)d->hwirq, msg->address_hi, msg->address_lo);
 }
 
+/*
+ * The algo here honor if there is any intersection of mask of
+ * the existing msi vectors and the requesting msi vector. So we
+ * could handle both narrow (1 bit set mask) and wide (0xffff...)
+ * cases, return -EINVAL and reject the request if the result of
+ * cpumask is empty, otherwise return 0 and have the calculated
+ * result on the mask_to_check to pass down to the irq_chip.
+ */
+static int dw_pci_check_mask_compatibility(struct dw_pcie_rp *pp,
+					   unsigned long msi_irq_index,
+					   unsigned long hwirq_to_check,
+					   struct cpumask *mask_to_check)
+{
+	unsigned long end, hwirq;
+	const struct cpumask *mask;
+	unsigned int virq;
+
+	hwirq = msi_irq_index * MAX_MSI_IRQS_PER_CTRL;
+	end = hwirq + MAX_MSI_IRQS_PER_CTRL;
+	for_each_set_bit_from(hwirq, pp->msi_irq_in_use, end) {
+		if (hwirq == hwirq_to_check)
+			continue;
+		virq = irq_find_mapping(pp->irq_domain, hwirq);
+		if (!virq)
+			continue;
+		mask = irq_get_affinity_mask(virq);
+		if (!cpumask_and(mask_to_check, mask, mask_to_check))
+			return -EINVAL;
+	}
+
+	return 0;
+}
+
+static void dw_pci_update_effective_affinity(struct dw_pcie_rp *pp,
+					     unsigned long msi_irq_index,
+					     const struct cpumask *effective_mask,
+					     unsigned long hwirq_to_check)
+{
+	struct irq_desc *desc_downstream;
+	unsigned int virq_downstream;
+	unsigned long end, hwirq;
+
+	/*
+	 * update all the irq_data's effective mask
+	 * bind to this msi controller, so the correct
+	 * affinity would reflect on
+	 * /proc/irq/XXX/effective_affinity
+	 */
+	hwirq = msi_irq_index * MAX_MSI_IRQS_PER_CTRL;
+	end = hwirq + MAX_MSI_IRQS_PER_CTRL;
+	for_each_set_bit_from(hwirq, pp->msi_irq_in_use, end) {
+		virq_downstream = irq_find_mapping(pp->irq_domain, hwirq);
+		if (!virq_downstream)
+			continue;
+		desc_downstream = irq_to_desc(virq_downstream);
+		irq_data_update_effective_affinity(&desc_downstream->irq_data,
+						   effective_mask);
+	}
+}
+
 static int dw_pci_msi_set_affinity(struct irq_data *d,
 				   const struct cpumask *mask, bool force)
 {
-	return -EINVAL;
+	struct dw_pcie_rp *pp = irq_data_get_irq_chip_data(d);
+	struct dw_pcie *pci = to_dw_pcie_from_pp(pp);
+	int ret;
+	int virq_parent;
+	unsigned long hwirq = d->hwirq;
+	unsigned long flags, msi_irq_index;
+	struct irq_desc *desc_parent;
+	const struct cpumask *effective_mask;
+	cpumask_var_t mask_result;
+
+	/*
+	 * The msi irq vectors are 32:1 aggregator to GIC SPI
+	 * line. so divid the hwirq by 32 to find out GIC SPI
+	 * line this msi vector map to.
+	 */
+	msi_irq_index = hwirq / MAX_MSI_IRQS_PER_CTRL;
+	if (!alloc_cpumask_var(&mask_result, GFP_ATOMIC))
+		return -ENOMEM;
+
+	/*
+	 * Loop through all possible msi vector to check if the
+	 * request one is compatible with all of them
+	 */
+	raw_spin_lock_irqsave(&pp->lock, flags);
+	cpumask_copy(mask_result, mask);
+	ret = dw_pci_check_mask_compatibility(pp, msi_irq_index, hwirq, mask_result);
+	if (ret) {
+		dev_dbg(pci->dev, "Incompatible mask, request %*pbl, irq num %u\n",
+			cpumask_pr_args(mask), d->irq);
+		goto unlock;
+	}
+
+	dev_dbg(pci->dev, "Final mask, request %*pbl, irq num %u\n",
+		cpumask_pr_args(mask_result), d->irq);
+
+	virq_parent = pp->msi_irq[msi_irq_index];
+	desc_parent = irq_to_desc(virq_parent);
+	raw_spin_lock(&desc_parent->lock);
+	ret = desc_parent->irq_data.chip->irq_set_affinity(&desc_parent->irq_data,
+							   mask_result, force);
+
+	if (ret < 0) {
+		raw_spin_unlock(&desc_parent->lock);
+		goto unlock;
+	}
+
+	switch (ret) {
+	case IRQ_SET_MASK_OK:
+	case IRQ_SET_MASK_OK_DONE:
+		cpumask_copy(desc_parent->irq_common_data.affinity, mask);
+		fallthrough;
+	case IRQ_SET_MASK_OK_NOCOPY:
+		break;
+	}
+	raw_spin_unlock(&desc_parent->lock);
+
+	effective_mask = irq_data_get_effective_affinity_mask(&desc_parent->irq_data);
+	dw_pci_update_effective_affinity(pp, msi_irq_index, effective_mask, hwirq);
+
+unlock:
+	free_cpumask_var(mask_result);
+	raw_spin_unlock_irqrestore(&pp->lock, flags);
+	return ret < 0 ? ret : IRQ_SET_MASK_OK_NOCOPY;
 }
 
 static void dw_pci_bottom_mask(struct irq_data *d)
