@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f631745_a85c449f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-03T23:40:28Z",
+      "side": 1,
+      "message": "\"Increase\" instead of \"Alter\" since this mechanism can only add the task_struct size.",
+      "range": {
+        "startLine": 7,
+        "startChar": 14,
+        "endLine": 7,
+        "endChar": 19
+      },
+      "revId": "beee9513e01cbb1dd4a1a497fa8a72967ffe82dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea212293_c3335f0d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-03T23:40:28Z",
+      "side": 1,
+      "message": "Please state the motivation for this (significant reduction of VENDOR_DATA per task_struct from 512 bytes down to 48 bytes).\n\nAlso, provide an example of how it is expressed on the command line and how vendors find the beginning of this vendor space.",
+      "revId": "beee9513e01cbb1dd4a1a497fa8a72967ffe82dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a88ed496_121ee1da",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-03T23:40:28Z",
+      "side": 1,
+      "message": "Please add a patch to the series that reduces the ANDROID_VENDOR_DATA_ARRAY() - which is the whole point of this series.\n\n```\ndiff --git a/include/linux/sched.h b/include/linux/sched.h\nindex f5b50c82aa3a..ef39512bbe3e 100644\n--- a/include/linux/sched.h\n+++ b/include/linux/sched.h\n@@ -1517,7 +1517,7 @@ struct task_struct {\n        struct callback_head            mce_kill_me;\n        int                             mce_count;\n #endif\n-       ANDROID_VENDOR_DATA_ARRAY(1, 64);\n+       ANDROID_VENDOR_DATA_ARRAY(1, 6);\n        ANDROID_OEM_DATA_ARRAY(1, 6);\n \n```",
+      "revId": "beee9513e01cbb1dd4a1a497fa8a72967ffe82dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85f471d7_0abb9b22",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-03T23:40:28Z",
+      "side": 1,
+      "message": "Please no \"while at it...\". This padding should be a separate patch.",
+      "revId": "beee9513e01cbb1dd4a1a497fa8a72967ffe82dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc175240_eec2bdb1",
+        "filename": "init/init_task.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-03T23:40:28Z",
+      "side": 1,
+      "message": "why \"1\" in vendor_data_pad[127]? Can\u0027t this just be:\n```\nu64 vendor_data_pad[128];\n```\nwhich will set the whole thing to 0?\n\nWhy 128? If the old way was 64*sizeof(u64) \u003d 512, why do you now need 1024 bytes? I suspect this needs to be consistent with ARCH_TASK_STRUCT_SIZE_MAX so 1024 is needed for that -- if so, then this should be declared as:\n```\nu64 vendor_data_pad[ARCH_TASK_STRUCT_SIZE_MAX/sizeof(u64)]\n```\nPlease move this to a separate patch that also gives an example of how and why this is used.",
+      "range": {
+        "startLine": 244,
+        "startChar": 24,
+        "endLine": 244,
+        "endChar": 25
+      },
+      "revId": "beee9513e01cbb1dd4a1a497fa8a72967ffe82dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d50cfb5_2be30b77",
+        "filename": "kernel/fork.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1038,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-03T23:40:28Z",
+      "side": 1,
+      "message": "This name is misleading since it is not `sizeof(struct task_struct)` it is the size of the additional memory allocated per task_struct. How about something like `TASK_STRUCT_VENDOR_SIZE_MAX`?\n\n...and maybe this should be configurable. How about adding a config for this in init/Kconfig.gki which would also selects CONFIG_ARCH_WANTS_DYNAMIC_TASK_STRUCT?\n\nThen it can be enabled in gki_defconfig as\n```\nCONFIG_TASK_STRUCT_VENDOR_SIZE_MAX\u003d1024\n```",
+      "revId": "beee9513e01cbb1dd4a1a497fa8a72967ffe82dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
