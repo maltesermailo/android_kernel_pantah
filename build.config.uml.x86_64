@@ -1,0 +1,10 @@
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.common
+
+# TODO(b/368119551): implement proper support for uml
+ARCH=um
+
+# TODO(b/368119551): clean up DEFCONFIG usage after bug is fixed
+DEFCONFIG=x86_64_defconfig
+
+# TODO(b/368119551): clean up KCFLAGS
+KCFLAGS="-Wno-error"

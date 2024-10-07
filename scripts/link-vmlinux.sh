@@ -75,7 +75,8 @@ vmlinux_link()
 	objs="${objs} init/version-timestamp.o"
 
 	if [ "${SRCARCH}" = "um" ]; then
-		wl=-Wl,
+		# TODO(b/368119551): check the wl flag
+		wl=-Wl,-z,norelro,
 		ld="${CC}"
 		ldflags="${CFLAGS_vmlinux}"
 		ldlibs="-lutil -lrt -lpthread"
