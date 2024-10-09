@@ -22,6 +22,30 @@
       },
       "revId": "ffeee32106e3a43140aa556b96ecf75e19a7cdea",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a758e6da_2aee69e8",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 2
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1899350
+      },
+      "writtenOn": "2024-10-09T12:40:19Z",
+      "side": 1,
+      "message": "Qualcomm requires 512 bytes as additional space in the task_struct. So, I doubled that number and made that the maximum additional space up to which a vendor can request. 1024 is the absolute maximum which I just added as a safety check, vendors can request far lesser than that via cmdline.",
+      "parentUuid": "7becc180_80ecd17b",
+      "range": {
+        "startLine": 257,
+        "startChar": 9,
+        "endLine": 257,
+        "endChar": 13
+      },
+      "revId": "ffeee32106e3a43140aa556b96ecf75e19a7cdea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
