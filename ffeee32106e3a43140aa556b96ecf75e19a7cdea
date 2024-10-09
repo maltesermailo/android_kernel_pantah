@@ -24,6 +24,53 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aec75994_940562e8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-09T17:15:39Z",
+      "side": 1,
+      "message": "Since this whole patchset is about replacing the static `ANDROID_VENDOR_DATA_ARRAY(1, 64)` with dynamic vendor data, I think it actually should be part of the same bug.",
+      "parentUuid": "25aafc25_8a7eb2f1",
+      "range": {
+        "startLine": 14,
+        "startChar": 5,
+        "endLine": 14,
+        "endChar": 14
+      },
+      "revId": "ffeee32106e3a43140aa556b96ecf75e19a7cdea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84695231_9b2c24cb",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-09T17:15:39Z",
+      "side": 1,
+      "message": "Please prepend \"ANDROID\" or \"GKI\" to the name.",
+      "range": {
+        "startLine": 255,
+        "startChar": 7,
+        "endLine": 255,
+        "endChar": 34
+      },
+      "revId": "ffeee32106e3a43140aa556b96ecf75e19a7cdea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7becc180_80ecd17b",
@@ -61,6 +108,30 @@
       "side": 1,
       "message": "Qualcomm requires 512 bytes as additional space in the task_struct. So, I doubled that number and made that the maximum additional space up to which a vendor can request. 1024 is the absolute maximum which I just added as a safety check, vendors can request far lesser than that via cmdline.",
       "parentUuid": "7becc180_80ecd17b",
+      "range": {
+        "startLine": 257,
+        "startChar": 9,
+        "endLine": 257,
+        "endChar": 13
+      },
+      "revId": "ffeee32106e3a43140aa556b96ecf75e19a7cdea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34e8f8ac_28ae3f8d",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 2
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-09T17:15:39Z",
+      "side": 1,
+      "message": "Greg- this results in 1 1k buffer (for init_task) and sets the max for the dynamic addition to task_struct. Overall, this patchset is a significant decrease in the size of task_struct for non-QC use-cases and no change to QC compared with the static `ANDROID_VENDOR_DATA_ARRAY(1, 64)` of previous releases.\n\nSai- If Qualcomm requires 512, can this be 512? Why double it?",
+      "parentUuid": "a758e6da_2aee69e8",
       "range": {
         "startLine": 257,
         "startChar": 9,
