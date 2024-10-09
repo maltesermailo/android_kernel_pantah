@@ -46,6 +46,30 @@
       },
       "revId": "251760f2b6fdcd98c797a7fffdb5e3c798b894bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a8e6c55_eee1c941",
+        "filename": "kernel/fork.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1054,
+      "author": {
+        "id": 1899350
+      },
+      "writtenOn": "2024-10-09T13:04:05Z",
+      "side": 1,
+      "message": "added \"android\" to cmdline parameter\n\nYes it\u0027s adding to the ARCH size. But in gerrit https://android-review.googlesource.com/c/kernel/common/+/3292853/2?usp\u003drelated-change, this feature is enabled for all GKI compliant platforms regardless of architecture. Vendors simply need to use the pointer arithmetic I\u0027ve mentioned in the commit text to access the additional memory.",
+      "parentUuid": "d3da72ee_51ae41b3",
+      "range": {
+        "startLine": 1054,
+        "startChar": 13,
+        "endLine": 1054,
+        "endChar": 36
+      },
+      "revId": "251760f2b6fdcd98c797a7fffdb5e3c798b894bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
