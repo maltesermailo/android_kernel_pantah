@@ -71,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e03bfc89_4d40fd83",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1899350
+      },
+      "writtenOn": "2024-10-09T22:30:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84695231_9b2c24cb",
+      "range": {
+        "startLine": 255,
+        "startChar": 7,
+        "endLine": 255,
+        "endChar": 34
+      },
+      "revId": "ffeee32106e3a43140aa556b96ecf75e19a7cdea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7becc180_80ecd17b",
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "Greg- this results in 1 1k buffer (for init_task) and sets the max for the dynamic addition to task_struct. Overall, this patchset is a significant decrease in the size of task_struct for non-QC use-cases and no change to QC compared with the static `ANDROID_VENDOR_DATA_ARRAY(1, 64)` of previous releases.\n\nSai- If Qualcomm requires 512, can this be 512? Why double it?",
       "parentUuid": "a758e6da_2aee69e8",
+      "range": {
+        "startLine": 257,
+        "startChar": 9,
+        "endLine": 257,
+        "endChar": 13
+      },
+      "revId": "ffeee32106e3a43140aa556b96ecf75e19a7cdea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b78c98b_5041977f",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 2
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1899350
+      },
+      "writtenOn": "2024-10-09T22:30:23Z",
+      "side": 1,
+      "message": "Todd - done, reduced it to 512 bytes",
+      "parentUuid": "34e8f8ac_28ae3f8d",
       "range": {
         "startLine": 257,
         "startChar": 9,
