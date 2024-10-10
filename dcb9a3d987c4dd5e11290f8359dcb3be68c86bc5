@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9d958af3_bb8364e6",
+        "filename": "kernel/fork.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1054,
+      "author": {
+        "id": 1899350
+      },
+      "writtenOn": "2024-10-10T21:54:52Z",
+      "side": 1,
+      "message": "So what will happen in the x86 case is, first, kernel cmdline will be checked and whatever input size is passed will be added to task_struct size (this step is valid only if it\u0027s a GKI kernel, per the first patch).\nNext, whatever stuff happens in arch/x86/kernel/fpu/init.c will overwrite arch_task_struct_size, regardless of whether arch_task_struct_size was written to or not in the first step.",
+      "parentUuid": "36f1d65f_519f5875",
+      "revId": "dcb9a3d987c4dd5e11290f8359dcb3be68c86bc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a9561c5b_60575171",
         "filename": "kernel/sched/sched.h",
         "patchSetId": 5
