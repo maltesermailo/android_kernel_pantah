@@ -16,6 +16,24 @@
       "message": "Boot test failed with just this patch:\n```\n[    0.016727][    T0] Kernel panic - not syncing: __kmem_cache_create_args: Failed to create slab \u0027task_struct\u0027. Error -22\n[    0.017256][    T0] CPU: 0 UID: 0 PID: 0 Comm: swapper/0 Tainted: G        W          6.12.0-rc2-mainline-g5bc3993064eb-abP82440104-4k #1 701badd378f768fcdaaebf7a0b09347c63cd71e7\n[    0.018017][    T0] Tainted: [W]\u003dWARN\n[    0.018194][    T0] Hardware name: linux,dummy-virt (DT)\n[    0.018448][    T0] Call trace:\n[    0.018600][    T0]  dump_backtrace+0xf0/0x12c\n[    0.018818][    T0]  show_stack+0x18/0x28\n[    0.019012][    T0]  dump_stack_lvl+0x40/0xa0\n[    0.019229][    T0]  dump_stack+0x18/0x24\n[    0.019422][    T0]  panic+0x140/0x368\n[    0.019603][    T0]  __kmem_cache_create_args+0x2d4/0x2d8\n[    0.019860][    T0]  fork_init+0x4c/0x168\n[    0.020056][    T0]  start_kernel+0x30c/0x3f8\n[    0.020267][    T0]  __primary_switched+0x88/0x94\n```\n\nThis will be fixed with aosp/3292854 to set up the size -- maybe the two should be combined so it isn\u0027t completely broken with just this patch.",
       "revId": "3b44d639a45d40862ad50fe098d28b2e9ca4ff28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97914cbd_13c80b03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1899350
+      },
+      "writtenOn": "2024-10-10T00:55:55Z",
+      "side": 1,
+      "message": "Even if I combine the patch which sets up the size, unless the kernel is explicitly passed the cmdline parameter with a valid size, kernel will crash. This is because arch_task_struct_size is 0 otherwise.",
+      "parentUuid": "099f90c3_88ec5e0f",
+      "revId": "3b44d639a45d40862ad50fe098d28b2e9ca4ff28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
