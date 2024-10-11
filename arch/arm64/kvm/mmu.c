@@ -1177,6 +1177,11 @@ static void *hyp_mc_alloc_fn(void *flags, unsigned long order)
 	return addr;
 }
 
+static void *hyp_mc_alloc_gfp_fn(void *flags, unsigned long order)
+{
+	return (void *)__get_free_pages(*(gfp_t *)flags, order);
+}
+
 void free_hyp_memcache(struct kvm_hyp_memcache *mc)
 {
 	unsigned long flags = mc->flags;
@@ -1202,6 +1207,21 @@ int topup_hyp_memcache(struct kvm_hyp_memcache *mc, unsigned long min_pages,
 				    kvm_host_pa, (void *)flags, order);
 }
 EXPORT_SYMBOL(topup_hyp_memcache);
+
+int topup_hyp_memcache_gfp(struct kvm_hyp_memcache *mc, unsigned long min_pages,
+			   unsigned long order, gfp_t gfp)
+{
+	void *flags = &gfp;
+
+	if (!is_protected_kvm_enabled())
+		return 0;
+
+	if (order > PAGE_SHIFT)
+		return -E2BIG;
+
+	return __topup_hyp_memcache(mc, min_pages, hyp_mc_alloc_gfp_fn,
+				    kvm_host_pa, flags, order);
+}
 
 /**
  * kvm_phys_addr_ioremap - map a device range to guest IPA
@@ -1851,7 +1871,7 @@ static int user_mem_abort(struct kvm_vcpu *vcpu, phys_addr_t fault_ipa,
 	int ret = 0;
 	bool write_fault, writable, force_pte = false;
 	bool exec_fault, mte_allowed;
-	bool device = false;
+	bool device = false, vfio_allow_any_uc = false;
 	unsigned long mmu_seq;
 	struct kvm *kvm = vcpu->kvm;
 	struct kvm_mmu_memory_cache *memcache = &vcpu->arch.mmu_page_cache;
@@ -1943,6 +1963,8 @@ static int user_mem_abort(struct kvm_vcpu *vcpu, phys_addr_t fault_ipa,
 	gfn = fault_ipa >> PAGE_SHIFT;
 	mte_allowed = kvm_vma_mte_allowed(vma);
 
+	vfio_allow_any_uc = vma->vm_flags & VM_ALLOW_ANY_UNCACHED;
+
 	/* Don't use the VMA after the unlock -- it may have vanished */
 	vma = NULL;
 
@@ -2029,10 +2051,16 @@ static int user_mem_abort(struct kvm_vcpu *vcpu, phys_addr_t fault_ipa,
 	if (exec_fault)
 		prot |= KVM_PGTABLE_PROT_X;
 
-	if (device)
-		prot |= KVM_PGTABLE_PROT_DEVICE;
-	else if (cpus_have_const_cap(ARM64_HAS_CACHE_DIC))
+	if (device) {
+		if (vfio_allow_any_uc)
+			prot |= KVM_PGTABLE_PROT_NORMAL_NC;
+		else
+			prot |= KVM_PGTABLE_PROT_DEVICE;
+	} else if (cpus_have_const_cap(ARM64_HAS_CACHE_DIC)) {
 		prot |= KVM_PGTABLE_PROT_X;
+	} else if (memslot->flags & KVM_MEM_NON_COHERENT_DMA) {
+		prot |= KVM_PGTABLE_PROT_S2_NOFWB;
+	}
 
 	if (is_protected_kvm_enabled()) {
 		if (WARN_ON(fault_status != ESR_ELx_FSC_PERM))

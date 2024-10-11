@@ -27,6 +27,7 @@
 #include <linux/sizes.h>
 #include <linux/sched.h>
 #include <linux/pgtable.h>
+#include <linux/pgsize_migration_inline.h>
 #include <linux/kasan.h>
 #include <linux/page_pinner.h>
 #include <linux/memremap.h>
@@ -403,6 +404,20 @@ extern unsigned int kobjsize(const void *objp);
 #ifdef CONFIG_64BIT
 /* VM is sealed, in vm_flags */
 #define VM_SEALED	_BITUL(63)
+#endif
+
+/*
+ * This flag is used to connect VFIO to arch specific KVM code. It
+ * indicates that the memory under this VMA is safe for use with any
+ * non-cachable memory type inside KVM. Some VFIO devices, on some
+ * platforms, are thought to be unsafe and can cause machine crashes
+ * if KVM does not lock down the memory type.
+ */
+#ifdef CONFIG_64BIT
+#define VM_ALLOW_ANY_UNCACHED_BIT	39
+#define VM_ALLOW_ANY_UNCACHED		BIT(VM_ALLOW_ANY_UNCACHED_BIT)
+#else
+#define VM_ALLOW_ANY_UNCACHED		VM_NONE
 #endif
 
 /* Bits set in the VMA until the stack is in its final location */
@@ -849,6 +864,8 @@ static inline void vm_flags_reset(struct vm_area_struct *vma,
 				  vm_flags_t flags)
 {
 	vma_assert_write_locked(vma);
+	/* Preserve padding flags */
+	flags = vma_pad_fixup_flags(vma, flags);
 	vm_flags_init(vma, flags);
 }
 
@@ -856,6 +873,8 @@ static inline void vm_flags_reset_once(struct vm_area_struct *vma,
 				       vm_flags_t flags)
 {
 	vma_assert_write_locked(vma);
+	/* Preserve padding flags */
+	flags = vma_pad_fixup_flags(vma, flags);
 	WRITE_ONCE(ACCESS_PRIVATE(vma, __vm_flags), flags);
 }
 

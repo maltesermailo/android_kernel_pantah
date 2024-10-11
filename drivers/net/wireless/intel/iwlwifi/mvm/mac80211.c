@@ -1650,7 +1650,7 @@ static int iwl_mvm_mac_add_interface(struct ieee80211_hw *hw,
 	if (vif->type == NL80211_IFTYPE_MONITOR) {
 		mvm->monitor_on = true;
 		mvm->monitor_p80 =
-			iwl_mvm_chandef_get_primary_80(&vif->bss_conf.chandef);
+			iwl_mvm_chandef_get_primary_80(&vif->bss_conf.chanreq.oper);
 	}
 
 	iwl_mvm_vif_dbgfs_register(mvm, vif);
@@ -3452,16 +3452,16 @@ iwl_mvm_check_he_obss_narrow_bw_ru(struct ieee80211_hw *hw,
 		.tolerated = true,
 	};
 
-	if (WARN_ON_ONCE(!link_conf->chandef.chan ||
+	if (WARN_ON_ONCE(!link_conf->chanreq.oper.chan ||
 			 !mvmvif->link[link_id]))
 		return;
 
-	if (!(link_conf->chandef.chan->flags & IEEE80211_CHAN_RADAR)) {
+	if (!(link_conf->chanreq.oper.chan->flags & IEEE80211_CHAN_RADAR)) {
 		mvmvif->link[link_id]->he_ru_2mhz_block = false;
 		return;
 	}
 
-	cfg80211_bss_iter(hw->wiphy, &link_conf->chandef,
+	cfg80211_bss_iter(hw->wiphy, &link_conf->chanreq.oper,
 			  iwl_mvm_check_he_obss_narrow_bw_ru_iter,
 			  &iter_data);
 
@@ -3521,10 +3521,10 @@ static void iwl_mvm_mei_host_associated(struct iwl_mvm *mvm,
 		return;
 
 	/* FIXME: MEI needs to be updated for MLO */
-	if (!vif->bss_conf.chandef.chan)
+	if (!vif->bss_conf.chanreq.oper.chan)
 		return;
 
-	conn_info.channel = vif->bss_conf.chandef.chan->hw_value;
+	conn_info.channel = vif->bss_conf.chanreq.oper.chan->hw_value;
 
 	switch (mvm_sta->pairwise_cipher) {
 	case WLAN_CIPHER_SUITE_TKIP:
@@ -5589,6 +5589,10 @@ static void iwl_mvm_flush_no_vif(struct iwl_mvm *mvm, u32 queues, bool drop)
 	int i;
 
 	if (!iwl_mvm_has_new_tx_api(mvm)) {
+		/* we can't ask the firmware anything if it is dead */
+		if (test_bit(IWL_MVM_STATUS_HW_RESTART_REQUESTED,
+			     &mvm->status))
+			return;
 		if (drop) {
 			mutex_lock(&mvm->mutex);
 			iwl_mvm_flush_tx_path(mvm,
@@ -5673,8 +5677,11 @@ void iwl_mvm_mac_flush(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
 
 	/* this can take a while, and we may need/want other operations
 	 * to succeed while doing this, so do it without the mutex held
+	 * If the firmware is dead, this can't work...
 	 */
-	if (!drop && !iwl_mvm_has_new_tx_api(mvm))
+	if (!drop && !iwl_mvm_has_new_tx_api(mvm) &&
+	    !test_bit(IWL_MVM_STATUS_HW_RESTART_REQUESTED,
+		      &mvm->status))
 		iwl_trans_wait_tx_queues_empty(mvm->trans, msk);
 }
 
