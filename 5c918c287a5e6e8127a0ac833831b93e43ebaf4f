@@ -16,6 +16,24 @@
       "message": "shouldn\u0027t this only be printed if extra space is actually requested on the command-line? We don\u0027t want this warning on normal x86 boots when there isn\u0027t actually and issue.",
       "revId": "5c918c287a5e6e8127a0ac833831b93e43ebaf4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0861903_22978638",
+        "filename": "arch/x86/kernel/fpu/init.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1928805
+      },
+      "writtenOn": "2024-10-14T22:00:16Z",
+      "side": 1,
+      "message": "Ok, will add a check to see if arch_task_struct_size \u003e sizeof(struct task_struct) before printing. That works?",
+      "parentUuid": "97698a58_1fc9a843",
+      "revId": "5c918c287a5e6e8127a0ac833831b93e43ebaf4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
