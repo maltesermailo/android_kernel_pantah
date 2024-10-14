@@ -34,6 +34,24 @@
       "parentUuid": "97698a58_1fc9a843",
       "revId": "5c918c287a5e6e8127a0ac833831b93e43ebaf4f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed90f6cc_b7b0d856",
+        "filename": "arch/x86/kernel/fpu/init.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-10-14T22:20:07Z",
+      "side": 1,
+      "message": "that works as long as we know that `fpu__init_task_struct_size` is called after `arch_task_struct_size_setup`. I think this is true, but please confirm.\n\nIf we aren\u0027t sure, then add a test for `arch_task_struct_size \u003d\u003d 0` in `arch_task_struct_size_setup`.",
+      "parentUuid": "c0861903_22978638",
+      "revId": "5c918c287a5e6e8127a0ac833831b93e43ebaf4f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
