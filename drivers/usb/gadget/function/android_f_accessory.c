@@ -1291,6 +1291,7 @@ static int acc_init(void)
 
 err_free_dev:
 	kfree(dev);
+	acc_dev_instance = NULL;
 	pr_err("USB accessory gadget driver failed to initialize\n");
 	return ret;
 }
