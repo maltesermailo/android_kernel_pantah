@@ -268,6 +268,9 @@ DECLARE_HOOK(android_vh_alloc_pages_entry,
 DECLARE_HOOK(android_vh_isolate_freepages,
 	TP_PROTO(struct compact_control *cc, struct page *page, bool *bypass),
 	TP_ARGS(cc, page, bypass));
+DECLARE_HOOK(android_vh_mem_cgroup_charge,
+	TP_PROTO(struct page *page, struct mem_cgroup **memcg),
+	TP_ARGS(page, memcg));
 DECLARE_HOOK(android_vh_should_fault_around,
 	TP_PROTO(struct vm_fault *vmf, bool *should_around),
 	TP_ARGS(vmf, should_around));
@@ -330,6 +333,38 @@ DECLARE_HOOK(android_vh_page_cache_miss,
 		pgoff_t start, pgoff_t len,
 		pgoff_t index, bool buffer),
 	TP_ARGS(file, start, len, index, buffer));
+<<<<<<< HEAD   (3fb4058588744d11909ae18b46e4ac48fb6c91ee FROMGIT: f2fs: prevent atomic file from being dirtied before)
+||||||| BASE   (1596b9fbe05ce5b55165a0d621258bd0f8910694 FROMGIT: f2fs: fix condition in __allow_reserved_blocks())
+DECLARE_HOOK(android_vh_lru_cache_add_page_activate,
+	TP_PROTO(struct page *page, bool *bypass),
+	TP_ARGS(page, bypass));
+DECLARE_HOOK(android_vh_filemap_fault_pre_page_locked,
+	TP_PROTO(struct page *page),
+	TP_ARGS(page));
+DECLARE_HOOK(android_vh_filemap_page_mapped,
+	TP_PROTO(struct page *page),
+	TP_ARGS(page));
+DECLARE_HOOK(android_vh_zap_pte_range_page_remove_rmap,
+	TP_PROTO(struct page *page),
+	TP_ARGS(page));
+=======
+DECLARE_HOOK(android_vh_lru_cache_add_page_activate,
+	TP_PROTO(struct page *page, bool *bypass),
+	TP_ARGS(page, bypass));
+DECLARE_HOOK(android_vh_filemap_fault_pre_page_locked,
+	TP_PROTO(struct page *page),
+	TP_ARGS(page));
+DECLARE_HOOK(android_vh_filemap_page_mapped,
+	TP_PROTO(struct page *page),
+	TP_ARGS(page));
+DECLARE_HOOK(android_vh_zap_pte_range_page_remove_rmap,
+	TP_PROTO(struct page *page),
+	TP_ARGS(page));
+DECLARE_HOOK(android_vh_filemap_add_to_page_cache,
+	TP_PROTO(struct address_space *mapping, struct page *page,
+		pgoff_t offset),
+	TP_ARGS(mapping, page, offset));
+>>>>>>> CHANGE (882ce3c67a252ade215e4402b7ea60bceb2306d1 ANDROID: mm: add vendor hook to add page to specific memcg)
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
