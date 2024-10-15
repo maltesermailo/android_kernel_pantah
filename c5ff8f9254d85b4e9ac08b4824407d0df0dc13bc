@@ -1,6 +1,75 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "495bce87_456f91c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-10-15T16:45:03Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Cherry pick does not have same author date as original commit.\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\nOwner: android-kernel-team@google.com\n\nCherry pick does not have same author date as original commit.\n\nOriginal author date: Wed Mar 2 22:03:04 2022 +0000\nCherry pick author date: Wed May 8 10:51:49 2024 +0800\n\nPlease cherry-pick using: `git cherry-pick -x aa4faf6eb27132532d5a133d9241254c16d4bafa`.\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "c5ff8f9254d85b4e9ac08b4824407d0df0dc13bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb3b0be9_743bdae7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-10-15T16:45:03Z",
+      "side": 1,
+      "message": "Please address this WARNING reported by KernelCommit: Cherry pick is not clean. Checked against UPSTREAM.\n\n\nCherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/aa4faf6eb27132532d5a133d9241254c16d4bafa) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003daa4faf6eb27132532d5a133d9241254c16d4bafa).\n\n```\n      ## drivers/media/v4l2-core/v4l2-async.c ##\n    -@@ drivers/media/v4l2-core/v4l2-async.c: v4l2_async_nf_try_complete(struct v4l2_async_notifier *notifier)\n    - static int\n    - v4l2_async_nf_try_all_subdevs(struct v4l2_async_notifier *notifier);\n    +@@ drivers/media/v4l2-core/v4l2-async.c: static int v4l2_async_create_ancillary_links(struct v4l2_async_notifier *n,\n    + \t    sd-\u003eentity.function !\u003d MEDIA_ENT_F_FLASH)\n    + \t\treturn 0;\n      \n    -+static int v4l2_async_create_ancillary_links(struct v4l2_async_notifier *n,\n    -+\t\t\t\t\t     struct v4l2_subdev *sd)\n    -+{\n    -+\tstruct media_link *link \u003d NULL;\n    -+\n    -+#if IS_ENABLED(CONFIG_MEDIA_CONTROLLER)\n    -+\n    -+\tif (sd-\u003eentity.function !\u003d MEDIA_ENT_F_LENS \u0026\u0026\n    -+\t    sd-\u003eentity.function !\u003d MEDIA_ENT_F_FLASH)\n    ++\tif (!n-\u003esd)\n     +\t\treturn 0;\n     +\n    -+\tlink \u003d media_create_ancillary_link(\u0026n-\u003esd-\u003eentity, \u0026sd-\u003eentity);\n    -+\n    -+#endif\n    -+\n    -+\treturn IS_ERR(link) ? PTR_ERR(link) : 0;\n    -+}\n    -+\n    - static int v4l2_async_match_notify(struct v4l2_async_notifier *notifier,\n    - \t\t\t\t   struct v4l2_device *v4l2_dev,\n    - \t\t\t\t   struct v4l2_subdev *sd,\n    -@@ drivers/media/v4l2-core/v4l2-async.c: static int v4l2_async_match_notify(struct v4l2_async_notifier *notifier,\n    - \t\treturn ret;\n    - \t}\n    + \tlink \u003d media_create_ancillary_link(\u0026n-\u003esd-\u003eentity, \u0026sd-\u003eentity);\n      \n    -+\t/*\n    -+\t * Depending of the function of the entities involved, we may want to\n    -+\t * create links between them (for example between a sensor and its lens\n    -+\t * or between a sensor\u0027s source pad and the connected device\u0027s sink\n    -+\t * pad).\n    -+\t */\n    -+\tret \u003d v4l2_async_create_ancillary_links(notifier, sd);\n    -+\tif (ret) {\n    -+\t\tv4l2_async_nf_call_unbind(notifier, sd, asd);\n    -+\t\tv4l2_device_unregister_subdev(sd);\n    -+\t\treturn ret;\n    -+\t}\n    -+\n    - \t/* Remove from the waiting list */\n    - \tlist_del(\u0026asd-\u003elist);\n    - \tsd-\u003easd \u003d asd;\n    + #endif\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "c5ff8f9254d85b4e9ac08b4824407d0df0dc13bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "464ad647_a42829be",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-10-15T16:45:03Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Cherry pick does not have same author as original commit.\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\nOwner: android-kernel-team@google.com\n\nCherry pick does not have same author as original commit.\n\nOriginal author: \u0027djrscally@gmail.com\nCherry pick author: \u0027cy_huang@richtek.com\n\nPlease cherry-pick using: `git cherry-pick -x aa4faf6eb27132532d5a133d9241254c16d4bafa`.\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "c5ff8f9254d85b4e9ac08b4824407d0df0dc13bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "1162b106_1102f670",
