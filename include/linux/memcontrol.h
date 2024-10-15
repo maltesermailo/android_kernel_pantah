@@ -357,6 +357,19 @@ enum page_memcg_data_flags {
 
 static inline bool folio_memcg_kmem(struct folio *folio);
 
+<<<<<<< HEAD   (ca24c5 Revert "ANDROID: usb: Optimization the transfer rate of acce)
+||||||| BASE
+void do_traversal_all_lruvec(void);
+
+=======
+void do_traversal_all_lruvec(void);
+
+int mem_cgroup_move_account(struct folio *folio,
+			    bool compound,
+			    struct mem_cgroup *from,
+			    struct mem_cgroup *to);
+
+>>>>>>> CHANGE (c03147 ANDROID: mm: export mem_cgroup_move_account)
 /*
  * After the initialization objcg->memcg is always pointing at
  * a valid memcg, but can be atomically swapped to the parent memcg.
@@ -1188,6 +1201,26 @@ static inline bool PageMemcgKmem(struct page *page)
 	return false;
 }
 
+<<<<<<< HEAD   (ca24c5 Revert "ANDROID: usb: Optimization the transfer rate of acce)
+||||||| BASE
+static inline void do_traversal_all_lruvec(void)
+{
+}
+
+=======
+static inline void do_traversal_all_lruvec(void)
+{
+}
+
+static inline int mem_cgroup_move_account(struct folio *folio,
+					  bool compound,
+					  struct mem_cgroup *from,
+					  struct mem_cgroup *to)
+{
+	return 0;
+}
+
+>>>>>>> CHANGE (c03147 ANDROID: mm: export mem_cgroup_move_account)
 static inline bool mem_cgroup_is_root(struct mem_cgroup *memcg)
 {
 	return true;

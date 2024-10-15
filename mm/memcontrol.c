@@ -5750,7 +5750,13 @@ static struct page *mc_handle_file_pte(struct vm_area_struct *vma,
  * This function doesn't do "charge" to new cgroup and doesn't do "uncharge"
  * from old cgroup.
  */
+<<<<<<< HEAD   (ca24c5 Revert "ANDROID: usb: Optimization the transfer rate of acce)
 static int mem_cgroup_move_account(struct page *page,
+||||||| BASE
+static int mem_cgroup_move_account(struct folio *folio,
+=======
+int mem_cgroup_move_account(struct folio *folio,
+>>>>>>> CHANGE (c03147 ANDROID: mm: export mem_cgroup_move_account)
 				   bool compound,
 				   struct mem_cgroup *from,
 				   struct mem_cgroup *to)
@@ -5861,6 +5867,7 @@ out_unlock:
 out:
 	return ret;
 }
+EXPORT_SYMBOL_GPL(mem_cgroup_move_account);
 
 /**
  * get_mctgt_type - get target type of moving charge
