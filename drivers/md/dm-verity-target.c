@@ -16,6 +16,7 @@
 #include "dm-verity.h"
 #include "dm-verity-fec.h"
 #include "dm-verity-verify-sig.h"
+#include <linux/debugfs.h>
 #include <linux/module.h>
 #include <linux/reboot.h>
 #include <linux/scatterlist.h>
@@ -550,6 +551,9 @@ static inline void verity_bv_skip_block(struct dm_verity *v,
 	bio_advance_iter(bio, iter, 1 << v->data_dev_block_bits);
 }
 
+#define HISTOGRAM_LEN	(1<<18)
+static atomic64_t *histogram;
+
 /*
  * Verify one "dm_verity_io" structure.
  */
@@ -573,6 +577,13 @@ static int verity_verify_io(struct dm_verity_io *io)
 		iter = &iter_copy;
 	} else
 		iter = &io->iter;
+
+	if (histogram) {
+		if (io->n_blocks >= HISTOGRAM_LEN)
+			pr_warn("histogram is too short\n");
+		else
+			atomic64_inc(&histogram[io->n_blocks]);
+	}
 
 	for (b = 0; b < io->n_blocks; b++) {
 		int r;
@@ -1552,9 +1563,40 @@ static struct target_type verity_target = {
 	.io_hints	= verity_io_hints,
 };
 
+static ssize_t histogram_read(struct file *file, char __user *to,
+			      size_t count, loff_t *ppos)
+{
+	u64 *tmp;
+	size_t i;
+	ssize_t ret;
+
+	if (!histogram)
+		return -EOPNOTSUPP;
+	tmp = kvcalloc(HISTOGRAM_LEN, sizeof(tmp[0]), GFP_KERNEL);
+	if (!tmp)
+		return -ENOMEM;
+	for (i = 0; i < HISTOGRAM_LEN; i++)
+		tmp[i] = atomic64_read(&histogram[i]);
+
+	ret = simple_read_from_buffer(to, count, ppos, tmp,
+				      HISTOGRAM_LEN * sizeof(tmp[0]));
+	kfree(tmp);
+	return ret;
+}
+
+static const struct file_operations histogram_fops = {
+	.read = histogram_read,
+};
+
 static int __init dm_verity_init(void)
 {
 	int r;
+	struct dentry *dir;
+
+	histogram = kvcalloc(HISTOGRAM_LEN, sizeof(histogram[0]), GFP_KERNEL);
+
+	dir = debugfs_create_dir("dm-verity", NULL);
+	debugfs_create_file("histogram", 0400, dir, NULL, &histogram_fops);
 
 	r = dm_register_target(&verity_target);
 	if (r < 0)
