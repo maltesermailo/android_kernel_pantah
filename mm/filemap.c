@@ -893,10 +893,15 @@ noinline int __add_to_page_cache_locked(struct page *page,
 	VM_BUG_ON_PAGE(PageSwapBacked(page), page);
 	mapping_set_update(&xas, mapping);
 
+<<<<<<< HEAD   (8b216d564fb92a1beb0c28ef96bc367b12559e4c UPSTREAM: perf/core: Fix potential NULL deref)
 	get_page(page);
 	page->mapping = mapping;
 	page->index = offset;
 
+||||||| BASE   (e63d8c3188dbc76c573635164d39afad65306615 ANDROID: f2fs: fix incorrect merge resolution in f2fs_trace_)
+=======
+	trace_android_vh_filemap_add_folio(mapping, folio, index);
+>>>>>>> CHANGE (f2a18f1865797cb396ba90f89ddb3df8065b29e2 ANDROID: mm: add vendor hook to add folio to specific memcg)
 	if (!huge) {
 		error = mem_cgroup_charge(page, NULL, gfp);
 		if (error)

@@ -6894,7 +6894,14 @@ int __mem_cgroup_charge(struct page *page, struct mm_struct *mm,
 	int ret;
 
 	memcg = get_mem_cgroup_from_mm(mm);
+<<<<<<< HEAD   (8b216d564fb92a1beb0c28ef96bc367b12559e4c UPSTREAM: perf/core: Fix potential NULL deref)
 	ret = charge_memcg(page, memcg, gfp_mask);
+||||||| BASE   (e63d8c3188dbc76c573635164d39afad65306615 ANDROID: f2fs: fix incorrect merge resolution in f2fs_trace_)
+	ret = charge_memcg(folio, memcg, gfp);
+=======
+	trace_android_vh_mem_cgroup_charge(folio, &memcg);
+	ret = charge_memcg(folio, memcg, gfp);
+>>>>>>> CHANGE (f2a18f1865797cb396ba90f89ddb3df8065b29e2 ANDROID: mm: add vendor hook to add folio to specific memcg)
 	css_put(&memcg->css);
 
 	return ret;
