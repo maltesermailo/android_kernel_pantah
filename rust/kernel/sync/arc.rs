@@ -210,9 +210,35 @@ impl<T> Arc<T> {
         // `Arc` object.
         Ok(unsafe { Self::from_inner(Box::leak(inner).into()) })
     }
+<<<<<<< HEAD   (d31999 ANDROID: rust_binder: add binder_logs/proc directory)
 
     /// The offset that the value is stored at.
     pub const DATA_OFFSET: usize = core::mem::offset_of!(ArcInner<T>, data);
+||||||| BASE
+
+    /// Use the given initializer to in-place initialize a `T`.
+    ///
+    /// If `T: !Unpin` it will not be able to move afterwards.
+    #[inline]
+    pub fn pin_init<E>(init: impl PinInit<T, E>, flags: Flags) -> error::Result<Self>
+    where
+        Error: From<E>,
+    {
+        UniqueArc::pin_init(init, flags).map(|u| u.into())
+    }
+
+    /// Use the given initializer to in-place initialize a `T`.
+    ///
+    /// This is equivalent to [`Arc<T>::pin_init`], since an [`Arc`] is always pinned.
+    #[inline]
+    pub fn init<E>(init: impl Init<T, E>, flags: Flags) -> error::Result<Self>
+    where
+        Error: From<E>,
+    {
+        UniqueArc::init(init, flags).map(|u| u.into())
+    }
+=======
+>>>>>>> BRANCH (6b14bc Merge 9852d85ec9d4 ("Linux 6.12-rc1") into android-mainline)
 }
 
 impl<T: ?Sized> Arc<T> {

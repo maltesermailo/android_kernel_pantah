@@ -22,8 +22,12 @@ void rust_helper_spin_unlock(spinlock_t *lock)
 {
 	spin_unlock(lock);
 }
+<<<<<<< HEAD   (d31999 ANDROID: rust_binder: add binder_logs/proc directory)
 
 int rust_helper_spin_trylock(spinlock_t *lock)
 {
 	return spin_trylock(lock);
 }
+||||||| BASE
+=======
+>>>>>>> BRANCH (6b14bc Merge 9852d85ec9d4 ("Linux 6.12-rc1") into android-mainline)

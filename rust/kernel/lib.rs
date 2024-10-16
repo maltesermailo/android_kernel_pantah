@@ -42,7 +42,11 @@ pub mod ioctl;
 #[cfg(CONFIG_KUNIT)]
 pub mod kunit;
 pub mod list;
+<<<<<<< HEAD   (d31999 ANDROID: rust_binder: add binder_logs/proc directory)
 pub mod mm;
+||||||| BASE
+=======
+>>>>>>> BRANCH (6b14bc Merge 9852d85ec9d4 ("Linux 6.12-rc1") into android-mainline)
 #[cfg(CONFIG_NET)]
 pub mod net;
 pub mod page;
@@ -52,6 +56,7 @@ pub mod rbtree;
 pub mod security;
 pub mod seq_file;
 pub mod sizes;
+pub mod rbtree;
 mod static_assert;
 pub mod static_key;
 #[doc(hidden)]

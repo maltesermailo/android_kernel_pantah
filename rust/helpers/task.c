@@ -17,6 +17,7 @@ void rust_helper_put_task_struct(struct task_struct *t)
 {
 	put_task_struct(t);
 }
+<<<<<<< HEAD   (d31999 ANDROID: rust_binder: add binder_logs/proc directory)
 
 kuid_t rust_helper_task_uid(struct task_struct *task)
 {
@@ -61,3 +62,6 @@ unsigned long rust_helper_task_rlimit(const struct task_struct *task,
 {
 	return task_rlimit(task, limit);
 }
+||||||| BASE
+=======
+>>>>>>> BRANCH (6b14bc Merge 9852d85ec9d4 ("Linux 6.12-rc1") into android-mainline)
