@@ -34,6 +34,13 @@
 #include <trace/hooks/cpuidle_psci.h>
 #include <trace/hooks/vmscan.h>
 #include <trace/hooks/avc.h>
+<<<<<<< HEAD   (9eb7168d21babd324453313c48c26bf6a5ce7b2d ANDROID: {gki,microdroid}_defconfig: drop removed POLYVAL op)
+||||||| BASE   (695893eff96168c651252b732e4bf9aea646dc83 ANDROID: Enable CONFIG_ARM64_PSEUDO_NMI)
+#include <trace/hooks/creds.h>
+=======
+#include <trace/hooks/creds.h>
+#include <trace/hooks/module.h>
+>>>>>>> CHANGE (71c3c86ad2272c1405675d114f29b7bfabc833ac ANDROID: module: Add vendor hooks)
 #include <trace/hooks/selinux.h>
 #include <trace/hooks/syscall_check.h>
 #include <trace/hooks/gic.h>
@@ -203,6 +210,31 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_selinux_avc_node_delete);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_selinux_avc_node_replace);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_selinux_avc_lookup);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_selinux_is_initialized);
+<<<<<<< HEAD   (9eb7168d21babd324453313c48c26bf6a5ce7b2d ANDROID: {gki,microdroid}_defconfig: drop removed POLYVAL op)
+||||||| BASE   (695893eff96168c651252b732e4bf9aea646dc83 ANDROID: Enable CONFIG_ARM64_PSEUDO_NMI)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_record_mutex_lock_starttime);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_record_rtmutex_lock_starttime);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_record_rwsem_lock_starttime);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_record_pcpu_rwsem_starttime);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_percpu_rwsem_wq_add);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_commit_creds);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_exit_creds);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_override_creds);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_revert_creds);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_record_mutex_lock_starttime);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_record_rtmutex_lock_starttime);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_record_rwsem_lock_starttime);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_record_pcpu_rwsem_starttime);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_percpu_rwsem_wq_add);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_mod_mem);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_mod_perm_after_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_mod_perm_before_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_commit_creds);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_exit_creds);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_override_creds);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_revert_creds);
+>>>>>>> CHANGE (71c3c86ad2272c1405675d114f29b7bfabc833ac ANDROID: module: Add vendor hooks)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_mmap_file);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_file_open);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_gic_v3_suspend);
