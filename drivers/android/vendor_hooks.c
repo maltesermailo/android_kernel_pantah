@@ -34,6 +34,7 @@
 #include <trace/hooks/cpuidle_psci.h>
 #include <trace/hooks/vmscan.h>
 #include <trace/hooks/avc.h>
+#include <trace/hooks/module.h>
 #include <trace/hooks/selinux.h>
 #include <trace/hooks/syscall_check.h>
 #include <trace/hooks/gic.h>
@@ -203,6 +204,12 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_selinux_avc_node_delete);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_selinux_avc_node_replace);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_selinux_avc_lookup);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_selinux_is_initialized);
+<<<<<<< PATCH SET (4505aa6071bc15cf82f5025da77f0ab17f4a7a8f ANDROID: module: Add vendor hooks)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_mod_mem);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_mod_perm_after_init);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_mod_perm_before_init);
+||||||| BASE      (9eb7168d21babd324453313c48c26bf6a5ce7b2d ANDROID: {gki,microdroid}_defconfig: drop removed POLYVAL op)
+=======
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_lock_acquired);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_lock_released);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rtmutex_lock_acquired);
@@ -211,6 +218,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_lock_acquired);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rwsem_lock_released);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pcpu_rwsem_lock_acquired);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pcpu_rwsem_lock_released);
+>>>>>>> BASE      (a8651686a0c81422fd7d80d4268815e58b5e79aa Revert "ANDROID: locking/rwsem: Make rwsem write blockers us)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_mmap_file);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_check_file_open);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_gic_v3_suspend);
