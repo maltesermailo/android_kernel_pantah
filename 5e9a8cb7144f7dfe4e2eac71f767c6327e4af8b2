@@ -16,6 +16,24 @@
       "message": "I am getting a build error here:\n\n```\nkernel/fork.c: In function ‘arch_task_struct_size_setup’:\nkernel/fork.c:1047:32: error: ‘CONFIG_GKI_TASK_STRUCT_VENDOR_SIZE_MAX’ undeclared (first use in this function)\n 1047 |         if (size \u003c 0 || size \u003e CONFIG_GKI_TASK_STRUCT_VENDOR_SIZE_MAX)\n      |                                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nkernel/fork.c:1047:32: note: each undeclared identifier is reported only once for each function it appears in\n```",
       "revId": "5e9a8cb7144f7dfe4e2eac71f767c6327e4af8b2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb41431a_a263f1d9",
+        "filename": "kernel/fork.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1047,
+      "author": {
+        "id": 1899350
+      },
+      "writtenOn": "2024-10-17T18:48:29Z",
+      "side": 1,
+      "message": "are you building for non-GKI, x86 platform?",
+      "parentUuid": "9e9eab8f_fb1329ba",
+      "revId": "5e9a8cb7144f7dfe4e2eac71f767c6327e4af8b2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
