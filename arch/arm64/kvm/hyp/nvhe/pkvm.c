@@ -1246,6 +1246,9 @@ static bool pvm_psci_vcpu_on(struct pkvm_hyp_vcpu *hyp_vcpu)
 	reset_state->be = kvm_vcpu_is_be(&hyp_vcpu->vcpu);
 	reset_state->reset = true;
 
+	WARN_ON(hyp_vcpu->vcpu.arch.mp_state.mp_state == KVM_MP_STATE_RUNNABLE);
+	WRITE_ONCE(hyp_vcpu->vcpu.arch.mp_state.mp_state, KVM_MP_STATE_RUNNABLE);
+
 	/*
 	 * Return to the host, which should make the KVM_REQ_VCPU_RESET request
 	 * as well as kvm_vcpu_wake_up() to schedule the vcpu.
