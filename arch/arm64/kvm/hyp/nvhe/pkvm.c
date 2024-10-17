@@ -566,6 +566,7 @@ static int pkvm_vcpu_init_psci(struct pkvm_hyp_vcpu *hyp_vcpu)
 		hyp_vm->pvmfw_entry_vcpu = hyp_vcpu;
 		reset_state->reset = true;
 		hyp_vcpu->power_state = PSCI_0_2_AFFINITY_LEVEL_ON_PENDING;
+		hyp_vcpu->vcpu.arch.mp_state.mp_state = KVM_MP_STATE_RUNNABLE;
 	} else {
 		struct kvm_vcpu *host_vcpu = hyp_vcpu->host_vcpu;
 
@@ -573,6 +574,7 @@ static int pkvm_vcpu_init_psci(struct pkvm_hyp_vcpu *hyp_vcpu)
 		reset_state->r0 = READ_ONCE(host_vcpu->arch.ctxt.regs.regs[0]);
 		reset_state->reset = true;
 		hyp_vcpu->power_state = PSCI_0_2_AFFINITY_LEVEL_ON_PENDING;
+		hyp_vcpu->vcpu.arch.mp_state.mp_state = KVM_MP_STATE_RUNNABLE;
 	}
 
 	return 0;
@@ -1142,7 +1144,6 @@ void pkvm_reset_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu)
 	hyp_vcpu->exit_code = 0;
 
 	WARN_ON(hyp_vcpu->power_state != PSCI_0_2_AFFINITY_LEVEL_ON_PENDING);
-	WRITE_ONCE(vcpu->arch.mp_state.mp_state, KVM_MP_STATE_RUNNABLE);
 	WRITE_ONCE(hyp_vcpu->power_state, PSCI_0_2_AFFINITY_LEVEL_ON);
 }
 
@@ -1245,6 +1246,9 @@ static bool pvm_psci_vcpu_on(struct pkvm_hyp_vcpu *hyp_vcpu)
 	/* Propagate caller endianness */
 	reset_state->be = kvm_vcpu_is_be(&hyp_vcpu->vcpu);
 	reset_state->reset = true;
+
+	WARN_ON(target->vcpu.arch.mp_state.mp_state == KVM_MP_STATE_RUNNABLE);
+	target->vcpu.arch.mp_state.mp_state = KVM_MP_STATE_RUNNABLE;
 
 	/*
 	 * Return to the host, which should make the KVM_REQ_VCPU_RESET request
