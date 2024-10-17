@@ -94,6 +94,30 @@
       },
       "revId": "7a44c8411ad34f2cbe716315bf42480146c25335",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51b44790_1928eabe",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 935,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2024-10-17T12:58:59Z",
+      "side": 1,
+      "message": "Let me read the whole code to really understand the flow, but yes calling a vcpu \u0027runnable\u0027 w/o being in the \u0027KVM_MP_STATE_RUNNABLE\u0027 stands out. The PSCI code should really only be useful to \u0027drive\u0027 the mp_state intuitively. I\u0027ll read through, sorry if this isn\u0027t useful.",
+      "parentUuid": "9a2fb213_2d8fbab3",
+      "range": {
+        "startLine": 935,
+        "startChar": 2,
+        "endLine": 935,
+        "endChar": 61
+      },
+      "revId": "7a44c8411ad34f2cbe716315bf42480146c25335",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
