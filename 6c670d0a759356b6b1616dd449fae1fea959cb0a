@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5255b8cf_c1aaa24b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2024-10-18T17:02:42Z",
+      "side": 1,
+      "message": "Wait, the delta between the original patch seems to be only a blank new line?\n```\ndiff --git a/drivers/firmware/arm_scmi/mailbox.c b/drivers/firmware/arm_scmi/mailbox.c\nindex 8776660d7a9d..4417239561ba 100644\n--- a/drivers/firmware/arm_scmi/mailbox.c\n+++ b/drivers/firmware/arm_scmi/mailbox.c\n@@ -309,6 +309,7 @@ static void mailbox_mark_txdone(struct scmi_chan_info *cinfo, int ret,\n        struct scmi_mailbox *smbox \u003d cinfo-\u003etransport_info;\n \n        mbox_client_txdone(smbox-\u003echan, ret);\n+\n        /* Release channel */\n        mutex_unlock(\u0026smbox-\u003echan_lock);\n }\n```\n\nIt seems this should be a clean `UPSTREAM:` and not a `BACKPORT:`, please fix?",
+      "revId": "6c670d0a759356b6b1616dd449fae1fea959cb0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
