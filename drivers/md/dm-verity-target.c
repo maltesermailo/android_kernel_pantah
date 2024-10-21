@@ -51,6 +51,13 @@ module_param_named(prefetch_cluster, dm_verity_prefetch_cluster, uint, 0644);
 
 static DEFINE_STATIC_KEY_FALSE(use_bh_wq_enabled);
 
+/* If set, the verity_bh_work() will be used for small bio requests. */
+static DEFINE_STATIC_KEY_TRUE(use_bh_softirq_small_blocks);
+
+/* Maximum size of a bio request (in bytes) that will be processed * in softirq context when use_bh_softirq_small_blocks is enabled. */
+static unsigned int verity_bh_softirq_max_bytes = 4096;
+
+
 /* Is at least one dm-verity instance using ahash_tfm instead of shash_tfm? */
 static DEFINE_STATIC_KEY_FALSE(ahash_enabled);
 
@@ -748,6 +755,20 @@ static void verity_end_io(struct bio *bio)
 		verity_finish_io(io, bio->bi_status);
 		return;
 	}
+	
+	/* New condition for small blocks under 4kb (4096) */
+	if (static_branch_unlikely(&use_bh_softirq_small_blocks) && bio->bi_iter.bi_size <= verity_bh_softirq_max_bytes) {
+        	int err = verity_verify_io(io); //Call directly (executed immediately in the current context)
+        	
+        	if (err == -EAGAIN || err == -ENOMEM) {
+			/* fallback to retrying with work-queue */
+			INIT_WORK(&io->work, verity_work);
+			queue_work(io->v->verify_wq, &io->work);
+			return;
+		}
+        	
+        	return;
+    	}
 
 	if (static_branch_unlikely(&use_bh_wq_enabled) && io->v->use_bh_wq) {
 		INIT_WORK(&io->bh_work, verity_bh_work);
