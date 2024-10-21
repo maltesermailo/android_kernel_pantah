@@ -16,6 +16,29 @@
       "message": "Also refer to b/358426674#comment48.\nNote: arm64 defconfig already has these flags.",
       "revId": "267af685b8abc21ab9763a65bd9926469c58a0f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2c3728f_74841073",
+        "filename": "arch/x86/configs/android-x86_64_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2024-10-21T11:45:27Z",
+      "side": 1,
+      "message": "This is the only thing that is `\u003dn` for `gki_defconfig` (our long term kernel config).\n1. Do we really need this one?\n2. If yes, can it be `\u003dm` instead here so we avoid `gki_defconfig` modification in future?",
+      "range": {
+        "startLine": 222,
+        "startChar": 0,
+        "endLine": 222,
+        "endChar": 27
+      },
+      "revId": "267af685b8abc21ab9763a65bd9926469c58a0f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
