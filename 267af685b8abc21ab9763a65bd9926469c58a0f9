@@ -39,6 +39,30 @@
       },
       "revId": "267af685b8abc21ab9763a65bd9926469c58a0f9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87e5e994_0c27ebc7",
+        "filename": "arch/x86/configs/android-x86_64_defconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1952516
+      },
+      "writtenOn": "2024-10-22T04:39:39Z",
+      "side": 1,
+      "message": "Thanks for catching this! This was only our initial guess, and only one of `CONFIG_IP_NF_MATCH_RFILTER` and `CONFIG_IP6_NF_MATCH_RFILTER` is required for `CONFIG_NETFILTER_XT_TARGET_CT`. I have checked that tethering and still works with the change.",
+      "parentUuid": "d2c3728f_74841073",
+      "range": {
+        "startLine": 222,
+        "startChar": 0,
+        "endLine": 222,
+        "endChar": 27
+      },
+      "revId": "267af685b8abc21ab9763a65bd9926469c58a0f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
