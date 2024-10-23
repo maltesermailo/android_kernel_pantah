@@ -22,6 +22,30 @@
       },
       "revId": "bd399399b83fcfdfb23955ca65d0852963bbc2af",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61677fa5_17ee0acf",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 1257,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2024-10-23T21:18:53Z",
+      "side": 1,
+      "message": "what about\n\ncommon/arch/arm64/configs/android/allmodconfig.fragment\n\nor \n\ncommon/android/allmodconfig.fragment\n\nI could\u0027ve put it right below common/, but I think we also want to clean up the top level files (whether it is defconfig or build configs)\n\nI wouldn\u0027t put it in build/kernel because it may be branch specific.",
+      "parentUuid": "12efae0a_f2685fac",
+      "range": {
+        "startLine": 1229,
+        "startChar": 0,
+        "endLine": 1257,
+        "endChar": 1
+      },
+      "revId": "bd399399b83fcfdfb23955ca65d0852963bbc2af",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
