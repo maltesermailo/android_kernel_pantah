@@ -710,6 +710,15 @@ const struct cpumask *cpu_clustergroup_mask(int cpu)
 	return cpu_l2c_shared_mask(cpu);
 }
 
+static inline u64 hv_get_register2(unsigned int reg)
+{
+	u64 value;
+	pr_warn("#### rdmsrl_read: %u\n", reg);
+	rdmsrl(reg, value);
+	return value;
+}
+
+
 static void impress_friends(void)
 {
 	int cpu;
@@ -727,6 +736,14 @@ static void impress_friends(void)
 		(bogosum/(5000/HZ))%100);
 
 	pr_debug("Before bogocount - setting activated=1\n");
+	#define HV_X64_MSR_VP_INDEX                 0x4000002
+	#define HV_VP_INDEX_SELF              ((u32)-2)
+        for_each_possible_cpu(cpu) {
+		u64 vp_index = hv_get_register2(HV_X64_MSR_VP_INDEX);
+		pr_warn("#### Hyper-V vp index: %llu for cpu: %d\n", vp_index, cpu);
+		u64 vp_self = hv_get_register2(HV_VP_INDEX_SELF);
+		pr_warn("#### Hyper-V vp self: %llu for cpu: %d\n", vp_self, cpu);
+          }
 }
 
 void __inquire_remote_apic(int apicid)
