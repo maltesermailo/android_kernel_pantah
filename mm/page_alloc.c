@@ -698,7 +698,7 @@ void destroy_large_folio(struct folio *folio)
 		return;
 	}
 
-	folio_undo_large_rmappable(folio);
+	folio_unqueue_deferred_split(folio);
 	mem_cgroup_uncharge(folio);
 	free_the_page(&folio->page, folio_order(folio));
 }
@@ -2802,8 +2802,6 @@ void free_unref_folios(struct folio_batch *folios)
 		unsigned long pfn = folio_pfn(folio);
 		unsigned int order = folio_order(folio);
 
-		if (order > 0 && folio_test_large_rmappable(folio))
-			folio_unqueue_deferred_split(folio);
 		if (!free_pages_prepare(&folio->page, order, FPI_NONE))
 			continue;
 		/*
