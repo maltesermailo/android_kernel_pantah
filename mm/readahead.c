@@ -362,12 +362,12 @@ static unsigned long get_init_ra_size(unsigned long size, unsigned long max)
 {
 	unsigned long newsize = roundup_pow_of_two(size);
 
-	if (newsize <= max / 32)
+/*	if (newsize <= max / 32)
 		newsize = newsize * 4;
 	else if (newsize <= max / 4)
 		newsize = newsize * 2;
 	else
-		newsize = max;
+		newsize = max;*/
 
 	return newsize;
 }
@@ -381,11 +381,12 @@ static unsigned long get_next_ra_size(struct file_ra_state *ra,
 {
 	unsigned long cur = ra->size;
 
-	if (cur < max / 16)
+/*	if (cur < max / 16)
 		return 4 * cur;
 	if (cur <= max / 2)
 		return 2 * cur;
-	return max;
+	return max; */
+	return cur;
 }
 
 /*
