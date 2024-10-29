@@ -983,12 +983,29 @@ static int __maybe_unused geni_i2c_runtime_resume(struct device *dev)
 		return ret;
 
 	ret = clk_prepare_enable(gi2c->core_clk);
+<<<<<<< HEAD   (29d66b UPSTREAM: exit: Sleep at TASK_IDLE when waiting for applicat)
 	if (ret)
 		goto out_icc_disable;
 
 	ret = geni_se_resources_on(&gi2c->se);
 	if (ret)
 		goto out_clk_disable;
+||||||| BASE
+	if (ret)
+		return ret;
+=======
+	if (ret) {
+		geni_icc_disable(&gi2c->se);
+		return ret;
+	}
+
+	ret = geni_se_resources_on(&gi2c->se);
+	if (ret) {
+		clk_disable_unprepare(gi2c->core_clk);
+		geni_icc_disable(&gi2c->se);
+		return ret;
+	}
+>>>>>>> BRANCH (fcfc7a Merge 6.1.112 into android14-6.1-lts)
 
 	enable_irq(gi2c->irq);
 	gi2c->suspended = 0;
