@@ -611,8 +611,10 @@ int dp_altmode_probe(struct typec_altmode *alt)
 
 	typec_altmode_set_drvdata(alt, dp);
 
-	dp->state = DP_STATE_ENTER;
-	schedule_work(&dp->work);
+	if (port->auto_enter) {
+		dp->state = DP_STATE_ENTER;
+		schedule_work(&dp->work);
+	}
 
 	return 0;
 }
