@@ -94,6 +94,13 @@ if [[ "$CMD" == "menuconfig" ]] || [[ "$CMD" == "savedefconfig" ]]; then
 fi
 
 if [ "$ARCH" == "arm64" ] ; then
+    # Remove all previous DTBs. This resolves the situation where the DTS
+    # is removed in the new kernel. Without removing all artifacts, the FIT
+    # image crated later would contain the old DTB taken from previous
+    # build.
+    DEVICETREES=$(find ./arch/arm64/boot/dts -name \*$BUILD_FAMILY_NAME\*.dtb)
+    DEVICETREE_ARTIFACTS=$(find ./arch/arm64/boot/dts -name \*$BUILD_FAMILY_NAME\*.dtb.\*)
+    rm -rf $DEVICETREES $DEVICETREE_ARTIFACTS
     # XXX: Under arm64 arch, in a later step we replace kernel image with a FIT
     # image, which extends the kernel with devices trees. Running the script
     # twice results in nested FIT FIT image, which does not boot. Hence, we
