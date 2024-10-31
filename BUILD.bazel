@@ -1511,11 +1511,15 @@ ddk_headers(
     hdrs = [
         "drivers/gpu/drm/virtio/virtgpu_trace.h",
         "drivers/pinctrl/core.h",
+        "drivers/devfreq/governor.h",
     ],
     # The list of include directories where source files can #include headers
     # from. In other words, these are the `-I` option to the C compiler.
     # Unsafe include directories are appended to ccflags-y.
-    includes = ["drivers/pinctrl"],
+    includes = [
+        "drivers/pinctrl",
+        "drivers/devfreq",
+    ],
     visibility = ["//visibility:private"],
 )
 
