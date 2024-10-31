@@ -1563,13 +1563,23 @@ filegroup(
 ddk_headers(
     name = "all_headers_unsafe",
     hdrs = [
+<<<<<<< PATCH SET (82dda9 ANDROID: Add devfreq governor.h header to unsafe header.)
+        "drivers/devfreq/governor.h",
+        "drivers/gpu/drm/virtio/virtgpu_trace.h",
+||||||| BASE
+        "drivers/gpu/drm/virtio/virtgpu_trace.h",
+=======
+>>>>>>> BASE      (076be8 FROMLIST: media: videobuf2-core: copy vb planes unconditiona)
         "drivers/pinctrl/core.h",
         "//build/kernel/kleaf:user_ddk_unsafe_headers",
     ],
     # The list of include directories where source files can #include headers
     # from. In other words, these are the `-I` option to the C compiler.
     # Unsafe include directories are appended to ccflags-y.
-    includes = ["drivers/pinctrl"],
+    includes = [
+        "drivers/devfreq",
+        "drivers/pinctrl",
+    ],
     visibility = ["//visibility:private"],
 )
 
