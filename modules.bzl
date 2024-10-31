@@ -192,3 +192,16 @@ def get_kunit_modules_list(arch = None):
         ))
 
     return kunit_modules_list
+
+_COMMON_UNPROTECTED_MODULES_LIST = [
+    "kheaders.ko",
+    "zram.ko",
+]
+
+# buildifier: disable=unnamed-macro
+def get_gki_protected_modules(arch = None):
+    all_gki_modules = get_gki_modules_list(arch)
+
+    # TODO: - Consider including + get_kunit_modules_list(arch)
+    unprotected_modules = _COMMON_UNPROTECTED_MODULES_LIST
+    return [mod for mod in all_gki_modules if mod not in unprotected_modules]
