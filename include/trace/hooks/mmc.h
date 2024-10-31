@@ -34,6 +34,22 @@ DECLARE_HOOK(android_vh_mmc_update_mmc_queue,
 	TP_PROTO(struct mmc_card *card, struct mmc_queue *mq),
 	TP_ARGS(card, mq));
 
+DECLARE_HOOK(android_vh_mmc_blk_reset,
+	TP_PROTO(struct mmc_host *host, int err),
+	TP_ARGS(host, err));
+
+DECLARE_HOOK(android_vh_mmc_attach_sd,
+	TP_PROTO(struct mmc_host *host, int err),
+	TP_ARGS(host, err));
+
+DECLARE_HOOK(android_vh_sdhci_get_cd,
+	TP_PROTO(struct sdhci_host *host),
+	TP_ARGS(host));
+
+DECLARE_HOOK(android_vh_mmc_gpio_cd_irqt,
+	TP_PROTO(struct mmc_host *host),
+	TP_ARGS(host));
+
 #endif /* _TRACE_HOOK_MMC_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>
