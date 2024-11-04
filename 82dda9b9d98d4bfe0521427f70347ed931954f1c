@@ -33,6 +33,23 @@
       "message": "Hi, maennich, Would you look at this patch? We need devfreq support with DDK.\nThanks!",
       "revId": "82dda9b9d98d4bfe0521427f70347ed931954f1c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad715480_1d712ac8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1684042
+      },
+      "writtenOn": "2024-11-04T23:36:28Z",
+      "side": 1,
+      "message": "Oops, I think we have to check more about ddk headers with below patch.\nI\u0027m going to ask you later after checking below.  Thanks!\n\n\ncommit 226ad3da56e7deea43f672503f631d4cb624b7ee\nAuthor: Elliot Berman \u003cquic_eberman@quicinc.com\u003e\nDate:   Wed Oct 30 11:09:24 2024 -0700\n\n    ANDROID: kleaf: Clean not needed unsafe headers\n\n    ddk_headers now allows empty list of hdrs. Remove virtgpu_trace.h which\n    was previously (but no longer) needed by cuttlefish.\n\n    Bug: 376318144\n    Suggested-by: Yifan Hong \u003celsk@google.com\u003e\n    Change-Id: I91edd563ee7002c0380a068b02b9b4182f7060ce\n    Signed-off-by: Elliot Berman \u003cquic_eberman@quicinc.com\u003e",
+      "revId": "82dda9b9d98d4bfe0521427f70347ed931954f1c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
