@@ -139,6 +139,7 @@
 #include <linux/sched/clock.h>
 #include <linux/sched/topology.h>
 #include <linux/tick.h>
+#include <trace/events/power.h>
 
 /*
  * The number of bits to shift the CPU's capacity by in order to determine
@@ -378,6 +379,7 @@ static int teo_select(struct cpuidle_driver *drv, struct cpuidle_device *dev,
 	int constraint_idx = 0;
 	int idx0 = 0, idx = -1;
 	bool alt_intercepts, alt_recent;
+	int early_eval = -2, utilization = -2, latency = -2, residency = -2, intercept = -2;
 	ktime_t delta_tick;
 	s64 duration_ns;
 	int i;
@@ -395,12 +397,15 @@ static int teo_select(struct cpuidle_driver *drv, struct cpuidle_device *dev,
 	/* Check if there is any choice in the first place. */
 	if (drv->state_count < 2) {
 		idx = 0;
+		early_eval = -1;
 		goto end;
 	}
 	if (!dev->states_usage[0].disable) {
 		idx = 0;
-		if (drv->states[1].target_residency_ns > duration_ns)
+		if (drv->states[1].target_residency_ns > duration_ns) {
+			early_eval = idx;
 			goto end;
+		}
 	}
 
 	cpu_data->utilized = teo_cpu_is_utilized(dev->cpu, cpu_data);
@@ -426,6 +431,7 @@ static int teo_select(struct cpuidle_driver *drv, struct cpuidle_device *dev,
 		else /* Assume that state 1 is not a polling one and use it. */
 			idx = 1;
 
+		utilization = idx;
 		goto end;
 	}
 
@@ -469,6 +475,8 @@ static int teo_select(struct cpuidle_driver *drv, struct cpuidle_device *dev,
 		idx_recent_sum = recent_sum;
 	}
 
+	latency = constraint_idx;
+	residency = idx;
 	/* Avoid unnecessary overhead. */
 	if (idx < 0) {
 		idx = 0; /* No states enabled, must use 0. */
@@ -553,6 +561,8 @@ static int teo_select(struct cpuidle_driver *drv, struct cpuidle_device *dev,
 		}
 	}
 
+	intercept = idx;
+
 	/*
 	 * If there is a latency constraint, it may be necessary to select an
 	 * idle state shallower than the current candidate one.
@@ -575,6 +585,7 @@ static int teo_select(struct cpuidle_driver *drv, struct cpuidle_device *dev,
 			idx = i;
 			duration_ns = span_ns;
 		}
+	utilization = idx;
 	}
 
 end:
@@ -596,7 +607,7 @@ end:
 		    drv->states[idx].target_residency_ns > delta_tick)
 			idx = teo_find_shallower_state(drv, dev, idx, delta_tick, false);
 	}
-
+	trace_cpu_idle_teo(dev->cpu, idx, early_eval, latency, utilization, residency, intercept, *stop_tick, duration_ns, latency_req);
 	return idx;
 }
 

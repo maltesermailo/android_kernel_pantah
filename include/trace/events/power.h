@@ -62,6 +62,47 @@ TRACE_EVENT(cpu_idle_miss,
 		(unsigned long)__entry->state, (__entry->below)?"below":"above")
 );
 
+TRACE_EVENT(cpu_idle_teo,
+
+	TP_PROTO(unsigned int cpu_id, int state, int early_eval, int latency,
+		int utilization, int residency, int intercept, bool stop_tick,
+		s64 duration_ns, s64 latency_req),
+
+	TP_ARGS(cpu_id, state, early_eval, latency, utilization,
+		residency, intercept, stop_tick, duration_ns, latency_req),
+
+	TP_STRUCT__entry(
+		__field(u32,		cpu_id)
+		__field(s32,		state)
+		__field(s32,		early_eval)
+		__field(s32,		latency)
+		__field(s32,		utilization)
+		__field(s32,		residency)
+		__field(s32,		intercept)
+		__field(bool,		stop_tick)
+		__field(s64,		duration_ns)
+		__field(s64,		latency_req)
+	),
+
+	TP_fast_assign(
+		__entry->cpu_id = cpu_id;
+		__entry->state = state;
+		__entry->early_eval = early_eval;
+		__entry->latency = latency;
+		__entry->utilization = utilization;
+		__entry->residency = residency;
+		__entry->intercept = intercept;
+		__entry->stop_tick = stop_tick;
+		__entry->duration_ns = duration_ns;
+		__entry->latency_req = latency_req;
+	),
+
+	TP_printk("cpu_id=%lu state=%d early_eval=%d latency=%d utilization=%d residency=%d intercept=%d stop_tick=%d duration_ns=%lld latency_req=%lld",
+			(unsigned long)__entry->cpu_id,(int)__entry->state, __entry->early_eval, __entry->latency,
+			__entry->utilization, __entry->residency, __entry->intercept, __entry->stop_tick,
+			__entry->duration_ns, __entry->latency_req)
+);
+
 TRACE_EVENT(powernv_throttle,
 
 	TP_PROTO(int chip_id, const char *reason, int pmax),
