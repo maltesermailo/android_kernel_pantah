@@ -1,0 +1,103 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9afd7dd8_667e02a6",
+        "filename": "drivers/usb/core/driver.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1417,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-11-06T09:20:23Z",
+      "side": 1,
+      "message": "this is a duplicate of lines 1410-1416. Why is both an rvh and vh version needed?",
+      "range": {
+        "startLine": 1414,
+        "startChar": 0,
+        "endLine": 1417,
+        "endChar": 0
+      },
+      "revId": "1da63003b907d647de77bc36db8435bfa94f4aea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d03af34d_bed67b5f",
+        "filename": "include/trace/hooks/usb.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-11-06T09:20:23Z",
+      "side": 1,
+      "message": "please remove. This inclusion is not necessary. Instead, forward declare the types if needed like what is done at line 16.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "beddee62_0d789663",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/trace/hooks/usb.h",
+              "range": {
+                "startLine": 12,
+                "startChar": 0,
+                "endLine": 16,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "1da63003b907d647de77bc36db8435bfa94f4aea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c5fc889_83de3b28",
+        "filename": "include/trace/hooks/xhci.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-11-06T09:20:23Z",
+      "side": 1,
+      "message": "please remove this unnecessary inclusion",
+      "fixSuggestions": [
+        {
+          "fixId": "efbb0e48_6d33b245",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/trace/hooks/xhci.h",
+              "range": {
+                "startLine": 8,
+                "startChar": 0,
+                "endLine": 9,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "1da63003b907d647de77bc36db8435bfa94f4aea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
