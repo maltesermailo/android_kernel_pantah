@@ -1280,7 +1280,7 @@ static void update_curr(struct cfs_rq *cfs_rq)
 
 	account_cfs_rq_runtime(cfs_rq, delta_exec);
 
-	if (rq->nr_running == 1)
+	if (cfs_rq->nr_running == 1)
 		return;
 
 	if (resched || did_preempt_short(cfs_rq, curr)) {
@@ -3402,7 +3402,7 @@ retry_pids:
 		vma = vma_next(&vmi);
 	}
 
-	do {
+	for (; vma; vma = vma_next(&vmi)) {
 		if (!vma_migratable(vma) || !vma_policy_mof(vma) ||
 			is_vm_hugetlb_page(vma) || (vma->vm_flags & VM_MIXEDMAP)) {
 			trace_sched_skip_vma_numa(mm, vma, NUMAB_SKIP_UNSUITABLE);
@@ -3524,7 +3524,7 @@ retry_pids:
 		 */
 		if (vma_pids_forced)
 			break;
-	} for_each_vma(vmi, vma);
+	}
 
 	/*
 	 * If no VMAs are remaining and VMAs were skipped due to the PID
@@ -5666,8 +5666,9 @@ pick_next_entity(struct rq *rq, struct cfs_rq *cfs_rq)
 	struct sched_entity *se = pick_eevdf(cfs_rq);
 	if (se->sched_delayed) {
 		dequeue_entities(rq, se, DEQUEUE_SLEEP | DEQUEUE_DELAYED);
-		SCHED_WARN_ON(se->sched_delayed);
-		SCHED_WARN_ON(se->on_rq);
+		/*
+		 * Must not reference @se again, see __block_task().
+		 */
 		return NULL;
 	}
 	return se;
@@ -6100,10 +6101,13 @@ void unthrottle_cfs_rq(struct cfs_rq *cfs_rq)
 	for_each_sched_entity(se) {
 		struct cfs_rq *qcfs_rq = cfs_rq_of(se);
 
-		if (se->on_rq) {
-			SCHED_WARN_ON(se->sched_delayed);
+		/* Handle any unfinished DELAY_DEQUEUE business first. */
+		if (se->sched_delayed) {
+			int flags = DEQUEUE_SLEEP | DEQUEUE_DELAYED;
+
+			dequeue_entity(qcfs_rq, se, flags);
+		} else if (se->on_rq)
 			break;
-		}
 		enqueue_entity(qcfs_rq, se, ENQUEUE_WAKEUP);
 
 		if (cfs_rq_is_idle(group_cfs_rq(se)))
@@ -7222,7 +7226,11 @@ static int dequeue_entities(struct rq *rq, struct sched_entity *se, int flags)
 		/* Fix-up what dequeue_task_fair() skipped */
 		hrtick_update(rq);
 
-		/* Fix-up what block_task() skipped. */
+		/*
+		 * Fix-up what block_task() skipped.
+		 *
+		 * Must be last, @p might not be valid after this.
+		 */
 		__block_task(rq, p);
 	}
 
@@ -7239,12 +7247,14 @@ static bool dequeue_task_fair(struct rq *rq, struct task_struct *p, int flags)
 	if (!(p->se.sched_delayed && (task_on_rq_migrating(p) || (flags & DEQUEUE_SAVE))))
 		util_est_dequeue(&rq->cfs, p);
 
-	if (dequeue_entities(rq, &p->se, flags) < 0) {
-		util_est_update(&rq->cfs, p, DEQUEUE_SLEEP);
-		return false;
-	}
-
 	util_est_update(&rq->cfs, p, flags & DEQUEUE_SLEEP);
+	if (dequeue_entities(rq, &p->se, flags) < 0)
+		return false;
+
+	/*
+	 * Must not reference @p after dequeue_entities(DEQUEUE_DELAYED).
+	 */
+
 	hrtick_update(rq);
 	return true;
 }
@@ -11333,6 +11343,7 @@ static struct sched_group *sched_balance_find_src_group(struct lb_env *env)
 {
 	struct sg_lb_stats *local, *busiest;
 	struct sd_lb_stats sds;
+	int out_balance = 1;
 
 	init_sd_lb_stats(&sds);
 
@@ -11352,8 +11363,9 @@ static struct sched_group *sched_balance_find_src_group(struct lb_env *env)
 	if (busiest->group_type == group_misfit_task)
 		goto force_balance;
 
+	trace_android_rvh_find_busiest_group(sds.busiest, env->dst_rq, &out_balance);
 	if (!is_rd_overutilized(env->dst_rq->rd) &&
-	    rcu_dereference(env->dst_rq->rd->pd))
+	    rcu_dereference(env->dst_rq->rd->pd) && out_balance)
 		goto out_balanced;
 
 	/* ASYM feature bypasses nice load balance check */
@@ -13292,22 +13304,6 @@ static void attach_task_cfs_rq(struct task_struct *p)
 static void switched_from_fair(struct rq *rq, struct task_struct *p)
 {
 	detach_task_cfs_rq(p);
-	/*
-	 * Since this is called after changing class, this is a little weird
-	 * and we cannot use DEQUEUE_DELAYED.
-	 */
-	if (p->se.sched_delayed) {
-		/* First, dequeue it from its new class' structures */
-		dequeue_task(rq, p, DEQUEUE_NOCLOCK | DEQUEUE_SLEEP);
-		/*
-		 * Now, clean up the fair_sched_class side of things
-		 * related to sched_delayed being true and that wasn't done
-		 * due to the generic dequeue not using DEQUEUE_DELAYED.
-		 */
-		finish_delayed_dequeue_entity(&p->se);
-		p->se.rel_deadline = 0;
-		__block_task(rq, p);
-	}
 }
 
 static void switched_to_fair(struct rq *rq, struct task_struct *p)
