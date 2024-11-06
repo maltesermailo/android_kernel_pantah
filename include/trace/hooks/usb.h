@@ -1,7 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0 */
 #undef TRACE_SYSTEM
 #define TRACE_SYSTEM usb
-
 #undef TRACE_INCLUDE_PATH
 #define TRACE_INCLUDE_PATH trace/hooks
 
@@ -23,6 +22,10 @@ DECLARE_RESTRICTED_HOOK(android_rvh_usb_dev_suspend,
 DECLARE_HOOK(android_vh_usb_dev_resume,
 	TP_PROTO(struct usb_device *udev, pm_message_t msg, bool *bypass),
 	TP_ARGS(udev, msg, bypass));
+
+DECLARE_HOOK(android_vh_usb_new_device_added,
+	TP_PROTO(struct usb_device *udev, int *err),
+	TP_ARGS(udev, err));
 
 #endif /*  _TRACE_HOOK_USB_H */
 /*  This part must be outside protection */
