@@ -1514,6 +1514,15 @@
 			might take longer, especially on systems with a lot of
 			memory. Available with CONFIG_PAGE_EXTENSION=y.
 
+	exec.seal_system_mappings = [KNL]
+			Format: { no | yes }
+			Seal system mappings: vdso, vvar, sigpage, vsyscall.
+			This overwrites KCONFIG CONFIG_SEAL_SYSTEM_MAPPINGS
+			- 'no':  do not seal system mappings.
+			- 'yes': seal system mappings.
+			If not specified or invalid, default is the KCONFIG value.
+			This option has no effect if CONFIG_64BIT=n
+
 	failslab=
 	fail_usercopy=
 	fail_page_alloc=
