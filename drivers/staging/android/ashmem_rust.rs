@@ -79,6 +79,9 @@ fn has_cap_sys_admin() -> bool {
 
 static NUM_PIN_IOCTLS_WAITING: AtomicUsize = AtomicUsize::new(0);
 static UNPIN_IMMEDIATELY: AtomicBool = AtomicBool::new(false);
+/// Should the SET_PROT_MASK ioctl fail with EBUSY if there are existing VM_SHARED|VM_MAYWRITE
+/// mappings of the file.
+static BLOCK_SEAL_WHEN_MAPPED: AtomicBool = AtomicBool::new(false);
 
 fn shrinker_should_stop() -> bool {
     NUM_PIN_IOCTLS_WAITING.load(Ordering::Relaxed) > 0
@@ -249,14 +252,14 @@ impl MiscDevice for Ashmem {
         Ok(ret as usize)
     }
 
-    fn ioctl(me: Pin<&Ashmem>, _file: &File, cmd: u32, arg: usize) -> Result<c_long> {
+    fn ioctl(me: Pin<&Ashmem>, file: &File, cmd: u32, arg: usize) -> Result<c_long> {
         let size = _IOC_SIZE(cmd);
         match cmd {
             bindings::ASHMEM_SET_NAME => me.set_name(UserSlice::new(arg, size).reader()),
             bindings::ASHMEM_GET_NAME => me.get_name(UserSlice::new(arg, size).writer()),
             bindings::ASHMEM_SET_SIZE => me.set_size(arg),
             bindings::ASHMEM_GET_SIZE => me.get_size(),
-            bindings::ASHMEM_SET_PROT_MASK => me.set_prot_mask(arg),
+            bindings::ASHMEM_SET_PROT_MASK => me.set_prot_mask(arg, file),
             bindings::ASHMEM_GET_PROT_MASK => me.get_prot_mask(),
             bindings::ASHMEM_GET_FILE_ID => me.get_file_id(UserSlice::new(arg, size).writer()),
             ASHMEM_PIN | ASHMEM_UNPIN | ASHMEM_GET_PIN_STATUS => {
@@ -336,7 +339,7 @@ impl Ashmem {
         Ok(self.inner.lock().size as c_long)
     }
 
-    fn set_prot_mask(&self, mut prot: usize) -> Result<c_long> {
+    fn set_prot_mask(&self, mut prot: usize, file: &File) -> Result<c_long> {
         let mut asma = self.inner.lock();
 
         // The user can only remove, not add, protection bits.
@@ -346,6 +349,16 @@ impl Ashmem {
 
         if (prot & PROT_READ != 0) && read_implies_exec(current!()) {
             prot |= PROT_EXEC;
+        }
+
+        if BLOCK_SEAL_WHEN_MAPPED.load(Ordering::Relaxed) {
+            if (asma.prot_mask & PROT_WRITE != 0) && (prot & PROT_WRITE == 0) {
+                // We perform this check on the ashmem file, not the underlying shmem file, because
+                // that's the file for which `mmap_region` (in `mm/mmap.c`) increments the counter.
+                if shmem::mapping_writably_mapped(file) {
+                    return Err(EBUSY);
+                }
+            }
         }
 
         asma.prot_mask = prot;
@@ -480,5 +493,29 @@ impl AshmemInner {
             .position(|&c| c == 0)
             .map(|len| len + 1)
             .unwrap()
+    }
+}
+
+/// Sets the behavior of the SET_PROT_MASK ioctl.
+pub(crate) fn prot_set(value: &[u8]) -> Result<()> {
+    match value.trim_ascii() {
+        b"ashmem" => {
+            BLOCK_SEAL_WHEN_MAPPED.store(false, Ordering::Relaxed);
+            Ok(())
+        }
+        b"memfd" => {
+            BLOCK_SEAL_WHEN_MAPPED.store(true, Ordering::Relaxed);
+            Ok(())
+        }
+        _ => Err(EINVAL),
+    }
+}
+
+/// Gets the behavior of the SET_PROT_MASK ioctl.
+pub(crate) fn prot_get() -> &'static CStr {
+    if BLOCK_SEAL_WHEN_MAPPED.load(Ordering::Relaxed) {
+        c_str!("memfd\n")
+    } else {
+        c_str!("ashmem\n")
     }
 }

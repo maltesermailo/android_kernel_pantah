@@ -37,6 +37,15 @@ pub(crate) unsafe fn file_set_fpos(file: &LocalFile, pos: loff_t) {
     unsafe { (*file.as_ptr()).f_pos = pos };
 }
 
+/// Returns whether this file has any active `VM_SHARED|VM_MAYWRITE` mappings.
+pub(crate) fn mapping_writably_mapped(file: &LocalFile) -> bool {
+    // SAFETY: The `f_mapping` field is immutable.
+    let f_mapping = unsafe { (*file.as_ptr()).f_mapping };
+
+    // SAFETY: A file's `f_mapping` references a valid mapping for the duration of the file.
+    unsafe { bindings::mapping_writably_mapped(f_mapping) != 0 }
+}
+
 /// Wrapper around a file that is known to be a shmem file.
 #[derive(Clone)]
 pub(crate) struct ShmemFile {
