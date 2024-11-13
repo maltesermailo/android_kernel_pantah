@@ -1,16 +1,19 @@
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.constants
 
+<<<<<<< HEAD   (3f47aa ANDROID: Add ufs ufshcd-pltfrm.h header in unsafe header)
 KMI_GENERATION=0
 
 BRANCH=android16-6.12
 LLVM=1
 DEPMOD=depmod
 DTC=$(command -v dtc)
+||||||| BASE
+BRANCH=android-mainline
+LLVM=1
+DEPMOD=depmod
+DTC=$(command -v dtc)
+=======
+BRANCH=android-mainline
+>>>>>>> BRANCH (fab7f3 Revert "f2fs: remove unreachable lazytime mount option parsi)
 
 KCFLAGS="${KCFLAGS} -D__ANDROID_COMMON_KERNEL__"
-EXTRA_CMDS=''
-STOP_SHIP_TRACEPRINTK=1
-IN_KERNEL_MODULES=1
-DO_NOT_STRIP_MODULES=1
-
-HERMETIC_TOOLCHAIN=${HERMETIC_TOOLCHAIN:-1}

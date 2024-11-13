@@ -41,7 +41,11 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_check_preempt_wakeup_ignore);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_replace_next_task_fair);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_sched_balance_rt);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_check_preempt_wakeup_fair);
+<<<<<<< HEAD   (3f47aa ANDROID: Add ufs ufshcd-pltfrm.h header in unsafe header)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_update_deadline);
+||||||| BASE
+=======
+>>>>>>> BRANCH (fab7f3 Revert "f2fs: remove unreachable lazytime mount option parsi)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_cpus_allowed_by_task);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_free_task);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_uclamp_eff_get);
