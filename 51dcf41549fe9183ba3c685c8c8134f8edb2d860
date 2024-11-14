@@ -88,6 +88,24 @@
       "parentUuid": "3e3b515b_70d2517d",
       "revId": "51dcf41549fe9183ba3c685c8c8134f8edb2d860",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0025f5b1_2645a850",
+        "filename": "drivers/scsi/scsicam.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2024-11-14T11:59:16Z",
+      "side": 1,
+      "message": "\u003e UINT_MAX is just a initial value\n\n`UINT_MAX` is just a magic value. Your code now depends on the property that `cyl` will never reach this magic value. To check this property any reviewer has to dig deep to find `struct msdos_partition` definition. Any future reader of this code has to spend more time than needed!\n\n\u003e I just keep exactly the same semantic as the original code.\n\nThere are multiple ways to keep the same semantic, without relying on `struct msdos_partition *p` definition, see two options I proposed in the original comment.",
+      "parentUuid": "3e3b515b_70d2517d",
+      "revId": "51dcf41549fe9183ba3c685c8c8134f8edb2d860",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
