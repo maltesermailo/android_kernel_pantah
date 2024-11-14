@@ -888,14 +888,23 @@ static bool folio_referenced_one(struct folio *folio,
 			return false;
 		}
 
+<<<<<<< HEAD   (3f47aa ANDROID: Add ufs ufshcd-pltfrm.h header in unsafe header)
 		if (pvmw.pte) {
 			trace_android_vh_look_around(&pvmw, folio, vma, &referenced);
 			if (lru_gen_enabled() &&
 			    pte_young(ptep_get(pvmw.pte))) {
 				lru_gen_look_around(&pvmw);
+||||||| BASE
+		if (pvmw.pte) {
+			if (lru_gen_enabled() &&
+			    pte_young(ptep_get(pvmw.pte))) {
+				lru_gen_look_around(&pvmw);
+=======
+		if (lru_gen_enabled() && pvmw.pte) {
+			if (lru_gen_look_around(&pvmw))
+>>>>>>> BRANCH (fab7f3 Revert "f2fs: remove unreachable lazytime mount option parsi)
 				referenced++;
-			}
-
+		} else if (pvmw.pte) {
 			if (ptep_clear_flush_young_notify(vma, address,
 						pvmw.pte))
 				referenced++;
