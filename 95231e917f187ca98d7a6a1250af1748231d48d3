@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da73ddc1_e12f77ec",
+        "filename": "drivers/scsi/scsicam.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2024-11-14T14:45:25Z",
+      "side": 1,
+      "message": "More of a nitpick, but it is better for this variable to be left uninitialized or initialized to 0, rather than UINT_MAX. Otherwise it may confuse future code readers: they would be puzzled on \"why is it UINT_MAX?\".",
+      "revId": "95231e917f187ca98d7a6a1250af1748231d48d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
