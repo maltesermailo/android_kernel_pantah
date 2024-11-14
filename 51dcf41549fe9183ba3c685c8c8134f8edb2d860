@@ -34,6 +34,24 @@
       "parentUuid": "b9baf327_47c577e2",
       "revId": "51dcf41549fe9183ba3c685c8c8134f8edb2d860",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecf01d67_55bf4100",
+        "filename": "drivers/scsi/scsicam.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2024-11-14T11:31:35Z",
+      "side": 1,
+      "message": "\u003e both the type of p-\u003ecyl and p-\u003esector is u8, largest_cyl will never reach UINT_MAX\n\nI understand this, \"but it is safer to have code that doesn\u0027t rely on this property\".\n\n\u003e cyl was 0 here for the case\n\nBoth proposed changes work correctly in this case.",
+      "parentUuid": "26fcd62d_d98f83b0",
+      "revId": "51dcf41549fe9183ba3c685c8c8134f8edb2d860",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
