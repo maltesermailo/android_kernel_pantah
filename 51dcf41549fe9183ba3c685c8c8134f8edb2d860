@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9baf327_47c577e2",
+        "filename": "drivers/scsi/scsicam.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2024-11-14T11:15:04Z",
+      "side": 1,
+      "message": "This code will break if cyl reaches UINT_MAX. I understand that p-\u003ecyl and p-\u003esector are u8, but it is safer to have code that doesn\u0027t rely on this property.\n\nYou can set \"unsigned int largest_cyl \u003d 0;\" and then use \"if (cyl \u003e\u003d largest_cyl)\". Or you can use \"if ((largest \u003d\u003d NULL) || (cyl \u003e largest_cyl))\".\n\nFirst one will be most performant and concise, but may select another \"largest\", if two partitions have the same cyl. Second one will be equivalent to the code before the change.\n\nI will probably send similar comment to the upstream patch.",
+      "revId": "51dcf41549fe9183ba3c685c8c8134f8edb2d860",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
