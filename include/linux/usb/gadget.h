@@ -315,6 +315,13 @@ struct usb_udc;
 struct usb_gadget_ops {
 	int	(*get_frame)(struct usb_gadget *);
 	int	(*wakeup)(struct usb_gadget *);
+<<<<<<< HEAD   (db64cb Revert "irqchip/gic-v4: Don't allow a VMOVP on a dying VPE")
+||||||| BASE
+	int	(*set_remote_wakeup)(struct usb_gadget *, int set);
+=======
+	int	(*func_wakeup)(struct usb_gadget *gadget, int intf_id);
+	int	(*set_remote_wakeup)(struct usb_gadget *, int set);
+>>>>>>> BRANCH (7c1511 Linux 6.1.115)
 	int	(*set_selfpowered) (struct usb_gadget *, int is_selfpowered);
 	int	(*vbus_session) (struct usb_gadget *, int is_active);
 	int	(*vbus_draw) (struct usb_gadget *, unsigned mA);
