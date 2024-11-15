@@ -197,7 +197,7 @@ void hyp_split_page(struct hyp_page *p)
 	}
 }
 
-void *hyp_alloc_pages(struct hyp_pool *pool, u8 order)
+static struct hyp_page *__hyp_alloc_pages(struct hyp_pool *pool, u8 order, bool count)
 {
 	struct hyp_page *p;
 	u8 i = order;
@@ -217,13 +217,24 @@ void *hyp_alloc_pages(struct hyp_pool *pool, u8 order)
 	p = node_to_page(pool->free_area[i].next);
 	p = __hyp_extract_page(pool, p, order);
 
-	hyp_set_page_refcounted(p);
+	if (count)
+		hyp_set_page_refcounted(p);
 
 	free_pages = pool->free_pages - (1 << p->order);
 	WRITE_ONCE(pool->free_pages, free_pages);
 	hyp_spin_unlock(&pool->lock);
 
 	return hyp_page_to_virt(p);
+}
+
+void *hyp_pool_detach_page(struct hyp_pool *pool)
+{
+	return __hyp_alloc_pages(pool, 0, false);
+}
+
+void *hyp_alloc_pages(struct hyp_pool *pool, u8 order)
+{
+	return __hyp_alloc_pages(pool, order, true);
 }
 
 /*

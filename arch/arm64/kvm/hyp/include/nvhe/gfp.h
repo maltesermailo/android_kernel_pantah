@@ -25,6 +25,7 @@ void hyp_split_page(struct hyp_page *page);
 void hyp_get_page(struct hyp_pool *pool, void *addr);
 void hyp_put_page(struct hyp_pool *pool, void *addr);
 
+void *hyp_pool_detach_page(struct hyp_pool *pool);
 u64 hyp_pool_free_pages(struct hyp_pool *pool);
 
 /* Used pages cannot be freed */

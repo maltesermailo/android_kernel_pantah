@@ -617,21 +617,15 @@ int refill_hyp_pool(struct hyp_pool *pool, struct kvm_hyp_memcache *host_mc)
  * Remove target pages from the pool and put them in a memcache,
  * so the host can reclaim them.
  */
-int reclaim_hyp_pool(struct hyp_pool *pool, struct kvm_hyp_memcache *host_mc,
-		     int nr_pages)
+int reclaim_hyp_pool(struct hyp_pool *pool, struct kvm_hyp_memcache *host_mc, int nr_pages)
 {
-	void *p;
-	struct hyp_page *page;
-
 	while (nr_pages > 0) {
-		p = hyp_alloc_pages(pool, 0);
+		void *p = hyp_pool_detach_page(pool);
 		if (!p)
 			return -ENOMEM;
-		page = hyp_virt_to_page(p);
-		nr_pages -= (1 << page->order);
-		push_hyp_memcache(host_mc, p, hyp_virt_to_phys, page->order);
-		WARN_ON(__pkvm_hyp_donate_host(hyp_virt_to_pfn(p), 1 << page->order));
-		memset(page, 0, sizeof(struct hyp_page));
+		push_hyp_memcache(host_mc, p, hyp_virt_to_phys, 0);
+		WARN_ON(__pkvm_hyp_donate_host(hyp_virt_to_pfn(p), 1));
+		nr_pages--;
 	}
 
 	return 0;
