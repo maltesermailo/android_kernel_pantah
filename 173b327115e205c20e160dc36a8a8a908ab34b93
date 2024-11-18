@@ -33,6 +33,24 @@
       "message": "is that the smccc version supported by the upstream driver?\nwhen debugging we see that the version supported by the host is 1.5 (negotiated with EL3).",
       "revId": "173b327115e205c20e160dc36a8a8a908ab34b93",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83b3e359_7122de05",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1731,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-11-18T10:19:52Z",
+      "side": 1,
+      "message": "`is that the smccc version supported by the upstream driver?` - the upstream driver expects to be at least 1.2: https://elixir.bootlin.com/linux/v6.12/source/drivers/firmware/arm_ffa/smccc.c#L24\n\n`supported by the host is 1.5` - this patch is for what we are advertising to the guests.",
+      "parentUuid": "25820b49_c72e3a58",
+      "revId": "173b327115e205c20e160dc36a8a8a908ab34b93",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
