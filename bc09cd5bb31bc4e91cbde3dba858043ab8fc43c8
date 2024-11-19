@@ -46,6 +46,30 @@
       },
       "revId": "bc09cd5bb31bc4e91cbde3dba858043ab8fc43c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a262178_1d9b7642",
+        "filename": "build-kernel.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2024-11-19T19:21:49Z",
+      "side": 1,
+      "message": "I do not propose to keep building brya with build-kernel.sh. I am not native speaker but to me:\n```\n  echo \"WARNING: Brya devices migrated to Kleaf-based kernel prebuilts.\"\n  echo \"Building Brya kernels with the legacy system is deprecated.\"\n  echo -n \"Are you sure you want to continue with the legacy build? [y/N] \"\n```\nmeans that Brya already migrated to Kleaf while we are still not there, we first need to do PnP checks, confirm with workstream owners and so on. I already got two requests, asking how to update kernel prebuilts because of above warning.\n\nUntil we switch to Kleaf, people should still use build-kernel.sh to generate prebuilts so what I am proposing is:\n```\necho \"WARNING: Brya devices are migrating to Kleaf-based kernel prebuilts.\"\necho \"You can use it as-is but be aware that Brya kernels with the legacy system is going to be deprecated at some point.\"\n```\nand then after the switch make the original WARNING.",
+      "parentUuid": "9e56d0bb_a2368daa",
+      "range": {
+        "startLine": 24,
+        "startChar": 17,
+        "endLine": 24,
+        "endChar": 68
+      },
+      "revId": "bc09cd5bb31bc4e91cbde3dba858043ab8fc43c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
