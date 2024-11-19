@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7b5c0a2_5f5fb4ec",
+        "filename": "build-kernel.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2024-11-19T11:03:01Z",
+      "side": 1,
+      "message": "People are confused that this build is deprecated now. We should use here rather future tenses:\n\n```\n  echo \"WARNING: Brya devices are migrating to Kleaf-based kernel prebuilts.\"\n  echo \"You can use it as-is but be aware that Brya kernels with the legacy system is going to be deprecated at some point.\"\n```\nand remove the condition step.\n\nOnce we fully switch to Kleaf, we can have:\n```\n  echo \"WARNING: Brya devices migrated to Kleaf-based kernel prebuilts.\"\n  echo \"Building Brya kernels with the legacy system is deprecated.\"\n  echo -n \"Are you sure you want to continue with the legacy build? [y/N] \"\n```",
+      "range": {
+        "startLine": 24,
+        "startChar": 17,
+        "endLine": 24,
+        "endChar": 68
+      },
+      "revId": "bc09cd5bb31bc4e91cbde3dba858043ab8fc43c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
