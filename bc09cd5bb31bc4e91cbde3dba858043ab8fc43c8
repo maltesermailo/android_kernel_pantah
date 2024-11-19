@@ -22,6 +22,30 @@
       },
       "revId": "bc09cd5bb31bc4e91cbde3dba858043ab8fc43c8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e56d0bb_a2368daa",
+        "filename": "build-kernel.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 3522211
+      },
+      "writtenOn": "2024-11-19T16:20:18Z",
+      "side": 1,
+      "message": "I thought we _do_ want to move fully away from the legacy build on brya, right? Is there any reason why we would keep building brya with `build-kernel.sh`? We should avoid switching back-and-forth if possible, since the set of modules built is so drastically different. So if Kleaf-based brya builds work, I would think we should consider the legacy brya build deprecated.",
+      "parentUuid": "f7b5c0a2_5f5fb4ec",
+      "range": {
+        "startLine": 24,
+        "startChar": 17,
+        "endLine": 24,
+        "endChar": 68
+      },
+      "revId": "bc09cd5bb31bc4e91cbde3dba858043ab8fc43c8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
