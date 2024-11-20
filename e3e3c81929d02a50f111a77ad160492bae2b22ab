@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84beed50_417b50dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1031448
+      },
+      "writtenOn": "2024-11-20T12:04:36Z",
+      "side": 1,
+      "message": "DB845c devices in LKFT lab reported a 2 second boot time regression while running andriod15-6.6 kernel builds. @yongqin.liu@linaro.org bisected down the regression to upstream commit “clk: qcom: Park shared RCGs upon registration”.\n\nThis 3 patch series reverts “clk: qcom: Park shared RCGs upon registration” and follow-up fixes from android15-6.6.\n\nAs mentioned in the commit message, this is android-6.6 specific regression, and not reproducible on linux-6.6.y and upstream kernel versions.",
+      "revId": "e3e3c81929d02a50f111a77ad160492bae2b22ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
