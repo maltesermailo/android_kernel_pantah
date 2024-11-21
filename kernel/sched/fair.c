@@ -8989,14 +8989,16 @@ pick_next_task_fair(struct rq *rq, struct task_struct *prev, struct rq_flags *rf
 	struct sched_entity *se;
 	struct task_struct *p;
 	int new_tasks;
+	bool repick = false;
 
 again:
 	p = pick_task_fair(rq);
-	trace_android_rvh_replace_next_task_fair(rq, &p, prev);
 
 	if (!p)
 		goto idle;
 	se = &p->se;
+
+	trace_android_rvh_replace_next_task_fair(rq, &p, &se, &repick, false, prev);
 
 #ifdef CONFIG_FAIR_GROUP_SCHED
 	if (prev->sched_class != &fair_sched_class)

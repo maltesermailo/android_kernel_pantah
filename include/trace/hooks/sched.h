@@ -77,8 +77,8 @@ DECLARE_RESTRICTED_HOOK(android_rvh_setscheduler,
 	TP_ARGS(p), 1);
 
 DECLARE_RESTRICTED_HOOK(android_rvh_replace_next_task_fair,
-	TP_PROTO(struct rq *rq, struct task_struct **p, struct task_struct *prev),
-	TP_ARGS(rq, p, prev), 1);
+	TP_PROTO(struct rq *rq, struct task_struct **p, struct sched_entity     **se, bool *repick, bool simple,  struct task_struct *prev),
+	TP_ARGS(rq, p, se, repick, simple, prev), 1);
 
 struct sched_group;
 DECLARE_RESTRICTED_HOOK(android_rvh_sched_balance_find_src_group,
