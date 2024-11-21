@@ -331,21 +331,22 @@ static struct extent_node *__init_extent_tree(struct f2fs_sb_info *sbi,
 }
 
 static unsigned int __free_extent_tree(struct f2fs_sb_info *sbi,
-					struct extent_tree *et)
+				struct extent_tree *et, unsigned int nr_shrink)
 {
 	struct rb_node *node, *next;
 	struct extent_node *en;
-	unsigned int count = atomic_read(&et->node_cnt);
+	unsigned int count;
 
 	node = rb_first_cached(&et->root);
-	while (node) {
+
+	for (count = 0; node && count < nr_shrink; count++) {
 		next = rb_next(node);
 		en = rb_entry(node, struct extent_node, rb_node);
 		__release_extent_node(sbi, et, en);
 		node = next;
 	}
 
-	return count - atomic_read(&et->node_cnt);
+	return count;
 }
 
 static void __drop_largest_extent(struct extent_tree *et,
@@ -528,8 +529,40 @@ do_insert:
 	return en;
 }
 
+<<<<<<< HEAD   (9e6a72 UPSTREAM: vsock/virtio: Initialization of the dangling point)
 static void f2fs_update_extent_tree_range(struct inode *inode,
 				pgoff_t fofs, block_t blkaddr, unsigned int len)
+||||||| BASE
+static void __update_extent_tree_range(struct inode *inode,
+			struct extent_info *tei, enum extent_type type)
+=======
+static unsigned int __destroy_extent_node(struct inode *inode,
+					enum extent_type type)
+{
+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+	struct extent_tree *et = F2FS_I(inode)->extent_tree[type];
+	unsigned int nr_shrink = type == EX_READ ?
+				READ_EXTENT_CACHE_SHRINK_NUMBER :
+				AGE_EXTENT_CACHE_SHRINK_NUMBER;
+	unsigned int node_cnt = 0;
+
+	if (!et || !atomic_read(&et->node_cnt))
+		return 0;
+
+	while (atomic_read(&et->node_cnt)) {
+		write_lock(&et->lock);
+		node_cnt += __free_extent_tree(sbi, et, nr_shrink);
+		write_unlock(&et->lock);
+	}
+
+	f2fs_bug_on(sbi, atomic_read(&et->node_cnt));
+
+	return node_cnt;
+}
+
+static void __update_extent_tree_range(struct inode *inode,
+			struct extent_info *tei, enum extent_type type)
+>>>>>>> CHANGE (495335 UPSTREAM: f2fs: fix to shrink read extent node in batches)
 {
 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
 	struct extent_tree *et = F2FS_I(inode)->extent_tree;
@@ -649,15 +682,15 @@ static void f2fs_update_extent_tree_range(struct inode *inode,
 		}
 	}
 
-	if (is_inode_flag_set(inode, FI_NO_EXTENT))
-		__free_extent_tree(sbi, et);
-
 	if (et->largest_updated) {
 		et->largest_updated = false;
 		updated = true;
 	}
 
 	write_unlock(&et->lock);
+
+	if (is_inode_flag_set(inode, FI_NO_EXTENT))
+		__destroy_extent_node(inode, EX_READ);
 
 	if (updated)
 		f2fs_mark_inode_dirty_sync(inode, true);
@@ -724,10 +757,14 @@ unsigned int f2fs_shrink_extent_tree(struct f2fs_sb_info *sbi, int nr_shrink)
 	list_for_each_entry_safe(et, next, &sbi->zombie_list, list) {
 		if (atomic_read(&et->node_cnt)) {
 			write_lock(&et->lock);
-			node_cnt += __free_extent_tree(sbi, et);
+			node_cnt += __free_extent_tree(sbi, et,
+					nr_shrink - node_cnt - tree_cnt);
 			write_unlock(&et->lock);
 		}
-		f2fs_bug_on(sbi, atomic_read(&et->node_cnt));
+
+		if (atomic_read(&et->node_cnt))
+			goto unlock_out;
+
 		list_del_init(&et->list);
 		radix_tree_delete(&sbi->extent_tree_root, et->ino);
 		kmem_cache_free(extent_tree_slab, et);
@@ -780,6 +817,7 @@ out:
 	return node_cnt + tree_cnt;
 }
 
+<<<<<<< HEAD   (9e6a72 UPSTREAM: vsock/virtio: Initialization of the dangling point)
 unsigned int f2fs_destroy_extent_node(struct inode *inode)
 {
 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
@@ -797,22 +835,255 @@ unsigned int f2fs_destroy_extent_node(struct inode *inode)
 }
 
 void f2fs_drop_extent_tree(struct inode *inode)
+||||||| BASE
+/* read extent cache operations */
+bool f2fs_lookup_read_extent_cache(struct inode *inode, pgoff_t pgofs,
+				struct extent_info *ei)
+{
+	if (!__may_extent_tree(inode, EX_READ))
+		return false;
+
+	return __lookup_extent_tree(inode, pgofs, ei, EX_READ);
+}
+
+bool f2fs_lookup_read_extent_cache_block(struct inode *inode, pgoff_t index,
+				block_t *blkaddr)
+{
+	struct extent_info ei = {};
+
+	if (!f2fs_lookup_read_extent_cache(inode, index, &ei))
+		return false;
+	*blkaddr = ei.blk + index - ei.fofs;
+	return true;
+}
+
+void f2fs_update_read_extent_cache(struct dnode_of_data *dn)
+{
+	return __update_extent_cache(dn, EX_READ);
+}
+
+void f2fs_update_read_extent_cache_range(struct dnode_of_data *dn,
+				pgoff_t fofs, block_t blkaddr, unsigned int len)
+{
+	struct extent_info ei = {
+		.fofs = fofs,
+		.len = len,
+		.blk = blkaddr,
+	};
+
+	if (!__may_extent_tree(dn->inode, EX_READ))
+		return;
+
+	__update_extent_tree_range(dn->inode, &ei, EX_READ);
+}
+
+unsigned int f2fs_shrink_read_extent_tree(struct f2fs_sb_info *sbi, int nr_shrink)
+{
+	if (!test_opt(sbi, READ_EXTENT_CACHE))
+		return 0;
+
+	return __shrink_extent_tree(sbi, nr_shrink, EX_READ);
+}
+
+/* block age extent cache operations */
+bool f2fs_lookup_age_extent_cache(struct inode *inode, pgoff_t pgofs,
+				struct extent_info *ei)
+{
+	if (!__may_extent_tree(inode, EX_BLOCK_AGE))
+		return false;
+
+	return __lookup_extent_tree(inode, pgofs, ei, EX_BLOCK_AGE);
+}
+
+void f2fs_update_age_extent_cache(struct dnode_of_data *dn)
+{
+	return __update_extent_cache(dn, EX_BLOCK_AGE);
+}
+
+void f2fs_update_age_extent_cache_range(struct dnode_of_data *dn,
+				pgoff_t fofs, unsigned int len)
+{
+	struct extent_info ei = {
+		.fofs = fofs,
+		.len = len,
+	};
+
+	if (!__may_extent_tree(dn->inode, EX_BLOCK_AGE))
+		return;
+
+	__update_extent_tree_range(dn->inode, &ei, EX_BLOCK_AGE);
+}
+
+unsigned int f2fs_shrink_age_extent_tree(struct f2fs_sb_info *sbi, int nr_shrink)
+{
+	if (!test_opt(sbi, AGE_EXTENT_CACHE))
+		return 0;
+
+	return __shrink_extent_tree(sbi, nr_shrink, EX_BLOCK_AGE);
+}
+
+static unsigned int __destroy_extent_node(struct inode *inode,
+					enum extent_type type)
 {
 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+	struct extent_tree *et = F2FS_I(inode)->extent_tree[type];
+	unsigned int node_cnt = 0;
+
+	if (!et || !atomic_read(&et->node_cnt))
+		return 0;
+
+	write_lock(&et->lock);
+	node_cnt = __free_extent_tree(sbi, et);
+	write_unlock(&et->lock);
+
+	return node_cnt;
+}
+
+void f2fs_destroy_extent_node(struct inode *inode)
+{
+	__destroy_extent_node(inode, EX_READ);
+	__destroy_extent_node(inode, EX_BLOCK_AGE);
+}
+
+static void __drop_extent_tree(struct inode *inode, enum extent_type type)
+=======
+/* read extent cache operations */
+bool f2fs_lookup_read_extent_cache(struct inode *inode, pgoff_t pgofs,
+				struct extent_info *ei)
+{
+	if (!__may_extent_tree(inode, EX_READ))
+		return false;
+
+	return __lookup_extent_tree(inode, pgofs, ei, EX_READ);
+}
+
+bool f2fs_lookup_read_extent_cache_block(struct inode *inode, pgoff_t index,
+				block_t *blkaddr)
+{
+	struct extent_info ei = {};
+
+	if (!f2fs_lookup_read_extent_cache(inode, index, &ei))
+		return false;
+	*blkaddr = ei.blk + index - ei.fofs;
+	return true;
+}
+
+void f2fs_update_read_extent_cache(struct dnode_of_data *dn)
+{
+	return __update_extent_cache(dn, EX_READ);
+}
+
+void f2fs_update_read_extent_cache_range(struct dnode_of_data *dn,
+				pgoff_t fofs, block_t blkaddr, unsigned int len)
+{
+	struct extent_info ei = {
+		.fofs = fofs,
+		.len = len,
+		.blk = blkaddr,
+	};
+
+	if (!__may_extent_tree(dn->inode, EX_READ))
+		return;
+
+	__update_extent_tree_range(dn->inode, &ei, EX_READ);
+}
+
+unsigned int f2fs_shrink_read_extent_tree(struct f2fs_sb_info *sbi, int nr_shrink)
+{
+	if (!test_opt(sbi, READ_EXTENT_CACHE))
+		return 0;
+
+	return __shrink_extent_tree(sbi, nr_shrink, EX_READ);
+}
+
+/* block age extent cache operations */
+bool f2fs_lookup_age_extent_cache(struct inode *inode, pgoff_t pgofs,
+				struct extent_info *ei)
+{
+	if (!__may_extent_tree(inode, EX_BLOCK_AGE))
+		return false;
+
+	return __lookup_extent_tree(inode, pgofs, ei, EX_BLOCK_AGE);
+}
+
+void f2fs_update_age_extent_cache(struct dnode_of_data *dn)
+{
+	return __update_extent_cache(dn, EX_BLOCK_AGE);
+}
+
+void f2fs_update_age_extent_cache_range(struct dnode_of_data *dn,
+				pgoff_t fofs, unsigned int len)
+{
+	struct extent_info ei = {
+		.fofs = fofs,
+		.len = len,
+	};
+
+	if (!__may_extent_tree(dn->inode, EX_BLOCK_AGE))
+		return;
+
+	__update_extent_tree_range(dn->inode, &ei, EX_BLOCK_AGE);
+}
+
+unsigned int f2fs_shrink_age_extent_tree(struct f2fs_sb_info *sbi, int nr_shrink)
+{
+	if (!test_opt(sbi, AGE_EXTENT_CACHE))
+		return 0;
+
+	return __shrink_extent_tree(sbi, nr_shrink, EX_BLOCK_AGE);
+}
+
+void f2fs_destroy_extent_node(struct inode *inode)
+{
+	__destroy_extent_node(inode, EX_READ);
+	__destroy_extent_node(inode, EX_BLOCK_AGE);
+}
+
+static void __drop_extent_tree(struct inode *inode, enum extent_type type)
+>>>>>>> CHANGE (495335 UPSTREAM: f2fs: fix to shrink read extent node in batches)
+{
+<<<<<<< HEAD   (9e6a72 UPSTREAM: vsock/virtio: Initialization of the dangling point)
+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
 	struct extent_tree *et = F2FS_I(inode)->extent_tree;
+||||||| BASE
+	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
+	struct extent_tree *et = F2FS_I(inode)->extent_tree[type];
+=======
+	struct extent_tree *et = F2FS_I(inode)->extent_tree[type];
+>>>>>>> CHANGE (495335 UPSTREAM: f2fs: fix to shrink read extent node in batches)
 	bool updated = false;
 
 	if (!f2fs_may_extent_tree(inode))
 		return;
 
 	write_lock(&et->lock);
+<<<<<<< HEAD   (9e6a72 UPSTREAM: vsock/virtio: Initialization of the dangling point)
 	set_inode_flag(inode, FI_NO_EXTENT);
 	__free_extent_tree(sbi, et);
 	if (et->largest.len) {
 		et->largest.len = 0;
 		updated = true;
+||||||| BASE
+	__free_extent_tree(sbi, et);
+	if (type == EX_READ) {
+		set_inode_flag(inode, FI_NO_EXTENT);
+		if (et->largest.len) {
+			et->largest.len = 0;
+			updated = true;
+		}
+=======
+	if (type == EX_READ) {
+		set_inode_flag(inode, FI_NO_EXTENT);
+		if (et->largest.len) {
+			et->largest.len = 0;
+			updated = true;
+		}
+>>>>>>> CHANGE (495335 UPSTREAM: f2fs: fix to shrink read extent node in batches)
 	}
 	write_unlock(&et->lock);
+
+	__destroy_extent_node(inode, type);
+
 	if (updated)
 		f2fs_mark_inode_dirty_sync(inode, true);
 }
