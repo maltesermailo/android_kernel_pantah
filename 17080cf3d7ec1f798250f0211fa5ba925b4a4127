@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cfa4b89_e5cde663",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-11-26T20:02:39Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Failed to fetch commits for cherry pick check. Is the \"cherry picked from\" commit ID valid?\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\nOwner: android-kernel-team@google.com\n\nFailed to fetch commits for cherry pick check. Is the \"cherry picked from\" commit ID valid?\n\"cherry picked from\" commit ID: 1dc2527ce89273b56b43dbe1193c679f00cfc153\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "17080cf3d7ec1f798250f0211fa5ba925b4a4127",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "99614885_1a88fabb",
@@ -50,6 +73,24 @@
       "side": 1,
       "message": "I did cherry pick those commits form linux-next branch. However, these necessary patches will not be incorporated into the stable branch since there is no stable tag associated with the relevant commits. These patches are essential for our platform to meet the UVC requirements using the common kernel version 6.6.X in Android-15.\n\nhttps://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/tree/?h\u003dnext-20241121",
       "parentUuid": "5e53cd6e_685b5da3",
+      "revId": "17080cf3d7ec1f798250f0211fa5ba925b4a4127",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3307ae66_56e75ce9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2024-11-26T20:02:39Z",
+      "side": 1,
+      "message": "Per the contribution guidelines, this should be a FROM_GIT: cherry picked from a stable maintainer\u0027s branch (AKA Greg KH\u0027s usb_next):\n\nIf the patch has been merged into an upstream maintainer tree, but has not yet been merged into Linux mainline\n- tag the patch subject with FROMGIT:\n- add info on where the patch came from as (cherry picked from commit \u003csha1\u003e \u003crepo\u003e \u003cbranch\u003e). This must be a stable maintainer branch (**not rebased, so don\u0027t use linux-next for example**).\n- if changes were required, use BACKPORT: FROMGIT:\n\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md#requirements-for-other-backports",
+      "parentUuid": "1a7ec2cd_ec43a47b",
       "revId": "17080cf3d7ec1f798250f0211fa5ba925b4a4127",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
