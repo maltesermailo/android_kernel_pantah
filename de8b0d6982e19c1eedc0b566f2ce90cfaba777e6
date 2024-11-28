@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "912d7be3_b8a50bee",
+        "filename": "include/linux/mm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 4135,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2024-11-28T13:30:12Z",
+      "side": 1,
+      "message": "This might attempt to clear `VM_MAYEXEC` on a file with `VM_EXEC | !VM_SHARED`, but that is invalid. The condition should be `||` instead of `\u0026\u0026`. (Or `VM_MAYEXEC` should only be cleared if `VM_SHARED` is set.)",
+      "range": {
+        "startLine": 4131,
+        "startChar": 0,
+        "endLine": 4135,
+        "endChar": 34
+      },
+      "revId": "de8b0d6982e19c1eedc0b566f2ce90cfaba777e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
