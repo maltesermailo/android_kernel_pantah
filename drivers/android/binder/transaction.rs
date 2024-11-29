@@ -402,6 +402,10 @@ impl DeliverToRead for Transaction {
         // process work list, since the priority has otherwise already been updated.
         self.on_thread_selected(thread);
 
+        // Before we give userspace a pointer to the transaction data, ensure that the pages are
+        // mapped and usable.
+        thread.process.pages.flush()?;
+
         let files = if let Ok(list) = self.prepare_file_list() {
             list
         } else {

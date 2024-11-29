@@ -25,16 +25,19 @@ use kernel::{
     bindings,
     error::Result,
     mm::{virt, Mm, MmWithUser},
-    new_spinlock,
+    new_mutex, new_spinlock,
     page::{Page, PAGE_SHIFT, PAGE_SIZE},
     prelude::*,
     str::CStr,
-    sync::SpinLock,
+    sync::{Mutex, SpinLock},
     task::Pid,
     types::ARef,
     types::{FromBytes, Opaque},
     uaccess::UserSliceReader,
 };
+
+type SpinLockGuard<'a, T> =
+    kernel::sync::lock::Guard<'a, T, kernel::sync::lock::spinlock::SpinLockBackend>;
 
 /// Represents a shrinker that can be registered with the kernel.
 ///
@@ -129,7 +132,8 @@ pub(crate) struct ShrinkablePageRange {
     /// Pid using this page range. Only used as debugging information.
     pid: Pid,
     /// The mm for the relevant process.
-    mm: ARef<Mm>,
+    #[pin]
+    mm: Mutex<ARef<Mm>>,
     /// Spinlock protecting changes to pages.
     #[pin]
     lock: SpinLock<Inner>,
@@ -140,6 +144,8 @@ pub(crate) struct ShrinkablePageRange {
 }
 
 struct Inner {
+    /// Whether there are any pages that need to be inserted into the vma.
+    need_flush: bool,
     /// Array of pages.
     ///
     /// Since this is also accessed by the shrinker, we can't use a `Box`, which asserts exclusive
@@ -151,8 +157,8 @@ struct Inner {
     vma_addr: usize,
 }
 
-unsafe impl Send for ShrinkablePageRange {}
-unsafe impl Sync for ShrinkablePageRange {}
+unsafe impl Send for Inner {}
+unsafe impl Sync for Inner {}
 
 /// An array element that describes the current state of a page.
 ///
@@ -163,10 +169,21 @@ unsafe impl Sync for ShrinkablePageRange {}
 ///  * Used. The page is Some. The `lru` element is not queued.
 ///
 /// When an element is available, the shrinker is able to free the page.
+///
+/// Separately from the above, there's also a `need_vm_insert` flag for each page, which keeps
+/// track of whether `vm_insert_page` has been called.
+///
+/// Locking:
+///
+/// * Reading is always okay when holding `lock`.
+/// * Writing is always okay when holding both `lock` and `mutex`.
+/// * When the page is None, writing is okay with only `lock`.
+/// * When the page is Some, both `lock` and `mutex` are required to write.
+/// * When the page is Some, you can read given just `mutex`.
 #[repr(C)]
 struct PageInfo {
     lru: bindings::list_head,
-    page: Option<Page>,
+    page: PageNeedInsertPacked,
     range: *const ShrinkablePageRange,
 }
 
@@ -178,47 +195,57 @@ impl PageInfo {
         // SAFETY: This pointer offset is in bounds.
         let page = unsafe { ptr::addr_of!((*me).page) };
 
-        unsafe { (*page).is_some() }
+        unsafe { (*page).is_page_some() }
+    }
+
+    /// # Safety
+    ///
+    /// The caller ensures that reading from `me.page` is ok.
+    unsafe fn need_vm_insert(me: *const PageInfo) -> bool {
+        // SAFETY: This pointer offset is in bounds.
+        let page = unsafe { ptr::addr_of!((*me).page) };
+
+        unsafe { (*page).need_vm_insert() }
     }
 
     /// # Safety
     ///
     /// The caller ensures that writing to `me.page` is ok, and that the page is not currently set.
-    unsafe fn set_page(me: *mut PageInfo, page: Page) {
+    unsafe fn set_page(me: *mut PageInfo, page: PageNeedInsert) {
         // SAFETY: This pointer offset is in bounds.
         let ptr = unsafe { ptr::addr_of_mut!((*me).page) };
 
         // SAFETY: The pointer is valid for writing, so also valid for reading.
-        if unsafe { (*ptr).is_some() } {
+        if unsafe { (*ptr).is_page_some() } {
             pr_err!("set_page called when there is already a page");
             // SAFETY: We will initialize the page again below.
             unsafe { ptr::drop_in_place(ptr) };
         }
 
         // SAFETY: The pointer is valid for writing.
-        unsafe { ptr::write(ptr, Some(page)) };
+        unsafe { ptr::write(ptr, page.pack()) };
     }
 
     /// # Safety
     ///
-    /// The caller ensures that reading from `me.page` is ok for the duration of 'a.
-    unsafe fn get_page<'a>(me: *const PageInfo) -> Option<&'a Page> {
+    /// The caller ensures that reading from `me.page` is ok.
+    unsafe fn with_page<T>(me: *const PageInfo, f: impl FnOnce(Option<&Page>) -> T) -> T {
         // SAFETY: This pointer offset is in bounds.
         let ptr = unsafe { ptr::addr_of!((*me).page) };
 
         // SAFETY: The pointer is valid for reading.
-        unsafe { (*ptr).as_ref() }
+        unsafe { (*ptr).with_page(f) }
     }
 
     /// # Safety
     ///
     /// The caller ensures that writing to `me.page` is ok for the duration of 'a.
-    unsafe fn take_page(me: *mut PageInfo) -> Option<Page> {
+    unsafe fn take_page(me: *mut PageInfo) -> PageNeedInsert {
         // SAFETY: This pointer offset is in bounds.
         let ptr = unsafe { ptr::addr_of_mut!((*me).page) };
 
         // SAFETY: The pointer is valid for reading.
-        unsafe { (*ptr).take() }
+        core::mem::take(unsafe { &mut *ptr }).unpack()
     }
 
     /// Add this page to the lru list, if not already in the list.
@@ -252,8 +279,9 @@ impl ShrinkablePageRange {
         try_pin_init!(Self {
             shrinker,
             pid: kernel::current!().pid(),
-            mm: Mm::mmgrab_current().ok_or(ESRCH)?,
+            mm <- new_mutex!(Mm::mmgrab_current().ok_or(ESRCH)?, "Binder::vm_insert_page"),
             lock <- new_spinlock!(Inner {
+                need_flush: false,
                 pages: ptr::null_mut(),
                 size: 0,
                 vma_addr: 0,
@@ -267,7 +295,7 @@ impl ShrinkablePageRange {
         let num_bytes = usize::min(vma.end() - vma.start(), bindings::SZ_4M as usize);
         let num_pages = num_bytes >> PAGE_SHIFT;
 
-        if !self.mm.is_same_mm(vma) {
+        if !self.mm.lock().is_same_mm(vma) {
             pr_debug!("Failed to register with vma: invalid vma->vm_mm");
             return Err(EINVAL);
         }
@@ -289,7 +317,7 @@ impl ShrinkablePageRange {
             for i in 0..num_pages {
                 let info = pages.add(i);
                 ptr::addr_of_mut!((*info).range).write(self_ptr);
-                ptr::addr_of_mut!((*info).page).write(None);
+                ptr::addr_of_mut!((*info).page).write(PageNeedInsertPacked::default());
                 let lru = ptr::addr_of_mut!((*info).lru);
                 ptr::addr_of_mut!((*lru).next).write(lru);
                 ptr::addr_of_mut!((*lru).prev).write(lru);
@@ -328,7 +356,7 @@ impl ShrinkablePageRange {
             // SAFETY: This pointer offset is in bounds.
             let page_info = unsafe { inner.pages.add(i) };
 
-            // SAFETY: The pointer is valid, and we hold the lock so reading from the page is okay.
+            // SAFETY: The pointer is valid, and we hold `inner` so reading from the page is okay.
             if unsafe { PageInfo::has_page(page_info) } {
                 crate::trace::trace_alloc_lru_start(self.pid, i);
 
@@ -347,14 +375,13 @@ impl ShrinkablePageRange {
                 drop(inner);
                 crate::trace::trace_alloc_page_start(self.pid, i);
                 match self.use_page_slow(i) {
-                    Ok(()) => {}
+                    Ok(guard) => inner = guard,
                     Err(err) => {
                         pr_warn!("Error in use_page_slow: {:?}", err);
                         return Err(err);
                     }
                 }
                 crate::trace::trace_alloc_page_end(self.pid, i);
-                inner = self.lock.lock();
             }
         }
         Ok(())
@@ -368,26 +395,18 @@ impl ShrinkablePageRange {
     ///
     /// Assumes that `i` is in bounds.
     #[cold]
-    fn use_page_slow(&self, i: usize) -> Result<()> {
-        let new_page = Page::alloc_page(GFP_KERNEL | __GFP_HIGHMEM | __GFP_ZERO)?;
-        // We use `mmput_async` when dropping the `mm` because `use_page_slow` is usually used from
-        // a remote process. If the call to `mmput` races with the process shutting down, then the
-        // caller of `use_page_slow` becomes responsible for cleaning up the `mm`, which doesn't
-        // happen until it returns to userspace. However, the caller might instead go to sleep and
-        // wait for the owner of the `mm` to wake it up, which doesn't happen because it's in the
-        // middle of a shutdown process that wont complete until the `mm` is dropped. This can
-        // amount to a deadlock.
-        //
-        // Using `mmput_async` avoids this, because then the `mm` cleanup is instead queued to a
-        // workqueue.
-        let mm = MmWithUser::use_mmput_async(self.mm.mmget_not_zero().ok_or(ESRCH)?);
-        let mut mmap_lock = mm.mmap_write_lock();
-        let inner = self.lock.lock();
+    fn use_page_slow(&self, i: usize) -> Result<SpinLockGuard<'_, Inner>> {
+        let new_page = PageNeedInsert {
+            page: Some(Page::alloc_page(GFP_KERNEL | __GFP_HIGHMEM | __GFP_ZERO)?),
+            need_vm_insert: true,
+        };
+
+        let mut inner = self.lock.lock();
 
         // SAFETY: This pointer offset is in bounds.
         let page_info = unsafe { inner.pages.add(i) };
 
-        // SAFETY: The pointer is valid, and we hold the lock so reading from the page is okay.
+        // SAFETY: We hold `inner`, so we may read.
         if unsafe { PageInfo::has_page(page_info) } {
             // The page was already there, or someone else added the page while we didn't hold the
             // spinlock.
@@ -397,43 +416,65 @@ impl ShrinkablePageRange {
             // The shrinker can't free the page between the check and this call to
             // `list_lru_del` because we hold the lock.
             unsafe { PageInfo::list_lru_del(page_info, self.shrinker) };
+        } else {
+            // SAFETY: We hold `inner` and the page is null, so we may write.
+            unsafe { PageInfo::set_page(page_info, new_page) };
+            inner.need_flush = true;
+        }
+
+        Ok(inner)
+    }
+
+    /// Ensure that all pages are inserted to the vma.
+    ///
+    /// On multiple concurrent calls, one caller will perform the insertions and the others will
+    /// wait for it using the mutex.
+    ///
+    /// Technically this could be simplifed to only check the relevant range of pages, but doing it
+    /// this way doesn't seem too bad.
+    ///
+    /// Must be called from the process that owns the vma.
+    pub(crate) fn flush(&self) -> Result {
+        if !self.lock.lock().need_flush {
             return Ok(());
         }
 
-        let vma_addr = inner.vma_addr;
-        // Release the spinlock while we insert the page into the vma.
-        drop(inner);
+        let mutex = self.mm.lock();
+        let mm = MmWithUser::use_mmput_async(mutex.mmget_not_zero().ok_or(EFAULT)?);
+        let mmap_read = mm.mmap_read_lock();
+        let mut inner = self.lock.lock();
+        let vma = mmap_read.vma_lookup(inner.vma_addr).ok_or(EFAULT)?;
 
-        let vma = mmap_lock.vma_lookup(vma_addr).ok_or(ESRCH)?;
-
-        // No overflow since we stay in bounds of the vma.
-        let user_page_addr = vma_addr + (i << PAGE_SHIFT);
-        match vma.vm_insert_page(user_page_addr, &new_page) {
-            Ok(()) => {}
-            Err(err) => {
-                pr_warn!(
-                    "Error in insert_page({}): vma_addr:{} i:{} err:{:?}",
-                    user_page_addr,
-                    vma_addr,
-                    i,
-                    err
-                );
-                return Err(err);
-            }
+        if !inner.need_flush {
+            return Ok(());
         }
 
-        let inner = self.lock.lock();
+        for i in 0..inner.size {
+            // SAFETY: `i <= inner.size` so in-bounds.
+            let page = unsafe { inner.pages.add(i) };
+            // SAFETY: We hold `inner` so reading is okay.
+            if unsafe { !PageInfo::need_vm_insert(page) } {
+                continue;
+            }
 
-        // SAFETY: The `page_info` pointer is valid and currently does not have a page. The page
-        // can be written to since we hold the lock.
-        //
-        // We released and reacquired the spinlock since we checked that the page is null, but we
-        // always hold the mmap write lock when setting the page to a non-null value, so it's not
-        // possible for someone else to have changed it since our check.
-        unsafe { PageInfo::set_page(page_info, new_page) };
+            // SAFETY: We hold `inner` and `mutex` so writing is okay.
+            let mut p = unsafe { PageInfo::take_page(page) };
+            assert!(p.page.is_some());
+            p.need_vm_insert = false;
+            // SAFETY: We hold `inner` and `mutex` so writing is okay.
+            unsafe { PageInfo::set_page(page, p) };
 
-        drop(inner);
+            let addr = inner.vma_addr + (i << PAGE_SHIFT);
+            drop(inner);
 
+            // SAFETY: We just set the page to non-null, so nobody else can write until we release
+            // `mutex`. Thus it is safe to read.
+            unsafe { PageInfo::with_page(page, |p| vma.vm_insert_page(addr, p.ok_or(EFAULT)?))? };
+
+            inner = self.lock.lock();
+        }
+
+        inner.need_flush = false;
         Ok(())
     }
 
@@ -502,14 +543,16 @@ impl ShrinkablePageRange {
             let available = usize::min(size, PAGE_SIZE - offset);
             // SAFETY: The pointer is in bounds.
             let page_info = unsafe { pages.add(page_index) };
+
+            let f = |page: Option<&Page>| match page {
+                Some(page) => cb(page, offset, available),
+                None => Err(EFAULT),
+            };
+
             // SAFETY: The caller guarantees that this page is in the "in use" state for the
             // duration of this call to `iterate`, so nobody will change the page.
-            let page = unsafe { PageInfo::get_page(page_info) };
-            if page.is_none() {
-                pr_warn!("Page is null!");
-            }
-            let page = page.ok_or(EFAULT)?;
-            cb(page, offset, available)?;
+            unsafe { PageInfo::with_page(page_info, f)? };
+
             size -= available;
             page_index += 1;
             offset = 0;
@@ -683,6 +726,7 @@ unsafe extern "C" fn rust_shrink_free_page(
     let pid;
     let page;
     let page_index;
+    let mutex;
     let mm;
     let mmap_read;
     let vma_addr;
@@ -692,7 +736,12 @@ unsafe extern "C" fn rust_shrink_free_page(
         let info = item as *mut PageInfo;
         let range = unsafe { &*((*info).range) };
 
-        mm = match range.mm.mmget_not_zero() {
+        mutex = match range.mm.trylock() {
+            Some(guard) => guard,
+            None => return LRU_SKIP,
+        };
+
+        mm = match mutex.mmget_not_zero() {
             Some(mm) => MmWithUser::use_mmput_async(mm),
             None => return LRU_SKIP,
         };
@@ -742,6 +791,7 @@ unsafe extern "C" fn rust_shrink_free_page(
     }
 
     drop(mmap_read);
+    drop(mutex);
     drop(mm);
     drop(page);
 
@@ -749,4 +799,100 @@ unsafe extern "C" fn rust_shrink_free_page(
     unsafe { bindings::spin_lock(lru_lock) };
 
     LRU_REMOVED_ENTRY
+}
+
+use page_bit::{PageNeedInsert, PageNeedInsertPacked};
+
+/// Helper for storing data in the lower bit of a `struct page` pointer.
+mod page_bit {
+    use core::mem::{align_of, size_of, transmute, ManuallyDrop};
+    use core::ptr::NonNull;
+    use kernel::{bindings, page::Page};
+
+    const _: () = {
+        let page_ptr_size = size_of::<NonNull<bindings::page>>();
+        let page_rust_size = size_of::<Page>();
+        let page_opt_rust_size = size_of::<Option<Page>>();
+        assert!(page_ptr_size == page_rust_size);
+        assert!(page_opt_rust_size == page_rust_size);
+    };
+
+    const _: () = {
+        let page_align = align_of::<bindings::page>();
+        assert!(page_align != 1);
+    };
+
+    /// A version of [`PageNeedInsert`] packed into one pointer.
+    pub(super) struct PageNeedInsertPacked {
+        value: *mut bindings::page,
+    }
+
+    pub(super) struct PageNeedInsert {
+        pub(super) page: Option<Page>,
+        pub(super) need_vm_insert: bool,
+    }
+
+    const INSERTED_MASK: usize = 1;
+    const PTR_MASK: usize = !INSERTED_MASK;
+
+    impl PageNeedInsertPacked {
+        pub(super) fn unpack(self) -> PageNeedInsert {
+            let me = ManuallyDrop::new(self);
+            let need_vm_insert = (me.value as usize) & INSERTED_MASK == INSERTED_MASK;
+
+            let ptr = (me.value as usize & PTR_MASK) as *mut bindings::page;
+            // SAFETY: `Page` has only one field of type `NonNull<page>`, and it has the same size
+            // as `NonNull<page>`, so the layouts are compatible. The null-pointer optimization
+            // applies, so wrapping in `Option` is also okay.
+            let page = unsafe { transmute::<*mut bindings::page, Option<Page>>(ptr) };
+
+            PageNeedInsert {
+                page,
+                need_vm_insert,
+            }
+        }
+
+        pub(super) fn is_page_some(&self) -> bool {
+            self.value as usize & PTR_MASK != 0
+        }
+
+        pub(super) fn need_vm_insert(&self) -> bool {
+            self.value as usize & INSERTED_MASK == INSERTED_MASK
+        }
+
+        pub(super) fn with_page<T>(&self, f: impl FnOnce(Option<&Page>) -> T) -> T {
+            let ptr = (self.value as usize & PTR_MASK) as *mut bindings::page;
+            // SAFETY: Same as `unpack` except we're not taking ownership of the page.
+            let page =
+                ManuallyDrop::new(unsafe { transmute::<*mut bindings::page, Option<Page>>(ptr) });
+
+            f(Option::as_ref(&page))
+        }
+    }
+
+    impl PageNeedInsert {
+        pub(super) fn pack(self) -> PageNeedInsertPacked {
+            // SAFETY: Safe for same reason as in `pack`.
+            let ptr = unsafe { transmute::<Option<Page>, *mut bindings::page>(self.page) };
+            let inserted_bit = self.need_vm_insert as usize;
+
+            PageNeedInsertPacked {
+                value: ((ptr as usize) | inserted_bit) as *mut bindings::page,
+            }
+        }
+    }
+
+    impl Drop for PageNeedInsertPacked {
+        fn drop(&mut self) {
+            drop(Self::unpack(Self { value: self.value }));
+        }
+    }
+
+    impl Default for PageNeedInsertPacked {
+        fn default() -> Self {
+            Self {
+                value: core::ptr::null_mut(),
+            }
+        }
+    }
 }

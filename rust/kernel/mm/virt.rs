@@ -105,9 +105,11 @@ impl VmArea {
     ///
     /// This operation does not take ownership of the page.
     #[inline]
-    pub fn vm_insert_page(self: Pin<&mut Self>, address: usize, page: &Page) -> Result {
-        // SAFETY: By the type invariants, the caller holds the mmap write lock, so this access is
-        // not a data race. The page is guaranteed to be valid and of order 0. The range of
+    pub fn vm_insert_page(&self, address: usize, page: &Page) -> Result {
+        assert_ne!(self.flags() & flags::MIXEDMAP, 0);
+
+        // SAFETY: By the type invariants, the caller holds the mmap read lock and we just checked
+        // that VM_MIXEDMAP is set. The page is guaranteed to be valid and of order 0. The range of
         // `address` is already checked by `vm_insert_page`.
         to_result(unsafe { bindings::vm_insert_page(self.as_ptr(), address as _, page.as_ptr()) })
     }
