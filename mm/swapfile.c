@@ -54,6 +54,7 @@ struct swap_info_ext {
 	struct list_head frag_clusters[SWAP_NR_ORDERS];
 					/* list of cluster that are fragmented or contented */
 	unsigned int frag_cluster_nr[SWAP_NR_ORDERS];
+	struct list_head full_clusters; /* full clusters list */
 };
 
 static struct swap_info_ext *swap_info_ext[MAX_SWAPFILES];
@@ -697,7 +698,7 @@ static void cluster_alloc_range(struct swap_info_struct *si, struct swap_cluster
 			  (CLUSTER_FLAG_FREE | CLUSTER_FLAG_NONFULL | CLUSTER_FLAG_FRAG)));
 		if (ci->flags & CLUSTER_FLAG_FRAG)
 			SIE(si)->frag_cluster_nr[ci->order]--;
-		list_move_tail(&ci->list, &si->full_clusters);
+		list_move_tail(&ci->list, &SIE(si)->full_clusters);
 		ci->flags = CLUSTER_FLAG_FULL;
 	}
 }
@@ -753,9 +754,9 @@ static void swap_reclaim_full_clusters(struct swap_info_struct *si, bool force)
 	if (force)
 		to_scan = si->inuse_pages / SWAPFILE_CLUSTER;
 
-	while (!list_empty(&si->full_clusters)) {
-		ci = list_first_entry(&si->full_clusters, struct swap_cluster_info, list);
-		list_move_tail(&ci->list, &si->full_clusters);
+	while (!list_empty(&SIE(si)->full_clusters)) {
+		ci = list_first_entry(&SIE(si)->full_clusters, struct swap_cluster_info, list);
+		list_move_tail(&ci->list, &SIE(si)->full_clusters);
 		offset = cluster_offset(si, ci);
 		end = min(si->max, offset + SWAPFILE_CLUSTER);
 		to_scan--;
@@ -3256,7 +3257,7 @@ static int setup_swap_map_and_extents(struct swap_info_struct *p,
 	nr_good_pages = maxpages - 1;	/* omit header page */
 
 	INIT_LIST_HEAD(&p->free_clusters);
-	INIT_LIST_HEAD(&p->full_clusters);
+	INIT_LIST_HEAD(&SIE(p)->full_clusters);
 	INIT_LIST_HEAD(&p->discard_clusters);
 
 	for (i = 0; i < SWAP_NR_ORDERS; i++) {
