@@ -54,12 +54,15 @@ struct swap_info_ext {
 	struct list_head frag_clusters[SWAP_NR_ORDERS];
 					/* list of cluster that are fragmented or contented */
 	unsigned int frag_cluster_nr[SWAP_NR_ORDERS];
-	struct list_head full_clusters; /* full clusters list */
+	struct list_head full_clusters;		/* full clusters list */
+	struct work_struct reclaim_work;	/* reclaim worker */
+	signed char type;			/* strange name for an index */
 };
 
 static struct swap_info_ext *swap_info_ext[MAX_SWAPFILES];
 
 #define SIE(si) (READ_ONCE(swap_info_ext[si->type]))
+#define SI(sie) (READ_ONCE(swap_info[sie->type]))
 
 static bool swap_count_continued(struct swap_info_struct *, pgoff_t,
 				 unsigned char);
@@ -782,13 +785,13 @@ static void swap_reclaim_full_clusters(struct swap_info_struct *si, bool force)
 
 static void swap_reclaim_work(struct work_struct *work)
 {
-	struct swap_info_struct *si;
+	struct swap_info_ext *sie;
 
-	si = container_of(work, struct swap_info_struct, reclaim_work);
+	sie = container_of(work, struct swap_info_ext, reclaim_work);
 
-	spin_lock(&si->lock);
-	swap_reclaim_full_clusters(si, true);
-	spin_unlock(&si->lock);
+	spin_lock(&SI(sie)->lock);
+	swap_reclaim_full_clusters(SI(sie), true);
+	spin_unlock(&SI(sie)->lock);
 }
 
 /*
@@ -941,7 +944,7 @@ static void swap_range_alloc(struct swap_info_struct *si, unsigned long offset,
 		del_from_avail_list(si);
 
 		if (vm_swap_full())
-			schedule_work(&si->reclaim_work);
+			schedule_work(&SIE(si)->reclaim_work);
 	}
 }
 
@@ -2816,7 +2819,7 @@ SYSCALL_DEFINE1(swapoff, const char __user *, specialfile)
 	wait_for_completion(&p->comp);
 
 	flush_work(&p->discard_work);
-	flush_work(&p->reclaim_work);
+	flush_work(&SIE(p)->reclaim_work);
 
 	destroy_swap_extents(p);
 	if (p->flags & SWP_CONTINUED)
@@ -3070,6 +3073,7 @@ static struct swap_info_struct *alloc_swap_info(void)
 	}
 	if (type >= nr_swapfiles) {
 		p->type = type;
+		sie->type = type;
 		/*
 		 * Publish the swap_info_struct after initializing it.
 		 * Note that kvzalloc() above zeroes all its fields.
@@ -3364,7 +3368,7 @@ SYSCALL_DEFINE2(swapon, const char __user *, specialfile, int, swap_flags)
 		return PTR_ERR(p);
 
 	INIT_WORK(&p->discard_work, swap_discard_work);
-	INIT_WORK(&p->reclaim_work, swap_reclaim_work);
+	INIT_WORK(&SIE(p)->reclaim_work, swap_reclaim_work);
 
 	name = getname(specialfile);
 	if (IS_ERR(name)) {
