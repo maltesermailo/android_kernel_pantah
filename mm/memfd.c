@@ -184,6 +184,7 @@ unsigned int *memfd_file_seals_ptr(struct file *file)
 }
 
 #define F_ALL_SEALS (F_SEAL_SEAL | \
+		     F_SEAL_EXEC_MAPPING | \
 		     F_SEAL_EXEC | \
 		     F_SEAL_SHRINK | \
 		     F_SEAL_GROW | \
@@ -256,6 +257,12 @@ static int memfd_add_seals(struct file *file, unsigned int seals)
 			mapping_allow_writable(file->f_mapping);
 			goto unlock;
 		}
+	}
+
+	if ((seals & F_SEAL_EXEC_MAPPING) && !(*file_seals & F_SEAL_EXEC_MAPPING)) {
+		error = mapping_deny_executable(file->f_mapping);
+		if (error)
+			goto unlock;
 	}
 
 	/*

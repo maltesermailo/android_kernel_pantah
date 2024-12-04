@@ -748,6 +748,8 @@ static __latent_entropy int dup_mmap(struct mm_struct *mm,
 			i_mmap_lock_write(mapping);
 			if (vma_is_shared_maywrite(tmp))
 				mapping_allow_writable(mapping);
+			if (vma_is_shared_mayexec(tmp))
+				mapping_allow_executable(mapping);
 			flush_dcache_mmap_lock(mapping);
 			/* insert tmp into the share list, just after mpnt */
 			vma_interval_tree_insert_after(tmp, mpnt,

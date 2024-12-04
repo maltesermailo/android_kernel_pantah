@@ -412,6 +412,9 @@ unsigned long do_mmap(struct file *file, unsigned long addr,
 				vm_flags &= ~(VM_MAYWRITE | VM_SHARED);
 			else if (is_readonly_sealed(seals, vm_flags))
 				vm_flags &= ~VM_MAYWRITE;
+
+			if (is_nonexec_sealed(seals, vm_flags))
+				vm_flags &= ~VM_MAYEXEC;
 			fallthrough;
 		case MAP_PRIVATE:
 			if (!(file->f_mode & FMODE_READ))
@@ -1589,6 +1592,7 @@ unsigned long mmap_region(struct file *file, unsigned long addr,
 {
 	unsigned long ret;
 	bool writable_file_mapping = false;
+	bool executable_file_mapping = false;
 
 	/* Check to see if MDWE is applicable. */
 	if (map_deny_write_exec(vm_flags, vm_flags))
@@ -1607,7 +1611,23 @@ unsigned long mmap_region(struct file *file, unsigned long addr,
 		writable_file_mapping = true;
 	}
 
+	/* Map executable and ensure that this isn't a sealed memfd. */
+	if (file && is_shared_mayexec(vm_flags)) {
+		int error = mapping_map_executable(file->f_mapping);
+
+		if (error) {
+			if (writable_file_mapping)
+				mapping_unmap_writable(file->f_mapping);
+			return error;
+		}
+		executable_file_mapping = true;
+	}
+
 	ret = __mmap_region(file, addr, len, vm_flags, pgoff, uf);
+
+	/* Clear our exec mapping regardless of error. */
+	if (executable_file_mapping)
+		mapping_unmap_executable(file->f_mapping);
 
 	/* Clear our write mapping regardless of error. */
 	if (writable_file_mapping)

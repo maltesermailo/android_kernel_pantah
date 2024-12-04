@@ -468,6 +468,7 @@ struct address_space {
 	struct rw_semaphore	invalidate_lock;
 	gfp_t			gfp_mask;
 	atomic_t		i_mmap_writable;
+	atomic_t		i_mmap_executable;
 #ifdef CONFIG_READ_ONLY_THP_FOR_FS
 	/* number of thp, only for non-shmem files */
 	atomic_t		nr_thps;
@@ -584,6 +585,28 @@ static inline int mapping_deny_writable(struct address_space *mapping)
 static inline void mapping_allow_writable(struct address_space *mapping)
 {
 	atomic_inc(&mapping->i_mmap_writable);
+}
+
+static inline int mapping_map_executable(struct address_space *mapping)
+{
+	return atomic_inc_unless_negative(&mapping->i_mmap_executable) ?
+		0 : -EPERM;
+}
+
+static inline void mapping_unmap_executable(struct address_space *mapping)
+{
+	atomic_dec(&mapping->i_mmap_executable);
+}
+
+static inline int mapping_deny_executable(struct address_space *mapping)
+{
+	return atomic_dec_unless_positive(&mapping->i_mmap_executable) ?
+		0 : -EBUSY;
+}
+
+static inline void mapping_allow_executable(struct address_space *mapping)
+{
+	atomic_inc(&mapping->i_mmap_executable);
 }
 
 /*

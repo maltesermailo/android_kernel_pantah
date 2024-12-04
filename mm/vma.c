@@ -132,6 +132,9 @@ static void __vma_link_file(struct vm_area_struct *vma,
 	if (vma_is_shared_maywrite(vma))
 		mapping_allow_writable(mapping);
 
+	if (vma_is_shared_mayexec(vma))
+		mapping_allow_executable(mapping);
+
 	flush_dcache_mmap_lock(mapping);
 	vma_interval_tree_insert(vma, &mapping->i_mmap);
 	flush_dcache_mmap_unlock(mapping);
@@ -145,6 +148,9 @@ static void __remove_shared_vm_struct(struct vm_area_struct *vma,
 {
 	if (vma_is_shared_maywrite(vma))
 		mapping_unmap_writable(mapping);
+
+	if (vma_is_shared_mayexec(vma))
+		mapping_unmap_executable(mapping);
 
 	flush_dcache_mmap_lock(mapping);
 	vma_interval_tree_remove(vma, &mapping->i_mmap);

@@ -987,9 +987,20 @@ static inline bool is_shared_maywrite(vm_flags_t vm_flags)
 		(VM_SHARED | VM_MAYWRITE);
 }
 
+static inline bool is_shared_mayexec(vm_flags_t vm_flags)
+{
+	return (vm_flags & (VM_SHARED | VM_MAYEXEC)) ==
+		(VM_SHARED | VM_MAYEXEC);
+}
+
 static inline bool vma_is_shared_maywrite(struct vm_area_struct *vma)
 {
 	return is_shared_maywrite(vma->vm_flags);
+}
+
+static inline bool vma_is_shared_mayexec(struct vm_area_struct *vma)
+{
+	return is_shared_mayexec(vma->vm_flags);
 }
 
 static inline
@@ -4085,6 +4096,11 @@ static inline bool is_write_sealed(int seals)
 	return seals & (F_SEAL_WRITE | F_SEAL_FUTURE_WRITE);
 }
 
+static inline bool is_exec_sealed(int seals)
+{
+	return seals & F_SEAL_EXEC_MAPPING;
+}
+
 /**
  * is_readonly_sealed - Checks whether write-sealed but mapped read-only,
  *                      in which case writes should be disallowing moving
@@ -4112,6 +4128,25 @@ static inline bool is_readonly_sealed(int seals, vm_flags_t vm_flags)
 }
 
 /**
+ * is_nonexec_sealed - Checks if executable mappings are sealed and if the
+ *                     mapping is not executable. If so, executable mappings
+ *                     should not be permitted.
+ * @seals: the seals to check
+ * @vm_flags: the VMA flags to check
+ *
+ * Returns whether executable mappings are sealed, in which case they
+ * should not be permitted.
+ */
+static inline bool is_nonexec_sealed(int seals, vm_flags_t vm_flags)
+{
+	if (is_exec_sealed(seals) &&
+	    ((vm_flags & (VM_SHARED | VM_EXEC)) == VM_SHARED))
+		return true;
+
+	return false;
+}
+
+/**
  * seal_check_write - Check for F_SEAL_WRITE or F_SEAL_FUTURE_WRITE flags and
  *                    handle them.
  * @seals: the seals to check
@@ -4130,6 +4165,29 @@ static inline int seal_check_write(int seals, struct vm_area_struct *vma)
 	 * write seals are active.
 	 */
 	if ((vma->vm_flags & VM_SHARED) && (vma->vm_flags & VM_WRITE))
+		return -EPERM;
+
+	return 0;
+}
+
+/**
+ * seal_check_exec - Check for the F_SEAL_EXEC_MAPPING flag and handle it.
+ * @seals: the seals to check
+ * @vma: the vma to operate on
+ *
+ * Check if F_SEAL_EXEC_MAPPING is set; if so, do proper check/handling on the vma flags.
+ * Return 0 if check pass, or <0 for errors.
+ */
+static inline int seal_check_exec(int seals, struct vm_area_struct *vma)
+{
+	if (!is_exec_sealed(seals))
+		return 0;
+
+	/*
+	 * New PROT_EXEC and MAP_SHARED mmaps are not allowed when
+	 * exec mapping seals are active.
+	 */
+	if ((vma->vm_flags & VM_SHARED) && (vma->vm_flags & VM_EXEC))
 		return -EPERM;
 
 	return 0;
