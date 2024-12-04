@@ -22,6 +22,30 @@
       },
       "revId": "8f47d5a7f850f499662a50775c2a0a2def0a4406",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb3585fe_57c40688",
+        "filename": "mm/cma.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 3310449
+      },
+      "writtenOn": "2024-12-04T07:54:17Z",
+      "side": 1,
+      "message": "`trace_cma_alloc_finish` is not exported so I can\u0027t register my own hook with it in ko.\nIn patchset 4 I used `bitmap_count` because it was the aligned size and `count` was what the user passed in as a result of misalignment\nNow I changed the first argument from `cma-\u003ename` to `cma` and `bitmap_count` back to `count` so I can get more information through `cma` and calculate the correct count myself.\nAnd now it looks better.",
+      "parentUuid": "f38b50b5_3a94b199",
+      "range": {
+        "startLine": 541,
+        "startChar": 50,
+        "endLine": 541,
+        "endChar": 62
+      },
+      "revId": "8f47d5a7f850f499662a50775c2a0a2def0a4406",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
