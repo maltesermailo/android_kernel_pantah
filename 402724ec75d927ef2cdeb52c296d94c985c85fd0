@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2605c05_5c3c1833",
+        "filename": "scripts/gendwarfksyms/dwarf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2024-12-04T17:42:30Z",
+      "side": 1,
+      "message": "I think this has a couple of issues.\n\n- cache cleaning\n- recursion limiting (I understand this has since been removed)\n\nThey imply that there will be wasted effort recalculating some the same things again and again. To see if this is an actual performance issue, instrument the code to count how many times each \"node\" (DIE) is visited.\n\nIf you want to avoid all wasted work, you\u0027ll need a hash function that is cycle aware.\n\nFor STG, I developed a generic cycle detector that can be plugged into any DFS algorithm that works on DAGs, requiring only a little extra code for when it hands you a completed SCC.\n\nhttps://android.googlesource.com/platform/external/stg/+/refs/heads/main/scc.h\n\nSimplifications / optimisations may be possible in gendwarfksyms if you can mutate the nodes you have with some of your state.\n\n@vvvvvv@google.com even wrote a cycle-aware hash function for STG though we did not need it in the end.",
+      "range": {
+        "startLine": 619,
+        "startChar": 0,
+        "endLine": 619,
+        "endChar": 21
+      },
+      "revId": "402724ec75d927ef2cdeb52c296d94c985c85fd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
