@@ -22,6 +22,30 @@
       },
       "revId": "402724ec75d927ef2cdeb52c296d94c985c85fd0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd70491f_5cc9ca2c",
+        "filename": "scripts/gendwarfksyms/dwarf.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1058768
+      },
+      "writtenOn": "2024-12-05T16:21:05Z",
+      "side": 1,
+      "message": "\u003e They imply that there will be wasted effort recalculating some the same things again and again.\n\nNo, the cache in die.c ensures that each DIE is processed into a string just once, and it\u0027s not cleared until we\u0027re done with the object file. The cache added in this CL also isn\u0027t only for cycle detection, it also ensures we don\u0027t output the same, potentially huge, expansion multiple times, when requested. Note that this tool is split into relatively small CLs to make upstream review easier, which is why simple features like cycle detection is missing initially. We don\u0027t actually have a usable tool until the final CL.",
+      "parentUuid": "f2605c05_5c3c1833",
+      "range": {
+        "startLine": 619,
+        "startChar": 0,
+        "endLine": 619,
+        "endChar": 21
+      },
+      "revId": "402724ec75d927ef2cdeb52c296d94c985c85fd0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
