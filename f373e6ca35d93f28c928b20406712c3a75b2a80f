@@ -22,6 +22,30 @@
       },
       "revId": "f373e6ca35d93f28c928b20406712c3a75b2a80f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a3c6414_6b442a93",
+        "filename": "drivers/platform/chrome/cros_ec_typec.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1064639
+      },
+      "writtenOn": "2024-12-05T01:39:06Z",
+      "side": 1,
+      "message": "Abhishek added the active property here:\nhttps://android-review.git.corp.google.com/c/kernel/common/+/3343081\n\nThe intent was for the default to be \"active\" meaning that desc.inactive should default to false (which is appropriate if the memset initalizes the desc to 0).\n\nI\u0027ll go ahead and remove this line.",
+      "parentUuid": "95e09f13_d53638c3",
+      "range": {
+        "startLine": 298,
+        "startChar": 17,
+        "endLine": 298,
+        "endChar": 22
+      },
+      "revId": "f373e6ca35d93f28c928b20406712c3a75b2a80f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
