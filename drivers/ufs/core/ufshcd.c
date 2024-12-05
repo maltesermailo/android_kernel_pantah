@@ -2207,6 +2207,8 @@ void ufshcd_send_command(struct ufs_hba *hba, unsigned int task_tag,
 		spin_lock(&hwq->sq_lock);
 		dest = hwq->sqe_base_addr + hwq->sq_tail_slot;
 		memcpy(dest, src, utrd_size);
+		lrbp->issue_time_stamp = ktime_get();
+		lrbp->issue_time_stamp_local_clock = local_clock();
 		ufshcd_inc_sq_tail(hwq);
 		spin_unlock(&hwq->sq_lock);
 	} else {
@@ -2215,6 +2217,8 @@ void ufshcd_send_command(struct ufs_hba *hba, unsigned int task_tag,
 			hba->vops->setup_xfer_req(hba, lrbp->task_tag,
 						  !!lrbp->cmd);
 		__set_bit(lrbp->task_tag, &hba->outstanding_reqs);
+		lrbp->issue_time_stamp = ktime_get();
+		lrbp->issue_time_stamp_local_clock = local_clock();
 		ufshcd_writel(hba, 1 << lrbp->task_tag,
 			      REG_UTP_TRANSFER_REQ_DOOR_BELL);
 		spin_unlock_irqrestore(&hba->outstanding_lock, flags);
