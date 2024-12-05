@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7d9f8f1_e844270d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2024-12-05T10:04:54Z",
+      "side": 1,
+      "message": "Should we address any of those in this new port?\n\n```\nWARNING:PREFER_DEFINED_ATTRIBUTE_MACRO: Prefer __noreturn over __attribute__((noreturn))\n#84: FILE: samples/crypto/fips140_lab_util.c:52:\n--\nWARNING:PREFER_DEFINED_ATTRIBUTE_MACRO: Prefer __noreturn over __attribute__((noreturn))\n#95: FILE: samples/crypto/fips140_lab_util.c:63:\n--\nWARNING:PREFER_DEFINED_ATTRIBUTE_MACRO: Prefer __printf(1, 2) over __attribute__((format(printf, 1, 2)))\n#95: FILE: samples/crypto/fips140_lab_util.c:63:\n--\nWARNING:PREFER_DEFINED_ATTRIBUTE_MACRO: Prefer __noreturn over __attribute__((noreturn))\n#105: FILE: samples/crypto/fips140_lab_util.c:73:\n--\nWARNING:PREFER_DEFINED_ATTRIBUTE_MACRO: Prefer __printf(1, 2) over __attribute__((format(printf, 1, 2)))\n#105: FILE: samples/crypto/fips140_lab_util.c:73:\n--\nWARNING:PREFER_DEFINED_ATTRIBUTE_MACRO: Prefer __noreturn over __attribute__((noreturn))\n#115: FILE: samples/crypto/fips140_lab_util.c:83:\n--\nWARNING:STRNCPY: Prefer strscpy, strscpy_pad, or __nonstring over strncpy - see: https://github.com/KSPP/linux/issues/90\n#262: FILE: samples/crypto/fips140_lab_util.c:230:\n--\nWARNING:STRNCPY: Prefer strscpy, strscpy_pad, or __nonstring over strncpy - see: https://github.com/KSPP/linux/issues/90\n#263: FILE: samples/crypto/fips140_lab_util.c:231:\n```\n\nperhaps the KSPP guidance?\n\n@ardb@google.com, @ebiggers@google.com",
+      "revId": "e25dfbdafae27c30b1fe6718d31658bfd770dc10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
