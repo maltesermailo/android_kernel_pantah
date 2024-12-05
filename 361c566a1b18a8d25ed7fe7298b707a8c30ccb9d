@@ -22,6 +22,30 @@
       },
       "revId": "361c566a1b18a8d25ed7fe7298b707a8c30ccb9d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a63536d8_c0b60720",
+        "filename": "mm/cma.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 3310449
+      },
+      "writtenOn": "2024-12-05T07:50:05Z",
+      "side": 1,
+      "message": "When I use `trace_cma_alloc/trace_cma_release` in my ko, I will see the following compile error:\n```\nERROR: modpost: \"__tracepoint_cma_alloc_finish\"[my.ko] undefined!\nERROR: modpost: \"__tracepoint_cma_release\" [my.ko] undefined!\n```\n\nThe reason is that `trace_cma_alloc_finish` and `trace_cma_release` are not exported. \n\nSo I add vendor hook `trace_android_vh_cma_alloc` and `android_vh_cma_release` and **export them** in `drivers/android/vendor_hooks.c`",
+      "parentUuid": "7160f2af_bdbec746",
+      "range": {
+        "startLine": 540,
+        "startChar": 1,
+        "endLine": 540,
+        "endChar": 23
+      },
+      "revId": "361c566a1b18a8d25ed7fe7298b707a8c30ccb9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
