@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "520ada1d_5ffece79",
+        "filename": "include/linux/mm.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 4179,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2024-12-05T23:51:59Z",
+      "side": 1,
+      "message": "addressed in PS5",
+      "parentUuid": "42676e0b_ee96b857",
+      "revId": "85d12aa256afa87cc86bb825e8f16823f3276d43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f10915db_83ba0b57",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-12-05T18:55:44Z",
       "side": 1,
       "message": "Should this just be `is_exec_sealed()` ?\n\nIIUC in the write case we keep it so the MAP_PRIVATE still still COW to an anonymous page instead of persisting to the underlying file (as MAP_SHARED would).\n\nI don\u0027t think the same is applicable to MAYEXEC which seems only to indicate future mprotect to executable is possible.",
+      "range": {
+        "startLine": 416,
+        "startChar": 7,
+        "endLine": 416,
+        "endChar": 24
+      },
+      "revId": "85d12aa256afa87cc86bb825e8f16823f3276d43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7d3ffa0_846734da",
+        "filename": "mm/mmap.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2024-12-05T23:51:59Z",
+      "side": 1,
+      "message": "I agree. I\u0027ve addressed this in the next patchset, thanks!",
+      "parentUuid": "f10915db_83ba0b57",
       "range": {
         "startLine": 416,
         "startChar": 7,
