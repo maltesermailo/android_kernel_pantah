@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee5b6988_a0c15535",
+        "filename": "mm/mmap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2024-12-06T16:56:24Z",
+      "side": 1,
+      "message": "Should it be EPERM?\n\nAccording to mmap(2) man page:\n\n```\n EPERM  The operation was prevented by a file seal; see fcntl(2).\n```",
+      "range": {
+        "startLine": 381,
+        "startChar": 12,
+        "endLine": 381,
+        "endChar": 18
+      },
+      "revId": "5be1115e4197a37a2985aa7774fdf07308c24438",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
