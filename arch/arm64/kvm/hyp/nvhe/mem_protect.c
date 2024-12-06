@@ -787,51 +787,18 @@ static void host_inject_abort(struct kvm_cpu_context *host_ctxt)
 	write_sysreg_el2(spsr, SYS_SPSR);
 }
 
-#define MAX_HOST_FAULT_HANDLERS 16
-
-static int
-(*perm_fault_handlers[MAX_HOST_FAULT_HANDLERS])(struct user_pt_regs *regs, u64 esr, u64 addr);
-
-int hyp_register_host_perm_fault_handler(int (*cb)(struct user_pt_regs *regs, u64 esr, u64 addr))
-{
-	static DEFINE_HYP_SPINLOCK(handlers_lock);
-	int i;
-
-	hyp_spin_lock(&handlers_lock);
-
-	for (i = 0; i < MAX_HOST_FAULT_HANDLERS; i++) {
-		if (!perm_fault_handlers[i]) {
-			WRITE_ONCE(perm_fault_handlers[i], cb);
-			break;
-		}
-	}
-
-	hyp_spin_unlock(&handlers_lock);
-
-	return i >= MAX_HOST_FAULT_HANDLERS ? -EBUSY : 0;
-}
-
 static int handle_host_perm_fault(struct kvm_cpu_context *host_ctxt, u64 esr, u64 addr)
 {
-	int (*cb)(struct user_pt_regs *regs, u64 esr, u64 addr);
-	bool handled = false;
-	int i;
+	int ret = module_handle_host_perm_fault(&host_ctxt->regs, esr, addr);
 
-	for (i = 0; i < MAX_HOST_FAULT_HANDLERS; i++) {
-		int err;
+	/* handled */
+	if (ret == 1)
+		return 0;
+	/* !handled */
+	if (!ret)
+		return -EPERM;
 
-		cb = READ_ONCE(perm_fault_handlers[i]);
-		if (!cb)
-			break;
-
-		handled = true;
-
-		err = cb(&host_ctxt->regs, esr, addr);
-		if (err)
-			return err;
-	}
-
-	return handled ? 0 : -EPERM;
+	return ret;
 }
 
 static bool is_dabt(u64 esr)
