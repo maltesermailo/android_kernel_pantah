@@ -4,8 +4,23 @@
  * Author: Bartłomiej Grzesik <bgrzesik@google.com>
  */
 #include <kvm/iommu.h>
+#include <linux/init.h>
 #include <linux/module.h>
 #include <linux/printk.h>
+
+static bool early_enabled;
+
+static int __init early_enabled_cfg(char *arg)
+{
+	if (!arg)
+		return -EINVAL;
+
+	early_enabled = !strcmp(arg, "1");
+
+	return 0;
+}
+
+early_param("arm.kvm.unsafe_iommu", early_enabled_cfg);
 
 static int init_driver(void)
 {
@@ -34,6 +49,9 @@ int kvm_nvhe_sym(kvm_stub_iommu_init_hyp_module)(
 static int kvm_iommu_stub_register(void)
 {
 	int ret;
+
+	if (!early_enabled)
+		return 0;
 
 	ret = kvm_iommu_register_driver(&driver_ops);
 	if (!ret)
