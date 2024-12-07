@@ -40,6 +40,30 @@
       ],
       "revId": "930c44b4c78209fad70d7804677c5099c0896b3d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4304ab05_094de22d",
+        "filename": "kernel/sched/stats.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2024-12-07T03:17:57Z",
+      "side": 1,
+      "message": "Hrm. Ok. The difficulty is the proxy_exec logic re-uses logic (like block_task()) which calls dequeue_task() with DEQUEUE_SLEEP, but from a context where we won\u0027t necessarily do a context switch immediately. Having a separate flag might make more sense, but may require duplicating some infrastructure or piping the flag through. I\u0027ll think about this a bit and see if I can get it into v15.",
+      "parentUuid": "ea191116_60632f11",
+      "range": {
+        "startLine": 184,
+        "startChar": 1,
+        "endLine": 184,
+        "endChar": 59
+      },
+      "revId": "930c44b4c78209fad70d7804677c5099c0896b3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
