@@ -986,6 +986,8 @@ void free_large_kmalloc(struct folio *folio, void *object)
 	kasan_kfree_large(object);
 	kmsan_kfree_large(object);
 
+	trace_android_vh_free_large_kmalloc(folio, order, object);
+
 	mod_lruvec_page_state(folio_page(folio, 0), NR_SLAB_UNRECLAIMABLE_B,
 			      -(PAGE_SIZE << order));
 	__free_pages(folio_page(folio, 0), order);

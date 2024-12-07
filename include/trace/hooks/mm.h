@@ -71,6 +71,9 @@ DECLARE_HOOK(android_vh_process_madvise_iter,
 DECLARE_HOOK(android_vh_kmalloc_large_alloced,
 	TP_PROTO(struct page *page, unsigned int order, gfp_t flags),
 	TP_ARGS(page, order, flags));
+DECLARE_HOOK(android_vh_free_large_kmalloc,
+	TP_PROTO(struct folio *folio, unsigned int order, void *object),
+	TP_ARGS(folio, order, object));
 DECLARE_RESTRICTED_HOOK(android_rvh_ctl_dirty_rate,
 	TP_PROTO(struct inode *inode),
 	TP_ARGS(inode), 1);
