@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ea83784_48237ad0",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 6822,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2024-12-09T12:09:47Z",
+      "side": 1,
+      "message": "I can\u0027t see this being a problem, but have you tried with TTWU_QUEUE disabled?",
+      "range": {
+        "startLine": 6821,
+        "startChar": 6,
+        "endLine": 6822,
+        "endChar": 67
+      },
+      "revId": "ff90f077ac26a64036249739b2a17d7fc94d1124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71ee719c_4585db15",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 6872,
+      "author": {
+        "id": 1976445
+      },
+      "writtenOn": "2024-12-09T12:09:47Z",
+      "side": 1,
+      "message": "What if there are other tasks on the runqueue that are runnable? I think set_tsk_need_resched() will force another pick_next_task_cycle() but you\u0027re just forcing the locks to be released to allow some waiters to obtain it. Can we enter this path more than once due to unexpected delay in the remote CPU to acquire the lock fast enough?",
+      "range": {
+        "startLine": 6872,
+        "startChar": 3,
+        "endLine": 6872,
+        "endChar": 33
+      },
+      "revId": "ff90f077ac26a64036249739b2a17d7fc94d1124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
