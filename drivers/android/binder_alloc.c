@@ -253,9 +253,16 @@ static int binder_install_single_page(struct binder_alloc *alloc,
 	if (ret) {
 		pr_err("%d: %s failed to insert page at offset %lx with %d\n",
 		       alloc->pid, __func__, addr - alloc->buffer, ret);
+<<<<<<< HEAD   (dad6868f0c118913906b24f2bc7b56f73fd3dd62 ANDROID: Move SCX_OPS_DISABLING VH inside the scx_fork_rwsem)
 		__free_page(page);
 		ret = -ENOMEM;
 		goto out;
+||||||| BASE   (1573293d5d17e791fb3a4b556199f3574dfdeeba UPSTREAM: binder: use per-vma lock in page installation)
+		ret = -ENOMEM;
+		break;
+=======
+		break;
+>>>>>>> CHANGE (f4df7c643fc320ea45426bcc1ce22c7b0199e291 BACKPORT: binder: propagate vm_insert_page() errors)
 	}
 
 	/* Mark page installation complete and safe to use */
