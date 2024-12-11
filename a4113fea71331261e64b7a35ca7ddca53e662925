@@ -16,6 +16,24 @@
       "message": "Memfd checks for write sealing by calling `seal_check_write` from `shmem_mmap`. We don\u0027t need anything there?",
       "revId": "a4113fea71331261e64b7a35ca7ddca53e662925",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0902a7cf_0a2575cc",
+        "filename": "mm/mmap.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2024-12-11T22:20:56Z",
+      "side": 1,
+      "message": "No, since we\u0027re doing the check that we would in `shmem_mmap()` here. I will update this patch soon, but we won\u0027t need to check this in `shmem_mmap()` since the following patch moved the logic to check and handle memfd file seals to be invoked from `do_mmap()`: https://lore.kernel.org/all/20241206212846.210835-1-lorenzo.stoakes@oracle.com/\n\nI plan on rebasing this patch on top of that patch so that we check for the exec seal in `memfd_check_seals_mmap()`",
+      "parentUuid": "7057d879_eb15d1f7",
+      "revId": "a4113fea71331261e64b7a35ca7ddca53e662925",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
