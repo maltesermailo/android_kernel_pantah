@@ -1058,6 +1058,7 @@ struct file *task_lookup_fdget_rcu(struct task_struct *task, unsigned int fd)
 
 	return file;
 }
+EXPORT_SYMBOL_GPL(task_lookup_fdget_rcu);
 
 struct file *task_lookup_next_fdget_rcu(struct task_struct *task, unsigned int *ret_fd)
 {
