@@ -95,18 +95,20 @@ static int kvm_ptdump_build_levels(struct ptdump_pg_level *level, u32 start_lvl)
 	return 0;
 }
 
+#define PKVM_HANDLE(kvm) ((kvm) != NULL ? (kvm)->arch.pkvm.handle : 0)
+
 static u32 ptdump_get_ranges(struct kvm *kvm)
 {
 	if (!is_protected_kvm_enabled())
 		return kvm->arch.mmu.pgt->ia_bits;
-	return kvm_call_hyp_nvhe(__pkvm_ptdump_handle, kvm->arch.pkvm.handle, PKVM_PTDUMP_GET_RANGE);
+	return kvm_call_hyp_nvhe(__pkvm_ptdump_handle, PKVM_HANDLE(kvm), PKVM_PTDUMP_GET_RANGE);
 }
 
 static s8 ptdump_get_level(struct kvm *kvm)
 {
 	if (!is_protected_kvm_enabled())
 		return kvm->arch.mmu.pgt->start_level;
-	return kvm_call_hyp_nvhe(__pkvm_ptdump_handle, kvm->arch.pkvm.handle, PKVM_PTDUMP_GET_LEVEL);
+	return kvm_call_hyp_nvhe(__pkvm_ptdump_handle, PKVM_HANDLE(kvm), PKVM_PTDUMP_GET_LEVEL);
 }
 
 static struct kvm_ptdump_guest_state *kvm_ptdump_parser_create(struct kvm *kvm)
@@ -290,7 +292,7 @@ static int pkvm_ptdump_guest_show(struct seq_file *m, void *unused)
 	pfn = __phys_to_pfn(__pa((u64)(st->shared_buffer)));
 
 	do {
-		write_index = kvm_call_hyp_nvhe(__pkvm_ptdump_handle, kvm->arch.pkvm.handle,
+		write_index = kvm_call_hyp_nvhe(__pkvm_ptdump_handle, PKVM_HANDLE(kvm),
 						PKVM_PTDUMP_WALK_RANGE, start_addr, -1, pfn);
 		for (i = 0; i < write_index; i += sizeof(struct pkvm_ptdump_log)) {
 			log = (struct pkvm_ptdump_log *)(st->shared_buffer + i);
@@ -375,4 +377,92 @@ void kvm_s2_ptdump_create_debugfs(struct kvm *kvm)
 			    &kvm_pgtable_range_fops);
 	debugfs_create_file("stage2_levels", 0400, kvm->debugfs_dentry,
 			    kvm, &kvm_pgtable_levels_fops);
+}
+
+static int kvm_host_pgtable_range_open(struct inode *m, struct file *file)
+{
+	return single_open(file, kvm_pgtable_range_show, NULL);
+}
+
+static int kvm_host_pgtable_levels_open(struct inode *m, struct file *file)
+{
+	return single_open(file, kvm_pgtable_levels_show, NULL);
+}
+
+static const struct file_operations kvm_host_pgtable_range_fops = {
+	.open		= kvm_host_pgtable_range_open,
+	.read		= seq_read,
+	.llseek		= seq_lseek,
+	.release	= single_release,
+};
+
+static const struct file_operations kvm_host_pgtable_levels_fops = {
+	.open		= kvm_host_pgtable_levels_open,
+	.read		= seq_read,
+	.llseek		= seq_lseek,
+	.release	= single_release,
+};
+
+static int kvm_ptdump_host_open(struct inode *m, struct file *file)
+{
+	struct kvm_ptdump_guest_state *st;
+	int ret;
+	u64 pfn;
+
+	st = kvm_ptdump_parser_create(NULL);
+	if (IS_ERR(st))
+		return PTR_ERR(st);
+
+	st->shared_buffer = alloc_pages_exact(PAGE_SIZE, GFP_KERNEL_ACCOUNT);
+	if (!st->shared_buffer) {
+		ret = -ENOMEM;
+		goto err_with_state;
+	}
+
+	pfn = __phys_to_pfn(__pa((u64)(st->shared_buffer)));
+	ret = kvm_call_hyp_nvhe(__pkvm_host_share_hyp, pfn, 1);
+	if (ret)
+		goto err_with_buffer;
+
+	ret = single_open(file, pkvm_ptdump_guest_show, st);
+	if (!ret)
+		return 0;
+
+err_with_buffer:
+	free_pages_exact(st->shared_buffer, PAGE_SIZE);
+err_with_state:
+	kfree(st);
+	return ret;
+}
+
+static int kvm_ptdump_host_close(struct inode *m, struct file *file)
+{
+	struct kvm_ptdump_guest_state *st = ((struct seq_file *)file->private_data)->private;
+	u64 pfn;
+
+	pfn = __phys_to_pfn(__pa(((u64)(st->shared_buffer))));
+	WARN_ON(kvm_call_hyp_nvhe(__pkvm_host_unshare_hyp, pfn, 1));
+	free_pages_exact(st->shared_buffer, PAGE_SIZE);
+	kfree(st);
+
+	return single_release(m, file);
+}
+
+static const struct file_operations kvm_ptdump_host_fops = {
+	.open		= kvm_ptdump_host_open,
+	.read		= seq_read,
+	.llseek		= seq_lseek,
+	.release	= kvm_ptdump_host_close,
+};
+
+void kvm_s2_ptdump_host_create_debugfs(void)
+{
+	struct dentry *kvm_debugfs_dir = debugfs_lookup("kvm", NULL);
+
+	debugfs_create_file("host_stage2_page_tables", 0400, kvm_debugfs_dir,
+			    NULL, &kvm_ptdump_host_fops);
+	debugfs_create_file("ipa_range", 0400, kvm_debugfs_dir, NULL,
+			    &kvm_host_pgtable_range_fops);
+	debugfs_create_file("stage2_levels", 0400, kvm_debugfs_dir,
+			    NULL, &kvm_host_pgtable_levels_fops);
 }

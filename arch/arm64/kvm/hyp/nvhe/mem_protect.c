@@ -2496,7 +2496,21 @@ int host_stage2_get_leaf(phys_addr_t phys, kvm_pte_t *ptep, s8 *level)
 	return ret;
 }
 
-u64 __pkvm_ptdump_get_config(pkvm_handle_t handle, enum pkvm_ptdump_ops op)
+static u64 __pkvm_ptdump_get_host_config(enum pkvm_ptdump_ops op)
+{
+	u64 ret = 0;
+
+	host_lock_component();
+	if (op == PKVM_PTDUMP_GET_LEVEL)
+		ret = host_mmu.pgt.start_level;
+	else
+		ret = host_mmu.pgt.ia_bits;
+	host_unlock_component();
+
+	return ret;
+}
+
+static u64 __pkvm_ptdump_get_guest_config(pkvm_handle_t handle, enum pkvm_ptdump_ops op)
 {
 	struct pkvm_hyp_vm *vm;
 	u64 ret = 0;
@@ -2512,6 +2526,14 @@ u64 __pkvm_ptdump_get_config(pkvm_handle_t handle, enum pkvm_ptdump_ops op)
 
 	put_pkvm_hyp_vm(vm);
 	return ret;
+}
+
+u64 __pkvm_ptdump_get_config(pkvm_handle_t handle, enum pkvm_ptdump_ops op)
+{
+	if (!handle)
+		return __pkvm_ptdump_get_host_config(op);
+
+	return __pkvm_ptdump_get_guest_config(handle, op);
 }
 
 struct pkvm_ptdump_data {
@@ -2536,10 +2558,30 @@ static int pkvm_ptdump_walker(const struct kvm_pgtable_visit_ctx *ctx,
 	return 0;
 }
 
+static void pkvm_ptdump_walk_host(u64 addr, u64 size, struct kvm_pgtable_walker *walker)
+{
+	host_lock_component();
+
+	kvm_pgtable_walk(&host_mmu.pgt, addr, size, walker);
+
+	host_unlock_component();
+}
+
+static void pkvm_ptdump_walk_guest(struct pkvm_hyp_vm *vm, u64 addr, u64 size,
+				   struct kvm_pgtable_walker *walker)
+{
+	host_lock_component();
+	guest_lock_component(vm);
+
+	kvm_pgtable_walk(&vm->pgt, addr, size, walker);
+
+	guest_unlock_component(vm);
+	host_unlock_component();
+}
+
 u64 __pkvm_ptdump_walk_range(pkvm_handle_t handle, u64 addr, size_t nr_pages, u64 log_pfn)
 {
 	struct pkvm_hyp_vm *vm;
-	struct kvm_pgtable *pgt;
 	struct pkvm_ptdump_data data;
 	int ret;
 
@@ -2557,21 +2599,23 @@ u64 __pkvm_ptdump_walk_range(pkvm_handle_t handle, u64 addr, size_t nr_pages, u6
 	data.write_index = 0;
 
 	ret = hyp_pin_shared_mem(data.hyp_va_buff, data.hyp_va_buff + PAGE_SIZE);
-	if (ret) {
-		put_pkvm_hyp_vm(vm);
+	if (ret)
 		return ret;
+
+	if (!handle)
+		pkvm_ptdump_walk_host(addr, nr_pages * PAGE_SIZE, &walker);
+	else {
+		vm = get_pkvm_hyp_vm(handle);
+		if (!vm) {
+			data.write_index = -EINVAL;
+			goto unpin_shared_mem;
+		}
+
+		pkvm_ptdump_walk_guest(vm, addr, nr_pages * PAGE_SIZE, &walker);
+		put_pkvm_hyp_vm(vm);
 	}
 
-	pgt = &vm->pgt;
-	host_lock_component();
-	guest_lock_component(vm);
-
-	kvm_pgtable_walk(pgt, addr, nr_pages * PAGE_SIZE, &walker);
-
-	guest_unlock_component(vm);
-	host_unlock_component();
-
+unpin_shared_mem:
 	hyp_unpin_shared_mem(data.hyp_va_buff, data.hyp_va_buff + PAGE_SIZE);
-	put_pkvm_hyp_vm(vm);
 	return data.write_index;
 }
