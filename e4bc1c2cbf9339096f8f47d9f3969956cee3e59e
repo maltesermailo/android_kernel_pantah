@@ -16,6 +16,24 @@
       "message": "Should this check be in `kvm_handle_pvm_smc64` instead?",
       "revId": "e4bc1c2cbf9339096f8f47d9f3969956cee3e59e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0359f537_75fafd61",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 888,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2024-12-11T13:46:22Z",
+      "side": 1,
+      "message": "I think it is better to keep it here because we are going to invoke this function from the hvc handling as well. The FF-A spec allows both conduits.",
+      "parentUuid": "21414485_70be0b38",
+      "revId": "e4bc1c2cbf9339096f8f47d9f3969956cee3e59e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
