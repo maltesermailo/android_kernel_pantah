@@ -99,7 +99,12 @@
 #include <linux/stackprotector.h>
 #include <linux/user_events.h>
 #include <linux/iommu.h>
+<<<<<<< HEAD   (da6ee4 Revert "rcu-tasks: Pull sampling of ->percpu_dequeue_lim out)
 #include <linux/cpufreq_times.h>
+||||||| BASE
+=======
+#include <linux/tick.h>
+>>>>>>> BRANCH (f1ab3a Linux 6.6.61)
 
 #include <asm/pgalloc.h>
 #include <linux/uaccess.h>
@@ -2452,6 +2457,7 @@ __latent_entropy struct task_struct *copy_process(
 	acct_clear_integrals(p);
 
 	posix_cputimers_init(&p->posix_cputimers);
+	tick_dep_init_task(p);
 
 	p->io_context = NULL;
 	audit_set_context(p, NULL);
