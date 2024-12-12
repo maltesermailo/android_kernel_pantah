@@ -1,0 +1,62 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "828f2615_450d5143",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-12-12T18:05:47Z",
+      "side": 1,
+      "message": "Please provide more description. Why is this needed? What feature does it enable?",
+      "revId": "5cc20f0312b5e95af2571dfeb83d2b80dc1a0acc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d59f16db_db30f59b",
+        "filename": "include/trace/hooks/signal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-12-12T18:05:47Z",
+      "side": 1,
+      "message": "please remove these inclusions. If a declaration is needed, then forward declare it below (as was done for task_struct)",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 22
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "84d6c255_0d2df492",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/trace/hooks/signal.h",
+              "range": {
+                "startLine": 9,
+                "startChar": 0,
+                "endLine": 11,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "5cc20f0312b5e95af2571dfeb83d2b80dc1a0acc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
