@@ -83,8 +83,9 @@ static int mmio_guard_ioremap_hook(phys_addr_t phys, size_t size,
 	if (protval != PROT_DEVICE_nGnRE && protval != PROT_DEVICE_nGnRnE)
 		return 0;
 
-	phys = PAGE_ALIGN_DOWN(phys);
-	end = phys + PAGE_ALIGN(size);
+	size = ALIGN(size, pkvm_granule);
+	phys = ALIGN_DOWN(phys, pkvm_granule);
+	end = phys + size;
 
 	while (phys < end) {
 		const int func_id = ARM_SMCCC_VENDOR_HYP_KVM_MMIO_GUARD_MAP_FUNC_ID;
