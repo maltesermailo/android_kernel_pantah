@@ -1212,6 +1212,9 @@ static struct task_struct *dup_task_struct(struct task_struct *orig, int node)
 	android_init_vendor_data(tsk, 1);
 	android_init_oem_data(tsk, 1);
 
+#ifdef CONFIG_GKI_DYNAMIC_TASK_STRUCT_SIZE
+	android_init_dynamic_vendor_data(tsk);
+#endif
 	trace_android_vh_dup_task_struct(tsk, orig);
 	return tsk;
 
