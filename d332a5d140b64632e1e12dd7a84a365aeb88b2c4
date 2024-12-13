@@ -16,6 +16,23 @@
       "message": "Please add a Fixes tag:\n```\nFixes: 01032a9bf556 (\"BACKPORT: f2fs: atomic: fix to avoid racing w/ GC\")\n```",
       "revId": "d332a5d140b64632e1e12dd7a84a365aeb88b2c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32cdacba_306fc294",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2024-12-13T21:02:07Z",
+      "side": 1,
+      "message": "Jaegeuk, did the backport of `01032a9bf556 (\"BACKPORT: f2fs: atomic: fix to avoid racing w/ GC\")` intentionally leave out the call to `clear_page_private_atomic(page);` in `clear_page_private_all()`? If so, is this patch the correct fix?",
+      "revId": "d332a5d140b64632e1e12dd7a84a365aeb88b2c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
