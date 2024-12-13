@@ -221,8 +221,14 @@ mipi_dsi_device_register_full(struct mipi_dsi_host *host,
 		return dsi;
 	}
 
+<<<<<<< HEAD   (55d7d0 Merge 9f95de15904a ("xfrm: respect ip protocols rules criter)
 	device_set_node(&dsi->dev, of_fwnode_handle(info->node));
 	dsi->dev.fwnode = of_fwnode_handle(info->node);
+||||||| BASE
+	device_set_node(&dsi->dev, of_fwnode_handle(info->node));
+=======
+	dsi->dev.of_node = info->node;
+>>>>>>> BRANCH (b874a7 Linux 5.10.229)
 	dsi->channel = info->channel;
 	strlcpy(dsi->name, info->type, sizeof(dsi->name));
 
