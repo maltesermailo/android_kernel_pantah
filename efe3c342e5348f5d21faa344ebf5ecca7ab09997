@@ -81,6 +81,30 @@
       },
       "revId": "efe3c342e5348f5d21faa344ebf5ecca7ab09997",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6e3cb26_42521566",
+        "filename": "fs/seq_file.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2024-12-16T09:42:20Z",
+      "side": 1,
+      "message": "sysfs is ONE VALUE PER FILE, you shoul NOT need this function for that.\n\nIf you all are using sysfs for debugging stuff, please point me at that code so I can reject it, as that will break.  debugfs is for debugging.",
+      "parentUuid": "200f4ecb_2f7b4124",
+      "range": {
+        "startLine": 729,
+        "startChar": 14,
+        "endLine": 729,
+        "endChar": 39
+      },
+      "revId": "efe3c342e5348f5d21faa344ebf5ecca7ab09997",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
