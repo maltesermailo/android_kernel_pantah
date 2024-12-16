@@ -503,7 +503,7 @@ int arm_smmu_init_one_queue(struct arm_smmu_device *smmu,
 	size_t qsz;
 
 	do {
-		qsz = ((1 << q->llq.max_n_shift) * dwords) << 3;
+		qsz = PAGE_ALIGN(((1 << q->llq.max_n_shift) * dwords) << 3);
 		q->base = dmam_alloc_coherent(smmu->dev, qsz, &q->base_dma,
 					      GFP_KERNEL);
 		if (q->base || qsz < PAGE_SIZE)
@@ -587,6 +587,7 @@ static int arm_smmu_init_strtab_2lvl(struct arm_smmu_device *smmu)
 			 "2-level strtab only covers %u/%u bits of SID\n",
 			 size, smmu->sid_bits);
 
+	l1size = PAGE_ALIGN(l1size);
 	l1size = cfg->num_l1_ents * (STRTAB_L1_DESC_DWORDS << 3);
 	strtab = dmam_alloc_coherent(smmu->dev, l1size, &cfg->strtab_dma,
 				     GFP_KERNEL);
