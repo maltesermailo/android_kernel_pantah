@@ -39,6 +39,30 @@
       },
       "revId": "efe3c342e5348f5d21faa344ebf5ecca7ab09997",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "200f4ecb_2f7b4124",
+        "filename": "fs/seq_file.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1967749
+      },
+      "writtenOn": "2024-12-16T08:04:04Z",
+      "side": 1,
+      "message": "Hi Suren, actually this is ported from aosp/3081250, which includes the modification of ABI related file so I think it might be better to upload a cleaner CL.\n\nWe use this function to format metrics under sysfs, where each field/line can have different length and we use this API to align the output for easier parsing. IMHO this is a common formating API and we vendor don\u0027t want to reinvent the wheel.",
+      "parentUuid": "9e780189_c853bcb1",
+      "range": {
+        "startLine": 729,
+        "startChar": 14,
+        "endLine": 729,
+        "endChar": 39
+      },
+      "revId": "efe3c342e5348f5d21faa344ebf5ecca7ab09997",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
