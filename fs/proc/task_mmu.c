@@ -1784,6 +1784,9 @@ static int pagemap_open(struct inode *inode, struct file *file)
 {
 	struct mm_struct *mm;
 
+	if (static_branch_unlikely(&page_shift_compat_enabled))
+		return -EOPNOTSUPP;
+
 	mm = proc_mem_open(inode, PTRACE_MODE_READ);
 	if (IS_ERR(mm))
 		return PTR_ERR(mm);
