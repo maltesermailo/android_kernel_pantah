@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6effe624_1711d316",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1967749
+      },
+      "writtenOn": "2024-12-24T02:55:41Z",
+      "side": 1,
+      "message": "This is a cherry pick from aosp/3081365, but I modify the interface to pass the whole vm_fault instead of just file and offset. I see more and more vendors adding hooks inside this path (just look at what we had in 6.1 kernel and there are 4 hooks inside this function). I want to rule them all and this is what I observed from other\u0027s need:\n\n1. To monitor data of interest from vm_fault, vmf-\u003evma, etc\n2. To enable/disable or tune the size of fault_around runtime\n\nHence I decide to pass vm_fault and pointer to fault_around and this should be enough to achieve all the above needs and hopefully we no longer need to have so many similar hooks here. Hope that make sense.\n\n---\n\nPS: I accidentally add same comment on the symbol update CL, please ignore that one. Sorry for the noise.",
+      "revId": "7c4d316294b801a1fd573e8faa643e0407b27b50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
