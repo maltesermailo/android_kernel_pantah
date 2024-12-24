@@ -250,6 +250,7 @@
   cec_allocate_adapter
   cec_delete_adapter
   cec_fill_conn_info_from_drm
+  cec_get_edid_phys_addr
   cec_notifier_cec_adap_register
   cec_notifier_cec_adap_unregister
   cec_notifier_conn_register
@@ -258,8 +259,12 @@
   cec_notifier_set_phys_addr_from_edid
   cec_received_msg_ts
   cec_register_adapter
+  cec_s_phys_addr
   cec_transmit_attempt_done_ts
   cec_unregister_adapter
+  cfb_copyarea
+  cfb_fillrect
+  cfb_imageblit
   check_move_unevictable_folios
   __check_object_size
   check_signature
@@ -320,6 +325,9 @@
   config_group_init_type_name
   config_item_put
   config_item_set_name
+  console_lock
+  console_trylock
+  console_unlock
   __const_udelay
   consume_skb
   cont_write_begin
@@ -794,6 +802,9 @@
   drm_clflush_sg
   drm_clflush_virt_range
   drm_client_dev_unregister
+  drm_client_init
+  drm_client_register
+  drm_client_release
   drm_color_lut_check
   drm_compat_ioctl
   drm_connector_atomic_hdr_metadata_equal
@@ -874,11 +885,34 @@
   __drm_err
   drm_event_cancel_free
   drm_event_reserve_init_locked
+  drm_fbdev_generic_setup
+  drm_fb_helper_alloc_info
+  drm_fb_helper_blank
+  drm_fb_helper_check_var
+  drm_fb_helper_damage_area
+  drm_fb_helper_damage_range
+  drm_fb_helper_debug_enter
+  drm_fb_helper_debug_leave
+  drm_fb_helper_fill_info
+  drm_fb_helper_fini
+  drm_fb_helper_hotplug_event
+  drm_fb_helper_init
+  drm_fb_helper_initial_config
+  drm_fb_helper_ioctl
+  drm_fb_helper_pan_display
+  drm_fb_helper_prepare
+  drm_fb_helper_restore_fbdev_mode_unlocked
+  drm_fb_helper_setcmap
+  drm_fb_helper_set_par
+  drm_fb_helper_set_suspend
+  drm_fb_helper_unprepare
+  drm_fb_helper_unregister_info
   drm_format_info
   drm_format_info_block_width
   drm_framebuffer_cleanup
   drm_framebuffer_init
   drm_framebuffer_plane_height
+  drm_framebuffer_remove
   drm_gem_begin_shadow_fb_access
   drm_gem_create_mmap_offset
   drm_gem_destroy_shadow_plane_state
@@ -889,6 +923,7 @@
   drm_gem_fb_begin_cpu_access
   drm_gem_fb_create_with_dirty
   drm_gem_fb_end_cpu_access
+  drm_gem_fb_get_obj
   drm_gem_free_mmap_offset
   drm_gem_get_pages
   drm_gem_handle_create
@@ -962,6 +997,7 @@
   drm_mode_init
   drm_mode_is_420_also
   drm_mode_is_420_only
+  drm_mode_legacy_fb_format
   drm_mode_match
   drm_mode_object_find
   drm_mode_object_get
@@ -1093,6 +1129,10 @@
   eth_validate_addr
   extract_iter_to_sg
   fasync_helper
+  fb_alloc_cmap
+  fb_dealloc_cmap
+  fb_io_read
+  fb_io_write
   fd_install
   fileattr_fill_flags
   filemap_fault
@@ -1105,6 +1145,7 @@
   file_write_and_wait_range
   _find_first_bit
   _find_first_zero_bit
+  find_font
   find_iova
   _find_next_bit
   find_next_clump8
@@ -2332,6 +2373,7 @@
   refcount_dec_and_lock
   refcount_dec_and_lock_irqsave
   refcount_warn_saturate
+  __refrigerator
   regcache_cache_bypass
   regcache_cache_only
   regcache_drop_region
@@ -2346,6 +2388,7 @@
   register_chrdev_region
   register_die_notifier
   register_filesystem
+  register_framebuffer
   register_inet6addr_notifier
   register_inetaddr_notifier
   register_netdev
@@ -2524,6 +2567,7 @@
   setattr_copy
   setattr_prepare
   set_capacity
+  set_freezable
   set_memory_uc
   set_memory_wb
   set_nlink
@@ -3132,6 +3176,7 @@
   unregister_chrdev_region
   unregister_die_notifier
   unregister_filesystem
+  unregister_framebuffer
   unregister_inet6addr_notifier
   unregister_inetaddr_notifier
   unregister_netdev
@@ -3305,6 +3350,10 @@
   v4l2_async_register_subdev
   v4l2_async_register_subdev_sensor
   v4l2_async_unregister_subdev
+  v4l2_ctrl_activate
+  v4l2_ctrl_add_handler
+  v4l2_ctrl_auto_cluster
+  v4l2_ctrl_cluster
   v4l2_ctrl_find
   v4l2_ctrl_g_ctrl
   v4l2_ctrl_g_ctrl_int64
@@ -3312,27 +3361,44 @@
   v4l2_ctrl_handler_free
   v4l2_ctrl_handler_init_class
   __v4l2_ctrl_handler_setup
+  v4l2_ctrl_handler_setup
+  v4l2_ctrl_log_status
+  __v4l2_ctrl_modify_dimensions
   __v4l2_ctrl_modify_range
   v4l2_ctrl_new_custom
   v4l2_ctrl_new_fwnode_properties
   v4l2_ctrl_new_int_menu
   v4l2_ctrl_new_std
+  v4l2_ctrl_new_std_menu
   v4l2_ctrl_new_std_menu_items
+  v4l2_ctrl_poll
+  v4l2_ctrl_request_complete
+  v4l2_ctrl_request_setup
   __v4l2_ctrl_s_ctrl
   __v4l2_ctrl_s_ctrl_int64
+  __v4l2_ctrl_s_ctrl_string
   v4l2_ctrl_subdev_log_status
   v4l2_ctrl_subdev_subscribe_event
   v4l2_ctrl_subscribe_event
+  v4l2_detect_cvt
+  v4l2_detect_gtf
+  v4l2_device_put
   v4l2_device_register
   v4l2_device_register_subdev
   __v4l2_device_register_subdev_nodes
   v4l2_device_unregister
   v4l2_device_unregister_subdev
+  v4l2_dv_timings_presets
+  v4l2_enum_dv_timings_cap
   v4l2_event_queue
   v4l2_event_subdev_unsubscribe
   v4l2_event_subscribe
+  v4l2_event_unsubscribe
+  v4l2_event_wake_all
+  v4l2_fh_is_singular
   v4l2_fh_open
   v4l2_fh_release
+  v4l2_find_dv_timings_cap
   __v4l2_find_nearest_size
   v4l2_fwnode_device_parse
   v4l2_fwnode_endpoint_alloc_parse
@@ -3341,20 +3407,28 @@
   v4l2_g_ctrl
   v4l2_get_link_freq
   v4l2_i2c_subdev_init
+  v4l2_match_dv_timings
+  v4l2_phys_addr_for_input
+  v4l2_phys_addr_validate
   v4l2_pipeline_link_notify
   v4l2_pipeline_pm_get
   v4l2_pipeline_pm_put
+  v4l2_set_edid_phys_addr
+  v4l2_src_change_event_subscribe
   v4l2_subdev_call_wrappers
   v4l2_subdev_init
   v4l2_subdev_link_validate
   v4l2_subdev_link_validate_default
+  v4l2_valid_dv_timings
   __var_waitqueue
   vb2_buffer_done
   vb2_dma_contig_memops
   vb2_dma_sg_memops
   vb2_fop_mmap
   vb2_fop_poll
+  vb2_fop_read
   vb2_fop_release
+  vb2_fop_write
   vb2_ioctl_create_bufs
   vb2_ioctl_dqbuf
   vb2_ioctl_expbuf
@@ -3368,9 +3442,14 @@
   vb2_ops_wait_prepare
   vb2_plane_cookie
   vb2_plane_vaddr
+  vb2_queue_change_type
+  vb2_queue_error
   vb2_queue_init
   vb2_queue_release
+  vb2_request_queue
+  vb2_request_validate
   vb2_video_unregister_device
+  vb2_vmalloc_memops
   vchan_dma_desc_free_list
   vchan_find_desc
   vchan_init
