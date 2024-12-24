@@ -127,6 +127,9 @@ config GKI_HIDDEN_MEDIA_CONFIGS
 	select VIDEOBUF2_DMA_CONTIG
 	select VIDEOBUF2_DMA_SG
 	select VIDEO_V4L2_SUBDEV_API
+	select FB_CFB_COPYAREA
+	select FB_CFB_FILLRECT
+	select FB_CFB_IMAGEBLIT
 	help
 	  Dummy config option used to enable hidden media configs.
 	  These are normally selected implicitly when a module
