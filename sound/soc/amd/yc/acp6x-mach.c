@@ -437,6 +437,35 @@ static int acp6x_probe(struct platform_device *pdev)
 			platform_set_drvdata(pdev, &acp6x_card);
 	}
 
+<<<<<<< HEAD   (430ec4 ANDROID: GKI: Update oplus symbol list)
+||||||| BASE
+	handle = ACPI_HANDLE(pdev->dev.parent);
+	ret = acpi_evaluate_integer(handle, "_WOV", NULL, &dmic_status);
+	if (!ACPI_FAILURE(ret))
+		wov_en = dmic_status;
+
+	if (is_dmic_enable && wov_en)
+		platform_set_drvdata(pdev, &acp6x_card);
+	else
+		return 0;
+
+=======
+	handle = ACPI_HANDLE(pdev->dev.parent);
+	ret = acpi_evaluate_integer(handle, "_WOV", NULL, &dmic_status);
+	if (!ACPI_FAILURE(ret)) {
+		wov_en = dmic_status;
+		if (!wov_en)
+			return -ENODEV;
+	} else {
+		/* Incase of ACPI method read failure then jump to check_dmi_entry */
+		goto check_dmi_entry;
+	}
+
+	if (is_dmic_enable)
+		platform_set_drvdata(pdev, &acp6x_card);
+
+check_dmi_entry:
+>>>>>>> CHANGE (e31da5 Merge 6.1.121 into android14-6.1-lts)
 	/* check for any DMI overrides */
 	dmi_id = dmi_first_match(yc_acp_quirk_table);
 	if (dmi_id)

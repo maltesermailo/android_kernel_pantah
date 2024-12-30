@@ -1,7 +1,13 @@
 # SPDX-License-Identifier: GPL-2.0
 VERSION = 6
 PATCHLEVEL = 1
+<<<<<<< HEAD   (430ec4 ANDROID: GKI: Update oplus symbol list)
 SUBLEVEL = 115
+||||||| BASE
+SUBLEVEL = 120
+=======
+SUBLEVEL = 121
+>>>>>>> CHANGE (e31da5 Merge 6.1.121 into android14-6.1-lts)
 EXTRAVERSION =
 NAME = Curry Ramen
 
