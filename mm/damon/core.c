@@ -989,7 +989,12 @@ static void damon_do_apply_schemes(struct damon_ctx *c,
 	damon_for_each_scheme(s, c) {
 		struct damos_quota *quota = &s->quota;
 
+<<<<<<< HEAD   (8b157e ANDROID: fix up crc problems 6.6.63)
 		if (c->passed_sample_intervals != s->next_apply_sis)
+||||||| BASE
+=======
+		if (c->passed_sample_intervals < s->next_apply_sis)
+>>>>>>> BRANCH (bff3e1 Linux 6.6.63)
 			continue;
 
 		if (!s->wmarks.activated)
@@ -1089,7 +1094,7 @@ static void kdamond_apply_schemes(struct damon_ctx *c)
 	bool has_schemes_to_apply = false;
 
 	damon_for_each_scheme(s, c) {
-		if (c->passed_sample_intervals != s->next_apply_sis)
+		if (c->passed_sample_intervals < s->next_apply_sis)
 			continue;
 
 		if (!s->wmarks.activated)
@@ -1109,9 +1114,16 @@ static void kdamond_apply_schemes(struct damon_ctx *c)
 	}
 
 	damon_for_each_scheme(s, c) {
+<<<<<<< HEAD   (8b157e ANDROID: fix up crc problems 6.6.63)
 		if (c->passed_sample_intervals != s->next_apply_sis)
 			continue;
 		s->next_apply_sis +=
+||||||| BASE
+=======
+		if (c->passed_sample_intervals < s->next_apply_sis)
+			continue;
+		s->next_apply_sis = c->passed_sample_intervals +
+>>>>>>> BRANCH (bff3e1 Linux 6.6.63)
 			(s->apply_interval_us ? s->apply_interval_us :
 			 c->attrs.aggr_interval) / sample_interval;
 	}
