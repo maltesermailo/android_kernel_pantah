@@ -940,8 +940,16 @@ static void check_section(const char *modname, struct elf_info *elf,
 #define TEXT_SECTIONS ".text", ".text.unlikely", ".sched.text", \
 		".kprobes.text", ".cpuidle.text", ".noinstr.text"
 #define OTHER_TEXT_SECTIONS ".ref.text", ".head.text", ".spinlock.text", \
+<<<<<<< HEAD   (f3daaf Revert "modpost: Include '.text.*' in TEXT_SECTIONS")
 		".fixup", ".entry.text", ".exception.text", ".text.*", \
 		".coldtext", ".softirqentry.text"
+||||||| BASE
+		".fixup", ".entry.text", ".exception.text", \
+		".coldtext", ".softirqentry.text"
+=======
+		".fixup", ".entry.text", ".exception.text", \
+		".coldtext", ".softirqentry.text", ".irqentry.text"
+>>>>>>> BRANCH (963e65 Linux 5.15.174)
 
 #define INIT_SECTIONS      ".init.*"
 #define MEM_INIT_SECTIONS  ".meminit.*"
