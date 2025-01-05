@@ -1482,6 +1482,15 @@ void do_sme_acc(unsigned long esr, struct pt_regs *regs)
 		sme_set_vq(vq_minus_one);
 
 		fpsimd_bind_task_to_cpu();
+<<<<<<< HEAD   (73293d Revert "modpost: Include '.text.*' in TEXT_SECTIONS")
+||||||| BASE
+	} else {
+		fpsimd_to_sve(current);
+=======
+	} else {
+		fpsimd_to_sve(current);
+		fpsimd_flush_task_state(current);
+>>>>>>> BRANCH (963e65 Linux 5.15.174)
 	}
 
 	put_cpu_fpsimd_context();
