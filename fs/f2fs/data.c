@@ -943,7 +943,13 @@ static bool is_end_zone_blkaddr(struct f2fs_sb_info *sbi, block_t blkaddr)
 		blkaddr -= FDEV(devi).start_blk;
 		bdev = FDEV(devi).bdev;
 	}
+<<<<<<< HEAD   (25e2b2 UPSTREAM: ASoC: Intel: sst: Fix used of uninitialized ctx to)
 	return bdev_zoned_model(bdev) == BLK_ZONED_HM &&
+||||||| BASE
+	return bdev_zoned_model(FDEV(devi).bdev) == BLK_ZONED_HM &&
+=======
+	return bdev_is_zoned(bdev) &&
+>>>>>>> BRANCH (10c955 powerpc/pseries: Fix KVM guest detection for disabling hardl)
 		f2fs_blkz_is_seq(sbi, devi, blkaddr) &&
 		(blkaddr % sbi->blocks_per_blkz == sbi->blocks_per_blkz - 1);
 }
@@ -1969,7 +1975,14 @@ next:
 	if (!compr_cluster && !(map.m_flags & F2FS_MAP_FLAGS)) {
 		start_blk = next_pgofs;
 
+<<<<<<< HEAD   (25e2b2 UPSTREAM: ASoC: Intel: sst: Fix used of uninitialized ctx to)
 		if (F2FS_BLK_TO_BYTES(start_blk) < maxbytes)
+||||||| BASE
+		if (blks_to_bytes(inode, start_blk) < blks_to_bytes(inode,
+						max_inode_blocks(inode)))
+=======
+		if (blks_to_bytes(inode, start_blk) < maxbytes)
+>>>>>>> BRANCH (10c955 powerpc/pseries: Fix KVM guest detection for disabling hardl)
 			goto prep_next;
 
 		flags |= FIEMAP_EXTENT_LAST;
