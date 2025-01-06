@@ -53,11 +53,15 @@ impl Credential {
         unsafe { &*ptr.cast() }
     }
 
+<<<<<<< HEAD   (cad8f8 ANDROID: Update rustc to 1.82.0)
     /// Returns a raw pointer to the inner credential.
     pub fn as_ptr(&self) -> *const bindings::cred {
         self.0.get()
     }
 
+||||||| BASE
+=======
+>>>>>>> BRANCH (544ae1 ANDROID: GKI: enable CONFIG_CMA_SYSFS)
     /// Get the id for this security context.
     pub fn get_secid(&self) -> u32 {
         let mut secid = 0;

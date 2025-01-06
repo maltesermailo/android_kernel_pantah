@@ -6,7 +6,11 @@
 
 use crate::{
     bindings,
+<<<<<<< HEAD   (cad8f8 ANDROID: Update rustc to 1.82.0)
     mm::MmWithUser,
+||||||| BASE
+=======
+>>>>>>> BRANCH (544ae1 ANDROID: GKI: enable CONFIG_CMA_SYSFS)
     types::{NotThreadSafe, Opaque},
 };
 use core::{
@@ -152,6 +156,12 @@ pub struct Kuid {
     kuid: bindings::kuid_t,
 }
 
+/// The type of user identifiers (UIDs).
+#[derive(Copy, Clone)]
+pub struct Kuid {
+    kuid: bindings::kuid_t,
+}
+
 impl Task {
     /// Returns a raw pointer to the current task.
     ///
@@ -169,12 +179,26 @@ impl Task {
     ///
     /// # Safety
     ///
+<<<<<<< HEAD   (cad8f8 ANDROID: Update rustc to 1.82.0)
     /// Callers must ensure that the returned object is only used to access a [`CurrentTask`]
     /// within the task context that was active when this function was called. For more details,
     /// see the invariants section for [`CurrentTask`].
     pub unsafe fn current() -> impl Deref<Target = CurrentTask> {
         struct TaskRef {
             task: *const CurrentTask,
+||||||| BASE
+    /// Callers must ensure that the returned object doesn't outlive the current task/thread.
+    pub unsafe fn current() -> impl Deref<Target = Task> {
+        struct TaskRef<'a> {
+            task: &'a Task,
+            _not_send: PhantomData<*mut ()>,
+=======
+    /// Callers must ensure that the returned object doesn't outlive the current task/thread.
+    pub unsafe fn current() -> impl Deref<Target = Task> {
+        struct TaskRef<'a> {
+            task: &'a Task,
+            _not_send: NotThreadSafe,
+>>>>>>> BRANCH (544ae1 ANDROID: GKI: enable CONFIG_CMA_SYSFS)
         }
 
         impl Deref for TaskRef {
@@ -189,9 +213,31 @@ impl Task {
             }
         }
 
+<<<<<<< HEAD   (cad8f8 ANDROID: Update rustc to 1.82.0)
+||||||| BASE
+        // SAFETY: Just an FFI call with no additional safety requirements.
+        let ptr = unsafe { bindings::get_current() };
+
+=======
+        let current = Task::current_raw();
+>>>>>>> BRANCH (544ae1 ANDROID: GKI: enable CONFIG_CMA_SYSFS)
         TaskRef {
+<<<<<<< HEAD   (cad8f8 ANDROID: Update rustc to 1.82.0)
             // CAST: The layout of `struct task_struct` and `CurrentTask` is identical.
             task: Task::current_raw().cast(),
+||||||| BASE
+            // SAFETY: If the current thread is still running, the current task is valid. Given
+            // that `TaskRef` is not `Send`, we know it cannot be transferred to another thread
+            // (where it could potentially outlive the caller).
+            task: unsafe { &*ptr.cast() },
+            _not_send: PhantomData,
+=======
+            // SAFETY: If the current thread is still running, the current task is valid. Given
+            // that `TaskRef` is not `Send`, we know it cannot be transferred to another thread
+            // (where it could potentially outlive the caller).
+            task: unsafe { &*current.cast() },
+            _not_send: NotThreadSafe,
+>>>>>>> BRANCH (544ae1 ANDROID: GKI: enable CONFIG_CMA_SYSFS)
         }
     }
 
@@ -203,9 +249,9 @@ impl Task {
 
     /// Returns the group leader of the given task.
     pub fn group_leader(&self) -> &Task {
-        // SAFETY: By the type invariant, we know that `self.0` is a valid task. Valid tasks always
-        // have a valid `group_leader`.
-        let ptr = unsafe { *ptr::addr_of!((*self.0.get()).group_leader) };
+        // SAFETY: The group leader of a task never changes after initialization, so reading this
+        // field is not a data race.
+        let ptr = unsafe { *ptr::addr_of!((*self.as_ptr()).group_leader) };
 
         // SAFETY: The lifetime of the returned task reference is tied to the lifetime of `self`,
         // and given that a task has a reference to its group leader, we know it must be valid for
@@ -215,9 +261,21 @@ impl Task {
 
     /// Returns the PID of the given task.
     pub fn pid(&self) -> Pid {
-        // SAFETY: By the type invariant, we know that `self.0` is a valid task. Valid tasks always
-        // have a valid pid.
-        unsafe { *ptr::addr_of!((*self.0.get()).pid) }
+        // SAFETY: The pid of a task never changes after initialization, so reading this field is
+        // not a data race.
+        unsafe { *ptr::addr_of!((*self.as_ptr()).pid) }
+    }
+
+    /// Returns the UID of the given task.
+    pub fn uid(&self) -> Kuid {
+        // SAFETY: It's always safe to call `task_uid` on a valid task.
+        Kuid::from_raw(unsafe { bindings::task_uid(self.as_ptr()) })
+    }
+
+    /// Returns the effective UID of the given task.
+    pub fn euid(&self) -> Kuid {
+        // SAFETY: It's always safe to call `task_euid` on a valid task.
+        Kuid::from_raw(unsafe { bindings::task_euid(self.as_ptr()) })
     }
 
     /// Returns the UID of the given task.
@@ -234,8 +292,15 @@ impl Task {
 
     /// Determines whether the given task has pending signals.
     pub fn signal_pending(&self) -> bool {
-        // SAFETY: By the type invariant, we know that `self.0` is valid.
-        unsafe { bindings::signal_pending(self.0.get()) != 0 }
+        // SAFETY: It's always safe to call `signal_pending` on a valid task.
+        unsafe { bindings::signal_pending(self.as_ptr()) != 0 }
+    }
+
+    /// Returns the given task's pid in the current pid namespace.
+    pub fn pid_in_current_ns(&self) -> Pid {
+        // SAFETY: It's valid to pass a null pointer as the namespace (defaults to current
+        // namespace). The task pointer is also valid.
+        unsafe { bindings::task_tgid_nr_ns(self.as_ptr(), ptr::null_mut()) }
     }
 
     /// Returns the given task's pid in the current pid namespace.
@@ -255,10 +320,9 @@ impl Task {
 
     /// Wakes up the task.
     pub fn wake_up(&self) {
-        // SAFETY: By the type invariant, we know that `self.0.get()` is non-null and valid.
-        // And `wake_up_process` is safe to be called for any valid task, even if the task is
+        // SAFETY: It's always safe to call `signal_pending` on a valid task, even if the task
         // running.
-        unsafe { bindings::wake_up_process(self.0.get()) };
+        unsafe { bindings::wake_up_process(self.as_ptr()) };
     }
 
     /// Check if the task has the given capability without logging to the audit log.
@@ -362,7 +426,7 @@ impl CurrentTask {
 unsafe impl crate::types::AlwaysRefCounted for Task {
     fn inc_ref(&self) {
         // SAFETY: The existence of a shared reference means that the refcount is nonzero.
-        unsafe { bindings::get_task_struct(self.0.get()) };
+        unsafe { bindings::get_task_struct(self.as_ptr()) };
     }
 
     unsafe fn dec_ref(obj: ptr::NonNull<Self>) {

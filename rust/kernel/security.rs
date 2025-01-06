@@ -8,6 +8,7 @@
 
 use crate::{
     bindings,
+<<<<<<< HEAD   (cad8f8 ANDROID: Update rustc to 1.82.0)
     cred::Credential,
     error::{to_result, Result},
     fs::File,
@@ -43,6 +44,11 @@ pub fn binder_transfer_file(from: &Credential, to: &Credential, file: &File) -> 
         bindings::security_binder_transfer_file(from.as_ptr(), to.as_ptr(), file.as_ptr())
     })
 }
+||||||| BASE
+=======
+    error::{to_result, Result},
+};
+>>>>>>> BRANCH (544ae1 ANDROID: GKI: enable CONFIG_CMA_SYSFS)
 
 /// A security context string.
 ///

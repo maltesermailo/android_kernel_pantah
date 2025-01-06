@@ -55,9 +55,13 @@ pid_t rust_helper_task_tgid_nr_ns(struct task_struct *tsk,
 {
 	return task_tgid_nr_ns(tsk, ns);
 }
+<<<<<<< HEAD   (cad8f8 ANDROID: Update rustc to 1.82.0)
 
 unsigned long rust_helper_task_rlimit(const struct task_struct *task,
 				      unsigned int limit)
 {
 	return task_rlimit(task, limit);
 }
+||||||| BASE
+=======
+>>>>>>> BRANCH (544ae1 ANDROID: GKI: enable CONFIG_CMA_SYSFS)

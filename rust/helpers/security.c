@@ -17,6 +17,7 @@ void rust_helper_security_release_secctx(char *secdata, u32 seclen)
 {
 	security_release_secctx(secdata, seclen);
 }
+<<<<<<< HEAD   (cad8f8 ANDROID: Update rustc to 1.82.0)
 
 int rust_helper_security_binder_set_context_mgr(const struct cred *mgr)
 {
@@ -41,4 +42,7 @@ int rust_helper_security_binder_transfer_file(const struct cred *from,
 {
 	return security_binder_transfer_file(from, to, file);
 }
+||||||| BASE
+=======
+>>>>>>> BRANCH (544ae1 ANDROID: GKI: enable CONFIG_CMA_SYSFS)
 #endif
