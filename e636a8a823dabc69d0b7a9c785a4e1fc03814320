@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a40bae3b_b94f8fa9",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pkvm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 2018217
+      },
+      "writtenOn": "2025-01-10T16:35:15Z",
+      "side": 1,
+      "message": "If `!shadow_vm_is_protected(vm) \u003d\u003d true` then above `if (vm-\u003efinalized)` check should return early. I think it is better to have it here anyway just in case `vm-\u003efinalized` does not necessary mean unprotected VM.",
+      "range": {
+        "startLine": 178,
+        "startChar": 6,
+        "endLine": 178,
+        "endChar": 33
+      },
+      "revId": "e636a8a823dabc69d0b7a9c785a4e1fc03814320",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
