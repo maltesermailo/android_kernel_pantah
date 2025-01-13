@@ -1076,6 +1076,7 @@ static int guest_request_walker(const struct kvm_pgtable_visit_ctx *ctx,
 	u32 level = ctx->level;
 
 	state = guest_get_page_state(pte, 0);
+
 	if (data->desired_state != state)
 		return (state & PKVM_NOPAGE) ? -EFAULT : -EPERM;
 
@@ -1084,13 +1085,18 @@ static int guest_request_walker(const struct kvm_pgtable_visit_ctx *ctx,
 	if (!data->size) {
 		size_t size_orig = ctx->end - ctx->start;
 
+		data->pte_start = pte;
+		data->size = kvm_granule_size(level);
+		data->ipa_start = ctx->addr & ~(kvm_granule_size(level) - 1);
+
+		trace_hyp_printk("guest_request_walker: ipa_start=0x%llx phys=0x%llx size_orig=%lu allowed=%d",
+				data->ipa_start, phys, size_orig,
+				range_is_allowed_memory(phys, phys + size_orig));
+
 		if (kvm_pte_valid(pte) &&
 		    !range_is_allowed_memory(phys, phys + size_orig))
 			return -EINVAL;
 
-		data->pte_start = pte;
-		data->size = kvm_granule_size(level);
-		data->ipa_start = ctx->addr & ~(kvm_granule_size(level) - 1);
 		goto end;
 	}
 
@@ -1249,6 +1255,9 @@ int __pkvm_guest_share_host(struct pkvm_hyp_vcpu *vcpu, u64 ipa, u64 nr_pages,
 unlock:
 	guest_unlock_component(vm);
 	host_unlock_component();
+
+	trace_hyp_printk("__pkvm_guest_share_host: ipa=0x%llx nr_pages=%llu ret=%d nr_shared=%llu",
+			 ipa, nr_pages, ret, *nr_shared);
 
 	return ret;
 }
