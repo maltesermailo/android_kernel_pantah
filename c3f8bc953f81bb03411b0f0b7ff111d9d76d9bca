@@ -33,6 +33,24 @@
       "message": "I would appreciate if you could at least build your changes before uploading them. Also, putting two conflicting changes into a topic is not going to work.",
       "revId": "c3f8bc953f81bb03411b0f0b7ff111d9d76d9bca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f621d876_4a243735",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3736614
+      },
+      "writtenOn": "2025-01-13T14:59:06Z",
+      "side": 1,
+      "message": "I\u0027m not able to build GKI simply by adding this change as stand alone, only with this change. It will purely fail on my side, since to be able to build GKI image, i need symbols from this: https://android-review.googlesource.com/c/kernel/common/+/3441519\nto be added, and symbols requires this gki_defconfig to be addes CONFIG_GPIO_SYSFS\u003dy\n\nI\u0027m preatty sure that this combination will work, since i\u0027ve already developed working solution like this, on local branches. During development it was builded several times and currently CI is building it also. What i need now, is to get similar state on AOSP repos, and just get it officiall.",
+      "parentUuid": "8ac02b57_add9502f",
+      "revId": "c3f8bc953f81bb03411b0f0b7ff111d9d76d9bca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
