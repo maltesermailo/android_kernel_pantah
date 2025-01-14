@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a73d916_960a1df0",
+        "filename": "include/linux/fs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-01-14T23:11:32Z",
+      "side": 0,
+      "message": "We need to keep it for ABI compatibility",
+      "range": {
+        "startLine": 472,
+        "startChar": 16,
+        "endLine": 472,
+        "endChar": 29
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "028a83b4_66f1ab9a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/fs.h",
+              "range": {
+                "startLine": 472,
+                "startChar": 0,
+                "endLine": 473,
+                "endChar": 0
+              },
+              "replacement": "\tconst struct address_space_operations *a_ops; /* For ABI */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f840b050f605243529332917302ffdaa21371d0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
