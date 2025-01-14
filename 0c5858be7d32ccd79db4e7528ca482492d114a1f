@@ -16,6 +16,24 @@
       "message": "When I try the host ptdump, I get the following last line:\n\n`0x0000008000000000-0x0000000000000000   17179868672G 1   R W X    BLK`\n\nDo you have this problem too?",
       "revId": "0c5858be7d32ccd79db4e7528ca482492d114a1f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8193e723_a1dd0fac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-14T11:40:33Z",
+      "side": 1,
+      "message": "Good catch, I remember fixing this. It behaves like this because our walker alignes up the last address from the 52 bit space which will overflow our 40bit pfn from the log. We need 41 bit pfn. I will update the other patch which introduces this.",
+      "parentUuid": "46892012_42ff62f6",
+      "revId": "0c5858be7d32ccd79db4e7528ca482492d114a1f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
