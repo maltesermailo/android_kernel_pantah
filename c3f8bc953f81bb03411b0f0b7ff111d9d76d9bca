@@ -123,6 +123,24 @@
       "parentUuid": "f621d876_4a243735",
       "revId": "c3f8bc953f81bb03411b0f0b7ff111d9d76d9bca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3175067d_8e576d45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-01-14T17:59:17Z",
+      "side": 1,
+      "message": "Stacking the changes on top of each other (as is done when in a topic) will conflict. Instead the changes have to be submitted in a series.\n\nAdditionall, the kernel build as documented fails telling that the config is wrong. There is a suggestion as well on how to fix it.\n\n```\n--- common/arch/arm64/configs/gki_defconfig    2025-01-14 15:06:52.376140896 +0000\n+++ /mnt/disks/build-disk/src/android/common-android13-5.15/out_abi/android13-5.15/common/defconfig    2025-01-14 15:07:21.831234727 +0000\n@@ -418,6 +418,7 @@\n # CONFIG_PINCTRL_SUN50I_H5 is not set\n # CONFIG_PINCTRL_SUN50I_H6 is not set\n # CONFIG_PINCTRL_SUN50I_H6_R is not set\n+CONFIG_GPIO_SYSFS\u003dy\n CONFIG_GPIO_GENERIC_PLATFORM\u003dy\n CONFIG_POWER_RESET_HISI\u003dy\n CONFIG_POWER_RESET_SYSCON\u003dy\n@@ -566,7 +567,6 @@\n CONFIG_IIO_TRIGGERED_BUFFER\u003dy\n CONFIG_PWM\u003dy\n CONFIG_GENERIC_PHY\u003dy\n-CONFIG_GPIO_SYSFS\u003dy\n CONFIG_POWERCAP\u003dy\n CONFIG_IDLE_INJECT\u003dy\n CONFIG_ANDROID\u003dy\n++ RES\u003d1\n++ \u0027[\u0027 1 -ne 0 \u0027]\u0027\n++ echo ERROR: savedefconfig does not match common/arch/arm64/configs/gki_defconfig\nERROR: savedefconfig does not match common/arch/arm64/configs/gki_defconfig\n++ return 1\n```",
+      "parentUuid": "47ef8fc3_46e206fc",
+      "revId": "c3f8bc953f81bb03411b0f0b7ff111d9d76d9bca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
