@@ -16,6 +16,42 @@
       "message": "Should there be a check somewhere on nr_pages + pfn and nr_pages + gfn not wrapping (when shifted by PAGE_SHIFT)? I couldn\u0027t spot such a check anywhere.",
       "revId": "7a99e3eec215c8cf1888858c2f7651d44438daec",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7ef076e_22f8f3ff",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1093,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-01-15T14:00:17Z",
+      "side": 1,
+      "message": "In both donate and share case, the only thing that would wrap would be \"size\". In that case we just share/donate less than expected. \n\nOr do you think I\u0027ve missed something?",
+      "parentUuid": "511d044e_b68b0be2",
+      "revId": "7a99e3eec215c8cf1888858c2f7651d44438daec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6c46141_7f5e5ec7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/hyp-main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1093,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-01-15T14:00:17Z",
+      "side": 1,
+      "message": "I think this is safe because the",
+      "parentUuid": "511d044e_b68b0be2",
+      "revId": "7a99e3eec215c8cf1888858c2f7651d44438daec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
