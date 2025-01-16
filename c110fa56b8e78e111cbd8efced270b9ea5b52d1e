@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68585702_4c2cdb42",
+        "filename": "mm/memfd.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-01-16T19:33:11Z",
+      "side": 1,
+      "message": "NAME_MAX is 255 chars. Do we have to allocate it on the heap? I wonder if it would be better to have filename allocated on the stack here and just concatenate MFD_NAME_PREFIX and the name instead of changing alloc_name(). I think that would be a simpler and less invasive change. WDYT?",
+      "range": {
+        "startLine": 482,
+        "startChar": 1,
+        "endLine": 482,
+        "endChar": 36
+      },
+      "revId": "c110fa56b8e78e111cbd8efced270b9ea5b52d1e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
