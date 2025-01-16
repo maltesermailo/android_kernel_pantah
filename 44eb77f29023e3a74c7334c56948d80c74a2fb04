@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "906dd36e_320fcb76",
+        "filename": "mm/compaction.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2218,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-01-16T16:30:03Z",
+      "side": 1,
+      "message": "It\u0027s better to move this definition into the `if (is_via_compact_memory()) { }` block to localize the changes in one place.",
+      "range": {
+        "startLine": 2218,
+        "startChar": 1,
+        "endLine": 2218,
+        "endChar": 28
+      },
+      "revId": "44eb77f29023e3a74c7334c56948d80c74a2fb04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8f06980_6336d9c5",
+        "filename": "mm/compaction.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2259,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-01-16T16:30:03Z",
+      "side": 1,
+      "message": "So, you are doing this only during proactive compaction. I think that\u0027s important detail which should be mentioned in the patch description. Please add that.",
+      "range": {
+        "startLine": 2259,
+        "startChar": 5,
+        "endLine": 2259,
+        "endChar": 37
+      },
+      "revId": "44eb77f29023e3a74c7334c56948d80c74a2fb04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfd66fea_672ac3d5",
+        "filename": "mm/compaction.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2260,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-01-16T16:30:03Z",
+      "side": 1,
+      "message": "nit: We usually use `stop` or `bypass` in the vendor hooks I\u0027ve seen. I would siggest renaming this hook into `trace_android_vh_proactive_compact_stop()`.",
+      "range": {
+        "startLine": 2260,
+        "startChar": 2,
+        "endLine": 2260,
+        "endChar": 33
+      },
+      "revId": "44eb77f29023e3a74c7334c56948d80c74a2fb04",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
