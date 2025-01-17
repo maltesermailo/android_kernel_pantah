@@ -22,6 +22,30 @@
       },
       "revId": "188a460740bbaad4b6a47de84fa456e8acf767e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bd4f4b1_544db7ab",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4405,
+      "author": {
+        "id": 3616462
+      },
+      "writtenOn": "2025-01-17T02:25:34Z",
+      "side": 1,
+      "message": "I want to implement a function that only reclaims anonymous pages. When an app is pushed to the background, the anonymous pages of the app are reclaimed:\nCall the isolate_folio function to determine whether the folio can be isolated and reclaimed.\nThe pseudocode is as follows.\nlists \u003d lrugen-\u003efolios[gen][LRU_GEN_ANON][zone];\nfor each folio lists\n\tif (isolate_folio(lruvec, folio))\n\t\tlist_add(\u0026folio-\u003elru, \u0026list_release);\n\nreclaim_pages(\u0026list_release, true);",
+      "parentUuid": "422904ef_b9f022e0",
+      "range": {
+        "startLine": 4405,
+        "startChar": 0,
+        "endLine": 4405,
+        "endChar": 33
+      },
+      "revId": "188a460740bbaad4b6a47de84fa456e8acf767e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
