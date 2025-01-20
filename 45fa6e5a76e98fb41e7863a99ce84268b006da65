@@ -16,6 +16,24 @@
       "message": "Nit: You do use this safely everywhere here, and it\u0027s stuck inside a `fn` scope so it\u0027s not so bad, but *technically* `get_seals` isn\u0027t safe, because it needs to be a memfd file. You could either make it unsafe and write a comment at the callsites, or make it a closure (possible minor runtime cost?) so that you are capturing `file` at the declaration site (remove the argument) and then you\u0027d be able to claim it\u0027s a memfd file.... after adding an annotation to the enclosing function.\n\nAll this might not be necessary, I don\u0027t know what degree of `unsafe` restriction the kernel is going with, but for the rest of Android code I\u0027ve been saying that if you can\u0027t call the function on literally any value of that type that could be created safely, then it needs to be unsafe.",
       "revId": "45fa6e5a76e98fb41e7863a99ce84268b006da65",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6eebcc49_e1651950",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-01-20T10:36:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d87a858_21ad4a62",
+      "revId": "45fa6e5a76e98fb41e7863a99ce84268b006da65",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
