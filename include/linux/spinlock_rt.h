@@ -16,6 +16,25 @@ static inline void __rt_spin_lock_init(spinlock_t *lock, const char *name,
 }
 #endif
 
+#ifdef CONFIG_DEBUG_SPINLOCK
+
+#define __spin_lock_init(slock, name, key, percpu)		\
+do {								\
+	rt_mutex_base_init(&(slock)->lock);			\
+	__rt_spin_lock_init(slock, name, key, percpu);		\
+} while (0)
+
+#define _spin_lock_init(slock, percpu)				\
+do {								\
+	static struct lock_class_key __key;			\
+	__spin_lock_init(slock, #slock, &__key, percpu);	\
+} while (0)
+
+#define spin_lock_init(slock)		_spin_lock_init(slock, false)
+#define local_spin_lock_init(slock)	_spin_lock_init(slock, true)
+
+#else /* CONFIG_DEBUG_SPINLOCK */
+
 #define spin_lock_init(slock)					\
 do {								\
 	static struct lock_class_key __key;			\
@@ -31,6 +50,8 @@ do {								\
 	rt_mutex_base_init(&(slock)->lock);			\
 	__rt_spin_lock_init(slock, #slock, &__key, true);	\
 } while (0)
+
+#endif /* CONFIG_DEBUG_SPINLOCK */
 
 extern void rt_spin_lock(spinlock_t *lock);
 extern void rt_spin_lock_nested(spinlock_t *lock, int subclass);
