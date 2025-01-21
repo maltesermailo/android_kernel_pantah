@@ -52,6 +52,24 @@
       "parentUuid": "376988fe_0975080e",
       "revId": "32471d3b7e93f5042c9d0b143e937786eca79800",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75967dc2_c5a3c191",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-01-21T10:30:49Z",
+      "side": 1,
+      "message": "If you set all of the ashmem toggles to the right values, then the Rust ashmem driver should match Isaac\u0027s patchset with one exception: If you create a memfd using the `memfd_create` syscall, then you cannot set the name or size through the ashmem ioctls. I think this difference is okay, because anyone using those ioctls would not use the `memfd_create` syscall to create the fd.",
+      "parentUuid": "9e3dc4d5_6048444b",
+      "revId": "32471d3b7e93f5042c9d0b143e937786eca79800",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
