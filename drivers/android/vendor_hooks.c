@@ -29,6 +29,7 @@
 #include <trace/hooks/cgroup.h>
 #include <trace/hooks/sys.h>
 #include <trace/hooks/iommu.h>
+#include <trace/hooks/fs.h>
 #include <trace/hooks/net.h>
 #include <trace/hooks/pm_domain.h>
 #include <trace/hooks/cpuidle_psci.h>
@@ -157,6 +158,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_send_uic_command);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_send_tm_command);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_check_int_errors);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_update_sdev);
+<<<<<<< HEAD   (7eef4547a5cba44e35a00b5583d2eaa0608978d2 UPSTREAM: rust: bitops: add __rust_helper to helpers)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_eh_timed_out);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_link_startup);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_dev_cmd_completion);
@@ -166,6 +168,12 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_printk);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_create);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_set_bio_flag);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_put_super);
+||||||| BASE   (936ea2ffcd607604225dfeb31b851776051bb5a6 ANDROID: Allow vendor modules to perform operations on memor)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_io_statistics);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_f2fs_down_read);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_io_statistics);
+>>>>>>> CHANGE (7a9cbd82c8b5f839a256b5b24b9775b2b09c7cf5 ANDROID: vendor_hooks: add hooks for f2fs down read)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_cgroup_attach);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_iommu_setup_dma_ops);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_iommu_alloc_insert_iova);
