@@ -33,6 +33,24 @@
       "message": "Matt,\n\nThank you for the patch and the very detailed, clear explanation. We will be happy to take this patch. Just one question: Did you consider just using the range lock? I\u0027m being lazy, and haven\u0027t analyzed every path, but it looks like it might be just as good.\n\nThanks,\n\nPaul",
       "revId": "0ee43711aad9fe3feecd0c15ec20935924b3066b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fc5297d_d4ddff30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1858340
+      },
+      "writtenOn": "2025-01-22T22:06:50Z",
+      "side": 1,
+      "message": "Hi Paul. Thanks for the review!\n\nI did look at using the range_lock. The issue there is that that bow_write() (called from the workqueue) acquires the ranges_lock. That would result in a deadlock since state_store() need to hold that lock while flushing the workqueue.\n\n\nI think there are other alternative solutions to this problem, such as rewriting bow_write() to remove its assumption about the current state being CHECKPOINT, but believe the this current version of the change is easier to reason through. \n\nAlso, since we\u0027re not adding any additional mutex_lock() calls in the common (already committed path) and not meaningfully increasing lock contention even in the slow/workqueue path (since ranges lock already serializes work there) the performance impact of this change should be essentially nothing.",
+      "parentUuid": "5585a18d_18d861f8",
+      "revId": "0ee43711aad9fe3feecd0c15ec20935924b3066b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
