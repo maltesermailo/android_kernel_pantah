@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc335b8d_5d8449fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1858340
+      },
+      "writtenOn": "2025-01-22T02:22:46Z",
+      "side": 1,
+      "message": "For added context: we have attributed some ext4 userdata corruption (upon first the boot after an OTA) to this issue and that this patch resolves it.\n\nAmong the test we ran while debugging this, we added an assertion to dm-bow that would trip if we ever \"lost the race\" described in the the commit text, and we saw that it was indeed occasionally being hit: writes from the CHECKPOINT state were completing after the state had transitioned to COMMITTED.\n\nWe believe all AOSP kernel branches that use dm-bow are currently vulerable to this race for devices where dm-bow is used for checkpointing (ie. devices that don\u0027t use F2FS and its native checkpointing for userdata).",
+      "revId": "0ee43711aad9fe3feecd0c15ec20935924b3066b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
