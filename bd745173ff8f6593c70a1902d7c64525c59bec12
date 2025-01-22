@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f86e776b_58221091",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-01-22T20:51:42Z",
+      "side": 1,
+      "message": "Build break:\n```\nUse --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging\n/mnt/disks/build-disk/src/android/common-android16-6.12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/507/execroot/_main/common/net/core/sock.c:2388:2: error: call to undeclared function \u0027trace_android_vh_sk_clone_lock\u0027; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n 2388 |         trace_android_vh_sk_clone_lock(newsk);\n      |         ^\n1 error generated.\n```\n\nDon\u0027t you build and test your changes before submiting?",
+      "revId": "bd745173ff8f6593c70a1902d7c64525c59bec12",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
