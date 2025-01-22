@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5a4ab08_dd5f3b0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-01-22T18:23:11Z",
+      "side": 1,
+      "message": "I believe a simple bool with RO permissions could do instead? e.g.\n```\ndiff --git a/drivers/android/binder.c b/drivers/android/binder.c\nindex d6def6caf950..ebab79f10dd9 100644\n--- a/drivers/android/binder.c\n+++ b/drivers/android/binder.c\n@@ -118,6 +118,9 @@ module_param_named(debug_mask, binder_debug_mask, uint, 0644);\n char *binder_devices_param \u003d CONFIG_ANDROID_BINDER_DEVICES;\n module_param_named(devices, binder_devices_param, charp, 0444);\n\n+bool binder_use_rust;\n+module_param_named(use_rust, binder_use_rust, bool, 0444);\n+\n static DECLARE_WAIT_QUEUE_HEAD(binder_user_error_wait);\n static int binder_stop_on_user_error;\n\n@@ -6971,6 +6974,9 @@ static int __init binder_init(void)\n        char *device_names \u003d NULL;\n        const struct binder_debugfs_entry *db_entry;\n\n+       if (binder_use_rust)\n+               return 0;\n+\n        ret \u003d binder_alloc_shrinker_init();\n        if (ret)\n                return ret;\n```\n\nIt would be a similar `binder.use_rust\u003d{0/1}` kcmdline.",
+      "revId": "77dcf68817ac3c02b00658bd1aa1a28bb63104f5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
