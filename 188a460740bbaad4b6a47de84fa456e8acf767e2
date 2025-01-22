@@ -94,6 +94,30 @@
       },
       "revId": "188a460740bbaad4b6a47de84fa456e8acf767e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c69809d6_7592d269",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4405,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-01-22T19:22:00Z",
+      "side": 1,
+      "message": "Hmm. So, I\u0027m guessing you are implementing something like partial MADV_PAGEOUT. And you would still need to hold the mmap_lock, just for a shorter amount of time?\n\nWouldn\u0027t it be easier to export `do_madvise()` instead and add a hook inside `madvise_cold_or_pageout_pte_range()` to terminate the loop earlier to limit the number of isolated pages and then reclaim them? That seems like a more straight-forward and ribust approach than exporting individual internal functions.",
+      "parentUuid": "94e40a6f_caf1ac70",
+      "range": {
+        "startLine": 4405,
+        "startChar": 0,
+        "endLine": 4405,
+        "endChar": 33
+      },
+      "revId": "188a460740bbaad4b6a47de84fa456e8acf767e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
