@@ -118,6 +118,30 @@
       },
       "revId": "188a460740bbaad4b6a47de84fa456e8acf767e2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "165675fc_fd4e18c9",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4405,
+      "author": {
+        "id": 3616462
+      },
+      "writtenOn": "2025-01-23T12:27:49Z",
+      "side": 1,
+      "message": "Using do_madvise is process-based for memory reclamation. Therefore, if we want to reclaim memory for an app, we need to traverse multiple processes. However, we utilize the per-app memory control group (memcg) feature, which allows us to reclaim memory for an app based on a single memcg. This approach simplifies the code implementation and makes it more efficient.\nmemcg-\u003elruvec-\u003elrugen-\u003efolios[gen][LRU_GEN_ANON][zone];",
+      "parentUuid": "c69809d6_7592d269",
+      "range": {
+        "startLine": 4405,
+        "startChar": 0,
+        "endLine": 4405,
+        "endChar": 33
+      },
+      "revId": "188a460740bbaad4b6a47de84fa456e8acf767e2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
