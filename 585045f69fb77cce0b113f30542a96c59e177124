@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f175059_c98658e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-01-23T23:34:45Z",
+      "side": 1,
+      "message": "I\u0027m considering changing this boot parameter into a tristate `redirect_cma\u003dnever | restricted | always` to allow for resroring the upstream functionality too because another vendor is asking for an option to use upstream logic.\n\n`redirect_cma\u003dnever` will work the way upstream works today;\n`redirect_cma\u003drestricted` will work the same as `restrict_cma_redirect\u003dtrue`;\n`redirect_cma\u003dalways` will work as `restrict_cma_redirect\u003dfalse`;\n\nDefault will be `redirect_cma\u003dalways` to keep current functionality. Does that work for you?",
+      "revId": "585045f69fb77cce0b113f30542a96c59e177124",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
