@@ -123,6 +123,24 @@
       "parentUuid": "6bb03124_31d694db",
       "revId": "3bed176e44a70c84a241388386a41e328488e180",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12e63ac5_5a113685",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2025-01-24T17:58:37Z",
+      "side": 1,
+      "message": "Hi Greg, it was not the intention to hide that series has been rejected upstream. Actually, I mentioned that in the commit message itself for the first patch in the series https://r.android.com/c/kernel/common/+/3462727/1//COMMIT_MSG#42\nIn the retrospect, I should have added this note to every patch in the series. My bad.\n\nSome patches in the series which could be applied as is so I kept the tag FROMLIST. I will remove the FROMLIST tag from all the patches in the series so there is no confusion and it will make it clear that proposal for patches is ANDROID only.\n\nI also understand that having this series in android-mainline have potential to cause conflicts with frequent merges from upstream. However, these patches are necessary to have 16KB pagesize support on hardware which cannot have segments larger than 4KB. Such devices do exist and hence the series. \n\nMaybe I will change the series to WIP and keep it rebased and working with android-mainline. That way we don\u0027t need to merge this and anyone who wants to try android-mainline with 16KB page size can apply the series locally. \n\nIf you have any inputs or suggestions which will make long term maintenance a bit more easier, please let me know.",
+      "parentUuid": "e7c7d8fc_774ae5ea",
+      "revId": "3bed176e44a70c84a241388386a41e328488e180",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
