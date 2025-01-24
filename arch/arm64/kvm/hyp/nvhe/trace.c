@@ -606,3 +606,27 @@ int __pkvm_reset_tracing(unsigned int cpu)
 
 	return ret;
 }
+
+void __pkvm_panic_tracing(void)
+{
+	int cpu;
+
+	hyp_spin_lock(&trace_rb_lock);
+
+	for (cpu = 0; cpu < hyp_nr_cpus; cpu++) {
+		struct hyp_rb_per_cpu *cpu_buffer = per_cpu_ptr(&trace_rb, cpu);
+
+		if (!rb_cpu_loaded(cpu_buffer))
+			continue;
+
+		rb_cpu_disable_writing(cpu_buffer);
+
+		/* Allow the host to read the very last events */
+		while (cpu_buffer->tail_page != cpu_buffer->reader_page) {
+			if (rb_swap_reader_page(cpu_buffer))
+				break;
+		}
+	}
+
+	hyp_spin_unlock(&trace_rb_lock);
+}
