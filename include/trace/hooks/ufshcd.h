@@ -13,6 +13,9 @@
 struct ufs_hba;
 struct request;
 struct ufshcd_lrb;
+struct scsi_cmnd;
+struct cq_entry;
+struct uic_command;
 
 DECLARE_HOOK(android_vh_ufs_fill_prdt,
 	TP_PROTO(struct ufs_hba *hba, struct ufshcd_lrb *lrbp,
@@ -50,6 +53,40 @@ DECLARE_HOOK(android_vh_ufs_check_int_errors,
 	TP_PROTO(struct ufs_hba *hba, bool queue_eh_work),
 	TP_ARGS(hba, queue_eh_work));
 
+<<<<<<< HEAD   (d84a3e705026d79242ce3b92257ed61dc97a1912 FROMGIT: memfd,selinux: call security_inode_init_security_an)
+||||||| BASE   (4f776ed81ef2c48af1c316820f4f55c5ab4a4964 ANDROID: GKI: export symbols to do reverse mapping within me)
+struct scsi_device;
+DECLARE_HOOK(android_vh_ufs_update_sdev,
+	TP_PROTO(struct scsi_device *sdev),
+	TP_ARGS(sdev));
+
+=======
+struct scsi_device;
+DECLARE_HOOK(android_vh_ufs_update_sdev,
+	TP_PROTO(struct scsi_device *sdev),
+	TP_ARGS(sdev));
+
+DECLARE_HOOK(android_vh_ufs_eh_timed_out,
+	TP_PROTO(struct ufs_hba *hba, struct scsi_cmnd *scmd),
+	TP_ARGS(hba, scmd));
+
+DECLARE_HOOK(android_vh_ufs_link_startup,
+	TP_PROTO(struct ufs_hba *hba, int err),
+	TP_ARGS(hba, err));
+
+DECLARE_HOOK(android_vh_ufs_dev_cmd_completion,
+	TP_PROTO(struct ufs_hba *hba, struct ufshcd_lrb *lrbp, int err),
+	TP_ARGS(hba, lrbp, err));
+
+DECLARE_HOOK(android_vh_ufs_wait_for_uic_cmd,
+	TP_PROTO(struct ufs_hba *hba, struct uic_command *uic_cmd, int err),
+	TP_ARGS(hba, uic_cmd, err));
+
+DECLARE_HOOK(android_vh_ufs_transfer_rsp_status,
+	TP_PROTO(struct ufs_hba *hba, struct ufshcd_lrb *lrbp, struct cq_entry *cqe, int result),
+	TP_ARGS(hba, lrbp, cqe, result));
+
+>>>>>>> CHANGE (4b7014400eefe60eed5cc332d59617b3a0079ea9 ANDROID: ufs: add vendor hooks in the ufs command processing)
 #endif /* _TRACE_HOOK_UFSHCD_H */
 /* This part must be outside protection */
 #include <trace/define_trace.h>

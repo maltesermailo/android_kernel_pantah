@@ -28,6 +28,7 @@
 #include <scsi/scsi_dbg.h>
 #include <scsi/scsi_driver.h>
 #include <scsi/scsi_eh.h>
+#include <ufs/ufs.h>
 #include "ufshcd-priv.h"
 #include <ufs/ufs_quirks.h>
 #include <ufs/unipro.h>
@@ -119,6 +120,10 @@ static bool is_mcq_supported(struct ufs_hba *hba)
 
 module_param(use_mcq_mode, bool, 0644);
 MODULE_PARM_DESC(use_mcq_mode, "Control MCQ mode for controllers starting from UFSHCI 4.0. 1 - enable MCQ, 0 - disable MCQ. MCQ is enabled by default");
+
+EXPORT_TRACEPOINT_SYMBOL_GPL(ufshcd_profile_hibern8);
+EXPORT_TRACEPOINT_SYMBOL_GPL(ufshcd_profile_clk_scaling);
+EXPORT_TRACEPOINT_SYMBOL_GPL(ufshcd_profile_clk_gating);
 
 static unsigned int uic_cmd_timeout = UIC_CMD_TIMEOUT_DEFAULT;
 
@@ -2603,6 +2608,7 @@ ufshcd_wait_for_uic_cmd(struct ufs_hba *hba, struct uic_command *uic_cmd)
 	hba->active_uic_cmd = NULL;
 	spin_unlock_irqrestore(hba->host->host_lock, flags);
 
+	trace_android_vh_ufs_wait_for_uic_cmd(hba, uic_cmd, ret);
 	return ret;
 }
 
@@ -3227,8 +3233,14 @@ ufshcd_dev_cmd_completion(struct ufs_hba *hba, struct ufshcd_lrb *lrbp)
 				__func__, resp);
 		break;
 	}
+<<<<<<< HEAD   (d84a3e705026d79242ce3b92257ed61dc97a1912 FROMGIT: memfd,selinux: call security_inode_init_security_an)
 
 	WARN_ONCE(err > 0, "Incorrect return value %d > 0\n", err);
+||||||| BASE   (4f776ed81ef2c48af1c316820f4f55c5ab4a4964 ANDROID: GKI: export symbols to do reverse mapping within me)
+
+=======
+	trace_android_vh_ufs_dev_cmd_completion(hba, lrbp, err);
+>>>>>>> CHANGE (4b7014400eefe60eed5cc332d59617b3a0079ea9 ANDROID: ufs: add vendor hooks in the ufs command processing)
 	return err;
 }
 
@@ -5165,6 +5177,19 @@ link_startup:
 out:
 	if (ret)
 		dev_err(hba->dev, "link startup failed %d\n", ret);
+<<<<<<< HEAD   (d84a3e705026d79242ce3b92257ed61dc97a1912 FROMGIT: memfd,selinux: call security_inode_init_security_an)
+||||||| BASE   (4f776ed81ef2c48af1c316820f4f55c5ab4a4964 ANDROID: GKI: export symbols to do reverse mapping within me)
+		ufshcd_print_host_state(hba);
+		ufshcd_print_pwr_info(hba);
+		ufshcd_print_evt_hist(hba);
+	}
+=======
+		ufshcd_print_host_state(hba);
+		ufshcd_print_pwr_info(hba);
+		ufshcd_print_evt_hist(hba);
+	}
+	trace_android_vh_ufs_link_startup(hba, ret);
+>>>>>>> CHANGE (4b7014400eefe60eed5cc332d59617b3a0079ea9 ANDROID: ufs: add vendor hooks in the ufs command processing)
 	return ret;
 }
 
@@ -5568,6 +5593,8 @@ ufshcd_transfer_rsp_status(struct ufs_hba *hba, struct ufshcd_lrb *lrbp,
 	if ((host_byte(result) != DID_OK) &&
 	    (host_byte(result) != DID_REQUEUE) && !hba->silence_err_logs)
 		ufshcd_print_tr(hba, lrbp->task_tag, true);
+
+	trace_android_vh_ufs_transfer_rsp_status(hba, lrbp, cqe, result);
 	return result;
 }
 
@@ -9175,7 +9202,15 @@ static enum scsi_timeout_action ufshcd_eh_timed_out(struct scsi_cmnd *scmd)
 	dev_info(hba->dev, "%s() finished; outstanding_tasks = %#lx.\n",
 		 __func__, hba->outstanding_tasks);
 
+<<<<<<< HEAD   (d84a3e705026d79242ce3b92257ed61dc97a1912 FROMGIT: memfd,selinux: call security_inode_init_security_an)
 	return scsi_host_busy(hba->host) ? SCSI_EH_RESET_TIMER : SCSI_EH_DONE;
+||||||| BASE   (4f776ed81ef2c48af1c316820f4f55c5ab4a4964 ANDROID: GKI: export symbols to do reverse mapping within me)
+	return hba->outstanding_reqs ? SCSI_EH_RESET_TIMER : SCSI_EH_DONE;
+=======
+	trace_android_vh_ufs_eh_timed_out(hba, scmd);
+
+	return hba->outstanding_reqs ? SCSI_EH_RESET_TIMER : SCSI_EH_DONE;
+>>>>>>> CHANGE (4b7014400eefe60eed5cc332d59617b3a0079ea9 ANDROID: ufs: add vendor hooks in the ufs command processing)
 }
 
 static const struct attribute_group *ufshcd_driver_groups[] = {
