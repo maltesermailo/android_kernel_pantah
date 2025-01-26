@@ -1192,7 +1192,15 @@ static const struct bpf_func_proto bpf_get_func_arg_proto = {
 	.ret_type	= RET_INTEGER,
 	.arg1_type	= ARG_PTR_TO_CTX,
 	.arg2_type	= ARG_ANYTHING,
+<<<<<<< HEAD   (b3b3e0 Merge 6bc6ee31113b ("dm-verity FEC: Fix RS FEC repair for ro)
 	.arg3_type	= ARG_PTR_TO_LONG,
+||||||| BASE
+	.arg3_type	= ARG_PTR_TO_FIXED_SIZE_MEM | MEM_UNINIT | MEM_ALIGNED,
+	.arg3_size	= sizeof(u64),
+=======
+	.arg3_type	= ARG_PTR_TO_FIXED_SIZE_MEM | MEM_UNINIT | MEM_WRITE | MEM_ALIGNED,
+	.arg3_size	= sizeof(u64),
+>>>>>>> BRANCH (2a72b2 bpf: Add MEM_WRITE attribute)
 };
 
 BPF_CALL_2(get_func_ret, void *, ctx, u64 *, value)
@@ -1208,7 +1216,15 @@ static const struct bpf_func_proto bpf_get_func_ret_proto = {
 	.func		= get_func_ret,
 	.ret_type	= RET_INTEGER,
 	.arg1_type	= ARG_PTR_TO_CTX,
+<<<<<<< HEAD   (b3b3e0 Merge 6bc6ee31113b ("dm-verity FEC: Fix RS FEC repair for ro)
 	.arg2_type	= ARG_PTR_TO_LONG,
+||||||| BASE
+	.arg2_type	= ARG_PTR_TO_FIXED_SIZE_MEM | MEM_UNINIT | MEM_ALIGNED,
+	.arg2_size	= sizeof(u64),
+=======
+	.arg2_type	= ARG_PTR_TO_FIXED_SIZE_MEM | MEM_UNINIT | MEM_WRITE | MEM_ALIGNED,
+	.arg2_size	= sizeof(u64),
+>>>>>>> BRANCH (2a72b2 bpf: Add MEM_WRITE attribute)
 };
 
 BPF_CALL_1(get_func_arg_cnt, void *, ctx)

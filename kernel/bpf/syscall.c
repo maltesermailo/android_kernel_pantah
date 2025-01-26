@@ -5247,7 +5247,15 @@ static const struct bpf_func_proto bpf_kallsyms_lookup_name_proto = {
 	.arg1_type	= ARG_PTR_TO_MEM,
 	.arg2_type	= ARG_CONST_SIZE_OR_ZERO,
 	.arg3_type	= ARG_ANYTHING,
+<<<<<<< HEAD   (b3b3e0 Merge 6bc6ee31113b ("dm-verity FEC: Fix RS FEC repair for ro)
 	.arg4_type	= ARG_PTR_TO_LONG,
+||||||| BASE
+	.arg4_type	= ARG_PTR_TO_FIXED_SIZE_MEM | MEM_UNINIT | MEM_ALIGNED,
+	.arg4_size	= sizeof(u64),
+=======
+	.arg4_type	= ARG_PTR_TO_FIXED_SIZE_MEM | MEM_UNINIT | MEM_WRITE | MEM_ALIGNED,
+	.arg4_size	= sizeof(u64),
+>>>>>>> BRANCH (2a72b2 bpf: Add MEM_WRITE attribute)
 };
 
 static const struct bpf_func_proto *
