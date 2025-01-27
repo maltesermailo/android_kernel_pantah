@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "037a2b51_b76e25c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-01-27T19:45:14Z",
+      "side": 1,
+      "message": "I think we\u0027ll also need to update the vendor\u0027s symbol list to make this possible.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 8
+      },
+      "revId": "c866baf862e8d42d30a2f149c9c2a85533ea068c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "04c5ea2f_ece285ab",
         "filename": "Documentation/admin-guide/kernel-parameters.txt",
         "patchSetId": 2
@@ -14,6 +37,30 @@
       "writtenOn": "2025-01-24T17:23:55Z",
       "side": 1,
       "message": "I believe this file is a bit more adequate for \"core\" kernel parameters and not so much for \"drivers\". IMO, it would be best to drop this which would also help avoiding conflicts with upstream merges.",
+      "range": {
+        "startLine": 543,
+        "startChar": 1,
+        "endLine": 543,
+        "endChar": 13
+      },
+      "revId": "c866baf862e8d42d30a2f149c9c2a85533ea068c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f77460a4_b06c2520",
+        "filename": "Documentation/admin-guide/kernel-parameters.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-01-27T19:45:14Z",
+      "side": 1,
+      "message": "If you want to keep a documentation on this parameter, please consider using a `MODULE_PARM_DESC()` instead.",
+      "parentUuid": "04c5ea2f_ece285ab",
       "range": {
         "startLine": 543,
         "startChar": 1,
@@ -84,6 +131,30 @@
       "side": 1,
       "message": "Maybe not, I\u0027m not sure. I wanted to be absolutely sure you couldn\u0027t modify the param after the driver has already been loaded.",
       "parentUuid": "02e02064_365f9727",
+      "range": {
+        "startLine": 7195,
+        "startChar": 52,
+        "endLine": 7195,
+        "endChar": 56
+      },
+      "revId": "c866baf862e8d42d30a2f149c9c2a85533ea068c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "595c639f_8873a75d",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7195,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-01-27T19:45:14Z",
+      "side": 1,
+      "message": "Ok, the RO permissions makes this option only modifiable via kernel commandline. Then we don\u0027t need the `binder_driver_initialized` logic and can be removed.",
+      "parentUuid": "11e836ce_b4f6f0bc",
       "range": {
         "startLine": 7195,
         "startChar": 52,
