@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5009fd85_b6b6b6fc",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2025-01-27T13:59:16Z",
+      "side": 1,
+      "message": "A function comment would be nice, at least to explain what `valid` means here. I\u0027d instead/also suggest having a constructor iterator vs normal iterator as wrapper functions, to hide the naked bool parameter, but I can\u0027t immediately think of a good terse name for the constructor variant.",
+      "revId": "c9defad23dccd3e7ee0aae05f945d874841fd12f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97d8d616_f13141a7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1992,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2025-01-27T13:59:16Z",
+      "side": 1,
+      "message": "Some comment that failure in this loop is expected only in case of a misbehaving host, and what the result will be in that case. (ppages that aren\u0027t actually pinned/donated?)",
+      "revId": "c9defad23dccd3e7ee0aae05f945d874841fd12f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
