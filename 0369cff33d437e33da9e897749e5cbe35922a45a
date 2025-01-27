@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8ba01ed_3a24c3e1",
+        "filename": "arch/arm64/include/asm/module.lds.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2025-01-27T10:49:35Z",
+      "side": 1,
+      "message": "As discussed let\u0027s make it clearer that `.hyp_event_ids` doesn\u0027t even exist and is not included in the wildcard. It\u0027s just a \"something\" to kick the linker.",
+      "fixSuggestions": [
+        {
+          "fixId": "8ad14f8d_c143d720",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/include/asm/module.lds.h",
+              "range": {
+                "startLine": 45,
+                "startChar": 0,
+                "endLine": 47,
+                "endChar": 0
+              },
+              "replacement": "\t\t * The .hyp.event_ids section is not included in the wildcard\n\t\t * version of the section. We need to include it explicitly\n\t\t * here to make sure that the ALIGN directive is applied.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0369cff33d437e33da9e897749e5cbe35922a45a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
