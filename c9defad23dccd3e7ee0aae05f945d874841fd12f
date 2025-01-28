@@ -33,6 +33,24 @@
       "message": "Some comment that failure in this loop is expected only in case of a misbehaving host, and what the result will be in that case. (ppages that aren\u0027t actually pinned/donated?)",
       "revId": "c9defad23dccd3e7ee0aae05f945d874841fd12f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e49c5c0_8fcbef63",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1992,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-01-28T11:20:24Z",
+      "side": 1,
+      "message": "Perhaps I should WARN_ON() here just like the normal host_donate_guest() would do?",
+      "parentUuid": "97d8d616_f13141a7",
+      "revId": "c9defad23dccd3e7ee0aae05f945d874841fd12f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
