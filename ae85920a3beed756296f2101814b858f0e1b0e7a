@@ -65,6 +65,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "03f73ce0_da95d390",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 914,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-28T17:00:39Z",
+      "side": 1,
+      "message": "No because we check `is_ffa_call` first.",
+      "parentUuid": "f676852b_7cb945f4",
+      "range": {
+        "startLine": 914,
+        "startChar": 1,
+        "endLine": 914,
+        "endChar": 27
+      },
+      "revId": "ae85920a3beed756296f2101814b858f0e1b0e7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9df69842_55c562af",
@@ -78,6 +102,30 @@
       "writtenOn": "2025-01-28T14:56:28Z",
       "side": 1,
       "message": "This must be predicated on userspace opt-in from the VMM.",
+      "range": {
+        "startLine": 1600,
+        "startChar": 8,
+        "endLine": 1600,
+        "endChar": 29
+      },
+      "revId": "ae85920a3beed756296f2101814b858f0e1b0e7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf009e87_6f36e138",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1600,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-28T17:00:39Z",
+      "side": 1,
+      "message": "I introduce this later on the series on the UAPI change. We can have that change preceding this, what do you think ?",
+      "parentUuid": "9df69842_55c562af",
       "range": {
         "startLine": 1600,
         "startChar": 8,
