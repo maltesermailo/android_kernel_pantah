@@ -1,0 +1,91 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8eeccc3_de179b4c",
+        "filename": "arch/arm64/include/asm/kvm_hyp.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T14:56:28Z",
+      "side": 1,
+      "message": "Merge into the code block above?",
+      "range": {
+        "startLine": 141,
+        "startChar": 7,
+        "endLine": 141,
+        "endChar": 30
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "02ae5471_f6cfe209",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/include/asm/kvm_hyp.h",
+              "range": {
+                "startLine": 139,
+                "startChar": 0,
+                "endLine": 142,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "ae85920a3beed756296f2101814b858f0e1b0e7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f676852b_7cb945f4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 914,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T14:56:28Z",
+      "side": 1,
+      "message": "Isn\u0027t this horribly unsafe? We can\u0027t blindly forward memory-sharing operations without checking the stage-2. I suspect that comes later in the series, but you\u0027ll need to re-order things to avoid this broken state in the middle.",
+      "range": {
+        "startLine": 914,
+        "startChar": 1,
+        "endLine": 914,
+        "endChar": 27
+      },
+      "revId": "ae85920a3beed756296f2101814b858f0e1b0e7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9df69842_55c562af",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1600,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-28T14:56:28Z",
+      "side": 1,
+      "message": "This must be predicated on userspace opt-in from the VMM.",
+      "range": {
+        "startLine": 1600,
+        "startChar": 8,
+        "endLine": 1600,
+        "endChar": 29
+      },
+      "revId": "ae85920a3beed756296f2101814b858f0e1b0e7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
