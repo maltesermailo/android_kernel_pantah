@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d9b31cb0_7855916a",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-01-28T15:53:57Z",
+      "side": 1,
+      "message": "Just aligning the size isn\u0027t enough. If we consider a system with PAGE_SIZE 0x1000 and then the following request\n\nphys \u003d 0x1200\nsize \u003d 0x1000\n\nif we align_down phys solely we would end-up guarding 0x1000-0x2000 instead of 0x1000-0x3000",
+      "parentUuid": "170ed375_65e281c6",
+      "range": {
+        "startLine": 118,
+        "startChar": 1,
+        "endLine": 118,
+        "endChar": 40
+      },
+      "revId": "9ac3ec83d5be802c89d28bdf9b2dddd56c76c669",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c2110537_5843e033",
         "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2025-01-28T15:45:35Z",
       "side": 1,
       "message": "That is redundant?",
+      "range": {
+        "startLine": 119,
+        "startChar": 1,
+        "endLine": 119,
+        "endChar": 39
+      },
+      "revId": "9ac3ec83d5be802c89d28bdf9b2dddd56c76c669",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d38d9d18_dde0a199",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-01-28T15:53:57Z",
+      "side": 1,
+      "message": "Arg, no that\u0027s a typo. The first one should be PAGE_SIZE",
+      "parentUuid": "c2110537_5843e033",
       "range": {
         "startLine": 119,
         "startChar": 1,
