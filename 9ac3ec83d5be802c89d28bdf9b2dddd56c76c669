@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "170ed375_65e281c6",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-28T15:45:35Z",
+      "side": 1,
+      "message": "That\u0027s a bit confusing, besides we that we align for `PAGE_SIZE` first, isn\u0027t it simpler to just align the size instead of end then doing `((end - phys) \u003e\u003e PAGE_SHIFT)` to recalculate size",
+      "range": {
+        "startLine": 118,
+        "startChar": 1,
+        "endLine": 118,
+        "endChar": 40
+      },
+      "revId": "9ac3ec83d5be802c89d28bdf9b2dddd56c76c669",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2110537_5843e033",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-28T15:45:35Z",
+      "side": 1,
+      "message": "That is redundant?",
+      "range": {
+        "startLine": 119,
+        "startChar": 1,
+        "endLine": 119,
+        "endChar": 39
+      },
+      "revId": "9ac3ec83d5be802c89d28bdf9b2dddd56c76c669",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
