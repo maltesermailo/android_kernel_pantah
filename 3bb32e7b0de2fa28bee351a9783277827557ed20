@@ -69,6 +69,30 @@
       },
       "revId": "3bb32e7b0de2fa28bee351a9783277827557ed20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80f741a4_1aba363e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-01-29T16:27:02Z",
+      "side": 1,
+      "message": "Are you thinking of pKVM allocating handles that encode the vm_handle and the actual handle so that we can accelerate the lookup here?\n\nThat said, what prevents from tracking the host handles in the same as the guests? Does fragmentation get in the way? I\u0027m definitely missing something here.",
+      "parentUuid": "e879d18e_ee9bb8c3",
+      "range": {
+        "startLine": 717,
+        "startChar": 2,
+        "endLine": 724,
+        "endChar": 3
+      },
+      "revId": "3bb32e7b0de2fa28bee351a9783277827557ed20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
