@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d403c040_938329e7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1403,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-30T15:45:37Z",
+      "side": 1,
+      "message": "I was not sure, I was thinking that upon `psci_mem_protect_inc` FW should also clear any state for assignable device at reboot same as memory.",
+      "parentUuid": "17789762_fd2490ea",
+      "range": {
+        "startLine": 1403,
+        "startChar": 1,
+        "endLine": 1403,
+        "endChar": 21
+      },
+      "revId": "69cf20345d46a9f377b1bc8743add030c93a98d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec62db93_a0bbd385",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 3
@@ -60,6 +84,30 @@
       "writtenOn": "2025-01-29T13:54:33Z",
       "side": 1,
       "message": "Sneaky!\n\nPerhaps the name of this function should indicate that it\u0027s going to put down a device mapping for the guest? I\u0027m also not sure we should be using `PVKM_HOST_MMIO_PROT` here, as this has nothing to do with the host.\n\nCome to think of it, why do we need to use a device mapping at stage-2 for the guest?",
+      "range": {
+        "startLine": 1404,
+        "startChar": 21,
+        "endLine": 1404,
+        "endChar": 66
+      },
+      "revId": "69cf20345d46a9f377b1bc8743add030c93a98d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "719e7026_2c97c470",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1404,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-30T15:45:37Z",
+      "side": 1,
+      "message": "Yes, we can make it generic and check the memory range if device or not as other calls.\n\n\u003e Come to think of it, why do we need to use a device mapping at stage-2 for the guest?\n\nBecause of FWB",
+      "parentUuid": "ec62db93_a0bbd385",
       "range": {
         "startLine": 1404,
         "startChar": 21,
