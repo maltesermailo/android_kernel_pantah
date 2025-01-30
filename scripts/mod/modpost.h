@@ -89,7 +89,12 @@ struct module {
 	bool seen;
 	bool has_init;
 	bool has_cleanup;
+<<<<<<< HEAD   (7209e0 ANDROID: declare symbol list for exports protection)
 	struct buffer dev_table_buf;
+||||||| BASE
+=======
+	bool is_protected;  /* true if module exports are protected */
+>>>>>>> CHANGE (5530cd ANDROID: generate protected-exports.c from modpost)
 	char	     srcversion[25];
 	// Missing namespace dependencies
 	struct list_head missing_namespaces;
