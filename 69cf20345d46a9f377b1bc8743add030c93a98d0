@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65d46599_a40ca82e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1387,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-30T17:12:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0041e07c_23e13db8",
+      "range": {
+        "startLine": 1387,
+        "startChar": 30,
+        "endLine": 1387,
+        "endChar": 50
+      },
+      "revId": "69cf20345d46a9f377b1bc8743add030c93a98d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17789762_fd2490ea",
@@ -61,6 +85,30 @@
       "side": 1,
       "message": "I was not sure, I was thinking that upon `psci_mem_protect_inc` FW should also clear any state for assignable device at reboot same as memory.",
       "parentUuid": "17789762_fd2490ea",
+      "range": {
+        "startLine": 1403,
+        "startChar": 1,
+        "endLine": 1403,
+        "endChar": 21
+      },
+      "revId": "69cf20345d46a9f377b1bc8743add030c93a98d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68dcbb92_d7f3f139",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1403,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-01-30T17:12:12Z",
+      "side": 1,
+      "message": "Actually thinking again, that doesn\u0027t make any sense as with any VM will have count \u003e 1, I will remmove it.",
+      "parentUuid": "d403c040_938329e7",
       "range": {
         "startLine": 1403,
         "startChar": 1,
