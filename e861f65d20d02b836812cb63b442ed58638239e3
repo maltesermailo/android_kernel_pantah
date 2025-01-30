@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22966b99_4867b21f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-01-30T22:58:03Z",
+      "side": 1,
+      "message": "Looks like the cherry pick isn\u0027t clean, should this be labeled as BACKPORT?\n\nBuild warning: Please fix this WARNING reported by KernelCommit: Cherry pick is not clean. Checked against UPSTREAM.\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\nOwner: android-kernel-team@google.com\n\nCherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/07b887f8236eb3ed52f1fe83e385e6436dc4b052) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d07b887f8236eb3ed52f1fe83e385e6436dc4b052).\n\n```\n      ## drivers/usb/host/xhci.c ##\n     @@ drivers/usb/host/xhci.c: static int xhci_reserve_bandwidth(struct xhci_hcd *xhci,\n      \treturn -ENOMEM;\n    @@ drivers/usb/host/xhci.c: static int xhci_reserve_bandwidth(struct xhci_hcd *xhci\n       * and wait for it to finish.\n     \n      ## drivers/usb/host/xhci.h ##\n    -@@ drivers/usb/host/xhci.h: void xhci_ring_doorbell_for_active_rings(struct xhci_hcd *xhci,\n    - void xhci_cleanup_command_queue(struct xhci_hcd *xhci);\n    +@@ drivers/usb/host/xhci.h: void xhci_cleanup_command_queue(struct xhci_hcd *xhci);\n      void inc_deq(struct xhci_hcd *xhci, struct xhci_ring *ring);\n      unsigned int count_trbs(u64 addr, u64 len);\n    + void xhci_process_cancelled_tds(struct xhci_virt_ep *ep);\n     +int xhci_stop_endpoint_sync(struct xhci_hcd *xhci, struct xhci_virt_ep *ep,\n     +\t\t\t    int suspend, gfp_t gfp_flags);\n      \n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "range": {
+        "startLine": 0,
+        "startChar": 0,
+        "endLine": 0,
+        "endChar": 0
+      },
+      "revId": "e861f65d20d02b836812cb63b442ed58638239e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
