@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "26ac8795_dc39e3c0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-30T18:22:31Z",
+      "side": 1,
+      "message": "I am asking what it fixes not what you want to fix and I am reffering to a BUG entry. I hope this clarifies it.",
+      "parentUuid": "13d273fb_1b071e26",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 5
+      },
+      "revId": "1d8bb2b9ae7167064bee08c6385ccf43e1927d34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fb350d61_35d5d251",
         "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
         "patchSetId": 4
@@ -144,6 +168,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "666e7410_ebe3f1d9",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-30T18:22:31Z",
+      "side": 1,
+      "message": "`Its memory map is already 16KiB aligned` - CrosVM has no ideea about the guest granule so it can present the RAM with 4kb alignment. Where do we enforce in the kernel PAGE_SIZE alignment for `struct memblock_region *region` entries ?",
+      "parentUuid": "f8ad8dc7_169a6ef7",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 23
+      },
+      "revId": "1d8bb2b9ae7167064bee08c6385ccf43e1927d34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a9c4ffbf_9d134366",
         "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
         "patchSetId": 4
@@ -179,6 +227,30 @@
       "side": 1,
       "message": "Nope, we have the assumption that the host \"lied\" to pvmfw.\n\nAlso this make it compatible with something else than pvmfw.",
       "parentUuid": "a9c4ffbf_9d134366",
+      "range": {
+        "startLine": 208,
+        "startChar": 5,
+        "endLine": 208,
+        "endChar": 22
+      },
+      "revId": "1d8bb2b9ae7167064bee08c6385ccf43e1927d34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "068ff6dd_be718019",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-30T18:22:31Z",
+      "side": 1,
+      "message": "`that the host \"lied\" to pvmfw` - which implies that pvmfw is unable to protect which in turn it means that it is compromised.\n\n`this make it compatible with something else than pvmfw.` I really don\u0027t see how this affects compatibility.",
+      "parentUuid": "c8cfd58d_472a072a",
       "range": {
         "startLine": 208,
         "startChar": 5,
