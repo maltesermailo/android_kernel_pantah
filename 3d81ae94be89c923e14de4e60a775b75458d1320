@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8ba1175_8af4a5f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-01-30T17:55:19Z",
+      "side": 1,
+      "message": "Breaks the build due to redefinition of DWC3_LLUCTL: \n```\n...\n1 error generated.\n.../output_user_root/1171ade21b1f2d6667b712e8b35f38a9/sandbox/linux-sandbox/132/execroot/__main__/aosp/scripts/Makefile.build:250: ../private/google-modules/soc/gs/drivers/usb/dwc3/dwc3-exynos.o] Error 1\n...-6.1/out/bazel/output_user_root/1171ade21b1f2d6667b712e8b35f38a9/sandbox/linux-sandbox/132/execroot/__main__/aosp/scripts/Makefile.build:503: ../private/google-modules/soc/gs/drivers/usb/dwc3] Error 2\nmake[4]: *** Waiting for unfinished jobs....\n.../android14-gs-pixel-6.1/out/bazel/output_user_root/1171ade21b1f2d6667b712e8b35f38a9/sandbox/linux-sandbox/132/execroot/__main__/aosp/../private/google-modules/soc/gs/drivers/usb/host/xhci-exynos.c:31:\n...7b712e8b35f38a9/sandbox/linux-sandbox/132/execroot/__main__/aosp/../private/google-modules/soc/gs/include/linux/usb/dwc3-exynos.h:30:9: error: \u0027DWC3_LLUCTL\u0027 macro redefined [-Werror,-Wmacro-redefined]\n#define DWC3_LLUCTL             0xd024\n        ^\n...oid/android14-gs-pixel-6.1/out/bazel/output_user_root/1171ade21b1f2d6667b712e8b35f38a9/sandbox/linux-sandbox/132/execroot/__main__/aosp/drivers/usb/dwc3/core.h:183:9: note: previous definition is here\n#define DWC3_LLUCTL(n)          (0xd024 + ((n) * 0x80))\n        ^\n1 error generated.\n.../output_user_root/1171ade21b1f2d6667b712e8b35f38a9/sandbox/linux-sandbox/132/execroot/__main__/aosp/scripts/Makefile.build:250: ../private/google-modules/soc/gs/drivers/usb/host/xhci-exynos.o] Error 1\nmake[5]: *** Waiting for unfinished jobs....\n...-6.1/out/bazel/output_user_root/1171ade21b1f2d6667b712e8b35f38a9/sandbox/linux-sandbox/132/execroot/__main__/aosp/scripts/Makefile.build:503: ../private/google-modules/soc/gs/drivers/usb/host] Error 2\n...pixel-6.1/out/bazel/output_user_root/1171ade21b1f2d6667b712e8b35f38a9/sandbox/linux-sandbox/132/execroot/__main__/aosp/scripts/Makefile.build:503: ../private/google-modules/soc/gs/drivers/usb] Error 2\nmake[3]: *** Waiting for unfinished jobs....\n...ner-android/android14-gs-pixel-6.1/out/bazel/output_user_root/1171ade21b1f2d6667b712e8b35f38a9/sandbox/linux-sandbox/132/execroot/__main__/aosp/Makefile:2052: ../private/google-modules/soc/gs] Error 2\nmake[1]: *** [Makefile:256: __sub-make] Error 2\nmake: *** [Makefile:12: modules] Error 2\nTarget //private/devices/google/caimito:dist failed to build\nUse --verbose_failures to see the command lines of failed build steps.\n...e_Scaimito_Sdist-runfiles failed: (Exit 2): bash failed: error executing KernelModule command (from target //private/devices/google/zumapro:zumapro_soc) /bin/bash -c ... (remaining 1 argument skipped)\n\nUse --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging\nINFO: Elapsed time: 384.452s, Critical Path: 354.85s\nINFO: 608 processes: 475 internal, 132 linux-sandbox, 1 local.\nERROR: Build did NOT complete successfully\nERROR: Build failed. Not running target\n```",
+      "revId": "3d81ae94be89c923e14de4e60a775b75458d1320",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
