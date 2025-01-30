@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9c4ffbf_9d134366",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-30T11:36:17Z",
+      "side": 1,
+      "message": "I can\u0027t fully reason on why we need this `because`:\n\n1. We start with the assumption that pvmfw is compromised and this allows an attackers to play tricks on the memory placement thus placing it at an unaligned address with an unaligned size.\n\n2. If pvmfw is compromised, then what prevents an attacker for issuing MMIO guard calls on a region that will overlap with RAM ?",
+      "range": {
+        "startLine": 208,
+        "startChar": 5,
+        "endLine": 208,
+        "endChar": 22
+      },
+      "revId": "1d8bb2b9ae7167064bee08c6385ccf43e1927d34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
