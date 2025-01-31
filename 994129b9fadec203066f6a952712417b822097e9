@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52d049fc_d74561ed",
+        "filename": "fs/read_write.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-01-31T00:40:19Z",
+      "side": 1,
+      "message": "Do you need to consider cases where other places in the kernel are directly invoking `ksys_pread64()`? You could fold calling `__pagemap_pread()` into `ksys_pread64()` and do a fop check there to determine if you should call __pagemap_pread() since `ksys_pread64()` gets a reference to the underlying file structure?",
+      "revId": "994129b9fadec203066f6a952712417b822097e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1d9d447_1cd55f73",
+        "filename": "mm/page_size_compat.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-01-31T00:40:19Z",
+      "side": 1,
+      "message": "`unsigned int *fd, loff_t *pos`?",
+      "range": {
+        "startLine": 368,
+        "startChar": 20,
+        "endLine": 368,
+        "endChar": 49
+      },
+      "revId": "994129b9fadec203066f6a952712417b822097e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d13408a0_647dd521",
+        "filename": "mm/page_size_compat.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-01-31T00:40:19Z",
+      "side": 1,
+      "message": "You could avoid this and the buffer allocation by including \"../fs/proc/internal.h\" and checking file-\u003ef_op against proc_pagemap_operations.",
+      "range": {
+        "startLine": 397,
+        "startChar": 0,
+        "endLine": 406,
+        "endChar": 0
+      },
+      "revId": "994129b9fadec203066f6a952712417b822097e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
