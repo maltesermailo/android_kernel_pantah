@@ -33,6 +33,24 @@
       "message": "Since DWC3_LLUCTL is used in it\u0027s original form, I think you will need to define a new macro to avoid the abi breakage caused by redefinition. Perhaps DWC3_LLUCTL_N(n) or DWC3_LLUCTL_V(n) where V is used as similar notation to a vendor struct. \n\nIn doing so, please add a comment explaining the reason for the re-definition for Android- to maintain ABI compatibility. Should also add a comment below where it is actually used for ease of future maintenence and merges.",
       "revId": "3d81ae94be89c923e14de4e60a775b75458d1320",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1f49a54_b90bef66",
+        "filename": "drivers/usb/dwc3/core.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-01-31T16:48:18Z",
+      "side": 1,
+      "message": "alternatively, VDWC3_LLUCTL(n)?",
+      "parentUuid": "30fc6aa4_c8f0e145",
+      "revId": "3d81ae94be89c923e14de4e60a775b75458d1320",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
