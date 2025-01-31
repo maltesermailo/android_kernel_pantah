@@ -141,6 +141,30 @@
       },
       "revId": "3bb32e7b0de2fa28bee351a9783277827557ed20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a497e95d_3976c8e4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-01-31T16:12:04Z",
+      "side": 1,
+      "message": "`That said, what prevents from tracking the host handles in the same as the guests? Does fragmentation get in the way? I\u0027m definitely missing something here.` - we need memory and I don\u0027t know if it\u0027s ok to put an upper bound to the enumber of handles.\n\nworst case:\n- a handle identifies one page \u0026 a handle \u003d\u003d 2 BYTES. To cover 16G of memory we need 4194304 handles which would require 2048 pages.\n\nI don\u0027t know if we can marshall the handle from Trustzone. I am worried that we might break things if drivers refer to a region with the transformed value when talking to Trustzone(by passing the handle through a direct message for example).",
+      "parentUuid": "6d4c65a5_f5e3e111",
+      "range": {
+        "startLine": 717,
+        "startChar": 2,
+        "endLine": 724,
+        "endChar": 3
+      },
+      "revId": "3bb32e7b0de2fa28bee351a9783277827557ed20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
