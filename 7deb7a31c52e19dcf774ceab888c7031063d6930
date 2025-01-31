@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bafd508_56694a13",
+        "filename": "fs/proc/task_mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1674,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-01-31T00:24:31Z",
+      "side": 1,
+      "message": "s/guaranteee/guarantee",
+      "range": {
+        "startLine": 1674,
+        "startChar": 36,
+        "endLine": 1674,
+        "endChar": 46
+      },
+      "revId": "7deb7a31c52e19dcf774ceab888c7031063d6930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cfbc7ec_d6909b0f",
+        "filename": "fs/proc/task_mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1754,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-01-31T00:24:31Z",
+      "side": 1,
+      "message": "I think it might be a good idea to use `kcalloc()` here.",
+      "range": {
+        "startLine": 1754,
+        "startChar": 8,
+        "endLine": 1754,
+        "endChar": 21
+      },
+      "revId": "7deb7a31c52e19dcf774ceab888c7031063d6930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16fd9ac2_1ff273cb",
+        "filename": "fs/proc/task_mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1758,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-01-31T00:24:31Z",
+      "side": 1,
+      "message": "given that `kfree(res \u003d NULL)` is valid, this could be `goto out_free`, but I would also understand if you wanted to avoid that for the sake of clarity",
+      "range": {
+        "startLine": 1757,
+        "startChar": 0,
+        "endLine": 1758,
+        "endChar": 15
+      },
+      "revId": "7deb7a31c52e19dcf774ceab888c7031063d6930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d66187a_0c4b406f",
+        "filename": "fs/proc/task_mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1761,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-01-31T00:24:31Z",
+      "side": 1,
+      "message": "nit: should be `else { ... }`",
+      "range": {
+        "startLine": 1760,
+        "startChar": 3,
+        "endLine": 1761,
+        "endChar": 18
+      },
+      "revId": "7deb7a31c52e19dcf774ceab888c7031063d6930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6597529_10b49881",
+        "filename": "fs/proc/task_mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1824,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-01-31T00:24:31Z",
+      "side": 1,
+      "message": "Is this supposed to be `copied / nr_subpages`?",
+      "range": {
+        "startLine": 1824,
+        "startChar": 0,
+        "endLine": 1824,
+        "endChar": 16
+      },
+      "revId": "7deb7a31c52e19dcf774ceab888c7031063d6930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "138b00dd_4a535a40",
+        "filename": "fs/proc/task_mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1830,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-01-31T00:24:31Z",
+      "side": 1,
+      "message": "`kfree()` can accept NULL, so you don\u0027t necessarily need to put this in an if condition.",
+      "range": {
+        "startLine": 1830,
+        "startChar": 2,
+        "endLine": 1830,
+        "endChar": 13
+      },
+      "revId": "7deb7a31c52e19dcf774ceab888c7031063d6930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
