@@ -189,6 +189,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "317cc8ea_1d8f27d4",
+        "filename": "fs/proc/task_mmu.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1761,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-01-31T17:50:49Z",
+      "side": 1,
+      "message": "I think it\u0027s something that\u0027s commonly overlooked, but according to section 3 of the style guidelines (2nd to last example): https://www.kernel.org/doc/html/latest/process/coding-style.html\n\nCases where you have an if statement where at least one branch requires multiple statements, and therefore braces, means that the rest of the branches get braces",
+      "parentUuid": "88ddb5b0_25d60bcf",
+      "range": {
+        "startLine": 1760,
+        "startChar": 3,
+        "endLine": 1761,
+        "endChar": 18
+      },
+      "revId": "7deb7a31c52e19dcf774ceab888c7031063d6930",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6597529_10b49881",
