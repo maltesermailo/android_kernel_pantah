@@ -117,6 +117,30 @@
       },
       "revId": "3bb32e7b0de2fa28bee351a9783277827557ed20",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d4c65a5_f5e3e111",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-01-31T13:46:47Z",
+      "side": 1,
+      "message": "\u003e Are you thinking of pKVM allocating handles that encode the vm_handle and the actual handle so that we can accelerate the lookup here?\n\nYes something along those lines, and yes that needs to apply to the host handles too.\n\nFor that pKVM needs to be able to convert between a guest/host facing handle (allocated by pKVM, in a way that allows a quick handle-\u003eowner lookup) to the real handle (allocated by Secure). And that means we need a handle allocator per guest, and to store the extra handle somewhere (ffa_mem_tranfer?).\n\nNothing infeasible, but that\u0027s additional complexity, although in practice the number of guests is likely small so perhaps the loop above ain\u0027t that bad ...",
+      "parentUuid": "80f741a4_1aba363e",
+      "range": {
+        "startLine": 717,
+        "startChar": 2,
+        "endLine": 724,
+        "endChar": 3
+      },
+      "revId": "3bb32e7b0de2fa28bee351a9783277827557ed20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
