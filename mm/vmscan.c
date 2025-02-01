@@ -6543,6 +6543,7 @@ unsigned long try_to_free_pages(struct zonelist *zonelist, int order,
 				gfp_t gfp_mask, nodemask_t *nodemask)
 {
 	unsigned long nr_reclaimed;
+	int direct_recl_order;
 	struct scan_control sc = {
 		.nr_to_reclaim = SWAP_CLUSTER_MAX,
 		.gfp_mask = current_gfp_context(gfp_mask),
@@ -6575,6 +6576,10 @@ unsigned long try_to_free_pages(struct zonelist *zonelist, int order,
 	trace_mm_vmscan_direct_reclaim_begin(order, sc.gfp_mask);
 
 	nr_reclaimed = do_try_to_free_pages(zonelist, &sc);
+
+	/* Create direct reclaim order histogram */
+	direct_recl_order = min_t(int, ilog2(nr_reclaimed), 22);
+	count_vm_event(NR_DIRECT_RECLAIM_ORDER_0 + direct_recl_order);
 
 	trace_mm_vmscan_direct_reclaim_end(nr_reclaimed);
 	set_task_reclaim_state(current, NULL);

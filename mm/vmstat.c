@@ -1484,6 +1484,31 @@ const char * const vmstat_text[] = {
 	"nr_kswapd_reclaim_order_20",
 	"nr_kswapd_reclaim_order_21",
 	"nr_kswapd_reclaim_order_22_and_above",
+
+	"nr_direct_reclaim_order_0",
+	"nr_direct_reclaim_order_1",
+	"nr_direct_reclaim_order_2",
+	"nr_direct_reclaim_order_3",
+	"nr_direct_reclaim_order_4",
+	"nr_direct_reclaim_order_5",
+	"nr_direct_reclaim_order_6",
+	"nr_direct_reclaim_order_7",
+	"nr_direct_reclaim_order_8",
+	"nr_direct_reclaim_order_9",
+	"nr_direct_reclaim_order_10",
+	"nr_direct_reclaim_order_11",
+	"nr_direct_reclaim_order_12",
+	"nr_direct_reclaim_order_13",
+	"nr_direct_reclaim_order_14",
+	"nr_direct_reclaim_order_15",
+	"nr_direct_reclaim_order_16",
+	"nr_direct_reclaim_order_17",
+	"nr_direct_reclaim_order_18",
+	"nr_direct_reclaim_order_19",
+	"nr_direct_reclaim_order_20",
+	"nr_direct_reclaim_order_21",
+	"nr_direct_reclaim_order_22_and_above",
+
 #endif /* CONFIG_VM_EVENT_COUNTERS || CONFIG_MEMCG */
 };
 #endif /* CONFIG_PROC_FS || CONFIG_SYSFS || CONFIG_NUMA || CONFIG_MEMCG */
