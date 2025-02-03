@@ -72,6 +72,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "edb1c3f0_7c707a9f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-02-03T10:25:27Z",
+      "side": 1,
+      "message": "Ha you are right I have missed the \"Bug:\" tag.",
+      "parentUuid": "26ac8795_dc39e3c0",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 5
+      },
+      "revId": "1d8bb2b9ae7167064bee08c6385ccf43e1927d34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fb350d61_35d5d251",
@@ -192,6 +216,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ccdb8e54_1a4e75fc",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-02-03T10:25:27Z",
+      "side": 1,
+      "message": "The guest RAM has to be aligned with the guest granule. So the problem with overshooting only applies when the underlying stage-2 granule is bigger than the stage-1.",
+      "parentUuid": "666e7410_ebe3f1d9",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 23
+      },
+      "revId": "1d8bb2b9ae7167064bee08c6385ccf43e1927d34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a9c4ffbf_9d134366",
         "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
         "patchSetId": 4
@@ -251,6 +299,30 @@
       "side": 1,
       "message": "`that the host \"lied\" to pvmfw` - which implies that pvmfw is unable to protect which in turn it means that it is compromised.\n\n`this make it compatible with something else than pvmfw.` I really don\u0027t see how this affects compatibility.",
       "parentUuid": "c8cfd58d_472a072a",
+      "range": {
+        "startLine": 208,
+        "startChar": 5,
+        "endLine": 208,
+        "endChar": 22
+      },
+      "revId": "1d8bb2b9ae7167064bee08c6385ccf43e1927d34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "662e8bcf_2ef16451",
+        "filename": "drivers/virt/coco/pkvm-guest/arm-pkvm-guest.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-02-03T10:25:27Z",
+      "side": 1,
+      "message": "As discussed offline. Pvmfw will be fixed. But now belt and braces, let\u0027s ensure the alignment is correct in the guest as well.",
+      "parentUuid": "068ff6dd_be718019",
       "range": {
         "startLine": 208,
         "startChar": 5,
