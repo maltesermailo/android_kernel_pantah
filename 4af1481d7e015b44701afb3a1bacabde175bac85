@@ -16,6 +16,24 @@
       "message": "If the purpose of the C version of this layer is so that we can backport to older kernels and get a larger dogfooding pool, then we should probably make sure to match the sysfs API. Otherwise userspace will need different logic for enabling dogfood features depending on the kernel version.",
       "revId": "4af1481d7e015b44701afb3a1bacabde175bac85",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11cacaf0_e05e8862",
+        "filename": "drivers/staging/android/ashmem.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-02-05T17:52:44Z",
+      "side": 1,
+      "message": "Do you mean that I should change the C version\u0027s sysfs API should match the Rust version that you implemented in aosp/3342376? If not, could you please clarify?",
+      "parentUuid": "46be1cee_6b9a1e3f",
+      "revId": "4af1481d7e015b44701afb3a1bacabde175bac85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
