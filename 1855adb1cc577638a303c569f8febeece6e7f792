@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57eace71_148a8697",
+        "filename": "include/trace/hooks/android_vendor_lmk.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-02-05T15:42:50Z",
+      "side": 1,
+      "message": "Trace events should be declared in header files under include/trace/events. This directory is for vendor hooks (eg `DECLARE_HOOK()`)",
+      "fixSuggestions": [
+        {
+          "fixId": "68c1431b_ed320ae2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/trace/hooks/android_vendor_lmk.h",
+              "range": {
+                "startLine": 13,
+                "startChar": 0,
+                "endLine": 29,
+                "endChar": 0
+              },
+              "replacement": "#include \u003ctrace/events/android_vendor_lmk.h\u003e\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1855adb1cc577638a303c569f8febeece6e7f792",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
