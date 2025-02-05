@@ -212,6 +212,30 @@
       },
       "revId": "69cf20345d46a9f377b1bc8743add030c93a98d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70236569_9bde68e1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1404,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-02-05T14:41:57Z",
+      "side": 1,
+      "message": "That make sense, but I don\u0027t see a way to use `MT_S2_FWB_NORMAL_NC` at the moment, as `KVM_PGTABLE_PROT_DEVICE` ends up as `MT_DEVICE_nGnRE`, I can add a new patch for that.\n\n\u003e Also, if we\u0027re going to assign devices to a guest usiong FWB, doesn\u0027t that mean we require the device to be DMA-coherent? Is that enforced anywhere?\n\nVFIO does that, however, I was thinking to disable FWB for all guests with devices, but not sure if that\u0027s too paraniod.",
+      "parentUuid": "b8d5d722_d38110da",
+      "range": {
+        "startLine": 1404,
+        "startChar": 21,
+        "endLine": 1404,
+        "endChar": 66
+      },
+      "revId": "69cf20345d46a9f377b1bc8743add030c93a98d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
