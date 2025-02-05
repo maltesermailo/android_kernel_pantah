@@ -188,6 +188,30 @@
       },
       "revId": "69cf20345d46a9f377b1bc8743add030c93a98d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8d5d722_d38110da",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1404,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-05T13:43:39Z",
+      "side": 1,
+      "message": "\u003e Because of FWB\n\nIn which case, wouldn\u0027t MT_S2_FWB_NORMAL_NC be better so that we force device/nc, but the guest has control over things like the device attributes?\n\nAlso, if we\u0027re going to assign devices to a guest usiong FWB, doesn\u0027t that mean we require the device to be DMA-coherent? Is that enforced anywhere? We should probably check that when enumerating the assignable devices during boot.",
+      "parentUuid": "719e7026_2c97c470",
+      "range": {
+        "startLine": 1404,
+        "startChar": 21,
+        "endLine": 1404,
+        "endChar": 66
+      },
+      "revId": "69cf20345d46a9f377b1bc8743add030c93a98d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
