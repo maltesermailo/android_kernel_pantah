@@ -104,6 +104,8 @@ static struct kmem_cache *ashmem_range_cachep __read_mostly;
  */
 static struct lock_class_key backing_shmem_inode_class;
 
+static bool unpinning_enabled = true;
+
 static inline unsigned long range_size(struct ashmem_range *range)
 {
 	return range->pgend - range->pgstart + 1;
@@ -486,6 +488,9 @@ ashmem_shrink_scan(struct shrinker *shrink, struct shrink_control *sc)
 	if (!mutex_trylock(&ashmem_mutex))
 		return -1;
 
+	if (!unpinning_enabled)
+		goto out_unlock;
+
 	while (!list_empty(&ashmem_lru_list)) {
 		struct ashmem_range *range =
 			list_first_entry(&ashmem_lru_list, typeof(*range), lru);
@@ -511,6 +516,7 @@ ashmem_shrink_scan(struct shrinker *shrink, struct shrink_control *sc)
 		if (--sc->nr_to_scan <= 0)
 			break;
 	}
+out_unlock:
 	mutex_unlock(&ashmem_mutex);
 out:
 	return freed;
@@ -524,7 +530,7 @@ ashmem_shrink_count(struct shrinker *shrink, struct shrink_control *sc)
 	 * objects on the list. This means the scan function needs to return the
 	 * number of pages freed, not the number of objects scanned.
 	 */
-	return lru_count;
+	return unpinning_enabled ? lru_count : 0;
 }
 
 static struct shrinker *ashmem_shrinker;
@@ -813,7 +819,7 @@ static int ashmem_pin_unpin(struct ashmem_area *asma, unsigned long cmd,
 		ret = ashmem_pin(asma, pgstart, pgend, &range);
 		break;
 	case ASHMEM_UNPIN:
-		ret = ashmem_unpin(asma, pgstart, pgend, &range);
+		ret = unpinning_enabled ? ashmem_unpin(asma, pgstart, pgend, &range) : 0;
 		break;
 	case ASHMEM_GET_PIN_STATUS:
 		ret = ashmem_get_pin_status(asma, pgstart, pgend);
@@ -954,6 +960,45 @@ static struct miscdevice ashmem_misc = {
 	.fops = &ashmem_fops,
 };
 
+static ssize_t unpinning_enable_show(struct kobject *kobj, struct kobj_attribute *attr, char *buf)
+{
+	return sysfs_emit(buf, "%d\n", unpinning_enabled ? 1 : 0);
+}
+
+static ssize_t unpinning_enable_store(struct kobject *kobj, struct kobj_attribute *attr,
+				      const char *buf, size_t count)
+{
+	ssize_t ret = count;
+	bool enable;
+
+	if (kstrtobool(buf, &enable))
+	    return -EINVAL;
+
+	mutex_lock(&ashmem_mutex);
+	unpinning_enabled = enable;
+	mutex_unlock(&ashmem_mutex);
+
+	return ret;
+}
+
+static struct kobj_attribute unpinning_enable_attr = __ATTR_RW(unpinning_enable);
+static struct kobject *kobj_root;
+
+static int sysfs_create(void)
+{
+	int ret;
+
+	kobj_root = kobject_create_and_add("ashmem", mm_kobj);
+	if (!kobj_root)
+		return -ENOMEM;
+
+	ret = sysfs_create_file(kobj_root, &unpinning_enable_attr.attr);
+	if (ret)
+		kobject_put(kobj_root);
+
+	return ret;
+}
+
 static int __init ashmem_init(void)
 {
 	int ret = -ENOMEM;
@@ -986,10 +1031,18 @@ static int __init ashmem_init(void)
 		goto out_demisc;
 	}
 
+	ret = sysfs_create();
+	if (ret) {
+		pr_err("failed to create sysfs files\n");
+		goto out_shrinker_free;
+	}
+
 	pr_info("initialized\n");
 
 	return 0;
 
+out_shrinker_free:
+	shrinker_free(ashmem_shrinker);
 out_demisc:
 	misc_deregister(&ashmem_misc);
 out_free2:
