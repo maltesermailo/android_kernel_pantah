@@ -34,6 +34,24 @@
       "parentUuid": "f6f9fe08_15a299bb",
       "revId": "4c3ebb0fa9f23c71ad389fa8de2a06b8d34b8bbb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d890693_14ffef29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-02-05T15:35:16Z",
+      "side": 1,
+      "message": "This series in and of itself doesn\u0027t affect the ABI as extracted by STG.\n\nHowever, to test properly:\n\n1. LLVM prebuilts need to include the necessary profile generation tools.\n2. The option needs to be turned on in `defconfig`.\n3. Kleaf needs to know about the profile input (so it knows there is a build dependency) and it needs to pass it as `CLANG_AUTOFDO_PROFILE` to Kbuild.\n4. We need an ARM64 device that runs `android15-6.6` and a suitable load test\n5. We need profile gathering instructions for ARM64.\n6. We need to conduct multiple builds using the same profile (but with different build host / path).\n7. We need to compare build artefacts.\n8. We need to check that building GKI with this / vendor modules without this and vice versa results in viable mixed builds.\n\nIs really a good idea to target `android15-6.6` at this point?",
+      "parentUuid": "6cfbd68f_57d881f3",
+      "revId": "4c3ebb0fa9f23c71ad389fa8de2a06b8d34b8bbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
