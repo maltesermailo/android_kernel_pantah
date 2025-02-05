@@ -1109,6 +1109,17 @@ static int __host_set_page_state_range(u64 addr, u64 size,
 	return 0;
 }
 
+static int __host_request_owned_transition(u64 *completer_addr,
+					   const struct pkvm_mem_transition *tx)
+{
+	u64 size = tx->nr_pages * PAGE_SIZE;
+	u64 addr = tx->initiator.addr;
+
+	*completer_addr = tx->initiator.host.completer_addr;
+	return __host_check_page_state_range(addr, size, PKVM_PAGE_OWNED);
+}
+
+
 static int host_request_owned_transition(u64 *completer_addr,
 					 const struct pkvm_mem_transition *tx)
 {
@@ -1118,24 +1129,30 @@ static int host_request_owned_transition(u64 *completer_addr,
 	if (range_is_memory(addr, addr + size) && is_range_refcounted(addr, tx->nr_pages))
 		return -EINVAL;
 
-	*completer_addr = tx->initiator.host.completer_addr;
-	return __host_check_page_state_range(addr, size, PKVM_PAGE_OWNED);
+	return __host_request_owned_transition(completer_addr, tx);
 }
 
-static int host_request_unshare(struct pkvm_checked_mem_transition *checked_tx)
+static int __host_request_unshare(struct pkvm_checked_mem_transition *checked_tx)
 {
 	const struct pkvm_mem_transition *tx = checked_tx->tx;
 	u64 size = tx->nr_pages * PAGE_SIZE;
 	u64 addr = tx->initiator.addr;
 
-
-	if (is_range_refcounted(addr, tx->nr_pages))
-		return -EINVAL;
-
 	checked_tx->completer_addr = tx->initiator.host.completer_addr;
 	checked_tx->nr_pages = tx->nr_pages;
 
 	return __host_check_page_state_range(addr, size, PKVM_PAGE_SHARED_OWNED);
+}
+
+static int host_request_unshare(struct pkvm_checked_mem_transition *checked_tx)
+{
+	const struct pkvm_mem_transition *tx = checked_tx->tx;
+	u64 addr = tx->initiator.addr;
+
+	if (is_range_refcounted(addr, tx->nr_pages))
+		return -EINVAL;
+
+	return __host_request_unshare(checked_tx);
 }
 
 static int host_initiate_share(const struct pkvm_checked_mem_transition *checked_tx)
@@ -1681,7 +1698,18 @@ static int check_share(struct pkvm_checked_mem_transition *checked_tx)
 
 	switch (tx->initiator.id) {
 	case PKVM_ID_HOST:
-		ret = host_request_owned_transition(&checked_tx->completer_addr, tx);
+		/*
+		 * Allow sharing of refcounted pages to any entity besides the hypervisor,
+		 * as long as they are OWNED by the host.
+		 * The problem with allowing this for the hypervisor, is that when the
+		 * host calls the unshare hypercall, and the refcount is elevated we can't
+		 * know if it is because of DMA or hyp_pin_shared_mem() which would make
+		 * unshare fails, even share was allowed.
+		 */
+		if (tx->completer.id == PKVM_ID_HYP)
+			ret = host_request_owned_transition(&checked_tx->completer_addr, tx);
+		else
+			ret = __host_request_owned_transition(&checked_tx->completer_addr, tx);
 		checked_tx->nr_pages = tx->nr_pages;
 		break;
 	case PKVM_ID_GUEST:
@@ -1802,7 +1830,11 @@ static int check_unshare(struct pkvm_checked_mem_transition *checked_tx)
 
 	switch (tx->initiator.id) {
 	case PKVM_ID_HOST:
-		ret = host_request_unshare(checked_tx);
+		/* See check_share() */
+		if (tx->completer.id == PKVM_ID_HYP)
+			ret = host_request_unshare(checked_tx);
+		else
+			ret = __host_request_unshare(checked_tx);
 		break;
 	case PKVM_ID_GUEST:
 		ret = guest_request_unshare(checked_tx);
