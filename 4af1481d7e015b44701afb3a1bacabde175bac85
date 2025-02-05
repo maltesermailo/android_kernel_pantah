@@ -52,6 +52,24 @@
       "parentUuid": "11cacaf0_e05e8862",
       "revId": "4af1481d7e015b44701afb3a1bacabde175bac85",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dec12a50_f19e43d1",
+        "filename": "drivers/staging/android/ashmem.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-02-05T22:51:48Z",
+      "side": 1,
+      "message": "I would prefer to use the API I implemented since this should be under `/sys/kernel/mm`, and I find it to be clearer to use `unpin_enable` for the sysfs node. I also think using 1 or 0 makes more sense since the state is binary.",
+      "parentUuid": "2f7bffef_cb351ce8",
+      "revId": "4af1481d7e015b44701afb3a1bacabde175bac85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
