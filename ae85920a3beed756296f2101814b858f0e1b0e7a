@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "75c951ec_a233ab62",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-06T14:24:20Z",
+      "side": 1,
+      "message": "We can also return false (force return to the Host) when `ret \u003c 0` line 986, (eg. when the page is not faulted in the guest but we try to issue FF-A map on it.)",
+      "parentUuid": "9e0bf7f4_4da77834",
+      "revId": "ae85920a3beed756296f2101814b858f0e1b0e7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9df69842_55c562af",
         "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
         "patchSetId": 6
