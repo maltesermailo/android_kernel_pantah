@@ -357,6 +357,7 @@ static const struct v4l2_ctrl_config vivid_ctrl_ro_int32 = {
 	.step = 1,
 };
 
+#if IS_ENABLED(CONFIG_VIDEO_VIVID_FB)
 /* Framebuffer Controls */
 
 static int vivid_fb_s_ctrl(struct v4l2_ctrl *ctrl)
@@ -382,6 +383,7 @@ static const struct v4l2_ctrl_config vivid_ctrl_clear_fb = {
 	.name = "Clear Framebuffer",
 	.type = V4L2_CTRL_TYPE_BUTTON,
 };
+#endif
 
 
 /* Video User Controls */
@@ -1828,8 +1830,10 @@ int vivid_create_controls(struct vivid_dev *dev, bool show_ccs_cap,
 	    (dev->has_vbi_cap && dev->has_vbi_out))
 		v4l2_ctrl_new_custom(hdl_loop_cap, &vivid_ctrl_loop_video, NULL);
 
+#if IS_ENABLED(CONFIG_VIDEO_VIVID_FB)
 	if (dev->has_fb)
 		v4l2_ctrl_new_custom(hdl_fb, &vivid_ctrl_clear_fb, NULL);
+#endif
 
 	if (dev->has_radio_rx) {
 		v4l2_ctrl_new_custom(hdl_radio_rx, &vivid_ctrl_radio_hw_seek_mode, NULL);

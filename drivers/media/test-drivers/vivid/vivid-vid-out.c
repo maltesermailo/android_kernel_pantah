@@ -914,10 +914,14 @@ int vivid_vid_out_g_fbuf(struct file *file, void *fh,
 	a->base = (void *)dev->video_pbase;
 	a->fmt.width = dev->display_width;
 	a->fmt.height = dev->display_height;
+#if IS_ENABLED(CONFIG_VIDEO_VIVID_FB)
 	if (dev->fb_defined.green.length == 5)
 		a->fmt.pixelformat = V4L2_PIX_FMT_ARGB555;
 	else
 		a->fmt.pixelformat = V4L2_PIX_FMT_RGB565;
+#else
+	a->fmt.pixelformat = V4L2_PIX_FMT_RGB565;
+#endif
 	a->fmt.bytesperline = dev->display_byte_stride;
 	a->fmt.sizeimage = a->fmt.height * a->fmt.bytesperline;
 	a->fmt.field = V4L2_FIELD_NONE;
