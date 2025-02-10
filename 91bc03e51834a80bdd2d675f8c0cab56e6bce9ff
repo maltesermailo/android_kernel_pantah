@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a793249_e26d7faa",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-02-10T18:57:12Z",
+      "side": 1,
+      "message": "So, `prot_read\u003d\u003dashmem` meanse we do not block unsetting PROT_READ and `prot_read\u003d\u003dmemfd` means we block such requests? This wither has to be documented or a better naming should be used. Maybe just have something like `can_reset_prot_read` as bool?",
+      "range": {
+        "startLine": 116,
+        "startChar": 10,
+        "endLine": 116,
+        "endChar": 16
+      },
+      "revId": "91bc03e51834a80bdd2d675f8c0cab56e6bce9ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a91f617e_b6659fe8",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 16
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-02-10T18:57:12Z",
+      "side": 1,
+      "message": "Can we do the value parsing/generation inside prot_read_store()/prot_read_get()? These strings are specific to the toggle. Here I would have only setter/getter for BLOCK_UNSET_PROT_READ which can be called from prot_read_store()/prot_read_get().",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 0
+      },
+      "revId": "91bc03e51834a80bdd2d675f8c0cab56e6bce9ff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
