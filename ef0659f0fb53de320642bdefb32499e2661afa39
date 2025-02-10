@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "256b0911_a88e9bb9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3821538
+      },
+      "writtenOn": "2025-02-10T03:49:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b93ea80a_5ef34bf5",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 62
+      },
+      "revId": "ef0659f0fb53de320642bdefb32499e2661afa39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de9649b5_abb3101f",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-02-06T09:41:10Z",
       "side": 1,
       "message": "properly wrap this.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 128
+      },
+      "revId": "ef0659f0fb53de320642bdefb32499e2661afa39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22c0798b_91e82df3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 3821538
+      },
+      "writtenOn": "2025-02-10T03:49:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de9649b5_abb3101f",
       "range": {
         "startLine": 9,
         "startChar": 0,
@@ -77,6 +125,24 @@
       "writtenOn": "2025-02-06T09:41:10Z",
       "side": 1,
       "message": "Why isn\u0027t the needed functionaity for this upstream already?  file names should NOT be referred to, they are racy and will not work properly.\n\nAnd why isn\u0027t the existing hooks suffient for this?",
+      "revId": "ef0659f0fb53de320642bdefb32499e2661afa39",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea687876_09d52a8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3821538
+      },
+      "writtenOn": "2025-02-10T03:49:46Z",
+      "side": 1,
+      "message": "This functionality is specifically required by optimization of android performance. File names are racy when being acquired concurrently with rename, unlink and etc, thus will not work properly in these corner cases. However this works in most occasions according to our experience in analysis of android performance issue. Existing hooks are either inefficient or imprecise for not inserted at exact position where missed page cache detected.",
+      "parentUuid": "c1e64d1e_374159d0",
       "revId": "ef0659f0fb53de320642bdefb32499e2661afa39",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
