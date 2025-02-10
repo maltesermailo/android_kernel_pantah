@@ -22,6 +22,30 @@
       },
       "revId": "fc99bcd94b4d2b414a05926a8f1c3536cd0516bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4486cd9_c23315ad",
+        "filename": "include/kvm/iommu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1956160
+      },
+      "writtenOn": "2025-02-10T15:22:14Z",
+      "side": 0,
+      "message": "The problem is that nvhe/* headers are not available for the whole kernel, only in EL2 binaries. ABI tools will see this structure exactly as various object files in the kernel, which results in two conflicting definitions. You have to expose only one definition to the whole kernel for ABI tools to work correctly and `u32` is the only time available everywhere.",
+      "parentUuid": "ec03d8ce_ff67e62a",
+      "range": {
+        "startLine": 62,
+        "startChar": 1,
+        "endLine": 62,
+        "endChar": 23
+      },
+      "revId": "fc99bcd94b4d2b414a05926a8f1c3536cd0516bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
