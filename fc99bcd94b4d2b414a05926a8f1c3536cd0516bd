@@ -46,6 +46,30 @@
       },
       "revId": "fc99bcd94b4d2b414a05926a8f1c3536cd0516bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c4e48a1_aa64ed02",
+        "filename": "include/kvm/iommu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-02-10T17:49:07Z",
+      "side": 0,
+      "message": "Yep, I\u0027m suggesting to move the whole \u003cnvhe/spinlock.h\u003e file into a kernel-visible location (\u003casm/hyp_spinlock.h\u003e or something). hyp_spinlock_t _is_ part of the KMI, it\u0027s used by the kernel and modules, etc, so it\u0027d be a shame if the ABI tooling lost visibility into it.",
+      "parentUuid": "f4486cd9_c23315ad",
+      "range": {
+        "startLine": 62,
+        "startChar": 1,
+        "endLine": 62,
+        "endChar": 23
+      },
+      "revId": "fc99bcd94b4d2b414a05926a8f1c3536cd0516bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
