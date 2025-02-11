@@ -2242,6 +2242,15 @@ static void fuse_fs_cleanup(void)
 
 static struct kobject *fuse_kobj;
 
+static ssize_t fuse_passthrough_show(struct kobject *kobj,
+				       struct kobj_attribute *attr, char *buff)
+{
+	return sysfs_emit(buff, "supported\n");
+}
+
+static struct kobj_attribute fuse_passthrough_attr =
+		__ATTR_RO(fuse_passthrough);
+
 static ssize_t fuse_bpf_show(struct kobject *kobj,
 				       struct kobj_attribute *attr, char *buff)
 {
@@ -2251,14 +2260,15 @@ static ssize_t fuse_bpf_show(struct kobject *kobj,
 static struct kobj_attribute fuse_bpf_attr =
 		__ATTR_RO(fuse_bpf);
 
-static struct attribute *bpf_features[] = {
+static struct attribute *fuse_features[] = {
 	&fuse_bpf_attr.attr,
+	&fuse_passthrough_attr.attr,
 	NULL,
 };
 
 static const struct attribute_group bpf_features_group = {
 	.name = "features",
-	.attrs = bpf_features,
+	.attrs = fuse_features,
 };
 
 /*
