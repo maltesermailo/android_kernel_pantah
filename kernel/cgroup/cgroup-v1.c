@@ -531,6 +531,12 @@ static ssize_t __cgroup1_procs_write(struct kernfs_open_file *of,
 		goto out_finish;
 
 	ret = cgroup_attach_task(cgrp, task, threadgroup);
+<<<<<<< HEAD   (92006aa7394b93146726ae6bdcfd782233f202dc ANDROID: GKI: Update qcom symbol list for SDEI)
+||||||| BASE   (3b58573735e1d2f2c3eff856ed4c596f4d52a61d ANDROID: mm: create vendor hooks for page alloc)
+	trace_android_vh_cgroup_set_task(ret, task);
+=======
+	trace_android_vh_cgroup_set_task(ret, cgrp, task, threadgroup);
+>>>>>>> CHANGE (578bcc20c07e88c093e63192c838b7245b3bfc01 ANDROID: cgroup: Add trace_android_vh_cgroup_set_task parame)
 
 out_finish:
 	cgroup_procs_write_finish(task, lock_mode);
