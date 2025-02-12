@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "84d4e52f_385e8770",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-12T16:55:20Z",
+      "side": 1,
+      "message": "This allocation might come from trapping a guest ff-a call. If we have a different error code than `-ENOMEM` then I am not how this would map to an ff-a error code returned to the guest and how recovarable this is. By looking at the source code of the hyp allocator we can return -EINVAL or -E2BIG when things go wrong.",
+      "parentUuid": "c80b48ca_5f8ecbda",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 236,
+        "endChar": 39
+      },
+      "revId": "d8c42c61eff09d6b202d3a29dd83c3dccbaa7a16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd627cb4_cbd7ee87",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 5
@@ -37,6 +61,30 @@
       "writtenOn": "2025-01-29T16:27:02Z",
       "side": 1,
       "message": "Hmm. In this case, won\u0027t we end up going back to the host? What is the exit_code in that case and what is the host expected to do?",
+      "range": {
+        "startLine": 239,
+        "startChar": 19,
+        "endLine": 239,
+        "endChar": 25
+      },
+      "revId": "d8c42c61eff09d6b202d3a29dd83c3dccbaa7a16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b613c8ff_984b5426",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-12T16:55:20Z",
+      "side": 1,
+      "message": "Yes we will go back to the host and the caller takes care of that. The host is expected to topup pages to the allocator and then we replay the last guest instruction",
+      "parentUuid": "cd627cb4_cbd7ee87",
       "range": {
         "startLine": 239,
         "startChar": 19,
@@ -70,6 +118,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e180f6a3_1330d75b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-12T16:55:20Z",
+      "side": 1,
+      "message": "I don\u0027t understand your point. As of the latest changes we are only supporting the hvc conduit.",
+      "parentUuid": "50ca028d_93359e8e",
+      "range": {
+        "startLine": 244,
+        "startChar": 0,
+        "endLine": 244,
+        "endChar": 58
+      },
+      "revId": "d8c42c61eff09d6b202d3a29dd83c3dccbaa7a16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13c4f589_e6df6628",
@@ -83,6 +155,30 @@
       "writtenOn": "2025-01-29T16:27:02Z",
       "side": 1,
       "message": "This looks wrong to me, as it will propagate to `ffa_to_smccc_res()`, which expects an FFA return code _not_ a Linux errno.",
+      "range": {
+        "startLine": 582,
+        "startChar": 9,
+        "endLine": 582,
+        "endChar": 16
+      },
+      "revId": "d8c42c61eff09d6b202d3a29dd83c3dccbaa7a16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e234d8eb_d43e04b9",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-12T16:55:20Z",
+      "side": 1,
+      "message": "It shouldn\u0027t be a problem because we won\u0027t return this as an ff-a error. The caller will see that is a negative error code and it will return to the host.",
+      "parentUuid": "13c4f589_e6df6628",
       "range": {
         "startLine": 582,
         "startChar": 9,
