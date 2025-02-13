@@ -124,6 +124,24 @@
       "parentUuid": "052351ad_194e5088",
       "revId": "4af1481d7e015b44701afb3a1bacabde175bac85",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "767e7058_b83db16e",
+        "filename": "drivers/staging/android/ashmem.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-02-13T21:16:17Z",
+      "side": 1,
+      "message": "The rationale for using `module_param` makes sense, and I\u0027ve moved to using that.\n\nThanks for pointing out the `immediately` option. What is the rationale for adding this? We\u0027re trying to deprecate ashmem\u0027s unpinning feature since it hasn\u0027t proven to be beneficial, so I do not think we should extend it via this new behavior.",
+      "parentUuid": "243f2afa_6612abf0",
+      "revId": "4af1481d7e015b44701afb3a1bacabde175bac85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
