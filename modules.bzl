@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: GPL-2.0
 # Copyright (C) 2022 The Android Open Source Project
 
+
 """
 This module contains a full list of kernel modules
  compiled by GKI.
