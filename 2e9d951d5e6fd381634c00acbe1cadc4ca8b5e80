@@ -39,6 +39,53 @@
       },
       "revId": "2e9d951d5e6fd381634c00acbe1cadc4ca8b5e80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39e4e0fe_e34fdbb3",
+        "filename": "drivers/staging/android/ashmem.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-02-14T19:25:23Z",
+      "side": 1,
+      "message": "I think this should actually be combined with the if condition above, so that the shrinker is skipped over for the current reclaim context. What do you think?",
+      "parentUuid": "0a9c9115_de7f3f34",
+      "range": {
+        "startLine": 491,
+        "startChar": 0,
+        "endLine": 492,
+        "endChar": 11
+      },
+      "revId": "2e9d951d5e6fd381634c00acbe1cadc4ca8b5e80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d8c43ab_003e00dc",
+        "filename": "drivers/staging/android/ashmem.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-02-14T19:25:23Z",
+      "side": 1,
+      "message": "@kaleshsingh@google.com and this should probably be `SHRINK_EMPTY`",
+      "range": {
+        "startLine": 535,
+        "startChar": 40,
+        "endLine": 535,
+        "endChar": 42
+      },
+      "revId": "2e9d951d5e6fd381634c00acbe1cadc4ca8b5e80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

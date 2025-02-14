@@ -160,6 +160,24 @@
       "parentUuid": "767e7058_b83db16e",
       "revId": "4af1481d7e015b44701afb3a1bacabde175bac85",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a86e763d_041b15b7",
+        "filename": "drivers/staging/android/ashmem.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-02-14T19:25:23Z",
+      "side": 1,
+      "message": "I think the point of module parameters being discouraged upstream is reason enough to not use it and use sysfs. @surenb@google.com what do you think?\n\nI don\u0027t anticipate that disabling unpinning will have an adverse effect, so I think we should drop the `immediately` option.",
+      "parentUuid": "35bb66db_edcc0d72",
+      "revId": "4af1481d7e015b44701afb3a1bacabde175bac85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
