@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8d9ada95_d3b9f4de",
+        "filename": "drivers/staging/android/ashmem.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-02-14T21:28:24Z",
+      "side": 1,
+      "message": "Yeah good catch, it helps to break out of the scan loop early. Though I\u0027m not sure how not updating the shrinker nr_deferred affects overall reclaim behavior",
+      "parentUuid": "39e4e0fe_e34fdbb3",
+      "range": {
+        "startLine": 491,
+        "startChar": 0,
+        "endLine": 492,
+        "endChar": 11
+      },
+      "revId": "2e9d951d5e6fd381634c00acbe1cadc4ca8b5e80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5d8c43ab_003e00dc",
         "filename": "drivers/staging/android/ashmem.c",
         "patchSetId": 3
@@ -83,6 +107,53 @@
         "startChar": 40,
         "endLine": 535,
         "endChar": 42
+      },
+      "revId": "2e9d951d5e6fd381634c00acbe1cadc4ca8b5e80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6f922fe_f2d1d6a4",
+        "filename": "drivers/staging/android/ashmem.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-02-14T21:28:24Z",
+      "side": 1,
+      "message": "I think that\u0027s a bit better, so we break out of the shrinker_list loop in shink_slab() early.",
+      "parentUuid": "5d8c43ab_003e00dc",
+      "range": {
+        "startLine": 535,
+        "startChar": 40,
+        "endLine": 535,
+        "endChar": 42
+      },
+      "revId": "2e9d951d5e6fd381634c00acbe1cadc4ca8b5e80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9732aa95_0d0b72df",
+        "filename": "drivers/staging/android/ashmem.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-02-14T21:28:24Z",
+      "side": 1,
+      "message": "Could we disable the shrinker from here? I\u0027m not sure if that works with module params. Maybe early kernel command line param?\n\n```\nstatic int __init ashmem_init_shrinker(void) {\n    if (!unpinning_enabled) return 0;\n    \n    ...\n}\n```",
+      "range": {
+        "startLine": 540,
+        "startChar": 18,
+        "endLine": 540,
+        "endChar": 38
       },
       "revId": "2e9d951d5e6fd381634c00acbe1cadc4ca8b5e80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
