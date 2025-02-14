@@ -178,6 +178,24 @@
       "parentUuid": "35bb66db_edcc0d72",
       "revId": "4af1481d7e015b44701afb3a1bacabde175bac85",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8eae63a9_0e5de4f0",
+        "filename": "drivers/staging/android/ashmem.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-02-14T21:53:11Z",
+      "side": 1,
+      "message": "When we get to upstreaming the Rust driver, will these toggles be part of that patchset or by then we will know if we can deprecate PIN/UNPIN and others?\nIf latter, then I think we can implement the toggles any way is convenient for us. \n\nI just thought upstreaming an ashmem control into `/sys/kernel/mm` would get more resistance vs having a local control.",
+      "parentUuid": "a86e763d_041b15b7",
+      "revId": "4af1481d7e015b44701afb3a1bacabde175bac85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
