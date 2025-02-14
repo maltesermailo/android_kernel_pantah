@@ -612,11 +612,48 @@ static void lru_deactivate(struct lruvec *lruvec, struct folio *folio)
 
 static void lru_lazyfree(struct lruvec *lruvec, struct folio *folio)
 {
+<<<<<<< HEAD   (891189 ANDROID: mm: create vendor hooks for mm  proactive compact)
 	long nr_pages = folio_nr_pages(folio);
+||||||| BASE
+	if (folio_test_anon(folio) && folio_test_swapbacked(folio) &&
+	    !folio_test_swapcache(folio) && !folio_test_unevictable(folio)) {
+		long nr_pages = folio_nr_pages(folio);
+=======
+	if (folio_test_anon(folio) && folio_test_swapbacked(folio) &&
+	    !folio_test_swapcache(folio) && !folio_test_unevictable(folio)) {
+		long nr_pages = folio_nr_pages(folio);
+		bool bypass = false;
+>>>>>>> CHANGE (7a184f ANDROID: mm: create vendor hooks for mm lru_lazyfree)
 
+<<<<<<< HEAD   (891189 ANDROID: mm: create vendor hooks for mm  proactive compact)
 	if (!folio_test_anon(folio) || !folio_test_swapbacked(folio) ||
 	    folio_test_swapcache(folio) || folio_test_unevictable(folio))
 		return;
+||||||| BASE
+		lruvec_del_folio(lruvec, folio);
+		folio_clear_active(folio);
+		folio_clear_referenced(folio);
+		/*
+		 * Lazyfree folios are clean anonymous folios.  They have
+		 * the swapbacked flag cleared, to distinguish them from normal
+		 * anonymous folios
+		 */
+		folio_clear_swapbacked(folio);
+		lruvec_add_folio(lruvec, folio);
+=======
+		lruvec_del_folio(lruvec, folio);
+		folio_clear_active(folio);
+		folio_clear_referenced(folio);
+		/*
+		 * Lazyfree folios are clean anonymous folios.  They have
+		 * the swapbacked flag cleared, to distinguish them from normal
+		 * anonymous folios
+		 */
+		folio_clear_swapbacked(folio);
+		trace_android_vh_add_lazyfree_bypass(lruvec, folio, &bypass);
+		if (!bypass)
+			lruvec_add_folio(lruvec, folio);
+>>>>>>> CHANGE (7a184f ANDROID: mm: create vendor hooks for mm lru_lazyfree)
 
 	lruvec_del_folio(lruvec, folio);
 	folio_clear_active(folio);
