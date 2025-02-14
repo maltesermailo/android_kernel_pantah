@@ -142,6 +142,24 @@
       "parentUuid": "243f2afa_6612abf0",
       "revId": "4af1481d7e015b44701afb3a1bacabde175bac85",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35bb66db_edcc0d72",
+        "filename": "drivers/staging/android/ashmem.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-02-14T08:54:32Z",
+      "side": 1,
+      "message": "I\u0027d prefer to avoid module_param for several reasons:\n\n* The Rust driver unregisters the shrinker when the option is changed, so a simple boolean option isn\u0027t enough on the Rust side. We need to trigger an actual callback when it\u0027s changed.\n* Doing that from a module parameter is more tricky because module parameters can be set before the module is initialized, so I need special logic to not touch the shrinker if the option is changed before the module is initialized.\n* I\u0027ve been told by many people [including Greg](https://lore.kernel.org/all/2024121309-lethargic-ended-5f99@gregkh/) that module parameters are discouraged and should be avoided in favor of sysfs.\n\nAs for the `immediately` option, I added it as an alternative option we could try if removing unpinning turned out to not be a good option on dogfood. The idea is to translate the `UNPIN` ioctl to `fallocate(FALLOC_FL_PUNCH_HOLE | FALLOC_FL_KEEP_SIZE)` instead of a no-op. But I\u0027m happy to drop it if we don\u0027t think we will need it.",
+      "parentUuid": "767e7058_b83db16e",
+      "revId": "4af1481d7e015b44701afb3a1bacabde175bac85",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
