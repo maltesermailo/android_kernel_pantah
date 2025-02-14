@@ -159,6 +159,7 @@ DECLARE_HOOK(android_vh_alloc_pages_entry,
 		nodemask_t *nodemask),
 	TP_ARGS(gfp, order, preferred_nid, nodemask));
 
+<<<<<<< HEAD   (891189 ANDROID: mm: create vendor hooks for mm  proactive compact)
 DECLARE_HOOK(android_vh_watermark_fast_ok,
 	TP_PROTO(unsigned int order, gfp_t gfp_mask, bool *is_watermark_ok),
 	TP_ARGS(order, gfp_mask, is_watermark_ok));
@@ -197,6 +198,9 @@ DECLARE_HOOK(android_vh_alloc_pages_slowpath_end,
 		unsigned long pages_reclaimed, int retry_loop_count),
 	TP_ARGS(gfp_mask, order, alloc_start, stime, did_some_progress,
 		pages_reclaimed, retry_loop_count));
+DECLARE_HOOK(android_vh_add_lazyfree_bypass,
+	TP_PROTO(struct lruvec *lruvec, struct folio *folio, bool *bypass),
+	TP_ARGS(lruvec, folio, bypass));
 DECLARE_HOOK(android_vh_alloc_contig_range_not_isolated,
 	TP_PROTO(unsigned long start, unsigned end),
 	TP_ARGS(start, end));
