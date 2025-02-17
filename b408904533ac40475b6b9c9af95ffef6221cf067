@@ -16,6 +16,24 @@
       "message": "Why is a hook needed in an android-only driver?  Please fix it properly instead.",
       "revId": "b408904533ac40475b6b9c9af95ffef6221cf067",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7b915d9_5518d78c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1292828
+      },
+      "writtenOn": "2025-02-17T04:04:29Z",
+      "side": 1,
+      "message": "The reason for this hook is to address compatibility issues with certain USB controllers that have limitations in handling streams. Enabling streams on these controllers can result in dropped USB packets and data loss. By providing this hook, we allow vendors to:\n\nDetermine whether to enable stream functionality based on the specific USB controller in use.\nFine-tune stream parameters to optimize performance and prevent packet loss\n\nThe controller V2.00a is updated to not respond to streamID:0 when the stream capability of endpoint is enabled (b/384849480#comment44).\n\nMeanwhile, the original patch\n(https://android-review.git.corp.google.com/c/kernel/common/+/3311119) states that 3p OEMs are relying on this.\n\nSo, we think the vendor hook is a better alternative to address the compatibility.",
+      "parentUuid": "d3af5f1c_c9fa1ae1",
+      "revId": "b408904533ac40475b6b9c9af95ffef6221cf067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
