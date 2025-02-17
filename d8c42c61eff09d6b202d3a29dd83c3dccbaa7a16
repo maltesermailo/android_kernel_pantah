@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "90461414_28381957",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-02-17T09:44:09Z",
+      "side": 1,
+      "message": "E2BIG is when We\u0027ve ran out of private space. (to distinguish from ENOMEM which is when you need to topup). I guess you could just propagate it here? It\u0027s very unlikely we can trigger it but nonetheless it would be shame of crashing the whole system when just a single VM can\u0027t call FF-A?",
+      "parentUuid": "84d4e52f_385e8770",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 236,
+        "endChar": 39
+      },
+      "revId": "d8c42c61eff09d6b202d3a29dd83c3dccbaa7a16",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd627cb4_cbd7ee87",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 5
