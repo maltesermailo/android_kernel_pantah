@@ -34,6 +34,24 @@
       "parentUuid": "d3af5f1c_c9fa1ae1",
       "revId": "b408904533ac40475b6b9c9af95ffef6221cf067",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ebd1bec_7701a2f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-02-17T09:00:02Z",
+      "side": 1,
+      "message": "So that other patch broke your systems?  If so, then it should be reverted and fixed properly.\n\nA hook should NOT be needed for android-specific code in the kernel, just fix it properly so that this driver handles all cases, which will reduce the maintaince load on external users like you and put it back on this module itself, which should work properly.\n\nSo just submit a fix here, for this driver to work correct, again, no hook should be needed.",
+      "parentUuid": "f7b915d9_5518d78c",
+      "revId": "b408904533ac40475b6b9c9af95ffef6221cf067",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
