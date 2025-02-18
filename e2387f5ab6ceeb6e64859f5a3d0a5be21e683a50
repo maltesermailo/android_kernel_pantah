@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8364f31c_457ba50e",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-02-18T21:51:30Z",
+      "side": 1,
+      "message": "This returns `memfd:...` correct? If so, I think we should strip the `memfd` prefix since that\u0027s what the ashmem driver\u0027s `ASHMEM_GET_NAME` ioctl command does.",
+      "range": {
+        "startLine": 542,
+        "startChar": 12,
+        "endLine": 546,
+        "endChar": 45
+      },
+      "revId": "e2387f5ab6ceeb6e64859f5a3d0a5be21e683a50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b54d7395_263b4d57",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-02-18T21:51:30Z",
+      "side": 1,
+      "message": "Should we just have this be a nop and return success? I agree with your idea, but an application isn\u0027t aware of libcutils setting the name. I\u0027m not sure if there are cases where an ashmem buffer is created and named later, which would now fail.",
+      "range": {
+        "startLine": 621,
+        "startChar": 8,
+        "endLine": 621,
+        "endChar": 49
+      },
+      "revId": "e2387f5ab6ceeb6e64859f5a3d0a5be21e683a50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ed0334e_4f5a4bdf",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-02-18T21:51:30Z",
+      "side": 1,
+      "message": "This is because we\u0027re assuming that `libcutils` sealed the size, so we should return `EPERM`: https://cs.android.com/android/kernel/superproject/+/e792e182463bdfd1c9c34aab22a1b7e035cbad15:common/mm/shmem.c;l\u003d1211-1214",
+      "range": {
+        "startLine": 622,
+        "startChar": 41,
+        "endLine": 622,
+        "endChar": 47
+      },
+      "revId": "e2387f5ab6ceeb6e64859f5a3d0a5be21e683a50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19212dc8_f08c08a4",
+        "filename": "mm/shmem.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 4853,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-02-18T21:51:30Z",
+      "side": 1,
+      "message": "should this be guarded with `#ifdef CONFIG_COMPAT`?",
+      "range": {
+        "startLine": 4853,
+        "startChar": 0,
+        "endLine": 4853,
+        "endChar": 36
+      },
+      "revId": "e2387f5ab6ceeb6e64859f5a3d0a5be21e683a50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b577721f_92cc6e7d",
+        "filename": "mm/shmem.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 4854,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-02-18T21:51:30Z",
+      "side": 1,
+      "message": "There\u0027s also the question of `show_fdinfo` too. I had added support for it as part of the shim layer, but that was more because using `stat()` on ashmem fds didn\u0027t provide what was needed, I believe. @kaleshsingh@google.com / @surenb@google.com, do we still need to support `show_fdinfo()` for memfd?",
+      "revId": "e2387f5ab6ceeb6e64859f5a3d0a5be21e683a50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
