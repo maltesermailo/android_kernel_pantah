@@ -108,6 +108,24 @@
       "message": "There\u0027s also the question of `show_fdinfo` too. I had added support for it as part of the shim layer, but that was more because using `stat()` on ashmem fds didn\u0027t provide what was needed, I believe. @kaleshsingh@google.com / @surenb@google.com, do we still need to support `show_fdinfo()` for memfd?",
       "revId": "e2387f5ab6ceeb6e64859f5a3d0a5be21e683a50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18a114c0_53b6fe9f",
+        "filename": "mm/shmem.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 4854,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-02-18T22:36:06Z",
+      "side": 1,
+      "message": "I *think* we use fdinfo only for dmabufs: https://cs.android.com/android/platform/superproject/main/+/main:system/memory/libmeminfo/libdmabufinfo/dmabufinfo.cpp;l\u003d53 but I might be missing something.\n\nIn general I think it would be safer if we can provide that funcitonality and sounds like it\u0027s not hard to implement?",
+      "parentUuid": "b577721f_92cc6e7d",
+      "revId": "e2387f5ab6ceeb6e64859f5a3d0a5be21e683a50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
