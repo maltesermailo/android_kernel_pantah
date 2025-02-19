@@ -46,6 +46,30 @@
       },
       "revId": "e4c1339a8e201da2113c2b11e4f2d99efcabd3b4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89dfa3d9_1f616312",
+        "filename": "mm/readahead.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-02-19T16:46:26Z",
+      "side": 0,
+      "message": "Nope, this is still not a clean cherry-pick from android15-6.6. To cleanly do this you first need to cherry-pick 2ad2067e9ffc (\"mm/readahead: do not allow order-1 folio\") from android15-6.6 and then apply this patch. That way you won\u0027t have to cut parts of this patch.",
+      "parentUuid": "99bcc3b1_6cc123fa",
+      "range": {
+        "startLine": 526,
+        "startChar": 2,
+        "endLine": 533,
+        "endChar": 3
+      },
+      "revId": "e4c1339a8e201da2113c2b11e4f2d99efcabd3b4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
