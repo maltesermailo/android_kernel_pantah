@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46b02bac_0b3f7db4",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-02-19T10:36:12Z",
+      "side": 1,
+      "message": "Added logic to strip a `memfd:` prefix if one exists.",
+      "parentUuid": "8364f31c_457ba50e",
+      "range": {
+        "startLine": 542,
+        "startChar": 12,
+        "endLine": 546,
+        "endChar": 45
+      },
+      "revId": "e2387f5ab6ceeb6e64859f5a3d0a5be21e683a50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b54d7395_263b4d57",
@@ -37,6 +61,30 @@
       "writtenOn": "2025-02-18T21:51:30Z",
       "side": 1,
       "message": "Should we just have this be a nop and return success? I agree with your idea, but an application isn\u0027t aware of libcutils setting the name. I\u0027m not sure if there are cases where an ashmem buffer is created and named later, which would now fail.",
+      "range": {
+        "startLine": 621,
+        "startChar": 8,
+        "endLine": 621,
+        "endChar": 49
+      },
+      "revId": "e2387f5ab6ceeb6e64859f5a3d0a5be21e683a50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baf0eea4_17a32c71",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-02-19T10:36:12Z",
+      "side": 1,
+      "message": "So that would be an application providing a name to libcutils to create the fd, and then renaming it later, but before it is first mapped?",
+      "parentUuid": "b54d7395_263b4d57",
       "range": {
         "startLine": 621,
         "startChar": 8,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a1a0c0c0_61216be0",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-02-19T10:36:12Z",
+      "side": 1,
+      "message": "Ashmem returns EINVAL if the fd has already been mapped, not EPERM.",
+      "parentUuid": "2ed0334e_4f5a4bdf",
+      "range": {
+        "startLine": 622,
+        "startChar": 41,
+        "endLine": 622,
+        "endChar": 47
+      },
+      "revId": "e2387f5ab6ceeb6e64859f5a3d0a5be21e683a50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19212dc8_f08c08a4",
         "filename": "mm/shmem.c",
         "patchSetId": 23
@@ -83,6 +155,30 @@
       "writtenOn": "2025-02-18T21:51:30Z",
       "side": 1,
       "message": "should this be guarded with `#ifdef CONFIG_COMPAT`?",
+      "range": {
+        "startLine": 4853,
+        "startChar": 0,
+        "endLine": 4853,
+        "endChar": 36
+      },
+      "revId": "e2387f5ab6ceeb6e64859f5a3d0a5be21e683a50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ef56380_85258068",
+        "filename": "mm/shmem.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 4853,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-02-19T10:36:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19212dc8_f08c08a4",
       "range": {
         "startLine": 4853,
         "startChar": 0,
