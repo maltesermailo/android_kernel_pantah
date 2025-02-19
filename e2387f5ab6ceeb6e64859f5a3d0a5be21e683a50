@@ -126,6 +126,24 @@
       "parentUuid": "b577721f_92cc6e7d",
       "revId": "e2387f5ab6ceeb6e64859f5a3d0a5be21e683a50",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c57af9b5_c093280d",
+        "filename": "mm/shmem.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 4854,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-02-19T01:35:31Z",
+      "side": 1,
+      "message": "Ashmem has an `fdinfo` callback too which shows the underlying shmem file\u0027s inode number and name, since the normal output for an ashmem buffer would just provide the inode number for the ashmem device file, which isn\u0027t useful.\n\nAccording to [1] this was added to help figure out which processes were sharing an ashmem buffer. I don\u0027t think the name was actually needed, since it\u0027s not guaranteed to be unique anyway, but the important bit is the inode number.\n\nHowever, the inode number is already part of fdinfo\u0027s output, so perhaps we shouldn\u0027t implement `show_fdinfo`?\n\n[1] https://cs.android.com/android/kernel/superproject/+/common-android13-5.15:common/drivers/staging/android/ashmem.c;bpv\u003d1;bpt\u003d0",
+      "parentUuid": "18a114c0_53b6fe9f",
+      "revId": "e2387f5ab6ceeb6e64859f5a3d0a5be21e683a50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
