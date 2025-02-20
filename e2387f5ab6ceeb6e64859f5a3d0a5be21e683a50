@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2f69737d_8d5dff38",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-02-20T01:54:53Z",
+      "side": 1,
+      "message": "Correct.",
+      "parentUuid": "baf0eea4_17a32c71",
+      "range": {
+        "startLine": 621,
+        "startChar": 8,
+        "endLine": 621,
+        "endChar": 49
+      },
+      "revId": "e2387f5ab6ceeb6e64859f5a3d0a5be21e683a50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2ed0334e_4f5a4bdf",
         "filename": "drivers/staging/android/ashmem_rust.rs",
         "patchSetId": 23
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "Ashmem returns EINVAL if the fd has already been mapped, not EPERM.",
       "parentUuid": "2ed0334e_4f5a4bdf",
+      "range": {
+        "startLine": 622,
+        "startChar": 41,
+        "endLine": 622,
+        "endChar": 47
+      },
+      "revId": "e2387f5ab6ceeb6e64859f5a3d0a5be21e683a50",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1390b5a_8d7395ee",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 23
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-02-20T01:54:53Z",
+      "side": 1,
+      "message": "Good point, I was thinking of how `ftruncate()` would work with memfd, but we\u0027re trying to mimic ashmem here, so `-EINVAL` makes more sense; I\u0027ll update my patch to do that.",
+      "parentUuid": "a1a0c0c0_61216be0",
       "range": {
         "startLine": 622,
         "startChar": 41,
