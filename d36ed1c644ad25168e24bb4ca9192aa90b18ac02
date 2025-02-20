@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dca57759_36ccdb84",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/pkvm.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-02-20T18:46:33Z",
+      "side": 1,
+      "message": "I believe this isn\u0027t used anymore or is it?",
+      "revId": "d36ed1c644ad25168e24bb4ca9192aa90b18ac02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd3de8f7_fcdc26d6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-02-20T18:46:33Z",
+      "side": 1,
+      "message": "Does VM handle exists in the FF-A spec? Isn\u0027t it an \"endpoint\" or \"endpoint ID\"?",
+      "revId": "d36ed1c644ad25168e24bb4ca9192aa90b18ac02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93fc2651_8d5072cb",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-02-20T18:46:33Z",
+      "side": 1,
+      "message": "You could here do one stone two birds with a KVM_HYP_REQ_TYPE_MAP. That is, if -EFAULT, you\u0027ll also check the memcache at the same time?\n\nsee pkvm_memshare_call()",
+      "revId": "d36ed1c644ad25168e24bb4ca9192aa90b18ac02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1304563e_f414d5e1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 933,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-02-20T18:46:33Z",
+      "side": 1,
+      "message": "I believe this is can\u0027t be triggered as the caller already checks is_ffa_call().",
+      "revId": "d36ed1c644ad25168e24bb4ca9192aa90b18ac02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "556a775a_15f0b172",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 952,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-02-20T18:46:33Z",
+      "side": 1,
+      "message": "I understand you are building the supported call one by one. But at the moment of this patch, we should probably not forward anything.\n\nHow about you do not forward anything and then once all the func_id\u0027s are supported you safely forward perhaps even in a separated patch?",
+      "revId": "d36ed1c644ad25168e24bb4ca9192aa90b18ac02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
