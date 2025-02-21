@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0e0a723_eabee737",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-02-21T10:11:50Z",
+      "side": 1,
+      "message": "Does that mean we will always go back to the host? Shouldn\u0027t we _only_ if we need to topup hyp_alloc?",
+      "revId": "1e761d7c9f038ac4fc2b780d32cdf1afed8a75ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45aaac32_4b6517af",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-02-21T10:11:50Z",
+      "side": 1,
+      "message": "IS_ERR_OR_NULL()",
+      "revId": "1e761d7c9f038ac4fc2b780d32cdf1afed8a75ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6493abda_4c2bff5f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 635,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-02-21T10:11:50Z",
+      "side": 1,
+      "message": "Can\u0027t you drop __ret declaration if you drop the do {} while(0) as you\u0027ve added that \"({ })\" ?",
+      "revId": "1e761d7c9f038ac4fc2b780d32cdf1afed8a75ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
