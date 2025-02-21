@@ -16,6 +16,52 @@
       "message": "Please do not add new mm functionality that is not upstream first.",
       "revId": "3dd9f511da08f8d81f8152ffc86bbadb0461d46c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "630e27ee_bca4b326",
+        "filename": "mm/slub.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-02-21T20:10:37Z",
+      "side": 1,
+      "message": "So, if CONFIG_STACKDEPOT\u003dn the whole get_each_kmemcache_node_track() does pretty much nothing?",
+      "range": {
+        "startLine": 955,
+        "startChar": 7,
+        "endLine": 955,
+        "endChar": 24
+      },
+      "revId": "3dd9f511da08f8d81f8152ffc86bbadb0461d46c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66369dd5_931ec50c",
+        "filename": "mm/slub.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 969,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-02-21T20:10:37Z",
+      "side": 1,
+      "message": "This seems like a very specialized function which can\u0027t be used for anything else. Can we instead make get_track() an exported function and change this function to `for_each_kmem_cache_object()` which loops over all slab objects calling the `fn` callback? Something like:\n```\nfor_each_kmem_cache_object()\n{\n    for_each_kmem_cache_node() {\n        list_for_each_entry(slab, \u0026n-\u003epartial, slab_list) {\n            for_each_object(p, s, slab_address(slab), slab-\u003eobjects) {\n                fn(s, p, t-\u003eaddr, handle, private);\n            }\n        }\n    }\n}\n```",
+      "range": {
+        "startLine": 969,
+        "startChar": 14,
+        "endLine": 969,
+        "endChar": 43
+      },
+      "revId": "3dd9f511da08f8d81f8152ffc86bbadb0461d46c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
