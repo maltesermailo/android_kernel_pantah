@@ -135,6 +135,30 @@
       },
       "revId": "54b05756c4949cca3c908c0e3298b2d794c1c8de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c774b7d_fe4a1ac7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 729,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-02-21T09:55:52Z",
+      "side": 1,
+      "message": "What about having the xfer store in two list? One per VM (for the quick search above) and one \"global\" for the \"host\" search here?\n\nThat would help to do a quick\n\n```if list_empty(ffa_mem_xfers) continue;```\n\nthat does not penalize the host when no guest is using FF-A?\n\nOf course that would be an additional 16 bytes cost per xfer struct.",
+      "parentUuid": "893a9f89_900b1c4d",
+      "range": {
+        "startLine": 729,
+        "startChar": 2,
+        "endLine": 729,
+        "endChar": 38
+      },
+      "revId": "54b05756c4949cca3c908c0e3298b2d794c1c8de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
