@@ -92,6 +92,23 @@
       "parentUuid": "02a2c998_5bf9f223",
       "revId": "39c128f8329185852e56275a7847f6cb273319a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e81c61f_181eeadd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-02-23T01:24:23Z",
+      "side": 1,
+      "message": "FWIW, this breaks downstream drivers due to \n\n`gpiod_export_link` and `gpiod_export` becoming exported symbols being `static inline` functions before this change.\n\nhttps://cs.android.com/android/kernel/superproject/+/common-android-mainline:common/include/linux/gpio/consumer.h;l\u003d629?q\u003dgpiod_export",
+      "revId": "39c128f8329185852e56275a7847f6cb273319a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
