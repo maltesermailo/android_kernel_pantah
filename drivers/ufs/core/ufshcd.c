@@ -421,8 +421,6 @@ static void ufshcd_add_uic_command_trace(struct ufs_hba *hba,
 {
 	u32 cmd;
 
-	trace_android_vh_ufs_send_uic_command(hba, ucmd, (int)str_t);
-
 	if (!trace_ufshcd_uic_command_enabled())
 		return;
 
@@ -5239,8 +5237,6 @@ static int ufshcd_slave_alloc(struct scsi_device *sdev)
 
 	ufshcd_setup_links(hba, sdev);
 
-	trace_android_vh_ufs_update_sdev(sdev);
-
 	return 0;
 }
 
@@ -5571,7 +5567,6 @@ void ufshcd_compl_one_cqe(struct ufs_hba *hba, int task_tag,
 	lrbp->compl_time_stamp = ktime_get();
 	cmd = lrbp->cmd;
 	if (cmd) {
-		trace_android_vh_ufs_compl_command(hba, lrbp);
 		if (unlikely(ufshcd_should_inform_monitor(hba, lrbp)))
 			ufshcd_update_monitor(hba, lrbp);
 		ufshcd_add_command_trace(hba, task_tag, UFS_CMD_COMP);
@@ -5580,7 +5575,6 @@ void ufshcd_compl_one_cqe(struct ufs_hba *hba, int task_tag,
 		/* Do not touch lrbp after scsi done */
 		scsi_done(cmd);
 	} else if (hba->dev_cmd.complete) {
-		trace_android_vh_ufs_compl_command(hba, lrbp);
 		if (cqe) {
 			ocs = le32_to_cpu(cqe->status) & MASK_OCS;
 			lrbp->utr_descriptor_ptr->header.ocs = ocs;
