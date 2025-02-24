@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab922f85_4a2ac559",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-24T22:04:38Z",
+      "side": 1,
+      "message": "Why is that a safe assumption to make?",
+      "range": {
+        "startLine": 685,
+        "startChar": 9,
+        "endLine": 685,
+        "endChar": 60
+      },
+      "revId": "2319d96533ac7f6b3b698c2ddd7afc80a74885a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbd7ac8c_4164f8ae",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 687,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-24T22:04:38Z",
+      "side": 1,
+      "message": "Pass `NULL` instead?",
+      "range": {
+        "startLine": 687,
+        "startChar": 61,
+        "endLine": 687,
+        "endChar": 66
+      },
+      "revId": "2319d96533ac7f6b3b698c2ddd7afc80a74885a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c959c0f_abf9f1ee",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-02-24T22:04:38Z",
+      "side": 1,
+      "message": "I think this means we can now return 0 if the `va` wasn\u0027t mapped, whereas before we would always hit the `WARN_ON()`",
+      "range": {
+        "startLine": 690,
+        "startChar": 7,
+        "endLine": 690,
+        "endChar": 17
+      },
+      "revId": "2319d96533ac7f6b3b698c2ddd7afc80a74885a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
