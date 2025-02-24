@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8306055f_8dd4dcc6",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/pkvm.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-24T18:45:04Z",
+      "side": 1,
+      "message": "I will drop it. It shouldn\u0027t be used anymore as we decided that we are only supporting hvc",
+      "parentUuid": "dca57759_36ccdb84",
+      "revId": "d36ed1c644ad25168e24bb4ca9192aa90b18ac02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd3de8f7_fcdc26d6",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 18
@@ -31,6 +49,24 @@
       "writtenOn": "2025-02-20T18:46:33Z",
       "side": 1,
       "message": "Does VM handle exists in the FF-A spec? Isn\u0027t it an \"endpoint\" or \"endpoint ID\"?",
+      "revId": "d36ed1c644ad25168e24bb4ca9192aa90b18ac02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bf72fd2_d3505492",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-24T18:45:04Z",
+      "side": 1,
+      "message": "I think it is used inter-changeable so it should be ok.",
+      "parentUuid": "cd3de8f7_fcdc26d6",
       "revId": "d36ed1c644ad25168e24bb4ca9192aa90b18ac02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -69,6 +105,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb433432_990ae142",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 933,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-24T18:45:04Z",
+      "side": 1,
+      "message": "That\u0027s only for ths host part, we still haven\u0027t plumbed the caller yet.",
+      "parentUuid": "1304563e_f414d5e1",
+      "revId": "d36ed1c644ad25168e24bb4ca9192aa90b18ac02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "556a775a_15f0b172",
@@ -82,6 +136,24 @@
       "writtenOn": "2025-02-20T18:46:33Z",
       "side": 1,
       "message": "I understand you are building the supported call one by one. But at the moment of this patch, we should probably not forward anything.\n\nHow about you do not forward anything and then once all the func_id\u0027s are supported you safely forward perhaps even in a separated patch?",
+      "revId": "d36ed1c644ad25168e24bb4ca9192aa90b18ac02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97c567b8_a3f62431",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 952,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-02-24T18:45:04Z",
+      "side": 1,
+      "message": "we are not plumbing the caller yet (it is done later in the series) so this is fine.",
+      "parentUuid": "556a775a_15f0b172",
       "revId": "d36ed1c644ad25168e24bb4ca9192aa90b18ac02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
