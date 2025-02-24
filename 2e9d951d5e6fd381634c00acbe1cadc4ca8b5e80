@@ -127,6 +127,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2787e28a_8d5de1ee",
+        "filename": "drivers/staging/android/ashmem.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-02-24T18:18:50Z",
+      "side": 1,
+      "message": "I\u0027m not sure what the impact of using `SHRINK_STOP` would be here, so I erred on the side of caution and just returned 0 when unpinning is disabled. Regardless, we shouldn\u0027t get to the `scan_objects()` callback, since `count_objects()` will return `SHRINK_EMPTY`.\n\nWhat do you think?",
+      "parentUuid": "8d9ada95_d3b9f4de",
+      "range": {
+        "startLine": 491,
+        "startChar": 0,
+        "endLine": 492,
+        "endChar": 11
+      },
+      "revId": "2e9d951d5e6fd381634c00acbe1cadc4ca8b5e80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5d8c43ab_003e00dc",
         "filename": "drivers/staging/android/ashmem.c",
         "patchSetId": 3
