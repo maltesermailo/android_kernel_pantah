@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cb9b1809_3867f0b7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-02-24T23:02:15Z",
+      "side": 1,
+      "message": "This relies on the caller (which is at the moment the IOMMU code which does the right thing)",
+      "parentUuid": "ab922f85_4a2ac559",
+      "range": {
+        "startLine": 685,
+        "startChar": 9,
+        "endLine": 685,
+        "endChar": 60
+      },
+      "revId": "2319d96533ac7f6b3b698c2ddd7afc80a74885a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bbd7ac8c_4164f8ae",
         "filename": "arch/arm64/kvm/hyp/nvhe/mm.c",
         "patchSetId": 3
@@ -60,6 +84,30 @@
       "writtenOn": "2025-02-24T22:04:38Z",
       "side": 1,
       "message": "I think this means we can now return 0 if the `va` wasn\u0027t mapped, whereas before we would always hit the `WARN_ON()`",
+      "range": {
+        "startLine": 690,
+        "startChar": 7,
+        "endLine": 690,
+        "endChar": 17
+      },
+      "revId": "2319d96533ac7f6b3b698c2ddd7afc80a74885a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "260d590f_3b6a2f07",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-02-24T23:02:15Z",
+      "side": 1,
+      "message": "I am not sure I understand, wouldn\u0027t it be mapped if `kvm_pgtable_get_leaf` succeeds.",
+      "parentUuid": "2c959c0f_abf9f1ee",
       "range": {
         "startLine": 690,
         "startChar": 7,
