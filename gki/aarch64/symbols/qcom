@@ -31,6 +31,7 @@
   alloc_workqueue
   alt_cb_patch_nops
   amba_bustype
+  __amba_driver_register
   amba_driver_unregister
   android_rvh_probe_register
   android_vh_rproc_recovery
@@ -470,6 +471,7 @@
   datagram_poll
   dbs_update
   deactivate_task
+  debug_check_no_locks_freed
   debugfs_attr_read
   debugfs_attr_write
   debugfs_create_atomic_t
@@ -492,6 +494,8 @@
   debugfs_lookup
   debugfs_remove
   debugfs_rename
+  debug_lockdep_rcu_enabled
+  debug_locks
   debug_locks_off
   debug_locks_silent
   dec_node_page_state
@@ -509,6 +513,7 @@
   __dev_change_net_namespace
   dev_close
   dev_close_many
+  dev_coredumpm_timeout
   dev_coredumpv
   _dev_crit
   dev_driver_string
@@ -1129,6 +1134,7 @@
   __folio_put
   folio_unlock
   folio_wait_bit
+  __fortify_panic
   fortify_panic
   fput
   fqdir_exit
@@ -1540,6 +1546,7 @@
   init_pid_ns
   init_pseudo
   __init_rwsem
+  __init_srcu_struct
   init_srcu_struct
   __init_swait_queue_head
   init_task
@@ -1726,6 +1733,7 @@
   kill_anon_super
   kill_fasync
   kimage_voffset
+  __kmalloc_cache_node_noprof
   kmalloc_caches
   kmalloc_large
   kmalloc_large_node
@@ -1754,6 +1762,7 @@
   kobject_uevent
   kobject_uevent_env
   kobj_sysfs_ops
+  krealloc_noprof
   kset_create_and_add
   kset_find_obj
   kset_unregister
@@ -1865,6 +1874,13 @@
   llist_reverse_order
   __local_bh_disable_ip
   __local_bh_enable_ip
+  lock_acquire
+  lockdep_init_map_type
+  lockdep_rcu_suspicious
+  lockdep_recursion
+  lockdep_rht_bucket_is_held
+  lockdep_rht_mutex_is_held
+  lockdep_rtnl_is_held
   lock_pin_lock
   lock_release
   lock_repin_lock
@@ -1942,6 +1958,7 @@
   memunmap
   metadata_dst_alloc
   metadata_dst_free
+  __might_fault
   migrate_swap
   __migrate_task
   mipi_dsi_create_packet
@@ -1988,6 +2005,7 @@
   mutex_is_locked
   mutex_lock
   mutex_lock_interruptible
+  mutex_lock_nested
   mutex_trylock
   mutex_unlock
   napi_complete_done
@@ -2572,6 +2590,7 @@
   _raw_read_unlock_irqrestore
   _raw_spin_lock
   _raw_spin_lock_bh
+  __raw_spin_lock_init
   _raw_spin_lock_irq
   _raw_spin_lock_irqsave
   _raw_spin_lock_nested
@@ -2605,6 +2624,7 @@
   rcu_barrier
   rcu_barrier_tasks
   rcu_barrier_tasks_trace
+  rcu_bh_lock_map
   rcu_bind_current_to_nocb
   rcu_check_boost_fail
   rcu_cpu_stall_suppress
@@ -2623,6 +2643,10 @@
   rcu_nocb_cpu_deoffload
   rcu_nocb_cpu_offload
   __rcu_read_lock
+  rcu_read_lock_any_held
+  rcu_read_lock_bh_held
+  rcu_read_lock_held
+  rcu_read_lock_sched_held
   __rcu_read_unlock
   rcu_read_unlock_trace_special
   rcuref_get_slowpath
@@ -3313,6 +3337,7 @@
   trace_event_reg
   trace_get_event_file
   trace_handle_return
+  trace_hardirqs_off
   __traceiter_android_rvh_account_irq
   __traceiter_android_rvh_after_dequeue_task
   __traceiter_android_rvh_after_enqueue_task
@@ -3418,6 +3443,7 @@
   __traceiter_ipi_entry
   __traceiter_ipi_raise
   __traceiter_irq_handler_entry
+  __traceiter_mark_victim
   __traceiter_mmap_lock_acquire_returned
   __traceiter_mmap_lock_released
   __traceiter_mmap_lock_start_locking
@@ -3532,6 +3558,7 @@
   __tracepoint_ipi_entry
   __tracepoint_ipi_raise
   __tracepoint_irq_handler_entry
+  __tracepoint_mark_victim
   __tracepoint_mmap_lock_acquire_returned
   __tracepoint_mmap_lock_released
   __tracepoint_mmap_lock_start_locking
@@ -3612,6 +3639,12 @@
   uart_unregister_driver
   uart_update_timeout
   uart_write_wakeup
+  __ubsan_handle_add_overflow
+  __ubsan_handle_divrem_overflow
+  __ubsan_handle_mul_overflow
+  __ubsan_handle_negate_overflow
+  __ubsan_handle_out_of_bounds
+  __ubsan_handle_sub_overflow
   uclamp_eff_value
   ucsi_connector_change
   ucsi_create
