@@ -59,6 +59,7 @@ extern void cma_reserve_pages_on_error(struct cma *cma);
 #ifdef CONFIG_CMA
 struct folio *cma_alloc_folio(struct cma *cma, int order, gfp_t gfp);
 bool cma_free_folio(struct cma *cma, const struct folio *folio);
+extern unsigned long cma_get_first_virtzone_base(int nid);
 #else
 static inline struct folio *cma_alloc_folio(struct cma *cma, int order, gfp_t gfp)
 {
@@ -68,6 +69,11 @@ static inline struct folio *cma_alloc_folio(struct cma *cma, int order, gfp_t gf
 static inline bool cma_free_folio(struct cma *cma, const struct folio *folio)
 {
 	return false;
+}
+
+static inline unsigned long cma_get_first_virtzone_base(int nid)
+{
+	return 0;
 }
 #endif
 
