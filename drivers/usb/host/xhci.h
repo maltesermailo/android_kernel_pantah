@@ -1992,7 +1992,12 @@ int xhci_stop_endpoint_sync(struct xhci_hcd *xhci, struct xhci_virt_ep *ep,
 void xhci_update_erst_dequeue(struct xhci_hcd *xhci,
 				     struct xhci_interrupter *ir,
 				     bool clear_ehb);
+<<<<<<< HEAD   (1cd69c Merge branch 'android15-6.6-2aa57daa75e0' into android15-6.6)
 int xhci_pending_interrupt(struct xhci_hcd *xhci);
+||||||| BASE
+=======
+void xhci_process_cancelled_tds(struct xhci_virt_ep *ep);
+>>>>>>> BRANCH (640d94 Merge 6.6.71 into android15-6.6-lts)
 
 /* xHCI roothub code */
 void xhci_set_link_state(struct xhci_hcd *xhci, struct xhci_port *port,
