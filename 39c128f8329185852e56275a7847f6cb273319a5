@@ -127,6 +127,41 @@
       "parentUuid": "5a3d21e7_c8b18cb0",
       "revId": "39c128f8329185852e56275a7847f6cb273319a5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6bd768b_d5dad565",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3736614
+      },
+      "writtenOn": "2025-02-25T14:04:44Z",
+      "side": 1,
+      "message": "comment from different review:\nhttps://android-review.googlesource.com/c/kernel/common/+/3441519?tab\u003dcomments\n\nMatthias Männich\nPatchset 6\nJan 10\nThe kernel_aarch64 build fails claiming the symbol is not in the symtab:\n\"ERROR: Differences between ksymtab and symbol list detected!\nSymbols missing from ksymtab:\n - gpiod_export\"\n\nI took a quick look and when I read this correctly, then this symbol is conditional on CONFIG_GPIO_SYSFS\u003dy , but the gki_defconfig does not define that.\n\naccording to this CONFIG_GPIO_SYSFS\u003dy is conditional for later on enabling gpiod_export",
+      "parentUuid": "32555383_b8e8212a",
+      "revId": "39c128f8329185852e56275a7847f6cb273319a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb464f2a_c93b4ba0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3736614
+      },
+      "writtenOn": "2025-02-25T14:04:44Z",
+      "side": 1,
+      "message": "cco",
+      "revId": "39c128f8329185852e56275a7847f6cb273319a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
