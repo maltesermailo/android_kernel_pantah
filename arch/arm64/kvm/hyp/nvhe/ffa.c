@@ -301,7 +301,7 @@ err_unshare_tx:
 }
 
 static int kvm_notify_vm_availability(uint16_t vm_handle, struct kvm_ffa_buffers *ffa_buf,
-				      u32 availability_msg)
+				      u32 availability_msg, bool run)
 {
 	int i;
 	struct arm_smccc_res res;
@@ -322,6 +322,16 @@ static int kvm_notify_vm_availability(uint16_t vm_handle, struct kvm_ffa_buffers
 				  0, 0, vm_handle, 0, 0, &res);
 		if (res.a0 != FFA_MSG_SEND_DIRECT_RESP)
 			return FFA_RET_INVALID_PARAMETERS;
+
+		if ((int32_t)res.a3 == FFA_RET_RETRY && run) {
+			uint32_t dest = ((uint32_t)sp_ids[i] << 16) | hyp_smp_processor_id();
+
+			arm_smccc_1_1_smc(FFA_RUN, dest, 0, 0, 0, 0, 0, 0, &res);
+			if (res.a0 == FFA_ERROR)
+				return res.a2;
+			else
+				return FFA_RET_RETRY;
+		}
 
 		if (res.a3 != FFA_RET_SUCCESS)
 			return res.a3;
@@ -360,7 +370,7 @@ static int do_ffa_rxtx_map(struct arm_smccc_res *res, struct kvm_cpu_context *ct
 		goto out_unlock;
 	}
 
-	ret = kvm_notify_vm_availability(vm_handle, ffa_buf, FFA_VM_CREATION_MSG);
+	ret = kvm_notify_vm_availability(vm_handle, ffa_buf, FFA_VM_CREATION_MSG, false);
 	if (ret != FFA_RET_SUCCESS)
 		goto out_unlock;
 
@@ -1095,6 +1105,7 @@ static void do_ffa_part_get(struct arm_smccc_res *res,
 	u32 i, count, partition_sz, copy_sz;
 	struct kvm_ffa_buffers *ffa_buf;
 	struct arm_smccc_res _res;
+	int ret;
 
 	hyp_spin_lock(&kvm_ffa_hyp_lock);
 	ffa_buf = ffa_get_buffers(vm_handle);
@@ -1135,16 +1146,23 @@ static void do_ffa_part_get(struct arm_smccc_res *res,
 
 release_rx:
 	ffa_rx_release(&_res);
-	if (num_registered_sp_ids)
-		goto out_unlock;
-
-	count = count < FFA_MAX_REGISTERED_SP_IDS ? count : FFA_MAX_REGISTERED_SP_IDS;
-	for (i = 0; i < count; i++) {
-		struct ffa_partition_info *part = hyp_buffers.rx + i * partition_sz;
-		if ((part->properties & FFA_PART_VM_AVAIL_MASK) == FFA_PART_SUPPORTS_VM_AVAIL) {
-			sp_ids[num_registered_sp_ids++] = part->id;
+	if (!num_registered_sp_ids) {
+		count = count < FFA_MAX_REGISTERED_SP_IDS ? count : FFA_MAX_REGISTERED_SP_IDS;
+		for (i = 0; i < count; i++) {
+			struct ffa_partition_info *part = hyp_buffers.rx + i * partition_sz;
+			if ((part->properties & FFA_PART_VM_AVAIL_MASK) == FFA_PART_SUPPORTS_VM_AVAIL) {
+				sp_ids[num_registered_sp_ids++] = part->id;
+			}
 		}
 	}
+
+	if (IS_HOST_HANDLE(vm_handle)) {
+		ret = kvm_notify_vm_availability(vm_handle, ffa_buf, FFA_VM_CREATION_MSG, true);
+		if (ret != FFA_RET_SUCCESS) {
+			ffa_to_smccc_error(res, ret);
+		}
+	}
+
 out_unlock:
 	hyp_spin_unlock(&kvm_ffa_hyp_lock);
 }
@@ -1344,7 +1362,7 @@ int kvm_reclaim_ffa_guest_pages(struct pkvm_hyp_vm *vm, pkvm_handle_t handle)
 	if (!guest_has_ffa)
 		goto unlock;
 
-	ret = kvm_notify_vm_availability(vm_handle, ffa_buf, FFA_VM_DESTRUCTION_MSG);
+	ret = kvm_notify_vm_availability(vm_handle, ffa_buf, FFA_VM_DESTRUCTION_MSG, false);
 	if (ret != FFA_RET_SUCCESS)
 		goto unlock;
 
