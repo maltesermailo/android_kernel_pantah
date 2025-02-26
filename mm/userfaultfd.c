@@ -1237,9 +1237,15 @@ retry:
 			src_folio_pte = orig_src_pte;
 			spin_unlock(src_ptl);
 
+<<<<<<< HEAD
 			if (!folio_trylock(src_folio)) {
 				pte_unmap(&orig_src_pte);
 				pte_unmap(&orig_dst_pte);
+=======
+			if (!locked) {
+				pte_unmap(src_pte);
+				pte_unmap(dst_pte);
+>>>>>>> aa26713d4f95 (FROMGIT: userfaultfd: fix PTE unmapping stack-allocated PTE copies)
 				src_pte = dst_pte = NULL;
 				/* now we can block and wait */
 				folio_lock(src_folio);
@@ -1255,8 +1261,8 @@ retry:
 		/* at this point we have src_folio locked */
 		if (folio_test_large(src_folio)) {
 			/* split_folio() can block */
-			pte_unmap(&orig_src_pte);
-			pte_unmap(&orig_dst_pte);
+			pte_unmap(src_pte);
+			pte_unmap(dst_pte);
 			src_pte = dst_pte = NULL;
 			err = split_folio(src_folio);
 			if (err)
@@ -1281,8 +1287,8 @@ retry:
 				goto out;
 			}
 			if (!anon_vma_trylock_write(src_anon_vma)) {
-				pte_unmap(&orig_src_pte);
-				pte_unmap(&orig_dst_pte);
+				pte_unmap(src_pte);
+				pte_unmap(dst_pte);
 				src_pte = dst_pte = NULL;
 				/* now we can block and wait */
 				anon_vma_lock_write(src_anon_vma);
@@ -1298,8 +1304,8 @@ retry:
 		entry = pte_to_swp_entry(orig_src_pte);
 		if (non_swap_entry(entry)) {
 			if (is_migration_entry(entry)) {
-				pte_unmap(&orig_src_pte);
-				pte_unmap(&orig_dst_pte);
+				pte_unmap(src_pte);
+				pte_unmap(dst_pte);
 				src_pte = dst_pte = NULL;
 				migration_entry_wait(mm, src_pmd, src_addr);
 				err = -EAGAIN;
@@ -1308,10 +1314,59 @@ retry:
 			goto out;
 		}
 
+<<<<<<< HEAD
 		err = move_swap_pte(mm, dst_addr, src_addr,
 				    dst_pte, src_pte,
 				    orig_dst_pte, orig_src_pte,
 				    dst_ptl, src_ptl);
+=======
+		if (!pte_swp_exclusive(orig_src_pte)) {
+			err = -EBUSY;
+			goto out;
+		}
+
+		si = get_swap_device(entry);
+		if (unlikely(!si)) {
+			err = -EAGAIN;
+			goto out;
+		}
+		/*
+		 * Verify the existence of the swapcache. If present, the folio's
+		 * index and mapping must be updated even when the PTE is a swap
+		 * entry. The anon_vma lock is not taken during this process since
+		 * the folio has already been unmapped, and the swap entry is
+		 * exclusive, preventing rmap walks.
+		 *
+		 * For large folios, return -EBUSY immediately, as split_folio()
+		 * also returns -EBUSY when attempting to split unmapped large
+		 * folios in the swapcache. This issue needs to be resolved
+		 * separately to allow proper handling.
+		 */
+		if (!src_folio)
+			folio = filemap_get_folio(swap_address_space(entry),
+					swp_offset(entry));
+		if (!IS_ERR_OR_NULL(folio)) {
+			if (folio_test_large(folio)) {
+				err = -EBUSY;
+				folio_put(folio);
+				goto out;
+			}
+			src_folio = folio;
+			src_folio_pte = orig_src_pte;
+			if (!folio_trylock(src_folio)) {
+				pte_unmap(src_pte);
+				pte_unmap(dst_pte);
+				src_pte = dst_pte = NULL;
+				put_swap_device(si);
+				si = NULL;
+				/* now we can block and wait */
+				folio_lock(src_folio);
+				goto retry;
+			}
+		}
+		err = move_swap_pte(mm, dst_vma, dst_addr, src_addr, dst_pte, src_pte,
+				orig_dst_pte, orig_src_pte, dst_ptl, src_ptl, src_folio);
+>>>>>>> aa26713d4f95 (FROMGIT: userfaultfd: fix PTE unmapping stack-allocated PTE copies)
 	}
 
 out:
