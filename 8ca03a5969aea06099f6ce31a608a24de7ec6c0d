@@ -16,6 +16,24 @@
       "message": "Why not `return true` to pass the error back to the guest?",
       "revId": "8ca03a5969aea06099f6ce31a608a24de7ec6c0d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3abad594_42171463",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 957,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-02-27T07:16:58Z",
+      "side": 1,
+      "message": "I made https://r.android.com/3509863 which is needed to pass `FFA_RET_RETRY` back to the host so it retries in https://r.android.com/3509862. Any objection to that approach?",
+      "parentUuid": "96c9aab4_7aade1e8",
+      "revId": "8ca03a5969aea06099f6ce31a608a24de7ec6c0d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
