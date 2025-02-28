@@ -16,6 +16,24 @@
       "message": "Once again, could you provide in the commit message:\n\n1) What issue/problem have you run into that necessitates adding these hooks?\n\n2) What quantifiable benefit (relative or %) do you get by using these vendorhooks\n\n3) What upstream behavior change would make these hooks unnecessary?\n\nFeel free to add the details to a bug if you\u0027d prefer it not be public.",
       "revId": "aff66ea3728d546708fb5d498b173f9ca5f0df6f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc7ed3e8_b6bc7da4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1961338
+      },
+      "writtenOn": "2025-02-28T09:03:42Z",
+      "side": 1,
+      "message": "1) What issue/problem have you run into that necessitates adding these hooks?\n\n   In the stability Monkey4SystemLongTime test, the camera startup will request\n   a large amount of memory in a short period of time, resulting in a temporary shortage\n   of system memory. In addition, other processes also need to continuously request memory.\n   In this case, it is easy for the system to have lmkd blocked and unable to kill\n   the process in time, resulting in OOM.\n\n2) What quantifiable benefit (relative or %) do you get by using these vendorhooks\n\n        This hook can be used to detect when lmkd is in D state and the memory pressure\n        meets the set conditions, then the kill process mechanism is triggered to avoid\n        the occurrence of OOM. In the previous test, 1/20 machines had a problem at 74.49 hours,\n        but after the modification, 48 machines were tested for 120 hours without any problems.\n\n\n3) What upstream behavior change would make these hooks unnecessary?\n\n        Sorry, we have not yet considered any upstream methods that can alleviate the above problems.",
+      "parentUuid": "32771601_e542d990",
+      "revId": "aff66ea3728d546708fb5d498b173f9ca5f0df6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
