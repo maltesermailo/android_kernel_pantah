@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c28963c1_0726c973",
+        "filename": "drivers/pci/controller/dwc/pcie-designware.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-03-04T18:42:31Z",
+      "side": 1,
+      "message": "So this struct should be ABI stable since I see that `pcie-exynos-rc.c` is using it. I also see a reference to it in `android/abi_gki_aarch64.stg`. So it will probably fail presubmit.",
+      "range": {
+        "startLine": 308,
+        "startChar": 0,
+        "endLine": 308,
+        "endChar": 19
+      },
+      "revId": "7c8d972aaa661f702884375b57f9a6f9a61ebefb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
