@@ -3859,6 +3859,11 @@ pointer_reference {
   pointee_type_id: 0x185e3c3b
 }
 pointer_reference {
+  id: 0x0c884220
+  kind: POINTER
+  pointee_type_id: 0x1861ee1e
+}
+pointer_reference {
   id: 0x0c892400
   kind: POINTER
   pointee_type_id: 0x1864769e
@@ -3877,6 +3882,11 @@ pointer_reference {
   id: 0x0c8d012c
   kind: POINTER
   pointee_type_id: 0x1874e22c
+}
+pointer_reference {
+  id: 0x0c8e95d5
+  kind: POINTER
+  pointee_type_id: 0x187ab1c9
 }
 pointer_reference {
   id: 0x0c957ac0
@@ -11864,6 +11874,11 @@ pointer_reference {
   pointee_type_id: 0xac0d4f27
 }
 pointer_reference {
+  id: 0x2197d55b
+  kind: POINTER
+  pointee_type_id: 0xac1fb3f2
+}
+pointer_reference {
   id: 0x21b2d2f4
   kind: POINTER
   pointee_type_id: 0xac8bad4e
@@ -12997,6 +13012,11 @@ pointer_reference {
   id: 0x270c2906
   kind: POINTER
   pointee_type_id: 0xb6704284
+}
+pointer_reference {
+  id: 0x2712b6f9
+  kind: POINTER
+  pointee_type_id: 0xb60a3d7a
 }
 pointer_reference {
   id: 0x27283ea3
@@ -22609,6 +22629,16 @@ pointer_reference {
   pointee_type_id: 0x95614628
 }
 pointer_reference {
+  id: 0x2fc8b97a
+  kind: POINTER
+  pointee_type_id: 0x95620375
+}
+pointer_reference {
+  id: 0x2fc8d405
+  kind: POINTER
+  pointee_type_id: 0x9563b688
+}
+pointer_reference {
   id: 0x2fc964c0
   kind: POINTER
   pointee_type_id: 0x9565759f
@@ -22627,6 +22657,16 @@ pointer_reference {
   id: 0x2fccc15b
   kind: POINTER
   pointee_type_id: 0x9573e3f3
+}
+pointer_reference {
+  id: 0x2fcd0f5c
+  kind: POINTER
+  pointee_type_id: 0x9574dbef
+}
+pointer_reference {
+  id: 0x2fce6e8f
+  kind: POINTER
+  pointee_type_id: 0x95795ca2
 }
 pointer_reference {
   id: 0x2fd17240
@@ -26232,6 +26272,11 @@ pointer_reference {
   id: 0x3705a40d
   kind: POINTER
   pointee_type_id: 0xf65676a9
+}
+pointer_reference {
+  id: 0x37074085
+  kind: POINTER
+  pointee_type_id: 0xf65de489
 }
 pointer_reference {
   id: 0x370b11b2
@@ -42545,6 +42590,13 @@ member {
   type_id: 0x92233392
 }
 member {
+  id: 0xe8b65c9e
+  name: "TX_BUF_BYTE_x_hidden"
+  type_id: 0x5d8155a5
+  offset: 64
+  bitsize: 1
+}
+member {
   id: 0x107e7ca8
   name: "UnsupportedOpcodesReceived"
   type_id: 0x92233392
@@ -50361,6 +50413,12 @@ member {
   offset: 512
 }
 member {
+  id: 0xb9243a3d
+  name: "attempt_vconn_swap_discovery"
+  type_id: 0x37074085
+  offset: 576
+}
+member {
   id: 0xb92598f2
   name: "attempt_vconn_swap_discovery"
   type_id: 0x36afd129
@@ -50789,6 +50847,13 @@ member {
   name: "auto_boot"
   type_id: 0x6d7f5ff6
   offset: 9096
+}
+member {
+  id: 0x7db25385
+  name: "auto_discharge_disconnect"
+  type_id: 0x5d8155a5
+  offset: 65
+  bitsize: 1
 }
 member {
   id: 0xaa0ea302
@@ -57374,6 +57439,13 @@ member {
   offset: 1600
 }
 member {
+  id: 0x827ac758
+  name: "cable_comm_capable"
+  type_id: 0x5d8155a5
+  offset: 67
+  bitsize: 1
+}
+member {
   id: 0x965a7ff0
   name: "cable_identity"
   type_id: 0x556c6bb0
@@ -60320,6 +60392,12 @@ member {
   name: "check_config"
   type_id: 0x2fa652dc
   offset: 1024
+}
+member {
+  id: 0xca18cac1
+  name: "check_contaminant"
+  type_id: 0x0c884220
+  offset: 512
 }
 member {
   id: 0xca1963af
@@ -93904,6 +93982,12 @@ member {
   offset: 1216
 }
 member {
+  id: 0x796dacfc
+  name: "frs_sourcing_vbus"
+  type_id: 0x0c884220
+  offset: 384
+}
+member {
   id: 0xdaf762ad
   name: "frto"
   type_id: 0x295c7202
@@ -107545,6 +107629,12 @@ member {
   name: "init"
   type_id: 0x2e36aac4
   offset: 1536
+}
+member {
+  id: 0x1ac50289
+  name: "init"
+  type_id: 0x2fce6e8f
+  offset: 128
 }
 member {
   id: 0x1ac56cb9
@@ -176459,6 +176549,13 @@ member {
   offset: 512
 }
 member {
+  id: 0xaa31d7c7
+  name: "set_orientation"
+  type_id: 0x5d8155a5
+  offset: 68
+  bitsize: 1
+}
+member {
   id: 0x01b2c6d9
   name: "set_over_current_protection"
   type_id: 0x2d66bab9
@@ -176523,6 +176620,12 @@ member {
   name: "set_parity"
   type_id: 0x2c7e6442
   offset: 384
+}
+member {
+  id: 0x2a460727
+  name: "set_partner_usb_comm_capable"
+  type_id: 0x0c8e95d5
+  offset: 448
 }
 member {
   id: 0x2a47c439
@@ -177158,6 +177261,12 @@ member {
   offset: 640
 }
 member {
+  id: 0xfef58f90
+  name: "set_vbus"
+  type_id: 0x2fc8d405
+  offset: 320
+}
+member {
   id: 0xfef70ddf
   name: "set_vbus"
   type_id: 0x2d4644f3
@@ -177174,6 +177283,12 @@ member {
   name: "set_vconn"
   type_id: 0x2e0b807c
   offset: 576
+}
+member {
+  id: 0xc8f320ea
+  name: "set_vconn"
+  type_id: 0x2fc8b97a
+  offset: 192
 }
 member {
   id: 0x51082ae7
@@ -184115,6 +184230,12 @@ member {
   name: "start_data"
   type_id: 0x33756485
   offset: 2624
+}
+member {
+  id: 0xa8acce05
+  name: "start_drp_toggling"
+  type_id: 0x2fcd0f5c
+  offset: 256
 }
 member {
   id: 0x786ffa71
@@ -203789,6 +203910,13 @@ member {
   name: "vbus_session"
   type_id: 0x2fc1720f
   offset: 320
+}
+member {
+  id: 0xd309fdc6
+  name: "vbus_vsafe0v"
+  type_id: 0x5d8155a5
+  offset: 66
+  bitsize: 1
 }
 member {
   id: 0xf6f15b5e
@@ -264147,6 +264275,33 @@ struct_union {
   }
 }
 struct_union {
+  id: 0xac1fb3f2
+  kind: STRUCT
+  name: "tcpci"
+}
+struct_union {
+  id: 0xb60a3d7a
+  kind: STRUCT
+  name: "tcpci_data"
+  definition {
+    bytesize: 80
+    member_id: 0x36e6f99c
+    member_id: 0xe8b65c9e
+    member_id: 0x7db25385
+    member_id: 0xd309fdc6
+    member_id: 0x827ac758
+    member_id: 0xaa31d7c7
+    member_id: 0x1ac50289
+    member_id: 0xc8f320ea
+    member_id: 0xa8acce05
+    member_id: 0xfef58f90
+    member_id: 0x796dacfc
+    member_id: 0x2a460727
+    member_id: 0xca18cac1
+    member_id: 0xb9243a3d
+  }
+}
+struct_union {
   id: 0x2083530c
   kind: STRUCT
   name: "tcphdr"
@@ -298666,6 +298821,12 @@ function {
   parameter_id: 0x33756485
 }
 function {
+  id: 0x1861ee1e
+  return_type_id: 0x48b5725f
+  parameter_id: 0x2197d55b
+  parameter_id: 0x2712b6f9
+}
+function {
   id: 0x1864769e
   return_type_id: 0x48b5725f
   parameter_id: 0x23f09c34
@@ -298698,6 +298859,13 @@ function {
   id: 0x187ab05b
   return_type_id: 0x48b5725f
   parameter_id: 0x238b8721
+}
+function {
+  id: 0x187ab1c9
+  return_type_id: 0x48b5725f
+  parameter_id: 0x2197d55b
+  parameter_id: 0x2712b6f9
+  parameter_id: 0x6d7f5ff6
 }
 function {
   id: 0x187c3067
@@ -298958,6 +299126,11 @@ function {
   parameter_id: 0x2208f89a
   parameter_id: 0x3e6239e1
   parameter_id: 0x66d19a75
+}
+function {
+  id: 0x18fda4c5
+  return_type_id: 0x48b5725f
+  parameter_id: 0x2197d55b
 }
 function {
   id: 0x19020ee6
@@ -303727,6 +303900,11 @@ function {
   parameter_id: 0x3e10b518
 }
 function {
+  id: 0x2aa171b7
+  return_type_id: 0x40e51470
+  parameter_id: 0x2197d55b
+}
+function {
   id: 0x2ad54eeb
   return_type_id: 0xf1eeb05c
   parameter_id: 0x2ed870a7
@@ -307974,6 +308152,11 @@ function {
   return_type_id: 0xd41e888f
   parameter_id: 0x0258f96e
   parameter_id: 0x368ec5cb
+}
+function {
+  id: 0x811fe124
+  return_type_id: 0x3e3c5004
+  parameter_id: 0x2197d55b
 }
 function {
   id: 0x81481ce8
@@ -315012,6 +315195,21 @@ function {
   parameter_id: 0x238b8721
 }
 function {
+  id: 0x95620375
+  return_type_id: 0x6720d32f
+  parameter_id: 0x2197d55b
+  parameter_id: 0x2712b6f9
+  parameter_id: 0x6d7f5ff6
+}
+function {
+  id: 0x9563b688
+  return_type_id: 0x6720d32f
+  parameter_id: 0x2197d55b
+  parameter_id: 0x2712b6f9
+  parameter_id: 0x6d7f5ff6
+  parameter_id: 0x6d7f5ff6
+}
+function {
   id: 0x9565c8c3
   return_type_id: 0x6720d32f
   parameter_id: 0x23f09c34
@@ -315044,6 +315242,19 @@ function {
   parameter_id: 0x6d7f5ff6
   parameter_id: 0x6720d32f
   parameter_id: 0x18bd6530
+}
+function {
+  id: 0x9574dbef
+  return_type_id: 0x6720d32f
+  parameter_id: 0x2197d55b
+  parameter_id: 0x2712b6f9
+  parameter_id: 0x361d366b
+}
+function {
+  id: 0x95795ca2
+  return_type_id: 0x6720d32f
+  parameter_id: 0x2197d55b
+  parameter_id: 0x2712b6f9
 }
 function {
   id: 0x957964bc
@@ -328774,6 +328985,11 @@ function {
   parameter_id: 0x806e162f
 }
 function {
+  id: 0xa0c6098f
+  return_type_id: 0x3e10b518
+  parameter_id: 0xca0878b1
+}
+function {
   id: 0xa12d962e
   return_type_id: 0xfc0e1dbd
   parameter_id: 0x1b36c7a2
@@ -329067,6 +329283,12 @@ function {
   parameter_id: 0x054f691a
   parameter_id: 0x32a623d7
   parameter_id: 0x2584a3b9
+}
+function {
+  id: 0xa763da50
+  return_type_id: 0x2197d55b
+  parameter_id: 0x0258f96e
+  parameter_id: 0x2712b6f9
 }
 function {
   id: 0xa780332f
@@ -332200,6 +332422,12 @@ function {
   id: 0xf6266522
   return_type_id: 0x6d7f5ff6
   parameter_id: 0x2208f89a
+}
+function {
+  id: 0xf65de489
+  return_type_id: 0x6d7f5ff6
+  parameter_id: 0x2197d55b
+  parameter_id: 0x2712b6f9
 }
 function {
   id: 0xf66ca055
@@ -376671,6 +376899,42 @@ elf_symbol {
   full_name: "tcp_reno_undo_cwnd"
 }
 elf_symbol {
+  id: 0x857e5dc9
+  name: "tcpci_get_tcpm_port"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x9cbb7db3
+  type_id: 0x811fe124
+  full_name: "tcpci_get_tcpm_port"
+}
+elf_symbol {
+  id: 0x85459353
+  name: "tcpci_irq"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa8bcced0
+  type_id: 0x2aa171b7
+  full_name: "tcpci_irq"
+}
+elf_symbol {
+  id: 0x1ecfd7d9
+  name: "tcpci_register_port"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xfa031b9a
+  type_id: 0xa763da50
+  full_name: "tcpci_register_port"
+}
+elf_symbol {
+  id: 0x80ba938c
+  name: "tcpci_unregister_port"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x7e9026b3
+  type_id: 0x18fda4c5
+  full_name: "tcpci_unregister_port"
+}
+elf_symbol {
   id: 0x76f0e146
   name: "tcpm_cc_change"
   is_defined: true
@@ -379864,6 +380128,15 @@ elf_symbol {
   crc: 0xe5a33b04
   type_id: 0x952154fc
   full_name: "usb_match_one_id"
+}
+elf_symbol {
+  id: 0xbc24fc64
+  name: "usb_otg_state_string"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x88356966
+  type_id: 0xa0c6098f
+  full_name: "usb_otg_state_string"
 }
 elf_symbol {
   id: 0xe9d87e68
@@ -388383,6 +388656,10 @@ interface {
   symbol_id: 0x11c1cd7f
   symbol_id: 0xeb0e3e9b
   symbol_id: 0xdb8e8104
+  symbol_id: 0x857e5dc9
+  symbol_id: 0x85459353
+  symbol_id: 0x1ecfd7d9
+  symbol_id: 0x80ba938c
   symbol_id: 0x76f0e146
   symbol_id: 0x8ff05644
   symbol_id: 0x3da83409
@@ -388738,6 +389015,7 @@ interface {
   symbol_id: 0x37cf2035
   symbol_id: 0x2db08c33
   symbol_id: 0x927b119c
+  symbol_id: 0xbc24fc64
   symbol_id: 0xe9d87e68
   symbol_id: 0xcaff4b1e
   symbol_id: 0x92510f88
