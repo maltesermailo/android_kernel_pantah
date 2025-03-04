@@ -105,6 +105,24 @@
       "parentUuid": "be80861d_46032dcc",
       "revId": "e9ba145c0a4d6f197fdbd622eaf3391f9e149933",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fe41fd8_9e8c02c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2025-03-04T10:42:28Z",
+      "side": 1,
+      "message": "Yes, it\u0027s a bit tricky isn\u0027t it. Arguably some of drivers/virt/coco/pkvm-guest belongs under a newly-created arch/arm64/coco along with arch/arm64/{gunyah,hyperv,...} but then the pKVM ops/hooks being defined will also in time be of use to pKVM-x86. We probably haven\u0027t seen the last of wrestling this code around, but this at least feels closer to what\u0027s been upstreamed so far. There\u0027s definitely a tension with other hypervisors clustering in ACK under arch/arm64/\u003chyp\u003e though.\n\nI\u0027m happy to +1 this, and wait for Will to explicitly remove his now-virtual -1 or comment further.",
+      "parentUuid": "9c52b86e_1849f6d8",
+      "revId": "e9ba145c0a4d6f197fdbd622eaf3391f9e149933",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
