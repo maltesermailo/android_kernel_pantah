@@ -167,6 +167,12 @@ static inline loff_t *io_kiocb_update_pos(struct io_kiocb *req)
 	return NULL;
 }
 
+static void io_req_task_queue_reissue(struct io_kiocb *req)
+{
+	req->io_task_work.func = io_queue_iowq;
+	io_req_task_work_add(req);
+}
+
 #ifdef CONFIG_BLOCK
 static bool io_resubmit_prep(struct io_kiocb *req)
 {
@@ -335,7 +341,7 @@ static int kiocb_done(struct io_kiocb *req, ssize_t ret,
 	if (req->flags & REQ_F_REISSUE) {
 		req->flags &= ~REQ_F_REISSUE;
 		if (io_resubmit_prep(req))
-			return -EAGAIN;
+			io_req_task_queue_reissue(req);
 		else
 			io_req_task_queue_fail(req, final_ret);
 	}
@@ -685,7 +691,7 @@ static int io_rw_init_file(struct io_kiocb *req, fmode_t mode)
 	return 0;
 }
 
-static int __io_read(struct io_kiocb *req, unsigned int issue_flags)
+int io_read(struct io_kiocb *req, unsigned int issue_flags)
 {
 	struct io_rw *rw = io_kiocb_to_cmd(req, struct io_rw);
 	struct io_rw_state __s, *s = &__s;
@@ -750,14 +756,6 @@ static int __io_read(struct io_kiocb *req, unsigned int issue_flags)
 	}
 
 	ret = io_iter_do_read(rw, &s->iter);
-
-	/*
-	 * Some file systems like to return -EOPNOTSUPP for an IOCB_NOWAIT
-	 * issue, even though they should be returning -EAGAIN. To be safe,
-	 * retry from blocking context for either.
-	 */
-	if (ret == -EOPNOTSUPP && force_nonblock)
-		ret = -EAGAIN;
 
 	if (ret == -EAGAIN || (req->flags & REQ_F_REISSUE)) {
 		req->flags &= ~REQ_F_REISSUE;
@@ -838,18 +836,7 @@ done:
 	/* it's faster to check here then delegate to kfree */
 	if (iovec)
 		kfree(iovec);
-	return ret;
-}
-
-int io_read(struct io_kiocb *req, unsigned int issue_flags)
-{
-	int ret;
-
-	ret = __io_read(req, issue_flags);
-	if (ret >= 0)
-		return kiocb_done(req, ret, issue_flags);
-
-	return ret;
+	return kiocb_done(req, ret, issue_flags);
 }
 
 static bool io_kiocb_start_write(struct io_kiocb *req, struct kiocb *kiocb)
