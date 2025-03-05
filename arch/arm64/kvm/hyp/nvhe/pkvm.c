@@ -32,7 +32,7 @@ unsigned int kvm_sve_max_vl;
 unsigned int kvm_host_sve_max_vl;
 
 /*
- * The currently loaded hyp vCPU for each physical CPU. Used only when
+ * The currently loaded hyp vCPU for each physical CPU. This is used only when
  * protected KVM is enabled, but for both protected and non-protected VMs.
  */
 static DEFINE_PER_CPU(struct pkvm_hyp_vcpu *, loaded_hyp_vcpu);
