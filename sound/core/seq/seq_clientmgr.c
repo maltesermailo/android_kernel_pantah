@@ -678,18 +678,12 @@ static int snd_seq_deliver_single_event(struct snd_seq_client *client,
 					  dest_port->time_real);
 
 #if IS_ENABLED(CONFIG_SND_SEQ_UMP)
-	if (snd_seq_ev_is_ump(event)) {
-		if (!(dest->filter & SNDRV_SEQ_FILTER_NO_CONVERT)) {
+	if (!(dest->filter & SNDRV_SEQ_FILTER_NO_CONVERT)) {
+		if (snd_seq_ev_is_ump(event)) {
 			result = snd_seq_deliver_from_ump(client, dest, dest_port,
 							  event, atomic, hop);
 			goto __skip;
-		} else if (dest->type == USER_CLIENT &&
-			   !snd_seq_client_is_ump(dest)) {
-			result = 0; // drop the event
-			goto __skip;
-		}
-	} else if (snd_seq_client_is_ump(dest)) {
-		if (!(dest->filter & SNDRV_SEQ_FILTER_NO_CONVERT)) {
+		} else if (snd_seq_client_is_ump(dest)) {
 			result = snd_seq_deliver_to_ump(client, dest, dest_port,
 							event, atomic, hop);
 			goto __skip;

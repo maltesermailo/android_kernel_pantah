@@ -15,11 +15,9 @@
 };
 
 &gmac2io {
-	/delete-property/ tx_delay;
-	/delete-property/ rx_delay;
-
 	phy-handle = <&yt8531c>;
-	phy-mode = "rgmii-id";
+	tx_delay = <0x19>;
+	rx_delay = <0x05>;
 
 	mdio {
 		/delete-node/ ethernet-phy@1;

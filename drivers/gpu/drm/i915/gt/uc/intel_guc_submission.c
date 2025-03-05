@@ -3425,10 +3425,10 @@ static inline int guc_lrc_desc_unpin(struct intel_context *ce)
 	 */
 	ret = deregister_context(ce, ce->guc_id.id);
 	if (ret) {
-		spin_lock_irqsave(&ce->guc_state.lock, flags);
+		spin_lock(&ce->guc_state.lock);
 		set_context_registered(ce);
 		clr_context_destroyed(ce);
-		spin_unlock_irqrestore(&ce->guc_state.lock, flags);
+		spin_unlock(&ce->guc_state.lock);
 		/*
 		 * As gt-pm is awake at function entry, intel_wakeref_put_async merely decrements
 		 * the wakeref immediately but per function spec usage call this after unlock.

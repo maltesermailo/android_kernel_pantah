@@ -411,20 +411,46 @@ static inline bool mask_contains_bar(int mask, int bar)
 	return mask & BIT(bar);
 }
 
+/*
+ * This is a copy of pci_intx() used to bypass the problem of recursive
+ * function calls due to the hybrid nature of pci_intx().
+ */
+static void __pcim_intx(struct pci_dev *pdev, int enable)
+{
+	u16 pci_command, new;
+
+	pci_read_config_word(pdev, PCI_COMMAND, &pci_command);
+
+	if (enable)
+		new = pci_command & ~PCI_COMMAND_INTX_DISABLE;
+	else
+		new = pci_command | PCI_COMMAND_INTX_DISABLE;
+
+	if (new != pci_command)
+		pci_write_config_word(pdev, PCI_COMMAND, new);
+}
+
 static void pcim_intx_restore(struct device *dev, void *data)
 {
 	struct pci_dev *pdev = to_pci_dev(dev);
 	struct pcim_intx_devres *res = data;
 
-	pci_intx(pdev, res->orig_intx);
+	__pcim_intx(pdev, res->orig_intx);
 }
 
-static void save_orig_intx(struct pci_dev *pdev, struct pcim_intx_devres *res)
+static struct pcim_intx_devres *get_or_create_intx_devres(struct device *dev)
 {
-	u16 pci_command;
+	struct pcim_intx_devres *res;
 
-	pci_read_config_word(pdev, PCI_COMMAND, &pci_command);
-	res->orig_intx = !(pci_command & PCI_COMMAND_INTX_DISABLE);
+	res = devres_find(dev, pcim_intx_restore, NULL, NULL);
+	if (res)
+		return res;
+
+	res = devres_alloc(pcim_intx_restore, sizeof(*res), GFP_KERNEL);
+	if (res)
+		devres_add(dev, res);
+
+	return res;
 }
 
 /**
@@ -440,28 +466,16 @@ static void save_orig_intx(struct pci_dev *pdev, struct pcim_intx_devres *res)
 int pcim_intx(struct pci_dev *pdev, int enable)
 {
 	struct pcim_intx_devres *res;
-	struct device *dev = &pdev->dev;
 
-	/*
-	 * pcim_intx() must only restore the INTx value that existed before the
-	 * driver was loaded, i.e., before it called pcim_intx() for the
-	 * first time.
-	 */
-	res = devres_find(dev, pcim_intx_restore, NULL, NULL);
-	if (!res) {
-		res = devres_alloc(pcim_intx_restore, sizeof(*res), GFP_KERNEL);
-		if (!res)
-			return -ENOMEM;
+	res = get_or_create_intx_devres(&pdev->dev);
+	if (!res)
+		return -ENOMEM;
 
-		save_orig_intx(pdev, res);
-		devres_add(dev, res);
-	}
-
-	pci_intx(pdev, enable);
+	res->orig_intx = !enable;
+	__pcim_intx(pdev, enable);
 
 	return 0;
 }
-EXPORT_SYMBOL_GPL(pcim_intx);
 
 static void pcim_disable_device(void *pdev_raw)
 {
@@ -925,7 +939,7 @@ static void pcim_release_all_regions(struct pci_dev *pdev)
  * desired, release individual regions with pcim_release_region() or all of
  * them at once with pcim_release_all_regions().
  */
-int pcim_request_all_regions(struct pci_dev *pdev, const char *name)
+static int pcim_request_all_regions(struct pci_dev *pdev, const char *name)
 {
 	int ret;
 	int bar;
@@ -943,7 +957,6 @@ err:
 
 	return ret;
 }
-EXPORT_SYMBOL(pcim_request_all_regions);
 
 /**
  * pcim_iomap_regions_request_all - Request all BARs and iomap specified ones

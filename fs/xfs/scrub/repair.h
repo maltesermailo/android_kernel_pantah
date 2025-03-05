@@ -163,16 +163,7 @@ bool xrep_buf_verify_struct(struct xfs_buf *bp, const struct xfs_buf_ops *ops);
 #else
 
 #define xrep_ino_dqattach(sc)	(0)
-
-/*
- * When online repair is not built into the kernel, we still want to attempt
- * the repair so that the stub xrep_attempt below will return EOPNOTSUPP.
- */
-static inline bool xrep_will_attempt(const struct xfs_scrub *sc)
-{
-	return (sc->sm->sm_flags & XFS_SCRUB_IFLAG_FORCE_REBUILD) ||
-		xchk_needs_repair(sc->sm);
-}
+#define xrep_will_attempt(sc)	(false)
 
 static inline int
 xrep_attempt(

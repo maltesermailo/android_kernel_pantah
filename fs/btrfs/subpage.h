@@ -45,6 +45,14 @@ enum {
 struct btrfs_subpage {
 	/* Common members for both data and metadata pages */
 	spinlock_t lock;
+	/*
+	 * Both data and metadata needs to track how many readers are for the
+	 * page.
+	 * Data relies on @readers to unlock the page when last reader finished.
+	 * While metadata doesn't need page unlock, it needs to prevent
+	 * page::private get cleared before the last end_page_read().
+	 */
+	atomic_t readers;
 	union {
 		/*
 		 * Structures only used by metadata
@@ -54,12 +62,8 @@ struct btrfs_subpage {
 		 */
 		atomic_t eb_refs;
 
-		/*
-		 * Structures only used by data,
-		 *
-		 * How many sectors inside the page is locked.
-		 */
-		atomic_t nr_locked;
+		/* Structures only used by data */
+		atomic_t writers;
 	};
 	unsigned long bitmaps[];
 };
@@ -91,12 +95,23 @@ void btrfs_free_subpage(struct btrfs_subpage *subpage);
 void btrfs_folio_inc_eb_refs(const struct btrfs_fs_info *fs_info, struct folio *folio);
 void btrfs_folio_dec_eb_refs(const struct btrfs_fs_info *fs_info, struct folio *folio);
 
-void btrfs_folio_end_lock(const struct btrfs_fs_info *fs_info,
-			  struct folio *folio, u64 start, u32 len);
-void btrfs_folio_set_lock(const struct btrfs_fs_info *fs_info,
-			  struct folio *folio, u64 start, u32 len);
-void btrfs_folio_end_lock_bitmap(const struct btrfs_fs_info *fs_info,
-				 struct folio *folio, unsigned long bitmap);
+void btrfs_subpage_start_reader(const struct btrfs_fs_info *fs_info,
+				struct folio *folio, u64 start, u32 len);
+void btrfs_subpage_end_reader(const struct btrfs_fs_info *fs_info,
+			      struct folio *folio, u64 start, u32 len);
+
+int btrfs_folio_start_writer_lock(const struct btrfs_fs_info *fs_info,
+				  struct folio *folio, u64 start, u32 len);
+void btrfs_folio_end_writer_lock(const struct btrfs_fs_info *fs_info,
+				 struct folio *folio, u64 start, u32 len);
+void btrfs_folio_set_writer_lock(const struct btrfs_fs_info *fs_info,
+				 struct folio *folio, u64 start, u32 len);
+void btrfs_folio_end_writer_lock_bitmap(const struct btrfs_fs_info *fs_info,
+					struct folio *folio, unsigned long bitmap);
+bool btrfs_subpage_find_writer_locked(const struct btrfs_fs_info *fs_info,
+				      struct folio *folio, u64 search_start,
+				      u64 *found_start_ret, u32 *found_len_ret);
+
 /*
  * Template for subpage related operations.
  *

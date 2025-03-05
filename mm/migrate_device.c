@@ -840,15 +840,20 @@ void migrate_device_finalize(unsigned long *src_pfns,
 			dst = src;
 		}
 
-		if (!folio_is_zone_device(dst))
-			folio_add_lru(dst);
 		remove_migration_ptes(src, dst, 0);
 		folio_unlock(src);
-		folio_put(src);
+
+		if (folio_is_zone_device(src))
+			folio_put(src);
+		else
+			folio_putback_lru(src);
 
 		if (dst != src) {
 			folio_unlock(dst);
-			folio_put(dst);
+			if (folio_is_zone_device(dst))
+				folio_put(dst);
+			else
+				folio_putback_lru(dst);
 		}
 	}
 }
