@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c5b09b2_2c1aade4",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/pkvm.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-03-06T23:28:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8306055f_8dd4dcc6",
+      "revId": "d36ed1c644ad25168e24bb4ca9192aa90b18ac02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd3de8f7_fcdc26d6",
@@ -84,6 +102,24 @@
       "writtenOn": "2025-02-20T18:46:33Z",
       "side": 1,
       "message": "You could here do one stone two birds with a KVM_HYP_REQ_TYPE_MAP. That is, if -EFAULT, you\u0027ll also check the memcache at the same time?\n\nsee pkvm_memshare_call()",
+      "revId": "d36ed1c644ad25168e24bb4ca9192aa90b18ac02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1c0743e_4c305d71",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-03-06T23:28:09Z",
+      "side": 1,
+      "message": "Seems the example you pointed is using `pkvm_hyp_req_reserve` which sets a custom request in the hyp_reqs and then it falls through in `pkvm_handle_empty_memcache` to request memory \u0026 set the exit code to `ARM_EXCEPTION_HYP_REQ`.\n\nI still have to simulate the page fault through `__pkvm_memshare_page_req`",
+      "parentUuid": "93fc2651_8d5072cb",
       "revId": "d36ed1c644ad25168e24bb4ca9192aa90b18ac02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
