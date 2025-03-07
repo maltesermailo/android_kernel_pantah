@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "844f7bb4_544e7f89",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2110,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-03-07T16:43:33Z",
+      "side": 1,
+      "message": "This feels pretty slow, perhaps allocate one page per-vcpu and donate that to EL2 during the vm creation so we can just copy the sglist from the host using the fixmap or something? That was no need to temporarily punch holes in the host stage-2 on every fault?",
+      "range": {
+        "startLine": 2110,
+        "startChar": 7,
+        "endLine": 2110,
+        "endChar": 58
+      },
+      "revId": "c6db7a304b6b5b5b8223655563f58d9be029838b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
