@@ -22,6 +22,30 @@
       },
       "revId": "c6db7a304b6b5b5b8223655563f58d9be029838b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d10751dd_530ed1fd",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 2110,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-03-07T17:01:11Z",
+      "side": 1,
+      "message": "Yeah I wasn\u0027t sure either.\n\nThe problem is also that means extra allocations while most of users wouldn\u0027t really care.\n\nAnother solution I thought of is to allocate a private version (either static or with hyp_alloc()) and then only share the list from the host and copy it into our private memory?",
+      "parentUuid": "844f7bb4_544e7f89",
+      "range": {
+        "startLine": 2110,
+        "startChar": 7,
+        "endLine": 2110,
+        "endChar": 58
+      },
+      "revId": "c6db7a304b6b5b5b8223655563f58d9be029838b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
