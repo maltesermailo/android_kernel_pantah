@@ -51,6 +51,12 @@ static int try_to_freeze_tasks(bool user_only)
 
 	while (true) {
 		todo = 0;
+		if (pm_wakeup_pending()) {
+			wakeup = true;
+			todo++;
+			break;
+		}
+
 		read_lock(&tasklist_lock);
 		for_each_process_thread(g, p) {
 			if (p == current || !freeze_task(p))
@@ -67,11 +73,6 @@ static int try_to_freeze_tasks(bool user_only)
 
 		if (!todo || time_after(jiffies, end_time))
 			break;
-
-		if (pm_wakeup_pending()) {
-			wakeup = true;
-			break;
-		}
 
 		/*
 		 * We need to retry, but first give the freezing tasks some
