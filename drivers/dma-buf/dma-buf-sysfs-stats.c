@@ -66,6 +66,8 @@ static ssize_t dma_buf_stats_attribute_show(struct kobject *kobj,
 	struct dma_buf_stats_attribute *attribute;
 	struct dma_buf_sysfs_entry *sysfs_entry;
 	struct dma_buf *dmabuf;
+	bool dmabuf_get = true;
+	ssize_t ret;
 
 	attribute = to_dma_buf_stats_attr(attr);
 	sysfs_entry = to_dma_buf_entry_from_kobj(kobj);
@@ -74,7 +76,19 @@ static ssize_t dma_buf_stats_attribute_show(struct kobject *kobj,
 	if (!dmabuf || !attribute->show)
 		return -EIO;
 
-	return attribute->show(dmabuf, attribute, buf);
+	trace_android_vh_dma_buf_attr_show_start(dmabuf, &dmabuf_get);
+	/*
+	 * The user space traverses /sys/kernel/dmabuf/buffers to read info.
+	 * When reading a node fails, it exits; in order to avoid interrupting
+	 * the traversal operation, if get dmabuf fails, returns 0 in this case.
+	 */
+	if (!dmabuf_get)
+		return 0;
+
+	ret = attribute->show(dmabuf, attribute, buf);
+	trace_android_vh_dma_buf_attr_show_end(dmabuf);
+
+	return ret;
 }
 
 static const struct sysfs_ops dma_buf_stats_sysfs_ops = {
