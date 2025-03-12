@@ -3,6 +3,74 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "74e1d5f8_25a66f4b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-12T17:18:29Z",
+      "side": 1,
+      "message": "Please submit this as 2 patches:\n1) the patch adding the exports\n2) the symbol update",
+      "revId": "46e7cb42b5e640226ac6b415fad8f05ae1aea5cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b979ccd0_d502403f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-12T17:18:29Z",
+      "side": 1,
+      "message": "If these were already in android15-6.6, why can\u0027t you cherry-pick those patches so we can correlate them via their matching Change-Id?",
+      "revId": "46e7cb42b5e640226ac6b415fad8f05ae1aea5cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "485843e7_37657595",
+        "filename": "gki/aarch64/symbols/oplus",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-12T17:18:29Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by Kernel Symbol Tracker (aarch64): Missing traceiter symbols for the following tracepoint symbols:\n\nAnalyzer Description: Reports KMI symbol presence status across android branches.\nOwner: gki-eng-team@google.com\n\nMissing traceiter symbols for the following tracepoint symbols:\n  __tracepoint_block_rq_requeue",
+      "revId": "46e7cb42b5e640226ac6b415fad8f05ae1aea5cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7f7caba_16a273fe",
+        "filename": "gki/aarch64/symbols/oplus",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-12T17:18:29Z",
+      "side": 1,
+      "message": "missing __tracepoint_block_rq_requeue",
+      "revId": "46e7cb42b5e640226ac6b415fad8f05ae1aea5cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d5571dea_263da013",
         "filename": "net/sched/sch_api.c",
         "patchSetId": 1
@@ -14,6 +82,30 @@
       "writtenOn": "2025-03-11T15:17:42Z",
       "side": 1,
       "message": "do not export internal symbols like this with __ as a prefix.\n\nAlso, if you do, it MUST be `EXPORT_SYMBOL_GPL()`",
+      "range": {
+        "startLine": 596,
+        "startChar": 0,
+        "endLine": 596,
+        "endChar": 13
+      },
+      "revId": "46e7cb42b5e640226ac6b415fad8f05ae1aea5cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc259e89_c414274e",
+        "filename": "net/sched/sch_api.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-12T17:18:29Z",
+      "side": 1,
+      "message": "Also, if you really need this, explain why in the commit message.",
+      "parentUuid": "d5571dea_263da013",
       "range": {
         "startLine": 596,
         "startChar": 0,
