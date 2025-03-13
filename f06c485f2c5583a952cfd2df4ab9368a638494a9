@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cc9205a_50c8c7d3",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-03-13T18:38:05Z",
+      "side": 1,
+      "message": "gfn/pfn values are in the PA space, so not sure about using VA_BITS here. I guess we should check what\u0027s the largest PA size with LPAE and such, but it should be smaller that 52 I think.",
+      "range": {
+        "startLine": 758,
+        "startChar": 11,
+        "endLine": 758,
+        "endChar": 18
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b032bf52_5bab2ab3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/include/asm/kvm_host.h",
+              "range": {
+                "startLine": 758,
+                "startChar": 0,
+                "endLine": 759,
+                "endChar": 0
+              },
+              "replacement": " * biggest PA_BITS value (52) - minimum PAGE_SHIFT (12).\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f06c485f2c5583a952cfd2df4ab9368a638494a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "594ef028_7bc8fa82",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 2132,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-03-13T18:38:05Z",
+      "side": 1,
+      "message": "Do we actually need to pre-copy? The loop below could read the ppages from the hyp_reqs one by one, check the state of the current ppage, and then donate. Failing halfway through should not happen unless the host is being stupid so I guess we can bail. I don\u0027t _think_ there is ToCToU thing here, because we can just copy an entire struct kvm_hyp_pinned_page on the hyp stack, work with it, and then discard it for the next one. Wdyt?",
+      "range": {
+        "startLine": 2132,
+        "startChar": 7,
+        "endLine": 2132,
+        "endChar": 24
+      },
+      "revId": "f06c485f2c5583a952cfd2df4ab9368a638494a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
