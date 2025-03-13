@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74121219_4e67a838",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-03-13T18:46:58Z",
+      "side": 1,
+      "message": "Overall looks ok, but the structure modifications for kABI compat, and the vendorhook additions should be done in separate patches. Please split this, and then update the symbol addition patch on top (as it currently has a merge conflict).\n\nHopefully we can get this ready for the next kabi merge window",
+      "revId": "b996803de7ae6fe5fcbb8745876a10deff5504ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e8657e9_6a4d3388",
+        "filename": "include/trace/hooks/sched.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-03-13T18:46:58Z",
+      "side": 1,
+      "message": "So, the included structure changes and the vendorhook additions should probably be two separate patches. Could you split this out?",
+      "fixSuggestions": [
+        {
+          "fixId": "eab30ab0_9216f23d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/trace/hooks/sched.h",
+              "range": {
+                "startLine": 469,
+                "startChar": 0,
+                "endLine": 470,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "b996803de7ae6fe5fcbb8745876a10deff5504ed",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
