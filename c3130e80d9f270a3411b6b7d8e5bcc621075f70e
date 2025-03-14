@@ -16,6 +16,23 @@
       "message": "This topic reconciles android-mainline with the HW-wrapped key patches that are expected to make it upstrearm in 6.15 and 6.16.  The presubmit failure on kernel_raviole_* is expected since a driver update http://pagit/3130972 is needed.",
       "revId": "c3130e80d9f270a3411b6b7d8e5bcc621075f70e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a68fc88_ae5426d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-03-14T22:12:23Z",
+      "side": 1,
+      "message": "Couple of things:\n\n1) Plese don\u0027t bypass presubmit when targets are clearly failing some reason and proposed fixed to address the failures.\n\n2) Can we just wait for these upstream change to come in via the merges? One reason to wait for the merges is because it may cause conflicts during the 6.13-\u003e6.16 merge process.",
+      "revId": "c3130e80d9f270a3411b6b7d8e5bcc621075f70e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
