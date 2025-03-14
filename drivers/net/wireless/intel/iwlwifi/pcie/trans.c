@@ -2589,6 +2589,7 @@ static const struct file_operations iwl_dbgfs_##name##_ops = {		\
 	.llseek = generic_file_llseek,					\
 };
 
+/*
 struct iwl_dbgfs_tx_queue_priv {
 	struct iwl_trans *trans;
 };
@@ -2677,7 +2678,7 @@ static int iwl_dbgfs_tx_queue_open(struct inode *inode, struct file *filp)
 
 	priv->trans = inode->i_private;
 	return 0;
-}
+}*/
 
 static ssize_t iwl_dbgfs_rx_queue_read(struct file *file,
 				       char __user *user_buf,
@@ -3026,13 +3027,14 @@ DEBUGFS_WRITE_FILE_OPS(csr);
 DEBUGFS_READ_WRITE_FILE_OPS(rfkill);
 DEBUGFS_READ_FILE_OPS(rf);
 
+/*
 static const struct file_operations iwl_dbgfs_tx_queue_ops = {
 	.owner = THIS_MODULE,
 	.open = iwl_dbgfs_tx_queue_open,
 	.read = seq_read,
 	.llseek = seq_lseek,
 	.release = seq_release_private,
-};
+};*/
 
 static const struct file_operations iwl_dbgfs_monitor_data_ops = {
 	.read = iwl_dbgfs_monitor_data_read,
@@ -3046,7 +3048,7 @@ void iwl_trans_pcie_dbgfs_register(struct iwl_trans *trans)
 	struct dentry *dir = trans->dbgfs_dir;
 
 	DEBUGFS_ADD_FILE(rx_queue, dir, 0400);
-	DEBUGFS_ADD_FILE(tx_queue, dir, 0400);
+	//DEBUGFS_ADD_FILE(tx_queue, dir, 0400);
 	DEBUGFS_ADD_FILE(interrupt, dir, 0600);
 	DEBUGFS_ADD_FILE(csr, dir, 0200);
 	DEBUGFS_ADD_FILE(fh_reg, dir, 0400);

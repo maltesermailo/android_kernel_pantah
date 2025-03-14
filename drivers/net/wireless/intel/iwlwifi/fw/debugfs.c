@@ -282,6 +282,7 @@ static ssize_t iwl_dbgfs_fw_dbg_domain_read(struct iwl_fw_runtime *fwrt,
 
 FWRT_DEBUGFS_READ_FILE_OPS(fw_dbg_domain, 20);
 
+/*
 struct iwl_dbgfs_fw_info_priv {
 	struct iwl_fw_runtime *fwrt;
 };
@@ -387,14 +388,14 @@ static const struct file_operations iwl_dbgfs_fw_info_ops = {
 	.read = seq_read,
 	.llseek = seq_lseek,
 	.release = seq_release_private,
-};
+};*/
 
 void iwl_fwrt_dbgfs_register(struct iwl_fw_runtime *fwrt,
 			    struct dentry *dbgfs_dir)
 {
 	INIT_DELAYED_WORK(&fwrt->timestamp.wk, iwl_fw_timestamp_marker_wk);
 	FWRT_DEBUGFS_ADD_FILE(timestamp_marker, dbgfs_dir, 0200);
-	FWRT_DEBUGFS_ADD_FILE(fw_info, dbgfs_dir, 0200);
+	//FWRT_DEBUGFS_ADD_FILE(fw_info, dbgfs_dir, 0200);
 	FWRT_DEBUGFS_ADD_FILE(send_hcmd, dbgfs_dir, 0200);
 	FWRT_DEBUGFS_ADD_FILE(enabled_severities, dbgfs_dir, 0200);
 	FWRT_DEBUGFS_ADD_FILE(fw_dbg_domain, dbgfs_dir, 0400);
