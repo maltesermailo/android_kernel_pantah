@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e4dbf86_85cd8f5c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-03-15T04:35:14Z",
+      "side": 1,
+      "message": "This commit message needs a bit more explanation as you\u0027re adding hooks but also some pretty new behavior to the logic (particularly elevating sched ext as a class above rt).",
+      "revId": "f0fddc696ab6f5b01cf2b4fa199d60fee828e9ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "932bec8e_a6850fb0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-03-15T04:35:14Z",
+      "side": 1,
+      "message": "I think this needs a bit more iteration. Please note the commit message tweaks I already made when you resubmit.",
+      "revId": "f0fddc696ab6f5b01cf2b4fa199d60fee828e9ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "528d34de_58dbe6ba",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 5254,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-03-15T04:35:14Z",
+      "side": 1,
+      "message": "I\u0027m a little concerned with this logic, as it seems to be hinting that you\u0027re trying to use scx for realtime prio tasks, which is sort of beyond what sched_class_ext does currently. This probably needs some clarification and justification in the commit message as it seems to be a pretty meaninful change.",
+      "revId": "f0fddc696ab6f5b01cf2b4fa199d60fee828e9ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dfd05ae_bb63b791",
+        "filename": "kernel/sched/core.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 8091,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-03-15T04:35:14Z",
+      "side": 1,
+      "message": "Same here. This seems to be elevating sched_ext above RT, which is definitely a break from the upstream behavior.",
+      "revId": "f0fddc696ab6f5b01cf2b4fa199d60fee828e9ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbef7ec0_4514d379",
+        "filename": "kernel/sched/ext.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 3104,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-03-15T04:35:14Z",
+      "side": 1,
+      "message": "This vendorhook should probably have a scx_ prefix, as otherwise it doesn\u0027t seem very obviously tied to the function it is in.",
+      "revId": "f0fddc696ab6f5b01cf2b4fa199d60fee828e9ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "311d6a73_85ddd495",
+        "filename": "kernel/sched/ext.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 4681,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-03-15T04:35:14Z",
+      "side": 1,
+      "message": "This is a really generic vendorhook name. Probably should have scx_ in it somewhere to make it clear its connected to scx functionality",
+      "revId": "f0fddc696ab6f5b01cf2b4fa199d60fee828e9ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6487796d_633030fd",
+        "filename": "kernel/sched/ext.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 5402,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-03-15T04:35:14Z",
+      "side": 1,
+      "message": "Same here. This is a pretty generic function name that might seem to apply to non-scx code.",
+      "revId": "f0fddc696ab6f5b01cf2b4fa199d60fee828e9ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
