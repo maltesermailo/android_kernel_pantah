@@ -475,3 +475,6 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_trigger_vendor_lmk_kill);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_map_pages_range);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_vprintk_store);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_referenced_check_bypass);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mem_cgroup_charge);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_add_folio);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_shrink_node);
