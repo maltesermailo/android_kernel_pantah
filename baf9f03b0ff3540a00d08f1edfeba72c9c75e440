@@ -52,6 +52,24 @@
       "parentUuid": "9b59b524_066809c2",
       "revId": "baf9f03b0ff3540a00d08f1edfeba72c9c75e440",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "619c2772_bcbbe028",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-03-18T15:21:28Z",
+      "side": 1,
+      "message": "We should probably make sure that:\n\n- The stalk walk is strictly ascending and stays within the bounds of the stack\n- It doesn\u0027t rely on well-formed frames (including NUL terminator)\n- It handles the overflow stack properly (which isn\u0027t implemented for guest context yet -- see b/340829252)\n\nThat may all be true today, but we should confirm prior to enabling this in production.",
+      "parentUuid": "fe0c4c66_3a1a60f5",
+      "revId": "baf9f03b0ff3540a00d08f1edfeba72c9c75e440",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
