@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4658f354_2d05ca3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1293738
+      },
+      "writtenOn": "2025-03-18T19:26:23Z",
+      "side": 1,
+      "message": "\u003e Since the btusb module was not compiled in ACK before, this means the\n\u003e module was not used by any other projects and it shall be safe to enable\n\u003e the config on ACK by default.\n\nGenerally the opposite is true, actually. This would only be true if the symbols required to build btusb were not already in the GKI ABI, if they already are, any vendor could be building btusb downstream and have made changes to it, and thus not actually want it in GKI. I think this might require a poll.",
+      "revId": "3a3e55cf522350dd18d7c3f82f4b516509bf6276",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
