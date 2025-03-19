@@ -16,6 +16,24 @@
       "message": "\u003e Since the btusb module was not compiled in ACK before, this means the\n\u003e module was not used by any other projects and it shall be safe to enable\n\u003e the config on ACK by default.\n\nGenerally the opposite is true, actually. This would only be true if the symbols required to build btusb were not already in the GKI ABI, if they already are, any vendor could be building btusb downstream and have made changes to it, and thus not actually want it in GKI. I think this might require a poll.",
       "revId": "3a3e55cf522350dd18d7c3f82f4b516509bf6276",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0e1fcd9_dc09bfce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1962300
+      },
+      "writtenOn": "2025-03-19T02:45:26Z",
+      "side": 1,
+      "message": "Hi @adelva@google.com, thanks for the feedback!\n\n\u003e I think this might require a poll.\n\nWhere\u0027s the best place to conduct the poll? Is it Android Bluetooth chat?\n\n\u003e any vendor could be building btusb downstream and have made changes to it\n\nDoes this mean they would have a btusb.ko under /vendor? If so, wouldn\u0027t the default one be replaced by the vendor one?",
+      "parentUuid": "4658f354_2d05ca3e",
+      "revId": "3a3e55cf522350dd18d7c3f82f4b516509bf6276",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
