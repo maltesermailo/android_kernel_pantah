@@ -6,6 +6,7 @@ This module contains a full list of kernel modules
  compiled by GKI.
 """
 
+# LINT.IfChange
 _COMMON_GKI_MODULES_LIST = [
     # keep sorted
     "drivers/block/virtio_blk.ko",
@@ -104,7 +105,9 @@ _ARM64_GKI_MODULES_LIST = [
     "drivers/char/hw_random/cctrng.ko",
     "drivers/misc/open-dice.ko",
     "drivers/ptp/ptp_kvm.ko",
+    # test
 ]
+# LINT.ThenChange(gki/aarch64/protected_exports)
 
 _X86_GKI_MODULES_LIST = [
     # keep sorted
