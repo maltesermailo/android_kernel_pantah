@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eddc4988_1f861f41",
+        "filename": "include/net/cls_cgroup.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-20T09:41:55Z",
+      "side": 1,
+      "message": "this inclusion is causing the ABI issue because this file is included by otehr files and results in the visibility of some struct to change (probably from decl-only to fully defined). Adding a hook to a static inline function causes that code to be replicated in multiple places. Better to define a function and avoid the inclusion as was done in aosp/3053646.",
+      "fixSuggestions": [
+        {
+          "fixId": "5f01ae0e_5aca96a1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/net/cls_cgroup.h",
+              "range": {
+                "startLine": 16,
+                "startChar": 0,
+                "endLine": 17,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "include/net/cls_cgroup.h",
+              "range": {
+                "startLine": 76,
+                "startChar": 0,
+                "endLine": 78,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "2c650f21e2b77acf1bb72879ff0496b02326e4d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
