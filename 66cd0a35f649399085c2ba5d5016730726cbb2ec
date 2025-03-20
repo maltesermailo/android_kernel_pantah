@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce620487_a876834e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-20T21:39:47Z",
+      "side": 1,
+      "message": "Breaks the build. Always test your patches before uploading!\n```\nIn file included from /mnt/disks/build-disk/src/android/common-android16-6.12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/146/execroot/_main/common/net/core/sock.c:145:\n/mnt/disks/build-disk/src/android/common-android16-6.12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/146/execroot/_main/common/include/trace/hooks/net.h:87:1: error: static declaration of \u0027trace_android_vh_task_get_classid\u0027 follows non-static declaration\n   87 | DECLARE_HOOK(android_vh_task_get_classid,\n      | ^\n/mnt/disks/build-disk/src/android/common-android16-6.12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/146/execroot/_main/common/include/trace/hooks/vendor_hooks.h:16:22: note: expanded from macro \u0027DECLARE_HOOK\u0027\n   16 | #define DECLARE_HOOK DECLARE_TRACE\n      |                      ^\n/mnt/disks/build-disk/src/android/common-android16-6.12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/146/execroot/_main/common/include/linux/tracepoint.h:473:2: note: expanded from macro \u0027DECLARE_TRACE\u0027\n  473 |         __DECLARE_TRACE(name, PARAMS(proto), PARAMS(args),              \\\n      |         ^\n/mnt/disks/build-disk/src/android/common-android16-6.12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/146/execroot/_main/common/include/linux/tracepoint.h:294:21: note: expanded from macro \u0027__DECLARE_TRACE\u0027\n  294 |         static inline void trace_##name(proto)                          \\\n      |                            ^\n\u003cscratch space\u003e:7:1: note: expanded from here\n    7 | trace_android_vh_task_get_classid\n      | ^\n/mnt/disks/build-disk/src/android/common-android16-6.12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/146/execroot/_main/common/include/net/cls_cgroup.h:23:6: note: previous declaration is here\n   23 | void trace_android_vh_task_get_classid(const struct sk_buff *skb, u32 *classid);\n      |      ^\n1 error generated.\n```",
+      "revId": "66cd0a35f649399085c2ba5d5016730726cbb2ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23371f2b_ef07e11c",
+        "filename": "include/trace/hooks/net.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-20T21:39:47Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCheckPatch: ERROR:CODE_INDENT: code indent should use tabs where possible\n\nAnalyzer Description: Ensures that kernel patches follow the guidelines.\nOwner: estaats@google.com\n\nERROR:CODE_INDENT: code indent should use tabs where possible",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 0
+      },
+      "revId": "66cd0a35f649399085c2ba5d5016730726cbb2ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78176e49_05582bff",
+        "filename": "include/trace/hooks/net.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-20T21:39:47Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCheckPatch: ERROR:CODE_INDENT: code indent should use tabs where possible\n\nAnalyzer Description: Ensures that kernel patches follow the guidelines.\nOwner: estaats@google.com\n\nERROR:CODE_INDENT: code indent should use tabs where possible",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 0
+      },
+      "revId": "66cd0a35f649399085c2ba5d5016730726cbb2ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
