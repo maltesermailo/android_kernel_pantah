@@ -20,6 +20,51 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "87228966_6ba7c574",
+        "filename": "include/net/cls_cgroup.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-20T21:46:09Z",
+      "side": 1,
+      "message": "if you forward declare a function, that function actually needs to be defined somewhere. Look more closely at the example in aosp/3053646",
+      "fixSuggestions": [
+        {
+          "fixId": "ba64cf59_3b7cc0c7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/net/cls_cgroup.h",
+              "range": {
+                "startLine": 23,
+                "startChar": 0,
+                "endLine": 25,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "include/net/cls_cgroup.h",
+              "range": {
+                "startLine": 77,
+                "startChar": 0,
+                "endLine": 79,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "66cd0a35f649399085c2ba5d5016730726cbb2ec",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23371f2b_ef07e11c",
         "filename": "include/trace/hooks/net.h",
         "patchSetId": 9
