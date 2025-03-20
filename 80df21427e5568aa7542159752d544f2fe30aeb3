@@ -34,6 +34,24 @@
       "parentUuid": "bb0f9898_cbb5569c",
       "revId": "80df21427e5568aa7542159752d544f2fe30aeb3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b679b0d9_6684166b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-20T05:20:39Z",
+      "side": 1,
+      "message": "arm64 allmodconfig is still broken:\n```\n/mnt/disks/build-disk/src/android/common-android16-6.12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/146/execroot/_main/common/drivers/of/unittest-data/tests-phandle.dtsi:12.18-22: Warning (node_name_vs_property_name): /testcase-data/duplicate-name: node name and property name conflict\n/mnt/disks/build-disk/src/android/common-android16-6.12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/146/execroot/_main/common/drivers/of/unittest-data/tests-interrupts.dtsi:33.26-51.6: Warning (interrupt_map): /testcase-data/interrupts/intmap1: Missing \u0027#address-cells\u0027 in interrupt-map provider\n/mnt/disks/build-disk/src/android/common-android16-6.12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/146/execroot/_main/common/drivers/of/unittest-data/tests-phandle.dtsi:12.18-22: Warning (node_name_vs_property_name): /testcase-data/duplicate-name: node name and property name conflict\n/mnt/disks/build-disk/src/android/common-android16-6.12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/146/execroot/_main/common/drivers/of/unittest-data/tests-interrupts.dtsi:33.26-51.6: Warning (interrupt_map): /testcase-data/interrupts/intmap1: Missing \u0027#address-cells\u0027 in interrupt-map provider\nERROR: modpost: \"dma_alloc_contiguous\" [drivers/virt/gunyah/gunyah_rsc_mgr.ko] undefined!\nERROR: modpost: \"dma_free_contiguous\" [drivers/virt/gunyah/gunyah_rsc_mgr.ko] undefined!\nERROR: modpost: \"cma_get_size\" [drivers/virt/gunyah/gunyah_rsc_mgr.ko] undefined!\nERROR: modpost: \"gunyah_share_range_as_parcels\" [drivers/virt/gunyah/gunyah_qtvm.ko] undefined!\nERROR: modpost: \"gunyah_rm_vm_authenticate\" [drivers/virt/gunyah/gunyah_qtvm.ko] undefined!\nWARNING: modpost: module snd-compress uses symbol dma_buf_fd from namespace DMA_BUF, but does not import it.\nWARNING: modpost: module snd-compress uses symbol dma_buf_get from namespace DMA_BUF, but does not import it.\nWARNING: modpost: module snd-compress uses symbol dma_buf_put from namespace DMA_BUF, but does not import it.\nmake[3]: *** [/mnt/disks/build-disk/src/android/common-android16-6.12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/146/execroot/_main/common/scripts/Makefile.modpost:213: Module.symvers] Error 1\n```",
+      "parentUuid": "c18157ae_1c843366",
+      "revId": "80df21427e5568aa7542159752d544f2fe30aeb3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
