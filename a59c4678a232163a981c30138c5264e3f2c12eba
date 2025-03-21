@@ -51,6 +51,24 @@
       "message": "This patch breaks KMI so it needs to wait for the April 2nd KMI update.",
       "revId": "a59c4678a232163a981c30138c5264e3f2c12eba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "686c1321_5b47efc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-21T04:14:59Z",
+      "side": 1,
+      "message": "Ying, can you add CONFIG_BK_WBT_MQ to this patch? In the commit message you imply that that might be a problem, but it looks like others want to enable it (and likely would later if we don\u0027t do it now). With both of those enabled, I\u0027ll cherry-pick this to android-mainline so we don\u0027t have to do this again next year.",
+      "parentUuid": "1ced8f7e_4cb8fb61",
+      "revId": "a59c4678a232163a981c30138c5264e3f2c12eba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
