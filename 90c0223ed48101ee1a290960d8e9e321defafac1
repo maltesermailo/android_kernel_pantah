@@ -22,6 +22,88 @@
       },
       "revId": "90c0223ed48101ee1a290960d8e9e321defafac1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79df031d_ebbd047d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-21T19:38:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c511bc5e_5eac49c9",
+      "range": {
+        "startLine": 9,
+        "startChar": 17,
+        "endLine": 9,
+        "endChar": 75
+      },
+      "revId": "90c0223ed48101ee1a290960d8e9e321defafac1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52d66e69_311bb0dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-21T19:38:33Z",
+      "side": 1,
+      "message": "Please rebase",
+      "revId": "90c0223ed48101ee1a290960d8e9e321defafac1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e8999ee_59509bea",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5979,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-03-21T19:38:33Z",
+      "side": 1,
+      "message": "nit: Can you change this to:\n```\nif (skip)\n\t\treturn;\ntrace_mm_calculate_totalreserve_pages(totalreserve_pages);\n```\nThis way we have min changes to the upstream code.",
+      "range": {
+        "startLine": 5978,
+        "startChar": 1,
+        "endLine": 5979,
+        "endChar": 60
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b420fe59_907fff6a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 5978,
+                "startChar": 0,
+                "endLine": 5980,
+                "endChar": 0
+              },
+              "replacement": "\tif (skip)\n\t\treturn;\n\ttrace_mm_calculate_totalreserve_pages(totalreserve_pages);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "90c0223ed48101ee1a290960d8e9e321defafac1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
