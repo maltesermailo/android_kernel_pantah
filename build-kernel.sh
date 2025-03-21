@@ -99,7 +99,12 @@ esac
 TMP_MODULES="$(mktemp -d)"
 trap 'rm -rf -- "$TMP_MODULES"' EXIT
 
-if [[ "$CMD" == "menuconfig" ]] || [[ "$CMD" == "savedefconfig" ]]; then
+if [[ "$CMD" == "menuconfig" ]]; then
+    make -j $BUILD_NUM_CPUS android-${ARCH}_defconfig && make -j $BUILD_NUM_CPUS $CMD
+    exit
+fi
+
+if [[ "$CMD" == "savedefconfig" ]]; then
     make -j $BUILD_NUM_CPUS $CMD
     exit
 fi
