@@ -1,0 +1,66 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9a0fba8_65ef9598",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-24T15:16:12Z",
+      "side": 1,
+      "message": "commit message should explain why you needed to create the new `_trace_android_vh_task_get_classid()` as a function",
+      "revId": "c1ed85a5320a46dd0826a5fa85868dd6c5e22061",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62731335_8420a7ff",
+        "filename": "net/core/netclassid_cgroup.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-24T15:16:12Z",
+      "side": 1,
+      "message": "why does this need to be exported? You don\u0027t have it in your symbol list update",
+      "fixSuggestions": [
+        {
+          "fixId": "6564245a_686e7fbb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "net/core/netclassid_cgroup.c",
+              "range": {
+                "startLine": 17,
+                "startChar": 0,
+                "endLine": 18,
+                "endChar": 0
+              },
+              "replacement": "static void _trace_android_vh_task_get_classid(const struct sk_buff *skb, u32 *classid)\n"
+            },
+            {
+              "path": "net/core/netclassid_cgroup.c",
+              "range": {
+                "startLine": 21,
+                "startChar": 0,
+                "endLine": 22,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "c1ed85a5320a46dd0826a5fa85868dd6c5e22061",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
