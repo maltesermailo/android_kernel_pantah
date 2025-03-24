@@ -68,6 +68,8 @@ struct f2fs_gc_kthread {
 	unsigned int no_zoned_gc_percent;
 	unsigned int boost_zoned_gc_percent;
 	unsigned int valid_thresh_ratio;
+
+	ANDROID_OEM_DATA(1);
 };
 
 struct gc_inode_list {
