@@ -20,6 +20,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4673cca9_463252f7",
+        "filename": "scripts/Makefile.modpost",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-03-25T18:18:32Z",
+      "side": 1,
+      "message": "should be $(objtree)/vmlinux.symvers",
+      "range": {
+        "startLine": 134,
+        "startChar": 18,
+        "endLine": 134,
+        "endChar": 33
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "bf601018_6e2ba9c4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "scripts/Makefile.modpost",
+              "range": {
+                "startLine": 134,
+                "startChar": 0,
+                "endLine": 135,
+                "endChar": 0
+              },
+              "replacement": "ifneq ($(wildcard $(objtree)/vmlinux.symvers),)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6b043893eb367317693e14d34d1c33900818f0e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8c3a50b9_a6b26bde",
         "filename": "scripts/Makefile.modpost",
         "patchSetId": 3
