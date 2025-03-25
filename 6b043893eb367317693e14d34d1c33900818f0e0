@@ -134,6 +134,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a86f73e5_6a9b29d6",
+        "filename": "scripts/Makefile.modpost",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-03-25T18:45:16Z",
+      "side": 1,
+      "message": "okay, yeah that makes sense. I think it\u0027s better to just create `vmlinux.symvers` then vs carry over `vmlinux.o`.\n\n\u003e Alternatively, can we create vmlinux.o from vmlinux, or even use vmlinux directly here?\n\nit looks a bit more complicated if we use vmlinux.o. For example `scripts/mod/modpost.c` looks for `.vmlinux.objs` also when you provide `vmlinux.o`. So using `vmlinux.symvers` seems like the best option.",
+      "parentUuid": "bef81fb7_ad625338",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 0
+      },
+      "revId": "6b043893eb367317693e14d34d1c33900818f0e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7a2225f_5d57f443",
