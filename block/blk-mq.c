@@ -31,6 +31,7 @@
 #include <linux/sched/isolation.h>
 
 #include <trace/events/block.h>
+#include <trace/hooks/blk.h>
 
 #include <linux/t10-pi.h>
 #include "blk.h"
@@ -3127,10 +3128,18 @@ void blk_mq_submit_bio(struct bio *bio)
 	struct request *rq;
 	blk_status_t ret;
 
+<<<<<<< HEAD   (029c3b29942fa7c9965736a5ab9030f41c9c02d3 ANDROID: ABI: New variables and hooks added, honor symbol li)
 	/*
 	 * If the plug has a cached request for this queue, try to use it.
 	 */
 	rq = blk_mq_peek_cached_request(plug, q, bio->bi_opf);
+||||||| BASE   (eafcd29b88b645eaef132d334fd1ffe290c10435 ANDROID: GKI: db845c: Add _totalram_pages to symbol list)
+	bio = blk_queue_bounce(bio, q);
+=======
+	trace_android_vh_check_set_ioprio(bio);
+
+	bio = blk_queue_bounce(bio, q);
+>>>>>>> CHANGE (52e82fb490db327de31439e47cf58f7bc9a1bb5e ANDROID: vendor_hook: add hooks for I/O priority)
 
 	/*
 	 * A BIO that was released from a zone write plug has already been
