@@ -71,6 +71,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bef81fb7_ad625338",
+        "filename": "scripts/Makefile.modpost",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-03-25T18:17:59Z",
+      "side": 1,
+      "message": "I think the problem is that we are not passing `vmlinux.o` from the GKI build to the device kernel_build() (on the Kleaf level, that is). Technically we could do that, but would this make the output too bloated?\n\nAlternatively, can we create vmlinux.o from vmlinux, or even use vmlinux directly here?",
+      "parentUuid": "8c3a50b9_a6b26bde",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 0
+      },
+      "revId": "6b043893eb367317693e14d34d1c33900818f0e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c7a2225f_5d57f443",
         "filename": "scripts/Makefile.modpost",
         "patchSetId": 3
