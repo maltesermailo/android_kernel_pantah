@@ -52,6 +52,23 @@
       "parentUuid": "d1134935_9c15b70b",
       "revId": "5128d98f5c48eec2d5ec94f267395106397e1c5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "979672bd_01c66cd4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-03-25T16:55:03Z",
+      "side": 1,
+      "message": "Build break:\n```\nSymbols missing from the ksymtab:\n  __traceiter_android_vh_reserve_highatomic_bypass\n  __tracepoint_android_vh_reserve_highatomic_bypass\n```\nThese symbols are not exported by the kernel. Please fix.",
+      "revId": "5128d98f5c48eec2d5ec94f267395106397e1c5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
