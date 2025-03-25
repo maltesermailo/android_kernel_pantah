@@ -253377,6 +253377,12 @@ function {
   parameter_id: 0xc9082b19
 }
 function {
+  id: 0x068e01ac
+  return_type_id: 0x48b5725f
+  parameter_id: 0x5d8155a5
+  parameter_id: 0x5d8155a5
+}
+function {
   id: 0x070e76e8
   return_type_id: 0x914dbfdc
   parameter_id: 0x11e6864c
@@ -261444,6 +261450,15 @@ function {
   parameter_id: 0x18ea6ae3
   parameter_id: 0x27a7c613
   parameter_id: 0x6720d32f
+  parameter_id: 0x27a7c613
+}
+function {
+  id: 0x2d643948
+  return_type_id: 0x27a7c613
+  parameter_id: 0x18ea6ae3
+  parameter_id: 0x27a7c613
+  parameter_id: 0x6720d32f
+  parameter_id: 0x27a7c613
   parameter_id: 0x27a7c613
 }
 function {
@@ -281617,6 +281632,11 @@ function {
   parameter_id: 0x5d8155a5
 }
 function {
+  id: 0xdab9eed2
+  return_type_id: 0x5d8155a5
+  parameter_id: 0x5d8155a5
+}
+function {
   id: 0xdae0c256
   return_type_id: 0x33143958
   parameter_id: 0x0ca27481
@@ -296713,6 +296733,15 @@ elf_symbol {
   full_name: "generic_file_llseek"
 }
 elf_symbol {
+  id: 0xbebc28bb
+  name: "generic_file_llseek_size"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xc47ca8a0
+  type_id: 0x2d643948
+  full_name: "generic_file_llseek_size"
+}
+elf_symbol {
   id: 0x6ac5d61b
   name: "generic_file_mmap"
   is_defined: true
@@ -307191,6 +307220,24 @@ elf_symbol {
   full_name: "round_jiffies_up_relative"
 }
 elf_symbol {
+  id: 0x151faef1
+  name: "rtc_cmos_read"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x9e64fbfe
+  type_id: 0xdab9eed2
+  full_name: "rtc_cmos_read"
+}
+elf_symbol {
+  id: 0xe299fa54
+  name: "rtc_cmos_write"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x2def7f76
+  type_id: 0x068e01ac
+  full_name: "rtc_cmos_write"
+}
+elf_symbol {
   id: 0x8163968f
   name: "rtc_ktime_to_tm"
   is_defined: true
@@ -307198,6 +307245,15 @@ elf_symbol {
   crc: 0xe4c2c66c
   type_id: 0xac4edba4
   full_name: "rtc_ktime_to_tm"
+}
+elf_symbol {
+  id: 0xda88b9a2
+  name: "rtc_lock"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7040fff9
+  type_id: 0xf313e71a
+  full_name: "rtc_lock"
 }
 elf_symbol {
   id: 0x2edd194c
@@ -318914,6 +318970,7 @@ interface {
   symbol_id: 0xc5e4d583
   symbol_id: 0x94ddcd90
   symbol_id: 0x94b60724
+  symbol_id: 0xbebc28bb
   symbol_id: 0x6ac5d61b
   symbol_id: 0x54756210
   symbol_id: 0x5ec3daa8
@@ -320076,7 +320133,10 @@ interface {
   symbol_id: 0x81bce56b
   symbol_id: 0x01a1f5e7
   symbol_id: 0xeab23f1b
+  symbol_id: 0x151faef1
+  symbol_id: 0xe299fa54
   symbol_id: 0x8163968f
+  symbol_id: 0xda88b9a2
   symbol_id: 0x2edd194c
   symbol_id: 0xa4ad8391
   symbol_id: 0x5c1197ba
