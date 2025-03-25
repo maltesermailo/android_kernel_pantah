@@ -210,6 +210,7 @@ void blk_mq_freeze_queue_wait(struct request_queue *q)
 			percpu_ref_is_zero(&q->q_usage_counter),
 			msecs_to_jiffies(300));
 		WARN_ON_ONCE(time_remaining < 0);
+		atomic_set(&q->report_last_put, 1);
 		if (time_remaining > 0)
 			break;
 
@@ -217,6 +218,7 @@ void blk_mq_freeze_queue_wait(struct request_queue *q)
 			blk_mq_tagset_busy_iter(q->tag_set, blk_mq_show_busy_rq,
 						q);
 	}
+	atomic_set(&q->report_last_put, 0);
 }
 EXPORT_SYMBOL_GPL(blk_mq_freeze_queue_wait);
 
