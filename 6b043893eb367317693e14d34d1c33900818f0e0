@@ -20,6 +20,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8c3a50b9_a6b26bde",
+        "filename": "scripts/Makefile.modpost",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-03-25T18:09:02Z",
+      "side": 1,
+      "message": "Do we have to use `vmlinux.symvers` here? Can we just use `$(objtree)/vmlinux.o` for these two and then set `output-symdump :\u003d Module.symvers`? If that will extract the GKI vmlinux symbols from the `vmlinux.o` and then append the mixed build module symbols to create `Module.symvers`, then it should be enough. I can give this a try.",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "aa968936_a464e063",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "scripts/Makefile.modpost",
+              "range": {
+                "startLine": 133,
+                "startChar": 0,
+                "endLine": 141,
+                "endChar": 0
+              },
+              "replacement": "# ANDROID: Use vmlinux.o from base build when doing mixed build\nifneq ($(wildcard vmlinux.o),)\nmodpost-args +\u003d -i $(objtree)/vmlinux.o\nmodpost-deps +\u003d $(objtree)/vmlinux.o\noutput-symdump :\u003d Module.symvers\nelse # vmlinux.o does not exist\n"
+            },
+            {
+              "path": "scripts/Makefile.modpost",
+              "range": {
+                "startLine": 143,
+                "startChar": 0,
+                "endLine": 144,
+                "endChar": 0
+              },
+              "replacement": "endif # vmlinux.o exists\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6b043893eb367317693e14d34d1c33900818f0e0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c7a2225f_5d57f443",
         "filename": "scripts/Makefile.modpost",
         "patchSetId": 3
