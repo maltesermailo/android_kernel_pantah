@@ -22,6 +22,30 @@
       },
       "revId": "475311dfd982c79435615021c141dda0429d69c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d064729f_02ea719e",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 1975505
+      },
+      "writtenOn": "2025-03-27T00:12:02Z",
+      "side": 1,
+      "message": "The same condition as the `[PATCH v2]` should be more appropriate.\n\n/apex/\u003cpackage\u003e/\n|\n/dev/block/mapper/\u003cpackage\u003e\n|\n/dev/block/loopXX\n|\n/data/apex/active/\u003cpackage\u003e.apex\n\ndm-verity may work on a loop block device and loop block device will call verity_end_io in its workqueue but not interrupts.",
+      "parentUuid": "cd47097b_5d73f479",
+      "range": {
+        "startLine": 711,
+        "startChar": 8,
+        "endLine": 711,
+        "endChar": 18
+      },
+      "revId": "475311dfd982c79435615021c141dda0429d69c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
