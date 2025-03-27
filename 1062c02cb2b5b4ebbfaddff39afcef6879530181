@@ -70,6 +70,24 @@
       "parentUuid": "4ebea616_a3a1ee7f",
       "revId": "1062c02cb2b5b4ebbfaddff39afcef6879530181",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b4e243c_8d51e987",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2025-03-27T16:42:55Z",
+      "side": 1,
+      "message": "In case this wouldn\u0027t be clear, `IOPRIO_CLASS_RT` is assigned by the ioprio cgroup policy.\n\nPlease consider implementing the necessary algorithms in the ioprio cgroup policy and configuring the parameters for these algorithms via `task_profiles.json`, either the generic configuration file or the vendor-specific `task_profiles.json` file.\n\nOr alternatively, disable assigning `IOPRIO_CLASS_RT` by overriding this `task_profiles.json` section:\n```\n        {\n          \"Name\": \"SetAttribute\",\n          \"Params\":\n          {\n            \"Name\": \"IoPrioClass\",\n            \"Value\": \"promote-to-rt\",\n            \"Optional\": \"true\"\n          }\n        }\n```",
+      "parentUuid": "f9855f97_e3b25e4f",
+      "revId": "1062c02cb2b5b4ebbfaddff39afcef6879530181",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
