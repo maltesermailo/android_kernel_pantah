@@ -52,6 +52,24 @@
       "parentUuid": "d162d529_60a9845d",
       "revId": "1062c02cb2b5b4ebbfaddff39afcef6879530181",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9855f97_e3b25e4f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 3332404
+      },
+      "writtenOn": "2025-03-27T12:09:25Z",
+      "side": 1,
+      "message": "We have already considered the ioprio cgroup policy, but it still does not meet our needs. We have the following unresolved issues:\n1. For requests of type IOPRIO_CLASS_RT, the `ufshcd_comp_scsi_upiu` function adds the UPIU_CMD_FLAGS_CP flag to the `upiu_flags`, causing UFS to prioritize these types of I/O. However, marking high-priority I/O at the thread granularity can lead to an excessive number of high-priority I/O, which may cause the UFS priority marking to become ineffective.\n2. We want to statistic the distribution of high-priority I/O at different granularities and types in order to set I/O priorities more rationally. We aim to avoid marking too many large-granularity I/O as high-priority I/O, which could result in significant delays for important small-granularity I/O, especially on low-end devices.",
+      "parentUuid": "4ebea616_a3a1ee7f",
+      "revId": "1062c02cb2b5b4ebbfaddff39afcef6879530181",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
