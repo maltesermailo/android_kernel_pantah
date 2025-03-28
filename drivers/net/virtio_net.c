@@ -6665,7 +6665,7 @@ static int virtnet_probe(struct virtio_device *vdev)
 		}
 	}
 
-	if (virtio_has_feature(vi->vdev, VIRTIO_NET_F_DEVICE_STATS)) {
+	if (vi->has_cvq && virtio_has_feature(vi->vdev, VIRTIO_NET_F_DEVICE_STATS)) {
 		struct virtio_net_stats_capabilities *stats_cap  __free(kfree) = NULL;
 		struct scatterlist sg;
 		__le64 v;
