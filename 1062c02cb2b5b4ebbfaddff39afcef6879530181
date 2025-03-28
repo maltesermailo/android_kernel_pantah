@@ -88,6 +88,24 @@
       "parentUuid": "f9855f97_e3b25e4f",
       "revId": "1062c02cb2b5b4ebbfaddff39afcef6879530181",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4185f665_137912bc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 3332404
+      },
+      "writtenOn": "2025-03-28T10:47:17Z",
+      "side": 1,
+      "message": "1. We expect to monitor the usage of high-priority I/O sent to storage devices through vendor hooks.\n2. The `get_current_ioprio` function sets `bio-\u003ebi_ioprio` based on the `{struct task_struct}-\u003epolicy`, which means that even if the I/O priority cgroup policy is disabled, the I/O priority will still be set. Therefore, it is necessary to monitor the distribution of high-priority I/O across different types and granularities.\n3. Modifying the `task_profiles.json` configuration allows setting I/O priority only at the thread level, and it cannot differentiate between read/write operations or I/O granularity. Excessively marking large-granularity write I/O as high priority can starve important small-granularity read I/O. For lower-end devices, we expect to mark only the read requests and small write requests from foreground applications as high priority in order to optimize application startup times, rather than marking all I/O as high priority. This requirement cannot be met by modifying the `task_profiles.json` configuration.",
+      "parentUuid": "4b4e243c_8d51e987",
+      "revId": "1062c02cb2b5b4ebbfaddff39afcef6879530181",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
