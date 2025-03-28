@@ -142,6 +142,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7db5968a_c3ca7e49",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-03-28T13:08:07Z",
+      "side": 1,
+      "message": "In my case I need to replay the last instruction (moving the elr) and I can\u0027t find a path that is doing the same in your example.\n\nLet me explain what I have:\nI am originally entering the hypervisor from the guest because of a synchronus exception from the hvc (ff-a). On this handler I find out that I don\u0027t have the memory faulted in and I need to get back to the host, map the page into the guest while preserving the original hvc (ff-a) request to replay it.",
+      "parentUuid": "9b2a7379_b36b6878",
+      "revId": "d36ed1c644ad25168e24bb4ca9192aa90b18ac02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1304563e_f414d5e1",
@@ -209,6 +227,24 @@
       "side": 1,
       "message": "I see what you mean. If we decide we keep the smc handling (which we should keep) we would likely need this but otherwise it can be dropped.",
       "parentUuid": "e78b3ba3_10f3e65e",
+      "revId": "d36ed1c644ad25168e24bb4ca9192aa90b18ac02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58afa118_7762cefa",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 933,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-03-28T13:08:07Z",
+      "side": 1,
+      "message": "Closing this for the moment. I would like to avoid forwarding other smcs than ff-a from this function and I don\u0027t want to make any assumptions from the caller. It doesn\u0027t buy us much a comparison and is safer to have it.",
+      "parentUuid": "400365b7_c87909a0",
       "revId": "d36ed1c644ad25168e24bb4ca9192aa90b18ac02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
