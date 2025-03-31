@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "177cef1e_1fe8dea7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-03-31T16:17:04Z",
+      "side": 1,
+      "message": "no, do we want/need one? I can open one if so.",
+      "parentUuid": "b9fdb167_675afba4",
+      "revId": "50d2016a00f653d10a9bf965378af3e410dfd1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c76f72da_79d41415",
@@ -31,6 +49,30 @@
       "writtenOn": "2025-03-31T16:09:35Z",
       "side": 1,
       "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:UNSPECIFIED_INT: Prefer \u0027unsigned int\u0027 to bare use of \u0027unsigned\u0027\n\nAnalyzer Description: Ensures that kernel patches follow the guidelines.\nOwner: estaats@google.com\n\nWARNING:UNSPECIFIED_INT: Prefer \u0027unsigned int\u0027 to bare use of \u0027unsigned\u0027",
+      "range": {
+        "startLine": 673,
+        "startChar": 0,
+        "endLine": 673,
+        "endChar": 0
+      },
+      "revId": "50d2016a00f653d10a9bf965378af3e410dfd1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbdfba24_e048014a",
+        "filename": "tools/lib/bpf/libbpf_internal.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-03-31T16:17:04Z",
+      "side": 1,
+      "message": "This was already there which I noticed before I sent the patch upstream (nothing \"new\" in this patch) so I decided not to \"fix\" it. I would prefer to keep things as is instead of adding \"more\" changes to the fix. wdyt?",
+      "parentUuid": "c76f72da_79d41415",
       "range": {
         "startLine": 673,
         "startChar": 0,
