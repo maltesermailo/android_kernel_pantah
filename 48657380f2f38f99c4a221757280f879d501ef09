@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12389e33_43b23ff7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-03-31T20:09:00Z",
+      "side": 1,
+      "message": "BACKPORT",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "48657380f2f38f99c4a221757280f879d501ef09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f03ab93_cc776e2a",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-03-31T20:09:00Z",
+      "side": 1,
+      "message": "Should add a blank line after `int err;`",
+      "range": {
+        "startLine": 732,
+        "startChar": 0,
+        "endLine": 733,
+        "endChar": 6
+      },
+      "revId": "48657380f2f38f99c4a221757280f879d501ef09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39c77ff0_8d1dca75",
+        "filename": "drivers/md/dm-verity-target.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 735,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-03-31T20:09:00Z",
+      "side": 1,
+      "message": "This should be just `if (err !\u003d -EAGAIN \u0026\u0026 err !\u003d -ENOMEM)`, both because it is simpler and because it is what upstream `verity_bh_work()` does.",
+      "range": {
+        "startLine": 735,
+        "startChar": 7,
+        "endLine": 735,
+        "endChar": 53
+      },
+      "revId": "48657380f2f38f99c4a221757280f879d501ef09",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
