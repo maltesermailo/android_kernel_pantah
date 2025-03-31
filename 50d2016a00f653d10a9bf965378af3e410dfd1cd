@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1233b6b6_4ef225f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2025-03-31T18:12:34Z",
+      "side": 1,
+      "message": "What is the purpose of the patch?\n\nPerhaps a [Carlos: \u003cdescription] line above your SoB would be good.",
+      "parentUuid": "177cef1e_1fe8dea7",
+      "revId": "50d2016a00f653d10a9bf965378af3e410dfd1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c76f72da_79d41415",
@@ -73,6 +91,30 @@
       "side": 1,
       "message": "This was already there which I noticed before I sent the patch upstream (nothing \"new\" in this patch) so I decided not to \"fix\" it. I would prefer to keep things as is instead of adding \"more\" changes to the fix. wdyt?",
       "parentUuid": "c76f72da_79d41415",
+      "range": {
+        "startLine": 673,
+        "startChar": 0,
+        "endLine": 673,
+        "endChar": 0
+      },
+      "revId": "50d2016a00f653d10a9bf965378af3e410dfd1cd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d87e15f_f1b6090b",
+        "filename": "tools/lib/bpf/libbpf_internal.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1870730
+      },
+      "writtenOn": "2025-03-31T18:12:34Z",
+      "side": 1,
+      "message": "Yes, please don\u0027t fork from Mainline. If you _really_ want this fixed, do it in Mainline then backport it.",
+      "parentUuid": "bbdfba24_e048014a",
       "range": {
         "startLine": 673,
         "startChar": 0,
