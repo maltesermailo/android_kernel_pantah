@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3a0191a_64fd9fc5",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4766,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-04-02T14:33:03Z",
+      "side": 1,
+      "message": "I want to understand the connection between this hook and trace_android_rvh_alloc_pages_adjust_wmark(). If after calling trace_android_rvh_alloc_pages_adjust_wmark() the system jumps to `got_pg` or `nopage` label before reaching this line, then this hook will never be called. Is that your intention? I would expect trace_android_rvh_alloc_pages_reset_wmark() to be always called once you are done with direct reclaim.\n\nAlso how is direct_reclaim_retries being used here? It seems like you are using it to adjust watermarks only on the first iteration but the places it\u0027s used seems weird.\n```\nrestart:\n...\nif (!direct_reclaim_retries)\n    trace_android_rvh_alloc_pages_adjust_wmark();\n...\nif (direct_reclaim_retries \u003c ULONG_MAX)\n\t\tdirect_reclaim_retries++;\n...\ntrace_android_rvh_alloc_pages_reset_wmark();\n...\ngoto restart;\n```\nSeems like you are adjusting the wmark only on the first iteration but you call trace_android_rvh_alloc_pages_reset_wmark() on all iterations. Also if that\u0027s the intention, direct_reclaim_retries could be just a bool and you would not need to check it against ULONG_MAX to prevent overflow.",
+      "range": {
+        "startLine": 4766,
+        "startChar": 1,
+        "endLine": 4766,
+        "endChar": 42
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c02b3b26_b50f2484",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 4626,
+                "startChar": 0,
+                "endLine": 4626,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * This tracepoint is called before the first allocation attempt\n\t * and allows to adjust the watermark flags.\n\t */\n"
+            },
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 4766,
+                "startChar": 0,
+                "endLine": 4766,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * This tracepoint is called before the reclaim retry and allows to\n\t * reset the watermark flags.\n\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "361e3005aafba19c3d9538cc6bedee5d95697157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
