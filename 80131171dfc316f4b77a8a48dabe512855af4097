@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "440c5a3c_9bf6d0ca",
+        "filename": "mm/memcontrol.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1462,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-04-03T22:39:10Z",
+      "side": 1,
+      "message": "Instead of adding yet another memcg traversal function why can\u0027t you simply add this here:\n```\ntrace_android_vh_do_traversal_lruvec_ex(memcg, lruvec, \u0026stop);\nif (stop) {\n\tmem_cgroup_iter_break(NULL, memcg);\n\tbreak;\n}\n```\n?",
+      "range": {
+        "startLine": 1462,
+        "startChar": 3,
+        "endLine": 1462,
+        "endChar": 48
+      },
+      "revId": "80131171dfc316f4b77a8a48dabe512855af4097",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13e11841_f310b6a1",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1485,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-04-03T22:39:10Z",
+      "side": 1,
+      "message": "why do you pass `refcount` by reference instead of by value? Even if you modify it, it\u0027s not used later on.",
+      "range": {
+        "startLine": 1485,
+        "startChar": 48,
+        "endLine": 1485,
+        "endChar": 49
+      },
+      "revId": "80131171dfc316f4b77a8a48dabe512855af4097",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
