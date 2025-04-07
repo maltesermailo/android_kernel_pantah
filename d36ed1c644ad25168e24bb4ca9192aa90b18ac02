@@ -162,6 +162,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8004bb2a_00c187dc",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-04-07T09:46:02Z",
+      "side": 1,
+      "message": "`pkvm_handle_empty_memcache()` would rewind do the ELR rewind.\n\nYou should be able to just use hyp_req\u0027s MAP alongside with `pkvm_handle_empty_memcache()` to \"simulate\" the page fault. The host would then fault the page you need and then the guest would replay the FFA instruction. (just like guest_share_host needs to fault a range and then replay the HVC when returning to the guest)\n\nAlso, what about that REPLAY_FFA_CALL? I can\u0027t find anyone reading it.",
+      "parentUuid": "7db5968a_c3ca7e49",
+      "revId": "d36ed1c644ad25168e24bb4ca9192aa90b18ac02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1304563e_f414d5e1",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 18
