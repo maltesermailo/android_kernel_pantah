@@ -16,6 +16,24 @@
       "message": "While I\u0027m not necessarily opposed to this change logically, I fret it may have impact to other vendors already using the trace_android_vh_reweight_entity() hook. \n\nHowever, the ABI change at least would force folks to re-work/re-evaluate their vendorhooks, so hopefully it wouldn\u0027t surprise folks.",
       "revId": "01b8ff7dc2679f623ede082b577ea336a805fa19",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "501a711a_0e5ec61a",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3966,
+      "author": {
+        "id": 1965005
+      },
+      "writtenOn": "2025-04-07T03:10:04Z",
+      "side": 0,
+      "message": "thanks for your review~\nIt\u0027s us who added the trace_android_vh_reweight_entity() hook. \n\nBut we found that when we update the group/task se\u0027s weight through the hook, we should do the reweight_eevdf work between line 3954~3962 again to preserve the vlag of the se. So we change the location of the hook before the reweight_eevdf work so we can reuse it.",
+      "parentUuid": "68f73906_0e077ec0",
+      "revId": "01b8ff7dc2679f623ede082b577ea336a805fa19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
