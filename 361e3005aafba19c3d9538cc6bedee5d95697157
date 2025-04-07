@@ -50,6 +50,30 @@
       ],
       "revId": "361e3005aafba19c3d9538cc6bedee5d95697157",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f5f6e02_7258e4d2",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4766,
+      "author": {
+        "id": 1867527
+      },
+      "writtenOn": "2025-04-07T08:51:53Z",
+      "side": 1,
+      "message": "Why adjusting the wmark only on the first iteration but you call trace_android_rvh_alloc_pages_reset_wmark() on all iterations？\nBecause the process of direct memory recycling may be forcibly preempted, the importance of the process will change due to scheduling dependencies when it is scheduled for execution again. Therefore, it is necessary to try to see whether it is necessary to restore to the water level or even use a lower water level to apply for memory after each memory recycling.\n\nWhy not always call trace_android_rvh_alloc_pages_reset_wmark() after completing a direct reclaim？\nBecause trace_android_vh_alloc_pages_reset_wmark() also acts as a \"wall\", allowing those unimportant processes to actively release CPU resources and sleep. If they sleep before \u0027goto got_pg\u0027 and \u0027goto nopage\u0027, it will affect some drivers. For example, some drivers try to apply with kmalloc(__GFP_NORETRY) first, and then continue to use vmalloc if it fails.\n\nWhy is direct_reclaim_retries needed?\ndirect_reclaim_retries is mainly used to check how many times the target process has executed direct memory reclaims. It mainly plays a fool-proof role to avoid serious problems caused by some processes not being able to get memory for a long time.",
+      "parentUuid": "f3a0191a_64fd9fc5",
+      "range": {
+        "startLine": 4766,
+        "startChar": 1,
+        "endLine": 4766,
+        "endChar": 42
+      },
+      "revId": "361e3005aafba19c3d9538cc6bedee5d95697157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
