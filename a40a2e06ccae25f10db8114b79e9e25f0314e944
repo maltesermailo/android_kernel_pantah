@@ -40,6 +40,30 @@
       ],
       "revId": "a40a2e06ccae25f10db8114b79e9e25f0314e944",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80981e5f_7a152068",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-04-07T10:35:45Z",
+      "side": 1,
+      "message": "After reading the spec, it looks like TZ expects all fields other than the handle to be 0. I understand HYP_FFA_ID is 0, so this is actually OK, but I\u0027d suggest just removing this line for clarity.",
+      "parentUuid": "7bf00f9f_5d286e96",
+      "range": {
+        "startLine": 694,
+        "startChar": 15,
+        "endLine": 694,
+        "endChar": 26
+      },
+      "revId": "a40a2e06ccae25f10db8114b79e9e25f0314e944",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
