@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cef785cb_9b7c2484",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 32
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-04-07T15:43:24Z",
+      "side": 1,
+      "message": "We should be able to avoid this; we already have guest-facing hypercalls that may need to be replayed and they haven\u0027t needed to stash any extra metadata in the `exit_code`",
+      "range": {
+        "startLine": 47,
+        "startChar": 8,
+        "endLine": 47,
+        "endChar": 23
+      },
+      "revId": "50f21c8cd360aba1655e7e821adb8a451ce4af38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
