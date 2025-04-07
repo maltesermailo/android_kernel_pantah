@@ -74,6 +74,30 @@
       },
       "revId": "361e3005aafba19c3d9538cc6bedee5d95697157",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "641112f4_f0f4c3af",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4766,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-04-07T18:41:41Z",
+      "side": 1,
+      "message": "From your explanation sounds like trace_android_rvh_alloc_pages_reset_wmark() does not necessarily reset the watermark but readjusts it. But even then it sounds like you might end up exiting __alloc_pages_slowpath() without calling trace_android_rvh_alloc_pages_reset_wmark() and without restoring the watermark. Is that your intention? If not, are you perhaps using trace_android_vh_alloc_pages_slowpath_end() to restore the watermark to its original value?\n\nOverall naming these hooks trace_android_rvh_alloc_pages_reset_wmark() and trace_android_rvh_alloc_pages_adjust_wmark() is confusing. I suggest renaming trace_android_rvh_alloc_pages_adjust_wmark() to trace_android_vh_alloc_pages_reclaim_start() since it\u0027s called at the start of the direct reclaim. trace_android_rvh_alloc_pages_reset_wmark() I would name trace_android_vh_alloc_pages_reclaim_cycle_end() because it\u0027s called at the end of a reclaim cycle.",
+      "parentUuid": "1f5f6e02_7258e4d2",
+      "range": {
+        "startLine": 4766,
+        "startChar": 1,
+        "endLine": 4766,
+        "endChar": 42
+      },
+      "revId": "361e3005aafba19c3d9538cc6bedee5d95697157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
