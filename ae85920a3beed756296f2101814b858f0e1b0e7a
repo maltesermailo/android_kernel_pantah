@@ -115,6 +115,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "428c0762_e5a62b7a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 914,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-04-07T09:42:38Z",
+      "side": 1,
+      "message": "I don\u0027t think `is_ffa_call()` really helps, though. If the guest issues something like `FFA_MEM_SHARE` then, at this point in the patch series, we\u0027ll forward it directly to TZ because `ffa_call_supported()` will return true.\n\nOverall, I think we should stick to an allow-list for guest FFA requests and not call `ffa_call_supported()` or forward requests directly on this path at all. Then, when we want to support a request from the guest, we just add a new `case:` for it. That will also mean that we don\u0027t expose some of the scheduling requests to guests by default.\n\nIt does, however, mean that you\u0027ll need a separate implementation for `FFA_FEATURES` for the guest-facing code, but I think that\u0027s generally more robust.",
+      "parentUuid": "03f73ce0_da95d390",
+      "range": {
+        "startLine": 914,
+        "startChar": 1,
+        "endLine": 914,
+        "endChar": 27
+      },
+      "revId": "ae85920a3beed756296f2101814b858f0e1b0e7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9e0bf7f4_4da77834",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 6
