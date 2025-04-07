@@ -484,6 +484,7 @@ impl_frombytes! {
 /// mutability.
 pub unsafe trait AsBytes {}
 
+<<<<<<< HEAD   (5786aa ANDROID: fix build breakages with Rust alloc backport)
 /// Zero-sized type to mark types not [`Send`].
 ///
 /// Add this type as a field to your struct if your type should not be sent to a different task.
@@ -505,6 +506,9 @@ pub type NotThreadSafe = PhantomData<*mut ()>;
 #[allow(non_upper_case_globals)]
 pub const NotThreadSafe: NotThreadSafe = PhantomData;
 
+||||||| BASE
+=======
+>>>>>>> BRANCH (1ef4cf rust: alloc: update module comment of alloc.rs)
 macro_rules! impl_asbytes {
     ($($({$($generics:tt)*})? $t:ty, )*) => {
         // SAFETY: Safety comments written in the macro invocation.
