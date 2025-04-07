@@ -1,0 +1,85 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81d5db31_49b7ae41",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 34
+      },
+      "lineNbr": 920,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-04-07T12:08:16Z",
+      "side": 1,
+      "message": "Is there any point in doing `ffa_retrieve_req()` in this paths for guest? We should have everything we need to know about stashed into the transfer already.",
+      "range": {
+        "startLine": 919,
+        "startChar": 2,
+        "endLine": 920,
+        "endChar": 49
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "975ebc21_24c2c6ba",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 844,
+                "startChar": 0,
+                "endLine": 844,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * The guest is not allowed to reclaim a handle that it has not\n\t * previously shared.\n\t */\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 867,
+                "startChar": 0,
+                "endLine": 867,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * The host is responsible for retrieving the descriptor from the\n\t * SPMD. The guest is not allowed to do this.\n\t */\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 913,
+                "startChar": 0,
+                "endLine": 914,
+                "endChar": 0
+              },
+              "replacement": "\tif (res-\u003ea0 !\u003d FFA_SUCCESS) {\n\t\t/*\n\t\t * If the reclaim failed, we need to release the RX buffer\n\t\t * and return an error to the caller.\n\t\t */\n\t\tffa_rx_release(res);\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 915,
+                "startChar": 0,
+                "endLine": 915,
+                "endChar": 0
+              },
+              "replacement": "\t}\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 925,
+                "startChar": 0,
+                "endLine": 925,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * The guest is not allowed to release the RX buffer.\n\t */\n\tif (hyp_vcpu)\n\t\tffa_rx_release(res);\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "257dc469e7c8b8288f1b91640a969063fb4c8703",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
