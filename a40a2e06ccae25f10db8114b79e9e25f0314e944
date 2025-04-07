@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bf00f9f_5d286e96",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-04-07T10:31:01Z",
+      "side": 1,
+      "message": "I see this is being changed with HYP_FFA_ID in a later patch, but shouldn\u0027t this be the caller\u0027s ID instead?",
+      "range": {
+        "startLine": 694,
+        "startChar": 15,
+        "endLine": 694,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e56836a8_ca51b8a5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 694,
+                "startChar": 0,
+                "endLine": 694,
+                "endChar": 0
+              },
+              "replacement": "\t\t/*\n\t\t * TODO: This should be the caller\u0027s ID, not the host\u0027s.\n\t\t * This is fixed in a later patch.\n\t\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a40a2e06ccae25f10db8114b79e9e25f0314e944",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
