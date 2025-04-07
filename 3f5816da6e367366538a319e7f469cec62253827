@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7b02963_093f9c35",
+        "filename": "arch/arm64/kvm/hyp/include/nvhe/ffa.h",
+        "patchSetId": 31
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-04-07T10:01:04Z",
+      "side": 1,
+      "message": "This is cleaner as a `static inline`:\n\n```\nstatic inline u32 hyp_vcpu_to_ffa_handle(struct pkvm_hyp_vcpu *hyp_vcpu)\n{\n\tpkvm_handle_t vm_handle;\n\t\n\tif (!hyp_vcpu)\n\t\treturn HOST_FFA_ID;\n\t\n\tvm_handle \u003d hyp_vcpu-\u003evcpu.kvm-\u003earch.pkvm_handle;\n\treturn vm_handle_to_idx(vm_handle) + 1;\n}\n```\n\nYou\u0027ll need to move `vm_handle_to_idx()` and `idx_to_vm_handle()` into the header file as `static inline` functions too.\nIn fact,",
+      "range": {
+        "startLine": 16,
+        "startChar": 8,
+        "endLine": 16,
+        "endChar": 32
+      },
+      "revId": "3f5816da6e367366538a319e7f469cec62253827",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
