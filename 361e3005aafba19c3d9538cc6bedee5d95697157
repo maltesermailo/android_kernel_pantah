@@ -98,6 +98,30 @@
       },
       "revId": "361e3005aafba19c3d9538cc6bedee5d95697157",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85b027f9_9411327a",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 4766,
+      "author": {
+        "id": 1867527
+      },
+      "writtenOn": "2025-04-08T02:10:12Z",
+      "side": 1,
+      "message": "Changing the location of trace_android_rvh_alloc_pages_adjust_wmark() and trace_android_rvh_alloc_pages_reset_wmark() in the code will result in missing functionality, but I agree with your idea that the hook names can be changed to trace_android_vh_alloc_pages_reclaim_start() and trace_android_vh_alloc_pages_reclaim_cycle_end().\n\nDo I need to resubmit the patch to change the hook names?",
+      "parentUuid": "641112f4_f0f4c3af",
+      "range": {
+        "startLine": 4766,
+        "startChar": 1,
+        "endLine": 4766,
+        "endChar": 42
+      },
+      "revId": "361e3005aafba19c3d9538cc6bedee5d95697157",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
