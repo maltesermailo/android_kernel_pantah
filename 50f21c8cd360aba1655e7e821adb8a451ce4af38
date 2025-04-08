@@ -22,6 +22,30 @@
       },
       "revId": "50f21c8cd360aba1655e7e821adb8a451ce4af38",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3522bf5_9aac84d7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 32
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-04-08T08:57:20Z",
+      "side": 1,
+      "message": "I only use it locally in this file (it has no meaning outside of it) to prevent the guest_ffa_handler from calling `ffa_set_retval` which overwrites the cpu context.",
+      "parentUuid": "cef785cb_9b7c2484",
+      "range": {
+        "startLine": 47,
+        "startChar": 8,
+        "endLine": 47,
+        "endChar": 23
+      },
+      "revId": "50f21c8cd360aba1655e7e821adb8a451ce4af38",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
