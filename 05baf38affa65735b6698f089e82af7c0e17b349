@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b0279d4_b3ceec42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2025-04-09T16:20:19Z",
+      "side": 1,
+      "message": "Power testing result:\n```\n$ adb shell dumpsys -t 20 android.hardware.power.stats.IPowerStats/default  | grep \"SOC\"\n               SOC              MISSION          319610 ms              3818           448660 ms\n               SOC              DORMANT           95317 ms              3583           412913 ms\n               SOC      DORMANT_SUSPEND            5467 ms               232           392748 ms\n               SOC              AMBIENT           31618 ms                 3           417078 ms\n               SOC      AMBIENT_SEC_ACC               0 ms                 0                0 ms\n               SOC      AMBIENT_SUSPEND             827 ms                 1           359914 ms\n```",
+      "revId": "05baf38affa65735b6698f089e82af7c0e17b349",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
