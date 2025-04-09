@@ -286,4 +286,9 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_fault_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_signal_whether_wake);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_check);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_freeze_whether_wake);
+<<<<<<< PATCH SET (559e3dee94aaf6320bd96c7b9a2fe937e0366c1f ANDROID: mm: Add vendor hook in swapon())
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_adjust_swap_info_flags);
+||||||| BASE      (5f9112651b5f4209aa6c3e83bf262d30d3b32af4 FROMLIST: mm: Split SWP_SYNCHRONOUS_IO into separate read an)
+=======
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_regmap_update);
+>>>>>>> BASE      (f65c31e20d547ff62eb7b552cb97424f884889fc FROMLIST: mm: Split SWP_SYNCHRONOUS_IO into separate read an)
