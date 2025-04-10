@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4082929b_9d07911f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-04-10T11:56:27Z",
+      "side": 1,
+      "message": "removed",
+      "parentUuid": "ed6e6e24_d9952a22",
+      "revId": "ee855ee4200983d2f82e79a1d54aae35500aa03d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0081c7c9_ef35c516",
@@ -81,6 +99,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1660fd89_795f8eb8",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-04-10T11:56:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0081c7c9_ef35c516",
+      "revId": "ee855ee4200983d2f82e79a1d54aae35500aa03d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c11ea17_5644620c",
@@ -98,6 +134,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2605040c_42c76171",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-04-10T11:56:27Z",
+      "side": 1,
+      "message": "good catch, yes.",
+      "parentUuid": "1c11ea17_5644620c",
+      "revId": "ee855ee4200983d2f82e79a1d54aae35500aa03d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd5d4cfe_58a760aa",
@@ -111,6 +165,24 @@
       "writtenOn": "2025-04-10T08:57:58Z",
       "side": 1,
       "message": "To save potential back and forth, as we are going back to the host anyway, you could make a request for both tx and rx buffers at the same time, as soon as one of them failed?\n\n```\nif (ret \u003d\u003d -EFAULT) {\n    req \u003d pkvm_hyp_req_reserve(hyp_vcpu, KVM_HYP_REQ_TYPE_MAP);\n    if (!req || !pkvm_hyp_req_reserve(hyp_vcpu, KVM_HYP_REQ_TYPE_MAP))\n        return -ENOSPC;\n\n    req-\u003emap.guest_ipa \u003d tx;\n    req-\u003emap.size \u003d PAGE_SIZE;\n    \n    req++;\n    req-\u003emap.guest_ipa \u003d rx;\n    req-\u003emap.size \u003d PAGE_SIZE    \n}\n```\n\nBut that\u0027s just a small improvement and I believe this is as also good as it is.",
+      "revId": "ee855ee4200983d2f82e79a1d54aae35500aa03d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "477459ca_24fa5b06",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-04-10T11:56:27Z",
+      "side": 1,
+      "message": "I wanted to do this but I didn\u0027t know what\u0027s the behaviour if the page is already mapped. I applied your suggestion, thanks",
+      "parentUuid": "bd5d4cfe_58a760aa",
       "revId": "ee855ee4200983d2f82e79a1d54aae35500aa03d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -160,6 +232,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "791a00c6_c9b0a292",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-04-10T11:56:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c404464e_234b6976",
+      "revId": "ee855ee4200983d2f82e79a1d54aae35500aa03d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a915916c_55b5a734",
@@ -205,6 +295,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58d4d1ed_0cc051af",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 1009,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-04-10T11:56:27Z",
+      "side": 1,
+      "message": "fixed",
+      "parentUuid": "a915916c_55b5a734",
+      "revId": "ee855ee4200983d2f82e79a1d54aae35500aa03d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b618b933_fd9f8156",
@@ -246,6 +354,24 @@
           ]
         }
       ],
+      "revId": "ee855ee4200983d2f82e79a1d54aae35500aa03d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64314dc3_63409b15",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 1013,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-04-10T11:56:27Z",
+      "side": 1,
+      "message": "I am using it later on the series.",
+      "parentUuid": "b618b933_fd9f8156",
       "revId": "ee855ee4200983d2f82e79a1d54aae35500aa03d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
