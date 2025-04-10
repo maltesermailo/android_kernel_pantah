@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed6e6e24_d9952a22",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-04-10T08:57:58Z",
+      "side": 1,
+      "message": "nit: spare empty line.",
+      "fixSuggestions": [
+        {
+          "fixId": "f9195c43_4190b8a3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 304,
+                "startChar": 0,
+                "endLine": 305,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "ee855ee4200983d2f82e79a1d54aae35500aa03d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c11ea17_5644620c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-04-10T08:57:58Z",
+      "side": 1,
+      "message": "You need a different error code here (ENOSPC?). ENOMEM would topup the memcache and go back to the host. But in that case we\u0027ve ran out of hyp_req and that\u0027s something not expected and probably we should just come back to the guest with an error.",
+      "revId": "ee855ee4200983d2f82e79a1d54aae35500aa03d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd5d4cfe_58a760aa",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-04-10T08:57:58Z",
+      "side": 1,
+      "message": "To save potential back and forth, as we are going back to the host anyway, you could make a request for both tx and rx buffers at the same time, as soon as one of them failed?\n\n```\nif (ret \u003d\u003d -EFAULT) {\n    req \u003d pkvm_hyp_req_reserve(hyp_vcpu, KVM_HYP_REQ_TYPE_MAP);\n    if (!req || !pkvm_hyp_req_reserve(hyp_vcpu, KVM_HYP_REQ_TYPE_MAP))\n        return -ENOSPC;\n\n    req-\u003emap.guest_ipa \u003d tx;\n    req-\u003emap.size \u003d PAGE_SIZE;\n    \n    req++;\n    req-\u003emap.guest_ipa \u003d rx;\n    req-\u003emap.size \u003d PAGE_SIZE    \n}\n```\n\nBut that\u0027s just a small improvement and I believe this is as also good as it is.",
+      "revId": "ee855ee4200983d2f82e79a1d54aae35500aa03d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c404464e_234b6976",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-04-10T08:57:58Z",
+      "side": 1,
+      "message": "I would move that into a `default:` label within the switch case to make it more obvious what we are doing.",
+      "fixSuggestions": [
+        {
+          "fixId": "edeb40d0_3f037494",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 988,
+                "startChar": 0,
+                "endLine": 989,
+                "endChar": 0
+              },
+              "replacement": "\tint ret;\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1007,
+                "startChar": 0,
+                "endLine": 1007,
+                "endChar": 0
+              },
+              "replacement": "\tdefault:\n\t\tret \u003d -EOPNOTSUPP;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ee855ee4200983d2f82e79a1d54aae35500aa03d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a915916c_55b5a734",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 1009,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-04-10T08:57:58Z",
+      "side": 1,
+      "message": "nit: This is only useful when going back to the guest. So probably this could go just above the out_guest: label.",
+      "fixSuggestions": [
+        {
+          "fixId": "1effcd85_720bff75",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1008,
+                "startChar": 0,
+                "endLine": 1010,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1016,
+                "startChar": 0,
+                "endLine": 1016,
+                "endChar": 0
+              },
+              "replacement": "\tffa_to_smccc_res(\u0026res, linux_errno_to_ffa(ret));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ee855ee4200983d2f82e79a1d54aae35500aa03d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b618b933_fd9f8156",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 35
+      },
+      "lineNbr": 1013,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-04-10T08:57:58Z",
+      "side": 1,
+      "message": "No one else uses out_host.",
+      "fixSuggestions": [
+        {
+          "fixId": "cee02f3c_cc7cd883",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1013,
+                "startChar": 0,
+                "endLine": 1014,
+                "endChar": 0
+              },
+              "replacement": "\t\t\treturn false;\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1019,
+                "startChar": 0,
+                "endLine": 1021,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "ee855ee4200983d2f82e79a1d54aae35500aa03d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
