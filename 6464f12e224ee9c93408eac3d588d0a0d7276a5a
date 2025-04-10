@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "549f6d6f_28ac5eae",
+        "filename": "drivers/scsi/scsi_scan.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2025-04-10T18:21:33Z",
+      "side": 1,
+      "message": "UFS header files should not be included from a SCSI core source file.",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 31
+      },
+      "revId": "6464f12e224ee9c93408eac3d588d0a0d7276a5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f20400df_440b7494",
+        "filename": "drivers/scsi/scsi_scan.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2025-04-10T18:21:33Z",
+      "side": 1,
+      "message": "SCSI LLDs can define `.slave_alloc()` and `.slave_configure()` callback functions. Please define one or both of these callback functions in the SCSI LLD instead of introducing tracepoints in the SCSI core.",
+      "range": {
+        "startLine": 903,
+        "startChar": 1,
+        "endLine": 903,
+        "endChar": 63
+      },
+      "revId": "6464f12e224ee9c93408eac3d588d0a0d7276a5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "def67955_83a15b32",
+        "filename": "drivers/scsi/sd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2025-04-10T18:21:33Z",
+      "side": 1,
+      "message": "UFS header files must not be included from the SCSI disk driver implementation.",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 31
+      },
+      "revId": "6464f12e224ee9c93408eac3d588d0a0d7276a5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fba26da_ec274fd7",
+        "filename": "drivers/scsi/sd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3960,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2025-04-10T18:21:33Z",
+      "side": 1,
+      "message": "Allowing a vendor hook to modify the value of `index` seems dangerous to me because it may cause the `sd` driver to pass an incorrect value to `ida_free()`.",
+      "range": {
+        "startLine": 3960,
+        "startChar": 1,
+        "endLine": 3960,
+        "endChar": 40
+      },
+      "revId": "6464f12e224ee9c93408eac3d588d0a0d7276a5a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
