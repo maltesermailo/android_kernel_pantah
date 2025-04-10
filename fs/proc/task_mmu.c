@@ -726,11 +726,14 @@ static void show_smap_vma_flags(struct seq_file *m, struct vm_area_struct *vma)
 		[ilog2(VM_SEALED)] = "sl",
 #endif
 	};
+	unsigned long pad_pages = vma_pad_pages(vma);
 	size_t i;
 
 	seq_puts(m, "VmFlags: ");
 	for (i = 0; i < BITS_PER_LONG; i++) {
 		if (!mnemonics[i][0])
+			continue;
+		if ((1UL << i) & VM_PAD_MASK)
 			continue;
 		if (vma->vm_flags & (1UL << i)) {
 			seq_putc(m, mnemonics[i][0]);
@@ -738,6 +741,9 @@ static void show_smap_vma_flags(struct seq_file *m, struct vm_area_struct *vma)
 			seq_putc(m, ' ');
 		}
 	}
+	if (pad_pages)
+		seq_printf(m, "pad=%lukB", pad_pages << (PAGE_SHIFT - 10));
+
 	seq_putc(m, '\n');
 }
 
@@ -815,7 +821,15 @@ static void smap_gather_stats(struct vm_area_struct *vma,
 
 		if (!start && (!shmem_swapped || (vma->vm_flags & VM_SHARED) ||
 					!(vma->vm_flags & VM_WRITE)) &&
-					end == vma->vm_end) {
+					/*
+					 * Only if we don't have padding can we use the fast path
+					 * shmem_inode_info->swapped for shmem_swapped.
+					 *
+					 * Else we'll walk the page table to calculate shmem_swapped,
+					 * (excluding the padding region).
+					 */
+					end == vma->vm_end
+			) {
 			mss->swap += shmem_swapped;
 		} else {
 			ops = &smaps_shmem_walk_ops;
