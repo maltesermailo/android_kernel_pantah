@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2487fb5e_1c00a86b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 1097,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-04-10T09:24:35Z",
+      "side": 1,
+      "message": "Hum, now looking at this code, it\u0027s a bit confusing and probably error prone to have the ELR handled either above or within handle_empty_memcache.\n\nOverall I wonder if that wouldn\u0027t be better to not use pkvm_handle_empty_memcache and to explicitly do the ELR by hand in all cases. (and actually perhaps we should remove later the ELR handling from pkvm_handle_empty_memcache to make it more explicit)\n\nWhat do you think of the following?\n\n```\n/* Let\u0027s see if the host can help */\nif (ret) {\n    switch (ret) {\n        case -EFAULT:\n            /* hyp_req already populated. While at it, let\u0027s also topup the memcache */\n            fallthrough;\n        case -ENOMEM:\n            if (hyp_alloc_errno()) {\n                req \u003d pkvm_hyp_req_reserve(hyp_vcpu, KVM_HYP_REQ_TYPE_MEM);\n                if (req) {\n                    req-\u003emem.dest \u003d REQ_MEM_DEST_HYP_ALLOC;\n                    req-\u003emem.nr_pages \u003d hyp_alloc_missing_donations();\n                }\n            }\n            req \u003d pkvm_hyp_req_reserve(hyp_vcpu, KVM_HYP_REQ_TYPE_MEM);\n            if (req) {\n                req-\u003emem.dest \u003d REQ_MEM_DEST_VCPU_MEMCACHE;\n                req-\u003emem.nr_pages \u003d kvm_mmu_cache_min_pages(\u0026hyp_vcpu-\u003evcpu.kvm-\u003earch.mmu);\n                ret \u003d 0;\n            } else {\n                ret \u003d -ENOSPC;\n            }\n    }\n\n    /* Not something the host can help with */\n    if (ret) {\n        ffa_to_smccc_res(\u0026res, linux_errno_to_ffa(ret));\n        goto out_guest;\n    }\n\n    write_sysreg_el2(read_sysreg_el2(SYS_ELR) - 4, SYS_ELR);\n    *exit_code \u003d ARM_EXCEPTION_HYP_REQ;\n    return true;\n}\n```",
+      "revId": "2969ced4df277fee5d5ac23ef6cdfd6b02919267",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
