@@ -34,6 +34,24 @@
       "parentUuid": "2487fb5e_1c00a86b",
       "revId": "2969ced4df277fee5d5ac23ef6cdfd6b02919267",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "050fa1ae_956b71e6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 36
+      },
+      "lineNbr": 1097,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-04-11T10:24:49Z",
+      "side": 1,
+      "message": "So the problem is the alloc errno is not reset until another allocation succeed. \n\nSo I am just scared that you get a loop where you always get ENOMEM set and hyp_alloc_errno() set too, hence why I believe having the memcache topped-up isn\u0027t a bad idea.\n\nAlso, there too, as we are going back to the host, we might just as well top-up the memcache. \n\nAlternatively, you could probably reset the errno on hyp_alloc_errno().\n\nWDYS?",
+      "parentUuid": "314d7afd_5bb1143f",
+      "revId": "2969ced4df277fee5d5ac23ef6cdfd6b02919267",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
