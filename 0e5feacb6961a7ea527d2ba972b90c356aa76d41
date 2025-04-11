@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81158d27_43c2b04f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 37
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-11T20:20:50Z",
+      "side": 1,
+      "message": "Is it guaranteed that the second call will return `req + 1`? Could other CPUs race here?",
+      "revId": "0e5feacb6961a7ea527d2ba972b90c356aa76d41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "829ebc5c_5fd895ed",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 37
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-11T20:20:50Z",
+      "side": 1,
+      "message": "I\u0027m not entirely familiar with what `pkvm_hyp_req_reserve` does, but should this be `KVM_FFA_MBOX_NR_PAGES * PAGE_SIZE` instead?",
+      "revId": "0e5feacb6961a7ea527d2ba972b90c356aa76d41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e21a9476_a5294b93",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 37
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-04-11T20:20:50Z",
+      "side": 1,
+      "message": "This value is reserved in the spec. Should we return an error instead, or `WARN`/`BUG`?",
+      "revId": "0e5feacb6961a7ea527d2ba972b90c356aa76d41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
