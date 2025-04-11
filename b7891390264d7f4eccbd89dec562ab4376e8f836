@@ -1,0 +1,108 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dec9404_3a60fdbc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 38
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-04-11T14:12:36Z",
+      "side": 1,
+      "message": "Few nits but otherwise it looks good",
+      "revId": "b7891390264d7f4eccbd89dec562ab4376e8f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fc807c5_3a344eec",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 38
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-04-11T14:12:36Z",
+      "side": 1,
+      "message": "nit: unnecessary line jump",
+      "fixSuggestions": [
+        {
+          "fixId": "e0cfc397_a2d011e4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 193,
+                "startChar": 0,
+                "endLine": 196,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t    struct pkvm_hyp_vcpu *hyp_vcpu) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b7891390264d7f4eccbd89dec562ab4376e8f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "842d7ebd_4b49703b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 38
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-04-11T14:12:36Z",
+      "side": 1,
+      "message": "perhaps it should be out_guest_with_ret to make sure we propagate the error back to the guest.",
+      "fixSuggestions": [
+        {
+          "fixId": "b5f546db_32e1f425",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1088,
+                "startChar": 0,
+                "endLine": 1089,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\tgoto out_guest_with_ret;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b7891390264d7f4eccbd89dec562ab4376e8f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "374e89ba_31e535fb",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 38
+      },
+      "lineNbr": 1093,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-04-11T14:12:36Z",
+      "side": 1,
+      "message": "There\u0027s nothing the guest can do really. I believe a better comment would be something like \"Nothing the host can do for us, let the HVC fail\"",
+      "revId": "b7891390264d7f4eccbd89dec562ab4376e8f836",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
