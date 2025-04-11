@@ -1,0 +1,181 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cad00107_1681a3a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-04-11T23:58:58Z",
+      "side": 1,
+      "message": "The BUILD.bazel file LGTM. I just have some nit comments on the documentation.",
+      "revId": "a728bbfdbcee97d6dac52e98fad5065578b1e697",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c261fa3_af86f8e1",
+        "filename": "gki/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-04-11T23:58:58Z",
+      "side": 1,
+      "message": "nit: maybe add a line here as well and at L39 explaining what the afdo directory does (just link to your README.md file)",
+      "revId": "a728bbfdbcee97d6dac52e98fad5065578b1e697",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "190cdb4d_c9c6e493",
+        "filename": "gki/aarch64/afdo/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-04-11T23:58:58Z",
+      "side": 1,
+      "message": "nit: This should be deleted to be future proof",
+      "range": {
+        "startLine": 29,
+        "startChar": 77,
+        "endLine": 29,
+        "endChar": 86
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9ff68979_720f7f1b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "gki/aarch64/afdo/README.md",
+              "range": {
+                "startLine": 29,
+                "startChar": 0,
+                "endLine": 30,
+                "endChar": 0
+              },
+              "replacement": "https://ci.android.com/builds/branches/aosp_kernel-common-android16-6.12/grid) and download\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a728bbfdbcee97d6dac52e98fad5065578b1e697",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e080ded3_13336e4d",
+        "filename": "gki/aarch64/afdo/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-04-11T23:58:58Z",
+      "side": 1,
+      "message": "delete, or change the unordered list to an ordered list",
+      "range": {
+        "startLine": 38,
+        "startChar": 2,
+        "endLine": 38,
+        "endChar": 4
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ab0eca93_17e93c6c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "gki/aarch64/afdo/README.md",
+              "range": {
+                "startLine": 38,
+                "startChar": 0,
+                "endLine": 39,
+                "endChar": 0
+              },
+              "replacement": "1. Build a kernel image and flash it on an Android device\n"
+            },
+            {
+              "path": "gki/aarch64/afdo/README.md",
+              "range": {
+                "startLine": 41,
+                "startChar": 0,
+                "endLine": 42,
+                "endChar": 0
+              },
+              "replacement": "2. Run app crawling and app launching for top 100 apps\n"
+            },
+            {
+              "path": "gki/aarch64/afdo/README.md",
+              "range": {
+                "startLine": 48,
+                "startChar": 0,
+                "endLine": 49,
+                "endChar": 0
+              },
+              "replacement": "3. Record ETM data while running app crawling and app launching.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a728bbfdbcee97d6dac52e98fad5065578b1e697",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "737dc52f_fbac2952",
+        "filename": "gki/aarch64/afdo/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-04-11T23:58:58Z",
+      "side": 1,
+      "message": "is this right? maybe a android16 branch?",
+      "range": {
+        "startLine": 49,
+        "startChar": 148,
+        "endLine": 49,
+        "endChar": 154
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8639ee95_17da9b87",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "gki/aarch64/afdo/README.md",
+              "range": {
+                "startLine": 49,
+                "startChar": 0,
+                "endLine": 50,
+                "endChar": 0
+              },
+              "replacement": "  * We use cmdline `simpleperf record -e cs-etm:k -a` to [record ETM data for the kernel](https://android.googlesource.com/platform/system/extras/+/android14-release/simpleperf/doc/collect_etm_data_for_autofdo.md).\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a728bbfdbcee97d6dac52e98fad5065578b1e697",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
