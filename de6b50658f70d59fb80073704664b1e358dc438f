@@ -1,0 +1,91 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc993173_35023930",
+        "filename": "arch/x86/kernel/devicetree.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-04-11T17:12:22Z",
+      "side": 1,
+      "message": "This debug is redundant, given the pr_err in `early_init_dt_reserve_memory()`?",
+      "revId": "de6b50658f70d59fb80073704664b1e358dc438f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ecf34b9_c88701e6",
+        "filename": "drivers/of/fdt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-04-11T17:12:22Z",
+      "side": 1,
+      "message": "Use `%pa`? https://docs.kernel.org/core-api/printk-formats.html#physical-address-types-phys-addr-t\n\n(Yeah, I know this was copied from pKVM-IA, which was copied from pKVM-ARM...)",
+      "fixSuggestions": [
+        {
+          "fixId": "b3ca77a1_93440ee0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/of/fdt.c",
+              "range": {
+                "startLine": 493,
+                "startChar": 0,
+                "endLine": 494,
+                "endChar": 0
+              },
+              "replacement": "\t\tpr_err(\"%pa-%pa not arch reserved\\n\", \u0026base, \u0026(base + size));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "de6b50658f70d59fb80073704664b1e358dc438f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05cfdf16_f9bf8f2b",
+        "filename": "drivers/of/fdt.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-04-11T17:12:22Z",
+      "side": 1,
+      "message": "Unneeded empty line?",
+      "fixSuggestions": [
+        {
+          "fixId": "284fc3ce_0d7e6073",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/of/fdt.c",
+              "range": {
+                "startLine": 587,
+                "startChar": 0,
+                "endLine": 588,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "de6b50658f70d59fb80073704664b1e358dc438f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
