@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d915d8f1_7f3acd3e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 38
+      },
+      "lineNbr": 856,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-04-11T12:10:47Z",
+      "side": 1,
+      "message": "nit: move this into the `else` (host) clause, since `buf` is uninitialised if we\u0027re in guest context",
+      "range": {
+        "startLine": 856,
+        "startChar": 1,
+        "endLine": 856,
+        "endChar": 28
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8956bb94_8de3f463",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 856,
+                "startChar": 0,
+                "endLine": 857,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 861,
+                "startChar": 0,
+                "endLine": 861,
+                "endChar": 0
+              },
+              "replacement": "\t\treg \u003d (void *)buf + offset;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2822465898260bb0c9e50f2a037251633aae3406",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
