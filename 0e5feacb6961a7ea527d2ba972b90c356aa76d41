@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "887e34e9_921f9f6c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 37
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-04-14T10:11:20Z",
+      "side": 1,
+      "message": "Requests are per-cpu so we should be fine here. We call two time `pkvm_hyp_req_reserve` to reserve request slots.",
+      "parentUuid": "81158d27_43c2b04f",
+      "revId": "0e5feacb6961a7ea527d2ba972b90c356aa76d41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "829ebc5c_5fd895ed",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d8357c4_25cd3e5a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 37
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-04-14T10:11:20Z",
+      "side": 1,
+      "message": "I think we can keep it as it is for the moment, to support different `KVM_FFA_MBOX_NR_PAGES` for the guests we will have to change a bit more and have contiguous(physical) allocation of pages in the guest.",
+      "parentUuid": "829ebc5c_5fd895ed",
+      "revId": "0e5feacb6961a7ea527d2ba972b90c356aa76d41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e21a9476_a5294b93",
@@ -48,6 +84,24 @@
       "writtenOn": "2025-04-11T20:20:50Z",
       "side": 1,
       "message": "This value is reserved in the spec. Should we return an error instead, or `WARN`/`BUG`?",
+      "revId": "0e5feacb6961a7ea527d2ba972b90c356aa76d41",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e468e275_c80cf4d0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 37
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-04-14T10:11:20Z",
+      "side": 1,
+      "message": "In practice I don\u0027t think we will ever hit a different page size than (4k, 16k, 64k). We let the guest driver deal with it.",
+      "parentUuid": "e21a9476_a5294b93",
       "revId": "0e5feacb6961a7ea527d2ba972b90c356aa76d41",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
