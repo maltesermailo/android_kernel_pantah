@@ -425,6 +425,7 @@ int sdei_event_enable(u32 event_num)
 
 	return err;
 }
+EXPORT_SYMBOL_GPL(sdei_event_enable);
 
 static int sdei_api_event_disable(u32 event_num)
 {
@@ -466,6 +467,7 @@ int sdei_event_disable(u32 event_num)
 
 	return err;
 }
+EXPORT_SYMBOL_GPL(sdei_event_disable);
 
 static int sdei_api_event_unregister(u32 event_num)
 {
@@ -518,6 +520,7 @@ unlock:
 
 	return err;
 }
+EXPORT_SYMBOL_GPL(sdei_event_unregister);
 
 /*
  * unregister events, but don't destroy them as they are re-registered by
@@ -614,6 +617,7 @@ unlock:
 	mutex_unlock(&sdei_events_lock);
 	return err;
 }
+EXPORT_SYMBOL_GPL(sdei_event_register);
 
 static int sdei_reregister_shared(void)
 {
@@ -1062,14 +1066,14 @@ static bool __init sdei_present_acpi(void)
 	return true;
 }
 
-void __init sdei_init(void)
+int __init sdei_init(void)
 {
 	struct platform_device *pdev;
 	int ret;
 
 	ret = platform_driver_register(&sdei_driver);
 	if (ret || !sdei_present_acpi())
-		return;
+		return ret;
 
 	pdev = platform_device_register_simple(sdei_driver.driver.name,
 					       0, NULL, 0);
@@ -1078,8 +1082,14 @@ void __init sdei_init(void)
 		platform_driver_unregister(&sdei_driver);
 		pr_info("Failed to register ACPI:SDEI platform device %d\n",
 			ret);
+		return ret;
 	}
+
+	return 0;
 }
+#ifndef CONFIG_ACPI
+subsys_initcall_sync(sdei_init);
+#endif
 
 int sdei_event_handler(struct pt_regs *regs,
 		       struct sdei_registered_event *arg)
