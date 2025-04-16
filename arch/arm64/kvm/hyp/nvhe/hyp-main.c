@@ -7,6 +7,7 @@
 #include <kvm/arm_hypercalls.h>
 
 #include <hyp/adjust_pc.h>
+#include <hyp/switch.h>
 
 #include <asm/pgtable-types.h>
 #include <asm/kvm_asm.h>
@@ -687,11 +688,21 @@ static void flush_hyp_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu)
 		hyp_vcpu->vcpu.arch.hcr_el2 |= READ_ONCE(host_vcpu->arch.hcr_el2);
 	}
 
+<<<<<<< HEAD   (7c2885 Merge b44a37824878 ("mptcp: Fix data stream corruption in th)
 	hyp_vcpu->vcpu.arch.vsesr_el2 = host_vcpu->arch.vsesr_el2;
+||||||| BASE
+	hyp_vcpu->vcpu.arch.hcr_el2	= host_vcpu->arch.hcr_el2;
+	hyp_vcpu->vcpu.arch.mdcr_el2	= host_vcpu->arch.mdcr_el2;
+	hyp_vcpu->vcpu.arch.cptr_el2	= host_vcpu->arch.cptr_el2;
+=======
+	hyp_vcpu->vcpu.arch.hcr_el2	= host_vcpu->arch.hcr_el2;
+	hyp_vcpu->vcpu.arch.mdcr_el2	= host_vcpu->arch.mdcr_el2;
+>>>>>>> BRANCH (7d5669 KVM: arm64: Eagerly switch ZCR_EL{1,2})
 
 	flush_hyp_vgic_state(hyp_vcpu);
 	flush_hyp_timer_state(hyp_vcpu);
 
+<<<<<<< HEAD   (7c2885 Merge b44a37824878 ("mptcp: Fix data stream corruption in th)
 	switch (ARM_EXCEPTION_CODE(hyp_vcpu->exit_code)) {
 	case ARM_EXCEPTION_IRQ:
 	case ARM_EXCEPTION_EL1_SERROR:
@@ -699,6 +710,12 @@ static void flush_hyp_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu)
 		break;
 	case ARM_EXCEPTION_TRAP:
 		esr_ec = ESR_ELx_EC(kvm_vcpu_get_esr(&hyp_vcpu->vcpu));
+||||||| BASE
+	hyp_vcpu->vcpu.arch.debug_ptr	= kern_hyp_va(host_vcpu->arch.debug_ptr);
+	hyp_vcpu->vcpu.arch.host_fpsimd_state = host_vcpu->arch.host_fpsimd_state;
+=======
+	hyp_vcpu->vcpu.arch.debug_ptr	= kern_hyp_va(host_vcpu->arch.debug_ptr);
+>>>>>>> BRANCH (7d5669 KVM: arm64: Eagerly switch ZCR_EL{1,2})
 
 		if (pkvm_hyp_vcpu_is_protected(hyp_vcpu))
 			ec_handler = entry_hyp_pvm_handlers[esr_ec];
@@ -727,12 +744,19 @@ static void sync_hyp_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu, u32 exit_reason)
 	if (!pkvm_hyp_vcpu_is_protected(hyp_vcpu))
 		sync_debug_state(hyp_vcpu);
 
+<<<<<<< HEAD   (7c2885 Merge b44a37824878 ("mptcp: Fix data stream corruption in th)
 	/*
 	 * Don't sync the vcpu GPR/sysreg state after a run. Instead,
 	 * leave it in the hyp vCPU until someone actually requires it.
 	 */
 	sync_hyp_vgic_state(hyp_vcpu);
 	sync_hyp_timer_state(hyp_vcpu);
+||||||| BASE
+	host_vcpu->arch.hcr_el2		= hyp_vcpu->vcpu.arch.hcr_el2;
+	host_vcpu->arch.cptr_el2	= hyp_vcpu->vcpu.arch.cptr_el2;
+=======
+	host_vcpu->arch.hcr_el2		= hyp_vcpu->vcpu.arch.hcr_el2;
+>>>>>>> BRANCH (7d5669 KVM: arm64: Eagerly switch ZCR_EL{1,2})
 
 	switch (ARM_EXCEPTION_CODE(exit_reason)) {
 	case ARM_EXCEPTION_IRQ:
@@ -988,7 +1012,9 @@ static void handle___kvm_vcpu_run(struct kvm_cpu_context *host_ctxt)
 		}
 	} else {
 		/* The host is fully trusted, run its vCPU directly. */
+		fpsimd_lazy_switch_to_guest(host_vcpu);
 		ret = __kvm_vcpu_run(host_vcpu);
+		fpsimd_lazy_switch_to_host(host_vcpu);
 	}
 out:
 	cpu_reg(host_ctxt, 1) =  ret;
@@ -1769,11 +1795,24 @@ void handle_trap(struct kvm_cpu_context *host_ctxt)
 	case ESR_ELx_EC_SMC64:
 		handle_host_smc(host_ctxt);
 		break;
+<<<<<<< HEAD   (7c2885 Merge b44a37824878 ("mptcp: Fix data stream corruption in th)
 	case ESR_ELx_EC_FP_ASIMD:
 	case ESR_ELx_EC_SVE:
 	case ESR_ELx_EC_SME:
 		fpsimd_host_restore();
 		break;
+||||||| BASE
+	case ESR_ELx_EC_SVE:
+		if (has_hvhe())
+			sysreg_clear_set(cpacr_el1, 0, (CPACR_EL1_ZEN_EL1EN |
+							CPACR_EL1_ZEN_EL0EN));
+		else
+			sysreg_clear_set(cptr_el2, CPTR_EL2_TZ, 0);
+		isb();
+		sve_cond_update_zcr_vq(ZCR_ELx_LEN_MASK, SYS_ZCR_EL2);
+		break;
+=======
+>>>>>>> BRANCH (7d5669 KVM: arm64: Eagerly switch ZCR_EL{1,2})
 	case ESR_ELx_EC_IABT_LOW:
 	case ESR_ELx_EC_DABT_LOW:
 		handle_host_mem_abort(host_ctxt);

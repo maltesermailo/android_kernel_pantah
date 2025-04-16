@@ -157,6 +157,7 @@ extern u64 kvm_nvhe_sym(id_aa64smfr0_el1_sys_val);
 
 extern unsigned long kvm_nvhe_sym(__icache_flags);
 extern unsigned int kvm_nvhe_sym(kvm_arm_vmid_bits);
+<<<<<<< HEAD   (7c2885 Merge b44a37824878 ("mptcp: Fix data stream corruption in th)
 extern bool kvm_nvhe_sym(smccc_trng_available);
 extern unsigned int kvm_nvhe_sym(kvm_sve_max_vl);
 extern unsigned int kvm_nvhe_sym(kvm_host_sve_max_vl);
@@ -167,5 +168,9 @@ struct kvm_nvhe_clock_data {
 	u64 epoch_ns;
 	u64 epoch_cyc;
 };
+||||||| BASE
+=======
+extern unsigned int kvm_nvhe_sym(kvm_host_sve_max_vl);
+>>>>>>> BRANCH (7d5669 KVM: arm64: Eagerly switch ZCR_EL{1,2})
 
 #endif /* __ARM64_KVM_HYP_H__ */

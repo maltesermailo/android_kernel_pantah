@@ -41,6 +41,11 @@ int __init kvm_arm_init_sve(void)
 	if (system_supports_sve()) {
 		kvm_sve_max_vl = sve_max_virtualisable_vl();
 		kvm_host_sve_max_vl = sve_max_vl();
+<<<<<<< HEAD   (7c2885 Merge b44a37824878 ("mptcp: Fix data stream corruption in th)
+||||||| BASE
+=======
+		kvm_nvhe_sym(kvm_host_sve_max_vl) = kvm_host_sve_max_vl;
+>>>>>>> BRANCH (7d5669 KVM: arm64: Eagerly switch ZCR_EL{1,2})
 
 		/*
 		 * The get_sve_reg()/set_sve_reg() ioctl interface will need

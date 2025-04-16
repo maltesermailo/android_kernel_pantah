@@ -27,6 +27,7 @@ unsigned long __icache_flags;
 /* Used by kvm_get_vttbr(). */
 unsigned int kvm_arm_vmid_bits;
 
+<<<<<<< HEAD   (7c2885 Merge b44a37824878 ("mptcp: Fix data stream corruption in th)
 unsigned int kvm_sve_max_vl;
 
 unsigned int kvm_host_sve_max_vl;
@@ -71,6 +72,10 @@ struct kvm_host_sve_state *get_host_sve_state(struct kvm_vcpu *vcpu)
 	WARN_ON(!is_protected_kvm_enabled());
 	return __get_host_fpsimd_bytes();
 }
+||||||| BASE
+=======
+unsigned int kvm_host_sve_max_vl;
+>>>>>>> BRANCH (7d5669 KVM: arm64: Eagerly switch ZCR_EL{1,2})
 
 /*
  * Set trap register values based on features in ID_AA64PFR0.
@@ -80,8 +85,6 @@ static void pvm_init_traps_aa64pfr0(struct kvm_vcpu *vcpu)
 	const u64 feature_ids = pvm_read_id_reg(vcpu, SYS_ID_AA64PFR0_EL1);
 	u64 hcr_set = HCR_RW;
 	u64 hcr_clear = 0;
-	u64 cptr_set = 0;
-	u64 cptr_clear = 0;
 
 	/* Protected KVM does not support AArch32 guests. */
 	BUILD_BUG_ON(FIELD_GET(ARM64_FEATURE_MASK(ID_AA64PFR0_EL1_EL0),
@@ -111,21 +114,10 @@ static void pvm_init_traps_aa64pfr0(struct kvm_vcpu *vcpu)
 	/* Trap AMU */
 	if (!FIELD_GET(ARM64_FEATURE_MASK(ID_AA64PFR0_EL1_AMU), feature_ids)) {
 		hcr_clear |= HCR_AMVOFFEN;
-		cptr_set |= CPTR_EL2_TAM;
-	}
-
-	/* Trap SVE */
-	if (!FIELD_GET(ARM64_FEATURE_MASK(ID_AA64PFR0_EL1_SVE), feature_ids)) {
-		if (has_hvhe())
-			cptr_clear |= CPACR_EL1_ZEN_EL0EN | CPACR_EL1_ZEN_EL1EN;
-		else
-			cptr_set |= CPTR_EL2_TZ;
 	}
 
 	vcpu->arch.hcr_el2 |= hcr_set;
 	vcpu->arch.hcr_el2 &= ~hcr_clear;
-	vcpu->arch.cptr_el2 |= cptr_set;
-	vcpu->arch.cptr_el2 &= ~cptr_clear;
 }
 
 /*
@@ -166,7 +158,6 @@ static void pvm_init_traps_aa64dfr0(struct kvm_vcpu *vcpu)
 	const u64 feature_ids = pvm_read_id_reg(vcpu, SYS_ID_AA64DFR0_EL1);
 	u64 mdcr_set = 0;
 	u64 mdcr_clear = 0;
-	u64 cptr_set = 0;
 
 	/* Trap/constrain PMU */
 	if (!FIELD_GET(ARM64_FEATURE_MASK(ID_AA64DFR0_EL1_PMUVer), feature_ids)) {
@@ -193,6 +184,7 @@ static void pvm_init_traps_aa64dfr0(struct kvm_vcpu *vcpu)
 	if (!FIELD_GET(ARM64_FEATURE_MASK(ID_AA64DFR0_EL1_TraceFilt), feature_ids))
 		mdcr_set |= MDCR_EL2_TTRF;
 
+<<<<<<< HEAD   (7c2885 Merge b44a37824878 ("mptcp: Fix data stream corruption in th)
 	/* Trap Trace */
 	if (!FIELD_GET(ARM64_FEATURE_MASK(ID_AA64DFR0_EL1_TraceVer), feature_ids)) {
 		if (has_hvhe())
@@ -205,9 +197,19 @@ static void pvm_init_traps_aa64dfr0(struct kvm_vcpu *vcpu)
 	if (!FIELD_GET(ARM64_FEATURE_MASK(ID_AA64DFR0_EL1_ExtTrcBuff), feature_ids))
 		mdcr_clear |= MDCR_EL2_E2TB_MASK << MDCR_EL2_E2TB_SHIFT;
 
+||||||| BASE
+	/* Trap Trace */
+	if (!FIELD_GET(ARM64_FEATURE_MASK(ID_AA64DFR0_EL1_TraceVer), feature_ids)) {
+		if (has_hvhe())
+			cptr_set |= CPACR_EL1_TTA;
+		else
+			cptr_set |= CPTR_EL2_TTA;
+	}
+
+=======
+>>>>>>> BRANCH (7d5669 KVM: arm64: Eagerly switch ZCR_EL{1,2})
 	vcpu->arch.mdcr_el2 |= mdcr_set;
 	vcpu->arch.mdcr_el2 &= ~mdcr_clear;
-	vcpu->arch.cptr_el2 |= cptr_set;
 }
 
 /*
@@ -253,6 +255,7 @@ static void pvm_init_trap_regs(struct kvm_vcpu *vcpu)
 	vcpu->arch.hcr_el2 = HCR_GUEST_FLAGS |
 			     HCR_TID3 | HCR_TACR | HCR_TIDCP | HCR_TID1;
 
+<<<<<<< HEAD   (7c2885 Merge b44a37824878 ("mptcp: Fix data stream corruption in th)
 	if (cpus_have_const_cap(ARM64_HAS_RAS_EXTN)) {
 		/* route synchronous external abort exceptions to EL2 */
 		vcpu->arch.hcr_el2 |= HCR_TEA;
@@ -270,6 +273,19 @@ static void pvm_init_trap_regs(struct kvm_vcpu *vcpu)
 		vcpu->arch.cptr_el2 |= CPTR_NVHE_EL2_RES1;
 		vcpu->arch.cptr_el2 &= ~(CPTR_NVHE_EL2_RES0);
 	}
+||||||| BASE
+	/* Clear res0 and set res1 bits to trap potential new features. */
+	vcpu->arch.hcr_el2 &= ~(HCR_RES0);
+	vcpu->arch.mdcr_el2 &= ~(MDCR_EL2_RES0);
+	if (!has_hvhe()) {
+		vcpu->arch.cptr_el2 |= CPTR_NVHE_EL2_RES1;
+		vcpu->arch.cptr_el2 &= ~(CPTR_NVHE_EL2_RES0);
+	}
+=======
+	/* Clear res0 and set res1 bits to trap potential new features. */
+	vcpu->arch.hcr_el2 &= ~(HCR_RES0);
+	vcpu->arch.mdcr_el2 &= ~(MDCR_EL2_RES0);
+>>>>>>> BRANCH (7d5669 KVM: arm64: Eagerly switch ZCR_EL{1,2})
 }
 
 /*
