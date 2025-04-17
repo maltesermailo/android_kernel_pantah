@@ -763,6 +763,8 @@ static struct pci_driver ivpu_pci_driver = {
 
 module_pci_driver(ivpu_pci_driver);
 
+MODULE_IMPORT_NS(DMA_BUF);
+
 MODULE_AUTHOR("Intel Corporation");
 MODULE_DESCRIPTION(DRIVER_DESC);
 MODULE_LICENSE("GPL and additional rights");
