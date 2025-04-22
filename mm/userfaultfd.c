@@ -1387,7 +1387,13 @@ retry:
 			}
 		}
 		err = move_swap_pte(mm, dst_vma, dst_addr, src_addr, dst_pte, src_pte,
+<<<<<<< HEAD   (063f6b ANDROID: ABI: Update symbol list for mtk)
 				orig_dst_pte, orig_src_pte, dst_ptl, src_ptl, src_folio);
+||||||| BASE
+=======
+				orig_dst_pte, orig_src_pte,
+				dst_ptl, src_ptl, src_folio);
+>>>>>>> BRANCH (9e79fd Revert "openvswitch: switch to per-action label counting in )
 	}
 
 out:
