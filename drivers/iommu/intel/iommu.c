@@ -2562,6 +2562,7 @@ static int __init init_dmars(void)
 	struct dmar_drhd_unit *drhd;
 	struct intel_iommu *iommu;
 	int ret;
+	void *desc;
 
 	ret = intel_cap_audit(CAP_AUDIT_STATIC_DMAR, NULL);
 	if (ret)
@@ -2643,6 +2644,8 @@ static int __init init_dmars(void)
 	 */
 	for_each_active_iommu(iommu, drhd) {
 		iommu_flush_write_buffer(iommu);
+		desc = iommu_alloc_pages_node(iommu->node, GFP_ATOMIC, 1);
+		pkvm_set_iommu_iqa(iommu->reg_phys, virt_to_phys(desc));
 		iommu_set_root_entry(iommu);
 	}
 
