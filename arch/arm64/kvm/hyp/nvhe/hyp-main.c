@@ -7,6 +7,7 @@
 #include <kvm/arm_hypercalls.h>
 
 #include <hyp/adjust_pc.h>
+#include <hyp/switch.h>
 
 #include <asm/pgtable-types.h>
 #include <asm/kvm_asm.h>
@@ -545,7 +546,7 @@ static void fpsimd_sve_sync(struct kvm_vcpu *vcpu)
 	if (system_supports_sve())
 		__hyp_sve_restore_host();
 	else
-		__fpsimd_restore_state(*host_data_ptr(fpsimd_state));
+		__fpsimd_restore_state(host_data_ptr(host_ctxt.fp_regs));
 
 	if (has_fpmr)
 		write_sysreg_s(*host_data_ptr(fpmr), SYS_FPMR);
@@ -1074,7 +1075,9 @@ static void handle___kvm_vcpu_run(struct kvm_cpu_context *host_ctxt)
 			cpacr_clear_set(CPACR_ELx_FPEN | CPACR_ELx_ZEN, 0);
 	} else {
 		/* The host is fully trusted, run its vCPU directly. */
+		fpsimd_lazy_switch_to_guest(host_vcpu);
 		ret = __kvm_vcpu_run(host_vcpu);
+		fpsimd_lazy_switch_to_host(host_vcpu);
 	}
 out:
 	cpu_reg(host_ctxt, 1) =  ret;
@@ -2078,11 +2081,21 @@ void handle_trap(struct kvm_cpu_context *host_ctxt)
 	case ESR_ELx_EC_SMC64:
 		handle_host_smc(host_ctxt);
 		break;
+<<<<<<< HEAD   (99d39c ANDROID: db845c: publish the tests.zip package)
 	case ESR_ELx_EC_FP_ASIMD:
 	case ESR_ELx_EC_SVE:
 	case ESR_ELx_EC_SME:
 		fpsimd_host_restore();
 		break;
+||||||| BASE
+	case ESR_ELx_EC_SVE:
+		cpacr_clear_set(0, CPACR_ELx_ZEN);
+		isb();
+		sve_cond_update_zcr_vq(sve_vq_from_vl(kvm_host_sve_max_vl) - 1,
+				       SYS_ZCR_EL2);
+		break;
+=======
+>>>>>>> BRANCH (c77623 KVM: arm64: Eagerly switch ZCR_EL{1,2})
 	case ESR_ELx_EC_IABT_LOW:
 	case ESR_ELx_EC_DABT_LOW:
 		handle_host_mem_abort(host_ctxt);
