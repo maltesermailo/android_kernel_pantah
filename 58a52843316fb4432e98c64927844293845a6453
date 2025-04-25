@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b94ff4a9_f773809f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-04-25T14:47:13Z",
+      "side": 1,
+      "message": "I thought that too. But for now, this new config is for the minority, actually for the appsearch VM only. Furthermore, the existence of this new kernel config is somewhat controversal, and we may remove it in the future. So, I think it\u0027s too hasty to make big change to the existing defconfig.",
+      "parentUuid": "9118acb4_eb5d146e",
+      "revId": "58a52843316fb4432e98c64927844293845a6453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5f3b6daa_cfb81b6f",
         "filename": "arch/arm64/configs/microdroid_nodebug_defconfig",
         "patchSetId": 3
@@ -31,6 +49,24 @@
       "writtenOn": "2025-04-25T10:58:12Z",
       "side": 1,
       "message": "Can we use defconfig fragments to not maintain 2 related full configs?\n\nhttps://android.googlesource.com/kernel/build/+/refs/heads/main-kernel/kleaf/docs/kernel_config.md#defconfig-fragments",
+      "revId": "58a52843316fb4432e98c64927844293845a6453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bdc05d5_13a70b88",
+        "filename": "arch/arm64/configs/microdroid_nodebug_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1132673
+      },
+      "writtenOn": "2025-04-25T14:47:13Z",
+      "side": 1,
+      "message": "Please see my comment below. If it is fully decided that we keep this config, we can consider that. But for now, I wish we take a path with the least resistance.",
+      "parentUuid": "5f3b6daa_cfb81b6f",
       "revId": "58a52843316fb4432e98c64927844293845a6453",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
