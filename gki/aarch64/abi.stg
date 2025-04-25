@@ -354254,16 +354254,16 @@ function {
   parameter_id: 0x13580d6c
 }
 function {
-  id: 0x9b858247
-  return_type_id: 0x6720d32f
-  parameter_id: 0x1b52b59a
-  parameter_id: 0x347303b4
-}
-function {
   id: 0x9b8532be
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
   parameter_id: 0x0aa2374e
+}
+function {
+  id: 0x9b858247
+  return_type_id: 0x6720d32f
+  parameter_id: 0x1b52b59a
+  parameter_id: 0x347303b4
 }
 function {
   id: 0x9b858538
@@ -359771,6 +359771,14 @@ function {
   parameter_id: 0x00a43052
   parameter_id: 0x329bbc92
   parameter_id: 0x6720d32f
+}
+function {
+  id: 0x9d7b5780
+  return_type_id: 0x6720d32f
+  parameter_id: 0x0258f96e
+  parameter_id: 0x188b9e81
+  parameter_id: 0x3ee52b5e
+  parameter_id: 0x07712b14
 }
 function {
   id: 0x9d7d2035
@@ -394230,6 +394238,15 @@ elf_symbol {
   full_name: "devm_iio_device_alloc"
 }
 elf_symbol {
+  id: 0x4cc5c3be
+  name: "devm_iio_kfifo_buffer_setup_ext"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xbc8a5571
+  type_id: 0x9d7b5780
+  full_name: "devm_iio_kfifo_buffer_setup_ext"
+}
+elf_symbol {
   id: 0x93a520bf
   name: "devm_iio_trigger_register"
   is_defined: true
@@ -407800,6 +407817,15 @@ elf_symbol {
   crc: 0x083e5974
   type_id: 0x884063ea
   full_name: "iio_get_time_ns"
+}
+elf_symbol {
+  id: 0x6bc45122
+  name: "iio_kfifo_free"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd4e23103
+  type_id: 0x1b54f3ab
+  full_name: "iio_kfifo_free"
 }
 elf_symbol {
   id: 0x2c6f9f9a
@@ -448972,6 +448998,7 @@ interface {
   symbol_id: 0x35d98638
   symbol_id: 0xb5428827
   symbol_id: 0x4e9c460b
+  symbol_id: 0x4cc5c3be
   symbol_id: 0x93a520bf
   symbol_id: 0xc129555c
   symbol_id: 0x50344150
@@ -450477,6 +450504,7 @@ interface {
   symbol_id: 0xef661661
   symbol_id: 0x83815ff1
   symbol_id: 0x01f28688
+  symbol_id: 0x6bc45122
   symbol_id: 0x2c6f9f9a
   symbol_id: 0xa4bca904
   symbol_id: 0x2dd4437a
