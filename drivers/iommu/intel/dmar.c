@@ -1386,7 +1386,7 @@ static int qi_check_fault(struct intel_iommu *iommu, int index, int wait_index)
  * hardware has completed the invalidation before return. Wait descriptors
  * can be part of the submission but it will not be polled for completion.
  */
-int qi_submit_sync(struct intel_iommu *iommu, struct qi_desc *desc,
+static int __qi_submit_sync(struct intel_iommu *iommu, struct qi_desc *desc,
 		   unsigned int count, unsigned long options)
 {
 	struct q_inval *qi = iommu->qi;
@@ -1512,6 +1512,17 @@ restart:
 				ktime_to_ns(ktime_get()) - iec_start_ktime);
 
 	return rc;
+}
+
+int qi_submit_sync(struct intel_iommu *iommu, struct qi_desc *desc,
+		unsigned int count, unsigned long options)
+{
+	if (likely(this_cpu_read(pkvm_enabled))) {
+		kvm_hypercall3(PKVM_HC_SUBMIT_QI, iommu->reg_phys, (unsigned long)desc, count);
+		return 0;
+	}
+	else
+		return __qi_submit_sync(iommu, desc, count, options);
 }
 
 /*
