@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6b172d21_32b855c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-04-28T15:29:24Z",
+      "side": 1,
+      "message": "If the config has a defined purpose, we should call that purpose out and not hide behind the non-descriptive \"nodebug\". Any more descriptive naming suggestions?",
+      "parentUuid": "b94ff4a9_f773809f",
+      "revId": "58a52843316fb4432e98c64927844293845a6453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5f3b6daa_cfb81b6f",
         "filename": "arch/arm64/configs/microdroid_nodebug_defconfig",
         "patchSetId": 3
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Please see my comment below. If it is fully decided that we keep this config, we can consider that. But for now, I wish we take a path with the least resistance.",
       "parentUuid": "5f3b6daa_cfb81b6f",
+      "revId": "58a52843316fb4432e98c64927844293845a6453",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3791ba9f_ea3ecf02",
+        "filename": "arch/arm64/configs/microdroid_nodebug_defconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1402878
+      },
+      "writtenOn": "2025-04-28T15:29:24Z",
+      "side": 1,
+      "message": "Using defconfig fragments is independent of whether we keep the config for long. defconfig fragments precisely describe the increment between configurations and avoid divergence in the future. As such, please use them to not introduce unnecessary tech debt.",
+      "parentUuid": "3bdc05d5_13a70b88",
       "revId": "58a52843316fb4432e98c64927844293845a6453",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
