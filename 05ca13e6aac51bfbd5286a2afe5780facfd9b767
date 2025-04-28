@@ -16,6 +16,24 @@
       "message": "checkpatch:\n\n```\nWARNING:MACRO_ARG_UNUSED: Argument \u0027tracepoint\u0027 is not used in function-like macro\n#43: FILE: include/asm-generic/io.h:95\n```",
       "revId": "05ca13e6aac51bfbd5286a2afe5780facfd9b767",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9a5745a_e6e4adf1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026025
+      },
+      "writtenOn": "2025-04-28T19:09:47Z",
+      "side": 1,
+      "message": "`rwmmio_tracepoint_enabled(tracepoint)` is conditionally compiled to two variants, one of which does not use the tracepoint `arg`. bypassing checkpatch warning about unused `tracepoint` arg to keep both definitions consistent.",
+      "parentUuid": "a1feed86_4481fa3c",
+      "revId": "05ca13e6aac51bfbd5286a2afe5780facfd9b767",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
