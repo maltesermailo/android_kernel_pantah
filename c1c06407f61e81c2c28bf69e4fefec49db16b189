@@ -34,6 +34,23 @@
       "parentUuid": "36ce4ee3_efd6b397",
       "revId": "c1c06407f61e81c2c28bf69e4fefec49db16b189",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adb2aa1b_59ee873e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-04-28T15:57:38Z",
+      "side": 1,
+      "message": "This is a build break since these symbols are not exported by the kernel (you can\u0027t add symbols to your symbol list that are not exported):\n```\n  xpcs_config_eee\n  xpcs_create_fwnode\n  xpcs_create_mdiodev\n  xpcs_destroy\n  xpcs_get_an_mode\n  xpcs_get_interfaces\n```\nPlease fix.",
+      "revId": "c1c06407f61e81c2c28bf69e4fefec49db16b189",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
