@@ -51,6 +51,24 @@
       "message": "We don\u0027t accept FROMLIST bugs in android-mainline. Get it accepted upstream and it will merge into android-mainline.",
       "revId": "05ca13e6aac51bfbd5286a2afe5780facfd9b767",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54351611_44a89112",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026025
+      },
+      "writtenOn": "2025-04-29T09:37:14Z",
+      "side": 1,
+      "message": "This conflicts with the ACK contribution document here [1], which states that not-yet-upstreamed patches can be submitted to android-mainline:\n\n\u003e Submit patches to LKML first for an upstream review. If the patch is: [...] Not accepted upstream, submit it to android-mainline with a reference to the upstream submission or an explanation for why it wasn\u0027t submitted to LKML.\n\n\nThis patch fits the FROMLIST criteria at [2]:\n\n\u003e If the patch has been submitted to LKML, but not accepted into any maintainer tree\n\u003e tag the patch subject with FROMLIST:\n\n\nAnd I see the following FROMLIST patches were accepted into android-mainline [3].\n\nCould the guidance at [1] be corrected if FROMLIST patches are not allowed on android-mainline.\n\n---\n\n[1] https://source.android.com/docs/core/architecture/kernel/kernel-code#:~:text\u003dNot%20accepted%20upstream%2C%20submit%20it%20to%20android%2Dmainline%20with%20a%20reference%20to%20the%20upstream%20submission\n\n[2] https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md#:~:text\u003dIf%20the%20patch%20has%20been%20submitted%20to%20LKML%2C%20but%20not%20accepted%20into%20any%20maintainer%20tree\n\n[3] https://android-review.git.corp.google.com/q/project:kernel/common+branch:android-mainline+subject:%22FROMLIST:%22+status:merged",
+      "parentUuid": "9fa0b3cb_fa39af52",
+      "revId": "05ca13e6aac51bfbd5286a2afe5780facfd9b767",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
