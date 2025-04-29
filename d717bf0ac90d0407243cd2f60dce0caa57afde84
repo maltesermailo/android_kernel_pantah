@@ -16,6 +16,24 @@
       "message": "Aleksandr, can you please check whether this patch works?",
       "revId": "d717bf0ac90d0407243cd2f60dce0caa57afde84",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d69619bc_19f49c54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4008700
+      },
+      "writtenOn": "2025-04-29T12:44:26Z",
+      "side": 1,
+      "message": "Unfortunately it doesn\u0027t work :(\n\nSyzkaller doesn\u0027t see the coverage + e.g. here\u0027s a disassemble of one of the functions from the Rust code:\n\n`$ objdump  --disassemble\u003d_RINvNtCs8DPF7ip8WBQ_4core3ptr13drop_in_placeINtCsa3eM6HvC5LS_11rust_binder7DTRWrapNtNtBJ_4node9NodeDeathEEBJ_ vmlinux`\n\nhttps://paste.googleplex.com/4647606778855424\n\nThere are KASAN callbacks (__asan_report*), but no KCOV calls (__sanitizer_cov_trace_pc)\n\nThe configs are set:\n```\n$ cat .config | grep -e CONFIG_KCOV\u003d -e CONFIG_RUST\u003d\nCONFIG_RUST\u003dy\nCONFIG_KCOV\u003dy\n```\n\nAnd the commits are the right ones:\n```\n$ git log --pretty\u003dformat:%s\nANDROID: rust: add KCOV support\nANDROID: DO NOT SUBMIT: gki: enable Rust Binder\n```",
+      "parentUuid": "3506e3e6_f9e6840b",
+      "revId": "d717bf0ac90d0407243cd2f60dce0caa57afde84",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
