@@ -69,6 +69,24 @@
       "parentUuid": "9fa0b3cb_fa39af52",
       "revId": "05ca13e6aac51bfbd5286a2afe5780facfd9b767",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0598850b_a08df94a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-04-29T18:30:12Z",
+      "side": 1,
+      "message": "\u003e Not accepted upstream, submit it to android-mainline with a reference to the upstream submission or an explanation for why it wasn\u0027t submitted to LKML\n\nIf it is not accepted upstream, it should be submitted to android-mainline as an ANDROID patch (keeping the \"Link:\" tag so we see the upstream discussion). If it is still active on the list, we don\u0027t know yet whether it will be accepted...this is FROMLIST and should wait until it lands for android-mainline. We do accept FROMLIST patches to the GKI production branches since we understand that fix/feature may be needed urgently and can\u0027t wait for the full upstream cycle. This not true for android-mainline. You can have a downstream branch that tracks android-mainline for patches like this that haven\u0027t landed upstream yet.\n\n\u003e And I see the following FROMLIST patches were accepted into android-mainline \n\nWe do make exceptions for Pixel 6 and Cuttlefish support since those are needed for presubmit tests of android-mainline (chicken-and-egg issue).\n\nSo, if you can provide a very compelling reason why this patch should get an exception like that even though it is not needed for our android-mainline presubmits, we could make an exception.",
+      "parentUuid": "54351611_44a89112",
+      "revId": "05ca13e6aac51bfbd5286a2afe5780facfd9b767",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
