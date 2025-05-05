@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2727a3c7_92cde207",
+        "filename": "rust/kernel/page_size_compat.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-05-05T18:34:57Z",
+      "side": 1,
+      "message": "Thanks, good catch. This should only be toggled at early boot. I\u0027ve now made it __ro_after_init to enforce it (previous patch in the series).",
+      "parentUuid": "5a0e3604_772a769e",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 49
+      },
+      "revId": "2b968bfd0624b2a3a3d21903d8bf29edb9876525",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fed28ad2_36696a8c",
@@ -37,6 +61,24 @@
       "writtenOn": "2025-05-05T10:38:47Z",
       "side": 1,
       "message": "For same reason as code in `page.rs`.\n```suggestion\n        (addr_val + (page_size - 1)) \u0026 mask\n```",
+      "revId": "2b968bfd0624b2a3a3d21903d8bf29edb9876525",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76a5de66_001c7bcb",
+        "filename": "rust/kernel/page_size_compat.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-05-05T18:34:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fed28ad2_36696a8c",
       "revId": "2b968bfd0624b2a3a3d21903d8bf29edb9876525",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

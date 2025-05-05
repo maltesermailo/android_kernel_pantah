@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5cb03dd_a29f5900",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-05-05T18:34:57Z",
+      "side": 1,
+      "message": "We don\u0027t plat to upstream this feautre, as it\u0027s and android specific use case of page size emulation for x86 only to support app developers x86 machines. (There is no perf benefit only for compatibility testing)",
+      "parentUuid": "fc7f105f_b8b9bb16",
+      "revId": "874b9e122213e060d36fa08416b03e5c26280286",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06b23284_fe173748",
@@ -103,6 +121,24 @@
       "side": 1,
       "message": "I believe you can add `#![feature(asm_goto)]` to `rust/kernel/lib.rs` to fix that error.",
       "parentUuid": "49b5dc2b_0f095ee2",
+      "revId": "874b9e122213e060d36fa08416b03e5c26280286",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e9e923b_79a6ebc5",
+        "filename": "rust/kernel/page_size_compat.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-05-05T18:34:57Z",
+      "side": 1,
+      "message": "Thanks, that works.",
+      "parentUuid": "68bc7918_8b2477fe",
       "revId": "874b9e122213e060d36fa08416b03e5c26280286",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
