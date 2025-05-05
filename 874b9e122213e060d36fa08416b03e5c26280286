@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c81e1e5_a1e4474f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-05-05T10:20:39Z",
+      "side": 1,
+      "message": "Maybe :) but I\u0027d to have inlined / macros  to have the rest of the helpers available for completeness and parity with C.",
+      "parentUuid": "23a80c07_73614494",
+      "revId": "874b9e122213e060d36fa08416b03e5c26280286",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06b23284_fe173748",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-05-05T09:39:14Z",
       "side": 1,
       "message": "I don\u0027t think a macro is needed. I believe `static_branch_unlikely` works well enough inside a function as long as you mark it `#[inline]`.",
+      "revId": "874b9e122213e060d36fa08416b03e5c26280286",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49b5dc2b_0f095ee2",
+        "filename": "rust/kernel/page_size_compat.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-05-05T10:20:39Z",
+      "side": 1,
+      "message": "I am encountering below error with both inline and inline(always) I\u0027m not sure what is needed to fix it.\n\nI found making them macros as is done in tracepoint.rs allows it to compile\n\n```\nerror[E0658]: label operands for inline assembly are unstable\n  --\u003e /proc/self/cwd/common/rust/kernel/jump_label.rs:51:13\n   |\n51 | /             l_yes \u003d label {\n52 | |                 break \u0027my_label true;\n53 | |             },\n   | |_____________^\n   |\n  ::: /proc/self/cwd/common/rust/kernel/page_size_compat.rs:23:13\n   |\n23 | /             jump_label::static_branch_unlikely!(\n24 | |                 bindings::page_shift_compat_enabled,\n25 | |                 bindings::static_key_false,\n26 | |                 key\n27 | |             )\n   | |_____________- in this macro invocation\n   |\n   \u003d note: see issue #119364 \u003chttps://github.com/rust-lang/rust/issues/119364\u003e for more information\n   \u003d help: add `#![feature(asm_goto)]` to the crate attributes to enable\n   \u003d note: this compiler was built on 2024-10-15; consider upgrading it if it is out of date\n   \u003d note: this error originates in the macro `$crate::jump_label::arch_static_branch` which comes from the expansion of the macro `jump_label::static_branch_unlikely` (in Nightly builds, run with -Z macro-backtrace for more info)\n\nerror: aborting due to 1 previous error\n```",
+      "parentUuid": "06b23284_fe173748",
       "revId": "874b9e122213e060d36fa08416b03e5c26280286",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
