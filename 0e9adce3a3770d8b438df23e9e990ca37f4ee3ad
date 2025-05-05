@@ -1,0 +1,86 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6a5e07c_fcb6f14d",
+        "filename": "arch/arm64/configs/tv_gki.fragment",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-05-05T12:20:23Z",
+      "side": 1,
+      "message": "this should not affect the runtime image size at all.",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 21
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c509e8f0_5be19dc0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/configs/tv_gki.fragment",
+              "range": {
+                "startLine": 6,
+                "startChar": 0,
+                "endLine": 7,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "0e9adce3a3770d8b438df23e9e990ca37f4ee3ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e7d3263_cba6ec1b",
+        "filename": "arch/arm64/configs/tv_gki.fragment",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-05-05T12:20:23Z",
+      "side": 1,
+      "message": "this should not be an issue, it should just be building a kernel module, no extra space should be taken up at runtime if not loaded.  Why not do it that way as you will want these bpf headers to compile against, right?",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 18
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0baa262a_41008503",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/configs/tv_gki.fragment",
+              "range": {
+                "startLine": 11,
+                "startChar": 0,
+                "endLine": 12,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "0e9adce3a3770d8b438df23e9e990ca37f4ee3ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
