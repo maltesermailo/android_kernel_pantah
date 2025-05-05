@@ -68,6 +68,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "143975b4_db9bb2c8",
+        "filename": "arch/arm64/configs/tv_gki.fragment",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-05-05T13:15:35Z",
+      "side": 1,
+      "message": "What is \"lsmod\" memory size?\n\nAh, I see it now, yes, this will take up more size, BUT you will get worse panic messages.  Are you SURE that support will be possible without these symbols present?  How are you going to resolve them from the oops/panic crash messages without this?",
+      "parentUuid": "6df2f6cf_da838e97",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 21
+      },
+      "revId": "0e9adce3a3770d8b438df23e9e990ca37f4ee3ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0e7d3263_cba6ec1b",
         "filename": "arch/arm64/configs/tv_gki.fragment",
         "patchSetId": 4
@@ -121,6 +145,30 @@
       "side": 1,
       "message": "Yes, it will have no extra cost if not loaded.\n\nI think the reason is that we want to make sure the kheaders.ko will not be loaded if using tv_gki.fragment (since it is disabled in tv_gki.fragment)",
       "parentUuid": "0e7d3263_cba6ec1b",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 18
+      },
+      "revId": "0e9adce3a3770d8b438df23e9e990ca37f4ee3ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8257cddc_d6204860",
+        "filename": "arch/arm64/configs/tv_gki.fragment",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-05-05T13:15:35Z",
+      "side": 1,
+      "message": "Just don\u0027t load the module if you do not want it.\n\nBut bpf users will need/want this at runtime, so watch out if this is not present.  It could be breaking use cases so be careful.",
+      "parentUuid": "571adcff_9d3d6091",
       "range": {
         "startLine": 11,
         "startChar": 0,
