@@ -44,6 +44,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6df2f6cf_da838e97",
+        "filename": "arch/arm64/configs/tv_gki.fragment",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 2051144
+      },
+      "writtenOn": "2025-05-05T13:01:01Z",
+      "side": 1,
+      "message": "This will affect reserved memory (MemTotal) and module loaded size (lsmod)\n\nIn our environment, the differences are as following:\n\n1. CONFIG_KALLSYMS_ALL\u003dy\nlsmod total size is 38580224 Bytes\nMemory: 1472924K/2097152K available (17088K kernel code, 2010K rwdata, 12400K rodata, 4224K init, 583K bss, 345532K reserved, 274432K cma-reserved)\n\n2. CONFIG_KALLSYMS_ALL\u003dn\nlsmod total size is 38039552 Bytes\nMemory: 1474076K/2097152K available (17088K kernel code, 2010K rwdata, 11204K rodata, 4224K init, 583K bss, 344380K reserved, 274432K cma-reserved)\n\nSo, we can calculate the memory difference\na. lsmod is 38580224 - 38039552 \u003d 528KB shrinked\nb. reserved is 345532K - 344380K \u003d 1152KB shrinked\nc. rodata is 12400K - 11204K \u003d 1196KB shrinked\n\nThen, the total memory difference is\n528KB + 1152KB + 1196KB \u003d 2876KB",
+      "parentUuid": "e6a5e07c_fcb6f14d",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 21
+      },
+      "revId": "0e9adce3a3770d8b438df23e9e990ca37f4ee3ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0e7d3263_cba6ec1b",
         "filename": "arch/arm64/configs/tv_gki.fragment",
         "patchSetId": 4
@@ -79,6 +103,30 @@
           ]
         }
       ],
+      "revId": "0e9adce3a3770d8b438df23e9e990ca37f4ee3ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "571adcff_9d3d6091",
+        "filename": "arch/arm64/configs/tv_gki.fragment",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 2051144
+      },
+      "writtenOn": "2025-05-05T13:01:01Z",
+      "side": 1,
+      "message": "Yes, it will have no extra cost if not loaded.\n\nI think the reason is that we want to make sure the kheaders.ko will not be loaded if using tv_gki.fragment (since it is disabled in tv_gki.fragment)",
+      "parentUuid": "0e7d3263_cba6ec1b",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 18
+      },
       "revId": "0e9adce3a3770d8b438df23e9e990ca37f4ee3ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
