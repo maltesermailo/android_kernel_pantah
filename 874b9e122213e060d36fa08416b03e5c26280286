@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23a80c07_73614494",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-05-05T09:39:14Z",
+      "side": 1,
+      "message": "Isn\u0027t this a bit overkill compared to just using a helper C function? :)",
+      "revId": "874b9e122213e060d36fa08416b03e5c26280286",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06b23284_fe173748",
+        "filename": "rust/kernel/page_size_compat.rs",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-05-05T09:39:14Z",
+      "side": 1,
+      "message": "I don\u0027t think a macro is needed. I believe `static_branch_unlikely` works well enough inside a function as long as you mark it `#[inline]`.",
+      "revId": "874b9e122213e060d36fa08416b03e5c26280286",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
