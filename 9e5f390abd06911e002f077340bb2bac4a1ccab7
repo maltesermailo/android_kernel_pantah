@@ -1,0 +1,86 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df931b85_edef10a0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-05-06T08:48:36Z",
+      "side": 1,
+      "message": "The commit message shouldn\u0027t have an exclamation mark anymore since it\u0027s not a macro.",
+      "revId": "9e5f390abd06911e002f077340bb2bac4a1ccab7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aec16826_2736f054",
+        "filename": "rust/kernel/page_size_compat.rs",
+        "patchSetId": 9
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-05-06T08:48:36Z",
+      "side": 1,
+      "message": "You don\u0027t need all these `: usize` annotations anymore now that it\u0027s not a macro.",
+      "fixSuggestions": [
+        {
+          "fixId": "be87eb6c_d5ad1f6d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "rust/kernel/page_size_compat.rs",
+              "range": {
+                "startLine": 39,
+                "startChar": 0,
+                "endLine": 40,
+                "endChar": 0
+              },
+              "replacement": "    let shift \u003d __page_shift();\n"
+            },
+            {
+              "path": "rust/kernel/page_size_compat.rs",
+              "range": {
+                "startLine": 47,
+                "startChar": 0,
+                "endLine": 49,
+                "endChar": 0
+              },
+              "replacement": "    let page_size \u003d __page_size();\n"
+            },
+            {
+              "path": "rust/kernel/page_size_compat.rs",
+              "range": {
+                "startLine": 55,
+                "startChar": 0,
+                "endLine": 57,
+                "endChar": 0
+              },
+              "replacement": "    let page_size \u003d __page_size();\n    let mask \u003d !(page_size - 1);\n"
+            },
+            {
+              "path": "rust/kernel/page_size_compat.rs",
+              "range": {
+                "startLine": 66,
+                "startChar": 0,
+                "endLine": 67,
+                "endChar": 0
+              },
+              "replacement": "    let mask \u003d __page_mask();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "9e5f390abd06911e002f077340bb2bac4a1ccab7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
