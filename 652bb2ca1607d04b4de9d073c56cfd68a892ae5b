@@ -16,6 +16,24 @@
       "message": "In the previous version on ACK15-6.6, the vendor hook was before the null (\\0) terminated rwbs, but here it is after. Is it carefully crafted fix from previous version or is it misplaced now? If vendor hook modifies rwbs after/beyond `\\0` you will have problems getting it in systrace.",
       "revId": "652bb2ca1607d04b4de9d073c56cfd68a892ae5b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16cea6cb_ab5cae04",
+        "filename": "kernel/trace/blktrace.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1914,
+      "author": {
+        "id": 2010822
+      },
+      "writtenOn": "2025-05-07T02:28:34Z",
+      "side": 1,
+      "message": "In ACK15-6.6, we modified this commit again, put the vendor hook after the \u0027\\0\u0027, and passed the parameter \"i\" indicating the current buffer fill position.\nhttps://android-review.googlesource.com/c/kernel/common/+/3148420",
+      "parentUuid": "bf0d638d_004dc5fa",
+      "revId": "652bb2ca1607d04b4de9d073c56cfd68a892ae5b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
