@@ -33,6 +33,24 @@
       "message": "Is the ABI tooling giving a false positive here? @gprocida@google.com\n\nI updated the ABI to test with presubmits but here the ABI checks still failed",
       "revId": "955d1bc1b0f80975250d7386fc789ea0e7ba9d8c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c96e1c55_dd5ab479",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-05-07T09:02:44Z",
+      "side": 1,
+      "message": "TL;DR: No.\n\nYou have traded ABI Compliance errors (the ABI of the kernel as built is not the same as the ABI as stored) for ABI Compatibility errors (the new stored ABI is not compatible with the old stored ABI).\n\nWe never (knowingly) allow ABI Compliance errors.\n\nWe only allow ABI Compatibility errors (a.k.a. ABI breaks) at very specific times or if they are reviewed carefully and determined to be safe (and we record the allowed break). Symbol CRC changes are never safe as they will prevent module load.\n\nReference: go/abi:gerrit",
+      "parentUuid": "2dbc747a_fbdf5e59",
+      "revId": "955d1bc1b0f80975250d7386fc789ea0e7ba9d8c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
