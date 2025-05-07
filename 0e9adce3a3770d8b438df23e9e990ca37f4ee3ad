@@ -242,6 +242,30 @@
       },
       "revId": "0e9adce3a3770d8b438df23e9e990ca37f4ee3ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96f15785_de2af3f5",
+        "filename": "arch/arm64/configs/tv_gki.fragment",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-05-07T17:54:51Z",
+      "side": 1,
+      "message": "This causes a failure:\n```\nERROR: Unable to find kernel/kheaders.ko in any of the following directories:\n  bazel-out/k8-fastbuild/bin/common/kernel_aarch64_tv/staging/lib/modules/6.12.23-android16-4-maybe-dirty-4k/kernel\n```\nFor now, please remove this line and file a bug to fix this error (you can assign it to me)",
+      "parentUuid": "8257cddc_d6204860",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 18
+      },
+      "revId": "0e9adce3a3770d8b438df23e9e990ca37f4ee3ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
