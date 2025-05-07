@@ -130,7 +130,18 @@ extern u64 kvm_nvhe_sym(id_aa64isar1_el1_sys_val);
 extern u64 kvm_nvhe_sym(id_aa64isar2_el1_sys_val);
 extern u64 kvm_nvhe_sym(id_aa64mmfr0_el1_sys_val);
 extern u64 kvm_nvhe_sym(id_aa64mmfr1_el1_sys_val);
+<<<<<<< HEAD   (0416ed UPSTREAM: arm64: errata: Add missing sentinels to Spectre-BH)
 extern u64 kvm_nvhe_sym(id_aa64mmfr2_el1_sys_val);
+||||||| BASE
+=======
+extern unsigned int kvm_nvhe_sym(kvm_host_sve_max_vl);
+
+static inline bool guest_owns_fp_regs(struct kvm_vcpu *vcpu)
+{
+	return vcpu->arch.flags & KVM_ARM64_FP_ENABLED;
+}
+
+>>>>>>> BRANCH (93cc7c KVM: arm64: Eagerly switch ZCR_EL{1,2})
 
 extern unsigned long kvm_nvhe_sym(__icache_flags);
 extern unsigned int kvm_nvhe_sym(kvm_arm_vmid_bits);

@@ -894,8 +894,13 @@ static int sve_set_common(struct task_struct *target,
 		ret = __fpr_set(target, regset, pos, count, kbuf, ubuf,
 				SVE_PT_FPSIMD_OFFSET);
 		clear_tsk_thread_flag(target, TIF_SVE);
+<<<<<<< HEAD   (0416ed UPSTREAM: arm64: errata: Add missing sentinels to Spectre-BH)
 		if (type == ARM64_VEC_SME)
 			fpsimd_force_sync_to_sve(target);
+||||||| BASE
+=======
+		target->thread.fp_type = FP_STATE_FPSIMD;
+>>>>>>> BRANCH (93cc7c KVM: arm64: Eagerly switch ZCR_EL{1,2})
 		goto out;
 	}
 
@@ -918,6 +923,7 @@ static int sve_set_common(struct task_struct *target,
 	if (!target->thread.sve_state) {
 		ret = -ENOMEM;
 		clear_tsk_thread_flag(target, TIF_SVE);
+		target->thread.fp_type = FP_STATE_FPSIMD;
 		goto out;
 	}
 
@@ -929,8 +935,15 @@ static int sve_set_common(struct task_struct *target,
 	 * have normal SVE.
 	 */
 	fpsimd_sync_to_sve(target);
+<<<<<<< HEAD   (0416ed UPSTREAM: arm64: errata: Add missing sentinels to Spectre-BH)
 	if (type == ARM64_VEC_SVE)
 		set_tsk_thread_flag(target, TIF_SVE);
+||||||| BASE
+	set_tsk_thread_flag(target, TIF_SVE);
+=======
+	set_tsk_thread_flag(target, TIF_SVE);
+	target->thread.fp_type = FP_STATE_SVE;
+>>>>>>> BRANCH (93cc7c KVM: arm64: Eagerly switch ZCR_EL{1,2})
 
 	BUILD_BUG_ON(SVE_PT_SVE_OFFSET != sizeof(header));
 	start = SVE_PT_SVE_OFFSET;

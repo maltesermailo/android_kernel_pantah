@@ -208,6 +208,7 @@ static int restore_fpsimd_context(struct fpsimd_context __user *ctx)
 	__get_user_error(fpsimd.fpcr, &ctx->fpcr, err);
 
 	clear_thread_flag(TIF_SVE);
+	current->thread.fp_type = FP_STATE_FPSIMD;
 
 	/* load the hardware registers from the fpsimd_state structure */
 	if (!err)
@@ -289,7 +290,12 @@ static int restore_sve_fpsimd_context(struct user_ctxs *user)
 
 	if (sve.head.size <= sizeof(*user->sve)) {
 		clear_thread_flag(TIF_SVE);
+<<<<<<< HEAD   (0416ed UPSTREAM: arm64: errata: Add missing sentinels to Spectre-BH)
 		current->thread.svcr &= ~SVCR_SM_MASK;
+||||||| BASE
+=======
+		current->thread.fp_type = FP_STATE_FPSIMD;
+>>>>>>> BRANCH (93cc7c KVM: arm64: Eagerly switch ZCR_EL{1,2})
 		goto fpsimd_only;
 	}
 
@@ -321,10 +327,17 @@ static int restore_sve_fpsimd_context(struct user_ctxs *user)
 	if (err)
 		return -EFAULT;
 
+<<<<<<< HEAD   (0416ed UPSTREAM: arm64: errata: Add missing sentinels to Spectre-BH)
 	if (sve.flags & SVE_SIG_FLAG_SM)
 		current->thread.svcr |= SVCR_SM_MASK;
 	else
 		set_thread_flag(TIF_SVE);
+||||||| BASE
+	set_thread_flag(TIF_SVE);
+=======
+	set_thread_flag(TIF_SVE);
+	current->thread.fp_type = FP_STATE_SVE;
+>>>>>>> BRANCH (93cc7c KVM: arm64: Eagerly switch ZCR_EL{1,2})
 
 fpsimd_only:
 	/* copy the FP and status/control registers */

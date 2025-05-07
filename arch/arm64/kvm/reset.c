@@ -38,8 +38,16 @@ unsigned int kvm_host_sve_max_vl;
 int kvm_arm_init_sve(void)
 {
 	if (system_supports_sve()) {
+<<<<<<< HEAD   (0416ed UPSTREAM: arm64: errata: Add missing sentinels to Spectre-BH)
 		kvm_sve_max_vl = sve_max_virtualisable_vl();
 		kvm_host_sve_max_vl = sve_max_vl();
+||||||| BASE
+		kvm_sve_max_vl = sve_max_virtualisable_vl;
+=======
+		kvm_sve_max_vl = sve_max_virtualisable_vl;
+		kvm_host_sve_max_vl = sve_max_vl;
+		kvm_nvhe_sym(kvm_host_sve_max_vl) = kvm_host_sve_max_vl;
+>>>>>>> BRANCH (93cc7c KVM: arm64: Eagerly switch ZCR_EL{1,2})
 
 		/*
 		 * The get_sve_reg()/set_sve_reg() ioctl interface will need

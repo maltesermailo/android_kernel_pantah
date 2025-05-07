@@ -313,6 +313,7 @@ int arch_dup_task_struct(struct task_struct *dst, struct task_struct *src)
 	dst->thread.sve_state = NULL;
 	clear_tsk_thread_flag(dst, TIF_SVE);
 
+<<<<<<< HEAD   (0416ed UPSTREAM: arm64: errata: Add missing sentinels to Spectre-BH)
 	/*
 	 * In the unlikely event that we create a new thread with ZA
 	 * enabled we should retain the ZA state so duplicate it here.
@@ -338,6 +339,11 @@ int arch_dup_task_struct(struct task_struct *dst, struct task_struct *src)
 		dst->thread.za_state = NULL;
 		clear_tsk_thread_flag(dst, TIF_SME);
 	}
+||||||| BASE
+=======
+
+	dst->thread.fp_type = FP_STATE_FPSIMD;
+>>>>>>> BRANCH (93cc7c KVM: arm64: Eagerly switch ZCR_EL{1,2})
 
 	/* clear any pending asynchronous tag fault raised by the parent */
 	clear_tsk_thread_flag(dst, TIF_MTE_ASYNC_FAULT);
