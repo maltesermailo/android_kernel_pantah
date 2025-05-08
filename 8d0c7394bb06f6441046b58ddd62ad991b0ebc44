@@ -40,6 +40,47 @@
       ],
       "revId": "8d0c7394bb06f6441046b58ddd62ad991b0ebc44",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edbc3084_4e760e40",
+        "filename": "scripts/link-vmlinux.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2025-05-08T13:21:13Z",
+      "side": 1,
+      "message": "`CONFIG_TRIM_UNUSED_KSYMS`?",
+      "range": {
+        "startLine": 76,
+        "startChar": 16,
+        "endLine": 76,
+        "endChar": 42
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6dd45cb7_b627d8da",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "scripts/link-vmlinux.sh",
+              "range": {
+                "startLine": 76,
+                "startChar": 0,
+                "endLine": 77,
+                "endChar": 0
+              },
+              "replacement": "\t\tif is_enabled CONFIG_TRIM_UNUSED_KSYMS; then\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8d0c7394bb06f6441046b58ddd62ad991b0ebc44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
