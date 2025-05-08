@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14988b7b_24b064b7",
+        "filename": "scripts/Makefile.vmlinux",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1961395
+      },
+      "writtenOn": "2025-05-08T10:53:38Z",
+      "side": 1,
+      "message": "just bare `vmlinux` to solve the linking error:\n\n```\nld.lld: error: undefined symbol: permitted_symbol_imports_count\n\u003e\u003e\u003e referenced by main.c:1154 (/proc/self/cwd/common/kernel/module/main.c:1154)\n\u003e\u003e\u003e               vmlinux.o:(resolve_symbol)\n\u003e\u003e\u003e referenced by main.c:1156 (/proc/self/cwd/common/kernel/module/main.c:1156)\n\u003e\u003e\u003e               vmlinux.o:(resolve_symbol)\n```",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 16
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "043ff4cb_9fbc87f8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "scripts/Makefile.vmlinux",
+              "range": {
+                "startLine": 31,
+                "startChar": 0,
+                "endLine": 32,
+                "endChar": 0
+              },
+              "replacement": "vmlinux: .vmlinux.permitted-imports.o\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8d0c7394bb06f6441046b58ddd62ad991b0ebc44",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
