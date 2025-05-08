@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcb954ca_a7bb1290",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-05-08T15:27:12Z",
+      "side": 1,
+      "message": "no need for __packed here, it is already 64-bits.",
+      "fixSuggestions": [
+        {
+          "fixId": "68e5083b_3b735fa2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 67,
+                "startChar": 0,
+                "endLine": 68,
+                "endChar": 0
+              },
+              "replacement": "};\n"
+            }
+          ]
+        }
+      ],
+      "revId": "39d5d9e55c8a360656ab9f30465fa9563b4a40d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60d56758_dc7b0cb2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-05-08T15:27:12Z",
+      "side": 1,
+      "message": "Do we really need to save the list of handles? The information about what is a lend can be found in the host stage-2.\n\nOn a lend, we would do host_donate_ffa(). During reclaim, we could just check in the host stage-2 who owns the page? If it is FFA_OWNED, we then need to re-map it?",
+      "revId": "39d5d9e55c8a360656ab9f30465fa9563b4a40d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
