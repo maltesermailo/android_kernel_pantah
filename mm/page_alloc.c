@@ -3253,6 +3253,19 @@ struct page *__rmqueue_pcplist(struct zone *zone, unsigned int order,
 			int batch = nr_pcp_alloc(pcp, zone, order);
 			int alloced;
 
+<<<<<<< HEAD   (eb5e5c1f626e74ce56890b491edb90a1d11a7ea7 ANDROID: gki_defconfig: Enable Tegra SoCs)
+||||||| BASE   (34fe71fe24c9cd59c12ec7098566a86d8b0b7e2d ANDROID: GKI: Update symbol list file for xiaomi)
+			trace_android_vh_rmqueue_bulk_bypass(order, pcp, migratetype, list);
+			if (!list_empty(list))
+				goto get_list;
+=======
+			trace_android_vh_rmqueue_bulk_bypass(order, pcp, migratetype, list);
+			if (!list_empty(list))
+				goto get_list;
+
+			trace_android_vh_rmqueue_pcplist_override_batch(&batch);
+
+>>>>>>> CHANGE (ac8b302ab02119bcd81628390ed466890e6ab7b0 ANDROID: mm: Add vendor hook before rmqueue_bulk)
 			alloced = rmqueue_bulk(zone, order,
 					batch, list,
 					migratetype, alloc_flags);
