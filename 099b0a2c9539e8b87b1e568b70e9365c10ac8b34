@@ -16,6 +16,24 @@
       "message": "We are only supporting the HVC conduit in pKVM; please update your VM payload to use that instead. Thanks.",
       "revId": "099b0a2c9539e8b87b1e568b70e9365c10ac8b34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44317cbf_1d0868e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 45
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-05-13T17:52:07Z",
+      "side": 1,
+      "message": "We need a better explanation for this. It is not clear to me that this is spec compliant and that other hypervisors have the same restriction. Trusty needs to make SMC(/HVC) calls very early in the boot process. It is much simpler to use the SMC conduit everywhere than parsing the device tree to find out which conduit should be supported. I don\u0027t think we even get an error code back when we make an SMC call.\n\nWe also want to make it as easy as possible for other operating systems that currently run in trustzone to move to running in a VM. This seems like a needless hurdle.",
+      "parentUuid": "c1b00796_eadd5b16",
+      "revId": "099b0a2c9539e8b87b1e568b70e9365c10ac8b34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
