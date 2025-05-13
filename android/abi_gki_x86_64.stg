@@ -534,6 +534,11 @@ pointer_reference {
   pointee_type_id: 0x22ada5b1
 }
 pointer_reference {
+  id: 0x023d70b1
+  kind: POINTER
+  pointee_type_id: 0x22b52459
+}
+pointer_reference {
   id: 0x023e1217
   kind: POINTER
   pointee_type_id: 0x22b8aec1
@@ -2394,6 +2399,11 @@ pointer_reference {
   pointee_type_id: 0x019a878e
 }
 pointer_reference {
+  id: 0x0af6c6c5
+  kind: POINTER
+  pointee_type_id: 0x019bfd88
+}
+pointer_reference {
   id: 0x0b036186
   kind: POINTER
   pointee_type_id: 0x064d6086
@@ -2502,6 +2512,11 @@ pointer_reference {
   id: 0x0b756bd6
   kind: POINTER
   pointee_type_id: 0x079549c7
+}
+pointer_reference {
+  id: 0x0b7685fc
+  kind: POINTER
+  pointee_type_id: 0x079af16e
 }
 pointer_reference {
   id: 0x0b77f3e1
@@ -9337,6 +9352,11 @@ pointer_reference {
   id: 0x1fc1dca8
   kind: POINTER
   pointee_type_id: 0x5547943d
+}
+pointer_reference {
+  id: 0x1fc8ac0e
+  kind: POINTER
+  pointee_type_id: 0x556256a4
 }
 pointer_reference {
   id: 0x1fcb234b
@@ -22487,6 +22507,11 @@ pointer_reference {
   id: 0x386883b9
   kind: POINTER
   pointee_type_id: 0xcbe2e878
+}
+pointer_reference {
+  id: 0x386d811a
+  kind: POINTER
+  pointee_type_id: 0xcbf6e2f7
 }
 pointer_reference {
   id: 0x386effc9
@@ -128071,6 +128096,42 @@ member {
   bitsize: 1
 }
 member {
+  id: 0xea072bdb
+  name: "pci_mmcfg_readb"
+  type_id: 0x386d811a
+  offset: 1024
+}
+member {
+  id: 0x8643fcba
+  name: "pci_mmcfg_readl"
+  type_id: 0x38ad304a
+  offset: 1152
+}
+member {
+  id: 0x226f8c34
+  name: "pci_mmcfg_readw"
+  type_id: 0x1fc8ac0e
+  offset: 1088
+}
+member {
+  id: 0xced6e3de
+  name: "pci_mmcfg_writeb"
+  type_id: 0x0b7685fc
+  offset: 1216
+}
+member {
+  id: 0x665cfc37
+  name: "pci_mmcfg_writel"
+  type_id: 0x0af6c6c5
+  offset: 1344
+}
+member {
+  id: 0xa3963617
+  name: "pci_mmcfg_writew"
+  type_id: 0x023d70b1
+  offset: 1280
+}
+member {
   id: 0x475f5a88
   name: "pci_pf"
   type_id: 0xf0f5f897
@@ -217382,7 +217443,7 @@ struct_union {
   kind: STRUCT
   name: "paravirt_patch_template"
   definition {
-    bytesize: 232
+    bytesize: 280
     member_id: 0x51bb2ef1
     member_id: 0x990f606c
     member_id: 0x6d79f1e0
@@ -220573,7 +220634,7 @@ struct_union {
   kind: STRUCT
   name: "pv_mmio_ops"
   definition {
-    bytesize: 128
+    bytesize: 176
     member_id: 0x642dee55
     member_id: 0xb245d49c
     member_id: 0xcbebb96b
@@ -220590,6 +220651,12 @@ struct_union {
     member_id: 0x8a87ac43
     member_id: 0xc7112108
     member_id: 0x1047feb4
+    member_id: 0xea072bdb
+    member_id: 0x226f8c34
+    member_id: 0x8643fcba
+    member_id: 0xced6e3de
+    member_id: 0xa3963617
+    member_id: 0x665cfc37
   }
 }
 struct_union {
@@ -253778,6 +253845,12 @@ function {
   parameter_id: 0x18ea6ae3
 }
 function {
+  id: 0x019bfd88
+  return_type_id: 0x48b5725f
+  parameter_id: 0x4585663f
+  parameter_id: 0x18bd6530
+}
+function {
   id: 0x01f9081c
   return_type_id: 0x48b5725f
   parameter_id: 0x4585663f
@@ -253881,6 +253954,12 @@ function {
   return_type_id: 0x48b5725f
   parameter_id: 0x5d8155a5
   parameter_id: 0x2b1ef221
+}
+function {
+  id: 0x079af16e
+  return_type_id: 0x48b5725f
+  parameter_id: 0x5d8155a5
+  parameter_id: 0x18bd6530
 }
 function {
   id: 0x082ccdd1
@@ -261700,6 +261779,12 @@ function {
   parameter_id: 0x18bd6530
 }
 function {
+  id: 0x22b52459
+  return_type_id: 0x48b5725f
+  parameter_id: 0xc93e017b
+  parameter_id: 0x18bd6530
+}
+function {
   id: 0x22b8aec1
   return_type_id: 0x48b5725f
   parameter_id: 0xc9082b19
@@ -263320,6 +263405,11 @@ function {
   parameter_id: 0x0b30ee00
   parameter_id: 0x4585663f
   parameter_id: 0x6720d32f
+}
+function {
+  id: 0x556256a4
+  return_type_id: 0xc93e017b
+  parameter_id: 0x18bd6530
 }
 function {
   id: 0x55aa47ce
@@ -281915,6 +282005,11 @@ function {
   return_type_id: 0x65d74a06
   parameter_id: 0x246dc7d4
   parameter_id: 0x3360dff4
+}
+function {
+  id: 0xcbf6e2f7
+  return_type_id: 0x5d8155a5
+  parameter_id: 0x18bd6530
 }
 function {
   id: 0xcc046d22
@@ -306727,7 +306822,7 @@ elf_symbol {
   name: "pv_ops"
   is_defined: true
   symbol_type: OBJECT
-  crc: 0x50ea54f9
+  crc: 0x1870f715
   type_id: 0x2cfd13fd
   full_name: "pv_ops"
 }
