@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac0a7719_53aa86e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-05-14T08:57:37Z",
+      "side": 1,
+      "message": "I am not sure we want this in production.\n\nPerhaps the SMCs the guest is issuing shouldn\u0027t be inspected by the host?\n\nAlso for debug purpose we probably need to add a field to identify the VM. But I don\u0027t think pKVM has access to anything that is meaningful to userspace (vmid or pkvm_handle are probably not helpful)",
+      "revId": "e6ad506e0d2d65b4bb0f3f665dd58687c0050932",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
