@@ -1878,18 +1878,7 @@ static inline bool page_needs_cow_for_dma(struct vm_area_struct *vma,
  */
 static inline bool is_zero_page(const struct page *page)
 {
-	return is_zero_pfn(page_to_pfn(page));
-}
-
-/**
- * is_zero_folio - Query if a folio is a zero page
- * @folio: The folio to query
- *
- * This returns true if @folio is one of the permanent zero pages.
- */
-static inline bool is_zero_folio(const struct folio *folio)
-{
-	return is_zero_page(&folio->page);
+       return is_zero_pfn(page_to_pfn(page));
 }
 
 /* MIGRATE_CMA and ZONE_MOVABLE do not allow pin pages */
@@ -1902,8 +1891,8 @@ static inline bool is_longterm_pinnable_page(struct page *page)
 	if (mt == MIGRATE_CMA || mt == MIGRATE_ISOLATE)
 		return false;
 #endif
-	/* The zero page can be "pinned" but gets special handling. */
-	if (is_zero_page(page))
+	/* The zero page may always be pinned */
+	if (is_zero_pfn(page_to_pfn(page)))
 		return true;
 
 	/* Coherent device memory must always allow eviction. */
