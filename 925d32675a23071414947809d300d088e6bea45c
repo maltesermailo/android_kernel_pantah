@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b4487f5_fe5702ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1594463
+      },
+      "writtenOn": "2025-05-14T00:46:20Z",
+      "side": 1,
+      "message": "I was wondering why the pixel6 boot test is failing (it initially looked unrelated). However, it seems to fail because the ABI is updated:\n\"Found CRC differences between the GKI kernel and device modules!\"\n\n@Todd, how should I proceed with these CLs? Can we update the ABI in this case (changing the size of a reserved member in a bitfield to add the newly defined RA PIO flags?). If not, I can always mask instead.",
+      "revId": "925d32675a23071414947809d300d088e6bea45c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
