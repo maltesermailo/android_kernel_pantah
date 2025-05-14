@@ -16,6 +16,7 @@
 struct pkvm_dev_resource {
 	u64 base;
 	u64 size;
+	ANDROID_KABI_RESERVE(1);
 };
 
 /*
@@ -25,6 +26,7 @@ struct pkvm_dev_resource {
 struct pkvm_dev_iommu {
 	u64 id;
 	u64 endpoint;
+	ANDROID_KABI_RESERVE(1);
 };
 
 #define PKVM_DEVICE_MAX_RESOURCE	32
@@ -40,6 +42,10 @@ struct pkvm_device {
 	unsigned short refcount;
 	int (*reset_handler)(void *cookie, bool host_to_guest);
 	void *cookie; /* cookie from drivers. */
+	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_RESERVE(2);
+	ANDROID_KABI_RESERVE(3);
+	ANDROID_KABI_RESERVE(4);
 };
 
 #endif /* #ifndef __KVM_DEVICE_H */
