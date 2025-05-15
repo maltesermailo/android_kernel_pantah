@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5b584bb_4d035164",
+        "filename": "drivers/usb/dwc3/core.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 1415,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-05-15T21:35:14Z",
+      "side": 1,
+      "message": "Do you actually need to keep this part? Why not just start with i\u003d0 since `DWC3_LLUCTL\u003d\u003dVDWC3_LLUCTL(0)`?",
+      "range": {
+        "startLine": 1412,
+        "startChar": 0,
+        "endLine": 1415,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "76cdf508_c954971f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/usb/dwc3/core.c",
+              "range": {
+                "startLine": 1412,
+                "startChar": 0,
+                "endLine": 1416,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/usb/dwc3/core.c",
+              "range": {
+                "startLine": 1422,
+                "startChar": 0,
+                "endLine": 1423,
+                "endChar": 0
+              },
+              "replacement": "\t\tfor (i \u003d 0; i \u003c vdwc-\u003enum_usb3_ports; i++) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "08277494c80bf37b86b89c6de298ab7bb65a7214",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
