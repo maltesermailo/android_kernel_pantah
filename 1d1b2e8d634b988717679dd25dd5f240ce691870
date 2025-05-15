@@ -16,6 +16,24 @@
       "message": "Note this should have been a `BACKPORT:` as the patch doesn\u0027t apply cleanly. I can tell because it has a minor conflict with another patch on the KMI update.",
       "revId": "1d1b2e8d634b988717679dd25dd5f240ce691870",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e263cbc2_31a8942c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1056364
+      },
+      "writtenOn": "2025-05-15T22:48:41Z",
+      "side": 1,
+      "message": "The reason for not applying cleanly is that a patch for adding 0x0200 flag is missing, in include/linux/perf_event.h:\n#define PERF_PMU_CAP_EXTENDED_HW_TYPE\t\t0x0100\n+#define PERF_PMU_CAP_AUX_PREFER_LARGE\t\t0x0400\n\nI thought it was still no change. I will use BACKPORT if the same situation happens in the future.",
+      "parentUuid": "355b7732_77cdd997",
+      "revId": "1d1b2e8d634b988717679dd25dd5f240ce691870",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
