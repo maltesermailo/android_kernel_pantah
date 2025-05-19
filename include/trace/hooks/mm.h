@@ -581,6 +581,7 @@ DECLARE_HOOK(android_vh_alloc_swap_slot_cache,
 DECLARE_HOOK(android_vh_calculate_totalreserve_pages,
 	TP_PROTO(bool *skip),
 	TP_ARGS(skip));
+<<<<<<< HEAD
 DECLARE_HOOK(android_vh_folio_add_lru_folio_activate,
 	TP_PROTO(struct folio *folio, bool *bypass),
 	TP_ARGS(folio, bypass));
@@ -593,6 +594,16 @@ DECLARE_HOOK(android_vh_filemap_folio_mapped,
 DECLARE_HOOK(android_vh_folio_remove_rmap_ptes,
 	TP_PROTO(struct folio *folio),
 	TP_ARGS(folio));
+=======
+DECLARE_HOOK(android_vh_drain_all_pages_bypass,
+	TP_PROTO(gfp_t gfp_mask, unsigned int order, unsigned long alloc_flags,
+		int migratetype, unsigned long did_some_progress,
+		bool *bypass),
+	TP_ARGS(gfp_mask, order, alloc_flags, migratetype, did_some_progress, bypass));
+DECLARE_HOOK(android_vh_pageset_update,
+	TP_PROTO(unsigned long *high, unsigned long *batch),
+	TP_ARGS(high, batch));
+>>>>>>> 58b3f63bc69f (ANDROID: vendor_hooks: Add hooks for pcp related optimization.)
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
