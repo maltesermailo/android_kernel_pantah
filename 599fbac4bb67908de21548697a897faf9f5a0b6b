@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5e1d9486_8527f44d",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-05-20T11:55:40Z",
+      "side": 1,
+      "message": "\u003e In the pkvm_vcpu_update_state_from_host(), some of the protected VM registers will be updated according to the shared vcpu registers, including the RIP\n\nFor RIP that is addressed in the earlier patch: https://android-review.googlesource.com/c/kernel/common/+/3632018/1/arch/x86/kvm/pkvm/pkvm.c#686\n\n\u003e and some other PV interfaces still allow the host to pre-set pVM\u0027s vcpu registers before it starts to run, e.g. cr3\n\nBoth pkvm_vcpu_pvmfw_entry_init() and that code in pkvm_vcpu_update_state_from_host() are only called if !kvm_vcpu_has_run(vcpu), i.e. in a single run of the vcpu_run hypercall, so it should not be possible for the host to inject some register setting between them?\n\nSo the host can only set CR3 or other control registers, MSRs etc before pkvm_vcpu_pvmfw_entry_init(), not after. If that is still a concern, I believe we should just enforce the desired values of those register here in pkvm_vcpu_pvmfw_entry_init(), like we do with CR0.\n\nPlease let me know if you think we should enforce more than just CR0.PG and CR0.PE (and EFER.LMA which is implicitly set by vmx_set_cr0()). Taking CR3 as an example, I assumed we don\u0027t need to care about it since we disable paging.\n\n\u003e Shall the pkvm hypervisor eventually not to allow the host to pre-set any of the pVM\u0027s vcpu registers\n\nI think that is not possible. The host needs some way to pass some boot information to the pVM and/or to pvmfw.\n\nAnd I think it should not be a problem for security to allow the host pre-set any GPRs (and that also gives us flexibility: we don\u0027t mandate a particular boot protocol, so we automatically support Linux boot protocol, Multiboot, various custom protocols etc). Do you agree?\n\nI\u0027m actually going to prepare another patch, to update that code and comments in pkvm_vcpu_update_state_from_host() to allow pre-setting any GPRs except RIP.\n\nCurrently we have crosvm using the following GPRs to pass boot info to pvmfw:\n* RSI with the address of the Linux boot_params structure (in accordance with Linux x86 boot protocol), transparently passed by pvmfw to the pVM payload \n* RDX with the address of device tree (redundant since the same information is in boot_params-\u003esetup_data, but allows to simplify the pvmfw implementation)\n* RDI with the pVM payload entry address (not required, not really used by pvmfw, \n though sometimes useful in development)\n\nFor reference, here pKVM-ARM allows the host to pre-set GPRs: https://android.googlesource.com/kernel/common/+/bf3d08843a415d6871c30e1d7ea1170efeae90ca/arch/arm64/kvm/hyp/nvhe/pkvm.c#1121\n\n\u003e then probably a follow question is how to boot up a protected VM without pvmfw by the crosvm\n\nGood question, since the VMM may set the pvmfw address via the ioctl at any moment before running the first vCPU, e.g. it may do KVM_SET_SREGS either before or after that, so at the moment of KVM_SET_SREGS pKVM doesn\u0027t know if the pVM will run with pvmfw or not.\n\nI think we should just allow the host to pre-set any state at any time but only before running the vCPU first time (regardless of whether running with or w/o pvmfw) and then in pkvm_vcpu_pvmfw_entry_init() override what needs to be overridden. (So I also would like to update the comment in is_kvm_vcpu_accessible() as well.)",
+      "parentUuid": "654b486e_dace0ada",
+      "revId": "599fbac4bb67908de21548697a897faf9f5a0b6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6aac2feb_a1004ed6",
         "filename": "arch/x86/kvm/pkvm/pkvm.c",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2025-05-20T01:56:49Z",
       "side": 1,
       "message": "This function is called before kvm_vcpu_enter_guest(). And kvm_vcpu_enter_guest() will clear the host request in the beginning, which can make the HOST_RESET_MMU lost.",
+      "revId": "599fbac4bb67908de21548697a897faf9f5a0b6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37f58ee4_f07a51ec",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-05-20T11:55:40Z",
+      "side": 1,
+      "message": "Indeed, thanks for catching. I think we can just remove this, this is an edge case that shouldn\u0027t matter in practice, since:\n1. the host shouldn\u0027t need to enable CR0.PG before starting pvmfw.\n2. IIUC the registers state captured in mmu-\u003ecpu_role is used by the host for things like MMIO emulation, to walk the guest\u0027s page tables to translate GVA-\u003eGPA when needed, and for pVMs the host cannot do that anyway.",
+      "parentUuid": "6aac2feb_a1004ed6",
       "revId": "599fbac4bb67908de21548697a897faf9f5a0b6b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
