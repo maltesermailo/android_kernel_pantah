@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f2ce4aeb_6ea4558d",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-05-20T13:30:19Z",
+      "side": 1,
+      "message": "\u003e So the host can only set CR3 or other control registers, MSRs etc before pkvm_vcpu_pvmfw_entry_init(), not after.\n\nYes, that is what I mean. The host can use other PV interfaces to set the vcpu registers before calling the vcpu_run PV interfaces, so not sure if doing so can expose any security issue to the protected VM with pvmfw\n\n\u003ePlease let me know if you think we should enforce more than just CR0.PG and CR0.PE (and EFER.LMA which is implicitly set by vmx_set_cr0()). Taking CR3 as an example, I assumed we don\u0027t need to care about it since we disable paging.\n\nAh yes, paging is guaranteed to be disabled thus cr3 value doesn\u0027t matter.\n\n\u003eAnd I think it should not be a problem for security to allow the host pre-set any GPRs (and that also gives us flexibility: we don\u0027t mandate a particular boot protocol, so we automatically support Linux boot protocol, Multiboot, various custom protocols etc). Do you agree?\n\nIf the pVM expects a GPR to contain some meaningful initial value, and the host can pre-set that GPR with a bad value, then sounds like it will cause a problem?",
+      "parentUuid": "f0120f82_6964cd26",
+      "revId": "599fbac4bb67908de21548697a897faf9f5a0b6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6aac2feb_a1004ed6",
         "filename": "arch/x86/kvm/pkvm/pkvm.c",
         "patchSetId": 1
