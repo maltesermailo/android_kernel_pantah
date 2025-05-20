@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f0120f82_6964cd26",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-05-20T12:05:54Z",
+      "side": 1,
+      "message": "Actually, pKVM-ARM lets the host pass all GPRs except X15, which pKVM reserves for its own \"boot protocol version\" (just in case in the future we need some boot protocol between pKVM and pvmfw). Perhaps we should do the same and let the host pass all GPRs except R15, and set R15 to 0?",
+      "parentUuid": "5e1d9486_8527f44d",
+      "revId": "599fbac4bb67908de21548697a897faf9f5a0b6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6aac2feb_a1004ed6",
         "filename": "arch/x86/kvm/pkvm/pkvm.c",
         "patchSetId": 1
