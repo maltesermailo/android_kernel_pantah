@@ -64,6 +64,88 @@
       },
       "revId": "315e52e1098baaff65cd83610b8e201c47396c9d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27e05afd_a14f8d23",
+        "filename": "scripts/mod/modpost.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2204,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-05-20T12:25:04Z",
+      "side": 1,
+      "message": "No error or warning for unknown modules?",
+      "range": {
+        "startLine": 2203,
+        "startChar": 1,
+        "endLine": 2204,
+        "endChar": 28
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1bd7b800_a7b048f8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "scripts/mod/modpost.c",
+              "range": {
+                "startLine": 2205,
+                "startChar": 0,
+                "endLine": 2205,
+                "endChar": 0
+              },
+              "replacement": "\t\telse\n\t\t\twarn(\"module %s not found in the list of modules to be processed\", name);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "315e52e1098baaff65cd83610b8e201c47396c9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92d4ea2f_e1f2be78",
+        "filename": "scripts/mod/modpost.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2232,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-05-20T12:25:04Z",
+      "side": 1,
+      "message": "missing whitespace (according to the prevailing style)",
+      "range": {
+        "startLine": 2232,
+        "startChar": 3,
+        "endLine": 2232,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d6edd677_21341762",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "scripts/mod/modpost.c",
+              "range": {
+                "startLine": 2232,
+                "startChar": 0,
+                "endLine": 2233,
+                "endChar": 0
+              },
+              "replacement": "\tfor (i \u003d 0; i \u003c symbols_size; ++i) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "315e52e1098baaff65cd83610b8e201c47396c9d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
