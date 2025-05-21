@@ -3657,6 +3657,11 @@ int __init intel_iommu_init(void)
 
 	if (no_iommu || dmar_disabled) {
 		/*
+		 * TODO: Find an elegant solution.
+		 */
+		if (enable_pkvm)
+			panic("pkvm needs iommu to be enabled\n");
+		/*
 		 * We exit the function here to ensure IOMMU's remapping and
 		 * mempool aren't setup, which means that the IOMMU's PMRs
 		 * won't be disabled via the call to init_dmars(). So disable
