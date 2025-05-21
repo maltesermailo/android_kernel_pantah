@@ -51,6 +51,24 @@
       "parentUuid": "2e014b99_a649c9f3",
       "revId": "925d32675a23071414947809d300d088e6bea45c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c3beb25_624a17f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-05-21T22:51:05Z",
+      "side": 1,
+      "message": "Yes, the usage of the new bitfields is causing the ABI failure. Something like the following will be needed:\n```\ndiff --git a/include/net/addrconf.h b/include/net/addrconf.h\nindex 84f98cee1d7a..1b85221a1e56 100644\n--- a/include/net/addrconf.h\n+++ b/include/net/addrconf.h\n@@ -37,13 +37,21 @@ struct prefix_info {\n #if defined(__BIG_ENDIAN_BITFIELD)\n                        __u8    onlink : 1,\n                                autoconf : 1,\n+#ifdef __GENKSYMS__\n+                               reserved : 6;\n+#else\n                                routeraddr : 1,\n                                preferpd : 1,\n                                reserved : 4;\n+#endif\n #elif defined(__LITTLE_ENDIAN_BITFIELD)\n+#ifdef __GENKSYMS__\n+                       __u8    reserved : 6,\n+#else\n                        __u8    reserved : 4,\n                                preferpd : 1,\n                                routeraddr : 1,\n+#endif\n                                autoconf : 1,\n                                onlink : 1;\n #else\n```",
+      "parentUuid": "8fbc83f9_0d01aa81",
+      "revId": "925d32675a23071414947809d300d088e6bea45c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
