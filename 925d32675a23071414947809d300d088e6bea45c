@@ -16,6 +16,23 @@
       "message": "I was wondering why the pixel6 boot test is failing (it initially looked unrelated). However, it seems to fail because the ABI is updated:\n\"Found CRC differences between the GKI kernel and device modules!\"\n\n@Todd, how should I proceed with these CLs? Can we update the ABI in this case (changing the size of a reserved member in a bitfield to add the newly defined RA PIO flags?). If not, I can always mask instead.",
       "revId": "925d32675a23071414947809d300d088e6bea45c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e014b99_a649c9f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1594463
+      },
+      "writtenOn": "2025-05-21T22:18:53Z",
+      "side": 1,
+      "message": "Hi Carlos, I just noticed you removed KMI-changes-for-2025-05-15. Todd left me under the impression that this will be merged in the next merge window (? I don\u0027t quite understand your process). Is that still the case? If not, can you let me know what needs to happen for these CLs to be merged? Do I need to address the bitfield ABI failure? It was indicated previously that this could be bypassed in this instance. Let me know what you would like me to do here.",
+      "revId": "925d32675a23071414947809d300d088e6bea45c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
