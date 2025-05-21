@@ -543,5 +543,10 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_add_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_finish);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_init);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_swapmem_gather_finish);
+<<<<<<< PATCH SET (0a78bb ANDROID: vendor hooks: Add hooks to handle kernel faults)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_handle_kernel_fault);
+||||||| BASE
+=======
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_gfp_zone_flags);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_readahead_gfp_mask);
+>>>>>>> BASE      (d1febc ANDROID: Add all_headers_allowlist_exynos to aarch64 allowli)
