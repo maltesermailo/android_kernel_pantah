@@ -83,29 +83,6 @@ int xhci_handshake(void __iomem *ptr, u32 mask, u32 done, u64 timeout_us)
 }
 
 /*
- * xhci_handshake_check_state - same as xhci_handshake but takes an additional
- * exit_state parameter, and bails out with an error immediately when xhc_state
- * has exit_state flag set.
- */
-int xhci_handshake_check_state(struct xhci_hcd *xhci, void __iomem *ptr,
-		u32 mask, u32 done, int usec, unsigned int exit_state)
-{
-	u32	result;
-	int	ret;
-
-	ret = readl_poll_timeout_atomic(ptr, result,
-				(result & mask) == done ||
-				result == U32_MAX ||
-				xhci->xhc_state & exit_state,
-				1, usec);
-
-	if (result == U32_MAX || xhci->xhc_state & exit_state)
-		return -ENODEV;
-
-	return ret;
-}
-
-/*
  * Disable interrupts and begin the xHCI halting process.
  */
 void xhci_quiesce(struct xhci_hcd *xhci)
@@ -228,11 +205,18 @@ int xhci_reset(struct xhci_hcd *xhci, u64 timeout_us)
 	if (xhci->quirks & XHCI_INTEL_HOST)
 		udelay(1000);
 
+<<<<<<< HEAD   (f511f395a8a1116ba7f8d785703016382dcc1ad5 FROMLIST: tee/optee: prevent use-after-free when the client )
 	trace_android_vh_xhci_full_reset_on_remove(&full_reset);
 
 	ret = xhci_handshake_check_state(xhci, &xhci->op_regs->command,
 				CMD_RESET, 0, timeout_us,
 				full_reset ? 0 : XHCI_STATE_REMOVING);
+||||||| BASE   (7e8167d7f4e511e460f36409793e399e9ebb6719 BACKPORT: usb: xhci: Skip xhci_reset in xhci_resume if xhci )
+	ret = xhci_handshake_check_state(xhci, &xhci->op_regs->command,
+				CMD_RESET, 0, timeout_us, XHCI_STATE_REMOVING);
+=======
+	ret = xhci_handshake(&xhci->op_regs->command, CMD_RESET, 0, timeout_us);
+>>>>>>> CHANGE (67d7a05a7856a943b4e52f5bbf786c8e9dbf5b31 UPSTREAM: Revert "usb: xhci: Implement xhci_handshake_check_)
 	if (ret)
 		return ret;
 
