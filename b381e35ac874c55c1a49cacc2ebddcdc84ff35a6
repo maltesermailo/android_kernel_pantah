@@ -85,6 +85,24 @@
       "message": "A bug id is needed.",
       "revId": "b381e35ac874c55c1a49cacc2ebddcdc84ff35a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29b7df2a_00405c5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2005503
+      },
+      "writtenOn": "2025-05-22T06:23:34Z",
+      "side": 1,
+      "message": "with https://android-review.googlesource.com/c/kernel/common/+/3463507/-1..1/arch/arm64/include/asm/mman.h, module call calc_vm_flag_bits will causes the following error:\n\n[    4.514038][    T1] haptic_drv_hv: Unknown symbol shmem_aops (err -2)\n[    4.515361][    T1] init: Failed to insmod \u0027/lib/modules/haptic_drv_hv.ko\u0027 with args \u0027\u0027: No such file or directory\n[    4.516670][    T1] init: LoadWithAliases was unable to load haptic_drv_hv\n[    4.518065][    T1] init: Failed to load kernel modules\n[    4.518756][    T1] Kernel panic - not syncing: Attempted to kill init! exitcode\u003d0x00007f00\n[    4.519805][    T1] CPU: 7 PID: 1 Comm: init Tainted: G        W  O       6.1.124-android14-11-gf044a08b82f5-ab13293802 #1\n\nIt seems that this kernel version 6.1.124-android14-11-gf044a08b82f5-ab13293802 does not export shmem_aops.\n\nThis commit serves as an alternative solution, but our driver vendor has released a solution that does not use calc_vm_flag_bits. Therefore, please disregard this commit. Sorry for the inconvenience.",
+      "parentUuid": "40828e35_651de379",
+      "revId": "b381e35ac874c55c1a49cacc2ebddcdc84ff35a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
