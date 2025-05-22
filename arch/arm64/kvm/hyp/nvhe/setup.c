@@ -10,6 +10,7 @@
 #include <asm/kvm_pgtable.h>
 #include <asm/kvm_pkvm.h>
 
+#include <module/nvhe/trace.h>
 #include <nvhe/alloc.h>
 #include <nvhe/early_alloc.h>
 #include <nvhe/ffa.h>
@@ -19,7 +20,6 @@
 #include <nvhe/mm.h>
 #include <nvhe/pkvm.h>
 #include <nvhe/serial.h>
-#include <nvhe/trace/trace.h>
 #include <nvhe/trap_handler.h>
 
 unsigned long hyp_nr_cpus;

@@ -7,6 +7,7 @@
 #include <asm/kvm_hypevents.h>
 #include <asm/module.h>
 
+#include <module/nvhe/trace.h>
 #include <nvhe/alloc.h>
 #include <nvhe/iommu.h>
 #include <nvhe/mem_protect.h>
@@ -14,7 +15,6 @@
 #include <nvhe/mm.h>
 #include <nvhe/serial.h>
 #include <nvhe/spinlock.h>
-#include <nvhe/trace/trace.h>
 #include <nvhe/trap_handler.h>
 
 static void *__pkvm_module_memcpy(void *to, const void *from, size_t count)
