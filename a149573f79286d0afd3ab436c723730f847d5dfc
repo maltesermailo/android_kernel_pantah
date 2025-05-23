@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4c34483_b8d2fb89",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1889140
+      },
+      "writtenOn": "2025-05-23T16:27:00Z",
+      "side": 1,
+      "message": "shouldn\u0027t this check be inside a #ifdef CONFIG_CMA block?",
+      "range": {
+        "startLine": 619,
+        "startChar": 43,
+        "endLine": 619,
+        "endChar": 72
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a2bb1003_28f59164",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 619,
+                "startChar": 0,
+                "endLine": 620,
+                "endChar": 0
+              },
+              "replacement": "\t\tmovable \u003d migratetype \u003d\u003d MIGRATE_MOVABLE;\n#ifdef CONFIG_CMA\n\t\tmovable |\u003d migratetype \u003d\u003d MIGRATE_CMA;\n#endif\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a149573f79286d0afd3ab436c723730f847d5dfc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
