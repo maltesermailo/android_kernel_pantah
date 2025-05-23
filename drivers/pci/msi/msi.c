@@ -11,6 +11,8 @@
 #include <linux/export.h>
 #include <linux/irq.h>
 #include <linux/irqdomain.h>
+#include <linux/android_kabi.h>
+ANDROID_KABI_DECLONLY(irq_domain);
 
 #include "../pci.h"
 #include "msi.h"
