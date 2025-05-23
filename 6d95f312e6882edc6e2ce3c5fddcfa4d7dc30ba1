@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc69922a_7f2dd39c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1119,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-23T00:30:29Z",
+      "side": 1,
+      "message": "```suggestion\n\t\t/* rx buf ownership not transferred */\n```",
+      "revId": "6d95f312e6882edc6e2ce3c5fddcfa4d7dc30ba1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d30e747f_e3d2df48",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1125,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-23T00:30:29Z",
+      "side": 1,
+      "message": "```suggestion\n\t\t\t/* rx buf ownership not transferred */\n```",
+      "revId": "6d95f312e6882edc6e2ce3c5fddcfa4d7dc30ba1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c28846c4_264be72e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1136,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-23T00:30:29Z",
+      "side": 1,
+      "message": "This needs an `ffx_rx_release` call.\n\nEven better: add a label before 1146, and `goto` it from here instead.",
+      "revId": "6d95f312e6882edc6e2ce3c5fddcfa4d7dc30ba1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "000995aa_73b010b2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1146,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-23T00:30:29Z",
+      "side": 1,
+      "message": "Might be useful to add a comment that we\u0027re intentionally ignoring the result of `FFA_RX_RELEASE` call.",
+      "revId": "6d95f312e6882edc6e2ce3c5fddcfa4d7dc30ba1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
