@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "234ce102_6ee8bfa3",
+        "filename": "mm/memory_hotplug.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1648,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-05-23T13:25:32Z",
+      "side": 1,
+      "message": "create a patch to add the symbol to your symbol list",
+      "fixSuggestions": [
+        {
+          "fixId": "7b63e06f_0e53a65b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/memory_hotplug.c",
+              "range": {
+                "startLine": 1648,
+                "startChar": 0,
+                "endLine": 1649,
+                "endChar": 0
+              },
+              "replacement": "EXPORT_SYMBOL(add_memory_subsection);\n"
+            },
+            {
+              "path": "mm/memory_hotplug.c",
+              "range": {
+                "startLine": 2395,
+                "startChar": 0,
+                "endLine": 2396,
+                "endChar": 0
+              },
+              "replacement": "EXPORT_SYMBOL(remove_memory_subsection);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "abdc4ba160bbaa16d7fcbdca4adc402e3ab25797",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
