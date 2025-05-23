@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "592d63d7_5e2e9368",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-05-23T17:34:37Z",
+      "side": 1,
+      "message": "Capturing a discussion on chat. It is equally important to sleep here as for the creation message. However, this can\u0027t be killable here, and if the other loop can exit before the creation message has succeeded, then I think this loop needs to complete the create loop before it can send the destruction message to be compliant with the current FF-A spec.\n\nIt is probably easier to not allow the creation loop to return early though, which means removing the timeout and killable part.",
+      "revId": "876d72fcb57ebf61c6e5305e98f984a7587d1f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
