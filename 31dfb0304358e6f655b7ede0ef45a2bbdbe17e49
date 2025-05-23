@@ -51,6 +51,24 @@
       "message": "I wonder if we shouldn\u0027t add the module/ path into \"hyp/Makefile\" to make that `module/` disappear. ?",
       "revId": "31dfb0304358e6f655b7ede0ef45a2bbdbe17e49",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04da7f9d_2564a3f6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/modules.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-05-23T18:43:22Z",
+      "side": 1,
+      "message": "I can fix `arch/arm64/kvm/hyp/nvhe/*.c` by editing `arch/arm64/kvm/hyp/Makefile`, but I am not sure whether I should fix `arch/arm64/kvm/hyp/hyp-constants.c`; that one needs me to edit `arch/arm64/kvm/Makefile`, which is upstreamed and seems more likely to cause merge conflict in the future. Do you want me to fix `arch/arm64/kvm/hyp/hyp-constants.c` as well?",
+      "parentUuid": "7bf9ae58_1abb5b58",
+      "revId": "31dfb0304358e6f655b7ede0ef45a2bbdbe17e49",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
