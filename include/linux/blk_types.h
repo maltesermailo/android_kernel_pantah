@@ -273,6 +273,11 @@ struct bio {
 
 	struct bio_set		*bi_pool;
 
+<<<<<<< HEAD   (dcc873 ANDROID: gki_defconfig: enable FRED X86_FRED)
+||||||| BASE
+=======
+	ANDROID_OEM_DATA(1);
+>>>>>>> BRANCH (0690b3 ANDROID: 2025/05/15 KMI update)
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
 

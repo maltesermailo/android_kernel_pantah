@@ -5,6 +5,7 @@
 #ifndef __ASSEMBLY__
 #ifndef __GENERATING_BOUNDS_H
 
+#include <linux/android_kabi.h>
 #include <linux/spinlock.h>
 #include <linux/list.h>
 #include <linux/list_nulls.h>
@@ -669,6 +670,8 @@ struct lruvec {
 	struct pglist_data *pgdat;
 #endif
 	struct zswap_lruvec_state zswap_lruvec_state;
+
+	ANDROID_BACKPORT_RESERVE(1);
 };
 
 /* Isolate for asynchronous migration */
@@ -1472,6 +1475,12 @@ typedef struct pglist_data {
 #endif
 
 	ANDROID_KABI_RESERVE(1);
+<<<<<<< HEAD   (dcc873 ANDROID: gki_defconfig: enable FRED X86_FRED)
+||||||| BASE
+=======
+	ANDROID_BACKPORT_RESERVE(1);
+	ANDROID_OEM_DATA(1);
+>>>>>>> BRANCH (0690b3 ANDROID: 2025/05/15 KMI update)
 } pg_data_t;
 
 #define node_present_pages(nid)	(NODE_DATA(nid)->node_present_pages)

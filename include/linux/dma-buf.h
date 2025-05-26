@@ -13,6 +13,7 @@
 #ifndef __DMA_BUF_H__
 #define __DMA_BUF_H__
 
+#include <linux/android_kabi.h>
 #include <linux/iosys-map.h>
 #include <linux/file.h>
 #include <linux/err.h>
@@ -538,6 +539,11 @@ struct dma_buf {
 
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
+<<<<<<< HEAD   (dcc873 ANDROID: gki_defconfig: enable FRED X86_FRED)
+||||||| BASE
+=======
+	ANDROID_BACKPORT_RESERVE(1);
+>>>>>>> BRANCH (0690b3 ANDROID: 2025/05/15 KMI update)
 };
 
 /**

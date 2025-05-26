@@ -28,6 +28,7 @@
 #include <linux/sizes.h>
 #include <linux/sched.h>
 #include <linux/pgtable.h>
+#include <linux/pgsize_migration_inline.h>
 #include <linux/kasan.h>
 #include <linux/page_pinner.h>
 #include <linux/memremap.h>
@@ -90,13 +91,13 @@ extern int sysctl_legacy_va_layout;
 #endif
 
 #ifdef CONFIG_HAVE_ARCH_MMAP_RND_BITS
-extern const int mmap_rnd_bits_min;
+extern int mmap_rnd_bits_min __ro_after_init;
 extern int mmap_rnd_bits_max __ro_after_init;
 extern int mmap_rnd_bits __read_mostly;
 #endif
 #ifdef CONFIG_HAVE_ARCH_MMAP_RND_COMPAT_BITS
-extern const int mmap_rnd_compat_bits_min;
-extern const int mmap_rnd_compat_bits_max;
+extern int mmap_rnd_compat_bits_min __ro_after_init;
+extern int mmap_rnd_compat_bits_max __ro_after_init;
 extern int mmap_rnd_compat_bits __read_mostly;
 #endif
 
@@ -971,6 +972,8 @@ static inline void vm_flags_reset(struct vm_area_struct *vma,
 				  vm_flags_t flags)
 {
 	vma_assert_write_locked(vma);
+	/* Preserve padding flags */
+	flags = vma_pad_fixup_flags(vma, flags);
 	vm_flags_init(vma, flags);
 }
 
@@ -978,6 +981,8 @@ static inline void vm_flags_reset_once(struct vm_area_struct *vma,
 				       vm_flags_t flags)
 {
 	vma_assert_write_locked(vma);
+	/* Preserve padding flags */
+	flags = vma_pad_fixup_flags(vma, flags);
 	WRITE_ONCE(ACCESS_PRIVATE(vma, __vm_flags), flags);
 }
 

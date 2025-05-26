@@ -16,6 +16,11 @@
 #include <linux/bitops.h>
 #include <linux/compiler.h>
 #include <linux/android_kabi.h>
+<<<<<<< HEAD   (dcc873 ANDROID: gki_defconfig: enable FRED X86_FRED)
+||||||| BASE
+=======
+#include <linux/android_vendor.h>
+>>>>>>> BRANCH (0690b3 ANDROID: 2025/05/15 KMI update)
 
 #include <linux/netfilter/nf_conntrack_common.h>
 #include <linux/netfilter/nf_conntrack_tcp.h>
@@ -127,6 +132,11 @@ struct nf_conn {
 
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
+<<<<<<< HEAD   (dcc873 ANDROID: gki_defconfig: enable FRED X86_FRED)
+||||||| BASE
+=======
+	ANDROID_OEM_DATA(1);
+>>>>>>> BRANCH (0690b3 ANDROID: 2025/05/15 KMI update)
 };
 
 static inline struct nf_conn *

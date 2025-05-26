@@ -10,7 +10,9 @@
 #include <linux/pagemap.h>
 #include <linux/syscalls.h>
 #include <linux/mempolicy.h>
+#include <linux/page_size_compat.h>
 #include <linux/page-isolation.h>
+#include <linux/pgsize_migration.h>
 #include <linux/page_idle.h>
 #include <linux/userfaultfd_k.h>
 #include <linux/hugetlb.h>
@@ -891,6 +893,8 @@ static int madvise_free_single_vma(struct vm_area_struct *vma,
 static long madvise_dontneed_single_vma(struct vm_area_struct *vma,
 					unsigned long start, unsigned long end)
 {
+	madvise_vma_pad_pages(vma, start, end);
+
 	zap_page_range_single(vma, start, end - start, NULL);
 	return 0;
 }
@@ -1583,9 +1587,9 @@ int madvise_set_anon_name(struct mm_struct *mm, unsigned long start,
 	unsigned long end;
 	unsigned long len;
 
-	if (start & ~PAGE_MASK)
+	if (start & ~__PAGE_MASK)
 		return -EINVAL;
-	len = (len_in + ~PAGE_MASK) & PAGE_MASK;
+	len = (len_in + ~__PAGE_MASK) & __PAGE_MASK;
 
 	/* Check to see whether len was rounded up from small -ve to zero */
 	if (len_in && !len)
@@ -1685,9 +1689,9 @@ int do_madvise(struct mm_struct *mm, unsigned long start, size_t len_in, int beh
 	if (!madvise_behavior_valid(behavior))
 		return -EINVAL;
 
-	if (!PAGE_ALIGNED(start))
+	if (!__PAGE_ALIGNED(start))
 		return -EINVAL;
-	len = PAGE_ALIGN(len_in);
+	len = __PAGE_ALIGN(len_in);
 
 	/* Check to see whether len was rounded up from small -ve to zero */
 	if (len_in && !len)

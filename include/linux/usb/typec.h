@@ -268,8 +268,12 @@ struct typec_operations {
 			     enum typec_port_type type);
 	struct usb_power_delivery **(*pd_get)(struct typec_port *port);
 	int (*pd_set)(struct typec_port *port, struct usb_power_delivery *pd);
+<<<<<<< HEAD   (dcc873 ANDROID: gki_defconfig: enable FRED X86_FRED)
 	int (*default_usb_mode_set)(struct typec_port *port, enum usb_mode mode);
 	int (*enter_usb_mode)(struct typec_port *port, enum usb_mode mode);
+||||||| BASE
+=======
+>>>>>>> BRANCH (0690b3 ANDROID: 2025/05/15 KMI update)
 
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_KABI_RESERVE(2);
