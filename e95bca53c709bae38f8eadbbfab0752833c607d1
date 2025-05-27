@@ -64,6 +64,30 @@
       },
       "revId": "e95bca53c709bae38f8eadbbfab0752833c607d1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae0c5f01_0a4df11e",
+        "filename": "android/abi_gki_aarch64_nvidia",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 4048864
+      },
+      "writtenOn": "2025-05-27T20:32:38Z",
+      "side": 1,
+      "message": "Moved the new tegra_ivc_* symbols to the second commit as instructed. Thanks.\n\nThe tegra_ivc_* symbols are part of the GKI core symbol list because ivc.c is automatically selected as a built-in module for Tegra SoCs, as specified in https://android.googlesource.com/kernel/common/+/refs/heads/android15-6.6/drivers/soc/tegra/Kconfig#131. Android inherits this from the upstream kernel. And gki_defconfig has `CONFIG_ARCH_TEGRA_234_SOC` enabled.",
+      "parentUuid": "910b89b1_1cacff95",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 32
+      },
+      "revId": "e95bca53c709bae38f8eadbbfab0752833c607d1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
