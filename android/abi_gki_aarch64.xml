@@ -103,6 +103,7 @@
       <elf-symbol name='__devm_clk_hw_register_mux' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb26cf7c1'/>
       <elf-symbol name='__devm_drm_dev_alloc' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x67c889bc'/>
       <elf-symbol name='__devm_iio_device_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x20055eca'/>
+      <elf-symbol name='__devm_iio_trigger_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x76f0c313'/>
       <elf-symbol name='__devm_irq_alloc_descs' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x95f3ee4b'/>
       <elf-symbol name='__devm_mdiobus_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3ca690ac'/>
       <elf-symbol name='__devm_of_phy_provider_register' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd251af97'/>
@@ -989,6 +990,7 @@
       <elf-symbol name='__xa_alloc' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9114b616'/>
       <elf-symbol name='__xa_alloc_cyclic' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb04a43ad'/>
       <elf-symbol name='__xa_clear_mark' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb9af1d0d'/>
+      <elf-symbol name='__xa_cmpxchg' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa0ebc08'/>
       <elf-symbol name='__xa_erase' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe02c9c92'/>
       <elf-symbol name='__xa_insert' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x7dcf4135'/>
       <elf-symbol name='__xa_store' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xca9beaa4'/>
@@ -1665,6 +1667,7 @@
       <elf-symbol name='crc16' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xbd6841d4'/>
       <elf-symbol name='crc32_be' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4df02057'/>
       <elf-symbol name='crc32_le' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x69dd3b5b'/>
+      <elf-symbol name='crc32c' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb15b4109'/>
       <elf-symbol name='crc8' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9c5d5b94'/>
       <elf-symbol name='crc8_populate_msb' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xaa8106bc'/>
       <elf-symbol name='crc_ccitt' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x52ecbc75'/>
@@ -2095,6 +2098,7 @@
       <elf-symbol name='devm_iio_channel_get_all' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2bf32454'/>
       <elf-symbol name='devm_iio_device_alloc' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x99e72c1c'/>
       <elf-symbol name='devm_iio_kfifo_buffer_setup_ext' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x95ec2851'/>
+      <elf-symbol name='devm_iio_trigger_alloc' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x10621170'/>
       <elf-symbol name='devm_iio_triggered_buffer_setup_ext' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x84093fd3'/>
       <elf-symbol name='devm_input_allocate_device' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xd940616d'/>
       <elf-symbol name='devm_ioremap' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x31f4adef'/>
@@ -3062,6 +3066,7 @@
       <elf-symbol name='freq_qos_remove_request' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x894967be'/>
       <elf-symbol name='freq_qos_update_request' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2eec24ef'/>
       <elf-symbol name='fs_ftype_to_dtype' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc3805cd1'/>
+      <elf-symbol name='fs_param_is_enum' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa016aff0'/>
       <elf-symbol name='fs_param_is_string' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe3db5301'/>
       <elf-symbol name='fs_param_is_u32' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x900ff675'/>
       <elf-symbol name='fs_umode_to_dtype' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8f786bee'/>
@@ -3583,6 +3588,7 @@
       <elf-symbol name='iio_trigger_generic_data_rdy_poll' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x2d6bcdcb'/>
       <elf-symbol name='iio_trigger_notify_done' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfb4a9fd4'/>
       <elf-symbol name='iio_trigger_poll' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3970d75b'/>
+      <elf-symbol name='iio_trigger_poll_chained' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xe68f1eea'/>
       <elf-symbol name='iio_trigger_unregister' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x433fa49d'/>
       <elf-symbol name='iio_triggered_buffer_cleanup' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x83d4b035'/>
       <elf-symbol name='iio_triggered_buffer_setup_ext' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x40f791fb'/>
@@ -3677,7 +3683,12 @@
       <elf-symbol name='io_schedule' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x93a6e0b2'/>
       <elf-symbol name='io_schedule_timeout' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfbc4f89e'/>
       <elf-symbol name='ioc_lookup_icq' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x406089f4'/>
+      <elf-symbol name='iomap_bmap' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8b46ba73'/>
       <elf-symbol name='iomap_dio_complete' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x344a2c84'/>
+      <elf-symbol name='iomap_dio_rw' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa9111c69'/>
+      <elf-symbol name='iomap_fiemap' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x4e087e0b'/>
+      <elf-symbol name='iomap_readahead' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xee880a40'/>
+      <elf-symbol name='iomap_readpage' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa9d0446'/>
       <elf-symbol name='iommu_alloc_resv_region' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xaf40724'/>
       <elf-symbol name='iommu_attach_device' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5939a898'/>
       <elf-symbol name='iommu_attach_group' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf47d9b35'/>
@@ -3982,6 +3993,7 @@
       <elf-symbol name='kthread_cancel_work_sync' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xcdeb29a1'/>
       <elf-symbol name='kthread_create_on_node' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x15f9ecee'/>
       <elf-symbol name='kthread_create_worker' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf0bdce21'/>
+      <elf-symbol name='kthread_create_worker_on_cpu' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xf9c41c78'/>
       <elf-symbol name='kthread_delayed_work_timer_fn' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc1b48cc6'/>
       <elf-symbol name='kthread_destroy_worker' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x9068c1e0'/>
       <elf-symbol name='kthread_flush_work' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x1c2d7968'/>
@@ -4948,6 +4960,7 @@
       <elf-symbol name='phy_find_first' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x26a60681'/>
       <elf-symbol name='phy_get' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa8fc92ed'/>
       <elf-symbol name='phy_get_eee_err' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x5b6c0fa9'/>
+      <elf-symbol name='phy_get_internal_delay' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc6fcbe88'/>
       <elf-symbol name='phy_get_pause' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x375a75a0'/>
       <elf-symbol name='phy_init' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfb37cdbd'/>
       <elf-symbol name='phy_init_eee' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xc593a230'/>
@@ -5351,6 +5364,7 @@
       <elf-symbol name='read_cache_page_gfp' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xfcf3cf08'/>
       <elf-symbol name='read_cache_pages' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xb9fb5828'/>
       <elf-symbol name='read_sanitised_ftr_reg' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x3562f983'/>
+      <elf-symbol name='readahead_expand' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x8377ab68'/>
       <elf-symbol name='readahead_gfp_mask' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0x40a3e1bb'/>
       <elf-symbol name='rebuild_sched_domains' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa65ab83d'/>
       <elf-symbol name='reciprocal_value' type='func-type' binding='global-binding' visibility='default-visibility' is-defined='yes' crc='0xa965ca81'/>
@@ -29925,7 +29939,7 @@
       <pointer-type-def type-id='2c3bbc0e' size-in-bits='64' id='342f43d1'/>
       <pointer-type-def type-id='014fe25e' size-in-bits='64' id='3434e051'/>
       <function-type size-in-bits='64' id='3434ed92'>
-        <parameter type-id='8bf48c31'/>
+        <parameter type-id='8bf48c31' name='intf'/>
         <return type-id='48b5725f'/>
       </function-type>
       <pointer-type-def type-id='07b58648' size-in-bits='64' id='343c05fa'/>
@@ -38606,7 +38620,7 @@
       <pointer-type-def type-id='f4c2725e' size-in-bits='64' id='498944b4'/>
       <pointer-type-def type-id='0e15337c' size-in-bits='64' id='498f47da'/>
       <function-type size-in-bits='64' id='4993d1b5'>
-        <parameter type-id='4dfe71de'/>
+        <parameter type-id='4dfe71de' name='c'/>
         <return type-id='91ce1af9'/>
       </function-type>
       <pointer-type-def type-id='bfa69bfb' size-in-bits='64' id='4998c99f'/>
@@ -54167,7 +54181,7 @@
       <pointer-type-def type-id='3e1d184a' size-in-bits='64' id='6aee814c'/>
       <pointer-type-def type-id='ec84183d' size-in-bits='64' id='6af1ec35'/>
       <pointer-type-def type-id='74e7a035' size-in-bits='64' id='6af64a09'/>
-      <class-decl name='uncached_list' size-in-bits='192' is-struct='yes' visibility='default' filepath='net/ipv6/route.c' line='131' column='1' id='6b1203e5'>
+      <class-decl name='uncached_list' size-in-bits='192' is-struct='yes' visibility='default' filepath='net/ipv4/route.c' line='1499' column='1' id='6b1203e5'>
         <data-member access='public' layout-offset-in-bits='0'>
           <var-decl name='lock' type-id='fb4018a0' visibility='default' filepath='net/ipv4/route.c' line='1500' column='1'/>
         </data-member>
@@ -110854,7 +110868,14 @@
         <parameter type-id='95e97e5e'/>
         <return type-id='95e97e5e'/>
       </function-type>
-      <class-decl name='fscrypt_keyring' is-struct='yes' visibility='default' is-declaration-only='yes' id='dd510bd0'/>
+      <class-decl name='fscrypt_keyring' size-in-bits='8256' is-struct='yes' visibility='default' filepath='fs/crypto/keyring.c' line='30' column='1' id='dd510bd0'>
+        <data-member access='public' layout-offset-in-bits='0'>
+          <var-decl name='lock' type-id='fb4018a0' visibility='default' filepath='fs/crypto/keyring.c' line='35' column='1'/>
+        </data-member>
+        <data-member access='public' layout-offset-in-bits='64'>
+          <var-decl name='key_hashtable' type-id='64f4baeb' visibility='default' filepath='fs/crypto/keyring.c' line='38' column='1'/>
+        </data-member>
+      </class-decl>
       <pointer-type-def type-id='a7d74313' size-in-bits='64' id='dd575c43'/>
       <class-decl name='cstate' size-in-bits='1536' is-struct='yes' visibility='default' filepath='include/net/slhc_vj.h' line='128' column='1' id='dd60e4df'>
         <data-member access='public' layout-offset-in-bits='0'>
@@ -131239,6 +131260,12 @@
         <parameter type-id='2730d015' name='this_mod' filepath='drivers/iio/industrialio-core.c' line='2040' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='__devm_iio_trigger_register' mangled-name='__devm_iio_trigger_register' filepath='drivers/iio/industrialio-trigger.c' line='696' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__devm_iio_trigger_register'>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/iio/industrialio-trigger.c' line='696' column='1'/>
+        <parameter type-id='54e54fbb' name='trig_info' filepath='drivers/iio/industrialio-trigger.c' line='697' column='1'/>
+        <parameter type-id='2730d015' name='this_mod' filepath='drivers/iio/industrialio-trigger.c' line='698' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='__devm_irq_alloc_descs' mangled-name='__devm_irq_alloc_descs' filepath='kernel/irq/devres.c' line='178' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__devm_irq_alloc_descs'>
         <parameter type-id='fa0b179b' name='dev' filepath='kernel/irq/devres.c' line='178' column='1'/>
         <parameter type-id='95e97e5e' name='irq' filepath='kernel/irq/devres.c' line='178' column='1'/>
@@ -137306,6 +137333,14 @@
         <parameter type-id='933bf462' name='mark' filepath='lib/xarray.c' line='1915' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='__xa_cmpxchg' mangled-name='__xa_cmpxchg' filepath='lib/xarray.c' line='1602' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__xa_cmpxchg'>
+        <parameter type-id='60075f2a' name='xa' filepath='lib/xarray.c' line='1602' column='1'/>
+        <parameter type-id='7359adad' name='index' filepath='lib/xarray.c' line='1602' column='1'/>
+        <parameter type-id='eaa32e2f' name='old' filepath='lib/xarray.c' line='1603' column='1'/>
+        <parameter type-id='eaa32e2f' name='entry' filepath='lib/xarray.c' line='1603' column='1'/>
+        <parameter type-id='3eb7c31c' name='gfp' filepath='lib/xarray.c' line='1603' column='1'/>
+        <return type-id='eaa32e2f'/>
+      </function-decl>
       <function-decl name='__xa_erase' mangled-name='__xa_erase' filepath='lib/xarray.c' line='1491' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='__xa_erase'>
         <parameter type-id='60075f2a' name='xa' filepath='lib/xarray.c' line='1491' column='1'/>
         <parameter type-id='7359adad' name='index' filepath='lib/xarray.c' line='1491' column='1'/>
@@ -140865,6 +140900,12 @@
         <parameter type-id='b59d7dce' name='len' filepath='lib/crc32.c' line='340' column='1'/>
         <return type-id='19c2251e'/>
       </function-decl>
+      <function-decl name='crc32c' mangled-name='crc32c' filepath='lib/libcrc32c.c' line='38' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='crc32c'>
+        <parameter type-id='19c2251e' name='crc' filepath='lib/libcrc32c.c' line='38' column='1'/>
+        <parameter type-id='eaa32e2f' name='address' filepath='lib/libcrc32c.c' line='38' column='1'/>
+        <parameter type-id='f0981eeb' name='length' filepath='lib/libcrc32c.c' line='38' column='1'/>
+        <return type-id='19c2251e'/>
+      </function-decl>
       <function-decl name='crc8' mangled-name='crc8' filepath='lib/crc8.c' line='74' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='crc8'>
         <parameter type-id='bbaf3419' name='table' filepath='lib/crc8.c' line='74' column='1'/>
         <parameter type-id='bbaf3419' name='pdata' filepath='lib/crc8.c' line='74' column='1'/>
@@ -143137,6 +143178,12 @@
         <parameter type-id='7597aac3' name='setup_ops' filepath='drivers/iio/buffer/kfifo_buf.c' line='225' column='1'/>
         <parameter type-id='cd733e18' name='buffer_attrs' filepath='drivers/iio/buffer/kfifo_buf.c' line='226' column='1'/>
         <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='devm_iio_trigger_alloc' mangled-name='devm_iio_trigger_alloc' filepath='drivers/iio/industrialio-trigger.c' line='652' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='devm_iio_trigger_alloc'>
+        <parameter type-id='fa0b179b' name='parent' filepath='drivers/iio/industrialio-trigger.c' line='652' column='1'/>
+        <parameter type-id='80f4b756' name='fmt' filepath='drivers/iio/industrialio-trigger.c' line='652' column='1'/>
+        <parameter is-variadic='yes'/>
+        <return type-id='54e54fbb'/>
       </function-decl>
       <function-decl name='devm_iio_triggered_buffer_setup_ext' mangled-name='devm_iio_triggered_buffer_setup_ext' filepath='drivers/iio/buffer/industrialio-triggered-buffer.c' line='114' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='devm_iio_triggered_buffer_setup_ext'>
         <parameter type-id='fa0b179b' name='dev' filepath='drivers/iio/buffer/industrialio-triggered-buffer.c' line='114' column='1'/>
@@ -148231,6 +148278,13 @@
         <return type-id='002ac4a6'/>
       </function-decl>
       <var-decl name='fs_kobj' type-id='d30bdc51' mangled-name='fs_kobj' visibility='default' filepath='fs/namespace.c' line='88' column='1' elf-symbol-id='fs_kobj'/>
+      <function-decl name='fs_param_is_enum' mangled-name='fs_param_is_enum' filepath='fs/fs_parser.c' line='241' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='fs_param_is_enum'>
+        <parameter type-id='e27a9d68' name='log' filepath='fs/fs_parser.c' line='241' column='1'/>
+        <parameter type-id='8d4f223b' name='p' filepath='fs/fs_parser.c' line='241' column='1'/>
+        <parameter type-id='75615bf0' name='param' filepath='fs/fs_parser.c' line='242' column='1'/>
+        <parameter type-id='59cc1ae8' name='result' filepath='fs/fs_parser.c' line='242' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
       <function-decl name='fs_param_is_string' mangled-name='fs_param_is_string' filepath='fs/fs_parser.c' line='255' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='fs_param_is_string'>
         <parameter type-id='e27a9d68' name='log' filepath='fs/fs_parser.c' line='255' column='1'/>
         <parameter type-id='8d4f223b' name='p' filepath='fs/fs_parser.c' line='255' column='1'/>
@@ -150924,6 +150978,10 @@
         <parameter type-id='54e54fbb' name='trig' filepath='drivers/iio/industrialio-trigger.c' line='198' column='1'/>
         <return type-id='48b5725f'/>
       </function-decl>
+      <function-decl name='iio_trigger_poll_chained' mangled-name='iio_trigger_poll_chained' filepath='drivers/iio/industrialio-trigger.c' line='222' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iio_trigger_poll_chained'>
+        <parameter type-id='54e54fbb' name='trig' filepath='drivers/iio/industrialio-trigger.c' line='222' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
       <function-decl name='iio_trigger_unregister' mangled-name='iio_trigger_unregister' filepath='drivers/iio/industrialio-trigger.c' line='106' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iio_trigger_unregister'>
         <parameter type-id='54e54fbb' name='trig_info' filepath='drivers/iio/industrialio-trigger.c' line='106' column='1'/>
         <return type-id='48b5725f'/>
@@ -151420,9 +151478,42 @@
         <parameter type-id='e7d2a5fc' name='q' filepath='block/blk-ioc.c' line='333' column='1'/>
         <return type-id='7c6e0e0c'/>
       </function-decl>
+      <function-decl name='iomap_bmap' mangled-name='iomap_bmap' filepath='fs/iomap/fiemap.c' line='97' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iomap_bmap'>
+        <parameter type-id='f57039f0' name='mapping' filepath='fs/iomap/fiemap.c' line='97' column='1'/>
+        <parameter type-id='a42536cd' name='bno' filepath='fs/iomap/fiemap.c' line='97' column='1'/>
+        <parameter type-id='f4e64e1d' name='ops' filepath='fs/iomap/fiemap.c' line='98' column='1'/>
+        <return type-id='a42536cd'/>
+      </function-decl>
       <function-decl name='iomap_dio_complete' mangled-name='iomap_dio_complete' filepath='fs/iomap/direct-io.c' line='82' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iomap_dio_complete'>
         <parameter type-id='22159b04' name='dio' filepath='fs/iomap/direct-io.c' line='82' column='1'/>
         <return type-id='79a0948f'/>
+      </function-decl>
+      <function-decl name='iomap_dio_rw' mangled-name='iomap_dio_rw' filepath='fs/iomap/direct-io.c' line='678' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iomap_dio_rw'>
+        <parameter type-id='80f25feb' name='iocb' filepath='fs/iomap/direct-io.c' line='678' column='1'/>
+        <parameter type-id='4fa10f9e' name='iter' filepath='fs/iomap/direct-io.c' line='678' column='1'/>
+        <parameter type-id='f4e64e1d' name='ops' filepath='fs/iomap/direct-io.c' line='679' column='1'/>
+        <parameter type-id='79ebba98' name='dops' filepath='fs/iomap/direct-io.c' line='679' column='1'/>
+        <parameter type-id='f0981eeb' name='dio_flags' filepath='fs/iomap/direct-io.c' line='680' column='1'/>
+        <parameter type-id='b59d7dce' name='done_before' filepath='fs/iomap/direct-io.c' line='680' column='1'/>
+        <return type-id='79a0948f'/>
+      </function-decl>
+      <function-decl name='iomap_fiemap' mangled-name='iomap_fiemap' filepath='fs/iomap/fiemap.c' line='61' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iomap_fiemap'>
+        <parameter type-id='7e666abe' name='inode' filepath='fs/iomap/fiemap.c' line='61' column='1'/>
+        <parameter type-id='890caaa5' name='fi' filepath='fs/iomap/fiemap.c' line='61' column='1'/>
+        <parameter type-id='91ce1af9' name='start' filepath='fs/iomap/fiemap.c' line='62' column='1'/>
+        <parameter type-id='91ce1af9' name='len' filepath='fs/iomap/fiemap.c' line='62' column='1'/>
+        <parameter type-id='f4e64e1d' name='ops' filepath='fs/iomap/fiemap.c' line='62' column='1'/>
+        <return type-id='95e97e5e'/>
+      </function-decl>
+      <function-decl name='iomap_readahead' mangled-name='iomap_readahead' filepath='fs/iomap/buffered-io.c' line='400' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iomap_readahead'>
+        <parameter type-id='a6cdca2a' name='rac' filepath='fs/iomap/buffered-io.c' line='400' column='1'/>
+        <parameter type-id='f4e64e1d' name='ops' filepath='fs/iomap/buffered-io.c' line='400' column='1'/>
+        <return type-id='48b5725f'/>
+      </function-decl>
+      <function-decl name='iomap_readpage' mangled-name='iomap_readpage' filepath='fs/iomap/buffered-io.c' line='323' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iomap_readpage'>
+        <parameter type-id='02f11ed4' name='page' filepath='fs/iomap/buffered-io.c' line='323' column='1'/>
+        <parameter type-id='f4e64e1d' name='ops' filepath='fs/iomap/buffered-io.c' line='323' column='1'/>
+        <return type-id='95e97e5e'/>
       </function-decl>
       <var-decl name='iomem_resource' type-id='5218160d' mangled-name='iomem_resource' visibility='default' filepath='kernel/resource.c' line='41' column='1' elf-symbol-id='iomem_resource'/>
       <function-decl name='iommu_alloc_resv_region' mangled-name='iommu_alloc_resv_region' filepath='drivers/iommu/iommu.c' line='2865' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='iommu_alloc_resv_region'>
@@ -153076,6 +153167,13 @@
       <function-decl name='kthread_create_worker' mangled-name='kthread_create_worker' filepath='kernel/kthread.c' line='852' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='kthread_create_worker'>
         <parameter type-id='f0981eeb' name='flags' filepath='kernel/kthread.c' line='852' column='1'/>
         <parameter type-id='80f4b756' name='namefmt' filepath='kernel/kthread.c' line='852' column='1'/>
+        <parameter is-variadic='yes'/>
+        <return type-id='c41f4539'/>
+      </function-decl>
+      <function-decl name='kthread_create_worker_on_cpu' mangled-name='kthread_create_worker_on_cpu' filepath='kernel/kthread.c' line='901' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='kthread_create_worker_on_cpu'>
+        <parameter type-id='95e97e5e' name='cpu' filepath='kernel/kthread.c' line='901' column='1'/>
+        <parameter type-id='f0981eeb' name='flags' filepath='kernel/kthread.c' line='901' column='1'/>
+        <parameter type-id='80f4b756' name='namefmt' filepath='kernel/kthread.c' line='902' column='1'/>
         <parameter is-variadic='yes'/>
         <return type-id='c41f4539'/>
       </function-decl>
@@ -158001,6 +158099,14 @@
         <parameter type-id='7efbcaaf' name='phydev' filepath='drivers/net/phy/phy.c' line='1323' column='1'/>
         <return type-id='95e97e5e'/>
       </function-decl>
+      <function-decl name='phy_get_internal_delay' mangled-name='phy_get_internal_delay' filepath='drivers/net/phy/phy_device.c' line='2854' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='phy_get_internal_delay'>
+        <parameter type-id='7efbcaaf' name='phydev' filepath='drivers/net/phy/phy_device.c' line='2854' column='1'/>
+        <parameter type-id='fa0b179b' name='dev' filepath='drivers/net/phy/phy_device.c' line='2854' column='1'/>
+        <parameter type-id='6d60f45d' name='delay_values' filepath='drivers/net/phy/phy_device.c' line='2855' column='1'/>
+        <parameter type-id='95e97e5e' name='size' filepath='drivers/net/phy/phy_device.c' line='2855' column='1'/>
+        <parameter type-id='b50a4934' name='is_rx' filepath='drivers/net/phy/phy_device.c' line='2855' column='1'/>
+        <return type-id='a7832498'/>
+      </function-decl>
       <function-decl name='phy_get_pause' mangled-name='phy_get_pause' filepath='drivers/net/phy/phy_device.c' line='2805' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='phy_get_pause'>
         <parameter type-id='7efbcaaf' name='phydev' filepath='drivers/net/phy/phy_device.c' line='2805' column='1'/>
         <parameter type-id='d8e6b335' name='tx_pause' filepath='drivers/net/phy/phy_device.c' line='2805' column='1'/>
@@ -160023,6 +160129,12 @@
       <function-decl name='read_sanitised_ftr_reg' mangled-name='read_sanitised_ftr_reg' filepath='arch/arm64/kernel/cpufeature.c' line='1260' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='read_sanitised_ftr_reg'>
         <parameter type-id='19c2251e' name='id' filepath='arch/arm64/kernel/cpufeature.c' line='1260' column='1'/>
         <return type-id='91ce1af9'/>
+      </function-decl>
+      <function-decl name='readahead_expand' mangled-name='readahead_expand' filepath='mm/readahead.c' line='678' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='readahead_expand'>
+        <parameter type-id='a6cdca2a' name='ractl' filepath='mm/readahead.c' line='678' column='1'/>
+        <parameter type-id='69bf7bee' name='new_start' filepath='mm/readahead.c' line='679' column='1'/>
+        <parameter type-id='b59d7dce' name='new_len' filepath='mm/readahead.c' line='679' column='1'/>
+        <return type-id='48b5725f'/>
       </function-decl>
       <function-decl name='readahead_gfp_mask' mangled-name='readahead_gfp_mask' filepath='mm/readahead.c' line='118' column='1' visibility='default' binding='global' size-in-bits='64' elf-symbol-id='readahead_gfp_mask'>
         <parameter type-id='f57039f0' name='x' filepath='mm/readahead.c' line='118' column='1'/>
