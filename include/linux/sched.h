@@ -1021,6 +1021,9 @@ struct task_struct {
 	unsigned			no_cgroup_migration:1;
 	/* task is frozen/stopped (used by the cgroup freezer) */
 	unsigned			frozen:1;
+	/* protected by css_set_lock */
+	u64				frozen_time_total;  /* time spent frozen in nsecs */
+	u64				frozen_time_start;
 #endif
 #ifdef CONFIG_BLK_CGROUP
 	unsigned			use_memdelay:1;
