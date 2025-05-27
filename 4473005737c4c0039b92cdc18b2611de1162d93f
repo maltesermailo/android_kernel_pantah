@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05bb39f8_0750a388",
+        "filename": "fs/proc/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3375,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-05-27T23:39:28Z",
+      "side": 1,
+      "message": "remind me why we need this in tgid_base_stuff?",
+      "revId": "4473005737c4c0039b92cdc18b2611de1162d93f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4d1f5dd_abe094a3",
+        "filename": "fs/proc/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3726,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-05-27T23:39:28Z",
+      "side": 1,
+      "message": "Should we distinguish here that this is for the v2 cgroup freezer?",
+      "revId": "4473005737c4c0039b92cdc18b2611de1162d93f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fa011e3_01792f9b",
+        "filename": "include/linux/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1023,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-05-27T23:39:28Z",
+      "side": 1,
+      "message": "where does frozen get initialized? might be a good spot to initialize the timestamps.",
+      "revId": "4473005737c4c0039b92cdc18b2611de1162d93f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31d57528_c85c6797",
+        "filename": "include/linux/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1025,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-05-27T23:39:28Z",
+      "side": 1,
+      "message": "Also might be good to add a comment mentioning which lock serializes access to these values.",
+      "revId": "4473005737c4c0039b92cdc18b2611de1162d93f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a29effd_3d408b89",
+        "filename": "kernel/cgroup/freezer.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-05-27T23:39:28Z",
+      "side": 1,
+      "message": "probably should scope end_ns to the {} its used in.",
+      "fixSuggestions": [
+        {
+          "fixId": "c173a83a_18d360f1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "kernel/cgroup/freezer.c",
+              "range": {
+                "startLine": 132,
+                "startChar": 0,
+                "endLine": 133,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "kernel/cgroup/freezer.c",
+              "range": {
+                "startLine": 137,
+                "startChar": 0,
+                "endLine": 137,
+                "endChar": 0
+              },
+              "replacement": "\t\tu64 end_ns;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4473005737c4c0039b92cdc18b2611de1162d93f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd5fe013_de41295f",
+        "filename": "kernel/cgroup/freezer.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-05-27T23:39:28Z",
+      "side": 1,
+      "message": "This is fine, but the fancy way to do these now is with guard(). Just FYI, don\u0027t bother switching it unless someone else asks (since elsewhere css_set_lock is consistently used this way).",
+      "revId": "4473005737c4c0039b92cdc18b2611de1162d93f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54ac3dd3_20c7de6a",
+        "filename": "kernel/cgroup/freezer.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-05-27T23:39:28Z",
+      "side": 1,
+      "message": "I\u0027m not sure if it\u0027s useful to export frozen_time_start here.  Might just limit it to the time in freezer",
+      "range": {
+        "startLine": 272,
+        "startChar": 32,
+        "endLine": 272,
+        "endChar": 74
+      },
+      "revId": "4473005737c4c0039b92cdc18b2611de1162d93f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
