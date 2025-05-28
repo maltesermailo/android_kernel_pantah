@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66bf6190_5ff3366c",
+        "filename": "fs/proc/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3375,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-05-28T02:34:38Z",
+      "side": 1,
+      "message": "So for some things like cputime, there\u0027s a sense of the thread times all added up should match the process time.  But I\u0027m not sure if that makes sense for the freezer to be anything but the single thread\u0027s frozen time. \n\nSo, I\u0027d probably avoid having multiple ways to access the same data, so you don\u0027t confuse people as to if the group leader should have a sum of its threads.",
+      "parentUuid": "a5baa6b6_4cc283cd",
+      "revId": "4473005737c4c0039b92cdc18b2611de1162d93f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f4d1f5dd_abe094a3",
         "filename": "fs/proc/base.c",
         "patchSetId": 1
@@ -137,6 +155,24 @@
       "side": 1,
       "message": "frozen doesn\u0027t actually get initialized anywhere. i looked for assignment to some of the other bit flags inside of the `task_struct`, and this seems to be pretty common, but i may be missing some distinction. I have the initialization in `cgroup_fork` because a lot of other task_struct members seem to be inited around where it\u0027s called in `copy_process`, but I can move it!",
       "parentUuid": "8fa011e3_01792f9b",
+      "revId": "4473005737c4c0039b92cdc18b2611de1162d93f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df83f2f5_ab754e83",
+        "filename": "include/linux/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1023,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-05-28T02:34:38Z",
+      "side": 1,
+      "message": "I\u0027m wondering if it is kzalloc\u0027ed, and if so, then maybe you don\u0027t need to explicitly zero the new fields?",
+      "parentUuid": "8fe432da_eebcb811",
       "revId": "4473005737c4c0039b92cdc18b2611de1162d93f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
