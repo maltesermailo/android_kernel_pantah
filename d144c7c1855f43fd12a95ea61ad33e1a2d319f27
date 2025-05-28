@@ -142,6 +142,30 @@
       },
       "revId": "d144c7c1855f43fd12a95ea61ad33e1a2d319f27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d1f475e_68ef70ab",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1147,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-05-28T19:29:44Z",
+      "side": 1,
+      "message": "\u003e Can you confirm that both the guest and the host have the updated arm-ffa driver with that patch ?\n\nI\u0027m testing with Trusty as the guest VM as Arve indicated. The function that calls `FFA_PARTITION_INFO_GET` in a way that takes ownership of the rx buffer is here:\n\nhttps://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:trusty/kernel/lib/arm_ffa/arm_ffa.c;l\u003d1614",
+      "parentUuid": "def67e14_c4b5743d",
+      "range": {
+        "startLine": 1147,
+        "startChar": 1,
+        "endLine": 1147,
+        "endChar": 15
+      },
+      "revId": "d144c7c1855f43fd12a95ea61ad33e1a2d319f27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
