@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ea9f4784_fbbe3d58",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1118,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-05-28T23:56:58Z",
+      "side": 1,
+      "message": "Looking at Table 6.3 (FF-A 1.3 ALP0), if the SPM is the caller and a hypervisor is the caller, then there are no partitions available for discovery. So in that case, it sounds spec-compliant to have the call succeed and return a count of zero.\n\nIn this case (Hypervisor calls SPM), I don\u0027t know how the count could come back non-zero given that the Nil UUID case must include the caller and non-Nil UUID cases must return `INVALID_PARAMETERS` if UUID wasn\u0027t recognized.\n\nI checked the EL3 SPMC in ATF and it will indeed return `FFA_ERROR`/`INVALID_PARAMETERS` if count is zero.\n\nI could open a follow-up CL to discuss whether we should `WARN_ON` a zero count. WDYT @arve@android.com?",
+      "parentUuid": "06c3a301_a583a0be",
+      "revId": "d144c7c1855f43fd12a95ea61ad33e1a2d319f27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "edc2ec62_ad8aaf59",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 3
