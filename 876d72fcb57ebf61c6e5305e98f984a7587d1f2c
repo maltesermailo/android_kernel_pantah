@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4be0a24c_b5c3bf61",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-28T15:19:07Z",
+      "side": 1,
+      "message": "My main concern was that afaik we can\u0027t return `-EINTR` to user space because e.g. `TEMP_FAILURE_RETRY` will immediately retry the syscall. Doesn\u0027t crosvm do the equivalent (in Rust)?\n\n`-EAGAIN` might be better but I\u0027m not sure how much.",
+      "parentUuid": "269a428e_5bd18e30",
+      "range": {
+        "startLine": 12,
+        "startChar": 7,
+        "endLine": 12,
+        "endChar": 25
+      },
+      "revId": "876d72fcb57ebf61c6e5305e98f984a7587d1f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "592d63d7_5e2e9368",
         "filename": "arch/arm64/kvm/pkvm.c",
         "patchSetId": 4
