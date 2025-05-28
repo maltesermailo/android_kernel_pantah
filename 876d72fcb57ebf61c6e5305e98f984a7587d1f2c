@@ -86,6 +86,24 @@
       "message": "Capturing a discussion on chat. It is equally important to sleep here as for the creation message. However, this can\u0027t be killable here, and if the other loop can exit before the creation message has succeeded, then I think this loop needs to complete the create loop before it can send the destruction message to be compliant with the current FF-A spec.\n\nIt is probably easier to not allow the creation loop to return early though, which means removing the timeout and killable part.",
       "revId": "876d72fcb57ebf61c6e5305e98f984a7587d1f2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bba19dda_cc2521d5",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-05-28T15:35:03Z",
+      "side": 1,
+      "message": "While at it, please move the sending of the destruction message to the \u0027if (nr_busy)\u0027 section further down this function. That will allow Linux to reclaim the majority of guest pages that are not \u0027tainted\u0027 by FF-A early, and then to deal with the potentially slow FF-A related logic in a second step.",
+      "parentUuid": "592d63d7_5e2e9368",
+      "revId": "876d72fcb57ebf61c6e5305e98f984a7587d1f2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
