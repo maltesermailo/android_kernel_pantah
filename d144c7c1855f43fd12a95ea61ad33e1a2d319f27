@@ -46,6 +46,30 @@
       },
       "revId": "d144c7c1855f43fd12a95ea61ad33e1a2d319f27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e18139c1_8a22662a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1147,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-05-28T15:16:23Z",
+      "side": 1,
+      "message": "Also note that the host and guest ff-a drivers release their own rx buffer, not the hypervisor\u0027s rx buffer. If you release the hypervisor\u0027s rx buffer when the guest rx buffer is released, that means only one guest can have live content in its rx buffer at once. This means one guest can block all other guests (including the host) from making any ff-a calls that need the rx buffer.",
+      "parentUuid": "747ced94_3146e06c",
+      "range": {
+        "startLine": 1147,
+        "startChar": 1,
+        "endLine": 1147,
+        "endChar": 15
+      },
+      "revId": "d144c7c1855f43fd12a95ea61ad33e1a2d319f27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
