@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edc2ec62_ad8aaf59",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1147,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-28T09:20:43Z",
+      "side": 1,
+      "message": "I don\u0027t think this is necessary here - seems like the arm ff-a driver was lacking an `ffa_rx_release` after issuing the `ffa_get_partition` call. For context : https://lore.kernel.org/all/20250401-innocent-outrageous-deer-0946c5@sudeepholla/",
+      "range": {
+        "startLine": 1147,
+        "startChar": 1,
+        "endLine": 1147,
+        "endChar": 15
+      },
+      "revId": "d144c7c1855f43fd12a95ea61ad33e1a2d319f27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
