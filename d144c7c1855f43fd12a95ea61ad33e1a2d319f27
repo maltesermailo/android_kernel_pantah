@@ -22,6 +22,30 @@
       },
       "revId": "d144c7c1855f43fd12a95ea61ad33e1a2d319f27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "747ced94_3146e06c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1147,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-05-28T15:06:05Z",
+      "side": 1,
+      "message": "I have the referenced patch [1] from Sudeep applied. I re-tested without this CL to confirm that the problem it is intended to fix reappears. It does indeed:\n\n```\nstatus_t arm_ffa_partition_info_get_desc(uuid_t, size_t, struct ffa_part_info_desc *, size_t *):1638: Call to PARTITION_INFO_GET failed, err \u003d -33\n```\n\n[1] https://lore.kernel.org/all/20250321115700.3525197-1-sudeep.holla@arm.com/",
+      "parentUuid": "edc2ec62_ad8aaf59",
+      "range": {
+        "startLine": 1147,
+        "startChar": 1,
+        "endLine": 1147,
+        "endChar": 15
+      },
+      "revId": "d144c7c1855f43fd12a95ea61ad33e1a2d319f27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
