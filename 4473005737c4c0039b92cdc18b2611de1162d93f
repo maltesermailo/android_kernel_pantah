@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "73298387_51cb9683",
+        "filename": "fs/proc/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3375,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2025-05-28T04:22:14Z",
+      "side": 1,
+      "message": "Makes sense! Philosophically, since these values are task-specific, they should be in the `/proc/\u003ctgid\u003e/task/\u003cpid\u003e/cgroup_v2_freezer_stats` path, but I think most users would still expect it to be in `/proc/\u003cpid\u003e/cgroup_v2_freezer_stats`. `/proc/pid/schedstat` is an example of a value where only the group leader\u0027s exec time is shown when schedstat is accessed through either path, so there would be precedent to leave it as is. If not, I would prefer to take it out of `tid_base_stuff` because I don\u0027t know if it\u0027s always reasonable to assume that a user trying to get info on a pid will know the pid of the group leader.",
+      "parentUuid": "66bf6190_5ff3366c",
+      "revId": "4473005737c4c0039b92cdc18b2611de1162d93f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f4d1f5dd_abe094a3",
         "filename": "fs/proc/base.c",
         "patchSetId": 1
@@ -173,6 +191,24 @@
       "side": 1,
       "message": "I\u0027m wondering if it is kzalloc\u0027ed, and if so, then maybe you don\u0027t need to explicitly zero the new fields?",
       "parentUuid": "8fe432da_eebcb811",
+      "revId": "4473005737c4c0039b92cdc18b2611de1162d93f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37574421_26fc3c1f",
+        "filename": "include/linux/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1023,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2025-05-28T04:22:14Z",
+      "side": 1,
+      "message": "It looks like it happens in [`dup_task_struct`](https://elixir.bootlin.com/linux/v6.12/source/kernel/fork.c#L1108) using [`alloc_task_struct_node`](https://elixir.bootlin.com/linux/v6.12/source/kernel/fork.c#L179), which doesn\u0027t seem to explicitly 0 the task struct? The contents of the original task_struct get copied to the new one, but this wouldn\u0027t be correct behavior for freezer if the task we\u0027re forking from is `frozen` because we expect `frozen \u003d false` for the new task. Maybe since the original process is doing the forking, it won\u0027t ever be marked as frozen when we create a new one? If we\u0027re relying on this assumption, it would be nice if it was documented somewhere!",
+      "parentUuid": "df83f2f5_ab754e83",
       "revId": "4473005737c4c0039b92cdc18b2611de1162d93f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
