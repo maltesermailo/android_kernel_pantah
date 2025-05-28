@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e30af92_b7f21cab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2025-05-28T02:08:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b4584b5_86bcdfd3",
+      "revId": "4473005737c4c0039b92cdc18b2611de1162d93f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05bb39f8_0750a388",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a5baa6b6_4cc283cd",
+        "filename": "fs/proc/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3375,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2025-05-28T02:08:30Z",
+      "side": 1,
+      "message": "the entries in `tgid_base_stuff` map to `/proc/\u003cpid\u003e/cgroup_v2_freezer_stats` and the ones in `tid_base_stuff` map to `/proc/\u003ctask group leader pid\u003e/task/\u003cpid\u003e/cgroup_v2_freezer_stats`. I have it in `tid_base_stuff` because originally I thought that the long path was the only way to access the counter for a non-group leader task id, but now I\u0027m seeing that you can still read the file at `/proc/\u003cnon leader pid\u003e/cgroup_v2_freezer_stats` even if it doesn\u0027t have an entry when you read `/proc`. My preference is to keep it there in case someone wants to use the `/proc/\u003cgroup leader\u003e/task/...` path to check the freezer time for each subtask, but I\u0027m also happy to remove it if you don\u0027t think anyone would use that!",
+      "parentUuid": "05bb39f8_0750a388",
+      "revId": "4473005737c4c0039b92cdc18b2611de1162d93f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f4d1f5dd_abe094a3",
         "filename": "fs/proc/base.c",
         "patchSetId": 1
@@ -48,6 +84,24 @@
       "writtenOn": "2025-05-27T23:39:28Z",
       "side": 1,
       "message": "Should we distinguish here that this is for the v2 cgroup freezer?",
+      "revId": "4473005737c4c0039b92cdc18b2611de1162d93f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31c020c3_c2cd9ecd",
+        "filename": "fs/proc/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3726,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2025-05-28T02:08:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4d1f5dd_abe094a3",
       "revId": "4473005737c4c0039b92cdc18b2611de1162d93f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -71,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8fe432da_eebcb811",
+        "filename": "include/linux/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1023,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2025-05-28T02:08:30Z",
+      "side": 1,
+      "message": "frozen doesn\u0027t actually get initialized anywhere. i looked for assignment to some of the other bit flags inside of the `task_struct`, and this seems to be pretty common, but i may be missing some distinction. I have the initialization in `cgroup_fork` because a lot of other task_struct members seem to be inited around where it\u0027s called in `copy_process`, but I can move it!",
+      "parentUuid": "8fa011e3_01792f9b",
+      "revId": "4473005737c4c0039b92cdc18b2611de1162d93f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "31d57528_c85c6797",
         "filename": "include/linux/sched.h",
         "patchSetId": 1
@@ -82,6 +154,24 @@
       "writtenOn": "2025-05-27T23:39:28Z",
       "side": 1,
       "message": "Also might be good to add a comment mentioning which lock serializes access to these values.",
+      "revId": "4473005737c4c0039b92cdc18b2611de1162d93f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4a5a7cb_add6b2c3",
+        "filename": "include/linux/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1025,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2025-05-28T02:08:30Z",
+      "side": 1,
+      "message": "Done. This comment may be more suitable above \"frozen\" because it serializes access to all 3, but also realized midway through this comment that I placed these in the middle of a bunch of bitflags, so I\u0027m about to send a fix!",
+      "parentUuid": "31d57528_c85c6797",
       "revId": "4473005737c4c0039b92cdc18b2611de1162d93f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -131,6 +221,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e629a62_c3de0f12",
+        "filename": "kernel/cgroup/freezer.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2025-05-28T02:08:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a29effd_3d408b89",
+      "revId": "4473005737c4c0039b92cdc18b2611de1162d93f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd5fe013_de41295f",
@@ -161,6 +269,30 @@
       "writtenOn": "2025-05-27T23:39:28Z",
       "side": 1,
       "message": "I\u0027m not sure if it\u0027s useful to export frozen_time_start here.  Might just limit it to the time in freezer",
+      "range": {
+        "startLine": 272,
+        "startChar": 32,
+        "endLine": 272,
+        "endChar": 74
+      },
+      "revId": "4473005737c4c0039b92cdc18b2611de1162d93f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70001551_9bdf7e74",
+        "filename": "kernel/cgroup/freezer.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2025-05-28T02:08:30Z",
+      "side": 1,
+      "message": "Cool I was debating switching the freezer counters to `s64` so that I could use `ktime_mono_to_real` to print start, but now I don\u0027t have to!",
+      "parentUuid": "54ac3dd3_20c7de6a",
       "range": {
         "startLine": 272,
         "startChar": 32,
