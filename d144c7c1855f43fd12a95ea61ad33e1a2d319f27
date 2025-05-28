@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dddd74e8_6808686d",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1118,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-05-28T22:20:15Z",
+      "side": 1,
+      "message": "As Andrei said, this is the case where the call succeeded with zero descriptors in the rx buffer. ARM has indicated that the release of the spec will clarify that there is no transfer of ownership of the rx buffer when \n- count (`w2`) is zero.\n- Bit[0] \u003d b’1 in the Flags input parameter.\n\nThis lines up with the comments added in this CL.",
+      "parentUuid": "79f66fc7_be28e9aa",
+      "revId": "d144c7c1855f43fd12a95ea61ad33e1a2d319f27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "edc2ec62_ad8aaf59",
