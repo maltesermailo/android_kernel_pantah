@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a7d48f5_1167e019",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1118,
+      "author": {
+        "id": 1891742
+      },
+      "writtenOn": "2025-05-28T21:26:51Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be `if (count)`? `!count` means it\u0027s getting the descriptors which does transfer ownership of the rx buffer.",
+      "revId": "d144c7c1855f43fd12a95ea61ad33e1a2d319f27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "edc2ec62_ad8aaf59",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 3
