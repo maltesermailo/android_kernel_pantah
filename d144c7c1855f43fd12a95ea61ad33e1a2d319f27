@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "79f66fc7_be28e9aa",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1118,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-28T22:09:29Z",
+      "side": 1,
+      "message": "\u003e uint32 Count w2\n• If Bit[0] \u003d b’0 in the Flags input parameter, this field contains the count of partition information descriptors corresponding to the specified UUID in w1-w4. The descriptors are populated in the RX buffer of the caller.\n• If Bit[0] \u003d b’1 in the Flags input parameter, this field contains the count of partitions deployed in the system corresponding to the specified UUID in w1-w4.\n\nIn either case, `count \u003d\u003d res-\u003ea2 \u003d\u003d 0` means that there are no descriptors in the buffer. The spec doesn\u0027t say what happens to the RX buffer in that case, but all current implementations skip the transfer.",
+      "parentUuid": "1a7d48f5_1167e019",
+      "revId": "d144c7c1855f43fd12a95ea61ad33e1a2d319f27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "edc2ec62_ad8aaf59",
         "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
         "patchSetId": 3
