@@ -333,6 +333,30 @@
       },
       "revId": "d144c7c1855f43fd12a95ea61ad33e1a2d319f27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef5e7cbd_d197bc28",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1147,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-05-29T20:49:39Z",
+      "side": 1,
+      "message": "Why do you only want to release the hypervisor\u0027s rx buffer when there is an error?\n\nI posted this comment earlier in this thread:\nAlso note that the host and guest ff-a drivers release their own rx buffer, not the hypervisor\u0027s rx buffer. If you release the hypervisor\u0027s rx buffer when the guest rx buffer is released, that means only one guest can have live content in its rx buffer at once. This means one guest can block all other guests (including the host) from making any ff-a calls that need the rx buffer.",
+      "parentUuid": "c41eda9b_7ebdec3b",
+      "range": {
+        "startLine": 1147,
+        "startChar": 1,
+        "endLine": 1147,
+        "endChar": 15
+      },
+      "revId": "d144c7c1855f43fd12a95ea61ad33e1a2d319f27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
