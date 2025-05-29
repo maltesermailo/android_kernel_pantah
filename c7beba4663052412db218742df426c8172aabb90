@@ -22,6 +22,30 @@
       },
       "revId": "c7beba4663052412db218742df426c8172aabb90",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a11a66b_336286ff",
+        "filename": "fs/proc/base.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3375,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-05-29T07:09:56Z",
+      "side": 1,
+      "message": "\u003e please no new proc files unless they are really really required.\n\nSo, just for context, this is a very early draft/prototype of the idea to prove out the functionality is sufficient for the userland\u0027s needs.\n\nWe\u0027re open to suggestions on how to best expose this time accounting to userland. \n\nSince its a per-task value, something via proc seemed most intuitive, but happy to consider alternatives.  \n\nIts a unfortunately a little narrow being a pretty specific \"time in cgroups v2 freezer\" accounting, but generalizing to \"freezer\" is problematic as cgroups v2 \"freezer\" confusingly doesn\u0027t actually use the freezer.\n\n\u003e Also, no documentation for this new proc file that you will be forced to maintain for the next 20+ years? :)\n\nWanted to get some feedback first on the preferred interface before pushing for documentation, but yes, this will be needed before being actually submitted.",
+      "parentUuid": "af38559d_30448e68",
+      "range": {
+        "startLine": 3375,
+        "startChar": 6,
+        "endLine": 3375,
+        "endChar": 23
+      },
+      "revId": "c7beba4663052412db218742df426c8172aabb90",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
