@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b442511f_be546d51",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1809582
+      },
+      "writtenOn": "2025-05-29T01:10:27Z",
+      "side": 1,
+      "message": "We reviewed what happens on the Trusty side if we run out of retries:\n* For the creation message, if Trusty gets enough cycles with `FFA_RUN` then it will successfully create the VM and put it in the `FRESH` state (but not available). TZ shouldn\u0027t get stuck here, worst case that happens is that VM leaks.\n* Destruction message: if Trusty never returns success here, then the VM stays in one of the `NOTIFYING` states and never reaches `READY_TO_FREE`, which means it leaks.\n\nThe TEE should otherwise continue functioning normally, since the actual work done for the VM messages is on a separate thread that can sleep independently.",
+      "revId": "da6c66e034af103e466967404ac3b6496f2a212c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
