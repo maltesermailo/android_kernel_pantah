@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f19f6c07_847bd964",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-05-29T21:38:38Z",
+      "side": 1,
+      "message": "I think after moving the IOMMU driver initialization after deprivilege, those per-cpu variables are actually not needed at all. They are only used by the IOMMU driver\u0027s MMIO accessors, and they were needed precisely because the IOMMU driver was already active during deprivilege, so it could be doing an MMIO read or write when some CPUs are already deprivileged but some others are not. Now, since the IOMMU driver initialization is done after deprivilege, those MMIO accessors can just use this global flag. (Also it would make them faster, since this is a static key.)\n\nSo I\u0027d just remove those per-cpu variables, and rename `pkvm_ia_enabled()` to `pkvm_enabled()`. (IMO pkvm_ia_enabled is not the best name, for various reasons.)\n\nWhile we\u0027re at it, also we are currently (ab)using `enable_pkvm` in a couple of places where we\u0027d better use this `pkvm_[ia_]enabled()` instead (and there will be more such places after the PV MMU changes). Since aosp/3608584 we reset `enable_pkvm` to false if pKVM init fails, and are relying on that, which seems not quite correct, since pkvm_init() may fail after pkvm_host_deprivilege_cpus() succeeded, and in such case don\u0027t try to \"un-deprivilege\" CPUs, we leave the system in a known-broken state instead of a fallback to normal privileged kernel boot, so we shouldn\u0027t pretend otherwise.",
+      "revId": "8402ac0722fcb69c904aab9cf2daac13057136e1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
