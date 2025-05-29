@@ -357,6 +357,30 @@
       },
       "revId": "d144c7c1855f43fd12a95ea61ad33e1a2d319f27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d67959c8_dc550fe1",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1147,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-05-29T21:12:26Z",
+      "side": 1,
+      "message": "I think there are more fixes needed for how the rx buffers are handled though. FFA_RX_RELEASE from the host or guest seem to be passed through to EL3 without validation if the caller is the actually the VM you are holding on to the hypervisor\u0027s rx buffer on behalf of. The spec _does_ specify a protocol for transferring the ownership of the VM\u0027s rx buffer between the SPMC releasing the VM\u0027s RX buffer all the way to the SPMC will be needed in the future, but that is not what the code does today (in ffa_rx_release). It releases the hypervisor\u0027s RX buffer which I don\u0027t think there is ever a need to do in a FFA_RX_RELEASE call from a VM/host.",
+      "parentUuid": "ef5e7cbd_d197bc28",
+      "range": {
+        "startLine": 1147,
+        "startChar": 1,
+        "endLine": 1147,
+        "endChar": 15
+      },
+      "revId": "d144c7c1855f43fd12a95ea61ad33e1a2d319f27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
