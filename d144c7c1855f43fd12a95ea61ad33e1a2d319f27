@@ -309,6 +309,30 @@
       },
       "revId": "d144c7c1855f43fd12a95ea61ad33e1a2d319f27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c41eda9b_7ebdec3b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1147,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-05-29T10:49:47Z",
+      "side": 1,
+      "message": "Thanks, I looked at the indicated link and it seems correct from Trusty side. I suggest having the following:\n\n\n```\nif (copy_sz \u003e KVM_FFA_MBOX_NR_PAGES * PAGE_SIZE) { \n\tret \u003d FFA_RET_ABORTED;\n\tgoto unlock;\n}\n\nif (ffa_buf)\n\tmemcpy(ffa_buf-\u003erx, hyp_buffers.rx, copy_sz);\n\nret \u003d parse_vm_availability_resp(partition_sz, count);\nif (!ret)\n\treturn;\n\nunlock:\n\tffa_to_smccc_res(res, ret);\n\tffa_rx_release(\u0026rx_res);\n\n}\n```\n\nIn this way we will only `ffa_rx_release` on error from `parse_vm_availability_resp` and when we don\u0027t have space in the mbox buffer.",
+      "parentUuid": "5d1f475e_68ef70ab",
+      "range": {
+        "startLine": 1147,
+        "startChar": 1,
+        "endLine": 1147,
+        "endChar": 15
+      },
+      "revId": "d144c7c1855f43fd12a95ea61ad33e1a2d319f27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
