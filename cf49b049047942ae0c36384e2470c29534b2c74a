@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5ee37f0c_5a032ea9",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2612,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-05-30T04:13:15Z",
+      "side": 1,
+      "message": "You are right. I\u0027ll move the migrate type above this.",
+      "parentUuid": "f150f4b7_39aa69a0",
+      "range": {
+        "startLine": 2612,
+        "startChar": 54,
+        "endLine": 2612,
+        "endChar": 65
+      },
+      "revId": "cf49b049047942ae0c36384e2470c29534b2c74a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "768bdcf3_4afc47a7",
         "filename": "mm/page_alloc.c",
         "patchSetId": 3
@@ -54,6 +78,30 @@
       "writtenOn": "2025-05-29T22:32:15Z",
       "side": 1,
       "message": "Wouldn\u0027t this start putting reclaimable pages in a different pcp list (movable)? What\u0027s the rationale for that? Upstream doesn\u0027t seem to do it either.",
+      "range": {
+        "startLine": 2616,
+        "startChar": 26,
+        "endLine": 2616,
+        "endChar": 29
+      },
+      "revId": "cf49b049047942ae0c36384e2470c29534b2c74a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b100666_a05a1fe8",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2616,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-05-30T04:13:15Z",
+      "side": 1,
+      "message": "This should be `\u003e`. I\u0027ll fix that.\n\nThe reason for the migrate type reclaimable is Android\u0027s OOT patches for CMA:\n\nhttps://r.android.com/3009320",
+      "parentUuid": "768bdcf3_4afc47a7",
       "range": {
         "startLine": 2616,
         "startChar": 26,
