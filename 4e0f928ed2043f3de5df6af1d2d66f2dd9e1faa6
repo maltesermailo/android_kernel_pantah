@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45c47781_086d4adb",
+        "filename": "arch/x86/include/asm/pkvm.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-03T18:33:47Z",
+      "side": 1,
+      "message": "I still think pkvm_enabled() would be a better name. We don\u0027t use pkvm_ia_ prefix anywhere else, and we don\u0027t assume that pKVM on x86 needs to be inherently Intel-specific.\n\nI understand this name clashes with the percpu variables until they are removed. So maybe just combine aosp/3649035 into this patch?",
+      "revId": "4e0f928ed2043f3de5df6af1d2d66f2dd9e1faa6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
