@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "56ae91da_a0410db2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-06-05T16:03:12Z",
+      "side": 1,
+      "message": "Can we split this into 2 patches:\n1) the original patch\n2) a patch to fix the ABI breakage",
+      "revId": "08277494c80bf37b86b89c6de298ab7bb65a7214",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c5b584bb_4d035164",
         "filename": "drivers/usb/dwc3/core.c",
         "patchSetId": 7
@@ -72,6 +89,47 @@
         "endLine": 1415,
         "endChar": 0
       },
+      "revId": "08277494c80bf37b86b89c6de298ab7bb65a7214",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38d383d7_dc29a468",
+        "filename": "drivers/usb/dwc3/core.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-06-05T16:03:12Z",
+      "side": 1,
+      "message": "shouldn\u0027t this use `DWC3_LLUCTL` defined above?",
+      "range": {
+        "startLine": 188,
+        "startChar": 26,
+        "endLine": 188,
+        "endChar": 32
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8b733181_84561be4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/usb/dwc3/core.h",
+              "range": {
+                "startLine": 188,
+                "startChar": 0,
+                "endLine": 189,
+                "endChar": 0
+              },
+              "replacement": "#define VDWC3_LLUCTL(n)\t\t(DWC3_LLUCTL + ((n) * 0x80))\n"
+            }
+          ]
+        }
+      ],
       "revId": "08277494c80bf37b86b89c6de298ab7bb65a7214",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
