@@ -405,6 +405,30 @@
       },
       "revId": "d144c7c1855f43fd12a95ea61ad33e1a2d319f27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46052954_4d28686c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1147,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-06-05T19:32:44Z",
+      "side": 1,
+      "message": "\u003e `Why do you only want to release the hypervisor\u0027s rx buffer when there is an error?` - on successful return the caller(host or guest) issues rx_release which is trapped \u0026 forwarded by the hypervisor but if there is an internal error in the hyp we need to do do the release ourselves.\n\nUnderstood, but releasing the hypervisors RX buffer with the SPMC when the guest or host is releasing its own RX buffer, is a bug in itself that should be fixed. Once that bug is fixed so the hypervisor always releases its own RX buffer by itself, the need for a special case on this error path goes away.",
+      "parentUuid": "c88f7303_a6ef23b2",
+      "range": {
+        "startLine": 1147,
+        "startChar": 1,
+        "endLine": 1147,
+        "endChar": 15
+      },
+      "revId": "d144c7c1855f43fd12a95ea61ad33e1a2d319f27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
