@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bacae32e_db247e5e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-06-05T18:04:20Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Cherry pick is not clean. Checked against UPSTREAM.\n\nAnalyzer Description: Ensures that kernel commit messages follow the guidelines.\nOwner: android-kernel-team@google.com\n\nCherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/d026feb03bdcde33e22a75777d59ed9d8725bcdd) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003dd026feb03bdcde33e22a75777d59ed9d8725bcdd).\n\n```\n      ## drivers/platform/x86/intel/pmc/core.c ##\n     @@ drivers/platform/x86/intel/pmc/core.c: static const struct x86_cpu_id intel_pmc_core_ids[] \u003d {\n    @@ drivers/platform/x86/intel/pmc/spt.c\n     +\n      #include \"core.h\"\n      \n    - const struct pmc_bit_map spt_pll_map[] \u003d {\n    -@@ drivers/platform/x86/intel/pmc/spt.c: const struct pmc_reg_map spt_reg_map \u003d {\n    + static const struct pmc_bit_map spt_pll_map[] \u003d {\n    +@@ drivers/platform/x86/intel/pmc/spt.c: static const struct pmc_reg_map spt_reg_map \u003d {\n      \t.pm_vric1_offset \u003d SPT_PMC_VRIC1_OFFSET,\n      };\n      \n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\n----\n\nAdding this comment for posterity, and then immediately resolving it since it\u0027s not really an issue.\n\nThis is actually a clean cherrypick. The linter is detecting differences compared to upstream outside of these changes, like  `spt_pll_map` being declared `static` here, but not in the upstream version of the patch.",
+      "revId": "43de79bf236ea416890b9fb40e503e0288e23a72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
