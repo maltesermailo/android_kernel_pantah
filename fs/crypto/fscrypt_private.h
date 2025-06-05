@@ -510,9 +510,13 @@ struct fscrypt_master_key_secret {
 	 */
 	bool			is_hw_wrapped;
 
+<<<<<<< HEAD   (494c3c Merge f83fcb87f824 ("Merge tag 'xfs-merge-6.16' of git://git)
 	/* True if this key was added using __FSCRYPT_ADD_KEY_FLAG_HW_WRAPPED */
 	bool			android_compat;
 
+||||||| BASE
+=======
+>>>>>>> BRANCH (14f19d Merge tag 'fscrypt-for-linus' of git://git.kernel.org/pub/sc)
 	/*
 	 * Size of the key in bytes.  This remains set even if ->bytes was
 	 * zeroized due to no longer being needed.  I.e. we still remember the

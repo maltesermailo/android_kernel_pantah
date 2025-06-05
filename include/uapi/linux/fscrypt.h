@@ -130,10 +130,15 @@ struct fscrypt_add_key_arg {
 	__u32 key_id;
 #define FSCRYPT_ADD_KEY_FLAG_HW_WRAPPED	0x00000001
 	__u32 flags;
+<<<<<<< HEAD   (494c3c Merge f83fcb87f824 ("Merge tag 'xfs-merge-6.16' of git://git)
 	__u32 __reserved[6];
 	/* N.B.: "temporary" flag, not reserved upstream */
 #define __FSCRYPT_ADD_KEY_FLAG_HW_WRAPPED		0x00000001
 	__u32 __flags;
+||||||| BASE
+=======
+	__u32 __reserved[7];
+>>>>>>> BRANCH (14f19d Merge tag 'fscrypt-for-linus' of git://git.kernel.org/pub/sc)
 	__u8 raw[];
 };
 
