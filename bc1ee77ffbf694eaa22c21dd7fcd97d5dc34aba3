@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4004a406_6847ebe6",
+        "filename": "kernel/sched/syscalls.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-06-06T17:34:25Z",
+      "side": 1,
+      "message": "Nit: \"allowed\" seems unintuitive here, as you seem to be bailing early from the function as if the set_user_nice request was not allowed.  Is there a better name we could use here?  Maybe \"early_ret\" or something else?",
+      "revId": "bc1ee77ffbf694eaa22c21dd7fcd97d5dc34aba3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
