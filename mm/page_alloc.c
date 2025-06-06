@@ -2426,7 +2426,11 @@ __rmqueue(struct zone *zone, unsigned int order, int migratetype,
 			}
 		}
 	}
+<<<<<<< HEAD   (360b34 FROMGIT: mm: page_alloc: tighten up find_suitable_fallback())
 
+||||||| BASE
+=======
+>>>>>>> BRANCH (44add0 FROMGIT: mm: page_alloc: tighten up find_suitable_fallback())
 	return NULL;
 }
 
@@ -2455,8 +2459,14 @@ static int rmqueue_bulk(struct zone *zone, unsigned int order,
 		if (cma_redirect_restricted() && is_migrate_cma(migratetype))
 			page = __rmqueue_cma_fallback(zone, order);
 		else
+<<<<<<< HEAD   (360b34 FROMGIT: mm: page_alloc: tighten up find_suitable_fallback())
 			page = __rmqueue(zone, order, migratetype, alloc_flags,
 					 &rmqm);
+||||||| BASE
+			page = __rmqueue(zone, order, migratetype, alloc_flags);
+=======
+			page = __rmqueue(zone, order, migratetype, alloc_flags, &rmqm);
+>>>>>>> BRANCH (44add0 FROMGIT: mm: page_alloc: tighten up find_suitable_fallback())
 
 		if (unlikely(page == NULL))
 			break;
@@ -3081,9 +3091,16 @@ struct page *rmqueue_buddy(struct zone *preferred_zone, struct zone *zone,
 			    alloc_flags & ALLOC_CMA)
 				page = __rmqueue_cma_fallback(zone, order);
 
-			if (!page)
+			if (!page) {
+				enum rmqueue_mode rmqm = RMQUEUE_NORMAL;
+
 				page = __rmqueue(zone, order, migratetype,
 						 alloc_flags, &rmqm);
+<<<<<<< HEAD   (360b34 FROMGIT: mm: page_alloc: tighten up find_suitable_fallback())
+||||||| BASE
+=======
+			}
+>>>>>>> BRANCH (44add0 FROMGIT: mm: page_alloc: tighten up find_suitable_fallback())
 			/*
 			 * If the allocation fails, allow OOM handling and
 			 * order-0 (atomic) allocs access to HIGHATOMIC
