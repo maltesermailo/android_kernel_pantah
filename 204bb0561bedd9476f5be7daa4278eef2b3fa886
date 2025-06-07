@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e12e5ef_8ef4767e",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-07T14:02:33Z",
+      "side": 1,
+      "message": "nit: \"ret \u003d ...; if (ret) { ... }\" is more conventional to use in the kernel code (and IMHO is more readable too).",
+      "revId": "204bb0561bedd9476f5be7daa4278eef2b3fa886",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "125c3b83_d3205c01",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-07T14:02:33Z",
+      "side": 1,
+      "message": "May fail?",
+      "revId": "204bb0561bedd9476f5be7daa4278eef2b3fa886",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec8504e5_1c244a96",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-07T14:02:33Z",
+      "side": 1,
+      "message": "May fail?",
+      "revId": "204bb0561bedd9476f5be7daa4278eef2b3fa886",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10a56acc_e1f2909b",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-07T14:02:33Z",
+      "side": 1,
+      "message": "Instead of having 2 implementations of iommu_context_addr() it seems cleaner to just name it e.g. iommu_pv_context_addr(), and just add this at the beginning of iommu_context_addr():\n\n```\n\tif (IS_ENABLED(CONFIG_PKVM_INTEL_PVIOMMU) \u0026\u0026 pkvm_ia_enabled())\n\t\treturn iommu_pv_context_addr(iommu, bus, devfn, alloc);\n```\n\nAnd similarly in other cases.",
+      "revId": "204bb0561bedd9476f5be7daa4278eef2b3fa886",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1469d921_cf032836",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1279,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-07T14:02:33Z",
+      "side": 1,
+      "message": "nit: unneeded line added.",
+      "revId": "204bb0561bedd9476f5be7daa4278eef2b3fa886",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf9b3f30_d9d60d06",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1312,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-07T14:02:33Z",
+      "side": 1,
+      "message": "It is only called here, so we don\u0027t need to move it to a separate function, we can just return after iommu_set_pv_root_entry() above if pKVM enabled?",
+      "revId": "204bb0561bedd9476f5be7daa4278eef2b3fa886",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acd16c4b_bf075fc1",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1896,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-07T14:02:33Z",
+      "side": 1,
+      "message": "I wonder if it should ever fail (if we pass correct data to it).",
+      "revId": "204bb0561bedd9476f5be7daa4278eef2b3fa886",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "820a0548_551af1f5",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2128,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-07T14:02:33Z",
+      "side": 1,
+      "message": "It was probably after the spinlock unlock for a reason?",
+      "revId": "204bb0561bedd9476f5be7daa4278eef2b3fa886",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
