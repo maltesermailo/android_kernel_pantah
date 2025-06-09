@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6aefe2b3_bc87632f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2025-06-09T06:17:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11c9d752_60e1615e",
+      "revId": "bc1ee77ffbf694eaa22c21dd7fcd97d5dc34aba3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4004a406_6847ebe6",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-06-06T17:34:25Z",
       "side": 1,
       "message": "Nit: \"allowed\" seems unintuitive here, as you seem to be bailing early from the function as if the set_user_nice request was not allowed.  Is there a better name we could use here?  Maybe \"early_ret\" or something else?",
+      "revId": "bc1ee77ffbf694eaa22c21dd7fcd97d5dc34aba3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de896738_fa72dcf1",
+        "filename": "kernel/sched/syscalls.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1324603
+      },
+      "writtenOn": "2025-06-09T06:17:08Z",
+      "side": 1,
+      "message": "\"allowed\" is to sync with the previous trace_android_rvh_set_user_nice function, which uses \"allowed\" until kernel 6.6. I also updated this patch to sync with the original one (aosp/2849294). Thanks.",
+      "parentUuid": "4004a406_6847ebe6",
       "revId": "bc1ee77ffbf694eaa22c21dd7fcd97d5dc34aba3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
