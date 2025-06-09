@@ -107,6 +107,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c48ec94_d0cabe85",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-06-09T15:46:44Z",
+      "side": 1,
+      "message": "Good point, adding a pointer to keep the last free handle and optimized the store.",
+      "parentUuid": "6ce3804a_43ad9aff",
+      "revId": "39d5d9e55c8a360656ab9f30465fa9563b4a40d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60d56758_dc7b0cb2",
@@ -174,6 +192,24 @@
       "side": 1,
       "message": "Actually, giving more thoughts? Would that help to only store handles in the case where we expect a MEM_FRAG_TX?\n\nSo that we do not penalize too much other transactions with a linear search in a discontinuous array? (After few transactions, that\u0027s probably worst than just kvm_pgtable_get_leaf())?",
       "parentUuid": "d96e03c5_e41dca04",
+      "revId": "39d5d9e55c8a360656ab9f30465fa9563b4a40d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "209bacca_58967252",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-06-09T15:46:44Z",
+      "side": 1,
+      "message": "Storing the handles for the host (not only for MEM_FRAG_TX) would help for something else: we have a sanitization to see if the host is impersonating the guest handles. I would like to keep it as it is for the moment, please re-open if needed.",
+      "parentUuid": "0e56735c_47aa6ba3",
       "revId": "39d5d9e55c8a360656ab9f30465fa9563b4a40d4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
