@@ -477,7 +477,8 @@ void do_el0_undef(struct pt_regs *regs, unsigned long esr)
 		return;
 
 out_err:
-	force_signal_inject(SIGILL, ILL_ILLOPC, regs->pc, 0);
+    regs->pc += 4;
+    //force_signal_inject(SIGILL, ILL_ILLOPC, regs->pc, 0);
 }
 
 void do_el1_undef(struct pt_regs *regs, unsigned long esr)
