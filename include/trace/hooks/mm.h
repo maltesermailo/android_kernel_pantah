@@ -288,6 +288,7 @@ DECLARE_HOOK(android_vh_oom_swapmem_gather_init,
 DECLARE_HOOK(android_vh_oom_swapmem_gather_finish,
 	TP_PROTO(struct mm_struct *mm),
 	TP_ARGS(mm));
+<<<<<<< HEAD   (13ff13 BACKPORT: erofs: allocate more short-lived pages from reserv)
 DECLARE_HOOK(android_vh_filemap_add_folio,
 	TP_PROTO(struct address_space *mapping, struct folio *folio,
 		pgoff_t index),
@@ -323,6 +324,12 @@ DECLARE_HOOK(android_vh_drain_all_pages_bypass,
 DECLARE_HOOK(android_vh_pageset_update,
 	TP_PROTO(unsigned long *high, unsigned long *batch),
 	TP_ARGS(high, batch));
+||||||| BASE
+=======
+DECLARE_HOOK(android_vh_mempool_alloc_bypass,
+	TP_PROTO(gfp_t *gfp_flags, bool *bypass),
+	TP_ARGS(gfp_flags, bypass));
+>>>>>>> CHANGE (b149fd ANDROID: vendor_hooks: add hook for mempool alloc wait optim)
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
