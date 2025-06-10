@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c63510fd_868ce234",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-06-10T18:01:12Z",
+      "side": 1,
+      "message": "We should not use schedule_timeout_killable when called from __pkvm_destroy_hyp_vm. This code runs on the path where a VM is killed, and this sleep will return immediately in that case.",
+      "revId": "93276483ce07881724b1e4c092f9db8b3f69e39c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
