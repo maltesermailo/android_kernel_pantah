@@ -1,0 +1,86 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fd7f49f_699073bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-06-10T08:37:13Z",
+      "side": 1,
+      "message": "I wonder if that should be guarded by `PKVM_DEBUG`. \n\nAs this communication doesn\u0027t go to the host normally perhaps it shouldn\u0027t have any way seeing what\u0027s happening?",
+      "revId": "fc2a502304ba2134665c625b7cf12bef104fbd5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66b32f40_e953cfe4",
+        "filename": "arch/arm64/include/asm/kvm_hypevents.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-06-10T08:37:13Z",
+      "side": 1,
+      "message": "This would need a way of identifying what is the VM.\n\nThe best is probably `hyp_vm-\u003ehost_kvm-\u003euserspace_pid`;",
+      "fixSuggestions": [
+        {
+          "fixId": "12f7b7a5_38f1814e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/include/asm/kvm_hypevents.h",
+              "range": {
+                "startLine": 181,
+                "startChar": 0,
+                "endLine": 182,
+                "endChar": 0
+              },
+              "replacement": "\tHE_PROTO(u64 id, u8 forwarded, u64 pid),\n"
+            },
+            {
+              "path": "arch/arm64/include/asm/kvm_hypevents.h",
+              "range": {
+                "startLine": 185,
+                "startChar": 0,
+                "endLine": 185,
+                "endChar": 0
+              },
+              "replacement": "\t\the_field(u64, pid)\n"
+            },
+            {
+              "path": "arch/arm64/include/asm/kvm_hypevents.h",
+              "range": {
+                "startLine": 189,
+                "startChar": 0,
+                "endLine": 189,
+                "endChar": 0
+              },
+              "replacement": "\t\t__entry-\u003epid \u003d pid;\n"
+            },
+            {
+              "path": "arch/arm64/include/asm/kvm_hypevents.h",
+              "range": {
+                "startLine": 190,
+                "startChar": 0,
+                "endLine": 192,
+                "endChar": 0
+              },
+              "replacement": "\tHE_PRINTK(\"id\u003d%llu forwarded\u003d%u pid\u003d%llu\",\n\t\t  __entry-\u003eid, __entry-\u003eforwarded, __entry-\u003epid)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fc2a502304ba2134665c625b7cf12bef104fbd5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
