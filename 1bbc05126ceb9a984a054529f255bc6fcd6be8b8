@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37e20bc7_8a484718",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-11T15:20:50Z",
+      "side": 1,
+      "message": "Duplicates the printk after the this_cpu_do_finalise_hc() call?\nIf we are interested in the return value, we can add it to that printk instead?",
+      "revId": "1bbc05126ceb9a984a054529f255bc6fcd6be8b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea1fda6f_ae831e09",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1033,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-11T15:20:50Z",
+      "side": 1,
+      "message": "this_cpu_do_finalise_hc() itself is called on multiple CPUs, right?\nWe should do this in pkvm_init_finalise(), not here?",
+      "revId": "1bbc05126ceb9a984a054529f255bc6fcd6be8b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "957ca92a_81635d37",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1118,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-11T15:20:50Z",
+      "side": 1,
+      "message": "nit suggestion: \"CPU%d\" (like in pkvm_host_deprivilege_cpu() and other places)",
+      "revId": "1bbc05126ceb9a984a054529f255bc6fcd6be8b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
