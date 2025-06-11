@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1c18e0a5_70266fea",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1033,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-11T17:20:48Z",
+      "side": 1,
+      "message": "Sorry I think I was right. Even if it gets called in multiple cpus, its called serially using `for_each_possible_cpu` and breaks out if any of the cpu call fails:\n```\n»       for_each_possible_cpu(cpu) {\n»       »       if (cpu \u003d\u003d self)\n»       »       »       continue;\n \n»       »       /*\n»       »        * Second hypercall to switch the mmu and ept pgtable\n»       »        * for other cpus other than boot cpu.\n»       »        */\n»       »       ret \u003d smp_call_function_single(cpu, do_pkvm_finalise,\n»       »       »       »       »              NULL, true);\n»       »       if (ret) {\n»       »       »       pr_err(\"%s: pkvm finalise on cpu: %d failed!\\n\",\n»       »       »       »       »       __func__, cpu);\n»       »       »       goto out;\n»       »       }\n»       }\n```\n\nSo if one cpu fails, we revert all cpus to privileged and return ret. I think this implementation is correct",
+      "parentUuid": "0ee19699_57e65ee8",
+      "revId": "1bbc05126ceb9a984a054529f255bc6fcd6be8b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "957ca92a_81635d37",
         "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
         "patchSetId": 1
