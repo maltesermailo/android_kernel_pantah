@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "42a71d18_54267d4a",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1033,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-11T17:28:22Z",
+      "side": 1,
+      "message": "\u003e I wrongly assumed, on_each_cpu() works serially. Looks like it calls smp_call_function_many_cond and runs in parallel.\n\nDoes it matter? My point was that we end up executing pkvm_host_reprivilege_cpu() N^2 times (N times on each CPU), which is definitely not what we want.\n\n\u003e I wanted to avoid calling this two times in pkvm_init_finalise() - one if local cpu fails and one for rest of the cpus failure.\n\nWe can use a single goto for both, for example?",
+      "parentUuid": "0ee19699_57e65ee8",
+      "revId": "1bbc05126ceb9a984a054529f255bc6fcd6be8b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "957ca92a_81635d37",
         "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
         "patchSetId": 1
