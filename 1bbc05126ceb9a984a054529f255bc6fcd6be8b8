@@ -163,6 +163,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be64ef6b_0a160cd9",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1033,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-11T22:46:15Z",
+      "side": 1,
+      "message": "Ok, got it, the reprivilege is done only once because it is only done when a CPU finalise failed, and once a CPU finalise failed, this_cpu_do_finalise_hc() will not be called for any more CPUs (if the error is propagated correctly).\n\nStill, it is not clear to me why need to make it less obvious than it can be, and not just do the reprivilege in pkvm_init_finalise() in a common failure path? this_cpu_do_finalise_hc() is a function that runs on each CPU, so _just_ from looking at the code in this_cpu_do_finalise_hc() it is not obvious that reprivilege will not be called on more than one CPU.",
+      "parentUuid": "60ebe6ef_e3e30d4e",
+      "revId": "1bbc05126ceb9a984a054529f255bc6fcd6be8b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "957ca92a_81635d37",
         "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
         "patchSetId": 1
