@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "981ee983_5ed1c87d",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-11T20:16:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1513a1ca_b6148911",
+      "revId": "1bbc05126ceb9a984a054529f255bc6fcd6be8b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea1fda6f_ae831e09",
@@ -127,6 +145,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "60ebe6ef_e3e30d4e",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1033,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-11T20:16:05Z",
+      "side": 1,
+      "message": "\u003e Does it matter? My point was that we end up executing pkvm_host_reprivilege_cpu() N^2 times (N times on each CPU), which is definitely not what we want.\n\nWhat I meant was, if an api like what I had assumed(serially execute on each cpu and break out on error), then we would do the reprivilege only once. And this for loop I pasted above does exactly that. Sorry for that I got myself confused and confused you.\n\nSo the only fix that needed to be done was to capture the error correctly and I have done it now. Please have a second look",
+      "parentUuid": "42a71d18_54267d4a",
+      "revId": "1bbc05126ceb9a984a054529f255bc6fcd6be8b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "957ca92a_81635d37",
         "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
         "patchSetId": 1
@@ -156,6 +192,24 @@
       "side": 1,
       "message": "Will do",
       "parentUuid": "957ca92a_81635d37",
+      "revId": "1bbc05126ceb9a984a054529f255bc6fcd6be8b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6b03eca_b25b8471",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1118,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-11T20:16:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "736ec501_e3c9d174",
       "revId": "1bbc05126ceb9a984a054529f255bc6fcd6be8b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
