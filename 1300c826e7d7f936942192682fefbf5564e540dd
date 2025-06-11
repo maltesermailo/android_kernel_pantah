@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d095215_ef8d4ad4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-11T18:09:44Z",
+      "side": 1,
+      "message": "I believe this is not quite accurate. Even with re-privilege, these per-cpu flags are still needed as long as the IOMMU driver is initialized earlier than pKVM. Let me just quote my earlier comment: \"They [per-cpu flags] are only used by the IOMMU driver\u0027s MMIO accessors, and they were needed precisely because the IOMMU driver was already active during deprivilege, so it could be doing an MMIO read or write when some CPUs are already deprivileged but some others are not. Now, since the IOMMU driver initialization is done after deprivilege, those MMIO accessors can just use this global flag.\"\n\nThis means that it\u0027s better to move aosp/3590992 before this patch?",
+      "revId": "1300c826e7d7f936942192682fefbf5564e540dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd3219e3_929d6067",
+        "filename": "arch/x86/include/asm/pkvm.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-11T18:09:44Z",
+      "side": 1,
+      "message": "Why a macro, not a static inline function?",
+      "revId": "1300c826e7d7f936942192682fefbf5564e540dd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
