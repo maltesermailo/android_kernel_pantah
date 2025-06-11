@@ -320,7 +320,9 @@ static int snd_pcm_update_hw_ptr0(struct snd_pcm_substream *substream,
 			/* check for double acknowledged interrupts */
 			hdelta = curr_jiffies - runtime->hw_ptr_jiffies;
 			if (hdelta > runtime->hw_ptr_buffer_jiffies/2 + 1) {
+				pr_err("[MM] %s: double acknowledged interrupts, hdelta %ld, runtime->hw_ptr_buffer_jiffies %ld, hw_base %ld\n", __func__, hdelta, runtime->hw_ptr_buffer_jiffies, hw_base);
 				hw_base += runtime->buffer_size;
+				pr_err("[MM] %s: double acknowledged interrupts, new hw_base %ld\n", __func__, hw_base);
 				if (hw_base >= runtime->boundary) {
 					hw_base = 0;
 					crossed_boundary++;
@@ -1867,6 +1869,8 @@ static int wait_for_avail(struct snd_pcm_substream *substream,
 	snd_pcm_uframes_t avail = 0;
 	long wait_time, tout;
 
+
+	pr_info("[MM_AOSP] %s: ++\n", __func__);
 	init_waitqueue_entry(&wait, current);
 	set_current_state(TASK_INTERRUPTIBLE);
 	add_wait_queue(&runtime->tsleep, &wait);
@@ -1944,6 +1948,7 @@ static int wait_for_avail(struct snd_pcm_substream *substream,
 	set_current_state(TASK_RUNNING);
 	remove_wait_queue(&runtime->tsleep, &wait);
 	*availp = avail;
+	pr_info("[MM_AOSP] %s: --, avail %ld\n", __func__, avail);
 	return err;
 }
 	
@@ -2243,6 +2248,8 @@ snd_pcm_sframes_t __snd_pcm_lib_xfer(struct snd_pcm_substream *substream,
 	}
 
 	avail = snd_pcm_avail(substream);
+	pr_info("[MM_AOSP] %s: avail %ld, hw_ptr %ld, appl_ptr %ld\n", __func__, avail,
+			runtime->status->hw_ptr, runtime->control->appl_ptr);
 
 	while (size > 0) {
 		snd_pcm_uframes_t frames, appl_ptr, appl_ofs;
