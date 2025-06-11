@@ -16,6 +16,24 @@
       "message": "We should not use schedule_timeout_killable when called from __pkvm_destroy_hyp_vm. This code runs on the path where a VM is killed, and this sleep will return immediately in that case.",
       "revId": "93276483ce07881724b1e4c092f9db8b3f69e39c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "faf94bf9_ece941f4",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-06-11T10:37:51Z",
+      "side": 1,
+      "message": "From the discussion that I had with @willdeacon we cannot have un-interuptable sleep on the process destroy path.",
+      "parentUuid": "c63510fd_868ce234",
+      "revId": "93276483ce07881724b1e4c092f9db8b3f69e39c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
