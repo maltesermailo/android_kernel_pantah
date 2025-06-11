@@ -34,6 +34,24 @@
       "parentUuid": "c63510fd_868ce234",
       "revId": "93276483ce07881724b1e4c092f9db8b3f69e39c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2bc6fce_22bf773c",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2025-06-11T16:54:49Z",
+      "side": 1,
+      "message": "Are you sure about that? I would expect an un-interuptable sleep to return immediately if there is a signal pending and effectively turn this loop into a busy loop, and counting retries will not work. This was OK on the create path, since we can finish on the destroy path, but if you interrupt the destroy path, the cleanup will never happen and you will leak the vm-id. I don\u0027t think is a good idea to leak resources just because someone tried to kill a VM.\n\nAlso, note that the end result of not having a sleep in the __pkvm_reclaim_dying_guest_ffa_resourcesm loop below, is that the dying process is stuck using 100% CPU until you reboot the device when the VM. This seems like a worse end result than being stuck in a loop that sleeps. We observed this yesterday.",
+      "parentUuid": "faf94bf9_ece941f4",
+      "revId": "93276483ce07881724b1e4c092f9db8b3f69e39c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
