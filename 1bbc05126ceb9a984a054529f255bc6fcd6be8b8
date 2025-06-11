@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1513a1ca_b6148911",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-11T17:08:03Z",
+      "side": 1,
+      "message": "Will remove.",
+      "parentUuid": "37e20bc7_8a484718",
+      "revId": "1bbc05126ceb9a984a054529f255bc6fcd6be8b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ea1fda6f_ae831e09",
         "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
         "patchSetId": 1
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0ee19699_57e65ee8",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1033,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-11T17:08:03Z",
+      "side": 1,
+      "message": "Youre right. I wrongly assumed, on_each_cpu() works serially. Looks like it calls smp_call_function_many_cond and runs in parallel. I wanted to avoid calling this two times in pkvm_init_finalise() - one if local cpu fails and one for rest of the cpus failure. But yes, this is a mistake. Will fix it",
+      "parentUuid": "ea1fda6f_ae831e09",
+      "revId": "1bbc05126ceb9a984a054529f255bc6fcd6be8b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "957ca92a_81635d37",
         "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
         "patchSetId": 1
@@ -48,6 +84,24 @@
       "writtenOn": "2025-06-11T15:20:50Z",
       "side": 1,
       "message": "nit suggestion: \"CPU%d\" (like in pkvm_host_deprivilege_cpu() and other places)",
+      "revId": "1bbc05126ceb9a984a054529f255bc6fcd6be8b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "736ec501_e3c9d174",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1118,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-11T17:08:03Z",
+      "side": 1,
+      "message": "Will do",
+      "parentUuid": "957ca92a_81635d37",
       "revId": "1bbc05126ceb9a984a054529f255bc6fcd6be8b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
