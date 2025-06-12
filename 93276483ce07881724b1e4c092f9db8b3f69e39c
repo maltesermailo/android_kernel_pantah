@@ -52,6 +52,24 @@
       "parentUuid": "faf94bf9_ece941f4",
       "revId": "93276483ce07881724b1e4c092f9db8b3f69e39c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9861d81_2f538d1d",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 18
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-06-12T10:14:08Z",
+      "side": 1,
+      "message": "I understand what you are saying. I ended up squashing this CL in the previous one. I looked up the `__pkvm_reclaim_dying_guest_ffa_resources` loop and added one send destruction message in between in case the destruction message was interrupted previously. I also added back the `msleep` call for the destruction messages. I will close this CL.",
+      "parentUuid": "b2bc6fce_22bf773c",
+      "revId": "93276483ce07881724b1e4c092f9db8b3f69e39c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
