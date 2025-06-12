@@ -84,6 +84,23 @@
       "message": "Might be worth adding some explanation (at least for noobs like me) why we need to patch those particular symbols in retpoline.S?",
       "revId": "53d9ca603a94f30501565ddce319819dc0616ea5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1692ba26_c7de0a27",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-12T19:46:41Z",
+      "side": 1,
+      "message": "Belated off-topic note: the comment still says that we remove CFI CFLAGS, whereas we don\u0027t.\n\nSo we should update this comment (in a separate patch), and BTW it would be also good to add an explanation here why on x86 (in contrast to ARM) we should not disable CFI for pKVM hyp code.",
+      "revId": "53d9ca603a94f30501565ddce319819dc0616ea5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
