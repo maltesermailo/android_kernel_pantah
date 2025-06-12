@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20c3cb13_60705eba",
+        "filename": "arch/x86/include/asm/nospec-branch.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-12T19:32:50Z",
+      "side": 1,
+      "message": "nit: We already have an #ifdef CONFIG_PKVM_INTEL block above. It seems cleaner to combine these 2 blocks into one?",
+      "revId": "e4be4c62e829b5e3881ffbef473e1112cd071d86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08c87a07_5102f4ed",
+        "filename": "arch/x86/include/asm/nospec-branch.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-12T19:32:50Z",
+      "side": 1,
+      "message": "nit: This is declared even if CONFIG_PKVM_INTEL is not enabled. It seems cleaner to add this under the above #ifdef CONFIG_PKVM_INTEL block:\n\n```\n#ifdef CONFIG_MITIGATION_CALL_DEPTH_TRACKING\nextern void call_depth_return_thunk__pkvm(void);\n#else\nstatic inline void call_depth_return_thunk__pkvm(void) {}\n#endif\n```",
+      "revId": "e4be4c62e829b5e3881ffbef473e1112cd071d86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04131ed7_8c947afd",
+        "filename": "arch/x86/kernel/alternative.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-12T19:32:50Z",
+      "side": 1,
+      "message": "We should put it under #ifdef CONFIG_PKVM_INTEL, since we don\u0027t provide no-op versions of \\__x86_return_thunk__pkvm etc, so build fails when CONFIG_PKVM_INTEL is disabled.\n\n(BTW I\u0027d actually prefer to provide no-op versions for these symbols, as well as for get_return_thunk() itself and other functions, to avoid the need for all these #ifdefs all over the code. But since all this is reworked in the later patches anyway, no need to bother with such refactoring, let\u0027s just add this #ifdef here to fix the build breakage by this patch.)",
+      "revId": "e4be4c62e829b5e3881ffbef473e1112cd071d86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
