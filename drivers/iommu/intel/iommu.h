@@ -545,7 +545,16 @@ enum {
 #define VTD_FLAG_IRQ_REMAP_PRE_ENABLED	(1 << 1)
 #define VTD_FLAG_SVM_CAPABLE		(1 << 2)
 
+#ifdef CONFIG_PKVM_INTEL
+/*
+ * FIXME: temporarily force legacy mode if nested translation is not supported,
+ * until pKVM supports scalable mode without nested translation.
+ */
+#define sm_supported(iommu)	(intel_iommu_sm && ecap_smts((iommu)->ecap) && \
+				 (!enable_pkvm || ecap_nest((iommu)->ecap)))
+#else
 #define sm_supported(iommu)	(intel_iommu_sm && ecap_smts((iommu)->ecap))
+#endif
 #define pasid_supported(iommu)	(sm_supported(iommu) &&			\
 				 ecap_pasid((iommu)->ecap))
 #define ssads_supported(iommu) (sm_supported(iommu) &&                 \
