@@ -214,6 +214,17 @@ out:
 	spin_unlock(&mm->dmabufs->lock);
 }
 
+static int dma_buf_flush(struct file *file, fl_owner_t id)
+{
+	struct mm_struct *mm = get_task_mm(current);
+
+	if (mm) {
+		dma_buf_unaccount_from_mm(file->private_data, mm);
+		mmput(mm);
+	}
+	return 0;
+}
+
 static int dma_buf_mmap_internal(struct file *file, struct vm_area_struct *vma)
 {
 	struct dma_buf *dmabuf;
@@ -617,6 +628,7 @@ static const struct file_operations dma_buf_fops = {
 	.unlocked_ioctl	= dma_buf_ioctl,
 	.compat_ioctl	= compat_ptr_ioctl,
 	.show_fdinfo	= dma_buf_show_fdinfo,
+	.flush		= dma_buf_flush,
 };
 
 /*
