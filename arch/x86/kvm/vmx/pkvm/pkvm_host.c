@@ -214,15 +214,6 @@ static __init int check_and_init_iommu(struct pkvm_hyp *pkvm)
 		iounmap(addr);
 
 		/*
-		 * If pkvm IOMMU works in scalable mode, it requires to use nested translation.
-		 */
-		if (ecap_smts(ecap) && !ecap_nest(ecap)) {
-			pr_err("pkvm: drhd reg_base 0x%llx: nested translation not supported\n",
-				drhd->reg_base_addr);
-			return -EINVAL;
-		}
-
-		/*
 		 * Check for the coherency of the paging structure access.
 		 */
 		if (!is_iommu_coherent(ecap))
