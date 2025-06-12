@@ -840,6 +840,7 @@ struct kvm {
 	struct dentry *debugfs_dentry;
 	struct kvm_stat_data **debugfs_stat_data;
 	struct srcu_struct srcu;
+	struct srcu_struct buses_srcu;
 	struct srcu_struct irq_srcu;
 	pid_t userspace_pid;
 	bool override_halt_poll_ns;
@@ -961,7 +962,7 @@ static inline bool kvm_dirty_log_manual_protect_and_init_set(struct kvm *kvm)
 
 static inline struct kvm_io_bus *kvm_get_bus(struct kvm *kvm, enum kvm_bus idx)
 {
-	return srcu_dereference_check(kvm->buses[idx], &kvm->srcu,
+	return srcu_dereference_check(kvm->buses[idx], &kvm->buses_srcu,
 				      lockdep_is_held(&kvm->slots_lock) ||
 				      !refcount_read(&kvm->users_count));
 }

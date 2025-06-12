@@ -1184,6 +1184,8 @@ static struct kvm *kvm_create_vm(unsigned long type, const char *fdname)
 		goto out_err_no_srcu;
 	if (init_srcu_struct(&kvm->irq_srcu))
 		goto out_err_no_irq_srcu;
+	if (init_srcu_struct(&kvm->buses_srcu))
+		goto out_err_no_buses_srcu;
 
 	r = kvm_init_irq_routing(kvm);
 	if (r)
@@ -1272,6 +1274,8 @@ out_err_no_arch_destroy_vm:
 		kfree(kvm_get_bus(kvm, i));
 	kvm_free_irq_routing(kvm);
 out_err_no_irq_routing:
+	cleanup_srcu_struct(&kvm->buses_srcu);
+out_err_no_buses_srcu:
 	cleanup_srcu_struct(&kvm->irq_srcu);
 out_err_no_irq_srcu:
 	cleanup_srcu_struct(&kvm->srcu);
@@ -1353,6 +1357,7 @@ static void kvm_destroy_vm(struct kvm *kvm)
 		kvm_free_memslots(kvm, &kvm->__memslots[i][0]);
 		kvm_free_memslots(kvm, &kvm->__memslots[i][1]);
 	}
+	cleanup_srcu_struct(&kvm->buses_srcu);
 	cleanup_srcu_struct(&kvm->irq_srcu);
 	cleanup_srcu_struct(&kvm->srcu);
 #ifdef CONFIG_KVM_GENERIC_MEMORY_ATTRIBUTES
@@ -5893,7 +5898,7 @@ int kvm_io_bus_write(struct kvm_vcpu *vcpu, enum kvm_bus bus_idx, gpa_t addr,
 		.len = len,
 	};
 
-	bus = srcu_dereference(vcpu->kvm->buses[bus_idx], &vcpu->kvm->srcu);
+	bus = kvm_get_bus(vcpu->kvm, bus_idx);
 	if (!bus)
 		return -ENOMEM;
 	r = __kvm_io_bus_write(vcpu, bus, &range, val);
@@ -5913,7 +5918,7 @@ int kvm_io_bus_write_cookie(struct kvm_vcpu *vcpu, enum kvm_bus bus_idx,
 		.len = len,
 	};
 
-	bus = srcu_dereference(vcpu->kvm->buses[bus_idx], &vcpu->kvm->srcu);
+	bus = kvm_get_bus(vcpu->kvm, bus_idx);
 	if (!bus)
 		return -ENOMEM;
 
@@ -5964,7 +5969,7 @@ int kvm_io_bus_read(struct kvm_vcpu *vcpu, enum kvm_bus bus_idx, gpa_t addr,
 		.len = len,
 	};
 
-	bus = srcu_dereference(vcpu->kvm->buses[bus_idx], &vcpu->kvm->srcu);
+	bus = kvm_get_bus(vcpu->kvm, bus_idx);
 	if (!bus)
 		return -ENOMEM;
 	r = __kvm_io_bus_read(vcpu, bus, &range, val);
@@ -6009,7 +6014,7 @@ int kvm_io_bus_register_dev(struct kvm *kvm, enum kvm_bus bus_idx, gpa_t addr,
 	memcpy(new_bus->range + i + 1, bus->range + i,
 		(bus->dev_count - i) * sizeof(struct kvm_io_range));
 	rcu_assign_pointer(kvm->buses[bus_idx], new_bus);
-	synchronize_srcu_expedited(&kvm->srcu);
+	synchronize_srcu_expedited(&kvm->buses_srcu);
 	kfree(bus);
 
 	return 0;
@@ -6046,7 +6051,7 @@ int kvm_io_bus_unregister_dev(struct kvm *kvm, enum kvm_bus bus_idx,
 	}
 
 	rcu_assign_pointer(kvm->buses[bus_idx], new_bus);
-	synchronize_srcu_expedited(&kvm->srcu);
+	synchronize_srcu_expedited(&kvm->buses_srcu);
 
 	/*
 	 * If NULL bus is installed, destroy the old bus, including all the
@@ -6070,9 +6075,9 @@ struct kvm_io_device *kvm_io_bus_get_dev(struct kvm *kvm, enum kvm_bus bus_idx,
 	int dev_idx, srcu_idx;
 	struct kvm_io_device *iodev = NULL;
 
-	srcu_idx = srcu_read_lock(&kvm->srcu);
+	srcu_idx = srcu_read_lock(&kvm->buses_srcu);
 
-	bus = srcu_dereference(kvm->buses[bus_idx], &kvm->srcu);
+	bus = srcu_dereference(kvm->buses[bus_idx], &kvm->buses_srcu);
 	if (!bus)
 		goto out_unlock;
 
@@ -6083,7 +6088,7 @@ struct kvm_io_device *kvm_io_bus_get_dev(struct kvm *kvm, enum kvm_bus bus_idx,
 	iodev = bus->range[dev_idx].dev;
 
 out_unlock:
-	srcu_read_unlock(&kvm->srcu, srcu_idx);
+	srcu_read_unlock(&kvm->buses_srcu, srcu_idx);
 
 	return iodev;
 }
