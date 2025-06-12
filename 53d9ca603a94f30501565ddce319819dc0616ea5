@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07da2842_a3b136e2",
+        "filename": "arch/x86/kernel/alternative.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 833,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-12T19:37:29Z",
+      "side": 1,
+      "message": "Ignorant question: are we sure we don\u0027t need to deal with any other opcodes?",
+      "revId": "53d9ca603a94f30501565ddce319819dc0616ea5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bc148d8_7ebfaa78",
+        "filename": "arch/x86/kernel/alternative.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 843,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-12T19:37:29Z",
+      "side": 1,
+      "message": "Ignorant question: are we sure it is always 4?",
+      "revId": "53d9ca603a94f30501565ddce319819dc0616ea5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46bc99a1_667107cc",
+        "filename": "arch/x86/kernel/alternative.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 898,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-12T19:37:29Z",
+      "side": 1,
+      "message": "patch_pkvm() is called twice: in apply_retpolines() and apply_returns(), for the same address range. Seems redundant?\n\nAlso apply_retpolines() and apply_returns() are called not just for the kernel image but also for modules (in module_finalize()), and it seems we don\u0027t need patch_pkvm() there?\n\nSo maybe it\u0027s better to call patch_pkvm() just once, in alternative_instructions(), after calling apply_retpolines() + apply_returns()?",
+      "revId": "53d9ca603a94f30501565ddce319819dc0616ea5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd985f65_482b050f",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-12T19:37:29Z",
+      "side": 1,
+      "message": "This becomes even harder to read than it already was. Can we move this script to a separate file?\n\nThat would also allow to add some comments to it, explaining why it does what it does. (For example, it would be good to add a comment about why we use suffixes instead of simply using `objcopy --prefix-symbols`, i.e. in particular to not conflict with kCFI.)",
+      "revId": "53d9ca603a94f30501565ddce319819dc0616ea5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9139c5ec_638ad8be",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-12T19:37:29Z",
+      "side": 1,
+      "message": "Might be worth adding some explanation (at least for noobs like me) why we need to patch those particular symbols in retpoline.S?",
+      "revId": "53d9ca603a94f30501565ddce319819dc0616ea5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
