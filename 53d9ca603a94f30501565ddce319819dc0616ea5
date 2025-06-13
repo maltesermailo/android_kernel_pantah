@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d4c2d68b_10239df0",
+        "filename": "arch/x86/kernel/alternative.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-06-13T04:23:51Z",
+      "side": 1,
+      "message": "No, just a comment in the development. These 5 symbols are not used as a jump/call destination. Will remove this. The srso_alias_untrain_ret is similar to the entry_untrain_ret symbol, which is also not used as a destination. So I think below line of 797/798 should also be removed.",
+      "parentUuid": "4b6f3984_845eed1e",
+      "revId": "53d9ca603a94f30501565ddce319819dc0616ea5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "07da2842_a3b136e2",
         "filename": "arch/x86/kernel/alternative.c",
         "patchSetId": 3
@@ -31,6 +49,24 @@
       "writtenOn": "2025-06-12T19:37:29Z",
       "side": 1,
       "message": "Ignorant question: are we sure we don\u0027t need to deal with any other opcodes?",
+      "revId": "53d9ca603a94f30501565ddce319819dc0616ea5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40a2ffd2_02ce518f",
+        "filename": "arch/x86/kernel/alternative.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 833,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-06-13T04:23:51Z",
+      "side": 1,
+      "message": "After discussed with Zhiyuan, seems only checking these two opcode is not enough, but also needs to consider the condition jump. Rather than checking the opcode to determine if needs to patch pkvm or not at here, an alternative is to patch pkvm inside the for loop of the apply_retpoline and apply_return, so that we can leverage the opcode check conditions, which is more comprehensive. Then the patch_pkvm can be demoted to 829~844 lines of code, without a for loop and opcode checking.",
+      "parentUuid": "07da2842_a3b136e2",
       "revId": "53d9ca603a94f30501565ddce319819dc0616ea5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d6cf3410_87a01ccd",
+        "filename": "arch/x86/kernel/alternative.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 843,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-06-13T04:23:51Z",
+      "side": 1,
+      "message": "Yes. 4 means the length of disp, which is defined as s32 in line 834. So it should be always 4 unless we change the define of the disp.",
+      "parentUuid": "7bc148d8_7ebfaa78",
+      "revId": "53d9ca603a94f30501565ddce319819dc0616ea5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "46bc99a1_667107cc",
         "filename": "arch/x86/kernel/alternative.c",
         "patchSetId": 3
@@ -65,6 +119,24 @@
       "writtenOn": "2025-06-12T19:37:29Z",
       "side": 1,
       "message": "patch_pkvm() is called twice: in apply_retpolines() and apply_returns(), for the same address range. Seems redundant?\n\nAlso apply_retpolines() and apply_returns() are called not just for the kernel image but also for modules (in module_finalize()), and it seems we don\u0027t need patch_pkvm() there?\n\nSo maybe it\u0027s better to call patch_pkvm() just once, in alternative_instructions(), after calling apply_retpolines() + apply_returns()?",
+      "revId": "53d9ca603a94f30501565ddce319819dc0616ea5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2a74a0c_91b9f1ea",
+        "filename": "arch/x86/kernel/alternative.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 898,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-06-13T04:23:51Z",
+      "side": 1,
+      "message": "apply_retpolines takes the section address __retpoline_sites ~ __retpoline_sites_end, and apply_returns takes the section address __return_sites ~ __return_sites_end. As they are two different ranges, calling patch_pkvm twice for different sections seems reasonable.\n\nRegarding where to call the patch_pkvm, probably we can call them inside the for loop of the apply_retpolines and apply_return. Although it will be called by module_finalize() which is not necessary for the pkvm, the overhead is just a check to see if the addr belongs to the pkvm text or not. The benefit is that, we don\u0027t need to run the for loop twice for __retpoline_sites and __return_sites, and also don\u0027t need to have another opcode checking, which sounds more attractive to me.",
+      "parentUuid": "46bc99a1_667107cc",
       "revId": "53d9ca603a94f30501565ddce319819dc0616ea5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -88,6 +160,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "01f016cb_f737b6f0",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-06-13T04:23:51Z",
+      "side": 1,
+      "message": "Sure. Will do this.",
+      "parentUuid": "dd985f65_482b050f",
+      "revId": "53d9ca603a94f30501565ddce319819dc0616ea5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9139c5ec_638ad8be",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/Makefile",
         "patchSetId": 3
@@ -105,6 +195,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "39852bc9_5e85bcc3",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-06-13T04:23:51Z",
+      "side": 1,
+      "message": "Sure.",
+      "parentUuid": "9139c5ec_638ad8be",
+      "revId": "53d9ca603a94f30501565ddce319819dc0616ea5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1692ba26_c7de0a27",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/Makefile",
         "patchSetId": 3
@@ -116,6 +224,24 @@
       "writtenOn": "2025-06-12T19:46:41Z",
       "side": 1,
       "message": "Belated off-topic note: the comment still says that we remove CFI CFLAGS, whereas we don\u0027t.\n\nSo we should update this comment (in a separate patch), and BTW it would be also good to add an explanation here why on x86 (in contrast to ARM) we should not disable CFI for pKVM hyp code.",
+      "revId": "53d9ca603a94f30501565ddce319819dc0616ea5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07902de0_6ffc64aa",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-06-13T04:23:51Z",
+      "side": 1,
+      "message": "Sure.",
+      "parentUuid": "1692ba26_c7de0a27",
       "revId": "53d9ca603a94f30501565ddce319819dc0616ea5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
