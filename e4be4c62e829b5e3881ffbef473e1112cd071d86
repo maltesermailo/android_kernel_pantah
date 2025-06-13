@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "83c74b84_955dcf2f",
+        "filename": "arch/x86/include/asm/nospec-branch.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-06-13T04:34:26Z",
+      "side": 1,
+      "message": "Agree. Will update",
+      "parentUuid": "20c3cb13_60705eba",
+      "revId": "e4be4c62e829b5e3881ffbef473e1112cd071d86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "08c87a07_5102f4ed",
         "filename": "arch/x86/include/asm/nospec-branch.h",
         "patchSetId": 3
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cc1d9cb4_29f2fa4a",
+        "filename": "arch/x86/include/asm/nospec-branch.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-06-13T04:34:26Z",
+      "side": 1,
+      "message": "Yeah, agree.",
+      "parentUuid": "08c87a07_5102f4ed",
+      "revId": "e4be4c62e829b5e3881ffbef473e1112cd071d86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "04131ed7_8c947afd",
         "filename": "arch/x86/kernel/alternative.c",
         "patchSetId": 3
@@ -48,6 +84,24 @@
       "writtenOn": "2025-06-12T19:32:50Z",
       "side": 1,
       "message": "We should put it under #ifdef CONFIG_PKVM_INTEL, since we don\u0027t provide no-op versions of \\__x86_return_thunk__pkvm etc, so build fails when CONFIG_PKVM_INTEL is disabled.\n\n(BTW I\u0027d actually prefer to provide no-op versions for these symbols, as well as for get_return_thunk() itself and other functions, to avoid the need for all these #ifdefs all over the code. But since all this is reworked in the later patches anyway, no need to bother with such refactoring, let\u0027s just add this #ifdef here to fix the build breakage by this patch.)",
+      "revId": "e4be4c62e829b5e3881ffbef473e1112cd071d86",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c85fa519_c74e4d5b",
+        "filename": "arch/x86/kernel/alternative.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-06-13T04:34:26Z",
+      "side": 1,
+      "message": "Indeed, the get_return_thunk will be removed later. So let\u0027s just add CONFIG_PKVM_INTEL to fix the building breakage.",
+      "parentUuid": "04131ed7_8c947afd",
       "revId": "e4be4c62e829b5e3881ffbef473e1112cd071d86",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
