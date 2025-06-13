@@ -531,7 +531,7 @@ struct dma_buf {
 	} *sysfs_entry;
 #endif
 
-	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_USE(1, u64 num_unique_mm_refs);
 	ANDROID_KABI_RESERVE(2);
 };
 

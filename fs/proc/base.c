@@ -100,6 +100,7 @@
 #include <linux/cn_proc.h>
 #include <linux/ksm.h>
 #include <linux/cpufreq_times.h>
+#include <linux/dma-buf.h>
 #include <trace/events/oom.h>
 #include <trace/hooks/sched.h>
 #include "internal.h"
@@ -3323,6 +3324,29 @@ static int proc_dmabuf_rss_show(struct seq_file *m, struct pid_namespace *ns,
 	return 0;
 }
 
+static int proc_dmabuf_pss_show(struct seq_file *m, struct pid_namespace *ns,
+		     struct pid *pid, struct task_struct *tsk)
+{
+	struct mm_struct *mm;
+	struct dma_buf_record *r;
+	uint64_t pss = 0;
+
+	mm = get_task_mm(tsk);
+	if (mm) {
+		spin_lock(&mm->dmabufs->lock);
+		list_for_each_entry(r, &mm->dmabufs->refcounts, node)
+			if (r->dmabuf->num_unique_mm_refs)
+				pss += r->dmabuf->size / r->dmabuf->num_unique_mm_refs; // TODO possible overflow, rounding
+			//else BUG_ON
+		spin_unlock(&mm->dmabufs->lock);
+
+		seq_printf(m, "%llu\n", pss);
+		mmput(mm);
+	}
+
+	return 0;
+}
+
 /*
  * Thread groups
  */
@@ -3448,6 +3472,7 @@ static const struct pid_entry tgid_base_stuff[] = {
 #endif
 // TODO ifdefs
 	ONE("dmabuf_rss",  S_IRUGO, proc_dmabuf_rss_show),
+	ONE("dmabuf_pss",  S_IRUGO, proc_dmabuf_pss_show),
 };
 
 static int proc_tgid_base_readdir(struct file *file, struct dir_context *ctx)
