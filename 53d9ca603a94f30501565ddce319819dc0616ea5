@@ -196,6 +196,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a50e8382_fa20dcd0",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/Makefile",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-06-16T08:10:36Z",
+      "side": 1,
+      "message": "Regarding not using the --prefix-symbols, the direct reason is to satisfy the CFI which adds prefixes as well. But as now we are using script to add suffixes rather than simply using the objcopy parameter --prefix-symbols, it would be possible to use the prefixes rather than the suffixes to support CFI (still cannot directly using --prefix-symbols) by adding the pkvm prefix \"__pkvm\" after the CFI prefixes.\n\nBy doing that, `\"idx\u003dindex($$1,\".\");if(idx\u003e0){print $$1, substr($$1, 1, idx-1)\"__pkvm\"substr($$1, idx)}\"` which adds `__pkvm` before the first dot in the symbol name is not needed. And this script also doesn\u0027t need to change `__pkvm___x86_indirect_xxx` to `__x86_indirect_xxx__pkvm`. But this script will need to manually add `__pkvm` prefix after the CFI prefixes, e.g., change `__cfi_xxx` to `__cfi___pkvm_xxx`, `__kcfi_typeid_xxx` to `__kcfi_typid___pkvm_xxx` (probably more)\n\nHow do you think?",
+      "parentUuid": "01f016cb_f737b6f0",
+      "revId": "53d9ca603a94f30501565ddce319819dc0616ea5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9139c5ec_638ad8be",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/Makefile",
         "patchSetId": 3
