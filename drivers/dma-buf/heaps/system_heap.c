@@ -24,9 +24,15 @@
 #include <linux/swiotlb.h>
 #include <linux/vmalloc.h>
 
+<<<<<<< HEAD   (6985e4 ANDROID: Make most build configs an error.)
 static struct dma_heap *sys_heap;
 static struct dma_heap *sys_uncached_heap;
 
+||||||| BASE
+static struct dma_heap *sys_heap;
+
+=======
+>>>>>>> BRANCH (b08494 Merge tag 'drm-next-2025-05-28' of https://gitlab.freedeskto)
 struct system_heap_buffer {
 	struct dma_heap *heap;
 	struct list_head attachments;
@@ -523,6 +529,7 @@ static struct dma_heap_ops system_uncached_heap_ops = {
 static int __init system_heap_create(void)
 {
 	struct dma_heap_export_info exp_info;
+	struct dma_heap *sys_heap;
 
 	exp_info.name = "system";
 	exp_info.ops = &system_heap_ops;
