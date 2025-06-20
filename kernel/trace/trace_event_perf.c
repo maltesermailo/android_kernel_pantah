@@ -411,6 +411,8 @@ void *perf_trace_buf_alloc(int size, struct pt_regs **regs, int *rctxp)
 	if (rctx < 0)
 		return NULL;
 
+	if (!perf_trace_buf[rctx])
+		return NULL;
 	if (regs)
 		*regs = this_cpu_ptr(&__perf_regs[rctx]);
 	raw_data = this_cpu_ptr(perf_trace_buf[rctx]);
