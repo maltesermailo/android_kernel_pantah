@@ -16,6 +16,24 @@
       "message": "I think this would be a nice patch on its own, but since aosp/3590992 it becomes a bit redundant (since intel_iommu_init() itself will return -ENODEV too, triggering pKVM init failure, albeit much later than in this patch), and a bit inconsistent with the overall style of aosp/3590992 (i.e. factoring the iommu stuff out of __vmx_pkvm_init(), and abstracting away driver-specific details into the iommu driver\u0027s callbacks)?",
       "revId": "4db9806c21f5e24441467489c911a2063a305427",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81744e5c_1ccbc327",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1424,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-23T10:52:53Z",
+      "side": 1,
+      "message": "Ahh yes, you are right, its redundant as we fail on intel_iommu_init() failure. Will remove this patch",
+      "parentUuid": "c9feddf9_fa38cd47",
+      "revId": "4db9806c21f5e24441467489c911a2063a305427",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
