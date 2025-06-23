@@ -162,9 +162,83 @@ static struct file_system_type dma_buf_fs_type = {
 	.kill_sb = kill_anon_super,
 };
 
+static struct mm_dma_buf_record *__mm_dmabuf(struct mm_struct *mm, struct dma_buf *dmabuf)
+{
+	struct mm_dma_buf_record *mm_rec;
+
+	// TODO lockdep 
+
+	list_for_each_entry(mm_rec, &mm->dmabufs->list, node)
+		if (dmabuf == mm_rec->dmabuf)
+			return mm_rec;
+
+	return NULL;
+}
+
+static int __new_mm_dmabuf_record(struct dma_buf *dmabuf, struct mm_struct *mm)
+{
+	struct mm_dma_buf_record *mm_rec;
+
+	// TODO lockdep
+
+	mm_rec = kmalloc(sizeof(*mm_rec), GFP_KERNEL);
+	if (!mm_rec)
+		return -ENOMEM;
+
+	mm_rec->dmabuf = dmabuf;
+	mm_rec->refcount = 1;
+	list_add(&mm_rec->node, &mm->dmabufs->list);
+
+	return 0;
+}
+
+int dma_buf_account_mm(struct dma_buf *dmabuf, struct mm_struct *mm)
+{
+	struct mm_dma_buf_record *mm_rec;
+	int ret = 0;
+
+	WARN_ON(!dmabuf);
+	WARN_ON(!mm);
+	WARN_ON(!mm->dmabufs);
+
+	spin_lock(&mm->dmabufs->lock);
+	mm_rec = __mm_dmabuf(mm, dmabuf);
+	if (!mm_rec)
+		ret = __new_mm_dmabuf_record(dmabuf, mm);
+	else
+		++mm_rec->refcount;
+	spin_unlock(&mm->dmabufs->lock);
+
+	return ret;
+}
+
+void dma_buf_unaccount_mm(struct dma_buf *dmabuf, struct mm_struct *mm)
+{
+	struct mm_dma_buf_record *mm_rec;
+
+	WARN_ON(!dmabuf);
+	WARN_ON(!mm);
+	WARN_ON(!mm->dmabufs);
+
+	spin_lock(&mm->dmabufs->lock);
+	mm_rec = __mm_dmabuf(mm, dmabuf);
+	if (!mm_rec) {
+		WARN(1, "TJM dmabuf %lu not found under MM %pX\n", dmabuf->file->f_inode->i_ino, mm);
+		goto err;
+	}
+
+	if (--mm_rec->refcount == 0) {
+		list_del(&mm_rec->node);
+		kfree(mm_rec);
+	}
+err:
+	spin_unlock(&mm->dmabufs->lock);
+}
+
 static int dma_buf_mmap_internal(struct file *file, struct vm_area_struct *vma)
 {
 	struct dma_buf *dmabuf;
+	int ret;
 
 	if (!is_dma_buf_file(file))
 		return -EINVAL;
@@ -179,6 +253,10 @@ static int dma_buf_mmap_internal(struct file *file, struct vm_area_struct *vma)
 	if (vma->vm_pgoff + vma_pages(vma) >
 	    dmabuf->size >> PAGE_SHIFT)
 		return -EINVAL;
+
+	ret = dma_buf_account_mm(dmabuf, vma->vm_mm);
+	if (ret)
+		return ret;
 
 	return dmabuf->ops->mmap(dmabuf, vma);
 }
@@ -1555,6 +1633,8 @@ EXPORT_SYMBOL_GPL(dma_buf_end_cpu_access_partial);
 int dma_buf_mmap(struct dma_buf *dmabuf, struct vm_area_struct *vma,
 		 unsigned long pgoff)
 {
+	int ret;
+
 	if (WARN_ON(!dmabuf || !vma))
 		return -EINVAL;
 
@@ -1574,6 +1654,10 @@ int dma_buf_mmap(struct dma_buf *dmabuf, struct vm_area_struct *vma,
 	/* readjust the vma */
 	vma_set_file(vma, dmabuf->file);
 	vma->vm_pgoff = pgoff;
+
+	ret = dma_buf_account_mm(dmabuf, vma->vm_mm);
+	if (ret)
+		return ret;
 
 	return dmabuf->ops->mmap(dmabuf, vma);
 }

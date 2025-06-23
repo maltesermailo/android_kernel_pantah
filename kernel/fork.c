@@ -101,6 +101,7 @@
 #include <linux/iommu.h>
 #include <linux/tick.h>
 #include <linux/cpufreq_times.h>
+#include <linux/dma-buf.h>
 
 #include <asm/pgalloc.h>
 #include <linux/uaccess.h>
@@ -665,6 +666,7 @@ static __latent_entropy int dup_mmap(struct mm_struct *mm,
 	unsigned long charge = 0;
 	LIST_HEAD(uf);
 	VMA_ITERATOR(vmi, mm, 0);
+	struct mm_dma_buf_record *old_mm_rec, *new_mm_rec;
 
 	if (mmap_write_lock_killable(oldmm))
 		return -EINTR;
@@ -757,6 +759,22 @@ static __latent_entropy int dup_mmap(struct mm_struct *mm,
 					&mapping->i_mmap);
 			flush_dcache_mmap_unlock(mapping);
 			i_mmap_unlock_write(mapping);
+
+			if (is_dma_buf_file(file)) {
+				/*
+				 * No list locks necessary since oldmm write lock held,
+				 * and the new mm isn't referenced anywhere else yet.
+				 */
+				list_for_each_entry(old_mm_rec, &oldmm->dmabufs->list, node) {
+					new_mm_rec = kmalloc(sizeof(*new_mm_rec), GFP_KERNEL);
+					if (!new_mm_rec)
+						goto fail_nomem_dmabuf_list;
+
+					new_mm_rec->dmabuf = old_mm_rec->dmabuf;
+					new_mm_rec->refcount = old_mm_rec->refcount;
+					list_add(&new_mm_rec->node, &mm->dmabufs->list);
+				}
+			}
 		}
 
 		/*
@@ -808,7 +826,11 @@ out:
 	else
 		dup_userfaultfd_fail(&uf);
 	return retval;
-
+fail_nomem_dmabuf_list:
+	list_for_each_entry_safe(old_mm_rec, new_mm_rec, &mm->dmabufs->list, node) {
+		list_del(&old_mm_rec->node);
+		kfree(old_mm_rec);
+	}
 fail_nomem_anon_vma_fork:
 	mpol_put(vma_policy(tmp));
 fail_nomem_policy:
@@ -954,6 +976,9 @@ void __mmdrop(struct mm_struct *mm)
 	mm_destroy_cid(mm);
 	percpu_counter_destroy_many(mm->rss_stat, NR_MM_COUNTERS);
 
+	WARN_ON(!list_empty(&mm->dmabufs->list));
+	kfree(mm->dmabufs);
+
 	free_mm(mm);
 }
 EXPORT_SYMBOL_GPL(__mmdrop);
@@ -1049,6 +1074,18 @@ static void set_max_threads(unsigned int max_threads_suggested)
 /* Initialized by the architecture: */
 int arch_task_struct_size __read_mostly;
 #endif
+
+static int mm_init_dma_buf_task_info(struct mm_struct *mm)
+{
+	mm->dmabufs = kmalloc(sizeof(*mm->dmabufs), GFP_KERNEL);
+	if (!mm->dmabufs)
+		return -ENOMEM;
+
+	spin_lock_init(&mm->dmabufs->lock);
+	INIT_LIST_HEAD(&mm->dmabufs->list);
+
+	return 0;
+}
 
 #ifndef CONFIG_ARCH_TASK_STRUCT_ALLOCATOR
 static void task_struct_whitelist(unsigned long *offset, unsigned long *size)
@@ -1339,6 +1376,9 @@ static struct mm_struct *mm_init(struct mm_struct *mm, struct task_struct *p,
 
 	if (percpu_counter_init_many(mm->rss_stat, 0, GFP_KERNEL_ACCOUNT,
 				     NR_MM_COUNTERS))
+		goto fail_pcpu;
+
+	if (mm_init_dma_buf_task_info(mm))
 		goto fail_pcpu;
 
 	mm->user_ns = get_user_ns(user_ns);

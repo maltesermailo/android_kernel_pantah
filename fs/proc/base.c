@@ -100,6 +100,7 @@
 #include <linux/cn_proc.h>
 #include <linux/ksm.h>
 #include <linux/cpufreq_times.h>
+#include <linux/dma-buf.h>
 #include <trace/events/oom.h>
 #include <trace/hooks/sched.h>
 #include "internal.h"
@@ -3304,6 +3305,91 @@ static int proc_stack_depth(struct seq_file *m, struct pid_namespace *ns,
 }
 #endif /* CONFIG_STACKLEAK_METRICS */
 
+struct dmabuf_file_rss_ctx {
+	struct list_head unique_dmabufs;
+	size_t rss;
+};
+
+static int dmabuf_file_rss(const void *v, struct file *file, unsigned int fd)
+{
+	if (is_dma_buf_file(file)) {
+		struct dma_buf *dmabuf = file->private_data;
+		struct dmabuf_file_rss_ctx *ctx = (struct dmabuf_file_rss_ctx *)v;
+		struct mm_dma_buf_record *mm_rec;
+
+		list_for_each_entry(mm_rec, &ctx->unique_dmabufs, node)
+			if (mm_rec->dmabuf == dmabuf)
+				return 0;
+
+		mm_rec = kmalloc(sizeof(*mm_rec), GFP_KERNEL);
+		if (!mm_rec)
+			return -ENOMEM;
+
+		mm_rec->dmabuf = dmabuf;
+		list_add(&mm_rec->node, &ctx->unique_dmabufs);
+		ctx->rss += dmabuf->size;
+	}
+
+	return 0;
+}
+
+static int proc_dmabuf_rss_show(struct seq_file *m, struct pid_namespace *ns,
+		     struct pid *pid, struct task_struct *task)
+{
+	struct mm_struct *mm;
+	int fd = 0;
+	struct dmabuf_file_rss_ctx ctx = {
+		.unique_dmabufs = LIST_HEAD_INIT(ctx.unique_dmabufs),
+		.rss = 0,
+	};
+	int ret = 0;
+	struct mm_dma_buf_record *mm_rec, *copy; // just reuse the type for now (should be the same slab size even if we remove refcount)
+
+	mm = get_task_mm(task);
+	if (mm) {
+		spin_lock(&mm->dmabufs->lock);
+		list_for_each_entry(mm_rec, &mm->dmabufs->list, node) {
+			copy = kmalloc(sizeof(*copy), GFP_KERNEL);
+			if (!copy) {
+				spin_unlock(&mm->dmabufs->lock);
+				ret = -ENOMEM;
+				goto err;
+			}
+
+			copy->dmabuf = mm_rec->dmabuf;
+			list_add(&copy->node, &ctx.unique_dmabufs);
+			ctx.rss += mm_rec->dmabuf->size;
+		}
+		spin_unlock(&mm->dmabufs->lock);
+		mmput(mm);
+	}
+
+	do { // I mean, we could keep a dmabuf list in files_struct to avoid this full iteration,
+		 // but we don't have official KMI padding there, and we shouldn't have nearly as many FDs as VMAs,
+		 // and that'd be more unsupported, non-upstream changes to deal with.
+		task_lock(task);
+		fd = iterate_fd(task->files, fd, dmabuf_file_rss, &ctx);
+		if (fd < 0) {
+			task_unlock(task);
+			ret = -ENOMEM;
+			goto err;
+		}
+		task_unlock(task);
+	} while (fd);
+	
+	// Only (userspace) tasks with MMs should print
+	if (mm)
+		seq_printf(m, "%zu\n", ctx.rss);
+
+	list_for_each_entry_safe(mm_rec, copy, &ctx.unique_dmabufs, node) {
+		list_del(&mm_rec->node);
+		kfree(mm_rec);
+	}
+
+err:
+	return ret;
+}
+
 /*
  * Thread groups
  */
@@ -3427,6 +3513,8 @@ static const struct pid_entry tgid_base_stuff[] = {
 	ONE("ksm_merging_pages",  S_IRUSR, proc_pid_ksm_merging_pages),
 	ONE("ksm_stat",  S_IRUSR, proc_pid_ksm_stat),
 #endif
+// TODO ifdefs
+	ONE("dmabuf_rss", 0444, proc_dmabuf_rss_show),
 };
 
 static int proc_tgid_base_readdir(struct file *file, struct dir_context *ctx)
