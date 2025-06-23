@@ -33,6 +33,24 @@
       "message": "What if it overlaps but only partially?\n\nEven if we consider that should not happen with a well-behaving bootloader, if it still happens it means we still silently fail to unmap pvmfw from the host stage-2?",
       "revId": "11cd7ad4ab1fc666a419c84cc7fd7b747ce5015f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40ea2912_546f699b",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-06-23T15:35:13Z",
+      "side": 1,
+      "message": "I guess there is a point past which a broken bootloader is hopeless :)\n\nBut I guess something like would at least detect the problem (untested at this point):\n\n```diff --git a/arch/arm64/kvm/pkvm.c b/arch/arm64/kvm/pkvm.c\nindex 6cc203816e5b..e9503cf97acb 100644\n--- a/arch/arm64/kvm/pkvm.c\n+++ b/arch/arm64/kvm/pkvm.c\n@@ -85,6 +85,7 @@ static void __init sort_memblock_regions(void)\n static int __init register_memblock_regions(void)\n {\n        struct memblock_region *reg;\n+       bool pvmfw_in_mem \u003d false;\n\n        for_each_mem_region(reg) {\n                if (*hyp_memblock_nr_ptr \u003e\u003d HYP_MEMBLOCK_REGIONS)\n@@ -92,9 +93,18 @@ static int __init register_memblock_regions(void)\n\n                hyp_memory[*hyp_memblock_nr_ptr] \u003d *reg;\n                (*hyp_memblock_nr_ptr)++;\n+\n+               if (!pvmfw_size || pvmfw_in_mem)\n+                       continue;\n+               if ((reg-\u003ebase + reg-\u003esize \u003c\u003d pvmfw_base) || (pvmfw_base + pvmfw_size \u003c\u003d reg-\u003ebase))\n+                       continue;\n+               /* If the pvmfw region overlaps a memblock, it must a subset */\n+               if (pvmfw_base \u003c reg-\u003ebase || (pvmfw_base + pvmfw_size) \u003e (reg-\u003ebase + reg-\u003esize))\n+                       return -EINVAL;\n+               pvmfw_in_mem \u003d true;\n        }\n\n-       if (pvmfw_size \u0026\u0026 !memblock_overlaps_region(\u0026memblock.memory, pvmfw_base, pvmfw_size)) {\n+       if (pvmfw_size \u0026\u0026 !pvmfw_in_mem) {\n                if (*hyp_memblock_nr_ptr \u003e\u003d HYP_MEMBLOCK_REGIONS)\n                        return -ENOMEM;\n```\n\nThoughts?",
+      "parentUuid": "ac8a393d_74ad78d4",
+      "revId": "11cd7ad4ab1fc666a419c84cc7fd7b747ce5015f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
