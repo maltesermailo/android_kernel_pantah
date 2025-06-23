@@ -16,6 +16,23 @@
       "message": "Pending testing",
       "revId": "11cd7ad4ab1fc666a419c84cc7fd7b747ce5015f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac8a393d_74ad78d4",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-23T14:33:52Z",
+      "side": 1,
+      "message": "What if it overlaps but only partially?\n\nEven if we consider that should not happen with a well-behaving bootloader, if it still happens it means we still silently fail to unmap pvmfw from the host stage-2?",
+      "revId": "11cd7ad4ab1fc666a419c84cc7fd7b747ce5015f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
