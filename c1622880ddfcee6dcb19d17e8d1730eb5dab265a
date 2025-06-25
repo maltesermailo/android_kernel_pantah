@@ -196,6 +196,24 @@
       "parentUuid": "d9771dc2_e7c2d244",
       "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c99ba14d_92802dcc",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-25T11:36:55Z",
+      "side": 1,
+      "message": "\u003e Yes. If the pkvm hypervisor can decode mov instruction properly, then we don\u0027t need to use the pkvm_enabled_key to determine if we should use hypercall to access IOMMU MMIO or use memory mapped way. We can always use memory mapped way for that.\n\nAhh ok understood.\n\n\u003e Based on this, I think the advantage of having percpu variable is to make sure the IRQ_REMAP driver on each cpu will only use hypercall after its own finalise hypercall completed. With a single pkvm_enabled_key, the other CPUs would use hypercall earlier before its finalise, but sounds like should not be a problem as the pkvm hypervisor is already able to handle this, right?\n\nYeah, I think its safe to switch to hypercalls on other cpus after deprivilege is successful and we need not wait for finalize to complete. It should probably be safe even on the first cpu as well - meaning we could set the static key after deprivilege is successful? \n\n\u003e A less complicated addon we could do is to wait on a completion variable until the first cpu sets the static key.\n\nI take back this comment. It might be doable, but seems a bit complicated to synchronize all cpus early during this boot phase",
+      "parentUuid": "1404b62d_ea3a563b",
+      "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
