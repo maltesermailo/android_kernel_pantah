@@ -52,6 +52,24 @@
       "parentUuid": "27b9e65b_5540c1ff",
       "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab21eeb9_e4df4eac",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-25T08:25:32Z",
+      "side": 1,
+      "message": "IMHO, a single static key is simpler and more efficient than percpu variables, so it feels a bit excessive to use percpu variables to protect against something that may only hypothetically (and rather unlikely) happen in future kernels.\n\nPerhaps we could just add some WARN_ON() to detect this condition if it ever happens (although I\u0027m not sure where and how we would add it)?",
+      "parentUuid": "2133efe1_948aa5c7",
+      "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
