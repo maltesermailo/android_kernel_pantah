@@ -178,6 +178,24 @@
       "parentUuid": "dbfe3c8c_ec06fe1f",
       "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1404b62d_ea3a563b",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-25T11:06:52Z",
+      "side": 1,
+      "message": "\u003e Hmm, not really: on a CPU that is not the first CPU, the CPU may be already deprivileged and already gone out of the IPI interrupt context, but pkvm_enabled_key not set by the first CPU yet, so the CPU may still try to access MMIO directly?\n\nAhh yes, you are right - there is still a small window of race that could happen. I haven\u0027t seen any EPT violations yet on my testing though. A less complicated addon we could do is to wait on a completion variable until the first cpu sets the static key. What do you think?",
+      "parentUuid": "d9771dc2_e7c2d244",
+      "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
