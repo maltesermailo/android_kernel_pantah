@@ -70,6 +70,24 @@
       "parentUuid": "2133efe1_948aa5c7",
       "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "251c65cf_edeaa147",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-06-25T08:54:31Z",
+      "side": 1,
+      "message": "Yes. It seems not easy to add this WARN_ON(). BTW, enabling pkvm_enabled_key can still be done in an irq disabled context, right after the finalise hypercall, so that the host has no chance to access the IOMMU MMIO via memory mapped way after the finalise on this CPU. This is something the pkvm code can guarantee, right? For the other CPUs, probably can add some comments to mention the other CPUs may still use memory mapped way to access the IOMMU MMIO until they are deprivileged.",
+      "parentUuid": "ab21eeb9_e4df4eac",
+      "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
