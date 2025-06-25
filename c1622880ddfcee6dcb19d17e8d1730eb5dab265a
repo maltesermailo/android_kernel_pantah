@@ -16,6 +16,24 @@
       "message": "Once return from this hypercall, the host will switch to use EPT, which doesn\u0027t have IOMMU MMIO map already. So if there is any chance for the host IOMMU IRQ_REMAP driver (which is enabled much earlier than pkvm deprivilege, right?) to access the IOMMU MMIO via memory map before enabling the pkvm_enabled_key but after this hypercall, it will cause EPT_VIOLATION to the pkvm, which I think the pkvm hypervisor doesn\u0027t handle this case. So probably we should enable the pkvm_enabled_key in this function with IRQ disabled so that, at lease on this CPU, there is no chance for the host to use memory map to access the IOMMU MMIO. For the other CPUs, they are not finalized yet which means they are not using EPT yet. And the pkvm_enabled_key is not percpu, so for the other CPUs, they will also see the pkvm_enabled_key to be true in this case and switch to use hypercall (pv method), right? Is there any impact to the IRQ_REMAP driver?",
       "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27b9e65b_5540c1ff",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-25T07:38:32Z",
+      "side": 1,
+      "message": "Yeah, IIUC it is essentially the same question I asked in https://android-review.googlesource.com/c/kernel/common/+/3590991/comments/64e04893_f0eaf13d . If we are sure that IRQ_REMAP\u0027s access to the IOMMU MMIO may only happen during early APIC setup or, for example, during suppend/resume, not in parallel with pKVM initialization, then it seems there is no issue (and then we don\u0027t need to disable IRQs, right?).\n\nOtherwise, if it may happen in parallel with CPUs deprivileging, then yes, we should disable IRQs (in case such MMIO access may happen in an IRQ handler), but more importantly, we need to restore the percpu variables (since we are back to the problem which was the reason for introducing those percpu variables in the first place)?",
+      "parentUuid": "a17cfd47_0cce4d69",
+      "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
