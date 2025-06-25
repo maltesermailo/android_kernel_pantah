@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a17cfd47_0cce4d69",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-06-25T02:33:18Z",
+      "side": 1,
+      "message": "Once return from this hypercall, the host will switch to use EPT, which doesn\u0027t have IOMMU MMIO map already. So if there is any chance for the host IOMMU IRQ_REMAP driver (which is enabled much earlier than pkvm deprivilege, right?) to access the IOMMU MMIO via memory map before enabling the pkvm_enabled_key but after this hypercall, it will cause EPT_VIOLATION to the pkvm, which I think the pkvm hypervisor doesn\u0027t handle this case. So probably we should enable the pkvm_enabled_key in this function with IRQ disabled so that, at lease on this CPU, there is no chance for the host to use memory map to access the IOMMU MMIO. For the other CPUs, they are not finalized yet which means they are not using EPT yet. And the pkvm_enabled_key is not percpu, so for the other CPUs, they will also see the pkvm_enabled_key to be true in this case and switch to use hypercall (pv method), right? Is there any impact to the IRQ_REMAP driver?",
+      "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
