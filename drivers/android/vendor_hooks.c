@@ -444,6 +444,14 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_reclaim_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_failure_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_adjust_wmark);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_reset_wmark);
+<<<<<<< HEAD   (cd861f Revert "ANDROID: usb: Optimization the transfer rate of acce)
+||||||| BASE
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_watermark_fast_ok);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_alloc_pages_adjust_wmark);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_alloc_pages_reset_wmark);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_watermark_fast_ok);
+>>>>>>> CHANGE (390d88 ANDROID: vendor hooks: Add new android_rvh for adjust water )
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_fiq_dump);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_init);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_swapmem_gather_add_bypass);
