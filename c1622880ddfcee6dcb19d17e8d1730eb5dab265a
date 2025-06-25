@@ -160,6 +160,24 @@
       "parentUuid": "a79a62e5_c42be642",
       "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1884ca0e_0899ddda",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-06-25T11:06:20Z",
+      "side": 1,
+      "message": "\u003e Hmm, not really: on a CPU that is not the first CPU, the CPU may be already deprivileged and already gone out of the IPI interrupt context, but pkvm_enabled_key not set by the first CPU yet, so the CPU may still try to access MMIO directly?\n\nTo prevent that, I suppose we should set the pkvm_enabled_key after the first finalise, not all the finalise.",
+      "parentUuid": "dbfe3c8c_ec06fe1f",
+      "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
