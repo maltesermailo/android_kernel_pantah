@@ -88,6 +88,24 @@
       "parentUuid": "ab21eeb9_e4df4eac",
       "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db08df96_381d2864",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-25T10:21:00Z",
+      "side": 1,
+      "message": "Ah, now I see what you mean: add local_irq_disable()/local_irq_enable() around the entire `pkvm_init_finalise()` + `static_branch_enable(\u0026pkvm_enabled_key)` in vmx_pkvm_init(), not just around this_cpu_do_finalise_hc()? (Or rather move static_branch_enable(\u0026pkvm_enabled_key) into pkvm_init_finalise(), so that we can do local_irq_disable()/local_irq_enable() together with get_cpu()/put_cpu(), and set pkvm_enabled_key before enabling IRQs _and_ putting the CPU.) And thereby guarantee that each CPU, including the first CPU, at each moment in time is in one of 3 possible states:\n\n1. deprivileging not started yet (so the host can safely access physical MMIO)\n2. deprivileging started and it is guaranteed that it will not be interrupted (thanks to local_irq_disable()/local_irq_enable() if it\u0027s the first CPU, or to the IPI interrupt context if it\u0027s some other CPU)\n3. deprivileging finished, pkvm_enabled_key already set, and the host can safely use hypercalls\n\nYeah, this seems reasonable, easy to do and preventing potential problem with IRQ_REMAP (and maybe some other potential subtle issues we don\u0027t know about yet). And it seems that using percpu variables would have no advantage over this solution?",
+      "parentUuid": "251c65cf_edeaa147",
+      "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
