@@ -106,6 +106,24 @@
       "parentUuid": "251c65cf_edeaa147",
       "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a79a62e5_c42be642",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-25T10:45:09Z",
+      "side": 1,
+      "message": "True, this is perfectly doable and less complicated as well. I shall make this change in the next iteration.\n\nRegarding changing the instruction decoder to support different src/dest, I think we have seen an issue because the dest was always rax(Some ACPI code was using a different dest than rax) and I had a sample patch to fix this issue:\nhttps://github.com/vineethrp/pKVM-IA/commit/37c85df1f13928c2e70915f7c9eb255af39136c6\n\nIs this what you meant? this patch changes only dest, but can be extended for src as well. I am curious how this change could be helpful for the above mentioned problem?",
+      "parentUuid": "db08df96_381d2864",
+      "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
