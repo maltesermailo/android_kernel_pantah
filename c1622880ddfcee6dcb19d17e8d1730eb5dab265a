@@ -232,6 +232,24 @@
       "parentUuid": "c99ba14d_92802dcc",
       "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abd03859_6ed55745",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-25T15:11:03Z",
+      "side": 1,
+      "message": "\u003e To prevent that, I suppose we should set the pkvm_enabled_key after the first finalise, not all the finalise.\n\nThen we have a small window when pkvm_enabled_key is already set but a CPU has not finalised yet, but is already trying to use the hypercall.\n\nAlthough I see you\u0027ve already said about that:\n\n\u003e ...the other CPUs would use hypercall earlier before its finalise, but sounds like should not be a problem as the pkvm hypervisor is already able to handle this, right?\n\nWell, yes, it seems it would be already able to handle this hypercall.\n\nBut it means introducing another non-obvious assumption... And I imagined the meaning of this global pkvm_enabled flag is that pKVM is fully initialized (and we can reuse this flag in KVM MMU and so on...). Well, yes, maybe it\u0027s not a bad idea to set it to true already after the first finalise, and reset it back to false if something fails later, and add a comment explaining why we do it that way... (Even though it might not address any real issue as of now, assuming that in fact IRQ_REMAP never runs in parallel with pKVM deprivileging, so there is no real issue.)\n\n...Regarding instruction decoder, IMHO we should try to avoid the need for such complicated error-prone stuff in the hypervisor.",
+      "parentUuid": "777ca606_647a9397",
+      "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
