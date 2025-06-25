@@ -142,6 +142,24 @@
       "parentUuid": "db08df96_381d2864",
       "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbfe3c8c_ec06fe1f",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-06-25T11:03:47Z",
+      "side": 1,
+      "message": "\u003eYeah, this seems reasonable, easy to do and preventing potential problem with IRQ_REMAP (and maybe some other potential subtle issues we don\u0027t know about yet). And it seems that using percpu variables would have no advantage over this solution?\n\nI suppose the pkvm_enabled_key should be enabled after the first finalise hypercall completed, not all finalise hypercalls, right? Otherwise, some CPU which has completed its own finalise hypercall will still use memory mapped MMIO accessing and cause EPT violation.\n\nBased on this, I think the advantage of having percpu variable is to make sure the IRQ_REMAP driver on each cpu will only use hypercall after its own finalise hypercall completed. With a single pkvm_enabled_key, the other CPUs would use hypercall earlier before its finalise, but sounds like should not be a problem as the pkvm hypervisor is already able to handle this, right? \n\n\u003eIs this what you meant? this patch changes only dest, but can be extended for src as well. I am curious how this change could be helpful for the above mentioned problem?\n\nYes. If the pkvm hypervisor can decode mov instruction properly, then we don\u0027t need to use the pkvm_enabled_key to determine if we should use hypercall to access IOMMU MMIO or use memory mapped way. We can always use memory mapped way for that.",
+      "parentUuid": "a79a62e5_c42be642",
+      "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
