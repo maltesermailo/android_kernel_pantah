@@ -740,6 +740,7 @@ struct task_dma_buf_record {
 
 struct task_dma_buf_info {
 	atomic64_t rss;
+	atomic64_t rss_hwm;
 	refcount_t refcnt;
 	spinlock_t lock;
 	struct list_head dmabufs;
