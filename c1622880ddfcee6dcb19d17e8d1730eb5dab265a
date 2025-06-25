@@ -124,6 +124,24 @@
       "parentUuid": "db08df96_381d2864",
       "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9771dc2_e7c2d244",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-25T10:58:04Z",
+      "side": 1,
+      "message": "\u003e 3. deprivileging finished, pkvm_enabled_key already set, and the host can safely use hypercalls\n\nHmm, not really: on a CPU that is not the first CPU, the CPU may be already deprivileged and already gone out of the IPI interrupt context, but pkvm_enabled_key not set by the first CPU yet, so the CPU may still try to access MMIO directly?\n\nSo we still either need to use percpu variables (to reliably prevent such situations), or may just not bother at all, given that we are not aware of any real scenarios when such situation may occur in the first place?",
+      "parentUuid": "db08df96_381d2864",
+      "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
