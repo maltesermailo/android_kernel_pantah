@@ -34,6 +34,24 @@
       "parentUuid": "a17cfd47_0cce4d69",
       "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2133efe1_948aa5c7",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-06-25T08:11:58Z",
+      "side": 1,
+      "message": "By looking the irq_remapping.c, looks like it doesn\u0027t use dmar_read/write in parallel with pkvm but it also seems like there is no guarantee that this won\u0027t be happened in future. So probably using the percpu variables may be safer and yes, that is also the reason to use percpu variable in the first place. Alternative, extending the instruction decoder in the pkvm hypervisor to support decoding mov instruction with src/dest different registers (currently only support rax for pci configuration space accessing) if the effort is not too much, which can reduce the code change to the IOMMU read/write wrapper. Of cause, this alternative is more complex than just using a percpu variable, and we can discuss this later when preparing the upstream RFC.",
+      "parentUuid": "27b9e65b_5540c1ff",
+      "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
