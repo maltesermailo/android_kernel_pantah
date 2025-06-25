@@ -23,6 +23,7 @@
 #include <linux/dma-fence.h>
 #include <linux/wait.h>
 #include <linux/workqueue.h>
+#include <linux/atomic.h>
 #include <linux/android_kabi.h>
 
 struct device;
@@ -531,7 +532,7 @@ struct dma_buf {
 	} *sysfs_entry;
 #endif
 
-	ANDROID_KABI_RESERVE(1);
+	ANDROID_KABI_USE(1, atomic64_t num_unique_refs);
 	ANDROID_KABI_RESERVE(2);
 };
 
