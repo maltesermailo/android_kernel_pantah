@@ -214,6 +214,24 @@
       "parentUuid": "1404b62d_ea3a563b",
       "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "777ca606_647a9397",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-25T11:42:48Z",
+      "side": 1,
+      "message": "\u003e It should probably be safe even on the first cpu as well - meaning we could set the static key after deprivilege is successful?\n\nMy bad, `create_iommu` needs to be called before enabling the hypercalls. So yes, we need the first cpu to to complete init_finalize before enabling the static key.",
+      "parentUuid": "c99ba14d_92802dcc",
+      "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
