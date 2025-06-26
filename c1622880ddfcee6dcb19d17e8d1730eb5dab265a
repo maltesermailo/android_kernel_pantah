@@ -268,6 +268,24 @@
       "parentUuid": "abd03859_6ed55745",
       "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26543762_c4970ef8",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-06-26T14:17:24Z",
+      "side": 1,
+      "message": "Yeah, you are right, it is tricky. It\u0027s better not to rely on pkvm_enabled_key  while deprivileging is still in progress. (Although pkvm_enabled_key might be still useful to have, for various checks, not during deprivileging but later, after everything is deprivileged and finalized.)\n\nSo I think we have 2 options:\n\n* If we still think that IOMMU MMIO access (by IRQ_REMAP or anything else) may possibly happen during deprivileging/finalizing, we should just use percpu variables, like we used to. Maybe rename them to pkvm_cpu_enabled (to not conflict with the global pkvm_enabled()), and use them in dmar_XXX() accessors, while in other places use the global pkvm_enabled().\n\n* Or if we think that IOMMU MMIO access may not happen during deprivileging/finalizing, then we can just have pkvm_enabled_key, without percpu variables, to keep the code simpler.",
+      "parentUuid": "d552ec09_6981a96f",
+      "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
