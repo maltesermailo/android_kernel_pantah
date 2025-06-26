@@ -286,6 +286,24 @@
       "parentUuid": "d552ec09_6981a96f",
       "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14fefd74_92b3790a",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-06-26T15:07:56Z",
+      "side": 1,
+      "message": "I was again thinking along the lines of cpu synchronization and I feel the basic problem here is that cpus are not in a controlled state of execution while being initialized for pkvm. If we can make sure that all cpus entered into a controlled and predictable sequence of execution, we can guarantee that, iommu MMIO will not happen. The sequence I am envisioning is:\n1. main cpu enter vmx_pkvm_init and performs deprivilege\n2. Sets up a shared area to communicate the state of the INIT_FINALIZE phase\n2. Does the INIT_FINALIZE hypercall\n3. sends ipi to other cpus to do INIT_FINALIZE hypercall, but does not wait(sync \u003d false)\n4. All the other cpus perform the hypercall, but waits before returning. It updates the shared area about its status of the init_finalize\n5. Main cpu waits for other cpus to update the status. It reads the status and if all the cpus succeeds, it enables the static key\n6. Main cpu updates the shared area about the final status\n7. Other cpus wait for this update and it returns from the hypercall after reading the status. if global status is failure, it reprivileges\n\nA sample code is here:\nhttps://gist.github.com/vineethrp/ed0dab4ab93ec14eb72135daf5774ef5\n\nThis code is just compile tested. Need to test and may need changes to make it functional. Similar idea to completion variables, but doing it with bare primitives. Just a PoC that I wanted to share it with you all and see how it looks like :-)\n\nI think its not super complex and is good to have this logic in here so that we have a controlled state of execution during deprivilege and initialization. What do you all think about this?",
+      "parentUuid": "26543762_c4970ef8",
+      "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
