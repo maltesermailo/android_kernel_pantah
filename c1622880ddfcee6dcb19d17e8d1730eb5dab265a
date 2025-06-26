@@ -250,6 +250,24 @@
       "parentUuid": "777ca606_647a9397",
       "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d552ec09_6981a96f",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-06-26T02:47:09Z",
+      "side": 1,
+      "message": "\u003e and reset it back to false if something fails later\n\nI didn\u0027t realized about resetting it back to false for recovery. If any of the finialise hypercall is failed, we goes to reprivilege. As the pkvm_enabled_key is a global, when shall we reset it back to false if it is set to be true after the first success finialise hypercall? If we reset it back to false after all cpu reprivileged, then some already reprivileged CPU can still use hypercall to access IOMMU MMIO (even though it might not be happened for the IRQ_REMAP driver) and cause #UD in that CPU. If we reset it back before reprivilege any CPU, then it can cause EPT violation. Seems no good way to reset back the pkvm_enabled_key, unless we switch to use percpu variable?",
+      "parentUuid": "abd03859_6ed55745",
+      "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
