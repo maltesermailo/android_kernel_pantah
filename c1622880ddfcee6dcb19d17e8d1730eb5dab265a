@@ -304,6 +304,24 @@
       "parentUuid": "26543762_c4970ef8",
       "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1a6f61d_dd1895e8",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-06-27T09:29:52Z",
+      "side": 1,
+      "message": "\u003eSo I think we have 2 options:\n\nI am fine with either case. Just a little worry about if we can convince upstream with option#2 in the future :). No concern for now.\n\n\u003eI think its not super complex and is good to have this logic in here so that we have a controlled state of execution during deprivilege and initialization. What do you all think about this?\n\nSo we will block all the CPU a while until all the CPU successfully finalised or reprivileged. I agree this is a good idea to solve the issues with just using one global pkvm_enabled_key.\n\nThis reminds me that, with single global pkvm_enabled_key, we are fine to set this to true after the first finalise if all the other CPUs can also be finalised successfully. The only issue is for reprivilege when any of the CPU is finalised failed. I think the reason is that, the deprivilege and finalise are two separate phases, while the reprivilege is one combined phase. In deprivilege, we just put the host in non-root mode while doesn\u0027t use EPT for the host. So before a CPU calling finalise to switch to EPT, this CPU is able to use hypercall already. The reprivilege is different, it disable VMX directly to let the host back to root mode directly. If we can split the reprivilege to two phases, e.g., use the reprivilege hypercall to disable EPT only. Then the pkvm_enabled_key can be reset back to false after disabling EPT for all the CPU. After that, disable VMX for all the CPU.",
+      "parentUuid": "14fefd74_92b3790a",
+      "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
