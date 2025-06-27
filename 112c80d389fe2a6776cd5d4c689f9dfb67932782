@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8a434f8_32ead499",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-06-27T17:59:31Z",
+      "side": 1,
+      "message": "Hi, the cherry-pick is not clean. \n\nPlease mark as backport and describe the changes:\n\n```\n      ## mm/compaction.c ##\n     @@ mm/compaction.c: static enum compact_result __compact_finished(struct compact_control *cc)\n          ret \u003d COMPACT_NO_SUITABLE_PAGE;\n    @@ mm/compaction.c: static enum compact_result __compact_finished(struct compact_co\n                   * stealing for a non-movable allocation, make sure\n\n      ## mm/internal.h ##\n    -@@ mm/internal.h: static inline void init_cma_pageblock(struct page *page)\n    - \n    +@@ mm/internal.h: void init_cma_reserved_pageblock(struct page *page);\n    + #endif /* CONFIG_COMPACTION || CONFIG_CMA */\n\n      int find_suitable_fallback(struct free_area *area, unsigned int order,\n     -            int migratetype, bool only_stealable, bool *can_steal);\n    @@ mm/page_alloc.c: int find_suitable_fallback(struct free_area *area, unsigned int\n\n     -    *can_steal \u003d false;\n     +    *claim_block \u003d false;\n    -     for (i \u003d 0; i \u003c MIGRATE_PCPTYPES - 1 ; i++) {\n    +     for (i \u003d 0; i \u003c MIGRATE_FALLBACKS - 1 ; i++) {\n              fallback_mt \u003d fallbacks[migratetype][i];\n              if (free_area_empty(area, fallback_mt))\n                  continue;\n```",
+      "revId": "112c80d389fe2a6776cd5d4c689f9dfb67932782",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
