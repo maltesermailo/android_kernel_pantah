@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b87d33f_0baad264",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-30T16:33:55Z",
+      "side": 1,
+      "message": "Note: might be useful to make this file pollable and trigger it once the HWM is breached.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 66
+      },
+      "revId": "be9e4ba62c3f7b9490289954954b6efa76a778d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5de5e11e_3d243627",
+        "filename": "fs/proc/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3323,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-30T16:33:55Z",
+      "side": 1,
+      "message": "return if this warning is triggered to avoid NULL dereference.",
+      "range": {
+        "startLine": 3323,
+        "startChar": 1,
+        "endLine": 3323,
+        "endChar": 29
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f28d8704_3105ca58",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "fs/proc/base.c",
+              "range": {
+                "startLine": 3313,
+                "startChar": 0,
+                "endLine": 3313,
+                "endChar": 0
+              },
+              "replacement": "\tif (!task-\u003edmabuf_info)\n\t\treturn 0;\n"
+            },
+            {
+              "path": "fs/proc/base.c",
+              "range": {
+                "startLine": 3324,
+                "startChar": 0,
+                "endLine": 3324,
+                "endChar": 0
+              },
+              "replacement": "\tif (!task-\u003edmabuf_info)\n\t\treturn 0;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "be9e4ba62c3f7b9490289954954b6efa76a778d5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
