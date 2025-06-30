@@ -26,6 +26,353 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "068b1b94_beec5708",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-30T16:02:31Z",
+      "side": 1,
+      "message": "Let\u0027s call it according to the functionality: find_task_dmabuf_record() or something like this.",
+      "range": {
+        "startLine": 165,
+        "startChar": 35,
+        "endLine": 165,
+        "endChar": 55
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c35ab57c_935d8385",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 165,
+                "startChar": 0,
+                "endLine": 167,
+                "endChar": 0
+              },
+              "replacement": "static struct task_dma_buf_record *find_task_dmabuf_record(\n\t\tstruct task_struct *task, struct dma_buf *dmabuf)\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 220,
+                "startChar": 0,
+                "endLine": 221,
+                "endChar": 0
+              },
+              "replacement": "\trec \u003d find_task_dmabuf_record(task, dmabuf);\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 253,
+                "startChar": 0,
+                "endLine": 254,
+                "endChar": 0
+              },
+              "replacement": "\trec \u003d find_task_dmabuf_record(task, dmabuf);\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 790,
+                "startChar": 0,
+                "endLine": 792,
+                "endChar": 0
+              },
+              "replacement": "\tif (exp_info-\u003eops-\u003epin \u0026\u0026 !exp_info-\u003eops-\u003eunpin)\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 793,
+                "startChar": 0,
+                "endLine": 793,
+                "endChar": 0
+              },
+              "replacement": "\tif (!exp_info-\u003eops-\u003epin \u0026\u0026 exp_info-\u003eops-\u003eunpin)\n\t\treturn ERR_PTR(-EINVAL);\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 1100,
+                "startChar": 0,
+                "endLine": 1101,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 1112,
+                "startChar": 0,
+                "endLine": 1112,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tdma_resv_unlock(attach-\u003edmabuf-\u003eresv);\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 1130,
+                "startChar": 0,
+                "endLine": 1131,
+                "endChar": 0
+              },
+              "replacement": "err_unpin:\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 1386,
+                "startChar": 0,
+                "endLine": 1387,
+                "endChar": 0
+              },
+              "replacement": "\t\tgoto out;\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 1393,
+                "startChar": 0,
+                "endLine": 1393,
+                "endChar": 0
+              },
+              "replacement": "out:\n\tattach-\u003esgt \u003d NULL;\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 1415,
+                "startChar": 0,
+                "endLine": 1415,
+                "endChar": 0
+              },
+              "replacement": "\tif (attach-\u003esgt \u003d\u003d sg_table)\n\t\tgoto out;\n\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 1418,
+                "startChar": 0,
+                "endLine": 1418,
+                "endChar": 0
+              },
+              "replacement": "out:\n\treturn;\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 1735,
+                "startChar": 0,
+                "endLine": 1736,
+                "endChar": 0
+              },
+              "replacement": "\t\t*map \u003d dmabuf-\u003evmap_ptr; /* copy */\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 1748,
+                "startChar": 0,
+                "endLine": 1749,
+                "endChar": 0
+              },
+              "replacement": "\t*map \u003d dmabuf-\u003evmap_ptr; /* copy */\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 1795,
+                "startChar": 0,
+                "endLine": 1796,
+                "endChar": 0
+              },
+              "replacement": "\tBUG_ON(!iosys_map_is_equal(\u0026dmabuf-\u003evmap_ptr, map)); /* compare */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fde91f6e8c3e13fe2bb69975d8cf61e96a74de8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13c26f38_1b0b2e14",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-30T16:02:31Z",
+      "side": 1,
+      "message": "__new_task_dmabuf_record() would make sense if you had new_task_dmabuf_record() calling it but I think you don\u0027t, so let\u0027s drop that prefix.",
+      "range": {
+        "startLine": 179,
+        "startChar": 11,
+        "endLine": 179,
+        "endChar": 35
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "94eb77dc_93a09d8d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 179,
+                "startChar": 0,
+                "endLine": 180,
+                "endChar": 0
+              },
+              "replacement": "static int new_task_dmabuf_record(struct task_struct *task, struct dma_buf *dmabuf)\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 222,
+                "startChar": 0,
+                "endLine": 223,
+                "endChar": 0
+              },
+              "replacement": "\t\tret \u003d new_task_dmabuf_record(task, dmabuf);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fde91f6e8c3e13fe2bb69975d8cf61e96a74de8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc953ac6_ef70fbf5",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-30T16:02:31Z",
+      "side": 1,
+      "message": "Unaccount",
+      "range": {
+        "startLine": 231,
+        "startChar": 28,
+        "endLine": 231,
+        "endChar": 36
+      },
+      "revId": "fde91f6e8c3e13fe2bb69975d8cf61e96a74de8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f7538eb_b485c706",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-30T16:02:31Z",
+      "side": 1,
+      "message": "Can mmap fail? If so, we should unaccount the dmabuf, right?",
+      "range": {
+        "startLine": 289,
+        "startChar": 8,
+        "endLine": 289,
+        "endChar": 39
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1acfd944_ebea084d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 289,
+                "startChar": 0,
+                "endLine": 290,
+                "endChar": 0
+              },
+              "replacement": "\tret \u003d dmabuf-\u003eops-\u003emmap(dmabuf, vma);\n\tif (ret)\n\t\tdma_buf_unaccount_task(dmabuf, current);\n\n\treturn ret;\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 1697,
+                "startChar": 0,
+                "endLine": 1698,
+                "endChar": 0
+              },
+              "replacement": "\tret \u003d dmabuf-\u003eops-\u003emmap(dmabuf, vma);\n\tif (ret)\n\t\tdma_buf_unaccount_task(dmabuf, current);\n\n\treturn ret;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fde91f6e8c3e13fe2bb69975d8cf61e96a74de8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e830e732_69e4ae4c",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1697,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-30T16:02:31Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 1697,
+        "startChar": 8,
+        "endLine": 1697,
+        "endChar": 39
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "87114a46_86c0d9d8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 1697,
+                "startChar": 0,
+                "endLine": 1698,
+                "endChar": 0
+              },
+              "replacement": "\tret \u003d dmabuf-\u003eops-\u003emmap(dmabuf, vma);\n\tif (ret)\n\t\tdma_buf_unaccount_task(dmabuf, current);\n\n\treturn ret;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fde91f6e8c3e13fe2bb69975d8cf61e96a74de8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e610ff2b_e902df14",
         "filename": "fs/file.c",
         "patchSetId": 1
@@ -42,6 +389,161 @@
         "startChar": 2,
         "endLine": 598,
         "endChar": 9
+      },
+      "revId": "fde91f6e8c3e13fe2bb69975d8cf61e96a74de8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "731ef884_50f40162",
+        "filename": "fs/proc/base.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3312,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-30T16:02:31Z",
+      "side": 1,
+      "message": "If this warning triggers you want to return immediately to avoid NULL dereference.",
+      "range": {
+        "startLine": 3312,
+        "startChar": 1,
+        "endLine": 3312,
+        "endChar": 29
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5fee7ea2_5641902e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "fs/proc/base.c",
+              "range": {
+                "startLine": 3313,
+                "startChar": 0,
+                "endLine": 3313,
+                "endChar": 0
+              },
+              "replacement": "\tif (!task-\u003edmabuf_info)\n\t\treturn 0;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fde91f6e8c3e13fe2bb69975d8cf61e96a74de8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36f8a170_b2747592",
+        "filename": "kernel/fork.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2306,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-30T16:02:31Z",
+      "side": 1,
+      "message": "When does this happen? Only when current-\u003edmabuf_info failed its allocation or some other cases as well?",
+      "range": {
+        "startLine": 2306,
+        "startChar": 6,
+        "endLine": 2306,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "953fec82_f6ccf76a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "kernel/fork.c",
+              "range": {
+                "startLine": 1247,
+                "startChar": 0,
+                "endLine": 1248,
+                "endChar": 0
+              },
+              "replacement": "\tandroid_init_oem_data(tsk);\n"
+            },
+            {
+              "path": "kernel/fork.c",
+              "range": {
+                "startLine": 2306,
+                "startChar": 0,
+                "endLine": 2306,
+                "endChar": 0
+              },
+              "replacement": "\t\t/*\n\t\t * Copy dmabuf info from parent only if it exists.\n\t\t * It may not exist if the parent has not allocated any dmabufs.\n\t\t */\n"
+            },
+            {
+              "path": "kernel/fork.c",
+              "range": {
+                "startLine": 2646,
+                "startChar": 0,
+                "endLine": 2647,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (retval \u003c 0) {\n\t\t\tif (pid !\u003d \u0026init_struct_pid)\n\t\t\t\tfree_pid(pid);\n"
+            },
+            {
+              "path": "kernel/fork.c",
+              "range": {
+                "startLine": 2648,
+                "startChar": 0,
+                "endLine": 2648,
+                "endChar": 0
+              },
+              "replacement": "\t\t}\n"
+            },
+            {
+              "path": "kernel/fork.c",
+              "range": {
+                "startLine": 2860,
+                "startChar": 0,
+                "endLine": 2860,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (pid !\u003d \u0026init_struct_pid)\n\t\t\tfree_pid(pid);\n"
+            },
+            {
+              "path": "kernel/fork.c",
+              "range": {
+                "startLine": 3067,
+                "startChar": 0,
+                "endLine": 3067,
+                "endChar": 0
+              },
+              "replacement": "\t\telse\n\t\t\treturn -EINTR;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fde91f6e8c3e13fe2bb69975d8cf61e96a74de8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31abeea1_bd3bb94d",
+        "filename": "kernel/fork.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2590,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-06-30T16:02:31Z",
+      "side": 1,
+      "message": "bad_fork_cleanup_dmabuf",
+      "range": {
+        "startLine": 2590,
+        "startChar": 7,
+        "endLine": 2590,
+        "endChar": 30
       },
       "revId": "fde91f6e8c3e13fe2bb69975d8cf61e96a74de8d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
