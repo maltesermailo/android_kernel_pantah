@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dfb31f9_aa4862b3",
+        "filename": "fs/proc/base.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3313,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-01T00:46:19Z",
+      "side": 1,
+      "message": "I would change this to ENOMEM because this was caused by lack of memory at the time we were allocating this member. EINVAL would mean userspace provided some invalid input.",
+      "range": {
+        "startLine": 3313,
+        "startChar": 10,
+        "endLine": 3313,
+        "endChar": 16
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "61eb67e4_481bd439",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "fs/proc/base.c",
+              "range": {
+                "startLine": 3313,
+                "startChar": 0,
+                "endLine": 3314,
+                "endChar": 0
+              },
+              "replacement": "\t\treturn -ENOMEM;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d9fa41cd1d2ad5d108c3a726dac46ac2e09c71bc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
