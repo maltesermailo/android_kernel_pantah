@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76419c4d_0ac91be7",
+        "filename": "drivers/ufs/host/ufs-qcom.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1814,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2025-07-01T22:52:10Z",
+      "side": 1,
+      "message": "This causes build failure. \n```\nERROR: modpost: \"dev_pm_opp_find_freq_exact_indexed\" [drivers/ufs/host/ufs-qcom.ko] undefined!\n```\n\nProbably you are missing include \u003clinux/pm_opp.h\u003e",
+      "revId": "3bfb8694ef78558687bc075d48f3e64348db51fe",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
