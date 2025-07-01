@@ -60,6 +60,57 @@
       ],
       "revId": "dbf6a4a5b18c10e3244315ce4a6983ef6d6f7dd5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a847c35_05456508",
+        "filename": "include/linux/dma-buf.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-01T00:59:41Z",
+      "side": 1,
+      "message": "Where do you initialize it?",
+      "range": {
+        "startLine": 677,
+        "startChar": 12,
+        "endLine": 677,
+        "endChar": 19
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "87e06ba7_80e9d8d8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/dma-buf.h",
+              "range": {
+                "startLine": 644,
+                "startChar": 0,
+                "endLine": 644,
+                "endChar": 0
+              },
+              "replacement": "/**\n * enum dma_buf_rss_update_mode - Defines the mode for updating RSS counters.\n *\n * @DMA_BUF_RSS_UPDATE_ADD: Add the provided size to the RSS counters.\n * @DMA_BUF_RSS_UPDATE_SUB: Subtract the provided size from the RSS counters.\n */\nenum dma_buf_rss_update_mode {\n\tDMA_BUF_RSS_UPDATE_ADD,\n\tDMA_BUF_RSS_UPDATE_SUB,\n};\n\n"
+            },
+            {
+              "path": "include/linux/dma-buf.h",
+              "range": {
+                "startLine": 788,
+                "startChar": 0,
+                "endLine": 788,
+                "endChar": 0
+              },
+              "replacement": "void dma_buf_update_rss(struct task_dma_buf_info *info,\n\t\t\tenum dma_buf_rss_update_mode mode, size_t size);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "dbf6a4a5b18c10e3244315ce4a6983ef6d6f7dd5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
