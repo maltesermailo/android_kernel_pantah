@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8d1b53f2_5aa32afd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-01T15:43:12Z",
+      "side": 1,
+      "message": "We were pushing for dmabuf accounting upstream for years now. I\u0027m sure TJ can provide more history.",
+      "parentUuid": "bba1bbb6_e8ee832b",
+      "revId": "59d573878b5a8d1d0839168fb3543281d2ee7cc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "28559ec8_adf26b05",
         "filename": "drivers/dma-buf/dma-buf.c",
         "patchSetId": 3
@@ -43,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10597a5f_df25d4e4",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-01T15:43:12Z",
+      "side": 1,
+      "message": "WARN_ON() will reboot a device only if panic_on_warn is enabled, right? I don\u0027t think we enable it in GKI.\n\nWARN_ON() is quite prevalent in upstream mm code. People even are talking about removing VM_BUG_ON()/VM_WARN_ON() because in production they are usually disabled.",
+      "parentUuid": "28559ec8_adf26b05",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 18
+      },
+      "revId": "59d573878b5a8d1d0839168fb3543281d2ee7cc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "796c5ea7_29cb85e6",
         "filename": "include/linux/dma-buf.h",
         "patchSetId": 3
@@ -54,6 +96,30 @@
       "writtenOn": "2025-07-01T06:29:15Z",
       "side": 1,
       "message": "why is a lock needed for an atomic value?  Now you have two locks in play :(",
+      "range": {
+        "startLine": 677,
+        "startChar": 0,
+        "endLine": 677,
+        "endChar": 17
+      },
+      "revId": "59d573878b5a8d1d0839168fb3543281d2ee7cc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20a202df_f41c60f6",
+        "filename": "include/linux/dma-buf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-01T15:43:12Z",
+      "side": 1,
+      "message": "The lock protects all members of this structure, not only the atomic rss. IIUC rss is atomic because we do not take the lock when reading it.",
+      "parentUuid": "796c5ea7_29cb85e6",
       "range": {
         "startLine": 677,
         "startChar": 0,
