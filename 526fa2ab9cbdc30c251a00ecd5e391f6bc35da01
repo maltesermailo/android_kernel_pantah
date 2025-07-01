@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7465da8_dd87e11e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-01T16:00:27Z",
+      "side": 1,
+      "message": "How often does that trigger? Would we end up  with a flood of events? Should we ratelimit them?",
+      "range": {
+        "startLine": 10,
+        "startChar": 28,
+        "endLine": 12,
+        "endChar": 23
+      },
+      "revId": "526fa2ab9cbdc30c251a00ecd5e391f6bc35da01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9ee2468_f0425fce",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-01T16:00:27Z",
+      "side": 1,
+      "message": "Should we include dmabuf-\u003efd and dmabuf-\u003esize in the tracepoint?",
+      "range": {
+        "startLine": 194,
+        "startChar": 1,
+        "endLine": 194,
+        "endChar": 22
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d6b95da3_ab8de80e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 194,
+                "startChar": 0,
+                "endLine": 195,
+                "endChar": 0
+              },
+              "replacement": "\ttrace_dmabuf_rss_stat(rss, dmabuf-\u003efile-\u003ef_fd, dmabuf-\u003esize);\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 277,
+                "startChar": 0,
+                "endLine": 278,
+                "endChar": 0
+              },
+              "replacement": "\t\ttrace_dmabuf_rss_stat(rss, dmabuf-\u003efile-\u003ef_fd, dmabuf-\u003esize);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "526fa2ab9cbdc30c251a00ecd5e391f6bc35da01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
