@@ -121,6 +121,30 @@
       },
       "revId": "526fa2ab9cbdc30c251a00ecd5e391f6bc35da01",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a99d9679_66a27b40",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1080238
+      },
+      "writtenOn": "2025-07-01T17:05:31Z",
+      "side": 1,
+      "message": "The size is somewhat redundant as we can just recompute it from the rss + delta. As for fd, that\u0027s just because rss_stat is mostly for anon memory and that doesn\u0027t have an fd associated with it. We\u0027re always happy to have more information if it\u0027s available.",
+      "parentUuid": "fef59326_cdad4c93",
+      "range": {
+        "startLine": 194,
+        "startChar": 1,
+        "endLine": 194,
+        "endChar": 22
+      },
+      "revId": "526fa2ab9cbdc30c251a00ecd5e391f6bc35da01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
