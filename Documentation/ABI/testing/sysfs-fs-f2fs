@@ -870,6 +870,7 @@ Description:	This threshold is used to control triggering garbage collection whi
 		reserved section before preallocating on pinned file.
 		By default, the value is ovp_sections, especially, for zoned ufs, the
 		value is 1.
+<<<<<<< HEAD   (d014070de77f2e1770b4b08659ad4ba0b3c6f5f6 Merge branch 'android-mainline' into android17-6.18)
 
 What:		/sys/fs/f2fs/<disk>/gc_boost_gc_multiple
 Date:		June 2025
@@ -933,3 +934,6 @@ Description:	Controls write priority in multi-devices setups. A value of 0 means
 		allocate_section_policy = 1  Prioritize writing to section before allocate_section_hint
 		allocate_section_policy = 2  Prioritize writing to section after allocate_section_hint
 		===========================  ==========================================================
+||||||| BASE   (286cd9d628742ff0409775fdd81e67dcd559ab06 ANDROID: GKI: Update RTK STB KMI symbol list)
+=======
+>>>>>>> CHANGE (12727f8a4b65b2fb55a7fc88199ab5f854be52a4 FROMGIT: f2fs: introduce reserved_pin_section sysfs entry)

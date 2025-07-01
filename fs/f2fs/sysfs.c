@@ -868,6 +868,7 @@ out:
 		return count;
 	}
 
+<<<<<<< HEAD   (d014070de77f2e1770b4b08659ad4ba0b3c6f5f6 Merge branch 'android-mainline' into android17-6.18)
 	if (!strcmp(a->attr.name, "gc_boost_gc_multiple")) {
 		if (t < 1 || t > SEGS_PER_SEC(sbi))
 			return -EINVAL;
@@ -903,6 +904,9 @@ out:
 		return count;
 	}
 
+||||||| BASE   (286cd9d628742ff0409775fdd81e67dcd559ab06 ANDROID: GKI: Update RTK STB KMI symbol list)
+=======
+>>>>>>> CHANGE (12727f8a4b65b2fb55a7fc88199ab5f854be52a4 FROMGIT: f2fs: introduce reserved_pin_section sysfs entry)
 	*ui = (unsigned int)t;
 
 	return count;
@@ -1214,7 +1218,11 @@ F2FS_SBI_GENERAL_RW_ATTR(blkzone_alloc_policy);
 #endif
 F2FS_SBI_GENERAL_RW_ATTR(carve_out);
 F2FS_SBI_GENERAL_RW_ATTR(reserved_pin_section);
+<<<<<<< HEAD   (d014070de77f2e1770b4b08659ad4ba0b3c6f5f6 Merge branch 'android-mainline' into android17-6.18)
 F2FS_SBI_GENERAL_RW_ATTR(bggc_io_aware);
+||||||| BASE   (286cd9d628742ff0409775fdd81e67dcd559ab06 ANDROID: GKI: Update RTK STB KMI symbol list)
+=======
+>>>>>>> CHANGE (12727f8a4b65b2fb55a7fc88199ab5f854be52a4 FROMGIT: f2fs: introduce reserved_pin_section sysfs entry)
 
 /* STAT_INFO ATTR */
 #ifdef CONFIG_F2FS_STAT_FS
@@ -1414,8 +1422,12 @@ static struct attribute *f2fs_attrs[] = {
 	ATTR_LIST(max_read_extent_count),
 	ATTR_LIST(carve_out),
 	ATTR_LIST(reserved_pin_section),
+<<<<<<< HEAD   (d014070de77f2e1770b4b08659ad4ba0b3c6f5f6 Merge branch 'android-mainline' into android17-6.18)
 	ATTR_LIST(allocate_section_hint),
 	ATTR_LIST(allocate_section_policy),
+||||||| BASE   (286cd9d628742ff0409775fdd81e67dcd559ab06 ANDROID: GKI: Update RTK STB KMI symbol list)
+=======
+>>>>>>> CHANGE (12727f8a4b65b2fb55a7fc88199ab5f854be52a4 FROMGIT: f2fs: introduce reserved_pin_section sysfs entry)
 	NULL,
 };
 ATTRIBUTE_GROUPS(f2fs);
