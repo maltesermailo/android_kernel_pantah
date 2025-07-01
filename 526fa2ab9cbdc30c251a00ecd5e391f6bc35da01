@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9585d0e0_6d2a4616",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1386032
+      },
+      "writtenOn": "2025-07-01T17:43:16Z",
+      "side": 1,
+      "message": "Note if we need to rate limit them, we can configure it in userspace using ftrace histograms (same way we rate limit rss_stat)",
+      "parentUuid": "da471701_2a018c82",
+      "range": {
+        "startLine": 10,
+        "startChar": 28,
+        "endLine": 12,
+        "endChar": 23
+      },
+      "revId": "526fa2ab9cbdc30c251a00ecd5e391f6bc35da01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c9ee2468_f0425fce",
         "filename": "drivers/dma-buf/dma-buf.c",
         "patchSetId": 1
@@ -161,6 +185,30 @@
       "side": 1,
       "message": "Maybe the inode number for the buf causing the rss change? We can use that to compare with other dmabuf info sources.",
       "parentUuid": "a99d9679_66a27b40",
+      "range": {
+        "startLine": 194,
+        "startChar": 1,
+        "endLine": 194,
+        "endChar": 22
+      },
+      "revId": "526fa2ab9cbdc30c251a00ecd5e391f6bc35da01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf811838_eb861f8b",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1386032
+      },
+      "writtenOn": "2025-07-01T17:43:16Z",
+      "side": 1,
+      "message": "We definitely want the current total for the process, the delta and the inode, we already use it to track buffer lifetimes (basically we want the equivalent of the existing dma_heap_stat, but per-process)",
+      "parentUuid": "82d1855f_080e3f6b",
       "range": {
         "startLine": 194,
         "startChar": 1,
