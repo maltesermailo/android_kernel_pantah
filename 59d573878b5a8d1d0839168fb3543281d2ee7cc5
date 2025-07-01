@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0ed28a67_f1892f5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-07-01T18:23:18Z",
+      "side": 1,
+      "message": "Yeah there have been multiple attempts for this style of per-process accounting. Upstream doesn\u0027t want this. This isn\u0027t even the way I\u0027d prefer to do it, but it\u0027s what we need to meet requirements from SysHealth.",
+      "parentUuid": "8d1b53f2_5aa32afd",
+      "revId": "59d573878b5a8d1d0839168fb3543281d2ee7cc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "28559ec8_adf26b05",
         "filename": "drivers/dma-buf/dma-buf.c",
         "patchSetId": 3
@@ -120,6 +138,30 @@
       "side": 1,
       "message": "The lock protects all members of this structure, not only the atomic rss. IIUC rss is atomic because we do not take the lock when reading it.",
       "parentUuid": "796c5ea7_29cb85e6",
+      "range": {
+        "startLine": 677,
+        "startChar": 0,
+        "endLine": 677,
+        "endChar": 17
+      },
+      "revId": "59d573878b5a8d1d0839168fb3543281d2ee7cc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56778504_b44ed6f3",
+        "filename": "include/linux/dma-buf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-07-01T18:23:18Z",
+      "side": 1,
+      "message": "Yup, the lock is mostly for the dmabuf list. The counter is atomic so it can be read without locking, but that might be overkill. Not sure how much contention to expect here yet.",
+      "parentUuid": "20a202df_f41c60f6",
       "range": {
         "startLine": 677,
         "startChar": 0,
