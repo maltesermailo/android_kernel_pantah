@@ -322,6 +322,24 @@
       "parentUuid": "14fefd74_92b3790a",
       "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cda8bb7a_b07ef381",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-07-02T02:12:31Z",
+      "side": 1,
+      "message": "\u003e the deprivilege and finalise are two separate phases, while the reprivilege is one combined phase. In deprivilege, we just put the host in non-root mode while doesn\u0027t use EPT for the host. So before a CPU calling finalise to switch to EPT, this CPU is able to use hypercall already. \n\nThanks for pointing this out, yeah it makes sense to split the reprivilege also into two phases.\n\nBut I was wondering if there is a reason to perform the pkvm initialization as it is implemented now. I mean the current steps as you mentioned is:\n1. initial vmx_init and deprivilege\n2. Hypercall to perform finalize and switch to EPT\n\nRather, I was wondering if we could do this:\n1. Initial vmx_init(setting up vmcs and vmcs_load) - ie everything except `local_deprivilege_cpu`\n2. directly call __pkvm_init_finalise instead of hypercall\n3. do deprivilege(call `local_deprivilege_cpu` on all cpus)\n\nThe advantage is, if something fails during initialization, we don\u0027t need to reprivilege. The only failure that needs reprivilege is if vmlaunch fails. Error handling becomes a bit easier. But I am not sure if there was a good reason for doing the finalize and EPT switch in a hypercall after deprivilege\n\nI have quickly tested this and the deprivilege is successful and system comes up. But VM creation fails with vmptrld error 9. Need to see if I missed something. Wanted to check with you if the above idea is worth pursuing or I am doing something silly ;-)",
+      "parentUuid": "d1a6f61d_dd1895e8",
+      "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
