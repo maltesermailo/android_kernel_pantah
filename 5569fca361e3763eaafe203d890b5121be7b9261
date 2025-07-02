@@ -40,6 +40,30 @@
       ],
       "revId": "5569fca361e3763eaafe203d890b5121be7b9261",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91a6355a_d01cbac7",
+        "filename": "security/selinux/include/policycap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1291338
+      },
+      "writtenOn": "2025-07-02T07:43:16Z",
+      "side": 1,
+      "message": "Because values must be identical to userspace libselinux. These enums have already been added to [`external/selinux`](https://source.corp.google.com/h/googleplex-android/platform/superproject/main/+/main:external/selinux/libsepol/include/sepol/policydb/polcaps.h;l\u003d9;drc\u003da1788ed503c2e7b86a333e9ac5cede9bc6abd6aa), so we need these extra enums to make them identical, even when we only take care of `GENFS_SECLABEL_WILDCARD`.\n\n@takayas@google.com Do we need to fully cherry-pick changes introducing these enums?",
+      "parentUuid": "ad18f841_d82b9305",
+      "range": {
+        "startLine": 17,
+        "startChar": 28,
+        "endLine": 18,
+        "endChar": 29
+      },
+      "revId": "5569fca361e3763eaafe203d890b5121be7b9261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
