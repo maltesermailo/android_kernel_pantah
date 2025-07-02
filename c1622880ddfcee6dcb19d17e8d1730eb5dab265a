@@ -358,6 +358,24 @@
       "parentUuid": "cda8bb7a_b07ef381",
       "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffee40b8_a549e14b",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-07-02T11:28:24Z",
+      "side": 1,
+      "message": "Thanks for the detailed reply. Makes a lot more sense now :-)\n\n\u003e Another thing is that, the pkvm now has its own percpu, which is addressed via its own gs_base. Calling the pkvm\u0027s code before deprivileging means using the host gs_base, and if some percpu variable is reading/writing by pkvm\u0027s code via using the host gs_base, then such variable seen by the pkvm after driprivilege is incorrect as the pkvm will find out them via its own gs_base. Currently the __pkvm_init_finalise initialize some pkvm\u0027s percpu variable, e.g. this_cpu_write(host_vcpu, vcpu), and doing this in the host environment is incorrect. Of cause, this can be fixed via using \"per_cpu(host_vcpu, cpu) \u003d vcpu\" which can take the pkvm\u0027s gs_base explicitly.\n\nThis was the thing I was missing :-). the vmptrld was failing because of the incorrect setting of FS_BASE. A simple change to switch to host selectors and fs_base and gs_base solved this issue and protected VMs are created successfully now. Thanks for pointing this out\n\n\u003e We uses the hyp_page structure to manage the memory pools inside the pkvm hypervisor, like pkvm-arm. This is mapped starting from virtual address 0, via the pkvm_back_vmemmap(), in the pkvm\u0027s mmu. And later will switch to the pkvm\u0027s mmu and use this for allocating memory pages from the pool for ept/iommu pgt and so on. When we do these in the host environment, the mmu will be the host mmu, and accessing to the hyp_page structure is to access some memory mapped at the same virtual in the host mmu. So we need to redesign this part.\n\nAhh ok, I thought this is taken care of whether or not we call `__pkvm_init_finalise` as a hypercall or not. With the current implementation we inititally set the HOST_CR3 to host\u0027s cr3 and on INIT_FINALIZE hypercall, we switch to pkvm CR3 in create_mmu_mapping. We do the same here was well, but we don\u0027t go through the hypercall. So the effect of `ret \u003d pkvm_back_vmemmap(__pkvm_pa(pkvm_vmemmap_base));` should be same regardless of whether we came through hypercall or not I guess. This is assuming that the rest of MMU related registers are set correctly which I started doing now, thanks to you pointing out the FS_BASE issue :-).\n\nOn my tests, I think hyp_page structure is initialized correctly and feels similar to the existing implementation. But please let me know if my understanding is correct\n\n\u003e Probably there are more changes needed to make it working. But looks like these changes are more complicated than the error handling.\n\nyeah true, there might be other things that we are missing. But on a quick code read, everything looks like the initial implementation and I see no errors now. I shall play with it for a little while and see how it goes and if it makes the life easier regarding error handling and global pkvm_enabled switch (without causing regressions ofcourse), I shall send a WIP patch for you all to review after verifying that changes are simple and effective and not causing regressions. Will keep you posted",
+      "parentUuid": "db5e164e_2eb162d9",
+      "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
