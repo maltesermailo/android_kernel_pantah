@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "093de5bc_43c9d8f5",
+        "filename": "mm/page_io.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-02T15:23:06Z",
+      "side": 1,
+      "message": "Will trace_android_rvh_swap_readpage_bdev_sync() be replacing trace_android_vh_swap_readpage_bdev_sync() hook? If so, please add a comment that trace_android_vh_swap_readpage_bdev_sync() is deprecated and should not be carried over into later kernels.",
+      "range": {
+        "startLine": 482,
+        "startChar": 1,
+        "endLine": 482,
+        "endChar": 41
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "72da6e8f_7dc9d374",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/page_io.c",
+              "range": {
+                "startLine": 482,
+                "startChar": 0,
+                "endLine": 482,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * trace_android_vh_swap_readpage_bdev_sync is deprecated,\n\t * please use trace_android_rvh_swap_readpage_bdev_sync instead.\n\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5fe10ed06e0cf6da4ff854b65e0a9ca29f153270",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
