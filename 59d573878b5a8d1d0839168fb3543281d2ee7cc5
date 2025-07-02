@@ -145,6 +145,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ae683da2_1bee4a8a",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-02T15:53:17Z",
+      "side": 1,
+      "message": "Ok, I think something like will do:\n```\nif (!dmabuf || !task)\n    return -EINVAL;\n    \nif (!task-\u003edmabuf_info) {\n    pr_warn(\"dmabuf accounting record was not allocated\");\n    return -ENOMEM;\n}\n```\n\nAnd in other places instead of `if (WARN_ON(...)) {}` we can do `if (...) { pr_warn(); ...}`",
+      "parentUuid": "ba468ca6_297d0012",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 18
+      },
+      "revId": "59d573878b5a8d1d0839168fb3543281d2ee7cc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "796c5ea7_29cb85e6",
         "filename": "include/linux/dma-buf.h",
         "patchSetId": 3
