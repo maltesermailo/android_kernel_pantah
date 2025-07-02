@@ -340,6 +340,24 @@
       "parentUuid": "d1a6f61d_dd1895e8",
       "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db5e164e_2eb162d9",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-07-02T04:57:36Z",
+      "side": 1,
+      "message": "Yeah, this is a good point. Probably there is no hard reason to prevent this new flow, but I can see with the new flow, some changes will be needed.\n\nWe uses the hyp_page structure to manage the memory pools inside the pkvm hypervisor, like pkvm-arm. This is mapped starting from virtual address 0, via the pkvm_back_vmemmap(), in the pkvm\u0027s mmu. And later will switch to the pkvm\u0027s mmu and use this for allocating memory pages from the pool for ept/iommu pgt and so on. When we do these in the host environment, the mmu will be the host mmu, and accessing to the hyp_page structure is to access some memory mapped at the same virtual in the host mmu. So we need to redesign this part.\n\nAnother thing is that, the pkvm now has its own percpu, which is addressed via its own gs_base. Calling the pkvm\u0027s code before deprivileging means using the host gs_base, and if some percpu variable is reading/writing by pkvm\u0027s code via using the host gs_base, then such variable seen by the pkvm after driprivilege is incorrect as the pkvm will find out them via its own gs_base. Currently the __pkvm_init_finalise initialize some pkvm\u0027s percpu variable, e.g. this_cpu_write(host_vcpu, vcpu), and doing this in the host environment is incorrect. Of cause, this can be fixed via using \"per_cpu(host_vcpu, cpu) \u003d vcpu\" which can take the pkvm\u0027s gs_base explicitly.\n\nProbably there are more changes needed to make it working. But looks like these changes are more complicated than the error handling.",
+      "parentUuid": "cda8bb7a_b07ef381",
+      "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
