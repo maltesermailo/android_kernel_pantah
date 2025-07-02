@@ -16,6 +16,24 @@
       "message": "we really want hooks to be tracepoints but not trace events. For now, can we just revert that upstream patch while we figure out the right approach?",
       "revId": "c96325618362dac6be74f83bf20b3dfaefaebd5c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3824ad39_b14642e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-07-02T23:11:24Z",
+      "side": 1,
+      "message": "Using this new `DECLARE_TRACE_EVENT()` by itself doesn\u0027t create a trace event. It was added so the regular `TRACE_EVENT()` macro could declare the trace function without the new `_tp` suffix.\n\nThat is my analysis of Steven\u0027s changes. Note that I also checked that none of the trace_android_vh_* functions got exposed to userspace under `/sys/kernel/tracing/events`.\n\nMaybe a name different naming of `DECLARE_TRACE_EVENT()` could have avoided the mixup? I guess this macro is only intended to be used by `TRACE_EVENT()` and thus the naming.\n\nThis is the only way that I found to keep the status quo for vendor hooks in a simple way. I don\u0027t know that reverting Steven\u0027s commit is feasible, as we would need to revert or modify several patches that now depend on this new behavior.",
+      "parentUuid": "0ee3e424_8649b73e",
+      "revId": "c96325618362dac6be74f83bf20b3dfaefaebd5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
