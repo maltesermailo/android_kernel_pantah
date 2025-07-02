@@ -54,6 +54,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a201096_27cbdc7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-07-02T06:38:26Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0ed28a67_f1892f5b",
+      "revId": "59d573878b5a8d1d0839168fb3543281d2ee7cc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28559ec8_adf26b05",
@@ -91,6 +109,30 @@
       "side": 1,
       "message": "WARN_ON() will reboot a device only if panic_on_warn is enabled, right? I don\u0027t think we enable it in GKI.\n\nWARN_ON() is quite prevalent in upstream mm code. People even are talking about removing VM_BUG_ON()/VM_WARN_ON() because in production they are usually disabled.",
       "parentUuid": "28559ec8_adf26b05",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 18
+      },
+      "revId": "59d573878b5a8d1d0839168fb3543281d2ee7cc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba468ca6_297d0012",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-07-02T06:38:26Z",
+      "side": 1,
+      "message": "Some of the users of GKI kernels DO enable `panic_on_warn`, so please don\u0027t do this.  Properly handle the error, don\u0027t write code that will be guaranteed to generate a CVE eventually :)",
+      "parentUuid": "10597a5f_df25d4e4",
       "range": {
         "startLine": 215,
         "startChar": 0,
