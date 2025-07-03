@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e223d870_d248353c",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 680,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-07-03T09:19:38Z",
+      "side": 1,
+      "message": "You\u0027re repeating this logic over 3 CLs. Could we refactor it?",
+      "range": {
+        "startLine": 669,
+        "startChar": 0,
+        "endLine": 680,
+        "endChar": 93
+      },
+      "revId": "e7359b473028516f423bdbcc96274d4b61e0b92c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bea7fc8f_a711cd1c",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-07-03T09:19:38Z",
+      "side": 1,
+      "message": "Instead of going through this, you can cast `name` to `*mut [u8; ASHMEM_FULL_NAME_LEN]`, turn it to a reference and pass it directly to `full_name`.",
+      "revId": "e7359b473028516f423bdbcc96274d4b61e0b92c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
