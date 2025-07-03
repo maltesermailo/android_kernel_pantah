@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ded12fa_b9854880",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-07-03T19:56:47Z",
+      "side": 1,
+      "message": "I\u0027m not sure, but thought of checking: would it be useful to allow host to access __hyp_mem_base in case of any pkvm memory pool corruption cases? One case I had an encounter with, was debugging the crash when device reserved memory\u0027s hyp_page was not accessible. Not sure if such case would pop up.",
+      "fixSuggestions": [
+        {
+          "fixId": "2db4fd41_05132663",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+              "range": {
+                "startLine": 270,
+                "startChar": 0,
+                "endLine": 275,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * We don\u0027t unmap the reserved memory, because it may be useful for\n\t * debugging in case of any pkvm memory pool corruption cases.\n\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3ee0ceb17303a4e2f504a2e9fc355bdec5860222",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
