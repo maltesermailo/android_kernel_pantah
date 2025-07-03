@@ -126,7 +126,6 @@ static __init int check_and_init_iommu(struct pkvm_hyp *pkvm)
 	struct dmar_drhd_unit *drhd;
 	int pgsz_mask = 1 << PG_LEVEL_4K;
 	int pgt_level = 0;
-	void __iomem *addr;
 	u64 reg_size;
 	u64 cap, ecap;
 	int index = 0, ret;
@@ -192,17 +191,12 @@ static __init int check_and_init_iommu(struct pkvm_hyp *pkvm)
 			return -EINVAL;
 		}
 
-		addr = ioremap(drhd->reg_base_addr, VTD_PAGE_SIZE);
-		if (!addr) {
-			pr_err("pkvm: failed to map drhd reg physical addr 0x%llx\n",
-				drhd->reg_base_addr);
-			return -EINVAL;
-		}
-
 		info = &pkvm->iommu_infos[index];
-		cap = readq(addr + DMAR_CAP_REG);
-		ecap = readq(addr + DMAR_ECAP_REG);
-		iounmap(addr);
+		/* The host IOMMU reads the SATC entries and enables ECAPS.DTE for those units.
+		 * Copy the capabilities from the host IOMMU driver.
+		*/
+		cap = info->cap = drhd->iommu->cap;
+		ecap = info->ecap = drhd->iommu->ecap;
 
 		/*
 		 * If pkvm IOMMU works in scalable mode, it requires to use nested translation,

@@ -3015,6 +3015,65 @@ int dmar_iommu_notify_scope_dev(struct dmar_pci_notify_info *info)
 	return 0;
 }
 
+#ifdef CONFIG_PKVM_INTEL
+
+/* Bit 2 of ecap register enables Device TLB support (DTE) */
+#define VTD_ECAP_DTE (1UL << 2)
+
+static int dev_lookup_drhd(struct device *dev, struct dmar_drhd_unit **drhd)
+{
+	struct device *_dev;
+	struct dmar_drhd_unit *_drhd;
+	int i;
+
+	for_each_drhd_unit(_drhd) {
+		if (_drhd->ignored)
+			continue;
+
+		for_each_dev_scope(_drhd->devices, _drhd->devices_cnt, i, _dev) {
+			if (_dev == NULL)
+				continue;
+			if(_dev == dev) {
+				*drhd = _drhd;
+				return 1;
+			}
+		}
+	}
+
+	return 0;
+}
+
+/**
+ * dmar_iommu_enable_dte - Enable Device TLB support (DTE) for devices under
+ * SATC
+ *
+ * This function iterates over all SATC units and enables Device TLB support
+ * (by setting the DTE bit in the ecap register) for IOMMUs associated with
+ * devices listed in the SATC tables. This is done because Intel guarantees
+ * that devices under SATC are trusted and can use Device TLBs.
+ * No parameters.
+ */
+void dmar_iommu_enable_dte(void)
+{
+	struct dmar_drhd_unit *drhd;
+	struct dmar_satc_unit *satcu;
+	struct device *dev;
+	int i;
+
+	list_for_each_entry(satcu, &dmar_satc_units, list)
+		for_each_dev_scope(satcu->devices, satcu->devices_cnt, i, dev)
+			if(dev != NULL)
+				if(dev_lookup_drhd(dev, &drhd))
+					if(!ecap_dev_iotlb_support(drhd->iommu->ecap)) {
+						pr_info("%s listed in SATC, enabling DTE \n",
+								dev_name(dev));
+						/* Set Device TLB Enable (DTE) bit in ecap */
+						drhd->iommu->ecap |= VTD_ECAP_DTE;
+					}
+}
+
+#endif
+
 static void intel_disable_iommus(void)
 {
 	struct intel_iommu *iommu = NULL;

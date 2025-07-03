@@ -60,6 +60,8 @@ struct pkvm_host_vm {
 struct pkvm_iommu_info {
 	u64 reg_phys;
 	u64 reg_size;
+	u64 cap;
+	u64 ecap;
 };
 
 struct pkvm_hyp {

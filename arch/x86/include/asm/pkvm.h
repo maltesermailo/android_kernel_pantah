@@ -74,7 +74,7 @@ static inline void pkvm_writel(void __iomem *reg, unsigned long reg_phys,
 		writel(val, reg + offset);
 }
 
-static inline void pkvm_update_iommu_virtual_caps(u64 *cap, u64 *ecap)
+static inline void pkvm_update_iommu_caps(u64 *cap, u64 *ecap)
 {
 #ifndef __PKVM_HYP__
 	if (!enable_pkvm)
@@ -131,7 +131,12 @@ static inline void pkvm_update_iommu_virtual_caps(u64 *cap, u64 *ecap)
 		 *
 		 * To resolve this, tell the host IOMMU driver not to enable
 		 * any device's ATS as pkvm controls IOMMU not to enable the
-		 * device TLB.
+		 * device TLB. The only exception to this rule are the devices
+		 * listed under the SATC ACPI entries (Integrated devices),
+		 * as Intel guarantees the translation protection cannot
+		 * be bypassed for these devices. The host IOMMU driver parses
+		 * the SATC entries and enables ATS for these devices at a later
+		 * stage.
 		 */
 		*ecap &= ~(1UL << 2);
 	}

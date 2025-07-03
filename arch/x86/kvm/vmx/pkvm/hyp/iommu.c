@@ -502,8 +502,9 @@ static bool sync_shadow_context_entry(struct id_sync_data *sdata)
 			tmp.hi = guest_ce->hi;
 			tmp.lo = sdata->shadow_pa | (guest_ce->lo & 0xfff);
 
-			/* Clear DTE to make sure device TLB is disabled for security */
-			context_sm_clear_dte(&tmp);
+			/* Clear DTE for devices without Device TLB support(DT) */
+			if(!ecap_dev_iotlb_support(sdata->iommu_ecap))
+				context_sm_clear_dte(&tmp);
 		}
 	} else {
 		/*
@@ -904,8 +905,8 @@ int pkvm_init_iommu(unsigned long mem_base, unsigned long nr_pages)
 		if (ret)
 			return ret;
 
-		piommu->iommu.cap = readq(piommu->iommu.reg + DMAR_CAP_REG);
-		piommu->iommu.ecap = readq(piommu->iommu.reg + DMAR_ECAP_REG);
+		piommu->iommu.cap = info->cap;
+		piommu->iommu.ecap = info->ecap;
 		/* cache the enabled features from Global Status register */
 		piommu->iommu.gcmd = readl(piommu->iommu.reg + DMAR_GSTS_REG) &
 				     DMAR_GSTS_EN_BITS;
@@ -1537,9 +1538,8 @@ static void initialize_viommu_reg(struct pkvm_iommu *iommu)
 	struct viommu_reg *vreg = &iommu->viommu.vreg;
 	void __iomem *reg_base = iommu->iommu.reg;
 
-	vreg->cap = readq(reg_base + DMAR_CAP_REG);
-	vreg->ecap = readq(reg_base + DMAR_ECAP_REG);
-	pkvm_update_iommu_virtual_caps(&vreg->cap, &vreg->ecap);
+	vreg->cap = iommu->iommu.cap;
+	vreg->ecap = iommu->iommu.ecap;
 
 	vreg->gsts = readl(reg_base + DMAR_GSTS_REG);
 	vreg->rta = readq(reg_base + DMAR_RTADDR_REG);

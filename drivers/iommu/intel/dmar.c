@@ -117,6 +117,7 @@ void dmar_free_dev_scope(struct dmar_dev_scope **devices, int *cnt)
 	*cnt = 0;
 }
 
+
 /* Optimize out kzalloc()/kfree() for normal cases */
 static char dmar_pci_notify_info_buf[64];
 
@@ -309,8 +310,10 @@ static int dmar_pci_bus_add_dev(struct dmar_pci_notify_info *info)
 		if (ret)
 			break;
 	}
-	if (ret >= 0)
+	if (ret >= 0) {
 		ret = dmar_iommu_notify_scope_dev(info);
+		dmar_iommu_enable_dte();
+	}
 	if (ret < 0 && dmar_dev_scope_status == 0)
 		dmar_dev_scope_status = ret;
 
@@ -995,7 +998,7 @@ static int map_iommu(struct intel_iommu *iommu, struct dmar_drhd_unit *drhd)
 		goto unmap;
 	}
 #ifdef CONFIG_PKVM_INTEL
-	pkvm_update_iommu_virtual_caps(&iommu->cap, &iommu->ecap);
+	pkvm_update_iommu_caps(&iommu->cap, &iommu->ecap);
 #endif
 
 	/* the registers might be more than one page */
