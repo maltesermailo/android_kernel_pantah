@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c91c4e01_bd59483f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-07-03T22:27:12Z",
+      "side": 1,
+      "message": "In the latest versions it is a bit different: we do step 1 and then step 2 for each symbol individually?",
+      "revId": "db87712061595251a8a61fc3c333b17b2119a2e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c3ca732_87a3be98",
+        "filename": "arch/x86/kernel/alternative.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1050,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-07-03T22:27:12Z",
+      "side": 1,
+      "message": "It seems like with such cpu feature checks we expose implementation details that should be hidden inside patch_retpoline() and patch_return()... Maybe we can just call patch_pkvm() unconditionally, without these checks?",
+      "revId": "db87712061595251a8a61fc3c333b17b2119a2e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "227ffa53_8397faeb",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/compiling_cmds.sh",
         "patchSetId": 8
