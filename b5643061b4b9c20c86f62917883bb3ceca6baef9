@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d09bc51_8647a4c3",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2025-07-03T15:45:23Z",
+      "side": 1,
+      "message": "#include \u003ctrace/events/kmem.h\u003e\n\n?",
+      "fixSuggestions": [
+        {
+          "fixId": "6cbf529e_72007d7f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 34,
+                "startChar": 0,
+                "endLine": 34,
+                "endChar": 0
+              },
+              "replacement": "#include \u003ctrace/events/kmem.h\u003e\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b5643061b4b9c20c86f62917883bb3ceca6baef9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0621e56_c0a0d3cd",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1409599
+      },
+      "writtenOn": "2025-07-03T15:45:23Z",
+      "side": 1,
+      "message": "My build fails here. Maybe",
+      "range": {
+        "startLine": 201,
+        "startChar": 1,
+        "endLine": 201,
+        "endChar": 22
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8def4e8b_7daeca60",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 201,
+                "startChar": 0,
+                "endLine": 202,
+                "endChar": 0
+              },
+              "replacement": "\ttrace_android_vh_dmabuf_rss_stat(rss, dmabuf-\u003esize, dmabuf);\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 296,
+                "startChar": 0,
+                "endLine": 297,
+                "endChar": 0
+              },
+              "replacement": "\t\ttrace_android_vh_dmabuf_rss_stat(rss, -dmabuf-\u003esize, dmabuf);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b5643061b4b9c20c86f62917883bb3ceca6baef9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
