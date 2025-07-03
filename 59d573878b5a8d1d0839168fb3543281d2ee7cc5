@@ -260,6 +260,30 @@
       },
       "revId": "59d573878b5a8d1d0839168fb3543281d2ee7cc5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c145485_9210aae3",
+        "filename": "include/linux/dma-buf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-07-03T07:06:01Z",
+      "side": 1,
+      "message": "It\u0027s not just the contention, it\u0027s the cache flush issues as this is going to be on a fast-path, right?  A lock for a list-head is understandable, but if you have a lock, why do those need to be atomic values and not just a u64?",
+      "parentUuid": "56778504_b44ed6f3",
+      "range": {
+        "startLine": 677,
+        "startChar": 0,
+        "endLine": 677,
+        "endChar": 17
+      },
+      "revId": "59d573878b5a8d1d0839168fb3543281d2ee7cc5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
