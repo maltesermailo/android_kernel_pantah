@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9758cc86_b3a5eb77",
+        "filename": "kernel/fork.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2319,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-07-03T07:04:49Z",
+      "side": 1,
+      "message": "taking a lock and ALSO doing 3 atomic reads is really heavy, why do you need the lock at all?  Or better yet, why do those need to be atomics?  This is going to be a fast-path, so speed and cache flushes matter, right?",
+      "range": {
+        "startLine": 2316,
+        "startChar": 0,
+        "endLine": 2319,
+        "endChar": 46
+      },
+      "revId": "78335ac34bb461a6c209a95eff069f5ad7865d59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
