@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a4baaf4_1992aa62",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/compiling_cmds.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-07-04T16:06:27Z",
+      "side": 1,
+      "message": "nit: we can also add space here.\n```suggestion\n\t\tidx \u003d index($1, \".\");\n```",
+      "revId": "5744c13951dc55008d772148a6899861a46338f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6818887e_241c3054",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/compiling_cmds.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-07-04T16:06:27Z",
+      "side": 1,
+      "message": "and here :)\n```suggestion\n\t\t\tidx \u003d index($1, \"__pkvm___x86_indirect_\");\n```",
+      "revId": "5744c13951dc55008d772148a6899861a46338f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e064a36_e90db985",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/compiling_cmds.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-07-04T16:06:27Z",
+      "side": 1,
+      "message": "and here :)",
+      "fixSuggestions": [
+        {
+          "fixId": "305368ed_c8a2b181",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/compiling_cmds.sh",
+              "range": {
+                "startLine": 48,
+                "startChar": 0,
+                "endLine": 49,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\tprint $1, substr($1, 8)\"__pkvm\"\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5744c13951dc55008d772148a6899861a46338f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
