@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2e0bde82_5e5eac96",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-07-04T02:51:53Z",
+      "side": 1,
+      "message": "Yes, will update the commit message accordingly.",
+      "parentUuid": "c91c4e01_bd59483f",
+      "revId": "db87712061595251a8a61fc3c333b17b2119a2e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5c3ca732_87a3be98",
         "filename": "arch/x86/kernel/alternative.c",
         "patchSetId": 8
@@ -31,6 +49,24 @@
       "writtenOn": "2025-07-03T22:27:12Z",
       "side": 1,
       "message": "It seems like with such cpu feature checks we expose implementation details that should be hidden inside patch_retpoline() and patch_return()... Maybe we can just call patch_pkvm() unconditionally, without these checks?",
+      "revId": "db87712061595251a8a61fc3c333b17b2119a2e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81c22211_510220d1",
+        "filename": "arch/x86/kernel/alternative.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1050,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-07-04T02:51:53Z",
+      "side": 1,
+      "message": "patch_retpoline/patch_return will patch the code with specific thunks or patch the code back with indirect call or ret, according to the feature checks. So at the outside of the patch_retpoline/patch_return, we don\u0027t know which case it is. If it is case patching the code back, then we don\u0027t need to call patch_pkvm. So added the checks before calling patch_pkvm.",
+      "parentUuid": "5c3ca732_87a3be98",
       "revId": "db87712061595251a8a61fc3c333b17b2119a2e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
