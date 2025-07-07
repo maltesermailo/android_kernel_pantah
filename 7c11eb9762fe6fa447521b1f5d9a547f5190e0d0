@@ -16,6 +16,24 @@
       "message": "wait, this is changing the functionality of the existing hooks, which could cause big problems for existing users.  Are you _SURE_ this is ok to do?",
       "revId": "7c11eb9762fe6fa447521b1f5d9a547f5190e0d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c442900f_2b7f4c89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-07-07T16:03:00Z",
+      "side": 1,
+      "message": "This is fixing a bug. The _start() gets called unconditionally, but _end() is missed if the function returns early. The logic changed from the 6.6 version so the bug was introduced when the patch was cherry-picked without refactoring for the logic change.",
+      "parentUuid": "220ae59e_fe1b2244",
+      "revId": "7c11eb9762fe6fa447521b1f5d9a547f5190e0d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
