@@ -17,6 +17,9 @@
 #ifdef CONFIG_CMA
 #include <linux/cma.h>
 #endif
+#ifdef CONFIG_GCMA_SYSFS
+#include <linux/gcma.h>
+#endif
 #include <linux/zswap.h>
 #include <trace/hooks/mm.h>
 #include <asm/page.h>
@@ -159,6 +162,11 @@ static int meminfo_proc_show(struct seq_file *m, void *v)
 	show_val_kb(m, "CmaTotal:       ", totalcma_pages);
 	show_val_kb(m, "CmaFree:        ",
 		    global_zone_page_state(NR_FREE_CMA_PAGES));
+#endif
+#ifdef CONFIG_GCMA_SYSFS
+	show_val_kb(m, "GcmaTotal:      ", gcma_stat_get(TOTAL_PAGE));
+	show_val_kb(m, "GcmaFree:       ", gcma_stat_get(FREE_PAGE));
+	show_val_kb(m, "GcmaCached:     ", gcma_stat_get(CACHED_PAGE));
 #endif
 	trace_android_vh_meminfo_proc_show(m);
 	trace_android_rvh_meminfo_proc_show(m);
