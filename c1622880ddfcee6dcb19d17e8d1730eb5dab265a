@@ -376,6 +376,24 @@
       "parentUuid": "db5e164e_2eb162d9",
       "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aefd00ef_b8925c5d",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-07-08T14:06:52Z",
+      "side": 1,
+      "message": "I have verified it works as intended and no regressions seen. But I am keeping the old implementation for now as this one also doesn\u0027t help with the case of global static key. I shall bring this implementation back in future if we find any other use cases.\n\nFor the global static key, I am thinking of protecting(unmap from host) IOMMU mmio space after enabling the global static key (during pkvm_iommu_driver_init). Now that we initialize iommu after deprivilege and pkvm_init, we have an oppurtunity to unmap the pages during init. And this will make sure that we do not have an ambiguous state of accessing the iommu, since all cpus would have already switched to hypercall before pkvm_iommu_driver_init. By this, we can have a global flag to denote iommu initialization success that could be used else where as well. Would this be a sensible approach?",
+      "parentUuid": "ffee40b8_a549e14b",
+      "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
