@@ -22,6 +22,47 @@
       },
       "revId": "b984cb9131e7a1bbe8794cee4a2f0f4ddd8d8c02",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7062b363_205fd9c2",
+        "filename": "fs/proc/base.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 3527,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-07-08T18:24:34Z",
+      "side": 1,
+      "message": "Isn\u0027t this file just read-only even though it\u0027s supposed to be writable?",
+      "range": {
+        "startLine": 3527,
+        "startChar": 24,
+        "endLine": 3527,
+        "endChar": 27
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c68f69ba_6c255a79",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "fs/proc/base.c",
+              "range": {
+                "startLine": 3527,
+                "startChar": 0,
+                "endLine": 3528,
+                "endChar": 0
+              },
+              "replacement": "\tREG(\"dmabuf_rss_hwm\", 0644, proc_dmabuf_rss_hwm_operations),\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b984cb9131e7a1bbe8794cee4a2f0f4ddd8d8c02",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
