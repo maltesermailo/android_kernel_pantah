@@ -412,6 +412,24 @@
       "parentUuid": "aefd00ef_b8925c5d",
       "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7ed36a3_c14107dd",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-07-08T16:36:08Z",
+      "side": 1,
+      "message": "\u003e Hmm, indeed, why not just do that, sounds like a great idea. AIU, it means moving pkvm_host_ept_unmap() from pkvm_init_iommu() to, for example, activate_iommu() which is postponed until pkvm_iommu_driver_init in aosp/3590992. (The rest of pkvm_init_iommu() still should be done before setting the static key, not after it, so that pKVM is able to handle IOMMU MMIO hypercalls at any moment after the static key is set.)\n\nYeah exactly. I shall test it and push it with next iteration. Thanks",
+      "parentUuid": "99364580_5a5fa08f",
+      "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
