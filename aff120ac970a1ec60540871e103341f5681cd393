@@ -1,0 +1,209 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "172cbeb0_bc669c5f",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-07-08T08:43:35Z",
+      "side": 1,
+      "message": "This function should be unsafe and require that `file` references a valid file for the duration of \u0027a.",
+      "fixSuggestions": [
+        {
+          "fixId": "ea30fce3_e8040f46",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/staging/android/ashmem_rust.rs",
+              "range": {
+                "startLine": 668,
+                "startChar": 0,
+                "endLine": 669,
+                "endChar": 0
+              },
+              "replacement": "/// # Safety\n///\n/// The caller must ensure that `file` references a valid file for the duration of `\u0027a`.\nunsafe fn get_ashmem_area\u003c\u0027a\u003e(\n"
+            },
+            {
+              "path": "drivers/staging/android/ashmem_rust.rs",
+              "range": {
+                "startLine": 701,
+                "startChar": 0,
+                "endLine": 702,
+                "endChar": 0
+              },
+              "replacement": "    match unsafe { get_ashmem_area(file) } {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "aff120ac970a1ec60540871e103341f5681cd393",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcdffc5a_2ec3c00a",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-07-08T08:43:35Z",
+      "side": 1,
+      "message": "Although this isn\u0027t wrong, it\u0027s a pretty verbose way to write a reference to `Ashmem`.\n```suggestion\n) -\u003e Result\u003c\u0026\u0027a Ashmem, Error\u003e {\n```",
+      "revId": "aff120ac970a1ec60540871e103341f5681cd393",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ddbbbdf_169f09e9",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 686,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-07-08T08:43:35Z",
+      "side": 1,
+      "message": "It\u0027s more idiomatic to place the `#[no_mangle]` after the documentation.",
+      "revId": "aff120ac970a1ec60540871e103341f5681cd393",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e1a1b83_9c8ad28b",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-07-08T08:43:35Z",
+      "side": 1,
+      "message": "You just require that the file is valid. It doesn\u0027t matter what mechanism the user uses to enforce that.",
+      "range": {
+        "startLine": 691,
+        "startChar": 0,
+        "endLine": 692,
+        "endChar": 37
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "88cb95fd_ee093613",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/staging/android/ashmem_rust.rs",
+              "range": {
+                "startLine": 655,
+                "startChar": 0,
+                "endLine": 657,
+                "endChar": 0
+              },
+              "replacement": "/// The file must be valid for the duration of this function.\n"
+            },
+            {
+              "path": "drivers/staging/android/ashmem_rust.rs",
+              "range": {
+                "startLine": 691,
+                "startChar": 0,
+                "endLine": 693,
+                "endChar": 0
+              },
+              "replacement": "/// 2. The file must be valid for the duration of this function.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "aff120ac970a1ec60540871e103341f5681cd393",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d885294_67725366",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-07-08T08:43:35Z",
+      "side": 1,
+      "message": "It is considered good coding-style to use `.cast()` for casting raw pointers because `as` casts can also accidentally change the mutability of the pointer, whereas `.cast()` can only change the type and not the mutability.\n```suggestion\n            let name_buffer \u003d name.cast::\u003c[u8; ASHMEM_FULL_NAME_LEN]\u003e();\n```",
+      "revId": "aff120ac970a1ec60540871e103341f5681cd393",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f2dd3a9_18d9f3b4",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-07-08T08:43:35Z",
+      "side": 1,
+      "message": "The requirement is stronger than \"non-null\". If I called this function with `(char *) 0xdeadbeef` then that would also be incorrect even though the pointer is non-null. Generally, we just say that the pointer is valid for writing, which implies that it\u0027s non-null.",
+      "range": {
+        "startLine": 705,
+        "startChar": 0,
+        "endLine": 706,
+        "endChar": 84
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d7e9f416_ed93d33c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/staging/android/ashmem_rust.rs",
+              "range": {
+                "startLine": 705,
+                "startChar": 0,
+                "endLine": 707,
+                "endChar": 0
+              },
+              "replacement": "            // SAFETY: The caller guarantees that `name` points to a valid buffer of at least\n            // `ASHMEM_FULL_NAME_LEN` bytes.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "aff120ac970a1ec60540871e103341f5681cd393",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e371c6a3_36c48323",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-07-08T08:43:35Z",
+      "side": 1,
+      "message": "This makes it look like the unsafe operation is `full_name`, but that\u0027s not the case.\n```suggestion\n            asma.full_name(unsafe { \u0026mut *name_buffer });\n```\nAdditionally, you can take the lock on the same line:\n```suggestion\n            ashmem.inner.lock().full_name(unsafe { \u0026mut *name_buffer });\n```",
+      "revId": "aff120ac970a1ec60540871e103341f5681cd393",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
