@@ -394,6 +394,24 @@
       "parentUuid": "ffee40b8_a549e14b",
       "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99364580_5a5fa08f",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-07-08T16:23:21Z",
+      "side": 1,
+      "message": "\u003e For the global static key, I am thinking of protecting(unmap from host) IOMMU mmio space after enabling the global static key (during pkvm_iommu_driver_init). Now that we initialize iommu after deprivilege and pkvm_init, we have an oppurtunity to unmap the pages during init. And this will make sure that we do not have an ambiguous state of accessing the iommu, since all cpus would have already switched to hypercall before pkvm_iommu_driver_init. \n\nHmm, indeed, why not just do that, sounds like a great idea. AIU, it means moving pkvm_host_ept_unmap() from pkvm_init_iommu() to, for example, activate_iommu() which is postponed until pkvm_iommu_driver_init in aosp/3590992. (The rest of pkvm_init_iommu() still should be done before setting the static key, not after it, so that pKVM is able to handle IOMMU MMIO hypercalls at any moment after the static key is set.)",
+      "parentUuid": "aefd00ef_b8925c5d",
+      "revId": "c1622880ddfcee6dcb19d17e8d1730eb5dab265a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
