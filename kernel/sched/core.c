@@ -2134,7 +2134,7 @@ inline bool dequeue_task(struct rq *rq, struct task_struct *p, int flags)
 	uclamp_rq_dec(rq, p);
 	trace_android_rvh_dequeue_task(rq, p, flags);
 	dequeue_task_result = p->sched_class->dequeue_task(rq, p, flags);
-	trace_android_rvh_after_dequeue_task(rq, p, flags);
+	trace_android_rvh_after_dequeue_task(rq, p, flags, &dequeue_task_result);
 	return dequeue_task_result;
 }
 
@@ -3604,7 +3604,7 @@ int select_fallback_rq(int cpu, struct task_struct *p)
 			 *
 			 * More yuck to audit.
 			 */
-			do_set_cpus_allowed(p, task_cpu_possible_mask(p));
+			do_set_cpus_allowed(p, task_cpu_fallback_mask(p));
 			state = fail;
 			break;
 		case fail:
