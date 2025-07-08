@@ -1,0 +1,139 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d17c231_9f346d98",
+        "filename": "arch/x86/kernel/alternative.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1140,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-07-08T22:43:34Z",
+      "side": 1,
+      "message": "minor: Since we are trying patch_kvm if `dest !\u003d \u0026__x86_return_thunk`, do we need to WARN here? We can probably return a value from patch_kvm and emit WARNING if its not a pkvm sym?",
+      "fixSuggestions": [
+        {
+          "fixId": "128ef19a_85d90cad",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kernel/alternative.c",
+              "range": {
+                "startLine": 961,
+                "startChar": 0,
+                "endLine": 962,
+                "endChar": 0
+              },
+              "replacement": "static bool patch_pkvm(void *addr)\n"
+            },
+            {
+              "path": "arch/x86/kernel/alternative.c",
+              "range": {
+                "startLine": 969,
+                "startChar": 0,
+                "endLine": 970,
+                "endChar": 0
+              },
+              "replacement": "\t\treturn false;\n"
+            },
+            {
+              "path": "arch/x86/kernel/alternative.c",
+              "range": {
+                "startLine": 972,
+                "startChar": 0,
+                "endLine": 973,
+                "endChar": 0
+              },
+              "replacement": "\t\treturn false;\n"
+            },
+            {
+              "path": "arch/x86/kernel/alternative.c",
+              "range": {
+                "startLine": 977,
+                "startChar": 0,
+                "endLine": 978,
+                "endChar": 0
+              },
+              "replacement": "\t\treturn false;\n"
+            },
+            {
+              "path": "arch/x86/kernel/alternative.c",
+              "range": {
+                "startLine": 983,
+                "startChar": 0,
+                "endLine": 984,
+                "endChar": 0
+              },
+              "replacement": "\t\treturn false;\n"
+            },
+            {
+              "path": "arch/x86/kernel/alternative.c",
+              "range": {
+                "startLine": 987,
+                "startChar": 0,
+                "endLine": 987,
+                "endChar": 0
+              },
+              "replacement": "\treturn true;\n"
+            },
+            {
+              "path": "arch/x86/kernel/alternative.c",
+              "range": {
+                "startLine": 989,
+                "startChar": 0,
+                "endLine": 990,
+                "endChar": 0
+              },
+              "replacement": "static inline bool patch_pkvm(void *addr) { return false; }\n"
+            },
+            {
+              "path": "arch/x86/kernel/alternative.c",
+              "range": {
+                "startLine": 1042,
+                "startChar": 0,
+                "endLine": 1043,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tpatch_pkvm(addr); /* ignore return value */\n"
+            },
+            {
+              "path": "arch/x86/kernel/alternative.c",
+              "range": {
+                "startLine": 1139,
+                "startChar": 0,
+                "endLine": 1143,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (__static_call_fixup(addr, op, dest))\n"
+            },
+            {
+              "path": "arch/x86/kernel/alternative.c",
+              "range": {
+                "startLine": 1145,
+                "startChar": 0,
+                "endLine": 1145,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (dest !\u003d \u0026__x86_return_thunk) {\n\t\t\tif (!patch_pkvm(addr))\n\t\t\t\tWARN_ONCE(1, \"missing return thunk: %pS-%pS: %*ph\",\n\t\t\t\t\t  addr, dest, 5, addr);\n\t\t\tcontinue;\n\t\t}\n\n"
+            },
+            {
+              "path": "arch/x86/kernel/alternative.c",
+              "range": {
+                "startLine": 1157,
+                "startChar": 0,
+                "endLine": 1158,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tpatch_pkvm(addr); /* ignore return value */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0da2bdd1c26a0346a4c381528d70cdda73815579",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
