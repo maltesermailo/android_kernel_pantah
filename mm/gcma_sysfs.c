@@ -22,6 +22,12 @@ void gcma_stat_add(enum gcma_stat_type type, unsigned long delta)
 	atomic64_add(delta, &gcma_stats[type]);
 }
 
+u64 gcma_stat_get(enum gcma_stat_type type)
+{
+	return (u64)atomic64_read(&gcma_stats[type]);
+}
+EXPORT_SYMBOL_GPL(gcma_stat_get);
+
 /*
  * This all compiles without CONFIG_SYSFS, but is a waste of space.
  */
@@ -32,35 +38,35 @@ void gcma_stat_add(enum gcma_stat_type type, unsigned long delta)
 static ssize_t stored_show(struct kobject *kobj,
 		struct kobj_attribute *attr, char *buf)
 {
-	return sysfs_emit(buf, "%llu\n", (u64)atomic64_read(&gcma_stats[STORED_PAGE]));
+	return sysfs_emit(buf, "%llu\n", gcma_stat_get(STORED_PAGE));
 }
 GCMA_ATTR_RO(stored);
 
 static ssize_t loaded_show(struct kobject *kobj,
 		struct kobj_attribute *attr, char *buf)
 {
-	return sysfs_emit(buf, "%llu\n", (u64)atomic64_read(&gcma_stats[LOADED_PAGE]));
+	return sysfs_emit(buf, "%llu\n", gcma_stat_get(LOADED_PAGE));
 }
 GCMA_ATTR_RO(loaded);
 
 static ssize_t evicted_show(struct kobject *kobj,
 		struct kobj_attribute *attr, char *buf)
 {
-	return sysfs_emit(buf, "%llu\n", (u64)atomic64_read(&gcma_stats[EVICTED_PAGE]));
+	return sysfs_emit(buf, "%llu\n", gcma_stat_get(EVICTED_PAGE));
 }
 GCMA_ATTR_RO(evicted);
 
 static ssize_t cached_show(struct kobject *kobj,
 		struct kobj_attribute *attr, char *buf)
 {
-	return sysfs_emit(buf, "%llu\n", (u64)atomic64_read(&gcma_stats[CACHED_PAGE]));
+	return sysfs_emit(buf, "%llu\n", gcma_stat_get(CACHED_PAGE));
 }
 GCMA_ATTR_RO(cached);
 
 static ssize_t discarded_show(struct kobject *kobj,
 		struct kobj_attribute *attr, char *buf)
 {
-	return sysfs_emit(buf, "%llu\n", (u64)atomic64_read(&gcma_stats[DISCARDED_PAGE]));
+	return sysfs_emit(buf, "%llu\n", gcma_stat_get(DISCARDED_PAGE));
 }
 GCMA_ATTR_RO(discarded);
 
