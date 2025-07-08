@@ -50,6 +50,30 @@
       ],
       "revId": "50da7cf1c3e1e11ea540bacee2dc2a997b8c9f29",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c958129e_25c8fb00",
+        "filename": "include/linux/dma-buf.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 658,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-08T16:08:58Z",
+      "side": 1,
+      "message": "This refcount is always accessed under task_dma_buf_info.lock, so no need for extra memory barriers which come with the refcount_t API.",
+      "parentUuid": "1e029e5d_f680d122",
+      "range": {
+        "startLine": 658,
+        "startChar": 0,
+        "endLine": 658,
+        "endChar": 22
+      },
+      "revId": "50da7cf1c3e1e11ea540bacee2dc2a997b8c9f29",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
