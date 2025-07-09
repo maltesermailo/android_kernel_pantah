@@ -16,6 +16,24 @@
       "message": "Just curious: do we need to implement this in the second cl if we are removing it here? Do we break any logic in between if this code was not there in the second patch?",
       "revId": "99d82dbd4b22f63b62076de854ca0608e7df41c4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6097357_2402c41d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-07-09T01:50:21Z",
+      "side": 1,
+      "message": "I think that is just the history of correctly enabling the retpoline. As the retpoline functionality is broken from the first cl already, I don\u0027t think we will break more in the middle. The second cl is just a temperate way to make the retpoline working earlier with the pkvm\u0027s original retpoline.S (ITS mitigation still doesn\u0027t work at this moment). Then until we goes to the tenth cl, the retpoline is functional with the new design, together with ITS mitigation. But I think dropping the second cl is also ok as we don\u0027t really need to make retpoline working earlier. Actually I plan to refine this history for the v61.5 rebasing. Thanks for pointing this out.",
+      "parentUuid": "350e2b76_d94447e2",
+      "revId": "99d82dbd4b22f63b62076de854ca0608e7df41c4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
