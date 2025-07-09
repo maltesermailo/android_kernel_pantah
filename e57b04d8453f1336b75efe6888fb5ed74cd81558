@@ -1,0 +1,62 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7b163b1_23749433",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-07-09T06:47:33Z",
+      "side": 1,
+      "message": "This variable name is somewhat confusing. It sounds like a file, but it\u0027s a boolean.",
+      "fixSuggestions": [
+        {
+          "fixId": "5dca50d6_0558a27d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/staging/android/ashmem_rust.rs",
+              "range": {
+                "startLine": 672,
+                "startChar": 0,
+                "endLine": 674,
+                "endChar": 0
+              },
+              "replacement": "    let is_ashmem \u003d unsafe { is_ashmem_file(file) };\n    if !is_ashmem {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e57b04d8453f1336b75efe6888fb5ed74cd81558",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60c81c7e_35f577ff",
+        "filename": "drivers/staging/android/ashmem_rust.rs",
+        "patchSetId": 5
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-07-09T06:47:33Z",
+      "side": 1,
+      "message": "This safety comment must explain why the preconditions of `is_ashmem_file` are satisfied. The actual precondition listed in its docs is that the file must be valid, so that\u0027s what you should explain here.",
+      "range": {
+        "startLine": 671,
+        "startChar": 0,
+        "endLine": 672,
+        "endChar": 54
+      },
+      "revId": "e57b04d8453f1336b75efe6888fb5ed74cd81558",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
