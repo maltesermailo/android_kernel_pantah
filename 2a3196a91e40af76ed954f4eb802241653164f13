@@ -48,6 +48,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45d03620_c35b12a6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 2043573
+      },
+      "writtenOn": "2025-07-09T23:13:35Z",
+      "side": 1,
+      "message": "OK. It has been modified.",
+      "parentUuid": "94baae1d_bd30f5e1",
+      "range": {
+        "startLine": 26,
+        "startChar": 15,
+        "endLine": 26,
+        "endChar": 18
+      },
+      "revId": "2a3196a91e40af76ed954f4eb802241653164f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5cdf2901_b6a9a8fb",
@@ -61,6 +85,24 @@
       "writtenOn": "2025-07-03T07:09:05Z",
       "side": 1,
       "message": "Why not fix the futex code properly, upstream, instead of changing it\u0027s behavior like this?",
+      "revId": "2a3196a91e40af76ed954f4eb802241653164f13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a859d8c_991ab942",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2043573
+      },
+      "writtenOn": "2025-07-09T23:13:35Z",
+      "side": 1,
+      "message": "Hi Greg,\nThe code futex_wait() function in the Linux community is ok. It is allowed to have return statements in the middle of the function. \nThe issue is that when we later added vendor hooks, we missed two positions. This is related to the commit: https://android-review.googlesource.com/c/kernel/common/+/3491453/3/kernel/futex/waitwake.c",
+      "parentUuid": "5cdf2901_b6a9a8fb",
       "revId": "2a3196a91e40af76ed954f4eb802241653164f13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }

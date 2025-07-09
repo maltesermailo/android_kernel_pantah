@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f14a37f_5e942639",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 2043573
+      },
+      "writtenOn": "2025-07-09T23:13:35Z",
+      "side": 1,
+      "message": "OK.\nUpdated as \"Fixes: Add vendor_hook in futex to fix the OEM scheduling\npriority bug\"",
+      "parentUuid": "c151c275_d86b68e4",
+      "revId": "7c11eb9762fe6fa447521b1f5d9a547f5190e0d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "220ae59e_fe1b2244",
@@ -66,6 +84,24 @@
       "writtenOn": "2025-07-07T16:03:00Z",
       "side": 1,
       "message": "This is fixing a bug. The _start() gets called unconditionally, but _end() is missed if the function returns early. The logic changed from the 6.6 version so the bug was introduced when the patch was cherry-picked without refactoring for the logic change.",
+      "parentUuid": "220ae59e_fe1b2244",
+      "revId": "7c11eb9762fe6fa447521b1f5d9a547f5190e0d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0fcc8af_db8a2fcc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2043573
+      },
+      "writtenOn": "2025-07-09T23:13:35Z",
+      "side": 1,
+      "message": "Hi Greg，\nThe trace_android_vh_futex_wait_end() hook was added by our company to perform post-processing when futex_wait() end. \n\nLogging shows that the function typically returns ret at line 710, while returning at line 729 is rare.\nDuring the 2-hour Monkey test, the return statement on line 720 was executed 184 times, the return on line 725 was executed 3 times, and the return on line 710 was executed a staggering 1,278,144 times. Therefore, it is necessary to add a trace_android_vh_futex_wait_end hook at lines 709/724.\n\nIf other companies are using this hook (unlikely, as the futex owner needs to be customized and passed down from the framework), they should also add hook calls at lines 709 and 724.",
       "parentUuid": "220ae59e_fe1b2244",
       "revId": "7c11eb9762fe6fa447521b1f5d9a547f5190e0d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
