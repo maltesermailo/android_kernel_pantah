@@ -46,6 +46,30 @@
       },
       "revId": "971201321cfeb47a4ace5c6581d948079fcb13c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33de396a_5689e51d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-07-09T15:47:34Z",
+      "side": 1,
+      "message": "\u003e Yes, I agree. This patch is present in drm repo.\n\nWhich patch? The original patch that this is reverting? Or the revert of that patch?\n\nThe original `FROMGIT` patch wasn\u0027t just dropped from upstream. Once it landed in the tree, which is required to use the `FROMGIT` tag, then any further changes regarding the patch require additional commits. If the patch was reverted upstream, then there is a revert patch upstream that must be cherrypicked here also, rather than manually reverting it.\n\nCan you point to the upstream revert of the original `FROMGIT` patch?\n\nIf the patch was not reverted upstream, then I don\u0027t understand this commit message statement.",
+      "parentUuid": "3c75e23b_b3144a00",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 48
+      },
+      "revId": "971201321cfeb47a4ace5c6581d948079fcb13c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
