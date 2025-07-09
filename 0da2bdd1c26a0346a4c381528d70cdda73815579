@@ -134,6 +134,24 @@
       ],
       "revId": "0da2bdd1c26a0346a4c381528d70cdda73815579",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a30a2e30_9f866e4d",
+        "filename": "arch/x86/kernel/alternative.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1140,
+      "author": {
+        "id": 1015280
+      },
+      "writtenOn": "2025-07-09T01:42:12Z",
+      "side": 1,
+      "message": "With this suggested change, probably we don\u0027t need to call patch_pkvm `if (dest !\u003d \u0026__x86_return_thunk)` but just continue. With the current implement, the patch_pkvm is still called when `dest !\u003d \u0026__x86_return_thunk`. I think this should also be fine as eventually patch_pkvm will get a 0 offset for this case and print a log without really patching the pkvm.",
+      "parentUuid": "5d17c231_9f346d98",
+      "revId": "0da2bdd1c26a0346a4c381528d70cdda73815579",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
