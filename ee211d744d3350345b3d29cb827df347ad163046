@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8544316d_4cd0af0a",
+        "filename": "include/linux/dma-buf.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-07-10T01:02:07Z",
+      "side": 1,
+      "message": "`is_dma_buf_file()` also needs a stub.",
+      "fixSuggestions": [
+        {
+          "fixId": "63019272_633b5845",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/dma-buf.h",
+              "range": {
+                "startLine": 792,
+                "startChar": 0,
+                "endLine": 792,
+                "endChar": 0
+              },
+              "replacement": "static inline int is_dma_buf_file(struct file *file) { return 0; }\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ee211d744d3350345b3d29cb827df347ad163046",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
