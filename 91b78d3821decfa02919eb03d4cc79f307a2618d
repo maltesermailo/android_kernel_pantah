@@ -16,6 +16,57 @@
       "message": "Respin Bug: 430819740",
       "revId": "91b78d3821decfa02919eb03d4cc79f307a2618d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3ff83b5_20e421c9",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-07-10T17:46:42Z",
+      "side": 1,
+      "message": "These hooks are added by other CLs, not this one (see the CL on the base branch: https://android-review.git.corp.google.com/c/kernel/common/+/3650293/2/drivers/android/vendor_hooks.c)",
+      "range": {
+        "startLine": 674,
+        "startChar": 0,
+        "endLine": 678,
+        "endChar": 56
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f5f9a4db_5ebf4052",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/vendor_hooks.c",
+              "range": {
+                "startLine": 674,
+                "startChar": 0,
+                "endLine": 674,
+                "endChar": 0
+              },
+              "replacement": "EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pageset_update);\nEXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_xhci_full_reset_on_remove);\n"
+            },
+            {
+              "path": "drivers/android/vendor_hooks.c",
+              "range": {
+                "startLine": 678,
+                "startChar": 0,
+                "endLine": 680,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "91b78d3821decfa02919eb03d4cc79f307a2618d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
