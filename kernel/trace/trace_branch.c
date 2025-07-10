@@ -32,6 +32,7 @@ probe_likely_condition(struct ftrace_likely_data *f, int val, int expect)
 {
 	struct trace_array *tr = branch_tracer;
 	struct trace_buffer *buffer;
+	struct trace_array_cpu *data;
 	struct ring_buffer_event *event;
 	struct trace_branch *entry;
 	unsigned long flags;
@@ -53,7 +54,8 @@ probe_likely_condition(struct ftrace_likely_data *f, int val, int expect)
 
 	raw_local_irq_save(flags);
 	current->trace_recursion |= TRACE_BRANCH_BIT;
-	if (!tracer_tracing_is_on_cpu(tr, raw_smp_processor_id()))
+	data = this_cpu_ptr(tr->array_buffer.data);
+	if (atomic_read(&data->disabled))
 		goto out;
 
 	trace_ctx = tracing_gen_ctx_flags(flags);
