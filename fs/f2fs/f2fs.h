@@ -1782,7 +1782,12 @@ struct f2fs_sb_info {
 	unsigned int dirty_device;		/* for checkpoint data flush */
 	spinlock_t dev_lock;			/* protect dirty_device */
 	bool aligned_blksize;			/* all devices has the same logical blksize */
+<<<<<<< HEAD   (cdee7b2a677e00d3a4fa021c9e8a653cd0ea6523 Merge 6.12.36 into android16-6.12-lts)
 	unsigned int first_zoned_segno;		/* first segno in sequential zone */
+||||||| BASE   (df64e51d4ab83244b6a4eb11eb41f89403611e24 Linux 6.12.36)
+=======
+	unsigned int first_seq_zone_segno;	/* first segno in sequential zone */
+>>>>>>> BRANCH (fbad404f04d758c52bae79ca20d0e7fe5fef91d3 Linux 6.12.37)
 
 	/* For write statistics */
 	u64 sectors_written_start;
