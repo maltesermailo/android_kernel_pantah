@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0f17c69_643c6bb0",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-07-10T01:07:30Z",
+      "side": 1,
+      "message": "nit: this should be `new_rec`",
+      "range": {
+        "startLine": 227,
+        "startChar": 28,
+        "endLine": 227,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0afcd9db_282c455d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 227,
+                "startChar": 0,
+                "endLine": 228,
+                "endChar": 0
+              },
+              "replacement": "\t\tnew_rec \u003d kmalloc(sizeof(*new_rec), GFP_KERNEL);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7a7d621fe750c353a93fd80f7ec52ed96ad8405a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
