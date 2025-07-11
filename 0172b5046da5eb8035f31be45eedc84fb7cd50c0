@@ -16,6 +16,24 @@
       "message": "This is not a clean cherry-pick of the upstream patch. Should it be BACKPORT? If so, please add an annotation of why the change was needed.",
       "revId": "0172b5046da5eb8035f31be45eedc84fb7cd50c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2a32e52_4aa47a24",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2001171
+      },
+      "writtenOn": "2025-07-11T22:55:47Z",
+      "side": 1,
+      "message": "The patch did apply cleanly without any merge conflict. The only diff is the function signature \n```\n    -@@ drivers/usb/host/xhci.c: int xhci_resume(struct xhci_hcd *xhci, bool power_lost, bool is_auto_resume)\n    +@@ drivers/usb/host/xhci.c: int xhci_resume(struct xhci_hcd *xhci, pm_message_t msg)\n```\nbut it has no impact at all to the patch itself.  \nCould you confirm if BACKPORT is the right tag in this case?",
+      "parentUuid": "7b418cfe_d6ef0890",
+      "revId": "0172b5046da5eb8035f31be45eedc84fb7cd50c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
