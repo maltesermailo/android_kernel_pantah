@@ -152,6 +152,24 @@
       "parentUuid": "5d17c231_9f346d98",
       "revId": "0da2bdd1c26a0346a4c381528d70cdda73815579",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5daac54f_68cf3233",
+        "filename": "arch/x86/kernel/alternative.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1140,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-07-11T16:18:23Z",
+      "side": 1,
+      "message": "Looks like the AI did not correctly code my intentions ;-). I was mentioning that we will be spitting a  WARNING message for cases where the addr is a pkvm symbol and we patch successfully in patch_kvm. I was just concerned that WARN_ON might be confusing when we successfully did with apply_return. But this is not a big deal and I am fine either way :-)",
+      "parentUuid": "a30a2e30_9f866e4d",
+      "revId": "0da2bdd1c26a0346a4c381528d70cdda73815579",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
