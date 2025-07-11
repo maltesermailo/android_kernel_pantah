@@ -1,0 +1,85 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18e8aac8_84aeb0b6",
+        "filename": "fs/proc/base.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3337,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-11T16:47:36Z",
+      "side": 1,
+      "message": "I wonder in this case we just report 0 instead of error failure.",
+      "range": {
+        "startLine": 3337,
+        "startChar": 9,
+        "endLine": 3337,
+        "endChar": 15
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9f575fc6_52ed5064",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "fs/proc/base.c",
+              "range": {
+                "startLine": 3331,
+                "startChar": 0,
+                "endLine": 3331,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * If dmabuf accounting record was not allocated, it means that\n\t * the task does not use dmabufs. In this case, report 0.\n\t */\n"
+            },
+            {
+              "path": "fs/proc/base.c",
+              "range": {
+                "startLine": 3336,
+                "startChar": 0,
+                "endLine": 3338,
+                "endChar": 0
+              },
+              "replacement": "\t\tseq_puts(m, \"0\\n\");\n"
+            },
+            {
+              "path": "fs/proc/base.c",
+              "range": {
+                "startLine": 3373,
+                "startChar": 0,
+                "endLine": 3373,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * If dmabuf accounting record was not allocated, it means that\n\t * the task does not use dmabufs. In this case, do nothing.\n\t */\n"
+            },
+            {
+              "path": "fs/proc/base.c",
+              "range": {
+                "startLine": 3378,
+                "startChar": 0,
+                "endLine": 3380,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "fs/proc/base.c",
+              "range": {
+                "startLine": 3526,
+                "startChar": 0,
+                "endLine": 3527,
+                "endChar": 0
+              },
+              "replacement": "\tONE(\"dmabuf_rss\", 0444, proc_dmabuf_rss_show), /* read-only */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2f5952019c6f5f6e045b112d15eb2062344dcca8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
