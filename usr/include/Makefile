@@ -10,10 +10,16 @@ UAPI_CFLAGS := -std=c90 -Wall -Werror=implicit-function-declaration
 
 # In theory, we do not care -m32 or -m64 for header compile tests.
 # It is here just because CONFIG_CC_CAN_LINK is tested with -m32 or -m64.
+<<<<<<< HEAD   (32c443bd6d40c4d3b916bbf787c2eabbc51d4c94 Merge 3b68784d1439 ("MIPS: Prefer cc-option for additions to)
 UAPI_CFLAGS += $(filter -m32 -m64 --target=%, $(KBUILD_CFLAGS))
 
 # USERCFLAGS might contain sysroot location for CC.
 UAPI_CFLAGS += $(USERCFLAGS)
+||||||| BASE   (3b68784d1439f5e2859c07d719cde5457ce39685 MIPS: Prefer cc-option for additions to cflags)
+UAPI_CFLAGS += $(filter -m32 -m64, $(KBUILD_CFLAGS))
+=======
+UAPI_CFLAGS += $(filter -m32 -m64, $(KBUILD_CPPFLAGS) $(KBUILD_CFLAGS))
+>>>>>>> BRANCH (3dea0e7f549ee8ce3ce9d058d6d5c494d9ad02dc Linux 5.15.186)
 
 override c_flags = $(UAPI_CFLAGS) -Wp,-MMD,$(depfile) -I$(objtree)/usr/include
 

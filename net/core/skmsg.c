@@ -681,8 +681,27 @@ start:
 							  len, ingress);
 			if (ret <= 0) {
 				if (ret == -EAGAIN) {
+<<<<<<< HEAD   (32c443bd6d40c4d3b916bbf787c2eabbc51d4c94 Merge 3b68784d1439 ("MIPS: Prefer cc-option for additions to)
 					sk_psock_skb_state(psock, state, skb,
 							   len, off);
+||||||| BASE   (3b68784d1439f5e2859c07d719cde5457ce39685 MIPS: Prefer cc-option for additions to cflags)
+					sk_psock_skb_state(psock, state, len, off);
+
+					/* Delay slightly to prioritize any
+					 * other work that might be here.
+					 */
+					if (sk_psock_test_state(psock, SK_PSOCK_TX_ENABLED))
+						schedule_delayed_work(&psock->work, 1);
+=======
+					sk_psock_skb_state(psock, state, len, off);
+					/* Restore redir info we cleared before */
+					skb_bpf_set_redir(skb, psock->sk, ingress);
+					/* Delay slightly to prioritize any
+					 * other work that might be here.
+					 */
+					if (sk_psock_test_state(psock, SK_PSOCK_TX_ENABLED))
+						schedule_delayed_work(&psock->work, 1);
+>>>>>>> BRANCH (3dea0e7f549ee8ce3ce9d058d6d5c494d9ad02dc Linux 5.15.186)
 					goto end;
 				}
 				/* Hard errors break pipe and stop xmit. */
