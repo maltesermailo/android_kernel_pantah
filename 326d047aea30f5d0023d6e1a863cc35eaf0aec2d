@@ -1,0 +1,121 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd4ce3a4_d6e6635a",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-11T01:47:02Z",
+      "side": 1,
+      "message": "Do we really need this? Furthermore __func__? \n\nAnd return error with -ENOMEM? \n\nCan we simply do\n```\nif (!dmabuf || !task || !task-\u003edmabuf_info)\n    return -EINVAL\n```",
+      "range": {
+        "startLine": 214,
+        "startChar": 2,
+        "endLine": 214,
+        "endChar": 70
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "dbfe8133_dcb6805b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 210,
+                "startChar": 0,
+                "endLine": 211,
+                "endChar": 0
+              },
+              "replacement": "\tif (!dmabuf || !task || !task-\u003edmabuf_info)\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 213,
+                "startChar": 0,
+                "endLine": 218,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 271,
+                "startChar": 0,
+                "endLine": 276,
+                "endChar": 0
+              },
+              "replacement": "\tif (!dmabuf || !task || !task-\u003edmabuf_info)\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 277,
+                "startChar": 0,
+                "endLine": 278,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d63d45b5_108d198e",
+        "filename": "kernel/fork.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2318,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-11T01:47:02Z",
+      "side": 1,
+      "message": "You hold the spin_lock on 2315 line and here GFP_KERNEL so it\u0027s clear bug.",
+      "range": {
+        "startLine": 2318,
+        "startChar": 3,
+        "endLine": 2318,
+        "endChar": 45
+      },
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "feb8c51b_6eab4156",
+        "filename": "mm/mmap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2427,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-11T01:47:02Z",
+      "side": 1,
+      "message": "dma_buf_account_task has the logic to be failed(such as, kmalloc). What happens if fails before and reach it out here again?\n\nIOW,  Which logic guarantees the dma_buf_account_task never fails here? Could you add more comment about that?",
+      "range": {
+        "startLine": 2427,
+        "startChar": 6,
+        "endLine": 2427,
+        "endChar": 23
+      },
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
