@@ -11,6 +11,7 @@
 
 #include <trace/hooks/vendor_hooks.h>
 
+struct alloc_context;
 struct shmem_inode_info;
 struct folio;
 struct folio_batch;
@@ -537,6 +538,27 @@ DECLARE_HOOK(android_vh_filemap_add_folio,
 	TP_PROTO(struct address_space *mapping, struct folio *folio,
 		pgoff_t index),
 	TP_ARGS(mapping, folio, index));
+DECLARE_HOOK(android_vh_mm_customize_alloc_anon_thp,
+	TP_PROTO(gfp_t *gfp_mask, unsigned long *orders, int *order, struct folio **folio),
+	TP_ARGS(gfp_mask, orders, order, folio));
+DECLARE_HOOK(android_vh_mm_customize_ac,
+	TP_PROTO(gfp_t gfp, unsigned int order, struct alloc_context *ac,
+		 unsigned int *alloc_flags),
+	TP_ARGS(gfp, order, ac, alloc_flags));
+DECLARE_HOOK(android_vh_mm_customize_rmqueue,
+	TP_PROTO(struct zone *zone, unsigned int order, unsigned int *alloc_flags,
+		 int *migratetype),
+	TP_ARGS(zone, order, alloc_flags, migratetype));
+DECLARE_HOOK(android_vh_mm_customize_suitable_zone,
+	TP_PROTO(struct zone *zone, gfp_t gfp, int order, enum zone_type highest_zoneidx,
+		 bool *try_this_zone, bool *suitable),
+	TP_ARGS(zone, gfp, order, highest_zoneidx, try_this_zone, suitable));
+DECLARE_HOOK(android_vh_mm_customize_zone_max_order,
+	TP_PROTO(struct zone *zone, int *max_order),
+	TP_ARGS(zone, max_order));
+DECLARE_HOOK(android_vh_mm_customize_zone_pageset,
+	TP_PROTO(struct zone *zone, int *new_high_min, int *new_high_max, int *new_batch),
+	TP_ARGS(zone, new_high_min, new_high_max, new_batch));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
