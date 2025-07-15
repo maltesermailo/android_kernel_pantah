@@ -19,6 +19,7 @@
 #include <vmx/hyperv.h>
 #include <kvm_onhyperv.h>
 #include <pkvm.h>
+#include <vmx/pkvm/hyp/trace.h>
 
 #ifdef __PKVM_HYP__
 #undef module_param_named
@@ -6680,6 +6681,7 @@ fastpath_t vmx_vcpu_run(struct kvm_vcpu *vcpu, bool force_immediate_exit)
 	}
 
 	trace_kvm_entry(vcpu, force_immediate_exit);
+	trace_vmexit_end(vcpu, vmx->exit_reason.basic);
 
 	if (vmx->ple_window_dirty) {
 		vmx->ple_window_dirty = false;
@@ -6805,6 +6807,7 @@ fastpath_t vmx_vcpu_run(struct kvm_vcpu *vcpu, bool force_immediate_exit)
 
 #endif
 	trace_kvm_exit(vcpu, KVM_ISA_VMX);
+	trace_vmexit_start(vcpu, true);
 
 	if (unlikely(vmx->exit_reason.failed_vmentry))
 		return EXIT_FASTPATH_NONE;
