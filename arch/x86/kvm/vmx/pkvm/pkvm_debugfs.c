@@ -47,18 +47,18 @@ static const char *get_vmexit_reason(int index)
 
 static void __pkvm_vmexit_perf_dump_percpu(struct vmexit_perf_dump *perf,
 					   struct vmexit_perf_dump *count,
-					   bool dump_l2)
+					   bool dump_guest)
 {
 	struct perf_data *perf_data, *count_perf_data;
 	int cpu = perf->cpu;
 	int i;
 
-	if (dump_l2) {
-		perf_data = &perf->l2data;
-		count_perf_data = count ? &count->l2data : NULL;
+	if (dump_guest) {
+		perf_data = &perf->guest_data;
+		count_perf_data = count ? &count->guest_data : NULL;
 	} else {
-		perf_data = &perf->l1data;
-		count_perf_data = count ? &count->l1data : NULL;
+		perf_data = &perf->host_data;
+		count_perf_data = count ? &count->host_data : NULL;
 	}
 
 	for (i = 0 ; i < 74; i++) {
@@ -66,7 +66,7 @@ static void __pkvm_vmexit_perf_dump_percpu(struct vmexit_perf_dump *perf,
 			continue;
 
 		pr_info("CPU%d vmexit_from_%s reason %s %lld cycles %lld each-handler-cycle %lld\n",
-			  cpu, dump_l2 ? "l2" : "l1", get_vmexit_reason(i),
+			  cpu, dump_guest ? "guest" : "host", get_vmexit_reason(i),
 			  perf_data->data.reasons[i], perf_data->data.cycles[i],
 			  perf_data->data.cycles[i] / perf_data->data.reasons[i]);
 
@@ -81,29 +81,29 @@ static void __pkvm_vmexit_perf_dump_percpu(struct vmexit_perf_dump *perf,
 
 	if (perf_data->data.total_count) {
 		pr_info("CPU%d total_vmexit_from_%s %lld total_cycles %lld\n",
-			  cpu, dump_l2 ? "l2" : "l1",
+			  cpu, dump_guest ? "guest" : "host",
 			  perf_data->data.total_count,
 			  perf_data->data.total_cycles);
 		memset(perf_data, 0, sizeof(struct perf_data));
 	}
 }
 
-static void __pkvm_vmexit_perf_dump_summary(struct vmexit_perf_dump *perf, bool dump_l2)
+static void __pkvm_vmexit_perf_dump_summary(struct vmexit_perf_dump *perf, bool dump_guest)
 {
 	struct perf_data *perf_data;
 	int i;
 
-	if (dump_l2)
-		perf_data = &perf->l2data;
+	if (dump_guest)
+		perf_data = &perf->guest_data;
 	else
-		perf_data = &perf->l1data;
+		perf_data = &perf->host_data;
 
 	for (i = 0 ; i < 74; i++) {
 		if (!perf_data->data.reasons[i])
 			continue;
 
 		pr_info("AllCPU: vmexit_from_%s reason %s %lld cycles %lld each-handler-cycle %lld\n",
-			  dump_l2 ? "l2" : "l1", get_vmexit_reason(i),
+			  dump_guest ? "guest" : "host", get_vmexit_reason(i),
 			  perf_data->data.reasons[i], perf_data->data.cycles[i],
 			  perf_data->data.cycles[i] / perf_data->data.reasons[i]);
 
@@ -115,7 +115,7 @@ static void __pkvm_vmexit_perf_dump_summary(struct vmexit_perf_dump *perf, bool 
 	}
 
 	pr_info("AllCPU: total_vmexit_from_%s %lld total_cycles %lld\n",
-		  dump_l2 ? "l2" : "l1",
+		  dump_guest ? "guest" : "host",
 		  perf_data->data.total_count,
 		  perf_data->data.total_cycles);
 }
@@ -126,8 +126,8 @@ static void pkvm_dump_vmexit_trace(struct vmexit_perf_dump *hvcpu_perf)
 	struct vmexit_perf_dump *perf;
 	int cpu;
 
-	memset(&pkvm_perf.l1data, 0, sizeof(struct perf_data));
-	memset(&pkvm_perf.l2data, 0, sizeof(struct perf_data));
+	memset(&pkvm_perf.host_data, 0, sizeof(struct perf_data));
+	memset(&pkvm_perf.guest_data, 0, sizeof(struct perf_data));
 
 	for (cpu = 0; cpu < num_possible_cpus(); cpu++) {
 		perf = &hvcpu_perf[cpu];

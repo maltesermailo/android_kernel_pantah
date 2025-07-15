@@ -18,8 +18,8 @@
 #undef memcpy
 
 struct vmexit_perf {
-	struct perf_data l1data;
-	struct perf_data l2data;
+	struct perf_data host_data;
+	struct perf_data guest_data;
 	struct perf_data *cur;
 	bool on;
 	bool start;
@@ -37,7 +37,7 @@ static inline unsigned long long pkvm_rdtsc_ordered(void)
 	return EAX_EDX_VAL(val, low, high);
 }
 
-void trace_vmexit_start(struct kvm_vcpu *vcpu, bool nested_vmexit)
+void trace_vmexit_start(struct kvm_vcpu *vcpu, bool guest_vmexit)
 {
 	int cpu = vcpu->cpu;
 	struct vmexit_perf *perf = &hvcpu_perf[cpu];
@@ -47,10 +47,10 @@ void trace_vmexit_start(struct kvm_vcpu *vcpu, bool nested_vmexit)
 
 	perf->start = true;
 	perf->cpu = cpu;
-	if (nested_vmexit)
-		perf->cur = &perf->l2data;
+	if (guest_vmexit)
+		perf->cur = &perf->guest_data;
 	else
-		perf->cur = &perf->l1data;
+		perf->cur = &perf->host_data;
 
 	pkvm_spin_lock(&perf->lock);
 	perf->cur->tsc = pkvm_rdtsc_ordered();
@@ -84,8 +84,8 @@ void pkvm_handle_set_vmexit_trace(struct kvm_vcpu *vcpu, bool en)
 	if (en && !perf->on) {
 		perf->on = true;
 		pkvm_dbg("%s: CPU%d enable vmexit_trace\n", __func__, cpu);
-		memset(&perf->l1data, 0, sizeof(struct perf_data));
-		memset(&perf->l2data, 0, sizeof(struct perf_data));
+		memset(&perf->host_data, 0, sizeof(struct perf_data));
+		memset(&perf->guest_data, 0, sizeof(struct perf_data));
 		return;
 	}
 
@@ -116,8 +116,8 @@ void pkvm_handle_dump_vmexit_trace(unsigned long pa, unsigned long size)
 		if (size >= sizeof(struct vmexit_perf_dump)) {
 			struct vmexit_perf_dump *dump = out;
 
-			memcpy(&dump->l1data, &perf->l1data, sizeof(struct perf_data));
-			memcpy(&dump->l2data, &perf->l2data, sizeof(struct perf_data));
+			memcpy(&dump->host_data, &perf->host_data, sizeof(struct perf_data));
+			memcpy(&dump->guest_data, &perf->guest_data, sizeof(struct perf_data));
 			dump->cpu = perf->cpu;
 			out += sizeof(struct vmexit_perf_dump);
 			size -= sizeof(struct vmexit_perf_dump);

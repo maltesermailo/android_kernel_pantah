@@ -18,8 +18,8 @@ struct perf_data {
 };
 
 struct vmexit_perf_dump {
-	struct perf_data l1data;
-	struct perf_data l2data;
+	struct perf_data host_data;
+	struct perf_data guest_data;
 	int cpu;
 };
 
