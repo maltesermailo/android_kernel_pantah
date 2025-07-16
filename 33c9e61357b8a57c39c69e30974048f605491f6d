@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "861e41da_c9ef9279",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2025-07-16T18:28:31Z",
+      "side": 1,
+      "message": "Do you have a CL that takes advantage of this?  The latest is still the one from Qualcomm that uses a system property.  I think we\u0027ll do that anyway, right?\n\nFor if/when it\u0027s turned on my default, I also suggested that we could just limit the use of `try_verify_in_tasklet` to 6.12 and later kernels.  Version checks aren\u0027t great, but it would work.\n\nSo, I\u0027m now wondering if this CL is really worth the churn.  Especially when the status output doesn\u0027t actually change, so the old name doesn\u0027t go away.\n\nI think there\u0027s also room for debate about whether the BH workqueue is really \"inline\" or not.  So the new name might not be 100% clear either.\n\nAlso note that the equivalent option in dm-crypt is named `no_read_workqueue`.  This would introduce yet another name.",
+      "range": {
+        "startLine": 11,
+        "startChar": 45,
+        "endLine": 13,
+        "endChar": 32
+      },
+      "revId": "33c9e61357b8a57c39c69e30974048f605491f6d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7e31cee7_9f537e8c",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
