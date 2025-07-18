@@ -16,9 +16,6 @@
 
 static const struct ieee80211_iface_limit if_limits[] = {
 	{
-		.max = 1,
-		.types = BIT(NL80211_IFTYPE_ADHOC)
-	}, {
 		.max = 16,
 		.types = BIT(NL80211_IFTYPE_AP)
 #ifdef CONFIG_MAC80211_MESH
@@ -85,7 +82,7 @@ static ssize_t mt7996_thermal_temp_store(struct device *dev,
 		return ret;
 
 	mutex_lock(&phy->dev->mt76.mutex);
-	val = clamp_val(DIV_ROUND_CLOSEST(val, 1000), 40, 130);
+	val = DIV_ROUND_CLOSEST(clamp_val(val, 40 * 1000, 130 * 1000), 1000);
 
 	/* add a safety margin ~10 */
 	if ((i - 1 == MT7996_CRIT_TEMP_IDX &&
@@ -390,9 +387,10 @@ mt7996_init_wiphy(struct ieee80211_hw *hw, struct mtk_wed_device *wed)
 	wiphy_ext_feature_set(wiphy, NL80211_EXT_FEATURE_CAN_REPLACE_PTK0);
 	wiphy_ext_feature_set(wiphy, NL80211_EXT_FEATURE_MU_MIMO_AIR_SNIFFER);
 
-	if (!mdev->dev->of_node ||
-	    !of_property_read_bool(mdev->dev->of_node,
-				   "mediatek,disable-radar-background"))
+	if (mt7996_has_background_radar(phy->dev) &&
+	    (!mdev->dev->of_node ||
+	     !of_property_read_bool(mdev->dev->of_node,
+				    "mediatek,disable-radar-background")))
 		wiphy_ext_feature_set(wiphy,
 				      NL80211_EXT_FEATURE_RADAR_BACKGROUND);
 
@@ -441,6 +439,9 @@ mt7996_init_wiphy(struct ieee80211_hw *hw, struct mtk_wed_device *wed)
 
 	wiphy->available_antennas_rx = phy->mt76->antenna_mask;
 	wiphy->available_antennas_tx = phy->mt76->antenna_mask;
+
+	wiphy->max_scan_ssids = 4;
+	wiphy->max_scan_ie_len = IEEE80211_MAX_DATA_LEN;
 }
 
 static void
@@ -458,6 +459,10 @@ mt7996_mac_init_band(struct mt7996_dev *dev, u8 band)
 		   MT_WF_RMAC_MIB_QOS01_BACKOFF);
 	mt76_clear(dev, MT_WF_RMAC_MIB_AIRTIME4(band),
 		   MT_WF_RMAC_MIB_QOS23_BACKOFF);
+
+	/* clear backoff time for Tx duration */
+	mt76_clear(dev, MT_WTBLOFF_ACR(band),
+		   MT_WTBLOFF_ADM_BACKOFFTIME);
 
 	/* clear backoff time and set software compensation for OBSS time */
 	mask = MT_WF_RMAC_MIB_OBSS_BACKOFF | MT_WF_RMAC_MIB_ED_OFFSET;
@@ -884,6 +889,76 @@ out:
 #endif
 }
 
+static int mt7996_variant_type_init(struct mt7996_dev *dev)
+{
+	u32 val = mt76_rr(dev, MT_PAD_GPIO);
+	u8 var_type;
+
+	switch (mt76_chip(&dev->mt76)) {
+	case 0x7990:
+		if (val & MT_PAD_GPIO_2ADIE_TBTC)
+			var_type = MT7996_VAR_TYPE_233;
+		else
+			var_type = MT7996_VAR_TYPE_444;
+		break;
+	case 0x7992:
+		if (val & MT_PAD_GPIO_ADIE_SINGLE)
+			var_type = MT7992_VAR_TYPE_23;
+		else if (u32_get_bits(val, MT_PAD_GPIO_ADIE_COMB_7992))
+			var_type = MT7992_VAR_TYPE_44;
+		else
+			return -EINVAL;
+		break;
+	default:
+		return -EINVAL;
+	}
+
+	dev->var.type = var_type;
+	return 0;
+}
+
+static int mt7996_variant_fem_init(struct mt7996_dev *dev)
+{
+#define MT7976C_EFUSE_OFFSET	0x470
+	u8 buf[MT7996_EEPROM_BLOCK_SIZE], idx, adie_idx, adie_comb;
+	u32 regval, val = mt76_rr(dev, MT_PAD_GPIO);
+	u16 adie_id, adie_ver;
+	bool is_7976c;
+	int ret;
+
+	if (is_mt7992(&dev->mt76)) {
+		adie_idx = (val & MT_PAD_GPIO_ADIE_SINGLE) ? 0 : 1;
+		adie_comb = u32_get_bits(val, MT_PAD_GPIO_ADIE_COMB_7992);
+	} else {
+		adie_idx = 0;
+		adie_comb = u32_get_bits(val, MT_PAD_GPIO_ADIE_COMB);
+	}
+
+	ret = mt7996_mcu_rf_regval(dev, MT_ADIE_CHIP_ID(adie_idx), &regval, false);
+	if (ret)
+		return ret;
+
+	ret = mt7996_mcu_get_eeprom(dev, MT7976C_EFUSE_OFFSET, buf, sizeof(buf));
+	if (ret && ret != -EINVAL)
+		return ret;
+
+	adie_ver = u32_get_bits(regval, MT_ADIE_VERSION_MASK);
+	idx = MT7976C_EFUSE_OFFSET % MT7996_EEPROM_BLOCK_SIZE;
+	is_7976c = adie_ver == 0x8a10 || adie_ver == 0x8b00 ||
+		   adie_ver == 0x8c10 || buf[idx] == 0xc;
+
+	adie_id = u32_get_bits(regval, MT_ADIE_CHIP_ID_MASK);
+	if (adie_id == 0x7975 || adie_id == 0x7979 ||
+	    (adie_id == 0x7976 && is_7976c))
+		dev->var.fem = MT7996_FEM_INT;
+	else if (adie_id == 0x7977 && adie_comb == 1)
+		dev->var.fem = MT7996_FEM_MIX;
+	else
+		dev->var.fem = MT7996_FEM_EXT;
+
+	return 0;
+}
+
 static int mt7996_init_hardware(struct mt7996_dev *dev)
 {
 	int ret, idx;
@@ -899,6 +974,10 @@ static int mt7996_init_hardware(struct mt7996_dev *dev)
 	INIT_LIST_HEAD(&dev->wed_rro.poll_list);
 	spin_lock_init(&dev->wed_rro.lock);
 
+	ret = mt7996_variant_type_init(dev);
+	if (ret)
+		return ret;
+
 	ret = mt7996_dma_init(dev);
 	if (ret)
 		return ret;
@@ -910,6 +989,10 @@ static int mt7996_init_hardware(struct mt7996_dev *dev)
 		return ret;
 
 	ret = mt7996_wed_rro_init(dev);
+	if (ret)
+		return ret;
+
+	ret = mt7996_variant_fem_init(dev);
 	if (ret)
 		return ret;
 
