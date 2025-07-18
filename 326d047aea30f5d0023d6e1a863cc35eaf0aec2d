@@ -105,6 +105,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9fe76e1b_7ed3a83f",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-18T20:09:26Z",
+      "side": 1,
+      "message": "Yes, currently it\u0027s never NULL but I think it\u0027s still reasonable to check input parameters for a non-static function to prevent future misuse.",
+      "parentUuid": "7da9f5a5_735897a0",
+      "range": {
+        "startLine": 210,
+        "startChar": 16,
+        "endLine": 210,
+        "endChar": 21
+      },
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00219427_828b7349",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-18T20:09:26Z",
+      "side": 1,
+      "message": "Currently this should not happen because we always call dma_buf_account_task() after we checked is_dma_buf_file() but since this is an external API I think it\u0027s reasonable to check input parameters to prevent possible future misuse.",
+      "parentUuid": "91990d77_5693e078",
+      "range": {
+        "startLine": 210,
+        "startChar": 5,
+        "endLine": 210,
+        "endChar": 12
+      },
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fd4ce3a4_d6e6635a",
         "filename": "drivers/dma-buf/dma-buf.c",
         "patchSetId": 6
@@ -170,6 +218,30 @@
           ]
         }
       ],
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17a6d229_58de8fe5",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-18T20:09:26Z",
+      "side": 1,
+      "message": "Yeah, I think this was done more for debugging purposed with WARN_ON() but then was converted to pr_err() since Greg objected to WARN_ON() usage. I\u0027ll remove the printout and just return the error code.",
+      "parentUuid": "fd4ce3a4_d6e6635a",
+      "range": {
+        "startLine": 214,
+        "startChar": 2,
+        "endLine": 214,
+        "endChar": 70
+      },
       "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -247,6 +319,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5e8577fb_c0d47c3a",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-18T20:09:26Z",
+      "side": 1,
+      "message": "I changed this code to use record pool, so I think with that change and the record reservation this comment becomes a bit obsolete.",
+      "parentUuid": "66a4aa67_725d7a4c",
+      "range": {
+        "startLine": 219,
+        "startChar": 0,
+        "endLine": 221,
+        "endChar": 16
+      },
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7fcc8e06_b9599dc4",
         "filename": "drivers/dma-buf/dma-buf.c",
         "patchSetId": 6
@@ -298,6 +394,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a9de96a1_8133c03c",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-18T20:09:26Z",
+      "side": 1,
+      "message": "I reworked this code to use record reservation outside of atomic context.",
+      "parentUuid": "7fcc8e06_b9599dc4",
+      "range": {
+        "startLine": 235,
+        "startChar": 5,
+        "endLine": 238,
+        "endChar": 31
+      },
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "64be39d1_a2658806",
         "filename": "drivers/dma-buf/dma-buf.c",
         "patchSetId": 6
@@ -333,6 +453,30 @@
           ]
         }
       ],
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a4118e9_8e3f659a",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-18T20:09:26Z",
+      "side": 1,
+      "message": "Yeah, we should emit the error/warning if the allocation failed, not when we unaccount the record. Will remove.",
+      "parentUuid": "64be39d1_a2658806",
+      "range": {
+        "startLine": 282,
+        "startChar": 2,
+        "endLine": 282,
+        "endChar": 44
+      },
       "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -519,6 +663,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a39d616_17e2c759",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-18T20:09:26Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d519650f_4b15d9ad",
+      "range": {
+        "startLine": 315,
+        "startChar": 5,
+        "endLine": 315,
+        "endChar": 8
+      },
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "090282aa_0f2536ce",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-18T20:09:26Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b5a13ca0_ff61d57e",
+      "range": {
+        "startLine": 315,
+        "startChar": 5,
+        "endLine": 315,
+        "endChar": 8
+      },
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb5bd8df_5a2a302e",
@@ -556,6 +748,30 @@
           ]
         }
       ],
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63352676_d9ed4e8c",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 699,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-18T20:09:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb5bd8df_5a2a302e",
+      "range": {
+        "startLine": 699,
+        "startChar": 11,
+        "endLine": 699,
+        "endChar": 24
+      },
       "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -603,6 +819,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6ead15ab_90417b34",
+        "filename": "fs/file.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-18T20:09:26Z",
+      "side": 1,
+      "message": "We should not fail just because the accounting failed. I\u0027ll fix the dma_buf_mmap_internal",
+      "parentUuid": "c5fd830e_fd8dd8c8",
+      "range": {
+        "startLine": 597,
+        "startChar": 30,
+        "endLine": 597,
+        "endChar": 50
+      },
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8e5fe5c3_ffc8ec09",
         "filename": "fs/proc/base.c",
         "patchSetId": 6
@@ -638,6 +878,30 @@
           ]
         }
       ],
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ce60e40_31af7b56",
+        "filename": "fs/proc/base.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3317,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-18T20:09:26Z",
+      "side": 1,
+      "message": "Even if it does, we won\u0027t be able to account it to any process\u0027 RSS or PSS, so accounting it is pointless. Besides in the later patch I have to store task-\u003edmabuf_info into task-\u003eworker_private, and that would not work for a kthread. So, we do not account kthread-imported buffers. In kernels with not frozen ABI we can but as I said before, it\u0027s not clear which process would that be accounted to.",
+      "parentUuid": "8e5fe5c3_ffc8ec09",
+      "range": {
+        "startLine": 3317,
+        "startChar": 1,
+        "endLine": 3317,
+        "endChar": 33
+      },
       "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -703,6 +967,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fce5c94a_82a29e1a",
+        "filename": "kernel/fork.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-18T20:09:26Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ea223065_496b3da0",
+      "range": {
+        "startLine": 1001,
+        "startChar": 60,
+        "endLine": 1001,
+        "endChar": 68
+      },
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "154ba3c5_0c745827",
@@ -746,6 +1034,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "15cb5893_e41fc4a0",
+        "filename": "kernel/fork.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1008,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-18T20:09:26Z",
+      "side": 1,
+      "message": "Ah, since the last refcount is dropped, this dmabuf_info can\u0027t be used by anyone else, so we don\u0027t need to worry about dmabuf_info-\u003erss changing from under us at this point. I think we can read it without READ_ONCE() at this point. Will drop it.",
+      "parentUuid": "154ba3c5_0c745827",
+      "range": {
+        "startLine": 1008,
+        "startChar": 5,
+        "endLine": 1008,
+        "endChar": 14
+      },
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5989ef64_295313d3",
         "filename": "kernel/fork.c",
         "patchSetId": 6
@@ -757,6 +1069,30 @@
       "writtenOn": "2025-07-11T16:37:18Z",
       "side": 1,
       "message": "tsk",
+      "range": {
+        "startLine": 2292,
+        "startChar": 65,
+        "endLine": 2292,
+        "endChar": 66
+      },
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bd3b5c8_43a2d444",
+        "filename": "kernel/fork.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2292,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-18T20:09:26Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5989ef64_295313d3",
       "range": {
         "startLine": 2292,
         "startChar": 65,
@@ -948,6 +1284,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63e47f24_7d7109a3",
+        "filename": "kernel/fork.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2294,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-18T20:09:26Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c8fb57a9_dfa231a0",
+      "range": {
+        "startLine": 2294,
+        "startChar": 28,
+        "endLine": 2294,
+        "endChar": 40
+      },
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d63d45b5_108d198e",
@@ -973,6 +1333,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "365759f2_e9852854",
+        "filename": "kernel/fork.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2318,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-18T20:09:26Z",
+      "side": 1,
+      "message": "Right. I reworked this code to reserve the required records before we enter atomic context.",
+      "parentUuid": "d63d45b5_108d198e",
+      "range": {
+        "startLine": 2318,
+        "startChar": 3,
+        "endLine": 2318,
+        "endChar": 45
+      },
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "feb8c51b_6eab4156",
         "filename": "mm/mmap.c",
         "patchSetId": 6
@@ -984,6 +1368,30 @@
       "writtenOn": "2025-07-11T01:47:02Z",
       "side": 1,
       "message": "dma_buf_account_task has the logic to be failed(such as, kmalloc). What happens if fails before and reach it out here again?\n\nIOW,  Which logic guarantees the dma_buf_account_task never fails here? Could you add more comment about that?",
+      "range": {
+        "startLine": 2427,
+        "startChar": 6,
+        "endLine": 2427,
+        "endChar": 23
+      },
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99c82fa8_4ee369e8",
+        "filename": "mm/mmap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2427,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-18T20:09:26Z",
+      "side": 1,
+      "message": "I think before the code would not fail here because we already have a record for this dmabuf, however with the new way of reserving records, we reserve before we check if the record already exists, so now it can fail. I\u0027ll remove the above comment as it\u0027s now not correct.",
+      "parentUuid": "feb8c51b_6eab4156",
       "range": {
         "startLine": 2427,
         "startChar": 6,
