@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e84c308c_7fbfe15e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-07-18T17:24:08Z",
+      "side": 1,
+      "message": "While we\u0027re at it, some notes about some issues with our current vmexit tracing implementation:\n\n- It doesn\u0027t provide stats for different types of hypercalls, it only provides stats for them all together (VMCALL stats). It would be very useful to have stats for individual hypercalls, especially since now with PV the vast majority of vmexits are hypercalls, and also we have lots of different hypercalls from host to pKVM (i.e. different `__pkvm__vm_XXX` interfaces).\n- It is quite weird that `cat dump_vmexit_trace` dumps it to dmesg, not to stdout (and just prints 0 to stdout). It shouldn\u0027t be difficult to rework it to properly dump it to the userspace buffer it is provided with?\n- We hardcode the max number of vmexit reasons to 74:\n\n```\nstruct vmexit_data {\n        u64 total_count;\n        u64 total_cycles;\n        u64 reasons[74];\n        u64 cycles[74];\n};\n```\n\nwhereas there are already more:\n\n```\n#define EXIT_REASON_BUS_LOCK            74\n#define EXIT_REASON_NOTIFY              75\n#define EXIT_REASON_TDCALL              77\n```\n\nand also in `trace_vmexit_end()` we use the vmexit reason value (from hardware) as an index to these arrays as is, without bounds checks?",
+      "revId": "f2ab538481ad9b96a83cca633c50a8799bad0a2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76dd8a03_6bffa3f7",
