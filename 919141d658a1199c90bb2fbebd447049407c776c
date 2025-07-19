@@ -46,6 +46,30 @@
       },
       "revId": "919141d658a1199c90bb2fbebd447049407c776c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce34f81d_d307d857",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-19T00:57:35Z",
+      "side": 1,
+      "message": "Ok, I know why TJ did if this way. During accounting there might be a race when multiple concurrent tasks can start allocating task-\u003edmabuf_info and the last one will override earlier ones, so we would end up with memory leaks and incorrect accounting. I\u0027ll add a comment here to clarify.",
+      "parentUuid": "050b2970_2776942f",
+      "range": {
+        "startLine": 394,
+        "startChar": 0,
+        "endLine": 399,
+        "endChar": 2
+      },
+      "revId": "919141d658a1199c90bb2fbebd447049407c776c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
