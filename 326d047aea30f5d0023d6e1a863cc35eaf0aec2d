@@ -413,6 +413,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a8a6620_6c436b64",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-21T20:59:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e8577fb_c0d47c3a",
+      "range": {
+        "startLine": 219,
+        "startChar": 0,
+        "endLine": 221,
+        "endChar": 16
+      },
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7fcc8e06_b9599dc4",
@@ -567,6 +591,30 @@
       "side": 1,
       "message": "Yeah, we should emit the error/warning if the allocation failed, not when we unaccount the record. Will remove.",
       "parentUuid": "64be39d1_a2658806",
+      "range": {
+        "startLine": 282,
+        "startChar": 2,
+        "endLine": 282,
+        "endChar": 44
+      },
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b09b6cf5_efd4ff3e",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-21T20:59:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a4118e9_8e3f659a",
       "range": {
         "startLine": 282,
         "startChar": 2,
@@ -963,6 +1011,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "509495be_d2de7e66",
+        "filename": "fs/file.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-21T20:59:10Z",
+      "side": 1,
+      "message": "That\u0027s why we emit an error in the logs. Do you have a better way to handle this without a hard failure. I don\u0027t think it\u0027s reasonable to fail the whole operation simply because we failed the accounting. Besides, if we fail to allocate a dmabuf_info then we probably have much bigger problem at that point.",
+      "parentUuid": "659940ff_9505dad2",
+      "range": {
+        "startLine": 597,
+        "startChar": 30,
+        "endLine": 597,
+        "endChar": 50
+      },
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8e5fe5c3_ffc8ec09",
         "filename": "fs/proc/base.c",
         "patchSetId": 6
@@ -1016,6 +1088,30 @@
       "side": 1,
       "message": "Even if it does, we won\u0027t be able to account it to any process\u0027 RSS or PSS, so accounting it is pointless. Besides in the later patch I have to store task-\u003edmabuf_info into task-\u003eworker_private, and that would not work for a kthread. So, we do not account kthread-imported buffers. In kernels with not frozen ABI we can but as I said before, it\u0027s not clear which process would that be accounted to.",
       "parentUuid": "8e5fe5c3_ffc8ec09",
+      "range": {
+        "startLine": 3317,
+        "startChar": 1,
+        "endLine": 3317,
+        "endChar": 33
+      },
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c87e6d59_b1ae66ab",
+        "filename": "fs/proc/base.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 3317,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-21T20:59:10Z",
+      "side": 1,
+      "message": "Ok, I reworked that patchset to account for kthread-pinned dmabufs.",
+      "parentUuid": "9ce60e40_31af7b56",
       "range": {
         "startLine": 3317,
         "startChar": 1,
@@ -1166,6 +1262,30 @@
       "side": 1,
       "message": "Ah, since the last refcount is dropped, this dmabuf_info can\u0027t be used by anyone else, so we don\u0027t need to worry about dmabuf_info-\u003erss changing from under us at this point. I think we can read it without READ_ONCE() at this point. Will drop it.",
       "parentUuid": "154ba3c5_0c745827",
+      "range": {
+        "startLine": 1008,
+        "startChar": 5,
+        "endLine": 1008,
+        "endChar": 14
+      },
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "642cea38_718cf44c",
+        "filename": "kernel/fork.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 1008,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-21T20:59:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15cb5893_e41fc4a0",
       "range": {
         "startLine": 1008,
         "startChar": 5,
