@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6f173d2_a4608255",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-07-21T17:47:49Z",
+      "side": 1,
+      "message": "Build-break:\n```\nSymbols missing from the ksymtab:\n  __traceiter_dwc3_readl\n  __tracepoint_dwc3_readl\n```",
+      "revId": "4066046e3fe224ba35964ae2320ebd94ebba1a4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6adff717_afc6f7a9",
+        "filename": "gki/aarch64/symbols/rtkstb",
+        "patchSetId": 2
+      },
+      "lineNbr": 964,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-07-21T17:47:49Z",
+      "side": 1,
+      "message": "These symbols are not exported by the kernel so this is a build-break.",
+      "fixSuggestions": [
+        {
+          "fixId": "f694470e_e239799a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "gki/aarch64/symbols/rtkstb",
+              "range": {
+                "startLine": 962,
+                "startChar": 0,
+                "endLine": 966,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "4066046e3fe224ba35964ae2320ebd94ebba1a4a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
