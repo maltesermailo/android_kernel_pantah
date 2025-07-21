@@ -35,6 +35,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05764d4f_fbc432fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-07-21T01:50:38Z",
+      "side": 1,
+      "message": "Yes, agree. We can enhance the pkvm trace with these in a separate patch.",
+      "parentUuid": "e84c308c_7fbfe15e",
+      "revId": "f2ab538481ad9b96a83cca633c50a8799bad0a2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76dd8a03_6bffa3f7",
@@ -48,6 +66,24 @@
       "writtenOn": "2025-07-18T16:28:02Z",
       "side": 1,
       "message": "Use `#ifdef __PKVM_HYP__`?\n\n```suggestion\n#ifdef __PKVM_HYP__\n\ttrace_vmexit_end(vcpu, vmx-\u003eexit_reason.basic);\n#else\n\ttrace_kvm_entry(vcpu, force_immediate_exit);\n#endif\n```",
+      "revId": "f2ab538481ad9b96a83cca633c50a8799bad0a2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77f5e61f_9dd67788",
+        "filename": "arch/x86/kvm/pkvm/vmx/vmx.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6684,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-07-21T01:50:38Z",
+      "side": 1,
+      "message": "Indeed. Will update this.",
+      "parentUuid": "76dd8a03_6bffa3f7",
       "revId": "f2ab538481ad9b96a83cca633c50a8799bad0a2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
