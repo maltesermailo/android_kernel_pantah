@@ -104,6 +104,24 @@
       "parentUuid": "77f5e61f_9dd67788",
       "revId": "f2ab538481ad9b96a83cca633c50a8799bad0a2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "741ca3a6_877c32f5",
+        "filename": "arch/x86/kvm/pkvm/vmx/vmx.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6684,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-07-21T17:38:36Z",
+      "side": 1,
+      "message": "Yeah, indeed. I see you\u0027ve already implemented that in aosp/3703375, looks nice.\n\nBesides that, I\u0027ve noticed that we may return at line 6805 (if vmx-\u003efail is non-zero) before calling trace_vmexit_start()?\n\nWouldn\u0027t we want to do trace_vmexit_end()/trace_vmexit_start() closer to the actual entry/exit (to account for as many CPU cycles spent in pKVM as possible)? i.e. just put them around vmx_vcpu_enter_exit(), or even around __vmx_vcpu_run()?",
+      "parentUuid": "080f7750_b6b4cb69",
+      "revId": "f2ab538481ad9b96a83cca633c50a8799bad0a2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
