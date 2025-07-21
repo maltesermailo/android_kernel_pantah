@@ -153,6 +153,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c8e240ba_13f75e08",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-21T18:27:37Z",
+      "side": 1,
+      "message": "Let\u0027s define policy for these APIs whether we allow client pass NULL and we handle them in dmabuf or set up responsibility that the caller should verify it before calling.",
+      "parentUuid": "9fe76e1b_7ed3a83f",
+      "range": {
+        "startLine": 210,
+        "startChar": 16,
+        "endLine": 210,
+        "endChar": 21
+      },
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bea7c97_05513955",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-21T18:27:37Z",
+      "side": 1,
+      "message": "The defensive program sometimes makes harder to detect issue. If it\u0027s not supposed to get non-NULL parameters, just let it go rather than handle the non-expected cases at this point to be crash(to easily catch the issue with crash dump). We can add the null check later if we have the usecase.\n\nThat makes code simple and straightfoward to understand \"No one pass non-NULL parameter for dmabuf and task so caller should take the responsibility for them\".",
+      "parentUuid": "00219427_828b7349",
+      "range": {
+        "startLine": 210,
+        "startChar": 5,
+        "endLine": 210,
+        "endChar": 12
+      },
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fd4ce3a4_d6e6635a",
         "filename": "drivers/dma-buf/dma-buf.c",
         "patchSetId": 6
@@ -236,6 +284,30 @@
       "side": 1,
       "message": "Yeah, I think this was done more for debugging purposed with WARN_ON() but then was converted to pr_err() since Greg objected to WARN_ON() usage. I\u0027ll remove the printout and just return the error code.",
       "parentUuid": "fd4ce3a4_d6e6635a",
+      "range": {
+        "startLine": 214,
+        "startChar": 2,
+        "endLine": 214,
+        "endChar": 70
+      },
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75b71e75_b5588e39",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-21T18:27:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "17a6d229_58de8fe5",
       "range": {
         "startLine": 214,
         "startChar": 2,
@@ -406,6 +478,30 @@
       "side": 1,
       "message": "I reworked this code to use record reservation outside of atomic context.",
       "parentUuid": "7fcc8e06_b9599dc4",
+      "range": {
+        "startLine": 235,
+        "startChar": 5,
+        "endLine": 238,
+        "endChar": 31
+      },
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5980c58_02ec25ae",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-21T18:27:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a9de96a1_8133c03c",
       "range": {
         "startLine": 235,
         "startChar": 5,
@@ -831,6 +927,30 @@
       "side": 1,
       "message": "We should not fail just because the accounting failed. I\u0027ll fix the dma_buf_mmap_internal",
       "parentUuid": "c5fd830e_fd8dd8c8",
+      "range": {
+        "startLine": 597,
+        "startChar": 30,
+        "endLine": 597,
+        "endChar": 50
+      },
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "659940ff_9505dad2",
+        "filename": "fs/file.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-21T18:27:37Z",
+      "side": 1,
+      "message": "Hmm, if we allow the failure, we need a way to see whether current rss has data loss or not so the tool can ignore it.",
+      "parentUuid": "6ead15ab_90417b34",
       "range": {
         "startLine": 597,
         "startChar": 30,
@@ -1355,6 +1475,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a0c977e_38558915",
+        "filename": "kernel/fork.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2318,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-21T18:27:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "365759f2_e9852854",
+      "range": {
+        "startLine": 2318,
+        "startChar": 3,
+        "endLine": 2318,
+        "endChar": 45
+      },
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "feb8c51b_6eab4156",
@@ -1392,6 +1536,30 @@
       "side": 1,
       "message": "I think before the code would not fail here because we already have a record for this dmabuf, however with the new way of reserving records, we reserve before we check if the record already exists, so now it can fail. I\u0027ll remove the above comment as it\u0027s now not correct.",
       "parentUuid": "feb8c51b_6eab4156",
+      "range": {
+        "startLine": 2427,
+        "startChar": 6,
+        "endLine": 2427,
+        "endChar": 23
+      },
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bab05b2_aed2af0a",
+        "filename": "mm/mmap.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2427,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-21T18:27:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "99c82fa8_4ee369e8",
       "range": {
         "startLine": 2427,
         "startChar": 6,
