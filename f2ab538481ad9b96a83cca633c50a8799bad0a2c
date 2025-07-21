@@ -86,6 +86,24 @@
       "parentUuid": "76dd8a03_6bffa3f7",
       "revId": "f2ab538481ad9b96a83cca633c50a8799bad0a2c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "080f7750_b6b4cb69",
+        "filename": "arch/x86/kvm/pkvm/vmx/vmx.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 6684,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-07-21T06:23:32Z",
+      "side": 1,
+      "message": "Seems just with adding trace_vmexit_end/trace_vmexit_start is not enough to have an accurate guest trace. The current pkvm trace implementation only fits to the old usage, which is to end the trace before return back to the host, to guarantee a comprehensive trace recording inside the pkvm. Now this new usage model is that after calling the trace_vmexit_start, the pkvm hypervisor can return back to the host to handle some vmexits, and then the host enter pkvm to run the vcpu with calling trace_vmexit_end. So in between trace_vmexit_start and trace_vmexit_end, the perf data is not a comprehensive record, and loading another vcpu from the host can break this perf data.\n\nTo resolve this, an option is to have a per vcpu vmexit_perf to avoid this conflict. Dump from the host may need to get the required memory size first and then get the vmexit_pef data from all vcpu. I may update with this new option if this is ok.",
+      "parentUuid": "77f5e61f_9dd67788",
+      "revId": "f2ab538481ad9b96a83cca633c50a8799bad0a2c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
