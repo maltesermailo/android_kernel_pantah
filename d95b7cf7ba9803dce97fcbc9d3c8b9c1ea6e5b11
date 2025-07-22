@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bdb590b_2d535414",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-07-22T15:57:14Z",
+      "side": 1,
+      "message": "I\u0027ve realized that now we count total cycles spent for guest vmexit handling: in pKVM + in host. Whereas in the old implementation, if I\u0027m not mistaken, we were only counting cycles spent in pKVM, before forwarding guest vmexit handling to host. Correct?\n\nSo, I\u0027m wondering: which of the two numbers we are more interested in?",
+      "revId": "d95b7cf7ba9803dce97fcbc9d3c8b9c1ea6e5b11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
