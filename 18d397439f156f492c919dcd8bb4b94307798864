@@ -1,0 +1,360 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f69c2bc5_62bb6fe8",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-22T01:34:38Z",
+      "side": 1,
+      "message": "What it is doing is release the memory, not put refcount. \n\nrelease[or free]_task_dmabuf_records would be better name, IMO.",
+      "range": {
+        "startLine": 177,
+        "startChar": 12,
+        "endLine": 177,
+        "endChar": 35
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1abf4e2e_f204ad1a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 177,
+                "startChar": 0,
+                "endLine": 178,
+                "endChar": 0
+              },
+              "replacement": "static void release_task_dmabuf_records(struct list_head *list)\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 249,
+                "startChar": 0,
+                "endLine": 250,
+                "endChar": 0
+              },
+              "replacement": "\t\t\trelease_task_dmabuf_records(list);\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 312,
+                "startChar": 0,
+                "endLine": 313,
+                "endChar": 0
+              },
+              "replacement": "\t\trelease_task_dmabuf_records(\u0026list);\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 352,
+                "startChar": 0,
+                "endLine": 353,
+                "endChar": 0
+              },
+              "replacement": "\t\trelease_task_dmabuf_records(\u0026list);\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 422,
+                "startChar": 0,
+                "endLine": 423,
+                "endChar": 0
+              },
+              "replacement": "\trelease_task_dmabuf_records(\u0026list);\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 427,
+                "startChar": 0,
+                "endLine": 428,
+                "endChar": 0
+              },
+              "replacement": "\trelease_task_dmabuf_records(\u0026list);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "18d397439f156f492c919dcd8bb4b94307798864",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ef66397_8c15a1c4",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-22T01:34:38Z",
+      "side": 1,
+      "message": "list_move(pos, \u0026dmabuf_rec_pool.list);",
+      "range": {
+        "startLine": 186,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 39
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a53ec26f_a428f838",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 186,
+                "startChar": 0,
+                "endLine": 188,
+                "endChar": 0
+              },
+              "replacement": "\t\tlist_move(pos, \u0026dmabuf_rec_pool.list);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "18d397439f156f492c919dcd8bb4b94307798864",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c93f6d47_e910617b",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-22T01:34:38Z",
+      "side": 1,
+      "message": "Why do we need to reset the list?",
+      "range": {
+        "startLine": 198,
+        "startChar": 1,
+        "endLine": 198,
+        "endChar": 15
+      },
+      "revId": "18d397439f156f492c919dcd8bb4b94307798864",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10545c78_1f9c29e2",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-22T01:34:38Z",
+      "side": 1,
+      "message": "What it is doing is allocating dmabuf_records. Thus, it would be better to say alloc_task_dmabuf_records",
+      "range": {
+        "startLine": 201,
+        "startChar": 12,
+        "endLine": 201,
+        "endChar": 35
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "090b850d_652805ed",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 201,
+                "startChar": 0,
+                "endLine": 202,
+                "endChar": 0
+              },
+              "replacement": "static bool alloc_task_dmabuf_records(int count, struct list_head *list)\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 305,
+                "startChar": 0,
+                "endLine": 306,
+                "endChar": 0
+              },
+              "replacement": "\tif (!alloc_task_dmabuf_records(1, \u0026list))\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 393,
+                "startChar": 0,
+                "endLine": 394,
+                "endChar": 0
+              },
+              "replacement": "\tif (!alloc_task_dmabuf_records(count, \u0026list))\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 403,
+                "startChar": 0,
+                "endLine": 404,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (!alloc_task_dmabuf_records(remaining, \u0026list))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "18d397439f156f492c919dcd8bb4b94307798864",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92f05085_b13547ba",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-22T01:34:38Z",
+      "side": 1,
+      "message": "Hmm... Now I understand what you want to do with get_task_dmabuf_records. I feel like this structure is smelly. How about doing something like this?\n\n```\npreemption_disable();\nerr \u003d reserve_task_dmabuf_record(); /* allocate dmabuf_record per cpu */\nif (err)\n   peemption_enable();\n   return -ENOMEM;\n   \ndoing the job\n(add_task_dmabuf_record will take the record from per-cpu buffer safely).\n\npreemption_enable();\n```",
+      "range": {
+        "startLine": 305,
+        "startChar": 6,
+        "endLine": 305,
+        "endChar": 29
+      },
+      "revId": "18d397439f156f492c919dcd8bb4b94307798864",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "901688c0_04879c97",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-22T01:34:38Z",
+      "side": 1,
+      "message": "We can just release_task_dmabuf_record(rec) which will free the object into per-cpu buffer.",
+      "range": {
+        "startLine": 352,
+        "startChar": 2,
+        "endLine": 352,
+        "endChar": 33
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f5ea16a1_1c5b8651",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 200,
+                "startChar": 0,
+                "endLine": 200,
+                "endChar": 0
+              },
+              "replacement": "\nstatic void release_task_dmabuf_record(struct task_dma_buf_record *rec)\n{\n\tLIST_HEAD(list);\n\n\tlist_add(\u0026rec-\u003enode, \u0026list);\n\tput_task_dmabuf_records(\u0026list);\n}\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 347,
+                "startChar": 0,
+                "endLine": 349,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 351,
+                "startChar": 0,
+                "endLine": 353,
+                "endChar": 0
+              },
+              "replacement": "\t\trelease_task_dmabuf_record(rec);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "18d397439f156f492c919dcd8bb4b94307798864",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c864bf6_a92d65c3",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-22T01:34:38Z",
+      "side": 1,
+      "message": "it should be pr_alert.",
+      "range": {
+        "startLine": 443,
+        "startChar": 2,
+        "endLine": 443,
+        "endChar": 8
+      },
+      "revId": "18d397439f156f492c919dcd8bb4b94307798864",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "367ae2ad_07282fe8",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-22T01:34:38Z",
+      "side": 1,
+      "message": "Ditto.",
+      "range": {
+        "startLine": 446,
+        "startChar": 2,
+        "endLine": 446,
+        "endChar": 8
+      },
+      "revId": "18d397439f156f492c919dcd8bb4b94307798864",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

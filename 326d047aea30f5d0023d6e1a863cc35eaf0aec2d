@@ -1083,6 +1083,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "28946f25_0e904a56",
+        "filename": "fs/file.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-22T01:34:38Z",
+      "side": 1,
+      "message": "```\nI don\u0027t think it\u0027s reasonable to fail the whole operation simply because we failed the accounting.\n```\n\nI agree but we need a way to capture the state in some way. \n\nIf we fail to a 4K regular page as RSS, the OOM will capture the memory state for the process and dump so we could know how much memory the process had at that time. However, this dmabuf doesn\u0027t have the logic at this point.\n\nIf we introduce the per-process dmabuf rss in the __oom_kill_process so we can capture the dmabuf rss at that time, we are good here to just pr_err.\n\nRegardless of this issue, The per-process dmabuf will be super useful to debug issues.",
+      "parentUuid": "509495be_d2de7e66",
+      "range": {
+        "startLine": 597,
+        "startChar": 30,
+        "endLine": 597,
+        "endChar": 50
+      },
+      "revId": "326d047aea30f5d0023d6e1a863cc35eaf0aec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8e5fe5c3_ffc8ec09",
         "filename": "fs/proc/base.c",
         "patchSetId": 6
