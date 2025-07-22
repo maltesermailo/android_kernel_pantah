@@ -62,6 +62,24 @@
       "parentUuid": "db489857_3177c421",
       "revId": "397f66711e42a14adb4aeaca47309bddc1644a94",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ef90db3_ed7111da",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-22T22:40:29Z",
+      "side": 1,
+      "message": "Re Minchan\u0027s question: yeah, I thought we will leave unused records in the pool but your later comments indicate that you want to limit max records. Will add.\n\nRe TJ\u0027s question: this interface knows nothing about `task-\u003edmabuf_info-\u003elock`, so for correctness preemption should be disabled when `alloc_task_dmabuf_record` is called to ensure other tasks do not steal preallocated records.\n\nThe API names are modeled after `radix_tree_preload`/`radix_tree_preload_end`.",
+      "parentUuid": "ab96f99d_57613390",
+      "revId": "397f66711e42a14adb4aeaca47309bddc1644a94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
