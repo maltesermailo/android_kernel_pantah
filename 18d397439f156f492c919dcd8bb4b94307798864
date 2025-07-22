@@ -92,6 +92,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65fed030_08fcae25",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-22T02:11:04Z",
+      "side": 1,
+      "message": "I was thinking of this as getting and putting elements from/to a record pool but if you prefer alloc/free I don\u0027t really object to that.",
+      "parentUuid": "f69c2bc5_62bb6fe8",
+      "range": {
+        "startLine": 177,
+        "startChar": 12,
+        "endLine": 177,
+        "endChar": 35
+      },
+      "revId": "18d397439f156f492c919dcd8bb4b94307798864",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ef66397_8c15a1c4",
@@ -133,6 +157,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53b73def_ee5658e7",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-22T02:11:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6ef66397_8c15a1c4",
+      "range": {
+        "startLine": 186,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 39
+      },
+      "revId": "18d397439f156f492c919dcd8bb4b94307798864",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c93f6d47_e910617b",
@@ -146,6 +194,30 @@
       "writtenOn": "2025-07-22T01:34:38Z",
       "side": 1,
       "message": "Why do we need to reset the list?",
+      "range": {
+        "startLine": 198,
+        "startChar": 1,
+        "endLine": 198,
+        "endChar": 15
+      },
+      "revId": "18d397439f156f492c919dcd8bb4b94307798864",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34098ef5_21a65bf1",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-22T02:11:04Z",
+      "side": 1,
+      "message": "In the previous loop I don\u0027t remove the elements from this list while freeing them, so technically it\u0027s not empty when this function exits. We don\u0027t use the list after this function exists but a new user potentially can keep using that list, so I don\u0027t want to leave it with bogus freed elements in it, so figured it would be more fail-safe to explicitly reset it.",
+      "parentUuid": "c93f6d47_e910617b",
       "range": {
         "startLine": 198,
         "startChar": 1,
@@ -227,6 +299,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bdfdb77_d361716a",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-22T02:11:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "10545c78_1f9c29e2",
+      "range": {
+        "startLine": 201,
+        "startChar": 12,
+        "endLine": 201,
+        "endChar": 35
+      },
+      "revId": "18d397439f156f492c919dcd8bb4b94307798864",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92f05085_b13547ba",
@@ -240,6 +336,30 @@
       "writtenOn": "2025-07-22T01:34:38Z",
       "side": 1,
       "message": "Hmm... Now I understand what you want to do with get_task_dmabuf_records. I feel like this structure is smelly. How about doing something like this?\n\n```\npreemption_disable();\nerr \u003d reserve_task_dmabuf_record(); /* allocate dmabuf_record per cpu */\nif (err)\n   peemption_enable();\n   return -ENOMEM;\n   \ndoing the job\n(add_task_dmabuf_record will take the record from per-cpu buffer safely).\n\npreemption_enable();\n```",
+      "range": {
+        "startLine": 305,
+        "startChar": 6,
+        "endLine": 305,
+        "endChar": 29
+      },
+      "revId": "18d397439f156f492c919dcd8bb4b94307798864",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4b52e94_fa89a3a3",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-22T02:11:04Z",
+      "side": 1,
+      "message": "I don\u0027t see why allocating with disabled preemption is better that record pooling. The whole point of `task_dma_buf_record_pool` is the ability to put unneeded records back to the pool and reuse them later instead of freeing and reallocating them. With your approach if the same dmabuf record is added by someone concurrently, our newly allocated record will not be needed and has to be freed. With the pool I implemented we can put that record back into the pool for later reuse. The pool is even more useful inside `copy_dmabuf_info` where we need to reserve multiple records. So, unless you have an explanation why this is \"smelly\", I don\u0027t think going with your suggestion is a better solution.",
+      "parentUuid": "92f05085_b13547ba",
       "range": {
         "startLine": 305,
         "startChar": 6,
@@ -313,6 +433,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0251677b_076c23d8",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-22T02:11:04Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand your idea of per-cpu buffer. Do you mean that each cpu would have one reserved `task_dma_buf_record`?",
+      "parentUuid": "901688c0_04879c97",
+      "range": {
+        "startLine": 352,
+        "startChar": 2,
+        "endLine": 352,
+        "endChar": 33
+      },
+      "revId": "18d397439f156f492c919dcd8bb4b94307798864",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5c864bf6_a92d65c3",
         "filename": "drivers/dma-buf/dma-buf.c",
         "patchSetId": 9
@@ -324,6 +468,30 @@
       "writtenOn": "2025-07-22T01:34:38Z",
       "side": 1,
       "message": "it should be pr_alert.",
+      "range": {
+        "startLine": 443,
+        "startChar": 2,
+        "endLine": 443,
+        "endChar": 8
+      },
+      "revId": "18d397439f156f492c919dcd8bb4b94307798864",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af67e321_d618381e",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-22T02:11:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5c864bf6_a92d65c3",
       "range": {
         "startLine": 443,
         "startChar": 2,
@@ -347,6 +515,30 @@
       "writtenOn": "2025-07-22T01:34:38Z",
       "side": 1,
       "message": "Ditto.",
+      "range": {
+        "startLine": 446,
+        "startChar": 2,
+        "endLine": 446,
+        "endChar": 8
+      },
+      "revId": "18d397439f156f492c919dcd8bb4b94307798864",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb524dca_d916a8d5",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-22T02:11:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "367ae2ad_07282fe8",
       "range": {
         "startLine": 446,
         "startChar": 2,
