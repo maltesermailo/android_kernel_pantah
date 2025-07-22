@@ -1,0 +1,250 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c28c2273_4cdf6935",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-22T22:27:10Z",
+      "side": 1,
+      "message": "It\u0027s void.",
+      "range": {
+        "startLine": 319,
+        "startChar": 0,
+        "endLine": 321,
+        "endChar": 36
+      },
+      "revId": "c84d6147abcd67dda4c20046fa89262ca0acb865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c51eaea_f411d7ed",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-22T22:27:10Z",
+      "side": 1,
+      "message": "Why don\u0027t we return the pool?",
+      "range": {
+        "startLine": 334,
+        "startChar": 2,
+        "endLine": 334,
+        "endChar": 50
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f35775a2_e3db7277",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 334,
+                "startChar": 0,
+                "endLine": 335,
+                "endChar": 0
+              },
+              "replacement": "\t\tlocal_lock(\u0026dmabuf_rec_reloads.lock);\n\t\tstruct task_dma_buf_record_preload *preload \u003d\n\t\t\tthis_cpu_ptr(\u0026dmabuf_rec_reloads);\n\t\tlist_add(\u0026rec-\u003enode, \u0026preload-\u003elist);\n\t\tpreload-\u003esize++;\n\t\tlocal_unlock(\u0026dmabuf_rec_reloads.lock);\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 383,
+                "startChar": 0,
+                "endLine": 384,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 394,
+                "startChar": 0,
+                "endLine": 394,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (!child_rec) {\n\t\t\tspin_unlock(\u0026current-\u003edmabuf_info-\u003elock);\n\t\t\ttask_dmabuf_records_preload_end();\n\t\t\tgoto err_list_copy;\n\t\t}\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 402,
+                "startChar": 0,
+                "endLine": 404,
+                "endChar": 0
+              },
+              "replacement": "\ttask_dmabuf_records_preload_end();\t\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c84d6147abcd67dda4c20046fa89262ca0acb865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da13a06c_462d786d",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-22T22:27:10Z",
+      "side": 1,
+      "message": "We also need a logic to release objects we allocated from 374 lines.\n\nFor example, 375 line allocated 5000 objects and 380 line was true by race and 386 line tried to allocate one more object but failed. Then those 5000 objects remained the per-cpu buffer without any free.",
+      "range": {
+        "startLine": 387,
+        "startChar": 8,
+        "endLine": 387,
+        "endChar": 21
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b1be35d7_0ec73a14",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 346,
+                "startChar": 0,
+                "endLine": 346,
+                "endChar": 0
+              },
+              "replacement": "\tLIST_HEAD(tmp_list);\n\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 387,
+                "startChar": 0,
+                "endLine": 388,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tgoto err_list_copy_free_records;\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 396,
+                "startChar": 0,
+                "endLine": 397,
+                "endChar": 0
+              },
+              "replacement": "\t\tlist_add(\u0026child_rec-\u003enode, \u0026tmp_list);\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 403,
+                "startChar": 0,
+                "endLine": 403,
+                "endChar": 0
+              },
+              "replacement": "\tlist_splice_init(\u0026tmp_list, \u0026task-\u003edmabuf_info-\u003edmabufs);\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 406,
+                "startChar": 0,
+                "endLine": 407,
+                "endChar": 0
+              },
+              "replacement": "err_list_copy_free_records:\n\tstruct task_dma_buf_record *rec_to_free;\n\n\tlist_for_each_entry_safe(rec_to_free, tmp_list, node,\n\t\t\t\t list_del(\u0026rec_to_free-\u003enode))\n\t\tkmem_cache_free(task_dmabuf_record_cachep, rec_to_free);\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c84d6147abcd67dda4c20046fa89262ca0acb865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7304e3c3_fc1d1b12",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-22T22:27:10Z",
+      "side": 1,
+      "message": "Theoretically, live lock possible. We need a limit.",
+      "range": {
+        "startLine": 388,
+        "startChar": 7,
+        "endLine": 388,
+        "endChar": 12
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b7f31533_1665c661",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 378,
+                "startChar": 0,
+                "endLine": 383,
+                "endChar": 0
+              },
+              "replacement": "\tfor (int retry \u003d 0; retry \u003c 5; retry++) {\n\t\tspin_lock(\u0026current-\u003edmabuf_info-\u003elock);\n\t\tif (current-\u003edmabuf_info-\u003edmabuf_count \u003e count) {\n\t\t\t/* We don\u0027t have enough reserved records, allocate more. */\n\t\t\tcount \u003d current-\u003edmabuf_info-\u003edmabuf_count;\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 384,
+                "startChar": 0,
+                "endLine": 390,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tspin_unlock(\u0026current-\u003edmabuf_info-\u003elock);\n\t\t\ttask_dmabuf_records_preload_end();\n\t\t\tif (!task_dmabuf_records_preload(count))\n\t\t\t\tgoto err_list_copy;\n\t\t\tcontinue;\n\t\t}\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 391,
+                "startChar": 0,
+                "endLine": 397,
+                "endChar": 0
+              },
+              "replacement": "\t\t/* All required records are reserved */\n\t\tlist_for_each_entry(parent_rec, \u0026current-\u003edmabuf_info-\u003edmabufs, node) {\n\t\t\tchild_rec \u003d alloc_task_dmabuf_record();\n\t\t\tchild_rec-\u003edmabuf \u003d parent_rec-\u003edmabuf;\n\t\t\tchild_rec-\u003erefcnt \u003d parent_rec-\u003erefcnt;\n\t\t\tlist_add(\u0026child_rec-\u003enode, \u0026task-\u003edmabuf_info-\u003edmabufs);\n\t\t}\n\t\ttask-\u003edmabuf_info-\u003edmabuf_count \u003d current-\u003edmabuf_info-\u003edmabuf_count;\n\t\ttask-\u003edmabuf_info-\u003erss \u003d current-\u003edmabuf_info-\u003erss;\n\t\tspin_unlock(\u0026current-\u003edmabuf_info-\u003elock);\n\t\tbreak;\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 398,
+                "startChar": 0,
+                "endLine": 401,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "c84d6147abcd67dda4c20046fa89262ca0acb865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
