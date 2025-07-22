@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db489857_3177c421",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-22T22:05:23Z",
+      "side": 1,
+      "message": "Better to move the pair: IOW, line number 225.\n\nThis patch has only alloc function but where is free function?",
+      "fixSuggestions": [
+        {
+          "fixId": "f65670e8_c634b0d4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 224,
+                "startChar": 0,
+                "endLine": 224,
+                "endChar": 0
+              },
+              "replacement": "\nstatic inline void task_dmabuf_records_preload_end(void)\n{\n\tlocal_unlock(\u0026dmabuf_rec_reloads.lock);\n}\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 240,
+                "startChar": 0,
+                "endLine": 245,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "397f66711e42a14adb4aeaca47309bddc1644a94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
