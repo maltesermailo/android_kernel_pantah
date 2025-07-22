@@ -8795,6 +8795,7 @@ static int ufshcd_probe_hba(struct ufs_hba *hba, bool init_dev_params)
 	struct Scsi_Host *host = hba->host;
 
 	hba->ufshcd_state = UFSHCD_STATE_RESET;
+        pr_info("Randall test build\n");
 
 	ret = ufshcd_link_startup(hba);
 	if (ret)
