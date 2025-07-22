@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3fd6ffc4_17b520f8",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-07-22T22:45:54Z",
+      "side": 1,
+      "message": "Hm, this can fail but we don\u0027t check for it.",
+      "range": {
+        "startLine": 300,
+        "startChar": 2,
+        "endLine": 300,
+        "endChar": 32
+      },
+      "revId": "c84d6147abcd67dda4c20046fa89262ca0acb865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c28c2273_4cdf6935",
         "filename": "drivers/dma-buf/dma-buf.c",
         "patchSetId": 13
@@ -19,6 +42,29 @@
         "startChar": 0,
         "endLine": 321,
         "endChar": 36
+      },
+      "revId": "c84d6147abcd67dda4c20046fa89262ca0acb865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d4ee46e_f7e923c7",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-07-22T22:45:54Z",
+      "side": 1,
+      "message": "This is actually an error now in all cases right? `pr_alert`?",
+      "range": {
+        "startLine": 327,
+        "startChar": 1,
+        "endLine": 328,
+        "endChar": 9
       },
       "revId": "c84d6147abcd67dda4c20046fa89262ca0acb865",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
@@ -243,6 +289,52 @@
           ]
         }
       ],
+      "revId": "c84d6147abcd67dda4c20046fa89262ca0acb865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eba40f89_36a925fc",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-07-22T22:45:54Z",
+      "side": 1,
+      "message": "This is actually an error now in all cases right? `pr_alert`?",
+      "range": {
+        "startLine": 416,
+        "startChar": 2,
+        "endLine": 416,
+        "endChar": 8
+      },
+      "revId": "c84d6147abcd67dda4c20046fa89262ca0acb865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4f3d608_f5b54517",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1865,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-07-22T22:45:54Z",
+      "side": 1,
+      "message": "We should probably have the same error handling semantics here as the new one in `dma_buf_mmap_internal`",
+      "range": {
+        "startLine": 1865,
+        "startChar": 2,
+        "endLine": 1865,
+        "endChar": 12
+      },
       "revId": "c84d6147abcd67dda4c20046fa89262ca0acb865",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
