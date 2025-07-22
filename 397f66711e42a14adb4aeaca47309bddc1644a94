@@ -44,6 +44,24 @@
       ],
       "revId": "397f66711e42a14adb4aeaca47309bddc1644a94",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab96f99d_57613390",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-07-22T22:30:32Z",
+      "side": 1,
+      "message": "Is this necessary to keep preemption disabled for alloc_task_dmabuf_record? But we already have `task-\u003edmabuf_info-\u003elock` for that, no?\n\nNaming: If we\u0027re going to have an `_end`, then I think we should have a `_begin`.",
+      "parentUuid": "db489857_3177c421",
+      "revId": "397f66711e42a14adb4aeaca47309bddc1644a94",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
