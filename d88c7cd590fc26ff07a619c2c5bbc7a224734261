@@ -1,0 +1,75 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "699a183e_4774a63b",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-23T18:19:30Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we add this one as last column to minimize any risk to break existing tool?",
+      "range": {
+        "startLine": 418,
+        "startChar": 2,
+        "endLine": 418,
+        "endChar": 5
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "07ceb4f1_01d6e1a5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/oom_kill.c",
+              "range": {
+                "startLine": 415,
+                "startChar": 0,
+                "endLine": 416,
+                "endChar": 0
+              },
+              "replacement": "\tpr_info(\"[%7d] %5d %5d %8lu %8lu %8ld %8lu %10s         %5hd %s\\n\",\n"
+            },
+            {
+              "path": "mm/oom_kill.c",
+              "range": {
+                "startLine": 418,
+                "startChar": 0,
+                "endLine": 419,
+                "endChar": 0
+              },
+              "replacement": "\t\tmm_pgtables_bytes(task-\u003emm),\n"
+            },
+            {
+              "path": "mm/oom_kill.c",
+              "range": {
+                "startLine": 420,
+                "startChar": 0,
+                "endLine": 420,
+                "endChar": 0
+              },
+              "replacement": "\t\tbuf,\n"
+            },
+            {
+              "path": "mm/oom_kill.c",
+              "range": {
+                "startLine": 439,
+                "startChar": 0,
+                "endLine": 440,
+                "endChar": 0
+              },
+              "replacement": "\tpr_info(\"[  pid  ]   uid  tgid total_vm      rss pgtables_bytes swapents dmabuf_rss oom_score_adj name\\n\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d88c7cd590fc26ff07a619c2c5bbc7a224734261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
