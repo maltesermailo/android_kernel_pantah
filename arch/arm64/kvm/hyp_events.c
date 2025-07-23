@@ -455,7 +455,7 @@ static void hyp_ftrace_init_mod(struct pkvm_el2_module *mod)
 
 static int enable_func_hyp_event(struct hyp_event *event, bool enable)
 {
-	unsigned short id = event->id;
+	unsigned short id = event->hyp_id;
 	int ret = 1;
 
 	if (event != &hyp_event_func && event != &hyp_event_func_ret)
@@ -503,7 +503,7 @@ extern struct hyp_event_id __hyp_event_ids_end[];
 
 static int enable_hyp_event(struct hyp_event *event, bool enable)
 {
-	unsigned short id = event->id;
+	unsigned short id = event->hyp_id;
 	int ret;
 
 	ret = enable_func_hyp_event(event, enable);
@@ -686,7 +686,11 @@ static const struct file_operations hyp_header_page_fops = {
 };
 
 static struct dentry *event_tracefs;
-static unsigned int last_event_id;
+// Event IDs should be positive integers, hence starting from 1 here.
+// NOTE: this introduces ID clash between hypervisor events and kernel events.
+// For now this doesn't seem to cause problems, but we should fix it...
+static unsigned int last_event_id = 1;
+static unsigned int last_event_hyp_id;
 
 static struct hyp_mod_tables mod_event_tables;
 
@@ -729,15 +733,15 @@ struct hyp_event *hyp_trace_find_event_name(const char *name)
 	return event;
 }
 
-struct hyp_event *hyp_trace_find_event(int id)
+struct hyp_event *hyp_trace_find_event(unsigned short hyp_id)
 {
-	struct hyp_event *event = __hyp_events_start + id;
+	struct hyp_event *event = __hyp_events_start + hyp_id;
 
 	if ((unsigned long)event >= (unsigned long)__hyp_events_end) {
 
-		id -= nr_entries(__hyp_events_start, __hyp_events_end);
+		hyp_id -= nr_entries(__hyp_events_start, __hyp_events_end);
 
-		event = hyp_table_entry(&mod_event_tables, sizeof(*event), id);
+		event = hyp_table_entry(&mod_event_tables, sizeof(*event), hyp_id);
 	}
 
 	return event;
@@ -822,7 +826,8 @@ static int hyp_event_table_init(struct hyp_event *event,
 		 * declarations from kvm_hypevents.h. We have then a 1:1
 		 * mapping.
 		 */
-		event->id = event_id->id = last_event_id++;
+		event->hyp_id = event_id->id = last_event_hyp_id++;
+		event->id = last_event_id++;
 
 		event++;
 		event_id++;

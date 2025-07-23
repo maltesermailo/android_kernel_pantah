@@ -9,7 +9,7 @@
 #ifdef CONFIG_TRACING
 int hyp_trace_init_tracefs(void);
 int hyp_trace_init_events(void);
-struct hyp_event *hyp_trace_find_event(int id);
+struct hyp_event *hyp_trace_find_event(unsigned short hyp_id);
 void hyp_trace_init_event_tracefs(struct dentry *parent);
 int hyp_trace_init_mod_events(struct pkvm_el2_module *mod);
 bool hyp_event_early_probe(void);

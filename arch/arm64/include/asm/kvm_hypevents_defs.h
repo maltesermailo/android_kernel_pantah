@@ -17,6 +17,7 @@ struct hyp_event {
 	struct trace_event_fields	*fields;
 	void (*trace_func)(struct ht_iterator *iter);
 	int				id;
+	unsigned short			hyp_id;
 };
 
 struct hyp_entry_hdr {
