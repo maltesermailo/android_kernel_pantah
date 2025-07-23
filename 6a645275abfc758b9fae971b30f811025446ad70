@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f0ce460_a103d3f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-23T06:12:18Z",
+      "side": 1,
+      "message": "Just nit",
+      "revId": "6a645275abfc758b9fae971b30f811025446ad70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "991a5a71_4a84a454",
+        "filename": "fs/proc/base.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 3514,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-23T06:12:18Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we add about these in the document? If you are doing undocumented intentionally, I am okay with that.",
+      "range": {
+        "startLine": 3513,
+        "startChar": 0,
+        "endLine": 3514,
+        "endChar": 20
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "221c0c18_09972923",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "fs/proc/base.c",
+              "range": {
+                "startLine": 3513,
+                "startChar": 0,
+                "endLine": 3515,
+                "endChar": 0
+              },
+              "replacement": "\tONE(\"dmabuf_rss\", S_IRUGO, proc_dmabuf_rss_show),\n\tREG(\"dmabuf_rss_hwm\", S_IRUGO|S_IWUSR, proc_dmabuf_rss_hwm_operations),\n"
+            },
+            {
+              "path": "fs/proc/base.c",
+              "range": {
+                "startLine": 3856,
+                "startChar": 0,
+                "endLine": 3857,
+                "endChar": 0
+              },
+              "replacement": "\tONE(\"time_in_state\", S_IRUGO, proc_time_in_state_show),\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6a645275abfc758b9fae971b30f811025446ad70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
