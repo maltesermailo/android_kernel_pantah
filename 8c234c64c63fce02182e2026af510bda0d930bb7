@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec270524_620ead5a",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-23T18:06:29Z",
+      "side": 1,
+      "message": "We also should call the trim here since we released the lock before(A thread in the parent could destroy records in the window and it makes allocation here was overchaged.",
+      "fixSuggestions": [
+        {
+          "fixId": "310f8006_0f271e05",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 448,
+                "startChar": 0,
+                "endLine": 448,
+                "endChar": 0
+              },
+              "replacement": "\ttrim_task_dmabuf_records();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8c234c64c63fce02182e2026af510bda0d930bb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
