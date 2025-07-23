@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "475ecdb1_f42dfb63",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-23T06:03:14Z",
+      "side": 1,
+      "message": "Can you comment why we need READ_ONCE?",
+      "range": {
+        "startLine": 412,
+        "startChar": 9,
+        "endLine": 412,
+        "endChar": 18
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5c852ecc_03195ea4",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 412,
+                "startChar": 0,
+                "endLine": 412,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * READ_ONCE is used to avoid a race with a concurrent update of\n\t * dmabuf_count. If we read the value while holding the lock, we\n\t * could deadlock if the value is increased by another thread.\n\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "44baaaf258ce3eca0f9b13afdbb937cdd364cf17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0422b34d_1f6a950f",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-23T06:03:14Z",
+      "side": 1,
+      "message": "It returns true with preemption disabled in the successful case.",
+      "range": {
+        "startLine": 424,
+        "startChar": 7,
+        "endLine": 424,
+        "endChar": 34
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "589bf9f2_afb81d1f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 424,
+                "startChar": 0,
+                "endLine": 425,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (!task_dmabuf_records_preload(count)) {\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 426,
+                "startChar": 0,
+                "endLine": 426,
+                "endChar": 0
+              },
+              "replacement": "\t\t}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "44baaaf258ce3eca0f9b13afdbb937cdd364cf17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aca436d6_5ddfd59c",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-23T06:03:14Z",
+      "side": 1,
+      "message": "Let\u0027s assume now retries is 6 so we go err_list_copy.",
+      "range": {
+        "startLine": 428,
+        "startChar": 6,
+        "endLine": 428,
+        "endChar": 13
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "114a02d2_fa99b6b6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 428,
+                "startChar": 0,
+                "endLine": 429,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (++retries \u003e 5)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "44baaaf258ce3eca0f9b13afdbb937cdd364cf17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8db2bb56_bdf5e7de",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 17
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-07-23T06:03:14Z",
+      "side": 1,
+      "message": "Here, try local_lock again so it\u0027s deadlock?",
+      "range": {
+        "startLine": 450,
+        "startChar": 1,
+        "endLine": 450,
+        "endChar": 25
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7497d1ae_ce3a1e91",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 450,
+                "startChar": 0,
+                "endLine": 450,
+                "endChar": 0
+              },
+              "replacement": "\tlocal_lock(\u0026dmabuf_rec_reloads.lock);\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 451,
+                "startChar": 0,
+                "endLine": 451,
+                "endChar": 0
+              },
+              "replacement": "\tlocal_unlock(\u0026dmabuf_rec_reloads.lock);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "44baaaf258ce3eca0f9b13afdbb937cdd364cf17",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
