@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "446e5622_427684ef",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-23T00:51:28Z",
+      "side": 1,
+      "message": "No, not really. We are still inside task_dmabuf_records_preload()/task_dmabuf_records_preload_end() section and we successfully preloaded the record. No preemption can happen, so we should have the record ready for us.",
+      "parentUuid": "3fd6ffc4_17b520f8",
+      "range": {
+        "startLine": 300,
+        "startChar": 2,
+        "endLine": 300,
+        "endChar": 32
+      },
+      "revId": "c84d6147abcd67dda4c20046fa89262ca0acb865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c28c2273_4cdf6935",
         "filename": "drivers/dma-buf/dma-buf.c",
         "patchSetId": 13
@@ -84,6 +108,30 @@
       "writtenOn": "2025-07-22T22:45:54Z",
       "side": 1,
       "message": "This is actually an error now in all cases right? `pr_alert`?",
+      "range": {
+        "startLine": 327,
+        "startChar": 1,
+        "endLine": 328,
+        "endChar": 9
+      },
+      "revId": "c84d6147abcd67dda4c20046fa89262ca0acb865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d3db682_d889579f",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-23T00:51:28Z",
+      "side": 1,
+      "message": "Not for `init` process and if we tried and failed to allocate `task-\u003edmabuf_info` then the `pr_alert` should be at the time we failed the allocation, not every time we account a dmabuf for that task. We do have a `pr_err(\"failed to copy dmabuf accounting info, err %d\\n\", retval)` if that allocation fails and fork will actually fail.",
+      "parentUuid": "0d4ee46e_f7e923c7",
       "range": {
         "startLine": 327,
         "startChar": 1,
@@ -414,6 +462,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d1e5d565_56ccce9c",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-23T00:51:28Z",
+      "side": 1,
+      "message": "See previous reply.",
+      "parentUuid": "eba40f89_36a925fc",
+      "range": {
+        "startLine": 416,
+        "startChar": 2,
+        "endLine": 416,
+        "endChar": 8
+      },
+      "revId": "c84d6147abcd67dda4c20046fa89262ca0acb865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c4f3d608_f5b54517",
         "filename": "drivers/dma-buf/dma-buf.c",
         "patchSetId": 13
@@ -425,6 +497,30 @@
       "writtenOn": "2025-07-22T22:45:54Z",
       "side": 1,
       "message": "We should probably have the same error handling semantics here as the new one in `dma_buf_mmap_internal`",
+      "range": {
+        "startLine": 1865,
+        "startChar": 2,
+        "endLine": 1865,
+        "endChar": 12
+      },
+      "revId": "c84d6147abcd67dda4c20046fa89262ca0acb865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3888e58b_49241304",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1865,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-23T00:51:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c4f3d608_f5b54517",
       "range": {
         "startLine": 1865,
         "startChar": 2,
@@ -460,6 +556,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "630d0060_dca0eb70",
+        "filename": "fs/proc/base.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3313,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-23T00:51:28Z",
+      "side": 1,
+      "message": "Ugh, yeah, on a 32-bit system tearing would still possible. Should we change to u32 instead of converting back to atomics or doing locking?",
+      "parentUuid": "4bcb36e3_d566b30d",
+      "range": {
+        "startLine": 3313,
+        "startChar": 26,
+        "endLine": 3313,
+        "endChar": 60
+      },
+      "revId": "c84d6147abcd67dda4c20046fa89262ca0acb865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "891db2ff_2a79cac5",
         "filename": "fs/proc/base.c",
         "patchSetId": 13
@@ -471,6 +591,30 @@
       "writtenOn": "2025-07-22T22:59:18Z",
       "side": 1,
       "message": "This is only for init now?",
+      "range": {
+        "startLine": 3315,
+        "startChar": 2,
+        "endLine": 3315,
+        "endChar": 21
+      },
+      "revId": "c84d6147abcd67dda4c20046fa89262ca0acb865",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b51df80_bc232d8c",
+        "filename": "fs/proc/base.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 3315,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-23T00:51:28Z",
+      "side": 1,
+      "message": "I think so, since we do support kthreads.",
+      "parentUuid": "891db2ff_2a79cac5",
       "range": {
         "startLine": 3315,
         "startChar": 2,
