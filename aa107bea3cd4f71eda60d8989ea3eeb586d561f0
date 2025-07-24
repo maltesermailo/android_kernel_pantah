@@ -16,6 +16,24 @@
       "message": "What about the memory leak?",
       "revId": "aa107bea3cd4f71eda60d8989ea3eeb586d561f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cda27b35_cd34f4e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-07-24T15:32:56Z",
+      "side": 1,
+      "message": "It looks like each failed probe will leak `sizeof(*typec)` until the device is unloaded (never?).\n\nHow about moving the allocation to after the parent check? But I see there are error paths in this probe function.\n\n@saravanak@google.com, is this OK as-is?",
+      "parentUuid": "204c0c9e_dc50f34f",
+      "revId": "aa107bea3cd4f71eda60d8989ea3eeb586d561f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
