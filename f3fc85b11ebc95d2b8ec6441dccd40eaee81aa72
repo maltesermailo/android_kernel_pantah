@@ -1,0 +1,237 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20822984_04dbdb8d",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2816,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-24T16:45:57Z",
+      "side": 1,
+      "message": "You are not in the loop. Did you mean to say `return` ?",
+      "range": {
+        "startLine": 2816,
+        "startChar": 2,
+        "endLine": 2816,
+        "endChar": 10
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0d6bf4d3_4004212e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 2816,
+                "startChar": 0,
+                "endLine": 2817,
+                "endChar": 0
+              },
+              "replacement": "\t\treturn;\n"
+            },
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 4106,
+                "startChar": 0,
+                "endLine": 4107,
+                "endChar": 0
+              },
+              "replacement": "\t\tzone-\u003ecompact_blockskip_flush \u003d 0;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f3fc85b11ebc95d2b8ec6441dccd40eaee81aa72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10a594b7_6f36e9dd",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2826,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-24T16:45:57Z",
+      "side": 1,
+      "message": "Why can\u0027t you use this existing hook here?",
+      "range": {
+        "startLine": 2826,
+        "startChar": 1,
+        "endLine": 2826,
+        "endChar": 40
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "7de5b55b_ac19a08a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 2804,
+                "startChar": 0,
+                "endLine": 2805,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 2814,
+                "startChar": 0,
+                "endLine": 2817,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 2867,
+                "startChar": 0,
+                "endLine": 2867,
+                "endChar": 0
+              },
+              "replacement": "\t\tint migratetype;\n"
+            },
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 2877,
+                "startChar": 0,
+                "endLine": 2877,
+                "endChar": 0
+              },
+              "replacement": "\n\t\tmigratetype \u003d get_pfnblock_migratetype(\u0026folio-\u003epage, pfn);\n\t\ttrace_android_vh_free_unref_page_bypass(\u0026folio-\u003epage, order,\n\t\t\t\tmigratetype, \u0026bypass);\n\t\tif (bypass)\n\t\t\tcontinue;\n"
+            },
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 2893,
+                "startChar": 0,
+                "endLine": 2894,
+                "endChar": 0
+              },
+              "replacement": "\ttrace_android_vh_free_unref_folios_bypass(folios, \u0026skip_free);\n"
+            },
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 3187,
+                "startChar": 0,
+                "endLine": 3188,
+                "endChar": 0
+              },
+              "replacement": "\t\t\ttrace_android_vh_rmqueue_bulk_bypass(order, pcp,\n\t\t\t\t\tmigratetype, list);\n"
+            },
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 3301,
+                "startChar": 0,
+                "endLine": 3302,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tgfp_flags, alloc_flags, migratetype, page);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f3fc85b11ebc95d2b8ec6441dccd40eaee81aa72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5a0208c_4f7476d3",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2873,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-24T16:45:57Z",
+      "side": 1,
+      "message": "Reusing a hook from a different path is not a good idea. If you really need to skip some pages here instead of bailing out using trace_android_vh_free_unref_folios_to_pcp_bypass() after this loop, then please introduce a separate hook.",
+      "range": {
+        "startLine": 2873,
+        "startChar": 2,
+        "endLine": 2873,
+        "endChar": 39
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "688cd33e_ccc555aa",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 2803,
+                "startChar": 0,
+                "endLine": 2804,
+                "endChar": 0
+              },
+              "replacement": "\tbool skip_free_unref_page_bypass \u003d false;\n"
+            },
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 2826,
+                "startChar": 0,
+                "endLine": 2828,
+                "endChar": 0
+              },
+              "replacement": "\ttrace_android_vh_free_unref_page_bypass(page, order, migratetype, \u0026skip_free_unref_page_bypass);\n\tif (skip_free_unref_page_bypass)\n"
+            },
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 2862,
+                "startChar": 0,
+                "endLine": 2862,
+                "endChar": 0
+              },
+              "replacement": "\tbool skip_free_pages_ok_bypass \u003d false;\n"
+            },
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 2868,
+                "startChar": 0,
+                "endLine": 2869,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 2873,
+                "startChar": 0,
+                "endLine": 2876,
+                "endChar": 0
+              },
+              "replacement": "\t\ttrace_android_vh_free_unref_folios_prepare_bypass(\u0026folio-\u003epage, order,\n\t\t\t\tFPI_NONE, \u0026skip_free_pages_ok_bypass);\n\t\tif (skip_free_pages_ok_bypass)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f3fc85b11ebc95d2b8ec6441dccd40eaee81aa72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
