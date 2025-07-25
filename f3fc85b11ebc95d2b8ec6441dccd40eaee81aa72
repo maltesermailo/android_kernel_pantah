@@ -52,6 +52,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a042567b_45b41af4",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2816,
+      "author": {
+        "id": 1988826
+      },
+      "writtenOn": "2025-07-25T00:42:50Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "20822984_04dbdb8d",
+      "range": {
+        "startLine": 2816,
+        "startChar": 2,
+        "endLine": 2816,
+        "endChar": 10
+      },
+      "revId": "f3fc85b11ebc95d2b8ec6441dccd40eaee81aa72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10a594b7_6f36e9dd",
@@ -153,6 +177,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "56970176_99635b52",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2826,
+      "author": {
+        "id": 1988826
+      },
+      "writtenOn": "2025-07-25T00:42:50Z",
+      "side": 1,
+      "message": "We can\u0027t use this vendor hook, because this vendor hook is also used via __free_pages_ok and we need fpi_flags to distinguish if page is freed from vendor module.",
+      "parentUuid": "10a594b7_6f36e9dd",
+      "range": {
+        "startLine": 2826,
+        "startChar": 1,
+        "endLine": 2826,
+        "endChar": 40
+      },
+      "revId": "f3fc85b11ebc95d2b8ec6441dccd40eaee81aa72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5a0208c_4f7476d3",
@@ -230,6 +278,30 @@
           ]
         }
       ],
+      "revId": "f3fc85b11ebc95d2b8ec6441dccd40eaee81aa72",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eee6fc58_cda1d88e",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2873,
+      "author": {
+        "id": 1988826
+      },
+      "writtenOn": "2025-07-25T00:42:50Z",
+      "side": 1,
+      "message": "I need vendor hook in 3 places for same purpose, and I thought it\u0027d be better to reuse one existing vendor hook.\nAre you suggesting to use 3 seperate vendor hooks in each place?",
+      "parentUuid": "b5a0208c_4f7476d3",
+      "range": {
+        "startLine": 2873,
+        "startChar": 2,
+        "endLine": 2873,
+        "endChar": 39
+      },
       "revId": "f3fc85b11ebc95d2b8ec6441dccd40eaee81aa72",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
