@@ -201,7 +201,9 @@ static struct file *secretmem_file_create(unsigned long flags)
 	if (IS_ERR(inode))
 		return ERR_CAST(inode);
 
-	err = security_inode_init_security_anon(inode, &QSTR(anon_name), NULL);
+	err = security_inode_init_security_anon(
+		inode, LSM_ANON_INODE_MEMFD_SECRET, &QSTR(anon_name), NULL);
+
 	if (err) {
 		file = ERR_PTR(err);
 		goto err_free_inode;
