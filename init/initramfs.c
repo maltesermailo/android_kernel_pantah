@@ -652,6 +652,10 @@ static bool __init kexec_free_initrd(void)
 {
 	unsigned long crashk_start = (unsigned long)__va(crashk_res.start);
 	unsigned long crashk_end   = (unsigned long)__va(crashk_res.end);
+	size_t size = crashk_end - crashk_start;
+
+	pr_info("Clearing crashkernel region (size: %zu KB)\n", size / 1024);
+	memset((void *)crashk_start, 0, size);
 
 	/*
 	 * If the initrd region is overlapped with crashkernel reserved region,
