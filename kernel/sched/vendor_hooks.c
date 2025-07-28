@@ -124,5 +124,12 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_set_iowait);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_prio_inheritance);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_prio_restore);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_set_task_comm);
+<<<<<<< PATCH SET (0bcd3f5f03d39d0e8bdb446578f6d608d3fd13a7 ANDROID: SPED: Add vendor hooks in Scheduler)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_add_task);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_chk_task);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_put_task);
+||||||| BASE      (75a6bad65c99855a56875861f214a83581a4d835 ANDROID: ABI: Update pixel symbol list)
+=======
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_before_pick_task_fair);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_balance_fair);
+>>>>>>> BASE      (2aeb1e4f4319635083b2c33f8635425f2adebc6f ANDROID: GKI: add fair task core selection logic vendor hook)
