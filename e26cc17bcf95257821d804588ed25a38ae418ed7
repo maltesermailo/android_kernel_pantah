@@ -16,6 +16,24 @@
       "message": "Would it make sense to call this earlier in the function, so if the pool-\u003eattrs were changed it would affect the set_user_nice() function?",
       "revId": "e26cc17bcf95257821d804588ed25a38ae418ed7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ee2d253_3a4ac501",
+        "filename": "kernel/workqueue.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1965,
+      "author": {
+        "id": 3589941
+      },
+      "writtenOn": "2025-07-29T02:35:25Z",
+      "side": 1,
+      "message": "We need to differentiate between different kworker threads using the nice value in the create_worker function. This is also where the modification for kernel 6.6 is added, so we hope to keep the hook at its current position.",
+      "parentUuid": "d9ccc551_2629860b",
+      "revId": "e26cc17bcf95257821d804588ed25a38ae418ed7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
