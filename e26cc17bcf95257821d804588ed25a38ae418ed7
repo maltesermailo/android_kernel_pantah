@@ -34,6 +34,24 @@
       "parentUuid": "d9ccc551_2629860b",
       "revId": "e26cc17bcf95257821d804588ed25a38ae418ed7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e092c6ff_b29450aa",
+        "filename": "kernel/workqueue.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1965,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-07-29T02:53:36Z",
+      "side": 1,
+      "message": "\u003e We need to differentiate between different kworker threads using the nice value in the create_worker function.\n\nOk, then a comment should be added for clarification, or the hook name should be more descriptive (trace_android_rvh_create_worker_post_nice?)\n\n\u003e This is also where the modification for kernel 6.6 is added, so we hope to keep the hook at its current position.\n\nIs this patch then supposed to be a cherry-pick of a change in 6.6? If so it should preserve the Change-Id from the original change.",
+      "parentUuid": "3ee2d253_3a4ac501",
+      "revId": "e26cc17bcf95257821d804588ed25a38ae418ed7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
