@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d319f4cd_7dc62d53",
+        "filename": "mm/page_alloc.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 2869,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-07-29T20:11:57Z",
+      "side": 1,
+      "message": "Why are you converting folio to page here? trace_android_vh_free_folios_bypass() implies that you are operating on a folio.",
+      "range": {
+        "startLine": 2869,
+        "startChar": 39,
+        "endLine": 2869,
+        "endChar": 50
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "014adecc_8927b314",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/page_alloc.c",
+              "range": {
+                "startLine": 2869,
+                "startChar": 0,
+                "endLine": 2870,
+                "endChar": 0
+              },
+              "replacement": "\t\ttrace_android_vh_free_folios_bypass(folio, order,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "62f119211f1b6bcbd24e3671827675fb5e473e3a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
