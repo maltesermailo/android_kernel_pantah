@@ -16,6 +16,24 @@
       "message": "William, the policy changes landed in git_main and Pixel devices are now booting fine. The presubmit is still failing here, but that\u0027s for android15 qpr2. I\u0027m not sure why this is required. From https://source.android.com/docs/core/architecture/kernel/android-common#test-matrix, I thought this kernel version was only supported for the main branch?\n\nThanks",
       "revId": "fcea93b06324f41c7bab36c189367767554c038a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ad7272d_8f208463",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-07-29T18:43:11Z",
+      "side": 1,
+      "message": "That\u0027s right. The next LTS kernel version with these changes will be required to ship with Android 17 and later. So it should be okay. The current test needs to update to a newer platform build.",
+      "parentUuid": "414f4715_98d3f122",
+      "revId": "fcea93b06324f41c7bab36c189367767554c038a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
