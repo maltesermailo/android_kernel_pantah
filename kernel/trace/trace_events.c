@@ -400,20 +400,6 @@ static bool process_string(const char *fmt, int len, struct trace_event_call *ca
 	return true;
 }
 
-static void handle_dereference_arg(const char *arg_str, u64 string_flags, int len,
-				   u64 *dereference_flags, int arg,
-				   struct trace_event_call *call)
-{
-	if (string_flags & (1ULL << arg)) {
-		if (process_string(arg_str, len, call))
-			*dereference_flags &= ~(1ULL << arg);
-	} else if (process_pointer(arg_str, len, call))
-		*dereference_flags &= ~(1ULL << arg);
-	else
-		pr_warn("TRACE EVENT ERROR: Bad dereference argument: '%.*s'\n",
-			len, arg_str);
-}
-
 /*
  * Examine the print fmt of the event looking for unsafe dereference
  * pointers using %p* that could be recorded in the trace event and
@@ -577,9 +563,11 @@ static void test_event_printk(struct trace_event_call *call)
 			}
 
 			if (dereference_flags & (1ULL << arg)) {
-				handle_dereference_arg(fmt + start_arg, string_flags,
-						       e - start_arg,
-						       &dereference_flags, arg, call);
+				if (string_flags & (1ULL << arg)) {
+					if (process_string(fmt + start_arg, e - start_arg, call))
+						dereference_flags &= ~(1ULL << arg);
+				} else if (process_pointer(fmt + start_arg, e - start_arg, call))
+					dereference_flags &= ~(1ULL << arg);
 			}
 
 			start_arg = i;
@@ -590,9 +578,11 @@ static void test_event_printk(struct trace_event_call *call)
 	}
 
 	if (dereference_flags & (1ULL << arg)) {
-		handle_dereference_arg(fmt + start_arg, string_flags,
-				       i - start_arg,
-				       &dereference_flags, arg, call);
+		if (string_flags & (1ULL << arg)) {
+			if (process_string(fmt + start_arg, i - start_arg, call))
+				dereference_flags &= ~(1ULL << arg);
+		} else if (process_pointer(fmt + start_arg, i - start_arg, call))
+			dereference_flags &= ~(1ULL << arg);
 	}
 
 	/*
@@ -632,6 +622,7 @@ EXPORT_SYMBOL_GPL(trace_event_raw_init);
 bool trace_event_ignore_this_pid(struct trace_event_file *trace_file)
 {
 	struct trace_array *tr = trace_file->tr;
+	struct trace_array_cpu *data;
 	struct trace_pid_list *no_pid_list;
 	struct trace_pid_list *pid_list;
 
@@ -641,11 +632,9 @@ bool trace_event_ignore_this_pid(struct trace_event_file *trace_file)
 	if (!pid_list && !no_pid_list)
 		return false;
 
-	/*
-	 * This is recorded at every sched_switch for this task.
-	 * Thus, even if the task migrates the ignore value will be the same.
-	 */
-	return this_cpu_read(tr->array_buffer.data->ignore_pid) != 0;
+	data = this_cpu_ptr(tr->array_buffer.data);
+
+	return data->ignore_pid;
 }
 EXPORT_SYMBOL_GPL(trace_event_ignore_this_pid);
 

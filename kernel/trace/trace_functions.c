@@ -209,6 +209,7 @@ function_trace_call(unsigned long ip, unsigned long parent_ip,
 		    struct ftrace_ops *op, struct ftrace_regs *fregs)
 {
 	struct trace_array *tr = op->private;
+	struct trace_array_cpu *data;
 	unsigned int trace_ctx;
 	int bit;
 
@@ -223,7 +224,9 @@ function_trace_call(unsigned long ip, unsigned long parent_ip,
 
 	trace_ctx = tracing_gen_ctx_dec();
 
-	trace_function(tr, ip, parent_ip, trace_ctx, NULL);
+	data = this_cpu_ptr(tr->array_buffer.data);
+	if (!atomic_read(&data->disabled))
+		trace_function(tr, ip, parent_ip, trace_ctx, NULL);
 
 	ftrace_test_recursion_unlock(bit);
 }
@@ -233,8 +236,10 @@ function_args_trace_call(unsigned long ip, unsigned long parent_ip,
 			 struct ftrace_ops *op, struct ftrace_regs *fregs)
 {
 	struct trace_array *tr = op->private;
+	struct trace_array_cpu *data;
 	unsigned int trace_ctx;
 	int bit;
+	int cpu;
 
 	if (unlikely(!tr->function_enabled))
 		return;
@@ -245,7 +250,10 @@ function_args_trace_call(unsigned long ip, unsigned long parent_ip,
 
 	trace_ctx = tracing_gen_ctx();
 
-	trace_function(tr, ip, parent_ip, trace_ctx, fregs);
+	cpu = smp_processor_id();
+	data = per_cpu_ptr(tr->array_buffer.data, cpu);
+	if (!atomic_read(&data->disabled))
+		trace_function(tr, ip, parent_ip, trace_ctx, fregs);
 
 	ftrace_test_recursion_unlock(bit);
 }
@@ -291,7 +299,7 @@ function_stack_trace_call(unsigned long ip, unsigned long parent_ip,
 	parent_ip = function_get_true_parent_ip(parent_ip, fregs);
 	cpu = raw_smp_processor_id();
 	data = per_cpu_ptr(tr->array_buffer.data, cpu);
-	disabled = local_inc_return(&data->disabled);
+	disabled = atomic_inc_return(&data->disabled);
 
 	if (likely(disabled == 1)) {
 		trace_ctx = tracing_gen_ctx_flags(flags);
@@ -303,7 +311,7 @@ function_stack_trace_call(unsigned long ip, unsigned long parent_ip,
 		__trace_stack(tr, trace_ctx, skip);
 	}
 
-	local_dec(&data->disabled);
+	atomic_dec(&data->disabled);
 	local_irq_restore(flags);
 }
 
@@ -344,6 +352,7 @@ function_no_repeats_trace_call(unsigned long ip, unsigned long parent_ip,
 {
 	struct trace_func_repeats *last_info;
 	struct trace_array *tr = op->private;
+	struct trace_array_cpu *data;
 	unsigned int trace_ctx;
 	int bit;
 
@@ -355,7 +364,8 @@ function_no_repeats_trace_call(unsigned long ip, unsigned long parent_ip,
 		return;
 
 	parent_ip = function_get_true_parent_ip(parent_ip, fregs);
-	if (!tracer_tracing_is_on(tr))
+	data = this_cpu_ptr(tr->array_buffer.data);
+	if (atomic_read(&data->disabled))
 		goto out;
 
 	/*
@@ -402,7 +412,7 @@ function_stack_no_repeats_trace_call(unsigned long ip, unsigned long parent_ip,
 	parent_ip = function_get_true_parent_ip(parent_ip, fregs);
 	cpu = raw_smp_processor_id();
 	data = per_cpu_ptr(tr->array_buffer.data, cpu);
-	disabled = local_inc_return(&data->disabled);
+	disabled = atomic_inc_return(&data->disabled);
 
 	if (likely(disabled == 1)) {
 		last_info = per_cpu_ptr(tr->last_func_repeats, cpu);
@@ -417,7 +427,7 @@ function_stack_no_repeats_trace_call(unsigned long ip, unsigned long parent_ip,
 	}
 
  out:
-	local_dec(&data->disabled);
+	atomic_dec(&data->disabled);
 	local_irq_restore(flags);
 }
 
