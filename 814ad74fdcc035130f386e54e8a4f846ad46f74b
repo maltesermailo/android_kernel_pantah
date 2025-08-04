@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91b0941a_a6889c8b",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 19
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-08-04T01:06:52Z",
+      "side": 1,
+      "message": "what if this page is already donated to pkvm hypervisor previously? We should only free if it was just allocated in this function. We can put a check before to see (in line 632) if it was just allocated.",
+      "revId": "814ad74fdcc035130f386e54e8a4f846ad46f74b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
