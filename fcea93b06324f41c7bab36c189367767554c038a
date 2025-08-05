@@ -106,6 +106,24 @@
       "parentUuid": "36a978a7_c3bee820",
       "revId": "fcea93b06324f41c7bab36c189367767554c038a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0e30d50_c0414b03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2025-08-05T23:39:46Z",
+      "side": 1,
+      "message": "Hi Yongqin Liu,\n\nThanks for reaching out. Two rules were added:\n\n1. In the platform policy, in kernel.te (that\u0027s change I2fb9089f77af6b5bce84110b0837dcf3008aa222): `allow kernel self:system firmware_load;`. Here is the description from the commit:\n\n```\nGrant firmware_load to the kernel\n\nBeginning with 6.15, the kernel introduced a new permission\n\"firwmare_load\" on the \"system\" class. This permission gates which file\nor firmware loading method can be used.\n\n  1. If the firmware_class.path command line parameter is set, the\n     kernel will attempt to read the firmware file by itself. In this\n     case, a new rule should be added on the expected type of firmware\n     file. This is *not* included as part of platform policy. For\n     instance:\n\n       allow kernel vendor_firwmare_file:file firmware_load;\n\n  2. Otherwise, the kernel relies on ueventd to read the firmware and\n     forward it to the kernel. Here, there are no more security context\n     associated with the firmware file once it reaches the kernel.\n     SELinux only verifies that this method is allowed. This is this\n     commit.\n```\n\n2. In the device policy, this was `allow kernel vendor_fw_file:system firmware_load;`. (What I described in the commit message (1) above).\n\nYou would have to match the target context (i.e., `vendor_fw_file`) to something similar on your device policies. I hope that helps, let me know if you need more details. Thanks",
+      "parentUuid": "660880ce_558c81a8",
+      "revId": "fcea93b06324f41c7bab36c189367767554c038a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
