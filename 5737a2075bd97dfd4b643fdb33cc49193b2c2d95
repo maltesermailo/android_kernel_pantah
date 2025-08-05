@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e6c18343_4989f323",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-08-05T18:22:29Z",
+      "side": 1,
+      "message": "That scenario is possible, but the branch starting at line 419 handles it.\n\nThere is still a very small bug here since `dmabuf_count` is a `size_t`, and the read could possibly be non-atomic. However it\u0027s extremely unlikely any process refers to `2^32 + 1` different buffers... that\u0027d take at least 128G of kernel memory to reach.",
+      "parentUuid": "30f22578_8b70434d",
+      "range": {
+        "startLine": 412,
+        "startChar": 0,
+        "endLine": 413,
+        "endChar": 55
+      },
+      "revId": "5737a2075bd97dfd4b643fdb33cc49193b2c2d95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aa5420cf_0f0bee09",
         "filename": "drivers/dma-buf/dma-buf.c",
         "patchSetId": 22
@@ -37,6 +61,30 @@
       "writtenOn": "2025-08-05T06:36:36Z",
       "side": 1,
       "message": "Seems this could be NULL if the reservation was not sufficient? So we should check it before deference below?",
+      "range": {
+        "startLine": 439,
+        "startChar": 2,
+        "endLine": 439,
+        "endChar": 41
+      },
+      "revId": "5737a2075bd97dfd4b643fdb33cc49193b2c2d95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad7ad8f0_d339ccf7",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-08-05T18:22:29Z",
+      "side": 1,
+      "message": "`alloc_task_dmabuf_record` can return null, but that should not be possible here.\n\nThe `dmabuf_info-\u003elock` is taken on 418 and is still held here. No new entries can be added to `dmabuf_info-\u003edmabufs` without that lock. We check to make sure the number of records we preallocated before the lock is still sufficient with the lock held on 419. So only if `dmabuf_count` is incorrect should this fail.",
+      "parentUuid": "aa5420cf_0f0bee09",
       "range": {
         "startLine": 439,
         "startChar": 2,
