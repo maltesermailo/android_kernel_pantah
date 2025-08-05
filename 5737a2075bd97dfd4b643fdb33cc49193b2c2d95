@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30f22578_8b70434d",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-08-05T06:36:36Z",
+      "side": 1,
+      "message": "@surenb@google.com @tjmercier@google.com do we need to do this after taking the dma buf info lock? Else we might miss copying a dmabuf that was recently installed in the parent? becuase we have reserved less than needed?",
+      "range": {
+        "startLine": 412,
+        "startChar": 0,
+        "endLine": 413,
+        "endChar": 55
+      },
+      "revId": "5737a2075bd97dfd4b643fdb33cc49193b2c2d95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa5420cf_0f0bee09",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 22
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-08-05T06:36:36Z",
+      "side": 1,
+      "message": "Seems this could be NULL if the reservation was not sufficient? So we should check it before deference below?",
+      "range": {
+        "startLine": 439,
+        "startChar": 2,
+        "endLine": 439,
+        "endChar": 41
+      },
+      "revId": "5737a2075bd97dfd4b643fdb33cc49193b2c2d95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
