@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ac82563_2b817266",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pci.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-08-05T12:34:27Z",
+      "side": 0,
+      "message": "I think we can completely remove `pci.h`, `pci.c` and `io.h` as well. Although pkvm_pci_cfg_space_read() is still used by pkvm_ptdev_cache_bar(), but pkvm_ptdev_cache_bar() was also added specifically for PCI config monitoring and can be removed as well (since `ptdev-\u003ebars` is not used any longer.)",
+      "revId": "77936f2c20e6845f60f262c35e727bdb94681516",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
