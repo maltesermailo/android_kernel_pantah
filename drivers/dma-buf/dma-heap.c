@@ -92,9 +92,12 @@ struct dma_buf *dma_heap_buffer_alloc(struct dma_heap *heap, size_t len,
 	 * Allocations from all heaps have to begin
 	 * and end on page boundaries.
 	 */
-	len = __PAGE_ALIGN(len);
-	if (!len)
-		return ERR_PTR(-EINVAL);
+	if (!(heap_flags & DMA_HEAP_ALLOC_AND_READ_FILE)) {
+		len = __PAGE_ALIGN(len);
+		if (!len)
+			return ERR_PTR(-EINVAL);
+	}
+
 
 	trace_android_vh_dma_heap_buffer_alloc_start(heap->name, len,
 			fd_flags, heap_flags);
@@ -470,6 +473,7 @@ static void dma_heap_sysfs_teardown(void)
 	kobject_put(dma_heap_kobject);
 }
 
+extern int dma_heap_read_init(void);
 static int dma_heap_init(void)
 {
 	int ret;
@@ -489,6 +493,12 @@ static int dma_heap_init(void)
 		goto err_class;
 	}
 	dma_heap_class->devnode = dma_heap_devnode;
+
+	ret = dma_heap_read_init();
+	if (ret) {
+		class_destroy(dma_heap_class);
+		goto err_class;
+	}
 
 	return 0;
 

@@ -18,13 +18,16 @@
 /* Valid FD_FLAGS are O_CLOEXEC, O_RDONLY, O_WRONLY, O_RDWR */
 #define DMA_HEAP_VALID_FD_FLAGS (O_CLOEXEC | O_ACCMODE)
 
+/* Heap will read file after alloc done */
+#define DMA_HEAP_ALLOC_AND_READ_FILE	00000001
+
 /* Currently no heap flags */
-#define DMA_HEAP_VALID_HEAP_FLAGS (0ULL)
+#define DMA_HEAP_VALID_HEAP_FLAGS (DMA_HEAP_ALLOC_AND_READ_FILE)
 
 /**
  * struct dma_heap_allocation_data - metadata passed from userspace for
  *                                      allocations
- * @len:		size of the allocation
+ * @len:		size of the allocation or a pointer
  * @fd:			will be populated with a fd which provides the
  *			handle to the allocated dma-buf
  * @fd_flags:		file descriptor flags used when allocating
