@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ff9c841_0979ad07",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-08-08T17:14:08Z",
+      "side": 1,
+      "message": "So the commit message in the reverted commit seems to indicate that this fixes issues on existing devices where PCI_PWRCTRL isn\u0027t enabled. So applying this revert could cause folks to see that problem? \n\nAs an alternative, what would be the downside to adding CONFIG_PCI_PWRCTRL to the gki_defconfig (via one of the hidden config options if needed)?\n\nSince PCI_PWRCTRL looks like a newer option, would enabling it andorid-mainline motivate vendors to fix their drivers properly as suggested by the lkml posting?\n\nMight there be other ways to elide the issue outside of the config option?",
+      "revId": "2b31e849f48b5830e44539fb610590b1708abc1a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
