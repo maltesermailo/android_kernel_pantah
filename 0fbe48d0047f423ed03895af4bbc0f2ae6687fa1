@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2a1a053_8327d82d",
+        "filename": "arch/x86/kvm/pkvm/vmx/vmx.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7893,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-08-11T17:18:20Z",
+      "side": 1,
+      "message": "We can remove this function and `.setup_virtual_mmu()` callback as well?",
+      "fixSuggestions": [
+        {
+          "fixId": "786ee321_c2054593",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/vmx/vmx.c",
+              "range": {
+                "startLine": 7892,
+                "startChar": 0,
+                "endLine": 7897,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/vmx/vmx.c",
+              "range": {
+                "startLine": 7995,
+                "startChar": 0,
+                "endLine": 7996,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "0fbe48d0047f423ed03895af4bbc0f2ae6687fa1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
