@@ -16,6 +16,179 @@
       "message": "https://issuetracker.google.com/issues/436420904  \nplease merge this one",
       "revId": "f02730b1221c8800dbfcd44d4eb7cadf210d73f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7d512bb_51d5d487",
+        "filename": "mm/cma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-08-12T19:56:35Z",
+      "side": 1,
+      "message": "Let\u0027s move this logic inside of gcma_alloc_range.",
+      "range": {
+        "startLine": 526,
+        "startChar": 3,
+        "endLine": 526,
+        "endChar": 46
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "bce0d012_80c9b63b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/cma.c",
+              "range": {
+                "startLine": 524,
+                "startChar": 0,
+                "endLine": 534,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tgcma_alloc_range(pfn, count, gfp);\n"
+            },
+            {
+              "path": "mm/cma.c",
+              "range": {
+                "startLine": 692,
+                "startChar": 0,
+                "endLine": 693,
+                "endChar": 0
+              },
+              "replacement": "\t\tgcma_free_range(pfn, count);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f02730b1221c8800dbfcd44d4eb7cadf210d73f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a683a1b_4639cf3a",
+        "filename": "mm/cma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-08-12T19:56:35Z",
+      "side": 1,
+      "message": "Why do we need this here CMA didn\u0027t need it? \n\nMaybe, CMA is resetting it when the CMA memory set up but GCMA didn\u0027t. If so, let\u0027s follow the way CMA is doing(IOW, clear those flags when GCMA set up)",
+      "range": {
+        "startLine": 532,
+        "startChar": 4,
+        "endLine": 532,
+        "endChar": 21
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "123d5af3_38b0712a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/cma.c",
+              "range": {
+                "startLine": 532,
+                "startChar": 0,
+                "endLine": 533,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/cma.c",
+              "range": {
+                "startLine": 678,
+                "startChar": 0,
+                "endLine": 681,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tfree_pages_prepare(\u0026folio-\u003epage, folio_order(folio));\t\t\t\n"
+            },
+            {
+              "path": "mm/cma.c",
+              "range": {
+                "startLine": 689,
+                "startChar": 0,
+                "endLine": 690,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/cma.c",
+              "range": {
+                "startLine": 696,
+                "startChar": 0,
+                "endLine": 696,
+                "endChar": 0
+              },
+              "replacement": "\tfor (unsigned long i \u003d 0; i \u003c count; i++)\n\t\tClearPageReserved(pfn_to_page(pfn + i));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f02730b1221c8800dbfcd44d4eb7cadf210d73f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06488ca8_ec41331b",
+        "filename": "mm/cma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-08-12T19:56:35Z",
+      "side": 1,
+      "message": "Same thing: We can move this logic in the gcma_free_range?",
+      "range": {
+        "startLine": 692,
+        "startChar": 2,
+        "endLine": 692,
+        "endChar": 17
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2c46fdda_7bc3aa5d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/cma.c",
+              "range": {
+                "startLine": 662,
+                "startChar": 0,
+                "endLine": 662,
+                "endChar": 0
+              },
+              "replacement": "\tif (cma-\u003egcma)\n\t\tgcma_free_range(pfn, pfn + count - 1);\n\n"
+            },
+            {
+              "path": "mm/cma.c",
+              "range": {
+                "startLine": 692,
+                "startChar": 0,
+                "endLine": 693,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "f02730b1221c8800dbfcd44d4eb7cadf210d73f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
