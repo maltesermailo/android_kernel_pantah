@@ -16,6 +16,24 @@
       "message": "This config should already be enabled as a vendor module: pa/3319319",
       "revId": "c75149ab3c1a06772941ffb8b68f497b4f262e47",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c29e21ba_1003a4e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-08-12T07:17:02Z",
+      "side": 1,
+      "message": "Early printk is delayed but it is printed on the console when module is loaded from the `vendor_dlkm` partition which is done in the second stage init. It is also possible to enable early console in the first stage init by moving the following modules to the `vendor_boot` partition:\n\n```\nBOARD_VENDOR_RAMDISK_KERNEL_MODULES +\u003d\n    mfd-core.ko \\\n    intel-lpss.ko \\\n    intel-lpss-pci.ko \\\n    8250_dw.ko\n```",
+      "parentUuid": "fc7ae326_e4dee1d9",
+      "revId": "c75149ab3c1a06772941ffb8b68f497b4f262e47",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
