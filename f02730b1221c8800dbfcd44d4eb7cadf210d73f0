@@ -262,6 +262,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fef35b75_bec5c71d",
+        "filename": "mm/cma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-12T21:05:50Z",
+      "side": 1,
+      "message": "re: What happens if other CPU checks the PG_reserved flags in parallel?\n\nI don\u0027t think there should be concurrent checks for PG_reserved for a page the system already freed...\n\nre: Do you see any problem if we remove the PG_reserved at GCMA init?\n\nNo, not really. We should be able to do that and it\u0027s probably simpler compared to setting/clearing it every time we free/allocate. I\u0027ll change it that way and test.",
+      "parentUuid": "247ea7b3_3136e216",
+      "range": {
+        "startLine": 532,
+        "startChar": 4,
+        "endLine": 532,
+        "endChar": 21
+      },
+      "revId": "f02730b1221c8800dbfcd44d4eb7cadf210d73f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "06488ca8_ec41331b",
         "filename": "mm/cma.c",
         "patchSetId": 2
