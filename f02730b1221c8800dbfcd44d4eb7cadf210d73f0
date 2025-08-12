@@ -214,6 +214,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "55cc4e0f_244de915",
+        "filename": "mm/cma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-12T20:49:29Z",
+      "side": 1,
+      "message": "The conceptual difference in my mind is that CMA is part of the system memory. System can see it and can use it when needed. GCMA OTOH is a carveout that the System does not see until it requests it from GCMA.\n\nWhich races are you concerned? While the page is used by GCMA, it\u0027s marked as reserved and the system can\u0027t see these pages. Once system got the pages, they are not reserved and GCMA will not touch them. At which moment do you think there will be a race?",
+      "parentUuid": "2c69d047_8c3a1e44",
+      "range": {
+        "startLine": 532,
+        "startChar": 4,
+        "endLine": 532,
+        "endChar": 21
+      },
+      "revId": "f02730b1221c8800dbfcd44d4eb7cadf210d73f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "06488ca8_ec41331b",
         "filename": "mm/cma.c",
         "patchSetId": 2
