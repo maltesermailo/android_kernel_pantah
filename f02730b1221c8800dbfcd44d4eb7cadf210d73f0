@@ -238,6 +238,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "247ea7b3_3136e216",
+        "filename": "mm/cma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-08-12T21:01:30Z",
+      "side": 1,
+      "message": "While you are changing the PG_reserved flags in this context, what happens if other CPU checks the PG_reserved flags in parallel? I didn\u0027t review cases and asking you checked that whether they are safe and not error prone in the future. \n\nFor the semantic, GCMA is something special compared to carveout so I don\u0027t have strong opinion wheather they should have PG_reserved or not.\nDo you see any problem if we remove the PG_reserved at GCMA init?",
+      "parentUuid": "55cc4e0f_244de915",
+      "range": {
+        "startLine": 532,
+        "startChar": 4,
+        "endLine": 532,
+        "endChar": 21
+      },
+      "revId": "f02730b1221c8800dbfcd44d4eb7cadf210d73f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "06488ca8_ec41331b",
         "filename": "mm/cma.c",
         "patchSetId": 2
