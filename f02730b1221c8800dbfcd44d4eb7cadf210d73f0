@@ -190,6 +190,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c69d047_8c3a1e44",
+        "filename": "mm/cma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-08-12T20:33:49Z",
+      "side": 1,
+      "message": "What\u0027s the different between CMA and GCMA?\n\nBoth can be used for driver on runtime and userspace when the driver owner is idle. Why does GCMA need to be handled differently? What semantic do you see the problem?\n\n\nThe other question: If we want to use PG_reserved flags dynamically, we need to review all the races cases. Have you checked it?",
+      "parentUuid": "dbc4b4ad_d697cd63",
+      "range": {
+        "startLine": 532,
+        "startChar": 4,
+        "endLine": 532,
+        "endChar": 21
+      },
+      "revId": "f02730b1221c8800dbfcd44d4eb7cadf210d73f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "06488ca8_ec41331b",
         "filename": "mm/cma.c",
         "patchSetId": 2
