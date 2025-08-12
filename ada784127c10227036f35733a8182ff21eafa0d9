@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "561bdb72_8b7bee9b",
+        "filename": "mm/huge_memory.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-12T23:47:20Z",
+      "side": 1,
+      "message": "This results in a build-break for arm32 allmodconfig builds:\n```\n\u003e\u003e\u003e defined at fou_core.c\n\u003e\u003e\u003e            net/ipv4/fou_core.o:(sum_mthp_stat)\n\u003e\u003e\u003e defined at fou_nl.c\n\u003e\u003e\u003e            net/ipv4/fou_nl.o:(.text+0x4)\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "28ae5815_8e531b77",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/huge_memory.c",
+              "range": {
+                "startLine": 582,
+                "startChar": 0,
+                "endLine": 583,
+                "endChar": 0
+              },
+              "replacement": "long sum_mthp_stat(int order, enum mthp_stat_item item)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "ada784127c10227036f35733a8182ff21eafa0d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
