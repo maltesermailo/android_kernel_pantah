@@ -69,6 +69,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c85da1c0_37a84803",
+        "filename": "mm/cma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-12T20:03:06Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f7d512bb_51d5d487",
+      "range": {
+        "startLine": 526,
+        "startChar": 3,
+        "endLine": 526,
+        "endChar": 46
+      },
+      "revId": "f02730b1221c8800dbfcd44d4eb7cadf210d73f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a683a1b_4639cf3a",
@@ -142,6 +166,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dbc4b4ad_d697cd63",
+        "filename": "mm/cma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-12T20:03:06Z",
+      "side": 1,
+      "message": "CMA memory is not marked reserved to start with, indeed it\u0027s part of the system memory. GCMA is a reserved memory, therefore once system wants to use it we should mark it unreserved. We can do that during GCMA init but I think that would be semantically incorrect. If we don\u0027t do that here then when we free the free_pages_prepare() will trigger a bad page report.",
+      "parentUuid": "4a683a1b_4639cf3a",
+      "range": {
+        "startLine": 532,
+        "startChar": 4,
+        "endLine": 532,
+        "endChar": 21
+      },
+      "revId": "f02730b1221c8800dbfcd44d4eb7cadf210d73f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "06488ca8_ec41331b",
         "filename": "mm/cma.c",
         "patchSetId": 2
@@ -187,6 +235,30 @@
           ]
         }
       ],
+      "revId": "f02730b1221c8800dbfcd44d4eb7cadf210d73f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93214911_4a0d6d92",
+        "filename": "mm/cma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-12T20:03:06Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "06488ca8_ec41331b",
+      "range": {
+        "startLine": 692,
+        "startChar": 2,
+        "endLine": 692,
+        "endChar": 17
+      },
       "revId": "f02730b1221c8800dbfcd44d4eb7cadf210d73f0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
