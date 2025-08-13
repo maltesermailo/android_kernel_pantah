@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5e08746_c6623b22",
+        "filename": "arch/x86/kvm/pkvm/vmx/vmx.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 5327,
+      "author": {
+        "id": 1076784
+      },
+      "writtenOn": "2025-08-13T16:59:39Z",
+      "side": 1,
+      "message": "Shouldn\u0027t it be 1? A comment is needed I think.",
+      "fixSuggestions": [
+        {
+          "fixId": "1343e92a_a41ce026",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/vmx/vmx.c",
+              "range": {
+                "startLine": 5327,
+                "startChar": 0,
+                "endLine": 5327,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * The pkvm hypervisor handles the EPT violation in the guest, so\n\t * return 1 to indicate the exit was handled fully and guest execution\n\t * may resume.\n\t */\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/vmx/vmx.c",
+              "range": {
+                "startLine": 5632,
+                "startChar": 0,
+                "endLine": 5632,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * The pkvm hypervisor handles the notify vmexit in the guest, so\n\t * return 1 to indicate the exit was handled fully and guest execution\n\t * may resume.\n\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5980e3267689a7846a748424d0ae4b76f8d0720e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
