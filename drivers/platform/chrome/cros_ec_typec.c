@@ -108,8 +108,8 @@ static int cros_typec_parse_port_props(struct typec_capability *cap,
 		cap->usb_capability |= USB_CAPABILITY_USB2;
 	if (fwnode_property_present(fwnode, "usb3-port"))
 		cap->usb_capability |= USB_CAPABILITY_USB3;
-	if (fwnode_property_present(fwnode, "usb4-port"))
-		cap->usb_capability |= USB_CAPABILITY_USB4;
+	//if (fwnode_property_present(fwnode, "usb4-port"))
+	cap->usb_capability |= USB_CAPABILITY_USB4;
 
 	cros_typec_role_switch_quirk(fwnode);
 
