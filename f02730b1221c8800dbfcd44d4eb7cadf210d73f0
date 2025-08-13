@@ -95,6 +95,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "56d166da_c58c341c",
+        "filename": "mm/cma.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-13T01:04:54Z",
+      "side": 1,
+      "message": "Unfortunately moving this code into gcma.c requires an additional parameter to be added to gcma_alloc_range() and since it\u0027s an exported function, that breaks ABI. The best alternative option I can think of which would not break ABI is to implement prepare_new_pages()/prepare_free_pages() as exported gcma_prepare_new_pages()/gcma_prepare_free_pages() functions which will be called from cma.c and drivers directly using gcma_alloc_range() will be call them as well.",
+      "parentUuid": "c85da1c0_37a84803",
+      "range": {
+        "startLine": 526,
+        "startChar": 3,
+        "endLine": 526,
+        "endChar": 46
+      },
+      "revId": "f02730b1221c8800dbfcd44d4eb7cadf210d73f0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4a683a1b_4639cf3a",
         "filename": "mm/cma.c",
         "patchSetId": 2
