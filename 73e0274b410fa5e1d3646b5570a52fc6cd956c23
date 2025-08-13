@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca223422_5ff6047e",
+        "filename": "include/linux/pci.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-08-13T07:00:40Z",
+      "side": 1,
+      "message": "please put above the KABI_RESERVE() fields.",
+      "range": {
+        "startLine": 614,
+        "startChar": 0,
+        "endLine": 614,
+        "endChar": 29
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3b119277_c585cc44",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/pci.h",
+              "range": {
+                "startLine": 612,
+                "startChar": 0,
+                "endLine": 612,
+                "endChar": 0
+              },
+              "replacement": "\tANDROID_BACKPORT_RESERVE(1);\n"
+            },
+            {
+              "path": "include/linux/pci.h",
+              "range": {
+                "startLine": 614,
+                "startChar": 0,
+                "endLine": 615,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "73e0274b410fa5e1d3646b5570a52fc6cd956c23",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
