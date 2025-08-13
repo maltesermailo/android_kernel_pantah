@@ -1,0 +1,127 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2cf3f94_02e13793",
+        "filename": "mm/gcma.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-08-13T16:37:13Z",
+      "side": 1,
+      "message": "let\u0027s add description why we remove the flag.",
+      "range": {
+        "startLine": 318,
+        "startChar": 2,
+        "endLine": 318,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "4d3d7e3e_bba1865d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/gcma.c",
+              "range": {
+                "startLine": 318,
+                "startChar": 0,
+                "endLine": 318,
+                "endChar": 0
+              },
+              "replacement": "\t\t/*\n\t\t * The page is managed by GCMA so it should not be reserved\n\t\t * by kernel.\n\t\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5b5f91bc389ca0115de1e273cf35352fab5ed0fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0faa5ea_5dff3721",
+        "filename": "mm/gcma.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-08-13T16:37:13Z",
+      "side": 1,
+      "message": "Have you ever review/test any memset/kasan_tags inside of post_alloc_hook working well for the GCMA memory\n\nI am unfamiliar with that but wanted to give a head up.",
+      "range": {
+        "startLine": 611,
+        "startChar": 2,
+        "endLine": 611,
+        "endChar": 17
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d56daa46_cf01d0de",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/gcma.c",
+              "range": {
+                "startLine": 611,
+                "startChar": 0,
+                "endLine": 611,
+                "endChar": 0
+              },
+              "replacement": "\t\t/*\n\t\t * TODO(b/323443986): Review the impact of post_alloc_hook\n\t\t * for GCMA memory.\n\t\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5b5f91bc389ca0115de1e273cf35352fab5ed0fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b6c9502_03df9ef6",
+        "filename": "mm/gcma.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-08-13T16:37:13Z",
+      "side": 1,
+      "message": "Why do we these cma doesn\u0027t have in their free_contig_range?",
+      "range": {
+        "startLine": 631,
+        "startChar": 0,
+        "endLine": 634,
+        "endChar": 29
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2e03bcd2_f9bfdb95",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/gcma.c",
+              "range": {
+                "startLine": 632,
+                "startChar": 0,
+                "endLine": 632,
+                "endChar": 0
+              },
+              "replacement": "\t\t/*\n\t\t * We need to release page_cache refcount and unqueue deferred\n\t\t * split before freeing the folio.\n\t\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5b5f91bc389ca0115de1e273cf35352fab5ed0fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
