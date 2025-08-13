@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90752140_1142c19a",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-13T21:57:12Z",
+      "side": 1,
+      "message": "This inclusion is causing CRC errors because the nested inclusion of include/linux/tracepoint.h changes the visibility of `struct trace_eval_map`. The CRC errors can be suppressed by adding this after the inclusion:\n```\nANDROID_KABI_DECLONLY(trace_eval_map);\n```\nTry adding it (and mention it in the commit message)",
+      "fixSuggestions": [
+        {
+          "fixId": "400b324e_cb74e84d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 35,
+                "startChar": 0,
+                "endLine": 35,
+                "endChar": 0
+              },
+              "replacement": "#include \u003clinux/tracepoint_probe.h\u003e\n"
+            }
+          ]
+        }
+      ],
+      "revId": "875565603f7be4cfe428afbfc2df3429cafe6c7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
