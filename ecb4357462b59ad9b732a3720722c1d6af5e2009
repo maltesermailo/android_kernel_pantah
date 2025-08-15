@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ab5d85b_94442a14",
+        "filename": "arch/x86/kvm/vmx/pkvm/pkvm_host.c",
+        "patchSetId": 23
+      },
+      "lineNbr": 1464,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-08-15T12:18:47Z",
+      "side": 1,
+      "message": "Without being familiar with the context it is not clear which MMIO range and which hypercall this is about...\n\nMaybe \"As the protection of the IOMMU MMIO range is already disabled and the CPUs are about to return to VMX root mode, mark pkvm disabled so that the host accesses the IOMMU MMIO directly instead of using a hypercall.\" ?",
+      "revId": "ecb4357462b59ad9b732a3720722c1d6af5e2009",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
