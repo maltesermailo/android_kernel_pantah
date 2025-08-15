@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d926983_4ec36141",
+        "filename": "include/linux/module_symbol.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-08-15T14:32:06Z",
+      "side": 1,
+      "message": "Consistency??\n\nksym_flags + ksym_flag_gpl_only\n\nor\n\nsymbol_flags + symbol_flag_gpl_only",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 36
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6bcb89d9_6f100049",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/module_symbol.h",
+              "range": {
+                "startLine": 6,
+                "startChar": 0,
+                "endLine": 7,
+                "endChar": 0
+              },
+              "replacement": "enum ksym_flags {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e6ff97693f3635f30b0d2f4a8501672629dc3d48",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
