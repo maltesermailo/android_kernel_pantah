@@ -34,6 +34,24 @@
       ],
       "revId": "68ffbe0bb04e35c210b454780c4bd8c47d425813",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed93fb00_adac8ec9",
+        "filename": "arch/x86/kvm/pkvm/vmx/vmx.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 7139,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-08-18T23:11:28Z",
+      "side": 1,
+      "message": "And in the other 100-200 places? :)\n\nThis consolidation shall be done by reusing KVM\u0027s vmx.c instead of having its copy (Chuanxiao can confirm), that shall automatically eliminate all these copies, nothing special about vmx_get_mt_mask() here.",
+      "parentUuid": "0764cffb_4d299e1a",
+      "revId": "68ffbe0bb04e35c210b454780c4bd8c47d425813",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
