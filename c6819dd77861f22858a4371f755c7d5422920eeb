@@ -1,6 +1,24 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d2979e8_1754cf88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4279232
+      },
+      "writtenOn": "2025-08-19T18:00:00Z",
+      "side": 1,
+      "message": "Camera apps",
+      "revId": "c6819dd77861f22858a4371f755c7d5422920eeb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
       "key": {
         "uuid": "f95ecf7c_08d0c158",
         "filename": "fs/incfs/vfs.c",
@@ -14,10 +32,10 @@
       "side": 1,
       "message": "Hello, I think there may be an issue with this line.  It appears that this function is used for opening both files and directories.  However, it is an error to use O_RDWR on a directory.  The open(2) manpage states that doing so will return EISDIR:\n\n    EISDIR pathname refers to a directory and the access requested\n           involved writing (that is, O_WRONLY or O_RDWR is set).\n\n\nI think we should pick the flags based on the mode.  Maybe something like:\n\n    int flags \u003d O_NOATIME;\n    if (S_ISDIR(inode-\u003ei_mode)) {\n      flags |\u003d O_RDONLY;\n    } else {\n      flags |\u003d O_RDWR;\n    }",
       "revId": "c6819dd77861f22858a4371f755c7d5422920eeb",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": true
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
       "key": {
         "uuid": "91e40dfc_068fdacb",
         "filename": "fs/incfs/vfs.c",
@@ -32,8 +50,7 @@
       "message": "Is this to fix the problem running on top of Virtio-FS? If so, please upload a CL with an explanation and I will be pleased to accept it. Obviously I can\u0027t change this fully merged CL now.",
       "parentUuid": "f95ecf7c_08d0c158",
       "revId": "c6819dd77861f22858a4371f755c7d5422920eeb",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
