@@ -200,6 +200,7 @@ static int __restore_freezer_state(struct task_struct *p, void *arg)
 
 void __thaw_task(struct task_struct *p)
 {
+<<<<<<< HEAD   (cfe843538bd4c9cfed92d1a26a08a33bf4902210 Merge 6.6.101 into android-6.6-lts)
 	unsigned long flags;
 
 	spin_lock_irqsave(&freezer_lock, flags);
@@ -212,6 +213,29 @@ void __thaw_task(struct task_struct *p)
 	wake_up_state(p, TASK_FROZEN);
 unlock:
 	spin_unlock_irqrestore(&freezer_lock, flags);
+||||||| BASE   (3a8ababb8b6a0ced2be230b60b6e3ddbd8d67014 Linux 6.6.101)
+	unsigned long flags, flags2;
+
+	spin_lock_irqsave(&freezer_lock, flags);
+	if (WARN_ON_ONCE(freezing(p)))
+		goto unlock;
+
+	if (lock_task_sighand(p, &flags2)) {
+		/* TASK_FROZEN -> TASK_{STOPPED,TRACED} */
+		bool ret = task_call_func(p, __set_task_special, NULL);
+		unlock_task_sighand(p, &flags2);
+		if (ret)
+			goto unlock;
+	}
+
+	wake_up_state(p, TASK_FROZEN);
+unlock:
+	spin_unlock_irqrestore(&freezer_lock, flags);
+=======
+	guard(spinlock_irqsave)(&freezer_lock);
+	if (frozen(p) && !task_call_func(p, __restore_freezer_state, NULL))
+		wake_up_state(p, TASK_FROZEN);
+>>>>>>> BRANCH (bb9c90ab9c5a1a933a0dfd302a3fde73642b2b06 Linux 6.6.102)
 }
 
 /**

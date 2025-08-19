@@ -2319,7 +2319,13 @@ int task_state_match(struct task_struct *p, unsigned int state)
 	int match;
 
 	/*
+<<<<<<< HEAD   (cfe843538bd4c9cfed92d1a26a08a33bf4902210 Merge 6.6.101 into android-6.6-lts)
 	 * Serialize against current_save_and_set_rtlock_wait_state(),
+||||||| BASE   (3a8ababb8b6a0ced2be230b60b6e3ddbd8d67014 Linux 6.6.101)
+	 * Serialize against current_save_and_set_rtlock_wait_state() and
+=======
+	 * Serialize against current_save_and_set_rtlock_wait_state() and
+>>>>>>> BRANCH (bb9c90ab9c5a1a933a0dfd302a3fde73642b2b06 Linux 6.6.102)
 	 * current_restore_rtlock_saved_state(), and __refrigerator().
 	 */
 	raw_spin_lock_irq(&p->pi_lock);
