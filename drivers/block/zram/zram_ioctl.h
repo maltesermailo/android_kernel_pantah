@@ -3,6 +3,8 @@
 #ifndef _ZRAM_IOCTL_H_
 #define _ZRAM_IOCTL_H_
 
+#include <uapi/linux/zram_ioctl.h>
+
 #if IS_ENABLED(CONFIG_ZRAM_ANDROID_IOCTL)
 int zram_ioctl(struct block_device *bdev, blk_mode_t mode,
 	       unsigned int cmd, unsigned long arg);
