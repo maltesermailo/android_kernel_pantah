@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e12afbd7_95921462",
+        "filename": "mm/madvise.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1561,
+      "author": {
+        "id": 3616462
+      },
+      "writtenOn": "2025-08-20T09:04:18Z",
+      "side": 1,
+      "message": "This code should be placed after return madvise_inject_error(behavior, start, start + len_in); to prevent the issue of the lock not being released.",
+      "range": {
+        "startLine": 1559,
+        "startChar": 2,
+        "endLine": 1561,
+        "endChar": 12
+      },
+      "revId": "87cddfadcdd3614e5d3123bbfa55683d8389a8b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
