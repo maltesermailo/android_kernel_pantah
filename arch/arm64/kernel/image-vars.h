@@ -113,6 +113,9 @@ KVM_NVHE_ALIAS(__hyp_printk_fmts_start);
 /* pKVM static key */
 KVM_NVHE_ALIAS(kvm_protected_mode_initialized);
 
+/* Host shared variable */
+KVM_NVHE_ALIAS(__hyp_s1_enomem);
+
 #endif /* CONFIG_KVM */
 
 #ifdef CONFIG_EFI_ZBOOT

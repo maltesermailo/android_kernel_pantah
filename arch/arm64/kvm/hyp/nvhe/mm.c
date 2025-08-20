@@ -42,6 +42,9 @@ static int __pkvm_create_mappings(unsigned long start, unsigned long size,
 	err = kvm_pgtable_hyp_map(&pkvm_pgtable, start, size, phys, prot);
 	hyp_spin_unlock(&pkvm_pgd_lock);
 
+	if (err == -ENOMEM)
+		__hyp_s1_enomem = true;
+
 	return err;
 }
 
@@ -199,6 +202,9 @@ int pkvm_create_mappings_locked(void *from, void *to, enum kvm_pgtable_prot prot
 		phys = hyp_virt_to_phys((void *)virt_addr);
 		err = kvm_pgtable_hyp_map(&pkvm_pgtable, virt_addr, PAGE_SIZE,
 					  phys, prot);
+		if (err == -ENOMEM)
+			__hyp_s1_enomem = true;
+
 		if (err)
 			return err;
 	}

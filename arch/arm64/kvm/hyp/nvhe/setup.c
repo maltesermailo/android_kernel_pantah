@@ -169,6 +169,11 @@ static int recreate_hyp_mappings(phys_addr_t phys, unsigned long size,
 	if (ret)
 		return ret;
 
+	prot= pkvm_mkstate(PAGE_HYP, PKVM_PAGE_SHARED_OWNED);
+	ret = pkvm_create_mappings(&__hyp_s1_enomem, &__hyp_s1_enomem + 1, prot);
+	if (ret)
+		return ret;
+
 	return 0;
 }
 

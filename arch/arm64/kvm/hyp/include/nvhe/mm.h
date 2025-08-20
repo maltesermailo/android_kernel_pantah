@@ -13,6 +13,7 @@
 extern struct kvm_pgtable pkvm_pgtable;
 extern hyp_spinlock_t pkvm_pgd_lock;
 extern const struct pkvm_module_ops module_ops;
+extern bool __hyp_s1_enomem;
 
 int hyp_create_fixmap(void);
 void *hyp_fixmap_map(phys_addr_t phys);
