@@ -1248,14 +1248,22 @@ static int __guest_initiate_page_transition(u64 ipa, kvm_pte_t pte, u64 nr_pages
 
 int __pkvm_host_share_hyp(u64 pfn)
 {
-	u64 phys = hyp_pfn_to_phys(pfn);
-	void *virt = __hyp_va(phys);
+	u64 phys;
+	void *virt;
 	enum kvm_pgtable_prot prot;
 	u64 size = PAGE_SIZE;
 	int ret;
 
 	host_lock_component();
 	hyp_lock_component();
+
+	if (pfn > ((BIT(host_mmu.pgt.ia_bits) - 1) >> PAGE_SHIFT)) {
+		ret = -ERANGE;
+		goto unlock;
+	}
+
+	phys = hyp_pfn_to_phys(pfn);
+	virt = __hyp_va(phys);
 
 	ret = __host_check_page_state_range(phys, size, PKVM_PAGE_OWNED);
 	if (ret)
