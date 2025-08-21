@@ -1,0 +1,126 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bc0927b_576e8bae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2025-08-21T22:45:39Z",
+      "side": 1,
+      "message": "You can either apply my suggestions or revert the following and try the merge again:\n\n`9b6e8d8096029a3905a0f82c9977dca91213547d ANDROID: sync_file: Weakly paper over potential xe driver (and similar) races`\n\nThey should be equivalent.\n\nIf you choose to apply the suggestions, please reference this bug in the commit message when describing your resolution: b/402479223",
+      "revId": "81e3464ac47a0a14e0b0716db8056032c887f7e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80e6f105_2ff63b45",
+        "filename": "drivers/dma-buf/sync_file.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2025-08-21T22:45:39Z",
+      "side": 1,
+      "message": "Replace the whole block with:\n\n```suggestion\n\t\trcu_read_lock();\n\t\tdriver \u003d dma_fence_driver_name(fence);\n\t\ttimeline \u003d dma_fence_timeline_name(fence);\n\t\tsnprintf(buf, len, \"%s-%s%llu-%lld\",\n\t\t\t rcu_dereference(driver),\n\t\t\t rcu_dereference(timeline),\n\t\t\t fence-\u003econtext,\n\t\t\t fence-\u003eseqno);\n\t\trcu_read_unlock();\n```",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 17
+      },
+      "revId": "81e3464ac47a0a14e0b0716db8056032c887f7e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93bd26eb_1c1a6dd7",
+        "filename": "drivers/dma-buf/sync_file.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2025-08-21T22:45:39Z",
+      "side": 1,
+      "message": "Remove the entire block.",
+      "range": {
+        "startLine": 285,
+        "startChar": 0,
+        "endLine": 293,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "34c31a03_41709bcd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/sync_file.c",
+              "range": {
+                "startLine": 285,
+                "startChar": 0,
+                "endLine": 294,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "81e3464ac47a0a14e0b0716db8056032c887f7e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58c8d13b_2785b3a2",
+        "filename": "drivers/dma-buf/sync_file.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2025-08-21T22:45:39Z",
+      "side": 1,
+      "message": "remove the leading space",
+      "range": {
+        "startLine": 299,
+        "startChar": 0,
+        "endLine": 299,
+        "endChar": 1
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1d08cd6b_8ea1d3d2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/sync_file.c",
+              "range": {
+                "startLine": 299,
+                "startChar": 0,
+                "endLine": 300,
+                "endChar": 0
+              },
+              "replacement": "\tstrscpy(info-\u003eobj_name, rcu_dereference(timeline),\n"
+            }
+          ]
+        }
+      ],
+      "revId": "81e3464ac47a0a14e0b0716db8056032c887f7e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
