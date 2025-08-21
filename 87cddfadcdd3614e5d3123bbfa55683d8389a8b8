@@ -22,6 +22,30 @@
       },
       "revId": "87cddfadcdd3614e5d3123bbfa55683d8389a8b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee7d2624_122c299e",
+        "filename": "mm/madvise.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1561,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-21T15:22:49Z",
+      "side": 1,
+      "message": "No, madvise_inject_error() should be executed under madvise_lock() lock. Instead I think we should do:\n```\nif (behavior \u003d\u003d MADV_HWPOISON || behavior \u003d\u003d MADV_SOFT_OFFLINE) {\n\tint ret \u003d madvise_inject_error(behavior, start, start + len_in);\n\tmadvise_unlock(mm, behavior);\n\n\treturn ret;\n}\n```",
+      "parentUuid": "e12afbd7_95921462",
+      "range": {
+        "startLine": 1559,
+        "startChar": 2,
+        "endLine": 1561,
+        "endChar": 12
+      },
+      "revId": "87cddfadcdd3614e5d3123bbfa55683d8389a8b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
