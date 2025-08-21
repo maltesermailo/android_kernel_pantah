@@ -1,0 +1,66 @@
+/* SPDX-License-Identifier: GPL-2.0-only */
+
+/*
+ * ACPI INT340X device IDs are shared between the thermal drivers and the device
+*  power management code.
+ */
+
+#ifndef _ACPI_INT340X_H_
+#define _ACPI_INT340X_H_
+
+#define ACPI_INT3400_DEVICE_IDS	\
+	{"INT3400"},	\
+	{"INTC1040"},	\
+	{"INTC1041"},	\
+	{"INTC1042"},	\
+	{"INTC1068"},	\
+	{"INTC10A0"},	\
+	{"INTC10D4"},	\
+	{"INTC10FC"}
+
+#define ACPI_INT3401_DEVICE_IDS	\
+	{"INT3401"}
+
+#define ACPI_INT3402_DEVICE_IDS	\
+	{"INT3402"}
+
+#define ACPI_INT3403_DEVICE_IDS	\
+	{"INT3403"},	\
+	{"INTC1043"},	\
+	{"INTC1046"},	\
+	{"INTC1062"},	\
+	{"INTC1069"},	\
+	{"INTC10A1"},	\
+	{"INTC10D5"},	\
+	{"INTC10FD"}
+
+#define ACPI_INT3406_DEVICE_IDS	\
+	{"INT3406"}
+
+#define ACPI_INT3407_DEVICE_IDS	\
+	{"INT3407"},	\
+	{"INT3532"},	\
+	{"INTC1047"},	\
+	{"INTC1050"},	\
+	{"INTC1060"},	\
+	{"INTC1061"},	\
+	{"INTC1065"},	\
+	{"INTC1066"},	\
+	{"INTC106C"},	\
+	{"INTC106D"},	\
+	{"INTC10A4"},	\
+	{"INTC10A5"},	\
+	{"INTC10D8"},	\
+	{"INTC10D9"},	\
+	{"INTC1100"},	\
+	{"INTC1101"}
+
+#define ACPI_PCH_FIVR_DEVICE_IDS	\
+	{"INTC1045"},	\
+	{"INTC1049"},	\
+	{"INTC1064"},	\
+	{"INTC106B"},	\
+	{"INTC10A3"},	\
+	{"INTC10D7"}
+
+#endif
