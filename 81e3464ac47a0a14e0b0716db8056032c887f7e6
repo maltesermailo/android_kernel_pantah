@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "608021a9_2d5a3b2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1244290
+      },
+      "writtenOn": "2025-08-21T23:16:31Z",
+      "side": 1,
+      "message": "Done, thanks for the fixes!",
+      "parentUuid": "6bc0927b_576e8bae",
+      "revId": "81e3464ac47a0a14e0b0716db8056032c887f7e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80e6f105_2ff63b45",
@@ -31,6 +49,30 @@
       "writtenOn": "2025-08-21T22:45:39Z",
       "side": 1,
       "message": "Replace the whole block with:\n\n```suggestion\n\t\trcu_read_lock();\n\t\tdriver \u003d dma_fence_driver_name(fence);\n\t\ttimeline \u003d dma_fence_timeline_name(fence);\n\t\tsnprintf(buf, len, \"%s-%s%llu-%lld\",\n\t\t\t rcu_dereference(driver),\n\t\t\t rcu_dereference(timeline),\n\t\t\t fence-\u003econtext,\n\t\t\t fence-\u003eseqno);\n\t\trcu_read_unlock();\n```",
+      "range": {
+        "startLine": 143,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 17
+      },
+      "revId": "81e3464ac47a0a14e0b0716db8056032c887f7e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1d444a8_9154f68b",
+        "filename": "drivers/dma-buf/sync_file.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1244290
+      },
+      "writtenOn": "2025-08-21T23:16:31Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "80e6f105_2ff63b45",
       "range": {
         "startLine": 143,
         "startChar": 0,
@@ -82,6 +124,54 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32c6b058_e26b99b4",
+        "filename": "drivers/dma-buf/sync_file.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1244290
+      },
+      "writtenOn": "2025-08-21T23:16:31Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "93bd26eb_1c1a6dd7",
+      "range": {
+        "startLine": 285,
+        "startChar": 0,
+        "endLine": 293,
+        "endChar": 0
+      },
+      "revId": "81e3464ac47a0a14e0b0716db8056032c887f7e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd0bd625_5849f4fc",
+        "filename": "drivers/dma-buf/sync_file.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1244290
+      },
+      "writtenOn": "2025-08-21T23:16:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93bd26eb_1c1a6dd7",
+      "range": {
+        "startLine": 285,
+        "startChar": 0,
+        "endLine": 293,
+        "endChar": 0
+      },
+      "revId": "81e3464ac47a0a14e0b0716db8056032c887f7e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58c8d13b_2785b3a2",
@@ -119,6 +209,54 @@
           ]
         }
       ],
+      "revId": "81e3464ac47a0a14e0b0716db8056032c887f7e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffaa1263_153b9f50",
+        "filename": "drivers/dma-buf/sync_file.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1244290
+      },
+      "writtenOn": "2025-08-21T23:16:31Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "58c8d13b_2785b3a2",
+      "range": {
+        "startLine": 299,
+        "startChar": 0,
+        "endLine": 299,
+        "endChar": 1
+      },
+      "revId": "81e3464ac47a0a14e0b0716db8056032c887f7e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "734409bf_d506c37e",
+        "filename": "drivers/dma-buf/sync_file.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1244290
+      },
+      "writtenOn": "2025-08-21T23:16:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58c8d13b_2785b3a2",
+      "range": {
+        "startLine": 299,
+        "startChar": 0,
+        "endLine": 299,
+        "endChar": 1
+      },
       "revId": "81e3464ac47a0a14e0b0716db8056032c887f7e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
