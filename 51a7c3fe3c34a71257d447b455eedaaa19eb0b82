@@ -1,0 +1,74 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "116c93bc_3afac064",
+        "filename": "drivers/base/power/qos.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-22T16:16:23Z",
+      "side": 1,
+      "message": "Remove this ifdef block. No compile-time debug/experimental code in GKI.",
+      "fixSuggestions": [
+        {
+          "fixId": "5ae2d28d_4177964a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/base/power/qos.c",
+              "range": {
+                "startLine": 441,
+                "startChar": 0,
+                "endLine": 445,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "51a7c3fe3c34a71257d447b455eedaaa19eb0b82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "210eac81_3bc4e607",
+        "filename": "include/trace/hooks/power.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-22T16:16:23Z",
+      "side": 1,
+      "message": "This hook is never used in the code.",
+      "fixSuggestions": [
+        {
+          "fixId": "0b063c1f_d6b70975",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/trace/hooks/power.h",
+              "range": {
+                "startLine": 40,
+                "startChar": 0,
+                "endLine": 44,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "51a7c3fe3c34a71257d447b455eedaaa19eb0b82",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
