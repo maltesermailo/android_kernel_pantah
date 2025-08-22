@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "d9587eae_02520197",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1244290
+      },
+      "writtenOn": "2025-08-22T03:17:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d522aad_5cdc9897",
+      "revId": "2bd75c3830d15ebea6f45c35101330d3069248d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "96cb3534_68bca23e",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 5
@@ -49,6 +67,41 @@
       "side": 1,
       "message": "Hmm, does AutoMerger remove it by itself or it was removed by mistake when resolving the conflicts? Generally the standard process is to keep all the tags from the original commit, so we don\u0027t need explicit approval from the original author to re-add their tag.",
       "parentUuid": "96cb3534_68bca23e",
+      "revId": "2bd75c3830d15ebea6f45c35101330d3069248d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f16347eb_446b9b7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1244290
+      },
+      "writtenOn": "2025-08-22T03:17:14Z",
+      "side": 1,
+      "message": "Additionally, it looks like there a build failure from the merge as well:\n\n.../_main/common/drivers/gpu/drm/xe/xe_gen_wa_oob.c:130:7: error: call to undeclared function \u0027basename\u0027; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n  130 |         fn \u003d basename(fn);\n      |              ^\n...bd/sandbox/linux-sandbox/219/execroot/_main/common/drivers/gpu/drm/xe/xe_gen_wa_oob.c:130:5: error: incompatible integer to pointer conversion assigning to \u0027const char *\u0027 from \u0027int\u0027 [-Wint-conversion]\n  130 |         fn \u003d basename(fn);\n      |            ^ ~~~~~~~~~~~~\n2 errors generated.",
+      "revId": "2bd75c3830d15ebea6f45c35101330d3069248d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49df6d40_a48d5712",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1244290
+      },
+      "writtenOn": "2025-08-22T03:17:14Z",
+      "side": 1,
+      "message": "Good point, the sign-off wasn\u0027t present in the original CL that it uploaded (patchset 1). In another CL (https://android-review.git.corp.google.com/c/kernel/common-modules/virtual-device/+/3737138) Automerger explicitly kept itself as the author. I can update the author bit back to automerger if it looks like an error.",
+      "parentUuid": "fdfbccb4_f93b94ee",
       "revId": "2bd75c3830d15ebea6f45c35101330d3069248d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
