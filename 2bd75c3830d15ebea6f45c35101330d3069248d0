@@ -122,6 +122,24 @@
       "parentUuid": "f16347eb_446b9b7f",
       "revId": "2bd75c3830d15ebea6f45c35101330d3069248d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "943a05cb_75959db6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2025-08-22T19:33:35Z",
+      "side": 1,
+      "message": "Hmmm,\n\n`xe_gen_wa_oob.c` is compiled as a host program for generating Xe kernel sources.\n\nIn that way, it assumes the availability of the GNU variant of `basename()` from the host toolchain, which _I suppose_ Android\u0027s kernel toolchain does not provide in the same manner as a GNU-compatible toolchain does generally on linux.\n\nNormally, an application would request the GNU variant with:\n```c\n#define _GNU_SOURCE\n#include \u003cstring.h\u003e\n```\n\nas Xe does in https://lore.kernel.org/all/20250709221605.172516-2-matthew.s.atwood@intel.com/\n\nBut in Android\u0027s libc (aka bionic), that is supported from Android API level 23 and newer: https://android.googlesource.com/platform/bionic/+/refs/heads/main/libc/include/string.h#231\n\nI\u0027m not sure what is going wrong here, yet.",
+      "parentUuid": "6bddd347_9710fd26",
+      "revId": "2bd75c3830d15ebea6f45c35101330d3069248d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
