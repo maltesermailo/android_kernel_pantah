@@ -226,6 +226,11 @@ static void pkvm_dump_backtrace(unsigned long hyp_offset)
 		= (unsigned long *) this_cpu_ptr_nvhe_sym(pkvm_stacktrace);
 	int i;
 
+#ifndef __FIXED_BUG_429170047
+	kvm_err("Cannot dump pKVM nVHE stacktrace: Bug 429170047\n");
+	return;
+#endif
+
 	kvm_nvhe_dump_backtrace_start();
 	/* The saved stacktrace is terminated by a null entry */
 	for (i = 0;

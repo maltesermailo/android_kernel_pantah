@@ -561,6 +561,10 @@ void __noreturn __cold nvhe_hyp_panic_handler(u64 esr, u64 spsr,
 		if (bug)
 			bug_get_file_line(bug, &file, &line);
 
+#ifndef __FIXED_BUG_429170047
+		file = NULL;
+#endif
+
 		if (file)
 			kvm_err("nVHE hyp BUG at: %s:%u!\n", file, line);
 		else
