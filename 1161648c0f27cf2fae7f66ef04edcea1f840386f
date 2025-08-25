@@ -52,6 +52,24 @@
       "parentUuid": "ad4ede3d_d027cc41",
       "revId": "1161648c0f27cf2fae7f66ef04edcea1f840386f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc98a889_1eea4a3d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1290458
+      },
+      "writtenOn": "2025-08-25T18:30:11Z",
+      "side": 1,
+      "message": "Android uses ueventd, not udev, and CONFIG_DEVTMPFS will create conflicts/races and selinux denials. Those issues need to be tested and resolved before enabling this. It might be easier to package a simple replacement in an initramfs, if not using the Android initramfs. This is what first_stage_init does.",
+      "parentUuid": "f909f35d_d7fdad61",
+      "revId": "1161648c0f27cf2fae7f66ef04edcea1f840386f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
