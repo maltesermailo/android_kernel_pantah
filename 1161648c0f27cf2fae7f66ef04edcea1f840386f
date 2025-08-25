@@ -16,6 +16,24 @@
       "message": "Need a lot more information than this. Why is this needed now? Why is the existing /dev insufficient? How much memory does this feature require? (provide before/after memory stats) Is this only for 6.12 or is it needed for future releases (android-mainline)? Why only arm64 and not x86?",
       "revId": "1161648c0f27cf2fae7f66ef04edcea1f840386f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad4ede3d_d027cc41",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 4297609
+      },
+      "writtenOn": "2025-08-25T01:24:29Z",
+      "side": 1,
+      "message": "Thanks for the feedback. Here\u0027s the detailed rationale:\n \n1. **Why is this needed now?**\n   This change is required to support Qualcom platforms that do not use initramfs. Without CONFIG_DEVTMPFS, /dev cannot be populated during boot, leading to device access failures.\n \n2. **Why is the existing /dev insufficient?**\n   In our setup, /dev is not populated by user-space tools like udev. Enabling CONFIG_DEVTMPFS allows the kernel to auto-create device nodes, ensuring system stability.\n \n3. **Memory impact**\n   devtmpfs is a lightweight memory filesystem. On our test device, enabling it increased memory usage by less than 1MB. We will attach before/after `df -h /dev` and `/proc/meminfo` snapshots.\n \n4. **Scope**\n   While this patch targets android16-6.12, it is also applicable to future LE releases including android-mainline.\n \n5. **Architecture**\n   This change is scoped to arm64 because Qualcom platforms are deployed on arm64. x86 platforms typically have full initramfs and do not require devtmpfs.\n \nLet me know if further clarification is needed.",
+      "parentUuid": "873525ae_e43809b5",
+      "revId": "1161648c0f27cf2fae7f66ef04edcea1f840386f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
