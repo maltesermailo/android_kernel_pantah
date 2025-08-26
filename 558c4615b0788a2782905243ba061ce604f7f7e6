@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c77119b6_f943d585",
+        "filename": "drivers/base/power/qos.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-26T18:36:44Z",
+      "side": 1,
+      "message": "have you compiled this? this will be a build-break. Please ALWAYS build and test your changes before submitting.\n\nAlso, there should be a space after \"if\"",
+      "fixSuggestions": [
+        {
+          "fixId": "4b0c3657_f6ceef17",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/base/power/qos.c",
+              "range": {
+                "startLine": 442,
+                "startChar": 0,
+                "endLine": 444,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (req-\u003etype \u003d\u003d DEV_PM_QOS_MAX_FREQUENCY)\n\t\t\t/* Add tracing for GPU QoS updates here if needed. */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "558c4615b0788a2782905243ba061ce604f7f7e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
