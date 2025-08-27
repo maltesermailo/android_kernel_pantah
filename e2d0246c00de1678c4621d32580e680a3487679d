@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86694a39_388efa45",
+        "filename": "kernel/power/suspend.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1446383
+      },
+      "writtenOn": "2025-08-27T22:49:42Z",
+      "side": 1,
+      "message": "This would mean the code would do \"complete\" on an already completed completion during subsequent suspends. Not sure if that\u0027s okay to do. Probably ok, but double check -- function docs/comments and dmesg to make sure there\u0027s no warning.\n\nIf it\u0027s an issue, another way to do this is to add the check in suspend_abort_fs_sync() to call it only if this flag is set.",
+      "range": {
+        "startLine": 442,
+        "startChar": 1,
+        "endLine": 446,
+        "endChar": 2
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "f15fc590_32a72235",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "kernel/power/suspend.c",
+              "range": {
+                "startLine": 91,
+                "startChar": 0,
+                "endLine": 92,
+                "endChar": 0
+              },
+              "replacement": "\tif (suspend_fs_sync_queued) {\n\t\tcomplete(\u0026suspend_fs_sync_complete);\n\t}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e2d0246c00de1678c4621d32580e680a3487679d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
