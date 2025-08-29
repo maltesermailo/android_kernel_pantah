@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "757dbe73_17230c7e",
+        "filename": "net/bridge/netfilter/ebt_limit.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-08-29T20:57:00Z",
+      "side": 1,
+      "message": "nit: for complete correctness this should be enclosed in parentheses:\n```\n#define ebt_limit_mt_reg (ebt_limit_mt_reg_ext.match)\n```",
+      "range": {
+        "startLine": 117,
+        "startChar": 25,
+        "endLine": 117,
+        "endChar": 51
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "387f69fb_3f605e6d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "net/bridge/netfilter/ebt_limit.c",
+              "range": {
+                "startLine": 117,
+                "startChar": 0,
+                "endLine": 118,
+                "endChar": 0
+              },
+              "replacement": "#define ebt_limit_mt_reg (ebt_limit_mt_reg_ext.match)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "30cd44387ae17e55e08d22b9a171b1642047131e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
