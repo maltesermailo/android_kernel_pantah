@@ -1,0 +1,79 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8bd6d18_5cfcf3b3",
+        "filename": "include/linux/android_kabi.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-08-29T20:37:50Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we base this on CONFIG_ANDROID_KABI_RESERVE? This is really not an ARM architectural feature. Do we just need to make sure all the macros behave correctly if !CONFIG_ANDROID_KABI_RESERVE?",
+      "fixSuggestions": [
+        {
+          "fixId": "067ec81f_683ffb03",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/android_kabi.h",
+              "range": {
+                "startLine": 35,
+                "startChar": 0,
+                "endLine": 37,
+                "endChar": 0
+              },
+              "replacement": "#ifdef CONFIG_ANDROID_KABI_RESERVE\n"
+            },
+            {
+              "path": "include/linux/android_kabi.h",
+              "range": {
+                "startLine": 90,
+                "startChar": 0,
+                "endLine": 91,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "include/linux/android_kabi.h",
+              "range": {
+                "startLine": 92,
+                "startChar": 0,
+                "endLine": 95,
+                "endChar": 0
+              },
+              "replacement": "\n"
+            },
+            {
+              "path": "include/linux/android_kabi.h",
+              "range": {
+                "startLine": 139,
+                "startChar": 0,
+                "endLine": 140,
+                "endChar": 0
+              },
+              "replacement": "#else /* !CONFIG_ANDROID_KABI_RESERVE */\n"
+            },
+            {
+              "path": "include/linux/android_kabi.h",
+              "range": {
+                "startLine": 147,
+                "startChar": 0,
+                "endLine": 148,
+                "endChar": 0
+              },
+              "replacement": "#endif /* CONFIG_ANDROID_KABI_RESERVE */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "dd1c5bde7e04ee21e8b7c3d37d450b454b85c8d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
