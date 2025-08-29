@@ -74,6 +74,24 @@
       ],
       "revId": "dd1c5bde7e04ee21e8b7c3d37d450b454b85c8d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36fb5b8d_e2314322",
+        "filename": "include/linux/android_kabi.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-08-29T20:41:29Z",
+      "side": 1,
+      "message": "That is an alternative, but only `ANDROID_KABI_RESERVE` is currently protected by it and all the others need to be protected as well.\n\nThat would also make applying it to only supported architectures more straightforward by adding a dependency in the Kconfig (see next patch), but for some reason the ` kernel_abi_aarch64` build fails when I do that. I\u0027m not sure why that\u0027s happening yet.",
+      "parentUuid": "b8bd6d18_5cfcf3b3",
+      "revId": "dd1c5bde7e04ee21e8b7c3d37d450b454b85c8d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
