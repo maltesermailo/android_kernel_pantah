@@ -16,6 +16,24 @@
       "message": "As requested in the prior patch submission: Could you be more explicit here in the commit message about why it is necessary to have an additional hook instead of using the existing trace_android_rvh_replace_next_task_fair() hook in this function? \n\nClarifying with a quantifiable benefit would help (ie: If I said no to this change, what would the impact be?)\n\nI recognize you replied in the other patch submission with: \"With this new hook, important tasks can be selected directly for execution rather than using the replace method, thereby saving the overhead of the pick_next_entity instructions in the non-simple native path.\n\nThis new hook allows important tasks to be immediately pulled from other CPUs for execution (instead of waiting for CPU newidle or tick balance), reducing scheduling latency—something that the current hooks cannot achieve.\"\n\nbut it would be good to have something to this effect in the commit message.",
       "revId": "e86b902d113d0547a853c3bf989864f0a33b2949",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0afc23e2_e090c1f7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 3589941
+      },
+      "writtenOn": "2025-08-29T20:03:17Z",
+      "side": 1,
+      "message": "Sure, I\u0027ve added the specific details in the commit message. Please review the submission. Thanks.",
+      "parentUuid": "f5955109_97682135",
+      "revId": "e86b902d113d0547a853c3bf989864f0a33b2949",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
