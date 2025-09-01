@@ -1436,7 +1436,9 @@ static int ufshcd_clock_scaling_prepare(struct ufs_hba *hba, u64 timeout_us)
 	 * make sure that there are no outstanding requests when
 	 * clock scaling is in progress
 	 */
-	mutex_lock(&hba->host->scan_mutex);
+	if (!mutex_trylock(&hba->host->scan_mutex))
+		return -EAGAIN;
+
 	blk_mq_quiesce_tagset(&hba->host->tag_set);
 	mutex_lock(&hba->wb_mutex);
 	down_write(&hba->clk_scaling_lock);
@@ -4443,9 +4445,16 @@ out_unlock:
 	mutex_unlock(&hba->uic_cmd_mutex);
 
 	/*
+<<<<<<< HEAD   (e3bf97db2b636b3fc807f1219ccb926f06f66c48 Revert "io_uring: don't use int for ABI")
 	 * If the h8 exit fails during the runtime resume process, it becomes
 	 * stuck and cannot be recovered through the error handler.  To fix
 	 * this, use link recovery instead of the error handler.
+||||||| BASE   (computed base)
+=======
+	 * If the h8 exit fails during the runtime resume process,
+	 * it becomes stuck and cannot be recovered through the error handler.
+	 * To fix this, use link recovery instead of the error handler.
+>>>>>>> BRANCH (2e5a4bace74a835f6a733c1a628cbd76501f2d62 Merge tag 'android16-6.12.40_r00' into android16-6.12)
 	 */
 	if (ret && hba->pm_op_in_progress)
 		ret = ufshcd_link_recovery(hba);
