@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b26989a8_7e5566c9",
+        "filename": "include/linux/android_kabi.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-01T06:50:32Z",
+      "side": 1,
+      "message": "wouldn\u0027t this break the build if anyone used it? It would resolve to:\n```\nstruct foo {\n  do { _new1; _new2; } while ();\n};\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "6b75d05c_27f7f699",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/android_kabi.h",
+              "range": {
+                "startLine": 140,
+                "startChar": 0,
+                "endLine": 141,
+                "endChar": 0
+              },
+              "replacement": "#define ANDROID_KABI_USE2(number, _new1, _new2) _new1; _new2;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3587741518a5742be62f6e34a4ae668f15a4fc6a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
