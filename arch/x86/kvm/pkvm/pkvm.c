@@ -853,6 +853,13 @@ static unsigned long pkvm_vcpu_run(struct pkvm_vcpu *pkvm_vcpu, bool force_immed
 
 	vcpu = to_kvm_vcpu(pkvm_vcpu);
 
+	/*
+	 * Flush predictor when switch from host VM to pVM to prevent host VM
+	 * from attacking pVM via the predicted branch targets.
+	 */
+	if (pkvm_is_protected_vcpu(vcpu))
+		indirect_branch_prediction_barrier();
+
 	if (unlikely(pkvm_is_protected_vcpu(vcpu) && !kvm_vcpu_has_run(vcpu))) {
 		if (READ_ONCE(vcpu->arch.mp_state) != KVM_MP_STATE_RUNNABLE)
 			return 0;
