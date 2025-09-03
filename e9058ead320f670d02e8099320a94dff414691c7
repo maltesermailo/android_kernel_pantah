@@ -3,6 +3,76 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "317950d5_075d9bca",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2596,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-03T07:27:26Z",
+      "side": 1,
+      "message": "zram_ioc_data is 0 length. Why do we bother with copying? I think it would be more helpful to add the copy in the next patch when this struct has at least 1 member",
+      "fixSuggestions": [
+        {
+          "fixId": "260c3e65_4a89fbc0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/block/zram/zram_drv.c",
+              "range": {
+                "startLine": 2595,
+                "startChar": 0,
+                "endLine": 2601,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "e9058ead320f670d02e8099320a94dff414691c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5673f8b0_9debadd8",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2601,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-03T07:27:26Z",
+      "side": 1,
+      "message": "why is this function anything more than this? :\n```\nstatic int zram_ioctl(struct block_device *bdev, blk_mode_t mode,\n\t\t      unsigned int cmd, unsigned long arg)\n{\n  return -EINVAL;\n}\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "49c58095_020c84d5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/block/zram/zram_drv.c",
+              "range": {
+                "startLine": 2595,
+                "startChar": 0,
+                "endLine": 2601,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "e9058ead320f670d02e8099320a94dff414691c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "98018797_63316ef3",
         "filename": "drivers/block/zram/zram_ioctl.h",
         "patchSetId": 3
@@ -14,6 +84,30 @@
       "writtenOn": "2025-08-29T08:39:07Z",
       "side": 1,
       "message": "this file location is NOT where to put a user/kernel api.\n\nNor is this the correct license for such a file 😞",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 22
+      },
+      "revId": "e9058ead320f670d02e8099320a94dff414691c7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1da80ab_89910f1c",
+        "filename": "drivers/block/zram/zram_ioctl.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-09-03T07:27:26Z",
+      "side": 1,
+      "message": "if this struct is needed, it should be in a UAPI header (include/UAPI/Linux/zram_ioctl.h?). But given the struct is empty, is it needed? I know the struct gets a member in the child patch - I think it would be less confusing to introduce this struct when it has at least 1 member.",
+      "parentUuid": "98018797_63316ef3",
       "range": {
         "startLine": 3,
         "startChar": 0,
