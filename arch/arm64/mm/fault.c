@@ -817,7 +817,12 @@ static int do_sea(unsigned long far, unsigned int esr, struct pt_regs *regs)
 		 */
 		siaddr  = untagged_addr(far);
 	}
+<<<<<<< HEAD   (da3dbfdd15be0f7780f9c4807c7bf5429d52f201 Merge android13-5.15 into android13-5.15-lts)
 	trace_android_rvh_do_sea(siaddr, esr, regs);
+||||||| BASE   (c79648372d02944bf4a54d87e3901db05d0ac82e Linux 5.15.189)
+=======
+	add_taint(TAINT_MACHINE_CHECK, LOCKDEP_STILL_OK);
+>>>>>>> BRANCH (01879f56bddeda429ecc7cd67bafdb291fbd7775 Linux 5.15.190)
 	arm64_notify_die(inf->name, regs, inf->sig, inf->code, siaddr, esr);
 
 	return 0;
