@@ -380932,6 +380932,12 @@ function {
   parameter_id: 0x33756485
 }
 function {
+  id: 0x18611289
+  return_type_id: 0x48b5725f
+  parameter_id: 0x21faa609
+  parameter_id: 0x21faa609
+}
+function {
   id: 0x1861ee1e
   return_type_id: 0x48b5725f
   parameter_id: 0x2197d55b
@@ -401493,6 +401499,14 @@ function {
   parameter_id: 0x38fdd541
 }
 function {
+  id: 0x93c09dc2
+  return_type_id: 0x6720d32f
+  parameter_id: 0x3b04bead
+  parameter_id: 0x21faa609
+  parameter_id: 0x1b2ca025
+  parameter_id: 0x1c3dbe5a
+}
+function {
   id: 0x93c0fc82
   return_type_id: 0x6720d32f
   parameter_id: 0x3760766d
@@ -401502,6 +401516,15 @@ function {
   id: 0x93c23a28
   return_type_id: 0x6720d32f
   parameter_id: 0x390b641d
+}
+function {
+  id: 0x93c2a2b7
+  return_type_id: 0x6720d32f
+  parameter_id: 0x3b04bead
+  parameter_id: 0x21faa609
+  parameter_id: 0x1b2ca025
+  parameter_id: 0x92233392
+  parameter_id: 0x1c3dbe5a
 }
 function {
   id: 0x93c5cc72
@@ -412639,6 +412662,13 @@ function {
   parameter_id: 0x6720d32f
   parameter_id: 0x32a623d7
   parameter_id: 0x4585663f
+}
+function {
+  id: 0x9ba3aabc
+  return_type_id: 0x6720d32f
+  parameter_id: 0x1b2ca025
+  parameter_id: 0x3c6a6bbc
+  parameter_id: 0x6720d32f
 }
 function {
   id: 0x9ba3bf47
@@ -459939,6 +459969,24 @@ elf_symbol {
   full_name: "drm_client_rotation"
 }
 elf_symbol {
+  id: 0x5f358433
+  name: "drm_colorop_pipeline_destroy"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x8033a83b
+  type_id: 0x1653799a
+  full_name: "drm_colorop_pipeline_destroy"
+}
+elf_symbol {
+  id: 0x15fced3c
+  name: "drm_colorop_set_next_property"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6ce54e6c
+  type_id: 0x18611289
+  full_name: "drm_colorop_set_next_property"
+}
+elf_symbol {
   id: 0x54a3e32d
   name: "drm_compat_ioctl"
   is_defined: true
@@ -462405,6 +462453,24 @@ elf_symbol {
   full_name: "drm_plane_cleanup"
 }
 elf_symbol {
+  id: 0x3f281067
+  name: "drm_plane_colorop_ctm_3x4_init"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x152cbd55
+  type_id: 0x93c09dc2
+  full_name: "drm_plane_colorop_ctm_3x4_init"
+}
+elf_symbol {
+  id: 0x1a12e742
+  name: "drm_plane_colorop_curve_1d_init"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x992de034
+  type_id: 0x93c2a2b7
+  full_name: "drm_plane_colorop_curve_1d_init"
+}
+elf_symbol {
   id: 0xbdb562b1
   name: "drm_plane_create_alpha_property"
   is_defined: true
@@ -462421,6 +462487,15 @@ elf_symbol {
   crc: 0xb131e42e
   type_id: 0x9a5ddebe
   full_name: "drm_plane_create_blend_mode_property"
+}
+elf_symbol {
+  id: 0x9ff642a7
+  name: "drm_plane_create_color_pipeline_property"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xd3d3a59d
+  type_id: 0x9ba3aabc
+  full_name: "drm_plane_create_color_pipeline_property"
 }
 elf_symbol {
   id: 0x34b80a32
@@ -515113,6 +515188,8 @@ interface {
   symbol_id: 0xa978b6c8
   symbol_id: 0xf6242585
   symbol_id: 0xfbd7432c
+  symbol_id: 0x5f358433
+  symbol_id: 0x15fced3c
   symbol_id: 0x54a3e32d
   symbol_id: 0x3f2eb351
   symbol_id: 0xb091c3a6
@@ -515387,8 +515464,11 @@ interface {
   symbol_id: 0x864914fa
   symbol_id: 0x046720ab
   symbol_id: 0x3c07bbff
+  symbol_id: 0x3f281067
+  symbol_id: 0x1a12e742
   symbol_id: 0xbdb562b1
   symbol_id: 0x1f35127a
+  symbol_id: 0x9ff642a7
   symbol_id: 0x34b80a32
   symbol_id: 0x93ab4714
   symbol_id: 0x198a2313
