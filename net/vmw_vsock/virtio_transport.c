@@ -571,9 +571,14 @@ static void virtio_transport_rx_work(struct work_struct *work)
 				continue;
 			}
 
+<<<<<<< HEAD   (09685dcf1db187315b48f590ff259778a18cce14 Revert "io_uring: don't use int for ABI")
 			if (payload_len)
 				virtio_vsock_skb_put(skb, payload_len);
 
+||||||| BASE   (19e01bc8c1ac5b20be723f439c85f27540da3e23 udp: also consider secpath when evaluating ipsec use for che)
+=======
+			virtio_vsock_skb_rx_put(skb);
+>>>>>>> BRANCH (0ed2068de1f9afdde56436af91aba8cbb77c2741 kbuild: userprogs: use correct linker when mixing clang and )
 			virtio_transport_deliver_tap_pkt(skb);
 			virtio_transport_recv_pkt(&virtio_transport, skb);
 		}

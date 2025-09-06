@@ -344,8 +344,13 @@ vhost_vsock_alloc_skb(struct vhost_virtqueue *vq,
 
 	len = iov_length(vq->iov, out);
 
+<<<<<<< HEAD   (09685dcf1db187315b48f590ff259778a18cce14 Revert "io_uring: don't use int for ABI")
 	if (len < VIRTIO_VSOCK_SKB_HEADROOM ||
 	    len > VIRTIO_VSOCK_MAX_PKT_BUF_SIZE + VIRTIO_VSOCK_SKB_HEADROOM)
+||||||| BASE   (19e01bc8c1ac5b20be723f439c85f27540da3e23 udp: also consider secpath when evaluating ipsec use for che)
+=======
+	if (len > VIRTIO_VSOCK_MAX_PKT_BUF_SIZE + VIRTIO_VSOCK_SKB_HEADROOM)
+>>>>>>> BRANCH (0ed2068de1f9afdde56436af91aba8cbb77c2741 kbuild: userprogs: use correct linker when mixing clang and )
 		return NULL;
 
 	/* len contains both payload and hdr */
