@@ -122,7 +122,7 @@ static bool sugov_update_next_freq(struct sugov_policy *sg_policy, u64 time,
 		 * policy limits.
 		 */
 		if (sg_policy->next_freq == next_freq &&
-		    !cpufreq_driver_test_flags(CPUFREQ_NEED_UPDATE_LIMITS))
+		    1)//!cpufreq_driver_test_flags(CPUFREQ_NEED_UPDATE_LIMITS))
 			return false;
 	} else if (sg_policy->next_freq == next_freq) {
 		return false;
@@ -853,7 +853,7 @@ static int sugov_start(struct cpufreq_policy *policy)
 	sg_policy->limits_changed		= false;
 	sg_policy->cached_raw_freq		= 0;
 
-	sg_policy->need_freq_update = cpufreq_driver_test_flags(CPUFREQ_NEED_UPDATE_LIMITS);
+	sg_policy->need_freq_update = 0;//cpufreq_driver_test_flags(CPUFREQ_NEED_UPDATE_LIMITS);
 
 	if (policy_is_shared(policy))
 		uu = sugov_update_shared;
