@@ -1,0 +1,229 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf7507d9_268ddaef",
+        "filename": "mm/filemap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2822,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-09-08T21:24:45Z",
+      "side": 1,
+      "message": "Do you really want to make folio_batch struct part of ABI? If you are using only `folios` and `nr` then just pass them directly.",
+      "range": {
+        "startLine": 2822,
+        "startChar": 44,
+        "endLine": 2822,
+        "endChar": 50
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0eae841b_cad19f92",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/filemap.c",
+              "range": {
+                "startLine": 2822,
+                "startChar": 0,
+                "endLine": 2823,
+                "endChar": 0
+              },
+              "replacement": "\t\ttrace_android_vh_filemap_read_end(inode, fbatch.folios,\n\t\t\t\t\t\t  folio_batch_count(\u0026fbatch));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "03fd4088a4117c9ac6fd1f969eb0ab295bdbe5f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "369aed2c_2f5be2f0",
+        "filename": "mm/filemap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3448,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-09-08T21:24:45Z",
+      "side": 1,
+      "message": "I think you want to use `trace_android_vh_filemap_fault_end` instead of adding one here. If the page is found and it\u0027s up-to-date then pagefault is not really the original reason the page is in the RAM. There also might be some failures (see all the goto\u0027s after this line).",
+      "range": {
+        "startLine": 3448,
+        "startChar": 1,
+        "endLine": 3448,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "acabe445_8e757b69",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/filemap.c",
+              "range": {
+                "startLine": 3448,
+                "startChar": 0,
+                "endLine": 3450,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "03fd4088a4117c9ac6fd1f969eb0ab295bdbe5f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8c9c2d9_632685c3",
+        "filename": "mm/filemap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3448,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-09-08T21:24:45Z",
+      "side": 1,
+      "message": "Similarly here. What do you use from vm_fault structure?",
+      "range": {
+        "startLine": 3448,
+        "startChar": 32,
+        "endLine": 3448,
+        "endChar": 35
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "24f6cb13_af169b58",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/filemap.c",
+              "range": {
+                "startLine": 3448,
+                "startChar": 0,
+                "endLine": 3449,
+                "endChar": 0
+              },
+              "replacement": "\ttrace_android_vh_filemap_fault(index, inode, folio);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "03fd4088a4117c9ac6fd1f969eb0ab295bdbe5f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57d59f24_1487cbb6",
+        "filename": "mm/readahead.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-09-08T21:24:45Z",
+      "side": 1,
+      "message": "This makes readahead_control structure part of ABI, which is bad. Please pass only the fields you need. Same in the other hooks.",
+      "range": {
+        "startLine": 254,
+        "startChar": 44,
+        "endLine": 254,
+        "endChar": 49
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "bae7f4a3_424aee70",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/readahead.c",
+              "range": {
+                "startLine": 254,
+                "startChar": 0,
+                "endLine": 255,
+                "endChar": 0
+              },
+              "replacement": "\t\t\ttrace_android_vh_page_cache_ra_unbounded(ractl-\u003e_index, ractl-\u003e_nr_pages, mapping, folio);\n"
+            },
+            {
+              "path": "mm/readahead.c",
+              "range": {
+                "startLine": 274,
+                "startChar": 0,
+                "endLine": 275,
+                "endChar": 0
+              },
+              "replacement": "\t\ttrace_android_vh_page_cache_ra_unbounded(ractl-\u003e_index, ractl-\u003e_nr_pages, mapping, folio);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "03fd4088a4117c9ac6fd1f969eb0ab295bdbe5f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9e9aaf6_c6f36eb8",
+        "filename": "mm/readahead.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-09-08T21:24:45Z",
+      "side": 1,
+      "message": "The location of this hook seems off. I would assume it to be after Line 267. Maybe even better to put a tracepoint inside read_pages()?",
+      "range": {
+        "startLine": 274,
+        "startChar": 2,
+        "endLine": 274,
+        "endChar": 66
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "484a0c05_a0fc10b9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/readahead.c",
+              "range": {
+                "startLine": 274,
+                "startChar": 0,
+                "endLine": 275,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/readahead.c",
+              "range": {
+                "startLine": 283,
+                "startChar": 0,
+                "endLine": 283,
+                "endChar": 0
+              },
+              "replacement": "\ttrace_android_vh_page_cache_ra_unbounded(ractl, mapping, folio);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "03fd4088a4117c9ac6fd1f969eb0ab295bdbe5f9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
