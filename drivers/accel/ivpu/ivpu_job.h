@@ -30,8 +30,15 @@ struct ivpu_cmdq {
 	u32 entry_count;
 	u32 id;
 	u32 db_id;
+<<<<<<< HEAD   (1e52d3ba33c0625899a7ffff58c7eb6d4bbb10d8 BACKPORT: x86/early_printk: Use 'mmio32' for consistency, fi)
 	u8 priority;
 	bool is_legacy;
+||||||| BASE   (437e1d666d1da25565a576e40737f771189ad707 UPSTREAM: printk: Improve memory usage logging during boot)
+	bool db_registered;
+=======
+	bool db_registered;
+	u8 priority;
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 };
 
 /**

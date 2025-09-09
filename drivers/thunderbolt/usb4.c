@@ -440,9 +440,25 @@ int usb4_switch_set_wake(struct tb_switch *sw, unsigned int flags, bool runtime)
 			bool configured = val & PORT_CS_19_PC;
 			bool wakeup = runtime || device_may_wakeup(&port->usb4->dev);
 
+<<<<<<< HEAD   (1e52d3ba33c0625899a7ffff58c7eb6d4bbb10d8 BACKPORT: x86/early_printk: Use 'mmio32' for consistency, fi)
 			if ((flags & TB_WAKE_ON_CONNECT) && wakeup && !configured)
+||||||| BASE   (437e1d666d1da25565a576e40737f771189ad707 UPSTREAM: printk: Improve memory usage logging during boot)
+			if (((flags & TB_WAKE_ON_CONNECT) |
+			      device_may_wakeup(&usb4->dev)) && !configured)
+=======
+			if (((flags & TB_WAKE_ON_CONNECT) &&
+			      device_may_wakeup(&usb4->dev)) && !configured)
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 				val |= PORT_CS_19_WOC;
+<<<<<<< HEAD   (1e52d3ba33c0625899a7ffff58c7eb6d4bbb10d8 BACKPORT: x86/early_printk: Use 'mmio32' for consistency, fi)
 			if ((flags & TB_WAKE_ON_DISCONNECT) && wakeup && configured)
+||||||| BASE   (437e1d666d1da25565a576e40737f771189ad707 UPSTREAM: printk: Improve memory usage logging during boot)
+			if (((flags & TB_WAKE_ON_DISCONNECT) |
+			      device_may_wakeup(&usb4->dev)) && configured)
+=======
+			if (((flags & TB_WAKE_ON_DISCONNECT) &&
+			      device_may_wakeup(&usb4->dev)) && configured)
+>>>>>>> BRANCH (21fbbe6cf817b3776973b0174ce80f28dafcb072 Merge tag 'android16-6.12.38_r00' into android16-6.12)
 				val |= PORT_CS_19_WOD;
 			if ((flags & TB_WAKE_ON_USB4) && configured)
 				val |= PORT_CS_19_WOU4;
