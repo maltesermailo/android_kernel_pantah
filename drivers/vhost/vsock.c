@@ -344,8 +344,13 @@ vhost_vsock_alloc_skb(struct vhost_virtqueue *vq,
 
 	len = iov_length(vq->iov, out);
 
+<<<<<<< HEAD   (04aaf3e4156661032502e913a7c259bcdf72e900 Revert "PCI: Store all PCIe Supported Link Speeds")
 	if (len < VIRTIO_VSOCK_SKB_HEADROOM ||
 	    len > VIRTIO_VSOCK_MAX_PKT_BUF_SIZE + VIRTIO_VSOCK_SKB_HEADROOM)
+||||||| BASE   (9becd7c25c61ae7e5b6fbfc3c226b1f23af7638c Linux 6.12.43)
+=======
+	if (len > VIRTIO_VSOCK_MAX_PKT_BUF_SIZE + VIRTIO_VSOCK_SKB_HEADROOM)
+>>>>>>> BRANCH (11a24528d080a6ac23f07d6031da9e271728d62d Linux 6.12.44)
 		return NULL;
 
 	/* len contains both payload and hdr */

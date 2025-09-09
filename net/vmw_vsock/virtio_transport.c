@@ -656,9 +656,14 @@ static void virtio_transport_rx_work(struct work_struct *work)
 				continue;
 			}
 
+<<<<<<< HEAD   (04aaf3e4156661032502e913a7c259bcdf72e900 Revert "PCI: Store all PCIe Supported Link Speeds")
 			if (payload_len)
 				virtio_vsock_skb_put(skb, payload_len);
 
+||||||| BASE   (9becd7c25c61ae7e5b6fbfc3c226b1f23af7638c Linux 6.12.43)
+=======
+			virtio_vsock_skb_rx_put(skb);
+>>>>>>> BRANCH (11a24528d080a6ac23f07d6031da9e271728d62d Linux 6.12.44)
 			virtio_transport_deliver_tap_pkt(skb);
 			virtio_transport_recv_pkt(&virtio_transport, skb);
 		}
