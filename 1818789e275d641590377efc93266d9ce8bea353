@@ -33,6 +33,24 @@
       "message": "Broken builds are going break anyway.",
       "revId": "1818789e275d641590377efc93266d9ce8bea353",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f59a4c6_ffbbce0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1279898
+      },
+      "writtenOn": "2025-09-09T03:55:59Z",
+      "side": 1,
+      "message": "Unfortunately I\u0027m in a bit of a catch-22 here. The kernel/build repo has merged to a point ahead of kernel/common because they are based off different branches, so the build is failing because I do not have your aosp/3740148 yet. I could patch it in like aosp/3758812 but I would need to patch multiple CLs in that chain to avoid the lint errors and fix every error from June 30 in this patch.\n\nInstead, I\u0027d really like to push this CL through, deal with all the auto-merger conflicts one-by-one and then submit a chain of patches to get the build green.",
+      "parentUuid": "57407f25_2e2f66d2",
+      "revId": "1818789e275d641590377efc93266d9ce8bea353",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
