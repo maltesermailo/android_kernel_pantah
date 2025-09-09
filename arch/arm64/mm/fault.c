@@ -787,7 +787,12 @@ static int do_sea(unsigned long far, unsigned long esr, struct pt_regs *regs)
 		 */
 		siaddr  = untagged_addr(far);
 	}
+<<<<<<< HEAD   (09685dcf1db187315b48f590ff259778a18cce14 Revert "io_uring: don't use int for ABI")
 	trace_android_rvh_do_sea(siaddr, esr, regs);
+||||||| BASE   (19e01bc8c1ac5b20be723f439c85f27540da3e23 udp: also consider secpath when evaluating ipsec use for che)
+=======
+	add_taint(TAINT_MACHINE_CHECK, LOCKDEP_STILL_OK);
+>>>>>>> BRANCH (868f23286c1a13162330fa6c614fe350f78e3f82 exfat: add cluster chain loop check for dir)
 	arm64_notify_die(inf->name, regs, inf->sig, inf->code, siaddr, esr);
 
 	return 0;
