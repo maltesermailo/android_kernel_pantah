@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c4057310_87255ee6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-10T17:46:00Z",
+      "side": 1,
+      "message": "BTW thanks for asking, because I\u0027ve realized I forgot to disable these:\n```\n                x86_ops-\u003eflush_remote_tlbs \u003d pkvm_tlb_remote_flush;\n                x86_ops-\u003eflush_remote_tlbs_range \u003d\n                                pkvm_tlb_remote_flush_with_range;\n```\nThese are for emulating TLB flush for shadow EPT, so with pvMMU we shouldn\u0027t use them anymore, we should just flush the physical TLB. I\u0027ll fix this.",
+      "parentUuid": "048c461a_80a18df2",
+      "revId": "ee507d4ad2d412ccff9345832ee0b73340962d95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "77d0f88b_30fd23e3",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 13
