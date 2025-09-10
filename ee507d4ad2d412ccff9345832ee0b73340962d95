@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77d0f88b_30fd23e3",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-10T06:56:52Z",
+      "side": 1,
+      "message": "Just want to understand the design. With setting flush_tlb as NULL, the pVM\u0027s EPT TLB is not flushed after pVM is destroyed. So we should guarantee that the TLB will be flushed eventually when another VM is created with the same EPT root, right? Not sure if it is feasible as at that time, we already don\u0027t know which physical CPU has ever run the pVM\u0027s vCPU, thus don\u0027t have the information of which physical CPU should be flushed.",
+      "revId": "ee507d4ad2d412ccff9345832ee0b73340962d95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
