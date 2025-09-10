@@ -16,6 +16,24 @@
       "message": "The userspace ABI should not be split, if it\u0027s possible to split the modules only.",
       "revId": "fd42dd7a004922fa4dc25dc3ef66deffc52c6f28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "268c86d0_a5c51279",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-09-10T22:58:42Z",
+      "side": 1,
+      "message": "I think this is just an incorrect packaging of the 16k kernel build; it incorrectly packages the 4k Kunit modules, but it should package the 16k Kunit modules instead.\n\nThere shouldn\u0027t be userspace ABI change, but I\u0027ll double check it on the android16-6.12 branch after I backport this.",
+      "parentUuid": "0c57880b_60b90389",
+      "revId": "fd42dd7a004922fa4dc25dc3ef66deffc52c6f28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
