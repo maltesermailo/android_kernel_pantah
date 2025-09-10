@@ -110,6 +110,30 @@
       },
       "revId": "12ca4863ade580ca5a5164a3cd491f531efb1a35",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afb5278d_8b5e45ff",
+        "filename": "drivers/android/binder/page_range_helper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2025-09-10T05:51:40Z",
+      "side": 1,
+      "message": "Right now Rust accesses it with an explicit declaration:\n```\nextern \"C\" {\n    fn rust_shrink_free_page_wrap(\n        item: *mut bindings::list_head,\n        list: *mut bindings::list_lru_one,\n        lock: *mut bindings::spinlock_t,\n        cb_arg: *mut kernel::ffi::c_void,\n    ) -\u003e bindings::lru_status;\n}\n```\nWe could probably get rid of this one using the header file, but that requires that the header file is included in `rust/bindings/bindings_helper.h`.",
+      "parentUuid": "904b8be7_82e1a461",
+      "range": {
+        "startLine": 8,
+        "startChar": 13,
+        "endLine": 8,
+        "endChar": 34
+      },
+      "revId": "12ca4863ade580ca5a5164a3cd491f531efb1a35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
