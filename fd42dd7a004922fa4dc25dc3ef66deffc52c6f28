@@ -52,6 +52,24 @@
       "parentUuid": "268c86d0_a5c51279",
       "revId": "fd42dd7a004922fa4dc25dc3ef66deffc52c6f28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b9c055f_67f1aaa0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-09-10T23:04:08Z",
+      "side": 1,
+      "message": "\u003e this module does not contain userspace components\n\nKunit modules should only be loaded when we run Kunit tests. They shouldn\u0027t be present on a regular production device.\n\n\u003e which we should be able to build once and work in both environments\n\nNot sure what you mean by this; are you saying that we build a module in 4k and it should be loadable on a 16k kernel?",
+      "parentUuid": "24654fe4_d6f46fc8",
+      "revId": "fd42dd7a004922fa4dc25dc3ef66deffc52c6f28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
