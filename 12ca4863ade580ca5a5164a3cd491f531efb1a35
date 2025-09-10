@@ -62,6 +62,30 @@
       },
       "revId": "12ca4863ade580ca5a5164a3cd491f531efb1a35",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "904b8be7_82e1a461",
+        "filename": "drivers/android/binder/page_range_helper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1786377
+      },
+      "writtenOn": "2025-09-10T05:09:48Z",
+      "side": 1,
+      "message": "`page_range_helper.c` uses `rust_shrink_free_page()` exposed from `page_range.rs` and expose `rust_shrink_free_page_wrap()` to `page_range.rs`.\nIf they are both c files then a header make sense, but I don\u0027t know what\u0027s the best practice for rust/c interop.",
+      "parentUuid": "e2718214_f73a52b9",
+      "range": {
+        "startLine": 8,
+        "startChar": 13,
+        "endLine": 8,
+        "endChar": 34
+      },
+      "revId": "12ca4863ade580ca5a5164a3cd491f531efb1a35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
