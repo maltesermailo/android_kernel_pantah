@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "048c461a_80a18df2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-10T17:35:30Z",
+      "side": 1,
+      "message": "It depends. When unmapping pages, TLB flush is triggered only by pKVM. KVM-high just issues the unmap hypercall and relies on pKVM to flush the TLB, as a part of pkvm_pgtable_unmap(). Which is why, for instance, in pkvm_unmap_gfn_range() in aosp/3684270 we always return false, which indicates to the caller that it doesn\u0027t need to flush TLB, since it has been flushed by pKVM.\n\nSimilarly when changing permissions of mapped pages (although in this initial pvMMU implementation we don\u0027t really allow changing permissions, for simplicity, since we don\u0027t seem to have use cases for that; but when we support it, I think we will rely on pKVM to do the flush, like in the unmap case).\n\nIn contrast, when clearing the access bit in the PTE (in the age hypercall implemented in aosp/3700490), pKVM does not flush the TLB. KVM-high triggers flushing the TLB after that, if needed, depending on which MMU notifier triggered it: .clear_young() or .clear_flush_young().\n\nIn such case, when KVM-high triggers TLB flush, it ends up using a hypercall \\_\\_pkvm\\_\\_flush_tlb_all or \\_\\_pkvm\\_\\_flush_tlb_current etc, which you kindly implemented in pvVMCS.\n\nPossibly there are also some other code paths in KVM-high that still trigger TLB flush via those hypercalls, maybe redundantly. TBH, I haven\u0027t analyzed all those code paths very carefully.",
+      "parentUuid": "34ebdad6_6926be93",
+      "revId": "ee507d4ad2d412ccff9345832ee0b73340962d95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "77d0f88b_30fd23e3",
         "filename": "arch/x86/kvm/pkvm/mmu.c",
         "patchSetId": 13
@@ -31,6 +49,24 @@
       "writtenOn": "2025-09-10T06:56:52Z",
       "side": 1,
       "message": "Just want to understand the design. With setting flush_tlb as NULL, the pVM\u0027s EPT TLB is not flushed after pVM is destroyed. So we should guarantee that the TLB will be flushed eventually when another VM is created with the same EPT root, right? Not sure if it is feasible as at that time, we already don\u0027t know which physical CPU has ever run the pVM\u0027s vCPU, thus don\u0027t have the information of which physical CPU should be flushed.",
+      "revId": "ee507d4ad2d412ccff9345832ee0b73340962d95",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cd72fc1_b18f4d0a",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-10T17:35:30Z",
+      "side": 1,
+      "message": "\u003e So we should guarantee that the TLB will be flushed eventually when another VM is created with the same EPT root, right?\n\nIIUC we don\u0027t need to flush the TLB immediately when creating another VM, we just need to flush it when loading any vCPU of this VM into a physical CPU which may have stale TLB entries from the old VM.\n\nAnd IIUC we do that in this code in vmx_vcpu_load_vmcs():\n\n```\n\t\t/*\n\t\t * Flush all EPTP/VPID contexts, the new pCPU may have stale\n\t\t * TLB entries from its previous association with the vCPU.\n\t\t */\n\t\tkvm_make_request(KVM_REQ_TLB_FLUSH, vcpu);\n```\n\ni.e. whenever we load any vCPU of any VM onto any pCPU, we flush all TLB entries on this pCPU, not just for a particular EPT root.\n\nAm I missing something?",
+      "parentUuid": "77d0f88b_30fd23e3",
       "revId": "ee507d4ad2d412ccff9345832ee0b73340962d95",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
