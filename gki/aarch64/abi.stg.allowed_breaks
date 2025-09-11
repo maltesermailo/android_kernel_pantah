@@ -42,6 +42,7 @@ type 'struct pkvm_module_ops' changed
 type 'enum iio_chan_type' changed
   enumerator 'IIO_ATTENTION' (39) was added
 
+<<<<<<< HEAD
 type 'struct cgroup' changed
   member 'u64 __kabi_reserved_backport1' was removed
   member 'union { struct cgroup_kmi_ext_info* kmi_ext_info; struct { u64 __kabi_reserved_backport1; }; union { }; }' was added
@@ -63,4 +64,10 @@ type 'struct usb_device' changed
 2 variable symbol(s) removed
   'struct tracepoint __tracepoint_android_vh_f2fs_printk'
   'struct tracepoint __tracepoint_f2fs_submit_folio_write'
+
+type 'struct readahead_control' changed
+  member 'union { bool dropbehind; unsigned char __kabi_ignored1; }' was added
+
+type 'struct bindings::bindings_raw::readahead_control' changed
+  member 'union bindings::bindings_raw::readahead_control__bindgen_ty_1 __bindgen_anon_1' was added
 
