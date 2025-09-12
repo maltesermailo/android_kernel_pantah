@@ -16,6 +16,24 @@
       "message": "shouldn\u0027t the prefix be updated here now that the change is upstream?",
       "revId": "99d3136ed8c0e1cbc36190299e67655db03be15c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28c8a94a_defbb648",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 57
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-09-12T09:24:26Z",
+      "side": 1,
+      "message": "This change was dropped from the upstream patch set in v9.\n\nThe reason was that I could reuse existing android-only code to support this interface. If you look at line 1693, the new case falls through to existing code that calls the existing `do_ffa_direct_msg` handler which Sebastian added in aosp/3422040 (after a slight tweak earlier in this stack: aosp/3667458).",
+      "parentUuid": "386c3fd9_fec644b4",
+      "revId": "99d3136ed8c0e1cbc36190299e67655db03be15c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
