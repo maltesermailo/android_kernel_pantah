@@ -157,6 +157,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1c3ade99_0bfe4285",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-09-12T18:52:12Z",
+      "side": 1,
+      "message": "Right, either CFLAGS approach is fine.\n\n\u003e I think defining prototypes within page_range_helper.c just loses the point of -Wmissing-prototypes.\n\nThe idea behind -Wmissing-prototypes is just to be explicit about local vs global and avoid forgetting to add `static`. Not that every prototype should be in a header file.\n\nIf you really want to use a header, then that is fine but please also _use_ the header where it\u0027s needed (otherwise it\u0027s kinda silly). I believe Alice gave some pointers if you want to go down this path.\n\nUsing `-Wno-missing-prototypes` would only mask future warns in this file.",
+      "parentUuid": "142d0d82_ee8de0f3",
+      "revId": "12ca4863ade580ca5a5164a3cd491f531efb1a35",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e2718214_f73a52b9",
         "filename": "drivers/android/binder/page_range_helper.h",
         "patchSetId": 1
