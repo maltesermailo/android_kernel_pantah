@@ -16,6 +16,24 @@
       "message": "I\u0027m a bit confused about all this. I remember re-enabling these warnings on android-mainline but not this branch. How are you getting these errors? This information is not in the bug either. Could you please explain?",
       "revId": "a545c980be4b5fe0d6ac26bafbed77a80e6575d2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc4848a1_c1f0e1c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1786377
+      },
+      "writtenOn": "2025-09-12T03:35:43Z",
+      "side": 1,
+      "message": "I\u0027m enabling it in Pixel\u0027s branch. Because it\u0027s a huge change to Pixel modules I\u0027m also adding it to 6.12 to avoid future merge conflicts.\n`rust_binder` seems to be the only in-tree module getting the warnings so it\u0027s easier to just fix it (it needs to be done sooner or later anyway) instead of only enable the warning to external modules.",
+      "parentUuid": "4fa283c4_0b1cd0a1",
+      "revId": "a545c980be4b5fe0d6ac26bafbed77a80e6575d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
