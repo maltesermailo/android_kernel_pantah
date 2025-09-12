@@ -56,6 +56,7 @@
 
 #define CREATE_TRACE_POINTS
 #include <trace/events/mmap.h>
+#include <trace/events/vma.h>
 
 #include "internal.h"
 
@@ -1522,10 +1523,12 @@ int __has_vma_count_remaining(const struct mm_struct *mm, int nr_vmas)
 	const int vma_count = mm->vma_count;
 	const int max_count = sysctl_max_map_count;
 
-	if (max_count > vma_count)
-		return (max_count - vma_count) >= nr_vmas;
-	else
-		return 0;
+	if ((max_count > vma_count) && (max_count - vma_count) >= nr_vmas)
+		return 1;
+
+	trace_max_vma_count_exceeded(current);
+
+	return 0;
 }
 
 static const struct ctl_table mmap_table[] = {
