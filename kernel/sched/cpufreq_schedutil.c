@@ -129,6 +129,28 @@ static void sugov_deferred_update(struct sugov_policy *sg_policy)
 }
 
 /**
+ * get_capacity_ref_freq - get the reference frequency that has been used to
+ * correlate frequency and compute capacity for a given cpufreq policy. We use
+ * the CPU managing it for the arch_scale_freq_ref() call in the function.
+ * @policy: the cpufreq policy of the CPU in question.
+ *
+ * Return: the reference CPU frequency to compute a capacity.
+ */
+static __always_inline
+unsigned long get_capacity_ref_freq(struct cpufreq_policy *policy)
+{
+	unsigned int freq = arch_scale_freq_ref(policy->cpu);
+
+	if (freq)
+		return freq;
+
+	if (arch_scale_freq_invariant())
+		return policy->cpuinfo.max_freq;
+
+	return policy->cur;
+}
+
+/**
  * get_next_freq - Compute a new frequency for a given cpufreq policy.
  * @sg_policy: schedutil policy object to compute the new frequency for.
  * @util: Current CPU utilization.
@@ -154,10 +176,18 @@ static unsigned int get_next_freq(struct sugov_policy *sg_policy,
 				  unsigned long util, unsigned long max)
 {
 	struct cpufreq_policy *policy = sg_policy->policy;
+<<<<<<< HEAD   (354adf434ceb311df39dc34cd7219bd164784657 Merge 9771732ab39c ("cpufreq: Use the fixed and coherent fre)
 	unsigned int freq = arch_scale_freq_invariant() ?
 				policy->cpuinfo.max_freq : policy->cur;
 	unsigned long next_freq = 0;
+||||||| BASE   (9771732ab39c2f32ee1e42a211e7817202f55d37 cpufreq: Use the fixed and coherent frequency for scaling ca)
+	unsigned int freq = arch_scale_freq_invariant() ?
+				policy->cpuinfo.max_freq : policy->cur;
+=======
+	unsigned int freq;
+>>>>>>> BRANCH (6688eb92693239a4cbd5385ead8a0e165951df02 cpufreq/schedutil: Use a fixed reference frequency)
 
+<<<<<<< HEAD   (354adf434ceb311df39dc34cd7219bd164784657 Merge 9771732ab39c ("cpufreq: Use the fixed and coherent fre)
 	util = map_util_perf(util);
 	trace_android_vh_map_util_freq(util, freq, max, &next_freq, policy,
 			&sg_policy->need_freq_update);
@@ -165,6 +195,12 @@ static unsigned int get_next_freq(struct sugov_policy *sg_policy,
 		freq = next_freq;
 	else
 		freq = map_util_freq(util, freq, max);
+||||||| BASE   (9771732ab39c2f32ee1e42a211e7817202f55d37 cpufreq: Use the fixed and coherent frequency for scaling ca)
+	freq = map_util_freq(util, freq, max);
+=======
+	freq = get_capacity_ref_freq(policy);
+	freq = map_util_freq(util, freq, max);
+>>>>>>> BRANCH (6688eb92693239a4cbd5385ead8a0e165951df02 cpufreq/schedutil: Use a fixed reference frequency)
 
 	if (freq == sg_policy->cached_raw_freq && !sg_policy->need_freq_update)
 		return sg_policy->next_freq;
