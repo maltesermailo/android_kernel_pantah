@@ -55,6 +55,13 @@
  * associated with them) to allow external modules to probe them.
  */
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_send_sig_info);
+<<<<<<< HEAD   (029c3b29942fa7c9965736a5ab9030f41c9c02d3 ANDROID: ABI: New variables and hooks added, honor symbol li)
+||||||| BASE   (caeb52b32bd70bc82167f136ab287e2b7a916375 ANDROID: cgroup: Use backport reservation for freeze time)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_killed_process);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_killed_process);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_oom_reaper_delay_bypass);
+>>>>>>> CHANGE (7f29b30f648a1248e683dde55f7ac3cae4d7b464 ANDROID: mm: Add vendor hook to bypass the delay in queue_oo)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_arch_set_freq_scale);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_wait_start);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mutex_wait_finish);
