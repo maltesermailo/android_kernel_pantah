@@ -84,6 +84,9 @@ DECLARE_HOOK(android_vh_madvise_swapin_walk_pmd_entry,
 DECLARE_HOOK(android_vh_process_madvise,
 	TP_PROTO(int behavior, ssize_t *ret, void *priv),
 	TP_ARGS(behavior, ret, priv));
+DECLARE_HOOK(android_vh_oom_reaper_delay_bypass,
+	TP_PROTO(struct task_struct *tsk, bool *bypass),
+	TP_ARGS(tsk, bypass));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
