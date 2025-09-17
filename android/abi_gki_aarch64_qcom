@@ -76,9 +76,11 @@
   bio_chain
   bio_endio
   bio_end_io_acct_remapped
+  bio_reset
   bio_split
   bio_start_io_acct
   bitmap_allocate_region
+  __bio_add_page
   __bitmap_and
   __bitmap_andnot
   __bitmap_clear
@@ -1883,6 +1885,7 @@
   __list_del_entry_valid
   list_sort
   llist_add_batch
+  llist_del_first
   llist_reverse_order
   __local_bh_enable_ip
   lock_sock_nested
@@ -4221,6 +4224,8 @@
   xsk_tx_peek_desc
   xsk_tx_release
   xsk_uses_need_wakeup
+  xxh32
+  xxh64
   zap_vma_ptes
   zlib_deflate
   zlib_deflateEnd
@@ -4242,3 +4247,4 @@
   zs_map_object
   zs_pool_stats
   zs_unmap_object
+  zstd_compress_bound
