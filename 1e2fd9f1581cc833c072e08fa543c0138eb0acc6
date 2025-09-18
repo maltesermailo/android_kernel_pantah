@@ -50,6 +50,30 @@
       ],
       "revId": "1e2fd9f1581cc833c072e08fa543c0138eb0acc6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "022e69fb_2e4ab888",
+        "filename": "include/ufs/ufshcd.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2025-09-18T15:25:04Z",
+      "side": 1,
+      "message": "I have a better proposal:\n- Back out all the GKI changes from this CL.\n- Move `struct mutex pm_qos_mutex` into `struct ufs_hba_priv`.\n- Use `to_hba_priv()` where necessary to convert the `hba` pointer into a `struct ufs_hba_priv` pointer.",
+      "parentUuid": "9306ca71_775cd0bd",
+      "range": {
+        "startLine": 1163,
+        "startChar": 0,
+        "endLine": 1164,
+        "endChar": 27
+      },
+      "revId": "1e2fd9f1581cc833c072e08fa543c0138eb0acc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
