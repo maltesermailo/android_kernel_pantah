@@ -41,6 +41,8 @@ static int enabled_devices;
 static int off __read_mostly;
 static int initialized __read_mostly;
 
+int (*aosp_sbbm_signal_update)(int signal_id, bool signal_value)= NULL;
+
 int cpuidle_disabled(void)
 {
 	return off;
@@ -250,6 +252,9 @@ noinstr int cpuidle_enter_state(struct cpuidle_device *dev,
 
 	/* Take note of the planned idle state. */
 	sched_idle_set_state(target_state);
+	if (aosp_sbbm_signal_update != NULL && index == 1) {
+		aosp_sbbm_signal_update(11, 0);
+	}
 
 	trace_cpu_idle(index, dev->cpu);
 	time_start = ns_to_ktime(local_clock_noinstr());
@@ -274,7 +279,7 @@ noinstr int cpuidle_enter_state(struct cpuidle_device *dev,
 	 * functions called within the RCU-idle region.
 	 */
 	entered_state = target_state->enter(dev, drv, index);
-
+	
 	if (WARN_ONCE(!irqs_disabled(), "%ps leaked IRQ state", target_state->enter))
 		raw_local_irq_disable();
 
@@ -286,6 +291,10 @@ noinstr int cpuidle_enter_state(struct cpuidle_device *dev,
 
 	sched_clock_idle_wakeup_event();
 	time_end = ns_to_ktime(local_clock_noinstr());
+	if (aosp_sbbm_signal_update != NULL && entered_state == 1) {
+		aosp_sbbm_signal_update(11, 1);
+	}
+
 	trace_cpu_idle(PWR_EVENT_EXIT, dev->cpu);
 	trace_android_vh_cpu_idle_exit(entered_state, dev);
 
@@ -349,6 +358,8 @@ noinstr int cpuidle_enter_state(struct cpuidle_device *dev,
 
 	return entered_state;
 }
+
+EXPORT_SYMBOL_GPL(aosp_sbbm_signal_update);
 
 /**
  * cpuidle_select - ask the cpuidle framework to choose an idle state
