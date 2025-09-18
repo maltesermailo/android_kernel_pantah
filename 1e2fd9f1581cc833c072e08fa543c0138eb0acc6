@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9306ca71_775cd0bd",
+        "filename": "include/ufs/ufshcd.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-09-18T14:50:01Z",
+      "side": 1,
+      "message": "You may be able to move this into a hole with a follow-up ANDROID change.",
+      "range": {
+        "startLine": 1163,
+        "startChar": 0,
+        "endLine": 1164,
+        "endChar": 27
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "42866e97_f69a91bb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/ufs/ufshcd.h",
+              "range": {
+                "startLine": 1163,
+                "startChar": 0,
+                "endLine": 1166,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "include/ufs/ufshcd.h",
+              "range": {
+                "startLine": 1170,
+                "startChar": 0,
+                "endLine": 1170,
+                "endChar": 0
+              },
+              "replacement": "\t/* synchronizes PM QoS request and status updates */\n\tstruct mutex pm_qos_mutex;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1e2fd9f1581cc833c072e08fa543c0138eb0acc6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
