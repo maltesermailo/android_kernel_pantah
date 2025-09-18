@@ -105,6 +105,8 @@ struct selinux_state {
 	struct mutex policy_mutex;
 } __randomize_layout;
 
+extern bool selinux_memfd_class_policycap;
+
 void selinux_avc_init(void);
 
 extern struct selinux_state selinux_state;
@@ -189,6 +191,11 @@ static inline bool selinux_policycap_ioctl_skip_cloexec(void)
 {
 	return READ_ONCE(
 		selinux_state.policycap[POLICYDB_CAP_IOCTL_SKIP_CLOEXEC]);
+}
+
+static inline bool selinux_policycap_memfd_class(void)
+{
+	return READ_ONCE(selinux_memfd_class_policycap);
 }
 
 static inline bool selinux_android_nlroute_getlink(void)
