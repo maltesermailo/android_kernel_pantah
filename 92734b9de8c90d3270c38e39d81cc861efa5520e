@@ -16,6 +16,41 @@
       "message": "This has to be submitted into `android-mainline` as well, so please:\n\n1. Create a Upstream bug, as for any FROMLIST change\n2. Submit this CL to android-mainline and get approval from Android\u0027s team",
       "revId": "92734b9de8c90d3270c38e39d81cc861efa5520e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e4befe6_82d6bcdc",
+        "filename": "arch/x86/configs/gki_defconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1981835
+      },
+      "writtenOn": "2025-09-22T13:54:38Z",
+      "side": 1,
+      "message": "This probably can be enabled as vendor module\n```\ndrivers/usb/typec/altmodes/Kconfig:config TYPEC_TBT_ALTMODE\ndrivers/usb/typec/altmodes/Kconfig-     tristate \"Thunderbolt3 Alternate Mode driver\"\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "d1471ed8_35e40e7b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/configs/gki_defconfig",
+              "range": {
+                "startLine": 534,
+                "startChar": 0,
+                "endLine": 536,
+                "endChar": 0
+              },
+              "replacement": "CONFIG_TYPEC_DP_ALTMODE\u003dm\nCONFIG_TYPEC_TBT_ALTMODE\u003dm\n"
+            }
+          ]
+        }
+      ],
+      "revId": "92734b9de8c90d3270c38e39d81cc861efa5520e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
