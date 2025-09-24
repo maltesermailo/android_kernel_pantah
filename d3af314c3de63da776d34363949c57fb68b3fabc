@@ -1,0 +1,139 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d90d9ae_0b0af281",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-09-24T13:30:45Z",
+      "side": 1,
+      "message": "I feel this would not fix all the race conditions. Another cpu would be able to still pass the is_pkvm_initialized() check, if this current cpu is just about to set it. I am thinking if we should protect these hypercalls with a lock which will act as a memory barrier as well. What do you think?",
+      "fixSuggestions": [
+        {
+          "fixId": "d53aecb3_0396c5ff",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+              "range": {
+                "startLine": 34,
+                "startChar": 0,
+                "endLine": 34,
+                "endChar": 0
+              },
+              "replacement": "#include \u003clinux/spinlock.h\u003e\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+              "range": {
+                "startLine": 323,
+                "startChar": 0,
+                "endLine": 323,
+                "endChar": 0
+              },
+              "replacement": "/* Lock to protect pkvm initialization state. */\nstatic DEFINE_SPINLOCK(pkvm_init_lock);\n\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+              "range": {
+                "startLine": 331,
+                "startChar": 0,
+                "endLine": 331,
+                "endChar": 0
+              },
+              "replacement": "\tunsigned long flags;\n\tint ret \u003d 0;\n\n\tspin_lock_irqsave(\u0026pkvm_init_lock, flags);\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+              "range": {
+                "startLine": 333,
+                "startChar": 0,
+                "endLine": 334,
+                "endChar": 0
+              },
+              "replacement": "\t\tret \u003d -EPERM;\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+              "range": {
+                "startLine": 335,
+                "startChar": 0,
+                "endLine": 335,
+                "endChar": 0
+              },
+              "replacement": "\tspin_unlock_irqrestore(\u0026pkvm_init_lock, flags);\n\n\tif (ret) return ret;\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+              "range": {
+                "startLine": 373,
+                "startChar": 0,
+                "endLine": 373,
+                "endChar": 0
+              },
+              "replacement": "\tunsigned long flags;\n\tint ret \u003d 0;\n\n\tspin_lock_irqsave(\u0026pkvm_init_lock, flags);\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+              "range": {
+                "startLine": 375,
+                "startChar": 0,
+                "endLine": 377,
+                "endChar": 0
+              },
+              "replacement": "\t\tret \u003d -EPERM;\n\t\tgoto out;\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+              "range": {
+                "startLine": 390,
+                "startChar": 0,
+                "endLine": 391,
+                "endChar": 0
+              },
+              "replacement": "out:\n\tspin_unlock_irqrestore(\u0026pkvm_init_lock, flags);\n\treturn ret;\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+              "range": {
+                "startLine": 398,
+                "startChar": 0,
+                "endLine": 398,
+                "endChar": 0
+              },
+              "replacement": "\tunsigned long flags;\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+              "range": {
+                "startLine": 403,
+                "startChar": 0,
+                "endLine": 403,
+                "endChar": 0
+              },
+              "replacement": "\tspin_lock_irqsave(\u0026pkvm_init_lock, flags);\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+              "range": {
+                "startLine": 507,
+                "startChar": 0,
+                "endLine": 507,
+                "endChar": 0
+              },
+              "replacement": "\tspin_unlock_irqrestore(\u0026pkvm_init_lock, flags);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d3af314c3de63da776d34363949c57fb68b3fabc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
