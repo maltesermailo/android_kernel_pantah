@@ -278,6 +278,24 @@
       "parentUuid": "82be366c_5478b1d5",
       "revId": "d3af314c3de63da776d34363949c57fb68b3fabc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8726796d_69d95743",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-24T15:51:13Z",
+      "side": 1,
+      "message": "No, I mean cases when it just reads it (in all 3 hypercalls). i.e. just need to make sure that it loads it from memory at all, at the moment of the check.\n\nWell, _probably_ READ_ONCE() should provide that in this case...",
+      "parentUuid": "75cb9f77_a6482e6a",
+      "revId": "d3af314c3de63da776d34363949c57fb68b3fabc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
