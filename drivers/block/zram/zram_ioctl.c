@@ -59,6 +59,7 @@ static int zram_process_walker(pmd_t *pmd, unsigned long start,
 	swp_entry_t entry;
 	spinlock_t *ptl;
 	unsigned long addr;
+	u64 nr_pages = zram->disksize >> PAGE_SHIFT;
 	u32 index;
 
 	for (addr = start; addr < end; addr += PAGE_SIZE) {
@@ -76,6 +77,8 @@ static int zram_process_walker(pmd_t *pmd, unsigned long start,
 			continue;
 
 		index = swp_offset(entry);
+		if (unlikely(index >= nr_pages))
+			continue;
 
 		/* Use PAGE_WRITEBACK for single index */
 		scan_slots_for_writeback(zram, 0, index, index+1, pp_ctl);
