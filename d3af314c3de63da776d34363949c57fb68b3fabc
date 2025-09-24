@@ -188,6 +188,24 @@
       "parentUuid": "238f3952_a58ab653",
       "revId": "d3af314c3de63da776d34363949c57fb68b3fabc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "845efc5e_a1344025",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-09-24T14:10:54Z",
+      "side": 1,
+      "message": "Sorry I didn\u0027t understand. The goal of this CL is to cause PKVM_HC_INIT_FINALISE, __PKVM_HC_COMMIT_FINALISE, and __PKVM_HC_REPRIVILEGE_VCPU to fail if `pkvm_initialized` is set to true right? If I understand correctly, the goal is - unintended or malicious invocation of the above hypercalls should not succeed if `pkvm_initialized` is true. We are trying to close a time window when the host sets ``pkvm_initialized` but other cpus fail to observe it. If this is the goal, then IMHO there is no practical difference between the cpu at init_finalize:378 (checking success) or at init_finalize: 380 (setting pkvm_initialized to true).\n\nThe scenario shouldn\u0027t occur at the first place and if we trust the host, this CL might not be needed. return from hypercall is also an implicit memory barrier and any further hypercalls from the host after this hypercall returns to host should be safe I guess.",
+      "parentUuid": "1beb59c4_85867a79",
+      "revId": "d3af314c3de63da776d34363949c57fb68b3fabc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
