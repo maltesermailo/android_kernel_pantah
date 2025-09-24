@@ -224,6 +224,24 @@
       "parentUuid": "845efc5e_a1344025",
       "revId": "d3af314c3de63da776d34363949c57fb68b3fabc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79e1c95e_f6cea7b5",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-09-24T15:12:48Z",
+      "side": 1,
+      "message": "I am also slightly confused if this load/store semantics will help us here. If my understanding is correct, load/store is to ensure ordering of multiple memory locations and a single one byte memory write should be visible immediately to other cpus due to Total Store Ordering and cache coherency protocol. The usual pattern where we use load/store is like this I believe:\nThread 1:\n```\nSet X\nsmp_store_release(\u0026Y, true)\n```\n\nThread 2:\n```\nsmp_load_acquire(\u0026Y);\nif (Y) {\n // process X\n}\n```\n\nBut in our case we don\u0027t rely on any other memory location and we use this solely to fail the invocation. So would this help?\n\nI think READ_ONCE()/WRITE_ONCE() would be more appropriate here. But thought of thinking it out loud :-)",
+      "parentUuid": "65b81e52_92d8bb94",
+      "revId": "d3af314c3de63da776d34363949c57fb68b3fabc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
