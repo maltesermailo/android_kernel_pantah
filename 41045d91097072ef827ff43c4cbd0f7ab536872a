@@ -39,6 +39,24 @@
       "message": "Just want to make sure my understanding is correct, as there is no data structures in the host to track the npvm/pvm\u0027s mapping, the kvm_rmap_age_gfn_range() will actually return false as there is no rmap, right? Similar to kvm_test_age_gfn().",
       "revId": "41045d91097072ef827ff43c4cbd0f7ab536872a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f24cfd8e_4faaaa5f",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 13
+      },
+      "lineNbr": 1727,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-24T10:15:32Z",
+      "side": 1,
+      "message": "Just saw aosp/3666643 has explicitly disabled ramp. So line 1722 won\u0027t be called, so does line 1737.",
+      "parentUuid": "d451c457_cfcb6802",
+      "revId": "41045d91097072ef827ff43c4cbd0f7ab536872a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
