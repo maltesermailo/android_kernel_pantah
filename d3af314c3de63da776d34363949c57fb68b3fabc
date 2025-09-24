@@ -260,6 +260,24 @@
       "parentUuid": "79e1c95e_f6cea7b5",
       "revId": "d3af314c3de63da776d34363949c57fb68b3fabc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75cb9f77_a6482e6a",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-09-24T15:38:28Z",
+      "side": 1,
+      "message": "You mean the use case in `pkvm_commit_finalise()` where it reads it before write? I think compiler cannot reorder here because of the strict control dependency, no?",
+      "parentUuid": "82be366c_5478b1d5",
+      "revId": "d3af314c3de63da776d34363949c57fb68b3fabc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
