@@ -152,6 +152,24 @@
       "parentUuid": "7d90d9ae_0b0af281",
       "revId": "d3af314c3de63da776d34363949c57fb68b3fabc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "238f3952_a58ab653",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-09-24T13:46:47Z",
+      "side": 1,
+      "message": "What I meant is this scenario:\ncpu1: at init_finalize.c:378 (checking the value of success and success is true)\ncpu2: at init_finalize.c:332 (in pkvm_reprivilege_vcpu checking is_pkvm_initialized())\ncpu2 will pass the check and start reprivileging. Right?\n\nWhat I mean is, there is a small time window where pkvm is sure to set `pkvm_initialized` but lost to another cpu which checked before setting it.",
+      "parentUuid": "3dafa58a_9bf68bfc",
+      "revId": "d3af314c3de63da776d34363949c57fb68b3fabc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
