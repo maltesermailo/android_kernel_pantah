@@ -206,6 +206,24 @@
       "parentUuid": "1beb59c4_85867a79",
       "revId": "d3af314c3de63da776d34363949c57fb68b3fabc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65b81e52_92d8bb94",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-24T15:06:30Z",
+      "side": 1,
+      "message": "\u003e return from hypercall is also an implicit memory barrier and any further hypercalls from the host after this hypercall returns to host should be safe I guess.\n\nHmm yeah, good point. If so, I\u0027m happy to abandon this patch. Or perhaps just use WRITE_ONCE/READ_ONCE.\n\nBut I\u0027m not entirely sure... We need a barrier on the read side as well, and on the read side we need it _after_ reading `pkvm_initialized`?\n\n```\n#define __smp_load_acquire(p)\t\t\t\t\t\t\\\n({\t\t\t\t\t\t\t\t\t\\\n\ttypeof(*p) ___p1 \u003d READ_ONCE(*p);\t\t\t\t\\\n\tcompiletime_assert_atomic_type(*p);\t\t\t\t\\\n\tbarrier();\t\t\t\t\t\t\t\\\n\t___p1;\t\t\t\t\t\t\t\t\\\n})\n```",
+      "parentUuid": "845efc5e_a1344025",
+      "revId": "d3af314c3de63da776d34363949c57fb68b3fabc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
