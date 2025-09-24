@@ -134,6 +134,24 @@
       ],
       "revId": "d3af314c3de63da776d34363949c57fb68b3fabc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dafa58a_9bf68bfc",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-24T13:35:35Z",
+      "side": 1,
+      "message": "If a CPU is about to set `pkvm_initialized` but hasn\u0027t set it yet, it means the host is still trusted, and is not expected to issue these hypercalls, right?",
+      "parentUuid": "7d90d9ae_0b0af281",
+      "revId": "d3af314c3de63da776d34363949c57fb68b3fabc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
