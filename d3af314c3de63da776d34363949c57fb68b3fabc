@@ -170,6 +170,24 @@
       "parentUuid": "3dafa58a_9bf68bfc",
       "revId": "d3af314c3de63da776d34363949c57fb68b3fabc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1beb59c4_85867a79",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-24T13:58:09Z",
+      "side": 1,
+      "message": "As I said, this scenario shouldn\u0027t occur in the first place. The host shouldn\u0027t issue COMMIT_FINALISE(success\u003dtrue) hypercall until everything is successfully initialized and thus there is no need to reprivilege. Right?",
+      "parentUuid": "238f3952_a58ab653",
+      "revId": "d3af314c3de63da776d34363949c57fb68b3fabc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
