@@ -242,6 +242,24 @@
       "parentUuid": "65b81e52_92d8bb94",
       "revId": "d3af314c3de63da776d34363949c57fb68b3fabc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82be366c_5478b1d5",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-24T15:27:41Z",
+      "side": 1,
+      "message": "Yes, on x86 a single 64-bit write is immediately visible to other CPUs, so this is only about preventing the compiler from reordering instructions, so that on the reader side `pkvm_initialized` is actually read from memory before it is used (see barrier() in the x86 implementation of __smp_load_acquire() I pasted above).",
+      "parentUuid": "79e1c95e_f6cea7b5",
+      "revId": "d3af314c3de63da776d34363949c57fb68b3fabc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
