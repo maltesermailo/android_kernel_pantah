@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "511beaaa_fa29c888",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 910,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-09-25T14:08:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "946c416a_bebe7b9f",
+      "revId": "e9a6aa89dcb043a069c2e2aa664fd8742357d77d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6236abe9_6e565181",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-09-25T13:08:01Z",
       "side": 1,
       "message": "Pushing the `hyp_vcpu` check into `ffa_host_alloc_handle()` seems dubious. I think it would be clearer to make the allocation conditional on `!hyp_vcpu` here in the caller. Since it is part of the caller\u0027s logic.",
+      "revId": "e9a6aa89dcb043a069c2e2aa664fd8742357d77d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f2ceec6_cfd90ee9",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1011,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-09-25T14:08:42Z",
+      "side": 1,
+      "message": "moved it to the caller",
+      "parentUuid": "6236abe9_6e565181",
       "revId": "e9a6aa89dcb043a069c2e2aa664fd8742357d77d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -66,6 +102,24 @@
           ]
         }
       ],
+      "revId": "e9a6aa89dcb043a069c2e2aa664fd8742357d77d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a81536c4_1bf6ee94",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1032,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-09-25T14:08:42Z",
+      "side": 1,
+      "message": "Yes, but it shouldn\u0027t be part of this change. I would like to keep it as is for now",
+      "parentUuid": "95eed68c_90c77f5c",
       "revId": "e9a6aa89dcb043a069c2e2aa664fd8742357d77d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
