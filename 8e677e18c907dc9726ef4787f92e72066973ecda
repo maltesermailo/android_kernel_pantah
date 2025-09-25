@@ -16,6 +16,24 @@
       "message": "swap_cgroup_cmpxchg() is only used in memcg v1, which we are trying to deprecate in Android 17 in favor of memcg v2.",
       "revId": "8e677e18c907dc9726ef4787f92e72066973ecda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3165825e_51ef0d17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-09-25T23:26:25Z",
+      "side": 1,
+      "message": "\u003e Adapt swap_cgroup_cmpxchg to no longer rely on the global swap cgroup lock,\n\nThat\u0027s unfortunate...\n\n`swap_cgroup_cmpxchg` is also only for v1\u0027s `move_charge_at_immigrate` which has been deprecated since 2022, and was removed a year ago.\n\n`move_charge_at_immigrate` and memcg v1 are dead ends. You need to move off of them.\n\nhttps://lore.kernel.org/all/20221206171340.139790-4-hannes@cmpxchg.org/\nhttps://lore.kernel.org/all/20241025012304.2473312-1-shakeel.butt@linux.dev/\n\n---\n\nHowever the rest of the patches in this series look like they are worth taking (especially `mm/swap_cgroup: remove global swap cgroup lock`), and `swap_cgroup_cmpxchg` blocks that.\n\nThis conflict *seems* small enough to be manageable but even what\u0027s implemented here looks like it should be retrying the `cmpxchg` if it fails, like `__swap_cgroup_id_xchg` does. I don\u0027t like the idea of maintaining out of tree cgroup v1 code, and especially not any charge moving code.",
+      "parentUuid": "1860a968_9a14f0c4",
+      "revId": "8e677e18c907dc9726ef4787f92e72066973ecda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
