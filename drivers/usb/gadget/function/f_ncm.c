@@ -1433,7 +1433,7 @@ static int ncm_bind(struct usb_configuration *c, struct usb_function *f)
 	struct usb_composite_dev *cdev = c->cdev;
 	struct f_ncm		*ncm = func_to_ncm(f);
 	struct usb_string	*us;
-	int			status = 0;
+	int			status;
 	struct usb_ep		*ep;
 	struct f_ncm_opts	*ncm_opts;
 
@@ -1451,11 +1451,29 @@ static int ncm_bind(struct usb_configuration *c, struct usb_function *f)
 			return -ENOMEM;
 	}
 
+<<<<<<< HEAD   (e436c77f5ed5017e5bd134f69e51a2e0a6550d4b ANDROID: sched: Avoid donor->sched_class->yield_task() null )
 	mutex_lock(&ncm_opts->lock);
 	gether_set_gadget(ncm_opts->net, cdev->gadget);
 	if (!ncm_opts->bound) {
 		ncm_opts->net->mtu = (ncm_opts->max_segment_size - ETH_HLEN);
+||||||| BASE   (7a0208b67c97f0110f0bee6c5c490b77cb987053 ANDROID: ABI: Update pixel symbol list)
+	mutex_lock(&ncm_opts->lock);
+	gether_set_gadget(ncm_opts->net, cdev->gadget);
+	if (!ncm_opts->bound)
+=======
+	/*
+	 * in drivers/usb/gadget/configfs.c:configfs_composite_bind()
+	 * configurations are bound in sequence with list_for_each_entry,
+	 * in each configuration its functions are bound in sequence
+	 * with list_for_each_entry, so we assume no race condition
+	 * with regard to ncm_opts->bound access
+	 */
+	if (!ncm_opts->bound) {
+		mutex_lock(&ncm_opts->lock);
+		gether_set_gadget(ncm_opts->net, cdev->gadget);
+>>>>>>> CHANGE (e4777dcdcfa42b76a2f5ccee7fded3b40663e529 Revert "usb: gadget: f_ncm: Always set current gadget in ncm)
 		status = gether_register_netdev(ncm_opts->net);
+<<<<<<< HEAD   (e436c77f5ed5017e5bd134f69e51a2e0a6550d4b ANDROID: sched: Avoid donor->sched_class->yield_task() null )
 	}
 	mutex_unlock(&ncm_opts->lock);
 
@@ -1466,6 +1484,21 @@ static int ncm_bind(struct usb_configuration *c, struct usb_function *f)
 
 	ncm_string_defs[1].s = ncm->ethaddr;
 
+||||||| BASE   (7a0208b67c97f0110f0bee6c5c490b77cb987053 ANDROID: ABI: Update pixel symbol list)
+	mutex_unlock(&ncm_opts->lock);
+
+	if (status)
+		goto fail;
+
+	ncm_opts->bound = true;
+
+=======
+		mutex_unlock(&ncm_opts->lock);
+		if (status)
+			goto fail;
+		ncm_opts->bound = true;
+	}
+>>>>>>> CHANGE (e4777dcdcfa42b76a2f5ccee7fded3b40663e529 Revert "usb: gadget: f_ncm: Always set current gadget in ncm)
 	us = usb_gstrings_attach(cdev, ncm_strings,
 				 ARRAY_SIZE(ncm_string_defs));
 	if (IS_ERR(us))
