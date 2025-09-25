@@ -63,20 +63,38 @@ static unsigned short __swap_cgroup_id_xchg(struct swap_cgroup *map,
 unsigned short swap_cgroup_cmpxchg(swp_entry_t ent,
 					unsigned short old, unsigned short new)
 {
-	struct swap_cgroup_ctrl *ctrl;
 	struct swap_cgroup *sc;
-	unsigned long flags;
-	unsigned short retval;
+	struct swap_cgroup *map;
+	unsigned short retval = 0;
+	unsigned short old_id;
+	int retry_cnt = 5;
+	pgoff_t offset;
+	unsigned int new_ids, old_ids;
+	unsigned int shift;
+	bool ret;
 
-	sc = lookup_swap_cgroup(ent, &ctrl);
+	map = swap_cgroup_ctrl[swp_type(ent)].map;
+	offset = swp_offset(ent);
+	sc = &map[offset / ID_PER_SC];
+	old_ids = atomic_read(&sc->ids);
+	shift = (offset % ID_PER_SC) * ID_SHIFT;
+	old_id = (old_ids >> shift) & ID_MASK;
+	if (old_id != old) {
+		pr_err("the id of sc:%u is not equal to old:%u\n", old_id, old);
+		goto out;
+	}
 
-	spin_lock_irqsave(&ctrl->lock, flags);
-	retval = sc->id;
-	if (retval == old)
-		sc->id = new;
-	else
-		retval = 0;
-	spin_unlock_irqrestore(&ctrl->lock, flags);
+	new_ids = (old_ids & ~(ID_MASK << shift));
+	new_ids |= ((unsigned int)new) << shift;
+	do {
+		ret = atomic_try_cmpxchg(&sc->ids, &old_ids, new_ids);
+		if (ret) {
+			retval = old;
+			break;
+		}
+	} while (retry_cnt--);
+
+out:
 	return retval;
 }
 
