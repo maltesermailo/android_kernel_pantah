@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "946c416a_bebe7b9f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 910,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2025-09-25T13:08:01Z",
+      "side": 1,
+      "message": "`handle` rather than `free_handle`? Since the value returned by `ffa_host_alloc_handle()` is by definition no longer free.",
+      "revId": "e9a6aa89dcb043a069c2e2aa664fd8742357d77d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6236abe9_6e565181",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1011,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2025-09-25T13:08:01Z",
+      "side": 1,
+      "message": "Pushing the `hyp_vcpu` check into `ffa_host_alloc_handle()` seems dubious. I think it would be clearer to make the allocation conditional on `!hyp_vcpu` here in the caller. Since it is part of the caller\u0027s logic.",
+      "revId": "e9a6aa89dcb043a069c2e2aa664fd8742357d77d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95eed68c_90c77f5c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1032,
+      "author": {
+        "id": 1935515
+      },
+      "writtenOn": "2025-09-25T13:08:01Z",
+      "side": 1,
+      "message": "By the by, it seems that if we get to this point `hyp_vcpu` implies `transfer`. I would thus remove the test of `transfer` in this conditional. If it\u0027s unexp[ectedly `NULL` we will get a pretty clear kernel oops.",
+      "fixSuggestions": [
+        {
+          "fixId": "2fb91a75_59908504",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1032,
+                "startChar": 0,
+                "endLine": 1033,
+                "endChar": 0
+              },
+              "replacement": "\tif (hyp_vcpu) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e9a6aa89dcb043a069c2e2aa664fd8742357d77d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
