@@ -1,0 +1,169 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "005bf0ac_843f0b6f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-09-26T13:05:29Z",
+      "side": 1,
+      "message": "NULL?",
+      "fixSuggestions": [
+        {
+          "fixId": "95aeca90_04de8ddd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 122,
+                "startChar": 0,
+                "endLine": 123,
+                "endChar": 0
+              },
+              "replacement": "\t\treturn NULL;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c944ef90d8a9189774987efaabea75fd09dc29ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b1bedff_1865c077",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-09-26T13:05:29Z",
+      "side": 1,
+      "message": "You can return early here.\n\nif (spm_free_handle) {\n   ... \n   return handle;\n}\n\nThat would then remove one indent for the following code.",
+      "fixSuggestions": [
+        {
+          "fixId": "7c56ca64_55e62341",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 119,
+                "startChar": 0,
+                "endLine": 120,
+                "endChar": 0
+              },
+              "replacement": "\tstruct ffa_handle *handle;\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 127,
+                "startChar": 0,
+                "endLine": 128,
+                "endChar": 0
+              },
+              "replacement": "\t\thandle \u003d spm_free_handle;\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 129,
+                "startChar": 0,
+                "endLine": 133,
+                "endChar": 0
+              },
+              "replacement": "\t\treturn handle;\n\t}\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 134,
+                "startChar": 0,
+                "endLine": 136,
+                "endChar": 0
+              },
+              "replacement": "\tfor (i \u003d 0; i \u003c num_spm_handles; i++)\n\t\tif (spm_handles[i].handle \u003d\u003d FFA_INVALID_SPM_HANDLE)\n\t\t\tbreak;\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 137,
+                "startChar": 0,
+                "endLine": 139,
+                "endChar": 0
+              },
+              "replacement": "\tif (i \u003d\u003d num_spm_handles)\n\t\treturn ERR_PTR(-ENOSPC);\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 140,
+                "startChar": 0,
+                "endLine": 141,
+                "endChar": 0
+              },
+              "replacement": "\treturn \u0026spm_handles[i];\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c944ef90d8a9189774987efaabea75fd09dc29ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5960f30_57a4189f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-09-26T13:05:29Z",
+      "side": 1,
+      "message": "With only one error code, you could just return NULL and in the caller, if (!handle) return -ENOSPC",
+      "fixSuggestions": [
+        {
+          "fixId": "7057b5ab_209e8893",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 135,
+                "startChar": 0,
+                "endLine": 136,
+                "endChar": 0
+              },
+              "replacement": "\t\t\treturn NULL;\n"
+            },
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1013,
+                "startChar": 0,
+                "endLine": 1016,
+                "endChar": 0
+              },
+              "replacement": "\tif (!hyp_vcpu \u0026\u0026 !handle) {\n\t\tret \u003d -ENOSPC;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c944ef90d8a9189774987efaabea75fd09dc29ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
