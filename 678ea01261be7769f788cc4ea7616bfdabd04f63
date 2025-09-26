@@ -50,6 +50,30 @@
       ],
       "revId": "678ea01261be7769f788cc4ea7616bfdabd04f63",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afa432c6_60543672",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 1730,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-09-26T22:25:46Z",
+      "side": 1,
+      "message": "I don\u0027t think so. These are files to be `#include`d. I think .dts and .dtso files are source files to be fed to `dtc` directly (i.e. in a dtb() / dtbo() rule).\n\nIf we do need them we can add them in the future.",
+      "parentUuid": "dd114472_1f507413",
+      "range": {
+        "startLine": 1730,
+        "startChar": 49,
+        "endLine": 1730,
+        "endChar": 53
+      },
+      "revId": "678ea01261be7769f788cc4ea7616bfdabd04f63",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
