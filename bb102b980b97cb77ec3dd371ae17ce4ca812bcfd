@@ -86,6 +86,24 @@
       "message": "Why is this line included? It\u0027s not in the original patch.",
       "revId": "bb102b980b97cb77ec3dd371ae17ce4ca812bcfd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9417b9bc_defaf915",
+        "filename": "drivers/platform/x86/intel/pmc/core.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 4235832
+      },
+      "writtenOn": "2025-09-26T15:22:28Z",
+      "side": 1,
+      "message": "Yes, good catch.  This line is moved up from line 317 to here because it has diverged from upstream Linux.  Fix the divergence at the same time.  No functional change is introduced.",
+      "parentUuid": "ac2e0eb0_fe7fce7a",
+      "revId": "bb102b980b97cb77ec3dd371ae17ce4ca812bcfd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
