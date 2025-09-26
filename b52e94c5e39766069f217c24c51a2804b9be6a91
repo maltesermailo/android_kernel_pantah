@@ -34,6 +34,24 @@
       "parentUuid": "ce1183d8_3c9e5685",
       "revId": "b52e94c5e39766069f217c24c51a2804b9be6a91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "170272b7_066831c3",
+        "filename": "arch/x86/kvm/pkvm/fpu/fpu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-26T09:45:48Z",
+      "side": 1,
+      "message": "Although we ensure that the host has no access to pVM\u0027s own internal state, generally we treat pVM as less privileged than the host, not more privileged (at bit in line with what we discussed in https://android-review.googlesource.com/c/kernel/common/+/3762334/comment/a7f481bb_90fc9806/) and let the host manage pVM as usual.\n\nThat said, in this case, I\u0027m not familiar with this FPU stuff so I don\u0027t know what these permissions are about (i.e. for what reason the host needs to limit them for the guest), so I\u0027m not sure how important that is in this case...",
+      "parentUuid": "d0efc68d_73d18ddf",
+      "revId": "b52e94c5e39766069f217c24c51a2804b9be6a91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
