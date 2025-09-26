@@ -34,6 +34,24 @@
       "parentUuid": "1860a968_9a14f0c4",
       "revId": "8e677e18c907dc9726ef4787f92e72066973ecda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "370b2b4f_f05f5e2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4361992
+      },
+      "writtenOn": "2025-09-26T03:48:57Z",
+      "side": 1,
+      "message": "The __swap_cgroup_id_xchg function’s return value semantics are that it performs the change (chg) and returns the old_id, so it uses a while loop to retry until the change succeeds. In contrast, the swap_cgroup_cmpxchg function’s return value semantics are: if the change succeeds, it returns the old_id; if the change fails, it returns 0. Therefore, there is no need to add a retry mechanism.\nAlternatively, we could add a limited number of retries to increase the success rate of swap_cgroup_cmpxchg, like this:\n\nint retry_cnt \u003d 5;\n\ndo {\n\told_ids \u003d atomic_read(\u0026sc-\u003eids);\n\tshift \u003d (offset % ID_PER_SC) * ID_SHIFT;\n\tnew_ids \u003d (old_ids \u0026 ~(ID_MASK \u003c\u003c shift));\n\tnew_ids |\u003d ((unsigned int)new) \u003c\u003c shift;\n\tret \u003d atomic_try_cmpxchg(\u0026sc-\u003eids, \u0026old_ids, new_ids);\n} while ((retry_cnt--) \u0026\u0026 (!ret));\n\n\nMaintaining these redundant codes is indeed not a good idea.\nWe can control this part of the code with CONFIG_MEMCG_V1 and remove it during the next KMI change window.",
+      "parentUuid": "3165825e_51ef0d17",
+      "revId": "8e677e18c907dc9726ef4787f92e72066973ecda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
