@@ -52,6 +52,24 @@
       "parentUuid": "d0efc68d_73d18ddf",
       "revId": "b52e94c5e39766069f217c24c51a2804b9be6a91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "952195f9_371b48a4",
+        "filename": "arch/x86/kvm/pkvm/fpu/fpu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-26T10:19:21Z",
+      "side": 1,
+      "message": "According to the cover letter of the patch serial which introducd the fpu permissions: https://lore.kernel.org/all/20211021225527.10184-5-chang.seok.bae@intel.com/T/#m4ef0120b8b4060be2820ea593dc68dcf0cc1a658\n\n\"With AMX the FPU register state buffer which is part of task_struct::thread::fpu is not going to be extended unconditionally for all tasks on an AMX enabled system as that would waste minimum 8K per task.\".\n\nIts purpose is to save the overall memory on an AMX enabled system due to the large memory size (8k) required by the AMX FPU registers. Otherwise each process will consume additional 8k memory pages. But not from security perspective. So I think it is not causing the pVM being more privilege than the host. And for the pkvm hypervisor, enabling all features for pVMs doesn\u0027t cause significant memory consumption as we only have limited number of pVMs. So it is fine to give the max features to the pVMs.",
+      "parentUuid": "170272b7_066831c3",
+      "revId": "b52e94c5e39766069f217c24c51a2804b9be6a91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
