@@ -1,0 +1,266 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f00135f_2e3756d1",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-29T11:50:45Z",
+      "side": 1,
+      "message": "-EINVAL seems more suitable?",
+      "fixSuggestions": [
+        {
+          "fixId": "50e4b86e_87cabb69",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 302,
+                "startChar": 0,
+                "endLine": 303,
+                "endChar": 0
+              },
+              "replacement": "\t\treturn -EINVAL;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "714118bd87e0ae391c94826a741feeacf729ef8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b5a31f9_c4df0ddf",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-29T11:50:45Z",
+      "side": 1,
+      "message": "Hmm... we shouldn\u0027t do this before donating?\n\nThe AI here suggests to donate the first page first just to read the size, we could do that, but it would be much easier to leverage aosp/3666638?\n\n...But actually, do we need to pass this size to the hypervisor at all? It is still the global constant `pkvm_vcpu_sz`, the hypervisor still knows this constant, nothing changed, right?",
+      "fixSuggestions": [
+        {
+          "fixId": "90a434bf_b29a6e67",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 305,
+                "startChar": 0,
+                "endLine": 305,
+                "endChar": 0
+              },
+              "replacement": "\n\t// Donate the first page to securely read the size.\n\tret \u003d donate_host_memory(va, PAGE_SIZE);\n\tif (ret)\n\t\treturn ret;\n\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 307,
+                "startChar": 0,
+                "endLine": 308,
+                "endChar": 0
+              },
+              "replacement": "\t\tgoto undonate_first_page;\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 309,
+                "startChar": 0,
+                "endLine": 312,
+                "endChar": 0
+              },
+              "replacement": "\t// Donate the rest of the memory if size is larger than one page.\n\tif (size \u003e PAGE_SIZE) {\n\t\tret \u003d donate_host_memory(va + PAGE_SIZE, size - PAGE_SIZE);\n\t\tif (ret)\n\t\t\tgoto undonate_first_page;\n\t}\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 319,
+                "startChar": 0,
+                "endLine": 319,
+                "endChar": 0
+              },
+              "replacement": "\nundonate_first_page:\n\t__pkvm_hyp_donate_host(__pkvm_pa(va), PAGE_SIZE);\n\treturn -EINVAL;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "714118bd87e0ae391c94826a741feeacf729ef8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8357bd18_2a6fb775",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-29T11:50:45Z",
+      "side": 1,
+      "message": "And here, similarly, we shouldn\u0027t access this memory before donating it, but it seems we don\u0027t need to pass this size to pKVM, since it knows the required size anyway?",
+      "revId": "714118bd87e0ae391c94826a741feeacf729ef8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b5be777_7647e9dc",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-29T11:50:45Z",
+      "side": 1,
+      "message": "...plus the size needed for XFD MSR emulation as well?\n\nSo, nit: maybe rearrange the code in such a way:\n```\n/*\n * comment about XFD MSR emulation for both pVM and npVM\n */\nrequired_size \u003d ALIGN(offsetof(struct fpstate, regs), 64);\nif (is_pvm) {\n\t/*\n\t * comment about FPU registers switching for pVM\n\t */\n\trequired_size +\u003d fpu_kernel_cfg.default_size;\n}\n\nif (size \u003c required_size)\n\treturn -EINVAL;\n```\n\nAnd similarly in pkvm_high.c as well?",
+      "fixSuggestions": [
+        {
+          "fixId": "0823aaaf_ba140a8b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 333,
+                "startChar": 0,
+                "endLine": 342,
+                "endChar": 0
+              },
+              "replacement": "\n\t/*\n\t * The fpstate memory is used for XFD MSR emulation in both pVM and npVM,\n\t * so it must at least cover up to the \u0027regs\u0027 field.\n\t */\n\tsize_t required_size \u003d ALIGN(offsetof(struct fpstate, regs), 64);\n\n\tif (is_pvm) {\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 343,
+                "startChar": 0,
+                "endLine": 347,
+                "endChar": 0
+              },
+              "replacement": "\t\t * For pVMs, the pkvm hypervisor switches the FPU registers,\n\t\t * so the fpstate size must also accommodate the FPU register\n\t\t * state as per the fpu kernel config default size.\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 348,
+                "startChar": 0,
+                "endLine": 348,
+                "endChar": 0
+              },
+              "replacement": "\t\trequired_size +\u003d fpu_kernel_cfg.default_size;\n\t}\n\n\tif (size \u003c required_size)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "714118bd87e0ae391c94826a741feeacf729ef8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf56d7a2_689ec504",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-29T11:50:45Z",
+      "side": 1,
+      "message": "Any reason for adding this include here? It doesn\u0027t look like it is used in vmexit.c?",
+      "fixSuggestions": [
+        {
+          "fixId": "9cbb91c3_2e6e762d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
+              "range": {
+                "startLine": 10,
+                "startChar": 0,
+                "endLine": 11,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "714118bd87e0ae391c94826a741feeacf729ef8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6696f19f_e6b34a16",
+        "filename": "arch/x86/kvm/vmx/pkvm_high.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 895,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-29T11:50:45Z",
+      "side": 1,
+      "message": "nit: Use { } braces?",
+      "fixSuggestions": [
+        {
+          "fixId": "f8cfc439_b967e007",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm_high.c",
+              "range": {
+                "startLine": 895,
+                "startChar": 0,
+                "endLine": 896,
+                "endChar": 0
+              },
+              "replacement": "\tif (pkvm_is_protected_vcpu(vcpu)) {\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm_high.c",
+              "range": {
+                "startLine": 903,
+                "startChar": 0,
+                "endLine": 904,
+                "endChar": 0
+              },
+              "replacement": "\t} else {\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm_high.c",
+              "range": {
+                "startLine": 910,
+                "startChar": 0,
+                "endLine": 910,
+                "endChar": 0
+              },
+              "replacement": "\t}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "714118bd87e0ae391c94826a741feeacf729ef8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
