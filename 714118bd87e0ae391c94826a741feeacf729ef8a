@@ -190,6 +190,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a10d758_7a11bb9c",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-29T22:26:10Z",
+      "side": 1,
+      "message": "After more thought, maybe this is not the best suggestion, since, I suppose, pKVM needs the `ALIGN(offsetof(struct fpstate, regs), 64)` part for pVM\u0027s FPU registers switching as well, i.e. it needs it regardless of XFD MSR emulation?\n\nIf so, please feel free to ignore this comment.",
+      "parentUuid": "9b5be777_7647e9dc",
+      "revId": "714118bd87e0ae391c94826a741feeacf729ef8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf56d7a2_689ec504",
