@@ -251,6 +251,10 @@ noinstr int cpuidle_enter_state(struct cpuidle_device *dev,
 	/* Take note of the planned idle state. */
 	sched_idle_set_state(target_state);
 
+	if (aosp_sbbm_signal_update != NULL && index == 0) {
+                aosp_sbbm_signal_update(11, 0);
+        }
+
 	trace_cpu_idle(index, dev->cpu);
 	time_start = ns_to_ktime(local_clock_noinstr());
 
@@ -286,6 +290,9 @@ noinstr int cpuidle_enter_state(struct cpuidle_device *dev,
 
 	sched_clock_idle_wakeup_event();
 	time_end = ns_to_ktime(local_clock_noinstr());
+	if (aosp_sbbm_signal_update != NULL && entered_state == 0) {
+                aosp_sbbm_signal_update(11, 1);
+        }
 	trace_cpu_idle(PWR_EVENT_EXIT, dev->cpu);
 	trace_android_vh_cpu_idle_exit(entered_state, dev);
 
