@@ -1,0 +1,83 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "808d5f61_a0bac404",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-29T14:50:41Z",
+      "side": 1,
+      "message": "Actually looks like there is some functional change: EXIT_FASTPATH_REENTER_GUEST is handled differently: we immediately call vcpu_run() again, without preparatory actions (for example, without re-evaluating `req_immediate_exit`)?\n\nSo possibly this patch actually fixes some bugs? or introduces some bugs? :)",
+      "revId": "79dcb2535ab20fb33e8a559419a6f957f48ca510",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0802d68_07e47113",
+        "filename": "arch/x86/kvm/pkvm/x86.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3403,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-29T14:50:41Z",
+      "side": 1,
+      "message": "We return without calling prepare_switch_to_host(), so the caller will call __kvm_vcpu_enter_guest() again and then we will call prepare_switch_to_guest() again although we\u0027ve already switched to guest? Is this intended?\n\nEven if this is intended, it seems a bit unclean? Maybe it\u0027s better to call prepare_switch_to_guest() and prepare_switch_to_host() outside __kvm_vcpu_enter_guest()?",
+      "revId": "79dcb2535ab20fb33e8a559419a6f957f48ca510",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78271496_66fb1e7f",
+        "filename": "arch/x86/kvm/pkvm/x86.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3427,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-29T14:50:41Z",
+      "side": 1,
+      "message": "nit: { } braces not needed anymore?",
+      "fixSuggestions": [
+        {
+          "fixId": "93096a94_e3da82c1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/x86.c",
+              "range": {
+                "startLine": 3427,
+                "startChar": 0,
+                "endLine": 3428,
+                "endChar": 0
+              },
+              "replacement": "\tfor (;;)\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/x86.c",
+              "range": {
+                "startLine": 3430,
+                "startChar": 0,
+                "endLine": 3431,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "79dcb2535ab20fb33e8a559419a6f957f48ca510",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
