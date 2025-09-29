@@ -52,6 +52,24 @@
       "parentUuid": "3165825e_51ef0d17",
       "revId": "8e677e18c907dc9726ef4787f92e72066973ecda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e286bea_28fdb292",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-09-29T21:20:39Z",
+      "side": 1,
+      "message": "The new `atomic_try_cmpxchg` could fail because the other ID (not `old`) sharing the `atomic_t` (`sc-\u003eids`) has changed, unrelated to this `swap_cgroup_cmpxchg` call. In which case `swap_cgroup_cmpxchg` would fail when it did not before, without checking to see if the problem was due to the `old` ID or the other / second ID.\n\nThe caller is designed to deal with failures, so this isn\u0027t the end of the world, but can you fix that part? Probably easiest to check that `old` is in `old_ids` after a `atomic_try_cmpxchg` failure, and retry if it is / fail if it isn\u0027t. Blind retries might help, but I\u0027d rather not.\n\nBTW next KMI thaw is about a year from now on 6.12, but I don\u0027t think we\u0027ll be able remove this then. 6.18 won\u0027t have this charge moving code at all.",
+      "parentUuid": "370b2b4f_f05f5e2d",
+      "revId": "8e677e18c907dc9726ef4787f92e72066973ecda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
