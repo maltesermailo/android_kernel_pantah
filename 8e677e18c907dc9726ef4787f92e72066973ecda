@@ -70,6 +70,24 @@
       "parentUuid": "370b2b4f_f05f5e2d",
       "revId": "8e677e18c907dc9726ef4787f92e72066973ecda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04a8697a_d1092806",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4361992
+      },
+      "writtenOn": "2025-09-30T02:39:41Z",
+      "side": 1,
+      "message": "Should it be changed like this?\n        map \u003d swap_cgroup_ctrl[swp_type(ent)].map;\n\toffset \u003d swp_offset(ent);\n\tsc \u003d \u0026map[offset / ID_PER_SC];\n\tdo {\n\t\told_ids \u003d atomic_read(\u0026sc-\u003eids);\n\t\tshift \u003d (offset % ID_PER_SC) * ID_SHIFT;\n\t\tnew_ids \u003d (old_ids \u0026 ~(ID_MASK \u003c\u003c shift));\n\t\tnew_ids |\u003d ((unsigned int)new) \u003c\u003c shift;\n\t\tret \u003d atomic_try_cmpxchg(\u0026sc-\u003eids, \u0026old_ids, new_ids);\n\t\tif (ret) {\n\t\t\tretval \u003d old;\n\t\t\tbreak;\n\t\t}\n\t\tretval \u003d 0;\n\t} while (((old_ids \u003e\u003e shift) \u0026 ID_MASK) \u003d\u003d old);\n\nBy the way, we will have an 8-day holiday starting tomorrow. During this period, we will not be able to respond to you.\nI will respond to your message promptly after the holiday ends. Thank you.",
+      "parentUuid": "5e286bea_28fdb292",
+      "revId": "8e677e18c907dc9726ef4787f92e72066973ecda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
