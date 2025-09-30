@@ -1701,6 +1701,7 @@ ddk_headers(
         "drivers/android/binder_internal.h",
         "drivers/android/binder_trace.h",
         "drivers/android/dbitmap.h",
+        "drivers/devfreq/governor.h",
         "kernel/sched/cpudeadline.h",
         "kernel/sched/cpupri.h",
         "kernel/sched/ext.h",
@@ -1708,6 +1709,10 @@ ddk_headers(
         "kernel/sched/sched.h",
         "kernel/sched/stats.h",
         "kernel/workqueue_internal.h",
+    ],
+    includes = [
+        ".",
+        "drivers/devfreq",
     ],
     visibility = ["//visibility:private"],
 )
