@@ -16,6 +16,24 @@
       "message": "What\u0027s the build warning this is suppressing?",
       "revId": "cd49263976ddd38143d57d73d58c3eb1198364d0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46d6d9e1_8a27e6a3",
+        "filename": "drivers/gpu/drm/xe/Makefile",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 3938928
+      },
+      "writtenOn": "2025-09-30T18:15:12Z",
+      "side": 1,
+      "message": "It was this error\n\ndrivers/gpu/drm/xe/xe_gt.c:881:2: error: ignoring return value of function declared with \u0027warn_unused_result\u0027 attribute [-Werror,-Wunused-result]  \n881          xe_force_wake_get(gt_to_fw(gt), XE_FORCEWAKE_ALL);",
+      "parentUuid": "0ab0f592_780d4dfb",
+      "revId": "cd49263976ddd38143d57d73d58c3eb1198364d0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
