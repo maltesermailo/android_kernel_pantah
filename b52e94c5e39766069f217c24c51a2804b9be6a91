@@ -106,6 +106,24 @@
       "parentUuid": "10a15731_6a8820d7",
       "revId": "b52e94c5e39766069f217c24c51a2804b9be6a91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f68afe68_f8195fc0",
+        "filename": "arch/x86/kvm/pkvm/fpu/fpu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-30T15:04:18Z",
+      "side": 1,
+      "message": "Thanks a lot for explanation and the details.\n\nSo as I understand now, actually there is no concern about extra memory consumption at all, i.e. we will only allocate exactly as much memory as we need (despite this __state_size \u003d fpu_kernel_cfg.max_size setting here). Correct?\n\nAlso a question just in case: in case there is not enough memory allocated by the host, although pKVM detects that thanks to __xfd_enable_feature() returning -ENOMEM as you described, it looks like it detects that only after it has already updated the guest CPUID in kvm_set_cpuid() -\u003e __kvm_update_cpuid_runtime()? So the FPU features advertised to the guest may be not consistent with the features actually supported by pKVM? Any concern about that?",
+      "parentUuid": "5d35997e_4aeda1c4",
+      "revId": "b52e94c5e39766069f217c24c51a2804b9be6a91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
