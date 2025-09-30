@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "980af7e6_b09c6207",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 2044797
+      },
+      "writtenOn": "2025-09-30T15:11:02Z",
+      "side": 1,
+      "message": "`non_swap_entry()` just checks that it\u0027s not `\u003e\u003d MAX_SWAPFILES`.\n\nThis same check exists in `swap_type_to_swap_info()` which is called by `swp_swap_info()`, you can drop this check here.",
+      "fixSuggestions": [
+        {
+          "fixId": "ae668d03_fa85b668",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/block/zram/zram_ioctl.c",
+              "range": {
+                "startLine": 77,
+                "startChar": 0,
+                "endLine": 79,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "f3b9c97a8bbecafe922a68f92375526504f59646",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
