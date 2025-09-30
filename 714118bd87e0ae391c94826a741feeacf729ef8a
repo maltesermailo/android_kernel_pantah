@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cdedd945_5086bc08",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-30T05:40:34Z",
+      "side": 1,
+      "message": "Will fix this.",
+      "parentUuid": "0ffba118_167768c7",
+      "revId": "714118bd87e0ae391c94826a741feeacf729ef8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0f00135f_2e3756d1",
         "filename": "arch/x86/kvm/pkvm/pkvm.c",
         "patchSetId": 2
@@ -49,6 +67,24 @@
           ]
         }
       ],
+      "revId": "714118bd87e0ae391c94826a741feeacf729ef8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f774134_a13ba955",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-30T05:40:34Z",
+      "side": 1,
+      "message": "Agree. Will change to -EINVAL.",
+      "parentUuid": "0f00135f_2e3756d1",
       "revId": "714118bd87e0ae391c94826a741feeacf729ef8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -120,6 +156,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6ea102f8_371e90cc",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-30T05:40:34Z",
+      "side": 1,
+      "message": "\u003e Hmm... we shouldn\u0027t do this before donating?\n\nNot sure if there is any potential issue if we read size from the memory page before donating it?\n\n\u003e ...But actually, do we need to pass this size to the hypervisor at all? It is still the global constant pkvm_vcpu_sz, the hypervisor still knows this constant, nothing changed, right?\n\nIndeed. The sizes of pkvm_vcpu is constant to pkvm for creating. The reason to store size is to have a way for the host to know if it doesn\u0027t allocate enough memory pages, e.g., the size is extended by pkvm but forget to extend at host side, then we will know that easily. Probably this is not important as we can find out this by other way. I can try not to store the size in the passed in memory pages.\n\n\u003e but it would be much easier to leverage aosp/3666638?\n\nIf we want to pass in the sizes as well, then probably we will need 5 inputs for this PV interface (shared_vcpu, pkvm_vcpu_gpa, pkvm_vcpu_size, fpu_gpa, fpu_size). But as we would like to try to limit the inputs as 4 in v6.15, so probably we can try to use constant size to avoid increasing the inputs first.",
+      "parentUuid": "6b5a31f9_c4df0ddf",
+      "revId": "714118bd87e0ae391c94826a741feeacf729ef8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8357bd18_2a6fb775",
         "filename": "arch/x86/kvm/pkvm/pkvm.c",
         "patchSetId": 2
@@ -131,6 +185,24 @@
       "writtenOn": "2025-09-29T11:50:45Z",
       "side": 1,
       "message": "And here, similarly, we shouldn\u0027t access this memory before donating it, but it seems we don\u0027t need to pass this size to pKVM, since it knows the required size anyway?",
+      "revId": "714118bd87e0ae391c94826a741feeacf729ef8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa9ec760_03a839c9",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-30T05:40:34Z",
+      "side": 1,
+      "message": "Suppose so. I will try that.",
+      "parentUuid": "8357bd18_2a6fb775",
       "revId": "714118bd87e0ae391c94826a741feeacf729ef8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -208,6 +280,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8e7965b_d67657b2",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-30T05:40:34Z",
+      "side": 1,
+      "message": "Yes, pkvm needs `ALIGN(offsetof(struct fpstate, regs), 64)` anyway for both npvm (to emulate XFD MSR) and pvm (to switch FPU), so seems like your suggested change below is ok? If so, probably this code can be wrapped as a helper function to return the required size according to the pVM or npVM. And this helper can be used by both host and pkvm to create vcpu.\n\n```\n/*\n * comment about XFD MSR emulation for both pVM and npVM\n */\nrequired_size \u003d ALIGN(offsetof(struct fpstate, regs), 64);\nif (is_pvm) {\n    /*\n     * comment about FPU registers switching for pVM\n     */\n    required_size +\u003d fpu_kernel_cfg.default_size;\n}\n\nif (size \u003c required_size)\n    return -EINVAL;\n```",
+      "parentUuid": "2a10d758_7a11bb9c",
+      "revId": "714118bd87e0ae391c94826a741feeacf729ef8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf56d7a2_689ec504",
@@ -239,6 +329,24 @@
           ]
         }
       ],
+      "revId": "714118bd87e0ae391c94826a741feeacf729ef8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb274590_7e1206a4",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/vmexit.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-30T05:40:34Z",
+      "side": 1,
+      "message": "Oops, forget to remove this line. Thanks for caching this. I will remove it.",
+      "parentUuid": "cf56d7a2_689ec504",
       "revId": "714118bd87e0ae391c94826a741feeacf729ef8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -294,6 +402,24 @@
           ]
         }
       ],
+      "revId": "714118bd87e0ae391c94826a741feeacf729ef8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1fadf84_07148d92",
+        "filename": "arch/x86/kvm/vmx/pkvm_high.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 895,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-30T05:40:34Z",
+      "side": 1,
+      "message": "Will use {}",
+      "parentUuid": "6696f19f_e6b34a16",
       "revId": "714118bd87e0ae391c94826a741feeacf729ef8a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
