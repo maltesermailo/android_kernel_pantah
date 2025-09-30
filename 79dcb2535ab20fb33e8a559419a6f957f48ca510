@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1f96ba2d_0e033665",
+        "filename": "arch/x86/kvm/pkvm/x86.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3403,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-30T17:33:15Z",
+      "side": 1,
+      "message": "I meant something like:\n```\n\tfor (;;) {\n\t\tkvm_x86_call(prepare_switch_to_guest)(vcpu);\n\n\t\tif (__kvm_vcpu_enter_guest(vcpu, force_immediate_exit) !\u003d 1)\n\t\t\tbreak;\n\t}\n\t\n\tkvm_x86_call(prepare_switch_to_host)(vcpu);\n```\n\njust so that it is clearly seen that prepare_switch_to_guest() is called before every entry, while prepare_switch_to_host() is called just once at the end.\n\nOr, if flushing TLB and checking pending events needs to be done before prepare_switch_to_guest() for some reason, then maybe something like:\n\n```\n\tfor (;;) {\n\t\tbool req_immediate_exit \u003d false;\n\n\t\tif (kvm_request_pending(vcpu)) {\n\t\t\tif (kvm_check_request(KVM_REQ_TLB_FLUSH, vcpu))\n\t\t\t\tkvm_vcpu_flush_tlb_all(vcpu);\n\n\t\t\tif (kvm_check_request(KVM_REQ_TLB_FLUSH_CURRENT, vcpu))\n\t\t\t\tkvm_vcpu_flush_tlb_current(vcpu);\n\n\t\t\tif (kvm_check_request(KVM_REQ_EVENT, vcpu))\n\t\t\t\tkvm_check_and_inject_events(vcpu, \u0026req_immediate_exit);\n\t\t}\n\t\t\n\t\tif (req_immediate_exit)\n\t\t\tkvm_make_request(KVM_REQ_EVENT, vcpu);\n\t\telse\n\t\t\treq_immediate_exit \u003d force_immediate_exit;\n\n\t\tkvm_x86_call(prepare_switch_to_guest)(vcpu);\n\n\t\tif (__kvm_vcpu_enter_guest(vcpu, req_immediate_exit) !\u003d 1)\n\t\t\tbreak;\n\t}\n\t\n\tkvm_x86_call(prepare_switch_to_host)(vcpu);\n```\n\n(assuming that it doesn\u0027t make a difference whether kvm_make_request(KVM_REQ_EVENT, vcpu) here is called before or after smp_store_mb(vcpu-\u003emode, IN_GUEST_MODE))\n\nPlease feel free to ignore this suggestion if it doesn\u0027t make a lot of sense.",
+      "parentUuid": "bff87ad8_13788bf3",
+      "revId": "79dcb2535ab20fb33e8a559419a6f957f48ca510",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "78271496_66fb1e7f",
         "filename": "arch/x86/kvm/pkvm/x86.c",
         "patchSetId": 2
