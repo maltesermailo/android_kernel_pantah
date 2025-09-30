@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "12aa07ab_5bba34e0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-30T06:55:23Z",
+      "side": 1,
+      "message": "Hmm, just overlook the EXIT_FASTPATH_REENTER_GUEST. Currently the vcpu_run() will not return EXIT_FASTPATH_REENTER_GUEST, as below code is the only place to return this but hv_timer_soft_disabled is false when preemption timer happens as the pkvm only use preemption time to trigger immediate exit but not have the case mentioned in the comment.\n```\n          /*\n           * In the *extremely* unlikely scenario that this is a spurious VM-Exit\n           * due to the timer expiring while it was \"soft\" disabled, just eat the\n           * exit and re-enter the guest.\n           */\n          if (unlikely(vmx-\u003eloaded_vmcs-\u003ehv_timer_soft_disabled))\n                  return EXIT_FASTPATH_REENTER_GUEST;\n\n```\nBut if to keep the way as this patch did, then probably need to add more logic to break the for loop if there is any pending request, in case EXIT_FASTPATH_REENTER_GUEST is returned in the future. Anyway, I don\u0027t intend to change this logic in this patch. Will recover it to the original logic. Thanks for caching this.",
+      "parentUuid": "808d5f61_a0bac404",
+      "revId": "79dcb2535ab20fb33e8a559419a6f957f48ca510",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0802d68_07e47113",
         "filename": "arch/x86/kvm/pkvm/x86.c",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2025-09-29T14:50:41Z",
       "side": 1,
       "message": "We return without calling prepare_switch_to_host(), so the caller will call __kvm_vcpu_enter_guest() again and then we will call prepare_switch_to_guest() again although we\u0027ve already switched to guest? Is this intended?\n\nEven if this is intended, it seems a bit unclean? Maybe it\u0027s better to call prepare_switch_to_guest() and prepare_switch_to_host() outside __kvm_vcpu_enter_guest()?",
+      "revId": "79dcb2535ab20fb33e8a559419a6f957f48ca510",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bff87ad8_13788bf3",
+        "filename": "arch/x86/kvm/pkvm/x86.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3403,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-30T06:55:23Z",
+      "side": 1,
+      "message": "\u003eIs this intended?\n\nYes. It is intended as `vmx-\u003eguest_uret_msrs_loaded` may be changed due to guest running, thus vmx_prepare_switch_to_guest() may need to run again. This is the same with the original code.\n\nNative KVM only has `prepare_switch_to_guest` ops, which will be called every time by `vcpu_enter_guest()` in the vcpu run loop. And it doesn\u0027t have `prepare_switch_to_host` ops as KVM-VMX code directly calls vmx_prepare_switch_to_host when put a vcpu (needed to load another vcpu, or back to user space, and so on).\n\nSo similarly to pkvm, we call `prepare_switch_to_guest` ops in the run loop, and call `prepare_switch_to_host` when switch back to the host.\n\n\u003eEven if this is intended, it seems a bit unclean? Maybe it\u0027s better to call prepare_switch_to_guest() and prepare_switch_to_host() outside __kvm_vcpu_enter_guest()?\n\nso calling `prepare_switch_to_host` ops to pair with `prepare_switch_to_guest` ops will do thing redundant as we only need to call `prepare_switch_to_host` ops once before exits from guest VM to host VM?",
+      "parentUuid": "a0802d68_07e47113",
       "revId": "79dcb2535ab20fb33e8a559419a6f957f48ca510",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -76,6 +112,24 @@
           ]
         }
       ],
+      "revId": "79dcb2535ab20fb33e8a559419a6f957f48ca510",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50c79784_498cbf4c",
+        "filename": "arch/x86/kvm/pkvm/x86.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3427,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-30T06:55:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "78271496_66fb1e7f",
       "revId": "79dcb2535ab20fb33e8a559419a6f957f48ca510",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
