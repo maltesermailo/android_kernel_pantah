@@ -174,6 +174,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "56bf0af5_b417e02b",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-09-30T11:02:55Z",
+      "side": 1,
+      "message": "\u003e Not sure if there is any potential issue if we read size from the memory page before donating it?\n\nIt is probably not as bad as writing to it, but still, it may be not even mapped in the hypervisor\u0027s page tables (thus causing a page fault in pKVM), or for example it may be a MMIO address, so reading it may have who knows what side effects?\n\nSo it seems safer to prevent that, by properly going through the page state API to at least validate this address?",
+      "parentUuid": "6ea102f8_371e90cc",
+      "revId": "714118bd87e0ae391c94826a741feeacf729ef8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8357bd18_2a6fb775",
         "filename": "arch/x86/kvm/pkvm/pkvm.c",
         "patchSetId": 2
