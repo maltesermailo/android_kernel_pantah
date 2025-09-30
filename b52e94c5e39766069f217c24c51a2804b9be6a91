@@ -88,6 +88,24 @@
       "parentUuid": "952195f9_371b48a4",
       "revId": "b52e94c5e39766069f217c24c51a2804b9be6a91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d35997e_4aeda1c4",
+        "filename": "arch/x86/kvm/pkvm/fpu/fpu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-09-30T01:49:40Z",
+      "side": 1,
+      "message": "\u003e Or perhaps it is even just per physical CPU, i.e. doesn\u0027t depend on the number of VMs?\n\nWe have two kinds of fpstate. One kind is per physical CPU, and the other is for per vCPU.\n\n\u003e This per-pCPU percpu_fpstate is allocated statically, but it doesn\u0027t include the dynamically sized part of fpstate-\u003eregs, right? So, how and when do we allocate that dynamically sized part? Or we don\u0027t need to allocate it?\n\n`percpu_fpstate` is per physical CPU, and its purpose is to reset the FPU hardware with the initial FPU state before switching from pVM to host, so that the host cannot get pVM\u0027s FPU contents. So it is statically allocated, and doesn\u0027t include the dynamically sized part of fpstate-\u003eregs, as we don\u0027t need that to reset FPU hardware. The FPU hardware is reset by `restore_fpregs_from_fpstate(cur_fps, XFEATURE_MASK_FPSTATE)` in `fpu_swap_kvm_fpstate()`. cur_fps points to the percpu fpstate if this is guest exiting path. The restore will be executed according to the XSTATE_BV field in the XSAVE header, which is `fpstate-\u003eregs.xsave.header.xfeatures`. percpu fpstate has 0 xfeatures. According to the SDM (vol1 13.8 OPERATION OF XRSTOR and 13.12 OPERATION OF XRSTORS), the restore will update the field (indicated by XFEATURE_MASK_FPSTATE) to initial state if the field bit in XSTATE_BV is 0.\n\n\u003e (donate_fpu() checks only for fpu_kernel_cfg.default_size)? BTW is that ok?\n\nIt should be ok. The reason is that, the size is saved in `guest_fpu-\u003efpstate.size` although it is only checked against the default size, which may not be sufficient. But later when updating the CPUID via `pkvm_vcpu_after_set_cpuid()`, the `guest_fpu-\u003efpstate.size` will be checked properly against the desired size by `kvm_set_cpuid`-\u003e`kvm_check_cpuid`-\u003e`fpu_enable_guest_xfd_features`-\u003e`__xfd_enable_feature`(in pkvm/fpu/xstate.c). If the size is not sufficient, -ENOMEM will be returned. The `fpu-\u003eguest_perm` is used by `__xfd_enable_feature`, and it is pointed to `fpu-\u003eperm` by aosp/3728239.",
+      "parentUuid": "10a15731_6a8820d7",
+      "revId": "b52e94c5e39766069f217c24c51a2804b9be6a91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
