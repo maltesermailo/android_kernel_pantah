@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ae72b291_8ce1c6a8",
+        "filename": "arch/x86/kvm/pkvm/x86.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3403,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-01T12:13:23Z",
+      "side": 1,
+      "message": "I see. Actually I\u0027m not against this patch, if it makes the code more readable by making kvm_vcpu_enter_guest() shorter. (It looks like the code remains quite complicated either way, but... :)) \n\nIf we keep this patch, perhaps just apply such change?\n```\n--- a/arch/x86/kvm/pkvm/x86.c\n+++ b/arch/x86/kvm/pkvm/x86.c\n@@ -3431,16 +3431,13 @@ static int __kvm_vcpu_enter_guest(struct kvm_vcpu *vcpu, bool force_immediate_ex\n \tret \u003d kvm_x86_call(handle_exit)(vcpu, exit_fastpath);\n \tif (ret \u003c\u003d 0) {\n \t\tpkvm_make_req_to_host(HOST_HANDLE_EXIT, vcpu);\n-\t\tgoto out;\n+\t\treturn 0;\n \t}\n \n \tif (unlikely(force_immediate_exit) || pkvm_reqs_to_host(vcpu))\n-\t\tgoto out;\n+\t\treturn 0;\n \n \treturn 1;\n-out:\n-\tkvm_x86_call(prepare_switch_to_host)(vcpu);\n-\treturn 0;\n }\n \n unsigned long kvm_vcpu_enter_guest(struct kvm_vcpu *vcpu, bool force_immediate_exit)\n@@ -3466,6 +3463,8 @@ unsigned long kvm_vcpu_enter_guest(struct kvm_vcpu *vcpu, bool force_immediate_e\n \t\t\tbreak;\n \t}\n \n+\tkvm_x86_call(prepare_switch_to_host)(vcpu);\n+\n \t/* Restore the host debug registers */\n \tset_debugreg(hvcpu-\u003earch.dr7, 7);\n \tfor (i \u003d 0; i \u003c KVM_NR_DB_REGS; i++)\n```",
+      "parentUuid": "bc5223c9_34a99be1",
+      "revId": "79dcb2535ab20fb33e8a559419a6f957f48ca510",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "78271496_66fb1e7f",
         "filename": "arch/x86/kvm/pkvm/x86.c",
         "patchSetId": 2
