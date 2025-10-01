@@ -1,6 +1,88 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "c55c350c_2996142f",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-10-01T21:44:57Z",
+      "side": 1,
+      "message": "What happens if this structure is destroyed by swapoff in the race?\n\nMaybe better to use get_swap_device.",
+      "range": {
+        "startLine": 78,
+        "startChar": 2,
+        "endLine": 78,
+        "endChar": 28
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "eed8c4ae_7c5f575f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/block/zram/zram_ioctl.c",
+              "range": {
+                "startLine": 81,
+                "startChar": 0,
+                "endLine": 81,
+                "endChar": 0
+              },
+              "replacement": "\t\t/*\n\t\t * Check if the swap area is being exited. This prevents\n\t\t * use-after-free if swapoff happens concurrently.\n\t\t */\n\t\tif (unlikely(sis-\u003eflags \u0026 SWP_EXITING))\n\t\t\tcontinue;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5cc8a57f610b96e9028b0fec1fe5aab1171d92c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6536007f_8a43bc33",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-10-01T21:44:57Z",
+      "side": 1,
+      "message": "Isn\u0027t it better below?\n\nsis-\u003ebdev \u0026\u0026 sis-\u003ebdev-\u003eprivate_data \u003d\u003d zram",
+      "range": {
+        "startLine": 81,
+        "startChar": 15,
+        "endLine": 81,
+        "endChar": 45
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "aae93047_57f09964",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/block/zram/zram_ioctl.c",
+              "range": {
+                "startLine": 81,
+                "startChar": 0,
+                "endLine": 82,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (unlikely(!sis-\u003ebdev || sis-\u003ebdev-\u003eprivate_data !\u003d zram))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5cc8a57f610b96e9028b0fec1fe5aab1171d92c2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "ad3a47a4_90fd88f3",
