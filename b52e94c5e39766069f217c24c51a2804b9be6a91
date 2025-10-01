@@ -124,6 +124,24 @@
       "parentUuid": "5d35997e_4aeda1c4",
       "revId": "b52e94c5e39766069f217c24c51a2804b9be6a91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "644d0d3c_e9e694b8",
+        "filename": "arch/x86/kvm/pkvm/fpu/fpu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-01T00:06:59Z",
+      "side": 1,
+      "message": "\u003ewe will only allocate exactly as much memory as we need (despite this __state_size \u003d fpu_kernel_cfg.max_size setting here). Correct?\n\nYes.\n\n\u003e it looks like it detects that only after it has already updated the guest CPUID in kvm_set_cpuid() -\u003e __kvm_update_cpuid_runtime()? So the FPU features advertised to the guest may be not consistent with the features actually supported by pKVM? Any concern about that?\n\nIt will be detected by kvm_set_cpuid(e2)-\u003ekvm_check_cpuid(e2), and returned before we set vcpu-\u003earch.cpuid_entries \u003d e2. So the pkvm hypervisor will not take the new vcpuid entries in this case, and returns the physical address of the new vcpuid entries to the host to make the host aware of this.\n\nFor this scenario, the pkvm_vcpu_add_fpstate() checks the new size before use it (I plan to change to check if the new size v.s. old size), and keep using the existing fpstate memory if its size \u003e\u003d new fpstate memory size, ensuring the fpstate size is at least as large as the previous one allows continued support in this scenario.",
+      "parentUuid": "f68afe68_f8195fc0",
+      "revId": "b52e94c5e39766069f217c24c51a2804b9be6a91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
