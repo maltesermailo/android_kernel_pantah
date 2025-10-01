@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bc5223c9_34a99be1",
+        "filename": "arch/x86/kvm/pkvm/x86.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 3403,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-01T00:51:55Z",
+      "side": 1,
+      "message": "I see. For the 1st code snapshot, we can do that as currently the request handling part doesn\u0027t have to be done before `prepare_switch_to_guest`, but I feel that keeping `prepare_switch_to_guest` closer to vcpu_run may be better as it will load guest\u0027s MSR. Although currently the request handling is simple and doesn\u0027t have conflict, keeping it before loading guest\u0027s MSR seems better. What do you think?\n\nFor the 2nd code snapshot, we still need to pass `force_immediate_exit` rather than `req_immediate_exit` to the `__kvm_vcpu_enter_guest` for the `if (unlikely(force_immediate_exit) || pkvm_reqs_to_host(vcpu))`, but passing both `force_immediate_exit` and `req_immediate_exit` seems not clean.\n\nSeems both are not that perfect. If this patch makes confusion, probably we can drop this patch and keep the original code, as aosp/3728586 just adds a few lines to this loop, not to much?",
+      "parentUuid": "1f96ba2d_0e033665",
+      "revId": "79dcb2535ab20fb33e8a559419a6f957f48ca510",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "78271496_66fb1e7f",
         "filename": "arch/x86/kvm/pkvm/x86.c",
         "patchSetId": 2
