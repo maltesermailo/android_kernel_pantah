@@ -142,6 +142,24 @@
       "parentUuid": "f68afe68_f8195fc0",
       "revId": "b52e94c5e39766069f217c24c51a2804b9be6a91",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c67216ae_a96d909c",
+        "filename": "arch/x86/kvm/pkvm/fpu/fpu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-01T11:51:52Z",
+      "side": 1,
+      "message": "\u003e It will be detected by kvm_set_cpuid(e2)-\u003ekvm_check_cpuid(e2), and returned before we set vcpu-\u003earch.cpuid_entries \u003d e2. So the pkvm hypervisor will not take the new vcpuid entries in this case\n\nAh, indeed. Seems all good then.\n\nJust one request: these details seem not quite obvious, so maybe let\u0027s add some comments to the code:\n1. Before the `percpu_fpstate` declaration, explain what you explained above, e.g.: \"percpu_fstate is used to reset the FPU hardware with the initial FPU state before switching from pVM to host, so that the host cannot get pVM\u0027s FPU contents\" + an explanation why it is guaranteed that the dynamic part of percpu_fpstate-\u003eregs will not be used so it\u0027s ok to allocate percpu_fpstate statically.\n2. When checking for \"size \u003c fpu_kernel_cfg.default_size + ...\" e.g. in donate_fpu(), explain that this is only the absolute required minimum, and we may actually require more (up to fpu_kernel_cfg.max_size + ...), which will be checked later by fpu_enable_guest_xfd_features() which will return -ENOMEM if needed?",
+      "parentUuid": "644d0d3c_e9e694b8",
+      "revId": "b52e94c5e39766069f217c24c51a2804b9be6a91",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
