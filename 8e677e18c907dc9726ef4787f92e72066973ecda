@@ -88,6 +88,24 @@
       "parentUuid": "5e286bea_28fdb292",
       "revId": "8e677e18c907dc9726ef4787f92e72066973ecda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79cf3f70_5436234e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-10-03T00:13:49Z",
+      "side": 1,
+      "message": "Almost, `atomic_try_cmpxchg` should update `old_ids`, so I think with the `atomic_read` outside the loop like:\n```\nold_ids \u003d atomic_read(\u0026sc-\u003eids);\nshift \u003d (offset % ID_PER_SC) * ID_SHIFT;\ndo {\nnew_ids \u003d (old_ids \u0026 ~(ID_MASK \u003c\u003c shift));\nnew_ids |\u003d ((unsigned int)new) \u003c\u003c shift;\nret \u003d atomic_try_cmpxchg(\u0026sc-\u003eids, \u0026old_ids, new_ids);\nif (ret) {\nretval \u003d old;\nbreak;\n}\nretval \u003d 0;\n} while (((old_ids \u003e\u003e shift) \u0026 ID_MASK) \u003d\u003d old);\n```",
+      "parentUuid": "04a8697a_d1092806",
+      "revId": "8e677e18c907dc9726ef4787f92e72066973ecda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
