@@ -145,11 +145,6 @@ static inline bool ttm_tt_is_populated(struct ttm_tt *tt)
 	return tt->page_flags & TTM_TT_FLAG_PRIV_POPULATED;
 }
 
-static inline bool ttm_tt_is_swapped(const struct ttm_tt *tt)
-{
-	return tt->page_flags & TTM_TT_FLAG_SWAPPED;
-}
-
 /**
  * ttm_tt_is_swapped() - Whether the ttm_tt is swapped out or backed up
  * @tt: The struct ttm_tt.
