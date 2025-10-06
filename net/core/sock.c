@@ -1801,6 +1801,8 @@ int sock_getsockopt(struct socket *sock, int level, int optname,
  */
 static inline void sock_lock_init(struct sock *sk)
 {
+	sk_owner_clear(sk);
+
 	if (sk->sk_kern_sock)
 		sock_lock_init_class_and_name(
 			sk,
@@ -1899,7 +1901,14 @@ static void sk_prot_free(struct proto *prot, struct sock *sk)
 	cgroup_sk_free(&sk->sk_cgrp_data);
 	mem_cgroup_sk_free(sk);
 	security_sk_free(sk);
+<<<<<<< HEAD   (2bbc293701f846f92c35429cefec2d057dd00afd Merge android13-5.15 into android13-5.15-lts)
 	trace_android_rvh_sk_free(sk);
+||||||| BASE   (43bb85222e53926decace01ce6584ca88e09a0a9 Linux 5.15.193)
+=======
+
+	sk_owner_put(sk);
+
+>>>>>>> BRANCH (5d5385feef3571dd33d243a747ac35130e12296e regulator: sy7636a: fix lifecycle of power good gpio)
 	if (slab != NULL)
 		kmem_cache_free(slab, sk);
 	else
