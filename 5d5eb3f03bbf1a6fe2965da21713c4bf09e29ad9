@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68e67d44_ca580ae8",
+        "filename": "drivers/ufs/core/ufs-mcq.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2025-10-07T20:03:33Z",
+      "side": 1,
+      "message": "Hi Bart,\nIs this intentional to call `ufshcd_mcq_sqe_search()` even when QUIRK is set? AFAICT, we don\u0027t proceed in this function regardless of the return value of `ufshcd_mcq_sqe_search()`, so is the call required? Or shall it behave more like `UFSHCD_QUIRK_MCQ_BROKEN_RTC` and return -ETIMEDOUT immediately?",
+      "revId": "5d5eb3f03bbf1a6fe2965da21713c4bf09e29ad9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
