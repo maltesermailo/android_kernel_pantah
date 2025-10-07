@@ -9478,10 +9478,16 @@ static void cpu_cgroup_attach(struct cgroup_taskset *tset)
 
 	cgroup_taskset_for_each(task, css, tset)
 		sched_move_task(task, false);
+<<<<<<< HEAD   (c0ed02ba142131f55e6506ab777e05abe25395ea Merge 76f01a4f22c4 ("Merge tag 'lsm-pr-20250926' of git://gi)
 
 	trace_android_rvh_cpu_cgroup_attach(tset);
 
 	scx_cgroup_finish_attach();
+||||||| BASE   (76f01a4f22c465bdb63ee19aaf5b682c5893ba96 Merge tag 'lsm-pr-20250926' of git://git.kernel.org/pub/scm/)
+
+	scx_cgroup_finish_attach();
+=======
+>>>>>>> BRANCH (a23cd25baed2316e50597f8b67192bdc904f955b Merge tag 'sched_ext-for-6.18' of git://git.kernel.org/pub/s)
 }
 
 static void cpu_cgroup_cancel_attach(struct cgroup_taskset *tset)
