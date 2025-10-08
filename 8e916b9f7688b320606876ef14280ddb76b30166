@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d5c725e_0f59b838",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-10-08T13:07:34Z",
+      "side": 1,
+      "message": "Sorry for not mentioning this before, please split this change into:\n\n1. no use of padding, no ABI refresh, no allowed breaks\n2. replace the new fields with use of padding, refresh the ABI, allow the breaks\n\nThis is so that if we have a future KMI Thaw we can revert just 2, and refresh the ABI.",
+      "revId": "8e916b9f7688b320606876ef14280ddb76b30166",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
