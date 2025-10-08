@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "045c62b7_a8a8312e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-08T10:53:45Z",
+      "side": 1,
+      "message": "Seems like pkvm_early_alloc_mm_ops and struct pkvm_mm_ops mm_ops slipped out of this change do we want to apply:\n\n```\nindex 35f455d511f2..8c8a7f60d25f 100644\n--- a/arch/x86/kvm/vmx/pkvm/hyp/early_alloc.c\n+++ b/arch/x86/kvm/vmx/pkvm/hyp/early_alloc.c\n@@ -17,8 +17,6 @@ static unsigned long cur;\n \n static pkvm_spinlock_t early_lock \u003d __PKVM_SPINLOCK_UNLOCKED;\n \n-struct pkvm_mm_ops pkvm_early_alloc_mm_ops;\n-\n unsigned long pkvm_early_alloc_nr_used_pages(void)\n {\n        return (cur - base) \u003e\u003e PAGE_SHIFT;\n@@ -63,16 +61,18 @@ static int pkvm_early_page_count(void *vaddr)\n        return 512;\n }\n \n+const struct pkvm_mm_ops pkvm_early_alloc_mm_ops \u003d {\n+       .zalloc_page \u003d pkvm_early_alloc_page,\n+       .get_page \u003d pkvm_early_alloc_get_page,\n+       .put_page \u003d pkvm_early_alloc_put_page,\n+       .phys_to_virt \u003d pkvm_phys_to_virt,\n+       .virt_to_phys \u003d pkvm_virt_to_phys,\n+       .page_count \u003d pkvm_early_page_count,\n+       .flush_tlb \u003d pkvm_early_flush_tlb,\n+};\n+\n void pkvm_early_alloc_init(void *virt, unsigned long size)\n {\n        base \u003d cur \u003d (unsigned long)virt;\n        end \u003d base + size;\n-\n-       pkvm_early_alloc_mm_ops.zalloc_page \u003d pkvm_early_alloc_page;\n-       pkvm_early_alloc_mm_ops.get_page \u003d pkvm_early_alloc_get_page;\n-       pkvm_early_alloc_mm_ops.put_page \u003d pkvm_early_alloc_put_page;\n-       pkvm_early_alloc_mm_ops.phys_to_virt \u003d pkvm_phys_to_virt;\n-       pkvm_early_alloc_mm_ops.virt_to_phys \u003d pkvm_virt_to_phys;\n-       pkvm_early_alloc_mm_ops.page_count \u003d pkvm_early_page_count;\n-       pkvm_early_alloc_mm_ops.flush_tlb \u003d pkvm_early_flush_tlb;\n }\ndiff --git a/arch/x86/kvm/vmx/pkvm/hyp/early_alloc.h b/arch/x86/kvm/vmx/pkvm/hyp/early_alloc.h\nindex e66fc9394456..b73d323f3a32 100644\n--- a/arch/x86/kvm/vmx/pkvm/hyp/early_alloc.h\n+++ b/arch/x86/kvm/vmx/pkvm/hyp/early_alloc.h\n@@ -10,6 +10,6 @@ void *pkvm_early_alloc_contig(unsigned int nr_pages);\n void *pkvm_early_alloc_page(void *mc);\n void pkvm_early_alloc_init(void *virt, unsigned long size);\n \n-extern struct pkvm_mm_ops pkvm_early_alloc_mm_ops;\n+extern const struct pkvm_mm_ops pkvm_early_alloc_mm_ops;\n \n #endif\ndiff --git a/arch/x86/kvm/vmx/pkvm/hyp/memory.c b/arch/x86/kvm/vmx/pkvm/hyp/memory.c\nindex afb8e3d7260a..f3bf57434977 100644\n--- a/arch/x86/kvm/vmx/pkvm/hyp/memory.c\n+++ b/arch/x86/kvm/vmx/pkvm/hyp/memory.c\n@@ -110,7 +110,7 @@ void *host_mmio2hva(unsigned long gpa)\n }\n \n extern struct pkvm_pgtable_ops mmu_ops;\n-static struct pkvm_mm_ops mm_ops \u003d {\n+static const struct pkvm_mm_ops mm_ops \u003d {\n        .phys_to_virt \u003d host_gpa2hva,\n };\n\n```\n\n?",
+      "revId": "f649484007d58499963be7d6ebea246519766ff9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
