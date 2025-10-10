@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79932e84_91240908",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2025-10-10T14:26:18Z",
+      "side": 1,
+      "message": "Hmm, this ends up being set in the stage2 mc in the vCPU, which really wants an allocation here for np guests",
+      "range": {
+        "startLine": 167,
+        "startChar": 1,
+        "endLine": 167,
+        "endChar": 29
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d759363a_da63f5a1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/include/asm/kvm_host.h",
+              "range": {
+                "startLine": 167,
+                "startChar": 0,
+                "endLine": 168,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/arm64/include/asm/kvm_host.h",
+              "range": {
+                "startLine": 174,
+                "startChar": 0,
+                "endLine": 174,
+                "endChar": 0
+              },
+              "replacement": "\tmc-\u003emapping \u003d ZERO_SIZE_PTR; /* Prevent allocation, solely useful for stage2 memcache */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f249dc0579d80efe7e784f016f01c3e9b80c98a5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
