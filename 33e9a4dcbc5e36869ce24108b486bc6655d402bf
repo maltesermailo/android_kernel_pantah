@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "287ccdf2_ed9912f0",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-10-10T21:49:23Z",
+      "side": 1,
+      "message": "I\u0027m concerned about a potential race condition with the swap slot. If the target process releases the memory, another process can claim that same swap slot before the writeback occurs. This would result in writing back data for the wrong process. The increased race window between zram_ioctl_process_writeback_scan and zram_writeback_slots makes this scenario more likely.\n\nTwo options \n\n1. Reduce the race window by introduce batch size limit: Instead of doing zram_ioctl_process_writeback_scan all at once and then let\u0027s have smaller steps\n\n2. Carry on the pte value the function and re-validate the PTE right before triggering the writeback. \n\n1 and 2 are orthogonal so we can have both, too.",
+      "range": {
+        "startLine": 92,
+        "startChar": 36,
+        "endLine": 92,
+        "endChar": 41
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "97717698_ab35a48e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/block/zram/zram_ioctl.c",
+              "range": {
+                "startLine": 24,
+                "startChar": 0,
+                "endLine": 24,
+                "endChar": 0
+              },
+              "replacement": "/* Batch size for writeback during process scan */\n#define ZRAM_PP_BATCH_SIZE 1024\n\n"
+            },
+            {
+              "path": "drivers/block/zram/zram_ioctl.c",
+              "range": {
+                "startLine": 28,
+                "startChar": 0,
+                "endLine": 28,
+                "endChar": 0
+              },
+              "replacement": "\tunsigned long batch_count;\n"
+            },
+            {
+              "path": "drivers/block/zram/zram_ioctl.c",
+              "range": {
+                "startLine": 92,
+                "startChar": 0,
+                "endLine": 93,
+                "endChar": 0
+              },
+              "replacement": "\t\tscan_slots_for_writeback(zram, 0, index, index + 1, pp_ctl);\n\t\tprivate-\u003ebatch_count++;\n\n\t\tif (private-\u003ebatch_count \u003e\u003d ZRAM_PP_BATCH_SIZE) {\n\t\t\tint ret \u003d zram_writeback_slots(zram, pp_ctl);\n\t\t\tif (ret)\n\t\t\t\treturn ret; /* Stop the walk on error */\n\t\t\tprivate-\u003ebatch_count \u003d 0;\n\t\t}\n"
+            },
+            {
+              "path": "drivers/block/zram/zram_ioctl.c",
+              "range": {
+                "startLine": 119,
+                "startChar": 0,
+                "endLine": 120,
+                "endChar": 0
+              },
+              "replacement": "\t\t.pp_ctl \u003d ctl,\n\t\t.batch_count \u003d 0,\n"
+            },
+            {
+              "path": "drivers/block/zram/zram_ioctl.c",
+              "range": {
+                "startLine": 147,
+                "startChar": 0,
+                "endLine": 147,
+                "endChar": 0
+              },
+              "replacement": "\t/* Writeback any remaining slots in the last batch */\n\tif (!ret \u0026\u0026 private.batch_count \u003e 0)\n\t\tret \u003d zram_writeback_slots(zram, ctl);\n\n"
+            },
+            {
+              "path": "drivers/block/zram/zram_ioctl.c",
+              "range": {
+                "startLine": 182,
+                "startChar": 0,
+                "endLine": 184,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "33e9a4dcbc5e36869ce24108b486bc6655d402bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
