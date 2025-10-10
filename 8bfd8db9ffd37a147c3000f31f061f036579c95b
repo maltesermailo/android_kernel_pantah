@@ -1,0 +1,109 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9004ea53_0afff8ca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-10-10T05:12:24Z",
+      "side": 1,
+      "message": "minor version \n\n(I\u0027m suggesting we leave the major version check as is in order to mirror the logic in `do_ffa_version`; if you do not agree with that suggestion, disregard this one.)",
+      "range": {
+        "startLine": 9,
+        "startChar": 39,
+        "endLine": 9,
+        "endChar": 46
+      },
+      "revId": "8bfd8db9ffd37a147c3000f31f061f036579c95b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "423b6cd8_05fabd47",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1512,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-10-10T05:12:24Z",
+      "side": 1,
+      "message": "This is not a valid error code for FFA_VERSION.  The only valid return code is `FFA_RET_NOT_SUPPORTED` (see DEN0077A Table 13.6).",
+      "range": {
+        "startLine": 1512,
+        "startChar": 2,
+        "endLine": 1512,
+        "endChar": 27
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6d395952_00223600",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1512,
+                "startChar": 0,
+                "endLine": 1513,
+                "endChar": 0
+              },
+              "replacement": "\t\tres-\u003ea0 \u003d FFA_RET_NOT_SUPPORTED;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8bfd8db9ffd37a147c3000f31f061f036579c95b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca74f09d_62ac82a3",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1521,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-10-10T05:12:24Z",
+      "side": 1,
+      "message": "aosp/3606370 provides a more detailed justification. Could we use a version of that here? E.g.:\n\n```c\n/*\n * If the hypervisor adds support for a new FF-A version that is not\n * backwards compatible with 1.1 without adding compatibility paths to\n * paper over differences, clients that requested a version less than\n * the hypervisor must be tracked and compatibility paths must be added..\n */\n```",
+      "range": {
+        "startLine": 1521,
+        "startChar": 1,
+        "endLine": 1521,
+        "endChar": 74
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d632cda8_d54ee8c8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1521,
+                "startChar": 0,
+                "endLine": 1522,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * If the hypervisor adds support for a new FF-A version that is not\n\t * backwards compatible with 1.1 without adding compatibility paths to\n\t * paper over differences, clients that requested a version less than\n\t * the hypervisor must be tracked and compatibility paths must be added\n\t * as needed.\n\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8bfd8db9ffd37a147c3000f31f061f036579c95b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
