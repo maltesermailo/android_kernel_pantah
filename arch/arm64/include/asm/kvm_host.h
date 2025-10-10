@@ -255,6 +255,7 @@ struct kvm_s2_mmu {
 };
 
 struct kvm_arch_memory_slot {
+	u64 pkvm_pf_count;
 };
 
 /**
@@ -278,6 +279,7 @@ struct kvm_pinned_page {
 	};
 	struct page		*_page;
 	struct file		*file;
+	struct kvm_memory_slot	*slot;
 	u64			pfn;
 	u64			ipa;
 	u64			__subtree_last;
