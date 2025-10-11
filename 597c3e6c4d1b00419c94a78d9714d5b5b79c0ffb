@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00fb16b1_5424df2a",
+        "filename": "mm/swap_cgroup.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-10-11T01:36:11Z",
+      "side": 1,
+      "message": "What if `((old_ids \u003e\u003e shift) \u0026 ID_MASK) !\u003d old` from the very beginning? I think in that case if `atomic_try_cmpxchg()` succeeds, then `swap_cgroup_cmpxchg()` will succeed while it should have failed.",
+      "range": {
+        "startLine": 80,
+        "startChar": 1,
+        "endLine": 80,
+        "endChar": 5
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "b0fe80b3_6d73867e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/swap_cgroup.c",
+              "range": {
+                "startLine": 68,
+                "startChar": 0,
+                "endLine": 69,
+                "endChar": 0
+              },
+              "replacement": "\tunsigned short current_id;\n"
+            },
+            {
+              "path": "mm/swap_cgroup.c",
+              "range": {
+                "startLine": 72,
+                "startChar": 0,
+                "endLine": 73,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/swap_cgroup.c",
+              "range": {
+                "startLine": 77,
+                "startChar": 0,
+                "endLine": 78,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "mm/swap_cgroup.c",
+              "range": {
+                "startLine": 81,
+                "startChar": 0,
+                "endLine": 81,
+                "endChar": 0
+              },
+              "replacement": "\t\told_ids \u003d atomic_read(\u0026sc-\u003eids);\n\t\tcurrent_id \u003d (old_ids \u003e\u003e shift) \u0026 ID_MASK;\n\t\tif (current_id !\u003d old)\n\t\t\treturn 0;\n\n"
+            },
+            {
+              "path": "mm/swap_cgroup.c",
+              "range": {
+                "startLine": 83,
+                "startChar": 0,
+                "endLine": 90,
+                "endChar": 0
+              },
+              "replacement": "\t} while (!atomic_try_cmpxchg(\u0026sc-\u003eids, \u0026old_ids, new_ids));\n"
+            },
+            {
+              "path": "mm/swap_cgroup.c",
+              "range": {
+                "startLine": 91,
+                "startChar": 0,
+                "endLine": 92,
+                "endChar": 0
+              },
+              "replacement": "\treturn old;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "597c3e6c4d1b00419c94a78d9714d5b5b79c0ffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
