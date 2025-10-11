@@ -90,6 +90,30 @@
       ],
       "revId": "597c3e6c4d1b00419c94a78d9714d5b5b79c0ffb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57358789_e0ccfacc",
+        "filename": "mm/swap_cgroup.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 4361992
+      },
+      "writtenOn": "2025-10-11T08:15:14Z",
+      "side": 1,
+      "message": "There is indeed a problem.\nBefore the while loop, first check whether ((old_ids \u003e\u003e shift) \u0026 ID_MASK) is equal to old;\nat this point, while (((old_ids \u003e\u003e shift) \u0026 ID_MASK) \u003d\u003d old) will always be true, approximately equivalent to while(1), so I want to add a counter to avoid an infinite loop;\nor we can also consider removing the while loop altogether.\n\n\tmap \u003d swap_cgroup_ctrl[swp_type(ent)].map;\n\toffset \u003d swp_offset(ent);\n\tsc \u003d \u0026map[offset / ID_PER_SC];\n\told_ids \u003d atomic_read(\u0026sc-\u003eids);\n\tshift \u003d (offset % ID_PER_SC) * ID_SHIFT;\n\told_id \u003d (old_ids \u003e\u003e shift) \u0026 ID_MASK;\n\tif (old_id !\u003d old) {\n\t\tpr_err(\"the id of sc:%u is not equal to old:%u\\n\", old_id, old);\n\t\tgoto out;\n\t}\n\n\tnew_ids \u003d (old_ids \u0026 ~(ID_MASK \u003c\u003c shift));\n\tnew_ids |\u003d ((unsigned int)new) \u003c\u003c shift;\n\tdo {\n\t\tret \u003d atomic_try_cmpxchg(\u0026sc-\u003eids, \u0026old_ids, new_ids);\n\t\tif (ret) {\n\t\t\tretval \u003d old;\n\t\t\tbreak;\n\t\t}\n\t} while (retry_cnt--);\n\n\tout:\n\t\treturn retval;",
+      "parentUuid": "00fb16b1_5424df2a",
+      "range": {
+        "startLine": 80,
+        "startChar": 1,
+        "endLine": 80,
+        "endChar": 5
+      },
+      "revId": "597c3e6c4d1b00419c94a78d9714d5b5b79c0ffb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
