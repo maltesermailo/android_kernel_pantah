@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9a13718_9da2241d",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-13T13:33:39Z",
+      "side": 1,
+      "message": "This will not be found by \"dmesg | grep pkvm\"?",
+      "fixSuggestions": [
+        {
+          "fixId": "9b14bd29_f83bab6c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 122,
+                "startChar": 0,
+                "endLine": 123,
+                "endChar": 0
+              },
+              "replacement": "\t\tpr_err(\"pkvm: %s: VM%d is busy, refcount %d\\n\",\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/pkvm.c",
+              "range": {
+                "startLine": 255,
+                "startChar": 0,
+                "endLine": 256,
+                "endChar": 0
+              },
+              "replacement": "\t\tpr_err(\"pkvm: VM%d vcpu%d is busy, refcount %d\\n\",\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0614d355879a522356094e367a4e49d946c47bfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
