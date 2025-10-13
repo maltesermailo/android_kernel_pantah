@@ -114,6 +114,30 @@
       },
       "revId": "33e9a4dcbc5e36869ce24108b486bc6655d402bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86502472_2a1a0c04",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2025-10-13T17:23:11Z",
+      "side": 1,
+      "message": "Ah, you are correct. ZRAM_PP_SLOT flag solves the race.\n\nThe most important part is zram_free_page in zram_write_page.\nIOW, right before overwrite the slt, the PP_SLOT will remove so zram_writeback_slot will ignore.\n\nThank you for the clarification, Richard!",
+      "parentUuid": "9534d617_262f4382",
+      "range": {
+        "startLine": 92,
+        "startChar": 36,
+        "endLine": 92,
+        "endChar": 41
+      },
+      "revId": "33e9a4dcbc5e36869ce24108b486bc6655d402bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
