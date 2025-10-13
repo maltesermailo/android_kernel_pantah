@@ -90,6 +90,30 @@
       ],
       "revId": "33e9a4dcbc5e36869ce24108b486bc6655d402bf",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9534d617_262f4382",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2025-10-13T08:33:56Z",
+      "side": 1,
+      "message": "This race should be protected by ZRAM_PP_SLOT flag.\n\nAn example:\n1. Process A page A1 writes to zram slot index 1\n2. System triggers per-procoess writeback\n3. scan_slots_for_writeback adds ZRAM_PP_SLOT on index 1\n4. Process A release page A1\n5. zram_slot_free_notify index 1 \u003d\u003e remove ZRAM_PP_SLOT\n6. Process B page B1 writes to zram slot index 1\n7. zram_writeback_slots ignores index 1 because no ZRAM_PP_SLOT flag",
+      "parentUuid": "287ccdf2_ed9912f0",
+      "range": {
+        "startLine": 92,
+        "startChar": 36,
+        "endLine": 92,
+        "endChar": 41
+      },
+      "revId": "33e9a4dcbc5e36869ce24108b486bc6655d402bf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
