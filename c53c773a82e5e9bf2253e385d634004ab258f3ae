@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48f10908_4a1cc3f9",
+        "filename": "arch/x86/coco/pkvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-10-14T13:55:40Z",
+      "side": 1,
+      "message": "Should we revert to SIPI/INIT method if this hypercall is not implemented in the hypervisor? Some thing like:\n```\nif (kvm_hypercall2(PKVM_GHC_START_CPU, apic_id, start_ip) !\u003d 0) {\n   return  wakeup_secondary_cpu_via_init(phys_apicid, start_eip);\n}\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "8ba8340a_8386ab98",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/coco/pkvm/pkvm.c",
+              "range": {
+                "startLine": 138,
+                "startChar": 0,
+                "endLine": 139,
+                "endChar": 0
+              },
+              "replacement": "\tif (kvm_hypercall2(PKVM_GHC_START_CPU, apic_id, start_ip) !\u003d 0)\n\t\treturn wakeup_secondary_cpu_via_init(apic_id, start_ip);\n\n\treturn 0;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c53c773a82e5e9bf2253e385d634004ab258f3ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
