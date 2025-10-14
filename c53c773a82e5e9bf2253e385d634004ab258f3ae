@@ -105,6 +105,24 @@
       "parentUuid": "07f3d222_4d8deebc",
       "revId": "c53c773a82e5e9bf2253e385d634004ab258f3ae",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd5eb1c2_b6c328e9",
+        "filename": "arch/x86/coco/pkvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-10-14T14:38:01Z",
+      "side": 1,
+      "message": "Yeah I understand that this is relevant only with protected VMs, was just curious about change in behavior if we have a version of pkvm without this hypercall implemented in upstream scenarios. Usually kvm does capability check for catering to guest and host running different versions. But in our case I understand that all these changes will go as a single feature upstream. So I guess there is no worry of a version of pkvm without this hypercall implemented :-). Thanks for clarification!",
+      "parentUuid": "0cb063f4_551ab7e0",
+      "revId": "c53c773a82e5e9bf2253e385d634004ab258f3ae",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
