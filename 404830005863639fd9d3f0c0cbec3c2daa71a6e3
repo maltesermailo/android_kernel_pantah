@@ -1,0 +1,66 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00d16dd2_1f51a3ff",
+        "filename": "arch/x86/kvm/pkvm/cpuid.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-14T17:23:04Z",
+      "side": 1,
+      "message": "Question: should this be done for pVM only, or for both pVM and npVM?",
+      "revId": "404830005863639fd9d3f0c0cbec3c2daa71a6e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bd6ea74_9eb2a4f9",
+        "filename": "arch/x86/kvm/pkvm/fpu/xstate.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-14T17:23:04Z",
+      "side": 1,
+      "message": "nit: use braces?",
+      "fixSuggestions": [
+        {
+          "fixId": "43c1639f_a89bb858",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/fpu/xstate.c",
+              "range": {
+                "startLine": 145,
+                "startChar": 0,
+                "endLine": 146,
+                "endChar": 0
+              },
+              "replacement": "\tif (fps-\u003esize \u003c ksize) {\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/fpu/xstate.c",
+              "range": {
+                "startLine": 148,
+                "startChar": 0,
+                "endLine": 148,
+                "endChar": 0
+              },
+              "replacement": "\t}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "404830005863639fd9d3f0c0cbec3c2daa71a6e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
