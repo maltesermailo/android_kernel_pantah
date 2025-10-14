@@ -1,0 +1,69 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6be85a9_475ddf0d",
+        "filename": "arch/x86/kvm/pkvm/x86.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 3401,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-14T17:41:13Z",
+      "side": 1,
+      "message": "The semantics of the return value of __kvm_vcpu_enter_guest() seems to be boolean, not int, so maybe explicitly make it bool? (maybe with inversed logic)",
+      "fixSuggestions": [
+        {
+          "fixId": "d3c4b1db_b7a319ab",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/x86.c",
+              "range": {
+                "startLine": 3330,
+                "startChar": 0,
+                "endLine": 3331,
+                "endChar": 0
+              },
+              "replacement": "static bool __kvm_vcpu_enter_guest(struct kvm_vcpu *vcpu, bool force_immediate_exit)\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/x86.c",
+              "range": {
+                "startLine": 3394,
+                "startChar": 0,
+                "endLine": 3395,
+                "endChar": 0
+              },
+              "replacement": "\t\treturn true;\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/x86.c",
+              "range": {
+                "startLine": 3398,
+                "startChar": 0,
+                "endLine": 3399,
+                "endChar": 0
+              },
+              "replacement": "\t\treturn false;\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/x86.c",
+              "range": {
+                "startLine": 3423,
+                "startChar": 0,
+                "endLine": 3424,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (!__kvm_vcpu_enter_guest(vcpu, force_immediate_exit))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fe8ed78a6f7531ceec9e8a8552293fe72b5c1a8f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
