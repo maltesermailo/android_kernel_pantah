@@ -185,6 +185,30 @@
       },
       "revId": "0614d355879a522356094e367a4e49d946c47bfa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d2f7aae_8bb05b42",
+        "filename": "arch/x86/kvm/pkvm/pkvm.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-10-14T13:50:30Z",
+      "side": 1,
+      "message": "\u003e The reference count by default is 1, means the resource is free. And some one can get this resource and increment the reference count. Change the reference count to zero means the resource is not valid. So getting this resource will be failed in this case, thus no one can use this resource any more. Thus we can free the resource at the moment. After we put the pkvm_vcpu, its reference can decrement to 1 but not zero. So we cannot free the pkvm_vcpu at put. Also, the pkvm_vcpu should be freed to the host, thus we free it when the host wants the pkvm_vcpu memory pages back via the vcpu_free PV interface.\n\nOk understood. I was worried about a case where the we may never return the memory to host because the final detach(in vm_destroy) was called while pkvm had a refcount on this vcpu in another thread of execution. But from your explanation I understand that such a case would not arise during a normal trusted host operation. Thanks for the detailed explanation.",
+      "parentUuid": "2d6292a0_d700fdea",
+      "range": {
+        "startLine": 88,
+        "startChar": 1,
+        "endLine": 88,
+        "endChar": 35
+      },
+      "revId": "0614d355879a522356094e367a4e49d946c47bfa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
