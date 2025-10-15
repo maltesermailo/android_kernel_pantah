@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "121ada8d_e2510369",
+        "filename": "arch/x86/kvm/pkvm/fpu/xstate.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-15T12:43:35Z",
+      "side": 1,
+      "message": "IIUC this shouldn\u0027t happen? Maybe WARN_ON_ONCE?",
+      "fixSuggestions": [
+        {
+          "fixId": "1bfd658c_a160a5eb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/fpu/xstate.c",
+              "range": {
+                "startLine": 136,
+                "startChar": 0,
+                "endLine": 137,
+                "endChar": 0
+              },
+              "replacement": "\tif (WARN_ON_ONCE(!guest_fpu))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0d4b2ba92066fc12058b1dd2fc6e76c5173684fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
