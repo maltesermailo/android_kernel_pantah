@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "896d4e32_b1c2d2f0",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pgtable.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-15T15:20:00Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we use memcache in this case as well?\n\nIf we don\u0027t, pKVM is gonna crash (in guest_mmu_zalloc_page() we don\u0027t even check if mc is not NULL)?",
+      "revId": "41b4e757090b6e509046c632c911587211a23d18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
