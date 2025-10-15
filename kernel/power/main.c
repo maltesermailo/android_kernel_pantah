@@ -517,6 +517,61 @@ bool pm_sleep_transition_in_progress(void)
 {
 	return pm_suspend_in_progress() || hibernation_in_progress();
 }
+
+static atomic_t pm_sleep_nr_fs_sync_enqueued = ATOMIC_INIT(0);
+static DECLARE_COMPLETION(pm_sleep_fs_sync_complete);
+
+/**
+ * pm_stop_waiting_for_fs_sync - Abort fs_sync to abort sleep early
+ *
+ * This function causes the suspend process to stop waiting on an in-progress
+ * filesystem sync, such that the suspend process can be aborted before the
+ * filesystem sync is complete.
+ */
+void pm_stop_waiting_for_fs_sync(void)
+{
+	complete(&pm_sleep_fs_sync_complete);
+}
+
+static void sync_filesystems_fn(struct work_struct *work)
+{
+	ksys_sync_helper();
+	atomic_dec(&pm_sleep_nr_fs_sync_enqueued);
+	complete(&pm_sleep_fs_sync_complete);
+}
+static DECLARE_WORK(sync_filesystems, sync_filesystems_fn);
+
+/**
+ * pm_sleep_fs_sync - Trigger fs_sync with ability to abort
+ *
+ * Return 0 on successful file system sync, otherwise returns -EBUSY if file
+ * system sync was aborted.
+ */
+int pm_sleep_fs_sync(void)
+{
+	atomic_inc(&pm_sleep_nr_fs_sync_enqueued);
+	/*
+	 * Handle the case where a sleep immediately follows a previous sleep
+	 * that was aborted during fs_sync. In this case, wait for the previous
+	 * filesystem sync to finish and then do another filesystem sync so any
+	 * subsequent filesystem changes are synced before sleeping.
+	 */
+	do {
+		reinit_completion(&pm_sleep_fs_sync_complete);
+		if (atomic_read(&pm_sleep_nr_fs_sync_enqueued) > 0)
+			schedule_work(&sync_filesystems);
+		/*
+		 * Completion is triggered by fs_sync finishing or an abort
+		 * sleep signal, whichever comes first
+		 */
+		wait_for_completion(&pm_sleep_fs_sync_complete);
+		if (pm_wakeup_pending())
+			return -EBUSY;
+	} while (atomic_read(&pm_sleep_nr_fs_sync_enqueued) > 0);
+
+	return 0;
+}
+
 #endif /* CONFIG_PM_SLEEP */
 
 #ifdef CONFIG_PM_SLEEP_DEBUG
