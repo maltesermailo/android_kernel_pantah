@@ -22,6 +22,30 @@
       },
       "revId": "1d7a2994b51d2393b6f3dda51d38d924c445f911",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6292d0f1_6bef94b8",
+        "filename": "drivers/gpu/drm/xe/xe_lrc.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3938928
+      },
+      "writtenOn": "2025-10-15T22:02:11Z",
+      "side": 1,
+      "message": "msix_vec is added by this upstream patch. MSI-X is basically an extension for message signaled interrupts for future platforms\n21d07f5fdc903e36cfd7119bb19477c4d12dbb36 drm/xe: Initial MSI-X support for HW engines\n\nfrom a functionality standpoint, we are not missing anything as it just adds more msi vectors for GuC events. without it, GuC will continue using the legacy interrupt path. Pulling this patch is not trivial as it depends on a lot of other series.",
+      "parentUuid": "36b2dce6_907fab83",
+      "range": {
+        "startLine": 29,
+        "startChar": 23,
+        "endLine": 29,
+        "endChar": 35
+      },
+      "revId": "1d7a2994b51d2393b6f3dda51d38d924c445f911",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
