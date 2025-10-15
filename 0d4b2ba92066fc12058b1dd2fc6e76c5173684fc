@@ -34,6 +34,24 @@
       ],
       "revId": "0d4b2ba92066fc12058b1dd2fc6e76c5173684fc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed90a8ba_67d629b9",
+        "filename": "arch/x86/kvm/pkvm/fpu/xstate.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-10-15T13:10:13Z",
+      "side": 1,
+      "message": "yeah, it should not happen as we always have guest_fpu if vcpu can be created successfully. The check is to prevent incorrect usage from the caller. We can use WARN_ON_ONCE.",
+      "parentUuid": "121ada8d_e2510369",
+      "revId": "0d4b2ba92066fc12058b1dd2fc6e76c5173684fc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
