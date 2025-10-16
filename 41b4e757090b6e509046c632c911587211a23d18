@@ -34,6 +34,41 @@
       "parentUuid": "896d4e32_b1c2d2f0",
       "revId": "41b4e757090b6e509046c632c911587211a23d18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6192c12_f08c1d37",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pgtable.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-16T17:49:37Z",
+      "side": 1,
+      "message": "Ok, I\u0027ve just noticed that pgtable_unmap_cb() never gets a non-NULL data-\u003ememcache anyway (a memcache is passed to pkvm_pgtable_map() only, not to pkvm_pgtable_unmap()). And yeah, it makes sense.\n\nStill, related note: it still seems it would be good to check if the memcache is NULL in guest_mmu_zalloc_page() (to let it return NULL and let its caller return -ENOMEM, instead of crashing the hypervisor)?",
+      "parentUuid": "cb557974_718516c4",
+      "revId": "41b4e757090b6e509046c632c911587211a23d18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cf80dd0_554f4cf3",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pgtable.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-16T17:49:37Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we use memcache in pkvm_pgtable_annotate() as well? pKVM-ARM does, for a reason. A pVM could share a huge page with the host and then unshare just a part of it, right?",
+      "revId": "41b4e757090b6e509046c632c911587211a23d18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
