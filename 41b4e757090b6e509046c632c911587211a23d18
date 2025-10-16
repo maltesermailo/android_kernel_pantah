@@ -69,6 +69,24 @@
       "message": "Shouldn\u0027t we use memcache in pkvm_pgtable_annotate() as well? pKVM-ARM does, for a reason. A pVM could share a huge page with the host and then unshare just a part of it, right?",
       "revId": "41b4e757090b6e509046c632c911587211a23d18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ac0acd3_2df64506",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pgtable.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-16T18:25:58Z",
+      "side": 1,
+      "message": "Ah sorry, pkvm_pgtable_annotate() is only used for the host page table, for which we still shall use a static memory pool. (pKVM-ARM does use it for guest page tables as well, for MMIO guards, but that is ARM-specific.)",
+      "parentUuid": "4cf80dd0_554f4cf3",
+      "revId": "41b4e757090b6e509046c632c911587211a23d18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
