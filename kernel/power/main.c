@@ -18,6 +18,7 @@
 #include <linux/suspend.h>
 #include <linux/syscalls.h>
 #include <linux/pm_runtime.h>
+#include <linux/delay.h>
 
 #include "power.h"
 
@@ -73,6 +74,7 @@ void ksys_sync_helper(void)
 	long elapsed_msecs;
 
 	start = ktime_get();
+	msleep(2000);
 	ksys_sync();
 	elapsed_msecs = ktime_to_ms(ktime_sub(ktime_get(), start));
 	pr_info("Filesystems sync: %ld.%03ld seconds\n",
