@@ -16,6 +16,24 @@
       "message": "Shouldn\u0027t we use memcache in this case as well?\n\nIf we don\u0027t, pKVM is gonna crash (in guest_mmu_zalloc_page() we don\u0027t even check if mc is not NULL)?",
       "revId": "41b4e757090b6e509046c632c911587211a23d18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb557974_718516c4",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pgtable.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-16T12:23:33Z",
+      "side": 1,
+      "message": "I\u0027ve thought about it earlier and play a little with it and I\u0027ve never encountered we get to this place for unmapping guest EPT: I mean even with MMU notifiers (balloon and swap enabled with or without huge-pages enabled) host never tries to unmap smaller page which is part of huge-page and I wonder if this could happen in practice. IIUC:\n- for pVM MMU notifiers are ignored (pages are pinned and notifiers ignored)\n- for non-pVM guest shares all pages with host and the granularity should match so when MMU notifiers fires it either unmaps 4K PTE entry or entire huge page which doesn\u0027t have to be split and is handed above under:\n```\n\tif (level \u003d\u003d PG_LEVEL_4K || (pgt_ops-\u003epgt_entry_huge(ptep) \u0026\u0026\n\t\t(!data-\u003esplit_huge_page || leaf_mapping_valid(pgt_ops, vaddr,\n\t\t\tvaddr_end, 1 \u003c\u003c level, level)))) {\n``` \n\n\n\nTo be specific this code can be reached in other non-guest-EPT related cases e.g. in case of unmaping host ept and I see it actually happens e.g. during:\n`protect_pkvm_pages-\u003epkvm_host_ept_unmap-\u003e...-\u003epgtable_unmap_cb`\nbut in such case different zalloc_page is registered which doesn\u0027t use memcache.\n\nIf you agree with the above reasoning and I didn\u0027t miss or misunderstand some cases, maybe some comment will be enough here?",
+      "parentUuid": "896d4e32_b1c2d2f0",
+      "revId": "41b4e757090b6e509046c632c911587211a23d18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
