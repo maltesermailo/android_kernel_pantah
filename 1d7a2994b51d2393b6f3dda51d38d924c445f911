@@ -46,6 +46,30 @@
       },
       "revId": "1d7a2994b51d2393b6f3dda51d38d924c445f911",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e95297fa_b7b8f20b",
+        "filename": "drivers/gpu/drm/xe/xe_lrc.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-10-16T21:00:36Z",
+      "side": 1,
+      "message": "\u003e msix_vec is added by this upstream patch.\n\nThat\u0027s not what I\u0027m seeing here:\n\nhttps://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/diff/drivers/gpu/drm/xe/xe_lrc.h?id\u003d72d479601d67026c4fafaad21762a777cf41f906\n\nInstead, only `u32 flags` is added by the upstream patch.\n\nMSI-X support was actually added with:\n\n\u003e drm/xe: Initial MSI-X support for HW engines\n\u003e \n\u003e https://github.com/torvalds/linux/commit/21d07f5fdc903e36cfd7119bb19477c4d12dbb36\n\nI think it\u0027ll be better to pull in that entire patch, rather than adding only the pieces currently included here. That should also resolve many (all?) of the merge conflicts being detected here.",
+      "parentUuid": "6292d0f1_6bef94b8",
+      "range": {
+        "startLine": 29,
+        "startChar": 23,
+        "endLine": 29,
+        "endChar": 35
+      },
+      "revId": "1d7a2994b51d2393b6f3dda51d38d924c445f911",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
