@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07066a91_f04c28d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-10-16T18:53:40Z",
+      "side": 1,
+      "message": "Giving a kernel module a raw struct bpf_map * pointer is extremely dangerous.\n\nThe BPF verifier and helper functions exist to provide a safe, limited API for interacting with maps.\n\nA kernel driver with a raw pointer to struct bpf_map can bypass all of these checks. It can directly write to the map\u0027s memory, corrupt its internal metadata (e.g., map-\u003eops), or read data it shouldn\u0027t have access to. This breaks the security model that BPF is designed to enforce.\n\nAdditionally, bpf_map_get is in the \u0027BPF_INTERNAL\u0027 namespace, which means it is not part of the stable kernel ABI and can be changed or removed at any time. If we were to accept this into the ABI, it could potentially cause significant difficulty for lts merges.",
+      "revId": "9967238c95310b3840ee0e44f0cafabc599b34ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
