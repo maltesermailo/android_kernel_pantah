@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a1c4154_3cef1343",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1524,
+      "author": {
+        "id": 1807569
+      },
+      "writtenOn": "2025-10-17T06:29:08Z",
+      "side": 1,
+      "message": "`FFA_MAJOR_VERSION(hyp_ffa_version)` is one here, `do_ffa_version` ensures that.\n`FFA_MAJOR_VERSION(ffa__req_version)` has been validated to be one.\nI don\u0027t see how this condition can be true.",
+      "range": {
+        "startLine": 1521,
+        "startChar": 0,
+        "endLine": 1524,
+        "endChar": 2
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "84915916_df74a9e6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+              "range": {
+                "startLine": 1520,
+                "startChar": 0,
+                "endLine": 1525,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "9cb54529e4489febb40c0db42448b649a5f0249d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
