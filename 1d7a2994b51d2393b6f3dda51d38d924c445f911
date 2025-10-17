@@ -70,6 +70,30 @@
       },
       "revId": "1d7a2994b51d2393b6f3dda51d38d924c445f911",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4666814d_7901d78a",
+        "filename": "drivers/gpu/drm/xe/xe_lrc.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 3938928
+      },
+      "writtenOn": "2025-10-17T16:38:20Z",
+      "side": 1,
+      "message": "Thanks Tim! as aligned offline, since MSI-X is not needed for PAVP enablement, we can safely remove all references to msix_vec without losing any functionality\n\nAbout pulling in the MSI-X series takes me into the direction of pulling in all MSI-X related patches. So far I would need to pull the below list and more  and chances are, i might have to mark some of them backport. \n\nb46afdac45a2 drm/xe: Introduce dedicated config for memirq debug\n6fa86e7ad46e drm/xe: Introduce xe_device_uses_memirq()\n4157849ca3ca drm/xe: move memirq out of VF\nef6103d20f97 drm/xe: memirq infra changes for MSI-X\naa4e21682755 drm/xe: memirq handler changes\n\n4d79a1266d4c  drm/xe: Make irq enabled flag atomic\n\nda889070be7b drm/xe/irq: Separate MSI and MSI-X flows \n21d07f5fdc90 drm/xe: Initial MSI-X support for HW engines\nf0d3a3cffd43 drm/xe/irq: Manage MSI-X interrupts allocation",
+      "parentUuid": "e95297fa_b7b8f20b",
+      "range": {
+        "startLine": 29,
+        "startChar": 23,
+        "endLine": 29,
+        "endChar": 35
+      },
+      "revId": "1d7a2994b51d2393b6f3dda51d38d924c445f911",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
