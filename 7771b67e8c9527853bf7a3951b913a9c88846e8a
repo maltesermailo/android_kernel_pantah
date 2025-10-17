@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96b050e4_985f7451",
+        "filename": "arch/x86/include/asm/kvm_host.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 1113,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-17T17:20:46Z",
+      "side": 1,
+      "message": "It would make sense to put both pkvm_vcpu_handle and stage2_mc into a structure field e.g. `struct kvm_protected_vcpu pkvm` similar to `struct kvm_protected_vm pkvm` in struct kvm_arch?\n\nAlthough while we\u0027re at it, `kvm_protected_vm` seems a misnomer, since it is not just about protected VMs. We could rename it e.g. to `kvm_pkvm_vm` (and if so, also `kvm_pkvm_vcpu` instead of `kvm_protected_vcpu`).",
+      "revId": "7771b67e8c9527853bf7a3951b913a9c88846e8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afb5a1cb_1a3141ec",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-17T17:20:46Z",
+      "side": 1,
+      "message": "nit: put this one line below (to keep the \"staircase\" style and to keep the \"struct kvm*\" declarations together)?",
+      "fixSuggestions": [
+        {
+          "fixId": "ae152383_29a684b9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 192,
+                "startChar": 0,
+                "endLine": 193,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 194,
+                "startChar": 0,
+                "endLine": 194,
+                "endChar": 0
+              },
+              "replacement": "\tstruct kvm_vcpu *vcpu;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7771b67e8c9527853bf7a3951b913a9c88846e8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddd44ef7_5a7aeb90",
+        "filename": "arch/x86/kvm/pkvm/mmu.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-17T17:20:46Z",
+      "side": 1,
+      "message": "Can replace with `vcpu` now?",
+      "range": {
+        "startLine": 215,
+        "startChar": 35,
+        "endLine": 215,
+        "endChar": 57
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2fa11191_bf01b6ef",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/mmu.c",
+              "range": {
+                "startLine": 215,
+                "startChar": 0,
+                "endLine": 216,
+                "endChar": 0
+              },
+              "replacement": "\tprot |\u003d kvm_x86_call(get_mt_mask)(vcpu, gpa \u003e\u003e PAGE_SHIFT, false);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7771b67e8c9527853bf7a3951b913a9c88846e8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
