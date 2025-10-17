@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "590a6bf7_9e60d626",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-10-17T06:02:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9004ea53_0afff8ca",
+      "range": {
+        "startLine": 9,
+        "startChar": 39,
+        "endLine": 9,
+        "endChar": 46
+      },
+      "revId": "8bfd8db9ffd37a147c3000f31f061f036579c95b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "423b6cd8_05fabd47",
@@ -127,6 +151,30 @@
       "side": 1,
       "message": "Do we have to break from the spec in order to facilitate debugging? It is very difficult to implement the FF-A spec correctly due to internal inconsistencies and subtle version differences. It would be less mental overhead if we always followed the spec as best we are able, in my opinion.\n\nI think this could be considered separately from the change you are making here; could we focus this CL on just updating the guest version logic?",
       "parentUuid": "9f4161f7_689ace7d",
+      "range": {
+        "startLine": 1512,
+        "startChar": 2,
+        "endLine": 1512,
+        "endChar": 27
+      },
+      "revId": "8bfd8db9ffd37a147c3000f31f061f036579c95b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34ba82a8_ee21faff",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1512,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-10-17T06:02:47Z",
+      "side": 1,
+      "message": "replaced it with FFA_RET_NOT_SUPPORTED even though we have 4 return cases that we will have to distinguish. buckle up in case you end up debugging this 😄",
+      "parentUuid": "1921a023_706ead19",
       "range": {
         "startLine": 1512,
         "startChar": 2,
