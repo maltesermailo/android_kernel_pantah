@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32582501_42be8933",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-10-20T17:44:09Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesour...\n\nCherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/1dbf1d590d10a6d1978e8184f8dfe20af22d680a) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d1dbf1d590d10a6d1978e8184f8dfe20af22d680a).\n\n```\n      ## include/net/dst.h ##\n     @@ include/net/dst.h: static inline struct net_device *dst_dev(const struct dst_entry *dst)\n    @@ net/ipv4/ip_output.c: int ip_mc_output(struct net *net, struct sock *sk, struct\n      \n      int ip_output(struct net *net, struct sock *sk, struct sk_buff *skb)\n      {\n    --\tstruct net_device *dev \u003d skb_dst_dev(skb), *indev \u003d skb-\u003edev;\n    +-\tstruct net_device *dev \u003d skb_dst(skb)-\u003edev, *indev \u003d skb-\u003edev;\n     +\tstruct net_device *dev, *indev \u003d skb-\u003edev;\n     +\tint ret_val;\n      \n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md\n\nSince the cherry-pick is not clean, this should be labeled as a \"BACKPORT:\", not \"UPSTREAM:\" and there should be an annotation of what needed to be changed and why. See the contribution guidelines at https://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "ec0eaa9f727b3e2b3cf7bec1f8d8ad6b47ff9a6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e931deb1_ba9f0029",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-10-20T17:44:09Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Cherry pick does not have same author as original commit.\n\nOriginal author: \u0027qui...\n\nCherry pick does not have same author as original commit.\n\nOriginal author: \u0027quic_sharathv@quicinc.com\nCherry pick author: \u0027zhoumin@oppo.corp-partner.google.com\n\nPlease cherry-pick using: `git cherry-pick -s -x 1dbf1d590d10a6d1978e8184f8dfe20af22d680a`.\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "ec0eaa9f727b3e2b3cf7bec1f8d8ad6b47ff9a6b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
