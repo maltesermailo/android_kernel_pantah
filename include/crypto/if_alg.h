@@ -152,7 +152,12 @@ struct af_alg_ctx {
 	size_t used;
 	atomic_t rcvused;
 
+<<<<<<< HEAD   (22c0b7236c43dfcea893a99fc11dc7d35a518341 ANDROID: PM: Fix suspend spinlock in IRQ context)
 	u32		more:1,
+||||||| BASE   (48c8410fc61f6ffa1410321714421d4c90b40ae8 ANDROID: KVM: arm64: Read REVIDR_EL1 and AIDR_EL1 for protec)
+=======
+	bool		more:1,
+>>>>>>> BRANCH (6f6441d9aa57fe509241727abf9727d132be6a72 Merge 6.1.155 into android14-6.1-lts)
 			merge:1,
 			enc:1,
 			write:1,
