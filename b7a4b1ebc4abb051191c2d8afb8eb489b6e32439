@@ -16,6 +16,24 @@
       "message": "Hrm.\n\nTJ: Do we expect vendors to use the upstream CMA heap or just implement their own vendor module? Do we have any convergence plan such that we could make the CMA heap a GKI module?",
       "revId": "b7a4b1ebc4abb051191c2d8afb8eb489b6e32439",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f82e2dbf_19ef6949",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-10-21T23:37:43Z",
+      "side": 1,
+      "message": "Some vendors use the upstream CMA heap. Even for those that don\u0027t, it is useful to have the upstream CMA heap available for testing even where a vendor provided CMA heap exists.\n\nWe could provide it as an overridable GKI module if necessary, but allowing vendors to set it to `\u003dm` (or provide their own modules) seems to be working well enough. In both cases we need the tristate.",
+      "parentUuid": "1d212973_1ce2cc26",
+      "revId": "b7a4b1ebc4abb051191c2d8afb8eb489b6e32439",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
