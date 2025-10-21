@@ -2758,6 +2758,11 @@ SYSCALL_DEFINE5(prctl, int, option, unsigned long, arg2, unsigned long, arg3,
 	case PR_RISCV_V_GET_CONTROL:
 		error = RISCV_V_GET_CONTROL();
 		break;
+	case PR_SET_ANDROID_16K_COMPAT:
+		if (arg2 || arg3 || arg4 || arg5)
+			return -EINVAL;
+		current->flags |= PF_ANDROID_16K_COMPAT;
+		break;
 	default:
 		error = -EINVAL;
 		break;

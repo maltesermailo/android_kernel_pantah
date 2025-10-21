@@ -694,7 +694,7 @@ fail:
  * pkey==-1 when doing a legacy mprotect()
  */
 static int do_mprotect_pkey(unsigned long start, size_t len,
-		unsigned long prot, int pkey)
+		unsigned long prot, int pkey, bool keep_rwx_prot)
 {
 	unsigned long nstart, end, tmp, reqprot;
 	struct vm_area_struct *vma, *prev;
@@ -785,7 +785,9 @@ static int do_mprotect_pkey(unsigned long start, size_t len,
 		 * If a permission is not passed to mprotect(), it must be
 		 * cleared from the VMA.
 		 */
-		mask_off_old_flags = VM_ACCESS_FLAGS | VM_FLAGS_CLEAR;
+		mask_off_old_flags = keep_rwx_prot ?
+					VM_FLAGS_CLEAR :
+					VM_ACCESS_FLAGS | VM_FLAGS_CLEAR;
 
 		new_vma_pkey = arch_override_mprotect_pkey(vma, prot, pkey);
 		newflags = calc_vm_prot_bits(prot, new_vma_pkey);
@@ -843,7 +845,94 @@ out:
 SYSCALL_DEFINE3(mprotect, unsigned long, start, size_t, len,
 		unsigned long, prot)
 {
-	return do_mprotect_pkey(start, len, prot, -1);
+	if (PAGE_SIZE == 16 * 1024 && (current->flags & PF_ANDROID_16K_COMPAT)) {
+		/* For Android's 16KiB compatibility mode we need to handle
+		 * mprotect calls that only use 4KiB address alignment.
+		 *
+		 * Assuming that start and len are 4KiB aligned, we can
+		 * potentially have three different segments we need to
+		 * handle, marked (1), (2) and (3) on the diagram below:
+		 *   (1) If start isn't 16KiB aligned, then this is the
+		 *       region until the first page boundary.
+		 *   (2) The number of full pages entirely contained within
+		 *       the range [start, start + len).
+		 *   (3) If start + len isn't 16KiB aligned, then this is
+		 *       the remaining 4KiB regions after (2).
+		 *
+		 * Offsets in KiB:
+		 * 0   4   8   12  16  ...
+		 * +---------------+---------+---------+---------------+
+		 * |   .   .   .   |   ...   |   ...   |   .   .   .   |
+		 * +---------------+---------+---------+---------------+
+		 *     ^                                       ^
+		 *     |-----------+-------------------+-------|
+		 *     |    (1)    |        (2)        |  (3)  |
+		 *     start                                   start + len
+		 *
+		 * For (2) we don't have to do anything special, it can be
+		 * handled as a regular mprotect call.
+		 * For (1) and (3) however, if they are present, we need to
+		 * merge the existing protection flags of the pages with the
+		 * new flags. I.e. we have new_prot = old_prot | prot. This
+		 * behaviour signaled by the keep_rwx_prot parameter of
+		 * do_mprotect_pkey.
+		 *
+		 * Each of the three regions may be missing, so we need to
+		 * handle those cases, and we also need to handle the case
+		 * where [start, start + len) is entirely within a single
+		 * 16KiB page, pictured below.
+		 *
+		 * +---------------+
+		 * |   .   .   .   |
+		 * +---------------+
+		 *     ^       ^
+		 *     |-------|
+		 *     |  (1)  |
+		 *     start   start + len
+		 *
+		 */
+		if (!IS_ALIGNED(start, 4096))
+			return -EINVAL;
+		if (!len)
+			return 0;
+		len = ALIGN(len, 4096);
+
+		int error = 0;
+		// Region (1):
+		unsigned long first_page_start = PAGE_ALIGN_DOWN(start);
+		unsigned long first_page_end = PAGE_ALIGN(start);
+		if (first_page_end > first_page_start) {
+			error = do_mprotect_pkey(first_page_start, PAGE_SIZE,
+						 prot, -1, true);
+			if (error)
+				return error;
+		}
+
+		// Region (2):
+		unsigned long middle_start = PAGE_ALIGN(start);
+		unsigned long middle_end = PAGE_ALIGN_DOWN(start + len);
+		if (middle_end > middle_start) {
+			error = do_mprotect_pkey(middle_start,
+						 middle_end - middle_start,
+						 prot, -1, false);
+			if (error)
+				return error;
+		}
+
+		// Region (3):
+		unsigned long last_page_start = PAGE_ALIGN_DOWN(start + len);
+		unsigned long last_page_end = PAGE_ALIGN(start + len);
+		if (last_page_start >= first_page_end &&
+		    last_page_end > last_page_start) {
+			error = do_mprotect_pkey(last_page_start, PAGE_SIZE,
+						 prot, -1, true);
+			if (error)
+				return error;
+		}
+		return 0;
+	}
+
+	return do_mprotect_pkey(start, len, prot, -1, false);
 }
 
 #ifdef CONFIG_ARCH_HAS_PKEYS
@@ -851,7 +940,7 @@ SYSCALL_DEFINE3(mprotect, unsigned long, start, size_t, len,
 SYSCALL_DEFINE4(pkey_mprotect, unsigned long, start, size_t, len,
 		unsigned long, prot, int, pkey)
 {
-	return do_mprotect_pkey(start, len, prot, pkey);
+	return do_mprotect_pkey(start, len, prot, pkey, false);
 }
 
 SYSCALL_DEFINE2(pkey_alloc, unsigned long, flags, unsigned long, init_val)
