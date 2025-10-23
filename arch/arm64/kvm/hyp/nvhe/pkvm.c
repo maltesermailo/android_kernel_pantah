@@ -1837,7 +1837,7 @@ static bool is_standard_secure_service_call(u64 func_id)
 
 bool kvm_handle_pvm_smc64(struct kvm_vcpu *vcpu, u64 *exit_code)
 {
-	bool handled = false;
+	enum pkvm_smc_handler_ret handler_ret;
 	struct kvm_cpu_context *ctxt = &vcpu->arch.ctxt;
 	struct pkvm_hyp_vm *vm;
 	struct pkvm_hyp_vcpu *hyp_vcpu;
@@ -1855,15 +1855,26 @@ bool kvm_handle_pvm_smc64(struct kvm_vcpu *vcpu, u64 *exit_code)
 		return false;
 
 	memcpy(&regs, &ctxt->regs, sizeof(regs));
-	handled = module_handle_guest_smc(&regs, &res, vm->kvm.arch.pkvm.handle);
-	if (handled)
+	handler_ret = module_handle_guest_smc(&regs, &res, vm->kvm.arch.pkvm.handle);
+	switch (handler_ret) {
+	case GUEST_SMC_HANDLED:
 		memcpy(&ctxt->regs.regs[0], &res, sizeof(res));
-	else
-		ctxt->regs.regs[0] = -1;
+		break;
+	case GUEST_SMC_NOT_HANDLED:
+		ctxt->regs.regs[0] = SMCCC_RET_NOT_SUPPORTED;
+		break;
+	case GUEST_SMC_NEED_TOPUP:
+		if (!pkvm_request_vcpu_memcache(hyp_vcpu, exit_code))
+			return false;
+		smccc_set_retval(vcpu, SMCCC_RET_INVALID_PARAMETER, 0, 0, 0);
+		break;
+	default:
+		WARN_ON(1);
+	}
 
 	__kvm_skip_instr(vcpu);
 
-	return handled;
+	return true;
 }
 
 /*
