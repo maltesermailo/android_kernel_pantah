@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a2adbe00_01fd968f",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1877,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-23T22:45:17Z",
+      "side": 1,
+      "message": "I think the barrier is still needed. Once we\u0027ve set mp_state to RUNNABLE, the host may successfully start running this vCPU on another pCPU at any time, i.e. the mp_state check in pkvm_vcpu_run() will succeed even if that check happens on another CPU _right_ after we set mp_state here (i.e. even if the host has issued the vcpu_run hypercall even slightly before that). And that is fine, as long as we still make sure to set up the vCPU in pkvm_vcpu_ap_entry_init() with the correct sipi_vector value, i.e. with the new sipi_vector value we\u0027ve set above. So we need a barrier to make sure pkvm_vcpu_ap_entry_init() sees this new sipi_vector value, not the old (i.e. zero) one, right?",
+      "parentUuid": "f763c3b7_8c578e2b",
+      "range": {
+        "startLine": 1876,
+        "startChar": 0,
+        "endLine": 1877,
+        "endChar": 57
+      },
+      "revId": "58edd2c95993629f13c1e681f20d4db6b5701387",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5251871b_8550cf71",
         "filename": "arch/x86/kvm/x86.c",
         "patchSetId": 5
@@ -132,6 +156,30 @@
           ]
         }
       ],
+      "revId": "58edd2c95993629f13c1e681f20d4db6b5701387",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c8a497b_b80ffb92",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 10052,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-23T22:45:17Z",
+      "side": 1,
+      "message": "If we skip this part, we still don\u0027t skip the receiver part in kvm_apic_accept_events() which handles KVM_APIC_INIT and KVM_APIC_SIPI and, in particular, does make hypercalls to pKVM to set up the segments in VMCS according to this sipi_vector (which are later overwritten by pKVM anyway, though). So, those host\u0027s actions are useless either way, but if we skip this part, they are useless _and_ inconsistent.\n\nAlthough, thinking more about this... That inconsistency wouldn\u0027t be a big deal, whereas the fact that we _expose_ this start_ip value to the host in the first place seems like a problem. We probably shouldn\u0027t even expose it (e.g. should zero it in pKVM before forwarding the hypercall to the host), since a pVM, in the general case, may not want the host to know it.",
+      "parentUuid": "5251871b_8550cf71",
+      "range": {
+        "startLine": 10050,
+        "startChar": 0,
+        "endLine": 10052,
+        "endChar": 11
+      },
       "revId": "58edd2c95993629f13c1e681f20d4db6b5701387",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
