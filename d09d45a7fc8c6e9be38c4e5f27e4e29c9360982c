@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0ee0c36_c2d9c7a5",
+        "filename": "drivers/gpu/drm/xe/xe_device.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 742,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2025-10-23T00:18:11Z",
+      "side": 1,
+      "message": "Should be `goto err_fini_gt;`",
+      "fixSuggestions": [
+        {
+          "fixId": "5d055930_3c096b74",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/gpu/drm/xe/xe_device.c",
+              "range": {
+                "startLine": 742,
+                "startChar": 0,
+                "endLine": 743,
+                "endChar": 0
+              },
+              "replacement": "\t\tgoto err_fini_gt;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d09d45a7fc8c6e9be38c4e5f27e4e29c9360982c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc5aa638_d4fd1f3f",
+        "filename": "drivers/gpu/drm/xe/xe_gpufreqtracer.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2025-10-23T00:18:11Z",
+      "side": 1,
+      "message": "Move these three definitions to the header (`xe_gpufreqtracer.h`) so they can be used both here and within `xe_module.c` for setting the corresponding default module param and printing the acceptable domain of inputs: for `gpufreq_monitoring_interval_ms`.",
+      "revId": "d09d45a7fc8c6e9be38c4e5f27e4e29c9360982c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b394c0cd_1fda6cea",
+        "filename": "drivers/gpu/drm/xe/xe_module.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2025-10-23T00:18:11Z",
+      "side": 1,
+      "message": "Remove this, it is redundant to `XE_GPUFREQ_MONITORING_DEFAULT_INTERVAL_MS`, already defined in the new `xe_gpufreqtracer.{c,h}`.",
+      "revId": "d09d45a7fc8c6e9be38c4e5f27e4e29c9360982c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40244d36_014a93ad",
+        "filename": "drivers/gpu/drm/xe/xe_module.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2025-10-23T00:18:11Z",
+      "side": 1,
+      "message": "Use the `__stringify` trick along with my other comment to make the min/max definitions available here via `#include \"xe_gpufreqtracer.h\"` to populate the description with the actual `_MIN` and `_MAX` values",
+      "fixSuggestions": [
+        {
+          "fixId": "882f6951_ff45988f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/gpu/drm/xe/xe_module.c",
+              "range": {
+                "startLine": 15,
+                "startChar": 0,
+                "endLine": 15,
+                "endChar": 0
+              },
+              "replacement": "#include \"xe_gpufreqtracer.h\"\n"
+            },
+            {
+              "path": "drivers/gpu/drm/xe/xe_module.c",
+              "range": {
+                "startLine": 77,
+                "startChar": 0,
+                "endLine": 78,
+                "endChar": 0
+              },
+              "replacement": "\t\t \"GPU frequency monitoring interval in milliseconds (\"\n\t\t __stringify(GPUFREQ_MONITORING_INTERVAL_MS_MIN) \"-\"\n\t\t __stringify(GPUFREQ_MONITORING_INTERVAL_MS_MAX) \", default: \"\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d09d45a7fc8c6e9be38c4e5f27e4e29c9360982c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
