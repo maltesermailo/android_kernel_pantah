@@ -2393,7 +2393,13 @@ static inline unsigned int get_available_block_count(struct f2fs_sb_info *sbi,
 	avail_user_block_count = sbi->user_block_count -
 					sbi->current_reserved_blocks;
 
+<<<<<<< HEAD   (cc4620f4d7fbd6faf250eee3e9e6c5fddbb509e0 Merge f856c598080b ("bpf: Enforce expected_attach_type for t)
 	if (test_opt(sbi, RESERVE_ROOT) && !__allow_reserved_root(sbi, inode, cap))
+||||||| BASE   (f856c598080ba7ce1252867b8ecd6ad5bdaf9a6a bpf: Enforce expected_attach_type for tailcall compatibility)
+	if (!__allow_reserved_blocks(sbi, inode, cap))
+=======
+	if (test_opt(sbi, RESERVE_ROOT) && !__allow_reserved_blocks(sbi, inode, cap))
+>>>>>>> BRANCH (fcd03f7736b1fa2b2181a7306d14008aa36b66ed Linux 6.12.53)
 		avail_user_block_count -= F2FS_OPTION(sbi).root_reserved_blocks;
 
 	if (unlikely(is_sbi_flag_set(sbi, SBI_CP_DISABLED))) {
