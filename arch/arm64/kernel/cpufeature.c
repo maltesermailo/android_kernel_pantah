@@ -2014,17 +2014,32 @@ static void bti_enable(const struct arm64_cpu_capabilities *__unused)
 #ifdef CONFIG_ARM64_MTE
 static void cpu_enable_mte(struct arm64_cpu_capabilities const *cap)
 {
+	static bool cleared_zero_page = false;
+
 	sysreg_clear_set(sctlr_el1, 0, SCTLR_ELx_ATA | SCTLR_EL1_ATA0);
 
 	mte_cpu_setup();
 
 	/*
 	 * Clear the tags in the zero page. This needs to be done via the
-	 * linear map which has the Tagged attribute.
+	 * linear map which has the Tagged attribute. Since this page is
+	 * always mapped as pte_special(), set_pte_at() will not attempt to
+	 * clear the tags or set PG_mte_tagged.
 	 */
+<<<<<<< HEAD   (4e13bdf7516dfd6aca8b2bf1ee4e490ff0789198 ANDROID: GKI: fix crc issue with include/linux/can/dev.h)
 	if (!page_mte_tagged(ZERO_PAGE(0))) {
+||||||| BASE   (29e53a5b1c4f144301ee36a907e8b03d7733f0b0 Linux 5.15.194)
+	if (!test_and_set_bit(PG_mte_tagged, &ZERO_PAGE(0)->flags))
+=======
+	if (!cleared_zero_page) {
+		cleared_zero_page = true;
+>>>>>>> BRANCH (ac56c046adf41fdb64ddda46fd66090f21dc381a Linux 5.15.195)
 		mte_clear_page_tags(lm_alias(empty_zero_page));
+<<<<<<< HEAD   (4e13bdf7516dfd6aca8b2bf1ee4e490ff0789198 ANDROID: GKI: fix crc issue with include/linux/can/dev.h)
 		set_page_mte_tagged(ZERO_PAGE(0));
+||||||| BASE   (29e53a5b1c4f144301ee36a907e8b03d7733f0b0 Linux 5.15.194)
+=======
+>>>>>>> BRANCH (ac56c046adf41fdb64ddda46fd66090f21dc381a Linux 5.15.195)
 	}
 
 	kasan_init_hw_tags_cpu();

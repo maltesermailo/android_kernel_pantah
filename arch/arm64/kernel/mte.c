@@ -455,7 +455,14 @@ static int __access_remote_tags(struct mm_struct *mm, unsigned long addr,
 			put_page(page);
 			break;
 		}
+<<<<<<< HEAD   (4e13bdf7516dfd6aca8b2bf1ee4e490ff0789198 ANDROID: GKI: fix crc issue with include/linux/can/dev.h)
 		WARN_ON_ONCE(!page_mte_tagged(page));
+||||||| BASE   (29e53a5b1c4f144301ee36a907e8b03d7733f0b0 Linux 5.15.194)
+		WARN_ON_ONCE(!test_bit(PG_mte_tagged, &page->flags));
+=======
+		WARN_ON_ONCE(!test_bit(PG_mte_tagged, &page->flags) &&
+			     !is_zero_pfn(page_to_pfn(page)));
+>>>>>>> BRANCH (ac56c046adf41fdb64ddda46fd66090f21dc381a Linux 5.15.195)
 
 		/* limit access to the end of the page */
 		offset = offset_in_page(addr);

@@ -1227,7 +1227,13 @@ try_again:
 		return 0;
 	}
 	if (work) {
+<<<<<<< HEAD   (4e13bdf7516dfd6aca8b2bf1ee4e490ff0789198 ANDROID: GKI: fix crc issue with include/linux/can/dev.h)
 		strncpy(work->nsui_ipaddr, ipaddr, sizeof(work->nsui_ipaddr));
+||||||| BASE   (29e53a5b1c4f144301ee36a907e8b03d7733f0b0 Linux 5.15.194)
+		strscpy(work->nsui_ipaddr, ipaddr, sizeof(work->nsui_ipaddr) - 1);
+=======
+		strscpy(work->nsui_ipaddr, ipaddr, sizeof(work->nsui_ipaddr));
+>>>>>>> BRANCH (ac56c046adf41fdb64ddda46fd66090f21dc381a Linux 5.15.195)
 		refcount_set(&work->nsui_refcnt, 2);
 		work->nsui_busy = true;
 		list_add_tail(&work->nsui_list, &nn->nfsd_ssc_mount_list);
