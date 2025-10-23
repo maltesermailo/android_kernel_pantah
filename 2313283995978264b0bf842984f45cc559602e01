@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05bd6929_ab162f9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2025-10-23T22:00:22Z",
+      "side": 1,
+      "message": "Sorry again for my long delay here.\n\nThese are my last comments (hadn\u0027t quite finished the latest review pass when I sent the earlier comments yesterday).\n\nAfter these, we\u0027re good to go!",
+      "revId": "2313283995978264b0bf842984f45cc559602e01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44701931_c724dfef",
+        "filename": "drivers/gpu/drm/xe/xe_gpufreqtracer.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2025-10-23T22:00:22Z",
+      "side": 1,
+      "message": "This is a bit chatty since we currently have DRIVER drm logging enabled for Xe.\n\nHow about hiding it behind `CONFIG_DRM_XE_DEBUG` and report the period in milliseconds (as it is often printed as `0` seconds):\n\n```suggestion\n#if IS_ENABLED(CONFIG_DRM_XE_DEBUG)\n\t\tdrm_dbg(\u0026xe-\u003edrm, \"GT%u frequency changed, tracing %u KHz (period %u msec)\",\n\t\t\tgt-\u003einfo.id, current_freq,\n\t\t\tatomic_read(\u0026gt_data-\u003egpu_active)\n\t\t\t\t? XE_GPUFREQ_MONITORING_MIN_INTERVAL_MS\n\t\t\t\t: xe_modparam.gpufreq_monitoring_interval_ms);\n#endif\n```",
+      "range": {
+        "startLine": 219,
+        "startChar": 0,
+        "endLine": 223,
+        "endChar": 57
+      },
+      "revId": "2313283995978264b0bf842984f45cc559602e01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d99d15d_538b56b3",
+        "filename": "drivers/gpu/drm/xe/xe_gpufreqtracer.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2025-10-23T22:00:22Z",
+      "side": 1,
+      "message": "`atomic_set()` here can be within the preceding `if ()` block, otherwise it is not changed and the write is superfluous.",
+      "fixSuggestions": [
+        {
+          "fixId": "7aea2c2f_782444d3",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/gpu/drm/xe/xe_gpufreqtracer.c",
+              "range": {
+                "startLine": 386,
+                "startChar": 0,
+                "endLine": 386,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tatomic_set(\u0026gt_data-\u003esubmission_rate, current_rate);\n"
+            },
+            {
+              "path": "drivers/gpu/drm/xe/xe_gpufreqtracer.c",
+              "range": {
+                "startLine": 387,
+                "startChar": 0,
+                "endLine": 388,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "2313283995978264b0bf842984f45cc559602e01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
