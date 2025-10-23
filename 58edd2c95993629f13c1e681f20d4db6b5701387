@@ -1,0 +1,91 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "108eb5a4_a534dc6a",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-23T21:10:20Z",
+      "side": 1,
+      "message": "Thinking loudly: if malicious host kicks vcpu not as a consequence of PKVM_GHC_START_CPU triggered by pVM but because it is malicious: do I understand correctly that we could start running this function in pKVM hyp with not initialized sipi_vector?\n\nIn `pkvm_vm_init` we `memset(pkvm_vm, 0, pa_size);` so sipi_vector will be set to 0 but not sure if it is safe? WDYT?",
+      "range": {
+        "startLine": 798,
+        "startChar": 0,
+        "endLine": 803,
+        "endChar": 0
+      },
+      "revId": "58edd2c95993629f13c1e681f20d4db6b5701387",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f763c3b7_8c578e2b",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1877,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-23T21:10:20Z",
+      "side": 1,
+      "message": "BTW those barriers are probably redundant since after storing sipi_vector we let host finish this hypercall handling and switching to host is its own kind of memory barrier. Right?",
+      "range": {
+        "startLine": 1876,
+        "startChar": 0,
+        "endLine": 1877,
+        "endChar": 57
+      },
+      "revId": "58edd2c95993629f13c1e681f20d4db6b5701387",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5251871b_8550cf71",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 10052,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-23T21:10:20Z",
+      "side": 1,
+      "message": "IIUC this part can be skipped since pkvm hypervisor will ignore sipi_vector stored here and use one stored in pkvm\u0027s version of `pkvm_start_secondary_vcpu` that protected-guest sets.\n\nMaybe removing it and adding some comment here will be beneficial? WDYT?",
+      "range": {
+        "startLine": 10050,
+        "startChar": 0,
+        "endLine": 10052,
+        "endChar": 11
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a564ea1e_03e97f7b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/x86.c",
+              "range": {
+                "startLine": 10050,
+                "startChar": 0,
+                "endLine": 10053,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * For pKVM, the SIPI vector is controlled by the protected guest and\n\t * is not taken from the \u0027start_ip\u0027 provided in the hypercall.\n\t * Thus, we don\u0027t need to update apic-\u003esipi_vector here.\n\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "58edd2c95993629f13c1e681f20d4db6b5701387",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
