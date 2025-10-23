@@ -107,6 +107,8 @@ static __always_inline void __load_host_stage2(void)
 		write_sysreg(0, vttbr_el2);
 }
 
+int __pkvm_accept_module_prot_page(u64 ipa, u64 nr_pages);
+
 #ifdef CONFIG_NVHE_EL2_DEBUG
 void pkvm_ownership_selftest(void *base);
 #else
