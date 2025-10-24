@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8b9a7c20_1246dd0c",
+        "filename": "arch/x86/include/asm/kvm_host.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 1112,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-24T19:06:27Z",
+      "side": 1,
+      "message": "\u003e So we can make this name more consistent with our other naming, e.g. something like guest_mmu_memcache?\n\nOr maybe just `memcache` (if it will be a sub-field of a structure field `pkvm`), why not. It we have any other use cases for a per-vCPU memcache in the future, I imagine we may reuse this memcache for that, instead of introducing a separate one.",
+      "parentUuid": "b8f42c24_13f3fc33",
+      "revId": "7771b67e8c9527853bf7a3951b913a9c88846e8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96b050e4_985f7451",
         "filename": "arch/x86/include/asm/kvm_host.h",
         "patchSetId": 8
