@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b243213_825f63ab",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-24T11:30:35Z",
+      "side": 1,
+      "message": "Maybe we should sanitize pv VCPU interface and not allow setting arbitrary segment, because now it seems to be too permissive and allow to set arbitrary segment unconditionally:\nhttps://source.corp.google.com/h/android/kernel/common/+/android16-6.12-desktop:arch/x86/kvm/pkvm/pkvm.c;l\u003d639 and now pkvm high can set any segment through:\narch/x86/kvm/vmx/pkvm_high.c: `pkvm_set_segment` (which triggers pkvm version of pkvm_set_segment)\n\nThis pv VCPU interface allows to change the segment only for vcpu that didn\u0027t run yet (checks !kvm_vcpu_has_run(vcpu)) so 2) scenario from my prev comment seems not possible thanks to this check but 1) remains a possibility? WDYT?",
+      "parentUuid": "959da7fa_8e6ee16b",
+      "range": {
+        "startLine": 801,
+        "startChar": 1,
+        "endLine": 801,
+        "endChar": 29
+      },
+      "revId": "58edd2c95993629f13c1e681f20d4db6b5701387",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "108eb5a4_a534dc6a",
         "filename": "arch/x86/kvm/pkvm/pkvm.c",
         "patchSetId": 5
