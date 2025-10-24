@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3c84243f_00e42495",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-24T14:14:25Z",
+      "side": 1,
+      "message": "\u003e This pv VCPU interface allows to change the segment only for vcpu that didn\u0027t run yet (checks !kvm_vcpu_has_run(vcpu)) so 2) scenario from my prev comment seems not possible thanks to this check\n\nExactly.\n\n\u003e but 1) remains a possibility?\n\nDo you mean that since there is a time window when pKVM has already done pkvm_vcpu_ap_entry_init() but kvm_vcpu_has_run(vcpu) is still false, during this time window the host may make another PV call and successfully modify a segment or anything else that pKVM has set up in pkvm_vcpu_ap_entry_init()?\n\nIt doesn\u0027t seem so. The host may only do that on another CPU, and on that other CPU it will not succeed to do that, since this vCPU is not loaded on that other CPU, so pKVM will not allow it (see the checks in load_pkvm_vcpu()).",
+      "parentUuid": "5b243213_825f63ab",
+      "range": {
+        "startLine": 801,
+        "startChar": 1,
+        "endLine": 801,
+        "endChar": 29
+      },
+      "revId": "58edd2c95993629f13c1e681f20d4db6b5701387",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "108eb5a4_a534dc6a",
         "filename": "arch/x86/kvm/pkvm/pkvm.c",
         "patchSetId": 5
