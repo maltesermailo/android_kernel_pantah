@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "959da7fa_8e6ee16b",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-24T10:57:07Z",
+      "side": 1,
+      "message": "BTW I do not know details about vLAPIC but just start thinking based on description and comments: if the sipi_vector is overwritten by pKVM can a malicious host overwrite it again or we are protected somehow from that? What I mean is does those scenario could happen:\n1) we\u0027ve reach this line and the sipi_vector is overwritten by pKVM with expected value but just after that can malicious host which emulates LAPIC overwrite it again before we run this vCPU for the first time?\n2) Can the malicious host at arbitrary time overwrite cs segment (sipi_vector) and trigger vCPU reset (via INIT/SIPI) and cause the vCPU executing malicious code?",
+      "range": {
+        "startLine": 801,
+        "startChar": 1,
+        "endLine": 801,
+        "endChar": 29
+      },
+      "revId": "58edd2c95993629f13c1e681f20d4db6b5701387",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "108eb5a4_a534dc6a",
         "filename": "arch/x86/kvm/pkvm/pkvm.c",
         "patchSetId": 5
@@ -109,6 +132,30 @@
       "side": 1,
       "message": "I think the barrier is still needed. Once we\u0027ve set mp_state to RUNNABLE, the host may successfully start running this vCPU on another pCPU at any time, i.e. the mp_state check in pkvm_vcpu_run() will succeed even if that check happens on another CPU _right_ after we set mp_state here (i.e. even if the host has issued the vcpu_run hypercall even slightly before that). And that is fine, as long as we still make sure to set up the vCPU in pkvm_vcpu_ap_entry_init() with the correct sipi_vector value, i.e. with the new sipi_vector value we\u0027ve set above. So we need a barrier to make sure pkvm_vcpu_ap_entry_init() sees this new sipi_vector value, not the old (i.e. zero) one, right?",
       "parentUuid": "f763c3b7_8c578e2b",
+      "range": {
+        "startLine": 1876,
+        "startChar": 0,
+        "endLine": 1877,
+        "endChar": 57
+      },
+      "revId": "58edd2c95993629f13c1e681f20d4db6b5701387",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "197952b9_a34bb492",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1877,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-24T10:57:07Z",
+      "side": 1,
+      "message": "Indeed, it is not triggered in vCPU context that we are about to start (obviously :) ) but on bsp vcpu, so the host indeed may start running this vCPU on another pCPU after mp_state is set to runnable.\n\nI think this make sense - resolving.",
+      "parentUuid": "a2adbe00_01fd968f",
       "range": {
         "startLine": 1876,
         "startChar": 0,
