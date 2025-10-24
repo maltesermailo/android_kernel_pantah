@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b8f42c24_13f3fc33",
+        "filename": "arch/x86/include/asm/kvm_host.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 1112,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-24T18:05:54Z",
+      "side": 1,
+      "message": "Rather nit: \"stage-2\" is generally not an x86 term... And in the upstream pKVM-ARM code this field is named `pkvm_memcache` instead, thus we probably don\u0027t need to be particularly attached to the name `stage2_mc`. So we can make this name more consistent with our other naming, e.g. something like `guest_mmu_memcache`?",
+      "revId": "7771b67e8c9527853bf7a3951b913a9c88846e8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96b050e4_985f7451",
         "filename": "arch/x86/include/asm/kvm_host.h",
         "patchSetId": 8
