@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ab8210a_7abfbba8",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2059,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-25T15:04:31Z",
+      "side": 1,
+      "message": "1. We set iommu-\u003eviommu.iqa to vreg-\u003eiqa _before_ initializing vreg-\u003eiqa in initialize_qi()? (Although I see initialize_qi() itself also initializes iommu-\u003eviommu.iqa together with vreg-\u003eiqa, but still, seems unclean.)\n2. We set vreg-\u003eiq_head to 0 and then just overwrite it with the value read from hardware in initialize_qi()? (This seems like an actual bug. At least because this value is gonna be outdated by the time initialize_qi() returns, right?)\n\nSo it seems we should do the following instead:\n```\n\tif (en) {\n\t\tif (!iommu-\u003eqi_enabled)\n\t\t\tinitialize_qi(iommu);\n\t\t\n\t\t/* existing logic */\n\t\t...\n\t}\n```\n\n?",
+      "revId": "fba01fd127d61976e2058bfafdc3270edc51a765",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
