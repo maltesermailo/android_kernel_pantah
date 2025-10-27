@@ -64,6 +64,30 @@
       },
       "revId": "a64618c1e5039f9380f21dfb8f5d73b03e83fa76",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9665c536_9959aecd",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 10056,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-10-27T22:10:29Z",
+      "side": 1,
+      "message": "fair point. I had gone through the path from kicking the vcpu to entering the guest and seemed safe to set it, but just noticed what you mentioned - probably all mp_state manipulation happens with vcpu_get() in its path. So it might not be safe as you suggested. Resolving",
+      "parentUuid": "84698106_0662ec45",
+      "range": {
+        "startLine": 10055,
+        "startChar": 1,
+        "endLine": 10056,
+        "endChar": 47
+      },
+      "revId": "a64618c1e5039f9380f21dfb8f5d73b03e83fa76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
