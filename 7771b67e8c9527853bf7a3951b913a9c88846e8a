@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "438b27ad_b74d31d5",
+        "filename": "arch/x86/include/asm/kvm_host.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 1112,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-27T08:14:39Z",
+      "side": 1,
+      "message": "Similar to https://android-review.git.corp.google.com/c/kernel/common/+/3702536/comment/75cd0329_cf0ad8ef/ and https://android-review.git.corp.google.com/c/kernel/common/+/3702536/comment/bbae1fc3_7e929419/ - using dedicate memcache for stage2 mmu pages is rather desired due kvm_account_pgtable_pages usage.\n\nRegarding the name, maybe: `guest_tdp_memcache`?",
+      "parentUuid": "8b9a7c20_1246dd0c",
+      "revId": "7771b67e8c9527853bf7a3951b913a9c88846e8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96b050e4_985f7451",
         "filename": "arch/x86/include/asm/kvm_host.h",
         "patchSetId": 8
