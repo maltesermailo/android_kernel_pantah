@@ -96,6 +96,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87065d8c_c6997c83",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-27T09:40:31Z",
+      "side": 1,
+      "message": "More precisely, the host may actually also try to load this vCPU on that other CPU, via `__pkvm__vcpu_load`. But that is also gated by the check if it is not already loaded on some CPU (and we know it is already loaded, since we are executing `__pkvm__vcpu_run`).",
+      "parentUuid": "e4524954_c28f6442",
+      "range": {
+        "startLine": 801,
+        "startChar": 1,
+        "endLine": 801,
+        "endChar": 29
+      },
+      "revId": "58edd2c95993629f13c1e681f20d4db6b5701387",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "108eb5a4_a534dc6a",
