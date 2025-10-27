@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "21b0b8d2_3e7d2f47",
+        "filename": "arch/x86/include/asm/kvm_host.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 1112,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-27T13:45:49Z",
+      "side": 1,
+      "message": "Ok, I see.\n\nRegarding the name, how about just `mmu_memcache` or `mmu_mc`? We don\u0027t necessarily need to make it super-explanatory, so we can keep it short, and also I\u0027ve realized that using \"guest\" in KVM-high MMU context might make it ambiguous with nested VMs MMU - see e.g. `guest_mmu` field in struct kvm_vcpu_arch.\n\nRegarding \"tdp\", we don\u0027t generally use this term in pKVM code (where is it not as relevant as in traditional KVM, since pKVM _requires_ 2 stages, and so on; in 6.15+ we consistently use names hyp_mmu, host_mmu, guest_mmu instead).",
+      "parentUuid": "438b27ad_b74d31d5",
+      "revId": "7771b67e8c9527853bf7a3951b913a9c88846e8a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "96b050e4_985f7451",
         "filename": "arch/x86/include/asm/kvm_host.h",
         "patchSetId": 8
