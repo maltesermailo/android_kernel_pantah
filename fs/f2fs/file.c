@@ -35,13 +35,45 @@
 #include <trace/events/f2fs.h>
 #include <uapi/linux/f2fs.h>
 
+<<<<<<< HEAD   (41e02838262fbef7a64722da4afb221f7b9174e6 Merge cf71834a0cfc ("pps: fix warning in pps_register_cdev w)
 #undef CREATE_TRACE_POINTS
 #include <trace/hooks/fs.h>
+||||||| BASE   (cf71834a0cfc394c72d62fd6dbb470ee13cf8f5e pps: fix warning in pps_register_cdev when register device f)
+static void f2fs_zero_post_eof_page(struct inode *inode, loff_t new_size)
+{
+	loff_t old_size = i_size_read(inode);
+=======
+static void f2fs_zero_post_eof_page(struct inode *inode,
+					loff_t new_size, bool lock)
+{
+	loff_t old_size = i_size_read(inode);
+>>>>>>> BRANCH (0bbbd97a442d5e0136cc2ee921a4b76542d618ce Linux 6.6.112)
 
 EXPORT_TRACEPOINT_SYMBOL_GPL(f2fs_sync_file_enter);
 EXPORT_TRACEPOINT_SYMBOL_GPL(f2fs_sync_file_exit);
 
+<<<<<<< HEAD   (41e02838262fbef7a64722da4afb221f7b9174e6 Merge cf71834a0cfc ("pps: fix warning in pps_register_cdev w)
 vm_fault_t f2fs_filemap_fault(struct vm_fault *vmf)
+||||||| BASE   (cf71834a0cfc394c72d62fd6dbb470ee13cf8f5e pps: fix warning in pps_register_cdev when register device f)
+	/* zero or drop pages only in range of [old_size, new_size] */
+	truncate_pagecache(inode, old_size);
+}
+
+static vm_fault_t f2fs_filemap_fault(struct vm_fault *vmf)
+=======
+	if (mapping_empty(inode->i_mapping))
+		return;
+
+	if (lock)
+		filemap_invalidate_lock(inode->i_mapping);
+	/* zero or drop pages only in range of [old_size, new_size] */
+	truncate_inode_pages_range(inode->i_mapping, old_size, new_size);
+	if (lock)
+		filemap_invalidate_unlock(inode->i_mapping);
+}
+
+static vm_fault_t f2fs_filemap_fault(struct vm_fault *vmf)
+>>>>>>> BRANCH (0bbbd97a442d5e0136cc2ee921a4b76542d618ce Linux 6.6.112)
 {
 	struct inode *inode = file_inode(vmf->vma->vm_file);
 	vm_flags_t flags = vmf->vma->vm_flags;
@@ -109,6 +141,16 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
 
 	f2fs_bug_on(sbi, f2fs_has_inline_data(inode));
 
+<<<<<<< HEAD   (41e02838262fbef7a64722da4afb221f7b9174e6 Merge cf71834a0cfc ("pps: fix warning in pps_register_cdev w)
+||||||| BASE   (cf71834a0cfc394c72d62fd6dbb470ee13cf8f5e pps: fix warning in pps_register_cdev when register device f)
+	filemap_invalidate_lock(inode->i_mapping);
+	f2fs_zero_post_eof_page(inode, (folio->index + 1) << PAGE_SHIFT);
+	filemap_invalidate_unlock(inode->i_mapping);
+
+=======
+	f2fs_zero_post_eof_page(inode, (folio->index + 1) << PAGE_SHIFT, true);
+
+>>>>>>> BRANCH (0bbbd97a442d5e0136cc2ee921a4b76542d618ce Linux 6.6.112)
 	file_update_time(vmf->vma->vm_file);
 	filemap_invalidate_lock_shared(inode->i_mapping);
 	folio_lock(folio);
@@ -891,8 +933,16 @@ int f2fs_truncate(struct inode *inode)
 	/* we should check inline_data size */
 	if (!f2fs_may_inline_data(inode)) {
 		err = f2fs_convert_inline_inode(inode);
-		if (err)
+		if (err) {
+			/*
+			 * Always truncate page #0 to avoid page cache
+			 * leak in evict() path.
+			 */
+			truncate_inode_pages_range(inode->i_mapping,
+					F2FS_BLK_TO_BYTES(0),
+					F2FS_BLK_END_BYTES(0));
 			return err;
+		}
 	}
 
 	err = f2fs_truncate_blocks(inode, i_size_read(inode), true);
@@ -1118,6 +1168,14 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
 		f2fs_down_write(&fi->i_gc_rwsem[WRITE]);
 		filemap_invalidate_lock(inode->i_mapping);
 
+<<<<<<< HEAD   (41e02838262fbef7a64722da4afb221f7b9174e6 Merge cf71834a0cfc ("pps: fix warning in pps_register_cdev w)
+||||||| BASE   (cf71834a0cfc394c72d62fd6dbb470ee13cf8f5e pps: fix warning in pps_register_cdev when register device f)
+		if (attr->ia_size > old_size)
+			f2fs_zero_post_eof_page(inode, attr->ia_size);
+=======
+		if (attr->ia_size > old_size)
+			f2fs_zero_post_eof_page(inode, attr->ia_size, false);
+>>>>>>> BRANCH (0bbbd97a442d5e0136cc2ee921a4b76542d618ce Linux 6.6.112)
 		truncate_setsize(inode, attr->ia_size);
 
 		if (attr->ia_size <= old_size)
@@ -1236,6 +1294,16 @@ static int f2fs_punch_hole(struct inode *inode, loff_t offset, loff_t len)
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD   (41e02838262fbef7a64722da4afb221f7b9174e6 Merge cf71834a0cfc ("pps: fix warning in pps_register_cdev w)
+||||||| BASE   (cf71834a0cfc394c72d62fd6dbb470ee13cf8f5e pps: fix warning in pps_register_cdev when register device f)
+	filemap_invalidate_lock(inode->i_mapping);
+	f2fs_zero_post_eof_page(inode, offset + len);
+	filemap_invalidate_unlock(inode->i_mapping);
+
+=======
+	f2fs_zero_post_eof_page(inode, offset + len, true);
+
+>>>>>>> BRANCH (0bbbd97a442d5e0136cc2ee921a4b76542d618ce Linux 6.6.112)
 	pg_start = ((unsigned long long) offset) >> PAGE_SHIFT;
 	pg_end = ((unsigned long long) offset + len) >> PAGE_SHIFT;
 
@@ -1519,6 +1587,14 @@ static int f2fs_do_collapse(struct inode *inode, loff_t offset, loff_t len)
 	f2fs_down_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
 	filemap_invalidate_lock(inode->i_mapping);
 
+<<<<<<< HEAD   (41e02838262fbef7a64722da4afb221f7b9174e6 Merge cf71834a0cfc ("pps: fix warning in pps_register_cdev w)
+||||||| BASE   (cf71834a0cfc394c72d62fd6dbb470ee13cf8f5e pps: fix warning in pps_register_cdev when register device f)
+	f2fs_zero_post_eof_page(inode, offset + len);
+
+=======
+	f2fs_zero_post_eof_page(inode, offset + len, false);
+
+>>>>>>> BRANCH (0bbbd97a442d5e0136cc2ee921a4b76542d618ce Linux 6.6.112)
 	f2fs_lock_op(sbi);
 	f2fs_drop_extent_tree(inode);
 	truncate_pagecache(inode, offset);
@@ -1640,6 +1716,16 @@ static int f2fs_zero_range(struct inode *inode, loff_t offset, loff_t len,
 	if (ret)
 		return ret;
 
+<<<<<<< HEAD   (41e02838262fbef7a64722da4afb221f7b9174e6 Merge cf71834a0cfc ("pps: fix warning in pps_register_cdev w)
+||||||| BASE   (cf71834a0cfc394c72d62fd6dbb470ee13cf8f5e pps: fix warning in pps_register_cdev when register device f)
+	filemap_invalidate_lock(mapping);
+	f2fs_zero_post_eof_page(inode, offset + len);
+	filemap_invalidate_unlock(mapping);
+
+=======
+	f2fs_zero_post_eof_page(inode, offset + len, true);
+
+>>>>>>> BRANCH (0bbbd97a442d5e0136cc2ee921a4b76542d618ce Linux 6.6.112)
 	pg_start = ((unsigned long long) offset) >> PAGE_SHIFT;
 	pg_end = ((unsigned long long) offset + len) >> PAGE_SHIFT;
 
@@ -1771,6 +1857,14 @@ static int f2fs_insert_range(struct inode *inode, loff_t offset, loff_t len)
 	/* avoid gc operation during block exchange */
 	f2fs_down_write(&F2FS_I(inode)->i_gc_rwsem[WRITE]);
 	filemap_invalidate_lock(mapping);
+<<<<<<< HEAD   (41e02838262fbef7a64722da4afb221f7b9174e6 Merge cf71834a0cfc ("pps: fix warning in pps_register_cdev w)
+||||||| BASE   (cf71834a0cfc394c72d62fd6dbb470ee13cf8f5e pps: fix warning in pps_register_cdev when register device f)
+
+	f2fs_zero_post_eof_page(inode, offset + len);
+=======
+
+	f2fs_zero_post_eof_page(inode, offset + len, false);
+>>>>>>> BRANCH (0bbbd97a442d5e0136cc2ee921a4b76542d618ce Linux 6.6.112)
 	truncate_pagecache(inode, offset);
 
 	while (!ret && idx > pg_start) {
@@ -1828,6 +1922,16 @@ static int f2fs_expand_inode_data(struct inode *inode, loff_t offset,
 	if (err)
 		return err;
 
+<<<<<<< HEAD   (41e02838262fbef7a64722da4afb221f7b9174e6 Merge cf71834a0cfc ("pps: fix warning in pps_register_cdev w)
+||||||| BASE   (cf71834a0cfc394c72d62fd6dbb470ee13cf8f5e pps: fix warning in pps_register_cdev when register device f)
+	filemap_invalidate_lock(inode->i_mapping);
+	f2fs_zero_post_eof_page(inode, offset + len);
+	filemap_invalidate_unlock(inode->i_mapping);
+
+=======
+	f2fs_zero_post_eof_page(inode, offset + len, true);
+
+>>>>>>> BRANCH (0bbbd97a442d5e0136cc2ee921a4b76542d618ce Linux 6.6.112)
 	f2fs_balance_fs(sbi, true);
 
 	pg_start = ((unsigned long long)offset) >> PAGE_SHIFT;
@@ -4878,6 +4982,17 @@ static ssize_t f2fs_write_checks(struct kiocb *iocb, struct iov_iter *from)
 	err = file_modified(file);
 	if (err)
 		return err;
+<<<<<<< HEAD   (41e02838262fbef7a64722da4afb221f7b9174e6 Merge cf71834a0cfc ("pps: fix warning in pps_register_cdev w)
+||||||| BASE   (cf71834a0cfc394c72d62fd6dbb470ee13cf8f5e pps: fix warning in pps_register_cdev when register device f)
+
+	filemap_invalidate_lock(inode->i_mapping);
+	f2fs_zero_post_eof_page(inode, iocb->ki_pos + iov_iter_count(from));
+	filemap_invalidate_unlock(inode->i_mapping);
+=======
+
+	f2fs_zero_post_eof_page(inode,
+		iocb->ki_pos + iov_iter_count(from), true);
+>>>>>>> BRANCH (0bbbd97a442d5e0136cc2ee921a4b76542d618ce Linux 6.6.112)
 	return count;
 }
 
