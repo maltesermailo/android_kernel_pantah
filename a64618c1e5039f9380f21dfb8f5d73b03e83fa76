@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fa1e9c7_6e85c148",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 10056,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-10-27T19:39:26Z",
+      "side": 1,
+      "message": "I was reading the code again and looks like the effect of these two events is basically setting `vcpu-\u003earch.mp_state` to `KVM_MP_STATE_INIT_RECEIVED` (and vcpu_reset hypercall) and then to `KVM_MP_STATE_RUNNABLE` (and sipi_deliver hypercall). So, I was wondering if we set this directly here to `KVM_MP_STATE_RUNNABLE`, would we be able to save couple of hypercalls? WDYT?",
+      "range": {
+        "startLine": 10055,
+        "startChar": 1,
+        "endLine": 10056,
+        "endChar": 47
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "badb3f87_eeaad69d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/x86.c",
+              "range": {
+                "startLine": 10049,
+                "startChar": 0,
+                "endLine": 10057,
+                "endChar": 0
+              },
+              "replacement": "\t/* Reset the vCPU state as if an INIT was received. */\n\tkvm_vcpu_reset(vcpu, false);\n\n\t/* Directly set the state to RUNNABLE, bypassing the SIPI handling.\n\t * pKVM enforces the needed start vector, so the SIPI vector is not needed. */\n\tvcpu-\u003earch.mp_state \u003d KVM_MP_STATE_RUNNABLE;\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a64618c1e5039f9380f21dfb8f5d73b03e83fa76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
