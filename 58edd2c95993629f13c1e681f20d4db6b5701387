@@ -325,6 +325,30 @@
       },
       "revId": "58edd2c95993629f13c1e681f20d4db6b5701387",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae8224b6_f5a71722",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 10052,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-10-27T16:16:54Z",
+      "side": 1,
+      "message": "I am not too familiar with kvm/pkvm interaction about running vcpus. But thought of checking the inconsistency you mentioned - can we avoid that by not setting APIC_INIT and APIC_SIPI in pending events? kvm_vcpu_kick would get to pkvm and pkvm_vcpu_run which would anyways reset vcpu and set the sipi_vector before entering guest. That way we will not have inconsistency at the receiving end as the bits are not set. I am not sure if pkvm explicitly needs the host to set these 2 pending events, so this comment might be just bogus ;-)",
+      "parentUuid": "3c8a497b_b80ffb92",
+      "range": {
+        "startLine": 10050,
+        "startChar": 0,
+        "endLine": 10052,
+        "endChar": 11
+      },
+      "revId": "58edd2c95993629f13c1e681f20d4db6b5701387",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
