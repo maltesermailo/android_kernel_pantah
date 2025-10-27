@@ -40,6 +40,30 @@
       ],
       "revId": "a64618c1e5039f9380f21dfb8f5d73b03e83fa76",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84698106_0662ec45",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 10056,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-27T19:55:55Z",
+      "side": 1,
+      "message": "AFAICT, KVM doesn\u0027t tend to just freely set mp_state of any vCPU on any CPU (not just on a CPU where that vCPU is loaded). We should be careful with races.\n\nAlso that\u0027s not the whole story. kvm_vcpu_reset(), among other things, calls kvm_lapic_reset(), and that part should be done by the host, since it is not done by pKVM (since LAPIC is emulated by the host, not by pKVM). We could just directly call kvm_lapic_reset() here too, but I\u0027m not sure that would be quite safe either.",
+      "parentUuid": "1fa1e9c7_6e85c148",
+      "range": {
+        "startLine": 10055,
+        "startChar": 1,
+        "endLine": 10056,
+        "endChar": 47
+      },
+      "revId": "a64618c1e5039f9380f21dfb8f5d73b03e83fa76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
