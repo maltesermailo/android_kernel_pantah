@@ -373,6 +373,30 @@
       },
       "revId": "58edd2c95993629f13c1e681f20d4db6b5701387",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a0ea948_95d52ac1",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 10052,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-10-27T17:17:46Z",
+      "side": 1,
+      "message": "\u003e It wouldn\u0027t. The receiving end here is not pKVM but the host\u0027s vCPU thread which will run the vCPU. Precisely, kvm_vcpu_kick() wakes up the thread sleeping in kvm_arch_vcpu_ioctl_run() -\u003e kvm_vcpu_block(), and then this thread checks these two events in kvm_arch_vcpu_ioctl_run() -\u003e kvm_apic_accept_events(). pKVM doesn\u0027t care about these two events.\n\nWhat I meant was, if setting these two events was necessary for kvm_vcpu_kick() to return to pvm guest mode. Return to pvm guest mode would go through pkvm I guess(pkvm_cpu_run()) and that should take care of setting sipi_vector if vcpu is running for first time.\n\nThanks for clarifying the code path - looks like these events are needed for the vcpu to get back to guest mode. Its clear to me now. Thanks\n\n\u003e The issue, if at all, is that the host does redundant kvm_vcpu_reset() + kvm_vcpu_deliver_sipi_vector() which means a few redundant hypercalls to pKVM when starting a vCPU. We could avoid that by implementing this in a bit different way (which would mean adding pKVM-specific logic on the receiving end as well, i.e. more pKVM-specific changes in more places in KVM code). But the impact of those few redundant calls should be negligible.\n\nagreed, makes sense!",
+      "parentUuid": "3d0ae3e8_8b24bfa5",
+      "range": {
+        "startLine": 10050,
+        "startChar": 0,
+        "endLine": 10052,
+        "endChar": 11
+      },
+      "revId": "58edd2c95993629f13c1e681f20d4db6b5701387",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
