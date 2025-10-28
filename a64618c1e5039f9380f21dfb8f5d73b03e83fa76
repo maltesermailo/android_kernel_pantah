@@ -88,6 +88,30 @@
       },
       "revId": "a64618c1e5039f9380f21dfb8f5d73b03e83fa76",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2a7b90c_261fef06",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 10056,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-28T00:06:17Z",
+      "side": 1,
+      "message": "Besides that, since KVM-high still happens to be responsible for LAPIC emulation for the guest, and LAPIC is architecturally responsible for starting CPUs, it generally feels safer if this START_CPU hypercall implementation \"organically coexists\" with the existing KVM LAPIC implementation as is, not intrudes in the way how it works if not necessary.",
+      "parentUuid": "9665c536_9959aecd",
+      "range": {
+        "startLine": 10055,
+        "startChar": 1,
+        "endLine": 10056,
+        "endChar": 47
+      },
+      "revId": "a64618c1e5039f9380f21dfb8f5d73b03e83fa76",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
