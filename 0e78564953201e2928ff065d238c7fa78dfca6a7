@@ -63,6 +63,30 @@
       },
       "revId": "0e78564953201e2928ff065d238c7fa78dfca6a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de3077a7_68a2e5e0",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1526,
+      "author": {
+        "id": 1942270
+      },
+      "writtenOn": "2025-10-28T13:58:28Z",
+      "side": 1,
+      "message": "Yes, we are doing as the spec sais. The callee is the hyp and the caller is the guest. If the version of the hyp is greater than the version of the guest we can either return `FFA_RET_NOT_SUPPORTED` or the version of the implementation. But in this case we can\u0027t return the version of the implementation because we lack compatibility paths in the hyp.",
+      "parentUuid": "140456b2_97511549",
+      "range": {
+        "startLine": 1522,
+        "startChar": 0,
+        "endLine": 1526,
+        "endChar": 0
+      },
+      "revId": "0e78564953201e2928ff065d238c7fa78dfca6a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
