@@ -16,6 +16,24 @@
       "message": "pkvm_init_cpuid() is called on every CPU, whereas is looks like it should be called just once?\n\nI see the comment says that it must be called after fpu initialization as it depends on some fpu setup. But what does it mean exactly, given that the fpu setup in pkvm_init_percpu_fpu() is per CPU, whereas the setup in pkvm_init_cpuid(), as far as I can see, is global?",
       "revId": "3c21acbf76409193ff0317ce340a0a40c556f43f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cadbd27c_7ea644b7",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 4222956
+      },
+      "writtenOn": "2025-10-28T02:07:54Z",
+      "side": 1,
+      "message": "there is a check inside pkvm_init_cpuid():\n\n       if (pkvm_hyp-\u003ecpuid_nent)\n                return 0;\n\nso effectively it can be executed only once. The dependency comes from leaf (0xD) which calls xstate_get_guest_group_perm() using current-\u003egroup_leader-\u003ethread.fpu.",
+      "parentUuid": "ce3c4d3b_a1e226c9",
+      "revId": "3c21acbf76409193ff0317ce340a0a40c556f43f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
