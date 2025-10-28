@@ -40,6 +40,29 @@
       ],
       "revId": "0e78564953201e2928ff065d238c7fa78dfca6a7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "140456b2_97511549",
+        "filename": "arch/arm64/kvm/hyp/nvhe/ffa.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 1526,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-10-28T13:00:09Z",
+      "side": 1,
+      "message": "I don\u0027t understand this. Why is it not correct to return `hyp_ffa_version` in this case, as the code does already? The spec says:\n\n```\nIf it [callee] only supports a Firmware Framework implementation that is incompatible with and at a greater version number than specified by the caller, it must either return the version number of this implementation or the NOT_SUPPORTED error code.\n\nIt is strongly recommended that the callee returns the version number instead of the NOT_SUPPORTED error code.\n```",
+      "range": {
+        "startLine": 1522,
+        "startChar": 0,
+        "endLine": 1526,
+        "endChar": 0
+      },
+      "revId": "0e78564953201e2928ff065d238c7fa78dfca6a7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
