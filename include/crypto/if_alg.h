@@ -152,7 +152,12 @@ struct af_alg_ctx {
 	size_t used;
 	atomic_t rcvused;
 
+<<<<<<< HEAD   (cff934b6075c435d53cd3696a583a13e9b6c74ed ANDROID: crypto: af_alg - Fix assignment from bitfield)
 	u32		more:1,
+||||||| BASE   (bd0e4cef233d7f95e320d36ced31a23b952ab0cd Merge tag 'android13-5.10.243_r00' into android13-5.10)
+=======
+	bool		more:1,
+>>>>>>> BRANCH (2ece552169c277a60a8b4ee62c478d6224db2db1 Revert "genirq: Export affinity setter for modules")
 			merge:1,
 			enc:1,
 			write:1,
