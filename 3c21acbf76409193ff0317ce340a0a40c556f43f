@@ -34,6 +34,24 @@
       "parentUuid": "ce3c4d3b_a1e226c9",
       "revId": "3c21acbf76409193ff0317ce340a0a40c556f43f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac3991f6_44db1aa6",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-28T11:06:23Z",
+      "side": 1,
+      "message": "Ok, I see. I guess it is kvm_get_filtered_xcr0() called from __do_cpuid_func()?\n\nAnd I assume it should be the same on all CPUs in practice, thus no concern?\n\nHow about making this more explicit for clarity, e.g.:\n```\n/*\n * Set up cpuid if not already done on another CPU.\n * Must be called after fpu initialization, as the latter affects\n * the fpu related bits in the supported cpuid leaves.\n */\nif (!pkvm_hyp-\u003ecpuid_nent) {\n\tret \u003d pkvm_init_cpuid();\n\tif (ret)\n\t\tgoto out;\t\n}\n```\n\nor just add a comment before `if (pkvm_hyp-\u003ecpuid_nent)` inside pkvm_init_cpuid(), e.g. \"Do nothing if already done on another CPU.\"?",
+      "parentUuid": "cadbd27c_7ea644b7",
+      "revId": "3c21acbf76409193ff0317ce340a0a40c556f43f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
