@@ -104,6 +104,24 @@
       "parentUuid": "e9ab1337_bbe0cbf0",
       "revId": "fb1539c24b2dc9aca66a0dffb2b06d915ec32d27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c5d936b_6a0ea790",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-10-29T21:39:18Z",
+      "side": 1,
+      "message": "Ah! I didn\u0027t realize you had already sent it upstream (though, you are excellent about working upstream, so I should have guessed :)\n\nSo, reading Peter\u0027s feedback, I don\u0027t think his concern about deferred output not making it to the console is a blocker, as for WARN_ONs we should be continuing along (though he\u0027s right that when those warnings trip, things are going bad and you likely will hit a crash shortly after, for which the deferred printing could be a problem).\n\nBut his concern about the change to \"generate absolutely atrocious code\", does give me some hesitancy.\n\nCould maybe this change be gated on CONFIG_PROVE_LOCKING so make sure it doesn\u0027t impact normal GKI builds?",
+      "parentUuid": "6e6a2aac_8f658ef1",
+      "revId": "fb1539c24b2dc9aca66a0dffb2b06d915ec32d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
