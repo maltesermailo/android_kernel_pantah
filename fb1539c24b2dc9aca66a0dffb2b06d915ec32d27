@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6096c6c0_63963d97",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2025-10-29T19:09:04Z",
+      "side": 1,
+      "message": "Normal GKI builds won\u0027t trigger the lockdep complaint but will still trigger sleeping from inside the scheduler. Sleeping inside the scheduler is not allowed and can trigger a deadlock.",
+      "parentUuid": "0ca8a434_4d0ad43c",
+      "revId": "fb1539c24b2dc9aca66a0dffb2b06d915ec32d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27762f7a_79067434",
@@ -35,6 +53,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20a0b85a_e65e88bf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2025-10-29T19:09:04Z",
+      "side": 1,
+      "message": "Yes. See also https://b.corp.google.com/issues/448181560.",
+      "parentUuid": "27762f7a_79067434",
+      "revId": "fb1539c24b2dc9aca66a0dffb2b06d915ec32d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9ab1337_bbe0cbf0",
@@ -48,6 +84,24 @@
       "writtenOn": "2025-10-29T18:55:20Z",
       "side": 1,
       "message": "Oof. I hit this *all* the time.\n\nSo I\u0027ve been told that the great printk rework was going to resolve this, but there\u0027s apparently some work still to do on the console driver.\n\nSo SCHED_WARN_ON() has since been dropped upstream, but I still trip over this issue there. I wonder if its something we should propose upstream for WARN_ON in general?",
+      "revId": "fb1539c24b2dc9aca66a0dffb2b06d915ec32d27",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e6a2aac_8f658ef1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2025-10-29T19:09:04Z",
+      "side": 1,
+      "message": "The printk() maintainers are working on printk() changes that should make this CL superfluous in the future. From https://lore.kernel.org/lkml/20251028184537.GC3419281@noisy.programming.kicks-ass.net/:\n```\nThe printk() people have been working on fixing this for a long while\nand I think they\u0027re close. All the crap consoles will get threaded\nprinting while the useful consoles (serial) will get atomic printing.\n```",
+      "parentUuid": "e9ab1337_bbe0cbf0",
       "revId": "fb1539c24b2dc9aca66a0dffb2b06d915ec32d27",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
