@@ -85,6 +85,24 @@
       "parentUuid": "1b11d1cc_587704ea",
       "revId": "0493558d8c8d8f53a6a091008262acf275ce19e3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d987c806_3cd02f21",
+        "filename": "arch/arm64/configs/gki_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2025-10-29T16:02:00Z",
+      "side": 1,
+      "message": "It doesn\u0027t seem to be ARM64 specific: https://cs.android.com/android/kernel/superproject/+/5d7d3f46e5aae26cb7ed95aab5d0e59ba72ccb10:common/net/sched/Kconfig\n\nWe typically try to keep the x86 and arm64 gki_defconfig in sync, so we should continue to do that, and enable this on x86 too.",
+      "parentUuid": "de57bd16_4bd48b46",
+      "revId": "0493558d8c8d8f53a6a091008262acf275ce19e3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
