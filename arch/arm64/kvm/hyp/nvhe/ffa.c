@@ -1723,6 +1723,12 @@ bool kvm_guest_ffa_handler(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
 		return true;
 	}
 
+	if (!smp_load_acquire(&has_version_negotiated)) {
+		ffa_to_smccc_error(&res, FFA_RET_INVALID_PARAMETERS);
+		ffa_set_retval(ctxt, &res);
+		return true;
+	}
+
 	switch (func_id) {
 	case FFA_FEATURES:
 		do_ffa_guest_features(&res, ctxt);
