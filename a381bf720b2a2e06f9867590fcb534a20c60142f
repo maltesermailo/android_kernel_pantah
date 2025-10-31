@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b543c115_66828b41",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-10-31T09:05:35Z",
+      "side": 1,
+      "message": "This is only safe if we are sure this page exists in the vmemmap, i.e. if it is a memory page.\n\nWe should probably forbid sharing non-memory pages with the hypervisor (like we forbid donating non-memory pages).\n\nSo we should add a find_mem_range() check to host_initiate_share(), like we have in host_initiate_donation()? (probably in the previous patch.)\n\nBTW host_request_donation()/host_request_share() seems a more suitable place for this check than host_initiate_donation()/host_initiate_share(). So we could also clean this up while we\u0027re at it... OTOH, who cares. In 6.15 we removed all these layers of wrappers anyway.",
+      "revId": "a381bf720b2a2e06f9867590fcb534a20c60142f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
