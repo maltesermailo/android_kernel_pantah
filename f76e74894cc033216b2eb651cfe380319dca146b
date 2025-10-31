@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2da1c9f7_6c920a00",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 3229,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2025-10-31T17:37:16Z",
+      "side": 1,
+      "message": "Since this is `exynos/google` and doesn\u0027t have anything related to `raviole` in it, should we give it a more generic name? \n\nIf so, the visibility below should also be `//devices/google:__subpackages__` for possible future devices.",
+      "range": {
+        "startLine": 3229,
+        "startChar": 16,
+        "endLine": 3229,
+        "endChar": 23
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c8fb50e2_ac4aeee6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 3229,
+                "startChar": 0,
+                "endLine": 3230,
+                "endChar": 0
+              },
+              "replacement": "    name \u003d \"all_exynos_google_dtsi\",\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 3235,
+                "startChar": 0,
+                "endLine": 3236,
+                "endChar": 0
+              },
+              "replacement": "    visibility \u003d [\"//devices/google:__subpackages__\"],\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f76e74894cc033216b2eb651cfe380319dca146b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
