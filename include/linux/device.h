@@ -30,7 +30,12 @@
 #include <linux/device/bus.h>
 #include <linux/device/class.h>
 #include <linux/device/driver.h>
+<<<<<<< HEAD   (ab3e1c0dd1ff17ac9e51b12bb4c67a62be3b205e Merge android13-5.10 into android13-5.10-lts)
 #include <linux/android_kabi.h>
+||||||| BASE   (d3d0b4e274d20103634bc7100cfb6d05ea3ec4d2 Linux 5.10.245)
+=======
+#include <linux/cleanup.h>
+>>>>>>> BRANCH (df70e44fa05b01476a78d0f6a210354784ff0992 Linux 5.10.246)
 #include <asm/device.h>
 
 struct device;
@@ -734,6 +739,9 @@ static inline bool device_pm_not_required(struct device *dev)
 static inline void device_set_pm_not_required(struct device *dev)
 {
 	dev->power.no_pm = true;
+#ifdef CONFIG_PM
+	dev->power.no_callbacks = true;
+#endif
 }
 
 static inline void dev_pm_syscore_device(struct device *dev, bool val)
@@ -804,6 +812,9 @@ void device_unregister(struct device *dev);
 void device_initialize(struct device *dev);
 int __must_check device_add(struct device *dev);
 void device_del(struct device *dev);
+
+DEFINE_FREE(device_del, struct device *, if (_T) device_del(_T))
+
 int device_for_each_child(struct device *dev, void *data,
 			  int (*fn)(struct device *dev, void *data));
 int device_for_each_child_reverse(struct device *dev, void *data,
@@ -932,6 +943,9 @@ extern int (*platform_notify_remove)(struct device *dev);
  */
 struct device *get_device(struct device *dev);
 void put_device(struct device *dev);
+
+DEFINE_FREE(put_device, struct device *, if (_T) put_device(_T))
+
 bool kill_device(struct device *dev);
 
 #ifdef CONFIG_DEVTMPFS

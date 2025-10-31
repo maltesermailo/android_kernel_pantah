@@ -359,8 +359,20 @@ void fuse_release_common(struct file *file, bool isdir)
 	 * Make the release synchronous if this is a fuseblk mount,
 	 * synchronous RELEASE is allowed (and desirable) in this case
 	 * because the server can be trusted not to screw up.
+	 *
+	 * Always use the asynchronous file put because the current thread
+	 * might be the fuse server.  This can happen if a process starts some
+	 * aio and closes the fd before the aio completes.  Since aio takes its
+	 * own ref to the file, the IO completion has to drop the ref, which is
+	 * how the fuse server can end up closing its clients' files.
 	 */
+<<<<<<< HEAD   (ab3e1c0dd1ff17ac9e51b12bb4c67a62be3b205e Merge android13-5.10 into android13-5.10-lts)
 	fuse_file_put(ra->inode, ff, ff->fm->fc->destroy, isdir);
+||||||| BASE   (d3d0b4e274d20103634bc7100cfb6d05ea3ec4d2 Linux 5.10.245)
+	fuse_file_put(ff, ff->fm->fc->destroy, isdir);
+=======
+	fuse_file_put(ff, false, isdir);
+>>>>>>> BRANCH (df70e44fa05b01476a78d0f6a210354784ff0992 Linux 5.10.246)
 }
 
 static int fuse_open(struct inode *inode, struct file *file)
