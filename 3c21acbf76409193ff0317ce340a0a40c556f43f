@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8eaeada2_64a06194",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 4222956
+      },
+      "writtenOn": "2025-10-31T03:34:51Z",
+      "side": 1,
+      "message": "that\u0027s a good point. I discussed with Chuanxiao that it\u0027s not a problem today as fpu-\u003eguest_perm is identical to fpu-\u003eperm, and there is no plan to make them different in short term. but conceptually it\u0027s problematic. \n\nSo I plan to do it per your another suggestion - instead of saving a global default set at boot time, get the supported set on-demand. But not do it in pkvm_vcpu_load() (which as you said leads to changing cpuid at runtime). I’ll call it at the beginning in pkvm_enforce_cpuid(). kvm-high calls pkvm_vcpu_realloc_fpstate() to initialize the guest fpu state before issuing  the vcpu_after_set_cpuid() hypercall, so the sequence ensures that guest fpu state is ready when calling pkvm_get_cpuid().\n\nOne related change is to reserve a cpuid buffer per cpu instead of reserving a global one as before, because multiple set-cpuid may be in parallel. It consumes a bit more resource, but logically is more robust and also future-proof to support the hybrid config.",
+      "parentUuid": "340e9c67_65babe86",
+      "revId": "3c21acbf76409193ff0317ce340a0a40c556f43f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce3c4d3b_a1e226c9",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/init_finalise.c",
         "patchSetId": 1
