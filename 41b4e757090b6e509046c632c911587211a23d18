@@ -72,6 +72,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3da3c6bf_b823228a",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pgtable.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-31T22:38:04Z",
+      "side": 1,
+      "message": "Done in aosp/3702534",
+      "parentUuid": "e2ca4585_f5a6f9df",
+      "revId": "41b4e757090b6e509046c632c911587211a23d18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4cf80dd0_554f4cf3",
@@ -120,6 +138,24 @@
       "writtenOn": "2025-10-24T18:32:27Z",
       "side": 1,
       "message": "Same comment as to previos CL: why are we using void*?",
+      "revId": "41b4e757090b6e509046c632c911587211a23d18",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dba7242_96cbd3c6",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pgtable.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-10-31T22:38:04Z",
+      "side": 1,
+      "message": "Ok, as answered in the previous CL, I\u0027ve switched to `struct pkvm_memcache*` instead of `void *`",
+      "parentUuid": "634d59cf_1d8156c5",
       "revId": "41b4e757090b6e509046c632c911587211a23d18",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
