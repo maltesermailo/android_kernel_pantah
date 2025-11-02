@@ -16,6 +16,24 @@
       "message": "nit: this might sound confusing, since `sizeof(struct kvm_vcpu)` is the actual kvm_vcpu structure size, by definition. :) \n\nMaybe something like \"kvm_vcpu_sz represents the actual, extended kvm_vcpu structure size\" ?\n\n...Also, this comment applies to pkvm_vm_sz and pkvm_vcpu_sz as well, right? So why limit this comment just to kvm_vcpu_sz?",
       "revId": "94a09e4097f3dc41b410789f117b1f2b1386a15b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf61d4ed_f378411f",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-11-02T03:11:47Z",
+      "side": 1,
+      "message": "\u003e Maybe something like \"kvm_vcpu_sz represents the actual, extended kvm_vcpu structure size\" ?\n\nSounds good to me.\n\n\u003e ...Also, this comment applies to pkvm_vm_sz and pkvm_vcpu_sz as well, right? So why limit this comment just to kvm_vcpu_sz?\n\nThis patch only introduces `kvm_vcpu_sz`, while `pkvm_vm_sz` and `pkvm_vcpu_sz` were introduced by some older patches, so didn\u0027t add comments to them in this patch. Shall we in this patch? OTOH, `pkvm_vm_sz` and `pkvm_vcpu_sz` are removed in v6.15.",
+      "parentUuid": "0e43b0ad_9e650083",
+      "revId": "94a09e4097f3dc41b410789f117b1f2b1386a15b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
