@@ -16,6 +16,24 @@
       "message": "1. We set iommu-\u003eviommu.iqa to vreg-\u003eiqa _before_ initializing vreg-\u003eiqa in initialize_qi()? (Although I see initialize_qi() itself also initializes iommu-\u003eviommu.iqa together with vreg-\u003eiqa, but still, seems unclean.)\n2. We set vreg-\u003eiq_head to 0 and then just overwrite it with the value read from hardware in initialize_qi()? (This seems like an actual bug. At least because this value is gonna be outdated by the time initialize_qi() returns, right?)\n\nSo it seems we should do the following instead:\n```\n\tif (en) {\n\t\tif (!iommu-\u003eqi_enabled)\n\t\t\tinitialize_qi(iommu);\n\t\t\n\t\t/* existing logic */\n\t\t...\n\t}\n```\n\n?",
       "revId": "fba01fd127d61976e2058bfafdc3270edc51a765",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88d0a5ef_f775bea6",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 2059,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-03T15:00:50Z",
+      "side": 1,
+      "message": "\u003e We set iommu-\u003eviommu.iqa to vreg-\u003eiqa before initializing vreg-\u003eiqa in initialize_qi()? (Although I see initialize_qi() itself also initializes iommu-\u003eviommu.iqa together with vreg-\u003eiqa, but still, seems unclean.)\n\nNice catch. While reviewing this code again, I found a bug as well. initialize_qi is called in 2 places - one during QIE write to GCMD and one during pkvm initialization. During QIE enable, IQA is not in the hardware but onlt vreg-\u003eiqa. But initialize_qi expects it in hardware register and reads it from there. I have refactored the code to cater for both cases and caller is required to set vreg-\u003eiqa before. That way we don\u0027t need to read from hardware register.\n\n\u003e We set vreg-\u003eiq_head to 0 and then just overwrite it with the value read from hardware in initialize_qi()? (This seems like an actual bug. At least because this value is gonna be outdated by the time initialize_qi() returns, right?)\n\nThis might not be really a bug because iq_head is already zero when called from handle_qcmd_qie() path. But as you mentioned, this is unclean and could turn into a bug if the iq_head assumption changes later. I have refactored the code to make it clean and explicit. initialize_qi need not touch vreg-\u003eiq_head or iq_tail. So I am using local variables for that. In the handle_gcmd_qie() path, iq_tail would have been set before by host and I am fixing iq_head to be explicitly set to zero after initialize_qi. In the pkvm_init_iommu_path, I set iq_head and iq_tail  be reading hardware as the host would expect those(because qi was initialized before during irq remap enable). This should make it cleaner and logically correct",
+      "parentUuid": "0ab8210a_7abfbba8",
+      "revId": "fba01fd127d61976e2058bfafdc3270edc51a765",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
