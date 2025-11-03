@@ -52,6 +52,24 @@
       "parentUuid": "87323970_986c6ce4",
       "revId": "a381bf720b2a2e06f9867590fcb534a20c60142f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50390f33_c5e07863",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-03T12:45:42Z",
+      "side": 1,
+      "message": "\u003e Seems find_mem_range() only checks for a single memory, so introduced an inline function is_mem_range() to check for the entire memory range in aosp/3783087\n\nHmm, indeed. And this means the existing find_mem_range() check in host_initiate_donation() is also buggy. We can fix it separately, reusing is_mem_range() you added.\n\n\u003e The reason not doing this in host_request_share/unshare is considering host may allow to share MMIO page with an npVM in the future, putting the check in host_request_share/unshare will block this usage.\n\nI thought about that too, but I don\u0027t think we will ever need that in 6.12. And in future kernels, where we may need it for device assignment, we will not have these request/ack/initiate/complete wrappers anyway.\n\nNevertheless, I surely don\u0027t mind doing this in hyp_ack_share/unshare to make it cleaner even in 6.12. :)",
+      "parentUuid": "83c1554a_bf00c96a",
+      "revId": "a381bf720b2a2e06f9867590fcb534a20c60142f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
