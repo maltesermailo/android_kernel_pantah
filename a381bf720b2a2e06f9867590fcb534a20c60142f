@@ -34,6 +34,24 @@
       "parentUuid": "b543c115_66828b41",
       "revId": "a381bf720b2a2e06f9867590fcb534a20c60142f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83c1554a_bf00c96a",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2025-11-03T07:09:54Z",
+      "side": 1,
+      "message": "Seems find_mem_range() only checks for a single memory, so introduced an inline function is_mem_range() to check for the entire memory range in aosp/3783087, and add this check for host sharing/unsharing hyp in hyp_ack_share/unshare in aosp/3783087. The reason not doing this in host_request_share/unshare is considering host may allow to share MMIO page with an npVM in the future, putting the check in host_request_share/unshare will block this usage.\n\nMeanwhile, with this consideration, the host_initiate_share/unshare also cannot blindly pin/unpin memory pages, so also added the is_mem_range() check in host_initiate_share/unshare before pin/unpin.",
+      "parentUuid": "87323970_986c6ce4",
+      "revId": "a381bf720b2a2e06f9867590fcb534a20c60142f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
