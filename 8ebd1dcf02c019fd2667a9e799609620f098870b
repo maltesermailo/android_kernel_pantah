@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1428b2ea_5ab94be8",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-03T13:20:07Z",
+      "side": 1,
+      "message": "is_mem_range()?",
+      "fixSuggestions": [
+        {
+          "fixId": "55f33553_5529f271",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+              "range": {
+                "startLine": 140,
+                "startChar": 0,
+                "endLine": 141,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/mem_protect.c",
+              "range": {
+                "startLine": 147,
+                "startChar": 0,
+                "endLine": 148,
+                "endChar": 0
+              },
+              "replacement": "\tif (!is_mem_range(start, end - start))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "8ebd1dcf02c019fd2667a9e799609620f098870b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
