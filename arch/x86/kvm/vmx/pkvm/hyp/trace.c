@@ -46,7 +46,16 @@ static void refresh_vmexit_perf(struct perf_ctrl *pctrl, struct vmexit_perf *per
 	memset(&perf->data.vmexit, 0, sizeof(struct vmexit_data));
 }
 
-void trace_vmexit_start(struct kvm_vcpu *vcpu)
+static void trace_vmexit_perf(struct vmexit_perf *perf, u32 index,
+			 unsigned long long cycles)
+{
+	perf->data.vmexit.cycles[index] += cycles;
+	perf->data.vmexit.total_cycles += cycles;
+	perf->data.vmexit.total_count++;
+	perf->data.vmexit.reasons[index]++;
+}
+
+void trace_vmexit_start(struct kvm_vcpu *vcpu, bool guest)
 {
 	struct perf_ctrl *pctrl = this_cpu_ptr(&perf_ctrl);
 	struct vmexit_perf *perf;
@@ -58,10 +67,13 @@ void trace_vmexit_start(struct kvm_vcpu *vcpu)
 	if (pctrl->age != perf->age)
 		refresh_vmexit_perf(pctrl, perf);
 
+	perf->guest = guest;
+	perf->rax = vcpu->arch.regs[VCPU_REGS_RAX];
+
 	perf->tsc = pkvm_rdtsc_ordered();
 }
 
-void trace_vmexit_end(struct kvm_vcpu *vcpu, u32 index)
+void trace_vmexit_end(struct kvm_vcpu *vcpu, u32 reason)
 {
 	struct perf_ctrl *pctrl = this_cpu_ptr(&perf_ctrl);
 	struct vmexit_perf *perf;
@@ -76,16 +88,18 @@ void trace_vmexit_end(struct kvm_vcpu *vcpu, u32 index)
 		return;
 	}
 
-	if (index >= MAX_EXIT_REASONS)
+	if (reason >= MAX_EXIT_REASONS)
 		return;
 
 	cycles = pkvm_rdtsc_ordered() - perf->tsc;
 
 	pkvm_spin_lock(&perf->lock);
-	perf->data.vmexit.cycles[index] += cycles;
-	perf->data.vmexit.total_cycles += cycles;
-	perf->data.vmexit.total_count++;
-	perf->data.vmexit.reasons[index]++;
+
+	trace_vmexit_perf(perf, reason, cycles);
+
+	if (!perf->guest && reason == EXIT_REASON_VMCALL && perf->rax < PKVM_MAX_HC)
+		trace_vmexit_perf(perf, MAX_EXIT_REASONS + perf->rax, cycles);
+
 	pkvm_spin_unlock(&perf->lock);
 }
 

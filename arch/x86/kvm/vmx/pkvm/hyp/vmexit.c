@@ -247,7 +247,7 @@ void pkvm_vmexit_main(struct vcpu_vmx *vmx)
 
 	vcpu->arch.cr2 = native_read_cr2();
 
-	trace_vmexit_start(vcpu);
+	trace_vmexit_start(vcpu, false);
 
 	set_vcpu_mode(vcpu, OUTSIDE_GUEST_MODE);
 
