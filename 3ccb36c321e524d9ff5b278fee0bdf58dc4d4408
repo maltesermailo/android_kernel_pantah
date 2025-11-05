@@ -1,0 +1,59 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51c68272_4ed6181a",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pgtable.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-05T00:05:19Z",
+      "side": 1,
+      "message": "If we decided to explicitly pass `struct pkvm_memcache *` instead of `void *` to zalloc_page(), why still pass `void *` to pgtable_alloc_page(), pkvm_pgtable_map(), __pkvm_host_donate_guest() etc?",
+      "fixSuggestions": [
+        {
+          "fixId": "7ff5398b_2eff8d6f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pgtable.c",
+              "range": {
+                "startLine": 69,
+                "startChar": 0,
+                "endLine": 70,
+                "endChar": 0
+              },
+              "replacement": "static void *pgtable_alloc_page(const struct pkvm_mm_ops *mm_ops, struct pkvm_memcache *mc)\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pgtable.c",
+              "range": {
+                "startLine": 587,
+                "startChar": 0,
+                "endLine": 588,
+                "endChar": 0
+              },
+              "replacement": "\t\t     u64 annotation, struct pkvm_memcache *mc)\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pgtable.c",
+              "range": {
+                "startLine": 609,
+                "startChar": 0,
+                "endLine": 610,
+                "endChar": 0
+              },
+              "replacement": "\t\t     int pgsz_mask, u64 prot, pgtable_leaf_ov_fn_t map_leaf, struct pkvm_memcache *mc)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3ccb36c321e524d9ff5b278fee0bdf58dc4d4408",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
