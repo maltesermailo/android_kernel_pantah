@@ -1,0 +1,59 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fe2f769_d9bbb45a",
+        "filename": "arch/x86/include/asm/kvm_pkvm.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-05T12:58:06Z",
+      "side": 1,
+      "message": "I\u0027ll try to do some macro magic to avoid this.",
+      "fixSuggestions": [
+        {
+          "fixId": "94111f7a_362eeebd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/include/asm/kvm_pkvm.h",
+              "range": {
+                "startLine": 271,
+                "startChar": 0,
+                "endLine": 271,
+                "endChar": 0
+              },
+              "replacement": "#define PKVM_FOR_EACH_FN(X)\t\t\t\t\t\\\n\tX(enable_virtualization_cpu),\t\t\t\t\\\n\tX(disable_virtualization_cpu),\t\t\t\t\\\n\tX(check_processor_compatibility),\t\t\t\\\n\tX(vm_init),\t\t\t\t\t\t\\\n\tX(vm_finalize),\t\t\t\t\t\t\\\n\tX(vm_destroy),\t\t\t\t\t\t\\\n\tX(vm_mmu_map),\t\t\t\t\t\t\\\n\tX(vm_mmu_unmap),\t\t\t\t\t\\\n\tX(vm_mmu_age),\t\t\t\t\t\t\\\n\tX(vcpu_create),\t\t\t\t\t\t\\\n\tX(vcpu_free),\t\t\t\t\t\t\\\n\tX(vcpu_reset),\t\t\t\t\t\t\\\n\tX(vcpu_load),\t\t\t\t\t\t\\\n\tX(vcpu_put),\t\t\t\t\t\t\\\n\tX(vcpu_run),\t\t\t\t\t\t\\\n\tX(vcpu_after_set_cpuid),\t\t\t\t\\\n\tX(get_segment_base),\t\t\t\t\t\\\n\tX(get_segment),\t\t\t\t\t\t\\\n\tX(set_segment),\t\t\t\t\t\t\\\n\tX(set_cr0),\t\t\t\t\t\t\\\n\tX(set_cr4),\t\t\t\t\t\t\\\n\tX(set_msr),\t\t\t\t\t\t\\\n\tX(get_msr),\t\t\t\t\t\t\\\n\tX(set_efer),\t\t\t\t\t\t\\\n\tX(get_idt),\t\t\t\t\t\t\\\n\tX(set_idt),\t\t\t\t\t\t\\\n\tX(get_gdt),\t\t\t\t\t\t\\\n\tX(set_gdt),\t\t\t\t\t\t\\\n\tX(set_dr7),\t\t\t\t\t\t\\\n\tX(get_rflags),\t\t\t\t\t\t\\\n\tX(set_rflags),\t\t\t\t\t\t\\\n\tX(flush_tlb_all),\t\t\t\t\t\\\n\tX(flush_tlb_current),\t\t\t\t\t\\\n\tX(flush_tlb_gva),\t\t\t\t\t\\\n\tX(flush_tlb_guest),\t\t\t\t\t\\\n\tX(set_interrupt_shadow),\t\t\t\t\\\n\tX(get_interrupt_shadow),\t\t\t\t\\\n\tX(complete_emulated_msr),\t\t\t\t\\\n\tX(interrupt_allowed),\t\t\t\t\t\\\n\tX(nmi_allowed),\t\t\t\t\t\t\\\n\tX(inject_irq),\t\t\t\t\t\t\\\n\tX(inject_nmi),\t\t\t\t\t\t\\\n\tX(inject_exception),\t\t\t\t\t\\\n\tX(cancel_injection),\t\t\t\t\t\\\n\tX(get_nmi_mask),\t\t\t\t\t\\\n\tX(set_nmi_mask),\t\t\t\t\t\\\n\tX(enable_nmi_window),\t\t\t\t\t\\\n\tX(enable_irq_window),\t\t\t\t\t\\\n\tX(update_cr8_intercept),\t\t\t\t\\\n\tX(set_virtual_apic_mode),\t\t\t\t\\\n\tX(refresh_apicv_exec_ctrl),\t\t\t\t\\\n\tX(load_eoi_exitmap),\t\t\t\t\t\\\n\tX(hwapic_irr_update),\t\t\t\t\t\\\n\tX(hwapic_isr_update),\t\t\t\t\t\\\n\tX(write_tsc_offset),\t\t\t\t\t\\\n\tX(write_tsc_multiplier),\t\t\t\t\\\n\tX(post_set_cr3),\t\t\t\t\t\\\n\tX(load_mmu_pgd),\t\t\t\t\t\\\n\tX(setup_mce),\t\t\t\t\t\t\\\n\tX(cache_reg),\t\t\t\t\t\t\\\n\tX(update_cpuid_runtime),\t\t\t\t\\\n\tX(update_exception_bitmap),\t\t\t\t\\\n\tX(vcpu_add_fpstate)\n\n"
+            },
+            {
+              "path": "arch/x86/include/asm/kvm_pkvm.h",
+              "range": {
+                "startLine": 272,
+                "startChar": 0,
+                "endLine": 335,
+                "endChar": 0
+              },
+              "replacement": "\t#define X(fn) __pkvm__##fn\n\tPKVM_FOR_EACH_FN(X)\n\t#undef X\n"
+            },
+            {
+              "path": "arch/x86/include/asm/kvm_pkvm.h",
+              "range": {
+                "startLine": 338,
+                "startChar": 0,
+                "endLine": 403,
+                "endChar": 0
+              },
+              "replacement": "#define PKVM_FN_NAMES {\t\t\t\t\t\t\t\\\n\t#define X(fn) [__pkvm__##fn] \u003d #fn,\n\tPKVM_FOR_EACH_FN(X)\n\t#undef X\n\t[PKVM_MAX_FN] \u003d NULL\t\t\t\t\t\t\\\n"
+            }
+          ]
+        }
+      ],
+      "revId": "72b6abc7aa914beac88903543e549453124cd8aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
