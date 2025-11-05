@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa5de52f_e38fc6dd",
+        "filename": "arch/x86/kvm/pkvm/cpuid.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1392,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-05T16:23:35Z",
+      "side": 1,
+      "message": "Why not just memset it unconditionally (for simplicitly and robustness)? I assume this is not performance critical?",
+      "fixSuggestions": [
+        {
+          "fixId": "5d6bf0c5_31d10270",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/cpuid.c",
+              "range": {
+                "startLine": 1391,
+                "startChar": 0,
+                "endLine": 1393,
+                "endChar": 0
+              },
+              "replacement": "\tmemset(de2, 0, PKVM_CPUID_MAX_SIZE);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "af234afad017c8554edc78d3df3786f97e9a2d6f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
