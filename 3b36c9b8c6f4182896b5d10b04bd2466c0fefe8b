@@ -18,6 +18,23 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "307cbfc8_efc54bda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-11-06T06:11:05Z",
+      "side": 1,
+      "message": "Generally looks sane, but I\u0027m curious about the lifetime of the boosted transaction vs the the length of the task boosted interval. Relatedly, if the transaction is started while a task holds an rt_mutex, if a high priority task grabs the mutex and boosts the task\u0027s priority, is there a communicative mechanism to apply the boosting to the transaction?",
+      "revId": "3b36c9b8c6f4182896b5d10b04bd2466c0fefe8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19141ede_00776f6a",
