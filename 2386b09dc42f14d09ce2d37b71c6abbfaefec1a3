@@ -34,6 +34,24 @@
       "parentUuid": "897d7d49_b81c9a9a",
       "revId": "2386b09dc42f14d09ce2d37b71c6abbfaefec1a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01256003_914c38ae",
+        "filename": "arch/x86/include/asm/pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-06T17:43:14Z",
+      "side": 1,
+      "message": "\u003e The reason I chose this is because the existing union had kvm specific structures and was fine when this was defined only for kvm. But when I pulled it out for generic usage, I had to bring the kvm specific structures to non-kvm code as well. Its doable but I felt it as a bit unclean.\n\nThose IOMMU hypercalls are still pKVM-specific, and pKVM is a part of KVM, so I don\u0027t see much problem with that. By the way:\n\n```\n$ grep -r asm/kvm drivers/iommu/\ndrivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-kvm.c:#include \u003casm/kvm_pkvm.h\u003e\ndrivers/iommu/arm/arm-smmu-v3/arm-smmu-v3-kvm.c:#include \u003casm/kvm_mmu.h\u003e\ndrivers/iommu/arm/arm-smmu-v3/pkvm/arm_smmu_v3.h:#include \u003casm/kvm_asm.h\u003e\ndrivers/iommu/arm/arm-smmu-v3/pkvm/io-pgtable-arm.c:#include \u003casm/kvm_hyp.h\u003e\ndrivers/iommu/arm/arm-smmu-v3/pkvm/io-pgtable-arm.c:#include \u003casm/kvm_mmu.h\u003e\ndrivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3-module.h:#include \u003casm/kvm_pkvm_module.h\u003e\ndrivers/iommu/arm/arm-smmu-v3/pkvm/arm-smmu-v3.c:#include \u003casm/kvm_hyp.h\u003e\n```",
+      "parentUuid": "3cd0c69f_365775b8",
+      "revId": "2386b09dc42f14d09ce2d37b71c6abbfaefec1a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
