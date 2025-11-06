@@ -16,6 +16,24 @@
       "message": "1. unsigned char (or just u8)?\n2. We must make sure the address, not just the size, is page-aligned?\n3. With the existing PAGE_SIZE-aligned `union pkvm_pv_param` with explicitly listed possible params, we have an assurance that any used param will fit into this memory region (so in particular, in principle it might even exceed one page, and it\u0027s still gonna work just fine). Whereas with this new interface, the caller needs to take care not to exceed PAGE_SIZE.\n\\\nSo maybe there\u0027s nothing wrong in keeping all possible params (including iommu-specific structures) defined in a centralized place in `union pkvm_pv_param` instead?",
       "revId": "2386b09dc42f14d09ce2d37b71c6abbfaefec1a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cd0c69f_365775b8",
+        "filename": "arch/x86/include/asm/pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-06T17:13:57Z",
+      "side": 1,
+      "message": "\u003e unsigned char (or just u8)?\n\nmakes sense, will change.\n\n\u003e We must make sure the address, not just the size, is page-aligned?\n\nIf I understand correctly, the percpu implementation guarantees that it will be page aligned as the size is PAGE_SIZE. But I will verify it.\n\n\u003e So maybe there\u0027s nothing wrong in keeping all possible params (including iommu-specific structures) defined in a centralized place in union pkvm_pv_param instead?\n\nThe reason I chose this is because the existing union had kvm specific structures and was fine when this was defined only for kvm. But when I pulled it out for generic usage, I had to bring the kvm specific structures to non-kvm code as well. Its doable but I felt it as a bit unclean.\n\n\u003e Whereas with this new interface, the caller needs to take care not to exceed PAGE_SIZE.\n\nThis is a valid argument. Either I could expose kvm.h to users of this interface or I can put a build time error and explicit comments for the users of this api. WDYT?",
+      "parentUuid": "897d7d49_b81c9a9a",
+      "revId": "2386b09dc42f14d09ce2d37b71c6abbfaefec1a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
