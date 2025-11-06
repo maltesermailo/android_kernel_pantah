@@ -52,6 +52,24 @@
       "parentUuid": "3cd0c69f_365775b8",
       "revId": "2386b09dc42f14d09ce2d37b71c6abbfaefec1a3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46fda13a_3ef29ba2",
+        "filename": "arch/x86/include/asm/pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-06T18:39:28Z",
+      "side": 1,
+      "message": "\u003e Those IOMMU hypercalls are still pKVM-specific, and pKVM is a part of KVM, so I don\u0027t see much problem with that\n\nkvm_pkvm.h seems to be mostly for kvm to pkvm interaction and for handling kvm offloading to pkvm to manage its VMs, while the direct host to pkvm interaction is a different relationship where host as a vm talks to its hypervisor. Thats the reason I thought it was a bit unclean.\n\nI see the precedence you showed for arm, and I am fine doing it that way. Let me see how I can refactor the code to keep the union as it is.",
+      "parentUuid": "01256003_914c38ae",
+      "revId": "2386b09dc42f14d09ce2d37b71c6abbfaefec1a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
