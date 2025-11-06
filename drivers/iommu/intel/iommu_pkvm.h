@@ -159,5 +159,24 @@ static inline long pkvm_hc_iommu_unmap_pages(unsigned long pgd_gpa, unsigned lon
 
 	return ret;
 }
+static inline long pkvm_hc_cache_tag_assign(unsigned long pgd_gpa)
+{
+	long ret = 0;
+	if (pkvm_pviommu_enabled()) {
+		ret = kvm_hypercall1(PKVM_HC_IOMMU_CACHE_ASSIGN, pgd_gpa);
+	}
+
+	return ret;
+}
+
+static inline long pkvm_hc_cache_tag_unassign(unsigned long pgd_gpa)
+{
+	long ret = 0;
+	if (pkvm_pviommu_enabled()) {
+		ret = kvm_hypercall1(PKVM_HC_IOMMU_CACHE_UNASSIGN, pgd_gpa);
+	}
+
+	return ret;
+}
 #endif
 
