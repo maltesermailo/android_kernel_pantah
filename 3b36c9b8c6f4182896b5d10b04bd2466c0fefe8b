@@ -50,6 +50,24 @@
       "message": "So this generally makes since, as we\u0027d want the boosting we do to inherit the priority we have been boosted to.\n\nHowever, I\u0027m curious about the lifetime of this transaction priority. If a normal task is momentarily boosted to RT task due to it holding a rtmutex, and it calls binder_transaction(), should the transaction continue to be boosted after it releases the mutex? Or is there the assumption this is synchronous, so it would block and wouldn\u0027t be able to release the rtmutex to become deboosted?",
       "revId": "3b36c9b8c6f4182896b5d10b04bd2466c0fefe8b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02b2cdbf_017b22d6",
+        "filename": "drivers/android/binder.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3470,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-11-06T06:16:02Z",
+      "side": 1,
+      "message": "This request was brought up as part of \"ADPF\", which I don\u0027t know exactly how it works or what it is. However, I don\u0027t see a way for a caller to release a potential rt_mutex while the transaction completes. So yes, this is expected to be synchronous. I\u0027ll leave this to @qyousef@google.com to confirm though.",
+      "parentUuid": "19141ede_00776f6a",
+      "revId": "3b36c9b8c6f4182896b5d10b04bd2466c0fefe8b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
