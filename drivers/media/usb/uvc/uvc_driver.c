@@ -2212,9 +2212,6 @@ static struct device *uvc_find_dma_pool_device(struct usb_device *udev)
 		}
 	}
 
-	if (!dma_dev)
-		dma_dev = bus_to_hcd(udev->bus)->self.sysdev;
-
         return dma_dev;
 }
 
