@@ -39,7 +39,8 @@ static int __init dma_pool_glue_probe(struct platform_device *pdev)
 		return ret;
 	}
 
-	dev_info(dev, "dma_pool_glue: Successfully attached custom DMA pool from DT\n");
+	dev_info(dev, "dma_pool_glue: Successfully attached custom DMA pool from DT: %llx + %llx\n",
+		 (unsigned long long)rmem->base, (unsigned long long)rmem->size);
 
 	return 0;
 }

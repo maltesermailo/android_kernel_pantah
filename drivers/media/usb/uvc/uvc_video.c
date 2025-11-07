@@ -1222,15 +1222,16 @@ static inline enum dma_data_direction uvc_stream_dir(
 
 static inline struct device *uvc_stream_to_dmadev(struct uvc_streaming *stream)
 {
-	return stream->dev->dma_dev;
+	return bus_to_hcd(stream->dev->udev->bus)->self.sysdev;
 }
 
 static int uvc_submit_urb(struct uvc_urb *uvc_urb, gfp_t mem_flags)
 {
 	/* Sync DMA. */
-	dma_sync_sgtable_for_device(uvc_stream_to_dmadev(uvc_urb->stream),
-				    uvc_urb->sgt,
-				    uvc_stream_dir(uvc_urb->stream));
+	if (!uvc_urb->stream->dev->dma_dev)
+		dma_sync_sgtable_for_device(uvc_stream_to_dmadev(uvc_urb->stream),
+					    uvc_urb->sgt,
+					    uvc_stream_dir(uvc_urb->stream));
 	return usb_submit_urb(uvc_urb->urb, mem_flags);
 }
 
@@ -1682,10 +1683,12 @@ static void uvc_video_complete(struct urb *urb)
 	uvc_urb->async_operations = 0;
 
 	/* Sync DMA and invalidate vmap range. */
-	dma_sync_sgtable_for_cpu(uvc_stream_to_dmadev(uvc_urb->stream),
-				 uvc_urb->sgt, uvc_stream_dir(stream));
-	invalidate_kernel_vmap_range(uvc_urb->buffer,
-				     uvc_urb->stream->urb_size);
+	if (!uvc_urb->stream->dev->dma_dev) {
+		dma_sync_sgtable_for_cpu(uvc_stream_to_dmadev(uvc_urb->stream),
+					 uvc_urb->sgt, uvc_stream_dir(stream));
+		invalidate_kernel_vmap_range(uvc_urb->buffer,
+					     uvc_urb->stream->urb_size);
+	}
 
 	/*
 	 * Process the URB headers, and optionally queue expensive memcpy tasks
@@ -1717,9 +1720,16 @@ static void uvc_free_urb_buffers(struct uvc_streaming *stream)
 		if (!uvc_urb->buffer)
 			continue;
 
-		dma_vunmap_noncontiguous(dma_dev, uvc_urb->buffer);
-		dma_free_noncontiguous(dma_dev, stream->urb_size, uvc_urb->sgt,
-				       uvc_stream_dir(stream));
+		if (stream->dev->dma_dev)
+			dma_free_coherent(stream->dev->dma_dev,
+					  stream->urb_size, uvc_urb->buffer,
+					  uvc_urb->dma);
+		else {
+			dma_vunmap_noncontiguous(dma_dev, uvc_urb->buffer);
+			dma_free_noncontiguous(dma_dev, stream->urb_size,
+					       uvc_urb->sgt,
+					       uvc_stream_dir(stream));
+		}
 
 		uvc_urb->buffer = NULL;
 		uvc_urb->sgt = NULL;
@@ -1731,26 +1741,33 @@ static void uvc_free_urb_buffers(struct uvc_streaming *stream)
 static bool uvc_alloc_urb_buffer(struct uvc_streaming *stream,
 				 struct uvc_urb *uvc_urb, gfp_t gfp_flags)
 {
-	struct device *dma_dev = uvc_stream_to_dmadev(stream);
-
-	uvc_urb->sgt = dma_alloc_noncontiguous(dma_dev, stream->urb_size,
-					       uvc_stream_dir(stream),
-					       gfp_flags, 0);
-	if (!uvc_urb->sgt)
-		return false;
-	uvc_urb->dma = uvc_urb->sgt->sgl->dma_address;
-
-	uvc_urb->buffer = dma_vmap_noncontiguous(dma_dev, stream->urb_size,
-						 uvc_urb->sgt);
-	if (!uvc_urb->buffer) {
-		dma_free_noncontiguous(dma_dev, stream->urb_size,
-				       uvc_urb->sgt,
-				       uvc_stream_dir(stream));
+	if (stream->dev->dma_dev) {
 		uvc_urb->sgt = NULL;
-		return false;
+		uvc_urb->buffer = dma_alloc_coherent(stream->dev->dma_dev,
+						     stream->urb_size,
+						     &uvc_urb->dma, gfp_flags);
+		dev_info(&stream->intf->dev, "alloc_urb: %llx\n", uvc_urb->dma);
+	} else {
+		struct device *dma_dev = uvc_stream_to_dmadev(stream);
+		uvc_urb->sgt = dma_alloc_noncontiguous(dma_dev, stream->urb_size,
+						       uvc_stream_dir(stream),
+						       gfp_flags, 0);
+		if (!uvc_urb->sgt)
+			return false;
+		uvc_urb->dma = uvc_urb->sgt->sgl->dma_address;
+
+		uvc_urb->buffer = dma_vmap_noncontiguous(dma_dev,
+							 stream->urb_size,
+							 uvc_urb->sgt);
+		if (!uvc_urb->buffer) {
+			dma_free_noncontiguous(dma_dev, stream->urb_size,
+					       uvc_urb->sgt,
+					       uvc_stream_dir(stream));
+			uvc_urb->sgt = NULL;
+		}
 	}
 
-	return true;
+	return uvc_urb->buffer != NULL;
 }
 
 /*
