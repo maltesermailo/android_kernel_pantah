@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fc8ff8b_5bdf08ba",
+        "filename": "arch/x86/include/asm/kvm_pkvm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-07T19:17:48Z",
+      "side": 1,
+      "message": "This pointer is set up by pKVM in `__pkvm__enable_virtualization_cpu` hypercall, which is called by the host in kvm_init() -\u003e kvm_init_virtualization() -\u003e kvm_enable_virtualization() -\u003e kvm_enable_virtualization_cpu() -\u003e kvm_arch_enable_virtualization_cpu() -\u003e pkvm_enable_virtualization_cpu(), which happens _later_ than vmx_pkvm_init() returns, i.e. in particular, later than IOMMU driver initialization?\n\nSo if we want to use it for IOMMU hypercalls, we should initialize it much earlier, probably in __pkvm_init_finalise()?\n\n(Looks like you are not actually using it for IOMMU hypercalls in this series yet?)\n\nBesides that, if KVM\u0027s param `enable_virt_at_load` is set to false, it is initialized even later, when creating the first VM.",
+      "revId": "a1106c632ac4d87e44f41680a1a9b3d94fb89cba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
