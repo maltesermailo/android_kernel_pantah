@@ -16,6 +16,24 @@
       "message": "This pointer is set up by pKVM in `__pkvm__enable_virtualization_cpu` hypercall, which is called by the host in kvm_init() -\u003e kvm_init_virtualization() -\u003e kvm_enable_virtualization() -\u003e kvm_enable_virtualization_cpu() -\u003e kvm_arch_enable_virtualization_cpu() -\u003e pkvm_enable_virtualization_cpu(), which happens _later_ than vmx_pkvm_init() returns, i.e. in particular, later than IOMMU driver initialization?\n\nSo if we want to use it for IOMMU hypercalls, we should initialize it much earlier, probably in __pkvm_init_finalise()?\n\n(Looks like you are not actually using it for IOMMU hypercalls in this series yet?)\n\nBesides that, if KVM\u0027s param `enable_virt_at_load` is set to false, it is initialized even later, when creating the first VM.",
       "revId": "a1106c632ac4d87e44f41680a1a9b3d94fb89cba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f4a9b31_0205c516",
+        "filename": "arch/x86/include/asm/kvm_pkvm.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-07T20:29:41Z",
+      "side": 1,
+      "message": "Thanks for both these points, I hadn\u0027t yet got to using this framework for my series yet. I just reverted my previous implementation and saw memory share patch go in and then resolved the conflicts. I hadn\u0027t noticed the initialization path of this framework and thanks for bringing it up. Yeah youre right, we should probably enable it in __pkvm_init_finalise so that hypercalls could use it soon after. \n\nI am starting to work on this now and rework the enabling path so that I can use it for iommu calls as well",
+      "parentUuid": "1fc8ff8b_5bdf08ba",
+      "revId": "a1106c632ac4d87e44f41680a1a9b3d94fb89cba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
