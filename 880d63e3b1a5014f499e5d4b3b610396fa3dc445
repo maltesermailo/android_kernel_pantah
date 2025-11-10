@@ -3,6 +3,51 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b6d06c5c_72e205c3",
+        "filename": "drivers/block/loop.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1988,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-11-10T20:17:28Z",
+      "side": 1,
+      "message": "The definition of \"struct loop_worker\" is local to this c file. How can your vendor modules use this function? Have you tested this?",
+      "fixSuggestions": [
+        {
+          "fixId": "657fa612_aa78e286",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/block/loop.c",
+              "range": {
+                "startLine": 40,
+                "startChar": 0,
+                "endLine": 40,
+                "endChar": 0
+              },
+              "replacement": "// Include private header for structures used by other modules\n#include \u003clinux/loop_private.h\u003e\n\n"
+            },
+            {
+              "path": "drivers/block/loop.c",
+              "range": {
+                "startLine": 803,
+                "startChar": 0,
+                "endLine": 813,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "880d63e3b1a5014f499e5d4b3b610396fa3dc445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd0f17bf_1d4ed8ef",
         "filename": "drivers/block/loop.c",
         "patchSetId": 2
