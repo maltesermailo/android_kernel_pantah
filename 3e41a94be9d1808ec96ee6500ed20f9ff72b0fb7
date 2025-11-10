@@ -16,6 +16,23 @@
       "message": "Instead of attempting to backport the new version of the AOA kernel driver, we chose to implement a disable switch, as it is significantly less risky. Once merged, I will cherry-pick to android14-5.15, android13-5.15, android 13-5.10, and android12-5.10.",
       "revId": "3e41a94be9d1808ec96ee6500ed20f9ff72b0fb7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1922a6c_86f31ae0",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-11-10T23:54:02Z",
+      "side": 1,
+      "message": "Is this only needed for android14-6.1? The newer kernels (6.6, 6.12, 6.18) rely on the user space version?",
+      "revId": "3e41a94be9d1808ec96ee6500ed20f9ff72b0fb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
