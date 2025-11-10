@@ -10927,8 +10927,7 @@ initialized:
 		goto out_disable;
 
 	async_schedule(ufshcd_async_scan, hba);
-	ufs_sysfs_add_nodes(hba->dev);
-
+	ufs_sysfs_add_nodes(dev);
 	trace_android_vh_ufs_update_sysfs(hba);
 
 	device_enable_async_suspend(dev);
