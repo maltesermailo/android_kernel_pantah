@@ -697,4 +697,17 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_customize_lru_add_dst);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_isolate_priv_lru);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_customize_pgdat_balanced);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_mm_customize_file_is_tiny);
+<<<<<<< HEAD   (819f1476b18ec877abfa5e958b10f5acb0959ef3 ANDROID: KVM: arm64: Disable Memory Tagging for all guests i)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_bio_add_page_merge_bypass);
+||||||| BASE   (a7de21fa4a35ef251a02bcba5e2eb6bbf5c7bae4 ANDROID: Fix !CONFIG_DMA_SHARED_BUFFER build failure)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_nr_pcp_alloc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pcp_alloc_factor_adjust);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fas_gpu_qos_update_tracer);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_loop_skip_queue_work);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_nr_pcp_alloc);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_pcp_alloc_factor_adjust);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fas_gpu_qos_update_tracer);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_loop_skip_queue_work);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_gup_longterm_locked);
+>>>>>>> CHANGE (ae27fb20183b08ba41d877523957f17f3da047ed ANDROID: add gup_longterm_locked vendor hook)

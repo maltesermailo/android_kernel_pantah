@@ -652,6 +652,33 @@ DECLARE_HOOK(android_vh_mm_customize_lru_add_dst,
 DECLARE_HOOK(android_vh_oom_reaper_delay_bypass,
 	TP_PROTO(struct task_struct *tsk, bool *bypass),
 	TP_ARGS(tsk, bypass));
+<<<<<<< HEAD   (819f1476b18ec877abfa5e958b10f5acb0959ef3 ANDROID: KVM: arm64: Disable Memory Tagging for all guests i)
+||||||| BASE   (a7de21fa4a35ef251a02bcba5e2eb6bbf5c7bae4 ANDROID: Fix !CONFIG_DMA_SHARED_BUFFER build failure)
+DECLARE_HOOK(android_vh_nr_pcp_alloc,
+	TP_PROTO(struct per_cpu_pages *pcp, struct zone *zone,
+		unsigned long __percpu **pad, unsigned int order, int *batch),
+	TP_ARGS(pcp, zone, pad, order, batch));
+DECLARE_HOOK(android_vh_pcp_alloc_factor_adjust,
+	TP_PROTO(struct zone *zone, unsigned long __percpu *pad,
+		struct per_cpu_pages *pcp, struct page *page, int migratetype,
+		unsigned int order),
+	TP_ARGS(zone, pad, pcp, page, migratetype, order));
+=======
+DECLARE_HOOK(android_vh_nr_pcp_alloc,
+	TP_PROTO(struct per_cpu_pages *pcp, struct zone *zone,
+		unsigned long __percpu **pad, unsigned int order, int *batch),
+	TP_ARGS(pcp, zone, pad, order, batch));
+DECLARE_HOOK(android_vh_pcp_alloc_factor_adjust,
+	TP_PROTO(struct zone *zone, unsigned long __percpu *pad,
+		struct per_cpu_pages *pcp, struct page *page, int migratetype,
+		unsigned int order),
+	TP_ARGS(zone, pad, pcp, page, migratetype, order));
+DECLARE_RESTRICTED_HOOK(android_rvh_gup_longterm_locked,
+	TP_PROTO(long rc, long nr_pinned_pages,
+		unsigned long start, unsigned long nr_pages,
+		struct page **pages),
+	TP_ARGS(rc, nr_pinned_pages, start, nr_pages, pages), 5);
+>>>>>>> CHANGE (ae27fb20183b08ba41d877523957f17f3da047ed ANDROID: add gup_longterm_locked vendor hook)
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
