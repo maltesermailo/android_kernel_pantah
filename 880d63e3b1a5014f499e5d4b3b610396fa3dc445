@@ -46,6 +46,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86b93b78_a158da1f",
+        "filename": "drivers/block/loop.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1988,
+      "author": {
+        "id": 3647860
+      },
+      "writtenOn": "2025-11-11T01:39:00Z",
+      "side": 1,
+      "message": "We do not use a loop worker to execute loop commands; instead, we add the loop commands to a structure within gendisk-\u003eandroid_oem_data1.\nWe process loop commands using another dedicated workqueue. Therefore, we need to export the loop_process_cmd_list function and call loop_process_cmd_list(NULL, \u0026ext-\u003ecmd_list, ext-\u003elo); where ext refers to the aforementioned structure.a1",
+      "parentUuid": "b6d06c5c_72e205c3",
+      "revId": "880d63e3b1a5014f499e5d4b3b610396fa3dc445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd0f17bf_1d4ed8ef",
@@ -59,6 +77,24 @@
       "writtenOn": "2025-11-10T20:15:10Z",
       "side": 1,
       "message": "The commit message should explain why this is necessary over exporting loop_process_work()",
+      "revId": "880d63e3b1a5014f499e5d4b3b610396fa3dc445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc62e18b_44c1d5be",
+        "filename": "drivers/block/loop.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1993,
+      "author": {
+        "id": 3647860
+      },
+      "writtenOn": "2025-11-11T01:39:00Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "cd0f17bf_1d4ed8ef",
       "revId": "880d63e3b1a5014f499e5d4b3b610396fa3dc445",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
