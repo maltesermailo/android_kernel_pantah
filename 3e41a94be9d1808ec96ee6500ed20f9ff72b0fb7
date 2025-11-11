@@ -51,6 +51,24 @@
       "parentUuid": "a1922a6c_86f31ae0",
       "revId": "3e41a94be9d1808ec96ee6500ed20f9ff72b0fb7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a7d2d02_20207959",
+        "filename": "drivers/usb/gadget/configfs.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1981633
+      },
+      "writtenOn": "2025-11-11T00:38:13Z",
+      "side": 1,
+      "message": "I started looking into backporting my updated android_f_accessory driver to older kernels, but I think it is too risky since there are pieces of the legacy version which were never brought forward in the refactored version, and we don\u0027t have a proper test plan for them (or devices which leverage them any longer)",
+      "parentUuid": "44efeb80_8d84a2e0",
+      "revId": "3e41a94be9d1808ec96ee6500ed20f9ff72b0fb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
