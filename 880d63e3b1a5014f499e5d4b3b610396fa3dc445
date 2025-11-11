@@ -84,6 +84,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b0051310_794faae6",
+        "filename": "drivers/block/loop.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1988,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-11-11T17:45:20Z",
+      "side": 1,
+      "message": "`struct loop_worker` is not available to your driver. How do you get \"ext\" to be able to pass `ext-\u003ecmd_list` or `ext-\u003elo`? You can\u0027t do that without defining your own local version of that struct which breaks KMI. This is a no go.\n\nHow is your driver even getting a pointer to \"ext\"?\n\nAll of this needs to be documented in the commit message as John said, and it needs to be done in a way that does not violate or circumvent the KMI.",
+      "parentUuid": "819b3d3a_b6308e41",
+      "revId": "880d63e3b1a5014f499e5d4b3b610396fa3dc445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd0f17bf_1d4ed8ef",
         "filename": "drivers/block/loop.c",
         "patchSetId": 2
