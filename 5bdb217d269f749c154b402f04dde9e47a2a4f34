@@ -16,6 +16,23 @@
       "message": "This needs a \"Bug: \" tag. If you are updating a rockchip symbol list, the Bug should be created by someone with an @rockchip email address (either in the bug or as the owner of the patch).\n\nIf you represent an IHV and these new symbols are required for your company\u0027s driver, then please create your own symbol file (again, a Bug: tag is needed)",
       "revId": "5bdb217d269f749c154b402f04dde9e47a2a4f34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b58853c5_3e16fdb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2025-11-12T18:13:58Z",
+      "side": 1,
+      "message": "I have discussed this briefly internally.\n\nHere\u0027s what you should do:\n\n1. identify \"you\" and create your own symbol list with that name\n2. identify the set of vendor modules that you care about and populate the symbol list using that list of symbols\n3. add the symbol list name to wherever the existing ones are in this project (2 places)\n4. push a change for review containing the above changes and get it submitted\n5. identify which current GKI release branch or branches should get the change\n6. open a respin bug per release branch\n7. cherry pick the change to each release branch, adding the bug to the commit message\n\nUseful links:\n\n* https://source.android.com/docs/core/architecture/kernel\n* https://source.android.com/docs/core/architecture/kernel/howto-symbol-lists\n* https://source.android.com/docs/core/architecture/kernel/gki-releases (including respin)\n\nI could go into more detail if needed.\n\nYou are free to hack up the symbol list however you like (`nm -u` and friends) but it should be self-contained description of the symbol dependencies of the modules you wish to load into GKI.",
+      "revId": "5bdb217d269f749c154b402f04dde9e47a2a4f34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
