@@ -100,6 +100,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bcdf16e_075b7e46",
+        "filename": "drivers/block/loop.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1988,
+      "author": {
+        "id": 3647860
+      },
+      "writtenOn": "2025-11-12T13:33:51Z",
+      "side": 1,
+      "message": "//It is only passed through, so there is no need to know the specific structure type.\n\nstruct loop_device; \nstruct loop_worker;\n\nstruct oplus_loop_ext {\n        struct work_struct      work;\n        struct list_head        cmd_list;\n        struct loop_device *lo;\n};\n\nin vendor hook,  we  use like:\n     disk \u003d rq-\u003eq-\u003edisk;\n     ext \u003d (struct oplus_loop_ext *)disk-\u003eandroid_oem_data1; //The ext and its\u0027 work is allocated/init at other locations\n     cmd \u003d blk_mq_rq_to_pdu(rq);\n                ext-\u003elo \u003d lo;\n    list_add_tail((struct list_head *)cmd, \u0026ext-\u003ecmd_list);\n  queue_work(oplus_kverityd_wq, \u0026ext-\u003ework); //oplus_kverityd_wq have high prio kthreads. \n\nwork is like this:\nstatic void oplus_loop_workfn(struct work_struct *work)\n{\n        struct oplus_loop_ext *ext \u003d (struct oplus_loop_ext *)work;\n        loop_process_cmd_list(NULL, \u0026ext-\u003ecmd_list, ext-\u003elo);\n}",
+      "parentUuid": "b0051310_794faae6",
+      "revId": "880d63e3b1a5014f499e5d4b3b610396fa3dc445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd0f17bf_1d4ed8ef",
