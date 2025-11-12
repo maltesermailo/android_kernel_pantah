@@ -120,6 +120,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "df2d4503_d3774186",
+        "filename": "drivers/block/loop.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1988,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-11-12T20:49:41Z",
+      "side": 1,
+      "message": "why is the \"worker\" parameter needed given you always pass NULL?\n\n```\next-\u003elo \u003d lo;\n```\nwhere do you get \"lo\" from? I don\u0027t see any other hooks in this file and `struct loop_device` is local to this file. Did \"lo\" come from disk-\u003eprivate_data?\n\nIf so, couldn\u0027t the new function be:\n```\nvoid loop_process_cmd_list(struct list_head *cmd_list, struct gendisk *disk)\n{\n  struct loop_device *lo \u003d disk-\u003eprivate_data;\n  \n  loop_process_work(NULL, cmd_list, lo);\n}\n```\nThen we don\u0027t have the issue of an unreachable struct being part of the KMI. struct gendisk is already in the KMI.",
+      "parentUuid": "2bcdf16e_075b7e46",
+      "revId": "880d63e3b1a5014f499e5d4b3b610396fa3dc445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd0f17bf_1d4ed8ef",
         "filename": "drivers/block/loop.c",
         "patchSetId": 2
