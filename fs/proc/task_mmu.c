@@ -426,8 +426,12 @@ static void get_vma_name(struct vm_area_struct *vma,
 	}
 
 	if (anon_name) {
-		*name_fmt = "[anon:%s]";
-		*name = anon_name->name;
+		if (!strncmp(anon_name->name, "16k:", 4)) {
+			*name = anon_name->name + 4;
+		} else {
+			*name_fmt = "[anon:%s]";
+			*name = anon_name->name;
+		}
 		return;
 	}
 }
