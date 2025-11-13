@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dec66d7_c4108480",
+        "filename": "arch/x86/include/asm/pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 3484945
+      },
+      "writtenOn": "2025-11-13T11:27:05Z",
+      "side": 1,
+      "message": "All this sounds like a good usage of memcache. Similar case needed to be solved with page tables for guest MMU stage-2 and it was done via memcache, see: https://android-review.git.corp.google.com/c/kernel/common/+/3702536 (and patches in this series)\n\nAlso ARM uses memcaches for that purpose both for MMU and SMMU and it is partially upstreamed: https://lists.infradead.org/pipermail/linux-arm-kernel/2022-June/756414.html.\n\nI didn\u0027t fully analyze SMMU usage but you could probably took a look how they use memcache (https://source.corp.google.com/h/android/kernel/common/+/android16-6.12:arch/arm64/kvm/hyp/nvhe/iommu/iommu.c?q\u003d%20kvm_hyp_memcache%20\u0026ss\u003dh%2Fandroid%2Fkernel%2Fcommon%2F%2B%2Frefs%2Fheads%2Fandroid16-6.12) - i briefly look on it and they also introduced hyp allocator for IOMMU (https://android-review.git.corp.google.com/c/kernel/common/+/3344128)\n\nI didn\u0027t go through all the patches so I am not telling that we have to switch to memcache right away but it sounds from this point that we probably could (and not introduce new mechanism for that)?",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 0
+      },
+      "revId": "54b64cf9cca8e6c5f08e1183258f6a5e77a582cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
