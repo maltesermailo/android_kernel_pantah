@@ -803,10 +803,11 @@ int dma_buf_get_flags(struct dma_buf *dmabuf, unsigned long *flags);
 #ifdef CONFIG_DMA_SHARED_BUFFER
 
 int is_dma_buf_file(struct file *file);
-int dma_buf_account_task(struct dma_buf *dmabuf, struct task_struct *task);
-void dma_buf_unaccount_task(struct dma_buf *dmabuf, struct task_struct *task);
+int dma_buf_account_task(struct dma_buf *dmabuf, struct task_dma_buf_info *dmabuf_info);
+void dma_buf_unaccount_task(struct dma_buf *dmabuf, struct task_dma_buf_info *dmabuf_info);
 int copy_dmabuf_info(u64 clone_flags, struct task_struct *task);
-void put_dmabuf_info(struct task_struct *task);
+void put_dmabuf_info(struct task_dma_buf_info *dmabuf_info);
+int dma_buf_begin_new_exec(struct files_struct *old_files);
 
 #else /* CONFIG_DMA_SHARED_BUFFER */
 
@@ -818,6 +819,7 @@ static inline void dma_buf_unaccount_task(struct dma_buf *dmabuf,
 static inline int copy_dmabuf_info(u64 clone_flags,
 				   struct task_struct *task) { return 0; }
 static inline void put_dmabuf_info(struct task_struct *task) {}
+int dma_buf_begin_new_exec(struct files_struct *old_files) { return 0; }
 
 #endif /* CONFIG_DMA_SHARED_BUFFER */
 #endif /* __DMA_BUF_H__ */
