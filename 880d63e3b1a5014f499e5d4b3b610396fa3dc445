@@ -138,6 +138,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a16b77bd_44ab3ff6",
+        "filename": "drivers/block/loop.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1988,
+      "author": {
+        "id": 3647860
+      },
+      "writtenOn": "2025-11-13T07:34:25Z",
+      "side": 1,
+      "message": "why is the \"worker\" parameter needed given you always pass NULL?\n--\u003e 1. Now we send commands like the loop root group, so we don\u0027t need loopworker anymore.\nIf so, couldn\u0027t the new function be:\n--\u003e Yes, this is sufficient. Modify it according to patch set5",
+      "parentUuid": "df2d4503_d3774186",
+      "revId": "880d63e3b1a5014f499e5d4b3b610396fa3dc445",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd0f17bf_1d4ed8ef",
         "filename": "drivers/block/loop.c",
         "patchSetId": 2
