@@ -22,6 +22,30 @@
       },
       "revId": "54b64cf9cca8e6c5f08e1183258f6a5e77a582cc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "084060c1_ae5b59f2",
+        "filename": "arch/x86/include/asm/pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-11-13T14:28:17Z",
+      "side": 1,
+      "message": "I fully agree with you. The only extra constraint that we have (with the current implementation) is that the donated pages would still need to have read access for the host. This is to avoid iova_to_phys translation as a hypercall. But Aashish had already implemented a mapletree based solution to avoid hypercalls - with some extra code churn: aosp/3693106. \n\nSo either we could stick to this implementation or move to memcache and use the maple tree approach by Aashish. We shall work on the memcache approach and run some numbers to see if there is any considerable impact for iova_to_phys.",
+      "parentUuid": "9dec66d7_c4108480",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 0
+      },
+      "revId": "54b64cf9cca8e6c5f08e1183258f6a5e77a582cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
