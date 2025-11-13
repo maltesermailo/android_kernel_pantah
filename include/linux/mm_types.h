@@ -555,6 +555,10 @@ struct vm_area_struct {
 	ANDROID_KABI_RESERVE(4);
 } __randomize_layout;
 
+struct mm_struct_abi_extend {
+	struct task_dma_buf_info *dmabuf_info;
+};
+
 struct kioctx_table;
 struct mm_struct {
 	struct {
@@ -781,7 +785,7 @@ struct mm_struct {
 		} lru_gen;
 #endif /* CONFIG_LRU_GEN */
 
-		ANDROID_KABI_RESERVE(1);
+		ANDROID_KABI_USE(1, struct mm_struct_abi_extend *abi_extend);
 	} __randomize_layout;
 
 	/*
