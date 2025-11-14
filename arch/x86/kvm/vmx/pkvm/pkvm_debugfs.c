@@ -202,6 +202,7 @@ static int vmexit_trace_show(struct seq_file *m, void *unused)
 	struct perf_data *perf, *summary;
 	unsigned long size;
 	int vm_handle = 0;
+	int ret;
 
 	if (kvm) {
 		/* Dump vmexit trace for a specific VM */
@@ -229,14 +230,14 @@ static int vmexit_trace_show(struct seq_file *m, void *unused)
 		return -ENOMEM;
 	}
 
-	/*TODO: Share perf memory with the pkvm hypervisor */
-
-	pkvm_hypercall(dump_vmexit_trace, vm_handle, __pa(perf), size);
-
-	/*TODO: Unshare perf memory with the pkvm hypervisor */
+	ret = pkvm_hypercall(dump_vmexit_trace, vm_handle, __pa(perf), size);
+	if (ret) {
+		pr_err("Failed to get vmexit trace from pkvm: err %d\n", ret);
+		goto out;
+	}
 
 	pkvm_dump_vmexit_trace(m, perf, summary, size);
-
+out:
 	kfree(summary);
 	free_pages_exact(perf, size);
 
