@@ -554,9 +554,11 @@ __pkvm_device_request_power(struct pkvm_hyp_vcpu *hyp_vcpu, u64 ipa, bool on, bo
 
 	hyp_spin_lock(&device_spinlock);
 	dev = pkvm_get_vm_device_by_addr(hyp_vm, phys);
+#if 0
 	/* power_lock is mandatory */
 	if (!dev || !dev->power_lock || (run_cb && dev->power_lock(dev->cookie, on)))
 		dev = NULL;
+#endif
 	hyp_spin_unlock(&device_spinlock);
 
 	return dev ? 0 : -EINVAL;
