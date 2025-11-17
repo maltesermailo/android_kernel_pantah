@@ -44,6 +44,24 @@
       ],
       "revId": "e4ef7c0138666e2a956204df7aecd707a7ae82c6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f6e28b6_e83f19a1",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-17T12:02:00Z",
+      "side": 1,
+      "message": "IMHO it is fine as is.\n\nBTW, FWIW in Chuanxiao\u0027s v6.18 port we don\u0027t call kvm_arch_enable_virtualization_cpu(), we directly call kvm_user_return_msr_cpu_online() (which is the only thing pKVM actually needs to do in this hypercall) plus kvm_x86_call(enable_virtualization_cpu)() which does nothing.",
+      "parentUuid": "39ee93b0_b6259b68",
+      "revId": "e4ef7c0138666e2a956204df7aecd707a7ae82c6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
