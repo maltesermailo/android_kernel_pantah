@@ -361,11 +361,13 @@ int pps_register_cdev(struct pps_device *pps)
 			       pps->info.name);
 			err = -EBUSY;
 		}
+		kfree(pps);
 		goto out_unlock;
 	}
 	pps->id = err;
 	mutex_unlock(&pps_idr_lock);
 
+<<<<<<< HEAD   (b809e08631e0a352611368fe655c36fe7c02594a Merge android14-6.1 into android14-6.1-lts)
 	devt = MKDEV(MAJOR(pps_devt), pps->id);
 
 	cdev_init(&pps->cdev, &pps_cdev_fops);
@@ -375,6 +377,24 @@ int pps_register_cdev(struct pps_device *pps)
 	if (err) {
 		pr_err("%s: failed to add char device %d:%d\n",
 				pps->info.name, MAJOR(pps_devt), pps->id);
+||||||| BASE   (015571c64ec26cf1a5c48bec38a36ba2bb3185bc misc: genwqe: Fix incorrect cmd field being reported in erro)
+	pps->dev.class = pps_class;
+	pps->dev.parent = pps->info.dev;
+	pps->dev.devt = MKDEV(pps_major, pps->id);
+	dev_set_drvdata(&pps->dev, pps);
+	dev_set_name(&pps->dev, "pps%d", pps->id);
+	err = device_register(&pps->dev);
+	if (err)
+=======
+	pps->dev.class = pps_class;
+	pps->dev.parent = pps->info.dev;
+	pps->dev.devt = MKDEV(pps_major, pps->id);
+	dev_set_drvdata(&pps->dev, pps);
+	dev_set_name(&pps->dev, "pps%d", pps->id);
+	pps->dev.release = pps_device_destruct;
+	err = device_register(&pps->dev);
+	if (err)
+>>>>>>> BRANCH (0a6b2ed51a1cf13e11473680f16ac9654a8ba04b f2fs: fix zero-sized extent for precache extents)
 		goto free_idr;
 	}
 	pps->dev = device_create(pps_class, pps->info.dev, devt, pps,
@@ -384,11 +404,22 @@ int pps_register_cdev(struct pps_device *pps)
 		goto del_cdev;
 	}
 
+<<<<<<< HEAD   (b809e08631e0a352611368fe655c36fe7c02594a Merge android14-6.1 into android14-6.1-lts)
 	/* Override the release function with our own */
 	pps->dev->release = pps_device_destruct;
 
 	pr_debug("source %s got cdev (%d:%d)\n", pps->info.name,
 			MAJOR(pps_devt), pps->id);
+||||||| BASE   (015571c64ec26cf1a5c48bec38a36ba2bb3185bc misc: genwqe: Fix incorrect cmd field being reported in erro)
+	/* Override the release function with our own */
+	pps->dev.release = pps_device_destruct;
+
+	pr_debug("source %s got cdev (%d:%d)\n", pps->info.name, pps_major,
+		 pps->id);
+=======
+	pr_debug("source %s got cdev (%d:%d)\n", pps->info.name, pps_major,
+		 pps->id);
+>>>>>>> BRANCH (0a6b2ed51a1cf13e11473680f16ac9654a8ba04b f2fs: fix zero-sized extent for precache extents)
 
 	return 0;
 
