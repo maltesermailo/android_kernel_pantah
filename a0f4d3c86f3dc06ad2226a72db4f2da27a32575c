@@ -3,6 +3,256 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f9e6e35_308e1e20",
+        "filename": "fs/exec.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1289,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-11-19T23:21:42Z",
+      "side": 1,
+      "message": "retval \u003d -ENOMEM?",
+      "range": {
+        "startLine": 1289,
+        "startChar": 2,
+        "endLine": 1289,
+        "endChar": 10
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d4b0191a_165c67bb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "fs/exec.c",
+              "range": {
+                "startLine": 1289,
+                "startChar": 0,
+                "endLine": 1289,
+                "endChar": 0
+              },
+              "replacement": "\t\tretval \u003d -ENOMEM;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a0f4d3c86f3dc06ad2226a72db4f2da27a32575c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c8c6220_0c3b18f2",
+        "filename": "fs/exec.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1315,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-11-19T23:21:42Z",
+      "side": 1,
+      "message": "You drop RCU read lock and then access the `file`. That does not sound safe unless something else (my_files-\u003efile_lock?) protects the object.",
+      "range": {
+        "startLine": 1315,
+        "startChar": 3,
+        "endLine": 1315,
+        "endChar": 18
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2b84e835_10128195",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "fs/exec.c",
+              "range": {
+                "startLine": 1313,
+                "startChar": 0,
+                "endLine": 1313,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tstruct file *file;\n\t\t\tint err;\n\n"
+            },
+            {
+              "path": "fs/exec.c",
+              "range": {
+                "startLine": 1314,
+                "startChar": 0,
+                "endLine": 1317,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tfile \u003d rcu_dereference_check_fdtable(my_files, fdt-\u003efd[n]);\n\t\t\tif (!file || !is_dma_buf_file(file)) {\n\t\t\t\trcu_read_unlock();\n"
+            },
+            {
+              "path": "fs/exec.c",
+              "range": {
+                "startLine": 1318,
+                "startChar": 0,
+                "endLine": 1318,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t}\n"
+            },
+            {
+              "path": "fs/exec.c",
+              "range": {
+                "startLine": 1320,
+                "startChar": 0,
+                "endLine": 1320,
+                "endChar": 0
+              },
+              "replacement": "\t\t\trcu_read_unlock();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a0f4d3c86f3dc06ad2226a72db4f2da27a32575c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ffd6f29_9ae345fc",
+        "filename": "fs/exec.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1338,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-11-19T23:21:42Z",
+      "side": 1,
+      "message": "This bug chunk should be factored into a separate dmabuf accounting function.",
+      "range": {
+        "startLine": 1305,
+        "startChar": 1,
+        "endLine": 1338,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "54d6195e_bb9ac224",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "fs/exec.c",
+              "range": {
+                "startLine": 1245,
+                "startChar": 0,
+                "endLine": 1245,
+                "endChar": 0
+              },
+              "replacement": "\nstatic void exec_dma_buf_account(struct task_struct *me,\n\t\t\t\t struct files_struct *old_files,\n\t\t\t\t struct task_dma_buf_info *new_dmabuf_info)\n{\n\tstruct files_struct *my_files \u003d current-\u003efiles;\n\n\tif (!IS_ENABLED(CONFIG_DMA_SHARED_BUFFER) || !my_files)\n\t\treturn;\n\n\tunsigned int n \u003d 0;\n\tint err;\n\n\tspin_lock(\u0026my_files-\u003efile_lock);\n\tfor (struct fdtable *fdt \u003d files_fdtable(my_files); n \u003c fdt-\u003emax_fds; n++) {\n\t\trcu_read_lock();\n\t\tstruct file *file \u003d rcu_dereference_check_fdtable(my_files, fdt-\u003efd[n]);\n\t\trcu_read_unlock();\n\t\tif (!file || !is_dma_buf_file(file))\n\t\t\tcontinue;\n\n\t\terr \u003d dma_buf_account_task(file-\u003eprivate_data, new_dmabuf_info);\n\t\tif (err)\n\t\t\tpr_err(\"dmabuf accounting failed during begin_new_exec, err %d\\n\",\n\t\t\t       err);\n\t}\n\n\t// put_files_struct puts the dmabuf_info, but not if we\u0027re reusing the original one\n\tif (my_files \u003d\u003d old_files)\n\t\tput_dmabuf_info(my_files-\u003edmabuf_info);\n\n\trefcount_inc(\u0026new_dmabuf_info-\u003erefcnt);\n\tmy_files-\u003edmabuf_info \u003d new_dmabuf_info;\n\tspin_unlock(\u0026my_files-\u003efile_lock);\n\n\tstruct task_dma_buf_info *old \u003d me-\u003edmabuf_info;\n\tme-\u003edmabuf_info \u003d new_dmabuf_info; // refcount from alloc_task_dma_buf_info\n\tif (old)\n\t\tput_dmabuf_info(old);\n}\n"
+            },
+            {
+              "path": "fs/exec.c",
+              "range": {
+                "startLine": 1306,
+                "startChar": 0,
+                "endLine": 1338,
+                "endChar": 0
+              },
+              "replacement": "\texec_dma_buf_account(me, old_files, new_dmabuf_info);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a0f4d3c86f3dc06ad2226a72db4f2da27a32575c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b8f1e78_179f1972",
+        "filename": "fs/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-11-19T23:21:42Z",
+      "side": 1,
+      "message": "long line",
+      "range": {
+        "startLine": 421,
+        "startChar": 17,
+        "endLine": 422,
+        "endChar": 13
+      },
+      "revId": "a0f4d3c86f3dc06ad2226a72db4f2da27a32575c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b8bf5cd_1ba82919",
+        "filename": "fs/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1136,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-11-19T23:21:42Z",
+      "side": 1,
+      "message": "Why can\u0027t this be done inside `filp_close`?",
+      "range": {
+        "startLine": 1134,
+        "startChar": 2,
+        "endLine": 1136,
+        "endChar": 28
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6d4de7a9_5160e3bf",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "fs/file.c",
+              "range": {
+                "startLine": 1134,
+                "startChar": 0,
+                "endLine": 1136,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "a0f4d3c86f3dc06ad2226a72db4f2da27a32575c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51dd4c82_eaec0587",
+        "filename": "include/linux/mm_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 784,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-11-19T23:21:42Z",
+      "side": 1,
+      "message": "is this acceptable?",
+      "range": {
+        "startLine": 784,
+        "startChar": 2,
+        "endLine": 784,
+        "endChar": 61
+      },
+      "revId": "a0f4d3c86f3dc06ad2226a72db4f2da27a32575c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bdc39333_de8e1524",
         "filename": "kernel/fork.c",
         "patchSetId": 1
@@ -19,6 +269,29 @@
         "startChar": 0,
         "endLine": 3503,
         "endChar": 26
+      },
+      "revId": "a0f4d3c86f3dc06ad2226a72db4f2da27a32575c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2895a967_8bb4099e",
+        "filename": "mm/mmap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2461,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-11-19T23:21:42Z",
+      "side": 1,
+      "message": "long line",
+      "range": {
+        "startLine": 2461,
+        "startChar": 3,
+        "endLine": 2461,
+        "endChar": 92
       },
       "revId": "a0f4d3c86f3dc06ad2226a72db4f2da27a32575c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
