@@ -45,6 +45,208 @@
       },
       "revId": "a028c849222d0d3016e81c1b03ac82caaea36e60",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1530b905_9ab9e275",
+        "filename": "drivers/virt/halla/hvm_ioeventfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-19T11:18:44Z",
+      "side": 1,
+      "message": "you just rebooted the machine if this ever fires, please properly handle this error if it can actually happen.  as-is, this is not how to handle problems.",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 52
+      },
+      "revId": "a028c849222d0d3016e81c1b03ac82caaea36e60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f68d5c06_b2a5fe22",
+        "filename": "drivers/virt/halla/hvm_irqfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-19T11:18:44Z",
+      "side": 1,
+      "message": "please put in the lockdep notification for this so that the compiler can check this assertion",
+      "range": {
+        "startLine": 82,
+        "startChar": 23,
+        "endLine": 82,
+        "endChar": 31
+      },
+      "revId": "a028c849222d0d3016e81c1b03ac82caaea36e60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd1b8b66_20ee1161",
+        "filename": "drivers/virt/halla/hvm_irqfd.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-19T11:18:44Z",
+      "side": 1,
+      "message": "add proper lockdep annotations for hvm-\u003eirqfds.lock",
+      "range": {
+        "startLine": 95,
+        "startChar": 5,
+        "endLine": 95,
+        "endChar": 12
+      },
+      "revId": "a028c849222d0d3016e81c1b03ac82caaea36e60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52dfd9ef_69146e44",
+        "filename": "drivers/virt/halla/hvm_vtimer.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-19T11:18:44Z",
+      "side": 1,
+      "message": "not needed.",
+      "range": {
+        "startLine": 79,
+        "startChar": 2,
+        "endLine": 79,
+        "endChar": 9
+      },
+      "revId": "a028c849222d0d3016e81c1b03ac82caaea36e60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60bc8377_ce091126",
+        "filename": "drivers/virt/halla/hvm_vtimer.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-19T11:18:44Z",
+      "side": 1,
+      "message": "remove debugging code",
+      "range": {
+        "startLine": 96,
+        "startChar": 1,
+        "endLine": 96,
+        "endChar": 8
+      },
+      "revId": "a028c849222d0d3016e81c1b03ac82caaea36e60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ba079a8_f21bdccd",
+        "filename": "drivers/virt/halla/hvm_vtimer.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-19T11:18:44Z",
+      "side": 1,
+      "message": "remove debugging code.",
+      "range": {
+        "startLine": 104,
+        "startChar": 1,
+        "endLine": 104,
+        "endChar": 8
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0dd68152_d7182e1b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/virt/halla/hvm_vtimer.c",
+              "range": {
+                "startLine": 104,
+                "startChar": 0,
+                "endLine": 105,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "a028c849222d0d3016e81c1b03ac82caaea36e60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eea4ded2_2257abf5",
+        "filename": "drivers/virt/halla/hvm_vtimer.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-19T11:18:44Z",
+      "side": 1,
+      "message": "please run checkpatch.pl and fix all coding style issues.",
+      "range": {
+        "startLine": 113,
+        "startChar": 63,
+        "endLine": 113,
+        "endChar": 65
+      },
+      "revId": "a028c849222d0d3016e81c1b03ac82caaea36e60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87d29258_642e91fe",
+        "filename": "drivers/virt/halla/hvm_vtimer.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-19T11:18:44Z",
+      "side": 1,
+      "message": "never use pr_info, pr_err, pr_warn, pr_notice, etc, you have a real device, use it.\n\nAlso, when drivers work, they are quiet.  Do not print debugging information to the kernel logs of every system.",
+      "range": {
+        "startLine": 138,
+        "startChar": 1,
+        "endLine": 138,
+        "endChar": 8
+      },
+      "revId": "a028c849222d0d3016e81c1b03ac82caaea36e60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
