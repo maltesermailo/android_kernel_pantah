@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "908413b3_99e19d76",
+        "filename": "drivers/virt/halla/hvm_debug.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-19T11:01:41Z",
+      "side": 1,
+      "message": "no need to ever check this, all debugfs calls should always ignore the return value.\n\nAlso, why is saving this even needed, it can always be looked up if you need to remove it, right?",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 22
+      },
+      "revId": "a028c849222d0d3016e81c1b03ac82caaea36e60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ba564ac_d4424f0e",
+        "filename": "drivers/virt/halla/hvm_debug.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-19T11:01:41Z",
+      "side": 1,
+      "message": "again, do not check the return value.",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 20
+      },
+      "revId": "a028c849222d0d3016e81c1b03ac82caaea36e60",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
