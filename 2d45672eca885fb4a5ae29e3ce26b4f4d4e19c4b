@@ -143,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "19a4f2eb_112cb551",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1715,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2025-11-20T18:41:30Z",
+      "side": 1,
+      "message": "That wasn\u0027t clear. I mean:\n\n\toff \u003d reg-\u003eid \u0026 ~(KVM_REG_ARCH_MASK | KVM_REG_SIZE_MASK | KVM_REG_ARM_CORE | KVM_REG_ARM_COPROC_MASK);\n\nIf it\u0027s a KVM_REG_ARM_COPROC_MASK, then off will be huge, and it would fail the check...\n\nTBH, now that I\u0027ve written this, I\u0027m not sure it\u0027s a great idea.... unless you think there\u0027s something to it, feel free to ignore.",
+      "parentUuid": "58bb7eec_d96e91ce",
+      "revId": "2d45672eca885fb4a5ae29e3ce26b4f4d4e19c4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "890cd5f9_6f9a8eff",
         "filename": "arch/arm64/kvm/arm.c",
         "patchSetId": 2
