@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "11db3715_045a8b3b",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1701,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-11-20T17:42:41Z",
+      "side": 1,
+      "message": "Sounds reasonable!",
+      "parentUuid": "1b6533c8_e45e4084",
+      "revId": "2d45672eca885fb4a5ae29e3ce26b4f4d4e19c4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e19d6e7a_a27d7b39",
         "filename": "arch/arm64/kvm/arm.c",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "writtenOn": "2025-11-20T16:11:42Z",
       "side": 1,
       "message": "Maybe a comment as to _why_ this hypercall needs access?\n\nAlso, is it both for set and get?",
+      "revId": "2d45672eca885fb4a5ae29e3ce26b4f4d4e19c4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bd69bce_5c4456b6",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1709,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-11-20T17:42:41Z",
+      "side": 1,
+      "message": "Yes it is for both. SET to also writeback the result of the HVC.",
+      "parentUuid": "e19d6e7a_a27d7b39",
       "revId": "2d45672eca885fb4a5ae29e3ce26b4f4d4e19c4b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -83,6 +119,24 @@
       "side": 1,
       "message": "Actually, it\u0027s not, but you could incorporate it if you add it to the mask below...",
       "parentUuid": "83fcf626_b0244d57",
+      "revId": "2d45672eca885fb4a5ae29e3ce26b4f4d4e19c4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58bb7eec_d96e91ce",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1715,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-11-20T17:42:41Z",
+      "side": 1,
+      "message": "WDYM? adding `KVM_REG_ARM_COPROC_MASK` to the check below and then make sure the offset is between  KVM_REG_ARM_CORE and KVM_REG_ARM_CORE + 3?",
+      "parentUuid": "4fe98e51_10a432fc",
       "revId": "2d45672eca885fb4a5ae29e3ce26b4f4d4e19c4b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
