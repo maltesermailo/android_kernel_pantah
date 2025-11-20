@@ -299007,6 +299007,7 @@ function {
   parameter_id: 0x33f8a50c
 }
 function {
+<<<<<<< HEAD   (51c161fd229f74f9e11326537484e8192702ba55 ANDROID: KVM: arm64: Use path variable for modules)
   id: 0x9bd47a1d
   return_type_id: 0x6720d32f
   parameter_id: 0x18bd6530
@@ -299014,6 +299015,15 @@ function {
   parameter_id: 0x38fa32ef
   parameter_id: 0x6720d32f
   parameter_id: 0x13580d6c
+||||||| BASE   (9f81c2665ac3833307838ce0216bcab6f31a5933 ANDROID: mm: skip oom killer to keep important task alive)
+=======
+  id: 0x9bd481b1
+  return_type_id: 0x6720d32f
+  parameter_id: 0x18bd6530
+  parameter_id: 0x1d19a9d5
+  parameter_id: 0x3c692b7e
+  parameter_id: 0x11cfee5a
+>>>>>>> CHANGE (5453f12f6799d8f600197663a7bf7039c2e0dd7e ANDROID: GKI: oppo add symbols to symbol list)
 }
 function {
   id: 0x9bd49403
@@ -311696,6 +311706,73 @@ elf_symbol {
   full_name: "__traceiter_android_vh_mutex_wait_start"
 }
 elf_symbol {
+<<<<<<< HEAD   (51c161fd229f74f9e11326537484e8192702ba55 ANDROID: KVM: arm64: Use path variable for modules)
+||||||| BASE   (9f81c2665ac3833307838ce0216bcab6f31a5933 ANDROID: mm: skip oom killer to keep important task alive)
+  id: 0xd3e1b817
+  name: "__traceiter_android_vh_ogki_check_vip_status"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa43903c9
+  type_id: 0x9a2a81ab
+  full_name: "__traceiter_android_vh_ogki_check_vip_status"
+}
+elf_symbol {
+  id: 0x594fa05d
+  name: "__traceiter_android_vh_oom_check_panic"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6d228f32
+  type_id: 0x9b5ac8cd
+  full_name: "__traceiter_android_vh_oom_check_panic"
+}
+elf_symbol {
+  id: 0xb3f4a3bd
+  name: "__traceiter_android_vh_oom_killer_disable"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x11f7ab20
+  type_id: 0x9a33392f
+  full_name: "__traceiter_android_vh_oom_killer_disable"
+}
+elf_symbol {
+=======
+  id: 0xd3e1b817
+  name: "__traceiter_android_vh_ogki_check_vip_status"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0xa43903c9
+  type_id: 0x9a2a81ab
+  full_name: "__traceiter_android_vh_ogki_check_vip_status"
+}
+elf_symbol {
+  id: 0x594fa05d
+  name: "__traceiter_android_vh_oom_check_panic"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x6d228f32
+  type_id: 0x9b5ac8cd
+  full_name: "__traceiter_android_vh_oom_check_panic"
+}
+elf_symbol {
+  id: 0x1ff6ff8b
+  name: "__traceiter_android_vh_oom_evaluate_task_bypass"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x39e206ae
+  type_id: 0x9bd481b1
+  full_name: "__traceiter_android_vh_oom_evaluate_task_bypass"
+}
+elf_symbol {
+  id: 0xb3f4a3bd
+  name: "__traceiter_android_vh_oom_killer_disable"
+  is_defined: true
+  symbol_type: FUNCTION
+  crc: 0x11f7ab20
+  type_id: 0x9a33392f
+  full_name: "__traceiter_android_vh_oom_killer_disable"
+}
+elf_symbol {
+>>>>>>> CHANGE (5453f12f6799d8f600197663a7bf7039c2e0dd7e ANDROID: GKI: oppo add symbols to symbol list)
   id: 0x2884ad94
   name: "__traceiter_android_vh_oom_reaper_delay_bypass"
   is_defined: true
@@ -314009,6 +314086,73 @@ elf_symbol {
   full_name: "__tracepoint_android_vh_mutex_wait_start"
 }
 elf_symbol {
+<<<<<<< HEAD   (51c161fd229f74f9e11326537484e8192702ba55 ANDROID: KVM: arm64: Use path variable for modules)
+||||||| BASE   (9f81c2665ac3833307838ce0216bcab6f31a5933 ANDROID: mm: skip oom killer to keep important task alive)
+  id: 0x508ff939
+  name: "__tracepoint_android_vh_ogki_check_vip_status"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_ogki_check_vip_status"
+}
+elf_symbol {
+  id: 0x0c86f8fb
+  name: "__tracepoint_android_vh_oom_check_panic"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_oom_check_panic"
+}
+elf_symbol {
+  id: 0xeb498f27
+  name: "__tracepoint_android_vh_oom_killer_disable"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_oom_killer_disable"
+}
+elf_symbol {
+=======
+  id: 0x508ff939
+  name: "__tracepoint_android_vh_ogki_check_vip_status"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_ogki_check_vip_status"
+}
+elf_symbol {
+  id: 0x0c86f8fb
+  name: "__tracepoint_android_vh_oom_check_panic"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_oom_check_panic"
+}
+elf_symbol {
+  id: 0x3a3a83c9
+  name: "__tracepoint_android_vh_oom_evaluate_task_bypass"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_oom_evaluate_task_bypass"
+}
+elf_symbol {
+  id: 0xeb498f27
+  name: "__tracepoint_android_vh_oom_killer_disable"
+  is_defined: true
+  symbol_type: OBJECT
+  crc: 0x7c5aa8a7
+  type_id: 0x18ccbd2c
+  full_name: "__tracepoint_android_vh_oom_killer_disable"
+}
+elf_symbol {
+>>>>>>> CHANGE (5453f12f6799d8f600197663a7bf7039c2e0dd7e ANDROID: GKI: oppo add symbols to symbol list)
   id: 0x05b8726a
   name: "__tracepoint_android_vh_oom_reaper_delay_bypass"
   is_defined: true
@@ -347410,6 +347554,17 @@ interface {
   symbol_id: 0x0b2ba11b
   symbol_id: 0xe17999f4
   symbol_id: 0x721b87b7
+<<<<<<< HEAD   (51c161fd229f74f9e11326537484e8192702ba55 ANDROID: KVM: arm64: Use path variable for modules)
+||||||| BASE   (9f81c2665ac3833307838ce0216bcab6f31a5933 ANDROID: mm: skip oom killer to keep important task alive)
+  symbol_id: 0xd3e1b817
+  symbol_id: 0x594fa05d
+  symbol_id: 0xb3f4a3bd
+=======
+  symbol_id: 0xd3e1b817
+  symbol_id: 0x594fa05d
+  symbol_id: 0x1ff6ff8b
+  symbol_id: 0xb3f4a3bd
+>>>>>>> CHANGE (5453f12f6799d8f600197663a7bf7039c2e0dd7e ANDROID: GKI: oppo add symbols to symbol list)
   symbol_id: 0x2884ad94
   symbol_id: 0xacaadcc9
   symbol_id: 0xbf28fbd5
@@ -347667,6 +347822,17 @@ interface {
   symbol_id: 0x68d68809
   symbol_id: 0x76e879b6
   symbol_id: 0xae5bbde9
+<<<<<<< HEAD   (51c161fd229f74f9e11326537484e8192702ba55 ANDROID: KVM: arm64: Use path variable for modules)
+||||||| BASE   (9f81c2665ac3833307838ce0216bcab6f31a5933 ANDROID: mm: skip oom killer to keep important task alive)
+  symbol_id: 0x508ff939
+  symbol_id: 0x0c86f8fb
+  symbol_id: 0xeb498f27
+=======
+  symbol_id: 0x508ff939
+  symbol_id: 0x0c86f8fb
+  symbol_id: 0x3a3a83c9
+  symbol_id: 0xeb498f27
+>>>>>>> CHANGE (5453f12f6799d8f600197663a7bf7039c2e0dd7e ANDROID: GKI: oppo add symbols to symbol list)
   symbol_id: 0x05b8726a
   symbol_id: 0x20d2ceb3
   symbol_id: 0x6e9a5b3f
