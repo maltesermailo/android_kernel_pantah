@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc397db3_a2df29d3",
+        "filename": "fs/exec.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1289,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-11-20T00:20:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f9e6e35_308e1e20",
+      "range": {
+        "startLine": 1289,
+        "startChar": 2,
+        "endLine": 1289,
+        "endChar": 10
+      },
+      "revId": "a0f4d3c86f3dc06ad2226a72db4f2da27a32575c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c8c6220_0c3b18f2",
@@ -109,6 +133,30 @@
           ]
         }
       ],
+      "revId": "a0f4d3c86f3dc06ad2226a72db4f2da27a32575c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ad02a32_58ef69a2",
+        "filename": "fs/exec.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1315,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-11-20T00:20:52Z",
+      "side": 1,
+      "message": "I\u0027m not actually sure the rcu_read_lock is necessary here, but included it given the `rcu_dereference`. `my_files-\u003efile_lock` is supposed to protect against adds/removes. I think I can use `files_lookup_fd_locked` for this case instead.",
+      "parentUuid": "8c8c6220_0c3b18f2",
+      "range": {
+        "startLine": 1315,
+        "startChar": 3,
+        "endLine": 1315,
+        "endChar": 18
+      },
       "revId": "a0f4d3c86f3dc06ad2226a72db4f2da27a32575c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -187,6 +235,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3238a5fa_accad281",
+        "filename": "fs/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-11-20T00:20:52Z",
+      "side": 1,
+      "message": "This is less than 100 chars.",
+      "parentUuid": "9b8f1e78_179f1972",
+      "range": {
+        "startLine": 421,
+        "startChar": 17,
+        "endLine": 422,
+        "endChar": 13
+      },
+      "revId": "a0f4d3c86f3dc06ad2226a72db4f2da27a32575c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b8bf5cd_1ba82919",
@@ -228,6 +300,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af58d1d4_9b13905e",
+        "filename": "fs/file.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1136,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-11-20T00:20:52Z",
+      "side": 1,
+      "message": "`filp_close` does not always have access to `files_struct`, except through whatever `current-\u003efiles` happens to be, which is not guaranteed to be correct in all contexts.",
+      "parentUuid": "0b8bf5cd_1ba82919",
+      "range": {
+        "startLine": 1134,
+        "startChar": 2,
+        "endLine": 1136,
+        "endChar": 28
+      },
+      "revId": "a0f4d3c86f3dc06ad2226a72db4f2da27a32575c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51dd4c82_eaec0587",
@@ -241,6 +337,30 @@
       "writtenOn": "2025-11-19T23:21:42Z",
       "side": 1,
       "message": "is this acceptable?",
+      "range": {
+        "startLine": 784,
+        "startChar": 2,
+        "endLine": 784,
+        "endChar": 61
+      },
+      "revId": "a0f4d3c86f3dc06ad2226a72db4f2da27a32575c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6ad0f62_ce117ead",
+        "filename": "include/linux/mm_types.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 784,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-11-20T00:20:52Z",
+      "side": 1,
+      "message": "Not sure. Last thing I want to think about while trying to fix the problem is ABI issues introduced by doing something unusual here like last time.",
+      "parentUuid": "51dd4c82_eaec0587",
       "range": {
         "startLine": 784,
         "startChar": 2,
@@ -274,6 +394,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "03d195ab_15d230a4",
+        "filename": "kernel/fork.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3503,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-11-20T00:20:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bdc39333_de8e1524",
+      "range": {
+        "startLine": 3503,
+        "startChar": 0,
+        "endLine": 3503,
+        "endChar": 26
+      },
+      "revId": "a0f4d3c86f3dc06ad2226a72db4f2da27a32575c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2895a967_8bb4099e",
@@ -287,6 +431,30 @@
       "writtenOn": "2025-11-19T23:21:42Z",
       "side": 1,
       "message": "long line",
+      "range": {
+        "startLine": 2461,
+        "startChar": 3,
+        "endLine": 2461,
+        "endChar": 92
+      },
+      "revId": "a0f4d3c86f3dc06ad2226a72db4f2da27a32575c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45e7fc06_0218e8ee",
+        "filename": "mm/mmap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 2461,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-11-20T00:20:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2895a967_8bb4099e",
       "range": {
         "startLine": 2461,
         "startChar": 3,
