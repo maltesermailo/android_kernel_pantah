@@ -55,7 +55,7 @@ struct fuse_release_args {
 	struct inode *inode;
 };
 
-struct fuse_file *fuse_file_alloc(struct fuse_mount *fm)
+struct fuse_file *fuse_file_alloc(struct fuse_mount *fm, bool release)
 {
 	struct fuse_file *ff;
 
@@ -64,11 +64,13 @@ struct fuse_file *fuse_file_alloc(struct fuse_mount *fm)
 		return NULL;
 
 	ff->fm = fm;
-	ff->release_args = kzalloc(sizeof(*ff->release_args),
-				   GFP_KERNEL_ACCOUNT);
-	if (!ff->release_args) {
-		kfree(ff);
-		return NULL;
+	if (release) {
+		ff->release_args = kzalloc(sizeof(*ff->release_args),
+					   GFP_KERNEL_ACCOUNT);
+		if (!ff->release_args) {
+			kfree(ff);
+			return NULL;
+		}
 	}
 
 	INIT_LIST_HEAD(&ff->write_entry);
@@ -104,14 +106,30 @@ static void fuse_release_end(struct fuse_mount *fm, struct fuse_args *args,
 	kfree(ra);
 }
 
+<<<<<<< HEAD   (9929332cf976b614e7b57fc2147fc857dd06df6c Merge 6012804a7786 ("padata: Reset next CPU when reorder seq)
 static void fuse_file_put(struct inode *inode, struct fuse_file *ff,
 			  bool sync, bool isdir)
+||||||| BASE   (6012804a778606e9b83b50dd342ea5558812ed0f padata: Reset next CPU when reorder sequence wraps around)
+static void fuse_file_put(struct fuse_file *ff, bool sync, bool isdir)
+=======
+static void fuse_file_put(struct fuse_file *ff, bool sync)
+>>>>>>> BRANCH (a39f70d63f4373a598820d9491719e44cd60afe9 fuse: allocate ff->release_args only if release is needed)
 {
+<<<<<<< HEAD   (9929332cf976b614e7b57fc2147fc857dd06df6c Merge 6012804a7786 ("padata: Reset next CPU when reorder seq)
 	struct fuse_args *args = &ff->release_args->args;
 #ifdef CONFIG_FUSE_BPF
 	struct fuse_err_ret fer;
 #endif
+||||||| BASE   (6012804a778606e9b83b50dd342ea5558812ed0f padata: Reset next CPU when reorder sequence wraps around)
+	if (refcount_dec_and_test(&ff->count)) {
+		struct fuse_args *args = &ff->release_args->args;
+=======
+	if (refcount_dec_and_test(&ff->count)) {
+		struct fuse_release_args *ra = ff->release_args;
+		struct fuse_args *args = (ra ? &ra->args : NULL);
+>>>>>>> BRANCH (a39f70d63f4373a598820d9491719e44cd60afe9 fuse: allocate ff->release_args only if release is needed)
 
+<<<<<<< HEAD   (9929332cf976b614e7b57fc2147fc857dd06df6c Merge 6012804a7786 ("padata: Reset next CPU when reorder seq)
 	if (!refcount_dec_and_test(&ff->count))
 		return;
 
@@ -135,6 +153,34 @@ static void fuse_file_put(struct inode *inode, struct fuse_file *ff,
 		if (fuse_simple_background(ff->fm, args,
 				GFP_KERNEL | __GFP_NOFAIL))
 			fuse_release_end(ff->fm, args, -ENOTCONN);
+||||||| BASE   (6012804a778606e9b83b50dd342ea5558812ed0f padata: Reset next CPU when reorder sequence wraps around)
+		if (isdir ? ff->fm->fc->no_opendir : ff->fm->fc->no_open) {
+			/* Do nothing when client does not implement 'open' */
+			fuse_release_end(ff->fm, args, 0);
+		} else if (sync) {
+			fuse_simple_request(ff->fm, args);
+			fuse_release_end(ff->fm, args, 0);
+		} else {
+			args->end = fuse_release_end;
+			if (fuse_simple_background(ff->fm, args,
+						   GFP_KERNEL | __GFP_NOFAIL))
+				fuse_release_end(ff->fm, args, -ENOTCONN);
+		}
+		kfree(ff);
+=======
+		if (!args) {
+			/* Do nothing when server does not implement 'open' */
+		} else if (sync) {
+			fuse_simple_request(ff->fm, args);
+			fuse_release_end(ff->fm, args, 0);
+		} else {
+			args->end = fuse_release_end;
+			if (fuse_simple_background(ff->fm, args,
+						   GFP_KERNEL | __GFP_NOFAIL))
+				fuse_release_end(ff->fm, args, -ENOTCONN);
+		}
+		kfree(ff);
+>>>>>>> BRANCH (a39f70d63f4373a598820d9491719e44cd60afe9 fuse: allocate ff->release_args only if release is needed)
 	}
 	kfree(ff);
 }
@@ -145,15 +191,16 @@ struct fuse_file *fuse_file_open(struct fuse_mount *fm, u64 nodeid,
 	struct fuse_conn *fc = fm->fc;
 	struct fuse_file *ff;
 	int opcode = isdir ? FUSE_OPENDIR : FUSE_OPEN;
+	bool open = isdir ? !fc->no_opendir : !fc->no_open;
 
-	ff = fuse_file_alloc(fm);
+	ff = fuse_file_alloc(fm, open);
 	if (!ff)
 		return ERR_PTR(-ENOMEM);
 
 	ff->fh = 0;
 	/* Default for no-open */
 	ff->open_flags = FOPEN_KEEP_CACHE | (isdir ? FOPEN_CACHE_DIR : 0);
-	if (isdir ? !fc->no_opendir : !fc->no_open) {
+	if (open) {
 		struct fuse_open_out outarg;
 		int err;
 
@@ -161,11 +208,19 @@ struct fuse_file *fuse_file_open(struct fuse_mount *fm, u64 nodeid,
 		if (!err) {
 			ff->fh = outarg.fh;
 			ff->open_flags = outarg.open_flags;
+<<<<<<< HEAD   (9929332cf976b614e7b57fc2147fc857dd06df6c Merge 6012804a7786 ("padata: Reset next CPU when reorder seq)
 			fuse_passthrough_setup(fc, ff, &outarg);
+||||||| BASE   (6012804a778606e9b83b50dd342ea5558812ed0f padata: Reset next CPU when reorder sequence wraps around)
+
+=======
+>>>>>>> BRANCH (a39f70d63f4373a598820d9491719e44cd60afe9 fuse: allocate ff->release_args only if release is needed)
 		} else if (err != -ENOSYS) {
 			fuse_file_free(ff);
 			return ERR_PTR(err);
 		} else {
+			/* No release needed */
+			kfree(ff->release_args);
+			ff->release_args = NULL;
 			if (isdir)
 				fc->no_opendir = 1;
 			else
@@ -303,7 +358,7 @@ out_inode_unlock:
 }
 
 static void fuse_prepare_release(struct fuse_inode *fi, struct fuse_file *ff,
-				 unsigned int flags, int opcode)
+				 unsigned int flags, int opcode, bool sync)
 {
 	struct fuse_conn *fc = ff->fm->fc;
 	struct fuse_release_args *ra = ff->release_args;
@@ -321,6 +376,9 @@ static void fuse_prepare_release(struct fuse_inode *fi, struct fuse_file *ff,
 
 	wake_up_interruptible_all(&ff->poll_wait);
 
+	if (!ra)
+		return;
+
 	ra->inarg.fh = ff->fh;
 	ra->inarg.flags = flags;
 	ra->args.in_numargs = 1;
@@ -330,6 +388,13 @@ static void fuse_prepare_release(struct fuse_inode *fi, struct fuse_file *ff,
 	ra->args.nodeid = ff->nodeid;
 	ra->args.force = true;
 	ra->args.nocreds = true;
+
+	/*
+	 * Hold inode until release is finished.
+	 * From fuse_sync_release() the refcount is 1 and everything's
+	 * synchronous, so we are fine with not doing igrab() here.
+	 */
+	ra->inode = sync ? NULL : igrab(&fi->inode);
 }
 
 void fuse_file_release(struct inode *inode, struct fuse_file *ff,
@@ -339,16 +404,20 @@ void fuse_file_release(struct inode *inode, struct fuse_file *ff,
 	struct fuse_release_args *ra = ff->release_args;
 	int opcode = isdir ? FUSE_RELEASEDIR : FUSE_RELEASE;
 
+<<<<<<< HEAD   (9929332cf976b614e7b57fc2147fc857dd06df6c Merge 6012804a7786 ("padata: Reset next CPU when reorder seq)
 	fuse_passthrough_release(&ff->passthrough);
 
 	fuse_prepare_release(fi, ff, open_flags, opcode);
+||||||| BASE   (6012804a778606e9b83b50dd342ea5558812ed0f padata: Reset next CPU when reorder sequence wraps around)
+	fuse_prepare_release(fi, ff, open_flags, opcode);
+=======
+	fuse_prepare_release(fi, ff, open_flags, opcode, false);
+>>>>>>> BRANCH (a39f70d63f4373a598820d9491719e44cd60afe9 fuse: allocate ff->release_args only if release is needed)
 
-	if (ff->flock) {
+	if (ra && ff->flock) {
 		ra->inarg.release_flags |= FUSE_RELEASE_FLOCK_UNLOCK;
 		ra->inarg.lock_owner = fuse_lock_owner_id(ff->fm->fc, id);
 	}
-	/* Hold inode until release is finished */
-	ra->inode = igrab(inode);
 
 	/*
 	 * Normally this will send the RELEASE request, however if
@@ -359,7 +428,13 @@ void fuse_file_release(struct inode *inode, struct fuse_file *ff,
 	 * synchronous RELEASE is allowed (and desirable) in this case
 	 * because the server can be trusted not to screw up.
 	 */
+<<<<<<< HEAD   (9929332cf976b614e7b57fc2147fc857dd06df6c Merge 6012804a7786 ("padata: Reset next CPU when reorder seq)
 	fuse_file_put(ra->inode, ff, ff->fm->fc->destroy, isdir);
+||||||| BASE   (6012804a778606e9b83b50dd342ea5558812ed0f padata: Reset next CPU when reorder sequence wraps around)
+	fuse_file_put(ff, ff->fm->fc->destroy, isdir);
+=======
+	fuse_file_put(ff, ff->fm->fc->destroy);
+>>>>>>> BRANCH (a39f70d63f4373a598820d9491719e44cd60afe9 fuse: allocate ff->release_args only if release is needed)
 }
 
 void fuse_release_common(struct file *file, bool isdir)
@@ -391,12 +466,24 @@ void fuse_sync_release(struct fuse_inode *fi, struct fuse_file *ff,
 		       unsigned int flags)
 {
 	WARN_ON(refcount_read(&ff->count) > 1);
+<<<<<<< HEAD   (9929332cf976b614e7b57fc2147fc857dd06df6c Merge 6012804a7786 ("padata: Reset next CPU when reorder seq)
 	fuse_prepare_release(fi, ff, flags, FUSE_RELEASE);
 	/*
 	 * iput(NULL) is a no-op and since the refcount is 1 and everything's
 	 * synchronous, we are fine with not doing igrab() here"
 	 */
 	fuse_file_put(&fi->inode, ff, true, false);
+||||||| BASE   (6012804a778606e9b83b50dd342ea5558812ed0f padata: Reset next CPU when reorder sequence wraps around)
+	fuse_prepare_release(fi, ff, flags, FUSE_RELEASE);
+	/*
+	 * iput(NULL) is a no-op and since the refcount is 1 and everything's
+	 * synchronous, we are fine with not doing igrab() here"
+	 */
+	fuse_file_put(ff, true, false);
+=======
+	fuse_prepare_release(fi, ff, flags, FUSE_RELEASE, true);
+	fuse_file_put(ff, true);
+>>>>>>> BRANCH (a39f70d63f4373a598820d9491719e44cd60afe9 fuse: allocate ff->release_args only if release is needed)
 }
 EXPORT_SYMBOL_GPL(fuse_sync_release);
 
@@ -970,11 +1057,19 @@ static void fuse_readpages_end(struct fuse_mount *fm, struct fuse_args *args,
 		unlock_page(page);
 		put_page(page);
 	}
+<<<<<<< HEAD   (9929332cf976b614e7b57fc2147fc857dd06df6c Merge 6012804a7786 ("padata: Reset next CPU when reorder seq)
 	if (ia->ff) {
 		WARN_ON(!mapping);
 		fuse_file_put(mapping ? mapping->host : NULL, ia->ff,
 			      false, false);
 	}
+||||||| BASE   (6012804a778606e9b83b50dd342ea5558812ed0f padata: Reset next CPU when reorder sequence wraps around)
+	if (ia->ff)
+		fuse_file_put(ia->ff, false, false);
+=======
+	if (ia->ff)
+		fuse_file_put(ia->ff, false);
+>>>>>>> BRANCH (a39f70d63f4373a598820d9491719e44cd60afe9 fuse: allocate ff->release_args only if release is needed)
 
 	fuse_io_free(ia);
 }
@@ -1723,7 +1818,13 @@ static void fuse_writepage_free(struct fuse_writepage_args *wpa)
 		__free_page(ap->pages[i]);
 
 	if (wpa->ia.ff)
+<<<<<<< HEAD   (9929332cf976b614e7b57fc2147fc857dd06df6c Merge 6012804a7786 ("padata: Reset next CPU when reorder seq)
 		fuse_file_put(wpa->inode, wpa->ia.ff, false, false);
+||||||| BASE   (6012804a778606e9b83b50dd342ea5558812ed0f padata: Reset next CPU when reorder sequence wraps around)
+		fuse_file_put(wpa->ia.ff, false, false);
+=======
+		fuse_file_put(wpa->ia.ff, false);
+>>>>>>> BRANCH (a39f70d63f4373a598820d9491719e44cd60afe9 fuse: allocate ff->release_args only if release is needed)
 
 	kfree(ap->pages);
 	kfree(wpa);
@@ -1985,7 +2086,13 @@ int fuse_write_inode(struct inode *inode, struct writeback_control *wbc)
 	ff = __fuse_write_file_get(fi);
 	err = fuse_flush_times(inode, ff);
 	if (ff)
+<<<<<<< HEAD   (9929332cf976b614e7b57fc2147fc857dd06df6c Merge 6012804a7786 ("padata: Reset next CPU when reorder seq)
 		fuse_file_put(inode, ff, false, false);
+||||||| BASE   (6012804a778606e9b83b50dd342ea5558812ed0f padata: Reset next CPU when reorder sequence wraps around)
+		fuse_file_put(ff, false, false);
+=======
+		fuse_file_put(ff, false);
+>>>>>>> BRANCH (a39f70d63f4373a598820d9491719e44cd60afe9 fuse: allocate ff->release_args only if release is needed)
 
 	return err;
 }
@@ -2374,7 +2481,13 @@ static int fuse_writepages(struct address_space *mapping,
 		fuse_writepages_send(&data);
 	}
 	if (data.ff)
+<<<<<<< HEAD   (9929332cf976b614e7b57fc2147fc857dd06df6c Merge 6012804a7786 ("padata: Reset next CPU when reorder seq)
 		fuse_file_put(inode, data.ff, false, false);
+||||||| BASE   (6012804a778606e9b83b50dd342ea5558812ed0f padata: Reset next CPU when reorder sequence wraps around)
+		fuse_file_put(data.ff, false, false);
+=======
+		fuse_file_put(data.ff, false);
+>>>>>>> BRANCH (a39f70d63f4373a598820d9491719e44cd60afe9 fuse: allocate ff->release_args only if release is needed)
 
 	kfree(data.orig_pages);
 out:
