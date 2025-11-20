@@ -52,6 +52,24 @@
       "parentUuid": "30774e79_891a72b1",
       "revId": "ecfc1ffb27ee46af08331488a722b11b7f9d55e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72adae01_b530eceb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4389547
+      },
+      "writtenOn": "2025-11-20T16:08:44Z",
+      "side": 1,
+      "message": "Noted. I\u0027d like to clarify the dependency relationship for the desktop-google repository. The second patch depends on the first patch because it calls functions introduced in the first patch. If the first patch is not merged into desktop-google, the second patch will encounter compilation errors. Could you please advise if there\u0027s a way for the two repositories to synchronize with each other through signaling mechanisms? Alternatively, should we not worry about the dependency issue for future submissions and instead just distinguish between core and vendor modules?",
+      "parentUuid": "adcb8e8d_cbf1aa23",
+      "revId": "ecfc1ffb27ee46af08331488a722b11b7f9d55e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
