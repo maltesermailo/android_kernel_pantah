@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b522fdc4_47af694a",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1700,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2025-11-20T16:11:42Z",
+      "side": 1,
+      "message": "This is an implementation detail comment, should go before exit_reason check.",
+      "revId": "2d45672eca885fb4a5ae29e3ce26b4f4d4e19c4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e19d6e7a_a27d7b39",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1709,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2025-11-20T16:11:42Z",
+      "side": 1,
+      "message": "Maybe a comment as to _why_ this hypercall needs access?\n\nAlso, is it both for set and get?",
+      "revId": "2d45672eca885fb4a5ae29e3ce26b4f4d4e19c4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83fcf626_b0244d57",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1715,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2025-11-20T16:11:42Z",
+      "side": 1,
+      "message": "Isn\u0027t this check redundant, looking at the one below?",
+      "revId": "2d45672eca885fb4a5ae29e3ce26b4f4d4e19c4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "890cd5f9_6f9a8eff",
+        "filename": "arch/arm64/kvm/arm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1756,
+      "author": {
+        "id": 1782620
+      },
+      "writtenOn": "2025-11-20T16:11:42Z",
+      "side": 1,
+      "message": "Maybe we could move the vcpu_get_flag(vcpu, VCPU_PKVM_FINALIZED) to the new function?\n\n/* Before the VCPU is initialized, all register accesses are allowed. */ (could be worded better, or skipped)\nif (!vcpu_get_flag(vcpu, VCPU_PKVM_FINALIZED))\n    return true;",
+      "revId": "2d45672eca885fb4a5ae29e3ce26b4f4d4e19c4b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
