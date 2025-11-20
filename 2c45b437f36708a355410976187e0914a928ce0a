@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bb3e3bb_dc2a0c66",
+        "filename": "drivers/virt/halla/hvm_debug.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-20T12:34:23Z",
+      "side": 1,
+      "message": "not needed, see other comments.",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 31
+      },
+      "revId": "2c45b437f36708a355410976187e0914a928ce0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72ff63ba_57220d8f",
+        "filename": "drivers/virt/halla/hvm_ioeventfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-20T12:34:23Z",
+      "side": 1,
+      "message": "again, not ok, you just broke the whole device 😞\n\nIf this is something that can happen, then check for it and properly handle the error.  If it can never happen, then no need to check for this at all.",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 46
+      },
+      "revId": "2c45b437f36708a355410976187e0914a928ce0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8af3a258_86bb546a",
+        "filename": "drivers/virt/halla/hvm_irqfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-20T12:34:23Z",
+      "side": 1,
+      "message": "no lockdep_assert_held() call?",
+      "revId": "2c45b437f36708a355410976187e0914a928ce0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb6a2488_8088ce50",
+        "filename": "drivers/virt/halla/hvm_mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-20T12:34:23Z",
+      "side": 1,
+      "message": "why do you need to loop to try to allocate memory?  It should either work, or not work, don\u0027t keep retrying, that implies something is really wrong with the system, especially as you are not delaying between attempts.",
+      "range": {
+        "startLine": 114,
+        "startChar": 5,
+        "endLine": 114,
+        "endChar": 14
+      },
+      "revId": "2c45b437f36708a355410976187e0914a928ce0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "318ddc21_40eba087",
+        "filename": "drivers/virt/halla/hvm_mmu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-20T12:34:23Z",
+      "side": 1,
+      "message": "same here, no need to keep retrying.",
+      "range": {
+        "startLine": 154,
+        "startChar": 5,
+        "endLine": 154,
+        "endChar": 14
+      },
+      "revId": "2c45b437f36708a355410976187e0914a928ce0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0f43e58_afe7a686",
+        "filename": "drivers/virt/halla/hvm_vcpu.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-20T12:34:23Z",
+      "side": 1,
+      "message": "isn\u0027t this a dynamic thing?  Is it always fixed?",
+      "range": {
+        "startLine": 225,
+        "startChar": 21,
+        "endLine": 225,
+        "endChar": 34
+      },
+      "revId": "2c45b437f36708a355410976187e0914a928ce0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "121c4805_c9e97eff",
+        "filename": "drivers/virt/halla/hvm_vtimer.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-20T12:34:23Z",
+      "side": 1,
+      "message": "dev_err() please.  and no need for __func__",
+      "range": {
+        "startLine": 158,
+        "startChar": 2,
+        "endLine": 158,
+        "endChar": 8
+      },
+      "revId": "2c45b437f36708a355410976187e0914a928ce0a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
