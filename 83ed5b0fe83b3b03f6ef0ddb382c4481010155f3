@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3e7ecf8_1c7855a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2023081
+      },
+      "writtenOn": "2025-11-20T17:42:23Z",
+      "side": 1,
+      "message": "Bypassing presubmit error for brya/fatcat as there is a cross-dependency problem (which will be resolved by landing those CLs: https://partner-android-review.git.corp.google.com/q/topic:%22soc-slider%22)\n\nMeanwhile, the ABI Compliance fail seems to be invalid:\n\n1. The abi.stg was already updated with new symbol definitions, but now the linter suggests to remove them (although previously it was suggesting to add them)\n2. Locally updating symbol list for x86-64 and aarch64 created 0 diff\n\nAs this is a pretty sensitive feature, I suggest bypassing both ABI compliance and cross-dependency.",
+      "revId": "83ed5b0fe83b3b03f6ef0ddb382c4481010155f3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
