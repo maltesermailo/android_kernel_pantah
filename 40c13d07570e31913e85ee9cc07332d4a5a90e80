@@ -16,6 +16,96 @@
       "message": "Nice optimization.",
       "revId": "40c13d07570e31913e85ee9cc07332d4a5a90e80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d6a9fd4_58a7a580",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 2407,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-20T18:33:19Z",
+      "side": 1,
+      "message": "Don\u0027t we need to take iommu-\u003elock?",
+      "fixSuggestions": [
+        {
+          "fixId": "5a0ce853_b5168f01",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+              "range": {
+                "startLine": 2408,
+                "startChar": 0,
+                "endLine": 2408,
+                "endChar": 0
+              },
+              "replacement": "\t\tpkvm_spin_lock(\u0026iommu-\u003elock);\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+              "range": {
+                "startLine": 2417,
+                "startChar": 0,
+                "endLine": 2417,
+                "endChar": 0
+              },
+              "replacement": "\t\tpkvm_spin_unlock(\u0026iommu-\u003elock);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "40c13d07570e31913e85ee9cc07332d4a5a90e80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f51495ad_bef33d18",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 2416,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-20T18:33:19Z",
+      "side": 1,
+      "message": "This descriptor will be submitted even if there are no devices with FLPT_DEFAULT_DID on this IOMMU (e.g. with default IOMMU mode set to strict or lazy). Can we optimize that?",
+      "fixSuggestions": [
+        {
+          "fixId": "683c16e1_5802a9c0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+              "range": {
+                "startLine": 2399,
+                "startChar": 0,
+                "endLine": 2399,
+                "endChar": 0
+              },
+              "replacement": "\nstatic bool iommu_has_default_did_ptdev(struct pkvm_iommu *iommu)\n{\n\tstruct pkvm_ptdev *p;\n\n\tpkvm_spin_lock(\u0026iommu-\u003elock);\n\tlist_for_each_entry(p, \u0026iommu-\u003eptdev_head, iommu_node) {\n\t\tif (p-\u003edid \u003d\u003d FLPT_DEFAULT_DID) {\n\t\t\tpkvm_spin_unlock(\u0026iommu-\u003elock);\n\t\t\treturn true;\n\t\t}\n\t}\n\tpkvm_spin_unlock(\u0026iommu-\u003elock);\n\treturn false;\n}\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+              "range": {
+                "startLine": 2408,
+                "startChar": 0,
+                "endLine": 2408,
+                "endChar": 0
+              },
+              "replacement": "\t\t/*\n\t\t * Only submit the descriptor if there is at least one device\n\t\t * associated with FLPT_DEFAULT_DID on this IOMMU.\n\t\t */\n\t\tif (!iommu_has_default_did_ptdev(iommu))\n\t\t\tcontinue;\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "40c13d07570e31913e85ee9cc07332d4a5a90e80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
