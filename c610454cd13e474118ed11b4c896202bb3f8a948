@@ -1,0 +1,384 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca62dcb3_4b0e1ad9",
+        "filename": "drivers/virt/Makefile",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-21T07:58:26Z",
+      "side": 1,
+      "message": "why \"y\" and why not trigger off of CONFIG_EXYNOS_HVM instead?",
+      "range": {
+        "startLine": 14,
+        "startChar": 4,
+        "endLine": 14,
+        "endChar": 5
+      },
+      "revId": "c610454cd13e474118ed11b4c896202bb3f8a948",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6e95f74_055c1102",
+        "filename": "drivers/virt/halla/Kconfig",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-21T07:58:26Z",
+      "side": 1,
+      "message": "more help text please, including module name, as per the normal kernel documentation rules.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 37
+      },
+      "revId": "c610454cd13e474118ed11b4c896202bb3f8a948",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f07a0a82_4b7e13e6",
+        "filename": "drivers/virt/halla/hvm_drv.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-21T07:58:26Z",
+      "side": 1,
+      "message": "misspelled 😞",
+      "range": {
+        "startLine": 96,
+        "startChar": 8,
+        "endLine": 96,
+        "endChar": 29
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "369484fa_8c89b631",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/virt/halla/hvm_drv.h",
+              "range": {
+                "startLine": 96,
+                "startChar": 0,
+                "endLine": 97,
+                "endChar": 0
+              },
+              "replacement": "#define HALLA_KERNEL_DEV_NAME\t\t\"hvm\"\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c610454cd13e474118ed11b4c896202bb3f8a948",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c038567c_165f8d39",
+        "filename": "drivers/virt/halla/hvm_drv.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-21T07:58:26Z",
+      "side": 1,
+      "message": "again, very generic name, please use more words.  Perhaps delete this and just use KBUILD_MODULE_NAME?",
+      "range": {
+        "startLine": 96,
+        "startChar": 32,
+        "endLine": 96,
+        "endChar": 35
+      },
+      "revId": "c610454cd13e474118ed11b4c896202bb3f8a948",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cdc42c5_752bb4a5",
+        "filename": "drivers/virt/halla/hvm_ioeventfd.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-21T07:58:26Z",
+      "side": 1,
+      "message": "no lockdep annotation to enforce this?",
+      "range": {
+        "startLine": 18,
+        "startChar": 61,
+        "endLine": 18,
+        "endChar": 73
+      },
+      "revId": "c610454cd13e474118ed11b4c896202bb3f8a948",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68d9a1c6_7756ea4d",
+        "filename": "drivers/virt/halla/hvm_ioeventfd.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-21T07:58:26Z",
+      "side": 1,
+      "message": "where is the locking?",
+      "revId": "c610454cd13e474118ed11b4c896202bb3f8a948",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92fc05d7_d4886637",
+        "filename": "drivers/virt/halla/hvm_main.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-21T07:58:26Z",
+      "side": 1,
+      "message": "not a valid kernel type to cross the user/kernel boundry, please use `__u64`",
+      "range": {
+        "startLine": 30,
+        "startChar": 40,
+        "endLine": 30,
+        "endChar": 48
+      },
+      "revId": "c610454cd13e474118ed11b4c896202bb3f8a948",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d03c438_39359594",
+        "filename": "drivers/virt/halla/hvm_main.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-21T07:58:26Z",
+      "side": 1,
+      "message": "use the #define you have for this, or KBUILD_MODULE_NAME",
+      "range": {
+        "startLine": 47,
+        "startChar": 10,
+        "endLine": 47,
+        "endChar": 13
+      },
+      "revId": "c610454cd13e474118ed11b4c896202bb3f8a948",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb88f089_66f32742",
+        "filename": "drivers/virt/halla/hvm_mmu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-21T07:58:26Z",
+      "side": 1,
+      "message": "again, please only use  dev_*() calls, AND do not print stuff when the driver is working properly.",
+      "range": {
+        "startLine": 158,
+        "startChar": 1,
+        "endLine": 158,
+        "endChar": 8
+      },
+      "revId": "c610454cd13e474118ed11b4c896202bb3f8a948",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59112c2a_9b28a789",
+        "filename": "drivers/virt/halla/hvm_vcpu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-21T07:58:26Z",
+      "side": 1,
+      "message": "not valid kernel types, use u64 instead.  Same for u32.  Same for all through this driver.",
+      "range": {
+        "startLine": 72,
+        "startChar": 1,
+        "endLine": 72,
+        "endChar": 9
+      },
+      "revId": "c610454cd13e474118ed11b4c896202bb3f8a948",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4ca9123_be5cdbc6",
+        "filename": "drivers/virt/halla/hvm_vcpu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-21T07:58:26Z",
+      "side": 1,
+      "message": "why have all of these states if you do not do anything different with them? Why not just remove them instead?",
+      "range": {
+        "startLine": 246,
+        "startChar": 6,
+        "endLine": 246,
+        "endChar": 29
+      },
+      "revId": "c610454cd13e474118ed11b4c896202bb3f8a948",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f14595b7_8cbceaf3",
+        "filename": "drivers/virt/halla/hvm_vcpu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-21T07:58:26Z",
+      "side": 1,
+      "message": "why is this even a valid option if it is not supported?",
+      "range": {
+        "startLine": 338,
+        "startChar": 9,
+        "endLine": 338,
+        "endChar": 19
+      },
+      "revId": "c610454cd13e474118ed11b4c896202bb3f8a948",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b143a5e_105526bb",
+        "filename": "drivers/virt/halla/hvm_vtimer.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-21T07:58:26Z",
+      "side": 1,
+      "message": "when is this going to be done?  And will it be done in an abi-safe way?",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 71
+      },
+      "revId": "c610454cd13e474118ed11b4c896202bb3f8a948",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1690a497_72b2654f",
+        "filename": "drivers/virt/halla/hvm_vtimer.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-21T07:58:26Z",
+      "side": 1,
+      "message": "you use dev_err() properly below, please use it through the whole driver, there should not be any calls to pr_*().",
+      "range": {
+        "startLine": 150,
+        "startChar": 2,
+        "endLine": 150,
+        "endChar": 8
+      },
+      "revId": "c610454cd13e474118ed11b4c896202bb3f8a948",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03e78d25_ababfe3f",
+        "filename": "drivers/virt/halla/hvm_vtimer.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-21T07:58:26Z",
+      "side": 1,
+      "message": "when is this going to be fixed?",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 60
+      },
+      "revId": "c610454cd13e474118ed11b4c896202bb3f8a948",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbcd4f7c_e65ca0c3",
+        "filename": "modules.bzl",
+        "patchSetId": 6
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-11-21T07:58:26Z",
+      "side": 1,
+      "message": "why is this being built for all systems?  Why can\u0027t you just enable it in your builds?",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 39
+      },
+      "revId": "c610454cd13e474118ed11b4c896202bb3f8a948",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
