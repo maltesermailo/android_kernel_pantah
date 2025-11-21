@@ -70,6 +70,24 @@
       "parentUuid": "adcb8e8d_cbf1aa23",
       "revId": "ecfc1ffb27ee46af08331488a722b11b7f9d55e7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c235b0fe_a1ab2501",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3485565
+      },
+      "writtenOn": "2025-11-21T07:11:05Z",
+      "side": 1,
+      "message": "`desktop-google` is having automerger from `kernel/common`. That is, all changes landing in the latter, end up in the former. So there should be no compilation issues \n\nIf we have only a one-way dependency, that is, second patch depends on first one, we can merge first on `kernel/common`, and then add the second on `desktop-google`.We unfortunately cannot ensure atomic submit (like topic) across two gerrit hosts.",
+      "parentUuid": "72adae01_b530eceb",
+      "revId": "ecfc1ffb27ee46af08331488a722b11b7f9d55e7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
