@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "69b07cc2_09fc8709",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 20
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-21T17:33:43Z",
+      "side": 1,
+      "message": "Actually, only with pvIOMMU we use did\u003dFLPT_DEFAULT_DID as the criteria for whether to use the host EPT or not? With the old shadow IOMMU implementation we use different criteria (i.e. translation type set to passthrough in the host\u0027s virtual context or PASID entry), and we allow the host to set any did in this case (so we cannot trust the host that it will set FLPT_DEFAULT_DID)?\n\nSo maybe don\u0027t remove the existing implementation of pkvm_iommu_flush_iotlb() but keep it, but add the new one under #ifdef CONFIG_PKVM_INTEL_PVIOMMU?",
+      "revId": "40c13d07570e31913e85ee9cc07332d4a5a90e80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "abb31d32_f0a830b8",
