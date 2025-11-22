@@ -16,6 +16,24 @@
       "message": "Do not merge yet: for some reason it doesn\u0027t work quite well: sometimes vmexit dump fails, due to pKVM unexpectedly returning -EPERM for some reason.",
       "revId": "8044fb4b06522d31152fb2098f8ac12c167aac66",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0652d416_737f75af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-22T16:37:54Z",
+      "side": 1,
+      "message": "It was returning -EPERM because copy_host_vm_trace() modifies (\"consumes\") the `size` variable, so I was passing size\u003d0 to __pkvm_host_unshare_hyp() and __pkvm_unpin_shared_mem(). Fixed.",
+      "parentUuid": "6ef3a1bb_15100ffb",
+      "revId": "8044fb4b06522d31152fb2098f8ac12c167aac66",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
