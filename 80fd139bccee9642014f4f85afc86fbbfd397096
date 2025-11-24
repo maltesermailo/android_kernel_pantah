@@ -3,6 +3,456 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "03f56b84_9b71bd33",
+        "filename": "drivers/virt/halla/hvm_debug.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-11-24T11:01:21Z",
+      "side": 1,
+      "message": "How can this happen? I don\u0027t think errors from `kstrtoull()` are propagated here.",
+      "range": {
+        "startLine": 23,
+        "startChar": 13,
+        "endLine": 23,
+        "endChar": 21
+      },
+      "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfd51518_72d01f42",
+        "filename": "drivers/virt/halla/hvm_main.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-11-24T11:01:21Z",
+      "side": 1,
+      "message": "Does this leak the `irqfd_cleanup_wq` allocated by `hvm_drv_irqfd_init()`?",
+      "range": {
+        "startLine": 108,
+        "startChar": 7,
+        "endLine": 108,
+        "endChar": 24
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "2fe6b546_12b02444",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/virt/halla/hvm_main.c",
+              "range": {
+                "startLine": 108,
+                "startChar": 0,
+                "endLine": 109,
+                "endChar": 0
+              },
+              "replacement": "\t\tgoto err_irqfd_init;\n"
+            },
+            {
+              "path": "drivers/virt/halla/hvm_main.c",
+              "range": {
+                "startLine": 112,
+                "startChar": 0,
+                "endLine": 113,
+                "endChar": 0
+              },
+              "replacement": "\t\tgoto err_irqfd_init;\n"
+            },
+            {
+              "path": "drivers/virt/halla/hvm_main.c",
+              "range": {
+                "startLine": 116,
+                "startChar": 0,
+                "endLine": 117,
+                "endChar": 0
+              },
+              "replacement": "\t\tgoto err_irqfd_init;\n"
+            },
+            {
+              "path": "drivers/virt/halla/hvm_main.c",
+              "range": {
+                "startLine": 120,
+                "startChar": 0,
+                "endLine": 120,
+                "endChar": 0
+              },
+              "replacement": "err_irqfd_init:\n\thvm_drv_irqfd_exit();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1093280b_27d174cb",
+        "filename": "drivers/virt/halla/hvm_main.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-11-24T11:01:21Z",
+      "side": 1,
+      "message": "Does this leak the vtimer irq and leave the hotplug notifier registered?",
+      "range": {
+        "startLine": 112,
+        "startChar": 7,
+        "endLine": 112,
+        "endChar": 24
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "218b463f_e21e05eb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/virt/halla/hvm_main.c",
+              "range": {
+                "startLine": 104,
+                "startChar": 0,
+                "endLine": 105,
+                "endChar": 0
+              },
+              "replacement": "\t\tgoto err_irqfd_init;\n"
+            },
+            {
+              "path": "drivers/virt/halla/hvm_main.c",
+              "range": {
+                "startLine": 108,
+                "startChar": 0,
+                "endLine": 109,
+                "endChar": 0
+              },
+              "replacement": "\t\tgoto err_vtimer_init;\n"
+            },
+            {
+              "path": "drivers/virt/halla/hvm_main.c",
+              "range": {
+                "startLine": 112,
+                "startChar": 0,
+                "endLine": 113,
+                "endChar": 0
+              },
+              "replacement": "\t\tgoto err_debug_init;\n"
+            },
+            {
+              "path": "drivers/virt/halla/hvm_main.c",
+              "range": {
+                "startLine": 116,
+                "startChar": 0,
+                "endLine": 117,
+                "endChar": 0
+              },
+              "replacement": "\t\tgoto err_drv_init;\n"
+            },
+            {
+              "path": "drivers/virt/halla/hvm_main.c",
+              "range": {
+                "startLine": 120,
+                "startChar": 0,
+                "endLine": 121,
+                "endChar": 0
+              },
+              "replacement": "err_drv_init:\n\thvm_drv_debug_exit();\nerr_debug_init:\n\thvm_vtimer_exit();\nerr_vtimer_init:\n\thvm_drv_irqfd_exit();\nerr_irqfd_init:\n"
+            },
+            {
+              "path": "drivers/virt/halla/hvm_main.c",
+              "range": {
+                "startLine": 129,
+                "startChar": 0,
+                "endLine": 129,
+                "endChar": 0
+              },
+              "replacement": "\thvm_vtimer_exit();\n\thvm_drv_debug_exit();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecae2df3_e3df3846",
+        "filename": "drivers/virt/halla/hvm_main.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-11-24T11:01:21Z",
+      "side": 1,
+      "message": "Leaks the debugfs entry?",
+      "range": {
+        "startLine": 116,
+        "startChar": 7,
+        "endLine": 116,
+        "endChar": 24
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "30795f71_74f8959d",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/virt/halla/hvm_main.c",
+              "range": {
+                "startLine": 104,
+                "startChar": 0,
+                "endLine": 105,
+                "endChar": 0
+              },
+              "replacement": "\t\tgoto err_irqfd_init;\n"
+            },
+            {
+              "path": "drivers/virt/halla/hvm_main.c",
+              "range": {
+                "startLine": 108,
+                "startChar": 0,
+                "endLine": 109,
+                "endChar": 0
+              },
+              "replacement": "\t\tgoto err_vtimer_init;\n"
+            },
+            {
+              "path": "drivers/virt/halla/hvm_main.c",
+              "range": {
+                "startLine": 112,
+                "startChar": 0,
+                "endLine": 113,
+                "endChar": 0
+              },
+              "replacement": "\t\tgoto err_debug_init;\n"
+            },
+            {
+              "path": "drivers/virt/halla/hvm_main.c",
+              "range": {
+                "startLine": 116,
+                "startChar": 0,
+                "endLine": 117,
+                "endChar": 0
+              },
+              "replacement": "\t\tgoto err_drv_init;\n"
+            },
+            {
+              "path": "drivers/virt/halla/hvm_main.c",
+              "range": {
+                "startLine": 120,
+                "startChar": 0,
+                "endLine": 121,
+                "endChar": 0
+              },
+              "replacement": "err_drv_init:\n\thvm_drv_debug_exit();\nerr_debug_init:\n\thvm_vtimer_exit();\nerr_vtimer_init:\n\thvm_drv_irqfd_exit();\nerr_irqfd_init:\n"
+            }
+          ]
+        }
+      ],
+      "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c040573f_e89b82cf",
+        "filename": "drivers/virt/halla/hvm_mmu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-11-24T11:01:21Z",
+      "side": 1,
+      "message": "What does the hypervisor do if the page is already mapped?",
+      "range": {
+        "startLine": 218,
+        "startChar": 7,
+        "endLine": 218,
+        "endChar": 17
+      },
+      "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcb4d778_99adf373",
+        "filename": "drivers/virt/halla/hvm_vcpu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-11-24T11:01:21Z",
+      "side": 1,
+      "message": "What filtering does the hypervisor perform for protected VMs?",
+      "range": {
+        "startLine": 48,
+        "startChar": 19,
+        "endLine": 48,
+        "endChar": 42
+      },
+      "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0357723f_01f57154",
+        "filename": "drivers/virt/halla/hvm_vcpu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-11-24T11:01:21Z",
+      "side": 1,
+      "message": "It doesn\u0027t look right to toggle preemption at this granularity.\n\nCan you use `rcuwait_wait_event()` instead?",
+      "range": {
+        "startLine": 174,
+        "startChar": 1,
+        "endLine": 174,
+        "endChar": 15
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "185fd886_f57ae860",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/virt/halla/hvm_vcpu.c",
+              "range": {
+                "startLine": 174,
+                "startChar": 0,
+                "endLine": 175,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/virt/halla/hvm_vcpu.c",
+              "range": {
+                "startLine": 190,
+                "startChar": 0,
+                "endLine": 191,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c7b2c87_933e0acf",
+        "filename": "drivers/virt/halla/hvm_vcpu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-11-24T11:01:21Z",
+      "side": 1,
+      "message": "Why do you need this barrier?",
+      "range": {
+        "startLine": 304,
+        "startChar": 2,
+        "endLine": 304,
+        "endChar": 5
+      },
+      "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32475886_c8ee67c2",
+        "filename": "drivers/virt/halla/hvm_vcpu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-11-24T11:01:21Z",
+      "side": 1,
+      "message": "What does this mean and why don\u0027t you need to do it in the `-EFAULT` case above when a signal is pending?",
+      "range": {
+        "startLine": 316,
+        "startChar": 0,
+        "endLine": 316,
+        "endChar": 45
+      },
+      "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81efb277_ae860c86",
+        "filename": "drivers/virt/halla/hvm_vcpu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-11-24T11:01:21Z",
+      "side": 1,
+      "message": "Why?",
+      "range": {
+        "startLine": 363,
+        "startChar": 0,
+        "endLine": 363,
+        "endChar": 45
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "67f926cc_048b2720",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/virt/halla/hvm_vcpu.c",
+              "range": {
+                "startLine": 362,
+                "startChar": 0,
+                "endLine": 363,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * Clear the shared memory region. This is done to prevent any sensitive\n\t * data from the guest or hypervisor from lingering in the memory pages\n\t * after the vCPU is destroyed, improving security and preventing\n\t * potential information leaks.\n\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e1343500_0180d3da",
         "filename": "drivers/virt/halla/hvm_vm.c",
         "patchSetId": 7
@@ -18,6 +468,75 @@
         "startLine": 51,
         "startChar": 2,
         "endLine": 51,
+        "endChar": 8
+      },
+      "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f052834d_cab4af53",
+        "filename": "drivers/virt/halla/hvm_vm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-11-24T11:01:21Z",
+      "side": 1,
+      "message": "`err_free_dev`",
+      "range": {
+        "startLine": 204,
+        "startChar": 11,
+        "endLine": 204,
+        "endChar": 17
+      },
+      "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efc262aa_d10efd6b",
+        "filename": "drivers/virt/halla/hvm_vm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-11-24T11:01:21Z",
+      "side": 1,
+      "message": "Can you be more specific?",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 233,
+        "endChar": 21
+      },
+      "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb95dd43_a321452f",
+        "filename": "drivers/virt/halla/hvm_vm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-11-24T11:01:21Z",
+      "side": 1,
+      "message": "Shouldn\u0027t you leak the page in this case, rather than proceed to unpin it in the destroy() path?",
+      "range": {
+        "startLine": 308,
+        "startChar": 3,
+        "endLine": 308,
         "endChar": 8
       },
       "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
