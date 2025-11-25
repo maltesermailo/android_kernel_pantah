@@ -195,6 +195,24 @@
       "parentUuid": "7f2731c5_801c4460",
       "revId": "40c13d07570e31913e85ee9cc07332d4a5a90e80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3725a7d1_dc4a8359",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 2416,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-11-25T18:54:22Z",
+      "side": 1,
+      "message": "In case of PVIOMMU, the list doesn\u0027t contain anything, as we don\u0027t need it. It\u0027s a remnant from shadow impl. I should put a #ifdef PVIOMMU around it. \n\nRight, it will be a counter, since the devices can be added/removed. I also feel, it will add a bit of complexity, but seems a straight forward solution for now.",
+      "parentUuid": "081f5fd0_48c222b5",
+      "revId": "40c13d07570e31913e85ee9cc07332d4a5a90e80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
