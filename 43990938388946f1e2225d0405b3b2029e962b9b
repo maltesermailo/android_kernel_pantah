@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b82dd8b4_13a25664",
+        "filename": "arch/x86/include/asm/kvm_pkvm.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-25T18:29:38Z",
+      "side": 1,
+      "message": "It would be better to add this IRQ save/restore in a separate patch, since it is a functional change? Or at least mention/explain this functional change in the commit message?",
+      "revId": "43990938388946f1e2225d0405b3b2029e962b9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe3be035_094157e1",
+        "filename": "arch/x86/kvm/vmx/pkvm_high.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 1057,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-25T18:29:38Z",
+      "side": 1,
+      "message": "Now this makes me think that it actually might have been better to introduce separate versions like get_this_pv_param_irqsave()/put_this_pv_param_irqrestore(), like you suggested yourself some time ago, just to avoid these not-very-useful changes to the existing users of get_this_pv_param()/put_this_pv_param()...\n\nThough we can probably keep it as is. We\u0027re probably not gonna carry this over to v6.18 anyway (as Chuanxiao suggested, in v6.18 we can probably just increase the number of regs used for hypercalls args, and use the \"inout\" mechanism that Chuanxiao introduced in v6.18 to multiplex the structures onto the hypercall args).",
+      "revId": "43990938388946f1e2225d0405b3b2029e962b9b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
