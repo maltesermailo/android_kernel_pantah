@@ -388,6 +388,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c68e0ee_81cb91b3",
+        "filename": "drivers/virt/halla/hvm_mmu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1667998
+      },
+      "writtenOn": "2025-11-25T11:25:57Z",
+      "side": 1,
+      "message": "this does not happen because vm does not have initial mapping. If you mean that it\u0027s already mapped to other vm, of course exception occurs.",
+      "parentUuid": "c040573f_e89b82cf",
+      "range": {
+        "startLine": 218,
+        "startChar": 7,
+        "endLine": 218,
+        "endChar": 17
+      },
+      "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fcb4d778_99adf373",
         "filename": "drivers/virt/halla/hvm_vcpu.c",
         "patchSetId": 7
@@ -399,6 +423,30 @@
       "writtenOn": "2025-11-24T11:01:21Z",
       "side": 1,
       "message": "What filtering does the hypervisor perform for protected VMs?",
+      "range": {
+        "startLine": 48,
+        "startChar": 19,
+        "endLine": 48,
+        "endChar": 42
+      },
+      "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6707e08a_7b804e8c",
+        "filename": "drivers/virt/halla/hvm_vcpu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1667998
+      },
+      "writtenOn": "2025-11-25T11:25:57Z",
+      "side": 1,
+      "message": "we don\u0027t have it.",
+      "parentUuid": "fcb4d778_99adf373",
       "range": {
         "startLine": 48,
         "startChar": 19,
@@ -485,6 +533,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94b99bfa_32d0595a",
+        "filename": "drivers/virt/halla/hvm_vcpu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1667998
+      },
+      "writtenOn": "2025-11-25T11:25:57Z",
+      "side": 1,
+      "message": "hvm_vcpu_put has local_irq_save. Shouldn\u0027t we guarantee it?",
+      "parentUuid": "0c7b2c87_933e0acf",
+      "range": {
+        "startLine": 304,
+        "startChar": 2,
+        "endLine": 304,
+        "endChar": 5
+      },
+      "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "32475886_c8ee67c2",
         "filename": "drivers/virt/halla/hvm_vcpu.c",
         "patchSetId": 7
@@ -496,6 +568,30 @@
       "writtenOn": "2025-11-24T11:01:21Z",
       "side": 1,
       "message": "What does this mean and why don\u0027t you need to do it in the `-EFAULT` case above when a signal is pending?",
+      "range": {
+        "startLine": 316,
+        "startChar": 0,
+        "endLine": 316,
+        "endChar": 45
+      },
+      "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9ad0718_753f29de",
+        "filename": "drivers/virt/halla/hvm_vcpu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1667998
+      },
+      "writtenOn": "2025-11-25T11:25:57Z",
+      "side": 1,
+      "message": "Annotation not related to behavior. I\u0027ll remove it",
+      "parentUuid": "32475886_c8ee67c2",
       "range": {
         "startLine": 316,
         "startChar": 0,
@@ -725,6 +821,30 @@
       "writtenOn": "2025-11-24T11:01:21Z",
       "side": 1,
       "message": "Shouldn\u0027t you leak the page in this case, rather than proceed to unpin it in the destroy() path?",
+      "range": {
+        "startLine": 308,
+        "startChar": 3,
+        "endLine": 308,
+        "endChar": 8
+      },
+      "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12c9b4f8_84a42e20",
+        "filename": "drivers/virt/halla/hvm_vm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1667998
+      },
+      "writtenOn": "2025-11-25T11:25:57Z",
+      "side": 1,
+      "message": "Ok, I\u0027ll add a flag for break case and then make sure not to unpin them in the destroy() path. Do I understand correctly?",
+      "parentUuid": "bb95dd43_a321452f",
       "range": {
         "startLine": 308,
         "startChar": 3,
