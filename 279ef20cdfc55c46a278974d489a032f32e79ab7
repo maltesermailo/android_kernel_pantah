@@ -22,6 +22,88 @@
       },
       "revId": "279ef20cdfc55c46a278974d489a032f32e79ab7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d95b0c45_2611221d",
+        "filename": "fs/exec.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1322,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-11-25T02:47:31Z",
+      "side": 1,
+      "message": "A comment explaining what is done here would be nice.",
+      "range": {
+        "startLine": 1319,
+        "startChar": 1,
+        "endLine": 1322,
+        "endChar": 2
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "85cca2ab_399b614e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "fs/exec.c",
+              "range": {
+                "startLine": 1319,
+                "startChar": 0,
+                "endLine": 1319,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * If DMA shared buffers are enabled, transfer the dmabuf_info\n\t * from the old files_struct to the new mm_struct.\n\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "279ef20cdfc55c46a278974d489a032f32e79ab7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "795c9d19_170d136a",
+        "filename": "fs/file.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-11-25T02:47:31Z",
+      "side": 1,
+      "message": "Why?",
+      "range": {
+        "startLine": 744,
+        "startChar": 1,
+        "endLine": 746,
+        "endChar": 0
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "df72890e_abfdc487",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "fs/file.c",
+              "range": {
+                "startLine": 744,
+                "startChar": 0,
+                "endLine": 744,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * We cannot unshare the file table if dmabuf accounting is active,\n\t * as the dmabuf_info is tied to the files_struct and unsharing\n\t * would break the accounting.\n\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "279ef20cdfc55c46a278974d489a032f32e79ab7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
