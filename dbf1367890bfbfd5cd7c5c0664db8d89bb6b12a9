@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c79151b_786cf0ee",
+        "filename": "mm/page_alloc_debugfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2025-11-25T17:29:40Z",
+      "side": 1,
+      "message": "Later we may need to think about zones that are not initially populated but come online by hotplug later like movable zone.",
+      "range": {
+        "startLine": 26,
+        "startChar": 7,
+        "endLine": 26,
+        "endChar": 21
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "49e347d4_bf78b146",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/page_alloc_debugfs.c",
+              "range": {
+                "startLine": 26,
+                "startChar": 0,
+                "endLine": 26,
+                "endChar": 0
+              },
+              "replacement": "\t\t/*\n\t\t * Later we may need to think about zones that are not initially\n\t\t * populated but come online by hotplug later like movable zone.\n\t\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "dbf1367890bfbfd5cd7c5c0664db8d89bb6b12a9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
