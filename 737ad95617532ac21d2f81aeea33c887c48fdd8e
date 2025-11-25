@@ -68,6 +68,24 @@
       "message": "Build-break for db845c builds:\n```\nUse --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging\nwarning: overriding the module target triple with aarch64-unknown-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with aarch64-unknown-linux-gnu [-Woverride-module]\n1 warning generated.\nERROR: modpost: \"devm_tegra_memory_controller_get\" [drivers/iommu/arm/arm-smmu/arm_smmu.ko] undefined!\nERROR: modpost: \"tegra_mc_probe_device\" [drivers/iommu/arm/arm-smmu/arm_smmu.ko] undefined!\n...rc/android/common-android16-6.12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/424/execroot/_main/common/scripts/Makefile.modpost:220: modules-only.symvers] Error 1\n...*** [/mnt/disks/build-disk/src/android/common-android16-6.12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/424/execroot/_main/common/Makefile:1948: modpost] Error 2\n...* [/mnt/disks/build-disk/src/android/common-android16-6.12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/424/execroot/_main/common/Makefile:242: __sub-make] Error 2\nmake: *** [Makefile:242: __sub-make] Error 2\nINFO: Found 1 target...\nTarget //common:db845c_dist failed to build\n```",
       "revId": "737ad95617532ac21d2f81aeea33c887c48fdd8e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be4ffcf3_076ba765",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3386406
+      },
+      "writtenOn": "2025-11-25T19:01:04Z",
+      "side": 1,
+      "message": "Will investigate and resolve the build error next week",
+      "parentUuid": "9f8b3a59_a38ae8fe",
+      "revId": "737ad95617532ac21d2f81aeea33c887c48fdd8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
