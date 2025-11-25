@@ -100,6 +100,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bd4389ce_bf87ff0b",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 2407,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-25T18:12:53Z",
+      "side": 1,
+      "message": "Indeed... and at least at first glance at the code in __submit_qi(), it seems it should be safe to call it without iommu-\u003elock locked.\n\nThis gives me some thoughts:\n1. Looks like in the old shadow IOMMU implementation, locking iommu-\u003eqi_lock was always done with iommu-\u003elock locked. Which makes it unclear why iommu-\u003eqi_lock was needed in the first place.\n2. In the new pvIOMMU implementation, I see it\u0027s different: we do QI flushing after unlocking iommu-\u003elock, following what the host IOMMU driver does. That probably makes sense, yeah, and may be good for performance.\n\n...So, yeah, it seems safe to not lock iommu-\u003elock here. OTOH, if we add checking if there are any passthrough domains (to avoid unneeded flushing if there are none), as we discussed below, then we will need to lock iommu-\u003elock here?\n\nAnd it seems this extra locking here shouldn\u0027t be a big problem then: although we might have a lock contention here e.g. when donating pages to a pVM in parallel on multiple CPUs, but we have this contention anyway, since we lock iommu-\u003eqi_lock anyway?",
+      "parentUuid": "b11145d4_f6e9cf07",
+      "revId": "40c13d07570e31913e85ee9cc07332d4a5a90e80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f51495ad_bef33d18",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
         "patchSetId": 20
@@ -157,6 +175,24 @@
       "side": 1,
       "message": "Is it a good idea to add a boolean field in `struct pkvm_iommu` which gets set to true when atleast one domain in it is passthrough? Then while doing the flush, we can check this field and only do flush when that field is set.",
       "parentUuid": "f51495ad_bef33d18",
+      "revId": "40c13d07570e31913e85ee9cc07332d4a5a90e80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "081f5fd0_48c222b5",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 2416,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-25T18:12:53Z",
+      "side": 1,
+      "message": "You mean, just to avoid iterating the list of devices here every time?\n\nI guess it would be not a boolean but a counter, i.e. we would just check if this counter is non-zero?\n\nSeems not a bad idea. Although I guess it would require a bit of extra complexity to maintain this counter when updating a context or PASID entry (and as one Linux kernel maintainer once said, \"more state, more problems\"), but maybe let\u0027s try.",
+      "parentUuid": "7f2731c5_801c4460",
       "revId": "40c13d07570e31913e85ee9cc07332d4a5a90e80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
