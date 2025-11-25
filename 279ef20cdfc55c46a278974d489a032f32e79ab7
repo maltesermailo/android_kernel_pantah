@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1e2831b_a4ff9b7e",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-11-25T18:34:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "689be749_e5b0764c",
+      "range": {
+        "startLine": 714,
+        "startChar": 1,
+        "endLine": 714,
+        "endChar": 21
+      },
+      "revId": "279ef20cdfc55c46a278974d489a032f32e79ab7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d95b0c45_2611221d",
@@ -65,6 +89,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "235e877d_14832733",
+        "filename": "fs/exec.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1322,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-11-25T18:34:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d95b0c45_2611221d",
+      "range": {
+        "startLine": 1319,
+        "startChar": 1,
+        "endLine": 1322,
+        "endChar": 2
+      },
+      "revId": "279ef20cdfc55c46a278974d489a032f32e79ab7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "795c9d19_170d136a",
@@ -102,6 +150,30 @@
           ]
         }
       ],
+      "revId": "279ef20cdfc55c46a278974d489a032f32e79ab7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb792b9d_834e224d",
+        "filename": "fs/file.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-11-25T18:34:13Z",
+      "side": 1,
+      "message": "If unshare is specified, it\u0027s partial sharing.\nWe can allow `CLOSE_RANGE_UNSHARE`, but then we have to add code for disabling accounting in the task that does this. Originally I thought that would be complicated, but I think we can just remove the task\u0027s dmabuf_info pointer like in `unshare_files`.",
+      "parentUuid": "795c9d19_170d136a",
+      "range": {
+        "startLine": 744,
+        "startChar": 1,
+        "endLine": 746,
+        "endChar": 0
+      },
       "revId": "279ef20cdfc55c46a278974d489a032f32e79ab7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
