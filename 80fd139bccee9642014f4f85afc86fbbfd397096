@@ -412,6 +412,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "729ca207_64b5d6c7",
+        "filename": "drivers/virt/halla/hvm_mmu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-11-25T11:32:00Z",
+      "side": 1,
+      "message": "I mean, in the case where two vCPUs from the same VM fault on the same page at the same time. They will both end up here but one of the hypercalls will see the entry installed by the other vCPU. In that case, what does the hypervisor do and what is returned from the hypercall?",
+      "parentUuid": "2c68e0ee_81cb91b3",
+      "range": {
+        "startLine": 218,
+        "startChar": 7,
+        "endLine": 218,
+        "endChar": 17
+      },
+      "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fcb4d778_99adf373",
         "filename": "drivers/virt/halla/hvm_vcpu.c",
         "patchSetId": 7
@@ -447,6 +471,30 @@
       "side": 1,
       "message": "we don\u0027t have it.",
       "parentUuid": "fcb4d778_99adf373",
+      "range": {
+        "startLine": 48,
+        "startChar": 19,
+        "endLine": 48,
+        "endChar": 42
+      },
+      "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c85abab_8169a04a",
+        "filename": "drivers/virt/halla/hvm_vcpu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-11-25T11:32:00Z",
+      "side": 1,
+      "message": "Doesn\u0027t that mean that a malicious host can call the `HVC_FID_HVM_SET_ONE_REG` hypercall to e.g. change the PC and general purpose registers for a protected VM while it is running? Or do you mean that you don\u0027t have support for protected VMs at all?",
+      "parentUuid": "6707e08a_7b804e8c",
       "range": {
         "startLine": 48,
         "startChar": 19,
@@ -545,6 +593,30 @@
       "side": 1,
       "message": "hvm_vcpu_put has local_irq_save. Shouldn\u0027t we guarantee it?",
       "parentUuid": "0c7b2c87_933e0acf",
+      "range": {
+        "startLine": 304,
+        "startChar": 2,
+        "endLine": 304,
+        "endChar": 5
+      },
+      "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d757e67a_5f97e6de",
+        "filename": "drivers/virt/halla/hvm_vcpu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-11-25T11:32:00Z",
+      "side": 1,
+      "message": "Assuming these are just toggling bits in DAIF, an ISB is not needed for that to be effective.",
+      "parentUuid": "94b99bfa_32d0595a",
       "range": {
         "startLine": 304,
         "startChar": 2,
@@ -845,6 +917,30 @@
       "side": 1,
       "message": "Ok, I\u0027ll add a flag for break case and then make sure not to unpin them in the destroy() path. Do I understand correctly?",
       "parentUuid": "bb95dd43_a321452f",
+      "range": {
+        "startLine": 308,
+        "startChar": 3,
+        "endLine": 308,
+        "endChar": 8
+      },
+      "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "751b0961_a7ae304e",
+        "filename": "drivers/virt/halla/hvm_vm.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-11-25T11:32:00Z",
+      "side": 1,
+      "message": "Right, you basically have to leave the page pinned as we don\u0027t know whether its save to access.",
+      "parentUuid": "12c9b4f8_84a42e20",
       "range": {
         "startLine": 308,
         "startChar": 3,
