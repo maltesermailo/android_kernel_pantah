@@ -70,6 +70,30 @@
       },
       "revId": "cf096fe065add60ba79985db0faccb523748b39b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3064a34_eb28dbef",
+        "filename": "BUILD.bazel",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1080813
+      },
+      "writtenOn": "2025-11-25T09:56:27Z",
+      "side": 1,
+      "message": "This is probably for the legacy GKI 1.0 testing, where we lookup AVB footer from the end of the partition. We copied those numbers from AOSP `gki_arm64` builds (b/222078981#comment2)\n\nSince `avbtool` later supports `--dynamic_partition_size`\nhttps://android-review.googlesource.com/c/platform/external/avb/+/1988815\n\nPerhaps we can use `--dynamic_partition_size` to replace `--partition_size 33554432` here. (This can be a separate CL).\n\n@yochiang@google.com\n@bettyzhou@google.com\n@howardsoc@google.com for more eyes (e.g., from testing POV).",
+      "parentUuid": "8e5c22ea_b2666148",
+      "range": {
+        "startLine": 68,
+        "startChar": 12,
+        "endLine": 68,
+        "endChar": 20
+      },
+      "revId": "cf096fe065add60ba79985db0faccb523748b39b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
