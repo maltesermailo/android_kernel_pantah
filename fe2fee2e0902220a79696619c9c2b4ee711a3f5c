@@ -1,0 +1,69 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "487ff1ce_151cb905",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 30
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-26T21:34:05Z",
+      "side": 1,
+      "message": "nit: maybe add a separate `if` instead, to print a more truthful message, e.g. \"legacy mode page table is protected by pkvm\"?\n\nDitto below.",
+      "fixSuggestions": [
+        {
+          "fixId": "4e2c33ad_33712fe7",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/iommu.c",
+              "range": {
+                "startLine": 592,
+                "startChar": 0,
+                "endLine": 595,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (!context_present(ctx_entry)) {\n"
+            },
+            {
+              "path": "drivers/iommu/intel/iommu.c",
+              "range": {
+                "startLine": 598,
+                "startChar": 0,
+                "endLine": 598,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (pkvm_pviommu_enabled() \u0026\u0026\n\t\t    context_domain_id(ctx_entry) \u003d\u003d FLPT_DEFAULT_DID) {\n\t\t\tpr_info(\"legacy mode page table is protected by pkvm\\n\");\n\t\t\treturn;\n\t\t}\n"
+            },
+            {
+              "path": "drivers/iommu/intel/iommu.c",
+              "range": {
+                "startLine": 630,
+                "startChar": 0,
+                "endLine": 633,
+                "endChar": 0
+              },
+              "replacement": "\tif (!pasid_pte_is_present(pte)) {\n"
+            },
+            {
+              "path": "drivers/iommu/intel/iommu.c",
+              "range": {
+                "startLine": 636,
+                "startChar": 0,
+                "endLine": 636,
+                "endChar": 0
+              },
+              "replacement": "\tif (pkvm_pviommu_enabled() \u0026\u0026\n\t    pasid_get_domain_id(pte) \u003d\u003d FLPT_DEFAULT_DID) {\n\t\tpr_info(\"scalable mode page table is protected by pkvm\\n\");\n\t\treturn;\n\t}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fe2fee2e0902220a79696619c9c2b4ee711a3f5c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
