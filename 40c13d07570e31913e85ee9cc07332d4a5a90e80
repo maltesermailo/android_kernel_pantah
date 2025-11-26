@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "22ffb5bc_4a2fcc5f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 20
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-26T11:47:49Z",
+      "side": 1,
+      "message": "Yeah, but adding #ifdef is not difficult either, and would avoid changing the way how shadow IOMMU works (since changing it is not our goal)? And as I see it, \"conceptually\", what the shadow IOMMU implementation does is emulating the IOMMU for the host to let it use the IOMMU in more or less arbitrary ways, with (almost) no assumptions about how exactly the host IOMMU driver uses it. Whereas in pvIOMMU, pKVM closely cooperates with the host IOMMU driver, so in case of pvIOMMU it does make sense to use FLPT_DEFAULT_DID as the criterion.\n\nWell, the shadow IOMMU implementation is going away anyway (we will not port it to v6.18 and so on), so basically I\u0027m fine either way.",
+      "parentUuid": "52f987fe_0913c933",
+      "revId": "40c13d07570e31913e85ee9cc07332d4a5a90e80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "abb31d32_f0a830b8",
