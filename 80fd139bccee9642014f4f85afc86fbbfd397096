@@ -725,6 +725,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f5b094f5_5ce5a6e2",
+        "filename": "drivers/virt/halla/hvm_vcpu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-11-26T11:22:26Z",
+      "side": 1,
+      "message": "Ah, thanks for the explanation. I hadn\u0027t appreciated that you had an ordering constraint with the vcpu_put(). In which case please keep the isb() but add a comment before it to explain why it\u0027s needed.\n\nAlso, does this mean that the `HVC_FID_HVM_VCPU_RUN` hypercall is made with interrupts enabled but returns with interrupts disabled? If so, you might need to call `trace_hardirqs_off()` so that the kernel is aware of this.",
+      "parentUuid": "6ece0964_b4daeb3c",
+      "range": {
+        "startLine": 304,
+        "startChar": 2,
+        "endLine": 304,
+        "endChar": 5
+      },
+      "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "32475886_c8ee67c2",
         "filename": "drivers/virt/halla/hvm_vcpu.c",
         "patchSetId": 7
