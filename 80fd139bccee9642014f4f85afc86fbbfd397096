@@ -629,6 +629,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6ece0964_b4daeb3c",
+        "filename": "drivers/virt/halla/hvm_vcpu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 4399338
+      },
+      "writtenOn": "2025-11-26T01:33:48Z",
+      "side": 1,
+      "message": "Does this mean that the interrupt handler is guaranteed to be called and processed before calling hvm_vcpu_put?\nI expect the VM timer interrupt handler to be processed before hvm_vcpu_put.",
+      "parentUuid": "d757e67a_5f97e6de",
+      "range": {
+        "startLine": 304,
+        "startChar": 2,
+        "endLine": 304,
+        "endChar": 5
+      },
+      "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "32475886_c8ee67c2",
         "filename": "drivers/virt/halla/hvm_vcpu.c",
         "patchSetId": 7
