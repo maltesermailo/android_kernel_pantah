@@ -16,6 +16,24 @@
       "message": "Looking at this patch again... Don\u0027t we have a race with the host\u0027s irq remapping code which may still modify DMAR_IQT_REG at any time (while we are initializing pKVM)?\n\n\nAnd not just here... e.g. in initialize_qi() we wait until pending invalidations are completed, but what if irq remapping submits _new_ invalidations in the meantime?",
       "revId": "70708fd66bc2a74ff1b3b5d01a9f2cff18dde5a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c34addf_6bcdde86",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 38
+      },
+      "lineNbr": 902,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-27T00:49:58Z",
+      "side": 1,
+      "message": "Or maybe we are assuming the irq remapping code is not expected to submit QI invalidations in parallel with pKVM initialization (e.g. it is only expected to do that much earlier, when initializing IRQ remapping, or much later, during suspend/resume)?\n\nBut if so, what exact problem is fixed by this patch?",
+      "parentUuid": "d9036e81_66887c54",
+      "revId": "70708fd66bc2a74ff1b3b5d01a9f2cff18dde5a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
