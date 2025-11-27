@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a096e78d_38aa48c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 27
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-27T15:53:38Z",
+      "side": 1,
+      "message": "I\u0027ve recalled we actually have another security gap to fix (IIUC): when donating pages, besides flushing IOTLB we should also flush Device TLB for those devices that use it (i.e. those that are in SATC and for which the host requested enabling DevTLB) and at the same use the host EPT i.e. are in the passthrough domain.\n\nThat makes it more complicated than just flushing IOTLB for a single did FLPT_DEFAULT_DID?\n\nI guess that can be implemented in a later patch, but just wondering how much it would complicate the implementation. (I haven\u0027t looked myself yet at how exactly DevTLB flushing is done.)",
+      "revId": "cc9ca4a6441504dcd7e8dc34e0caef6b1264e501",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
