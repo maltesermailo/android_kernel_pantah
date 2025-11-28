@@ -1,0 +1,93 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "388f3aa8_a12d80a5",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-28T19:45:31Z",
+      "side": 1,
+      "message": "This can be checked before locking hyp_iommu-\u003elock?\n\nBTW also maybe -EOPNOTSUPP instead of -EINVAL?",
+      "fixSuggestions": [
+        {
+          "fixId": "14da696e_ca482bf8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+              "range": {
+                "startLine": 255,
+                "startChar": 0,
+                "endLine": 256,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+              "range": {
+                "startLine": 261,
+                "startChar": 0,
+                "endLine": 262,
+                "endChar": 0
+              },
+              "replacement": "\t\treturn -EOPNOTSUPP;\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+              "range": {
+                "startLine": 263,
+                "startChar": 0,
+                "endLine": 263,
+                "endChar": 0
+              },
+              "replacement": "\n\tpkvm_spin_lock(\u0026hyp_iommu-\u003elock);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "db17381ee48f55e1faa13f2d4e9585dfb87e8fef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e71ee44_ffdebde1",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-28T19:45:31Z",
+      "side": 1,
+      "message": "It doesn\u0027t look like the host actually passes param-\u003eforce_snooping?",
+      "revId": "db17381ee48f55e1faa13f2d4e9585dfb87e8fef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99101ddf_55310ac4",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.h",
+        "patchSetId": 46
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-28T19:45:31Z",
+      "side": 1,
+      "message": "I see most of the definitions in this file are copied from drivers/iommu/intel/pasid.h. So we can we just include it instead?",
+      "revId": "db17381ee48f55e1faa13f2d4e9585dfb87e8fef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
