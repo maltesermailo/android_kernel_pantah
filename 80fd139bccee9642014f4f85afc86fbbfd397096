@@ -580,6 +580,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "26bc4a89_ca71af2a",
+        "filename": "drivers/virt/halla/hvm_mmu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-11-28T11:11:15Z",
+      "side": 1,
+      "message": "Couldn\u0027t crosvm change its mapping (e.g. by calling `mmap()`) in between the two pin operations and you would get a different pfn?\n\nI think the best approach is:\n\n1. Return `-EAGAIN` after unpinning the page if `hyp_insert_ppage()` returned `-EEXIST`\n2. Return 0 immediately from `handle_demand_page()` if `hvm_vm_allocate_guest_page()` returns `-EAGAIN`\n\nIt\u0027s also critical that the `HVC_FID_HVM_MAP_GUEST` hypercall does not allow the host to replace an existing stage-2 mapping with another one for a different address.",
+      "parentUuid": "210bbbff_ac2730b4",
+      "range": {
+        "startLine": 218,
+        "startChar": 7,
+        "endLine": 218,
+        "endChar": 17
+      },
+      "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fcb4d778_99adf373",
         "filename": "drivers/virt/halla/hvm_vcpu.c",
         "patchSetId": 7
