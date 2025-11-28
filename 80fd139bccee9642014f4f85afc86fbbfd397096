@@ -532,6 +532,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "09d05831_48e08147",
+        "filename": "drivers/virt/halla/hvm_mmu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2025-11-28T09:58:38Z",
+      "side": 1,
+      "message": "I think the flow is:\n\n * `hvm_insert_ppage()` returns `-EEXIST` and so `pin_one_page()` drops the pin, sets `*out_page \u003d page` and returns 0\n * `hvm_vm_allocate_guest_page()` then returns 0 and sets `*pfn` to the pfn for the _unpinned_ page\n * `hvm_map_guest()` is then called with this pfn and passes it to the `HVC_FID_HVM_MAP_GUEST` hypercall\n \nWhy do you think the hypercall is not invoked in this case?",
+      "parentUuid": "acd52876_85b7f96e",
+      "range": {
+        "startLine": 218,
+        "startChar": 7,
+        "endLine": 218,
+        "endChar": 17
+      },
+      "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fcb4d778_99adf373",
         "filename": "drivers/virt/halla/hvm_vcpu.c",
         "patchSetId": 7
