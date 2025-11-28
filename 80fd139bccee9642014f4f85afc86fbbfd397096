@@ -508,6 +508,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "acd52876_85b7f96e",
+        "filename": "drivers/virt/halla/hvm_mmu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1667998
+      },
+      "writtenOn": "2025-11-28T02:33:19Z",
+      "side": 1,
+      "message": "We expected that hvm_insert_ppage will return -EEXIST when pinned_page is already existed. Then invoke unpin_user_pages, HVC_FID_HVM_MAP_GUEST will not be invoked.",
+      "parentUuid": "9790aa78_6d147595",
+      "range": {
+        "startLine": 218,
+        "startChar": 7,
+        "endLine": 218,
+        "endChar": 17
+      },
+      "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fcb4d778_99adf373",
         "filename": "drivers/virt/halla/hvm_vcpu.c",
         "patchSetId": 7
