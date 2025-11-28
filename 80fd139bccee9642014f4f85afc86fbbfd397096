@@ -556,6 +556,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "210bbbff_ac2730b4",
+        "filename": "drivers/virt/halla/hvm_mmu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1667998
+      },
+      "writtenOn": "2025-11-28T10:22:28Z",
+      "side": 1,
+      "message": "I missed last code of pin_one_page..:( \nThe same pfn will enter hypercall in each vcpu. And Hypervisor handles the same pfn.\nThen, isn\u0027t there a pinning problem?",
+      "parentUuid": "09d05831_48e08147",
+      "range": {
+        "startLine": 218,
+        "startChar": 7,
+        "endLine": 218,
+        "endChar": 17
+      },
+      "revId": "80fd139bccee9642014f4f85afc86fbbfd397096",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fcb4d778_99adf373",
         "filename": "drivers/virt/halla/hvm_vcpu.c",
         "patchSetId": 7
