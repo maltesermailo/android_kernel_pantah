@@ -22,10 +22,14 @@ DECLARE_HOOK(android_vh_ufs_fill_prdt,
 		 unsigned int segments, int *err),
 	TP_ARGS(hba, lrbp, segments, err));
 
+<<<<<<< HEAD   (d4b3ccd5754388fc82d91691db056031084a9c88 Revert "FROMGIT: memfd,selinux: call security_inode_init_sec)
 DECLARE_RESTRICTED_HOOK(android_rvh_ufs_complete_init,
 			TP_PROTO(struct ufs_hba *hba),
 			TP_ARGS(hba), 1);
 
+||||||| BASE   (9e84d228ed5a82d7f57c692bbf1de1ccebe834cc Merge tag 'v6.18-rc6' into android-mainline)
+=======
+>>>>>>> BRANCH (fe12f3f1efac6cdd683b9053651a8f571e5b78f9 Reapply "ANDROID: gki: enable Rust Ashmem and disable C memf)
 DECLARE_RESTRICTED_HOOK(android_rvh_ufs_reprogram_all_keys,
 			TP_PROTO(struct ufs_hba *hba, int *err),
 			TP_ARGS(hba, err), 1);

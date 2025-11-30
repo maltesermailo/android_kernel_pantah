@@ -70,7 +70,11 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_irqs_enable);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpu_cgroup_attach);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_cpu_cgroup_online);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_fill_prdt);
+<<<<<<< HEAD   (d4b3ccd5754388fc82d91691db056031084a9c88 Revert "FROMGIT: memfd,selinux: call security_inode_init_sec)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ufs_complete_init);
+||||||| BASE   (9e84d228ed5a82d7f57c692bbf1de1ccebe834cc Merge tag 'v6.18-rc6' into android-mainline)
+=======
+>>>>>>> BRANCH (fe12f3f1efac6cdd683b9053651a8f571e5b78f9 Reapply "ANDROID: gki: enable Rust Ashmem and disable C memf)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_ufs_reprogram_all_keys);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_prepare_command);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_ufs_update_sysfs);
