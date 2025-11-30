@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7410cea_75c90d8c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2025-11-30T15:03:43Z",
+      "side": 1,
+      "message": "This is interesting. The `dev` branch has a conflict with `selinux-pr-20251121` (mainline). The conflict is this commit with a rename in `3ded250b97c3 (\"selinux: rename the cred_security_struct variables to \"crsec\"\")`.\n\nMy _guess_ here is that Paul\u0027s `dev` branch is rebasable and that he\u0027ll amend @tweek@google.com\u0027s commit to account for the `new_tsec` -\u003e `new_crsec` rename making this commit\u0027s SHA invalid.\n\nI noticed because I\u0027m trying to merge `6.18-rc7` into this branch and I hit this conflict. Ideally, we want to revert this patch and reapply the \"final\" version of the commit. As opposed to me fixing up the merge commit.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 3
+      },
+      "revId": "d84a3e705026d79242ce3b92257ed61dc97a1912",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
