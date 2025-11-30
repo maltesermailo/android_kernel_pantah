@@ -130,6 +130,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "869cdeb8_2e197f9c",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-11-30T20:31:32Z",
+      "side": 1,
+      "message": "Now that we have domain-\u003eagaw, we can use it in the `iommu_set_lm_ce` and  `iommu_set_pasid_sl` hypercalls instead of relying on the host to pass `domain_agaw`? and thus can remove `domain_agaw` from pkvm_lm_context_param and pkvm_sm_context_param? \n\nBTW if the order of patches was different (first these domain hypercalls, and only after that the context/pasid update hypercalls, IOW if the hypercalls were implemented in the order in which the host calls them), we wouldn\u0027t need that `domain_agaw` parameter even temporarily?",
+      "revId": "e5e35b1f833d316c8b9272c7e36380622f20c5dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dd4aea39_8f555d7c",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
         "patchSetId": 46
