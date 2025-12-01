@@ -75,6 +75,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "62f3c283_7fe83a9d",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-01T17:27:41Z",
+      "side": 1,
+      "message": "BTW it should rather be -ENOMEM than -EFAULT? Since pkvm_alloc_iommu_domain() only fails if exceeded MAX_IOMMU_DOMAIN_NUM?",
+      "parentUuid": "9eb34eae_e7ee4915",
+      "revId": "e5e35b1f833d316c8b9272c7e36380622f20c5dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eaab9577_fa93b315",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
         "patchSetId": 46
