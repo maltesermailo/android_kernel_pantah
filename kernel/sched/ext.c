@@ -4694,6 +4694,7 @@ repeat_iter:
 		if (skip)
 			continue;
 
+		trace_android_vh_setscheduler_class(&new_class, NULL, p, p->policy, p->prio);
 		if (old_class != new_class && p->se.sched_delayed)
 			dequeue_task(task_rq(p), p, DEQUEUE_SLEEP | DEQUEUE_DELAYED);
 
@@ -5423,7 +5424,14 @@ repeat_iter:
 		struct sched_enq_and_set_ctx ctx;
 		bool skip = false;
 
+<<<<<<< HEAD   (ac0cd93c480a6a0a351cb96a1089fe3c7256c7ad BACKPORT: sched_ext: Use SCX_TASK_READY test instead of tryg)
 		if (scx_get_task_state(p) != SCX_TASK_READY)
+||||||| BASE   (ac3d27f4f88245fabbaff30a4a9d6b8bd32f69d7 ANDROID: ABI: Update pixel symbol list)
+		if (!tryget_task_struct(p))
+=======
+		trace_android_vh_setscheduler_class(&new_class, NULL, p, p->policy, p->prio);
+		if (!tryget_task_struct(p))
+>>>>>>> CHANGE (d7fe9777b75c161cc0a858927db97138c29d6ebc ANDROID: vendor_hooks: Add hooks for oem sched_ext setschedu)
 			continue;
 
 		trace_android_vh_scx_switch_repeat_skip(p, &skip, &repeat);
