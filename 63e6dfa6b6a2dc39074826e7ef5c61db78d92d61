@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c3a13c4_d0409335",
+        "filename": "drivers/gpu/drm/xe/Kconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2025-12-01T19:12:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "126d0a06_891f873c",
+      "range": {
+        "startLine": 128,
+        "startChar": 19,
+        "endLine": 128,
+        "endChar": 20
+      },
+      "revId": "63e6dfa6b6a2dc39074826e7ef5c61db78d92d61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b3b7246_bd986858",
@@ -61,6 +85,30 @@
       "side": 1,
       "message": "Good catch. I will move this outside of the `ifeq ($(CONFIG_DEBUG_FS),y)` block.\n\nWe want it enabled in all builds.",
       "parentUuid": "6b3b7246_bd986858",
+      "range": {
+        "startLine": 290,
+        "startChar": 8,
+        "endLine": 290,
+        "endChar": 23
+      },
+      "revId": "63e6dfa6b6a2dc39074826e7ef5c61db78d92d61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9211f7da_196a88dc",
+        "filename": "drivers/gpu/drm/xe/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 2046240
+      },
+      "writtenOn": "2025-12-01T19:12:10Z",
+      "side": 1,
+      "message": "After reading through the provided link, I _think_ the kernel is always built with `CONFIG_DEBUG_FS`, but the guidance for vendors is to disallow access to debugfs by unmounting it in the filesystem.\n\nIn either case, we still don\u0027t want to condition _building_ the implementation of this tracepoint behind that KCONFIG since it does not depend on it or its enabled features at all, so I\u0027ve removed the `CONFIG_DEBUG_FS` dependency here.",
+      "parentUuid": "af13d314_24d1d728",
       "range": {
         "startLine": 290,
         "startChar": 8,
