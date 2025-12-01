@@ -52,6 +52,24 @@
       "parentUuid": "0c34addf_6bcdde86",
       "revId": "70708fd66bc2a74ff1b3b5d01a9f2cff18dde5a4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0504c3f7_c83095e5",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 38
+      },
+      "lineNbr": 902,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-01T14:32:19Z",
+      "side": 1,
+      "message": "I have verified that there are only 3 qi invalidation happening before we perform SRTP and all the three are IEC(both in brya and fatcat). SO verified that this patch is no longer needed as we now enable iommu early during SRTP and no qi invalidation happen between pkvm initialization(hypercall enabling) and pkvm iommu initialization. I shall abandon this change now.\n\nWhile auditing the code again, I realized that there is another issue with existing code where we do not handle iommu initialization with !IRQ_REMAP. In the case of !IRQ_REMAP, qi is not initialized before pkvm and hence we trap the qi initialization mmio access. We do not account for this and read IQA register for getting the queue buffer address instead of reading the vreg. I have added the fix as a separate cl(aosp/3871879).",
+      "parentUuid": "2f604086_7c8c5302",
+      "revId": "70708fd66bc2a74ff1b3b5d01a9f2cff18dde5a4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
