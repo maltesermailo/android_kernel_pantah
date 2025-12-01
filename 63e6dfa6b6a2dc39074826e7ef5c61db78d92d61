@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "126d0a06_891f873c",
+        "filename": "drivers/gpu/drm/xe/Kconfig",
+        "patchSetId": 4
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-12-01T18:54:24Z",
+      "side": 1,
+      "message": "typo: extra whitespace",
+      "range": {
+        "startLine": 128,
+        "startChar": 19,
+        "endLine": 128,
+        "endChar": 20
+      },
+      "revId": "63e6dfa6b6a2dc39074826e7ef5c61db78d92d61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b3b7246_bd986858",
+        "filename": "drivers/gpu/drm/xe/Makefile",
+        "patchSetId": 4
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1368430
+      },
+      "writtenOn": "2025-12-01T18:54:24Z",
+      "side": 1,
+      "message": "This is disabled in GKI `user` (release) builds.\n\nhttps://source.android.com/docs/core/architecture/kernel/using-debugfs-12\n\u003e Never mount DebugFS in user builds for devices launching on Android 12.\n...\n\u003e Don\u0027t allow DebugFS access during runtime. The following exceptions apply:\n\u003e * Bugreport generation (comes from the dumpstate HAL)\n\u003e * Testing and validation (accessible by `adb root` and `shell` - ensure that DebugFS is mounted first)\n\nSo, while the tests may pass in the lab (due to running on `userdebug` builds), app developer\u0027s devices will not have this available. Is this expected behavior?",
+      "range": {
+        "startLine": 290,
+        "startChar": 8,
+        "endLine": 290,
+        "endChar": 23
+      },
+      "revId": "63e6dfa6b6a2dc39074826e7ef5c61db78d92d61",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
