@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84313747_13a28471",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 33
+      },
+      "lineNbr": 1267,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-02T13:35:00Z",
+      "side": 1,
+      "message": "Since the actual incrementing/decrementing of pt_cnt is only implemented in later patches, makes sense to move this patch after those later patches? (And then probably makes sense to implement incrementing/decrementing in this patch, not in those patches?)",
+      "revId": "2fdb215fa866bbf170fc26aedaa5feb93e2d2aa8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d77f92f8_b82f7d02",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_internal.h",
+        "patchSetId": 33
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-02T13:35:00Z",
+      "side": 1,
+      "message": "nit: since we have a comment anyway, worth elaborating what \"PT\" stands for? E.g. \"Number of Context/Pasid entries configured in pass-through mode from host perspective\" or something like that?",
+      "revId": "2fdb215fa866bbf170fc26aedaa5feb93e2d2aa8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d542868c_81760e9a",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_internal.h",
+        "patchSetId": 33
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-02T13:35:00Z",
+      "side": 1,
+      "message": "Just a note: I guess we could just include drivers/iommu/intel/pasid.h instead? (We might consider that for v6.18)",
+      "revId": "2fdb215fa866bbf170fc26aedaa5feb93e2d2aa8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
