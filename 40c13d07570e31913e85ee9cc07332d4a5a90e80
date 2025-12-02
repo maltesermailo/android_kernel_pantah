@@ -170,6 +170,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9fb80f3_680892fc",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 2407,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-12-02T01:23:11Z",
+      "side": 1,
+      "message": "I am using an `atomic_t` type counter, so we won\u0027t to take iommu-\u003elock.",
+      "parentUuid": "bd4389ce_bf87ff0b",
+      "revId": "40c13d07570e31913e85ee9cc07332d4a5a90e80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f51495ad_bef33d18",
@@ -283,6 +301,24 @@
       "side": 1,
       "message": "\u003e In case of PVIOMMU, the list doesn\u0027t contain anything, as we don\u0027t need it. It\u0027s a remnant from shadow impl.\n\nAh, indeed. Then, a counter might be actually the simplest way to implement avoiding unneeded flushing.\n\nWhich seems worth implementing anyway. I didn\u0027t specifically measure how long a QI submit takes, but I doubt it is blazingly fast. And I did see page fault handling for a pVM taking on average several times longer than for a npVM, and my only working theory is that it is due to these IOTLB flushes during page donation.",
       "parentUuid": "3725a7d1_dc4a8359",
+      "revId": "40c13d07570e31913e85ee9cc07332d4a5a90e80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06eb9581_51939b37",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 2416,
+      "author": {
+        "id": 3494485
+      },
+      "writtenOn": "2025-12-02T01:23:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca6301c1_bdb9a4a8",
       "revId": "40c13d07570e31913e85ee9cc07332d4a5a90e80",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
