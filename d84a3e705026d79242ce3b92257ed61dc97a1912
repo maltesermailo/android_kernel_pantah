@@ -190,6 +190,30 @@
       },
       "revId": "d84a3e705026d79242ce3b92257ed61dc97a1912",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4da6a84d_d8c80a5d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1561651
+      },
+      "writtenOn": "2025-12-02T08:32:29Z",
+      "side": 1,
+      "message": "Side note: Paul explicitly discussed the merge conflict in his PR: \n\n\u003e A handful of SELinux changes for v6.19, the summary is below, but I\nwanted to call out a merge conflict caused by the recent task/cred\nchanges sent up during the v6.18-rcX cycle.  The conflict does require\nsome manual intervention to resolve, but it is limited to changing\nthe \"SECCLASS_FILE\" parameter in two avc_has_perm() calls to\n\"isec-\u003esclass\" in selinux_bprm_creds_for_exec().  The\nselinux-pr-20251201.merge tag contains an example fixup of the merge\nconflict.\n\nhttps://lore.kernel.org/selinux/c48b683b30a44eb12a0ff032876386fd@paul-moore.com/T/#u",
+      "parentUuid": "309d53ff_844da850",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 3
+      },
+      "revId": "d84a3e705026d79242ce3b92257ed61dc97a1912",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
