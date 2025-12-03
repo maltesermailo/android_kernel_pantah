@@ -29,7 +29,14 @@
 #include <linux/idr.h>
 #include <linux/leds.h>
 #include <linux/rculist.h>
+<<<<<<< HEAD   (40c0e6d40be8d0d7fd016d3a7c0667409ba0743f Merge c157fa22c400 ("lib/crypto: arm/curve25519: Disable on )
 #include <linux/android_kabi.h>
+||||||| BASE   (c157fa22c4007147fd0c443c723380df5587246a lib/crypto: arm/curve25519: Disable on CPU_BIG_ENDIAN)
+#include <linux/srcu.h>
+=======
+#include <linux/spinlock.h>
+#include <linux/srcu.h>
+>>>>>>> BRANCH (7ce9bb0b95fc280e9212b8922590c492ca1d9c39 Bluetooth: hci_sync: fix double free in 'hci_discovery_filte)
 
 #include <net/bluetooth/hci.h>
 #include <net/bluetooth/hci_sync.h>
@@ -95,6 +102,7 @@ struct discovery_state {
 	unsigned long		scan_start;
 	unsigned long		scan_duration;
 	unsigned long		name_resolve_timeout;
+	spinlock_t		lock;
 };
 
 #define SUSPEND_NOTIFIER_TIMEOUT	msecs_to_jiffies(2000) /* 2 seconds */
@@ -912,6 +920,7 @@ static inline void iso_recv(struct hci_conn *hcon, struct sk_buff *skb,
 
 static inline void discovery_init(struct hci_dev *hdev)
 {
+	spin_lock_init(&hdev->discovery.lock);
 	hdev->discovery.state = DISCOVERY_STOPPED;
 	INIT_LIST_HEAD(&hdev->discovery.all);
 	INIT_LIST_HEAD(&hdev->discovery.unknown);
@@ -926,8 +935,12 @@ static inline void hci_discovery_filter_clear(struct hci_dev *hdev)
 	hdev->discovery.report_invalid_rssi = true;
 	hdev->discovery.rssi = HCI_RSSI_INVALID;
 	hdev->discovery.uuid_count = 0;
+
+	spin_lock(&hdev->discovery.lock);
 	kfree(hdev->discovery.uuids);
 	hdev->discovery.uuids = NULL;
+	spin_unlock(&hdev->discovery.lock);
+
 	hdev->discovery.scan_start = 0;
 	hdev->discovery.scan_duration = 0;
 }
