@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4dda3ac_4aa0a6ef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-12-03T19:38:37Z",
+      "side": 1,
+      "message": "there are 3511 symbols in the list, so these numbers don\u0027t look correct.",
+      "revId": "348344b949316dd9e3224ef39d254b201bb1002f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1914ed34_61cdcde7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-12-03T19:38:37Z",
+      "side": 1,
+      "message": "This is really hard to review. Can you please split this into several patches to provide more context? Ideally 1 patch per module (or groupings of related modules) that require the exported symbol. That way we can review the impact by module on the KMI via the _ABI Fidelity Changes_ report and possibly suggest ways to lessen the impact on the x86 KMI.\n\nSome stats (compared to the android16-6.12 arm64 KMI):\n- symbols added to KMI that _are_ in arm64 KMI: 1854\n- symbols added that _are not_ in arm64 KMI: 1657\n- structs/enums added to KMI that _are_ in arm64 KMI: 584\n- structs/enums added that _are not_ in arm64 KMI: 251\n\nI\u0027d like to understand which of the 251 structs/enums and 1657 symbols that are not in the arm64 KMI are x86 arch/driver specific (in which case they have no impact on arm64)",
+      "revId": "348344b949316dd9e3224ef39d254b201bb1002f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
