@@ -200,6 +200,31 @@ int truncate_inode_folio(struct address_space *mapping, struct folio *folio)
 	return 0;
 }
 
+static int try_folio_split_or_unmap(struct folio *folio)
+{
+	enum ttu_flags ttu_flags =
+		TTU_SYNC |
+		TTU_SPLIT_HUGE_PMD |
+		TTU_IGNORE_MLOCK;
+	int ret;
+
+	ret = split_folio(folio);
+
+	/*
+	 * If the split fails, unmap the folio, so it will be refaulted
+	 * with PTEs to respect SIGBUS semantics.
+	 *
+	 * Make an exception for shmem/tmpfs that for long time
+	 * intentionally mapped with PMDs across i_size.
+	 */
+	if (ret && !shmem_mapping(folio->mapping)) {
+		try_to_unmap(folio, ttu_flags);
+		WARN_ON(folio_mapped(folio));
+	}
+
+	return ret;
+}
+
 /*
  * Handle partial folios.  The folio may be entirely within the
  * range if a split has raced with us.  If not, we zero the part of the
@@ -245,8 +270,14 @@ bool truncate_inode_partial_folio(struct folio *folio, loff_t start, loff_t end)
 		folio_invalidate(folio, offset, length);
 	if (!folio_test_large(folio))
 		return true;
+<<<<<<< HEAD   (d6c948eb12e69dfa899be8c53a5001bd399bbff5 Merge b283ba3ddc9f ("mm: memcg: add per-memcg zswap writebac)
 	err = split_folio(folio);
 	if (!err)
+||||||| BASE   (b283ba3ddc9f3dfbebb5c739694f129307bdde71 mm: memcg: add per-memcg zswap writeback stat)
+	if (split_folio(folio) == 0)
+=======
+	if (try_folio_split_or_unmap(folio) == 0)
+>>>>>>> BRANCH (1e89a1be4fe907d9c573fe98875bff132e7ac6c8 Linux 6.6.117)
 		return true;
 	if (err > 0)
 		return false;
