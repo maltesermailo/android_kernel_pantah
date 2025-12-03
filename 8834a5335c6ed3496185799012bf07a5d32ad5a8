@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f58c6ef_c60df004",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-03T20:43:56Z",
+      "side": 1,
+      "message": "Same: we are not really providing those security guarantees by this patch, they are already provided by pKVM anyway, we are just preventing the host from trying and failing to use ATS disallowed by pKVM?",
+      "revId": "8834a5335c6ed3496185799012bf07a5d32ad5a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "673801d3_93ba32b8",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 2704,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-03T20:43:56Z",
+      "side": 1,
+      "message": "nit: this sounds a bit inaccurate, since we are not really enforcing security guarantees here, it is pKVM that enforces them, and it enforces them anyway.\n\nSo maybe e.g. \"pKVM hypervisor does not allow ATS for devices not in SATC, so do not advertise ATS support for them.\" ?",
+      "revId": "8834a5335c6ed3496185799012bf07a5d32ad5a8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
