@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "685b7625_c1f6bd9e",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 44
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-04T19:50:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c6f6d92_b2d1ce3f",
+      "revId": "4d2e80238047429ce22974cac9a1711c1343d5ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d6ae629a_705ad96a",
@@ -95,6 +113,24 @@
       "side": 1,
       "message": "BTW further nitpicking: maybe s/access/read access/ for even more clarity?",
       "parentUuid": "d6ae629a_705ad96a",
+      "revId": "4d2e80238047429ce22974cac9a1711c1343d5ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4011452c_f7eeaee3",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 44
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-04T19:50:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e5fd0ae_138ceb69",
       "revId": "4d2e80238047429ce22974cac9a1711c1343d5ca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -166,6 +202,24 @@
       "side": 1,
       "message": "\u003e I\u0027m not sure what you mean, but I didn\u0027t suggest to rework anything here, the behavior here makes sense to me, it is simple and clear. I was just wondering why make the log message more verbose and at the same time less clear.\n\nWhat I meant is, without pkvm host doesn\u0027t print pagetable contents for passthrough mode(because there is no pagetable to print). So I was wondering if it would be better to keep the behavior consistent and just return here without a `pr_info()` for passthrough mode\n\n\u003e ...So, if your intention was to make this log message not just the say that it is protected but also reflect why it is protected, then maybe e.g. \"legacy mode page table is host EPT, protected by pkvm\" ?\n\nOk, I shall do this",
       "parentUuid": "a27f6fd6_997f1a51",
+      "revId": "4d2e80238047429ce22974cac9a1711c1343d5ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "387efe9c_195aaee2",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 44
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-04T19:50:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0cfa09e_60e2e0c9",
       "revId": "4d2e80238047429ce22974cac9a1711c1343d5ca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
