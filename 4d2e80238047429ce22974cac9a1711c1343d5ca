@@ -1,0 +1,66 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6ae629a_705ad96a",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 44
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-04T14:00:33Z",
+      "side": 1,
+      "message": "nit: s/do not/does not/, s/access/access to/ ?",
+      "fixSuggestions": [
+        {
+          "fixId": "384be283_9e4d6f20",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/iommu.c",
+              "range": {
+                "startLine": 598,
+                "startChar": 0,
+                "endLine": 600,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t * to DMA mapping and uses host ept which the host does\n\t\t\t * not have access to.\n"
+            },
+            {
+              "path": "drivers/iommu/intel/iommu.c",
+              "range": {
+                "startLine": 645,
+                "startChar": 0,
+                "endLine": 647,
+                "endChar": 0
+              },
+              "replacement": "\t\t * to DMA mapping and uses host ept which the host does\n\t\t * not have access to.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4d2e80238047429ce22974cac9a1711c1343d5ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83375fdd_91bde5ad",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 44
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-04T14:00:33Z",
+      "side": 1,
+      "message": "nit: what does \"mode is protected\" mean? It is the page table that is protected?\n\nWhat\u0027s wrong with the simple wording I suggested, i.e. \"legacy mode page table is protected by pkvm\" (which is similar to the existing \"legacy mode page table is not present\" above)?",
+      "revId": "4d2e80238047429ce22974cac9a1711c1343d5ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
