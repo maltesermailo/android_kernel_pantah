@@ -3,6 +3,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5c6f6d92_b2d1ce3f",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 44
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-04T17:05:49Z",
+      "side": 1,
+      "message": "And more nitpicking: it is conventional to start `context_domain_id(...)` right below `pkvm_pviommu_enabled()`?",
+      "fixSuggestions": [
+        {
+          "fixId": "683c6ae8_68934ae8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/iommu.c",
+              "range": {
+                "startLine": 594,
+                "startChar": 0,
+                "endLine": 595,
+                "endChar": 0
+              },
+              "replacement": "\t\t    context_domain_id(ctx_entry) \u003d\u003d FLPT_DEFAULT_DID) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "4d2e80238047429ce22974cac9a1711c1343d5ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d6ae629a_705ad96a",
         "filename": "drivers/iommu/intel/iommu.c",
         "patchSetId": 44
