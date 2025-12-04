@@ -79,6 +79,24 @@
       "parentUuid": "83375fdd_91bde5ad",
       "revId": "4d2e80238047429ce22974cac9a1711c1343d5ca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a27f6fd6_997f1a51",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 44
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-04T15:12:32Z",
+      "side": 1,
+      "message": "\u003e Its just that - not all legacy mode pagetables are protected, its only passthrough mode.\n\nYes, so we successfully dump all other (non-passthrough mode) page tables, while print this message for passthrough mode page tables instead of dumping them.\n\n\u003e To avoid confusion, I guess I will remove the logs and it will emulate the normal behaviour for passthrough(I mean no pagetable printing for passthrough).\n\nI\u0027m not sure what you mean, but I didn\u0027t suggest to rework anything here, the behavior here makes sense to me, it is simple and clear. I was just wondering why make the log message more verbose and at the same time less clear.\n\nBTW after looking at it again, it says \"write protected\", which is not relevant here at all (all other page tables are write protected too), what is relevant here is that it is read protected?\n\n...So, if your intention was to make this log message not just the say that it is protected but also reflect _why_ it is protected, then maybe e.g. \"legacy mode page table is host EPT, protected by pkvm\" ?",
+      "parentUuid": "e0d89caf_28d74821",
+      "revId": "4d2e80238047429ce22974cac9a1711c1343d5ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
