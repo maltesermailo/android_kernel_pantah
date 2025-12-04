@@ -86,6 +86,24 @@
       "parentUuid": "9f8b3a59_a38ae8fe",
       "revId": "737ad95617532ac21d2f81aeea33c887c48fdd8e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbca86c0_13316694",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3386406
+      },
+      "writtenOn": "2025-12-04T20:02:32Z",
+      "side": 1,
+      "message": "Pushed an updated patch to add the 2 tegra mc symbols marked as required by arm-smmu.ko to the db845c abi symbol list so they\u0027re available for build.\n\nSince the db845c fragment enables CONFIG_ARM_SMMU as a module, the above dependency arises and we need to include the tegra mc symbols in its symbol list.",
+      "parentUuid": "be4ffcf3_076ba765",
+      "revId": "737ad95617532ac21d2f81aeea33c887c48fdd8e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
