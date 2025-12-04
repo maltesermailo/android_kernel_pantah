@@ -61,6 +61,24 @@
       "message": "nit: what does \"mode is protected\" mean? It is the page table that is protected?\n\nWhat\u0027s wrong with the simple wording I suggested, i.e. \"legacy mode page table is protected by pkvm\" (which is similar to the existing \"legacy mode page table is not present\" above)?",
       "revId": "4d2e80238047429ce22974cac9a1711c1343d5ca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0d89caf_28d74821",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 44
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-04T14:35:11Z",
+      "side": 1,
+      "message": "\u003e nit: what does \"mode is protected\" mean? It is the page table that is protected?\n\nSorry for not being clear. The message says \"passthrough mode is shadowed and write protected..\"\nIt could be elaborated by\n\"passthrough mode is shadowed by pkvm with a write protected second level pagetable\". \n\n\u003e What\u0027s wrong with the simple wording I suggested, i.e. \"legacy mode page table is protected by pkvm\" (which is similar to the existing \"legacy mode page table is not present\" above)?\n\nThere is nothing wrong. Its just that - not all legacy mode pagetables are protected, its only passthrough mode. since the context/pasid entry has a SLPTR address, this code just goes ahead and tries to print the content of pagetable. That will fail because hostept is write protected.\n\nTo avoid confusion, I guess I will remove the logs and it will emulate the normal behaviour for passthrough(I mean no pagetable printing for passthrough).",
+      "parentUuid": "83375fdd_91bde5ad",
+      "revId": "4d2e80238047429ce22974cac9a1711c1343d5ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
