@@ -33,6 +33,24 @@
       "message": "Why does db845 need to be changed? Will this cause a build-break for other partners?\n\nGenerally you should never change symbol lists other than your own. Please refactor the code (in a separate patch) so other partners don\u0027t require tegra symbols.\n\nAlso, if there is a reason to change symbol lists or ABI, those need to be in a separate patch.",
       "revId": "7de3db41c7316cf50ff0421a59fada3d091b8b3e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "602bef2f_d9e17761",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3386406
+      },
+      "writtenOn": "2025-12-05T03:55:10Z",
+      "side": 1,
+      "message": "Thanks for the pointers on abi changes.\n\ndb845c is being changed because it\u0027s a vendor that builds arm-smmu.ko. In the current design of arm-smmu in upstream the compilation of arm-smmu-nvidia is by default https://elixir.bootlin.com/linux/v6.18/source/drivers/iommu/arm/arm-smmu/Makefile#L4. This is probably due to the reasons described below\n\nIn tegra-mc source code there is a conditional where depending on whether CONFIG_TEGRA_MC is enabled or not, it uses an inline stub implementation in the header file for certain functions or it uses an actual implementation from the tegra-mc source file and declares them as external symbols.\n\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android16-6.12/include/soc/tegra/mc.h#233\n\nIn cases where CONFIG_TEGRA_MC isn\u0027t enabled, it runs with the inline stubs and has no issues. But since we require CONFIG_TEGRA_MC for our devices to boot and we\u0027re enabling it, the actual source implementation is used and they\u0027re declared as external symbols, and these symbols are required by the arm-smmu driver, so arm-smmu is expecting to use the symbols for \n`devm_tegra_memory_controller_get` and `tegra_mc_probe_device` rather than the inline stub implementation which doesn\u0027t require any external symbol reference.\n\nCONFIG_TEGRA_MC is a bool config so we can\u0027t build it as a module and have the symbols available for arm-smmu by default. \nBased on all the above it seems that nvidia arm smmu is coupled with the general arm-smmu due to its boolean nature, and I don\u0027t quite see a simple way to resolve this via refactoring aside from the TEGRA_MC driver being converted to tristate and built as a vendor module.\nIt\u0027s for this reason that I\u0027ve added the symbols to db845c abi symbol list as a demonstration of a solution so that arm-smmu can be built without any issues.",
+      "parentUuid": "2e8f5692_869990f9",
+      "revId": "7de3db41c7316cf50ff0421a59fada3d091b8b3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
