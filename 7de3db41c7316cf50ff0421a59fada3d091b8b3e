@@ -16,6 +16,23 @@
       "message": "Confirmed that db845c build-break is resolved with this change locally",
       "revId": "7de3db41c7316cf50ff0421a59fada3d091b8b3e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e8f5692_869990f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2025-12-05T01:03:29Z",
+      "side": 1,
+      "message": "Why does db845 need to be changed? Will this cause a build-break for other partners?\n\nGenerally you should never change symbol lists other than your own. Please refactor the code (in a separate patch) so other partners don\u0027t require tegra symbols.\n\nAlso, if there is a reason to change symbol lists or ABI, those need to be in a separate patch.",
+      "revId": "7de3db41c7316cf50ff0421a59fada3d091b8b3e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
