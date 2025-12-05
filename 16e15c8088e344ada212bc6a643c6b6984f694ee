@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9af39194_c2d183fc",
+        "filename": "include/trace/hooks/sched.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2025-12-05T01:50:32Z",
+      "side": 1,
+      "message": "Could these be renamed to be more scx specific? As they otherwise aren\u0027t obvious by their name.",
+      "fixSuggestions": [
+        {
+          "fixId": "a939e849_406f9eef",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/trace/hooks/sched.h",
+              "range": {
+                "startLine": 442,
+                "startChar": 0,
+                "endLine": 443,
+                "endChar": 0
+              },
+              "replacement": "DECLARE_HOOK(android_vh_scx_enq_to_priq,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "16e15c8088e344ada212bc6a643c6b6984f694ee",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
