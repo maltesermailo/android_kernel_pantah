@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fffd731d_4ccc534e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-08T14:39:31Z",
+      "side": 1,
+      "message": "bit strange to have a `default_guest_prot` but used only in one place.",
+      "revId": "7a54fd150a48418bc0027039988604bf9c464545",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c04faa6_763b2e0c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1481,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-08T14:39:31Z",
+      "side": 1,
+      "message": "Where is the PFN coming from? Can we trust it?",
+      "revId": "7a54fd150a48418bc0027039988604bf9c464545",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec95be07_17367f79",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1493,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-08T14:39:31Z",
+      "side": 1,
+      "message": "If this is used for MMIO only. Do we want to reject normal memory, just in case?",
+      "fixSuggestions": [
+        {
+          "fixId": "561aa9f6_23f04162",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+              "range": {
+                "startLine": 1494,
+                "startChar": 0,
+                "endLine": 1495,
+                "endChar": 0
+              },
+              "replacement": "\tret \u003d __hyp_check_page_state_range(phys, size, PKVM_PAGE_OWNED, false);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7a54fd150a48418bc0027039988604bf9c464545",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27df275d_fc225b36",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1503,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-08T14:39:31Z",
+      "side": 1,
+      "message": "Especially this mandates MMIO-only I believe. Without the MMIO_GUARD annotation here, we could easily run into the case where stage2_mc is empty.",
+      "revId": "7a54fd150a48418bc0027039988604bf9c464545",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
