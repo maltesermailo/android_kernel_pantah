@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cef6a00c_f1ef460c",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-08T16:15:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f097ad65_62b23ac9",
+      "revId": "7a54fd150a48418bc0027039988604bf9c464545",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c04faa6_763b2e0c",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Yes, the hypervisor have a list of the allowed PFNs from the device tree before de-privilege and then the host will choose which device to be donated.",
       "parentUuid": "0c04faa6_763b2e0c",
+      "revId": "7a54fd150a48418bc0027039988604bf9c464545",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23cca186_194eaf50",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1481,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-08T16:15:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48a2e099_d7b5d811",
       "revId": "7a54fd150a48418bc0027039988604bf9c464545",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -126,6 +162,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b3c58698_a5b3e6f7",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1493,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-08T16:15:53Z",
+      "side": 1,
+      "message": "I\u0027m just scared about making strong assumptions without testing them. But then I understand that you are the only caller ... but for now. This function is not static.",
+      "parentUuid": "63cda414_40e19752",
+      "revId": "7a54fd150a48418bc0027039988604bf9c464545",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "27df275d_fc225b36",
         "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
         "patchSetId": 1
@@ -155,6 +209,24 @@
       "side": 1,
       "message": "I don\u0027t understand, if MMIO guard was installed we won\u0027t need any extra memory to map the page?",
       "parentUuid": "27df275d_fc225b36",
+      "revId": "7a54fd150a48418bc0027039988604bf9c464545",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0418bc11_8c5a3699",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1503,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-08T16:15:53Z",
+      "side": 1,
+      "message": "Yes you are correct. I meant this as a follow-up to the previous comment: that\u0027s another assumption the function will be called for MMIO only.",
+      "parentUuid": "43f54b96_755cf595",
       "revId": "7a54fd150a48418bc0027039988604bf9c464545",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
