@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "474f2aea_7a321221",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-08T10:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a49a092_1b022e49",
+      "revId": "9d51e5f2b070f1df4559cf794d1e2d7d9d20b3c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c37e582_f52acc42",
@@ -73,6 +91,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba20cbba_21e93eac",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-08T10:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c37e582_f52acc42",
+      "revId": "9d51e5f2b070f1df4559cf794d1e2d7d9d20b3c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a0786e8_f67c2db6",
@@ -104,6 +140,24 @@
           ]
         }
       ],
+      "revId": "9d51e5f2b070f1df4559cf794d1e2d7d9d20b3c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c8c238d_3fc4421c",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-08T10:51:07Z",
+      "side": 1,
+      "message": "shamelessly copied from ptdev.c ;-), but hlist_del + memset was doing the same as hash_del. I think might be why ptdev author did it this way. So I kept it like that. But for clarity, it makes sense to do hash_del() and changed it.",
+      "parentUuid": "6a0786e8_f67c2db6",
       "revId": "9d51e5f2b070f1df4559cf794d1e2d7d9d20b3c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -153,6 +207,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "03046308_9c43cd1d",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-08T10:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "429a1665_49fb375c",
+      "revId": "9d51e5f2b070f1df4559cf794d1e2d7d9d20b3c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c3420bd0_22c20840",
@@ -184,6 +256,24 @@
           ]
         }
       ],
+      "revId": "9d51e5f2b070f1df4559cf794d1e2d7d9d20b3c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8bfa31a_538abe0a",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-08T10:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3420bd0_22c20840",
       "revId": "9d51e5f2b070f1df4559cf794d1e2d7d9d20b3c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -253,6 +343,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d88ae0de_300f3f04",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-08T10:51:07Z",
+      "side": 1,
+      "message": "yeah you\u0027re right. I am removing this implementation. This was mainly done so as to call put_domain with only pgd. This was needed in context/pasid teardown. To avoid taking an extra ref when I call get_domain, I invented this function which searches for the domain and then calls put_domain. But seems like we would need to get the domain during context/pasid teardown to unassign cache tags and I have reworked this.",
+      "parentUuid": "4996ef6c_963a907b",
+      "revId": "9d51e5f2b070f1df4559cf794d1e2d7d9d20b3c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea531337_e001f892",
@@ -284,6 +392,24 @@
           ]
         }
       ],
+      "revId": "9d51e5f2b070f1df4559cf794d1e2d7d9d20b3c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62845850_6154f0d5",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.h",
+        "patchSetId": 46
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-08T10:51:07Z",
+      "side": 1,
+      "message": "Ahh yes, this is a left over from the ptdev integration we had before but removed as we were not using ptdev. Removed",
+      "parentUuid": "ea531337_e001f892",
       "revId": "9d51e5f2b070f1df4559cf794d1e2d7d9d20b3c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
