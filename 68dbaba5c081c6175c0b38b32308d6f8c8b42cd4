@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3485021_d9c0c25b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-08T14:20:00Z",
+      "side": 1,
+      "message": "Couldn\u0027t that be a bit risky? If protected_mode_initialized is set between two drv_lock/unlock?\n\nthe read_lock() is probably very cheap anyway, perhaps this optimization isn\u0027t worth it?",
+      "revId": "68dbaba5c081c6175c0b38b32308d6f8c8b42cd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "618001be_5c6a50a2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-08T14:20:00Z",
+      "side": 1,
+      "message": "How about you keep this to NULL?\n\nAnd then just set it with the cmpxchg_release once everything is ready? So that you don\u0027t have to use a private field for this.\n\nAnd perhaps the for_each_drv macro could hide a continue in the case where drv is NULL?",
+      "revId": "68dbaba5c081c6175c0b38b32308d6f8c8b42cd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "634af240_625f08d5",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-08T14:20:00Z",
+      "side": 1,
+      "message": "You want to protect against concurrent calls to the same ops? Sounds very unlikely, especially we are always before de-privilege here, right?",
+      "revId": "68dbaba5c081c6175c0b38b32308d6f8c8b42cd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22554ff1_d8553cd6",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-08T14:20:00Z",
+      "side": 1,
+      "message": "probably keeping that return 0 is fine.",
+      "fixSuggestions": [
+        {
+          "fixId": "9405bc01_58794778",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+              "range": {
+                "startLine": 213,
+                "startChar": 0,
+                "endLine": 214,
+                "endChar": 0
+              },
+              "replacement": "\treturn 0;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "68dbaba5c081c6175c0b38b32308d6f8c8b42cd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
