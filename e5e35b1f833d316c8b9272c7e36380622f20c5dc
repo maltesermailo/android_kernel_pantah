@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "887388b7_d0524d00",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-08T10:51:25Z",
+      "side": 1,
+      "message": "As we discussed before in previous cl, keeping it simple and consistent with host implementation, we don\u0027t free a page once it is used in pkvm_iommu_context_addr() and root table has set the present bit.",
+      "parentUuid": "16ff9407_7db0d077",
+      "revId": "e5e35b1f833d316c8b9272c7e36380622f20c5dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9eb34eae_e7ee4915",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
         "patchSetId": 46
@@ -91,6 +109,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "254a2dc2_6498d391",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-08T10:51:25Z",
+      "side": 1,
+      "message": "Right. With the latest code, we don\u0027t expect somain_alloc hypercall to be called more than once on same pgd before freeing it. So added that check to return EEXIST as well.",
+      "parentUuid": "62f3c283_7fe83a9d",
+      "revId": "e5e35b1f833d316c8b9272c7e36380622f20c5dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eaab9577_fa93b315",
@@ -146,6 +182,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3bcceb2_c18c4137",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-08T10:51:25Z",
+      "side": 1,
+      "message": "Done, fixed all occurences till this patch. Will revisit later patches and fix those as well soon",
+      "parentUuid": "eaab9577_fa93b315",
+      "revId": "e5e35b1f833d316c8b9272c7e36380622f20c5dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "869cdeb8_2e197f9c",
@@ -159,6 +213,24 @@
       "writtenOn": "2025-11-30T20:31:32Z",
       "side": 1,
       "message": "Now that we have domain-\u003eagaw, we can use it in the `iommu_set_lm_ce` and  `iommu_set_pasid_sl` hypercalls instead of relying on the host to pass `domain_agaw`? and thus can remove `domain_agaw` from pkvm_lm_context_param and pkvm_sm_context_param? \n\nBTW if the order of patches was different (first these domain hypercalls, and only after that the context/pasid update hypercalls, IOW if the hypercalls were implemented in the order in which the host calls them), we wouldn\u0027t need that `domain_agaw` parameter even temporarily?",
+      "revId": "e5e35b1f833d316c8b9272c7e36380622f20c5dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f85bef33_c24cda34",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-08T10:51:25Z",
+      "side": 1,
+      "message": "yeah makes sense. removed domain_agaw, domain_gaw and force_snoop in previous patches",
+      "parentUuid": "869cdeb8_2e197f9c",
       "revId": "e5e35b1f833d316c8b9272c7e36380622f20c5dc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -180,6 +252,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8647d216_1e2ecbae",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-08T10:51:25Z",
+      "side": 1,
+      "message": "yeah this function was confusing, reworked the logic",
+      "parentUuid": "dd4aea39_8f555d7c",
+      "revId": "e5e35b1f833d316c8b9272c7e36380622f20c5dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2875885_acbdecbe",
@@ -197,6 +287,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46b4b4fd_d862328a",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-08T10:51:25Z",
+      "side": 1,
+      "message": "Fixed the logic to have put_iommu_domain only decrement the refcount and free_iommu_domain to free the domain only if domain present and refcount is one. Also fixed this logic here to not unshare if the domain represented by pgd is not present or is in use.",
+      "parentUuid": "b2875885_acbdecbe",
+      "revId": "e5e35b1f833d316c8b9272c7e36380622f20c5dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "387b3730_2ec3aba5",
@@ -210,6 +318,24 @@
       "writtenOn": "2025-11-30T19:40:15Z",
       "side": 1,
       "message": "If we\u0027ve donated a PASID table in pkvm_pasid_get_entry() above, we\u0027d better undonate it before returning error to host?",
+      "revId": "e5e35b1f833d316c8b9272c7e36380622f20c5dc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9e5594c_e0421d1f",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-08T10:51:25Z",
+      "side": 1,
+      "message": "Same as pkvm_iommu_context_addr(), keeping it simple and consistent with host implementation, we don\u0027t free a page once it is used in pkvm_pasid_get_entry() and pasid dir has set the present bit.",
+      "parentUuid": "387b3730_2ec3aba5",
       "revId": "e5e35b1f833d316c8b9272c7e36380622f20c5dc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
