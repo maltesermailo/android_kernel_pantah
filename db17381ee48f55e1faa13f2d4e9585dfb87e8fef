@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43186486_24c7dc1b",
+        "filename": "arch/x86/include/asm/pkvm.h",
+        "patchSetId": 46
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-08T10:49:52Z",
+      "side": 1,
+      "message": "Thanks for pointing this out. Looks like we can remove domain_agaw as well as the value is almways iommu-\u003eagaw with latest code. Removed that as well from(legacy context code also)",
+      "parentUuid": "a4eadc99_cb04eb0a",
+      "revId": "db17381ee48f55e1faa13f2d4e9585dfb87e8fef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04fd3dcd_8dcb66c2",
@@ -49,6 +67,24 @@
       "writtenOn": "2025-11-29T22:25:28Z",
       "side": 1,
       "message": "Use get_pasid_dir_size() (which is BTW added in this very patch)?",
+      "revId": "db17381ee48f55e1faa13f2d4e9585dfb87e8fef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5d48eb1_5f25392b",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-08T10:49:52Z",
+      "side": 1,
+      "message": "Thanks for pointing this out, some how missed using the function. FIxed",
+      "parentUuid": "04fd3dcd_8dcb66c2",
       "revId": "db17381ee48f55e1faa13f2d4e9585dfb87e8fef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -108,6 +144,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8fc1be4_4e9fcc26",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-08T10:49:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "388f3aa8_a12d80a5",
+      "revId": "db17381ee48f55e1faa13f2d4e9585dfb87e8fef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e71ee44_ffdebde1",
@@ -143,6 +197,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9832d3bb_c0af037d",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+        "patchSetId": 46
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-08T10:49:52Z",
+      "side": 1,
+      "message": "Yeah true, its used only with vfio and iommufd. Removed the dead field it and added comments.",
+      "parentUuid": "cbba99fc_74215e4f",
+      "revId": "db17381ee48f55e1faa13f2d4e9585dfb87e8fef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99101ddf_55310ac4",
@@ -156,6 +228,24 @@
       "writtenOn": "2025-11-28T19:45:31Z",
       "side": 1,
       "message": "I see most of the definitions in this file are copied from drivers/iommu/intel/pasid.h. So we can we just include it instead?",
+      "revId": "db17381ee48f55e1faa13f2d4e9585dfb87e8fef",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "455e8c4d_3b592e71",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.h",
+        "patchSetId": 46
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-08T10:49:52Z",
+      "side": 1,
+      "message": "We have some pkvm defined constants(PASIDTAB_BITS, PASIDTAB_ENTRIES, PASIDDIR_BITS etc) and some functions which is almost same as the ones in host pasid.h but renamed for some reason. These are mostly used in shadow code, but some in iommu.c and pviommu as well. Using pasid.h directly seemed to be a bit of more code churn when I tried last time. It was easier to refactor it this way. For 6.18 we will be definitely using only the host definitions.",
+      "parentUuid": "99101ddf_55310ac4",
       "revId": "db17381ee48f55e1faa13f2d4e9585dfb87e8fef",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
