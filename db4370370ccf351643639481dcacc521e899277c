@@ -1,0 +1,285 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33f18670_68c60abe",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 74
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-09T19:12:23Z",
+      "side": 1,
+      "message": "future patches? relative to which HEAD?",
+      "fixSuggestions": [
+        {
+          "fixId": "7341cc67_b91434ca",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 189,
+                "startChar": 0,
+                "endLine": 192,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t * Decrement the domain count after the context clear,\n\t\t\t * as the domain is needed until the context is fully\n\t\t\t * cleared and flushed.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "db4370370ccf351643639481dcacc521e899277c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "143fd11e_647b0514",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 74
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-09T19:12:23Z",
+      "side": 1,
+      "message": "The comment above says \"needs the domain until context is cleared\" but it is not really cleared until caches are flushed?\n\nSee also my last comments in aosp/3818903",
+      "revId": "db4370370ccf351643639481dcacc521e899277c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b139357_74c83140",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 74
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-09T19:12:23Z",
+      "side": 1,
+      "message": "These pkvm_domain_param fields are unsigned?",
+      "fixSuggestions": [
+        {
+          "fixId": "aea96814_a626b943",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 466,
+                "startChar": 0,
+                "endLine": 467,
+                "endChar": 0
+              },
+              "replacement": "\t\tpkvm_err(\"pkvm: %s: invalid iommu_coherency(%u) from host!\\n\",\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 469,
+                "startChar": 0,
+                "endLine": 470,
+                "endChar": 0
+              },
+              "replacement": "\t\tpkvm_err(\"pkvm: %s: invalid agaw(%u) from host!\\n\", __func__, param-\u003eagaw);\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 471,
+                "startChar": 0,
+                "endLine": 472,
+                "endChar": 0
+              },
+              "replacement": "\t\tpkvm_err(\"pkvm: %s: invalid gaw(%u) from host!\\n\", __func__, param-\u003egaw);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "db4370370ccf351643639481dcacc521e899277c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95ff8c67_67f4f242",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 74
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-09T19:12:23Z",
+      "side": 1,
+      "message": "ptdev?\n\nAlso, since we have an error value anyway, we might print it as well?",
+      "fixSuggestions": [
+        {
+          "fixId": "62033eb1_bdf101d0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 506,
+                "startChar": 0,
+                "endLine": 507,
+                "endChar": 0
+              },
+              "replacement": "\t\tpkvm_err(\"pkvm: %s: failed to allocate iommu domain for bdf: %x (err\u003d%ld)\\n\",\n\t\t\t __func__, param-\u003ebdf, PTR_ERR(domain));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "db4370370ccf351643639481dcacc521e899277c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc0f50f3_6932428a",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 74
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-09T19:12:23Z",
+      "side": 1,
+      "message": "If we have `ret` anyway, we might as well print it?",
+      "fixSuggestions": [
+        {
+          "fixId": "949c169d_9a7b07b8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 557,
+                "startChar": 0,
+                "endLine": 558,
+                "endChar": 0
+              },
+              "replacement": "\t\tpkvm_err(\"pkvm: %s: Failed to free the domain[pgd:%llx] (err\u003d%d)\\n\",\n\t\t\t __func__, pgd, ret);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "db4370370ccf351643639481dcacc521e899277c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fa27531_8ccc1648",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 74
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-09T19:12:23Z",
+      "side": 1,
+      "message": "Do we need to memset it?",
+      "fixSuggestions": [
+        {
+          "fixId": "7a7f2c7b_f293f030",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 561,
+                "startChar": 0,
+                "endLine": 562,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "db4370370ccf351643639481dcacc521e899277c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc9e319a_cbac04e6",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 74
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-09T19:12:23Z",
+      "side": 1,
+      "message": "If we have `ret` anyway, we might as well print it?",
+      "fixSuggestions": [
+        {
+          "fixId": "6e23ce2a_a0ec2a70",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 565,
+                "startChar": 0,
+                "endLine": 566,
+                "endChar": 0
+              },
+              "replacement": "\t\tpkvm_err(\"pkvm: %s: failed to remove write protect pgd! (err\u003d%d)\\n\", __func__, ret);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "db4370370ccf351643639481dcacc521e899277c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fbff730_813fd626",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+        "patchSetId": 74
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-09T19:12:23Z",
+      "side": 1,
+      "message": "Same here.",
+      "revId": "db4370370ccf351643639481dcacc521e899277c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe33b680_17466e52",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+        "patchSetId": 74
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-09T19:12:23Z",
+      "side": 1,
+      "message": "Same here.",
+      "revId": "db4370370ccf351643639481dcacc521e899277c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
