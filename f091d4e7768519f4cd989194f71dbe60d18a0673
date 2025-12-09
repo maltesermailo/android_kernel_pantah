@@ -1,0 +1,74 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "722e9c6d_77e9d206",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+        "patchSetId": 74
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-09T18:34:39Z",
+      "side": 1,
+      "message": "nit: unneeded extra parentheses?",
+      "fixSuggestions": [
+        {
+          "fixId": "5890849d_2c1c5f92",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.c",
+              "range": {
+                "startLine": 75,
+                "startChar": 0,
+                "endLine": 76,
+                "endChar": 0
+              },
+              "replacement": "\tif (atomic_cmpxchg(\u0026domain-\u003erefcount, 1, 0) !\u003d 1) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f091d4e7768519f4cd989194f71dbe60d18a0673",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c655dea_a3436da1",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.h",
+        "patchSetId": 74
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-09T18:34:39Z",
+      "side": 1,
+      "message": "nit: s/iommu_domain/domain/ (for brevity and for consistency with the next line)?",
+      "fixSuggestions": [
+        {
+          "fixId": "26f0123d_86d8ca50",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/iommu_domain.h",
+              "range": {
+                "startLine": 36,
+                "startChar": 0,
+                "endLine": 37,
+                "endChar": 0
+              },
+              "replacement": "void pkvm_put_iommu_domain(struct pkvm_iommu_domain *domain);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f091d4e7768519f4cd989194f71dbe60d18a0673",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
