@@ -1,0 +1,94 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb298510_8e995f1d",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 54
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-09T17:36:23Z",
+      "side": 1,
+      "message": "We\u0027d better decrement the counter after flushing caches, not before?\n\nThis is not just about the CPU cache flush just below, but also about context_flush_present_no_pasid(). Decrement is atomic, so it is not a problem to do it after hyp_iommu-\u003elock is already unlocked?",
+      "fixSuggestions": [
+        {
+          "fixId": "126b5b94_e3da788b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 183,
+                "startChar": 0,
+                "endLine": 186,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 191,
+                "startChar": 0,
+                "endLine": 191,
+                "endChar": 0
+              },
+              "replacement": "\n\tif (!sm \u0026\u0026 did \u003d\u003d FLPT_DEFAULT_DID)\n\t\tatomic_dec(\u0026hyp_iommu-\u003ept_cnt);\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "edc6a8746bfc3328ddde4202cf2bf26847edeea8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68b4d507_796626eb",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+        "patchSetId": 54
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-09T17:36:23Z",
+      "side": 1,
+      "message": "We\u0027d better decrement the counter after flushing caches, not before?",
+      "fixSuggestions": [
+        {
+          "fixId": "e5388fdb_855696e6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+              "range": {
+                "startLine": 230,
+                "startChar": 0,
+                "endLine": 233,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+              "range": {
+                "startLine": 263,
+                "startChar": 0,
+                "endLine": 263,
+                "endChar": 0
+              },
+              "replacement": "\n\tif (did \u003d\u003d FLPT_DEFAULT_DID)\n\t\tatomic_dec(\u0026hyp_iommu-\u003ept_cnt);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "edc6a8746bfc3328ddde4202cf2bf26847edeea8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
