@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f4be786e_09b4fb3f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-10T14:13:22Z",
+      "side": 1,
+      "message": "I meant something like\n\n\n```\nhyp_write_lock();\nstatic int next_id;\n*drv_id \u003d next_id;\nnext_id++;\nhyp_write_unlock();\n\nret \u003d ops-\u003einit();\n...\n\nsmp_wmb(); /* or smp_store_release() or hyp_write_lock() again */\nkvm_iommu_drivers[*drv_id] \u003d ops;\natomic_inc(nr_drivers);\n```",
+      "parentUuid": "28eac0dc_1224213e",
+      "revId": "68dbaba5c081c6175c0b38b32308d6f8c8b42cd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "634af240_625f08d5",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
         "patchSetId": 1
@@ -102,6 +120,42 @@
       "side": 1,
       "message": "This is to protect against concurrent calls to `kvm_iommu_host_stage2_idmap`",
       "parentUuid": "634af240_625f08d5",
+      "revId": "68dbaba5c081c6175c0b38b32308d6f8c8b42cd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "047e307c_0c1c6ad4",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-10T14:13:22Z",
+      "side": 1,
+      "message": "Why not just smp_store_release then?",
+      "parentUuid": "01073b09_9afa5f23",
+      "revId": "68dbaba5c081c6175c0b38b32308d6f8c8b42cd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae958e46_18cf4a5b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-10T14:13:22Z",
+      "side": 1,
+      "message": "then why not smp_store_releaase?",
+      "parentUuid": "01073b09_9afa5f23",
       "revId": "68dbaba5c081c6175c0b38b32308d6f8c8b42cd4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -155,6 +209,24 @@
       "side": 1,
       "message": "ret should be already zero, I find this is better to extend the logic in the future.",
       "parentUuid": "22554ff1_d8553cd6",
+      "revId": "68dbaba5c081c6175c0b38b32308d6f8c8b42cd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eed62258_f575b38a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-10T14:13:22Z",
+      "side": 1,
+      "message": "if you prefer. I just find it easier to understand that it\u0027ll be __always__ 0 from there.",
+      "parentUuid": "c4379efb_8c255154",
       "revId": "68dbaba5c081c6175c0b38b32308d6f8c8b42cd4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
