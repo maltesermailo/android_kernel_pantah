@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd9a79eb_57d00d7c",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 76
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-10T10:29:28Z",
+      "side": 1,
+      "message": "micro-nit: s/%x/%u/ (just for consistency)?",
+      "fixSuggestions": [
+        {
+          "fixId": "d585e648_205a5de0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 457,
+                "startChar": 0,
+                "endLine": 458,
+                "endChar": 0
+              },
+              "replacement": "\t\tpkvm_err(\"pkvm: %s: invalid iommu_superpage(%u) from host!\\n\",\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7287df6aed9324f02104476114d7100aa6ee99a3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}

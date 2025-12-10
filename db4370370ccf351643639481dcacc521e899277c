@@ -321,6 +321,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d97c4c5a_d299c8a8",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 74
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-10T10:29:28Z",
+      "side": 1,
+      "message": "\u003e I was following a pattern of memsetting for donate and undonate page table pages\n\nAnd memsetting page table pages for undonate (not for donate) seems not needed either? (I was already asking about it in aosp/3599511.) Generally the reason for clearing pages before undonating them is to avoid exposing sensitive data to the host, but in this case there is no sensitive data, and the host never ceased to have read access to those pages anyway.",
+      "parentUuid": "7d3d56ad_11d57eb8",
+      "revId": "db4370370ccf351643639481dcacc521e899277c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc9e319a_cbac04e6",
