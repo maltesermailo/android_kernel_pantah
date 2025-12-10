@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "41998dfd_14f40504",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 77
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-10T14:34:21Z",
+      "side": 1,
+      "message": "\u003e Even if so, we don\u0027t trust the host? While it\u0027s the host that controls when to issue any of these hypercalls (domain alloc/free as well as context/pasid update), on any CPU?\n\nBut from a security perspective, we should be safe I guess. The normal functioning of the system may be at risk, but I think we don\u0027t compromise security. If alloc and context/pasid update or map/unmap happens concurrently, I guess the worst that could  happen is DMA initiated by the device fails. If the page donation and related security check works as intended, it will guarantee that no secrets are leaked. And flushing logic also would not be leaking any secrets if any of the above happens concurrently. Is my understanding correct?\n\nI am fine with fixing it by passing it do alloc_domain, but was thinking loud if its really needed :-). We take similar assumptions at various other places and just makes sure the security guarantees are met.\n\nConcurrent domain alloc/free might mess up pKVMs internal data structures and thats why I thought it should be fixed by taking a refcount.",
+      "parentUuid": "3fa7b471_73cf83ec",
+      "revId": "e63de4f225fbc857aad8ff57c21faf7d265cd82f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c12f810b_244ef05c",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
         "patchSetId": 77
