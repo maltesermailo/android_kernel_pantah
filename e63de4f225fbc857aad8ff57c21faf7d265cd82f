@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "314098e9_a06f3fb8",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 77
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-10T13:35:56Z",
+      "side": 1,
+      "message": "Hmm... we initialize `domain` after we already added it to `iommu_domains` AND unlocked iommu_domain_lock? We have a race, right?",
+      "revId": "e63de4f225fbc857aad8ff57c21faf7d265cd82f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c12f810b_244ef05c",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 77
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-10T13:35:56Z",
+      "side": 1,
+      "message": "nit: VTD_PAGE_SIZE for consistency?",
+      "fixSuggestions": [
+        {
+          "fixId": "8a922242_56f95557",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 527,
+                "startChar": 0,
+                "endLine": 528,
+                "endChar": 0
+              },
+              "replacement": "\t__pkvm_iommu_flush_cache(iommu, pgdptr, VTD_PAGE_SIZE);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e63de4f225fbc857aad8ff57c21faf7d265cd82f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
