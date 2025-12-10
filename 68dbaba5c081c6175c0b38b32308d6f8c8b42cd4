@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c759a298_895d27e2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-12-10T12:17:09Z",
+      "side": 1,
+      "message": "Yes, I see nothing that can prevent that, the only safe way I can see now it to somehow sync with `__pkvm_prot_finalize`.\n\nAlthough, if that happens that means that we just end up with an extra read_lock() call, which is not a problem as we never write after de-privilige.\n\nAnyway, I will drop that for now and rely on the lock, and this can be improved later.",
+      "parentUuid": "d3485021_d9c0c25b",
+      "revId": "68dbaba5c081c6175c0b38b32308d6f8c8b42cd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "618001be_5c6a50a2",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "28eac0dc_1224213e",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-12-10T12:17:09Z",
+      "side": 1,
+      "message": "That doesn\u0027t work as the comment mentions next.\n`kvm_iommu_drivers` must be written with `kvm_iommu_reg_lock` write lock, while the rest has to be called without the lock.",
+      "parentUuid": "618001be_5c6a50a2",
+      "revId": "68dbaba5c081c6175c0b38b32308d6f8c8b42cd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "634af240_625f08d5",
         "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
         "patchSetId": 1
@@ -48,6 +84,24 @@
       "writtenOn": "2025-12-08T14:20:00Z",
       "side": 1,
       "message": "You want to protect against concurrent calls to the same ops? Sounds very unlikely, especially we are always before de-privilege here, right?",
+      "revId": "68dbaba5c081c6175c0b38b32308d6f8c8b42cd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01073b09_9afa5f23",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-12-10T12:17:09Z",
+      "side": 1,
+      "message": "This is to protect against concurrent calls to `kvm_iommu_host_stage2_idmap`",
+      "parentUuid": "634af240_625f08d5",
       "revId": "68dbaba5c081c6175c0b38b32308d6f8c8b42cd4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -83,6 +137,24 @@
           ]
         }
       ],
+      "revId": "68dbaba5c081c6175c0b38b32308d6f8c8b42cd4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4379efb_8c255154",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-12-10T12:17:09Z",
+      "side": 1,
+      "message": "ret should be already zero, I find this is better to extend the logic in the future.",
+      "parentUuid": "22554ff1_d8553cd6",
       "revId": "68dbaba5c081c6175c0b38b32308d6f8c8b42cd4",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
