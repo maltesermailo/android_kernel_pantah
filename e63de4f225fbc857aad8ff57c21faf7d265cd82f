@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d9a6559d_7b1ac4cc",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 77
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-10T13:55:27Z",
+      "side": 1,
+      "message": "Nice catch, a concurrent domain free can mess things up. I shall do a pkvm_iommu_get_domain() and take a refcount to make sure that it doesn\u0027t disappear while being updated.",
+      "parentUuid": "314098e9_a06f3fb8",
+      "revId": "e63de4f225fbc857aad8ff57c21faf7d265cd82f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c12f810b_244ef05c",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
         "patchSetId": 77
