@@ -33,6 +33,24 @@
       "message": "How do you safely use bdi_list if you don\u0027t have access to bdi_lock?",
       "revId": "bb73604e30d87f1932583d93382b4961ba68f2d8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aef10ca8_9ac29c51",
+        "filename": "mm/backing-dev.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 3910417
+      },
+      "writtenOn": "2025-12-10T02:28:02Z",
+      "side": 1,
+      "message": "Thanks for the review.\n```\n /*\n  * bdi_lock protects bdi_tree and updates to bdi_list. bdi_list has RCU\n  * reader side locking.\n  */\n DEFINE_SPINLOCK(bdi_lock);\n```\nPer the bdi_lock comment above, we only does RCU reads from bdi_list; it doesn’t touch bdi_tree or update bdi_list, similar to wakeup_dirtytime_writeback() in fs/fs-writeback.c.",
+      "parentUuid": "a65f176c_bb57513c",
+      "revId": "bb73604e30d87f1932583d93382b4961ba68f2d8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
