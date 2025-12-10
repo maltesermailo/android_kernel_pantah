@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "459a67fa_a54ef97e",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 77
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-10T14:50:16Z",
+      "side": 1,
+      "message": "The behavior is simply unpredictable, right? The domain is being used while its parameters are being changed (whereas we are rather assuming that these parameters are only set when creating the domain, and never changed after; this race makes that assumption fall apart, with who knows what consequences).",
+      "parentUuid": "41998dfd_14f40504",
+      "revId": "e63de4f225fbc857aad8ff57c21faf7d265cd82f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c12f810b_244ef05c",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
         "patchSetId": 77
