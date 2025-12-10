@@ -16,6 +16,23 @@
       "message": "Echoing my last comment in aosp/3786919: if the device is in SATC, shouldn\u0027t we ensure flushing device TLB regardless of whether the host ask us to?\n\nAnd if so, param-\u003eats_enabled also seems unneeded?",
       "revId": "1b6a4aea907d3c448d793f42e55e813ed4a5a861",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d43baa0_e7d2e091",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+        "patchSetId": 74
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-10T14:25:44Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we validate ats_qdep, like we do in aosp/3788755? (Probably somewhere at the beginning of pkvm_iommu_clear_pasid_entry()?)",
+      "revId": "1b6a4aea907d3c448d793f42e55e813ed4a5a861",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
