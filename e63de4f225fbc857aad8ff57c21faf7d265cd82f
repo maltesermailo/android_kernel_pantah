@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3fa7b471_73cf83ec",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 77
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-10T14:14:15Z",
+      "side": 1,
+      "message": "\u003e Practically this may never happen as domain alloc happens much before context/pasid entry is allocated. domain is used during context/pasid update and map/unmap operations and these happen only after a domain is succesfully created. I think the host code also makes this assumption.\n\nEven if so, we don\u0027t trust the host? While it\u0027s the host that controls _when_ to issue any of these hypercalls (domain alloc/free as well as context/pasid update), on any CPU?",
+      "parentUuid": "a26eb913_5c2ca5c3",
+      "revId": "e63de4f225fbc857aad8ff57c21faf7d265cd82f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c12f810b_244ef05c",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
         "patchSetId": 77
