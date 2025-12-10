@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7a14f60_5ee52772",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2021,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-12-10T16:28:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6c41463_530eec01",
+      "revId": "2b205cb54f63cad301ba25d53b538bd92f6f800d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79e7fc14_ee6b49ad",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-12-10T14:17:41Z",
       "side": 1,
       "message": "unnecessary tab",
+      "revId": "2b205cb54f63cad301ba25d53b538bd92f6f800d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7091d886_0cbc7c51",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2023,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-12-10T16:28:15Z",
+      "side": 1,
+      "message": "Agh, yes.",
+      "parentUuid": "79e7fc14_ee6b49ad",
       "revId": "2b205cb54f63cad301ba25d53b538bd92f6f800d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfc6b9cf_a61dd767",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2034,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-12-10T16:28:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5069cb3_2ab31b8b",
+      "revId": "2b205cb54f63cad301ba25d53b538bd92f6f800d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71f2087f_44efc04b",
@@ -65,6 +119,24 @@
       "writtenOn": "2025-12-10T14:17:41Z",
       "side": 1,
       "message": "Shouldn\u0027t we kvm_release_faultin_page() in that case?",
+      "revId": "2b205cb54f63cad301ba25d53b538bd92f6f800d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c9aac18_e34563e0",
+        "filename": "arch/arm64/kvm/mmu.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 2042,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2025-12-10T16:28:15Z",
+      "side": 1,
+      "message": "AFAIU, if `!pfn_is_map_memory(pfn);` so it is not in the vmemmap and no need to release the pin. `__pkvm_host_map_guest_mmio` can fail for many other reasons.",
+      "parentUuid": "71f2087f_44efc04b",
       "revId": "2b205cb54f63cad301ba25d53b538bd92f6f800d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
