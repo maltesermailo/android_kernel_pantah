@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "994234a5_c9bf960e",
+        "filename": "drivers/iommu/intel/pasid.c",
+        "patchSetId": 74
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-10T15:56:59Z",
+      "side": 1,
+      "message": "Same comment as in aosp/3786920: if the hypercall returns an error anyway, and we print this anyway, why not make use of that and print which error is that?",
+      "fixSuggestions": [
+        {
+          "fixId": "8ae54d9c_685d2dd9",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pasid.c",
+              "range": {
+                "startLine": 653,
+                "startChar": 0,
+                "endLine": 653,
+                "endChar": 0
+              },
+              "replacement": "\tint ret;\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pasid.c",
+              "range": {
+                "startLine": 654,
+                "startChar": 0,
+                "endLine": 657,
+                "endChar": 0
+              },
+              "replacement": "\tret \u003d pkvm_hc_iommu_clear_ce(\u0026param);\n\tif (ret) {\n\t\tpr_warn(\"%s: pkvm failed to tear down pasid_table for device[%x]: %d\\n\",\n\t\t\t__func__, param.bdf, ret);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "856ec9a8eccb8f0c84530855cebe7ff25a53722e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
