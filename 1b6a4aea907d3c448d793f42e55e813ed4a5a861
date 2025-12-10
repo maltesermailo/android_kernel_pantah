@@ -3,6 +3,86 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "49d3cb73_332398fd",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+        "patchSetId": 74
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-10T21:37:44Z",
+      "side": 1,
+      "message": "We have `ptable_hpa` anyway, so it makes more sense to pass it rather than `*ptable_gpa` (although the two are equal)?\n\nBTW I see there are quite a few other such places in these patches, where we use a \"host gpa\" without \"properly converting\" it to a \"hpa\" (for example, right in this patch: `__pasid_setup_fl(iommu, pte, param-\u003edomain_pgd_gpa,`). That is not a huge problem, but it\u0027s easy to wrap them in host_gpa2hpa()?",
+      "fixSuggestions": [
+        {
+          "fixId": "c1c38b47_d5557fbc",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+              "range": {
+                "startLine": 103,
+                "startChar": 0,
+                "endLine": 104,
+                "endChar": 0
+              },
+              "replacement": "\t\tret \u003d __pkvm_host_donate_hyp_share_ro(ptable_hpa, VTD_PAGE_SIZE);\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+              "range": {
+                "startLine": 281,
+                "startChar": 0,
+                "endLine": 282,
+                "endChar": 0
+              },
+              "replacement": "\t__pasid_setup_fl(iommu, pte, host_gpa2hpa(param-\u003edomain_pgd_gpa),\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1b6a4aea907d3c448d793f42e55e813ed4a5a861",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "376d9c00_c4d8d07f",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+        "patchSetId": 74
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-10T21:37:44Z",
+      "side": 1,
+      "message": "Same: s/\\\\*ptable_gpa/ptable_hpa/ ?",
+      "fixSuggestions": [
+        {
+          "fixId": "b1394636_8013a579",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+              "range": {
+                "startLine": 120,
+                "startChar": 0,
+                "endLine": 121,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tret \u003d __pkvm_hyp_donate_host_unshare_ro(ptable_hpa, VTD_PAGE_SIZE);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1b6a4aea907d3c448d793f42e55e813ed4a5a861",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "63ada899_c1cec3c4",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
         "patchSetId": 74
