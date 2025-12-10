@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cb32aedb_65beca2e",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 77
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-10T14:02:15Z",
+      "side": 1,
+      "message": "The problem is not just with a concurrent free? The domain already exists, everyone may already find it via pkvm_get_iommu_domain() and start using it at any time, while it is still not fully initialized?\n\nThe first obvious solution that comes to mind is just to pass all these parameters to pkvm_alloc_iommu_domain()?",
+      "parentUuid": "d9a6559d_7b1ac4cc",
+      "revId": "e63de4f225fbc857aad8ff57c21faf7d265cd82f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c12f810b_244ef05c",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
         "patchSetId": 77
