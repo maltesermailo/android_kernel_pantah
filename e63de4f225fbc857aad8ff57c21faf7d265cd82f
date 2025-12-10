@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a26eb913_5c2ca5c3",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 77
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-10T14:10:20Z",
+      "side": 1,
+      "message": "\u003e The problem is not just with a concurrent free? The domain already exists, everyone may already find it via pkvm_get_iommu_domain() and start using it at any time, while it is still not fully initialized?\n\nPractically this may never happen as domain alloc happens much before context/pasid entry is allocated. domain is used during context/pasid update and map/unmap operations and these happen only after a domain is succesfully created. I think the host code also makes this assumption.\n\n\u003e The first obvious solution that comes to mind is just to pass all these parameters to pkvm_alloc_iommu_domain()?\n\nThis is fine with me, will do this.",
+      "parentUuid": "cb32aedb_65beca2e",
+      "revId": "e63de4f225fbc857aad8ff57c21faf7d265cd82f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c12f810b_244ef05c",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
         "patchSetId": 77
