@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7753e1c9_a78303dd",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 84
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-11T23:19:28Z",
+      "side": 1,
+      "message": "Hmm... so, in legacy mode we do care to put the iommu domain, but in scalable mode we don\u0027t even check if there are any domains still associated with any PASID entries behind this context entry?\n\n...Question: when this hypercall is called in scalable mode, are there still any domains associated with PASID entries behind this context entry? IOW, does the host call pkvm_hc_iommu_clear_pasid_entry() for all those PASID entries before calling pkvm_hc_iommu_clear_ce() for this context entry, or not? (I suppose it doesn\u0027t.)",
+      "revId": "78c41d21f5e4117220a790e69f08e5af1a51c0c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e2a732bf_b96b4f82",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
         "patchSetId": 84
