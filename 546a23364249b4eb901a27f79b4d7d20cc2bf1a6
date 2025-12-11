@@ -3,6 +3,51 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ace4f6d8_eae57d0f",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+        "patchSetId": 78
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-11T16:30:51Z",
+      "side": 1,
+      "message": "We should flush `entries` before writing its address to the PASID directory entry, not after? (Actually looks like the host\u0027s intel_pasid_get_entry() has the same bug.)",
+      "fixSuggestions": [
+        {
+          "fixId": "d8043ea0_d55098ef",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+              "range": {
+                "startLine": 110,
+                "startChar": 0,
+                "endLine": 110,
+                "endChar": 0
+              },
+              "replacement": "\t\t__pkvm_iommu_flush_cache(iommu, entries, VTD_PAGE_SIZE);\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+              "range": {
+                "startLine": 129,
+                "startChar": 0,
+                "endLine": 130,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "546a23364249b4eb901a27f79b4d7d20cc2bf1a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "05464643_5e5b1ccb",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.h",
         "patchSetId": 78
