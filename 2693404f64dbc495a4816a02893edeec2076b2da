@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dccfdaf_25c1f124",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 81
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-11T15:26:43Z",
+      "side": 1,
+      "message": "...And all this (donation + clearing) should also be done with iommu_domain_lock still locked?\n\nOr, maybe better, do all this before calling pkvm_alloc_iommu_domain()? (That would also make it consistent with the order of operations in pkvm_iommu_domain_free().)",
+      "revId": "2693404f64dbc495a4816a02893edeec2076b2da",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
