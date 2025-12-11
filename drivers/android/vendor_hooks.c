@@ -80,6 +80,13 @@
 #include <trace/hooks/usb.h>
 #include <trace/hooks/kasan.h>
 #include <trace/hooks/dmv_debug.h>
+<<<<<<< HEAD   (8beb6fa6a610eb000c2d881db85de49a391421eb ANDROID: GKI: update symbol list file for xiaomi)
+||||||| BASE   (7489090d13be9f02235c921587cf4e4085778c52 ANDROID: dma-buf: system_heap: Set allocation orders for lar)
+#include <trace/hooks/vb2.h>
+=======
+#include <trace/hooks/vb2.h>
+#include <trace/hooks/rcu.h>
+>>>>>>> CHANGE (419dd9ec591526d218610da5bd65324faf663774 ANDROID: vendor_hooks: Add vendor hooks for rcu)
 
 /*
  * Export tracepoints that act as a bare tracehook (ie: have no trace event
@@ -415,6 +422,10 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fuse_request_send);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fuse_request_send_ext);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fuse_request_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_fuse_request_end_ext);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sync_rcu_wait_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_sync_rcu_wait_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rcu_boost_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_rcu_boost_end);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lruvec_add_folio);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_lruvec_del_folio);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_do_async_mmap_readahead);
