@@ -48,6 +48,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ac4b16c0_65ed93a2",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.c",
+        "patchSetId": 78
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-11T17:15:04Z",
+      "side": 1,
+      "message": "Yeah true. Probably because of the assumption that the pasid dir entry is flushed after. But if pasid dir entry location was not cached at the first place, it would be a security issue. Moved up the flushing to after memset",
+      "parentUuid": "ace4f6d8_eae57d0f",
+      "revId": "546a23364249b4eb901a27f79b4d7d20cc2bf1a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "05464643_5e5b1ccb",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.h",
         "patchSetId": 78
@@ -77,6 +95,24 @@
           ]
         }
       ],
+      "revId": "546a23364249b4eb901a27f79b4d7d20cc2bf1a6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bf6cb07_3a351c42",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_pasid.h",
+        "patchSetId": 78
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-11T17:15:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05464643_5e5b1ccb",
       "revId": "546a23364249b4eb901a27f79b4d7d20cc2bf1a6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
