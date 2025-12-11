@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34388155_1e5ced9b",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1224,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-11T13:44:57Z",
+      "side": 1,
+      "message": "Looks like we don\u0027t need to copy it here (vmx_get_segment() doesn\u0027t read anything from the struct kvm_segment value passed to it, it only writes to it). But we can probably leave it as is.",
+      "revId": "c25f207ab13da6f64ac6715ee6d555ee2bd0c3e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
