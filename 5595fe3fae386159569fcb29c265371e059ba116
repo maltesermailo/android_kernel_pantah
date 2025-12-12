@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2bbe861_3d769325",
+        "filename": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2025-12-12T14:11:34Z",
+      "side": 1,
+      "message": "nit: if (!ret) kvm_iommu_drivers[*drv_id] \u003d ops;\n\nto get rid of that label.",
+      "fixSuggestions": [
+        {
+          "fixId": "7daa4a57_bc47ca7e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/hyp/nvhe/iommu/iommu.c",
+              "range": {
+                "startLine": 212,
+                "startChar": 0,
+                "endLine": 216,
+                "endChar": 0
+              },
+              "replacement": "\tif (!ret)\n\t\tkvm_iommu_drivers[*drv_id] \u003d ops;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "5595fe3fae386159569fcb29c265371e059ba116",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
