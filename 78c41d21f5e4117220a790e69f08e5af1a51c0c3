@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6dfc8724_700a1e80",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 84
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-12T02:16:20Z",
+      "side": 1,
+      "message": "You said yourself: \"If I understand correctly, the iommu subsystem considers it okay to have the context cleared before pasid entries are cleared. During a hot-unplug scenario, i think the context gets cleared first during device cleanup, but PASIDs attached to processes or VMS will be cleared later only.\"\n\nwhich actually means that those PASID entries will not be cleared at all (because there is no need to clear them, since there is no context entry that would point to them): in intel_iommu_release_device(), the host first clears the context entry in intel_pasid_teardown_sm_context(), and right after that it frees the PASID tables in intel_pasid_free_table(). After that, the host cannot clear the PASID entries in those tables even if it needed to, since those pages have been freed and may be used for something else now. Right?\n\n\u003e I am unable to test this with pKVM as we do not support device assignment. \n\nVFIO still supports it, as usual, right? We (pKVM) don\u0027t support assigning devices to pVMs, but for npVMs it might just work (although I haven\u0027t tried since a while). And even if it doesn\u0027t work (i.e. if the device itself is not operational in the VM), that is not our concern here, our concern is that attaching/detaching the device to a domain by the IOMMU subsystem in the host still works correctly.\n\nSo for a test we might simply try assigning a PCI device to a VM via vfio-pci in the usual way (i.e. as if there was no pKVM), and see what happens, and how the host behaves (which hypercalls it issues to pKVM in which order, etc)...\n\n\u003e Probably we can put a check to see we don\u0027t get any pasid attach other than IOMMU_NO_PASID?\n\nThat is orthogonal? Our hardware (PTL) doesn\u0027t even support any other PASIDs than IOMMU_NO_PASID, yes, but we are not talking about other PASIDs, we are talking about correct teardown of a PASID entry when clearing a context entry in scalable mode, no matter for which PASID.",
+      "parentUuid": "d75b3bc7_06295c09",
+      "revId": "78c41d21f5e4117220a790e69f08e5af1a51c0c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e2a732bf_b96b4f82",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
         "patchSetId": 84
