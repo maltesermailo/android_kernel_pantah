@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2ca17bf3_0c732d93",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 84
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-12T01:14:06Z",
+      "side": 1,
+      "message": "I think the host will issue clear_pasid_entry when the process or device is unbound and the domain will be freed only after all the attached pasid entries are unbound. From my understanding, domain free is not dependent on SM context entry clear, but the attached PASIDs \n\nI am unable to test this with pKVM as we do not support device assignment. In the normal case we attach the device with IOMMU_NO_PASID and we have verified that the domain gets freed as expected when we detach the domain(dma to identity).",
+      "parentUuid": "a2619124_01f9f478",
+      "revId": "78c41d21f5e4117220a790e69f08e5af1a51c0c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e2a732bf_b96b4f82",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
         "patchSetId": 84
