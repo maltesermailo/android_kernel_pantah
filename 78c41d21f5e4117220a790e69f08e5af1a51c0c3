@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d75b3bc7_06295c09",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 84
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2025-12-12T01:31:15Z",
+      "side": 1,
+      "message": "My understanding is - If the host driver works as designed, then we would get clear_pasid_entry from host for all attached PASIDs before a domain free. A compromised host can perform operations out of order, but I guess securitywise, it should not break any guarantees.\n\nIn our current case, we get only IOMMU_NO_PASID attach and the clear_pasid_entry is guaranteed to be called before domain free. For simplicity, shall we defer the verification of PASID clear scenarois to later when we support device assignment? Probably we can put a check to see we don\u0027t get any pasid attach other than IOMMU_NO_PASID? WDYT?",
+      "parentUuid": "c29f1e1c_a888335c",
+      "revId": "78c41d21f5e4117220a790e69f08e5af1a51c0c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e2a732bf_b96b4f82",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
         "patchSetId": 84
