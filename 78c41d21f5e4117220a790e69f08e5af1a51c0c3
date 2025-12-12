@@ -126,6 +126,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87247e99_4d9b8570",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 84
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-12T17:37:16Z",
+      "side": 1,
+      "message": "Ok, as we figured out offline, at least in basic scenario of detaching a device from a domain, the host actually first clears the PASID entry (in a non-intuitive path: iommu_deinit_device() -\u003e blocking_domain_attach_dev() -\u003e device_block_translation() -\u003e intel_pasid_tear_down_entry()) *before* clearing the context entry (in iommu_deinit_device() -\u003e intel_iommu_release_device() -\u003e intel_pasid_teardown_sm_context()).\n\nSo we can merge phase2 patches is, and then maybe, for example, in phase3 integrate Aashish\u0027s patch https://github.com/vineethrp/pKVM-IA/commit/bb1337730366e83bfa93a4878b90fdd4d1fef182 for releasing resources associated with the orphaned PASID entries in pkvm_pasid_free_table() if there are any, i.e. just in case the host hasn\u0027t cleared them before clearing the context entry. (Since even if the host driver doesn\u0027t currently behave this way in any scenarios, it still seems to be a legitimate behavior.)",
+      "parentUuid": "6dfc8724_700a1e80",
+      "revId": "78c41d21f5e4117220a790e69f08e5af1a51c0c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2a732bf_b96b4f82",
