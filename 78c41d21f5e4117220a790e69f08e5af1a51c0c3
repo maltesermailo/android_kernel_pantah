@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c29f1e1c_a888335c",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 84
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-12T01:17:28Z",
+      "side": 1,
+      "message": "Furthermore, putting the iommu domain is not the only thing we need to do when a PASID entry goes away: we also need to decrease `pt_cnt` if needed, and unassign the cache tags if needed? (i.e. the same things that  pkvm_iommu_clear_pasid_entry() does)\n\nSo seems like we should do all the same in pkvm_pasid_free_table() as well, for each present PASID entry, in each present PASID table? (Perhaps introduce a handy helper to use in both pkvm_iommu_clear_pasid_entry() and pkvm_pasid_free_table()?)\n\nSo, the scope of this bug extends beyond this patch:\n\n* The 1st buggy patch is aosp/3818903 which decreases pt_cnt in pkvm_iommu_clear_pasid_entry() but not in pkvm_pasid_free_table().\n* The 2nd buggy patch is this patch, which puts the iommu domain in  pkvm_iommu_clear_pasid_entry() but not in pkvm_pasid_free_table().\n* The 3rd buggy patch is aosp/3788755 which unassigns the cache tags in pkvm_iommu_clear_pasid_entry() but not in pkvm_pasid_free_table().\n\nCorrect?",
+      "parentUuid": "a2619124_01f9f478",
+      "revId": "78c41d21f5e4117220a790e69f08e5af1a51c0c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e2a732bf_b96b4f82",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
         "patchSetId": 84
