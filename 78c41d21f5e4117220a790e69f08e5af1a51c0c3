@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a2619124_01f9f478",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 84
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-12T01:03:02Z",
+      "side": 1,
+      "message": "So, the host clears the context entry without bothering to clear its child PASID entries, and that in itself is fine (no need to clear them, just need to free them), but for us (for pKVM) it means that the host will never issue the clear_pasid_entry hypercall for those PASID entries, thus we will never decrease the refcount of their corresponding IOMMU domains.\n\nSo we have a resource leak, and a potential functionality issue: the host will try to free an IOMMU domain later, and will fail, since pKVM will return an error, since the domain\u0027s refcount is \u003e1?\n\nSo it seems like we should put the iommu domains in pkvm_pasid_free_table()?",
+      "parentUuid": "7753e1c9_a78303dd",
+      "revId": "78c41d21f5e4117220a790e69f08e5af1a51c0c3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e2a732bf_b96b4f82",
         "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
         "patchSetId": 84

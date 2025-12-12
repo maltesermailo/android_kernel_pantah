@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4838514_a079e0f4",
+        "filename": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+        "patchSetId": 85
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-12T01:03:02Z",
+      "side": 1,
+      "message": "nit: Documentation/process/coding-style.rst:\n\n```\nThis does not apply if only one branch of a conditional statement is a single\nstatement; in the latter case use braces in both branches:\n\n.. code-block:: c\n\n\tif (condition) {\n\t\tdo_this();\n\t\tdo_that();\n\t} else {\n\t\totherwise();\n\t}\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "133893be_f443643a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 208,
+                "startChar": 0,
+                "endLine": 209,
+                "endChar": 0
+              },
+              "replacement": "\tif (sm) {\n"
+            },
+            {
+              "path": "arch/x86/kvm/vmx/pkvm/hyp/pv_iommu.c",
+              "range": {
+                "startLine": 210,
+                "startChar": 0,
+                "endLine": 211,
+                "endChar": 0
+              },
+              "replacement": "\t} else {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1a26723ff10fae94df50045479488257fe20d77c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
