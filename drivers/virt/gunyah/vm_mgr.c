@@ -921,7 +921,7 @@ static int gunyah_vm_start(struct gunyah_vm *ghvm)
 
 	ret = gunyah_rm_vm_start(ghvm->rm, ghvm->vmid);
 	if (ret) {
-		dev_warn(ghvm->parent, "Failed to start VM: %d\n", ret);
+		dev_err(ghvm->parent, "Failed to start VM: %d\n", ret);
 		goto err;
 	}
 
