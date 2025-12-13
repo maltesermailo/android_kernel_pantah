@@ -34,6 +34,24 @@
       "parentUuid": "f87da2bb_7d9fc7d6",
       "revId": "293f79b67d0b7fe0df6244e7f7ab2c0f53062b00",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2dc58cc2_2dd3c610",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3601150
+      },
+      "writtenOn": "2025-12-13T03:18:23Z",
+      "side": 1,
+      "message": "Reserve ANDROID_OEM_DATA in the struct mutex/rw_semaphore to record\ninformation about the lock, such as the lock owner, which helps\nwith OEM-specific lock optimization.\n\nAdd 2 u64 OEM fields in the struct rw_semaphore, specifically to\nrecord the write lock owner and the linked list where the read lock\nowners reside, in order to optimize the priority inversion issue.",
+      "parentUuid": "f87da2bb_7d9fc7d6",
+      "revId": "293f79b67d0b7fe0df6244e7f7ab2c0f53062b00",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
