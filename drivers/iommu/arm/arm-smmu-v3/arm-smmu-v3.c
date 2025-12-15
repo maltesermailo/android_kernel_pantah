@@ -3480,7 +3480,7 @@ static int arm_smmu_device_probe(struct platform_device *pdev)
 	if (ret)
 		goto err_disable;
 
-	if (dev->pm_domain) {
+	if (dev->pm_domain && !(smmu->options & ARM_SMMU_OPT_RPM_DISABLE)) {
 		pm_runtime_set_active(dev);
 		pm_runtime_use_autosuspend(dev);
 		pm_runtime_set_autosuspend_delay(dev, RPM_AUTOSUSPEND_DELAY_MS);

@@ -526,6 +526,7 @@ static struct arm_smmu_option_prop arm_smmu_options[] = {
 	{ ARM_SMMU_OPT_SKIP_PREFETCH, "hisilicon,broken-prefetch-cmd" },
 	{ ARM_SMMU_OPT_PAGE0_REGS_ONLY, "cavium,cn9900-broken-page1-regspace"},
 	{ ARM_SMMU_OPT_OVR_INSTCFG_DATA, "arm,instdata-override"},
+	{ ARM_SMMU_OPT_RPM_DISABLE, "disable-runtime-pm"},
 	{ 0, NULL},
 };
 
