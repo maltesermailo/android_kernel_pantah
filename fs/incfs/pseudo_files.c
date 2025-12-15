@@ -474,7 +474,6 @@ static long ioctl_create_file(struct file *file,
 	struct dentry *named_file_dentry = NULL;
 	struct dentry *incomplete_file_dentry = NULL;
 	struct path parent_dir_path = {};
-	struct inode *index_dir_inode = NULL;
 	__le64 size_attr_value = 0;
 	char *file_name = NULL;
 	char *attr_value = NULL;
@@ -589,11 +588,8 @@ static long ioctl_create_file(struct file *file,
 	}
 
 	/* Creating a file in the .index dir. */
-	index_dir_inode = d_inode(mi->mi_index_dir);
-	inode_lock_nested(index_dir_inode, I_MUTEX_PARENT);
-	error = vfs_create(&nop_mnt_idmap, index_dir_inode, index_file_dentry,
-			   args.mode | 0222, true);
-	inode_unlock(index_dir_inode);
+	error = vfs_create(&nop_mnt_idmap, index_file_dentry,
+			   args.mode | 0222, NULL);
 
 	if (error)
 		goto out;
@@ -765,7 +761,6 @@ static long ioctl_create_mapped_file(struct file *file, void __user *arg)
 	struct dentry *source_file_dentry = NULL;
 	u64 source_file_size;
 	struct dentry *file_dentry = NULL;
-	struct inode *parent_inode;
 	__le64 size_attr_value;
 
 	if (copy_from_user(&args, args_usr_ptr, sizeof(args)) > 0)
@@ -862,11 +857,8 @@ static long ioctl_create_mapped_file(struct file *file, void __user *arg)
 		goto out;
 	}
 
-	parent_inode = d_inode(parent_dir_path.dentry);
-	inode_lock_nested(parent_inode, I_MUTEX_PARENT);
-	error = vfs_create(&nop_mnt_idmap, parent_inode, file_dentry,
-			   args.mode | 0222, true);
-	inode_unlock(parent_inode);
+	error = vfs_create(&nop_mnt_idmap, file_dentry,
+			   args.mode | 0222, NULL);
 	if (error)
 		goto out;
 
