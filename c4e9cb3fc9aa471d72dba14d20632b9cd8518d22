@@ -33,6 +33,42 @@
       "message": "Is this patch even needed in GKI given all of this can be done downstream to build these as vendor modules?",
       "revId": "c4e9cb3fc9aa471d72dba14d20632b9cd8518d22",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d06fc061_ee06e9a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2025-12-16T21:34:59Z",
+      "side": 1,
+      "message": "Other mtk drivers are already done in the way that they depend on mtk_infracfg being a module and the problem is the change from bool to tristate.  We can\u0027t have the same option with two types. I don\u0027t see a way to make this change from bool to tristate downstream. Kconfig can\u0027t be overriden or prioritized over another one.",
+      "parentUuid": "e645da3e_6489fc83",
+      "revId": "c4e9cb3fc9aa471d72dba14d20632b9cd8518d22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fee490ad_32947b8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1898165
+      },
+      "writtenOn": "2025-12-16T21:34:59Z",
+      "side": 1,
+      "message": "I added symbol list update for this case.",
+      "parentUuid": "ea02bb7b_9c1a8c7a",
+      "revId": "c4e9cb3fc9aa471d72dba14d20632b9cd8518d22",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
