@@ -16,6 +16,24 @@
       "message": "why is this patch needed? It has no functional change and there are no other patches that rely on the new names.",
       "revId": "ffd0f645d12796296bfb802d538653dbbd2e0347",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bae493b_ea9775bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4519508
+      },
+      "writtenOn": "2025-12-16T04:38:36Z",
+      "side": 1,
+      "message": "https://issuetracker.google.com/issues/450700195 was raised based on this buanizer. \ntkjos@google.com added comment #8:\n\"Ah, ok. You need the pcie-designware.c changes which are in GKI. Ok, go ahead and cherry-pick the patch and upload to gerrit.\"\n\nthis change allows us to take hdma changes for dw-edma and maintain them as vendor module. Without this naming change a clean cherry-pick of hdma driver capabilities wouldnt be possible.",
+      "parentUuid": "2305e3a5_322cde23",
+      "revId": "ffd0f645d12796296bfb802d538653dbbd2e0347",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
