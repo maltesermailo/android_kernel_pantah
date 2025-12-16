@@ -20,6 +20,7 @@ void hyp_fixmap_unmap(void);
 void *hyp_fixblock_map(phys_addr_t phys, size_t *size);
 void hyp_fixblock_unmap(void);
 void hyp_poison_page(phys_addr_t phys, size_t size);
+void hyp_do_cmo(phys_addr_t phys, size_t size);
 
 int hyp_create_idmap(u32 hyp_va_bits);
 int hyp_map_vectors(void);

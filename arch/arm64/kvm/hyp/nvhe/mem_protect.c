@@ -357,7 +357,7 @@ void drain_hyp_pool(struct hyp_pool *pool, struct kvm_hyp_memcache *mc)
 
 static enum pkvm_page_state guest_get_page_state(kvm_pte_t pte, u64 addr);
 int __pkvm_guest_relinquish_to_host(struct pkvm_hyp_vcpu *vcpu,
-				    u64 ipa, u64 *ppa)
+				    u64 ipa, u64 flags, u64 *ppa)
 {
 	struct pkvm_hyp_vm *vm = pkvm_hyp_vcpu_to_hyp_vm(vcpu);
 	enum pkvm_page_state state;
@@ -403,7 +403,10 @@ int __pkvm_guest_relinquish_to_host(struct pkvm_hyp_vcpu *vcpu,
 	/* Zap the guest stage2 pte and return ownership to the host */
 	WARN_ON(kvm_pgtable_stage2_unmap(&vm->pgt, ipa, PAGE_SIZE));
 
-	hyp_poison_page(phys, PAGE_SIZE);
+	if (!(flags & KVM_FUNC_MEM_RELINQUISH_NO_POISON))
+		hyp_poison_page(phys, PAGE_SIZE);
+	else
+		hyp_do_cmo(phys, PAGE_SIZE);
 	psci_mem_protect_dec(1);
 
 	WARN_ON(host_stage2_set_owner_locked(phys, PAGE_SIZE, PKVM_ID_HOST));
@@ -1895,9 +1898,8 @@ static int __guest_check_transition_size(u64 phys, u64 ipa, u64 nr_pages, u64 *s
 	return 0;
 }
 
-static void __hyp_poison_page(void *addr, size_t size)
+static void __hyp_do_cmo(void *addr, size_t size)
 {
-	memset(addr, 0, size);
 	/*
 	 * Prefer kvm_flush_dcache_to_poc() over __clean_dcache_guest_page()
 	 * here as the latter may elide the CMO under the assumption that FWB
@@ -1908,9 +1910,20 @@ static void __hyp_poison_page(void *addr, size_t size)
 	kvm_flush_dcache_to_poc(addr, size);
 }
 
+static void __hyp_poison_page(void *addr, size_t size)
+{
+	memset(addr, 0, size);
+	__hyp_do_cmo(addr, size);
+}
+
 void hyp_poison_page(phys_addr_t phys, size_t size)
 {
 	__apply_guest_page(__hyp_va(phys), size, __hyp_poison_page);
+}
+
+void hyp_do_cmo(phys_addr_t phys, size_t size)
+{
+	__apply_guest_page(__hyp_va(phys), size, __hyp_do_cmo);
 }
 
 static int get_valid_guest_pte(struct pkvm_hyp_vm *vm, u64 ipa, kvm_pte_t *ptep, u64 *physp,
