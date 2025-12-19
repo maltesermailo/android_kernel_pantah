@@ -34,6 +34,24 @@
       "parentUuid": "83196f9e_8e91efa8",
       "revId": "ea2d001d5317f373865b5045814ce949561ca123",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e71d610_9a9014b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2025-12-19T20:58:31Z",
+      "side": 1,
+      "message": "So s/accessed/mapped/ ?\n\nAlso \"It only considered the PTEs required for the mapping.\" doesn\u0027t sound clear to me either (what else could it consider?)\n\nSo maybe to make it clear, something like this?\n```\nANDROID: pkvm: x86: Fix worstcase calculation in __pkvm_pgtable_max_pages()\n\n__pkvm_pgtable_max_pages() is used for calculating the worst-case number\nof pages needed for constructing page tables in order to contiguously\nmap the given number of pages (for example, for identity-mapping a\nmemblock range in the host EPT). However, the calculation it does is\na bit too optimistic in the general case, as the mapped range may cross\nthe boundary of an address range that can be mapped by a single page\ntable at the given level (e.g. 2MB for 4K pages) even if the range size\nis within this boundary (e.g. smaller than 2MB), so an extra page table\nmay be needed to map the whole range. So account for that as well.\n```",
+      "parentUuid": "7c6115fe_d65b0645",
+      "revId": "ea2d001d5317f373865b5045814ce949561ca123",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
