@@ -18,6 +18,29 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a55a86e0_10f0cde1",
+        "filename": "drivers/android/wonder/Kconfig",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-12-23T17:26:12Z",
+      "side": 1,
+      "message": "this is the default, so this is never needed.",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 10
+      },
+      "revId": "64befc07fb723d535e5fe4e0adad359ae69ca2ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "5edb9068_73d96620",
@@ -103,6 +126,138 @@
       "side": 1,
       "message": "What about other issues I find with this submission?  Where should they be reported to?  Why not properly submit this upstream so you can get a full review of the code?  I see a number of \"small\" issues with it, odds are it could use a good review from others.",
       "parentUuid": "9aea1a6f_23210f06",
+      "revId": "64befc07fb723d535e5fe4e0adad359ae69ca2ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8349b05_ab1c67c4",
+        "filename": "drivers/android/wonder/debugfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-12-23T17:26:12Z",
+      "side": 1,
+      "message": "do not check the return value of debugfs functions.",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 26
+      },
+      "revId": "64befc07fb723d535e5fe4e0adad359ae69ca2ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d142651c_58126ad4",
+        "filename": "drivers/android/wonder/mac80211.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-12-23T17:26:12Z",
+      "side": 1,
+      "message": "only use likely/unlikely if you can measure the difference in a benchmark, otherwise NEVER use it.",
+      "revId": "64befc07fb723d535e5fe4e0adad359ae69ca2ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa0d879d_52441e4c",
+        "filename": "drivers/android/wonder/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-12-23T17:26:12Z",
+      "side": 1,
+      "message": "when drivers work properly, they are quiet.  Please remove all dev_info() lines.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 47
+      },
+      "revId": "64befc07fb723d535e5fe4e0adad359ae69ca2ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6298dc2a_bd98e569",
+        "filename": "drivers/android/wonder/wonder_log.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-12-23T17:26:12Z",
+      "side": 1,
+      "message": "don\u0027t redefine tiny things like this for just a single driver, either use the \"raw\" pr_() calls, or better yet, always use the the dev_() macros instead.  This is a device, use the correct device structures involved so your log message will work properly AND you can use all the standard userspace tools for filtering and the like.",
+      "range": {
+        "startLine": 19,
+        "startChar": 8,
+        "endLine": 19,
+        "endChar": 20
+      },
+      "revId": "64befc07fb723d535e5fe4e0adad359ae69ca2ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efee9802_cffceae4",
+        "filename": "drivers/android/wonder/wondertap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-12-23T17:26:12Z",
+      "side": 1,
+      "message": "who calls this?",
+      "range": {
+        "startLine": 18,
+        "startChar": 4,
+        "endLine": 18,
+        "endChar": 26
+      },
+      "revId": "64befc07fb723d535e5fe4e0adad359ae69ca2ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fe8a91e_d771d084",
+        "filename": "drivers/android/wonder/wondertap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2025-12-23T17:26:12Z",
+      "side": 1,
+      "message": "shouldn\u0027t all of this just be in a debugfs file?  Why spam the kernel log when things are going well?",
+      "range": {
+        "startLine": 75,
+        "startChar": 2,
+        "endLine": 75,
+        "endChar": 13
+      },
       "revId": "64befc07fb723d535e5fe4e0adad359ae69ca2ca",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
