@@ -869,6 +869,7 @@ Description:	This threshold is used to control triggering garbage collection whi
 		By default, the value is ovp_sections, especially, for zoned ufs, the
 		value is 1.
 
+<<<<<<< HEAD   (230881c1b78e6e64be5f4eb8134b8d81f1268362 Merge 4c5181b9e1a9 ("f2fs: introduce reserved_pin_section sy)
 What:		/sys/fs/f2fs/<disk>/effective_lookup_mode
 Date:		August 2025
 Contact:	"Daniel Lee" <chullee@google.com>
@@ -883,3 +884,12 @@ Description:
 		- "compat": Hash-based lookup with a linear search fallback enabled
 		- "auto:perf": lookup_mode is auto and fallback is disabled on-disk
 		- "auto:compat": lookup_mode is auto and fallback is enabled on-disk
+||||||| BASE   (4c5181b9e1a994b5df6de0815ef0a1cfb888a31b f2fs: introduce reserved_pin_section sysfs entry)
+=======
+What:		/sys/fs/f2fs/<disk>/gc_boost_gc_multiple
+Date:		June 2025
+Contact:	"Daeho Jeong" <daehojeong@google.com>
+Description:	Set a multiplier for the background GC migration window when F2FS GC is
+		boosted. The range should be from 1 to the segment count in a section.
+		Default: 5
+>>>>>>> BRANCH (4236c017c4cecd8a67d90a93adf6ed8601fa606b f2fs: add gc_boost_gc_multiple sysfs node)
