@@ -281,6 +281,7 @@ static ssize_t encoding_flags_show(struct f2fs_attr *a,
 		le16_to_cpu(F2FS_RAW_SUPER(sbi)->s_encoding_flags));
 }
 
+<<<<<<< HEAD   (3d610f00bf116ea8c597b0dd630ec434be8e404d Merge 7cc6b80df66f ("f2fs: add carve_out sysfs node") into a)
 static ssize_t effective_lookup_mode_show(struct f2fs_attr *a,
 		struct f2fs_sb_info *sbi, char *buf)
 {
@@ -297,6 +298,9 @@ static ssize_t effective_lookup_mode_show(struct f2fs_attr *a,
 	return 0;
 }
 
+||||||| BASE   (7cc6b80df66f69bff1acf5cbcba5aaf639fc97c8 f2fs: add carve_out sysfs node)
+=======
+>>>>>>> BRANCH (d4a4abba458496d27fd54196597249c8cddfbb95 f2fs: sysfs: add encoding_flags entry)
 static ssize_t mounted_time_sec_show(struct f2fs_attr *a,
 		struct f2fs_sb_info *sbi, char *buf)
 {
@@ -1211,7 +1215,11 @@ F2FS_GENERAL_RO_ATTR(current_reserved_blocks);
 F2FS_GENERAL_RO_ATTR(unusable);
 F2FS_GENERAL_RO_ATTR(encoding);
 F2FS_GENERAL_RO_ATTR(encoding_flags);
+<<<<<<< HEAD   (3d610f00bf116ea8c597b0dd630ec434be8e404d Merge 7cc6b80df66f ("f2fs: add carve_out sysfs node") into a)
 F2FS_GENERAL_RO_ATTR(effective_lookup_mode);
+||||||| BASE   (7cc6b80df66f69bff1acf5cbcba5aaf639fc97c8 f2fs: add carve_out sysfs node)
+=======
+>>>>>>> BRANCH (d4a4abba458496d27fd54196597249c8cddfbb95 f2fs: sysfs: add encoding_flags entry)
 F2FS_GENERAL_RO_ATTR(mounted_time_sec);
 F2FS_GENERAL_RO_ATTR(main_blkaddr);
 F2FS_GENERAL_RO_ATTR(pending_discard);
@@ -1328,7 +1336,11 @@ static struct attribute *f2fs_attrs[] = {
 	ATTR_LIST(current_reserved_blocks),
 	ATTR_LIST(encoding),
 	ATTR_LIST(encoding_flags),
+<<<<<<< HEAD   (3d610f00bf116ea8c597b0dd630ec434be8e404d Merge 7cc6b80df66f ("f2fs: add carve_out sysfs node") into a)
 	ATTR_LIST(effective_lookup_mode),
+||||||| BASE   (7cc6b80df66f69bff1acf5cbcba5aaf639fc97c8 f2fs: add carve_out sysfs node)
+=======
+>>>>>>> BRANCH (d4a4abba458496d27fd54196597249c8cddfbb95 f2fs: sysfs: add encoding_flags entry)
 	ATTR_LIST(mounted_time_sec),
 #ifdef CONFIG_F2FS_STAT_FS
 	ATTR_LIST(cp_foreground_calls),
