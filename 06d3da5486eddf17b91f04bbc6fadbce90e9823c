@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "608400f0_360f1e01",
+        "filename": "drivers/android/vendor_hooks.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-12-23T21:19:23Z",
+      "side": 1,
+      "message": "How is this hook related to the sdcard features?",
+      "range": {
+        "startLine": 703,
+        "startChar": 29,
+        "endLine": 703,
+        "endChar": 60
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "14123166_c7a6cbaf",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/vendor_hooks.c",
+              "range": {
+                "startLine": 703,
+                "startChar": 0,
+                "endLine": 703,
+                "endChar": 0
+              },
+              "replacement": "// This hook is related to tracking when a longterm lock is taken during\n// get_user_pages (GUP) operations, often used for DMA or other cases\n// requiring pages to be pinned for extended durations.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "06d3da5486eddf17b91f04bbc6fadbce90e9823c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
