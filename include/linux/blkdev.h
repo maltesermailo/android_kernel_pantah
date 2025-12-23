@@ -1518,6 +1518,7 @@ static inline bool bdev_is_zone_start(struct block_device *bdev,
 int blk_zone_issue_zeroout(struct block_device *bdev, sector_t sector,
 			   sector_t nr_sects, gfp_t gfp_mask);
 
+<<<<<<< HEAD   (c77b2e6ba01bf06c8de3b525a30e198464d1bd1b Merge 3baeec23a82e ("block: Use RCU in blk_mq_[un]quiesce_ta)
 /**
  * bdev_zone_is_seq - check if a sector belongs to a sequential write zone
  * @bdev:	block device to check
@@ -1546,6 +1547,11 @@ static inline bool bdev_zone_is_seq(struct block_device *bdev, sector_t sector)
 }
 
 static inline int queue_dma_alignment(const struct request_queue *q)
+||||||| BASE   (3baeec23a82e7ee9691f434c6ab0ab1387326108 block: Use RCU in blk_mq_[un]quiesce_tagset() instead of set)
+static inline int queue_dma_alignment(const struct request_queue *q)
+=======
+static inline unsigned int queue_dma_alignment(const struct request_queue *q)
+>>>>>>> BRANCH (49278ca55ccf08c44370c20ccafe8bfd11f4af9c block: return unsigned int from queue_dma_alignment)
 {
 	return q->limits.dma_alignment;
 }
