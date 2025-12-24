@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "62ed43a9_1e8e9591",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-12-24T01:31:20Z",
+      "side": 1,
+      "message": "In order for me to test this, I have to run it on 6.6. So I\u0027ve made the changes requested here: https://r.android.com/3899266. PTAL when you get the chance.\n\nNote, I\u0027m still working through an initialization issue where I\u0027m hitting this error:\n```\n[    9.650635] kobject: \u0027bcmdhd4390.wondertap.0\u0027 (000000008c1acef0): is not initialized, yet kobject_get() is being called.\n```\n\nSo it\u0027s not complete yet,but I wanted to upload it since it\u0027s a big refactor.",
+      "revId": "64befc07fb723d535e5fe4e0adad359ae69ca2ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a55a86e0_10f0cde1",
         "filename": "drivers/android/wonder/Kconfig",
         "patchSetId": 1
@@ -176,6 +193,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34ad7ea0_92465f7d",
+        "filename": "drivers/android/wonder/debugfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-12-24T01:31:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fae2cc5_30d044cf",
+      "range": {
+        "startLine": 17,
+        "startChar": 22,
+        "endLine": 17,
+        "endChar": 41
+      },
+      "revId": "64befc07fb723d535e5fe4e0adad359ae69ca2ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d8349b05_ab1c67c4",
@@ -199,6 +240,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "319bc115_967c0438",
+        "filename": "drivers/android/wonder/debugfs.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-12-24T01:31:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8349b05_ab1c67c4",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 26
+      },
+      "revId": "64befc07fb723d535e5fe4e0adad359ae69ca2ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d7756fc_37659477",
@@ -212,6 +277,30 @@
       "writtenOn": "2025-12-23T17:31:40Z",
       "side": 1,
       "message": "can\u0027t handle more than one device?  Shouldn\u0027t this be attached to the device itself and not global?  If global, where is the lock?",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 40
+      },
+      "revId": "64befc07fb723d535e5fe4e0adad359ae69ca2ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82df0630_297f25f5",
+        "filename": "drivers/android/wonder/mac80211.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-12-24T01:31:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d7756fc_37659477",
       "range": {
         "startLine": 35,
         "startChar": 0,
@@ -285,6 +374,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a21c85ef_77af413b",
+        "filename": "drivers/android/wonder/wonder_log.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-12-24T01:31:20Z",
+      "side": 1,
+      "message": "I\u0027m just going to replace all these with their pr_* equivalents. Someone else can follow up with dev_* calls later.",
+      "parentUuid": "6298dc2a_bd98e569",
+      "range": {
+        "startLine": 19,
+        "startChar": 8,
+        "endLine": 19,
+        "endChar": 20
+      },
+      "revId": "64befc07fb723d535e5fe4e0adad359ae69ca2ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "efee9802_cffceae4",
@@ -308,6 +421,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d314578c_092e7dac",
+        "filename": "drivers/android/wonder/wondertap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-12-24T01:31:20Z",
+      "side": 1,
+      "message": "removed",
+      "parentUuid": "efee9802_cffceae4",
+      "range": {
+        "startLine": 18,
+        "startChar": 4,
+        "endLine": 18,
+        "endChar": 26
+      },
+      "revId": "64befc07fb723d535e5fe4e0adad359ae69ca2ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2fe8a91e_d771d084",
@@ -321,6 +458,30 @@
       "writtenOn": "2025-12-23T17:26:12Z",
       "side": 1,
       "message": "shouldn\u0027t all of this just be in a debugfs file?  Why spam the kernel log when things are going well?",
+      "range": {
+        "startLine": 75,
+        "startChar": 2,
+        "endLine": 75,
+        "endChar": 13
+      },
+      "revId": "64befc07fb723d535e5fe4e0adad359ae69ca2ca",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bf3a627_b84493db",
+        "filename": "drivers/android/wonder/wondertap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-12-24T01:31:20Z",
+      "side": 1,
+      "message": "Done. I added these to debugfs.c",
+      "parentUuid": "2fe8a91e_d771d084",
       "range": {
         "startLine": 75,
         "startChar": 2,
