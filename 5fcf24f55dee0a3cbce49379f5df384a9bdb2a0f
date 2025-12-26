@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "25fe9a9d_f933599a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-12-26T18:24:34Z",
+      "side": 1,
+      "message": "yup, I just uploaded this here for testing purposes.",
+      "parentUuid": "c9ea52fb_899a65aa",
+      "revId": "5fcf24f55dee0a3cbce49379f5df384a9bdb2a0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8628500c_8b9897a4",
         "filename": "drivers/android/wonder/wondertap.c",
         "patchSetId": 3
@@ -31,6 +49,24 @@
       "writtenOn": "2025-12-26T06:16:04Z",
       "side": 1,
       "message": "Hi William, I noticed the initial logs were removed in wondertap.c (https://source.corp.google.com/h/partner-android/kernel-pixel/superproject/+/android-gs-pixel-mainline:private/google-modules/wlan/wonder/wondertap.c;l\u003d75?q\u003d%22Wondertap%20Vendor%20Init%22). Could you share the reasoning behind this?",
+      "revId": "5fcf24f55dee0a3cbce49379f5df384a9bdb2a0f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5712d11c_d48632f0",
+        "filename": "drivers/android/wonder/wondertap.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-12-26T18:24:34Z",
+      "side": 1,
+      "message": "yes, kernel drivers should not be spamming the logs when they are working correctly. The kernel logs are reserved for warnings and errors. For more details please refer to go/greenlog. To get debug logs from a kernel driver, you can use the kernel dynamic debug interface -- https://docs.google.com/document/d/1JveBqSonGu7LQD7-aRbKXScA7Lrkd6_awEtA7TvKl8o/edit#heading\u003dh.7n60gvykqioe.\n\nFor these logs in particular, I\u0027ve exposed them via debugfs. PTAL at the `debugfs.c` file. Here is what that will look like:\n\n```\ntokay:/ # mount -t debugfs none /sys/kernel/debug\ntokay:/ # ls -1 /sys/kernel/debug/wonder                                                                                                                                                                                                                        \nbandwidth\nbssid\ncountry_code\nforce_stop_tx\nfreq\nmac_addr\ntx_rate_bw\ntx_rate_gi\ntx_rate_mcs\ntx_rate_preamble\n```",
+      "parentUuid": "8628500c_8b9897a4",
       "revId": "5fcf24f55dee0a3cbce49379f5df384a9bdb2a0f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
