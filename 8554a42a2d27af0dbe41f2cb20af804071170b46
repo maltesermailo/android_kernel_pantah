@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30d4f680_b9ff8dbc",
+        "filename": "drivers/android/wonder/wondertap.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-12-27T00:00:15Z",
+      "side": 1,
+      "message": "I see that we can `eth_random_addr()` here and also in `wonder_mac80211_init()`. Is that correct? I don\u0027t think this wondertap_data mac_addr and the actual mac address used for the virtual device are the same.",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 39
+      },
+      "revId": "8554a42a2d27af0dbe41f2cb20af804071170b46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ca4a19a_5578dffc",
+        "filename": "include/linux/android/wondertap.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2025-12-27T00:00:15Z",
+      "side": 1,
+      "message": "This change was made to address checkpatch issue with flexible arrays. If you actually want this to be a flexible array, then you should use `reserved[]` instead.",
+      "range": {
+        "startLine": 215,
+        "startChar": 4,
+        "endLine": 215,
+        "endChar": 12
+      },
+      "revId": "8554a42a2d27af0dbe41f2cb20af804071170b46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
