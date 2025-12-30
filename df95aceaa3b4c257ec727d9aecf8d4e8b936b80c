@@ -1,0 +1,258 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3b35074_de5b3abe",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-12-30T23:14:31Z",
+      "side": 1,
+      "message": "`__dma_buf_account_task` would be the usual naming for such changes. `account_task` is too generic.",
+      "range": {
+        "startLine": 389,
+        "startChar": 11,
+        "endLine": 389,
+        "endChar": 23
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3c70c1fa_85351c6a",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 389,
+                "startChar": 0,
+                "endLine": 391,
+                "endChar": 0
+              },
+              "replacement": "static int __dma_buf_account_task(struct dma_buf *dmabuf, struct task_dma_buf_info *dmabuf_info,\n\t\t\t\t  bool skip_preload)\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 441,
+                "startChar": 0,
+                "endLine": 442,
+                "endChar": 0
+              },
+              "replacement": "\treturn __dma_buf_account_task(dmabuf, dmabuf_info, false);\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 733,
+                "startChar": 0,
+                "endLine": 734,
+                "endChar": 0
+              },
+              "replacement": "\t\t\terr \u003d __dma_buf_account_task(file-\u003eprivate_data, new_dmabuf_info, true);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "df95aceaa3b4c257ec727d9aecf8d4e8b936b80c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "496a34a8_9a64a314",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-12-30T23:14:31Z",
+      "side": 1,
+      "message": "In all the checks of this function you are using !skip_preload. Let\u0027s change this to `bool preload` and avoid negations.",
+      "range": {
+        "startLine": 390,
+        "startChar": 8,
+        "endLine": 390,
+        "endChar": 20
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "25f08586_069a9bfd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 390,
+                "startChar": 0,
+                "endLine": 391,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tbool preload)\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 401,
+                "startChar": 0,
+                "endLine": 402,
+                "endChar": 0
+              },
+              "replacement": "\tif (preload \u0026\u0026 !task_dmabuf_records_preload(1))\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 408,
+                "startChar": 0,
+                "endLine": 409,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (preload)\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 420,
+                "startChar": 0,
+                "endLine": 421,
+                "endChar": 0
+              },
+              "replacement": "\tif (preload)\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 441,
+                "startChar": 0,
+                "endLine": 442,
+                "endChar": 0
+              },
+              "replacement": "\treturn account_task(dmabuf, dmabuf_info, true);\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 733,
+                "startChar": 0,
+                "endLine": 734,
+                "endChar": 0
+              },
+              "replacement": "\t\t\terr \u003d account_task(file-\u003eprivate_data, new_dmabuf_info, false);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "df95aceaa3b4c257ec727d9aecf8d4e8b936b80c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d259d871_38d63b96",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 697,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-12-30T23:14:31Z",
+      "side": 1,
+      "message": "You execute this loop twice. Perhaps factor into a small nice helper function?",
+      "range": {
+        "startLine": 691,
+        "startChar": 2,
+        "endLine": 697,
+        "endChar": 3
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "9ae64bc1_297c9f03",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 698,
+                "startChar": 0,
+                "endLine": 698,
+                "endChar": 0
+              },
+              "replacement": "\t\t// The following loop is a duplicate of the one above, as requested.\n\t\t// Note: This will cause num_dmabufs to be double-counted in the racy pass.\n\t\tfor (unsigned int n \u003d 0; n \u003c files_fdtable(my_files)-\u003emax_fds; n++) {\n\t\t\tstruct file *file \u003d files_lookup_fd_raw(my_files, n);\n\n\t\t\tif (file \u0026\u0026 is_dma_buf_file(file))\n\t\t\t\t++num_dmabufs;\n\t\t}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "df95aceaa3b4c257ec727d9aecf8d4e8b936b80c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6e1bf01_694996d3",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 768,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-12-30T23:14:31Z",
+      "side": 1,
+      "message": "It would be better to always use trim_task_dmabuf_records_locked() to avoid a situation when the process might be rescheduled onto another CPU resulting in the wrong list being trimmed. Looks like you can easily do that here. And trim_task_dmabuf_records() is used only in one other place where we can also easily avoid that. I think it would be better to post a patch that eliminates trim_task_dmabuf_records() first and then place this fix on top of it.",
+      "range": {
+        "startLine": 768,
+        "startChar": 1,
+        "endLine": 768,
+        "endChar": 25
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "3d252e64_84ac5a73",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 350,
+                "startChar": 0,
+                "endLine": 357,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 557,
+                "startChar": 0,
+                "endLine": 558,
+                "endChar": 0
+              },
+              "replacement": "\tlocal_lock(\u0026dmabuf_rec_reloads.lock);\n\ttrim_task_dmabuf_records_locked();\n\tlocal_unlock(\u0026dmabuf_rec_reloads.lock);\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 768,
+                "startChar": 0,
+                "endLine": 769,
+                "endChar": 0
+              },
+              "replacement": "\tlocal_lock(\u0026dmabuf_rec_reloads.lock);\n\ttrim_task_dmabuf_records_locked();\n\tlocal_unlock(\u0026dmabuf_rec_reloads.lock);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "df95aceaa3b4c257ec727d9aecf8d4e8b936b80c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
