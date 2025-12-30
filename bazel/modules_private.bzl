@@ -102,6 +102,7 @@ _ARM_GKI_MODULES_LIST = [
 _ARM64_GKI_MODULES_LIST = [
     # keep sorted
     "drivers/char/hw_random/cctrng.ko",
+    "drivers/gpio/gpio-shared-proxy.ko",
     "drivers/misc/open-dice.ko",
     "drivers/ptp/ptp_kvm.ko",
 ]
