@@ -1,0 +1,349 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6aec2fd_cebfd338",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-12-30T18:31:12Z",
+      "side": 1,
+      "message": "This function is 90% the same as dma_buf_account_task(). Can we instead add a parameter to dma_buf_account_task() to skip preloading?",
+      "range": {
+        "startLine": 389,
+        "startChar": 11,
+        "endLine": 389,
+        "endChar": 42
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "78b53cf1_b4d6ddcf",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 389,
+                "startChar": 0,
+                "endLine": 391,
+                "endChar": 0
+              },
+              "replacement": "/**\n * __dma_buf_account_task - Account a dmabuf to a task\n * @dmabuf:\t[in]\tpointer to dma_buf\n * @dmabuf_info:[in]\tpointer to task_dma_buf_info\n * @preload:\t[in]\twhether to use the per-cpu preload pool\n *\n * When a process obtains a dmabuf file descriptor, or maps a dmabuf, this\n * function attributes the provided @dmabuf to the @task. The first time @dmabuf\n * is attributed to @task, the buffer\u0027s size is added to the @task\u0027s dmabuf RSS.\n *\n * Return:\n * * 0 on success\n * * A negative error code upon error\n */\nstatic int __dma_buf_account_task(struct dma_buf *dmabuf,\n\t\t\t\t  struct task_dma_buf_info *dmabuf_info,\n\t\t\t\t  bool preload)\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 401,
+                "startChar": 0,
+                "endLine": 401,
+                "endChar": 0
+              },
+              "replacement": "\tif (preload \u0026\u0026 !task_dmabuf_records_preload(1))\n\t\treturn -ENOMEM;\n\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 405,
+                "startChar": 0,
+                "endLine": 405,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (preload)\n\t\t\ttrim_task_dmabuf_records_locked();\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 415,
+                "startChar": 0,
+                "endLine": 415,
+                "endChar": 0
+              },
+              "replacement": "\tif (preload)\n\t\ttask_dmabuf_records_preload_end();\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 432,
+                "startChar": 0,
+                "endLine": 433,
+                "endChar": 0
+              },
+              "replacement": "int dma_buf_account_task(struct dma_buf *dmabuf,\n\t\t\t struct task_dma_buf_info *dmabuf_info)\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 434,
+                "startChar": 0,
+                "endLine": 464,
+                "endChar": 0
+              },
+              "replacement": "\treturn __dma_buf_account_task(dmabuf, dmabuf_info, true);\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 754,
+                "startChar": 0,
+                "endLine": 755,
+                "endChar": 0
+              },
+              "replacement": "\t\t\terr \u003d __dma_buf_account_task(file-\u003eprivate_data, new_dmabuf_info, false);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "20e94f04afe20ecea618e6c52a86d87c89618cff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef6bfd48_4804848e",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-12-30T18:31:12Z",
+      "side": 1,
+      "message": "Do you consider this case as a possibility? If so it would be safer to change it to pr_warn() to avoid crashing the system.",
+      "range": {
+        "startLine": 453,
+        "startChar": 2,
+        "endLine": 453,
+        "endChar": 22
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a5bb3071_aa1f833e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 407,
+                "startChar": 0,
+                "endLine": 408,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (!rec) {\n\t\t\tpr_warn(\"Failed to allocate task_dma_buf_record\\n\");\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 453,
+                "startChar": 0,
+                "endLine": 454,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (!rec) {\n\t\t\tpr_warn(\"Failed to allocate task_dma_buf_record\\n\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "20e94f04afe20ecea618e6c52a86d87c89618cff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e9ab378_d31479ef",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-12-30T18:31:12Z",
+      "side": 1,
+      "message": "nit: Consider more specific names, like num_dmabufs and num_dmabufs_new.",
+      "range": {
+        "startLine": 707,
+        "startChar": 9,
+        "endLine": 707,
+        "endChar": 43
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "503c9811_893082d2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 707,
+                "startChar": 0,
+                "endLine": 708,
+                "endChar": 0
+              },
+              "replacement": "\t\tsize_t num_dmabufs \u003d 0, num_dmabufs_new;\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 718,
+                "startChar": 0,
+                "endLine": 719,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t++num_dmabufs;\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 722,
+                "startChar": 0,
+                "endLine": 723,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (!task_dmabuf_records_preload(num_dmabufs))\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 729,
+                "startChar": 0,
+                "endLine": 730,
+                "endChar": 0
+              },
+              "replacement": "\t\tnum_dmabufs_new \u003d 0;\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 734,
+                "startChar": 0,
+                "endLine": 735,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t++num_dmabufs_new;\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 737,
+                "startChar": 0,
+                "endLine": 738,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (num_dmabufs_new \u003e num_dmabufs) {\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 743,
+                "startChar": 0,
+                "endLine": 744,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tnum_dmabufs \u003d num_dmabufs_new;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "20e94f04afe20ecea618e6c52a86d87c89618cff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6153c534_d5edc714",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-12-30T18:31:12Z",
+      "side": 1,
+      "message": "Does rcu_read_lock protect my_files from changing? Needs a comment indicating why we need this lock.",
+      "range": {
+        "startLine": 712,
+        "startChar": 2,
+        "endLine": 712,
+        "endChar": 15
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "80946c1f_0b945922",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 711,
+                "startChar": 0,
+                "endLine": 712,
+                "endChar": 0
+              },
+              "replacement": "\t\t/*\n\t\t * Attempt to count dmabuf FDs locklessly before allocating.\n\t\t * rcu_read_lock() protects against my_files being freed,\n\t\t * but not against changes to the fdtable contents.\n\t\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "20e94f04afe20ecea618e6c52a86d87c89618cff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43aaba2d_4e7b8b84",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2025-12-30T18:31:12Z",
+      "side": 1,
+      "message": "Don\u0027t you need task_dmabuf_records_preload_end() before retrying? I don\u0027t think local_lock is re-entrant.",
+      "range": {
+        "startLine": 744,
+        "startChar": 3,
+        "endLine": 744,
+        "endChar": 14
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "0b232a86_6913418c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 740,
+                "startChar": 0,
+                "endLine": 740,
+                "endChar": 0
+              },
+              "replacement": "\t\t\ttask_dmabuf_records_preload_end();\n\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 789,
+                "startChar": 0,
+                "endLine": 790,
+                "endChar": 0
+              },
+              "replacement": "\ttrim_task_dmabuf_records();\n\tkfree(new_dmabuf_info);\n\treturn -ENOMEM;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "20e94f04afe20ecea618e6c52a86d87c89618cff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
