@@ -11,6 +11,7 @@
 
 struct mem_cgroup_reclaim_cookie;
 struct lruvec;
+struct scan_control;
 
 DECLARE_RESTRICTED_HOOK(android_rvh_set_balance_anon_file_reclaim,
 			TP_PROTO(bool *balance_anon_file_reclaim),
@@ -27,6 +28,9 @@ DECLARE_HOOK(android_vh_tune_swappiness,
 DECLARE_HOOK(android_vh_tune_inactive_ratio,
 	TP_PROTO(unsigned long *inactive_ratio, int file),
 	TP_ARGS(inactive_ratio, file));
+DECLARE_HOOK(android_vh_mem_cgroup_flush_stats_bypass,
+	TP_PROTO(struct mem_cgroup *target_mem_cgroup, bool *bypass),
+	TP_ARGS(target_mem_cgroup, bypass));
 DECLARE_HOOK(android_vh_shrink_folio_list,
 	TP_PROTO(struct folio *folio, bool dirty, bool writeback,
 		bool *activate, bool *keep),
