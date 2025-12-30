@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "bed74be2_c4d8ea0a",
+        "filename": "drivers/android/wonder/wondertap.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1332974
+      },
+      "writtenOn": "2025-12-30T00:49:29Z",
+      "side": 1,
+      "message": "Yes, you are correct.\nThe MAC address in wonder_mac80211_init is assigned to the wiphy (wireless physical device) and is mandatory for mac80211 registration. But, eth_random_addr() here is used by the vendor driver to provide a unique, random MAC address to the wondertap interface each time it is brought up.",
+      "parentUuid": "30d4f680_b9ff8dbc",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 39
+      },
+      "revId": "8554a42a2d27af0dbe41f2cb20af804071170b46",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9ca4a19a_5578dffc",
