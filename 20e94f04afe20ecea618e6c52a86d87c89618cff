@@ -102,6 +102,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e931b9d2_8dc705e4",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-12-30T20:52:53Z",
+      "side": 1,
+      "message": "We can, but then we have to update all external callers (which I don\u0027t think should need to be concerned about preloading details) which is why I added a new function. I can share a single implementation with both though.",
+      "parentUuid": "f6aec2fd_cebfd338",
+      "range": {
+        "startLine": 389,
+        "startChar": 11,
+        "endLine": 389,
+        "endChar": 42
+      },
+      "revId": "20e94f04afe20ecea618e6c52a86d87c89618cff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef6bfd48_4804848e",
@@ -149,6 +173,30 @@
           ]
         }
       ],
+      "revId": "20e94f04afe20ecea618e6c52a86d87c89618cff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce133c20_51cf5f42",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-12-30T20:52:53Z",
+      "side": 1,
+      "message": "It\u0027s already a `WARN_ON`, and the current code will crash in `add_task_dmabuf_record`. This new code only causes a crash if someone has asked for it with `panic_on_warn`. This case should not occur unless we have a kernel bug.",
+      "parentUuid": "ef6bfd48_4804848e",
+      "range": {
+        "startLine": 453,
+        "startChar": 2,
+        "endLine": 453,
+        "endChar": 22
+      },
       "revId": "20e94f04afe20ecea618e6c52a86d87c89618cff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -254,6 +302,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8aa1d6a3_7d08fd64",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-12-30T20:52:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e9ab378_d31479ef",
+      "range": {
+        "startLine": 707,
+        "startChar": 9,
+        "endLine": 707,
+        "endChar": 43
+      },
+      "revId": "20e94f04afe20ecea618e6c52a86d87c89618cff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6153c534_d5edc714",
@@ -291,6 +363,30 @@
           ]
         }
       ],
+      "revId": "20e94f04afe20ecea618e6c52a86d87c89618cff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f807f86b_50924a9c",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-12-30T20:52:53Z",
+      "side": 1,
+      "message": "No, but it\u0027s required to access the fdtable. It\u0027s the very first thing mentioned in the file management docs, and similar to the spin_lock below.",
+      "parentUuid": "6153c534_d5edc714",
+      "range": {
+        "startLine": 712,
+        "startChar": 2,
+        "endLine": 712,
+        "endChar": 15
+      },
       "revId": "20e94f04afe20ecea618e6c52a86d87c89618cff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -342,6 +438,30 @@
           ]
         }
       ],
+      "revId": "20e94f04afe20ecea618e6c52a86d87c89618cff",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0adb0314_33a7898f",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-12-30T20:52:53Z",
+      "side": 1,
+      "message": "You\u0027re right, thanks.",
+      "parentUuid": "43aaba2d_4e7b8b84",
+      "range": {
+        "startLine": 744,
+        "startChar": 3,
+        "endLine": 744,
+        "endChar": 14
+      },
       "revId": "20e94f04afe20ecea618e6c52a86d87c89618cff",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
