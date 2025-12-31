@@ -22,6 +22,30 @@
       },
       "revId": "5e6db704570401cf7c881129fa38842ddce8f945",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f557ff55_6c7ff13c",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-12-31T00:18:47Z",
+      "side": 0,
+      "message": "Remember we have two layers of caching here before anything is actually freed. I\u0027ll check if lockdep is smart enough to reason about the `local_trylock` scenario.",
+      "parentUuid": "26a3b733_cfdf170b",
+      "range": {
+        "startLine": 332,
+        "startChar": 1,
+        "endLine": 342,
+        "endChar": 40
+      },
+      "revId": "5e6db704570401cf7c881129fa38842ddce8f945",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }

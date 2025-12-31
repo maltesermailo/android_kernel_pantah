@@ -62,6 +62,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1c27ad7_6d97ba2a",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-12-31T00:18:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3b35074_de5b3abe",
+      "range": {
+        "startLine": 389,
+        "startChar": 11,
+        "endLine": 389,
+        "endChar": 23
+      },
+      "revId": "df95aceaa3b4c257ec727d9aecf8d4e8b936b80c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "496a34a8_9a64a314",
@@ -149,6 +173,30 @@
           ]
         }
       ],
+      "revId": "df95aceaa3b4c257ec727d9aecf8d4e8b936b80c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd3a0daf_95627c7e",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-12-31T00:18:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "496a34a8_9a64a314",
+      "range": {
+        "startLine": 390,
+        "startChar": 8,
+        "endLine": 390,
+        "endChar": 20
+      },
       "revId": "df95aceaa3b4c257ec727d9aecf8d4e8b936b80c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -251,6 +299,30 @@
           ]
         }
       ],
+      "revId": "df95aceaa3b4c257ec727d9aecf8d4e8b936b80c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e74cd0c8_be43f9a9",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 768,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2025-12-31T00:18:47Z",
+      "side": 1,
+      "message": "That makes sense for the case where we run out of retries and `dmabuf_rec_reloads.lock` is already (still) locked. We can be sure we\u0027ll trim a list that has at least the requested number of records since we\u0027re still on the same CPU.\n\nWhat about the case where `task_dmabuf_records_preload` fails and we `goto err_prealloc`? (Same as the other case `trim_task_dmabuf_records` is called.)\nIf the preload request is for more than one record and the last allocation fails, all the earlier allocations will remain on the preload list(s) despite `task_dmabuf_records_preload` returning an error. `dmabuf_rec_reloads.lock` is unlocked in that case, so we can\u0027t know which CPU we\u0027re on or which list we\u0027ll trim. We may even end up with multiple per-cpus lists \u003e `MAX_PCP_POOL_SIZE` if count is large.",
+      "parentUuid": "f6e1bf01_694996d3",
+      "range": {
+        "startLine": 768,
+        "startChar": 1,
+        "endLine": 768,
+        "endChar": 25
+      },
       "revId": "df95aceaa3b4c257ec727d9aecf8d4e8b936b80c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
