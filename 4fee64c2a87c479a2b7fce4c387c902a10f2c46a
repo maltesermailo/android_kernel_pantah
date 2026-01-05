@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a60a8e06_06a9cd73",
+        "filename": "drivers/android/wonder/main.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1557540
+      },
+      "writtenOn": "2026-01-05T18:19:32Z",
+      "side": 1,
+      "message": "Note, This change is not backwards compatible. I\u0027m fine with bumping the version number, but don\u0027t think we can detect this change via a version check since now the version comes from recasting the auxiliary_device pointer to wondertap_aux_dev. \n\nSince we haven\u0027t merged this driver yet into GKI, should we just bump the version number and not worry about the previous versions?",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 92
+      },
+      "revId": "4fee64c2a87c479a2b7fce4c387c902a10f2c46a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
