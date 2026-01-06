@@ -4,7 +4,6 @@ arm_smmu_v3-y := arm-smmu-v3.o
 arm_smmu_v3-y += arm-smmu-v3-common.o arm-smmu-v3-common-lib.o
 arm_smmu_v3-$(CONFIG_ARM_SMMU_V3_SVA) += arm-smmu-v3-sva.o
 arm_smmu_v3-$(CONFIG_TEGRA241_CMDQV) += tegra241-cmdqv.o
-arm_smmu_v3-$(CONFIG_ARM_SMMU_V3_PKVM_NESTED) += arm-smmu-v3-kvm-nested.o
 
 obj-$(CONFIG_ARM_SMMU_V3_KUNIT_TEST) += arm-smmu-v3-test.o
 
@@ -20,4 +19,17 @@ $(obj)/pkvm/kvm_nvhe.o: FORCE
 	$(Q)$(MAKE) $(build)=$(obj)/pkvm $(obj)/pkvm/kvm_nvhe.o
 
 arm_smmu_v3_kvm-objs += pkvm/kvm_nvhe.o
+endif
+
+ifeq ($(CONFIG_ARM_SMMU_V3_PKVM_NESTED),m)
+obj-$(CONFIG_ARM_SMMU_V3_PKVM_NESTED) += arm_smmu_v3_kvm_nested.o
+ccflags-$(CONFIG_ARM_SMMU_V3_PKVM_NESTED) += -Iarch/arm64/kvm/
+arm_smmu_v3_kvm_nested-objs-y += arm-smmu-v3-kvm-nested.o
+arm_smmu_v3_kvm_nested-objs := $(arm_smmu_v3_kvm_nested-objs-y)
+
+#Build hypervisor objects for module
+$(obj)/pkvm/nested/kvm_nvhe.o: FORCE
+	$(Q)$(MAKE) $(build)=$(obj)/pkvm/nested $(obj)/pkvm/nested/kvm_nvhe.o
+
+arm_smmu_v3_kvm_nested-objs += pkvm/nested/kvm_nvhe.o
 endif
