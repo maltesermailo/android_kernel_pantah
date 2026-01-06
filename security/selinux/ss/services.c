@@ -2747,9 +2747,15 @@ retry:
 		addr = *((const u32 *)addrp);
 
 		c = policydb->ocontexts[OCON_NODE_VSOCK];
+		if (!c) {
+			pr_warn("mtgvsock: security_node_sid: OCON_NODE_VSOCK list is EMPTY for cid %u\n", addr);
+		}
 		while (c) {
-			if (c->u.node.addr == (addr & c->u.node.mask))
+			pr_warn("mtgvsock: node lookup. target cid: %u, rule addr: %u, mask: %u\n", addr, c->u.node.addr, c->u.node.mask);
+			if (c->u.node.addr == (addr & c->u.node.mask)) {
+				pr_warn("mtgvsock: MATCH found!\n");
 				break;
+			}
 			c = c->next;
 		}
 		break;
@@ -2770,6 +2776,9 @@ retry:
 		if (rc)
 			goto out;
 	} else {
+		if (domain == AF_VSOCK) {
+			pr_warn("mtgvsock: no match found for cid %u, assigning default node sid\n", *((const u32 *)addrp));
+		}
 		*out_sid = SECINITSID_NODE;
 	}
 
