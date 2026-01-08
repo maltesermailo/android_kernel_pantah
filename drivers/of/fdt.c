@@ -503,11 +503,17 @@ void __init early_init_fdt_scan_reserved_mem(void)
 	if (!initial_boot_params)
 		return;
 
+<<<<<<< HEAD   (791caac69421eb6be64f22af015b788dfc3e7bf2 Merge android16-6.12 into android16-6.12-lts)
 	memblock_memsize_detect_hole();
 	memblock_memsize_disable_tracking();
 
 	fdt_scan_reserved_mem();
+||||||| BASE   (567bd8cbc2fe6b28b78864cbbbc41b0d405eb83c Linux 6.12.63)
+	fdt_scan_reserved_mem();
+=======
+>>>>>>> BRANCH (b69492161c056d36789aee42a87a33c18c8ed5e1 tpm: Cap the number of PCR banks)
 	fdt_reserve_elfcorehdr();
+	fdt_scan_reserved_mem();
 
 	/* Process header /memreserve/ fields */
 	for (n = 0; ; n++) {
