@@ -957,6 +957,7 @@ void __mmdrop(struct mm_struct *mm)
 	mm_pasid_drop(mm);
 	mm_destroy_cid(mm);
 	percpu_counter_destroy_many(mm->rss_stat, NR_MM_COUNTERS);
+	trace_android_vh_mmap_lock_free(&mm->mmap_lock);
 
 	trace_android_vh_mm_free(mm);
 	free_mm(mm);
@@ -1295,6 +1296,29 @@ static void mm_init_uprobes_state(struct mm_struct *mm)
 #endif
 }
 
+<<<<<<< HEAD   (06e4e6b55e9429d780c29efc060d28660f2b9432 ANDROID: Kleaf: Add build test for unsafe DDK headers)
+||||||| BASE   (4a338607b520a8036664be6e9aa7ad656b260025 ANDROID: sched: Add missing vendor hook for sched_setaffinit)
+static void mmap_init_lock(struct mm_struct *mm)
+{
+	init_rwsem(&mm->mmap_lock);
+	mm_lock_seqcount_init(mm);
+#ifdef CONFIG_PER_VMA_LOCK
+	rcuwait_init(&mm->vma_writer_wait);
+#endif
+}
+
+=======
+static void mmap_init_lock(struct mm_struct *mm)
+{
+	init_rwsem(&mm->mmap_lock);
+	trace_android_vh_mmap_lock_init(&mm->mmap_lock);
+	mm_lock_seqcount_init(mm);
+#ifdef CONFIG_PER_VMA_LOCK
+	rcuwait_init(&mm->vma_writer_wait);
+#endif
+}
+
+>>>>>>> CHANGE (9bd4e3d79beb702a17521a728b82b02cad4773b0 ANDROID: vendor_hooks: Add vendor hooks for mmap_lock)
 static struct mm_struct *mm_init(struct mm_struct *mm, struct task_struct *p,
 	struct user_namespace *user_ns)
 {

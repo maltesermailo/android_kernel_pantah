@@ -281,6 +281,26 @@ DECLARE_HOOK(android_vh_free_task,
 	TP_PROTO(struct task_struct *p),
 	TP_ARGS(p));
 
+<<<<<<< HEAD   (06e4e6b55e9429d780c29efc060d28660f2b9432 ANDROID: Kleaf: Add build test for unsafe DDK headers)
+||||||| BASE   (4a338607b520a8036664be6e9aa7ad656b260025 ANDROID: sched: Add missing vendor hook for sched_setaffinit)
+DECLARE_HOOK(android_vh_irqtime_account_process_tick,
+	TP_PROTO(struct task_struct *p, struct rq *rq, int user_tick, int ticks),
+	TP_ARGS(p, rq, user_tick, ticks));
+
+=======
+DECLARE_HOOK(android_vh_mmap_lock_init,
+	TP_PROTO(struct rw_semaphore *sem),
+	TP_ARGS(sem));
+
+DECLARE_HOOK(android_vh_mmap_lock_free,
+	TP_PROTO(struct rw_semaphore *sem),
+	TP_ARGS(sem));
+
+DECLARE_HOOK(android_vh_irqtime_account_process_tick,
+	TP_PROTO(struct task_struct *p, struct rq *rq, int user_tick, int ticks),
+	TP_ARGS(p, rq, user_tick, ticks));
+
+>>>>>>> CHANGE (9bd4e3d79beb702a17521a728b82b02cad4773b0 ANDROID: vendor_hooks: Add vendor hooks for mmap_lock)
 DECLARE_HOOK(android_vh_copy_process,
 	TP_PROTO(struct task_struct *p, int nr_threads),
 	TP_ARGS(p, nr_threads));
