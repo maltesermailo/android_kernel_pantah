@@ -18,6 +18,19 @@ DECLARE_HOOK(android_vh_queue_request_and_unlock,
 DECLARE_HOOK(android_vh_fuse_request_end,
 	TP_PROTO(struct task_struct *self),
 	TP_ARGS(self));
+<<<<<<< HEAD   (5fdbbd61a3cbdca7ac1034dc16723bdbc7ece8cc ANDROID: ABI: pixel: update symbol list)
+||||||| BASE   (a5f84b93f0a0194cd78a42283b8bfa679be56093 FROMGIT: Revert "f2fs: block cache/dio write during f2fs_ena)
+DECLARE_HOOK(android_vh_fuse_request_end_ext,
+	TP_PROTO(struct fuse_req *req, struct task_struct *self),
+	TP_ARGS(req, self));
+=======
+DECLARE_HOOK(android_vh_fuse_request_end_ext,
+	TP_PROTO(struct fuse_req *req, struct task_struct *self),
+	TP_ARGS(req, self));
+DECLARE_HOOK(android_vh_fuse_request_fetch,
+	TP_PROTO(struct fuse_req *req, struct task_struct *self),
+	TP_ARGS(req, self));
+>>>>>>> CHANGE (33d2a795c3f806f90603a2d96a842797c36b5a5a ANDROID: vendor_hooks: Add vendor hooks for fuse)
 
 #endif /* _TRACE_HOOK_FUSE_H */
 /* This part must be outside protection */
