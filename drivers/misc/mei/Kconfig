@@ -50,8 +50,14 @@ config INTEL_MEI_GSC
 	tristate "Intel MEI GSC embedded device"
 	depends on INTEL_MEI
 	depends on INTEL_MEI_ME
+<<<<<<< HEAD   (cf81dd0ec2f3ed02fed6d221c1b0279f8f907954 ANDROID: GKI: add disable_delayed_work_sync to virtual_devic)
 	depends on X86 && PCI
 	depends on DRM_I915
+||||||| BASE   (b69492161c056d36789aee42a87a33c18c8ed5e1 tpm: Cap the number of PCR banks)
+	depends on DRM_I915
+=======
+	depends on DRM_I915 || DRM_XE
+>>>>>>> BRANCH (3437c775bf209c674ad66304213b6b3c3b1b3f69 tracing: Do not register unsupported perf events)
 	help
 	  Intel auxiliary driver for GSC devices embedded in Intel graphics devices.
 

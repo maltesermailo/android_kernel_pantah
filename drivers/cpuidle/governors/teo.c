@@ -486,7 +486,16 @@ static int teo_select(struct cpuidle_driver *drv, struct cpuidle_device *dev,
 	 * candidate state, a shallower one needs to be found.
 	 */
 	if (drv->states[idx].target_residency_ns > duration_ns)
+<<<<<<< HEAD   (cf81dd0ec2f3ed02fed6d221c1b0279f8f907954 ANDROID: GKI: add disable_delayed_work_sync to virtual_devic)
 		idx = teo_find_shallower_state(drv, dev, idx, duration_ns);
+||||||| BASE   (b69492161c056d36789aee42a87a33c18c8ed5e1 tpm: Cap the number of PCR banks)
+		i = teo_find_shallower_state(drv, dev, idx, duration_ns, false);
+		if (teo_state_ok(i, drv))
+			idx = i;
+	}
+=======
+		idx = teo_find_shallower_state(drv, dev, idx, duration_ns, false);
+>>>>>>> BRANCH (3437c775bf209c674ad66304213b6b3c3b1b3f69 tracing: Do not register unsupported perf events)
 
 	/*
 	 * If the selected state's target residency is below the tick length
