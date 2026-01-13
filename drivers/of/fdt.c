@@ -505,11 +505,17 @@ void __init early_init_fdt_scan_reserved_mem(void)
 	if (!initial_boot_params)
 		return;
 
+<<<<<<< HEAD   (e90061b3b1e93c6f259e8053139bd3e174db38bd Revert "ANDROID: GKI: enable CONFIG_TLS=m as a GKI module")
 	memblock_memsize_detect_hole();
 	memblock_memsize_disable_tracking();
 
 	fdt_scan_reserved_mem();
+||||||| BASE   (f55201fb3becff6a903fd29f4d1147cc7e91eb0c block: fix race between wbt_enable_default and IO submission)
+	fdt_scan_reserved_mem();
+=======
+>>>>>>> BRANCH (095704d7f334d2efcc0a225ce086a6d423523935 powerpc/addnote: Fix overflow on 32-bit builds)
 	fdt_reserve_elfcorehdr();
+	fdt_scan_reserved_mem();
 
 	/* Process header /memreserve/ fields */
 	for (n = 0; ; n++) {
