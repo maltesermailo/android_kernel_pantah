@@ -476,6 +476,18 @@ show_map_vma(struct seq_file *m, struct vm_area_struct *vma)
 	start = vma->vm_start;
 	end = VMA_PAD_START(vma);
 
+	/*
+	 * Since a read restarts at the last vma's vm_end, we could end up See: proc_get_vma();
+	 * we can restart exactly at an anon fixup VMA for file backed mappings.
+	 *
+	 * We don't update the ppos in proc_get_vma() to account for folding as that
+	 * would require checking both the current and subseqeunt VMAs of each entry.
+	 *
+	 * Instead simply, omit such entries from the output.
+	 */
+	if (flags & __VM_NO_COMPAT)
+		return;
+
 	__fold_filemap_fixup_entry(&((struct proc_maps_private *)m->private)->iter, &end);
 
 	show_vma_header_prefix(m, start, end, flags, pgoff, dev, ino);
