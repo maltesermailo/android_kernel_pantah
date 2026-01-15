@@ -196,6 +196,24 @@
       "parentUuid": "d240401f_0933add2",
       "revId": "9c84b168942e270be4126df6f8b3c85c6249048b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf12017c_35c00f38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3334031
+      },
+      "writtenOn": "2026-01-15T12:42:35Z",
+      "side": 1,
+      "message": "Some hackers may attempt to disable SELinux and then access the monitorhang node to make the monitorhang driver perform unexpected operations. However, even if SELinux is disabled by the user, the SID (Security Identifier) value remains unique and available. By checking the SID value of the process, we can still provide effective protection and ensure that only specified critical processes are allowed to access the monitorhang node.\nMoreover, this security mechanism will not be applied to all kernel driver nodes. The monitorhang driver has the capability to trigger a system-wide abnormal reboot, making it a prime target for hackers. Therefore, we aim to strengthen the access control for the monitorhang driver node, ensuring that only authorized critical processes can access this node and thereby enhancing the overall system security.",
+      "parentUuid": "726fe5a7_aff15b46",
+      "revId": "9c84b168942e270be4126df6f8b3c85c6249048b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
