@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a60f5bc3_a566d51d",
+        "filename": "init/init_task.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-01-15T18:40:47Z",
+      "side": 1,
+      "message": "@gprocida@google.com, what is the incantation to suppress the CRC error for increasing CONFIG_GKI_TASK_STRUCT_VENDOR_SIZE_MAX from 512 to 1024?",
+      "fixSuggestions": [
+        {
+          "fixId": "394d359b_20c90463",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "init/init_task.c",
+              "range": {
+                "startLine": 242,
+                "startChar": 0,
+                "endLine": 243,
+                "endChar": 0
+              },
+              "replacement": "ANDROID_KABI_REPLACE(vendor_data_pad, 512, 1024);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "78a8ae27eff1c059638c5026b0c938178e0add13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
