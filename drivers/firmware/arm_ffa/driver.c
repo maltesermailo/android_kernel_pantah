@@ -1482,11 +1482,6 @@ static void ffa_partitions_cleanup(void)
 	xa_destroy(&drv_info->partition_info);
 }
 
-/* FFA FEATURE IDs */
-#define FFA_FEAT_NOTIFICATION_PENDING_INT	(1)
-#define FFA_FEAT_SCHEDULE_RECEIVER_INT		(2)
-#define FFA_FEAT_MANAGED_EXIT_INT		(3)
-
 static irqreturn_t ffa_sched_recv_irq_handler(int irq, void *irq_data)
 {
 	struct ffa_pcpu_irq *pcpu = irq_data;

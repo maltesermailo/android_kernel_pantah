@@ -38,6 +38,7 @@
 #include <nvhe/mem_protect.h>
 #include <nvhe/memory.h>
 #include <nvhe/pkvm.h>
+#include <nvhe/trace.h>
 #include <nvhe/trap_handler.h>
 #include <nvhe/spinlock.h>
 
@@ -1294,6 +1295,7 @@ static bool ffa_call_supported(u64 func_id)
 	case FFA_RXTX_MAP:
 	case FFA_MEM_DONATE:
 	case FFA_MEM_RETRIEVE_REQ:
+		return false;
        /* Optional notification interfaces added in FF-A 1.1 */
 	case FFA_NOTIFICATION_BITMAP_CREATE:
 	case FFA_NOTIFICATION_BITMAP_DESTROY:
@@ -1302,7 +1304,7 @@ static bool ffa_call_supported(u64 func_id)
 	case FFA_NOTIFICATION_SET:
 	case FFA_NOTIFICATION_GET:
 	case FFA_NOTIFICATION_INFO_GET:
-		return false;
+		return true;
 	/* Optional interfaces added in FF-A 1.2 */
 	case FFA_MSG_SEND_DIRECT_REQ2:		/* Optional per 7.5.1 */
 		return hyp_ffa_version >= FFA_VERSION_1_2;
@@ -1332,6 +1334,7 @@ static bool do_ffa_features(struct arm_smccc_1_2_regs *res,
 	case FFA_FN64_MEM_SHARE:
 	case FFA_MEM_LEND:
 	case FFA_FN64_MEM_LEND:
+	case FFA_NOTIFICATION_BITMAP_CREATE:
 		ret = FFA_RET_SUCCESS;
 		prop = 0; /* No support for dynamic buffers */
 		goto out_handled;
@@ -1357,7 +1360,15 @@ static void do_ffa_guest_features(struct arm_smccc_1_2_regs *res,
 	case FFA_MEM_LEND:
 	case FFA_FN64_MEM_LEND:
 	case FFA_RX_RELEASE:
+	case FFA_NOTIFICATION_BIND:
+	case FFA_NOTIFICATION_UNBIND:
+	case FFA_NOTIFICATION_SET:
+	case FFA_NOTIFICATION_GET:
 		ret = FFA_RET_SUCCESS;
+		goto out_handled;
+	case FFA_FEAT_NOTIFICATION_PENDING_INT:
+		ret = FFA_RET_SUCCESS;
+		prop = 8; // this should eventually be obtained from the VMM
 		goto out_handled;
 	case FFA_RXTX_MAP:
 	case FFA_FN64_RXTX_MAP:
@@ -1579,6 +1590,38 @@ static void do_ffa_direct_msg(struct arm_smccc_1_2_regs *res,
 	nvhe_arm_smccc_1_2_smc(args, res);
 }
 
+static void do_ffa_notification_bind(struct arm_smccc_1_2_regs *res,
+                             struct kvm_cpu_context *ctxt,
+                             u64 vm_handle)
+{
+       // DECLARE_REG(u32, endp, ctxt, 1);
+
+       struct arm_smccc_1_2_regs *args = (void *)&ctxt->regs.regs[0];
+
+       // if (FIELD_GET(FFA_SRC_ENDPOINT_MASK, endp) != vm_handle) {
+       //      ffa_to_smccc_error(res, FFA_RET_INVALID_PARAMETERS);
+       //      return;
+       // }
+
+       nvhe_arm_smccc_1_2_smc(args, res);
+}
+
+static void do_ffa_notification_get(struct arm_smccc_1_2_regs *res,
+                             struct kvm_cpu_context *ctxt,
+                             u64 vm_handle)
+{
+       // DECLARE_REG(u32, endp, ctxt, 1);
+
+       struct arm_smccc_1_2_regs *args = (void *)&ctxt->regs.regs[0];
+
+       // if (FIELD_GET(FFA_SRC_ENDPOINT_MASK, endp) != vm_handle) {
+       //      ffa_to_smccc_error(res, FFA_RET_INVALID_PARAMETERS);
+       //      return;
+       // }
+
+       nvhe_arm_smccc_1_2_smc(args, res);
+}
+
 static int kvm_host_ffa_signal_availability(void)
 {
 	int ret;
@@ -1780,6 +1823,12 @@ bool kvm_guest_ffa_handler(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
 	case FFA_MSG_SEND_DIRECT_REQ:
 	case FFA_FN64_MSG_SEND_DIRECT_REQ:
 		do_ffa_direct_msg(&res, ctxt, hyp_vcpu_to_ffa_handle(hyp_vcpu));
+		goto out_guest;
+	case FFA_NOTIFICATION_BIND:
+		do_ffa_notification_bind(&res, ctxt, hyp_vcpu_to_ffa_handle(hyp_vcpu));
+		goto out_guest;
+	case FFA_NOTIFICATION_GET:
+		do_ffa_notification_get(&res, ctxt, hyp_vcpu_to_ffa_handle(hyp_vcpu));
 		goto out_guest;
 	default:
 		ret = -EOPNOTSUPP;
