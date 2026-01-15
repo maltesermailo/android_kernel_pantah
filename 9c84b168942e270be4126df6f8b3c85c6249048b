@@ -88,6 +88,24 @@
       "parentUuid": "40ffd85d_e2797fc9",
       "revId": "9c84b168942e270be4126df6f8b3c85c6249048b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a09de8c_c36a715c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3334031
+      },
+      "writtenOn": "2026-01-15T10:49:20Z",
+      "side": 1,
+      "message": "In the Mediatek CVE-2025-20705 case, the monitorhang kernel driver node was attacked by a hacker\u0027s malicious program via ioctl, resulting in a Use-After-Free (UAF) issue. The monitorhang mechanism is unique to MTK, where code is inserted into the Android framework\u0027s watchdog to periodically \"kick\" the monitorhang node via ioctl, ensuring the watchdog is functioning properly.\nHowever, hackers can write malicious programs to access the monitorhang node via ioctl, maliciously controlling its behavior and causing unexpected system issues.\nTo address this, we plan to perform security checks in the kernel layer by obtaining the Security Identifier (SID) of critical processes, allowing only these processes to access the monitorhang node via ioctl and perform the corresponding actions. The process of obtaining the SID requires the security_cred_getsecid API, so it is necessary to export this symbol.",
+      "parentUuid": "40ffd85d_e2797fc9",
+      "revId": "9c84b168942e270be4126df6f8b3c85c6249048b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
