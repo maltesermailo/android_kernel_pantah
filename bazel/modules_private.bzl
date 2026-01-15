@@ -102,7 +102,6 @@ _ARM64_GKI_MODULES_LIST = [
     # keep sorted
     "drivers/char/hw_random/cctrng.ko",
     "drivers/misc/open-dice.ko",
-    "drivers/ptp/ptp_kvm.ko",
 ]
 
 _X86_GKI_MODULES_LIST = [
