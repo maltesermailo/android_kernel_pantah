@@ -160,6 +160,24 @@
       "parentUuid": "2057126f_b22816fd",
       "revId": "9c84b168942e270be4126df6f8b3c85c6249048b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d240401f_0933add2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3334031
+      },
+      "writtenOn": "2026-01-15T12:28:51Z",
+      "side": 1,
+      "message": "Regarding the UAF issue, we have already removed the logic in the kernel driver that could cause UAF. However, we want to further enhance security by allowing only critical processes, such as watchdog, to access the monitorhang node via ioctl. To achieve this, we plan to perform a security check in the kernel layer by obtaining the Security Identifier (SID) of the process, and only permit specified critical processes to access the monitorhang node. The use of the security_cred_getsecid API is solely for implementing this security access control mechanism, so it is necessary to export this symbol.",
+      "parentUuid": "bae3de51_50ca61fb",
+      "revId": "9c84b168942e270be4126df6f8b3c85c6249048b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
