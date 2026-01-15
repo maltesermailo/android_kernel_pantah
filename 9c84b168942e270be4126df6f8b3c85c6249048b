@@ -106,6 +106,24 @@
       "parentUuid": "40ffd85d_e2797fc9",
       "revId": "9c84b168942e270be4126df6f8b3c85c6249048b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b655d0f9_176020e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-01-15T11:11:36Z",
+      "side": 1,
+      "message": "Sorry, but that is not the proper way to do this, if a user can access your ioctl that way, they can easily change their sid as well.  Please fix your out-of-tree monitorhang kernel driver properly to prevent this from happening at all, as that sounds like the real issue to fix here, not paper over it by attempting to access a SID.",
+      "parentUuid": "6a09de8c_c36a715c",
+      "revId": "9c84b168942e270be4126df6f8b3c85c6249048b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
