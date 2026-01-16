@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "965a8a81_b8e0a0e0",
+        "filename": "include/trace/hooks/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-01-16T03:29:39Z",
+      "side": 1,
+      "message": "It looks like this has a build failure: \n```\n...common-android16-6.12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/146/execroot/_main/common/include/linux/tracepoint.h:167:26: note: expanded from macro \u0027TP_ARGS\u0027\n  167 | #define TP_ARGS(args...)        args\n      |                                 ^~~~\n...ndroid16-6.12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/146/execroot/_main/common/include/linux/tracepoint.h:196:62: note: expanded from macro \u0027__DO_TRACE_CALL\u0027\n  196 | #define __DO_TRACE_CALL(name, args)     __traceiter_##name(NULL, args)\n      |                                                                  ^~~~\n...id16-6.12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/146/execroot/_main/common/include/trace/hooks/sched.h:444:49: note: passing argument to parameter \u0027dsq\u0027 here\n  444 |         TP_PROTO(struct rq *rq, struct scx_dispatch_q *dsq, struct task_struct *p, bool *enq_priq),\n... 472 lines skipped ...\n      |                                        ^\n...7df5caec/sandbox/linux-sandbox/146/execroot/_main/common/include/trace/hooks/sched.h:444:33: warning: declaration of \u0027struct scx_dispatch_q\u0027 will not be visible outside of this function [-Wvisibility]\n...7df5caec/sandbox/linux-sandbox/146/execroot/_main/common/include/trace/hooks/sched.h:444:33: warning: declaration of \u0027struct scx_dispatch_q\u0027 will not be visible outside of this function [-Wvisibility]\n...7df5caec/sandbox/linux-sandbox/146/execroot/_main/common/include/trace/hooks/sched.h:444:33: warning: declaration of \u0027struct scx_dispatch_q\u0027 will not be visible outside of this function [-Wvisibility]\n9 warnings and 3 errors generated.```\n\nProbably need to declare `struct scx_dispatch_q`.",
+      "revId": "196523d518f53df1f9d95e58dc1f183cb94e6cf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cc9d3d73_c10babb9",
         "filename": "kernel/sched/ext.c",
         "patchSetId": 1
