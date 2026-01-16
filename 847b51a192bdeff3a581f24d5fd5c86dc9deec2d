@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b38de920_d4ba958f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-01-16T21:24:34Z",
+      "side": 1,
+      "message": "Overriding the checkpatch WARNs. I don\u0027t think we need the typedefs. However, it makes the current implementation less error prone. I think that ideally we could use only primitive types when calling Rust\u0027s tace events (after all that is what gets eventually logged), that way we don\u0027t have to worry about struct offsets. This can be changed later though.",
+      "revId": "847b51a192bdeff3a581f24d5fd5c86dc9deec2d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
