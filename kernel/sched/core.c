@@ -125,7 +125,12 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(sched_stat_blocked);
 #endif
 
 DEFINE_PER_CPU_SHARED_ALIGNED(struct rq, runqueues);
+<<<<<<< HEAD   (3f87bd62c43a201879aa1c63e86dbfa013ea5e73 Merge 1143f790a631 ("usb: xhci: Apply the link chain quirk o)
 EXPORT_SYMBOL_GPL(runqueues);
+||||||| BASE   (1143f790a6316201dc8f067eba4c94ea97ecb6ca usb: xhci: Apply the link chain quirk on NEC isoc endpoints)
+=======
+DEFINE_PER_CPU(struct rnd_state, sched_rnd_state);
+>>>>>>> BRANCH (5b4634b2c8d34bffceb435a591d1882b85f54cfa sched/fair: Proportional newidle balance)
 
 #ifdef CONFIG_SCHED_DEBUG
 /*
@@ -9883,6 +9888,8 @@ int sched_cpu_dying(unsigned int cpu)
 void __init sched_init_smp(void)
 {
 	sched_init_numa(NUMA_NO_NODE);
+
+	prandom_init_once(&sched_rnd_state);
 
 	/*
 	 * There's no userspace yet to cause hotplug operations; hence all the
