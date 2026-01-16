@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9300fb37_9b9e7fb7",
+        "filename": "include/trace/hooks/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-01-16T04:32:25Z",
+      "side": 1,
+      "message": "From the test log it seems to be the //common:kernel_aarch64_tv target? Other targets are failing as well.",
+      "parentUuid": "665f1971_f07ff706",
+      "revId": "196523d518f53df1f9d95e58dc1f183cb94e6cf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cc9d3d73_c10babb9",
         "filename": "kernel/sched/ext.c",
         "patchSetId": 1
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Thank you very much for your review:\nYes, we are using `repeat++` here for the following reasons:\n1. When entering for the first time, `repeat` is 0, so `vh` will increment it, indicating the first round.\n2. When ending this round, `ext` will set `repeat`, indicating the second round upon entry. If we find that the current round number matches our current round number, we will set it to -1. The loop will not restart after the current round is completed.\nWe are not using `repeat--` here because:\nIf we set the maximum round number upon entry, the `repeat` value would be 0 in both the first and last rounds. We would then need to use other variables to distinguish between the first and last entry values.",
       "parentUuid": "cc9d3d73_c10babb9",
+      "revId": "196523d518f53df1f9d95e58dc1f183cb94e6cf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99cbaa74_0639e614",
+        "filename": "kernel/sched/ext.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4715,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-01-16T04:32:25Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ecfff0d1_02b8b329",
       "revId": "196523d518f53df1f9d95e58dc1f183cb94e6cf2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
