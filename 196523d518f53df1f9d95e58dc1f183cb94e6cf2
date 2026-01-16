@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc9d3d73_c10babb9",
+        "filename": "kernel/sched/ext.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4715,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-01-16T03:26:54Z",
+      "side": 1,
+      "message": "Do you intend repeat++ here? instead of repeat--?\n\nI\u0027m just worried once repeat is set, if the vendorhook doesn\u0027t modify it this would loop indefinitely. It seems less error prone for the vendorhook to set to a value that it will repeat at most that many times unless the vendorhook sets it again.",
+      "revId": "196523d518f53df1f9d95e58dc1f183cb94e6cf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
