@@ -232,6 +232,24 @@
       "parentUuid": "bf12017c_35c00f38",
       "revId": "9c84b168942e270be4126df6f8b3c85c6249048b",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e09466a8_6d18a2e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3334031
+      },
+      "writtenOn": "2026-01-16T01:24:42Z",
+      "side": 1,
+      "message": "correct the 1st message， sorry for mismake\nmtk monitorhang mechanism need get sid for security usage, not for debug.\n\nThis patch only affects MTK products. \nBackground: In real user scenarios, hackers may gain root and disable SELinux, then exploit the monitorhang driver to trigger system-wide reboots. We use security_cred_getsecid to get the process SID in the kernel for access control. The SID is unique, cannot be modified by user programs, and remains unchanged even if SELinux is disabled or the watchdog process is restarted. This provides effective protection for MTK devices even when SELinux is turned off.\nWe noticed that security_cred_getsecid is already exported in kernel common code, and we want to leverage the SID value for additional security checks in our driver.\nIf there are better ways to protect kernel driver nodes when SELinux is disabled and hackers have root, we greatly appreciate any suggestions you may have.",
+      "parentUuid": "e048ad8e_2ffca184",
+      "revId": "9c84b168942e270be4126df6f8b3c85c6249048b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
