@@ -258,7 +258,30 @@ static inline int tty_port_users(struct tty_port *port)
 	return port->count + port->blocked_open;
 }
 
+<<<<<<< HEAD   (aea33b7c8ab414cccc260d512bdc35cad56e4a4d Merge 73d964ce4bc8 ("blk-mq: setup queue ->tag_set before in)
 void tty_port_tty_hangup(struct tty_port *port, bool check_clocal);
+||||||| BASE   (73d964ce4bc8b4de88a7c2e40df494f0d5cd8950 blk-mq: setup queue ->tag_set before initializing hctx)
+static inline void tty_port_tty_hangup(struct tty_port *port, bool check_clocal)
+{
+	__tty_port_tty_hangup(port, check_clocal, true);
+}
+
+=======
+/**
+ * tty_port_tty_hangup - helper to hang up a tty asynchronously
+ * @port: tty port
+ * @check_clocal: hang only ttys with %CLOCAL unset?
+ */
+static inline void tty_port_tty_hangup(struct tty_port *port, bool check_clocal)
+{
+	__tty_port_tty_hangup(port, check_clocal, true);
+}
+
+/**
+ * tty_port_tty_vhangup - helper to hang up a tty synchronously
+ * @port: tty port
+ */
+>>>>>>> BRANCH (7d84329cf4874389632c8c931401781634d266db tty: fix tty_port_tty_*hangup() kernel-doc)
 static inline void tty_port_tty_vhangup(struct tty_port *port)
 {
 	__tty_port_tty_hangup(port, false, false);
