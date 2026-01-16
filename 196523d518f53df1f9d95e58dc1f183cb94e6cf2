@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "665f1971_f07ff706",
+        "filename": "include/trace/hooks/sched.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 4363940
+      },
+      "writtenOn": "2026-01-16T04:02:33Z",
+      "side": 1,
+      "message": "Thank you for your guidance. I don\u0027t seem to be getting this error during compilation. Could it be that I\u0027m using the wrong compilation command?\nThe compilation method is as follows:\nhxl@cnbhw-puv-172-17-120-219:~/work/gki/kernel_6.12$ tools/bazel run --config\u003drelease //common:kernel_aarch64_abi_dist\nWARNING: Build options --//build/kernel/kleaf:config_release and --//build/kernel/kleaf:config_stamp have changed, discarding analysis cache (this can be expensive, see https://bazel.build/advanced/performance/iteration-speed).\nINFO: Analyzed target //common:kernel_aarch64_abi_dist (1 packages loaded, 105101 targets configured).\nINFO: From BazelWorkspaceStatusAction stable-status.txt:\n\n... A new version of repo (2.54) is available.\n... New version is available at: /data/hxl/work/gki/kernel_6.12/.repo/repo/repo\n... The launcher is run from: /usr/local/bin/repo\n!!! The launcher is not writable.  Please talk to your sysadmin or distro\n!!! to get an update installed.\n\nINFO: From Preparing for module build (trim) //common:kernel_aarch64_modules_prepare:\nwarning: overriding the module target triple with aarch64-unknown-linux-gnu [-Woverride-module]\n1 warning generated.\nINFO: From Building kernel (trim) //common:kernel_aarch64:\nwarning: overriding the module target triple with aarch64-unknown-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with aarch64-unknown-linux-gnu [-Woverride-module]\n1 warning generated.\nwarning: overriding the module target triple with aarch64-unknown-linux-gnu [-Woverride-module]\n1 warning generated.\nWARN: multiple IDs found for \u0027inode\u0027: 322, 30151 - using 322\nWARN: multiple IDs found for \u0027module\u0027: 257, 30193 - using 257\nWARN: multiple IDs found for \u0027vm_area_struct\u0027: 584, 30268 - using 584\nWARN: multiple IDs found for \u0027task_struct\u0027: 430, 30276 - using 430\nWARN: multiple IDs found for \u0027cgroup\u0027: 499, 30289 - using 499\nWARN: multiple IDs found for \u0027seq_file\u0027: 515, 30305 - using 515\nWARN: multiple IDs found for \u0027file\u0027: 248, 30319 - using 248\nWARN: multiple IDs found for \u0027path\u0027: 2020, 30405 - using 2020\nINFO: From [stg] Comparing Kernel ABI //common:kernel_aarch64_abi_diff:\nERROR: ABI DIFFERENCES HAVE BEEN DETECTED!\nERROR: Report summary:\n\n2 function symbol(s) added\n  \u0027int __traceiter_android_vh_enq_to_priq(void*, struct rq*, struct scx_dispatch_q*, struct task_struct*, bool*)\u0027\n  \u0027int __traceiter_android_vh_scx_switch_repeat_skip(void*, struct task_struct*, bool*, int*)\u0027\n\n2 variable symbol(s) added\n  \u0027struct tracepoint __tracepoint_android_vh_enq_to_priq\u0027\n  \u0027struct tracepoint __tracepoint_android_vh_scx_switch_repeat_skip\u0027\n\nINFO: Found 1 target...\nTarget //common:kernel_aarch64_abi_dist up-to-date:\n  bazel-bin/common/kernel_aarch64_abi_dist\nINFO: Elapsed time: 316.423s, Critical Path: 309.17s\nINFO: 24 processes: 938 action cache hit, 1 internal, 23 linux-sandbox.\nINFO: Build completed successfully, 24 total actions\nINFO: Running command line: bazel-bin/common/kernel_aarch64_abi_dist\nINFO: Installing to /data/hxl/work/gki/kernel_6.12/out_abi/kernel_aarch64_abi_dist/dist\nERROR: ABI DIFFERENCES HAVE BEEN DETECTED!\nERROR: Report summary:\n\n2 function symbol(s) added\n  \u0027int __traceiter_android_vh_enq_to_priq(void*, struct rq*, struct scx_dispatch_q*, struct task_struct*, bool*)\u0027\n  \u0027int __traceiter_android_vh_scx_switch_repeat_skip(void*, struct task_struct*, bool*, int*)\u0027\n\n2 variable symbol(s) added\n  \u0027struct tracepoint __tracepoint_android_vh_enq_to_priq\u0027\n  \u0027struct tracepoint __tracepoint_android_vh_scx_switch_repeat_skip\u0027",
+      "parentUuid": "965a8a81_b8e0a0e0",
+      "revId": "196523d518f53df1f9d95e58dc1f183cb94e6cf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cc9d3d73_c10babb9",
         "filename": "kernel/sched/ext.c",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2026-01-16T03:26:54Z",
       "side": 1,
       "message": "Do you intend repeat++ here? instead of repeat--?\n\nI\u0027m just worried once repeat is set, if the vendorhook doesn\u0027t modify it this would loop indefinitely. It seems less error prone for the vendorhook to set to a value that it will repeat at most that many times unless the vendorhook sets it again.",
+      "revId": "196523d518f53df1f9d95e58dc1f183cb94e6cf2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecfff0d1_02b8b329",
+        "filename": "kernel/sched/ext.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 4715,
+      "author": {
+        "id": 4363940
+      },
+      "writtenOn": "2026-01-16T04:02:33Z",
+      "side": 1,
+      "message": "Thank you very much for your review:\nYes, we are using `repeat++` here for the following reasons:\n1. When entering for the first time, `repeat` is 0, so `vh` will increment it, indicating the first round.\n2. When ending this round, `ext` will set `repeat`, indicating the second round upon entry. If we find that the current round number matches our current round number, we will set it to -1. The loop will not restart after the current round is completed.\nWe are not using `repeat--` here because:\nIf we set the maximum round number upon entry, the `repeat` value would be 0 in both the first and last rounds. We would then need to use other variables to distinguish between the first and last entry values.",
+      "parentUuid": "cc9d3d73_c10babb9",
       "revId": "196523d518f53df1f9d95e58dc1f183cb94e6cf2",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
