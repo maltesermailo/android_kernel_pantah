@@ -921,9 +921,27 @@ static void local_dsq_post_enq(struct scx_dispatch_q *dsq, struct task_struct *p
 	struct rq *rq = container_of(dsq, struct rq, scx.local_dsq);
 	bool preempt = false;
 
+<<<<<<< HEAD   (3b6a60ad9a87cbcd5ec5ab3bd837bcf985933000 Merge 5ddd444484be ("sched_ext: Fix bypass depth leak on scx)
 	if ((enq_flags & SCX_ENQ_PREEMPT) && p != rq->donor &&
 	    rq->donor->sched_class == &ext_sched_class) {
 		rq->donor->scx.slice = 0;
+||||||| BASE   (5ddd444484bea3e70521f6136cda9caf3d77adcc sched_ext: Fix bypass depth leak on scx_enable() failure)
+	if ((enq_flags & SCX_ENQ_PREEMPT) && p != rq->curr &&
+	    rq->curr->sched_class == &ext_sched_class) {
+		rq->curr->scx.slice = 0;
+=======
+	/*
+	 * If @rq is in balance, the CPU is already vacant and looking for the
+	 * next task to run. No need to preempt or trigger resched after moving
+	 * @p into its local DSQ.
+	 */
+	if (rq->scx.flags & SCX_RQ_IN_BALANCE)
+		return;
+
+	if ((enq_flags & SCX_ENQ_PREEMPT) && p != rq->curr &&
+	    rq->curr->sched_class == &ext_sched_class) {
+		rq->curr->scx.slice = 0;
+>>>>>>> BRANCH (2ad1e2faebbdba686fcdf4d38a530763cf729244 sched_ext: Fix missing post-enqueue handling in move_local_t)
 		preempt = true;
 	}
 
@@ -1534,6 +1552,8 @@ static void move_local_task_to_local_dsq(struct task_struct *p, u64 enq_flags,
 
 	dsq_mod_nr(dst_dsq, 1);
 	p->scx.dsq = dst_dsq;
+
+	local_dsq_post_enq(dst_dsq, p, enq_flags);
 }
 
 /**
