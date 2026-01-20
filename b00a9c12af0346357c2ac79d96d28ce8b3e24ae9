@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa7c1d95_85d5752c",
+        "filename": "drivers/virt/geniezone/gzvm_main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-01-20T08:57:23Z",
+      "side": 1,
+      "message": "checkpatch should have warned you about this, sysfs needs to use sysfs_emit().",
+      "revId": "b00a9c12af0346357c2ac79d96d28ce8b3e24ae9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bd2d65c_f1dba0a0",
+        "filename": "drivers/virt/geniezone/gzvm_main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-01-20T08:57:23Z",
+      "side": 1,
+      "message": "use proper macros for sysfs files, do not \"roll your own\"",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 63
+      },
+      "revId": "b00a9c12af0346357c2ac79d96d28ce8b3e24ae9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdc602e2_22b098e6",
+        "filename": "drivers/virt/geniezone/gzvm_main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-01-20T08:57:23Z",
+      "side": 1,
+      "message": "you are not allowed to put sysfs files here, sorry.  Please use the driver model properly and do NOT create random new user/kernel apis like this.\n\nYou have your own ioctls, use them if you need/want to get information like this, sysfs is NOT for this.\n\nAlso, even if you did want to, you didn\u0027t document these 😊",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 71
+      },
+      "revId": "b00a9c12af0346357c2ac79d96d28ce8b3e24ae9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89fbf06c_d1249556",
+        "filename": "drivers/virt/geniezone/gzvm_main.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1125653
+      },
+      "writtenOn": "2026-01-20T08:57:23Z",
+      "side": 1,
+      "message": "you just raced with userspace and lost.  Please register sysfs files properly, as part of your platform device, do NOT manually attempt to register raw kobjects like this, it will fail, userspace will not see them, and it will be unmanageable over time.",
+      "range": {
+        "startLine": 224,
+        "startChar": 0,
+        "endLine": 224,
+        "endChar": 29
+      },
+      "revId": "b00a9c12af0346357c2ac79d96d28ce8b3e24ae9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
