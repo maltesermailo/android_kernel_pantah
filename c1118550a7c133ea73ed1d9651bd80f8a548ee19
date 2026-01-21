@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70a33e4b_0077b42f",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2026-01-21T17:42:04Z",
+      "side": 1,
+      "message": "Not your fault, but I realize on 16KB configs that is pretty wasteful.",
+      "range": {
+        "startLine": 282,
+        "startChar": 9,
+        "endLine": 282,
+        "endChar": 17
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8a473593_1cc18ecb",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/pkvm.c",
+              "range": {
+                "startLine": 282,
+                "startChar": 0,
+                "endLine": 283,
+                "endChar": 0
+              },
+              "replacement": "\talign \u003d PAGE_SIZE;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c1118550a7c133ea73ed1d9651bd80f8a548ee19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2349c420_11161a27",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1569742
+      },
+      "writtenOn": "2026-01-21T17:42:04Z",
+      "side": 1,
+      "message": "Why does it need to be there?",
+      "range": {
+        "startLine": 307,
+        "startChar": 4,
+        "endLine": 307,
+        "endChar": 73
+      },
+      "revId": "c1118550a7c133ea73ed1d9651bd80f8a548ee19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
