@@ -347,3 +347,4 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_fault_pre_folio_locked);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_folio_mapped);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_remove_rmap_ptes);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_adjust_swap_info_flags);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_shrink_node_memcgs);
