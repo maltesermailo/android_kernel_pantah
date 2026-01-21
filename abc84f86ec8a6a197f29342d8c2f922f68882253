@@ -16,6 +16,29 @@
       "message": "Looks like Vincent counts as a code owner for 6.18 but not 6.12?\n+Will",
       "revId": "abc84f86ec8a6a197f29342d8c2f922f68882253",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f293cce4_37d54bcd",
+        "filename": "arch/arm64/kvm/va_layout.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-01-21T11:18:42Z",
+      "side": 1,
+      "message": "This shadows a global variable with the same name, which is a bit grotty.\n\nCan you assign to the global here and have `kvm_mmu_init()` use that instead of calling `kvm_hyp_va_bits()` a second time? If that doesn\u0027t work, then it\u0027s probably best to use a different variable name here.",
+      "range": {
+        "startLine": 87,
+        "startChar": 5,
+        "endLine": 87,
+        "endChar": 16
+      },
+      "revId": "abc84f86ec8a6a197f29342d8c2f922f68882253",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
