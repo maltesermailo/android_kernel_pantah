@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28010fcc_0f23397b",
+        "filename": "arch/arm64/configs/microdroid_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-01-21T16:17:12Z",
+      "side": 0,
+      "message": "I couldn\u0027t see this being disabled in the reference commit for the older ACK branches. Do you have a pointer to that?\n\nPerhaps it would be better to copy the `microdroid_defconfig` from `android15-6.6` into `android16-6.12` and then run `make olddefconfig` followed by `make savedefconfig` to create a new version.\n\nFinally, do we need to update the x86 config as well?",
+      "range": {
+        "startLine": 195,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 26
+      },
+      "revId": "f33ca06267f86f1974bd273c0cce78f614d6949e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
