@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7acbd7cd_c8933385",
+        "filename": "fs/namespace.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 3665,
+      "author": {
+        "id": 1954115
+      },
+      "writtenOn": "2026-01-21T18:53:06Z",
+      "side": 1,
+      "message": "I think you need to trace it before retain_and_null_ptr()\n\nBelow is the explanation in `include/linux/cleanup.h`\n```\n * After retain_and_null_ptr(f) the variable f is NULL and cannot be\n * dereferenced anymore.\n```",
+      "fixSuggestions": [
+        {
+          "fixId": "6b29496b_dc653354",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "fs/namespace.c",
+              "range": {
+                "startLine": 3664,
+                "startChar": 0,
+                "endLine": 3665,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "fs/namespace.c",
+              "range": {
+                "startLine": 3666,
+                "startChar": 0,
+                "endLine": 3666,
+                "endChar": 0
+              },
+              "replacement": "\t\tretain_and_null_ptr(mnt); // consumed on success\n"
+            }
+          ]
+        }
+      ],
+      "revId": "7361059fb2a5a59c1a3b0fc396f03ae587536c20",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
