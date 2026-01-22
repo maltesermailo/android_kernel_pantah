@@ -42,6 +42,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4415d13a_86062d30",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-01-22T09:47:33Z",
+      "side": 1,
+      "message": "Yeah I wanted to make it PAGE_SIZE if !PAGE_SIZE_4KB .... but ahem... CMA_MIN_ALIGNMENT_BYTES is already PMD_SIZE :-\\",
+      "parentUuid": "70a33e4b_0077b42f",
+      "range": {
+        "startLine": 282,
+        "startChar": 9,
+        "endLine": 282,
+        "endChar": 17
+      },
+      "revId": "c1118550a7c133ea73ed1d9651bd80f8a548ee19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2349c420_11161a27",
@@ -55,6 +79,30 @@
       "writtenOn": "2026-01-21T17:42:04Z",
       "side": 1,
       "message": "Why does it need to be there?",
+      "range": {
+        "startLine": 307,
+        "startChar": 4,
+        "endLine": 307,
+        "endChar": 73
+      },
+      "revId": "c1118550a7c133ea73ed1d9651bd80f8a548ee19",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ded77383_d392134a",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-01-22T09:47:33Z",
+      "side": 1,
+      "message": "As we over allocate, my idea was to make this over allocation part of host_s2_cma_size so it is reclaimable.",
+      "parentUuid": "2349c420_11161a27",
       "range": {
         "startLine": 307,
         "startChar": 4,
