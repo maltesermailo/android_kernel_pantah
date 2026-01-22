@@ -484,6 +484,8 @@
   __devm_pwmchip_add
   devm_pwmchip_alloc
   devm_pwm_get
+  devm_pwrseq_device_register
+  devm_pwrseq_get
   devm_register_reboot_notifier
   devm_register_sys_off_handler
   devm_regmap_add_irq_chip
@@ -1392,6 +1394,7 @@
   klist_iter_exit
   klist_iter_init
   klist_next
+  klist_node_attached
   klist_remove
   __kmalloc_cache_node_noprof
   __kmalloc_cache_noprof
@@ -2012,6 +2015,9 @@
   put_unused_fd
   put_vaddr_frames
   pwm_apply_might_sleep
+  pwrseq_device_get_drvdata
+  pwrseq_power_off
+  pwrseq_power_on
   queue_delayed_work_on
   queue_work_on
   radix_tree_insert
