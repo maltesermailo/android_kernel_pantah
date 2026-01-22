@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca3be597_dd7a4b8b",
+        "filename": "arch/arm64/include/asm/kvm_pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2026-01-22T23:16:07Z",
+      "side": 1,
+      "message": "Should this be `struct file *kvm_file`? Are there any clients of this that have any business directly accessing anything in `struct kvm`?",
+      "revId": "2988128b47a5d1b97ae1eadb60abf55f247d3c80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fda7ecc9_e4ec8c5c",
+        "filename": "arch/arm64/kvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1000205
+      },
+      "writtenOn": "2026-01-22T23:16:07Z",
+      "side": 1,
+      "message": "this does not match the function return type.",
+      "revId": "2988128b47a5d1b97ae1eadb60abf55f247d3c80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
