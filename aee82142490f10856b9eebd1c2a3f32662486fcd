@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "453cc0d8_8526d7f0",
+        "filename": "drivers/android/binder/transaction.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1892347
+      },
+      "writtenOn": "2026-01-22T09:47:54Z",
+      "side": 1,
+      "message": "Comparing with C Binder, we may also wish to perform this change:\n```suggestion\n        if node_prio.prio \u003c desired.prio\n            || (node_prio.prio \u003d\u003d desired.prio \u0026\u0026 node_prio.sched_policy \u003d\u003d prio::SCHED_FIFO)\n```",
+      "range": {
+        "startLine": 517,
+        "startChar": 0,
+        "endLine": 518,
+        "endChar": 99
+      },
+      "revId": "aee82142490f10856b9eebd1c2a3f32662486fcd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
