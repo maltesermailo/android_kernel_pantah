@@ -22,6 +22,30 @@
       },
       "revId": "aee82142490f10856b9eebd1c2a3f32662486fcd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4541b10c_f4ad98fb",
+        "filename": "drivers/android/binder/transaction.rs",
+        "patchSetId": 1
+      },
+      "lineNbr": 518,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-01-22T17:07:03Z",
+      "side": 1,
+      "message": "Yeah, because `desired` might have been modified above. BTW, the above code never made any sense to me. Why do we force `nice 0`?. I think the desired priority should instead fall back to the `to_thread` current priority and then compared to the `node_prio`.\n\nAlso, I think we still have a problem. The priority for oneway transactions is defined as `from.process.default_priority`. Isn\u0027t this supposed to be the `self.to.default_priority`? I think that is what C does. FWIW, this behavior also seems incorrect to me as the selected target thread might have a different priority than its group leader.\n\nAnyway, let\u0027s double check these scenarios, hopefully we can get rid of the default_priority thing altogether if possible. We should only need saved_priority and store it in \u003cThread\u003e.\n\nWould you mind if we fix these other things in separate commits? This fixes a specific single issue.",
+      "parentUuid": "453cc0d8_8526d7f0",
+      "range": {
+        "startLine": 517,
+        "startChar": 0,
+        "endLine": 518,
+        "endChar": 99
+      },
+      "revId": "aee82142490f10856b9eebd1c2a3f32662486fcd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
