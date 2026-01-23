@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf9ec5c5_9293edeb",
+        "filename": "drivers/block/zram/zram_ioctl.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1060234
+      },
+      "writtenOn": "2026-01-23T00:33:57Z",
+      "side": 0,
+      "message": "I think we still need the `!non_swap_entry()` check before calling `get_swap_device()`. Otherwise we can end up with a bunch of \"Bad swap file entry\" errors in dmesg from `get_swap_device()`.",
+      "range": {
+        "startLine": 75,
+        "startChar": 2,
+        "endLine": 75,
+        "endChar": 38
+      },
+      "revId": "e4e7aec478853bd7338a58703ac4d3e34b7a5ad1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
