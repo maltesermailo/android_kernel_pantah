@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0416c98_1f639f37",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 5537,
+      "author": {
+        "id": 1759142
+      },
+      "writtenOn": "2026-01-26T03:37:13Z",
+      "side": 1,
+      "message": "```\nandroid15-6.6/common/kernel/sched/fair.c:5537:14: error: unused variable \u0027skip_preempt\u0027 [-Werror\u003dunused-variable]\n 5537 |         bool skip_preempt \u003d false;\n      |              ^~~~~~~~~~~~\ncc1: all warnings being treated as errors\n```\n\nWhen CONFIG_SCHED_HRTICK is not defined",
+      "fixSuggestions": [
+        {
+          "fixId": "01cd101b_009c6532",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "kernel/sched/fair.c",
+              "range": {
+                "startLine": 5537,
+                "startChar": 0,
+                "endLine": 5538,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "kernel/sched/fair.c",
+              "range": {
+                "startLine": 5550,
+                "startChar": 0,
+                "endLine": 5550,
+                "endChar": 0
+              },
+              "replacement": "\tbool skip_preempt \u003d false;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "41cd08be1469b61c34acab96ca3350cd25e6291e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
