@@ -5552,6 +5552,22 @@ entity_tick(struct cfs_rq *cfs_rq, struct sched_entity *curr, int queued)
 	 * validating it and just reschedule.
 	 */
 	if (queued) {
+<<<<<<< HEAD   (7116e258bf03a56518418d7a09dfe3a686fc6504 ANDROID: ABI: Update Pixel symbol list)
+||||||| BASE   (f0325b3b213542bf3a515a754a304eb3f685f08a ANDROID: ABI: Update the symbol list for moto)
+		trace_android_vh_resched_curr_lazy(rq_of(cfs_rq), &skip_preempt);
+
+		if (skip_preempt)
+			return;
+
+=======
+		bool skip_preempt = false;
+
+		trace_android_vh_resched_curr_lazy(rq_of(cfs_rq), &skip_preempt);
+
+		if (skip_preempt)
+			return;
+
+>>>>>>> CHANGE (b62bbd8c7af74d5501d07396043202e50571b8ca ANDROID: Fix unused variable warning in entity_tick)
 		resched_curr(rq_of(cfs_rq));
 		return;
 	}
