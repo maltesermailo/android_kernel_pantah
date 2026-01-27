@@ -30,12 +30,34 @@ static const struct scmi_perf_proto_ops *perf_ops;
 
 static unsigned int scmi_cpufreq_get_rate(unsigned int cpu)
 {
+<<<<<<< HEAD   (ae365941ac9976abce7f4e97d9d94ec46312c187 Merge 0af745fddefb ("scsi: iscsi_tcp: Fix UAF during logout )
 	struct cpufreq_policy *policy = cpufreq_cpu_get_raw(cpu);
 	struct scmi_data *priv = policy->driver_data;
+||||||| BASE   (0af745fddefbd56198f4f35eb309215ee5f9e21e scsi: iscsi_tcp: Fix UAF during logout when accessing the sh)
+	struct cpufreq_policy *policy = cpufreq_cpu_get_raw(cpu);
+	const struct scmi_perf_ops *perf_ops = handle->perf_ops;
+	struct scmi_data *priv = policy->driver_data;
+=======
+	struct cpufreq_policy *policy;
+	struct scmi_data *priv;
+	const struct scmi_perf_ops *perf_ops = handle->perf_ops;
+>>>>>>> BRANCH (bd1dcfba72aac4159c1d5e17cd861e702e6c19ac cpufreq: scmi: Fix null-ptr-deref in scmi_cpufreq_get_rate())
 	unsigned long rate;
 	int ret;
 
+<<<<<<< HEAD   (ae365941ac9976abce7f4e97d9d94ec46312c187 Merge 0af745fddefb ("scsi: iscsi_tcp: Fix UAF during logout )
 	ret = perf_ops->freq_get(ph, priv->domain_id, &rate, false);
+||||||| BASE   (0af745fddefbd56198f4f35eb309215ee5f9e21e scsi: iscsi_tcp: Fix UAF during logout when accessing the sh)
+	ret = perf_ops->freq_get(handle, priv->domain_id, &rate, false);
+=======
+	policy = cpufreq_cpu_get_raw(cpu);
+	if (unlikely(!policy))
+		return 0;
+
+	priv = policy->driver_data;
+
+	ret = perf_ops->freq_get(handle, priv->domain_id, &rate, false);
+>>>>>>> BRANCH (bd1dcfba72aac4159c1d5e17cd861e702e6c19ac cpufreq: scmi: Fix null-ptr-deref in scmi_cpufreq_get_rate())
 	if (ret)
 		return 0;
 	return rate / 1000;
