@@ -148,10 +148,6 @@ enum blkzone_allocation_policy {
 	BLKZONE_ALLOC_PRIOR_CONV,	/* Prioritize writing to conventional zones */
 };
 
-enum f2fs_lock_name {
-	LOCK_NAME_NONE,
-};
-
 /*
  * An implementation of an rwsem that is explicitly unfair to readers. This
  * prevents priority inversion when a low-priority reader acquires the read lock
@@ -160,8 +156,6 @@ enum f2fs_lock_name {
  */
 
 struct f2fs_rwsem {
-	struct f2fs_sb_info *sbi;
-	enum f2fs_lock_name name;
         struct rw_semaphore internal_rwsem;
 #ifdef CONFIG_F2FS_UNFAIR_RWSEM
         wait_queue_head_t read_waiters;
@@ -1340,24 +1334,6 @@ struct f2fs_gc_control {
 	unsigned int nr_free_secs;	/* # of free sections to do GC */
 };
 
-struct f2fs_time_stat {
-	unsigned long long total_time;		/* total wall clock time */
-#ifdef CONFIG_64BIT
-	unsigned long long running_time;	/* running time */
-#endif
-#if defined(CONFIG_SCHED_INFO) && defined(CONFIG_SCHEDSTATS)
-	unsigned long long runnable_time;	/* runnable(including preempted) time */
-#endif
-#ifdef CONFIG_TASK_DELAY_ACCT
-	unsigned long long io_sleep_time;	/* IO sleep time */
-#endif
-};
-
-struct f2fs_lock_context {
-	struct f2fs_time_stat ts;
-	bool lock_trace;
-};
-
 /*
  * For s_flag in struct f2fs_sb_info
  * Modification on enum should be synchronized with s_flag array
@@ -1467,9 +1443,6 @@ enum {
 	MAX_CALL_TYPE,
 	TOTAL_CALL = FOREGROUND,
 };
-
-/* a threshold of maximum elapsed time in critical region to print tracepoint */
-#define MAX_LOCK_ELAPSED_TIME		500
 
 static inline int f2fs_test_bit(unsigned int nr, char *addr);
 static inline void f2fs_set_bit(unsigned int nr, char *addr);
@@ -2221,22 +2194,16 @@ static inline void clear_ckpt_flags(struct f2fs_sb_info *sbi, unsigned int f)
 	spin_unlock_irqrestore(&sbi->cp_lock, flags);
 }
 
-#define init_f2fs_rwsem(sem)	__init_f2fs_rwsem(sem, NULL, LOCK_NAME_NONE)
-#define init_f2fs_rwsem_trace	__init_f2fs_rwsem
-
-#define __init_f2fs_rwsem(sem, sbi, name)			\
+#define init_f2fs_rwsem(sem)					\
 do {								\
 	static struct lock_class_key __key;			\
 								\
-	do_init_f2fs_rwsem((sem), #sem, &__key, sbi, name);	\
+	__init_f2fs_rwsem((sem), #sem, &__key);			\
 } while (0)
 
-static inline void do_init_f2fs_rwsem(struct f2fs_rwsem *sem,
-		const char *sem_name, struct lock_class_key *key,
-		struct f2fs_sb_info *sbi, enum f2fs_lock_name name)
+static inline void __init_f2fs_rwsem(struct f2fs_rwsem *sem,
+		const char *sem_name, struct lock_class_key *key)
 {
-	sem->sbi = sbi;
-	sem->name = name;
 	__init_rwsem(&sem->internal_rwsem, sem_name, key);
 #ifdef CONFIG_F2FS_UNFAIR_RWSEM
 	init_waitqueue_head(&sem->read_waiters);
@@ -2311,16 +2278,6 @@ static inline void f2fs_up_write(struct f2fs_rwsem *sem)
 	wake_up_all(&sem->read_waiters);
 #endif
 }
-
-void f2fs_down_read_trace(struct f2fs_rwsem *sem, struct f2fs_lock_context *lc);
-int f2fs_down_read_trylock_trace(struct f2fs_rwsem *sem,
-						struct f2fs_lock_context *lc);
-void f2fs_up_read_trace(struct f2fs_rwsem *sem, struct f2fs_lock_context *lc);
-void f2fs_down_write_trace(struct f2fs_rwsem *sem,
-						struct f2fs_lock_context *lc);
-int f2fs_down_write_trylock_trace(struct f2fs_rwsem *sem,
-						struct f2fs_lock_context *lc);
-void f2fs_up_write_trace(struct f2fs_rwsem *sem, struct f2fs_lock_context *lc);
 
 static inline void disable_nat_bits(struct f2fs_sb_info *sbi, bool lock)
 {
