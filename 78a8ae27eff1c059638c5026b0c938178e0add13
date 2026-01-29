@@ -34,6 +34,24 @@
       ],
       "revId": "78a8ae27eff1c059638c5026b0c938178e0add13",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "945d3650_6ca590db",
+        "filename": "init/init_task.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1625880
+      },
+      "writtenOn": "2026-01-29T14:43:46Z",
+      "side": 1,
+      "message": "I initially thought this was a kernel per-CPU variable. It turns out it\u0027s a singleton array for vendor data associated with pid 1, the only one with a statically-allocated task struct.\n\n---\n\nThe answer is: Probably something using `TYPE_STRING`. I don\u0027t think the macros intended for structs and members will work. This is first occasion where the type we need to stabilise is anonymous and so we need to apply an override directly to the symbol.\n\nI will look into this.\n\nThis still leaves two issues:\n\n1. Is this safe? Newer vendor modules must not be used with older GKI. Could anything go wrong the other way around? Probably not.\n\n2. Does the module loader care about the size of such variables and will mismatched expectations cause (module loader) link failures? I don\u0027t see any size checks in the link or relocation code.",
+      "parentUuid": "a60f5bc3_a566d51d",
+      "revId": "78a8ae27eff1c059638c5026b0c938178e0add13",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
