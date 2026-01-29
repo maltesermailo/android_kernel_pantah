@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "00e1fb6a_a2f3d09a",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1117,
+      "author": {
+        "id": 1112968
+      },
+      "writtenOn": "2026-01-29T16:59:07Z",
+      "side": 1,
+      "message": "I see that `get_vm_by_handle()` returns `NULL` when `vm_table` contains `LEAKED_ENTRY`, which we do check for immediately below to return `0` ourselves. Do you mean something else?",
+      "parentUuid": "b0b6b56f_c2aa25af",
+      "revId": "2988128b47a5d1b97ae1eadb60abf55f247d3c80",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fda7ecc9_e4ec8c5c",
         "filename": "arch/arm64/kvm/pkvm.c",
         "patchSetId": 1
