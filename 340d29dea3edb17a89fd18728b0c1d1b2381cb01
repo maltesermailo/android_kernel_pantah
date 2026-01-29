@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47ce0df1_1ee7ca92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-01-29T20:24:36Z",
+      "side": 1,
+      "message": "We really only want to take changes into our tree that affect the core GKI or GKI modules. \n\nThe majority of the changes in this larger series don\u0027t seem to affect the core GKI build, so the advice is to maintain them in your own vendor modules build tree.\n\nHowever, the symbol addition change in this patch is likely needed in GKI so the driver can work.  So please rebase it alone and submit it without the driver changes.",
+      "revId": "340d29dea3edb17a89fd18728b0c1d1b2381cb01",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
