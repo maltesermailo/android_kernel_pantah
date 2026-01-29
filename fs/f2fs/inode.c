@@ -904,11 +904,9 @@ retry:
 		err = -EIO;
 
 	if (!err) {
-		struct f2fs_lock_context lc;
-
-		f2fs_lock_op(sbi, &lc);
+		f2fs_lock_op(sbi);
 		err = f2fs_remove_inode_page(inode);
-		f2fs_unlock_op(sbi, &lc);
+		f2fs_unlock_op(sbi);
 		if (err == -ENOENT) {
 			err = 0;
 
@@ -1005,7 +1003,7 @@ out_clear:
 }
 
 /* caller should call f2fs_lock_op() */
-void f2fs_handle_failed_inode(struct inode *inode, struct f2fs_lock_context *lc)
+void f2fs_handle_failed_inode(struct inode *inode)
 {
 	struct f2fs_sb_info *sbi = F2FS_I_SB(inode);
 	struct node_info ni;
@@ -1054,7 +1052,7 @@ void f2fs_handle_failed_inode(struct inode *inode, struct f2fs_lock_context *lc)
 	}
 
 out:
-	f2fs_unlock_op(sbi, lc);
+	f2fs_unlock_op(sbi);
 
 	/* iput will drop the inode object */
 	iput(inode);
