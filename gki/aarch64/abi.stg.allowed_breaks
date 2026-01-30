@@ -37,3 +37,49 @@ type 'struct inet_connection_sock' changed
         offset changed from 60 to 61
         bit-field size changed from 4 to 3
 
+<<<<<<< HEAD   (0b320ea545791e60ca3eb0b6d0dd9525f93f063f ANDROID: GKI: Update exynos symbol list)
+||||||| BASE   (735ecea92c9d2dbee880fa3ec5a51ee675c1a833 ANDROID: gki_defconfig: Change CONFIG_GKI_TASK_STRUCT_VENDOR)
+type 'struct kvm_iommu_ops' changed
+  member 'u64 __kabi_reserved2' was removed
+  member 'u64 __kabi_reserved3' was removed
+  member 'u64 __kabi_reserved4' was removed
+  member 'u64 __kabi_reserved5' was removed
+  member 'union { int(* attach_dev_nested)(struct kvm_hyp_iommu*, struct kvm_hyp_iommu_domain*, struct kvm_hyp_iommu_domain*, u32, u32, unsigned long, void*, size_t); struct { u64 __kabi_reserved2; }; union { }; }' was added
+  member 'union { int(* detach_dev_nested)(struct kvm_hyp_iommu*, struct kvm_hyp_iommu_domain*, struct kvm_hyp_iommu_domain*, u32, u32); struct { u64 __kabi_reserved3; }; union { }; }' was added
+  member 'union { void(* iotlb_inv_nested_domain)(struct kvm_hyp_iommu_domain*, unsigned long, size_t, size_t, bool); struct { u64 __kabi_reserved4; }; union { }; }' was added
+  member 'union { int(* nested_cfg_sync)(struct kvm_hyp_iommu*, void*, size_t); struct { u64 __kabi_reserved5; }; union { }; }' was added
+
+type 'struct io_ring_ctx' changed
+  member changed from 'struct { struct llist_head work_llist; unsigned long check_cq; atomic_t cq_wait_nr; atomic_t cq_timeouts; struct wait_queue_head cq_wait; }' to 'struct { struct llist_head work_llist; unsigned long check_cq; atomic_t cq_wait_nr; atomic_t cq_timeouts; struct wait_queue_head cq_wait; union { struct llist_head retry_llist; unsigned char __kabi_ignored8; }; }'
+    type changed from 'struct { struct llist_head work_llist; unsigned long check_cq; atomic_t cq_wait_nr; atomic_t cq_timeouts; struct wait_queue_head cq_wait; }' to 'struct { struct llist_head work_llist; unsigned long check_cq; atomic_t cq_wait_nr; atomic_t cq_timeouts; struct wait_queue_head cq_wait; union { struct llist_head retry_llist; unsigned char __kabi_ignored8; }; }'
+      member 'union { struct llist_head retry_llist; unsigned char __kabi_ignored8; }' was added
+
+type 'struct pkvm_module_ops' changed
+  member 'u64 __kabi_reserved4' was removed
+  member 'union { int(* request_hyp_alloc)(); struct { u64 __kabi_reserved4; }; union { }; }' was added
+
+=======
+type 'struct kvm_iommu_ops' changed
+  member 'u64 __kabi_reserved2' was removed
+  member 'u64 __kabi_reserved3' was removed
+  member 'u64 __kabi_reserved4' was removed
+  member 'u64 __kabi_reserved5' was removed
+  member 'union { int(* attach_dev_nested)(struct kvm_hyp_iommu*, struct kvm_hyp_iommu_domain*, struct kvm_hyp_iommu_domain*, u32, u32, unsigned long, void*, size_t); struct { u64 __kabi_reserved2; }; union { }; }' was added
+  member 'union { int(* detach_dev_nested)(struct kvm_hyp_iommu*, struct kvm_hyp_iommu_domain*, struct kvm_hyp_iommu_domain*, u32, u32); struct { u64 __kabi_reserved3; }; union { }; }' was added
+  member 'union { void(* iotlb_inv_nested_domain)(struct kvm_hyp_iommu_domain*, unsigned long, size_t, size_t, bool); struct { u64 __kabi_reserved4; }; union { }; }' was added
+  member 'union { int(* nested_cfg_sync)(struct kvm_hyp_iommu*, void*, size_t); struct { u64 __kabi_reserved5; }; union { }; }' was added
+
+type 'struct io_ring_ctx' changed
+  member changed from 'struct { struct llist_head work_llist; unsigned long check_cq; atomic_t cq_wait_nr; atomic_t cq_timeouts; struct wait_queue_head cq_wait; }' to 'struct { struct llist_head work_llist; unsigned long check_cq; atomic_t cq_wait_nr; atomic_t cq_timeouts; struct wait_queue_head cq_wait; union { struct llist_head retry_llist; unsigned char __kabi_ignored8; }; }'
+    type changed from 'struct { struct llist_head work_llist; unsigned long check_cq; atomic_t cq_wait_nr; atomic_t cq_timeouts; struct wait_queue_head cq_wait; }' to 'struct { struct llist_head work_llist; unsigned long check_cq; atomic_t cq_wait_nr; atomic_t cq_timeouts; struct wait_queue_head cq_wait; union { struct llist_head retry_llist; unsigned char __kabi_ignored8; }; }'
+      member 'union { struct llist_head retry_llist; unsigned char __kabi_ignored8; }' was added
+
+type 'struct pkvm_module_ops' changed
+  member 'u64 __kabi_reserved4' was removed
+  member 'union { int(* request_hyp_alloc)(); struct { u64 __kabi_reserved4; }; union { }; }' was added
+
+variable symbol changed from 'u64 vendor_data_pad[64]' to 'u64 vendor_data_pad[128]'
+  type changed from 'u64[64]' to 'u64[128]'
+    number of elements changed from 64 to 128
+
+>>>>>>> CHANGE (f6f9e74eb0b6e678470b3b61a979a1a7c03eb817 ANDROID: vendor_data_pad: fix up CRC, refresh ABI, allow ABI)
