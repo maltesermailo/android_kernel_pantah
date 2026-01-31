@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2946a8fa_b1106e52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4613764
+      },
+      "writtenOn": "2026-01-31T05:32:23Z",
+      "side": 1,
+      "message": "From b5e60cc833bb847a6ceea9a5457f44ad16dda3c9 Mon Sep 17 00:00:00 2001\nFrom: Chao Yu \u003cchao@kernel.org\u003e\nDate: Wed, 21 Jan 2026 05:14:04 +0000\nSubject: [PATCH] FROMGIT: f2fs: decrease maximum flush retry count in f2fs_enable_checkpoint()\n\nIt\u0027s rare case that sync_inodes_sb() always skips to flush some drity\ndatas, so it\u0027s enough to give extra three more chances to flush data.\n\nBug: 477022593\n(cherry picked from commit 6bb9010f78d7f0ff0e4a17b1be951e76d96757a5\nhttps://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git dev)\nLink: https://lore.kernel.org/linux-f2fs-devel/20260121051404.2056730-1-chao@kernel.org\nChange-Id: I8cd38e6c1e1473df65c49fd2f47c25c79fd57221\nSigned-off-by: Chao Yu \u003cchao@kernel.org\u003e\nSigned-off-by: Jaegeuk Kim \u003cjaegeuk@kernel.org\u003e\n(cherry picked from commit 6bb9010f78d7f0ff0e4a17b1be951e76d96757a5)\n[Chao: fix code conflict]\nSigned-off-by: Chao Yu \u003cchao@kernel.org\u003e\n---\n\ndiff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h\nindex 82a71bd..c9fcff2 100644\n--- a/fs/f2fs/f2fs.h\n+++ b/fs/f2fs/f2fs.h\n@@ -610,6 +610,8 @@ enum {\n \n #define DEFAULT_RETRY_IO_COUNT\t8\t/* maximum retry read IO or flush count */\n \n+#define MAX_FLUSH_RETRY_COUNT\t3\t/* maximum flush retry count in f2fs_enable_checkpoint() */\n+\n /* congestion wait timeout value, default: 20ms */\n #define\tDEFAULT_IO_TIMEOUT\t(msecs_to_jiffies(20))\n \ndiff --git a/fs/f2fs/super.c b/fs/f2fs/super.c\nindex 451daf5..4e7d381 100644\n--- a/fs/f2fs/super.c\n+++ b/fs/f2fs/super.c\n@@ -2330,7 +2330,7 @@ static int f2fs_disable_checkpoint(struct f2fs_sb_info *sbi)\n \n static int f2fs_enable_checkpoint(struct f2fs_sb_info *sbi)\n {\n-\tint retry \u003d DEFAULT_RETRY_IO_COUNT;\n+\tint retry \u003d MAX_FLUSH_RETRY_COUNT;\n \tlong long start, writeback, end;\n \tint ret;\n \tlong long skipped_write, dirty_data;",
+      "revId": "b5e60cc833bb847a6ceea9a5457f44ad16dda3c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
