@@ -147,8 +147,8 @@ char *sync_file_get_name(struct sync_file *sync_file, char *buf, int len)
 				 fence->seqno);
 		else
 			snprintf(buf, len, "%s-%s%llu-%lld",
-				 fence->ops->get_driver_name(fence),
-				 fence->ops->get_timeline_name(fence),
+				 dma_fence_driver_name(fence),
+				 dma_fence_timeline_name(fence),
 				 fence->context,
 				 fence->seqno);
 	}
@@ -281,9 +281,9 @@ static int sync_fill_fence_info(struct dma_fence *fence,
 		return info->status;
 	}
 
-	strscpy(info->obj_name, fence->ops->get_timeline_name(fence),
+	strscpy(info->obj_name, dma_fence_timeline_name(fence),
 		sizeof(info->obj_name));
-	strscpy(info->driver_name, fence->ops->get_driver_name(fence),
+	strscpy(info->driver_name, dma_fence_driver_name(fence),
 		sizeof(info->driver_name));
 
 	info->status = dma_fence_get_status(fence);
