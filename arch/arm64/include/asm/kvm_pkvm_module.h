@@ -233,6 +233,8 @@ struct pkvm_module_trng_ops {
  *				for pVMs. The @ops.trng_uuid is used to advertise the
  *				identity of TRNG implementation. @ops.trng_rnd64 is used
  *				to generate entropy bits to guest.
+ * @printf:			If a serial interface is registered, print a
+ *				formatted string, else does nothing.
  */
 struct pkvm_module_ops {
 	int (*create_private_mapping)(phys_addr_t phys, size_t size,
@@ -312,7 +314,7 @@ struct pkvm_module_ops {
 	ANDROID_KABI_USE(2, int (*map_module_pages)(u64 pfn, void *va, u64 nr_pages,
 				    enum kvm_pgtable_prot prot, bool is_protected));
 	ANDROID_KABI_USE(3, int (*unmap_module_pages)(u64 pfn, void *va, u64 nr_pages));
-	ANDROID_KABI_RESERVE(4);
+	ANDROID_KABI_USE(4, void (*printf)(const char *fmt, ...));
 	ANDROID_KABI_RESERVE(5);
 	ANDROID_KABI_RESERVE(6);
 	ANDROID_KABI_RESERVE(7);

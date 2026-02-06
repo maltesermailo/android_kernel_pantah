@@ -6,6 +6,7 @@
 void hyp_puts(const char *s);
 void hyp_putx64(u64 x);
 void hyp_putc(char c);
+void hyp_printf(const char *fmt, ...);
 int __pkvm_register_serial_driver(void (*driver_cb)(char));
 
 #endif
