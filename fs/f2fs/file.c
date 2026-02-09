@@ -1548,8 +1548,15 @@ static int f2fs_do_zero_range(struct dnode_of_data *dn, pgoff_t start,
 		f2fs_set_data_blkaddr(dn);
 	}
 
+<<<<<<< HEAD   (c5a66c8b50103bb9d144ea49a9d419e164a625a3 Merge 671910d2e5b8 ("f2fs: fix to propagate error from f2fs_)
 	f2fs_update_read_extent_cache_range(dn, start, 0, index - start);
 	f2fs_update_age_extent_cache_range(dn, start, index - start);
+||||||| BASE   (671910d2e5b899e6ecdd747dbaadb5c25e51b3b0 f2fs: fix to propagate error from f2fs_enable_checkpoint())
+	f2fs_update_extent_cache_range(dn, start, 0, index - start);
+=======
+	if (index > start)
+		f2fs_update_extent_cache_range(dn, start, 0, index - start);
+>>>>>>> BRANCH (72c58a82e6fb7b327e8701f5786c70c3edc56188 f2fs: fix to avoid updating zero-sized extent in extent cach)
 
 	return ret;
 }
