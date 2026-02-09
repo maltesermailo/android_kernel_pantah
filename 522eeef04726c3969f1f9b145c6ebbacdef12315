@@ -22,6 +22,30 @@
       },
       "revId": "522eeef04726c3969f1f9b145c6ebbacdef12315",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "652a9902_a6aea9e2",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2058,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-02-09T11:52:44Z",
+      "side": 1,
+      "message": "Hum, I\u0027m not sure it applies in that case. Either the probe function does a off/on just to check for the availability or it waits for the first pm_runtime_put to check but then the driver has probed for nothing. It doesn\u0027t sound very robust compared to using the existing HYP_KVM_FEATURES.",
+      "parentUuid": "e063e156_f88e2405",
+      "range": {
+        "startLine": 2058,
+        "startChar": 6,
+        "endLine": 2058,
+        "endChar": 50
+      },
+      "revId": "522eeef04726c3969f1f9b145c6ebbacdef12315",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
