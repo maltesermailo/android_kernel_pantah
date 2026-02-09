@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5169f445_8c6e75f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-02-09T21:29:16Z",
+      "side": 1,
+      "message": "Build-break. Missing a patch?\n```\nUse --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging\n/mnt/disks/build-disk/src/android/common-android-mainline/out/bazel/output_user_root/5eb738bf612d494239553bcc21fe7c03/sandbox/linux-sandbox/465/execroot/_main/common/drivers/block/zram/zram_drv.c:1531:8: error: call to undeclared function \u0027read_comp_algo_dictionary\u0027; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n 1531 |                 sz \u003d read_comp_algo_dictionary(\u0026zram-\u003eparams[prio].dict, dict_path);\n      |                      ^\n1 error generated.\n```",
+      "revId": "9b8a129be87f426da137d651ae8ff9938b10c9aa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
