@@ -112,6 +112,7 @@ static void fuse_file_put(struct inode *inode, struct fuse_file *ff,
 	struct fuse_err_ret fer;
 #endif
 
+<<<<<<< HEAD   (e97bb49be53e69e6cfbf22c7b2fb3f1134992520 Merge 72c58a82e6fb ("f2fs: fix to avoid updating zero-sized )
 	if (!refcount_dec_and_test(&ff->count))
 		return;
 
@@ -135,6 +136,35 @@ static void fuse_file_put(struct inode *inode, struct fuse_file *ff,
 		if (fuse_simple_background(ff->fm, args,
 				GFP_KERNEL | __GFP_NOFAIL))
 			fuse_release_end(ff->fm, args, -ENOTCONN);
+||||||| BASE   (72c58a82e6fb7b327e8701f5786c70c3edc56188 f2fs: fix to avoid updating zero-sized extent in extent cach)
+		if (!args) {
+			/* Do nothing when server does not implement 'open' */
+		} else if (sync) {
+			fuse_simple_request(ff->fm, args);
+			fuse_release_end(ff->fm, args, 0);
+		} else {
+			args->end = fuse_release_end;
+			if (fuse_simple_background(ff->fm, args,
+						   GFP_KERNEL | __GFP_NOFAIL))
+				fuse_release_end(ff->fm, args, -ENOTCONN);
+		}
+		kfree(ff);
+=======
+		if (!args) {
+			/* Do nothing when server does not implement 'opendir' */
+		} else if (args->opcode == FUSE_RELEASE && ff->fm->fc->no_open) {
+			fuse_release_end(ff->fm, args, 0);
+		} else if (sync) {
+			fuse_simple_request(ff->fm, args);
+			fuse_release_end(ff->fm, args, 0);
+		} else {
+			args->end = fuse_release_end;
+			if (fuse_simple_background(ff->fm, args,
+						   GFP_KERNEL | __GFP_NOFAIL))
+				fuse_release_end(ff->fm, args, -ENOTCONN);
+		}
+		kfree(ff);
+>>>>>>> BRANCH (eeeaba737919bdce9885e2a00ac2912f61a3684d HID: core: Harden s32ton() against conversion to 0 bits)
 	}
 	kfree(ff);
 }
@@ -145,8 +175,29 @@ struct fuse_file *fuse_file_open(struct fuse_mount *fm, u64 nodeid,
 	struct fuse_conn *fc = fm->fc;
 	struct fuse_file *ff;
 	int opcode = isdir ? FUSE_OPENDIR : FUSE_OPEN;
+<<<<<<< HEAD   (e97bb49be53e69e6cfbf22c7b2fb3f1134992520 Merge 72c58a82e6fb ("f2fs: fix to avoid updating zero-sized )
+||||||| BASE   (72c58a82e6fb7b327e8701f5786c70c3edc56188 f2fs: fix to avoid updating zero-sized extent in extent cach)
+	bool open = isdir ? !fc->no_opendir : !fc->no_open;
+=======
+	bool open = isdir ? !fc->no_opendir : !fc->no_open;
+	bool release = !isdir || open;
+>>>>>>> BRANCH (eeeaba737919bdce9885e2a00ac2912f61a3684d HID: core: Harden s32ton() against conversion to 0 bits)
 
+<<<<<<< HEAD   (e97bb49be53e69e6cfbf22c7b2fb3f1134992520 Merge 72c58a82e6fb ("f2fs: fix to avoid updating zero-sized )
 	ff = fuse_file_alloc(fm);
+||||||| BASE   (72c58a82e6fb7b327e8701f5786c70c3edc56188 f2fs: fix to avoid updating zero-sized extent in extent cach)
+	ff = fuse_file_alloc(fm, open);
+=======
+	/*
+	 * ff->args->release_args still needs to be allocated (so we can hold an
+	 * inode reference while there are pending inflight file operations when
+	 * ->release() is called, see fuse_prepare_release()) even if
+	 * fc->no_open is set else it becomes possible for reclaim to deadlock
+	 * if while servicing the readahead request the server triggers reclaim
+	 * and reclaim evicts the inode of the file being read ahead.
+	 */
+	ff = fuse_file_alloc(fm, release);
+>>>>>>> BRANCH (eeeaba737919bdce9885e2a00ac2912f61a3684d HID: core: Harden s32ton() against conversion to 0 bits)
 	if (!ff)
 		return ERR_PTR(-ENOMEM);
 
@@ -166,10 +217,23 @@ struct fuse_file *fuse_file_open(struct fuse_mount *fm, u64 nodeid,
 			fuse_file_free(ff);
 			return ERR_PTR(err);
 		} else {
+<<<<<<< HEAD   (e97bb49be53e69e6cfbf22c7b2fb3f1134992520 Merge 72c58a82e6fb ("f2fs: fix to avoid updating zero-sized )
 			if (isdir)
+||||||| BASE   (72c58a82e6fb7b327e8701f5786c70c3edc56188 f2fs: fix to avoid updating zero-sized extent in extent cach)
+			/* No release needed */
+			kfree(ff->release_args);
+			ff->release_args = NULL;
+			if (isdir)
+=======
+			if (isdir) {
+				/* No release needed */
+				kfree(ff->release_args);
+				ff->release_args = NULL;
+>>>>>>> BRANCH (eeeaba737919bdce9885e2a00ac2912f61a3684d HID: core: Harden s32ton() against conversion to 0 bits)
 				fc->no_opendir = 1;
-			else
+			} else {
 				fc->no_open = 1;
+			}
 		}
 	}
 
