@@ -4870,7 +4870,7 @@ static int selinux_socket_socketpair(struct socket *socka,
 
 static int selinux_socket_bind(struct socket *sock, struct sockaddr *address, int addrlen)
 {
-	// pr_warn("mtgvsock: selinux_socket_bind");
+	pr_warn("mtgvsock: selinux_socket_bind");
 	struct sock *sk = sock->sk;
 	struct sk_security_struct *sksec = selinux_sock(sk);
 	u16 family;
@@ -7332,6 +7332,8 @@ void selinux_set_vsock_sid(u32 cid, u32 sid);
 static int selinux_vhost_vsock_set_guest_cid(u64 guest_cid)
 {
 	u32 sid = current_sid();
+
+	pr_warn("mtgvsock: vhost_vsock_set_guest_cid hook triggered for cid %llu (sid %u)\n", guest_cid, sid);
 
 	if (guest_cid > U32_MAX)
 		return -EINVAL;

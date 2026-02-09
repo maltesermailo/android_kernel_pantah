@@ -85,6 +85,8 @@ void selinux_set_vsock_sid(u32 cid, u32 sid)
 {
 	struct vsock_sid_entry *entry, *new_entry;
 
+	pr_info("mtgvsock: setting cid %u to sid %u\n", cid, sid);
+
 	new_entry = kmalloc(sizeof(*new_entry), GFP_ATOMIC);
 	if (!new_entry)
 		return;
@@ -2786,6 +2788,7 @@ retry:
 			if (entry->cid == addr) {
 				*out_sid = entry->sid;
 				spin_unlock(&vsock_sid_lock);
+				pr_info("mtgvsock: dynamic MATCH found for cid %u -> sid %u\n", addr, *out_sid);
 				rc = 0;
 				goto out;
 			}
