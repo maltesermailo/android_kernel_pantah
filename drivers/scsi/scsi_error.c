@@ -241,11 +241,32 @@ static void scsi_eh_inc_host_failed(struct rcu_head *head)
 {
 	struct scsi_cmnd *scmd = container_of(head, typeof(*scmd), rcu);
 	struct Scsi_Host *shost = scmd->device->host;
+<<<<<<< HEAD   (72fac58a1f17e8685cdae301c4d44ef42598d0ae Revert "posix-clock: introduce posix_clock_context concept")
+||||||| BASE   (e1a7072bc4f958c9e852dc7e57e39f12b0bb44b5 regmap: Fix race condition in hwspinlock irqsave routine)
+	unsigned int busy = scsi_host_busy(shost);
+=======
+	unsigned int busy;
+>>>>>>> BRANCH (c9316144e09475d1bc3b1573d9c2683a7395b532 mm/pagewalk: add walk_page_range_vma())
 	unsigned long flags;
 
 	spin_lock_irqsave(shost->host_lock, flags);
 	shost->host_failed++;
+<<<<<<< HEAD   (72fac58a1f17e8685cdae301c4d44ef42598d0ae Revert "posix-clock: introduce posix_clock_context concept")
 	scsi_eh_wakeup(shost);
+||||||| BASE   (e1a7072bc4f958c9e852dc7e57e39f12b0bb44b5 regmap: Fix race condition in hwspinlock irqsave routine)
+	scsi_eh_wakeup(shost, busy);
+=======
+	spin_unlock_irqrestore(shost->host_lock, flags);
+	/*
+	 * The counting of busy requests needs to occur after adding to
+	 * host_failed or after the lock acquire for adding to host_failed
+	 * to prevent a race with host unbusy and missing an eh wakeup.
+	 */
+	busy = scsi_host_busy(shost);
+
+	spin_lock_irqsave(shost->host_lock, flags);
+	scsi_eh_wakeup(shost, busy);
+>>>>>>> BRANCH (c9316144e09475d1bc3b1573d9c2683a7395b532 mm/pagewalk: add walk_page_range_vma())
 	spin_unlock_irqrestore(shost->host_lock, flags);
 }
 
