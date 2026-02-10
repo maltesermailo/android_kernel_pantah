@@ -16,6 +16,24 @@
       "message": "Build-break:\n```\nERROR: /mnt/disks/build-disk/src/android/common-android16-6.12/common/BUILD.bazel:251:14: Building kernel (trim) //common:kernel_aarch64 failed: (Exit 2): bash failed: error executing KernelBuild command (from target //common:kernel_aarch64) /bin/bash -c ... (remaining 1 argument skipped)\n\nUse --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging\nwarning: overriding the module target triple with aarch64-unknown-linux-gnu [-Woverride-module]\n1 warning generated.\n/mnt/disks/build-disk/src/android/common-android16-6.12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/663/execroot/_main/common/drivers/soc/tegra/cbb/tegra234-cbb.c:192:51: error: use of undeclared identifier \u0027FABRIC_MN_INITIATOR_ERR_STATUS_0\u0027\n  192 |         writel(priv-\u003efabric-\u003eerr_status_clr, priv-\u003emon + FABRIC_MN_INITIATOR_ERR_STATUS_0);\n      |                                                          ^\n1 error generated.\nmake[7]: *** [/mnt/disks/build-disk/src/android/common-android16-6.12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/663/execroot/_main/common/scripts/Makefile.build:240: drivers/soc/tegra/cbb/tegra234-cbb.o] Error 1\nmake[6]: *** [/mnt/disks/build-disk/src/android/common-android16-6.12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/663/execroot/_main/common/scripts/Makefile.build:499: drivers/soc/tegra/cbb] Error 2\nmake[6]: *** Waiting for unfinished jobs....\nmake[5]: *** [/mnt/disks/build-disk/src/android/common-android16-6.12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/663/execroot/_main/common/scripts/Makefile.build:499: drivers/soc/tegra] Error 2\nmake[4]: *** [/mnt/disks/build-disk/src/android/common-android16-6.12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/663/execroot/_main/common/scripts/Makefile.build:499: drivers/soc] Error 2\nmake[4]: *** Waiting for unfinished jobs....\nmake[3]: *** [/mnt/disks/build-disk/src/android/common-android16-6.12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/663/execroot/_main/common/scripts/Makefile.build:499: drivers] Error 2\nmake[3]: *** Waiting for unfinished jobs....\nmake[2]: *** [/mnt/disks/build-disk/src/android/common-android16-6.12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/663/execroot/_main/common/Makefile:1996: .] Error 2\nmake[1]: *** [/mnt/disks/build-disk/src/android/common-android16-6.12/out/bazel/output_user_root/4cfd4b4d530262c9404da8567df5caec/sandbox/linux-sandbox/663/execroot/_main/common/Makefile:242: __sub-make] Error 2\nmake: *** [Makefile:242: __sub-make] Error 2\nERROR: Build did NOT complete successfully\n```",
       "revId": "6e7d9258f9597fb8b17c88e032e00c75c6144059",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5077430_a853bfb3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3386406
+      },
+      "writtenOn": "2026-02-10T18:08:34Z",
+      "side": 1,
+      "message": "Sorry for the inconvenience. We internally missed some associated patches that must be submitted together. Have pushed a new chain with the required changes together here. They are all present in android-mainline and are just looking to be backported to ack6.12. Abandoning this change in lieu of the new set\n\nhttps://android-review.googlesource.com/c/kernel/common/+/3946703/1",
+      "parentUuid": "e4d7293c_0758597f",
+      "revId": "6e7d9258f9597fb8b17c88e032e00c75c6144059",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
