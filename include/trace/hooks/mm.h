@@ -702,6 +702,22 @@ DECLARE_HOOK(android_vh_folios_put_refs_direct_free_extent,
 DECLARE_HOOK(android_vh_free_pages_and_swap_cache,
 	TP_PROTO(struct folio *folio),
 	TP_ARGS(folio));
+<<<<<<< PATCH SET (4d32e576da41b6ba39cda933289a5aac42a3032d ANDROID: vendor_hook: add vendor hooks for swapin and swap_w)
+DECLARE_HOOK(android_vh_swapin_start,
+	TP_PROTO(unsigned long *swapin_start),
+	TP_ARGS(swapin_start));
+DECLARE_HOOK(android_vh_swapin_end,
+	TP_PROTO(struct folio *folio, unsigned long swapin_start),
+	TP_ARGS(folio, swapin_start));
+DECLARE_HOOK(android_vh_swap_writepage_start,
+	TP_PROTO(unsigned long *swap_writepage_start),
+	TP_ARGS(swap_writepage_start));
+DECLARE_HOOK(android_vh_swap_writepage_end,
+	TP_PROTO(struct page *page, struct writeback_control *wbc,
+		unsigned long swap_writepage_start),
+	TP_ARGS(page, wbc, swap_writepage_start));
+||||||| BASE      (4604201b8d0a2f3093f9d232c2afaf93607190d7 ANDROID: GKI: update symbol list for xiaomi)
+=======
 DECLARE_HOOK(android_vh_task_mem,
 	TP_PROTO(struct seq_file *m, struct mm_struct *mm),
 	TP_ARGS(m, mm));
@@ -711,6 +727,7 @@ DECLARE_HOOK(android_vh_mm_free,
 DECLARE_HOOK(android_vh_mm_init,
 	TP_PROTO(struct mm_struct *mm),
 	TP_ARGS(mm));
+>>>>>>> BASE      (210f928df1eefad41a1b7e37b5ccb23c21c66662 Revert "ANDROID: mm/memfd-ashmem-shim: Introduce shim layer")
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
