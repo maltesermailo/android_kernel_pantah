@@ -22,6 +22,30 @@
       },
       "revId": "199f96b0de8c0e24567d0d9c0597dea24db2d8e9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "969304d8_303a2d16",
+        "filename": "arch/x86/configs/microdroid_defconfig",
+        "patchSetId": 2
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1897307
+      },
+      "writtenOn": "2026-02-16T15:08:52Z",
+      "side": 1,
+      "message": "encryptedstore does use ext4 fs [1]. CONFIG_EXT2_FS_SECURITY was the only security related option I could find using `menuconfig` - I\u0027m not sure why `CONFIG_EXT4_FS_SECURITY` was not shown when I used menuconfig to set these. Looking..\n\n\n\n[1] Verified using `mount`/`stat`. -\u003e `/dev/block/dm-8 on /mnt/encryptedstore type ext4 (rw,fscontext\u003du:object_r:encryptedstore_fs:s0,context\u003du:object_r:encryptedstore_file:s0,nosuid,nodev,noexec,relatime,discard)`",
+      "parentUuid": "2ddcbf11_7b258b44",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 25
+      },
+      "revId": "199f96b0de8c0e24567d0d9c0597dea24db2d8e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
