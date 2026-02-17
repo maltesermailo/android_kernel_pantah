@@ -1939,6 +1939,8 @@ static int pkvm_mem_abort(struct kvm_vcpu *vcpu, phys_addr_t fault_ipa, size_t s
 	LIST_HEAD(ppages);
 	long ret, nr_pages;
 
+	BUG();
+
 	if (WARN_ON(!kvm->arch.pkvm.enabled))
 		return -EINVAL;
 
