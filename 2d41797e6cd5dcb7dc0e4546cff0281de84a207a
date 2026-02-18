@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fba240b8_9c31c1aa",
+        "filename": "drivers/iommu/intel/pkvm_iommu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-02-18T22:22:14Z",
+      "side": 1,
+      "message": "\u003e nit: unneeded empty line?\n\nRemoved.\n\n\u003e (BTW side note: I\u0027m not sure why need to care to add these copyrights.)\n\nI thought it was Google policy to add copyright, but not sure.\n\nhttps://chromium.googlesource.com/website/+/HEAD/site/chromium-os/developer-library/guides/kernel/kernel-development/index.md#which-copyright-header-should-i-use\n\nBut I can remove this if its not really needed.",
+      "parentUuid": "b712fe69_36e79891",
+      "revId": "2d41797e6cd5dcb7dc0e4546cff0281de84a207a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b0ac62cb_5b11c3e1",
         "filename": "drivers/iommu/intel/pkvm_iommu.c",
         "patchSetId": 3
@@ -31,6 +49,24 @@
       "writtenOn": "2026-02-18T18:56:53Z",
       "side": 1,
       "message": "nit: wondering: maybe just s/pvIOMMU/IOMMU/? We have the `DMAR: pkvm:` prefix so it is clear that this is about pKVM anyway. And BTW IMHO these names pvIOMMU, pvMMU etc are generally a bit outdated (we don\u0027t need to emphasize that these implementations are PV-based in contrast to the old emulation-based ones, since those old ones are ancient history).",
+      "revId": "2d41797e6cd5dcb7dc0e4546cff0281de84a207a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c64566dc_9920f8df",
+        "filename": "drivers/iommu/intel/pkvm_iommu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-02-18T22:22:14Z",
+      "side": 1,
+      "message": "Makes sense, removed \"pv\"",
+      "parentUuid": "b0ac62cb_5b11c3e1",
       "revId": "2d41797e6cd5dcb7dc0e4546cff0281de84a207a",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
