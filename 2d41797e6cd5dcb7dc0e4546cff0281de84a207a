@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b712fe69_36e79891",
+        "filename": "drivers/iommu/intel/pkvm_iommu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-18T18:56:53Z",
+      "side": 1,
+      "message": "nit: unneeded empty line?\n\n(BTW side note: I\u0027m not sure why need to care to add these copyrights.)",
+      "revId": "2d41797e6cd5dcb7dc0e4546cff0281de84a207a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0ac62cb_5b11c3e1",
+        "filename": "drivers/iommu/intel/pkvm_iommu.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-18T18:56:53Z",
+      "side": 1,
+      "message": "nit: wondering: maybe just s/pvIOMMU/IOMMU/? We have the `DMAR: pkvm:` prefix so it is clear that this is about pKVM anyway. And BTW IMHO these names pvIOMMU, pvMMU etc are generally a bit outdated (we don\u0027t need to emphasize that these implementations are PV-based in contrast to the old emulation-based ones, since those old ones are ancient history).",
+      "revId": "2d41797e6cd5dcb7dc0e4546cff0281de84a207a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
