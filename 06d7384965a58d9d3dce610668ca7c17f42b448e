@@ -16,6 +16,23 @@
       "message": "nit: add empty line above this line for readability?",
       "revId": "06d7384965a58d9d3dce610668ca7c17f42b448e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "109fe1ba_03019000",
+        "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-18T23:28:06Z",
+      "side": 1,
+      "message": "`ept_pte_set` is used by both host EPT and guest EPT, while we need this clflush for host EPT only? So we should add separate callbacks for both (`host_ept_pte_set` and `guest_ept_pte_set`)? (I think I already commented about it.)\n\nAlso, makes sense to add a comment like \"TODO: optimize it: don\u0027t flush cache if non-coherent IOMMUs exist but don\u0027t actually use host EPT for any devices.\"? (I think I already commented about this as well.)",
+      "revId": "06d7384965a58d9d3dce610668ca7c17f42b448e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
