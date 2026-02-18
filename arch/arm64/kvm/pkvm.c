@@ -688,7 +688,7 @@ static int __init finalize_pkvm(void)
 
 	return 0;
 }
-device_initcall_sync(finalize_pkvm);
+rootfs_initcall(finalize_pkvm);
 
 int pkvm_enable_smc_forwarding(struct file *kvm_file)
 {
