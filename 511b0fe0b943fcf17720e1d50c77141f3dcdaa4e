@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d17a1e7d_e1e72a87",
+        "filename": "drivers/vfio/vfio_iommu_type1.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3122,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-02-18T21:08:36Z",
+      "side": 1,
+      "message": "I believe this is hardest part to get this right and accepted upstream, we would need to do that for devices that are capable of non-coherent DMA, in addition to many caveats which might not be fully captured by `dev_is_dma_coherent`\nCheck: https://lore.kernel.org/kvm/20220406135150.GA21532@lst.de/",
+      "range": {
+        "startLine": 3122,
+        "startChar": 6,
+        "endLine": 3122,
+        "endChar": 25
+      },
+      "revId": "511b0fe0b943fcf17720e1d50c77141f3dcdaa4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ce52dd6_42fca040",
+        "filename": "drivers/vfio/vfio_iommu_type1.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3123,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-02-18T21:08:36Z",
+      "side": 1,
+      "message": "That still won\u0027t work, as `__vfio_register_dev` will deny non-coherent devices.",
+      "range": {
+        "startLine": 3123,
+        "startChar": 9,
+        "endLine": 3123,
+        "endChar": 30
+      },
+      "revId": "511b0fe0b943fcf17720e1d50c77141f3dcdaa4e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
