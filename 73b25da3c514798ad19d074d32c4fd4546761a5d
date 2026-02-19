@@ -16,6 +16,24 @@
       "message": "Just curious: the previous version somehow worked without this, so, I guess, we were just lucky and ATS was already enabled before?\n\nActually, looks like pci_enable_ats() prints a call trace if called while ATS is already enabled. Isn\u0027t that what is already happening with this new version? (I haven\u0027t tested this new version myself yet.)",
       "revId": "73b25da3c514798ad19d074d32c4fd4546761a5d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ef2d827_38c996dc",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 4472,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-02-19T14:02:11Z",
+      "side": 1,
+      "message": "This is only for legacy mode and we do not have devices in SATC in brya(hence info-\u003eats_spported was false for all devices). So this was not an issue till now. You had a previous comment about setting ats_* fields to 0 with passthrough and rightfully mentioned that it should not be set to zero as we are not using passthrough internally. While fixing that, I was re-reading code and figured out we are not enabling ats for legacy mode and hence added this. We do not have a device to test this combination though.\n\nFor scalable mode, enabling happens before pasid table in `intel_iommu_probe_finalize`. So we got lucky there for PTL devices as it was enabling it regardless :-)",
+      "parentUuid": "48b60339_c712d336",
+      "revId": "73b25da3c514798ad19d074d32c4fd4546761a5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
