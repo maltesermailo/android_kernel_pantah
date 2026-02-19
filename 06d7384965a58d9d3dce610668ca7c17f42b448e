@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0604b368_d5d2631e",
+        "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-02-19T15:24:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d501c4fe_684f525e",
+      "revId": "06d7384965a58d9d3dce610668ca7c17f42b448e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "109fe1ba_03019000",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "\u003e \"TODO: optimize it: don\u0027t flush cache if non-coherent IOMMUs exist but don\u0027t actually use host EPT for any devices.\"\n\nMaybe s/don\u0027t actually use/are not actually using/ (to emphasize that this state may change at runtime).\n\n...BTW I\u0027m thinking: if we don\u0027t use iommu.passthrough\u003d1, this clflush is in fact completely useless? So this optimization seems really worth implementing.",
       "parentUuid": "109fe1ba_03019000",
+      "revId": "06d7384965a58d9d3dce610668ca7c17f42b448e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34419c0e_b0ee8cfa",
+        "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-02-19T15:24:03Z",
+      "side": 1,
+      "message": "\u003e ept_pte_set is used by both host EPT and guest EPT, while we need this clflush for host EPT only? So we should add separate callbacks for both (host_ept_pte_set and guest_ept_pte_set)? (I think I already commented about it.)\n\nSorry missed it last time. Updated it now.\n\n\u003e Also, makes sense to add a comment like \"TODO: optimize it: don\u0027t flush cache if non-coherent IOMMUs exist but don\u0027t actually use host EPT for any devices.\"? (I think I already commented about this as well.)\n\nAdded the TODO comment\n\n\u003e BTW I\u0027m thinking: if we don\u0027t use iommu.passthrough\u003d1, this clflush is in fact completely useless? So this optimization seems really worth implementing.\n\nI agree. I have an idea about how to get it done and will have it ready soon.",
+      "parentUuid": "4534811b_4247077b",
       "revId": "06d7384965a58d9d3dce610668ca7c17f42b448e",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
