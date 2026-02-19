@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd81c41b_d51e8299",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-19T19:50:44Z",
+      "side": 1,
+      "message": "This might sound a bit confusing, since neither domains nor cache tags are implemented yet, they are only implemented in later patches.\n\nSo maybe we it would make sense to move this patch later, after domains and cache tags are implemented, similarly to the patch aosp/3887151 in v6.12.\n\nOr maybe it\u0027s better to just add a clarification here, e.g.: \"(Domains and cache management will be implemented in later patches.)\" ?",
+      "revId": "d1728e1aed18d1ec3e7c39fcbb86f439720d6907",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e40ec06_fdc6d9a2",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1821,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-19T19:50:44Z",
+      "side": 1,
+      "message": "Since this shouldn\u0027t happen with a well-behaving host, maybe use WARN_ON (as we can\u0027t return an error here)?",
+      "revId": "d1728e1aed18d1ec3e7c39fcbb86f439720d6907",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42e39979_bcc9117c",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1836,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-19T19:50:44Z",
+      "side": 1,
+      "message": "Maybe this should be done already as a part of aosp/3956421? Otherwise, it seems aosp/3956421 introduces a regression until this patch: the freed pages are not donated back to the host, so the host may use them and fail or crash?\n\n(The pasid_table_has_present_entries() check is a different story, it is for a misbehaving host, so it\u0027s ok to add it in a separate patch.)",
+      "revId": "d1728e1aed18d1ec3e7c39fcbb86f439720d6907",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
