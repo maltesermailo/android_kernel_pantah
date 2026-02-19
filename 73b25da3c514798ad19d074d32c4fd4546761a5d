@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48b60339_c712d336",
+        "filename": "drivers/iommu/intel/iommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 4472,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-19T13:46:13Z",
+      "side": 1,
+      "message": "Just curious: the previous version somehow worked without this, so, I guess, we were just lucky and ATS was already enabled before?\n\nActually, looks like pci_enable_ats() prints a call trace if called while ATS is already enabled. Isn\u0027t that what is already happening with this new version? (I haven\u0027t tested this new version myself yet.)",
+      "revId": "73b25da3c514798ad19d074d32c4fd4546761a5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
