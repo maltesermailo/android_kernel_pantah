@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "671182ea_d76fe757",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-20T03:22:09Z",
+      "side": 1,
+      "message": "BTW maybe wouldn\u0027t be a bad idea to flush CPU cache for the root table before setting it? Although the host does that, in iommu_alloc_root_entry(), and the host is still trusted at this point, but still...",
+      "revId": "040329c5c91aab0a486b9b0ea7426d425bd36092",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
