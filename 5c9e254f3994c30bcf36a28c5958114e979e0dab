@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95efcf1a_7938b5ff",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-02-20T16:47:01Z",
+      "side": 1,
+      "message": "Maybe it\u0027s cleaner to do it outside set_root_table(), before calling it? For example, as a part of the patch aosp/3956427 (so that it is clear that it is flushed after it is donated and zeroed):\n```\n\tret \u003d pkvm_host_donate_hyp_share_ro(root_pa, VTD_PAGE_SIZE, true);\n\tif (ret) {\n\t\tpkvm_err(\"iommu%d: failed to write protect root table page(err\u003d%d)!\\n\",\n\t\t\t iommu-\u003eseq_id, ret);\n\t\treturn ret;\n\t}\n\n\tiommu-\u003eroot_entry \u003d pkvm_host_gpa_to_virt(iommu-\u003evrta \u0026 VTD_PAGE_MASK);\n\t__iommu_flush_cache(iommu, iommu-\u003eroot_entry, VTD_PAGE_SIZE);\n\t\n\tset_root_table(iommu);\t\n```\n\n?",
+      "revId": "5c9e254f3994c30bcf36a28c5958114e979e0dab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
