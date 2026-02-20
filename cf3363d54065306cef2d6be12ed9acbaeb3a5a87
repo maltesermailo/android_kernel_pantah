@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "202ce41a_cd8fe8a9",
+        "filename": "kernel/locking/rwsem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1765846
+      },
+      "writtenOn": "2026-02-20T03:36:49Z",
+      "side": 1,
+      "message": "We should probably clear current-\u003eblocked_donor here if wake_type \u003d\u003d RWSEM_WAKE_READ_OWNED or maybe if wake_type !\u003d RWSEM_WAKE_ANY, to cover the case where we get called from a downgrade.",
+      "revId": "cf3363d54065306cef2d6be12ed9acbaeb3a5a87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27894f91_3d46dca4",
+        "filename": "kernel/locking/rwsem.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1268,
+      "author": {
+        "id": 1765846
+      },
+      "writtenOn": "2026-02-20T03:36:49Z",
+      "side": 1,
+      "message": "I wonder if PROXY_WAKING could be set here, causing a warning.",
+      "revId": "cf3363d54065306cef2d6be12ed9acbaeb3a5a87",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
