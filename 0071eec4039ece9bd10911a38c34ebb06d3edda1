@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49f6bcfe_3728bb67",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-02-20T18:28:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5438a174_757b4864",
+      "revId": "0071eec4039ece9bd10911a38c34ebb06d3edda1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14a4b8e6_bd5e7220",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-02-20T16:22:44Z",
       "side": 1,
       "message": "Same.",
+      "revId": "0071eec4039ece9bd10911a38c34ebb06d3edda1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e27b4c8_14cae894",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-02-20T18:28:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14a4b8e6_bd5e7220",
       "revId": "0071eec4039ece9bd10911a38c34ebb06d3edda1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -52,6 +88,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95010fa6_d1240984",
+        "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-02-20T18:28:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae15365c_dcf7db3e",
+      "revId": "0071eec4039ece9bd10911a38c34ebb06d3edda1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be2d4e4f_d5a693b9",
@@ -65,6 +119,24 @@
       "writtenOn": "2026-02-20T15:54:33Z",
       "side": 1,
       "message": "nit: maybe add an empty line above and/or below this line?",
+      "revId": "0071eec4039ece9bd10911a38c34ebb06d3edda1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79d4a818_a7a33218",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-02-20T18:28:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be2d4e4f_d5a693b9",
       "revId": "0071eec4039ece9bd10911a38c34ebb06d3edda1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -86,6 +158,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db2663c5_5cb70726",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-02-20T18:28:15Z",
+      "side": 1,
+      "message": "moving to pkvm_iommu.h wouldn\u0027t work as this header is included in files which doesn\u0027t include `iommu.h` and hence cannot see inside of the pt_domain structure. Previosuly this function was used in 2 places, but now only in one place - So I directly use `pt_domain.qi_batch` and hence no need of this helper. So removed it",
+      "parentUuid": "8d0eef1a_e5f4a086",
+      "revId": "0071eec4039ece9bd10911a38c34ebb06d3edda1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1aa90577_95b3ce42",
@@ -99,6 +189,24 @@
       "writtenOn": "2026-02-20T15:54:33Z",
       "side": 1,
       "message": "Doesn\u0027t cache_tag_flush_range() take a physical address, not a virtual one?\n\nOk, this works correctly since it is currently only called from host_ept_flush_tlb() and host EPT contains identity mappings only. But still, here in pkvm_iommu_pt_flush() `vaddr` seems rather a misnomer? So s/vaddr/phys/, or s/vaddr/paddr/, or s/vaddr/start/ or whatever?",
+      "revId": "0071eec4039ece9bd10911a38c34ebb06d3edda1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f2aaaba_35aae780",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 15
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-02-20T18:28:15Z",
+      "side": 1,
+      "message": "s/vaddr/paddr/",
+      "parentUuid": "1aa90577_95b3ce42",
       "revId": "0071eec4039ece9bd10911a38c34ebb06d3edda1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
