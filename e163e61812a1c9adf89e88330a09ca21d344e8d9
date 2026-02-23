@@ -52,6 +52,24 @@
       "parentUuid": "4ac47a04_ed4ffeef",
       "revId": "e163e61812a1c9adf89e88330a09ca21d344e8d9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc67cd24_d62b8199",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-23T17:16:25Z",
+      "side": 1,
+      "message": "Ah, I see. You mean someone can mmap() as read-only and then to mprotect() to change that. Makes sense. I think if we clear VM_MAYWRITE when `!is_writable` that should prevent such usage.",
+      "parentUuid": "a53c34ee_1ecf4bef",
+      "revId": "e163e61812a1c9adf89e88330a09ca21d344e8d9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
