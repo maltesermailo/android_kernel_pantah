@@ -22,6 +22,30 @@
       },
       "revId": "f5e58e991ab328212c9a587e0d18c2103d3182be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0f0efc5_eda5c42e",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-02-24T17:56:37Z",
+      "side": 1,
+      "message": "We are holding ctx-\u003elock lock in the `is_writable` if block and vm_flags_clear() locks the VMA, so can\u0027t be used in atomic context.\nIf `is_writable` is false and `content-\u003eops-\u003emmap` sets `VM_WRITE`, that would be an obvious logical error on part of the content. I think we can simply add a `BUG_ON()` for that.",
+      "parentUuid": "999b8e17_df9a1a14",
+      "range": {
+        "startLine": 525,
+        "startChar": 0,
+        "endLine": 526,
+        "endChar": 35
+      },
+      "revId": "f5e58e991ab328212c9a587e0d18c2103d3182be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
