@@ -3952,6 +3952,8 @@ static void do_activate_blocked_waiter(struct rq *target_rq, struct task_struct 
 		}
 		proxy_set_task_cpu(p, target_cpu);
 		rq_lock_irqsave(target_rq, &rf);
+		if (p->sched_contributes_to_load)
+			target_rq->nr_uninterruptible--;
 		update_rq_clock(target_rq);
 		activate_task(target_rq, p, en_flags);
 		resched_curr(target_rq);
