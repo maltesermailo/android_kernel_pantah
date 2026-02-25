@@ -184,6 +184,7 @@ int ffa_driver_register(struct ffa_driver *driver, struct module *owner,
 			const char *mod_name);
 void ffa_driver_unregister(struct ffa_driver *driver);
 bool ffa_device_is_valid(struct ffa_device *ffa_dev);
+int ffa_notification_bitmap_create(unsigned long vmid, unsigned long vcpu_count);
 
 #else
 static inline struct ffa_device *
@@ -206,6 +207,9 @@ static inline void ffa_driver_unregister(struct ffa_driver *driver) {}
 
 static inline
 bool ffa_device_is_valid(struct ffa_device *ffa_dev) { return false; }
+
+static inline
+int ffa_notification_bitmap_create(unsigned long vmid, unsigned long vcpu_count) { return 0; }
 
 #endif /* CONFIG_ARM_FFA_TRANSPORT */
 
