@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3010558b_431ea3e1",
+        "filename": "arch/x86/kernel/fpu/init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-02-25T22:31:42Z",
+      "side": 1,
+      "message": "the problem is you are adding this functionality to all architectures and now x86 doesn\u0027t know how to handle this extra padding versus its fpu area. Have you thought about doing this extra padding only from the architectures that you need? Similar to how x86 does it here? This approach seems more reasonable to me.",
+      "range": {
+        "startLine": 178,
+        "startChar": 2,
+        "endLine": 178,
+        "endChar": 9
+      },
+      "revId": "8c75bd2379a0794c76db15f50e2706a8c041ca7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71da5d40_487fb853",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 1
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-02-25T22:31:42Z",
+      "side": 1,
+      "message": "Why do you need a config for this? How are vendors going to choose the maximum if the reserved area is in GKI? It sounds like this should be a simple define?",
+      "range": {
+        "startLine": 298,
+        "startChar": 7,
+        "endLine": 298,
+        "endChar": 38
+      },
+      "revId": "8c75bd2379a0794c76db15f50e2706a8c041ca7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "604d5f16_dc2c9acd",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-02-25T22:31:42Z",
+      "side": 1,
+      "message": "Why do you create a hidden config? Why not expose it and enable it via gki_defconfig?",
+      "range": {
+        "startLine": 344,
+        "startChar": 8,
+        "endLine": 344,
+        "endChar": 36
+      },
+      "revId": "8c75bd2379a0794c76db15f50e2706a8c041ca7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48c78e01_77f753d3",
+        "filename": "init/init_task.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-02-25T22:31:42Z",
+      "side": 1,
+      "message": "any particular reason to define this as a u64 buffer? Why not `u8 vendor_data_pad[512];` directly and drop the unnecessary math? Please use __aligned() if you need a certain memory alignment.",
+      "range": {
+        "startLine": 256,
+        "startChar": 61,
+        "endLine": 256,
+        "endChar": 72
+      },
+      "revId": "8c75bd2379a0794c76db15f50e2706a8c041ca7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "057d8f6b_ff98997d",
+        "filename": "init/init_task.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-02-25T22:31:42Z",
+      "side": 1,
+      "message": "this needs a better name. IIUC, this is used exclusively for init_task as this is statically defined right?",
+      "range": {
+        "startLine": 256,
+        "startChar": 4,
+        "endLine": 256,
+        "endChar": 19
+      },
+      "revId": "8c75bd2379a0794c76db15f50e2706a8c041ca7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2557578f_96105977",
+        "filename": "init/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1005,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-02-25T22:31:42Z",
+      "side": 1,
+      "message": "why not just initialize `arch_task_struct_size` directly in the definition? why do you need this extra function? Please drop this.",
+      "range": {
+        "startLine": 1005,
+        "startChar": 19,
+        "endLine": 1005,
+        "endChar": 46
+      },
+      "revId": "8c75bd2379a0794c76db15f50e2706a8c041ca7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85c819ee_19d6d067",
+        "filename": "init/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1037,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-02-25T22:31:42Z",
+      "side": 1,
+      "message": "I think the setup_arch_task_struct_size() should be implemented in here. As to avoid any collisions with other architectures modifying this value. Your `android_task_struct_vendor_size` value should be stored in a different global and then let architeture specific code add this value to the total task size and finally set the `arch_task_struct_size` which is exactly what x86 does for fpu.",
+      "range": {
+        "startLine": 1037,
+        "startChar": 1,
+        "endLine": 1037,
+        "endChar": 11
+      },
+      "revId": "8c75bd2379a0794c76db15f50e2706a8c041ca7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b487c71_b1efead2",
+        "filename": "kernel/fork.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 849,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-02-25T22:31:42Z",
+      "side": 1,
+      "message": "size is `unsigned` so how can it be negative?",
+      "range": {
+        "startLine": 849,
+        "startChar": 5,
+        "endLine": 849,
+        "endChar": 13
+      },
+      "revId": "8c75bd2379a0794c76db15f50e2706a8c041ca7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
