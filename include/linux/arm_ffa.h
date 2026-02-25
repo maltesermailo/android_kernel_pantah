@@ -175,6 +175,9 @@ static inline void *ffa_dev_get_drvdata(struct ffa_device *fdev)
 
 struct ffa_partition_info;
 
+typedef void (*ffa_sched_recv_cb)(u16 vcpu, bool is_per_vcpu, void *cb_data);
+typedef void (*ffa_notifier_cb)(int notify_id, void *cb_data);
+
 #if IS_REACHABLE(CONFIG_ARM_FFA_TRANSPORT)
 struct ffa_device *
 ffa_device_register(const struct ffa_partition_info *part_info,
@@ -184,6 +187,7 @@ int ffa_driver_register(struct ffa_driver *driver, struct module *owner,
 			const char *mod_name);
 void ffa_driver_unregister(struct ffa_driver *driver);
 bool ffa_device_is_valid(struct ffa_device *ffa_dev);
+int ffa_xa_add_partition_info(struct ffa_device *dev, ffa_sched_recv_cb callback, void *cb_data);
 int ffa_notification_bitmap_create(unsigned long vmid, unsigned long vcpu_count);
 
 #else
@@ -207,6 +211,9 @@ static inline void ffa_driver_unregister(struct ffa_driver *driver) {}
 
 static inline
 bool ffa_device_is_valid(struct ffa_device *ffa_dev) { return false; }
+
+static inline
+int ffa_xa_add_partition_info(struct ffa_device *dev, ffa_sched_recv_cb callback, void *cb_data) { return 0; }
 
 static inline
 int ffa_notification_bitmap_create(unsigned long vmid, unsigned long vcpu_count) { return 0; }
@@ -492,9 +499,6 @@ struct ffa_mem_ops {
 struct ffa_cpu_ops {
 	int (*run)(struct ffa_device *dev, u16 vcpu);
 };
-
-typedef void (*ffa_sched_recv_cb)(u16 vcpu, bool is_per_vcpu, void *cb_data);
-typedef void (*ffa_notifier_cb)(int notify_id, void *cb_data);
 
 struct ffa_notifier_ops {
 	int (*sched_recv_cb_register)(struct ffa_device *dev,

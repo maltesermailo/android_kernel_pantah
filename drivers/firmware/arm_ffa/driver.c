@@ -863,6 +863,7 @@ struct ffa_dev_part_info {
 	ffa_sched_recv_cb callback;
 	void *cb_data;
 	rwlock_t rw_lock;
+	struct ffa_device *dev;
 };
 
 static void __do_sched_recv_cb(u16 part_id, u16 vcpu, bool is_per_vcpu)
@@ -1386,6 +1387,35 @@ ffa_bus_notifier(struct notifier_block *nb, unsigned long action, void *data)
 static struct notifier_block ffa_bus_nb = {
 	.notifier_call = ffa_bus_notifier,
 };
+
+int ffa_xa_add_partition_info(struct ffa_device *dev, ffa_sched_recv_cb callback, void *cb_data)
+{
+	struct ffa_dev_part_info *info;
+	int ret = -ENOMEM;
+
+	info = kzalloc(sizeof(*info), GFP_KERNEL);
+	if (!info)
+		return ret;
+
+	rwlock_init(&info->rw_lock);
+	info->dev = dev;
+	info->callback = callback;
+	info->cb_data = cb_data;
+
+	ret = xa_insert(&drv_info->partition_info, dev->vm_id, info,
+			GFP_KERNEL);
+	if (ret) {
+		pr_err("%s: failed to save part ID 0x%x Ret:%d\n",
+		       __func__, dev->vm_id, ret);
+		goto free_out;
+	}
+	return 0;
+
+free_out:
+	kfree(info);
+	return ret;
+}
+EXPORT_SYMBOL(ffa_xa_add_partition_info);
 
 static int ffa_setup_partitions(void)
 {
