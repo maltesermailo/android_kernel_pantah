@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "827484c4_c7513ed4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-02-26T19:36:24Z",
+      "side": 1,
+      "message": "Is there a reason that this is not a cherry-pick of an existing version of this feature? (so we match Change-Id and can easily refer back to comments on previous versions of the patch)",
+      "revId": "8c75bd2379a0794c76db15f50e2706a8c041ca7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3010558b_431ea3e1",
         "filename": "arch/x86/kernel/fpu/init.c",
         "patchSetId": 1
@@ -133,6 +150,30 @@
       "side": 1,
       "message": "@tkjos@google.com this is a hardcoded value for GKI so there is no ability for different vendors to configure their own. Making it a config creates more trouble IMO. I think this needs to be a define.",
       "parentUuid": "56eb8514_083da81f",
+      "range": {
+        "startLine": 298,
+        "startChar": 7,
+        "endLine": 298,
+        "endChar": 38
+      },
+      "revId": "8c75bd2379a0794c76db15f50e2706a8c041ca7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "369807d9_44794c3d",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 1
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-02-26T19:36:24Z",
+      "side": 1,
+      "message": "This is just a limit. The actual size is configurable on the command-line. We need a constant since the init task uses a global sized by the MAX value.",
+      "parentUuid": "4b466d52_40bab456",
       "range": {
         "startLine": 298,
         "startChar": 7,
