@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cac7b439_2aeeaa3e",
+        "filename": "arch/x86/kernel/fpu/init.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-02-26T18:17:45Z",
+      "side": 1,
+      "message": "I can\u0027t find previous @tkjos@google.com\u0027s comments on this topic but I\u0027ll loop him into this review. The current kernel design is that each architecture defines its own `arch_task_struct_size` (hence the naming). So the changes should be added to fit the current design.",
+      "parentUuid": "beac0887_999087cb",
+      "range": {
+        "startLine": 178,
+        "startChar": 2,
+        "endLine": 178,
+        "endChar": 9
+      },
+      "revId": "8c75bd2379a0794c76db15f50e2706a8c041ca7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "71da5d40_487fb853",
         "filename": "init/Kconfig.gki",
         "patchSetId": 1
@@ -97,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4b466d52_40bab456",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 1
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-02-26T18:17:45Z",
+      "side": 1,
+      "message": "@tkjos@google.com this is a hardcoded value for GKI so there is no ability for different vendors to configure their own. Making it a config creates more trouble IMO. I think this needs to be a define.",
+      "parentUuid": "56eb8514_083da81f",
+      "range": {
+        "startLine": 298,
+        "startChar": 7,
+        "endLine": 298,
+        "endChar": 38
+      },
+      "revId": "8c75bd2379a0794c76db15f50e2706a8c041ca7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "604d5f16_dc2c9acd",
         "filename": "init/Kconfig.gki",
         "patchSetId": 1
@@ -132,6 +180,30 @@
       "side": 1,
       "message": "I added it here based on Todd\u0027s suggestion: https://android-review.googlesource.com/c/kernel/common/+/3292853/comment/7dee5f2c_e5fc7290/\n\nI\u0027m not sure what is a hidden config. how do I expose it? which file should I add this config to?",
       "parentUuid": "604d5f16_dc2c9acd",
+      "range": {
+        "startLine": 344,
+        "startChar": 8,
+        "endLine": 344,
+        "endChar": 36
+      },
+      "revId": "8c75bd2379a0794c76db15f50e2706a8c041ca7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed2f4511_92b822a0",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-02-26T18:17:45Z",
+      "side": 1,
+      "message": "I see Todd suggested in various comments to use the gki_defconfig. I see the added Kconfig option already has a prompt e.g. `\"Dynamic task_struct size needed for GKI\"` so it is already visible to users and can be added to gki_defconfig. Please use that instead of select.",
+      "parentUuid": "d3d185bf_0ea15586",
       "range": {
         "startLine": 344,
         "startChar": 8,
@@ -238,6 +310,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ac812e2f_392e014b",
+        "filename": "init/init_task.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-02-26T18:17:45Z",
+      "side": 1,
+      "message": "yes I think that works better.",
+      "parentUuid": "d0a5227c_7a0c882b",
+      "range": {
+        "startLine": 256,
+        "startChar": 4,
+        "endLine": 256,
+        "endChar": 19
+      },
+      "revId": "8c75bd2379a0794c76db15f50e2706a8c041ca7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2557578f_96105977",
         "filename": "init/main.c",
         "patchSetId": 1
@@ -320,6 +416,30 @@
       "side": 1,
       "message": "will directly set up arch_task_struct_size here instead of the added depth of the function call.\nThe design was such that it was originally for arm64 and vendors could use a kernel cmdline parameter in the devicetree IF they wanted extra space.",
       "parentUuid": "85c819ee_19d6d067",
+      "range": {
+        "startLine": 1037,
+        "startChar": 1,
+        "endLine": 1037,
+        "endChar": 11
+      },
+      "revId": "8c75bd2379a0794c76db15f50e2706a8c041ca7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb8bbf6a_62710c30",
+        "filename": "init/main.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1037,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-02-26T18:17:45Z",
+      "side": 1,
+      "message": "fwiw, making this only for arm64 makes more sense to me because of the current design around `arch_task_struct_size`.",
+      "parentUuid": "6b018e01_5ecd29b9",
       "range": {
         "startLine": 1037,
         "startChar": 1,
