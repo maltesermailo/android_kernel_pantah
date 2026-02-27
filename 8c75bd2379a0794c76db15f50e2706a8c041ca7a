@@ -186,6 +186,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b762239_4cd58b62",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 1
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-02-27T00:10:42Z",
+      "side": 1,
+      "message": "Right and this MAX doesn\u0027t have to be a Kconfig since it\u0027s always a constant in all GKI kernels. I don\u0027t see the point of this complication over a simple define. We don\u0027t need anything more than:\n\n```\n#define GKI_TASK_STRUCT_VENDOR_SIZE_MAX 512\n```",
+      "parentUuid": "369807d9_44794c3d",
+      "range": {
+        "startLine": 298,
+        "startChar": 7,
+        "endLine": 298,
+        "endChar": 38
+      },
+      "revId": "8c75bd2379a0794c76db15f50e2706a8c041ca7a",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "604d5f16_dc2c9acd",
         "filename": "init/Kconfig.gki",
         "patchSetId": 1
