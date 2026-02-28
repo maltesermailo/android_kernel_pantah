@@ -1014,6 +1014,11 @@ static void complete_signal(int sig, struct task_struct *p, enum pid_type type)
 	struct task_struct *t;
 	bool wake;
 
+#ifdef CONFIG_LRU_GEN
+	/* Remove mm of the task from lru_gen list to avoid reclaiming it */
+	if (sig_fatal(p, sig) && p->mm)
+		set_bit(MMF_LRU_GEN_SKIP, &p->mm->flags);
+#endif
 	/*
 	 * Now find a thread we can wake up to take the signal off the queue.
 	 *
