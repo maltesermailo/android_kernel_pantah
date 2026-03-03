@@ -16,6 +16,24 @@
       "message": "this dependency relationship seems a little off to me. do we only want to enable this when we\u0027re building all 3 into the kernel? i.e., what if we only want to build CRYPTO_LIB_AES and CRYPTO_LIB_SHA256? wouldn\u0027t we still want them to be overridden?",
       "revId": "5885de1ffa1724f7f55d120d34067c2720fe75bb",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abec3c90_2a5f0c82",
+        "filename": "crypto/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1137063
+      },
+      "writtenOn": "2026-03-03T19:20:28Z",
+      "side": 1,
+      "message": "`fips140.ko` does include all those algorithms, regardless of the values of `CRYPTO_LIB_*`.  If the kernel does not, then there would be an inconsistency.  So this ensures that `fips140.ko` is only supported in the case that is useful and consistent with the kernel it is loaded into.\n\nI think this way makes the most sense, but if you\u0027d prefer we could instead just move the fips140 stuff out of `lib/crypto/utils.c` and into an unconditional file.  The code would still be included in cases where it isn\u0027t useful, but at least the extra `select CRYPTO_LIB_UTILS` compared to upstream wouldn\u0027t be needed.  (Note that you added the select to only one of the three options -- we would actually need it in all three.)",
+      "parentUuid": "27ebbe4d_5444cf9a",
+      "revId": "5885de1ffa1724f7f55d120d34067c2720fe75bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
