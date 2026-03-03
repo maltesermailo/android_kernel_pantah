@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27ebbe4d_5444cf9a",
+        "filename": "crypto/Kconfig",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1967151
+      },
+      "writtenOn": "2026-03-03T18:58:10Z",
+      "side": 1,
+      "message": "this dependency relationship seems a little off to me. do we only want to enable this when we\u0027re building all 3 into the kernel? i.e., what if we only want to build CRYPTO_LIB_AES and CRYPTO_LIB_SHA256? wouldn\u0027t we still want them to be overridden?",
+      "revId": "5885de1ffa1724f7f55d120d34067c2720fe75bb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
