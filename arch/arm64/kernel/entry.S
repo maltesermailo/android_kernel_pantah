@@ -868,25 +868,19 @@ SYM_CODE_START(ret_from_fork)
 SYM_CODE_END(ret_from_fork)
 NOKPROBE(ret_from_fork)
 
-/*
- * void call_on_irq_stack(struct pt_regs *regs,
- * 		          void (*func)(struct pt_regs *));
- *
- * Calls func(regs) using this CPU's irq stack and shadow irq stack.
- */
-SYM_FUNC_START(call_on_irq_stack)
+.macro __call_on_irq_stack, type
 	save_and_disable_daif x9
 #ifdef CONFIG_SHADOW_CALL_STACK
-	get_current_task x16
-	scs_save x16
-	ldr_this_cpu scs_sp, irq_shadow_call_stack_ptr, x17
+	// XXX: This undoes 59b37fe52f49 ("arm64: Stash shadow stack pointer in the task struct on interrupt")
+	stp	scs_sp, xzr, [sp, #-16]!
+	ldr_this_cpu scs_sp, \type\()_shadow_call_stack_ptr, x17
 #endif
 
 	/* Create a frame record to save our LR and SP (implicit in FP) */
 	stp	x29, x30, [sp, #-16]!
 	mov	x29, sp
 
-	ldr_this_cpu x16, irq_stack_ptr, x17
+	ldr_this_cpu x16, \type\()_stack_ptr, x17
 
 	/* Move to the new stack and call the function there */
 	add	sp, x16, #IRQ_STACK_SIZE
@@ -900,11 +894,29 @@ SYM_FUNC_START(call_on_irq_stack)
 	 */
 	mov	sp, x29
 	ldp	x29, x30, [sp], #16
-	scs_load_current
+#ifdef CONFIG_SHADOW_CALL_STACK
+	ldp	scs_sp, xzr, [sp], #16
+#endif
 	restore_irq x9
+.endm
+
+/*
+ * void call_on_irq_stack(struct pt_regs *regs,
+ * 		          void (*func)(struct pt_regs *));
+ *
+ * Calls func(regs) using this CPU's irq stack and shadow irq stack.
+ */
+SYM_FUNC_START(call_on_irq_stack)
+	__call_on_irq_stack irq
 	ret
 SYM_FUNC_END(call_on_irq_stack)
 NOKPROBE(call_on_irq_stack)
+
+SYM_FUNC_START(call_on_softirq_stack)
+	__call_on_irq_stack softirq
+	ret
+SYM_FUNC_END(call_on_softirq_stack)
+NOKPROBE(call_on_softirq_stack)
 
 #ifdef CONFIG_ARM_SDE_INTERFACE
 

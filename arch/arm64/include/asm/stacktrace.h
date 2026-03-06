@@ -21,6 +21,7 @@ extern void dump_backtrace(struct pt_regs *regs, struct task_struct *tsk,
 			   const char *loglvl);
 
 DECLARE_PER_CPU(unsigned long *, irq_stack_ptr);
+DECLARE_PER_CPU(unsigned long *, softirq_stack_ptr);
 
 static inline struct stack_info stackinfo_get_irq(void)
 {
@@ -33,10 +34,24 @@ static inline struct stack_info stackinfo_get_irq(void)
 	};
 }
 
+static inline struct stack_info stackinfo_get_softirq(void)
+{
+	unsigned long low = (unsigned long)raw_cpu_read(softirq_stack_ptr);
+	unsigned long high = low + IRQ_STACK_SIZE;
+
+	return (struct stack_info) {
+		.low = low,
+		.high = high,
+	};
+}
+
 static inline bool on_irq_stack(unsigned long sp, unsigned long size)
 {
-	struct stack_info info = stackinfo_get_irq();
-	return stackinfo_on_stack(&info, sp, size);
+	struct stack_info hard = stackinfo_get_irq();
+	struct stack_info soft = stackinfo_get_softirq();
+
+	return stackinfo_on_stack(&hard, sp, size) ||
+	       stackinfo_on_stack(&soft, sp, size);
 }
 
 static inline struct stack_info stackinfo_get_task(const struct task_struct *tsk)

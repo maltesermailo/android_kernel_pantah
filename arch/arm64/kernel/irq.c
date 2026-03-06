@@ -31,12 +31,14 @@
 DEFINE_PER_CPU(struct nmi_ctx, nmi_contexts);
 
 DEFINE_PER_CPU(unsigned long *, irq_stack_ptr);
+DEFINE_PER_CPU(unsigned long *, softirq_stack_ptr);
 
 
 DECLARE_PER_CPU(unsigned long *, irq_shadow_call_stack_ptr);
 
 #ifdef CONFIG_SHADOW_CALL_STACK
 DEFINE_PER_CPU(unsigned long *, irq_shadow_call_stack_ptr);
+DEFINE_PER_CPU(unsigned long *, softirq_shadow_call_stack_ptr);
 #endif
 
 static void init_irq_scs(void)
@@ -46,9 +48,12 @@ static void init_irq_scs(void)
 	if (!scs_is_enabled())
 		return;
 
-	for_each_possible_cpu(cpu)
-		per_cpu(irq_shadow_call_stack_ptr, cpu) =
-			scs_alloc(early_cpu_to_node(cpu));
+	for_each_possible_cpu(cpu) {
+		int nid = early_cpu_to_node(cpu);
+
+		per_cpu(irq_shadow_call_stack_ptr, cpu) = scs_alloc(nid);
+		per_cpu(softirq_shadow_call_stack_ptr, cpu) = scs_alloc(nid);
+	}
 }
 
 #ifdef CONFIG_VMAP_STACK
@@ -58,8 +63,13 @@ static void __init init_irq_stacks(void)
 	unsigned long *p;
 
 	for_each_possible_cpu(cpu) {
-		p = arch_alloc_vmap_stack(IRQ_STACK_SIZE, early_cpu_to_node(cpu));
+		int nid = early_cpu_to_node(cpu);
+
+		p = arch_alloc_vmap_stack(IRQ_STACK_SIZE, nid);
 		per_cpu(irq_stack_ptr, cpu) = p;
+
+		p = arch_alloc_vmap_stack(IRQ_STACK_SIZE, nid);
+		per_cpu(softirq_stack_ptr, cpu) = p;
 	}
 }
 #else
@@ -83,7 +93,7 @@ static void ____do_softirq(struct pt_regs *regs)
 
 void do_softirq_own_stack(void)
 {
-	call_on_irq_stack(NULL, ____do_softirq);
+	call_on_softirq_stack(NULL, ____do_softirq);
 }
 #endif
 

@@ -50,6 +50,8 @@ asmlinkage void el0t_32_error_handler(struct pt_regs *regs);
 
 asmlinkage void call_on_irq_stack(struct pt_regs *regs,
 				  void (*func)(struct pt_regs *));
+asmlinkage void call_on_softirq_stack(struct pt_regs *regs,
+				      void (*func)(struct pt_regs *));
 asmlinkage void asm_exit_to_user_mode(struct pt_regs *regs);
 
 void do_mem_abort(unsigned long far, unsigned long esr, struct pt_regs *regs);
