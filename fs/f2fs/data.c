@@ -3299,6 +3299,30 @@ static inline bool __should_serialize_io(struct inode *inode,
 	return false;
 }
 
+<<<<<<< HEAD   (aec41bff420488c0ca44b164f1fdef3924e1a0d9 Merge 6.6.126 into android15-6.6-lts)
+||||||| BASE   (computed base)
+<<<<<<< OURS
+static inline void update_skipped_write(struct f2fs_sb_info *sbi,
+						struct writeback_control *wbc)
+{
+	long skipped = wbc->pages_skipped;
+
+	if (is_sbi_flag_set(sbi, SBI_ENABLE_CHECKPOINT) && skipped &&
+		wbc->sync_mode == WB_SYNC_ALL)
+		atomic_add(skipped, &sbi->nr_pages[F2FS_SKIPPED_WRITE]);
+=======
+=======
+static inline void update_skipped_write(struct f2fs_sb_info *sbi,
+						struct writeback_control *wbc)
+{
+	long skipped = wbc->pages_skipped;
+
+	if (is_sbi_flag_set(sbi, SBI_ENABLE_CHECKPOINT) && skipped &&
+		wbc->sync_mode == WB_SYNC_ALL)
+		atomic_add(skipped, &sbi->nr_pages[F2FS_SKIPPED_WRITE]);
+}
+
+>>>>>>> BRANCH (210e682ca5b12401a872ba342e22372c9f094532 ANDROID: Update AutoFDO profile to 6.6.123)
 static inline void account_writeback(struct inode *inode, bool inc)
 {
 	if (!f2fs_sb_has_compression(F2FS_I_SB(inode)))
@@ -3310,6 +3334,7 @@ static inline void account_writeback(struct inode *inode, bool inc)
 	else
 		atomic_dec(&F2FS_I(inode)->writeback);
 	f2fs_up_read(&F2FS_I(inode)->i_sem);
+<<<<<<< HEAD   (aec41bff420488c0ca44b164f1fdef3924e1a0d9 Merge 6.6.126 into android15-6.6-lts)
 }
 
 static inline void update_skipped_write(struct f2fs_sb_info *sbi,
@@ -3320,6 +3345,10 @@ static inline void update_skipped_write(struct f2fs_sb_info *sbi,
 	if (is_sbi_flag_set(sbi, SBI_ENABLE_CHECKPOINT) && skipped &&
 		wbc->sync_mode == WB_SYNC_ALL)
 		atomic_add(skipped, &sbi->nr_pages[F2FS_SKIPPED_WRITE]);
+||||||| BASE   (computed base)
+>>>>>>> THEIRS
+=======
+>>>>>>> BRANCH (210e682ca5b12401a872ba342e22372c9f094532 ANDROID: Update AutoFDO profile to 6.6.123)
 }
 
 static int __f2fs_write_data_pages(struct address_space *mapping,
