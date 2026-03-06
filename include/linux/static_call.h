@@ -294,6 +294,9 @@ static inline long __static_call_return0(void)
 	return 0;
 }
 
+static inline unsigned int __static_call_ret0_uint(void) { return 0; }
+static inline unsigned long __static_call_ret0_ulong(void) { return 0; }
+
 #define __DEFINE_STATIC_CALL(name, _func, _func_init)			\
 	DECLARE_STATIC_CALL(name, _func);				\
 	struct static_call_key STATIC_CALL_KEY(name) = {		\
@@ -308,6 +311,12 @@ static inline long __static_call_return0(void)
 
 #define DEFINE_STATIC_CALL_RET0(name, _func)				\
 	__DEFINE_STATIC_CALL(name, _func, __static_call_return0)
+
+#define DEFINE_STATIC_CALL_RET0_UINT(name, _func)			\
+	__DEFINE_STATIC_CALL(name, _func, __static_call_ret0_uint)
+
+#define DEFINE_STATIC_CALL_RET0_ULONG(name, _func)			\
+	__DEFINE_STATIC_CALL(name, _func, __static_call_ret0_ulong)
 
 static inline void __static_call_nop(void) { }
 

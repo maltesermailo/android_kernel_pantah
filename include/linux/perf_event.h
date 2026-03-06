@@ -1707,7 +1707,7 @@ static inline unsigned int perf_guest_handle_intel_pt_intr(void)
 
 static inline void perf_guest_handle_mediated_pmi(void)
 {
-	static_call(__perf_guest_handle_mediated_pmi)();
+	static_call_cond(__perf_guest_handle_mediated_pmi)();
 }
 
 extern void perf_register_guest_info_callbacks(struct perf_guest_info_callbacks *cbs);
