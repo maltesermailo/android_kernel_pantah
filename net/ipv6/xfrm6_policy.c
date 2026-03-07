@@ -58,6 +58,7 @@ static int xfrm6_get_saddr(struct net *net, int oif,
 	struct dst_entry *dst;
 	struct net_device *dev;
 	struct inet6_dev *idev;
+	int err;
 
 	dst = xfrm6_dst_lookup(net, 0, oif, NULL, daddr, mark);
 	if (IS_ERR(dst))
@@ -69,8 +70,18 @@ static int xfrm6_get_saddr(struct net *net, int oif,
 		return -EHOSTUNREACH;
 	}
 	dev = idev->dev;
+<<<<<<< HEAD   (83bfc34acac5c59f495f79fbd937e67d8b42d3a6 Merge 5.15.201 into android14-5.15-lts)
 	ipv6_dev_get_saddr(dev_net(dev), dev, &daddr->in6, 0, &saddr->in6);
+||||||| BASE   (3330a8d33e086f76608bb4e80a3dc569d04a8814 Linux 5.15.201)
+	ipv6_dev_get_saddr(dev_net(dev), dev, &params->daddr->in6, 0,
+			   &saddr->in6);
+=======
+	err = ipv6_dev_get_saddr(dev_net(dev), dev, &params->daddr->in6, 0,
+				 &saddr->in6);
+>>>>>>> BRANCH (91d48252ad4b17577cf8cc8d3e1353402e4da8f1 Linux 5.15.202)
 	dst_release(dst);
+	if (err)
+		return -EHOSTUNREACH;
 	return 0;
 }
 
