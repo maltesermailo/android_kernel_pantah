@@ -9979,6 +9979,11 @@ static int __ufshcd_wl_suspend(struct ufs_hba *hba, enum ufs_pm_op pm_op)
 
 	if (req_dev_pwr_mode == UFS_ACTIVE_PWR_MODE &&
 			req_link_state == UIC_LINK_ACTIVE_STATE) {
+<<<<<<< HEAD   (5bc66fa0f7285dfc19c4155520d93d70ccecff01 Merge 6.12.74 into android16-6.12-lts)
+||||||| BASE   (444b39ef6108313e8452010b22aaba588e8fb92b Linux 6.12.74)
+=======
+		ufshcd_disable_auto_bkops(hba);
+>>>>>>> BRANCH (c1924e059c728edf4138c6343fafb2c6d234ac35 Linux 6.12.75)
 		flush_work(&hba->eeh_work);
 		goto vops_suspend;
 	}
