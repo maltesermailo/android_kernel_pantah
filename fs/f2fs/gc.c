@@ -2074,9 +2074,14 @@ int f2fs_gc_range(struct f2fs_sb_info *sbi,
 	unsigned int segno;
 	unsigned int gc_secs = dry_run_sections;
 
+<<<<<<< HEAD   (4db0f3f0a9a8777b8b61718a08fcf39f5bc3ad0f Merge ff37dd18ce77 ("mm/hugetlb: fix excessive IPI broadcast)
 	if (unlikely(f2fs_cp_error(sbi)))
 		return -EIO;
 
+||||||| BASE   (ff37dd18ce7739a26aab0cc2d31006a45e6bde63 mm/hugetlb: fix excessive IPI broadcasts when unsharing PMD )
+=======
+	stat_inc_gc_call_count(sbi, FOREGROUND);
+>>>>>>> BRANCH (81193503af1fb9102fdd0c5f906af4dc39551e21 f2fs: fix to add gc count stat in f2fs_gc_range)
 	for (segno = start_seg; segno <= end_seg; segno += SEGS_PER_SEC(sbi)) {
 		struct gc_inode_list gc_list = {
 			.ilist = LIST_HEAD_INIT(gc_list.ilist),
