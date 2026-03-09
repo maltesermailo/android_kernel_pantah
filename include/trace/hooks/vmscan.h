@@ -66,9 +66,25 @@ DECLARE_HOOK(android_vh_remove_mapping_failed,
 DECLARE_HOOK(android_vh_rebalance_anon_lru_bypass,
 	TP_PROTO(bool *bypass),
 	TP_ARGS(bypass));
+<<<<<<< HEAD   (1109b9e35c077152dc648ea1f4cd893544626eec ANDROID: GKI: update symbol list file for xiaomi)
 DECLARE_HOOK(android_vh_tune_scan_control,
 	TP_PROTO(bool *skip_swap),
 	TP_ARGS(skip_swap));
+||||||| BASE   (ec73a58c8c5d75c46d5109e95a74fb84a578ceb2 ANDROID: Add vendor hook for tracking folios during readahea)
+DECLARE_HOOK(android_vh_shrink_node,
+	TP_PROTO(pg_data_t *pgdat, struct mem_cgroup *memcg),
+	TP_ARGS(pgdat, memcg));
+=======
+DECLARE_HOOK(android_vh_folio_skip_activate,
+	TP_PROTO(struct folio *folio, bool *skip),
+	TP_ARGS(folio, skip));
+DECLARE_HOOK(android_vh_folio_trylock_clear_bypass,
+	TP_PROTO(struct folio *folio, bool *bypass),
+	TP_ARGS(folio, bypass));
+DECLARE_HOOK(android_vh_shrink_node,
+	TP_PROTO(pg_data_t *pgdat, struct mem_cgroup *memcg),
+	TP_ARGS(pgdat, memcg));
+>>>>>>> CHANGE (c9bbfdb57bfc613b08ca18b24cf8f71a6bd7b835 ANDROID: vendor_hook: Added hooks and a function to handle s)
 DECLARE_HOOK(android_vh_shrink_node_memcgs,
 	TP_PROTO(struct mem_cgroup *memcg, bool *skip),
 	TP_ARGS(memcg, skip));
