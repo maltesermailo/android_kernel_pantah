@@ -1,1 +1,23 @@
 # See http://go/approve-abi-break
+
+function symbol 'struct block_device* I_BDEV(struct inode*)' changed
+  CRC changed from 0x3d10eb78 to 0xbc78df2c
+
+function symbol 'int ___pskb_trim(struct sk_buff*, unsigned int)' changed
+  CRC changed from 0xb4caaf31 to 0xbea4b7f4
+
+function symbol 'struct page* __alloc_pages_noprof(gfp_t, unsigned int, int, nodemask_t*)' changed
+  CRC changed from 0xd6b44167 to 0xe9e508db
+
+... 5269 omitted; 5272 symbols have only CRC changes
+
+type 'enum bpf_prog_type' changed
+  enumerator 'BPF_PROG_TYPE_FUSE' (33) was added
+  enumerator '__MAX_BPF_PROG_TYPE' value changed from 33 to 34
+
+type 'struct dentry_operations' changed
+  member changed from 'void(* d_canonical_path)(const struct path*, struct path*)' to 'int(* d_canonical_path)(const struct path*, struct path*)'
+    type changed from 'void(*)(const struct path*, struct path*)' to 'int(*)(const struct path*, struct path*)'
+      pointed-to type changed from 'void(const struct path*, struct path*)' to 'int(const struct path*, struct path*)'
+        return type changed from 'void' to 'int'
+
