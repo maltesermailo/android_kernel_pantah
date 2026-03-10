@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f86ce12d_04e3ff7c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1869780
+      },
+      "writtenOn": "2026-03-10T15:32:21Z",
+      "side": 1,
+      "message": "This should be `FROMGIT:` instead of `FROMLIST:`. See also commit f8ef441811ec413717f188f63d99182f30f0f08e in Martin Petersen\u0027s git repository (git://git.kernel.org/pub/scm/linux/kernel/git/mkp/scsi.git). Please import that commit as follows:\n- Drop this commit.\n- Run the following commands:\n```\ngit remote add mkp-scsi git://git.kernel.org/pub/scm/linux/kernel/git/mkp/scsi.git\ngit fetch mkp-scsi\ngit cherry-pick -x f8ef441811ec413717f188f63d99182f30f0f08e\ngit commit --amend # To correct the cherry picked from line, to add the Bug: number, etc.\n```",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 8
+      },
+      "revId": "de0c289ebf51002f21f287ab17a3e7aca2d171d2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
