@@ -29,6 +29,13 @@ static struct hyp_allocator {
 	hyp_spinlock_t		lock;
 } hyp_allocator;
 
+#ifdef KVM_NVHE_ALLOC_USE_KASAN
+bool hyp_alloc_check_range(const volatile void *p, size_t size)
+{
+	return true;
+}
+#endif
+
 struct chunk_hdr {
 	u32			alloc_size;
 	u32			mapped_size;
