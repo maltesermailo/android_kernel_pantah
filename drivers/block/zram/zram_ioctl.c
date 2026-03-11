@@ -335,6 +335,9 @@ int zram_ioctl(struct block_device *bdev, blk_mode_t mode,
 	struct zram_android_ioc_data ioc_data;
 	int ret = -EINVAL;
 
+	if (cmd == ZRAM_ANDROID_IOC_GET_VERSION)
+		return ZRAM_ANDROID_IOC_VERSION;
+
 	if (cmd != ZRAM_ANDROID_IOC_PROCESS_WRITEBACK &&
 	    cmd != ZRAM_ANDROID_IOC_PROCESS_RANGE_WRITEBACK &&
 	    cmd != ZRAM_ANDROID_IOC_PROCESS_PREFETCH)
