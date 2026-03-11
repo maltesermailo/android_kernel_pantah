@@ -7,10 +7,13 @@
 #include <nvhe/alloc.h>
 #include <nvhe/alloc_mgt.h>
 #include <nvhe/errno.h>
+#include <nvhe/kasan.h>
 #include <nvhe/mem_protect.h>
 #include <nvhe/mm.h>
 #include <nvhe/spinlock.h>
 
+#include <linux/bitmap.h>
+#include <linux/bitops.h>
 #include <linux/build_bug.h>
 #include <linux/hash.h>
 #include <linux/kvm_host.h>
@@ -22,18 +25,94 @@ static DEFINE_PER_CPU(int, hyp_allocator_errno);
 static DEFINE_PER_CPU(struct kvm_hyp_memcache, hyp_allocator_mc);
 static DEFINE_PER_CPU(u8, hyp_allocator_missing_donations);
 
-static struct hyp_allocator {
+#define KASAN_VA_BYTES_PER_BIT	MIN_ALLOC
+#define KASAN_SHADOW_PAGES	1UL
+#define KASAN_SHADOW_BITS	(KASAN_SHADOW_PAGES * PAGE_SIZE * BITS_PER_BYTE)
+
+struct hyp_allocator {
 	struct list_head	chunks;
 	unsigned long		start;
 	u32			size;
 	hyp_spinlock_t		lock;
+#ifdef KVM_NVHE_ALLOC_USE_KASAN
+	DECLARE_BITMAP(shadow, KASAN_SHADOW_BITS);
+#endif
 } hyp_allocator;
 
 #ifdef KVM_NVHE_ALLOC_USE_KASAN
-bool hyp_alloc_check_range(const volatile void *p, size_t size)
+#define KASAN_SHADOW_VA_COVERED		(KASAN_SHADOW_BITS * KASAN_VA_BYTES_PER_BIT)
+
+static bool kasan_check_range(struct hyp_allocator *allocator, unsigned long off_start,
+			      unsigned long off_end)
 {
+	unsigned long bit_start = off_start / KASAN_VA_BYTES_PER_BIT;
+	unsigned long bit_end = (off_end - 1)/ KASAN_VA_BYTES_PER_BIT;
+	unsigned long i;
+
+	for (i = bit_start; i <= bit_end; i++) {
+		if (!test_bit(i, allocator->shadow))
+			return false;
+	}
 	return true;
 }
+
+static void kasan_set_range(struct hyp_allocator *allocator, unsigned long off_start,
+			    unsigned long off_end, bool poison)
+{
+	unsigned long bit_start = off_start / KASAN_VA_BYTES_PER_BIT;
+	unsigned long bit_end = (off_end - 1)/ KASAN_VA_BYTES_PER_BIT;
+	unsigned long i;
+
+	for (i = bit_start; i <= bit_end; i++) {
+		if (poison)
+			clear_bit(i, allocator->shadow);
+		else
+			set_bit(i, allocator->shadow);
+	}
+}
+
+static void kasan_poison_shadow(struct hyp_allocator *allocator, unsigned long va, size_t size)
+{
+	unsigned long end = min(va + size, allocator->start + KASAN_SHADOW_VA_COVERED);
+
+	if (end < va)
+		return;
+
+	kasan_set_range(allocator, va - allocator->start, end - allocator->start, true);
+}
+
+static void kasan_unpoison_shadow(struct hyp_allocator *allocator, unsigned long va, size_t size)
+{
+	unsigned long end = min(va + size, allocator->start + KASAN_SHADOW_VA_COVERED);
+
+	if (end < va)
+		return;
+
+	kasan_set_range(allocator, va - allocator->start, end - allocator->start, false);
+}
+
+bool hyp_alloc_check_range(const volatile void *p, size_t size)
+{
+	struct hyp_allocator *allocator = &hyp_allocator;
+	unsigned long addr = (unsigned long)p;
+	unsigned long end;
+	int ret;
+
+	end = min(addr + size, allocator->start + KASAN_SHADOW_VA_COVERED);
+
+	if ((addr < allocator->start) || (end < addr))
+		return true;
+
+	hyp_spin_lock(&allocator->lock);
+	ret = kasan_check_range(allocator, addr - allocator->start, end - allocator->start);
+	hyp_spin_unlock(&allocator->lock);
+	return ret;
+}
+#else
+static inline void kasan_poison_shadow(struct hyp_allocator *alloc, unsigned long va,
+				       size_t size) { }
+static inline void kasan_unpoison_shadow(struct hyp_allocator *alloc, unsigned long va,
+					 size_t size) { }
 #endif
 
 struct chunk_hdr {
@@ -603,6 +682,9 @@ void *hyp_alloc(size_t size)
 	WARN_ON(chunk_install(chunk, size, last_chunk, allocator));
 
 end:
+	if (!ret)
+		kasan_unpoison_shadow(allocator, (unsigned long)chunk_data(chunk), size);
+
 	hyp_spin_unlock(&allocator->lock);
 
 end_unlocked:
@@ -649,6 +731,8 @@ void hyp_free(void *addr)
 	hyp_spin_lock(&allocator->lock);
 
 	chunk = chunk_get(container_of(chunk_data, struct chunk_hdr, data));
+	kasan_poison_shadow(allocator, (unsigned long)addr, chunk->alloc_size);
+
 	prev_chunk = chunk_get_prev(chunk, allocator);
 	next_chunk = chunk_get_next(chunk, allocator);
 
