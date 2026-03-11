@@ -456,6 +456,9 @@ DECLARE_HOOK(android_vh_shmem_swapin_folio,
 DECLARE_HOOK(android_vh_uprobes_uprobe_write,
 	TP_PROTO(struct folio *new_folio, struct folio *old_folio),
 	TP_ARGS(new_folio, old_folio));
+DECLARE_HOOK(android_vh_folio_end_writeback,
+	TP_PROTO(struct folio *folio),
+	TP_ARGS(folio));
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
