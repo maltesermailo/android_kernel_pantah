@@ -70,6 +70,24 @@
       "parentUuid": "2c03c0f0_9f80cc31",
       "revId": "190aa2e5a4c0ceb33fec2fd095411e6bb8fb8ef5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0657948_7f9cb83a",
+        "filename": "drivers/iommu/io-pgtable-arm-common.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-03-11T17:09:44Z",
+      "side": 1,
+      "message": "The kernel can still uses it, this was removed from upstream in 6.13.\n\nIn Android17-6.18, when I brought this back, I remove the concurrency case:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android17-6.18/drivers/iommu/io-pgtable-arm.c#627\nAlso it is gated only for IDMAP page tables.",
+      "parentUuid": "470c9449_02fe1d22",
+      "revId": "190aa2e5a4c0ceb33fec2fd095411e6bb8fb8ef5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
