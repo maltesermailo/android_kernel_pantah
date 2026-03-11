@@ -68,4 +68,10 @@ void hyp_alloc_reclaim(struct kvm_hyp_memcache *host_mc, int target);
 u8 hyp_alloc_missing_donations(void);
 
 extern struct hyp_mgt_allocator_ops hyp_alloc_ops;
+
+#if defined (CONFIG_KASAN_GENERIC) && defined (CONFIG_KASAN_OUTLINE)
+#define KVM_NVHE_ALLOC_USE_KASAN            1
+bool hyp_alloc_check_range(const volatile void *p, size_t size);
+#endif
+
 #endif
