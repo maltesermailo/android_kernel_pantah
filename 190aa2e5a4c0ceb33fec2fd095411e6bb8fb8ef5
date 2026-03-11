@@ -16,6 +16,24 @@
       "message": "Doesn\u0027t this miss the concurrent case where another thread installed the table? In that case, we need to wait for the broadcast TLB invalidation to complete (or do it ourselves, like we do for the CMOs in ``arm_lpae_install_table()`).",
       "revId": "190aa2e5a4c0ceb33fec2fd095411e6bb8fb8ef5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c03c0f0_9f80cc31",
+        "filename": "drivers/iommu/io-pgtable-arm-common.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-03-11T16:12:57Z",
+      "side": 1,
+      "message": "pKVM usage for the io-pgtable is locked, the other case is for the kernel which doesn\u0027t need the TLB invalidation as the kernel manages the IOVA space.",
+      "parentUuid": "1d862c3a_6199023a",
+      "revId": "190aa2e5a4c0ceb33fec2fd095411e6bb8fb8ef5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
