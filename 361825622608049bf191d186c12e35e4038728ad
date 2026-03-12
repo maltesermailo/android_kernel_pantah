@@ -16,6 +16,24 @@
       "message": "Abandon this patch and cherry-pick the version from android15-6.6 or other ACK branch so the Change-Id matches",
       "revId": "361825622608049bf191d186c12e35e4038728ad",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca7a540d_e97d652b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4692445
+      },
+      "writtenOn": "2026-03-12T01:44:40Z",
+      "side": 1,
+      "message": "Hello Todd, this vender hook is specifically for __alloc_pages. I\u0027ve checked the latest 6.6 and 6.12 codes and haven\u0027t found anything similar. Currently, all the available ones for high-precision time calculation are in the slow_path. The reason for considering adding a pair of vender hooks in __alloc_pages is to see the proportion of the problem caused by scheduling that leads to excessively long time consumption in the fast path. Under normal circumstances, the time consumption in the fast path is very little.",
+      "parentUuid": "4167c2bd_bb3b06ec",
+      "revId": "361825622608049bf191d186c12e35e4038728ad",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
