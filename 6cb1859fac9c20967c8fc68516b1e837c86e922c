@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0951ee8e_c838d1a3",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-03-12T23:09:02Z",
+      "side": 1,
+      "message": "This should be protected by the ctx spinlock; otherwise you could run into a UAF issue if you race against either the empty or rewrap ioctl commands.",
+      "range": {
+        "startLine": 545,
+        "startChar": 1,
+        "endLine": 552,
+        "endChar": 2
+      },
+      "revId": "6cb1859fac9c20967c8fc68516b1e837c86e922c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
