@@ -254,6 +254,7 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_mm);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_signal);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_exit_signal_whether_wake);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_create);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_fault_report);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_file_open);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_improve_priority);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_printk);
