@@ -33,6 +33,24 @@
       "message": "I understand the need to add this, but there is one issue. This trace hook is called later on after hibernate returns.\n\n```\nerror \u003d hibernate();\ntrace_android_vh_hibernate_state(error);\n```\n\nThe other users of the code may (likely will) be confused of sudden appearance of two trace points carrying the state.\n\nIs it too late for you case to use hook called from the other place?",
       "revId": "2b248fc62b5a9cac929f01d5afef300b2a2cc8de",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e475344e_3a67c5bd",
+        "filename": "kernel/power/hibernate.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 852,
+      "author": {
+        "id": 3879141
+      },
+      "writtenOn": "2026-03-13T04:37:33Z",
+      "side": 1,
+      "message": "Precisely, I need to get hibernate error state at PM_POST_HIBERNATION callback. I will check first, is there any way to do with trace hook that you mentioned. After that I will continue this patch.",
+      "parentUuid": "7d51271f_d57fc4a2",
+      "revId": "2b248fc62b5a9cac929f01d5afef300b2a2cc8de",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
