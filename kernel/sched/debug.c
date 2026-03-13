@@ -349,6 +349,11 @@ static ssize_t sched_server_write_common(struct file *filp, const char __user *u
 	struct sched_dl_entity *dl_se = (struct sched_dl_entity *)server;
 	u64 old_runtime, runtime, period;
 	struct rq *rq = cpu_rq(cpu);
+<<<<<<< HEAD   (3f9540fa9c4950ee4bb4a9f5aec74a68bb1994db Merge d39d675a4303 ("xenbus: Use .freeze/.thaw to handle xen)
+||||||| BASE   (d39d675a430308cda49c89e8d64bd80ba350b4c1 xenbus: Use .freeze/.thaw to handle xenbus devices)
+=======
+	u64 runtime, period;
+>>>>>>> BRANCH (20e248df7341b2754e88bb6f4a1119e47b69f174 media: mediatek: vcodec: Don't try to decode 422/444 VP9)
 	int retval = 0;
 	size_t err;
 	u64 value;
@@ -385,16 +390,43 @@ static ssize_t sched_server_write_common(struct file *filp, const char __user *u
 		retval = dl_server_apply_params(dl_se, runtime, period, 0);
 		dl_server_start(dl_se);
 
+<<<<<<< HEAD   (3f9540fa9c4950ee4bb4a9f5aec74a68bb1994db Merge d39d675a4303 ("xenbus: Use .freeze/.thaw to handle xen)
 		if (retval < 0)
 			return retval;
 	}
+||||||| BASE   (d39d675a430308cda49c89e8d64bd80ba350b4c1 xenbus: Use .freeze/.thaw to handle xenbus devices)
+		retval = dl_server_apply_params(&rq->fair_server, runtime, period, 0);
+		if (retval)
+			cnt = retval;
+=======
+		retval = dl_server_apply_params(&rq->fair_server, runtime, period, 0);
+>>>>>>> BRANCH (20e248df7341b2754e88bb6f4a1119e47b69f174 media: mediatek: vcodec: Don't try to decode 422/444 VP9)
 
+<<<<<<< HEAD   (3f9540fa9c4950ee4bb4a9f5aec74a68bb1994db Merge d39d675a4303 ("xenbus: Use .freeze/.thaw to handle xen)
 	if (!!old_runtime ^ !!runtime) {
 		pr_info("%s server %sabled on CPU %d%s.\n",
 			server == &rq->fair_server ? "Fair" : "Ext",
 			runtime ? "en" : "dis",
 			cpu_of(rq),
 			runtime ? "" : ", system may malfunction due to starvation");
+||||||| BASE   (d39d675a430308cda49c89e8d64bd80ba350b4c1 xenbus: Use .freeze/.thaw to handle xenbus devices)
+		if (!runtime)
+			printk_deferred("Fair server disabled in CPU %d, system may crash due to starvation.\n",
+					cpu_of(rq));
+
+		if (rq->cfs.h_nr_queued)
+			dl_server_start(&rq->fair_server);
+=======
+		if (!runtime)
+			printk_deferred("Fair server disabled in CPU %d, system may crash due to starvation.\n",
+					cpu_of(rq));
+
+		if (rq->cfs.h_nr_queued)
+			dl_server_start(&rq->fair_server);
+
+		if (retval < 0)
+			return retval;
+>>>>>>> BRANCH (20e248df7341b2754e88bb6f4a1119e47b69f174 media: mediatek: vcodec: Don't try to decode 422/444 VP9)
 	}
 
 	*ppos += cnt;
