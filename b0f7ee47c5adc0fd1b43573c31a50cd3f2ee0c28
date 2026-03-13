@@ -16,6 +16,24 @@
       "message": "We should probably update this and `wrapfd_put()` to match as well.",
       "revId": "b0f7ee47c5adc0fd1b43573c31a50cd3f2ee0c28",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3639be16_7341b784",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-13T20:06:08Z",
+      "side": 1,
+      "message": "I was thinking about it but this API also returns a mappable object for the consuming driver to map. So, it does multiple things. I can rename it to wrapfd_get_mappable()/wrapfd_put_mappable() and document that it also takes the ownership if this sounds better.",
+      "parentUuid": "1a3e90a9_37b0f5e5",
+      "revId": "b0f7ee47c5adc0fd1b43573c31a50cd3f2ee0c28",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
