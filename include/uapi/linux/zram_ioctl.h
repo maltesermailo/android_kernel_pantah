@@ -41,9 +41,14 @@ struct zram_android_ioc_process_range_writeback {
 	__u64		written_bytes;
 };
 
+struct zram_android_ioc_process_prefetch {
+	__aligned_u64	pidfd;
+};
+
 struct zram_android_ioc_params {
 	union {
 		struct zram_android_ioc_process_range_writeback process_range_writeback;
+		struct zram_android_ioc_process_prefetch process_prefetch;
 	} data;
 };
 
@@ -55,6 +60,9 @@ struct zram_android_ioc_params {
 
 #define ZRAM_ANDROID_IOC_PROCESS_RANGE_WRITEBACK \
 	_IOWR(ZRAM_ANDROID_IOC_MAGIC, 2, struct zram_android_ioc_params)
+
+#define ZRAM_ANDROID_IOC_PROCESS_PREFETCH \
+	_IOW(ZRAM_ANDROID_IOC_MAGIC, 3, struct zram_android_ioc_params)
 
 #endif /* _UAPI_LINUX_ZRAM_IOCTL_H */
 
