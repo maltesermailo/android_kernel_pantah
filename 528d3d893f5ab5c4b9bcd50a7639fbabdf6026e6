@@ -105,6 +105,24 @@
       "parentUuid": "7ba82d23_83c8902c",
       "revId": "528d3d893f5ab5c4b9bcd50a7639fbabdf6026e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e2a0a52_5f9be260",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-03-16T01:26:21Z",
+      "side": 1,
+      "message": "The reason to put it in `pkvm_vcpu_reset()` is to avoid modifying the upstream code `kvm_vcpu_reset()`/`vmx_vcpu_reset()` by adding a `kvm_lapic_set_tpr` or `kvm_set_cr8`. The drawback is if the pKVM wants to reset a pVM\u0027s vCPU, it needs to use `pkvm_vcpu_reset()` to guarantee the TPR is not 0x00 but 0x10.\n\nLater I found that, `vmx_vcpu_reset()` is calling `kvm_set_cr8(vcpu, 0)` but is commented by #ifndef __PKVM_HYP__ due to lapic is totally controlled by the host. So I think maybe we can leverage this, by adding the #else case for the pKVM hypervisor to call `kvm_set_cr8(vcpu, 1)` for the protected apic page, as below:\n```\ndiff --git a/arch/x86/kvm/vmx/vmx.c b/arch/x86/kvm/vmx/vmx.c\nindex 66415754d2e4..98c01d3053c1 100644\n--- a/arch/x86/kvm/vmx/vmx.c\n+++ b/arch/x86/kvm/vmx/vmx.c\n@@ -5274,9 +5274,26 @@ void vmx_vcpu_reset(struct kvm_vcpu *vcpu, bool init_event)\n        vmx-\u003emsr_ia32_umwait_control \u003d 0;\n\n        vmx-\u003ehv_deadline_tsc \u003d -1;\n-       /* The host VMM handles the virtual APIC for the guest. */\n #ifndef __PKVM_HYP__\n        kvm_set_cr8(vcpu, 0);\n+#else\n+       if (lapic_in_kernel(vcpu) \u0026\u0026 vcpu-\u003earch.apic-\u003eguest_apic_protected) {\n+               /*\n+                * TPR is the key register for the protected APIC, as it will be\n+                * used by the APICv to evaluate pending interrupts. To prevent\n+                * the host from injecting exception vectors (0 - 31) via the\n+                * posted interrupt mechanism into the pVM, the TPR should be\n+                * set as 0x10 to prevent both class 1 and class 0 interrupts.\n+                * As the pVM OS may not set the TPR during early boot, or even\n+                * doesn\u0027t set the TPR at all if it doesn\u0027t use APIC, these will\n+                * make the TPR as 0x0 which allows the host to inject exception\n+                * vectors (16 - 31) into the pVM and may cause security issues.\n+                * So enforce the TPR as 0x10 after reset vcpu in the pKVM to\n+                * prevent the host from injecting exception vectors from the\n+                * beginning of the pVM boot.\n+                */\n+               kvm_set_cr8(vcpu, 1);\n+       }\n #endif\n```\nSo that just calling `kvm_vcpu_reset` to reset the pVM\u0027s vCPU is good enough. WDYT?",
+      "parentUuid": "ba26befc_94b81bdc",
+      "revId": "528d3d893f5ab5c4b9bcd50a7639fbabdf6026e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
