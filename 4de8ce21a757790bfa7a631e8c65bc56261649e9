@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d063e79_7a256558",
+        "filename": "kernel/bpf/syscall.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 1195,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-03-17T20:38:01Z",
+      "side": 1,
+      "message": "Can we move this also to mm/page_size_compat.c\n\nWe\u0027ll also need a similar check for array maps: \n\n\nkernel/bpf/arraymap.c\n\ncheck against array_map_ops or percpu_array_map_ops\n\n\nhttps://r.android.com/3950501",
+      "range": {
+        "startLine": 1184,
+        "startChar": 0,
+        "endLine": 1195,
+        "endChar": 39
+      },
+      "revId": "4de8ce21a757790bfa7a631e8c65bc56261649e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4601a49_7434b3ac",
+        "filename": "mm/mmap.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-03-17T20:38:01Z",
+      "side": 1,
+      "message": "Could we encapsulate this into something like `__mmap_fixup_bpf_pgoff()` \n\nSo we can keep most logic in mm/page_size_comat.c to minimize risk of future conflicts from upstream",
+      "range": {
+        "startLine": 564,
+        "startChar": 0,
+        "endLine": 569,
+        "endChar": 2
+      },
+      "revId": "4de8ce21a757790bfa7a631e8c65bc56261649e9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
