@@ -177,6 +177,24 @@
       "parentUuid": "089838df_b6dd9c8f",
       "revId": "528d3d893f5ab5c4b9bcd50a7639fbabdf6026e6",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08335d11_8f88833c",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-03-17T00:30:45Z",
+      "side": 1,
+      "message": "With using `kvm_set_cr8()`, it will do the check of `lapic_in_kernel()` again. Seems a bit redundant as before calling `kvm_set_cr8()`, the pKVM also needs to check `lapic_in_kernel()` to see if this is protected APIC or not. The benefit is as you pointed out, to keep cr8 consistent with TPR. Comparing with this redundant check, this benefit seems more attractive than directly calling `kvm_lapic_set_tpr()`, so maybe using `kvm_set_cr8()` is better?",
+      "parentUuid": "3023cac0_b059b82a",
+      "revId": "528d3d893f5ab5c4b9bcd50a7639fbabdf6026e6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
