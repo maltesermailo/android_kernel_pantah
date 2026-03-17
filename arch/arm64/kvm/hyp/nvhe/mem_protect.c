@@ -2504,6 +2504,7 @@ int __pkvm_host_donate_sglist_guest(struct pkvm_hyp_vcpu *vcpu)
 			u64 phys = hyp_pfn_to_phys(ppage->pfn);
 			u64 ipa = hyp_pfn_to_phys(ppage->gfn);
 
+			psci_mem_protect_dec(1 << ppage->order);
 			WARN_ON(kvm_pgtable_stage2_unmap(&vm->pgt, ipa, size));
 			WARN_ON(host_stage2_set_owner_locked(phys, size, PKVM_ID_HOST));
 		}
