@@ -3438,9 +3438,11 @@ int __init intel_iommu_init(void)
 	/*
 	 * Intel IOMMU is required for a TXT/tboot launch or platform
 	 * opt in, so enforce that.
+	 * Intel IOMMU is also required by pKVM to prevent device DMA
+	 * from accessing protected memory regions.
 	 */
 	force_on = (!intel_iommu_tboot_noforce && tboot_force_iommu()) ||
-		    platform_optin_force_iommu();
+		    platform_optin_force_iommu() || pkvm_enabled();
 
 	down_write(&dmar_global_lock);
 	if (dmar_table_init()) {
