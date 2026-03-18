@@ -22,6 +22,30 @@
       },
       "revId": "99e867503dcd3cb9f64c35fb02df9ead60c9c074",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f003f61b_5b8dd676",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 1055,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2026-03-18T09:59:50Z",
+      "side": 1,
+      "message": "lockdep might not be the right tool to detect that, what you are looking for is probably `CONFIG_DEBUG_ATOMIC_SLEEP`.\n\nGiven that the allocation is under slot-lock this needs to be either NOWAIT or __GFP_KSWAPD_RECLAIM, you are right.",
+      "parentUuid": "4af2bdf1_e1026477",
+      "range": {
+        "startLine": 1055,
+        "startChar": 6,
+        "endLine": 1055,
+        "endChar": 14
+      },
+      "revId": "99e867503dcd3cb9f64c35fb02df9ead60c9c074",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
