@@ -260,6 +260,29 @@
       },
       "revId": "8b990309dd04e1d02e47ecf1c5f0fdd3c1dc9a10",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b385c22_fe01018f",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1078,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2026-03-19T04:19:22Z",
+      "side": 1,
+      "message": "So I guess here we need to follow the same pattern and avoid calling free_page(). Instead of restoring metadata let\u0027s just never clear it in the first place.",
+      "range": {
+        "startLine": 1078,
+        "startChar": 1,
+        "endLine": 1078,
+        "endChar": 15
+      },
+      "revId": "8b990309dd04e1d02e47ecf1c5f0fdd3c1dc9a10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
