@@ -33,6 +33,24 @@
       "message": "I\u0027m a little stumped on this as other changes don\u0027t seem to get caught on the same presubmit failure today. Are we sure there\u0027s not an impact from this patch?",
       "revId": "1e921c170d733b09017175a6c444022e78b89b11",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42614bc8_772f6b86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2026720
+      },
+      "writtenOn": "2026-03-19T21:21:50Z",
+      "side": 1,
+      "message": "I looked at the presubmit failures that were caused due to today\u0027s run. Those look like Bluetooth test cases and my change doesn\u0027t touch that stack. Though there can be other ways the tests failed (say USB Type-C stack never came up because of this change and adb doesn\u0027t work as a result). Hence, I did a sanity check on an actual device and it looks okay to me.",
+      "parentUuid": "9d7bb47a_4267c73d",
+      "revId": "1e921c170d733b09017175a6c444022e78b89b11",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
