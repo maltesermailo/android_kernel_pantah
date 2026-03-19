@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "085dd47d_697f93ea",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-03-19T03:33:59Z",
+      "side": 1,
+      "message": "SGTM, let me update it.",
+      "parentUuid": "391981e0_da42b604",
+      "range": {
+        "startLine": 649,
+        "startChar": 1,
+        "endLine": 649,
+        "endChar": 11
+      },
+      "revId": "8b990309dd04e1d02e47ecf1c5f0fdd3c1dc9a10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a25a7cb0_6179d551",
         "filename": "drivers/block/zram/zram_drv.c",
         "patchSetId": 9
@@ -37,6 +61,30 @@
       "writtenOn": "2026-03-19T02:02:05Z",
       "side": 1,
       "message": "a nit: take",
+      "range": {
+        "startLine": 1042,
+        "startChar": 60,
+        "endLine": 1042,
+        "endChar": 65
+      },
+      "revId": "8b990309dd04e1d02e47ecf1c5f0fdd3c1dc9a10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcd1d3ad_2b43f1ad",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1042,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-03-19T03:33:59Z",
+      "side": 1,
+      "message": "oops. Thanks.",
+      "parentUuid": "a25a7cb0_6179d551",
       "range": {
         "startLine": 1042,
         "startChar": 60,
@@ -60,6 +108,30 @@
       "writtenOn": "2026-03-19T02:02:05Z",
       "side": 1,
       "message": "a minor nit: you probably don\u0027t need else here.\n\nBut my question is - what does this pr_warn() mean? Is it actionable? Should it really be logged?",
+      "range": {
+        "startLine": 1050,
+        "startChar": 1,
+        "endLine": 1050,
+        "endChar": 5
+      },
+      "revId": "8b990309dd04e1d02e47ecf1c5f0fdd3c1dc9a10",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2161eacf_6a1d6108",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1050,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-03-19T03:33:59Z",
+      "side": 1,
+      "message": "I think at least we need `else if (old_val !\u003d NULL)`.\n\nIt was initially used to debug the concurrent access of the prefetch cache. Overwriting the index might lead to data corruption when reading back.",
+      "parentUuid": "43f716dd_d93709fa",
       "range": {
         "startLine": 1050,
         "startChar": 1,
