@@ -22,6 +22,30 @@
       },
       "revId": "21379631745ab21c414c37f0d55dd298f9c0506c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a29676e_b8047e00",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1139,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-03-20T06:57:03Z",
+      "side": 1,
+      "message": "I think so. With the prefetch cache we can avoid the race conditions if a page fault and prefetch occur simultaneously. So I want to keep it as a prefetch failure.",
+      "parentUuid": "4a8c0ff9_06eb63d5",
+      "range": {
+        "startLine": 1137,
+        "startChar": 0,
+        "endLine": 1139,
+        "endChar": 15
+      },
+      "revId": "21379631745ab21c414c37f0d55dd298f9c0506c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
