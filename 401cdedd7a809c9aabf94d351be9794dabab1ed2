@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72542c3f_29a61733",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1144,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2026-03-20T02:10:03Z",
+      "side": 1,
+      "message": "Can you please explain the logic here?\n\nWe just did `zram_prefetch_cache_store()` and it was successful. How can `zram_prefetch_cache_exist()` return false here?",
+      "range": {
+        "startLine": 1144,
+        "startChar": 0,
+        "endLine": 1144,
+        "endChar": 45
+      },
+      "revId": "401cdedd7a809c9aabf94d351be9794dabab1ed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62697e2a_57598f67",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1145,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2026-03-20T02:10:03Z",
+      "side": 1,
+      "message": "You already do that on line 1109 and have that value in `blk_idx`.",
+      "range": {
+        "startLine": 1145,
+        "startChar": 32,
+        "endLine": 1145,
+        "endChar": 60
+      },
+      "revId": "401cdedd7a809c9aabf94d351be9794dabab1ed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da303181_ee9e63b2",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 2366,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2026-03-20T02:10:03Z",
+      "side": 1,
+      "message": "I\u0027m not following again, sorry.\nSo if `bdev_idx` is in xarray then we don\u0027t release `bdev_idx` on `slot_free()`? When do we release `bdev_idx` then?\n\nHow can we have both `ZRAM_WB` and `zram_prefetch_cache_exist()` evaluating to true?",
+      "range": {
+        "startLine": 2366,
+        "startChar": 0,
+        "endLine": 2366,
+        "endChar": 46
+      },
+      "revId": "401cdedd7a809c9aabf94d351be9794dabab1ed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
