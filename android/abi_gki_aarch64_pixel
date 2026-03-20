@@ -101,6 +101,7 @@
   blk_mq_quiesce_tagset
   blk_mq_unfreeze_queue
   blk_mq_unquiesce_tagset
+  blk_op_str
   blk_put_queue
   blk_queue_flag_clear
   blk_queue_flag_set
@@ -113,6 +114,7 @@
   blk_queue_update_dma_alignment
   blk_rq_map_user_io
   blk_rq_unmap_user
+  blk_status_to_errno
   blocking_notifier_call_chain
   blocking_notifier_chain_register
   blocking_notifier_chain_unregister
@@ -587,6 +589,7 @@
   devres_add
   __devres_alloc_node
   devres_free
+  dev_set_mtu
   dev_set_name
   dev_vprintk_emit
   _dev_warn
@@ -976,6 +979,7 @@
   drop_reasons_register_subsys
   drop_reasons_unregister_subsys
   dump_backtrace
+  dump_page
   dump_stack
   dump_tasks
   dw_handle_msi_irq
@@ -1431,6 +1435,7 @@
   __kfifo_init
   __kfifo_out
   __kfifo_out_peek
+  __kfifo_to_user
   kfree
   kfree_sensitive
   kfree_skb_list_reason
@@ -1668,6 +1673,7 @@
   napi_schedule_prep
   __ndelay
   __netdev_alloc_skb
+  netdev_core_stats_alloc
   netdev_err
   netdev_info
   netdev_refcnt_read
@@ -1710,6 +1716,7 @@
   __nlmsg_put
   nonseekable_open
   noop_llseek
+  nop_mnt_idmap
   nr_cpu_ids
   nr_irqs
   nr_swap_pages
@@ -2683,6 +2690,7 @@
   trace_handle_return
   __traceiter_android_rvh_after_enqueue_task
   __traceiter_android_rvh_attach_entity_load_avg
+  __traceiter_android_rvh_blk_mq_has_request
   __traceiter_android_rvh_can_migrate_task
   __traceiter_android_rvh_cgroup_force_kthread_migration
   __traceiter_android_rvh_check_preempt_wakeup
@@ -2795,6 +2803,7 @@
   __traceiter_android_vh_ufs_update_sysfs
   __traceiter_android_vh_usb_dev_resume
   __traceiter_android_vh_use_amu_fie
+  __traceiter_android_vh_vmscan_kswapd_done
   __traceiter_android_vh_xhci_full_reset_on_remove
   __traceiter_clock_set_rate
   __traceiter_cma_alloc_finish
@@ -2810,6 +2819,7 @@
   __traceiter_mmap_lock_start_locking
   __traceiter_mm_vmscan_direct_reclaim_begin
   __traceiter_mm_vmscan_direct_reclaim_end
+  __traceiter_mm_vmscan_kswapd_wake
   __traceiter_pelt_cfs_tp
   __traceiter_pelt_dl_tp
   __traceiter_pelt_irq_tp
@@ -2834,6 +2844,7 @@
   trace_output_call
   __tracepoint_android_rvh_after_enqueue_task
   __tracepoint_android_rvh_attach_entity_load_avg
+  __tracepoint_android_rvh_blk_mq_has_request
   __tracepoint_android_rvh_can_migrate_task
   __tracepoint_android_rvh_cgroup_force_kthread_migration
   __tracepoint_android_rvh_check_preempt_wakeup
@@ -2946,6 +2957,7 @@
   __tracepoint_android_vh_ufs_update_sysfs
   __tracepoint_android_vh_usb_dev_resume
   __tracepoint_android_vh_use_amu_fie
+  __tracepoint_android_vh_vmscan_kswapd_done
   __tracepoint_android_vh_xhci_full_reset_on_remove
   __tracepoint_clock_set_rate
   __tracepoint_cma_alloc_finish
@@ -2961,6 +2973,7 @@
   __tracepoint_mmap_lock_start_locking
   __tracepoint_mm_vmscan_direct_reclaim_begin
   __tracepoint_mm_vmscan_direct_reclaim_end
+  __tracepoint_mm_vmscan_kswapd_wake
   __tracepoint_pelt_cfs_tp
   __tracepoint_pelt_dl_tp
   __tracepoint_pelt_irq_tp
@@ -3078,6 +3091,7 @@
   unregister_pernet_subsys
   unregister_pm_notifier
   unregister_reboot_notifier
+  unregister_restart_handler
   unregister_shrinker
   unregister_syscore_ops
   unregister_sysctl_table
