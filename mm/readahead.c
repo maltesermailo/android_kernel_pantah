@@ -536,6 +536,7 @@ void page_cache_ra_order(struct readahead_control *ractl,
 
 	while (index <= limit) {
 		unsigned int order = new_order;
+		bool retry = false;
 
 		/* Align with smaller pages if needed */
 		if (index & ((1UL << order) - 1))
@@ -543,9 +544,14 @@ void page_cache_ra_order(struct readahead_control *ractl,
 		/* Don't allocate pages past EOF */
 		while (order > min_order && index + (1UL << order) - 1 > limit)
 			order--;
+retry:
 		err = ra_alloc_folio(ractl, index, mark, order, gfp);
-		if (err)
+		if (err) {
+			trace_android_vh_ra_alloc_retry(&order, &retry);
+			if (retry)
+				goto retry;
 			break;
+		}
 		index += 1UL << order;
 	}
 
