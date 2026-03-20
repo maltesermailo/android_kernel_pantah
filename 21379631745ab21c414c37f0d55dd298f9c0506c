@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a8c0ff9_06eb63d5",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 1139,
+      "author": {
+        "id": 3489357
+      },
+      "writtenOn": "2026-03-20T05:58:58Z",
+      "side": 1,
+      "message": "Just curious: should this be an error? We failed to store bdev_idx for re-use, but should we actually discard the entry? We read it, decompressed it (potentially), allocated memory in zsmalloc. That\u0027s a lot of work.",
+      "range": {
+        "startLine": 1137,
+        "startChar": 0,
+        "endLine": 1139,
+        "endChar": 15
+      },
+      "revId": "21379631745ab21c414c37f0d55dd298f9c0506c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
