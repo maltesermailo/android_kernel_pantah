@@ -453,7 +453,20 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_receive_sock);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_task_get_classid);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_mq_delay_run_hw_queue);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_blk_mq_kick_requeue_list);
+<<<<<<< HEAD   (ff78c78d65d3b2e46c6cd4c1b59e8e0e6150cdae ANDROID: GKI: update symbol list for allwinner)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_update_thermal_trip_flag);
+||||||| BASE   (eed112409dee72c96e471760d8283476fe8111e2 Revert "ANDROID: block: Introduce the android_rvh_blk_mq_has)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_ra_op_flags);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_use_amu_fie);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_resume_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_early_resume_begin);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_rvh_blk_mq_has_request);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_f2fs_ra_op_flags);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_use_amu_fie);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_resume_end);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_early_resume_begin);
+>>>>>>> CHANGE (e4482a882fb0b4044fef96e02b1cf32b4e370946 ANDROID: block: Introduce the android_rvh_blk_mq_has_request)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_enable_thermal_genl_check);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_thermal_pm_notify_suspend);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_alloc_pages_entry);
