@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4662ac6e_72c23407",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-20T23:56:52Z",
+      "side": 1,
+      "message": "What do you mean future TODO? Please clarify.\n\nI\u0027m trying to fix this issue when LMKD often can\u0027t catch the target process to reap because current-\u003emm is already reset in exit_mm() while mm still has plenty of memory because exit_mmap() did not yet happen. With this patch we get almost 100% success rate for LMKD process_mrelease() which speeds up memory release.",
+      "parentUuid": "b2716585_41d1fcaf",
+      "range": {
+        "startLine": 7,
+        "startChar": 9,
+        "endLine": 7,
+        "endChar": 68
+      },
+      "revId": "e260dffbe5fe9002afee468b12c165d599a7953b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1282d5f_67a4a812",
         "filename": "mm/oom_kill.c",
         "patchSetId": 5
@@ -37,6 +61,30 @@
       "writtenOn": "2026-03-11T22:14:40Z",
       "side": 1,
       "message": "Can this task struct be different if the app has multiple threads?\n\nFor example, process_mrelease work with thread A task struct but exit_mm works with thread B task struct?",
+      "range": {
+        "startLine": 1242,
+        "startChar": 41,
+        "endLine": 1242,
+        "endChar": 45
+      },
+      "revId": "e260dffbe5fe9002afee468b12c165d599a7953b",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6937248_1ba90d4a",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 1242,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-20T23:56:52Z",
+      "side": 1,
+      "message": "Hmm, I guess that can happen. I\u0027ll use `task-\u003egroup_leader` instead of `task`. That should solve this issue.",
+      "parentUuid": "c1282d5f_67a4a812",
       "range": {
         "startLine": 1242,
         "startChar": 41,
