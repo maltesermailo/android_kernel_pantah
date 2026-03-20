@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24e3f4d3_7683ed2f",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1144,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-03-20T05:47:09Z",
+      "side": 1,
+      "message": "I refactor the code, now should be more clear. Please take a look. Thanks.",
+      "parentUuid": "72542c3f_29a61733",
+      "range": {
+        "startLine": 1144,
+        "startChar": 0,
+        "endLine": 1144,
+        "endChar": 45
+      },
+      "revId": "401cdedd7a809c9aabf94d351be9794dabab1ed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62697e2a_57598f67",
@@ -47,6 +71,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65e0a614_8dc4da08",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 1145,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-03-20T05:47:09Z",
+      "side": 1,
+      "message": "Good catch. Fixed.",
+      "parentUuid": "62697e2a_57598f67",
+      "range": {
+        "startLine": 1145,
+        "startChar": 32,
+        "endLine": 1145,
+        "endChar": 60
+      },
+      "revId": "401cdedd7a809c9aabf94d351be9794dabab1ed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da303181_ee9e63b2",
@@ -60,6 +108,30 @@
       "writtenOn": "2026-03-20T02:10:03Z",
       "side": 1,
       "message": "I\u0027m not following again, sorry.\nSo if `bdev_idx` is in xarray then we don\u0027t release `bdev_idx` on `slot_free()`? When do we release `bdev_idx` then?\n\nHow can we have both `ZRAM_WB` and `zram_prefetch_cache_exist()` evaluating to true?",
+      "range": {
+        "startLine": 2366,
+        "startChar": 0,
+        "endLine": 2366,
+        "endChar": 46
+      },
+      "revId": "401cdedd7a809c9aabf94d351be9794dabab1ed2",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2e59e5d_e5dbc620",
+        "filename": "drivers/block/zram/zram_drv.c",
+        "patchSetId": 10
+      },
+      "lineNbr": 2366,
+      "author": {
+        "id": 1894539
+      },
+      "writtenOn": "2026-03-20T05:47:09Z",
+      "side": 1,
+      "message": "Thanks to point out. I updated the logic and rename the `zram_prefetch_cache_load()` to `zram_prefetch_cache_pop()` to make it clearer.\nAfter `zram_prefetch_cache_pop()`, the ZRAM_WB and prefetch_cache_exist should be exclusive.",
+      "parentUuid": "da303181_ee9e63b2",
       "range": {
         "startLine": 2366,
         "startChar": 0,
