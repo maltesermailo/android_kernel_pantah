@@ -16,6 +16,24 @@
       "message": "Seems we need to remove the topic if the patch is abandoned, otherwise it will block the pre-submit?",
       "revId": "d9bd5e7dd8202efbe9c78fa4e7fed19f553836b5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4d4dfcc_4fd37f3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-03-21T14:37:36Z",
+      "side": 1,
+      "message": "Maybe. After I removed the topic, presubmit indeed finally passed. Although it may be just a coincidence, since before that, presubmit was not saying \"can\u0027t submit a topic with abandoned patches\" or something like that, it was failing with runtime failures of some tests which have nothing to do with pKVM or these patches at all. :)",
+      "parentUuid": "47ce3625_7f397c96",
+      "revId": "d9bd5e7dd8202efbe9c78fa4e7fed19f553836b5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ],
   "submitRequirementResults": [
