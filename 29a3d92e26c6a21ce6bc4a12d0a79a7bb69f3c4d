@@ -24,6 +24,30 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "deca2137_56ad5e96",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-22T06:01:11Z",
+      "side": 1,
+      "message": "mmyput_async is not the problem. It\u0027s the fact that we are going mmget for a long period of time (for the duration of the reclaim of that mm). I\u0027m changing this patch to use mmgrab instead of mmput, which is a much better solution.",
+      "parentUuid": "fff0ad5d_9b480c17",
+      "range": {
+        "startLine": 15,
+        "startChar": 5,
+        "endLine": 15,
+        "endChar": 33
+      },
+      "revId": "29a3d92e26c6a21ce6bc4a12d0a79a7bb69f3c4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f41bb335_83b23acd",
@@ -37,6 +61,30 @@
       "writtenOn": "2026-03-11T22:16:26Z",
       "side": 1,
       "message": "Regardless of task state, the memory aging should keep going since they are not coupled.",
+      "range": {
+        "startLine": 3770,
+        "startChar": 10,
+        "endLine": 3770,
+        "endChar": 30
+      },
+      "revId": "29a3d92e26c6a21ce6bc4a12d0a79a7bb69f3c4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f02138d6_4fbe9963",
+        "filename": "mm/vmscan.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 3770,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-22T06:01:11Z",
+      "side": 1,
+      "message": "I\u0027m changing this patch to avoid pinning the mm instead of skipping mm of a process with a pending signal.",
+      "parentUuid": "f41bb335_83b23acd",
       "range": {
         "startLine": 3770,
         "startChar": 10,
