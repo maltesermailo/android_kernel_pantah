@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e5bc0dc_c6453a1b",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-03-23T10:48:30Z",
+      "side": 0,
+      "message": "It looks like this is trying to handle (reject) device resources that are smaller than a page. The new code in `pkvm_get_vm_device_by_addr()` doesn\u0027t seem to do that; is that ok?",
+      "range": {
+        "startLine": 319,
+        "startChar": 32,
+        "endLine": 319,
+        "endChar": 74
+      },
+      "revId": "6c9c0bb670b66d3992ebaeefde07cbe0799b4367",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
