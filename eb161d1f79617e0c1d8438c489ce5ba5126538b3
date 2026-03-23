@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7d25587_3ed199c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004907
+      },
+      "writtenOn": "2026-03-23T23:30:24Z",
+      "side": 1,
+      "message": "Apparently for the build that is failing, we have a non-filesystem driver that\u0027s calling `close_fd()`.\n\n```\nERROR: modpost: module lwis uses symbol close_fd from namespace ANDROID_GKI_VFS_internal_I_am_really_a_filesystem_and_am_NOT_a_driver, but does not import it.\n```\n\nThere is a proposal to add to the lwis module:\n```\nMODULE_IMPORT_NS(\"ANDROID_GKI_VFS_internal_I_am_really_a_filesystem_and_am_NOT_a_driver\");\n```\n\n...but that seems wrong since the lwis module is _not_ a filesystem. I don\u0027t personally have any background on the lwis module, but it seems wrong to add that define.\n\nIt seems like instead the lwis module should see if it should remove the call to `close_fd()`?\n\nI can try to dig more, too. ...but if I\u0027m overthinking things and adding `ANDROID_GKI_VFS_internal_I_am_really_a_filesystem_and_am_NOT_a_driver` to random/arbitrary drivers is really fine, please let me know.",
+      "revId": "eb161d1f79617e0c1d8438c489ce5ba5126538b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
