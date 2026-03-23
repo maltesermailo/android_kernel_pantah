@@ -37,6 +37,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "417cc933_7fae0b59",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-03-23T21:47:24Z",
+      "side": 1,
+      "message": "nit: maybe add something like \"Unlike the PERF_GLOBAL_CTRL vmentry and vmexit controls bits, ...\" (to make it more clear what this paragraph refers to)?",
+      "revId": "1d595a0601e6b376b56b78fecf74509abc9f654c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88d6158e_30442b1d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-03-23T21:47:24Z",
+      "side": 1,
+      "message": "Does this mean that we should also update GUEST_IA32_RTIT_CTL on every vmexit, since the host may change the value of MSR_IA32_RTIT_CTL? (Referring to the explanation in Kevin\u0027s patch _why_ we want to intercept MSR_CORE_PERF_GLOBAL_CTRL: \"_To avoid the overhead of reading the MSR in every exit_, intercept host write to MSR_CORE_PERF_GLOBAL_CTRL and enable VMCS control fields only when it\u0027s set to a non-ZERO value.\")\n\nOr do we assume that the host kernel will never modify MSR_IA32_RTIT_CTL after deprivileging?\n\nAnd same question about other patches in this series.",
+      "revId": "1d595a0601e6b376b56b78fecf74509abc9f654c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b0880163_8d409efd",
         "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
         "patchSetId": 2
