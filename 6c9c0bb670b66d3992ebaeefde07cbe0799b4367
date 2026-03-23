@@ -22,6 +22,30 @@
       },
       "revId": "6c9c0bb670b66d3992ebaeefde07cbe0799b4367",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "862f0296_8a851a52",
+        "filename": "arch/arm64/kvm/hyp/nvhe/device/device.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-03-23T11:19:18Z",
+      "side": 0,
+      "message": "I don\u0027t think that is a problem because we do enforce the assignable devices as PAGE_ALIGNED during pKVM setup. And here the token is read directly from the pgtable. So it is aligned for sure.\n\n@smostafa@google.com is that correct?",
+      "parentUuid": "0e5bc0dc_c6453a1b",
+      "range": {
+        "startLine": 319,
+        "startChar": 32,
+        "endLine": 319,
+        "endChar": 74
+      },
+      "revId": "6c9c0bb670b66d3992ebaeefde07cbe0799b4367",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
