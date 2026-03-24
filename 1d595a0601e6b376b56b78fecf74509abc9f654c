@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e86f5884_24d80178",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-03-24T02:24:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e8ad4366_6ef5f637",
+      "revId": "1d595a0601e6b376b56b78fecf74509abc9f654c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "094c5cae_8c5a6ca4",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-03-23T20:20:31Z",
       "side": 1,
       "message": "nit: s/deprivieleging/deprivileging/",
+      "revId": "1d595a0601e6b376b56b78fecf74509abc9f654c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08fb744c_f57c3dd0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-03-24T02:24:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "094c5cae_8c5a6ca4",
       "revId": "1d595a0601e6b376b56b78fecf74509abc9f654c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -89,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f6c6d062_44cc5333",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-03-24T02:24:01Z",
+      "side": 1,
+      "message": "\u003e Does this mean that we should also update GUEST_IA32_RTIT_CTL on every vmexit, since the host may change the value of MSR_IA32_RTIT_CTL?\n\nWe need to do that, but not manually. The VMX will do this for us according to the SDM: \"If the processor supports either the 1-setting of the “load IA32_RTIT_CTL” VM-entry control or that of the “clear IA32_RTIT_CTL” VM-exit control, the contents of the IA32_RTIT_CTL MSR are saved into the corresponding field.\" The corresponding field is GUEST_IA32_RTIT_CTL.\n\nActually we assume the host kernel will modify MSR_IA32_RTIT_CTL after deprivileging, and that is why we need this patch.\n\nThis patch sets VM_ENTRY_LOAD_IA32_RTIT_CTL, so that the MSR_IA32_RTIT_CTL can be updated with the value in GUEST_IA32_RTIT_CTL when vmenter the deprivileged host, to make sure the host can see the correct value.\n\nThis patch also sets VM_EXIT_CLEAR_IA32_RTIT_CTL, so that the MSR_IA32_RTIT_CTL can be cleared to 0 after the deprivileged host exits to the pKVM, to make sure the Intel PT is disabled when the pKVM is running.\n\nBut we cannot dynamically toggle these bits by intercepting the MSR_IA32_RTIT_CTL writing, like the PERF_GLOBAL_CTL, when the host write non-zero value to MSR_IA32_RTIT_CTL, wrmsr vmexit happens, then we enable these bits to load MSR when vmenter and to clear MSR when vmexit. This is because the host may use XSAVE instruction to write non-zero value to MSR_IA32_RTIT_CTL, then there is no wrmsr vmexit, thus these control bits have no chance to be enabled.",
+      "parentUuid": "88d6158e_30442b1d",
+      "revId": "1d595a0601e6b376b56b78fecf74509abc9f654c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b0880163_8d409efd",
         "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
         "patchSetId": 2
@@ -100,6 +154,24 @@
       "writtenOn": "2026-03-23T20:20:31Z",
       "side": 1,
       "message": "nit: s/deprivielging/deprivileging/",
+      "revId": "1d595a0601e6b376b56b78fecf74509abc9f654c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5eacfca5_a159a1b2",
+        "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-03-24T02:24:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b0880163_8d409efd",
       "revId": "1d595a0601e6b376b56b78fecf74509abc9f654c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -117,6 +189,24 @@
       "writtenOn": "2026-03-23T20:20:31Z",
       "side": 1,
       "message": "nit: s/deprvileging/deprivileging/",
+      "revId": "1d595a0601e6b376b56b78fecf74509abc9f654c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70cd9070_b04338de",
+        "filename": "arch/x86/kvm/pkvm/vmx/host_vmx.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-03-24T02:24:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0e04f947_4c47eb3b",
       "revId": "1d595a0601e6b376b56b78fecf74509abc9f654c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
