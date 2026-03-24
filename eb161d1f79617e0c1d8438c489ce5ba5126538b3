@@ -63,6 +63,30 @@
       },
       "revId": "eb161d1f79617e0c1d8438c489ce5ba5126538b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3958b11_d97dc09c",
+        "filename": "fs/file.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 740,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-03-24T16:24:19Z",
+      "side": 1,
+      "message": "Once the `fd_install()` completes the fd is live and \"visible\" to the process. Using `close_fd()` from the kernel can race with say some other thread that might be using the fd already?",
+      "parentUuid": "148c1ce5_5511eb47",
+      "range": {
+        "startLine": 740,
+        "startChar": 0,
+        "endLine": 740,
+        "endChar": 100
+      },
+      "revId": "eb161d1f79617e0c1d8438c489ce5ba5126538b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
