@@ -161,6 +161,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "51a4614d_1669ea13",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-03-24T05:52:33Z",
+      "side": 1,
+      "message": "\u003e Or perhaps \"To avoid the overhead of reading the MSR in every exit\" in Kevin\u0027s patch means the overhead of this automatic reading of the MSR by VMX hardware? i.e. enabling “save IA32_PERF_GLOBAL_CTL” would make the vmexit itself (at the HW level) take longer?\n\u003e If so, then I guess these patches also make vmexits slower (by enabling controls which require HW to read those MSRs on every vmexit)?\n\nYes, I think so. These patches will require HW to restore IA32_RTIT_CLT/IA32_LBR_CTL/IA32_S_CET/IA32_INTERRUPT_SSP_TABLE_ADDR with pKVM\u0027s value (specifically, clearing IA32_RTIT_CTL/IA32_LBR_CTL) for every vmexit, and restore them with host\u0027s value on very vmenter.\n\nFor the MSR_IA32_RTIT_CTL, I may overlook this:\n1) \"If XSAVES saves PT state, the instruction clears IA32_RTIT_CTL.TraceEn (bit 0) after saving the value of the IA32_RTIT_CTL MSR and before saving any other PT state. If XSAVES causes a fault or a VM exit, it restores IA32_RTIT_CTL.TraceEn to its original value.\"\n2) \"If XRSTORS would restore (or initialize) PT state and IA32_RTIT_CTL.TraceEn \u003d 1, the instruction causes a general-protection exception (#GP) before modifying PT state.\"\n\nThe xsave can clear the TraceEn bit, and xrestors can restore the other bits of MSR_IA32_RTIT_CTL except for the TraceEn bit. So to enable TraceEn bit, the host has to use wrmsr, then it is possible for us to dynamically toggle these controls bits by monitoring the MSR_IA32_RTIT_CTL write. But seems this will be a bit complex than emulating PERF_GLOBAL_CTL. Maybe it is better to keep it as is for simplicity unless we meet some performance issue and need to optimize this?\n\n\u003e And same question about other patches in this series.\n\nFor the arch-LBR, all bits in the MSR_IA32_LBR_CTL can be save and restored by the xsave/xrestors instructions:\n1) \"If XSAVES would save LBR state and that state is not in its initial configuration (see Section 13.6), the instruction always saves IA32_LBR_CTL, IA32_LBR_DEPTH, IA32_LER_FROM_IP, IA32_LER_TO_IP, and IA32_LER_INFO.\"\n2) \"If the current value of IA32_LBR_DEPTH equals the value of corresponding field in the XSAVE area, the instruction restores IA32_LBR_CTL, IA32_LER_FROM_IP, IA32_LER_TO_IP, IA32_LER_INFO, and the ...\"\n\nSo if dynamically toggle the LBR control bits via monitoring the wrmsr, the host can bypass this by using xsave/xrestore instructions，unless we trap the xsave/xrestore instructions for the LBR, which will also introduce more complexity.",
+      "parentUuid": "b52b8965_60e9da84",
+      "revId": "1d595a0601e6b376b56b78fecf74509abc9f654c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b0880163_8d409efd",
         "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
         "patchSetId": 2
