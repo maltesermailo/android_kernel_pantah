@@ -39,6 +39,30 @@
       },
       "revId": "eb161d1f79617e0c1d8438c489ce5ba5126538b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "148c1ce5_5511eb47",
+        "filename": "fs/file.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 740,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-03-24T16:14:43Z",
+      "side": 1,
+      "message": "Isn\u0027t `put_unused_fd()` the corresponding \"undo\" for `get_unused_fd_flags()`? I don\u0027t think this is a problem. IIRC, it is the \"install\" part that cannot be undone and drivers need to account for that.",
+      "parentUuid": "13012e64_f62f7267",
+      "range": {
+        "startLine": 740,
+        "startChar": 0,
+        "endLine": 740,
+        "endChar": 100
+      },
+      "revId": "eb161d1f79617e0c1d8438c489ce5ba5126538b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
