@@ -16,6 +16,29 @@
       "message": "Apparently for the build that is failing, we have a non-filesystem driver that\u0027s calling `close_fd()`.\n\n```\nERROR: modpost: module lwis uses symbol close_fd from namespace ANDROID_GKI_VFS_internal_I_am_really_a_filesystem_and_am_NOT_a_driver, but does not import it.\n```\n\nThere is a proposal to add to the lwis module:\n```\nMODULE_IMPORT_NS(\"ANDROID_GKI_VFS_internal_I_am_really_a_filesystem_and_am_NOT_a_driver\");\n```\n\n...but that seems wrong since the lwis module is _not_ a filesystem. I don\u0027t personally have any background on the lwis module, but it seems wrong to add that define.\n\nIt seems like instead the lwis module should see if it should remove the call to `close_fd()`?\n\nI can try to dig more, too. ...but if I\u0027m overthinking things and adding `ANDROID_GKI_VFS_internal_I_am_really_a_filesystem_and_am_NOT_a_driver` to random/arbitrary drivers is really fine, please let me know.",
       "revId": "eb161d1f79617e0c1d8438c489ce5ba5126538b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13012e64_f62f7267",
+        "filename": "fs/file.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 740,
+      "author": {
+        "id": 1004907
+      },
+      "writtenOn": "2026-03-24T15:49:37Z",
+      "side": 1,
+      "message": "Feel free to shout at me if I\u0027m wrong, but are we sure this is only supposed to be used by filesystems?\n\nNotably, I see an internal driver that seems to be creating a fence. ...as part of that, it gets some fds. If it encounters an error after getting the fds, it needs to cleanup and it calls `close_fd`. That doesn\u0027t seem wrong, yet this is not a filesystem driver.\n\nNotably, the calls I see being made are:\n* `get_unused_fd_flags()`\n* `anon_inode_getfd()`\n\nMaybe there is a way to reorganize the driver such that there are no calls that could return errors that come after we get the fds, but at the same time it doesn\u0027t seem wrong to be able to error handle this way.",
+      "range": {
+        "startLine": 740,
+        "startChar": 0,
+        "endLine": 740,
+        "endChar": 100
+      },
+      "revId": "eb161d1f79617e0c1d8438c489ce5ba5126538b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
