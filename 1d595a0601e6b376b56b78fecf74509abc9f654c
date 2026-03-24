@@ -179,6 +179,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5937785f_400c4353",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-03-24T15:16:06Z",
+      "side": 1,
+      "message": "I see. Actually, I\u0027ve just realized that, since the SDM says \"_If the processor supports_ either the 1-setting of the ...\", it probably means that VMX hardware does this automatic saving of MSR_IA32_RTIT_CTL _unconditionally_, i.e. even if those vmexit/vmentry controls are not set? Which means that it already does that, before this patch, and thus this patch shouldn\u0027t introduce an extra overhead in this regard. (And looks like the same situation is with IA32_LBR_CTL/IA32_S_CET/IA32_INTERRUPT_SSP_TABLE_ADDR/IA32_BNDCFGS as well.)\n\nOTOH, after more thinking, it may still introduce overhead, not due to reading (saving) these MSRs on every vmexit (which is done unconditionally), but, as you said, due to writing (restoring) them on every vmentry, as well as writing (clearing) them on every vmexit.\n\nAnyway, I\u0027m fine with keeping this implementation as is, let\u0027s just clearly document these considerations here in this paragraph, e.g.: add something like \"Unlike for MSR_CORE_PERF_GLOBAL_CTRL, ...\" (to make it clear that we are comparing it with the PERF_GLOBAL_CTRL case, and thus make it clear why we are even mentioning dynamic toggling here), and also, besides clarifying why we don\u0027t do dynamic toggling (which you already did), clarify the implications of that (e.g. that it may increase VM-exit and VM-entry latencies due to clearing the MSR on every vmexit and restoring its host value on every vmentry even if its host value is already zero, but it\u0027s a tradeoff with simplicity)? And similarly in other patches?",
+      "parentUuid": "51a4614d_1669ea13",
+      "revId": "1d595a0601e6b376b56b78fecf74509abc9f654c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b0880163_8d409efd",
         "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
         "patchSetId": 2
