@@ -143,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b52b8965_60e9da84",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-03-24T04:34:55Z",
+      "side": 1,
+      "message": "\u003e We need to do that, but not manually. The VMX will do this for us according to the SDM: \"If the processor supports either the 1-setting of the “load IA32_RTIT_CTL” VM-entry control or that of the “clear IA32_RTIT_CTL” VM-exit control, the contents of the IA32_RTIT_CTL MSR are saved into the corresponding field.\" The corresponding field is GUEST_IA32_RTIT_CTL.\n\nMakes sense... But then why don\u0027t we just do the same for PERF_GLOBAL_CTL as well? The SDM says: \"If the “save IA32_PERF_GLOBAL_CTL” VM-exit control is 1, the contents of the IA32_PERF_GLOBAL_CTL MSR are saved into the corresponding field.\" - so why don\u0027t we just enable “save IA32_PERF_GLOBAL_CTL” instead of intercepting MSR_CORE_PERF_GLOBAL_CTRL?\n\nOr perhaps \"To avoid the overhead of reading the MSR in every exit\" in Kevin\u0027s patch means the overhead of this automatic reading of the MSR by VMX hardware? i.e. enabling “save IA32_PERF_GLOBAL_CTL” would make the vmexit itself (at the HW level) take longer?\n\nIf so, then I guess these patches also make vmexits slower (by enabling controls which require HW to read those MSRs on every vmexit)?\n\n\u003e Actually we assume the host kernel will modify MSR_IA32_RTIT_CTL after deprivileging, and that is why we need this patch.\n\nI assume the main reason why we need this patch is security (so even if the _correctly working_ host kernel doesn\u0027t modify MSR_IA32_RTIT_CTL, a malicious host kernel may modify it, so we still need to ensure clearing it on vmexit, even if we don\u0027t need to ensure restoring it on vmentry). But nevermind.",
+      "parentUuid": "f6c6d062_44cc5333",
+      "revId": "1d595a0601e6b376b56b78fecf74509abc9f654c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b0880163_8d409efd",
         "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
         "patchSetId": 2
