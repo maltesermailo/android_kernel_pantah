@@ -39,6 +39,41 @@
       "message": "LGTM. Should we include KEY_CONTEXTUAL_QUERY?",
       "revId": "a8dc02bd663a2449e7b67556b24fa922cbba19ac",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90e7097a_4ff273fe",
+        "filename": "include/uapi/linux/input-event-codes.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 3928670
+      },
+      "writtenOn": "2026-03-25T21:04:44Z",
+      "side": 1,
+      "message": "I feel like the key name `contextual search` does not quite match the name `Action on Selection` from HUTRR119.",
+      "fixSuggestions": [
+        {
+          "fixId": "dfd03c67_662c12f6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/uapi/linux/input-event-codes.h",
+              "range": {
+                "startLine": 646,
+                "startChar": 0,
+                "endLine": 647,
+                "endChar": 0
+              },
+              "replacement": "#define KEY_ACTION_ON_SELECTION\t\t0x254\t/* AL Action on Selection (HUTRR119) */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "a8dc02bd663a2449e7b67556b24fa922cbba19ac",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
