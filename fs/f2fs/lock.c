@@ -116,13 +116,9 @@ static void uplift_priority(struct f2fs_rwsem *sem, struct f2fs_lock_context *lc
 		return;
 	set_user_nice(current, lc->new_nice);
 	lc->need_restore = true;
-
-	trace_f2fs_priority_uplift(sem->sbi, sem->name, is_write, current,
-		NICE_TO_PRIO(lc->orig_nice), NICE_TO_PRIO(lc->new_nice));
 }
 
-static void restore_priority(struct f2fs_rwsem *sem, struct f2fs_lock_context *lc,
-						bool is_write)
+static void restore_priority(struct f2fs_lock_context *lc)
 {
 	if (!lc->need_restore)
 		return;
@@ -130,9 +126,6 @@ static void restore_priority(struct f2fs_rwsem *sem, struct f2fs_lock_context *l
 	if (task_nice(current) != lc->new_nice)
 		return;
 	set_user_nice(current, lc->orig_nice);
-
-	trace_f2fs_priority_restore(sem->sbi, sem->name, is_write, current,
-		NICE_TO_PRIO(lc->orig_nice), NICE_TO_PRIO(lc->new_nice));
 }
 
 void f2fs_down_read_trace(struct f2fs_rwsem *sem, struct f2fs_lock_context *lc)
@@ -146,7 +139,7 @@ int f2fs_down_read_trylock_trace(struct f2fs_rwsem *sem, struct f2fs_lock_contex
 {
 	uplift_priority(sem, lc, false);
 	if (!f2fs_down_read_trylock(sem)) {
-		restore_priority(sem, lc, false);
+		restore_priority(lc);
 		return 0;
 	}
 	trace_lock_elapsed_time_start(sem, lc);
@@ -156,7 +149,7 @@ int f2fs_down_read_trylock_trace(struct f2fs_rwsem *sem, struct f2fs_lock_contex
 void f2fs_up_read_trace(struct f2fs_rwsem *sem, struct f2fs_lock_context *lc)
 {
 	f2fs_up_read(sem);
-	restore_priority(sem, lc, false);
+	restore_priority(lc);
 	trace_lock_elapsed_time_end(sem, lc, false);
 }
 
@@ -171,7 +164,7 @@ int f2fs_down_write_trylock_trace(struct f2fs_rwsem *sem, struct f2fs_lock_conte
 {
 	uplift_priority(sem, lc, true);
 	if (!f2fs_down_write_trylock(sem)) {
-		restore_priority(sem, lc, true);
+		restore_priority(lc);
 		return 0;
 	}
 	trace_lock_elapsed_time_start(sem, lc);
@@ -181,7 +174,7 @@ int f2fs_down_write_trylock_trace(struct f2fs_rwsem *sem, struct f2fs_lock_conte
 void f2fs_up_write_trace(struct f2fs_rwsem *sem, struct f2fs_lock_context *lc)
 {
 	f2fs_up_write(sem);
-	restore_priority(sem, lc, true);
+	restore_priority(lc);
 	trace_lock_elapsed_time_end(sem, lc, true);
 }
 
