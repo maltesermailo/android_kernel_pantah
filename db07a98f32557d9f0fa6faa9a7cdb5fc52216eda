@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5244c3bb_8b2abff7",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 4062,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-03-25T21:03:30Z",
+      "side": 1,
+      "message": "`init_task` is an exported symbol and we go through all this trouble of having `android_init_task_vendor_data_pad` because it is statically defined. However, I don\u0027t understand why this `if (p \u003d\u003d \u0026init_task)` check couldn\u0027t be offloaded to the vendor module and have the extra padding live there too? Could you please explain this part?",
+      "range": {
+        "startLine": 4061,
+        "startChar": 1,
+        "endLine": 4062,
+        "endChar": 47
+      },
+      "revId": "db07a98f32557d9f0fa6faa9a7cdb5fc52216eda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
