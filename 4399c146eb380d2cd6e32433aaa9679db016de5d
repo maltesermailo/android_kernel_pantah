@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "067d41e9_663e65f0",
+        "filename": "mm/readahead.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-25T23:48:16Z",
+      "side": 1,
+      "message": "Ok but you did not reply to the first question:\n```\nfilemap_add_folio() might fail. Do you still want to call trace_android_vh_readahead_add_folio() for such a case?\n```\nFrom your explanation it does not sound like you really want to capture cases when filemap_add_folio() fails and frees the folio. Please clarify.",
+      "parentUuid": "137f7359_f0856c90",
+      "range": {
+        "startLine": 264,
+        "startChar": 6,
+        "endLine": 264,
+        "endChar": 23
+      },
+      "revId": "4399c146eb380d2cd6e32433aaa9679db016de5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "35bad62c_2c16d894",
         "filename": "mm/readahead.c",
         "patchSetId": 2
@@ -61,6 +85,30 @@
       "writtenOn": "2026-03-16T19:02:06Z",
       "side": 1,
       "message": "add_to_page_cache_lru() is an alias for filemap_add_folio(). If you really can\u0027t use trace_mm_filemap_add_to_page_cache() then you could add this new hook at the beginning of filemap_add_folio() and avoid modifying the code in multiple places.",
+      "range": {
+        "startLine": 838,
+        "startChar": 6,
+        "endLine": 838,
+        "endChar": 27
+      },
+      "revId": "4399c146eb380d2cd6e32433aaa9679db016de5d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21555d4e_65329bdb",
+        "filename": "mm/readahead.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 838,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-03-25T23:48:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35bad62c_2c16d894",
       "range": {
         "startLine": 838,
         "startChar": 6,
