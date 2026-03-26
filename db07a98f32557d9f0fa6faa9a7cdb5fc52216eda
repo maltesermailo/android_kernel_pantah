@@ -22,6 +22,30 @@
       },
       "revId": "db07a98f32557d9f0fa6faa9a7cdb5fc52216eda",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0d7eec4_3a97e5be",
+        "filename": "kernel/sched/sched.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 4062,
+      "author": {
+        "id": 1928805
+      },
+      "writtenOn": "2026-03-26T01:37:26Z",
+      "side": 1,
+      "message": "The access to the vendor data was supposed to be offloaded to the vendor initially. But, based on comments from Greg (https://android-review.googlesource.com/c/kernel/common/+/3292854/comment/ae19b731_4ddfe64c/) and Todd (https://android-review.googlesource.com/c/kernel/common/+/3292854/comment/70bafeb2_751329dd/), it was decided that it would be easier on the vendors to convert their code if a function of this sort was provided.",
+      "parentUuid": "5244c3bb_8b2abff7",
+      "range": {
+        "startLine": 4061,
+        "startChar": 1,
+        "endLine": 4062,
+        "endChar": 47
+      },
+      "revId": "db07a98f32557d9f0fa6faa9a7cdb5fc52216eda",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
