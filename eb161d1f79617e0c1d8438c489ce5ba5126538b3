@@ -87,6 +87,30 @@
       },
       "revId": "eb161d1f79617e0c1d8438c489ce5ba5126538b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d620a5dc_d496a730",
+        "filename": "fs/file.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 740,
+      "author": {
+        "id": 1004907
+      },
+      "writtenOn": "2026-03-26T23:58:50Z",
+      "side": 1,
+      "message": "The code seems to use `put_unused_fd()` as the opposite of `get_unused_fd_flags()` in one place, but moves to `close_fd()` in another place. Maybe after the call to `fd_install()` it decided it needed `close_fd()`. There\u0027s also the second file descriptor returned by `anon_inode_getfd()`.\n\nAs far as whether it\u0027s safe / causes a race, I just don\u0027t know this code well enough. Is the right answer that it just needs to be restructured / rejiggered such that it doesn\u0027t need `close_fd()`?",
+      "parentUuid": "b3958b11_d97dc09c",
+      "range": {
+        "startLine": 740,
+        "startChar": 0,
+        "endLine": 740,
+        "endChar": 100
+      },
+      "revId": "eb161d1f79617e0c1d8438c489ce5ba5126538b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
