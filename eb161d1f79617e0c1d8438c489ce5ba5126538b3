@@ -135,6 +135,30 @@
       },
       "revId": "eb161d1f79617e0c1d8438c489ce5ba5126538b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8799abd8_2221745c",
+        "filename": "fs/file.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 740,
+      "author": {
+        "id": 1004907
+      },
+      "writtenOn": "2026-03-27T15:56:30Z",
+      "side": 1,
+      "message": "FWIW: filed b/496709008 against the people that added the `close_fd()` in the first place. Until that\u0027s fixed, I guess for now we\u0027ll live with the:\n```\nMODULE_IMPORT_NS(\"ANDROID_GKI_VFS_internal_I_am_really_a_filesystem_and_am_NOT_a_driver\");\n```",
+      "parentUuid": "aee20d27_cbf345fa",
+      "range": {
+        "startLine": 740,
+        "startChar": 0,
+        "endLine": 740,
+        "endChar": 100
+      },
+      "revId": "eb161d1f79617e0c1d8438c489ce5ba5126538b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
