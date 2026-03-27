@@ -111,6 +111,30 @@
       },
       "revId": "eb161d1f79617e0c1d8438c489ce5ba5126538b3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aee20d27_cbf345fa",
+        "filename": "fs/file.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 740,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-03-27T00:12:49Z",
+      "side": 1,
+      "message": "\u003e Is the right answer that it just needs to be restructured / rejiggered such that it doesn\u0027t need close_fd()?\n\nI would think so. My understanding is that `fd_install()` transfers the ownership, so the `close()` must come from userspace at this point.",
+      "parentUuid": "d620a5dc_d496a730",
+      "range": {
+        "startLine": 740,
+        "startChar": 0,
+        "endLine": 740,
+        "endChar": 100
+      },
+      "revId": "eb161d1f79617e0c1d8438c489ce5ba5126538b3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
