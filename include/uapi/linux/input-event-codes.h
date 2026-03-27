@@ -625,6 +625,38 @@
 #define KEY_BRIGHTNESS_MIN		0x250	/* Set Brightness to Minimum */
 #define KEY_BRIGHTNESS_MAX		0x251	/* Set Brightness to Maximum */
 
+<<<<<<< HEAD   (009c5006c969826d37a2c5fc2721a7bb20d72555 ANDROID: Clear task dmabuf_info on unshare(CLONE_FILES))
+||||||| BASE   (a77aafd7eca0b0b0e48d77dd2240329bcf8f2a7a ANDROID: Update symbol list for unisoc whitelist)
+/*
+ * Keycodes for hotkeys toggling the electronic privacy screen found on some
+ * laptops on/off. Note when the embedded-controller turns on/off the eprivacy
+ * screen itself then the state should be reported through drm connecter props:
+ * https://www.kernel.org/doc/html/latest/gpu/drm-kms.html#standard-connector-properties
+ * Except when implementing the drm connecter properties API is not possible
+ * because e.g. the firmware does not allow querying the presence and/or status
+ * of the eprivacy screen at boot.
+ */
+#define KEY_EPRIVACY_SCREEN_ON		0x252
+#define KEY_EPRIVACY_SCREEN_OFF		0x253
+
+=======
+/*
+ * Keycodes for hotkeys toggling the electronic privacy screen found on some
+ * laptops on/off. Note when the embedded-controller turns on/off the eprivacy
+ * screen itself then the state should be reported through drm connecter props:
+ * https://www.kernel.org/doc/html/latest/gpu/drm-kms.html#standard-connector-properties
+ * Except when implementing the drm connecter properties API is not possible
+ * because e.g. the firmware does not allow querying the presence and/or status
+ * of the eprivacy screen at boot.
+ */
+#define KEY_EPRIVACY_SCREEN_ON		0x252
+#define KEY_EPRIVACY_SCREEN_OFF		0x253
+
+#define KEY_ACTION_ON_SELECTION		0x254	/* AL Action on Selection (HUTRR119) */
+#define KEY_CONTEXTUAL_INSERT		0x255	/* AL Contextual Insertion (HUTRR119) */
+#define KEY_CONTEXTUAL_QUERY		0x256	/* AL Contextual Query (HUTRR119) */
+
+>>>>>>> CHANGE (4c8f294eaec5f26707b98e2b24d3d88325bafa4b FROMGIT: Input: add keycodes for contextual AI usages (HUTRR)
 #define KEY_KBDINPUTASSIST_PREV		0x260
 #define KEY_KBDINPUTASSIST_NEXT		0x261
 #define KEY_KBDINPUTASSIST_PREVGROUP		0x262
