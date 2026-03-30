@@ -113,6 +113,13 @@ int intel_start_bus_after_reset(struct sdw_intel *sdw)
 		sdw_cdns_init(&sdw->cdns);
 
 	} else {
+		/* Wait a while and see if we were racing with it powering-down */
+		msleep(100);
+		if (!sdw_cdns_is_clock_stop(&sdw->cdns)) {
+			dev_err(dev, "%s: HW reported powered-up but now it is powered-down\n",
+				__func__);
+		}
+
 		ret = sdw_cdns_enable_interrupt(cdns, true);
 		if (ret < 0) {
 			dev_err(dev, "cannot enable interrupts during resume\n");
