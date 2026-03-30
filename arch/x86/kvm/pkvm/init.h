@@ -39,4 +39,17 @@ int pkvm_init_finalize(void);
 int pkvm_reprivilege_vcpu(struct kvm_vcpu *vcpu);
 bool pkvm_cpu_initialized(int cpu);
 
+/**
+ * for_each_initialized_cpu - iterate over initialized CPUs
+ * @cpu: cpu iterator variable (evaluated twice - don't use expressions)
+ *
+ * Iterates over all possible CPUs that have been initialized via
+ * pkvm_cpu_initialized().
+ */
+#define for_each_initialized_cpu(cpu)			\
+	for_each_possible_cpu((cpu))			\
+		if (!pkvm_cpu_initialized((cpu)))	\
+			continue;			\
+		else
+
 #endif /* __PKVM_X86_INIT_H */
