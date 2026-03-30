@@ -2107,6 +2107,33 @@ void pkvm_kick_vcpu(struct kvm_vcpu *vcpu)
 	pkvm_lapic_send_init(READ_ONCE(vcpu->cpu));
 }
 
+#define RELAX_ITERATIONS	1000
+
+void pkvm_wait_vcpu_kicked_out(struct kvm_vcpu *vcpu)
+{
+	int relax_iters = RELAX_ITERATIONS;
+	u64 start;
+
+	if (READ_ONCE(vcpu->mode) != EXITING_GUEST_MODE)
+		return;
+
+	start = rdtsc_ordered();
+	do {
+		cpu_relax();
+		relax_iters--;
+		if (!relax_iters) {
+			/*
+			 * Rather than infinite spinning the EXITING_GUEST_MODE,
+			 * check the TSC and bug the system if the estimated
+			 * time is longer than 1s (a fail-safe value) so that
+			 * this failure can be noticed easier, if tsc_khz is set.
+			 */
+			BUG_ON(tsc_khz && (((rdtsc_ordered() - start) / tsc_khz) > 1000));
+			relax_iters = RELAX_ITERATIONS;
+		}
+	} while (READ_ONCE(vcpu->mode) == EXITING_GUEST_MODE);
+}
+
 int pkvm_x86_vendor_init(struct kvm_x86_init_ops *ops)
 {
 	int r;
