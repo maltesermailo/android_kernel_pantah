@@ -86,6 +86,9 @@ static vm_fault_t f2fs_vm_page_mkwrite(struct vm_fault *vmf)
 	if (unlikely(IS_IMMUTABLE(inode)))
 		return VM_FAULT_SIGBUS;
 
+	if (unlikely(file_large_folio(inode)))
+		return VM_FAULT_SIGBUS;
+
 	if (is_inode_flag_set(inode, FI_COMPRESS_RELEASED)) {
 		err = -EIO;
 		goto out;
@@ -630,6 +633,9 @@ static int f2fs_file_open(struct inode *inode, struct file *filp)
 	    filp->f_mode & FMODE_WRITE)
 		return -EOPNOTSUPP;
 
+	if (file_large_folio(inode) && filp->f_mode & FMODE_WRITE)
+		return -EOPNOTSUPP;
+
 	err = fsverity_file_open(inode, filp);
 	if (err)
 		return err;
@@ -1087,6 +1093,9 @@ int f2fs_setattr(struct mnt_idmap *idmap, struct dentry *dentry,
 		return err;
 
 	if (unlikely(IS_IMMUTABLE(inode)))
+		return -EPERM;
+
+	if (unlikely(file_large_folio(inode)))
 		return -EPERM;
 
 	if (unlikely(IS_APPEND(inode) &&
@@ -4931,6 +4940,9 @@ static ssize_t f2fs_write_checks(struct kiocb *iocb, struct iov_iter *from)
 	if (IS_IMMUTABLE(inode))
 		return -EPERM;
 
+	if (unlikely(file_large_folio(inode)))
+		return -EPERM;
+
 	if (is_inode_flag_set(inode, FI_COMPRESS_RELEASED))
 		return -EPERM;
 
@@ -5223,6 +5235,11 @@ static ssize_t f2fs_file_write_iter(struct kiocb *iocb, struct iov_iter *from)
 		goto out;
 	}
 
+	if (file_large_folio(inode)) {
+		ret = -EOPNOTSUPP;
+		goto out;
+	}
+
 	if (iocb->ki_flags & IOCB_NOWAIT) {
 		if (!inode_trylock(inode)) {
 			ret = -EAGAIN;
@@ -5330,6 +5347,26 @@ static int f2fs_file_fadvise(struct file *filp, loff_t offset, loff_t len,
 	} else if (advice == POSIX_FADV_WILLNEED && offset == 0) {
 		/* Load extent cache at the first readahead. */
 		f2fs_precache_extents(inode);
+	} else if (advice == POSIX_FADV_WILLNEED && offset == -1 && len == -1) {
+		mapping = filp->f_mapping;
+		// Set large folio if the following case is true:
+		if (mapping != NULL) {
+			if (!f2fs_compressed_file(inode) &&
+			    !f2fs_quota_file(inode) &&
+			    S_ISREG(inode->i_mode) &&
+			    !file_large_folio(inode) &&
+			    !(filp->f_mode & FMODE_WRITE)) {
+				file_set_large_folio(inode);
+				f2fs_mark_inode_dirty_sync(inode, true);
+			}
+		}
+		return 0;
+	} else if (advice == POSIX_FADV_NORMAL && offset == -1 && len == -1) {
+		if (S_ISREG(inode->i_mode) && file_large_folio(inode)) {
+			file_clear_large_folio(inode);
+			f2fs_mark_inode_dirty_sync(inode, true);
+		}
+		return 0;
 	}
 
 	err = generic_fadvise(filp, offset, len, advice);
