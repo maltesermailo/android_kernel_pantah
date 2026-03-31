@@ -41,8 +41,14 @@
 #undef CREATE_TRACE_POINTS
 #include <trace/hooks/mm.h>
 
+<<<<<<< PATCH SET (40658bdc2553faacece48c301276240cd93e751f ANDROID: vendor_hooks: vmalloc alloc and mmap count)
+EXPORT_TRACEPOINT_SYMBOL_GPL(cma_alloc_start);
+EXPORT_TRACEPOINT_SYMBOL_GPL(cma_alloc_finish);
+||||||| BASE      (70d782f4da1aeb013fe0895d897d888b5d91754e ANDROID: GKI: Update symbol list for vivo)
+=======
 EXPORT_TRACEPOINT_SYMBOL_GPL(cma_alloc_busy_retry);
 EXPORT_TRACEPOINT_SYMBOL_GPL(cma_release);
+>>>>>>> BASE      (702185a02153105e701b2ba6f17ec5384cafb6d6 Revert "io_uring: ensure ctx->rings is stable for task work )
 
 struct cma cma_areas[MAX_CMA_AREAS];
 unsigned int cma_area_count;
