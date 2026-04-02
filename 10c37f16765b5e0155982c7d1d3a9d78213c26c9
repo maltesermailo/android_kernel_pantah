@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffc0ff39_9ac5fe33",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-02T19:27:35Z",
+      "side": 1,
+      "message": "very nit: this might sound like before this patch we don\u0027t check pending requests before entering guest at all, which is of course not the case (we check them, we just don\u0027t re-check them again after setting IN_GUEST_MODE). So maybe e.g. just s/Check/Re-check/?",
+      "revId": "10c37f16765b5e0155982c7d1d3a9d78213c26c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "897b8880_4162b14d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-02T19:27:35Z",
+      "side": 1,
+      "message": "nit: maybe also worth mentioning that it is similar to how we already address the same race scenario for host vCPUs?",
+      "revId": "10c37f16765b5e0155982c7d1d3a9d78213c26c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "510dd777_7c40e0a9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-02T19:27:35Z",
+      "side": 1,
+      "message": "Worth adding a Fixes: tag? (Probably for the patch \"pKVM: x86: Add pkvm_vcpu_enter_guest()\"?)",
+      "revId": "10c37f16765b5e0155982c7d1d3a9d78213c26c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec417118_ac4b29ff",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 14978,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-02T19:27:35Z",
+      "side": 1,
+      "message": "nit: in such cases it is recommended to use {} braces for the `if` branch as well?",
+      "revId": "10c37f16765b5e0155982c7d1d3a9d78213c26c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc44e4ee_16e530af",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 14991,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-02T19:27:35Z",
+      "side": 1,
+      "message": "nit: s/are made/that are made/, or just s/are made/made/ ?",
+      "fixSuggestions": [
+        {
+          "fixId": "550248b9_787da939",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/x86.c",
+              "range": {
+                "startLine": 14991,
+                "startChar": 0,
+                "endLine": 14992,
+                "endChar": 0
+              },
+              "replacement": "\t\t * other CPUs, e.g., the requests made after this CPU has\n"
+            }
+          ]
+        }
+      ],
+      "revId": "10c37f16765b5e0155982c7d1d3a9d78213c26c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
