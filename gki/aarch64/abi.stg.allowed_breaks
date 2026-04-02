@@ -141,3 +141,7 @@ type 'struct rb_thread_layout' changed
 type 'struct pkvm_module_ops' changed
   member 'u64 __kabi_reserved5' was removed
   member 'union { int(* device_register_power_lock)(u64, void*, int(*)(void*, bool)); struct { u64 __kabi_reserved5; }; union { }; }' was added
+
+type 'struct usb_device' changed
+  member 'u64 __kabi_reserved3' was removed
+  member 'union { unsigned int offload_pm_locked:1; struct { u64 __kabi_reserved3; }; union { }; }' was added
