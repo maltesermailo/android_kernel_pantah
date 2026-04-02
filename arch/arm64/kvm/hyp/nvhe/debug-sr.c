@@ -126,12 +126,16 @@ static void __debug_restore_trace(u64 trfcr_el1, u64 trblimitr_el1)
 
 void __debug_save_host_buffers_nvhe(struct kvm_vcpu *vcpu)
 {
+	u64 dfr0 = read_sysreg(id_aa64dfr0_el1);
+
 	/* Disable and flush SPE data generation */
-	if (vcpu_get_flag(vcpu, DEBUG_STATE_SAVE_SPE))
+	if (FIELD_GET(ID_AA64DFR0_EL1_PMSVer, dfr0) &&
+	    !(read_sysreg_s(SYS_PMBIDR_EL1) & BIT(PMBIDR_EL1_P_SHIFT)))
 		__debug_save_spe(host_data_ptr(host_debug_state.pmscr_el1),
 				 host_data_ptr(host_debug_state.pmblimitr_el1));
 	/* Disable and flush Self-Hosted Trace generation */
-	if (vcpu_get_flag(vcpu, DEBUG_STATE_SAVE_TRBE))
+	if (FIELD_GET(ID_AA64DFR0_EL1_TraceBuffer, dfr0) &&
+	    !(read_sysreg_s(SYS_TRBIDR_EL1) & TRBIDR_EL1_P))
 		__debug_save_trace(host_data_ptr(host_debug_state.trfcr_el1),
 				   host_data_ptr(host_debug_state.trblimitr_el1));
 }
@@ -143,11 +147,15 @@ void __debug_switch_to_guest(struct kvm_vcpu *vcpu)
 
 void __debug_restore_host_buffers_nvhe(struct kvm_vcpu *vcpu)
 {
-	if (vcpu_get_flag(vcpu, DEBUG_STATE_SAVE_SPE))
+	u64 dfr0 = read_sysreg(id_aa64dfr0_el1);
+
+	if (FIELD_GET(ID_AA64DFR0_EL1_PMSVer, dfr0) &&
+	    !(read_sysreg_s(SYS_PMBIDR_EL1) & BIT(PMBIDR_EL1_P_SHIFT)))
 		__debug_restore_spe(
 			*host_data_ptr(host_debug_state.pmscr_el1),
 			*host_data_ptr(host_debug_state.pmblimitr_el1));
-	if (vcpu_get_flag(vcpu, DEBUG_STATE_SAVE_TRBE))
+	if (FIELD_GET(ID_AA64DFR0_EL1_TraceBuffer, dfr0) &&
+	    !(read_sysreg_s(SYS_TRBIDR_EL1) & TRBIDR_EL1_P))
 		__debug_restore_trace(*host_data_ptr(host_debug_state.trfcr_el1),
 				      *host_data_ptr(host_debug_state.trblimitr_el1));
 }
