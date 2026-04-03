@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91933b0b_4b82dbdc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-03T00:55:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ffc0ff39_9ac5fe33",
+      "revId": "10c37f16765b5e0155982c7d1d3a9d78213c26c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "897b8880_4162b14d",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-04-02T19:27:35Z",
       "side": 1,
       "message": "nit: maybe also worth mentioning that it is similar to how we already address the same race scenario for host vCPUs?",
+      "revId": "10c37f16765b5e0155982c7d1d3a9d78213c26c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45aa1d0b_e5fb0ac9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-03T00:55:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "897b8880_4162b14d",
       "revId": "10c37f16765b5e0155982c7d1d3a9d78213c26c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c5f10ea2_5c8d7a62",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-03T00:55:22Z",
+      "side": 1,
+      "message": "This patch is only needed after we have the usage of kicking a guest vcpu. When we add the patch \"pKVM: x86: Add pkvm_vcpu_enter_guest()\", there is no code to kick a guest vCPU so seems we don\u0027t need this patch as a fix? Until we have the patch \"pKVM: VMX: Implement TLB flush for guest EPT\" which needs to kick guest vCPUs, this patch is needed. So maybe this patch should be re-ordered and applied right before or after \"pKVM: VMX: Implement TLB flush for guest EPT\"?",
+      "parentUuid": "510dd777_7c40e0a9",
+      "revId": "10c37f16765b5e0155982c7d1d3a9d78213c26c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec417118_ac4b29ff",
         "filename": "arch/x86/kvm/x86.c",
         "patchSetId": 1
@@ -65,6 +119,24 @@
       "writtenOn": "2026-04-02T19:27:35Z",
       "side": 1,
       "message": "nit: in such cases it is recommended to use {} braces for the `if` branch as well?",
+      "revId": "10c37f16765b5e0155982c7d1d3a9d78213c26c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f5b7124_66149ddc",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 14978,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-03T00:55:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ec417118_ac4b29ff",
       "revId": "10c37f16765b5e0155982c7d1d3a9d78213c26c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -100,6 +172,24 @@
           ]
         }
       ],
+      "revId": "10c37f16765b5e0155982c7d1d3a9d78213c26c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce83240d_f5f7bf54",
+        "filename": "arch/x86/kvm/x86.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 14991,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-03T00:55:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "bc44e4ee_16e530af",
       "revId": "10c37f16765b5e0155982c7d1d3a9d78213c26c9",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
