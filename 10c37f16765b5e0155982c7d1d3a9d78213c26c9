@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1f4b5637_e6ff2a50",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-03T01:13:29Z",
+      "side": 1,
+      "message": "If we add fixes tag for \"pKVM: VMX: Implement TLB flush for guest EPT\", which means we will squash this patch with \"pKVM: VMX: Implement TLB flush for guest EPT\" as one single patch in the future, right? But maybe they should be separated and just put them side-by-side, as \"pKVM: VMX: Implement TLB flush for guest EPT\" is a VMX specific change and this patch is a x86 generic change, and both of them are the implementations for the feature of flushing guest tlb. That is why I mention maybe this patch should be re-ordered and applied right before or after \"pKVM: VMX: Implement TLB flush for guest EPT\", but not a fix. 😊",
+      "parentUuid": "98faa45d_08d3934f",
+      "revId": "10c37f16765b5e0155982c7d1d3a9d78213c26c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec417118_ac4b29ff",
         "filename": "arch/x86/kvm/x86.c",
         "patchSetId": 1
