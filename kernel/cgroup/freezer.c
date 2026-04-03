@@ -100,6 +100,49 @@ static void cgroup_dec_frozen_cnt(struct cgroup *cgrp)
 	WARN_ON_ONCE(cgrp->freezer.nr_frozen_tasks < 0);
 }
 
+static bool reclaim_userspace_stack(struct task_struct *task)
+{
+	struct vm_area_struct *vma;
+	unsigned long start_addr;
+	unsigned long end_addr;
+	unsigned long esp_addr;
+
+	/* Exit if kthread. */
+	if (!task->mm)
+		return false;
+
+	if (in_atomic())
+		return false;
+
+	if (!mmap_read_trylock(task->mm))
+		return false;
+
+	esp_addr = KSTK_ESP(task);
+	vma = find_vma(task->mm, esp_addr);
+	if (!vma)
+		goto mmap_unlock;
+
+	if (vma->vm_flags & VM_GROWSDOWN) {
+		/* Area below esp_addr is unused */
+		esp_addr = PAGE_ALIGN_DOWN(esp_addr);
+		start_addr = vma->vm_start;
+		end_addr = esp_addr;
+	} else {
+		/* Area above esp_addr is unused */
+		esp_addr = PAGE_ALIGN(esp_addr);
+		start_addr = esp_addr;
+		end_addr = vma->vm_end;
+	}
+
+	if (start_addr < end_addr)
+		madvise_free_single_vma(vma, start_addr, end_addr);
+
+mmap_unlock:
+	mmap_read_unlock(task->mm);
+
+	return true;
+}
+
 /*
  * Enter frozen/stopped state, if not yet there. Update cgroup's counters,
  * and revisit the state of the cgroup, if necessary.
@@ -117,6 +160,7 @@ void cgroup_enter_frozen(void)
 	cgroup_inc_frozen_cnt(cgrp);
 	cgroup_update_frozen(cgrp);
 	spin_unlock_irq(&css_set_lock);
+	reclaim_userspace_stack(current);
 }
 
 /*
