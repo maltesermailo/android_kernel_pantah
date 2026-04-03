@@ -144,6 +144,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e5d163e1_5ca6b791",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-03T01:49:33Z",
+      "side": 1,
+      "message": "Ok, I see your point.\n\nI\u0027d be fine with either squashing it or reordering it, my intention here is just to help us _remember_ to reorder it specifically before or after \"pKVM: VMX: Implement TLB flush for guest EPT\" (or squash into it) during a future rebase.\n\nSo we might just add mentioning that specific commit here, either in the form of a Fixes: tag or just as a note?\n\n(BTW my understanding is that a Fixes: tag means simply: we\u0027ve had a bug because of the given patch, and now we are fixing this bug; it doesn\u0027t necessarily mean we should squash the fix into that exact patch.)",
+      "parentUuid": "1f4b5637_e6ff2a50",
+      "revId": "10c37f16765b5e0155982c7d1d3a9d78213c26c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec417118_ac4b29ff",
         "filename": "arch/x86/kvm/x86.c",
         "patchSetId": 1
