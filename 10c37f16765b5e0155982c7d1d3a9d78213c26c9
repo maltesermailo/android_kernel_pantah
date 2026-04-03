@@ -162,6 +162,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f555664c_a519f9c8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-03T02:16:25Z",
+      "side": 1,
+      "message": "\u003e (BTW my understanding is that a Fixes: tag means simply: we\u0027ve had a bug because of the given patch, and now we are fixing this bug; it doesn\u0027t necessarily mean we should squash the fix into that exact patch.)\n\nI see. In my mind, the way to handle fix patch is to squash to the patch it fixed. But your understanding makes more sense. How to handle a fix patch for the future rebasing can be specific, either squashing or reordering case-by-case. I will add a Fixes tag for \"pKVM: VMX: Implement TLB flush for guest EPT\".",
+      "parentUuid": "e5d163e1_5ca6b791",
+      "revId": "10c37f16765b5e0155982c7d1d3a9d78213c26c9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec417118_ac4b29ff",
         "filename": "arch/x86/kvm/x86.c",
         "patchSetId": 1
