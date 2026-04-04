@@ -503,28 +503,34 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 		ret = -EPERM;
 		break;
 	case DMAR_FEADDR_REG:
+	case DMAR_PERFINTRADDR_REG:
 		/*
-		 * FEADDR holds the MSI destination address for fault events.
-		 * The IOMMU writes to this address when a fault occurs, bypassing
-		 * DMA remapping. Ensure it targets only the x86 MSI address range
-		 * (0xFEE00000) to prevent writes to protected memory. Bits 1:0
+		 * FEADDR/PERFINTADDR holds the MSI destination address.
+		 * The IOMMU writes to this address, bypassing DMA remapping.
+		 * Ensure it targets only the x86 MSI address range(0xFEE00000)
+		 * to prevent writes to protected memory. Bits 11:4 and 1:0
 		 * are RsvdZ and the mask(X86_MSI_ADDR_MASK) takes care of checking
 		 * that as well.
 		 *
-		 * In x2APIC mode FEUADDR provides the upper 32 bits; check the
-		 * combined 64-bit address against the system memory map to catch
-		 * addresses like 0x100_FEE00000 (~1 TiB) that could target DRAM.
+		 * In x2APIC mode FEUADDR/PERFINTRUADDR provides the upper 32 bits;
+		 * check the combined 64-bit address against the system memory map to
+		 * catch addresses like 0x100_FEE00000 (~1 TiB) that could target DRAM.
 		 */
 		if ((val & X86_MSI_ADDR_MASK) != X86_MSI_ADDR_BASE) {
-			pkvm_err("iommu%d: FEADDR 0x%llx not in MSI address range\n",
-				 iommu->seq_id, val);
+			pkvm_err("iommu%d: %s 0x%llx not in MSI address range\n",
+				 iommu->seq_id,
+				 offset == DMAR_FEADDR_REG ? "FEADDR" : "PERFINTRADDR",
+				 val);
 			ret = -EINVAL;
 		} else {
-			u32 feuaddr = readl(iommu->reg + DMAR_FEUADDR_REG);
+			u32 uaddr = readl(iommu->reg + (offset == DMAR_FEADDR_REG ?
+					  DMAR_FEUADDR_REG : DMAR_PERFINTRUADDR_REG));
 
-			if (msi_addr_targets_memory((u32)val, feuaddr)) {
-				pkvm_err("iommu%d: FEADDR/FEUADDR 0x%llx targets system memory\n",
-					 iommu->seq_id, ((u64)feuaddr << 32) | (u32)val);
+			if (msi_addr_targets_memory((u32)val, uaddr)) {
+				pkvm_err("iommu%d: %s MSI addr 0x%llx targets system memory\n",
+					 iommu->seq_id,
+					 offset == DMAR_FEADDR_REG ? "FE" : "PERFINTR",
+					 ((u64)uaddr << 32) | (u32)val);
 				ret = -EPERM;
 			} else {
 				ret = iommu_direct_mmio_write(iommu, phys, len, val);
@@ -532,29 +538,35 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 		}
 		break;
 	case DMAR_FEUADDR_REG:
+	case DMAR_PERFINTRUADDR_REG:
 		/*
-		 * FEUADDR holds the upper 32 bits of the MSI address.
+		 * PERFINTRUADDR/FEUADDR holds the upper 32 bits of the MSI address.
 		 *
 		 * In xAPIC mode all MSI addresses fit in 32 bits (0xFEE00000),
-		 * so FEUADDR is zero.
+		 * so PERFINTRUADDR/FEUADDR is zero.
 		 *
 		 * In x2APIC mode, the IOMMU places APIC ID bits [31:8] in
-		 * FEUADDR bits [31:8]; bits [7:0] are reserved and must be zero.
+		 * bits [31:8]; bits [7:0] are reserved and must be zero.
 		 * Reject writes that set the reserved low byte.
 		 *
 		 * Also check that the combined 64-bit address with the current
-		 * FEADDR does not fall in system memory.
+		 * PERFINTRUADDR/FEADDR does not fall in system memory.
 		 */
 		if (val & 0xFF) {
-			pkvm_err("iommu%d: FEUADDR 0x%llx has reserved bits set\n",
-				 iommu->seq_id, val);
+			pkvm_err("iommu%d: %s 0x%llx has reserved bits set\n",
+				 iommu->seq_id,
+				 offset == DMAR_FEUADDR_REG ? "FEUADDR" : "PERFINTRUADDR",
+				 val);
 			ret = -EINVAL;
 		} else {
-			u32 feaddr = readl(iommu->reg + DMAR_FEADDR_REG);
+			u32 addr = readl(iommu->reg + (offset == DMAR_FEUADDR_REG ?
+					 DMAR_FEADDR_REG : DMAR_PERFINTRADDR_REG));
 
-			if (msi_addr_targets_memory(feaddr, (u32)val)) {
-				pkvm_err("iommu%d: FEUADDR/FEADDR 0x%llx targets system memory\n",
-					 iommu->seq_id, (val << 32) | feaddr);
+			if (msi_addr_targets_memory(addr, (u32)val)) {
+				pkvm_err("iommu%d: %s MSI addr 0x%llx targets system memory\n",
+					 iommu->seq_id,
+					 offset == DMAR_FEUADDR_REG ? "FE" : "PERFINTR",
+					 (val << 32) | addr);
 				ret = -EPERM;
 			} else {
 				ret = iommu_direct_mmio_write(iommu, phys, len, val);
@@ -562,23 +574,29 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 		}
 		break;
 	case DMAR_FEDATA_REG:
+	case DMAR_PERFINTRDATA_REG:
 		/* RsvdZ bits 31:9 */
 		if (val >> 9) {
-			pkvm_err("iommu%d: FEDATA 0x%llx has reserved bits set\n",
-				 iommu->seq_id, val);
+			pkvm_err("iommu%d: %s 0x%llx has reserved bits set\n",
+				 iommu->seq_id,
+				 offset == DMAR_FEDATA_REG ? "FEDATA" : "PERFINTRDATA",
+				 val);
 			ret = -EINVAL;
 		} else {
 			ret = iommu_direct_mmio_write(iommu, phys, len, val);
 		}
 		break;
-	case DMAR_FECTL_REG: {
+	case DMAR_FECTL_REG:
+	case DMAR_PERFINTRCTL_REG: {
 		/* RsvdP bits: 29:0 */
 		u32 rsvdp_mask = (~0U) >> 2;
-		u32 rsvdp = readl(iommu->reg + DMAR_FECTL_REG) & rsvdp_mask;
+		u32 rsvdp = readl(iommu->reg + offset) & rsvdp_mask;
 
 		if ((val & rsvdp_mask) != rsvdp) {
-			pkvm_err("iommu%d: FECTL reserved bits mismatch(0x%x != 0x%x)\n",
-				 iommu->seq_id, rsvdp, (u32)(val & rsvdp_mask));
+			pkvm_err("iommu%d: %s reserved bits mismatch(0x%x != 0x%x)\n",
+				 iommu->seq_id,
+				 offset == DMAR_FECTL_REG ? "FECTL" : "PERFINTRCTL",
+				 rsvdp, (u32)(val & rsvdp_mask));
 			ret = -EINVAL;
 		} else {
 			ret = iommu_direct_mmio_write(iommu, phys, len, val);
@@ -697,6 +715,18 @@ static int iommu_init(struct intel_iommu *iommu)
 				      "fault event");
 	if (ret)
 		return ret;
+
+	/*
+	 * Same check for PERFINTRADDR/PERFINTRUADDR if performance monitoring
+	 * is supported.
+	 */
+	if (ecap_pms(iommu->ecap)) {
+		ret = iommu_validate_msi_addr(iommu, DMAR_PERFINTRADDR_REG,
+					      DMAR_PERFINTRUADDR_REG,
+					      "perf monitoring");
+		if (ret)
+			return ret;
+	}
 
 	return 0;
 }
