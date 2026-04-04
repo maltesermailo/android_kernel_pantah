@@ -18,6 +18,14 @@
 unsigned int iommu_pgsz_mask = 1 << PG_LEVEL_4K | 1 << PG_LEVEL_2M | 1 << PG_LEVEL_1G;
 unsigned int iommu_pglvl_mask = IOMMU_PGT_4LEVEL | IOMMU_PGT_5LEVEL;
 
+/*
+ * x86 MSI address base: all legitimate MSI interrupts target this range
+ * (Local APIC delivery). FEADDR must have this prefix.
+ */
+#define X86_MSI_ADDR_BASE	0xfee00000U
+/* Mask for 0xFEE and RsvdZ bits 11:4 and 1:0 */
+#define X86_MSI_ADDR_MASK	0xfff00ff3U
+
 /* GCMD bits that handle enabling/disabling of IOMMU features */
 #define DMAR_GSTS_EN_BITS	(DMA_GCMD_TE | DMA_GCMD_QIE | DMA_GCMD_IRE | DMA_GCMD_CFI)
 /* GCMD oneshot bits where unsetting the bit doesn't have an effect */
@@ -477,6 +485,64 @@ int pkvm_iommu_mmio_write(u64 phys, int len, u64 val)
 		pkvm_err("iommu%d: Setting IRTA is not supported!\n", iommu->seq_id);
 		ret = -EPERM;
 		break;
+	case DMAR_FEADDR_REG:
+		/*
+		 * FEADDR holds the MSI destination address for fault events.
+		 * The IOMMU writes to this address when a fault occurs, bypassing
+		 * DMA remapping. Ensure it targets only the x86 MSI address range
+		 * (0xFEE00000) to prevent writes to protected memory.
+		 */
+		if ((val & X86_MSI_ADDR_MASK) != X86_MSI_ADDR_BASE) {
+			pkvm_err("iommu%d: FEADDR 0x%llx not in MSI address range\n",
+				 iommu->seq_id, val);
+			ret = -EINVAL;
+		} else {
+			ret = iommu_direct_mmio_write(iommu, phys, len, val);
+		}
+		break;
+	case DMAR_FEUADDR_REG:
+		/*
+		 * FEUADDR holds the upper 32 bits of the MSI address.
+		 *
+		 * In xAPIC mode all MSI addresses fit in 32 bits (0xFEE00000),
+		 * so FEUADDR is zero.
+		 *
+		 * In x2APIC mode, the IOMMU places APIC ID bits [31:8] in
+		 * FEUADDR bits [31:8]; bits [7:0] are reserved and must be zero.
+		 * Reject writes that set the reserved low byte.
+		 */
+		if (val & 0xFF) {
+			pkvm_err("iommu%d: FEUADDR 0x%llx has reserved bits set\n",
+				 iommu->seq_id, val);
+			ret = -EINVAL;
+		} else {
+			ret = iommu_direct_mmio_write(iommu, phys, len, val);
+		}
+		break;
+	case DMAR_FEDATA_REG:
+		/* RsvdZ bits 31:9 */
+		if (val >> 9) {
+			pkvm_err("iommu%d: FEDATA 0x%llx has reserved bits set\n",
+				 iommu->seq_id, val);
+			ret = -EINVAL;
+		} else {
+			ret = iommu_direct_mmio_write(iommu, phys, len, val);
+		}
+		break;
+	case DMAR_FECTL_REG: {
+		/* RsvdP bits: 29:0 */
+		u32 rsvdp_mask = (~0U) >> 2;
+		u32 rsvdp = readl(iommu->reg + DMAR_FECTL_REG) & rsvdp_mask;
+
+		if ((val & rsvdp_mask) != rsvdp) {
+			pkvm_err("iommu%d: FECTL reserved bits mismatch(0x%x != 0x%x)\n",
+				 iommu->seq_id, rsvdp, (u32)(val & rsvdp_mask));
+			ret = -EINVAL;
+		} else {
+			ret = iommu_direct_mmio_write(iommu, phys, len, val);
+		}
+		break;
+	}
 	default:
 		/* Not emulated MMIO can directly go to hardware */
 		ret = iommu_direct_mmio_write(iommu, phys, len, val);
@@ -503,6 +569,32 @@ int __init prepare_iommu(struct intel_iommu_info *info)
 	iommu->seq_id = info->seq_id;
 
 	iommu_paging_structure_coherent &= iommu_paging_structure_coherency(iommu);
+
+	return 0;
+}
+
+/*
+ * Validate that the MSI address programmed into a pair of 32-bit address
+ * registers (lower @addr_reg, upper @uaddr_reg) does not target system
+ * memory.  Called at deprivilege time to catch firmware/BIOS values that
+ * were set before pKVM took control.
+ */
+static int iommu_validate_msi_addr(struct intel_iommu *iommu,
+				   u32 addr_reg, u32 uaddr_reg,
+				   const char *name)
+{
+	u32 addr  = readl(iommu->reg + addr_reg);
+	u32 uaddr = readl(iommu->reg + uaddr_reg);
+
+	if (addr && (addr & X86_MSI_ADDR_MASK) != X86_MSI_ADDR_BASE) {
+		pkvm_err("iommu%d: %s ADDR 0x%x not in MSI address range\n",
+			 iommu->seq_id, name, addr);
+		return -EINVAL;
+	} else if (uaddr & 0xFF) {
+		pkvm_err("iommu%d: %s UADDR 0x%x has reserved bits set\n",
+				 iommu->seq_id, name, uaddr);
+		return -EINVAL;
+	}
 
 	return 0;
 }
@@ -553,6 +645,18 @@ static int iommu_init(struct intel_iommu *iommu)
 
 	iommu->virta = readq(iommu->reg + DMAR_IRTA_REG);
 	ret = iommu_protect_ir_table(iommu);
+	if (ret)
+		return ret;
+
+	/*
+	 * Validate that FEADDR/FEUADDR do not target system memory.  Firmware
+	 * programs these before deprivilege; a buggy or malicious firmware
+	 * could have pointed them at protected memory.  The check is possible
+	 * here because pKVM's MMU (and thus the full memory map) is
+	 * initialized before iommu_init().
+	 */
+	ret = iommu_validate_msi_addr(iommu, DMAR_FEADDR_REG, DMAR_FEUADDR_REG,
+				      "fault event");
 	if (ret)
 		return ret;
 
