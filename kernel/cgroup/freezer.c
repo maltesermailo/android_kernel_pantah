@@ -135,7 +135,7 @@ static bool reclaim_userspace_stack(struct task_struct *task)
 	}
 
 	if (start_addr < end_addr)
-		madvise_free_single_vma(vma, start_addr, end_addr);
+		madvise_free_single_vma(vma, start_addr, end_addr, true);
 
 mmap_unlock:
 	mmap_read_unlock(task->mm);
