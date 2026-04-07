@@ -16,6 +16,24 @@
       "message": "I\u0027m not very savvy on the kabi break details, but could we get some more detail in the commit message here on why this kabi break is safe and won\u0027t impact existing vendor modules?",
       "revId": "53028f7f76847cbe4b10a92fe44c78496d9e46be",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ca789ee_f5a02b88",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 3589941
+      },
+      "writtenOn": "2026-04-07T11:43:41Z",
+      "side": 1,
+      "message": "In the previous case 437260552, we had discussions regarding this patch. It was agreed at the time that we would merge it into the upstream GKI, but we actually only merged it into our OGKI and not into GKI. Recently, the two commits 735ecea92c9d2dbee880fa3ec5a51ee675c1a833 and f6f9e74eb0b6e678470b3b61a979a1a7c03eb817 in the upstream GKI increased the value of the CONFIG_GKI_TASK_STRUCT_VENDOR_SIZE_MAX macro to 1024. This causes conflicts during our local builds. Therefore, we need to synchronize our previous patch into the upstream GKI. This macro reserves space for third-party vendors, and since vendor_data_pad uses it, some ABI (Application Binary Interface) handling is required. I have performed the necessary handling with reference to the aforementioned two commits. Please help review it. Thank you.",
+      "parentUuid": "1ec749e4_39dcd180",
+      "revId": "53028f7f76847cbe4b10a92fe44c78496d9e46be",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
