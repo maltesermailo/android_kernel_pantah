@@ -577,6 +577,15 @@ DECLARE_HOOK(android_vh_adjust_iocb_flags,
 DECLARE_HOOK(android_vh_filemap_end_dropbehind_bypass,
 	TP_PROTO(struct folio *folio, bool *bypass),
 	TP_ARGS(folio, bypass));
+<<<<<<< PATCH SET (6ec239027328b51c1229b13db6e18802cd4f242e ANDROID: mm: Add vendor hooks for __alloc_pages_direct_recla)
+DECLARE_HOOK(android_vh_mm_direct_reclaim_enter,
+	TP_PROTO(unsigned int order),
+	TP_ARGS(order));
+DECLARE_HOOK(android_vh_mm_direct_reclaim_exit,
+	TP_PROTO(unsigned long did_some_progress, int retry_times),
+	TP_ARGS(did_some_progress, retry_times));
+||||||| BASE      (a8f13f82023241325f57237863a2a56dd428e3da ANDROID: android: Export cma tracehooks)
+=======
 DECLARE_HOOK(android_vh_vmalloc_node_range_start,
 	TP_PROTO(unsigned long size),
 	TP_ARGS(size));
@@ -588,6 +597,7 @@ DECLARE_HOOK(android_vh_do_mmap_map_count,
 			unsigned long len, unsigned long prot,
 			unsigned long flags),
 	TP_ARGS(file, addr, len, prot, flags));
+>>>>>>> BASE      (5054eba709841c0e57d2f55f33e55cdb3a1286f8 ANDROID: abi_gki_aarch64_xiaomi: Update symbol list)
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
