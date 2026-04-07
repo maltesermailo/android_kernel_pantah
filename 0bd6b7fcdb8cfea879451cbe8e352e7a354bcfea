@@ -1,0 +1,340 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b17808ad_5224e9ff",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-07T21:00:38Z",
+      "side": 1,
+      "message": "Can we check if from-\u003edmabuf_count \u003d\u003d 0 and bail out early or is that still racy?",
+      "revId": "0bd6b7fcdb8cfea879451cbe8e352e7a354bcfea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e0caf0c_18d979d2",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-07T21:00:38Z",
+      "side": 1,
+      "message": "Formatting for multi-line comment is incorrect.",
+      "range": {
+        "startLine": 523,
+        "startChar": 1,
+        "endLine": 523,
+        "endChar": 3
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "a27d81f8_f23e7d78",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 523,
+                "startChar": 0,
+                "endLine": 524,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * RCU not actually needed here because task isn\u0027t fully formed yet and nobody else can\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0bd6b7fcdb8cfea879451cbe8e352e7a354bcfea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9723bc97_eb8e9564",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-07T21:00:38Z",
+      "side": 1,
+      "message": "Why not use COUNT_DMABUF_FDS?",
+      "range": {
+        "startLine": 528,
+        "startChar": 2,
+        "endLine": 528,
+        "endChar": 74
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ba54345f_0dbb5857",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 686,
+                "startChar": 0,
+                "endLine": 687,
+                "endChar": 0
+              },
+              "replacement": "#define COUNT_DMABUF_FDS_FOR_FILES(files, file_lookup_func) ({ \\\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 688,
+                "startChar": 0,
+                "endLine": 690,
+                "endChar": 0
+              },
+              "replacement": "\tfor (unsigned int n \u003d 0; n \u003c files_fdtable(files)-\u003emax_fds; ++n) { \\\n\t\tstruct file *file \u003d file_lookup_func(files, n); \\\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "#define COUNT_DMABUF_FDS(file_lookup_func) \\\n\tCOUNT_DMABUF_FDS_FOR_FILES(current-\u003efiles, file_lookup_func)\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0bd6b7fcdb8cfea879451cbe8e352e7a354bcfea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c52e5fc1_828869fa",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-07T21:00:38Z",
+      "side": 1,
+      "message": "Let\u0027s add a comment that count can\u0027t be changing from under us because the child process is not completely initialized yet.",
+      "fixSuggestions": [
+        {
+          "fixId": "d7f4b160_f04b256c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t/*\n\t * The count cannot be changing from under us because the process is not\n\t * completely initialized yet.\n\t */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0bd6b7fcdb8cfea879451cbe8e352e7a354bcfea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40f79427_a1b60db1",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-07T21:00:38Z",
+      "side": 1,
+      "message": "If you count how many dmabufs are fd-referenced, you count loop until that count is reached instead of looping until max_fds",
+      "range": {
+        "startLine": 555,
+        "startChar": 32,
+        "endLine": 555,
+        "endChar": 67
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5784e495_36476f2c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 555,
+                "startChar": 0,
+                "endLine": 556,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tsize_t accounted_fds \u003d 0;\n\n\t\t\tfor (unsigned int n \u003d 0; n \u003c files_fdtable(task-\u003efiles)-\u003emax_fds \u0026\u0026\n\t\t\t     accounted_fds \u003c count; ++n) {\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 558,
+                "startChar": 0,
+                "endLine": 559,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\tif (file \u0026\u0026 is_dma_buf_file(file)) {\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t\taccounted_fds++;\n\t\t\t\t}\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0bd6b7fcdb8cfea879451cbe8e352e7a354bcfea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba58cd60_a081e0ca",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-07T21:00:38Z",
+      "side": 1,
+      "message": "Same thing here. You count how many dmabufs are mapped, and stop looping once that count is readched.",
+      "range": {
+        "startLine": 569,
+        "startChar": 3,
+        "endLine": 569,
+        "endChar": 27
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "eb223e8b_b401a524",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 517,
+                "startChar": 0,
+                "endLine": 518,
+                "endChar": 0
+              },
+              "replacement": "\tsize_t fd_count \u003d 0;\n\tsize_t vma_count \u003d 0;\n\tsize_t total_count;\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 522,
+                "startChar": 0,
+                "endLine": 523,
+                "endChar": 0
+              },
+              "replacement": "\t\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 532,
+                "startChar": 0,
+                "endLine": 533,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t++fd_count;\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 543,
+                "startChar": 0,
+                "endLine": 544,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t++vma_count;\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 547,
+                "startChar": 0,
+                "endLine": 549,
+                "endChar": 0
+              },
+              "replacement": "\ttotal_count \u003d fd_count + vma_count;\n\tif (total_count \u003e 0) {\n\t\tsize_t accounted_fds \u003d 0;\n\t\tsize_t accounted_vmas \u003d 0;\n\n\t\tif (!task_dmabuf_records_preload(total_count)) {\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 555,
+                "startChar": 0,
+                "endLine": 556,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tfor (unsigned int n \u003d 0; n \u003c files_fdtable(task-\u003efiles)-\u003emax_fds \u0026\u0026 accounted_fds \u003c fd_count; ++n) {\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t\taccounted_fds++;\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\tif (accounted_vmas \u003e\u003d vma_count)\n\t\t\t\t\tbreak;\n"
+            },
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t\taccounted_vmas++;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0bd6b7fcdb8cfea879451cbe8e352e7a354bcfea",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
