@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c4b67fc_6556ae96",
+        "filename": "mm/page_size_compat.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-04-08T17:37:04Z",
+      "side": 1,
+      "message": "This is only defined for CONFIG_BPF_SYSCALL, so you need to protect for that otherwise...\n```\nmm/page_size_compat.c: In function ‘bpf_is_ringbuf_file’:\nmm/page_size_compat.c:101:28: error: ‘bpf_map_fops’ undeclared (first use in this function); did you mean ‘bpf_map_ops’?\n  101 |         if (file-\u003ef_op !\u003d \u0026bpf_map_fops)\n      |                            ^~~~~~~~~~~~\n      |                            bpf_map_ops\n```",
+      "range": {
+        "startLine": 101,
+        "startChar": 20,
+        "endLine": 101,
+        "endChar": 32
+      },
+      "revId": "156b58543560782fded68ccebbf252314d2d9ba7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
