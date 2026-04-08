@@ -50,6 +50,24 @@
       "message": "This is interesting, I wonder why it is failing with debian rootfs.\n\nP24 is booting with 4kb/16kb page sizes with the android17-6.18 kernel without this change.",
       "revId": "fec1840056cc8bde600247fac6b87b013cfddf7c",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c548c411_c8b6bb2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-04-08T20:42:38Z",
+      "side": 1,
+      "message": "I suspect its something subtle with the rng access. I don\u0027t know if systemd might have some 4k assumptions?",
+      "parentUuid": "0eb2bd1b_7f04b445",
+      "revId": "fec1840056cc8bde600247fac6b87b013cfddf7c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
