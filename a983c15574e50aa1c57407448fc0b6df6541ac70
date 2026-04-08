@@ -22,6 +22,30 @@
       },
       "revId": "a983c15574e50aa1c57407448fc0b6df6541ac70",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2201e2b_214ef138",
+        "filename": "mm/oom_kill.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 1287,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-08T01:17:51Z",
+      "side": 1,
+      "message": "Hmm. Right, that is possible.\n\nI guess I have to keep mm alive until both last __mmput() and last __put_task_struct() are called. IOW if we stash mm into task-\u003egroup_leader-\u003eworker_private then we grab two mm refcounts and drop one during erase_exiting_mm() and the second one on the last __put_task_struct() because after that process_mrelease() can\u0027t find the task.",
+      "parentUuid": "30a0c785_d13f9be8",
+      "range": {
+        "startLine": 1287,
+        "startChar": 5,
+        "endLine": 1287,
+        "endChar": 7
+      },
+      "revId": "a983c15574e50aa1c57407448fc0b6df6541ac70",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
