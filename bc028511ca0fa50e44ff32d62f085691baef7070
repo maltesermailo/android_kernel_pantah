@@ -46,6 +46,30 @@
       },
       "revId": "bc028511ca0fa50e44ff32d62f085691baef7070",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6628dbc1_656a420c",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-04-08T18:01:58Z",
+      "side": 1,
+      "message": "IDK checking just `count_fd` makes me nervous. If the count is ever wrong for any reason this could be an infinite loop. I\u0027m going to bring back the max_fds check.",
+      "parentUuid": "cc087135_d322663f",
+      "range": {
+        "startLine": 564,
+        "startChar": 16,
+        "endLine": 564,
+        "endChar": 59
+      },
+      "revId": "bc028511ca0fa50e44ff32d62f085691baef7070",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
