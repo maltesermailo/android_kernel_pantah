@@ -70,6 +70,30 @@
       },
       "revId": "bc028511ca0fa50e44ff32d62f085691baef7070",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a024b5fe_f9c52deb",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-09T00:13:55Z",
+      "side": 1,
+      "message": "Ok, how about copying files_fdtable(task-\u003efiles)-\u003emax_fds into a local variable before the loop? I\u0027m not sure compiler would optimize rcu_dereference_check() and lockdep_is_held() involved in files_fdtable()",
+      "parentUuid": "6628dbc1_656a420c",
+      "range": {
+        "startLine": 564,
+        "startChar": 16,
+        "endLine": 564,
+        "endChar": 59
+      },
+      "revId": "bc028511ca0fa50e44ff32d62f085691baef7070",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
