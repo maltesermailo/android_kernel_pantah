@@ -94,6 +94,30 @@
       },
       "revId": "bc028511ca0fa50e44ff32d62f085691baef7070",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd9dbd8e_97883d2d",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 6
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1930620
+      },
+      "writtenOn": "2026-04-09T00:24:37Z",
+      "side": 1,
+      "message": "`lockdep_is_held` should be 0 overhead for production kernels where lockdep isn\u0027t enabled, but the `READ_ONCE` in `rcu_dereference_check` will cause a read every loop. :\\ Good idea to pull it out manually.",
+      "parentUuid": "a024b5fe_f9c52deb",
+      "range": {
+        "startLine": 564,
+        "startChar": 16,
+        "endLine": 564,
+        "endChar": 59
+      },
+      "revId": "bc028511ca0fa50e44ff32d62f085691baef7070",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
