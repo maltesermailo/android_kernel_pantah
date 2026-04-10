@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6fe4787_31a11475",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-04-10T09:18:10Z",
+      "side": 1,
+      "message": "Test is very much an Android stuff, we don\u0027t use it for kernel commits.",
+      "revId": "9d4c6bd435ac285e38164574d9f499a7a4c19027",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f47c761_2ab03964",
+        "filename": "arch/arm64/include/asm/kvm_pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-04-10T09:18:10Z",
+      "side": 1,
+      "message": "Shame, but I don\u0027t think we can fold that into an existing field.",
+      "revId": "9d4c6bd435ac285e38164574d9f499a7a4c19027",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf51050a_72a2f83f",
+        "filename": "arch/arm64/kvm/hyp/nvhe/mem_protect.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 3291,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-04-10T09:18:10Z",
+      "side": 1,
+      "message": "Unrelated too, but couldn\u0027t we optimize here a lot by adding a \"size\" field and just increasing the size whenever all the other fields are the same?\n\nAlso, you can skip !valid entries if the page_state (and now mmio_guard) isn\u0027t set.",
+      "revId": "9d4c6bd435ac285e38164574d9f499a7a4c19027",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27cc7c3b_084504dc",
+        "filename": "arch/arm64/kvm/ptdump.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-04-10T09:18:10Z",
+      "side": 1,
+      "message": "It should go into pkvm_ptdump_unpack_pte.",
+      "revId": "9d4c6bd435ac285e38164574d9f499a7a4c19027",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
