@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5592398_ff8fb941",
+        "filename": "arch/arm64/kvm/ptdump.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1951687
+      },
+      "writtenOn": "2026-04-10T12:59:03Z",
+      "side": 1,
+      "message": "Can we have this bit set for host?",
+      "fixSuggestions": [
+        {
+          "fixId": "9afee6b9_319cd221",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/arm64/kvm/ptdump.c",
+              "range": {
+                "startLine": 344,
+                "startChar": 0,
+                "endLine": 348,
+                "endChar": 0
+              },
+              "replacement": "\t\tFIELD_PREP(KVM_PGTABLE_PROT_SW0 | KVM_PGTABLE_PROT_SW1, log-\u003epage_state) |\n\t\tFIELD_PREP(KVM_INVALID_PTE_MMIO_NOTE, log-\u003emmio_guard);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e07f46bc26095e5dbe7f04332adfc99db1f6b672",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
