@@ -252,11 +252,25 @@ static int vfio_platform_set_irq_trigger(struct vfio_platform_device *vdev,
 	return 0;
 }
 
+static void vfio_platform_bypass_work(struct work_struct *work)
+{
+	struct vfio_platform_irq_ctx *ctx = container_of(work, struct vfio_platform_irq_ctx, bypass_work);
+
+	if (!ctx->bypass_registered) {
+		int ret = irq_bypass_register_producer(&ctx->producer);
+		if (ret == 0)
+			ctx->bypass_registered = true;
+	}
+}
+
 static irqreturn_t vfio_platform_msihandler(int irq, void *arg)
 {
-	struct eventfd_ctx *trigger = arg;
+	struct vfio_platform_irq_ctx *ctx = arg;
 
-	eventfd_signal(trigger);
+	eventfd_signal(ctx->trigger);
+	if (!ctx->bypass_registered)
+		schedule_work(&ctx->bypass_work);
+
 	return IRQ_HANDLED;
 }
 
@@ -271,7 +285,10 @@ static void vfio_platform_msi_disable(struct vfio_platform_device *vdev,
 	for (i = 0; i < irq->nr_ctx; i++) {
 		if (!irq->ctx[i].trigger)
 			continue;
-		free_irq(irq->ctx[i].hwirq, irq->ctx[i].trigger);
+		cancel_work_sync(&irq->ctx[i].bypass_work);
+		if (irq->ctx[i].bypass_registered)
+			irq_bypass_unregister_producer(&irq->ctx[i].producer);
+		free_irq(irq->ctx[i].hwirq, &irq->ctx[i]);
 		eventfd_ctx_put(irq->ctx[i].trigger);
 		kfree(irq->ctx[i].name);
 	}
@@ -351,10 +368,14 @@ static int vfio_platform_set_msi_trigger(struct vfio_platform_device *vdev,
 
 		for (i = start; i < start + count; i++) {
 			if (irq->ctx[i].trigger) {
-				free_irq(irq->ctx[i].hwirq, irq->ctx[i].trigger);
+				cancel_work_sync(&irq->ctx[i].bypass_work);
+				if (irq->ctx[i].bypass_registered)
+					irq_bypass_unregister_producer(&irq->ctx[i].producer);
+				free_irq(irq->ctx[i].hwirq, &irq->ctx[i]);
 				eventfd_ctx_put(irq->ctx[i].trigger);
 				kfree(irq->ctx[i].name);
 				irq->ctx[i].trigger = NULL;
+				irq->ctx[i].bypass_registered = false;
 			}
 			if (fds && fds[i - start] >= 0) {
 				struct eventfd_ctx *trigger;
@@ -365,12 +386,17 @@ static int vfio_platform_set_msi_trigger(struct vfio_platform_device *vdev,
 				irq->ctx[i].name = kasprintf(GFP_KERNEL_ACCOUNT,
 							     "vfio-msi[%d](%s)", i, vdev->name);
 				ret = request_irq(irq->ctx[i].hwirq, vfio_platform_msihandler,
-						  0, irq->ctx[i].name, trigger);
+						  0, irq->ctx[i].name, &irq->ctx[i]);
 				if (ret) {
 					kfree(irq->ctx[i].name);
 					eventfd_ctx_put(trigger);
 					irq->ctx[i].trigger = NULL;
+					continue;
 				}
+
+				irq->ctx[i].producer.token = trigger;
+				irq->ctx[i].producer.irq = irq->ctx[i].hwirq;
+				INIT_WORK(&irq->ctx[i].bypass_work, vfio_platform_bypass_work);
 			}
 		}
 		return 0;
