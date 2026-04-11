@@ -116,6 +116,7 @@ atomic_t pkvm_panic_in_progress = ATOMIC_INIT(0);
 void __noreturn pkvm_hyp_panic(struct pt_regs *regs, const char *file, unsigned int line)
 {
 	char panic_msg[1024];
+	unsigned long rip = regs ? regs->ip : 0;
 
 	/*
 	 * Ensure only one CPU handles the panic and writes to ramoops.
@@ -136,10 +137,12 @@ void __noreturn pkvm_hyp_panic(struct pt_regs *regs, const char *file, unsigned 
 	wrmsrl(0x830, 0xC0400);
 
 	pkvm_scnprintf(panic_msg, sizeof(panic_msg),
-		       "\n========================\n"
-		       "pKVM PANIC: BUG at %s:%u\n"
-		       "========================\n",
-		       file, line);
+		       "\n===================================\n"
+		       "pKVM PANIC: %s at %s:%u, RIP: %pS\n"
+		       "===================================\n",
+		       file ? "BUG" : "Exception",
+		       file ? file : "?", line,
+		       rip ? (void *)(rip - pkvm_sym(kaslr_offset_val)) : NULL);
 
 	pkvm_write_ramoops_console(panic_msg);
 

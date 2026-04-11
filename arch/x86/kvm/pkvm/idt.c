@@ -8,6 +8,8 @@
 #include <asm/trapnr.h>
 #include "debug.h"
 #include "idt.h"
+#include "pkvm.h"
+
 
 static const int pt_regoff[] = {
 	offsetof(struct pt_regs, ax),
@@ -139,7 +141,7 @@ static void default_exception_handler(struct pt_regs *regs,
 		pkvm_err("Exception %d @ip %pS (0x%px), no err code\n",
 			 vector, (void *)regs->ip, (void *)regs->ip);
 
-	asm volatile("hlt" : : : "memory");
+	pkvm_hyp_panic(regs, NULL, 0);
 }
 
 static exception_handler_t exception_handlers[X86_TRAP_IRET] = {
