@@ -57,6 +57,7 @@ static void __debug_restore_spe(u64 pmscr_el1, u64 pmblimitr_el1)
 
 static void __debug_save_trace(u64 *trfcr_el1, u64 *trblimitr_el1)
 {
+	*trfcr_el1 = 0;
 	*trblimitr_el1 = read_sysreg_s(SYS_TRBLIMITR_EL1);
 
 	/* Check if the TRBE is enabled */
