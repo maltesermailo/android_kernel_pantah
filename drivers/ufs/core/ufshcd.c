@@ -5517,7 +5517,12 @@ void ufshcd_release_scsi_cmd(struct ufs_hba *hba,
 	struct scsi_cmnd *cmd = lrbp->cmd;
 
 	scsi_dma_unmap(cmd);
+<<<<<<< HEAD   (2e06faf69ce6025afdd0aa8db3e170fdde895f96 Revert "mm/hugetlb: fix excessive IPI broadcasts when unshar)
 	ufshcd_crypto_clear_prdt(hba, lrbp);
+||||||| BASE   (daa6707b71a2da23a82979fa21f788aeb706f1a2 mm/hugetlb: fix excessive IPI broadcasts when unsharing PMD )
+	lrbp->cmd = NULL;	/* Mark the command as completed. */
+=======
+>>>>>>> BRANCH (c5009f5ad9341f63b3cb14774dfe03403b740357 firmware: arm_scpi: Fix device_node reference leak in probe )
 	ufshcd_release(hba);
 	ufshcd_clk_scaling_update_busy(hba);
 }
