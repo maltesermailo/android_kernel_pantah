@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b409aa3_b1c157f2",
+        "filename": "fs/fuse/dev.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-04-14T17:22:50Z",
+      "side": 1,
+      "message": "6.18 isn\u0027t KABI frozen yet, why not just extend the existing vendorhook to take teh argument you need?",
+      "fixSuggestions": [
+        {
+          "fixId": "b212d361_245a7304",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "fs/fuse/dev.c",
+              "range": {
+                "startLine": 511,
+                "startChar": 0,
+                "endLine": 513,
+                "endChar": 0
+              },
+              "replacement": "\t\ttrace_android_vh_fuse_request_end(req, current);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "82092dadc91a5fabd9626e4ea4bab20643a23251",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
