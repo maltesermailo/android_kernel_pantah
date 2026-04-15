@@ -16,6 +16,24 @@
       "message": "Could this `fput` call performing sleeping operations under the spinlock?",
       "revId": "b87d60507ade32b1b04bf2a752214025d9c859e5",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f1a6eba_970fde91",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-15T14:42:35Z",
+      "side": 1,
+      "message": "Good point. fput can indeed sleep if it\u0027s the last reference. I\u0027ll move it outside of the lock.",
+      "parentUuid": "b723b742_08402b84",
+      "revId": "b87d60507ade32b1b04bf2a752214025d9c859e5",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
