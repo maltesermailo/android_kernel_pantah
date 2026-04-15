@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8066716e_820d60ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-04-15T16:22:54Z",
+      "side": 1,
+      "message": "I notice that `android15-6.6` has both `CONFIG_CPUFREQ_VIRT` and `CONFIG_ANDROID_V_CPUFREQ_VIRT` which suggests we have two incompatible interfaces for this device.\n\nAm I then right in thinking that it\u0027s ok to ignore `CONFIG_ANDROID_V_CPUFREQ_VIRT` because (a) the device is implemented by crosvm and (b) crosvm is updated along with the guest kernel (because they both form part of the virt apex)?",
+      "revId": "8ef5e63c79e2e57feee5878b8379bd65dd3c9499",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
