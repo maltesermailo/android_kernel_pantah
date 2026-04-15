@@ -5,6 +5,7 @@
  */
 
 #include <linux/cleanup.h>
+#include <linux/debugfs.h>
 #include <linux/device.h>
 #include <linux/interconnect.h>
 #include <linux/firmware/qcom/qcom_scm.h>
@@ -12,8 +13,10 @@
 #include <linux/list.h>
 #include <linux/mod_devicetable.h>
 #include <linux/mutex.h>
+#include <linux/pci.h>
 #include <linux/platform_device.h>
 #include <linux/ratelimit.h>
+#include <linux/seq_file.h>
 #include <linux/spinlock.h>
 
 #include "arm-smmu.h"
@@ -59,6 +62,149 @@ struct qcom_tbu {
 static struct qcom_smmu *to_qcom_smmu(struct arm_smmu_device *smmu)
 {
 	return container_of(smmu, struct qcom_smmu, smmu);
+}
+
+static struct dentry *qcom_smmu_debugfs_dir;
+
+struct qcom_smmu_runtime_scan {
+	struct qcom_smmu *qsmmu;
+	unsigned long runtime_flags;
+	struct seq_file *s;
+};
+
+static void qcom_smmu_debugfs_remove(void *data)
+{
+	struct qcom_smmu *qsmmu = data;
+
+	debugfs_remove_recursive(qsmmu->sva_debugfs_root);
+	qsmmu->sva_debugfs_root = NULL;
+}
+
+static int qcom_smmu_scan_client(struct device *dev, void *data)
+{
+	struct qcom_smmu_runtime_scan *scan = data;
+
+	if (!dev->iommu || dev->iommu->iommu_dev != &scan->qsmmu->smmu.iommu)
+		return 0;
+
+	if (dev_is_pci(dev)) {
+		scan->runtime_flags |= QCOM_SMMU_OBS_CLIENT_PCIE;
+		if (scan->s)
+			seq_printf(scan->s,
+				   "pcie_client=%s vendor=%04x device=%04x\n",
+				   dev_name(dev), to_pci_dev(dev)->vendor,
+				   to_pci_dev(dev)->device);
+		return 0;
+	}
+
+	if (strstr(dev_name(dev), "kgsl") ||
+	    of_device_is_compatible(dev->of_node, "qcom,adreno")) {
+		scan->runtime_flags |= QCOM_SMMU_OBS_CLIENT_GPU;
+		if (scan->s)
+			seq_printf(scan->s,
+				   "gpu_client=%s standard_sva=0 private_gpu_path=1\n",
+				   dev_name(dev));
+		return 0;
+	}
+
+	if (strstr(dev_name(dev), "compute-cb") ||
+	    strstr(dev_name(dev), "remoteproc-cdsp") ||
+	    strstr(dev_name(dev), "nsp")) {
+		scan->runtime_flags |= QCOM_SMMU_OBS_CLIENT_NPU;
+		if (scan->s)
+			seq_printf(scan->s,
+				   "npu_client=%s classification=client_not_proven\n",
+				   dev_name(dev));
+	}
+
+	return 0;
+}
+
+static int qcom_smmu_sva_status_show(struct seq_file *s, void *unused)
+{
+	struct qcom_smmu *qsmmu = s->private;
+	struct qcom_smmu_runtime_scan scan = {
+		.qsmmu = qsmmu,
+		.s = s,
+	};
+	enum qcom_smmu_sva_class class;
+	unsigned long flags;
+
+	bus_for_each_dev(&platform_bus_type, NULL, &scan, qcom_smmu_scan_client);
+	bus_for_each_dev(&pci_bus_type, NULL, &scan, qcom_smmu_scan_client);
+
+	flags = qsmmu->obs_flags | scan.runtime_flags;
+	class = qcom_smmu_classify(qsmmu, scan.runtime_flags);
+
+	seq_printf(s, "device=%s\n", dev_name(qsmmu->smmu.dev));
+	seq_printf(s, "driver=arm_smmu_qcom\n");
+	seq_printf(s, "node=%pOF\n", qsmmu->smmu.dev->of_node);
+	seq_printf(s, "classification=%s\n", qcom_smmu_class_name(class));
+	seq_printf(s, "standard_sva_api=%u\n",
+		   !!(flags & QCOM_SMMU_OBS_STANDARD_SVA_API));
+	seq_printf(s, "pasid_programming=%u\n",
+		   !!(flags & QCOM_SMMU_OBS_PASID_PROGRAMMING));
+	seq_printf(s, "adreno_private_ttbr0=%u\n",
+		   !!(flags & QCOM_SMMU_OBS_ADRENO_TTBR0));
+	seq_printf(s, "adreno_private_stall=%u\n",
+		   !!(flags & QCOM_SMMU_OBS_ADRENO_STALL));
+	seq_printf(s, "adreno_private_fault_info=%u\n",
+		   !!(flags & QCOM_SMMU_OBS_ADRENO_FAULT_INFO));
+	seq_printf(s, "adreno_private_resume=%u\n",
+		   !!(flags & QCOM_SMMU_OBS_ADRENO_RESUME));
+	seq_puts(s, "reasons:\n");
+	if (!(flags & QCOM_SMMU_OBS_STANDARD_SVA_API))
+		seq_puts(s, " - legacy arm_smmu driver has no standard SVA feature callbacks in this tree\n");
+	if (!(flags & QCOM_SMMU_OBS_PASID_PROGRAMMING))
+		seq_puts(s, " - legacy arm_smmu driver has no PASID/SSID programming path in this tree\n");
+	if (flags & QCOM_SMMU_OBS_ADRENO_TTBR0)
+		seq_puts(s, " - Adreno TTBR0 split-pagetable path is private GPU plumbing, not standard SVA/PASID\n");
+	if (flags & QCOM_SMMU_OBS_CLIENT_NPU)
+		seq_puts(s, " - NPU/CDSP client presence found, but no standard SVA linkage proven\n");
+	if (flags & QCOM_SMMU_OBS_CLIENT_PCIE)
+		seq_puts(s, " - PCIe endpoint presence found, but ATS/PRI/PASID usage not proven by this stack\n");
+
+	return 0;
+}
+DEFINE_SHOW_ATTRIBUTE(qcom_smmu_sva_status);
+
+int qcom_smmu_debugfs_register(struct qcom_smmu *qsmmu)
+{
+	if (!iommu_debugfs_dir)
+		return -ENODEV;
+	if (!qcom_smmu_debugfs_dir)
+		qcom_smmu_debugfs_dir = debugfs_create_dir("arm_smmu_qcom",
+							  iommu_debugfs_dir);
+	if (!qcom_smmu_debugfs_dir)
+		return -ENOMEM;
+
+	qsmmu->sva_debugfs_root = debugfs_create_dir(dev_name(qsmmu->smmu.dev),
+						      qcom_smmu_debugfs_dir);
+	if (!qsmmu->sva_debugfs_root)
+		return -ENOMEM;
+
+	debugfs_create_file("sva_pasid_status", 0444, qsmmu->sva_debugfs_root,
+			    qsmmu, &qcom_smmu_sva_status_fops);
+	return devm_add_action_or_reset(qsmmu->smmu.dev, qcom_smmu_debugfs_remove,
+					qsmmu);
+}
+
+void qcom_smmu_log_status(struct qcom_smmu *qsmmu)
+{
+	enum qcom_smmu_sva_class class = qcom_smmu_classify(qsmmu, 0);
+
+	dev_info(qsmmu->smmu.dev,
+		 "SVA/PASID: class=%s standard_api=%u pasid_programming=%u adreno_private=%u\n",
+		 qcom_smmu_class_name(class),
+		 !!(qsmmu->obs_flags & QCOM_SMMU_OBS_STANDARD_SVA_API),
+		 !!(qsmmu->obs_flags & QCOM_SMMU_OBS_PASID_PROGRAMMING),
+		 !!(qsmmu->obs_flags & (QCOM_SMMU_OBS_ADRENO_TTBR0 |
+				       QCOM_SMMU_OBS_ADRENO_STALL |
+				       QCOM_SMMU_OBS_ADRENO_FAULT_INFO |
+				       QCOM_SMMU_OBS_ADRENO_RESUME)));
+	if (class != QCOM_SMMU_SVA_CLASS_STANDARD_SVA_PASID_SUPPORTED)
+		dev_info(qsmmu->smmu.dev,
+			 "SVA/PASID reason: legacy path lacks standard PASID/SVA wiring; private GPU hooks are reported separately\n");
 }
 
 void qcom_smmu_tlb_sync_debug(struct arm_smmu_device *smmu)

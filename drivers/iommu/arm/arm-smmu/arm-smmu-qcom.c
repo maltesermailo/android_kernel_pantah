@@ -21,6 +21,9 @@ static struct qcom_smmu *to_qcom_smmu(struct arm_smmu_device *smmu)
 	return container_of(smmu, struct qcom_smmu, smmu);
 }
 
+static const struct arm_smmu_impl qcom_adreno_smmu_v2_impl;
+static const struct arm_smmu_impl qcom_adreno_smmu_500_impl;
+
 static void qcom_smmu_tlb_sync(struct arm_smmu_device *smmu, int page,
 				int sync, int status)
 {
@@ -274,6 +277,55 @@ static int qcom_smmu_init_context(struct arm_smmu_domain *smmu_domain,
 	return 0;
 }
 
+unsigned long qcom_smmu_static_obs_flags(struct qcom_smmu *qsmmu)
+{
+	unsigned long flags = 0;
+
+	if (qsmmu->smmu.impl == &qcom_adreno_smmu_v2_impl ||
+	    qsmmu->smmu.impl == &qcom_adreno_smmu_500_impl)
+		flags |= QCOM_SMMU_OBS_ADRENO_TTBR0 |
+			 QCOM_SMMU_OBS_ADRENO_STALL |
+			 QCOM_SMMU_OBS_ADRENO_FAULT_INFO |
+			 QCOM_SMMU_OBS_ADRENO_RESUME;
+
+	return flags;
+}
+
+const char *qcom_smmu_class_name(enum qcom_smmu_sva_class class)
+{
+	switch (class) {
+	case QCOM_SMMU_SVA_CLASS_STANDARD_SVA_PASID_SUPPORTED:
+		return "standard_sva_pasid_supported";
+	case QCOM_SMMU_SVA_CLASS_DRIVER_NOT_WIRED_FOR_SVA_PASID:
+		return "driver_not_wired_for_sva_pasid";
+	case QCOM_SMMU_SVA_CLASS_PRIVATE_GPU_ONLY:
+		return "private_gpu_only";
+	default:
+		return "unknown";
+	}
+}
+
+enum qcom_smmu_sva_class qcom_smmu_classify(struct qcom_smmu *qsmmu,
+					    unsigned long runtime_flags)
+{
+	unsigned long flags = qsmmu->obs_flags | runtime_flags;
+	unsigned long private_gpu = QCOM_SMMU_OBS_ADRENO_TTBR0 |
+		QCOM_SMMU_OBS_ADRENO_STALL |
+		QCOM_SMMU_OBS_ADRENO_FAULT_INFO |
+		QCOM_SMMU_OBS_ADRENO_RESUME;
+
+	if ((flags & (QCOM_SMMU_OBS_STANDARD_SVA_API |
+		      QCOM_SMMU_OBS_PASID_PROGRAMMING)) ==
+	    (QCOM_SMMU_OBS_STANDARD_SVA_API |
+	     QCOM_SMMU_OBS_PASID_PROGRAMMING))
+		return QCOM_SMMU_SVA_CLASS_STANDARD_SVA_PASID_SUPPORTED;
+	if (flags & private_gpu)
+		return QCOM_SMMU_SVA_CLASS_PRIVATE_GPU_ONLY;
+	if (flags)
+		return QCOM_SMMU_SVA_CLASS_DRIVER_NOT_WIRED_FOR_SVA_PASID;
+	return QCOM_SMMU_SVA_CLASS_UNKNOWN;
+}
+
 static int qcom_smmu_cfg_probe(struct arm_smmu_device *smmu)
 {
 	struct qcom_smmu *qsmmu = to_qcom_smmu(smmu);
@@ -348,6 +400,15 @@ static int qcom_smmu_cfg_probe(struct arm_smmu_device *smmu)
 			smmu->s2crs[i].cbndx = 0xff;
 		}
 	}
+
+#ifdef CONFIG_ARM_SMMU_QCOM_DEBUG
+	qsmmu->obs_flags = qcom_smmu_static_obs_flags(qsmmu);
+	qcom_smmu_log_status(qsmmu);
+	i = qcom_smmu_debugfs_register(qsmmu);
+	if (i)
+		dev_warn(smmu->dev,
+			 "failed to register sva_pasid_status debugfs: %d\n", i);
+#endif
 
 	return 0;
 }
