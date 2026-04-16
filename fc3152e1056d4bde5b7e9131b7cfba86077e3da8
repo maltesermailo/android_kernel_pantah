@@ -1,0 +1,75 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdbb2482_c576a779",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-04-16T17:06:48Z",
+      "side": 1,
+      "message": "While we\u0027re here, could we please change this to clarify what it\u0027s testing? `is_owner()` sounds like we\u0027re testing if something is an owner, but that\u0027s what `is_owner_task()` and `is_owner_dev()` are for.\n\nSince we\u0027re just testing if the wrap has an owner, could we call this `has_owner()` or `is_owned()`?",
+      "range": {
+        "startLine": 337,
+        "startChar": 19,
+        "endLine": 337,
+        "endChar": 27
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1b990c01_2c0f7933",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 337,
+                "startChar": 0,
+                "endLine": 338,
+                "endChar": 0
+              },
+              "replacement": "static inline bool has_owner(struct wrap_ctx *ctx)\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 477,
+                "startChar": 0,
+                "endLine": 478,
+                "endChar": 0
+              },
+              "replacement": "\tif (!ctx-\u003eallow_guests \u0026\u0026 has_owner(ctx) \u0026\u0026\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 636,
+                "startChar": 0,
+                "endLine": 637,
+                "endChar": 0
+              },
+              "replacement": "\tif (has_owner(ctx)) {\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 977,
+                "startChar": 0,
+                "endLine": 978,
+                "endChar": 0
+              },
+              "replacement": "\tif (has_owner(ctx) \u0026\u0026 !is_owner_dev(ctx, dev)) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fc3152e1056d4bde5b7e9131b7cfba86077e3da8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
