@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48284249_7fc79a58",
+        "filename": "arch/x86/kvm/pkvm/pkvm_constants.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-16T21:48:23Z",
+      "side": 1,
+      "message": "Is this really cleaner than just duplicating the definitions of `PERSISTENT_RAM_SIG` and `struct persistent_ram_buffer` in the hypervisor code with a \"Copied from ...\" comment?\n\nBoth definitions are very simple, so duplicating them seems much less fragile than compiling the entire `ram_core.c` into this binary (and of course much simpler as well)?\n\nAlso that would be closer to a really clean future solution (which we are avoiding for now, as we are avoiding changes in generic parts of kernel), i.e.: simply moving those definitions from `ram_core.c` to a header under `include/linux/`? (I mean, in both that case and with duplicated definitions, the hypervisor code would directly use those definitions instead of these PKVM_RAMOOPS_xxx macros.)",
+      "revId": "676269d55b93bcce3415cb65290b1d9573ebbffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
