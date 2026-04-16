@@ -16,6 +16,24 @@
       "message": "It seems better to just do both kvm_topup_pkvm_memcache() and kzalloc() before calling kvm_mmu_faultin_pfn()?\n\nOtherwise:\n1. Is it safe to call kvm_mmu_finish_page_fault() without holding mmu_lock? (Maybe it is, but I\u0027m not so familiar with that part of KVM code.)\n2. It looks a bit confusing that the return value is different from RET_PF_RETRY, while we pass RET_PF_RETRY to kvm_mmu_finish_page_fault().",
       "revId": "797a7099b6de02916da49b3e19050081a7ff81d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "111d23e5_8227ebf7",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5114,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-16T12:33:52Z",
+      "side": 1,
+      "message": "\u003e It seems better to just do both kvm_topup_pkvm_memcache() and kzalloc() before calling kvm_mmu_faultin_pfn()?\n\nHmm, OTOH it means that e.g. in case of MMIO emulation for npVM (i.e. a normal scenario, not a failure path), we needlessly top up the memcache and allocate struct pkvm_mapping only to free it right after that...\n\n...So maybe let\u0027s release the refcounted page, but do it by directly calling kvm_release_faultin_page() with unused\u003dtrue instead of kvm_mmu_finish_page_fault(), to avoid confusion?\n\nBTW just noticed this inside kvm_release_faultin_page():\n\n```\n\tlockdep_assert_once(lockdep_is_held(\u0026kvm-\u003emmu_lock) || unused);\n```\n\nso it looks like it is indeed safe to do it without holding mmu_lock.",
+      "parentUuid": "65b30fcb_0288df76",
+      "revId": "797a7099b6de02916da49b3e19050081a7ff81d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
