@@ -3,6 +3,97 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3bee1ae8_260623b4",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 4
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-04-16T17:54:45Z",
+      "side": 1,
+      "message": "And perhaps this would read a little bit easier as:\n\n```\n#define MODIFICATIONS_BLOCKED BIT(0)\n#define USAGE_BLOCKED BIT(1)\n```",
+      "range": {
+        "startLine": 308,
+        "startChar": 0,
+        "endLine": 309,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "bd6ab5ed_8b62d876",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 308,
+                "startChar": 0,
+                "endLine": 310,
+                "endChar": 0
+              },
+              "replacement": "#define MODIFICATIONS_BLOCKED\tBIT(0)\n#define USAGE_BLOCKED\t\tBIT(1)\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 390,
+                "startChar": 0,
+                "endLine": 391,
+                "endChar": 0
+              },
+              "replacement": "\treturn (ctx-\u003eblock_mask \u0026 USAGE_BLOCKED) \u003d\u003d 0;\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 399,
+                "startChar": 0,
+                "endLine": 400,
+                "endChar": 0
+              },
+              "replacement": "\tif (WARN_ON((mask \u0026 MODIFICATIONS_BLOCKED) \u003d\u003d 0))\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 742,
+                "startChar": 0,
+                "endLine": 743,
+                "endChar": 0
+              },
+              "replacement": "\tret \u003d block_operations(ctx, MODIFICATIONS_BLOCKED);\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 779,
+                "startChar": 0,
+                "endLine": 781,
+                "endChar": 0
+              },
+              "replacement": "\tret \u003d block_operations(ctx, MODIFICATIONS_BLOCKED | USAGE_BLOCKED);\n"
+            },
+            {
+              "path": "drivers/android/wrapfd.c",
+              "range": {
+                "startLine": 842,
+                "startChar": 0,
+                "endLine": 844,
+                "endChar": 0
+              },
+              "replacement": "\tret \u003d block_operations(ctx, MODIFICATIONS_BLOCKED | USAGE_BLOCKED);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "fc3152e1056d4bde5b7e9131b7cfba86077e3da8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bdbb2482_c576a779",
         "filename": "drivers/android/wrapfd.c",
         "patchSetId": 4
