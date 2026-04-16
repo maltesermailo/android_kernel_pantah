@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65b30fcb_0288df76",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5114,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-16T12:23:46Z",
+      "side": 1,
+      "message": "It seems better to just do both kvm_topup_pkvm_memcache() and kzalloc() before calling kvm_mmu_faultin_pfn()?\n\nOtherwise:\n1. Is it safe to call kvm_mmu_finish_page_fault() without holding mmu_lock? (Maybe it is, but I\u0027m not so familiar with that part of KVM code.)\n2. It looks a bit confusing that the return value is different from RET_PF_RETRY, while we pass RET_PF_RETRY to kvm_mmu_finish_page_fault().",
+      "revId": "797a7099b6de02916da49b3e19050081a7ff81d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
