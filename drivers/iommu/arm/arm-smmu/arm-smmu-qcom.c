@@ -15,14 +15,34 @@
 #include "arm-smmu-qcom.h"
 
 #define QCOM_DUMMY_VAL	-1
+#define QCOM_SMMU_SVA_PATCH_ID "20260416_v2"
 
 static struct qcom_smmu *to_qcom_smmu(struct arm_smmu_device *smmu)
 {
 	return container_of(smmu, struct qcom_smmu, smmu);
 }
 
+static void qcom_smmu_log_patch_presence(struct qcom_smmu *qsmmu)
+{
+	struct device *dev = qsmmu->smmu.dev;
+	bool adreno = dev->of_node &&
+		of_device_is_compatible(dev->of_node, "qcom,adreno-smmu");
+
+	/*
+	 * Keep one unconditional marker in the always-built Qualcomm path so
+	 * product kernels can confirm the patch even when QCOM debug support is off.
+	 */
+	dev_info(dev,
+		 "QCOM_SMMU_SVA_PATCH_ID=%s qcom_debug=%u adreno=%u observability=%s\n",
+		 QCOM_SMMU_SVA_PATCH_ID,
+		 IS_ENABLED(CONFIG_ARM_SMMU_QCOM_DEBUG), adreno,
+		 IS_ENABLED(CONFIG_ARM_SMMU_QCOM_DEBUG) ? "full" : "log_only");
+}
+
+#ifdef CONFIG_ARM_SMMU_QCOM_DEBUG
 static const struct arm_smmu_impl qcom_adreno_smmu_v2_impl;
 static const struct arm_smmu_impl qcom_adreno_smmu_500_impl;
+#endif
 
 static void qcom_smmu_tlb_sync(struct arm_smmu_device *smmu, int page,
 				int sync, int status)
@@ -277,6 +297,7 @@ static int qcom_smmu_init_context(struct arm_smmu_domain *smmu_domain,
 	return 0;
 }
 
+#ifdef CONFIG_ARM_SMMU_QCOM_DEBUG
 unsigned long qcom_smmu_static_obs_flags(struct qcom_smmu *qsmmu)
 {
 	unsigned long flags = 0;
@@ -325,6 +346,7 @@ enum qcom_smmu_sva_class qcom_smmu_classify(struct qcom_smmu *qsmmu,
 		return QCOM_SMMU_SVA_CLASS_DRIVER_NOT_WIRED_FOR_SVA_PASID;
 	return QCOM_SMMU_SVA_CLASS_UNKNOWN;
 }
+#endif
 
 static int qcom_smmu_cfg_probe(struct arm_smmu_device *smmu)
 {
@@ -400,6 +422,8 @@ static int qcom_smmu_cfg_probe(struct arm_smmu_device *smmu)
 			smmu->s2crs[i].cbndx = 0xff;
 		}
 	}
+
+	qcom_smmu_log_patch_presence(qsmmu);
 
 #ifdef CONFIG_ARM_SMMU_QCOM_DEBUG
 	qsmmu->obs_flags = qcom_smmu_static_obs_flags(qsmmu);
