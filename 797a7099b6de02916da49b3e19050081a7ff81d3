@@ -34,6 +34,24 @@
       "parentUuid": "65b30fcb_0288df76",
       "revId": "797a7099b6de02916da49b3e19050081a7ff81d3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5904b968_b3a342b4",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 5114,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-16T13:34:00Z",
+      "side": 1,
+      "message": "Yeah, it is safe if the page is unused.\n\n\u003e ...So maybe let\u0027s release the refcounted page, but do it by directly calling kvm_release_faultin_page() with unused\u003dtrue instead of kvm_mmu_finish_page_fault(), to avoid confusion?\n\nIndeed it has confusion that pass RET_PF_RETRY to kvm_mmu_finish_page_fault() while returns another value. Using kvm_release_faultin_page() can avoid this.",
+      "parentUuid": "111d23e5_8227ebf7",
+      "revId": "797a7099b6de02916da49b3e19050081a7ff81d3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
