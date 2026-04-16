@@ -22,6 +22,30 @@
       },
       "revId": "125769312d8b8dfa10d2b4c36ccdfc8c104af0ab",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84d3e52d_1c2f309b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 4285019
+      },
+      "writtenOn": "2026-04-16T01:42:15Z",
+      "side": 1,
+      "message": "We found that the VTS test case timers_posix_timers_arm_64 for ITIMER_PROF does not account for interrupt events of the process. As a result, although softirq_entry: vec\u003d9 [action\u003dRCU] and softirq_exit: vec\u003d9 [action\u003dRCU] \n consumes significant time, this time is not included in either stime (system time) or utime (user time). Consequently, the timer expires prematurely, causing the VTS test to fail.",
+      "parentUuid": "0688dfb4_58b2f425",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 78
+      },
+      "revId": "125769312d8b8dfa10d2b4c36ccdfc8c104af0ab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
