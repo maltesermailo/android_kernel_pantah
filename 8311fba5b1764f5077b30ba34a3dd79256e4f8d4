@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "234d3329_4492e500",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 910,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-04-16T18:15:06Z",
+      "side": 1,
+      "message": "`wrap_file_acquire_ownership()` needs to be updated for this to be true.",
+      "range": {
+        "startLine": 909,
+        "startChar": 0,
+        "endLine": 910,
+        "endChar": 14
+      },
+      "revId": "8311fba5b1764f5077b30ba34a3dd79256e4f8d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37e65beb_9cfbdd66",
+        "filename": "drivers/android/wrapfd.c",
+        "patchSetId": 5
+      },
+      "lineNbr": 913,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-04-16T18:15:06Z",
+      "side": 1,
+      "message": "Do we really need `OP_BLOCKED_USAGE`? It is only ever set if `OP_BLOCKED_MODIFICATION` is also set. Could we get rid of it by implementing the following:\n\n```\nstatic int context_get(struct wrap_ctx *ctx)\n{\n        assert_spin_locked(\u0026ctx-\u003elock);\n        if (ctx-\u003eblock_mask \u0026 OP_BLOCKED_MODIFICATION)\n                return -ENOENT;\n        ctx-\u003eusage_count++;\n        return 0;\n}\n\nstatic void context_put(struct wrap_ctx *ctx)\n{\n        assert_spin_locked(\u0026ctx-\u003elock);\n        if (WARN_ON(ctx-\u003eblock_mask))\n                return;\n        ctx-\u003eusage_count--;\n}\n```\n\nAnd then in mmap, we can replace `can_use()` with `context_get()` and use `context_put()` at the end of it. We can also do the same in the `load()`, `ioctl()`, and `get_state()` functions and get rid of `can_use()` too? Since `can_modify()` checks `usage_count`, I think this should avoid preventing modifications to the wrap context while it is being used.",
+      "range": {
+        "startLine": 913,
+        "startChar": 0,
+        "endLine": 913,
+        "endChar": 18
+      },
+      "revId": "8311fba5b1764f5077b30ba34a3dd79256e4f8d4",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
