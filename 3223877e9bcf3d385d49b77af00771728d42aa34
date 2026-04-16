@@ -16,6 +16,24 @@
       "message": "We need to check that the version of clang used to build `android17-6.18` has [this patch](https://github.com/llvm/llvm-project/pull/141562) (see `http://b/462672132#comment5`)",
       "revId": "3223877e9bcf3d385d49b77af00771728d42aa34",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "774ffae9_f2124c41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1791310
+      },
+      "writtenOn": "2026-04-16T07:35:37Z",
+      "side": 1,
+      "message": "https://android.googlesource.com/kernel/common/+/refs/heads/android17-6.18/bazel/constants.scl\n\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/bazel/constants.scl\n\nYes, at the moment, android17-6.18 clang version equals the one used in android-mainline. CLANG_VERSION\u003d\"r584948b\"\n\njisshin@jisshin:~/repo/laj-pixel/kernel/prebuilts/clang/host/linux-x86$ ./clang-r584948b/bin/clang --version\nAndroid (14863223, +pgo, +bolt, +lto, +mlgo, based on r584948b) clang version 22.0.1 (https://android.googlesource.com/toolchain/llvm-project 2d65e4108033380e6fe8e08b1f1826cd2bfb0c99)\nTarget: x86_64-unknown-linux-gnu\nThread model: posix\nInstalledDir: /usr/local/google/home/jisshin/repo/laj-pixel/kernel/prebuilts/clang/host/linux-x86/clang-r584948b/bin",
+      "parentUuid": "74491358_72fb3a26",
+      "revId": "3223877e9bcf3d385d49b77af00771728d42aa34",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
