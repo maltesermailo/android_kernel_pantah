@@ -45,6 +45,30 @@
       },
       "revId": "dbc7c52765a6384eaa2041d3668a8708221cb4ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20b96948_b91a4c10",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-04-17T16:47:03Z",
+      "side": 1,
+      "message": "Yes it can save power and CPU as well: depending on how often we are reading ahead the stuff that we know will never be touched (e.g. ELF padding)\n\nThe power is saved from CPU cycles needed to reclaim these pages that constantly get brought into the pagecache (and populated in PTEs by fault around) only to never be used",
+      "parentUuid": "70d7122c_e6381e21",
+      "range": {
+        "startLine": 36,
+        "startChar": 14,
+        "endLine": 36,
+        "endChar": 28
+      },
+      "revId": "dbc7c52765a6384eaa2041d3668a8708221cb4ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
