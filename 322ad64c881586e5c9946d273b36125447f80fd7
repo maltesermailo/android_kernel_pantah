@@ -1,0 +1,149 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e77eed97_a5165d37",
+        "filename": "include/linux/vma_readahead_boundary.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-17T16:49:30Z",
+      "side": 1,
+      "message": "It doesn\u0027t need to be a macro. Prefer `static inline bool is_vma_readahead_boundary_enabled(void)`",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 7
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "17c3b207_1b5688b2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "include/linux/vma_readahead_boundary.h",
+              "range": {
+                "startLine": 6,
+                "startChar": 0,
+                "endLine": 7,
+                "endChar": 0
+              },
+              "replacement": " * Author: Frederick Mayle \u003cfmayle@google.com\u003e\n"
+            }
+          ]
+        }
+      ],
+      "revId": "322ad64c881586e5c9946d273b36125447f80fd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70b9211b_89dcf4aa",
+        "filename": "mm/vma_readahead_boundary.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-17T16:49:30Z",
+      "side": 1,
+      "message": "Prefer `kstrtobool` for flags.",
+      "range": {
+        "startLine": 35,
+        "startChar": 5,
+        "endLine": 35,
+        "endChar": 13
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "16f00df2_0693ccbd",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/vma_readahead_boundary.c",
+              "range": {
+                "startLine": 12,
+                "startChar": 0,
+                "endLine": 13,
+                "endChar": 0
+              },
+              "replacement": "#include \u003clinux/kernel.h\u003e\n"
+            },
+            {
+              "path": "mm/vma_readahead_boundary.c",
+              "range": {
+                "startLine": 19,
+                "startChar": 0,
+                "endLine": 22,
+                "endChar": 0
+              },
+              "replacement": "static ssize_t show_vma_readahead_boundary_enabled(struct kobject *kobj, struct kobj_attribute *attr, char *buf)\n"
+            },
+            {
+              "path": "mm/vma_readahead_boundary.c",
+              "range": {
+                "startLine": 29,
+                "startChar": 0,
+                "endLine": 32,
+                "endChar": 0
+              },
+              "replacement": "static ssize_t store_vma_readahead_boundary_enabled(struct kobject *kobj, struct kobj_attribute *attr, const char *buf, size_t n)\n"
+            },
+            {
+              "path": "mm/vma_readahead_boundary.c",
+              "range": {
+                "startLine": 33,
+                "startChar": 0,
+                "endLine": 37,
+                "endChar": 0
+              },
+              "replacement": "\tbool val;\n\tint ret;\n"
+            },
+            {
+              "path": "mm/vma_readahead_boundary.c",
+              "range": {
+                "startLine": 38,
+                "startChar": 0,
+                "endLine": 39,
+                "endChar": 0
+              },
+              "replacement": "\tret \u003d kstrtobool(buf, \u0026val);\n\tif (ret \u003c 0)\n"
+            }
+          ]
+        }
+      ],
+      "revId": "322ad64c881586e5c9946d273b36125447f80fd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dd06c26_b2c5eae9",
+        "filename": "mm/vma_readahead_boundary.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-17T16:49:30Z",
+      "side": 1,
+      "message": "This is a UAPI change. Are you planning to upstream it first?",
+      "range": {
+        "startLine": 78,
+        "startChar": 5,
+        "endLine": 78,
+        "endChar": 67
+      },
+      "revId": "322ad64c881586e5c9946d273b36125447f80fd7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
