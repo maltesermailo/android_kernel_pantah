@@ -1,0 +1,76 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39691988_5fa4e6f4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-17T12:55:36Z",
+      "side": 1,
+      "message": "Just a tiny nit: the code itself clarly shows that we add a label and call kvm_release_faultin_page() with unused as true, so we don\u0027t need to repeat such details here, we could just say e.g. \"So add releasing the faulted-in page on these error paths.\"?",
+      "revId": "e9cad922d95f9a7c643d4dc0d3d24d6912d0a15d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "671a58a5_41efc5f5",
+        "filename": "arch/x86/kvm/mmu/mmu.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 5113,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-17T12:55:36Z",
+      "side": 1,
+      "message": "nit: maybe better `release_page` (or e.g. `release_pfn`), for clarity?\n\nAlso the AI here is suggesting to add `out_` prefix (for consistency with `out_unlock`, I assume). So `out_release_page`, or `out_release_pfn`?",
+      "fixSuggestions": [
+        {
+          "fixId": "ea1ae173_35520cd1",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/mmu/mmu.c",
+              "range": {
+                "startLine": 5043,
+                "startChar": 0,
+                "endLine": 5044,
+                "endChar": 0
+              },
+              "replacement": "\t\tgoto out_release_pfn;\n"
+            },
+            {
+              "path": "arch/x86/kvm/mmu/mmu.c",
+              "range": {
+                "startLine": 5049,
+                "startChar": 0,
+                "endLine": 5050,
+                "endChar": 0
+              },
+              "replacement": "\t\tgoto out_release_pfn;\n"
+            },
+            {
+              "path": "arch/x86/kvm/mmu/mmu.c",
+              "range": {
+                "startLine": 5113,
+                "startChar": 0,
+                "endLine": 5114,
+                "endChar": 0
+              },
+              "replacement": "out_release_pfn:\n"
+            }
+          ]
+        }
+      ],
+      "revId": "e9cad922d95f9a7c643d4dc0d3d24d6912d0a15d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
