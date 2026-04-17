@@ -69,6 +69,47 @@
       },
       "revId": "dbc7c52765a6384eaa2041d3668a8708221cb4ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5a7a4de_70b00a80",
+        "filename": "mm/filemap.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 3380,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-04-17T16:52:46Z",
+      "side": 1,
+      "message": "Is Ryan\u0027s stuff off by one? do we need to add `- 1` here?\n\nOr do we need to remove it from other sites added in this patch: Line 3334 and line 3448 below.\n\nCould you double check this please.",
+      "range": {
+        "startLine": 3380,
+        "startChar": 22,
+        "endLine": 3380,
+        "endChar": 45
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "04dbd953_61f89d7e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/filemap.c",
+              "range": {
+                "startLine": 3380,
+                "startChar": 0,
+                "endLine": 3381,
+                "endChar": 0
+              },
+              "replacement": "\t\tunsigned long end \u003d start + vma_pages(vma);\t/* Exclusive */\n"
+            }
+          ]
+        }
+      ],
+      "revId": "dbc7c52765a6384eaa2041d3668a8708221cb4ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
