@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0265cfbf_be30ca8f",
+        "filename": "BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 1273,
+      "author": {
+        "id": 1121838
+      },
+      "writtenOn": "2026-04-17T20:47:00Z",
+      "side": 1,
+      "message": "... then in this change, this should contain `hdrs \u003d tools/include/**/*.h`, and drop the previous `uapi/**/*.h`. Some entries can be dropped from L1280 as well.\n\nFeel free to do this in a follow up change.",
+      "fixSuggestions": [
+        {
+          "fixId": "d080d3d9_c8dafc64",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "    hdrs \u003d glob([\"tools/include/**/*.h\"]),\n"
+            },
+            {
+              "path": "BUILD.bazel",
+              "range": {
+                "startLine": 1272,
+                "startChar": 0,
+                "endLine": 1273,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "59dcfce5438aae981b25f6b65506262a649a6fa9",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
