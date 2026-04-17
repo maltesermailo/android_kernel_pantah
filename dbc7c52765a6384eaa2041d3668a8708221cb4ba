@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63b05b32_fd814203",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1499410
+      },
+      "writtenOn": "2026-04-17T16:34:24Z",
+      "side": 1,
+      "message": "I think we should add some background and link to the previous discussions like these one (in order of relevance below):\n\nJan\u0027s opinion on the potential cache miss for consecutive VMA reads:\n\n[1] https://lore.kernel.org/all/ivnv2crd3et76p2nx7oszuqhzzah756oecn5yuykzqfkqzoygw@yvnlkhjjssoz/\n\n\nKent\u0027s suggestion on madvise boundary:\n\n[2] https://lore.kernel.org/all/dsvx2hyrdnv7smcrgpicqirwsmq5mcmbl7dbwmrx7dobrnxpbh@nxdhmkszdzyk/\n\n\nAlso make clear that your approach is different than what was discussed previously (sub vma level limits) this as it was contentious to have sub-VMA level boundaries; so here you only limit on the VMA limits. the other stuff about the cache miss is still relevant though\n\nfilemapt_fault should make it obvious but I still would  explicitly highlight that this doesn\u0027t affect readahead from syscall read path; and is only itended for readshead from the mmap sysc/async paths",
+      "range": {
+        "startLine": 7,
+        "startChar": 8,
+        "endLine": 7,
+        "endChar": 60
+      },
+      "revId": "dbc7c52765a6384eaa2041d3668a8708221cb4ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
