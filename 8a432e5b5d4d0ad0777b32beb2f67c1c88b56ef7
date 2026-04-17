@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca93524a_947a487c",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1256,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-17T14:43:50Z",
+      "side": 1,
+      "message": "nit question: are there any valid ISR values outside the range 0-255 at all? It seems such values are always invalid (and in particular the SVI field in GUEST_INTR_STATUS set to max_isr by `hwapic_isr_update` is only 8 bits)?\n\nIf so, it might make more sense to return -EINVAL in this case, like I suggested earlier?\n\nIn particular, we do this check for both pVM and npVM, and especially for npVM returning -EINVAL seems more appropriate than -EPERM?",
+      "revId": "8a432e5b5d4d0ad0777b32beb2f67c1c88b56ef7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
