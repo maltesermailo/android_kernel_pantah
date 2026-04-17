@@ -16,6 +16,23 @@
       "message": "Makes sense to copy the copyrights from arch/x86/boot/printf.c then?",
       "revId": "6f39d4e2d872ce51c255c4917537c44408ca00c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89766f5e_93afb8dc",
+        "filename": "arch/x86/kvm/pkvm/pkvm.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-17T16:07:28Z",
+      "side": 1,
+      "message": "nit: looks like generally in this `pkvm.h` we declare only those functions that are implemented in `pkvm.c` (with a small exception: a few functions implemented in KVM\u0027s `x86.c`, e.g. `pkvm_vcpu_enter_guest()`).\n\nSo, for consistency with other source files, we might declare these functions in a separate `printf.h` header?\n\n...Or maybe an even more consistent approach would be to rename these functions to `vscnprintf()` and `scnprintf()`, so that pKVM can just use the Linux header (`include/linux/sprintf.h`) for their declarations? And then also move `printf.c` into `arch/x86/kvm/pkvm/lib/` ?",
+      "revId": "6f39d4e2d872ce51c255c4917537c44408ca00c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
