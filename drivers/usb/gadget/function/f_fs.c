@@ -1075,6 +1075,8 @@ static ssize_t ffs_epfile_io(struct file *file, struct ffs_io_data *io_data)
 			req->buf = data;
 			req->num_sgs = 0;
 		}
+
+		req->zero = !!(io_data->kiocb->ki_flags & IOCB_ZLP);
 		req->length = data_len;
 
 		io_data->buf = data;
@@ -1126,6 +1128,8 @@ static ssize_t ffs_epfile_io(struct file *file, struct ffs_io_data *io_data)
 			req->buf = data;
 			req->num_sgs = 0;
 		}
+
+		req->zero = !!(io_data->kiocb->ki_flags & IOCB_ZLP);
 		req->length = data_len;
 
 		io_data->buf = data;
