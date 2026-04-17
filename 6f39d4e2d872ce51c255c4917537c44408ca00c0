@@ -33,6 +33,85 @@
       "message": "nit: looks like generally in this `pkvm.h` we declare only those functions that are implemented in `pkvm.c` (with a small exception: a few functions implemented in KVM\u0027s `x86.c`, e.g. `pkvm_vcpu_enter_guest()`).\n\nSo, for consistency with other source files, we might declare these functions in a separate `printf.h` header?\n\n...Or maybe an even more consistent approach would be to rename these functions to `vscnprintf()` and `scnprintf()`, so that pKVM can just use the Linux header (`include/linux/sprintf.h`) for their declarations? And then also move `printf.c` into `arch/x86/kvm/pkvm/lib/` ?",
       "revId": "6f39d4e2d872ce51c255c4917537c44408ca00c0",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ec34f47_1de1223f",
+        "filename": "arch/x86/kvm/pkvm/printf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-17T17:38:30Z",
+      "side": 1,
+      "message": "Since we only support bases 10 and 16, we don\u0027t need that many elements? It seems we only need 20 (for decimal 2^64 - 1)?",
+      "revId": "6f39d4e2d872ce51c255c4917537c44408ca00c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "059e45c2_5142a0ff",
+        "filename": "arch/x86/kvm/pkvm/printf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-17T17:38:30Z",
+      "side": 1,
+      "message": "nit: in such cases the recommended style is to use {} for both `if` and `else` branches?",
+      "fixSuggestions": [
+        {
+          "fixId": "415994fc_c04237f8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/printf.c",
+              "range": {
+                "startLine": 13,
+                "startChar": 0,
+                "endLine": 14,
+                "endChar": 0
+              },
+              "replacement": "\tif (num \u003d\u003d 0) {\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/printf.c",
+              "range": {
+                "startLine": 15,
+                "startChar": 0,
+                "endLine": 16,
+                "endChar": 0
+              },
+              "replacement": "\t} else {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6f39d4e2d872ce51c255c4917537c44408ca00c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12af7523_c60bc37d",
+        "filename": "arch/x86/kvm/pkvm/printf.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-17T17:38:30Z",
+      "side": 1,
+      "message": "Why long long, not int?\n\nSame question about lines 64 and 89.\n\nEDIT: the AI here is suggesting that it is to safely handle the negation of INT_MIN. If so, maybe let\u0027s add a short comment explaining that?",
+      "revId": "6f39d4e2d872ce51c255c4917537c44408ca00c0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
