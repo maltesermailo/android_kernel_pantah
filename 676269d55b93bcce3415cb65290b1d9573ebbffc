@@ -52,6 +52,24 @@
       "parentUuid": "48284249_7fc79a58",
       "revId": "676269d55b93bcce3415cb65290b1d9573ebbffc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fbccd9e_51822593",
+        "filename": "arch/x86/kvm/pkvm/pkvm_constants.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-20T23:44:41Z",
+      "side": 1,
+      "message": "\u003e * if (very unlikely) there will be some changes in original persistent_ram_buffer struct we will catch it - the kernel will stop compiling\n\u003e * we shouldn\u0027t be vulnerable for PKVM_RAMOOPS_BUFFER_SIG_VAL changes (very unlikely)\n\nWhich is extremely unlikely also because this ABI must remain stable (as you noted yourself in several places)?",
+      "parentUuid": "4a10507b_1a586983",
+      "revId": "676269d55b93bcce3415cb65290b1d9573ebbffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
