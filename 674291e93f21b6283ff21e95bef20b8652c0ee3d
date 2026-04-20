@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "188ffe20_eb93b4b1",
+        "filename": "drivers/dma-buf/dma-buf.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-04-20T20:27:33Z",
+      "side": 1,
+      "message": "This check is unusual for a kernel getter function and in most cases extra. It\u0027s better to place the change in cases where you expect dmabuf_info to sometimes be NULL.",
+      "range": {
+        "startLine": 675,
+        "startChar": 1,
+        "endLine": 675,
+        "endChar": 17
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "be190fd7_c8ac2be0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/dma-buf/dma-buf.c",
+              "range": {
+                "startLine": 675,
+                "startChar": 0,
+                "endLine": 677,
+                "endChar": 0
+              },
+              "replacement": "\trefcount_inc(\u0026dmabuf_info-\u003erefcnt);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "674291e93f21b6283ff21e95bef20b8652c0ee3d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
