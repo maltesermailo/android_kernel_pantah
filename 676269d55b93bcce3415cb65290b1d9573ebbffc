@@ -16,6 +16,24 @@
       "message": "Is this really cleaner than just duplicating the definitions of `PERSISTENT_RAM_SIG` and `struct persistent_ram_buffer` in the hypervisor code with a \"Copied from ...\" comment?\n\nBoth definitions are very simple, so duplicating them seems much less fragile than compiling the entire `ram_core.c` into this binary (and of course much simpler as well)?\n\nAlso that would be closer to a really clean future solution (which we are avoiding for now, as we are avoiding changes in generic parts of kernel), i.e.: simply moving those definitions from `ram_core.c` to a header under `include/linux/`? (I mean, in both that case and with duplicated definitions, the hypervisor code would directly use those definitions instead of these PKVM_RAMOOPS_xxx macros.)",
       "revId": "676269d55b93bcce3415cb65290b1d9573ebbffc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1b2aad1_e29fb6f4",
+        "filename": "arch/x86/kvm/pkvm/pkvm_constants.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-20T16:47:49Z",
+      "side": 1,
+      "message": "Moreover, I\u0027ve just tried compiling these patches with a non-Android .config which has CONFIG_PSTORE_RAM disabled, and got this:\n```\nIn file included from arch/x86/kvm/pkvm/pkvm_constants.c:8:\narch/x86/kvm/pkvm/../../../../fs/pstore/ram_core.c: In function ‘persistent_ram_encode_rs8’:\narch/x86/kvm/pkvm/../../../../fs/pstore/ram_core.c:106:9: error: implicit declaration of function ‘encode_rs8’; did you mean ‘encode_dr7’? [-Wimplicit-function-declaration]\n  106 |         encode_rs8(prz-\u003ers_decoder, data, len, prz-\u003eecc_info.par, 0);\n      |         ^~~~~~~~~~\n      |         encode_dr7\narch/x86/kvm/pkvm/../../../../fs/pstore/ram_core.c: In function ‘persistent_ram_decode_rs8’:\narch/x86/kvm/pkvm/../../../../fs/pstore/ram_core.c:118:16: error: implicit declaration of function ‘decode_rs8’; did you mean ‘decode_dr7’? [-Wimplicit-function-declaration]\n  118 |         return decode_rs8(prz-\u003ers_decoder, data, prz-\u003eecc_info.par, len,\n      |                ^~~~~~~~~~\n      |                decode_dr7\n```",
+      "parentUuid": "48284249_7fc79a58",
+      "revId": "676269d55b93bcce3415cb65290b1d9573ebbffc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
