@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c43f0ac5_2eda87b6",
+        "filename": "kernel/sched/fair.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 7256,
+      "author": {
+        "id": 1945845
+      },
+      "writtenOn": "2026-04-20T17:45:14Z",
+      "side": 1,
+      "message": "This feels a bit too confusing. Having one vendorhook provide two outputs that go into a single conditional feels overly complex and prone to bugs. Can this not be simplified?\n\nMaybe something like:\n```\nbool start_server \u003d false;\n\nif (!rq_h_nr_queued \u0026\u0026 rq-\u003ecfs.h_nr_queued)\n    start_server \u003d true;\ntrace_android_rvh_fair_dl_server_start(rq, \u0026start_server);\nif (start_server)\n    dl_server_start(\u0026rq-\u003efair_server);\n```",
+      "revId": "fcbf534e966eb36692af4caf2efba491d31454cf",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
