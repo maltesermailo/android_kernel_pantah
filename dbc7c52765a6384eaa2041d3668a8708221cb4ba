@@ -110,6 +110,30 @@
       ],
       "revId": "dbc7c52765a6384eaa2041d3668a8708221cb4ba",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e000d467_318b1193",
+        "filename": "mm/filemap.c",
+        "patchSetId": 16
+      },
+      "lineNbr": 3380,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2026-04-20T23:15:46Z",
+      "side": 1,
+      "message": "I think they are both correct. `ractl.max_index` is an inclusive end of range, while `end` is an exclusive end of range, so a difference of 1 is expected.\n\nI made `ractl.max_index` inclusive so that the default value can be valid value of `ULONG_MAX` instead of a special sentinel value. The pre-existing `limit` and `end_index` variables in readahead.c are also inclusive.\n\n(Confusingly, in this file, there are some variables named like inclusive ends, but aren\u0027t! For example, `last_index` in `filemap_get_pages` that was off by one until https://lkml.kernel.org/r/20230208022400.28962-1-coolqyj@163.com)",
+      "parentUuid": "c5a7a4de_70b00a80",
+      "range": {
+        "startLine": 3380,
+        "startChar": 22,
+        "endLine": 3380,
+        "endChar": 45
+      },
+      "revId": "dbc7c52765a6384eaa2041d3668a8708221cb4ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
