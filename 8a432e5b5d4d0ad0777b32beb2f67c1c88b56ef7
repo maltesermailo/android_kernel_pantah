@@ -16,6 +16,24 @@
       "message": "nit question: are there any valid ISR values outside the range 0-255 at all? It seems such values are always invalid (and in particular the SVI field in GUEST_INTR_STATUS set to max_isr by `hwapic_isr_update` is only 8 bits)?\n\nIf so, it might make more sense to return -EINVAL in this case, like I suggested earlier?\n\nIn particular, we do this check for both pVM and npVM, and especially for npVM returning -EINVAL seems more appropriate than -EPERM?",
       "revId": "8a432e5b5d4d0ad0777b32beb2f67c1c88b56ef7",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df8d1ed5_ec7cb4c6",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1256,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-20T01:54:50Z",
+      "side": 1,
+      "message": "Sure, I will separate the conditions, one is to return -EINVAL and the other to return -EPERM for pVM.\n\nMaybe to save the check `max_isr !\u003d -1`, I prefer to add `if (max_isr \u003d\u003d -1)` and jump to the update if this is true, so that the reset conditions doesn\u0027t need to have `max_isr !\u003d -1`.",
+      "parentUuid": "ca93524a_947a487c",
+      "revId": "8a432e5b5d4d0ad0777b32beb2f67c1c88b56ef7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
