@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d2d3e8a0_b06056d2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2026-04-21T00:26:58Z",
+      "side": 1,
+      "message": "\u003e Jan\u0027s opinion on the potential cache miss for consecutive VMA reads:\n\nI\u0027ve added a paragraph about that + a link\n\n\u003e Kent\u0027s suggestion on madvise boundary:\n\nI\u0027m less sure how to mention this. Would it be something like an \"alternatives considered\" section?\n\n\u003e filemapt_fault should make it obvious but I still would explicitly highlight that this doesn\u0027t affect readahead from syscall read path; and is only itended for readshead from the mmap sysc/async paths\n\nDone + mentioned what I expect to happen if they are mixed",
+      "parentUuid": "63b05b32_fd814203",
+      "range": {
+        "startLine": 7,
+        "startChar": 8,
+        "endLine": 7,
+        "endChar": 60
+      },
+      "revId": "dbc7c52765a6384eaa2041d3668a8708221cb4ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "70d7122c_e6381e21",
         "filename": "/COMMIT_MSG",
         "patchSetId": 16
@@ -61,6 +85,30 @@
       "side": 1,
       "message": "Yes it can save power and CPU as well: depending on how often we are reading ahead the stuff that we know will never be touched (e.g. ELF padding)\n\nThe power is saved from CPU cycles needed to reclaim these pages that constantly get brought into the pagecache (and populated in PTEs by fault around) only to never be used",
       "parentUuid": "70d7122c_e6381e21",
+      "range": {
+        "startLine": 36,
+        "startChar": 14,
+        "endLine": 36,
+        "endChar": 28
+      },
+      "revId": "dbc7c52765a6384eaa2041d3668a8708221cb4ba",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c43ff6ce_444a00fc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 16
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2026-04-21T00:26:58Z",
+      "side": 1,
+      "message": "I agree, I just don\u0027t want to make a claim since we don\u0027t have data yet. If the readahead was useful for some workload, then maybe this actually hurts CPU/power for them.\n\nI was mostly trying to say \"these benchmark results aren\u0027t the motivation\" since they aren\u0027t very impressive or high confidence. I\u0027ve adjusted it",
+      "parentUuid": "20b96948_b91a4c10",
       "range": {
         "startLine": 36,
         "startChar": 14,
