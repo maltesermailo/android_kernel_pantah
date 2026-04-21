@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0990597d_6b0ade89",
+        "filename": "mm/filemap.c",
+        "patchSetId": 20
+      },
+      "lineNbr": 3394,
+      "author": {
+        "id": 1944400
+      },
+      "writtenOn": "2026-04-21T01:42:02Z",
+      "side": 1,
+      "message": "local run of sashiko says\n\n\u003e Could this signedness cast bypass the VMA boundary limits for file offsets near 8TB on 32-bit systems?\n\u003e\n\u003e On 32-bit architectures, pgoff_t is an unsigned long supporting file offsets up to 16TB. If a VMA is mapped at or near the 8TB boundary (vm_pgoff \u003e\u003d 0x80000000), casting it to a signed 32-bit long yields a negative\nvalue.\n\u003e\n\u003e If a fault occurs in the first few pages of this VMA, vmf-\u003epgoff - ra-\u003era_pages / 2 can evaluate to a positive value (e.g., 0x7FFFFFF8). The max_t macro will incorrectly identify the positive value as the maximum, assigning an offset preceding the VMA start.",
+      "revId": "312f2b7ff41008ed8cb8bd0a07817db70e3b5d8d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
