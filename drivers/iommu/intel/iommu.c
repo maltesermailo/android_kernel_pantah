@@ -2000,10 +2000,10 @@ void domain_context_clear_one(struct device_domain_info *info, u8 bus, u8 devfn)
 	struct intel_iommu *iommu = info->iommu;
 	struct context_entry *context;
 #ifdef __PKVM_HYP__
-	struct pasid_dir_entry *pasid_dir;
+	struct pasid_dir_entry *pasid_dir = NULL;
 	bool sm = sm_supported(iommu);
 	u64 pasid_dir_sz;
-	void *pgd;
+	void *pgd = NULL;
 #endif
 	u16 did;
 
@@ -2026,6 +2026,9 @@ void domain_context_clear_one(struct device_domain_info *info, u8 bus, u8 devfn)
 	}
 
 #ifdef __PKVM_HYP__
+	if (!context_present(context))
+		goto clear;
+
 	if (sm) {
 		pasid_dir = __pkvm_va(context->lo & VTD_PAGE_MASK);
 		pasid_dir_sz = get_pasid_dir_size(context);
@@ -2036,6 +2039,7 @@ void domain_context_clear_one(struct device_domain_info *info, u8 bus, u8 devfn)
 	} else {
 		pgd = __pkvm_va(context->lo & VTD_PAGE_MASK);
 	}
+clear:
 #endif
 
 	did = context_domain_id(context);
@@ -2047,9 +2051,9 @@ void domain_context_clear_one(struct device_domain_info *info, u8 bus, u8 devfn)
 	__iommu_flush_cache(iommu, context, sizeof(*context));
 
 #ifdef __PKVM_HYP__
-	if (sm)
+	if (pasid_dir)
 		pasid_free_table(pasid_dir, pasid_dir_sz);
-	else
+	else if (pgd)
 		pkvm_put_domain_cache_tag_unassign(pgd, did,
 						   IOMMU_NO_PASID, info);
 #endif
