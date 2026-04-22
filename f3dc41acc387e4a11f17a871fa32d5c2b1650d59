@@ -22,6 +22,30 @@
       },
       "revId": "f3dc41acc387e4a11f17a871fa32d5c2b1650d59",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccdbcfa7_4b520cb7",
+        "filename": "include/linux/shmem_fs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-04-22T21:32:32Z",
+      "side": 1,
+      "message": "But that is set in the `fsflags` field of the `shmem_inode_info` structure, and this flag is set in the `flags` field, so while the numbers match, the existing logic shouldn\u0027t mix them up.",
+      "parentUuid": "9c2ead4b_7cc425e4",
+      "range": {
+        "startLine": 56,
+        "startChar": 25,
+        "endLine": 56,
+        "endChar": 35
+      },
+      "revId": "f3dc41acc387e4a11f17a871fa32d5c2b1650d59",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
