@@ -108,6 +108,13 @@ static u64 timer_get_offset(struct arch_timer_context *ctxt)
 	if (!ctxt)
 		return 0;
 
+	/*
+	 * Force return 0 for virtual timer to ensure cntvct_el0 == cntpct_el0
+	 * and maintain comparability with host timestamps.
+	 */
+	if (arch_timer_ctx_index(ctxt) == TIMER_VTIMER)
+		return 0;
+
 	if (ctxt->offset.vm_offset)
 		offset += *ctxt->offset.vm_offset;
 	if (ctxt->offset.vcpu_offset)
