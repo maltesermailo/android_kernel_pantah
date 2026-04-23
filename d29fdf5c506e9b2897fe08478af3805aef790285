@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3287686c_965a3c06",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-04-23T17:40:30Z",
+      "side": 1,
+      "message": "Right, that\u0027s how it\u0027d be implemented. With regards to `kvm_iommu_nested_cfg_sync()`, how would the EL2 IOMMU driver distinguish between a nested_cfg_sync descriptior, and a page response descriptor? You could use the size, but that seems fragile. We could extend and probably rename `nested_cfg_sync` so that it takes in a command as well so that it can interpret the structure and validate it, like an `ioctl()` handler?",
+      "parentUuid": "481cc45a_95735881",
+      "range": {
+        "startLine": 9,
+        "startChar": 9,
+        "endLine": 9,
+        "endChar": 18
+      },
+      "revId": "d29fdf5c506e9b2897fe08478af3805aef790285",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84e46b4d_125f18ec",
         "filename": "arch/arm64/include/asm/kvm_host.h",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2026-04-23T07:21:57Z",
       "side": 1,
       "message": "Why do we need this enum and not use the existing IOMMU ones, this is not an ABI so it should be fine.",
+      "range": {
+        "startLine": 2055,
+        "startChar": 5,
+        "endLine": 2055,
+        "endChar": 37
+      },
+      "revId": "d29fdf5c506e9b2897fe08478af3805aef790285",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea1347e7_c0c2c1c0",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2055,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-04-23T17:40:30Z",
+      "side": 1,
+      "message": "I did this in case we wanted to later do something different or define additional status codes. However, I\u0027m happy to use the IOMMU ones, since there doesn\u0027t need to be a need for that.",
+      "parentUuid": "84e46b4d_125f18ec",
       "range": {
         "startLine": 2055,
         "startChar": 5,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "06fc04e4_3887cb89",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2062,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-04-23T17:40:30Z",
+      "side": 1,
+      "message": "IOMMU drivers in EL1 should call this from their page_response() callback to format it correctly when they send it up to EL2, so the SMMUv3 driver would invoke this if it implements SVA in a paravirtualized enviornment. However, if we stick with the IOMMU status codes, yes, this becomes obselete.",
+      "parentUuid": "4e56cb0a_fcd0f9ab",
+      "range": {
+        "startLine": 2062,
+        "startChar": 0,
+        "endLine": 2062,
+        "endChar": 28
+      },
+      "revId": "d29fdf5c506e9b2897fe08478af3805aef790285",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd80bb30_6af8afb4",
         "filename": "arch/arm64/include/asm/kvm_host.h",
         "patchSetId": 1
@@ -83,6 +155,30 @@
       "writtenOn": "2026-04-23T07:21:57Z",
       "side": 1,
       "message": "This is is also unused, but I am guessing that\u0027s what is passed in `page_response_desc_hva`? can\u0027t we inline the 3 arguments instead of having 2 for address and size to avoid the sharing/pinning?",
+      "range": {
+        "startLine": 2077,
+        "startChar": 7,
+        "endLine": 2077,
+        "endChar": 34
+      },
+      "revId": "d29fdf5c506e9b2897fe08478af3805aef790285",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b9d3b76_ee2f3700",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2077,
+      "author": {
+        "id": 1934715
+      },
+      "writtenOn": "2026-04-23T17:40:30Z",
+      "side": 1,
+      "message": "Right. I think we can do that.",
+      "parentUuid": "cd80bb30_6af8afb4",
       "range": {
         "startLine": 2077,
         "startChar": 7,
