@@ -16,6 +16,40 @@
       "message": "This change will break the builds of every partner that currently builds these modules and vendor modules. Those partners may have also customised the source code.\n\nThis requires at a minimum some public discussion.",
       "revId": "490fd0b7a7a69e3647b0d8cb16e1fa97eec4ab79",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6eadfd64_65cdaf00",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-04-23T16:58:24Z",
+      "side": 1,
+      "message": "can we avoid this? What symbols do we need to add if USB_NET_SMSC95XX is a vendor module?",
+      "revId": "490fd0b7a7a69e3647b0d8cb16e1fa97eec4ab79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79ef99e2_fae81ccc",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-04-23T16:58:24Z",
+      "side": 1,
+      "message": "why is this needed? This patch is adding GKI modules, so these modules can select what they need. These hidden configs are normally used to select configs on behalf of vendor modules.",
+      "revId": "490fd0b7a7a69e3647b0d8cb16e1fa97eec4ab79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
