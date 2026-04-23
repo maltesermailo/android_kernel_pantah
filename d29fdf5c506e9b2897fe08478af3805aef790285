@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "481cc45a_95735881",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-04-23T07:21:57Z",
+      "side": 1,
+      "message": "Looking at the current SMMUv3 upstream driver, I see that\u0027s it\u0027s possible to make EL1 handle everything and just let EL2 send resume/abort.\n\nI am wondering, if we can just rely on `kvm_iommu_nested_cfg_sync` \nfor that. It already have a very similar declaration, and it\u0027s up to the driver how to decoded the passed descriptor. what do you think?",
+      "range": {
+        "startLine": 9,
+        "startChar": 9,
+        "endLine": 9,
+        "endChar": 18
+      },
+      "revId": "d29fdf5c506e9b2897fe08478af3805aef790285",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84e46b4d_125f18ec",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2055,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-04-23T07:21:57Z",
+      "side": 1,
+      "message": "Why do we need this enum and not use the existing IOMMU ones, this is not an ABI so it should be fine.",
+      "range": {
+        "startLine": 2055,
+        "startChar": 5,
+        "endLine": 2055,
+        "endChar": 37
+      },
+      "revId": "d29fdf5c506e9b2897fe08478af3805aef790285",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e56cb0a_fcd0f9ab",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2062,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-04-23T07:21:57Z",
+      "side": 1,
+      "message": "This is unused?",
+      "range": {
+        "startLine": 2062,
+        "startChar": 0,
+        "endLine": 2062,
+        "endChar": 28
+      },
+      "revId": "d29fdf5c506e9b2897fe08478af3805aef790285",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd80bb30_6af8afb4",
+        "filename": "arch/arm64/include/asm/kvm_host.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2077,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-04-23T07:21:57Z",
+      "side": 1,
+      "message": "This is is also unused, but I am guessing that\u0027s what is passed in `page_response_desc_hva`? can\u0027t we inline the 3 arguments instead of having 2 for address and size to avoid the sharing/pinning?",
+      "range": {
+        "startLine": 2077,
+        "startChar": 7,
+        "endLine": 2077,
+        "endChar": 34
+      },
+      "revId": "d29fdf5c506e9b2897fe08478af3805aef790285",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
