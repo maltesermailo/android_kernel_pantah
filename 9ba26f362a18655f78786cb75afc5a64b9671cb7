@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ff79c8af_aec9d40c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4167025
+      },
+      "writtenOn": "2026-04-23T03:14:16Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Cherry pick is not clean. Checked against base branch android15-6.6.\nBase branch...\n\nCherry pick is not clean. Checked against base branch android15-6.6.\nBase branch change: [4040910](https://android-review.googlesource.com/c/4040910).\n\n```\n      ## android/abi_gki_aarch64_xiaomi ##\n     @@ android/abi_gki_aarch64_xiaomi: __tracepoint_android_vh_folio_add_file_rmap\n    @@ android/abi_gki_aarch64_xiaomi: __tracepoint_android_vh_folio_add_file_rmap\n      __tracepoint_android_vh_folios_put_refs_direct_free_extent\n      __traceiter_android_vh_folios_put_refs_direct_free_extent\n      __tracepoint_android_vh_free_pages_and_swap_cache\n    +@@ android/abi_gki_aarch64_xiaomi: inode_add_lru\n    + _trace_android_rvh_mapping_shrinkable\n    + prep_new_page\n    + folio_isolate_lru\n    ++__traceiter_android_vh_free_page_bypass\n    ++__traceiter_android_vh_free_folio_bypass\n    ++__tracepoint_android_vh_free_page_bypass\n    ++__tracepoint_android_vh_free_folio_bypass\n    + \n    + # required by os-cpu\n    + __traceiter_android_vh_sync_rcu_wait_start\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "9ba26f362a18655f78786cb75afc5a64b9671cb7",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "53286124_33d65929",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 6
