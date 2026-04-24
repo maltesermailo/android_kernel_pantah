@@ -361,7 +361,7 @@ void pkvm_host_vmexit_main(struct vcpu_vmx *vmx)
 		 * Inject #GP to the host VM if its EPT violation
 		 * cannot be handled.
 		 */
-		if (pkvm_handle_host_ept_violation())
+		if (pkvm_handle_host_ept_violation(vcpu))
 			kvm_inject_gp(vcpu, 0);
 		break;
 	case EXIT_REASON_PREEMPTION_TIMER:

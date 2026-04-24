@@ -399,7 +399,49 @@ int pkvm_host_ept_finalize(struct pkvm_pgtable *pgt)
 	return 0;
 }
 
-int pkvm_handle_host_ept_violation(void)
+static int fixup_host_ept_violation(struct kvm_vcpu *vcpu)
+{
+	unsigned long exit_qualification = vmx_get_exit_qual(vcpu);
+	struct x86_exception fault;
+	u64 error_code = 0;
+
+	/*
+	 * The guest linear address(GLA) should be valid for fixing this by
+	 * injecting #PF. But the GLA may be invalid according to SDM vol. 3
+	 * Exit Qualification for EPT Violations:
+	 * "The guest linear-address field is valid for all EPT violations
+	 * except those resulting from an attempt to load the guest PDPTEs as
+	 * part of the execution of the MOV CR instruction and those due to
+	 * trace-address pre-translation (TAPT; Section 27.5.4)."
+	 * So if the GLA is invalid, fallback to the original behavior, which
+	 * is to inject #GP.
+	 */
+	if (!(exit_qualification & EPT_VIOLATION_GVA_IS_VALID))
+		return -EINVAL;
+
+	error_code |= (exit_qualification & EPT_VIOLATION_PROT_MASK)
+		      ? PFERR_PRESENT_MASK : 0;
+	error_code |= (exit_qualification & EPT_VIOLATION_ACC_WRITE)
+		      ? PFERR_WRITE_MASK : 0;
+	error_code |= VMX_AR_DPL(vmcs_read32(GUEST_SS_AR_BYTES)) == 3
+		      ? PFERR_USER_MASK : 0;
+	error_code |= (exit_qualification & EPT_VIOLATION_ACC_INSTR)
+		      ? PFERR_FETCH_MASK : 0;
+
+	fault.vector = PF_VECTOR;
+	fault.error_code_valid = true;
+	fault.error_code = error_code;
+	fault.nested_page_fault = false;
+	fault.address = vmcs_readl(GUEST_LINEAR_ADDRESS);
+	fault.async_page_fault = false;
+	fault.exit_qualification = exit_qualification;
+
+	kvm_inject_page_fault(vcpu, &fault);
+
+	return 0;
+}
+
+int pkvm_handle_host_ept_violation(struct kvm_vcpu *vcpu)
 {
 	struct range range, cur;
 	int level, ret = -EPERM;
@@ -415,7 +457,9 @@ int pkvm_handle_host_ept_violation(void)
 	 */
 	if (pkvm_find_addr_range(gpa, &range) || is_pvmfw(gpa) ||
 	    is_iommu_mmio(gpa)) {
-		pkvm_err("Host access to protected memory at 0x%lx\n", gpa);
+		ret = fixup_host_ept_violation(vcpu);
+		if (ret)
+			pkvm_err_ratelimited("Host access to protected memory at 0x%lx\n", gpa);
 		return ret;
 	}
 
