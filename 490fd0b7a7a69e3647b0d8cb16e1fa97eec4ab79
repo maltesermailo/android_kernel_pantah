@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "317a6928_dfd17c29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-04-24T22:23:17Z",
+      "side": 1,
+      "message": "I\u0027d like to see the symbol impact, but this looks promising. Please go ahead and upload the patch with the vendor modules removed.",
+      "parentUuid": "35195272_5e4f4aec",
+      "revId": "490fd0b7a7a69e3647b0d8cb16e1fa97eec4ab79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6eadfd64_65cdaf00",
         "filename": "BUILD.bazel",
         "patchSetId": 3
@@ -120,6 +138,24 @@
       "side": 1,
       "message": "Many SND_HDA driver Kconfig entries are gated by the SND_HDA config https://cs.android.com/android/kernel/superproject/+/common-android16-6.12:common/sound/pci/hda/Kconfig;l\u003d45, which is a hidden config.\nTo unblock those Kconfig entries and subsequently their drivers from being built as gki module, added it here as a hidden config for selection.",
       "parentUuid": "79ef99e2_fae81ccc",
+      "revId": "490fd0b7a7a69e3647b0d8cb16e1fa97eec4ab79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cade239_11acb738",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-04-24T22:23:17Z",
+      "side": 1,
+      "message": "Ok, so none of these drivers will end up as protected GKI modules? If any of them are, then this isn\u0027t needed since the driver will select this. I\u0027m fine with this if all the dependent drivers are now vendor modules.",
+      "parentUuid": "6cb1ede0_a5b0f671",
       "revId": "490fd0b7a7a69e3647b0d8cb16e1fa97eec4ab79",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
