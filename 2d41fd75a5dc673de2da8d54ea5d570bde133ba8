@@ -16,6 +16,24 @@
       "message": "queued for April 29 KMI update",
       "revId": "2d41fd75a5dc673de2da8d54ea5d570bde133ba8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5525dc61_37612ab8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-04-24T15:27:43Z",
+      "side": 1,
+      "message": "Oops, no KMI update for 6.12. We need to fix the breakage:\n```\n1 function symbol(s) added\n  \u0027int __traceiter_android_vh_snd_pcm_check_no_buffer(void*, struct snd_pcm_substream*, bool*)\u0027\n\n1 variable symbol(s) added\n  \u0027struct tracepoint __tracepoint_android_vh_snd_pcm_check_no_buffer\u0027\n\nfunction symbol \u0027unsigned long _snd_pcm_stream_lock_irqsave(struct snd_pcm_substream*)\u0027 changed\n  CRC changed from 0xd14db8b1 to 0xa8c70fe5\n\nfunction symbol \u0027int snd_pcm_kernel_ioctl(struct snd_pcm_substream*, unsigned int, void*)\u0027 changed\n  CRC changed from 0xdc42dbcb to 0xea44c5eb\n\nfunction symbol \u0027int snd_pcm_lib_default_mmap(struct snd_pcm_substream*, struct vm_area_struct*)\u0027 changed\n  CRC changed from 0x3cd37548 to 0x4ba76584\n\n... 6 omitted; 9 symbols have only CRC changes\n```",
+      "parentUuid": "580b8978_718ea16f",
+      "revId": "2d41fd75a5dc673de2da8d54ea5d570bde133ba8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
