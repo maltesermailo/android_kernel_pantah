@@ -16,6 +16,87 @@
       "message": "queued for April 29 KMI update since patch breaks KMI",
       "revId": "53073e3b1803def4c500dfeb4b902fd9bfced3c1",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba78cc44_ab4a9df7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-04-24T00:55:48Z",
+      "side": 1,
+      "message": "Oops, no KMI update for 6.12. The breakage will need to be fixed. See child patch",
+      "parentUuid": "55ea8915_d4478de2",
+      "revId": "53073e3b1803def4c500dfeb4b902fd9bfced3c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc9cd954_8603a1da",
+        "filename": "sound/core/pcm_native.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-04-24T00:55:48Z",
+      "side": 1,
+      "message": "The KMI breakage is probably caused by this inclusion which likely changes the visibility of `struct trace_eval_map`\n\nTry adding this here:\n```\n#include \u003clinux/android_kabi.h\u003e\nANDROID_KABI_DECLONLY(trace_eval_map);\n```\nIf that doesn\u0027t resolve the problem, I\u0027ll help you find the incantation that does.",
+      "revId": "53073e3b1803def4c500dfeb4b902fd9bfced3c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a55141c_72b99666",
+        "filename": "sound/core/pcm_native.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1451,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-04-24T00:55:48Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCheckPatch: WARNING:LEADING_SPACE: please, no spaces at the start of a line\n\nWARNING:LEADING_SPACE: please, no spaces at the start of a line",
+      "range": {
+        "startLine": 1450,
+        "startChar": 0,
+        "endLine": 1451,
+        "endChar": 0
+      },
+      "revId": "53073e3b1803def4c500dfeb4b902fd9bfced3c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72ecdaf7_678b36dc",
+        "filename": "sound/core/pcm_native.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 1451,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-04-24T00:55:48Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCheckPatch: ERROR:CODE_INDENT: code indent should use tabs where possible\n\nERROR:CODE_INDENT: code indent should use tabs where possible",
+      "range": {
+        "startLine": 1450,
+        "startChar": 0,
+        "endLine": 1451,
+        "endChar": 0
+      },
+      "revId": "53073e3b1803def4c500dfeb4b902fd9bfced3c1",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
