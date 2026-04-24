@@ -6,7 +6,18 @@
 #include <linux/extable.h>
 #include <asm/e820/api.h>
 #include <asm/pkvm_image.h>
+<<<<<<< PATCH SET (ef0c5f82977d61773e24b2cf9873e2d3b4b62fd0 ANDROID: pKVM: VMX: Unmap pKVM memory from the host kernel d)
+<<<<<<< HEAD   (019db5ff3686639edc6d415d6c0c9168df1695ea ANDROID: pKVM: VMX: Inject #PF to host on protected memory E)
+||||||| BASE   (73c2d4ba3039a42b6b9dfc18b13083891157f6c6 ANDROID: pKVM: VMX: Inject #PF to host on protected memory E)
 #include <asm/setup.h>
+=======
+#include <asm/setup.h>
+#include <asm/set_memory.h>
+>>>>>>> CHANGE (47923b213cfafd8a9f85b58b7ac6aaef7dae909e ANDROID: pKVM: VMX: Unmap pKVM memory from the host kernel d)
+||||||| BASE      (019db5ff3686639edc6d415d6c0c9168df1695ea ANDROID: pKVM: VMX: Inject #PF to host on protected memory E)
+=======
+#include <asm/setup.h>
+>>>>>>> BASE      (bc7dd2683a7a3c33fd49701e541980d398185116 ANDROID: pKVM: VMX: Inject #PF to host on protected memory E)
 #include "pkvm_constants.h"
 #include "vmx.h"
 #include "pkvm_iommu.h"
@@ -1504,6 +1515,24 @@ int __init vmx_pkvm_init(void)
 		static_branch_disable(&pkvm_enabled_key);
 		goto repriv_cpus;
 	}
+
+	/*
+	 * After host deprivileging succeed, un-present the kernel direct
+	 * mappings for the memory pages which are reserved from the memblock
+	 * for the pKVM as they are not accessible to the host kernel until the
+	 * platform is power cycled. This can avoid unnecessary EPT violation
+	 * vmexit for the usage of load_unaligned_zeropad().
+	 *
+	 * Note: The host memory pages donated to the pKVM are still mapped in
+	 * the host's MMU. Those pages are not un-presented right now because
+	 * they are sparse allocated from the linux, un-presenting from the
+	 * kernel direct mapping may split a huge PTE into smaller ones which
+	 * may slightly impact the host's performance. Without unpresenting for
+	 * those pages, the usage of load_unaligned_zeropad() can be supported
+	 * via injecting #PF by the pKVM.
+	 */
+	WARN_ON(set_memory_np((unsigned long)__va(pkvm_mem_base),
+			      pkvm_mem_size >> PAGE_SHIFT));
 
 	pkvm_hypercall(init_finalize);
 
