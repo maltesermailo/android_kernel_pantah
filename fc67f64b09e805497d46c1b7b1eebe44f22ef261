@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d96f53d5_03212499",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-24T18:46:39Z",
+      "side": 1,
+      "message": "This patch itself LGTM, but just wondering: since this patch alone is not enough anyway (since load_unaligned_zeropad() may also access memory donated to a pVM or to pKVM, not just memory reserved for pKVM), and since the next patch aosp/4047494 covers all kinds of pKVM-protected memory and thus makes this patch redundant, do we need this patch?",
+      "revId": "fc67f64b09e805497d46c1b7b1eebe44f22ef261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
