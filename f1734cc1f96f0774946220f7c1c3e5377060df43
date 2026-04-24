@@ -1,0 +1,93 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da1d05ee_bd49ea1e",
+        "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-24T15:43:20Z",
+      "side": 1,
+      "message": "\"the original behavior\" might sound a bit confusing: original in relation to what? \n\nSo maybe e.g. just \"...fallback to injecting #GP instead of #PF.\"?\n\nOr maybe better just remove this last sentence, since we are not injecting #GP here in pkvm_handle_host_ept_violation(), we are only returning an error to the caller, and it\u0027s the caller (the vmexit loop) that decides to inject #GP since pkvm_handle_host_ept_violation() failed?",
+      "revId": "f1734cc1f96f0774946220f7c1c3e5377060df43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10d62666_51f1429b",
+        "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-24T15:43:20Z",
+      "side": 1,
+      "message": "nit: just thinking: instead of explicitly setting `nested_page_fault` and `async_page_fault` to false, we could zero-initialize the whole `fault` structure when declaring it (`struct x86_exception fault \u003d { 0 };`) and thus make the code both shorter and more future-proof?",
+      "fixSuggestions": [
+        {
+          "fixId": "5ffb7e62_4bda8290",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/vmx/ept.c",
+              "range": {
+                "startLine": 405,
+                "startChar": 0,
+                "endLine": 406,
+                "endChar": 0
+              },
+              "replacement": "\tstruct x86_exception fault \u003d { 0 };\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/vmx/ept.c",
+              "range": {
+                "startLine": 434,
+                "startChar": 0,
+                "endLine": 435,
+                "endChar": 0
+              },
+              "replacement": ""
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/vmx/ept.c",
+              "range": {
+                "startLine": 436,
+                "startChar": 0,
+                "endLine": 437,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "f1734cc1f96f0774946220f7c1c3e5377060df43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30c8facd_51ca917d",
+        "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-24T15:43:20Z",
+      "side": 1,
+      "message": "This looks a bit confusing to me: so, we are only printing this error if EPT_VIOLATION_GVA_IS_VALID is not set (i.e. only in those rare corner cases related to MOV CR and TAPT), so this looks like we are assuming that in any other cases the host\u0027s access is a \"good\" one (like load_unaligned_zeropad()), not a malicious or mistaken one? Whereas in fact almost any malicious or mistaken access by the host will trigger the above successful path (#PF successfully injected), not this error path?\n\nSo it seems we should print this error in both cases? Although that would mean printing it in the \"good\" case of load_unaligned_zeropad() as well, but that is a very rare case anyway. And we might change it from error to warning for this reason.\n\nOr, if we somehow make the host kernel itself print an error message like this (e.g. by setting an extra non-standard bit in the #PF error code, to let the host kernel detect that it is a pKVM-injected page fault), then we won\u0027t need to print it here in pKVM at all, in either case? (BTW that would be also better since that would print it not only with CONFIG_PKVM_X86_DEBUG\u003dy.)\n\nAlthough, in some cases we still inject #GP, not #PF... So maybe we\u0027d better inject #PF in all those cases, even if GLA is invalid (in such case we could set the address to 0xdeadbeef or whatever)? So that the host kernel can detect and handle pKVM-injected faults in a unified way?",
+      "revId": "f1734cc1f96f0774946220f7c1c3e5377060df43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
