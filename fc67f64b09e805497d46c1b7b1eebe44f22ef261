@@ -34,6 +34,24 @@
       "parentUuid": "d96f53d5_03212499",
       "revId": "fc67f64b09e805497d46c1b7b1eebe44f22ef261",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33d703b1_15bee73f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-25T11:54:34Z",
+      "side": 1,
+      "message": "Hmm, so you mean that hardware prevents page faults due to such unintentional speculative loads if the page is not mapped in the MMU (stage 1), but does _not_ similarly prevent EPT violations due to such unintentional speculative loads if the page is not mapped in the EPT? Does the SDM mention that?\n\nIf that is the case, it is not clear to me why, not instance, in the upstream patchset https://lore.kernel.org/all/20260410151746.61150-1-kalyazin@amazon.com/ (implementing removing guest_memfd memory from the direct map) the cover letter says that the motivation for that is a security hardening, not the functional issue you\u0027ve mentioned; and also why it seems to implement that under a GUEST_MEMFD_FLAG_NO_DIRECT_MAP flag, not unconditionally.\n\n...Anyway, even if that is not the case, I guess this patch might be useful at least for security hardening, same as mentioned in that upstream patchset. So yeah, let\u0027s keep this patch.\n\nBut maybe let\u0027s add a TODO to do this for donated memory as well? (BTW I imagine that implementing that now would not be easy, since, for instance, the host would need to re-add donated pages to the direct map again when a pVM shares those pages with the host.)",
+      "parentUuid": "83209377_74de658a",
+      "revId": "fc67f64b09e805497d46c1b7b1eebe44f22ef261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
