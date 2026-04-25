@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0ed98aa0_0e2015b6",
+        "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-25T08:08:42Z",
+      "side": 1,
+      "message": "Makes sense. Let\u0027s just remove it.",
+      "parentUuid": "da1d05ee_bd49ea1e",
+      "revId": "f1734cc1f96f0774946220f7c1c3e5377060df43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "10d62666_51f1429b",
         "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
         "patchSetId": 1
@@ -75,6 +93,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d0d91df1_ce0b4641",
+        "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-25T08:08:42Z",
+      "side": 1,
+      "message": "Although this is what KVM code does, your suggestion makes more sense. Let\u0027s change to that.",
+      "parentUuid": "10d62666_51f1429b",
+      "revId": "f1734cc1f96f0774946220f7c1c3e5377060df43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "30c8facd_51ca917d",
         "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
         "patchSetId": 1
@@ -86,6 +122,24 @@
       "writtenOn": "2026-04-24T15:43:20Z",
       "side": 1,
       "message": "This looks a bit confusing to me: so, we are only printing this error if EPT_VIOLATION_GVA_IS_VALID is not set (i.e. only in those rare corner cases related to MOV CR and TAPT), so this looks like we are assuming that in any other cases the host\u0027s access is a \"good\" one (like load_unaligned_zeropad()), not a malicious or mistaken one? Whereas in fact almost any malicious or mistaken access by the host will trigger the above successful path (#PF successfully injected), not this error path?\n\nSo it seems we should print this error in both cases? Although that would mean printing it in the \"good\" case of load_unaligned_zeropad() as well, but that is a very rare case anyway. And we might change it from error to warning for this reason.\n\nOr, if we somehow make the host kernel itself print an error message like this (e.g. by setting an extra non-standard bit in the #PF error code, to let the host kernel detect that it is a pKVM-injected page fault), then we won\u0027t need to print it here in pKVM at all, in either case? (BTW that would be also better since that would print it not only with CONFIG_PKVM_X86_DEBUG\u003dy.)\n\nAlthough, in some cases we still inject #GP, not #PF... So maybe we\u0027d better inject #PF in all those cases, even if GLA is invalid (in such case we could set the address to 0xdeadbeef or whatever)? So that the host kernel can detect and handle pKVM-injected faults in a unified way?",
+      "revId": "f1734cc1f96f0774946220f7c1c3e5377060df43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dcc02d1_652acfb9",
+        "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-25T08:08:42Z",
+      "side": 1,
+      "message": "Sure. Let\u0027s print unconditionally.\n\n\u003eSo it seems we should print this error in both cases? Although that would mean printing it in the \"good\" case of load_unaligned_zeropad() as well, but that is a very rare case anyway. And we might change it from error to warning for this reason.\n\nI change this to ratelimited version to avoid the log flood. Change to warn needs to add a pkvm_warn_ratelimited macro, this is easy but I think error may be better, as a behave correct host should unmap the protected memory from its MMU (from its own safety point of view, as I mentioned at https://android-review.googlesource.com/c/kernel/common/+/4047493/comments/d96f53d5_03212499), thus the `load_unaligned_zeropad()` case should not cause EPT violation but #PF. So we can still treat the unexpected EPT violation as error?\n\n\u003e Or, if we somehow make the host kernel itself print an error message like this (e.g. by setting an extra non-standard bit in the #PF error code, to let the host kernel detect that it is a pKVM-injected page fault), then we won\u0027t need to print it here in pKVM at all, in either case? (BTW that would be also better since that would print it not only with CONFIG_PKVM_X86_DEBUG\u003dy.)\n\nI think a behave correct host should not cause EPT violation. And doing so will modify the generic x86 code, and this may also potentially cause conflict in the future if this non-standard hardware bit is used for other purpose, so if this is just to let the host to print some error log, sounds a bit overkill?\n\n\u003e Although, in some cases we still inject #GP, not #PF... So maybe we\u0027d better inject #PF in all those cases, even if GLA is invalid (in such case we could set the address to 0xdeadbeef or whatever)? So that the host kernel can detect and handle pKVM-injected faults in a unified way?\n\nI still think a behave correct host will not cause EPT violation by accessing the protected memory pages. For this `load_unaligned_zeropad()` case, it should get its own #PF rather than the injected one, via unmapping pKVM\u0027s memory and pVM\u0027s memory for its own safety. So ideally we only need to inject one kind of exceptions. Injecting #GP is easier than injecting #PF. If we finally have guest_memfd, maybe only inject #GP is good enough?",
+      "parentUuid": "30c8facd_51ca917d",
       "revId": "f1734cc1f96f0774946220f7c1c3e5377060df43",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
