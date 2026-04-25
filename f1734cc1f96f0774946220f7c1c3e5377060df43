@@ -160,6 +160,24 @@
       "parentUuid": "7dcc02d1_652acfb9",
       "revId": "f1734cc1f96f0774946220f7c1c3e5377060df43",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bc91ddc_336c71bb",
+        "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-25T13:29:37Z",
+      "side": 1,
+      "message": "\u003e I was just a bit worried that we don\u0027t have any logging in dmesg (in non-debug mode) that would indicate that the given #PF is due to the host trying to access pKVM-protected memory, not just a regular page fault due to some regular kernel bug, so some extra (possibly difficult) debugging work would be needed to find that out.\n\n`load_unaligned_zeropad` will not as it expect to receive the page fault so the kernel can fixup this. But if the page fault is not expected to be fixed, kernel can print logs for that. E.g., accessing pkvm reserved memory after init will get a #PF, and triggered below logs:\n```\n[    1.361452] BUG: unable to handle page fault for address: ffff888250801000\n[    1.361704] #PF: supervisor read access in kernel mode\n[    1.361704] #PF: error_code(0x0000) - not-present page\n[    1.361704] PGD 3e3d067 P4D 3e3d067 PUD 80000002400001e3\n[    1.361704] Oops: Oops: 0000 [#1] SMP NOPTI\n[    1.361704] CPU: 4 UID: 0 PID: 1 Comm: swapper/0 Not tainted 6.18.0-pkvm-clang+ #1365 PREEMPT(voluntary)\n[    1.361704] Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS rel-1.16.3-0-ga6ed6b701f0a-prebuilt.qemu.org 04/01/2014\n[    1.361704] RIP: 0010:vmx_pkvm_init+0x2f4/0x390\n[    1.361704] Code: a2 90 83 e8 fe a5 2a fe e8 a9 2c 00 00 85 c0 75 6f 48 8b 05 8e 54 4e 00 48 8b 0d 47 ba 94 ff 48 8d 14 08 48 81 c2 00 10 00 00 \u003c48\u003e 8b 0a 48 c7 c7 21 70 cb 82 48 c7 c6 13 81 d3 82 e8 e6 b5 dd fd\n[    1.361704] RSP: 0000:ffffc90000017a10 EFLAGS: 00010286\n[    1.361704] RAX: 0000000250800000 RBX: 0000000000000001 RCX: ffff888000000000\n[    1.361704] RDX: ffff888250801000 RSI: 0000000000000000 RDI: 0000000000000000\n[    1.361704] RBP: ffffc90000017a38 R08: 0000000000000000 R09: 0000000000000000\n[    1.361704] R10: 0000000000000000 R11: 0000000000000000 R12: 000000000000000f\n[    1.361704] R13: 000000000000000f R14: 0000000000000000 R15: 0000000000000010\n[    1.361704] FS:  0000000000000000(0000) GS:ffff8882cc953000(0000) knlGS:0000000000000000\n[    1.361704] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033\n[    1.361704] CR2: ffff888250801000 CR3: 000000000305a001 CR4: 0000000000772ef0\n[    1.361704] PKRU: 55555554\n[    1.361704] Call Trace:\n[    1.361704]  \u003cTASK\u003e\n[    1.361704]  do_vmx_pkvm_init+0xf/0xc0\n[    1.361704]  vmx_init+0x17d/0x260\n[    1.361704]  ? __pfx_vt_init+0x10/0x10\n[    1.361704]  vt_init+0x11/0x90\n[    1.361704]  ? __pfx_vt_init+0x10/0x10\n[    1.361704]  do_one_initcall+0x119/0x350\n[    1.361704]  ? __alloc_frozen_pages_noprof+0x16b/0x360\n[    1.361704]  ? alloc_pages_mpol+0xf7/0x1d0\n[    1.361704]  ? __get_random_u32_below+0x13/0x60\n[    1.361704]  ? allocate_slab+0x27c/0x7b0\n[    1.361704]  ? put_dec+0x95/0xb0\n[    1.361704]  ? number+0x1bd/0x4d0\n[    1.361704]  ? ida_alloc_range+0x452/0x490\n[    1.361704]  ? parameq+0x17/0xa0\n[    1.361704]  ? parse_args+0xec/0x3d0\n[    1.361704]  do_initcall_level+0xab/0x170\n[    1.361704]  do_initcalls+0x60/0xb0\n[    1.361704]  do_basic_setup+0x1d/0x30\n[    1.361704]  kernel_init_freeable+0x11e/0x1b0\n[    1.361704]  ? __pfx_kernel_init+0x10/0x10\n[    1.361704]  kernel_init+0x1b/0x1e0\n[    1.361704]  ret_from_fork+0x10a/0x1f0\n[    1.361704]  ? __pfx_kernel_init+0x10/0x10\n[    1.361704]  ret_from_fork_asm+0x1a/0x30\n[    1.361704]  \u003c/TASK\u003e\n[    1.361704] Modules linked in:\n[    1.361704] CR2: ffff888250801000\n```\nNot sure if such log is what you mean, but seems we may get some log if the host is accessing the protected memory in the kernel mode without expecting a page fault? If it expects a page fault, such page fault can be fixed by kernel as it wants then we will have no log.",
+      "parentUuid": "0d9ef008_d9296a47",
+      "revId": "f1734cc1f96f0774946220f7c1c3e5377060df43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
