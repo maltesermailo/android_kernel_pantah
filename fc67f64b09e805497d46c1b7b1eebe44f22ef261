@@ -52,6 +52,24 @@
       "parentUuid": "83209377_74de658a",
       "revId": "fc67f64b09e805497d46c1b7b1eebe44f22ef261",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b7440bf_b403a8f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-25T13:03:36Z",
+      "side": 1,
+      "message": "\u003e Hmm, so you mean that hardware prevents page faults due to such unintentional speculative loads if the page is not mapped in the MMU (stage 1), but does not similarly prevent EPT violations due to such unintentional speculative loads if the page is not mapped in the EPT? Does the SDM mention that?\n\nAh, I missed the EPT part. The SDM doesn\u0027t explicitly mention what is the expected behavior with EPT. It seems either causing EPT violation or not speculatively load data makes sense for the guest.\n\n\u003e But maybe let\u0027s add a TODO to do this for donated memory as well? \n\nYeah, indeed. If the hardware architecture will cause EPT violation, then we will still hit the similar issue with `load_unaligned_zeropad()`, which seems injecting #PF may be better, although #PF may also hung kernel in some cases.\n\n\u003e (BTW I imagine that implementing that now would not be easy, since, for instance, the host would need to re-add donated pages to the direct map again when a pVM shares those pages with the host.)\n\nIt seems the memory sharing hypercall can go to host as well to present the shared pages?",
+      "parentUuid": "33d703b1_15bee73f",
+      "revId": "fc67f64b09e805497d46c1b7b1eebe44f22ef261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
