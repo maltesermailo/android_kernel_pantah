@@ -70,6 +70,24 @@
       "parentUuid": "33d703b1_15bee73f",
       "revId": "fc67f64b09e805497d46c1b7b1eebe44f22ef261",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "580fea83_3bfb01be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-25T14:09:27Z",
+      "side": 1,
+      "message": "\u003e Ah, I missed the EPT part. The SDM doesn\u0027t explicitly mention what is the expected behavior with EPT. It seems either causing EPT violation or not speculatively load data makes sense for the guest.\n\nI\u0027m still not sure what you mean exactly. Does the SDM explicitly mention what is the behavior with MMU (stage 1)?\n\n\u003e It seems the memory sharing hypercall can go to host as well to present the shared pages?\n\nIt seems so. _Maybe_ it\u0027s easy to implement... I assume set_memory_np() just clears the present bit, i.e. preserves all other bits in the PTEs (so we don\u0027t need to explicitly remember the permission bits etc to restore them)?\n\n...Also you mentioned offline that we might have a performance concern due to splitting huge page mappings in the direct map?\n\n...Anyway, even if we implement that (so that EPT violations would only be triggered by a misbehaving host, not by load_unaligned_zeropad()), injecting #PF still seems better than injecting #GP, since it least provides the host with the address info?",
+      "parentUuid": "4b7440bf_b403a8f5",
+      "revId": "fc67f64b09e805497d46c1b7b1eebe44f22ef261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
