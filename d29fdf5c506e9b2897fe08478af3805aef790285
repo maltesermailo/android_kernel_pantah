@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94333cbe_87ebcc16",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1965911
+      },
+      "writtenOn": "2026-04-25T08:47:39Z",
+      "side": 1,
+      "message": "The core hypervisor doesn\u0027t know what is inside `cmd_desc_hva`, so it is up to the driver to define it, it can have something as:\n```\nstruct cmd_request {\n     u8 type; /* Resume, CFGI,...)\n     u8 args[]..\n}\n```\n\nBut no strong opinion, it looks better now with the args passed in registers,",
+      "parentUuid": "3287686c_965a3c06",
+      "range": {
+        "startLine": 9,
+        "startChar": 9,
+        "endLine": 9,
+        "endChar": 18
+      },
+      "revId": "d29fdf5c506e9b2897fe08478af3805aef790285",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84e46b4d_125f18ec",
         "filename": "arch/arm64/include/asm/kvm_host.h",
         "patchSetId": 1
