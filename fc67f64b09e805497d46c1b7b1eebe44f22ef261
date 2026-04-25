@@ -16,6 +16,24 @@
       "message": "This patch itself LGTM, but just wondering: since this patch alone is not enough anyway (since load_unaligned_zeropad() may also access memory donated to a pVM or to pKVM, not just memory reserved for pKVM), and since the next patch aosp/4047494 covers all kinds of pKVM-protected memory and thus makes this patch redundant, do we need this patch?",
       "revId": "fc67f64b09e805497d46c1b7b1eebe44f22ef261",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83209377_74de658a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-25T07:32:55Z",
+      "side": 1,
+      "message": "I think this is the right thing to do for the host, although it is not enough to fix the bug. In theory, the CPU can speculatively load data from the present mapping, although the code itself doesn\u0027t require such data. With keeping pkvm\u0027s memory mapped in the host\u0027s MMU, it may cause EPT violation due to this speculative loading, although the host doesn\u0027t intend to do so. So from the host point of view, unmapping those memory pages from its MMU is more safe?",
+      "parentUuid": "d96f53d5_03212499",
+      "revId": "fc67f64b09e805497d46c1b7b1eebe44f22ef261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
