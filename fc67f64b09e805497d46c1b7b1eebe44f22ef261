@@ -88,6 +88,24 @@
       "parentUuid": "4b7440bf_b403a8f5",
       "revId": "fc67f64b09e805497d46c1b7b1eebe44f22ef261",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a151d925_9bd4eca0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-25T19:53:46Z",
+      "side": 1,
+      "message": "\u003e Maybe it\u0027s easy to implement...\n\nActually it is more complicated: besides pVM pages, the host would also need to set_memory_np() any pages it implicitly donates to the hypervisor, e.g. struct kvm or struct kvm_vcpu when creating a VM or a vCPU, and so on...",
+      "parentUuid": "580fea83_3bfb01be",
+      "revId": "fc67f64b09e805497d46c1b7b1eebe44f22ef261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
