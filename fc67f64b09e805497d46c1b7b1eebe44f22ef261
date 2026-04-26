@@ -141,6 +141,24 @@
       "message": "https://android-review.googlesource.com/q/I09de242b2c1e12b8b57b81b10e8dcbae98a91ca4",
       "revId": "fc67f64b09e805497d46c1b7b1eebe44f22ef261",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "512cd993_3414b2b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-26T14:41:50Z",
+      "side": 1,
+      "message": "\u003e [...] So based on this, the speculative execution won\u0027t cause #PF if the PTE is non-present\n\nIt is still not clear to me how exactly this conclusion follows from the statements you\u0027ve quoted...\n\nAnyway, if we have uncertainties how exactly the CPU behaves in this case (i.e.  whether a speculative load instruction may trigger an EPT violation even if this instruction doesn\u0027t end up being actually executed in the instruction flow), should we ask Intel architects to clarify that?\n\nBTW, gemini is telling me it will not cause an EPT violation, since, in particular, EPT violation is a vmexit, i.e. a major change in the architectural state, while according to https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/hardware-behavior-related-to-speculative-execution.html: \"If a prediction was wrong, the instructions which were speculatively executed based on the misprediction must be squashed and do not affect architectural states.\"\n\nBTW also if we are talking not about speculative execution of load instructions but about \"speculative\" loading more data then requested, i.e. prefetching, gemini has pointed me to this statement in Intel® 64 and IA-32 Architectures\nOptimization Reference Manual (section 9.5.2 Hardware Prefetch): \"It will not prefetch across a 4-KByte page boundary.\"\n\n\u003e [...] But unmap these pages doesn\u0027t have any concern, right?\n\nYou mean, the pKVM reserved pages unmapped by this patch? Yes, I\u0027m ok with applying this patch as is.",
+      "parentUuid": "40128a93_eb028190",
+      "revId": "fc67f64b09e805497d46c1b7b1eebe44f22ef261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
