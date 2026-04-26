@@ -106,6 +106,24 @@
       "parentUuid": "580fea83_3bfb01be",
       "revId": "fc67f64b09e805497d46c1b7b1eebe44f22ef261",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40128a93_eb028190",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-26T02:34:26Z",
+      "side": 1,
+      "message": "\u003e I\u0027m still not sure what you mean exactly. Does the SDM explicitly mention what is the behavior with MMU (stage 1)?\n\nSDM mentioned the behaviors with MMU: \"because of speculative execution (or errant software), there may be accesses to the freed portion of the linear-address space before the invalidations occur.\" in \"Delayed Invalidation\" section. My understanding is that, although the linear-address is not present already but TLB still does, the speculative execution can still accesses the non-present PTE, which implicitly means once TLB is flushed, it won\u0027t access the data pointed by a non-present PTE, and also means it will access the data pointed by a present PTE.\n\nAnother another section \"Caches for Paging Structures\" mentioned \"The processor may create entries in paging-structure caches for translations required for prefetches and for accesses that are a result of speculative execution that would never actually occur in the executed code path.\" It is not clear if the processor will create paging-structure caches for present translations only or non-present as well. Maybe likely this is for non-present translation as well, because without walking, the CPU doesn\u0027t know if the PTE is present or not.\n\nSo based on this, the speculative execution won\u0027t cause #PF if the PTE is non-present (TLB is up-to-date), but the processor may still create paging-structure caches for it.\n\nMap to this case, after we unpresent the pKVM\u0027s reserved memory in the host MMU which will flush the TLB by `set_memory_np`, the CPU will not be able to speculatively access the pKVM\u0027s reserved memory via its direct mapping. Otherwise, the CPU may still can. But with the corresponding GPA not mapped in the EPT, it is still not clear whether this will cause EPT violation or silicently not load any data as SDM doesn\u0027t mention this at all. Maybe this is CPU architecture implementation dependent. This is what I mean in the last reply. \n\nIf it cause EPT violation, then unmap from the host MMU can avoid this as when translation the leaf PTE in the host MMU, it is non-present so the CPU should not try to walk EPT to translate the physical address in that non-present PTE.\n\nIf it doesn\u0027t cause EPT violation, then we don\u0027t need to unmap it from the host MMU.\n\nNot sure if there is a way can test the CPU speculative execution behavior for this case. I can try to reach out some PTL folks to see if they have any answer about this. But unmap these pages doesn\u0027t have any concern, right?\n\n\u003e ...Also you mentioned offline that we might have a performance concern due to splitting huge page mappings in the direct map?\n\nYes, I think so. For the donated memory pages, unpresent them may cause the original huge mapping splitted into small ones, which can hurt the host performance. If speculative accessing will cause EPT violation, then we have to unpresent them as well, to avoid potential expected exceptions to the host. If not, then we can leave it as it is.\n\n\u003e...Anyway, even if we implement that (so that EPT violations would only be triggered by a misbehaving host, not by load_unaligned_zeropad()), injecting #PF still seems better than injecting #GP, since it least provides the host with the address info?\n\nYes, I also agreed on this in my last reply.",
+      "parentUuid": "a151d925_9bd4eca0",
+      "revId": "fc67f64b09e805497d46c1b7b1eebe44f22ef261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
