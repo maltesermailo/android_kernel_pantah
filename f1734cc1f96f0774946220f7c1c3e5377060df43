@@ -3,6 +3,51 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "928a3cf4_fb604580",
+        "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-26T14:05:45Z",
+      "side": 1,
+      "message": "nit: this name may be a bit misleading, since we don\u0027t necessarily \"fix up\" the violation (we don\u0027t know if the host will fix up the #PF or will crash, since we don\u0027t know if the access was \"good\" like load_unaligned_zeropad() or a buggy/malicious one)?\n\nMaybe e.g. simply `host_inject_page_fault()`?\n\nOr the AI here is suggesting `inject_host_ept_violation_pf()` which seems better (it reflects that it is specifically for handling EPT violation, not some generic helper)?",
+      "fixSuggestions": [
+        {
+          "fixId": "26f46923_8690a605",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "arch/x86/kvm/pkvm/vmx/ept.c",
+              "range": {
+                "startLine": 402,
+                "startChar": 0,
+                "endLine": 403,
+                "endChar": 0
+              },
+              "replacement": "static int inject_host_ept_violation_pf(struct kvm_vcpu *vcpu)\n"
+            },
+            {
+              "path": "arch/x86/kvm/pkvm/vmx/ept.c",
+              "range": {
+                "startLine": 460,
+                "startChar": 0,
+                "endLine": 461,
+                "endChar": 0
+              },
+              "replacement": "\t\tret \u003d inject_host_ept_violation_pf(vcpu);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f1734cc1f96f0774946220f7c1c3e5377060df43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "da1d05ee_bd49ea1e",
         "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
         "patchSetId": 1
@@ -212,6 +257,24 @@
       "side": 1,
       "message": "\u003e Yes, but my point is that it prints the same kind of logs as in case of a normal page fault caused e.g. by a simple buffer overflow or other such common kernel bugs. I.e. we don\u0027t see from this log that it was caused by accessing memory protected by pKVM.\n\nAh, I see. That is true. We can assume the kernel itself most likely won\u0027t cause #PF normally. So if there is such #PF causing the kernel hung, most likely it is caused by accessing the protected memory pages?",
       "parentUuid": "9459cac7_acd24c13",
+      "revId": "f1734cc1f96f0774946220f7c1c3e5377060df43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7438a2ce_4a02f00a",
+        "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-26T14:05:45Z",
+      "side": 1,
+      "message": "Why most likely? I think most likely it will be caused by some other kernel bug, like a buffer overrun, a use-after-free etc (completely unrelated to pKVM). Such common bugs may occur in any part of kernel (like, a bluetooth driver or whatever), and are probably much more likely to occur than bugs causing accesses to pKVM-protected memory?\n\nAnyway, as I said, I agree it seems not too critical to let the host kernel distinguish pKVM-induced page faults. If later we come up with some way to do that, we can implement it later in a separate patch.",
+      "parentUuid": "23cacda3_d8e69645",
       "revId": "f1734cc1f96f0774946220f7c1c3e5377060df43",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
