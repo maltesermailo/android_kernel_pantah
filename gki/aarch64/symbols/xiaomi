@@ -1,0 +1,209 @@
+[abi_symbol_list]
+#required by xiaomi network protocol
+  __percpu_counter_init_many
+  __sk_dst_check
+  __sk_mem_schedule
+  inet6_bind
+  inet6_getname
+  inet6_register_protosw
+  inet6_release
+  inet6_unregister_protosw
+  inet_accept
+  inet_bind
+  inet_getname
+  inet_recvmsg
+  inet_register_protosw
+  inet_release
+  inet_sendmsg
+  inet_shutdown
+  inet_sk_get_local_port_range
+  inet_sk_set_state
+  inet_sock_destruct
+  inet_unregister_protosw
+  ip6_dst_lookup_flow
+  ip_getsockopt
+  ip_setsockopt
+  ipv6_getsockopt
+  ipv6_setsockopt
+  nr_free_buffer_pages
+  percpu_counter_destroy_many
+  reuseport_add_sock
+  reuseport_alloc
+  reuseport_detach_sock
+  reuseport_select_sock
+  cgroup_add_legacy_cftypes
+  cgroup_rm_cftypes
+  mem_cgroup_flush_stats
+  __traceiter_android_vh_remove_mapping
+  __traceiter_android_vh_remove_mapping_failed
+  __traceiter_android_vh_filemap_get_folio_end
+  __traceiter_android_vh_do_new_mount_fc
+  __traceiter_android_vh_put_super
+  __tracepoint_android_vh_remove_mapping
+  __tracepoint_android_vh_remove_mapping_failed
+  __tracepoint_android_vh_filemap_get_folio_end
+  __tracepoint_android_vh_do_new_mount_fc
+  __tracepoint_android_vh_put_super
+  LZ4_compress_default
+  find_inode_nowait
+
+  __traceiter_android_vh_save_vmalloc_stack
+  __tracepoint_android_vh_save_vmalloc_stack
+  __traceiter_android_vh_customize_thp_gfp_orders
+  __tracepoint_android_vh_customize_thp_gfp_orders
+  __traceiter_android_vh_customize_pmd_gfp_bypass
+  __tracepoint_android_vh_customize_pmd_gfp_bypass
+  __traceiter_android_vh_thp_vma_allowable_orders
+  __tracepoint_android_vh_thp_vma_allowable_orders
+  __traceiter_android_vh_dma_buf_release
+  __tracepoint_android_vh_dma_buf_release
+  __traceiter_cma_alloc_start
+  __tracepoint_cma_alloc_start
+  __traceiter_cma_alloc_finish
+  __tracepoint_cma_alloc_finish
+  __traceiter_cma_alloc_busy_retry
+  __tracepoint_cma_alloc_busy_retry
+  __traceiter_cma_release
+  __tracepoint_cma_release
+  __traceiter_android_vh_vmalloc_node_range_start
+  __tracepoint_android_vh_vmalloc_node_range_start
+  __traceiter_android_vh_vmalloc_node_range_end
+  __tracepoint_android_vh_vmalloc_node_range_end
+  __traceiter_android_vh_do_mmap_map_count
+  __tracepoint_android_vh_do_mmap_map_count
+  __traceiter_android_vh_mm_direct_reclaim_enter
+  __tracepoint_android_vh_mm_direct_reclaim_enter
+  __traceiter_android_vh_mm_direct_reclaim_exit
+  __tracepoint_android_vh_mm_direct_reclaim_exit
+
+#required by metis.ko module
+  __traceiter_android_rvh_try_to_wake_up_begin
+  __tracepoint_android_rvh_try_to_wake_up_begin
+
+#required by zram.ko module
+  __traceiter_android_vh_handle_folio_writeback
+  __tracepoint_android_vh_handle_folio_writeback
+  __traceiter_android_vh_reclaim_before_kswapd
+  __tracepoint_android_vh_reclaim_before_kswapd
+  __traceiter_android_vh_filemap_add_folio
+  __tracepoint_android_vh_filemap_add_folio
+  __traceiter_android_vh_mem_cgroup_charge
+  __tracepoint_android_vh_mem_cgroup_charge
+  __traceiter_android_rvh_swap_bio_charge
+  __tracepoint_android_rvh_swap_bio_charge
+
+# required by mi_kernel_monitor.ko
+  __tracepoint_android_vh_swapin_start
+  __traceiter_android_vh_swapin_start
+  __tracepoint_android_vh_swapin_end
+  __traceiter_android_vh_swapin_end
+  __tracepoint_android_vh_swap_writepage_start
+  __traceiter_android_vh_swap_writepage_start
+  __tracepoint_android_vh_swap_writepage_end
+  __traceiter_android_vh_swap_writepage_end
+
+# required by mi_ext_lru.ko
+  mem_cgroup_iter
+  __traceiter_android_vh_readahead_add_folio
+  __tracepoint_android_vh_readahead_add_folio
+  __traceiter_android_vh_mm_split_huge_page_bypass
+  __tracepoint_android_vh_mm_split_huge_page_bypass
+  __traceiter_android_vh_mm_try_split_folio_bypass
+  __tracepoint_android_vh_mm_try_split_folio_bypass
+  __traceiter_android_vh_mm_free_page
+  __tracepoint_android_vh_mm_free_page
+  __traceiter_android_vh_mm_isolate_priv_lru
+  __tracepoint_android_vh_mm_isolate_priv_lru
+  __traceiter_android_vh_folio_skip_activate
+  __tracepoint_android_vh_folio_skip_activate
+  __traceiter_android_vh_folio_trylock_clear_bypass
+  __tracepoint_android_vh_folio_trylock_clear_bypass
+  __traceiter_android_vh_filemap_adjust_folio_flags
+  __tracepoint_android_vh_filemap_adjust_folio_flags
+
+# required by custom memory policy
+  __tracepoint_android_vh_mm_get_zone_mark
+  __traceiter_android_vh_mm_get_zone_mark
+  __tracepoint_android_vh_folio_add_file_rmap
+  __traceiter_android_vh_folio_add_file_rmap
+  __tracepoint_android_vh_folio_remove_rmap
+  __traceiter_android_vh_folio_remove_rmap
+  __tracepoint_android_vh_folios_put_refs_direct_free_extent
+  __traceiter_android_vh_folios_put_refs_direct_free_extent
+  __tracepoint_android_vh_free_pages_and_swap_cache
+  __traceiter_android_vh_free_pages_and_swap_cache
+  __filemap_remove_folio
+  inode_add_lru
+  prep_new_page
+  folio_isolate_lru
+
+# required by kmem_protect.ko
+  __traceiter_android_vh_free_mod_mem
+  __traceiter_android_vh_set_mod_perm_after_init
+  __traceiter_android_vh_set_mod_perm_before_init
+  __tracepoint_android_vh_free_mod_mem
+  __tracepoint_android_vh_set_mod_perm_after_init
+  __tracepoint_android_vh_set_mod_perm_before_init
+
+#required by perf_helper.ko
+  __traceiter_android_rvh_dequeue_entity_delayed
+  __tracepoint_android_rvh_dequeue_entity_delayed
+
+# required by page reclaim
+  __traceiter_android_vh_filemap_fault_folio_locked
+  __traceiter_android_vh_filemap_read_end
+  __traceiter_android_vh_force_page_cache_ra
+  __traceiter_android_vh_page_cache_ra_unbounded
+  __tracepoint_android_vh_filemap_fault_folio_locked
+  __tracepoint_android_vh_filemap_read_end
+  __tracepoint_android_vh_force_page_cache_ra
+  __tracepoint_android_vh_page_cache_ra_unbounded
+
+# low lat mem
+ __tracepoint_android_vh_compact_bypass
+ __traceiter_android_vh_compact_bypass
+ __tracepoint_android_vh_cma_release_bypass
+ __traceiter_android_vh_cma_release_bypass
+ __tracepoint_android_vh_cma_alloc_end
+ __traceiter_android_vh_cma_alloc_end
+
+# required by mi clean page
+ __traceiter_android_vh_folio_end_writeback
+ __tracepoint_android_vh_folio_end_writeback
+
+# required by dw_wdt.ko
+ __traceiter_android_rvh_fiq_dump
+ __tracepoint_android_rvh_fiq_dump
+
+# required by sched-walt.ko
+ __traceiter_android_rvh_should_honor_rt_sync
+ __tracepoint_android_rvh_should_honor_rt_sync
+ task_sched_runtime
+
+# required by xr-qi.ko
+ __traceiter_android_vh_binder_transaction_init
+ __tracepoint_android_vh_binder_transaction_init
+ __traceiter_android_vh_fuse_request_fetch
+ __tracepoint_android_vh_fuse_request_fetch
+ __traceiter_android_vh_mmap_lock_init
+ __tracepoint_android_vh_mmap_lock_init
+ __traceiter_android_vh_mmap_lock_free
+ __tracepoint_android_vh_mmap_lock_free
+ __traceiter_android_vh_percpu_rwsem_init
+ __tracepoint_android_vh_percpu_rwsem_init
+ __traceiter_android_vh_rcu_boost_end
+ __tracepoint_android_vh_rcu_boost_end
+ __traceiter_android_vh_rcu_boost_start
+ __tracepoint_android_vh_rcu_boost_start
+ __traceiter_android_vh_sync_rcu_wait_end
+ __tracepoint_android_vh_sync_rcu_wait_end
+ __traceiter_android_vh_sync_rcu_wait_start
+ __tracepoint_android_vh_sync_rcu_wait_start
+
+# required by xring_thermal.ko
+ __traceiter_android_vh_enable_thermal_genl_check
+ __tracepoint_android_vh_enable_thermal_genl_check
+
+# required by printk_hook.ko
+ __traceiter_android_rvh_logbuf
+ __tracepoint_android_rvh_logbuf
