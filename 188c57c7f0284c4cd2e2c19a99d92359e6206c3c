@@ -1,5 +1,108 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db141ad8_43968a2b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3400301
+      },
+      "writtenOn": "2026-04-27T12:04:24Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Cherry pick is not clean. Checked against base branch android16-6.12.\nBase branc...\n\nCherry pick is not clean. Checked against base branch android16-6.12.\nBase branch change: [4034691](https://android-review.googlesource.com/c/4034691).\n\n```\n      ## drivers/android/vendor_hooks.c ##\n     @@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_freq_qos_update_request);\n    @@ include/trace/hooks/mm.h: DECLARE_HOOK(android_vh_page_cache_readahead_start,\n      \tTP_ARGS(file, pgoff));\n     \n      ## include/trace/hooks/vmscan.h ##\n    -@@ include/trace/hooks/vmscan.h: DECLARE_RESTRICTED_HOOK(android_rvh_kswapd_shrink_node_bypass,\n    - \t\t\tTP_PROTO(unsigned long *nr_to_reclaim, unsigned long *nr_scanned,\n    - \t\t\tunsigned long *nr_reclaimed, bool *bypass),\n    - \t\t\tTP_ARGS(nr_to_reclaim, nr_scanned, nr_reclaimed, bypass), 1);\n    +@@ include/trace/hooks/vmscan.h: DECLARE_RESTRICTED_HOOK(android_rvh_vmscan_kswapd_done,\n    + \tTP_PROTO(int node_id, unsigned int highest_zoneidx, unsigned int alloc_order,\n    + \t\tunsigned int reclaim_order),\n    + \tTP_ARGS(node_id, highest_zoneidx, alloc_order, reclaim_order), 1);\n     +DECLARE_RESTRICTED_HOOK(android_rvh_shrink_spec_lru,\n     +\tTP_PROTO(struct lruvec *lruvec, struct scan_control *sc,\n     +\t\t unsigned long *nr_reclaimed, unsigned long nr_to_reclaim,\n    @@ include/trace/hooks/vmscan.h: DECLARE_RESTRICTED_HOOK(android_rvh_kswapd_shrink_\n     +\t\t bool *skip),\n     +\tTP_ARGS(lruvec, sc, nr_reclaimed, nr_to_reclaim,\n     +\t\tproportional_reclaim, nr, skip), 1);\n    - DECLARE_HOOK(android_vh_check_folio_look_around_ref,\n    - \tTP_PROTO(struct folio *folio, int *skip),\n    - \tTP_ARGS(folio, skip));\n    + DECLARE_HOOK(android_vh_direct_reclaim_begin,\n    + \tTP_PROTO(int *prio),\n    + \tTP_ARGS(prio));\n     \n      ## mm/readahead.c ##\n     @@ mm/readahead.c: void page_cache_ra_unbounded(struct readahead_control *ractl,\n    @@ mm/vmscan.c: static void shrink_lruvec(struct lruvec *lruvec, struct scan_contro\n     +\t\t\t\t\t nr, \u0026shrink_bypass);\n     +\tif (shrink_bypass)\n     +\t\tgoto out;\n    - \n    - \ttrace_android_vh_reclaim_before_kswapd(\u0026nr_reclaimed);\n    - \tif (nr_reclaimed \u003e\u003d nr_to_reclaim)\n    ++\n    + \twhile (nr[LRU_INACTIVE_ANON] || nr[LRU_ACTIVE_FILE] ||\n    + \t\t\t\t\tnr[LRU_INACTIVE_FILE]) {\n    + \t\tunsigned long nr_anon, nr_file, percentage;\n    +@@ mm/vmscan.c: static void shrink_lruvec(struct lruvec *lruvec, struct scan_control *sc)\n    + \t\tnr[lru] \u003d targets[lru] * (100 - percentage) / 100;\n    + \t\tnr[lru] -\u003d min(nr[lru], nr_scanned);\n    + \t}\n    ++out:\n    + \tblk_finish_plug(\u0026plug);\n    + \tsc-\u003enr_reclaimed +\u003d nr_reclaimed;\n    + \ttrace_android_vh_rebalance_anon_lru_bypass(\u0026bypass);\n     \n      ## mm/workingset.c ##\n     @@ mm/workingset.c: void workingset_refault(struct folio *folio, void *shadow)\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "188c57c7f0284c4cd2e2c19a99d92359e6206c3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdf1ec61_51229a72",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3400301
+      },
+      "writtenOn": "2026-04-27T12:04:24Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Cherry pick is not clean. Checked against Android commit.\nAndroid commit: [sourc...\n\nCherry pick is not clean. Checked against Android commit.\nAndroid commit: [source](https://android.googlesource.com/kernel/common/+/f92fc701d34d76bf5dcc702ff0bcff165551948e).\n\n```\n      ## drivers/android/vendor_hooks.c ##\n     @@ drivers/android/vendor_hooks.c: EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_freq_qos_update_request);\n    @@ include/trace/hooks/mm.h: DECLARE_HOOK(android_vh_page_cache_readahead_start,\n      \tTP_ARGS(file, pgoff));\n     \n      ## include/trace/hooks/vmscan.h ##\n    -@@ include/trace/hooks/vmscan.h: DECLARE_RESTRICTED_HOOK(android_rvh_kswapd_shrink_node_bypass,\n    - \t\t\tTP_PROTO(unsigned long *nr_to_reclaim, unsigned long *nr_scanned,\n    - \t\t\tunsigned long *nr_reclaimed, bool *bypass),\n    - \t\t\tTP_ARGS(nr_to_reclaim, nr_scanned, nr_reclaimed, bypass), 1);\n    +@@ include/trace/hooks/vmscan.h: DECLARE_RESTRICTED_HOOK(android_rvh_vmscan_kswapd_done,\n    + \tTP_PROTO(int node_id, unsigned int highest_zoneidx, unsigned int alloc_order,\n    + \t\tunsigned int reclaim_order),\n    + \tTP_ARGS(node_id, highest_zoneidx, alloc_order, reclaim_order), 1);\n     +DECLARE_RESTRICTED_HOOK(android_rvh_shrink_spec_lru,\n     +\tTP_PROTO(struct lruvec *lruvec, struct scan_control *sc,\n     +\t\t unsigned long *nr_reclaimed, unsigned long nr_to_reclaim,\n    @@ include/trace/hooks/vmscan.h: DECLARE_RESTRICTED_HOOK(android_rvh_kswapd_shrink_\n     +\t\t bool *skip),\n     +\tTP_ARGS(lruvec, sc, nr_reclaimed, nr_to_reclaim,\n     +\t\tproportional_reclaim, nr, skip), 1);\n    - DECLARE_HOOK(android_vh_check_folio_look_around_ref,\n    - \tTP_PROTO(struct folio *folio, int *skip),\n    - \tTP_ARGS(folio, skip));\n    + DECLARE_HOOK(android_vh_direct_reclaim_begin,\n    + \tTP_PROTO(int *prio),\n    + \tTP_ARGS(prio));\n     \n      ## mm/readahead.c ##\n     @@ mm/readahead.c: void page_cache_ra_unbounded(struct readahead_control *ractl,\n    @@ mm/vmscan.c: static void shrink_lruvec(struct lruvec *lruvec, struct scan_contro\n     +\t\t\t\t\t nr, \u0026shrink_bypass);\n     +\tif (shrink_bypass)\n     +\t\tgoto out;\n    - \n    - \ttrace_android_vh_reclaim_before_kswapd(\u0026nr_reclaimed);\n    - \tif (nr_reclaimed \u003e\u003d nr_to_reclaim)\n    ++\n    + \twhile (nr[LRU_INACTIVE_ANON] || nr[LRU_ACTIVE_FILE] ||\n    + \t\t\t\t\tnr[LRU_INACTIVE_FILE]) {\n    + \t\tunsigned long nr_anon, nr_file, percentage;\n    +@@ mm/vmscan.c: static void shrink_lruvec(struct lruvec *lruvec, struct scan_control *sc)\n    + \t\tnr[lru] \u003d targets[lru] * (100 - percentage) / 100;\n    + \t\tnr[lru] -\u003d min(nr[lru], nr_scanned);\n    + \t}\n    ++out:\n    + \tblk_finish_plug(\u0026plug);\n    + \tsc-\u003enr_reclaimed +\u003d nr_reclaimed;\n    + \ttrace_android_vh_rebalance_anon_lru_bypass(\u0026bypass);\n     \n      ## mm/workingset.c ##\n     @@ mm/workingset.c: void workingset_refault(struct folio *folio, void *shadow)\n```\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "188c57c7f0284c4cd2e2c19a99d92359e6206c3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6af46c0e_e613f8c8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3400301
+      },
+      "writtenOn": "2026-04-27T12:04:24Z",
+      "side": 1,
+      "message": "Please fix this INFO reported by KernelCommit: Original change on base branch \u0027android16-6.12\u0027: [4034691](https://android-revie...\n\nOriginal change on base branch \u0027android16-6.12\u0027: [4034691](https://android-review.googlesource.com/c/4034691)\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "188c57c7f0284c4cd2e2c19a99d92359e6206c3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be7d718c_9f8ddc7e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3400301
+      },
+      "writtenOn": "2026-04-27T12:04:24Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Please **add an open respin request bug** to the commit message. Do not remove e...\n\nPlease **add an open respin request bug** to the commit message. Do not remove existing bug references.\nRefer to the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "188c57c7f0284c4cd2e2c19a99d92359e6206c3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "115d82de_26023b29",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3400301
+      },
+      "writtenOn": "2026-04-27T12:04:24Z",
+      "side": 1,
+      "message": "Please fix this ERROR reported by KernelCommit: Please **add an open respin request bug** to the commit message. Do not remove e...\n\nPlease **add an open respin request bug** to the commit message. Do not remove existing bug references.\nRefer to the following link for more information:\nhttps://source.android.com/docs/core/architecture/kernel/gki-releases#respin\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "188c57c7f0284c4cd2e2c19a99d92359e6206c3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bbe7d96_f0dbd8d2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3400301
+      },
+      "writtenOn": "2026-04-27T12:04:24Z",
+      "side": 1,
+      "message": "Please fix this INFO reported by KernelCommit: Original change on base branch \u0027android16-6.12\u0027: [4034691](https://android-revie...\n\nOriginal change on base branch \u0027android16-6.12\u0027: [4034691](https://android-review.googlesource.com/c/4034691)\n\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "188c57c7f0284c4cd2e2c19a99d92359e6206c3c",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
