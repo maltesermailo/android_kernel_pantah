@@ -2420,13 +2420,8 @@ int __pkvm_host_donate_sglist_guest(struct pkvm_hyp_vcpu *vcpu)
 		ret = __guest_check_page_state_range(vcpu, ipa, size, PKVM_NOPAGE);
 		if (ret)
 			goto unlock;
-	}
 
-	for_each_hyp_ppage(ppage) {
-		size_t size = PAGE_SIZE << ppage->order;
-		u64 phys = hyp_pfn_to_phys(ppage->pfn);
-		u64 ipa = hyp_pfn_to_phys(ppage->gfn);
-
+		size = PAGE_SIZE << ppage->order;
 		__host_set_owner_guest(vcpu, phys, ipa, size, HOST_SET_NO_COMPLETE);
 	}
 	__host_stage2_set_owner_complete(PKVM_ID_GUEST, 0);
