@@ -159,6 +159,24 @@
       "parentUuid": "40128a93_eb028190",
       "revId": "fc67f64b09e805497d46c1b7b1eebe44f22ef261",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f36a3cd8_d443bf84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-27T02:07:15Z",
+      "side": 1,
+      "message": "\u003e It is still not clear to me how exactly this conclusion follows from the statements you\u0027ve quoted...\n\nHope I can clarity this this time. 😊\n\nI think we were talking about the necessarily of unmap the pKVM\u0027s memory from host MMU. First I believe we agreed it is helpful to the `load_unaligned_zeropad()`. Second, I though unmap it from the host MMU can prevent the speculative loading data as I reply in the last reply: \"which implicitly means once TLB is flushed, it won\u0027t access the data pointed by a non-present PTE, and also means it will access the data pointed by a present PTE.\", without considering the EPT.\n\n\u003eAnyway, if we have uncertainties how exactly the CPU behaves in this case (i.e. whether a speculative load instruction may trigger an EPT violation even if this instruction doesn\u0027t end up being actually executed in the instruction flow), should we ask Intel architects to clarify that?\n\nYes, I will do that.\n\n\u003e BTW also if we are talking not about speculative execution of load instructions but about \"speculative\" loading more data then requested, i.e. prefetching, gemini has pointed me to this statement in Intel® 64 and IA-32 Architectures\nOptimization Reference Manual (section 9.5.2 Hardware Prefetch): \"It will not prefetch across a 4-KByte page boundary.\"\n\nWe are talking about \"speculative\" loading more data then requested, but not load instructions as the memory pages here are data but not code. The Optimization Reference Manual section 9.5.2 is talking about the \"automatic hardware prefetch\". In section 4.1.7 Cache And Memory Subsystem, it mentioned \"The final prefetcher is a next-page prefetcher that detects accesses likely to cross a page boundary and starts the access early.\" This section is specific for the \"Crestmont microarchitecture\", so not all microarchitecture has next-page prefetcher.\n\n\u003e You mean, the pKVM reserved pages unmapped by this patch? Yes, I\u0027m ok with applying this patch as is.\n\nYes.",
+      "parentUuid": "512cd993_3414b2b3",
+      "revId": "fc67f64b09e805497d46c1b7b1eebe44f22ef261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
