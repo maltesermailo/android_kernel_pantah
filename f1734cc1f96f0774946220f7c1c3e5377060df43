@@ -277,6 +277,24 @@
       "parentUuid": "23cacda3_d8e69645",
       "revId": "f1734cc1f96f0774946220f7c1c3e5377060df43",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a8809a0_c5a96492",
+        "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-04-27T02:53:16Z",
+      "side": 1,
+      "message": "\u003e Why most likely? I think most likely it will be caused by some other kernel bug, like a buffer overrun, a use-after-free etc (completely unrelated to pKVM). Such common bugs may occur in any part of kernel (like, a bluetooth driver or whatever), and are probably much more likely to occur than bugs causing accesses to pKVM-protected memory?\n\nI see. I was on the point that the linux kernel is robust enough and its self won\u0027t cause #PF, without considering the device drivers.\n\nRegarding if we inject #GP or #PF or only #PF, after a second though, I think we still need to inject #GP if EPT_VIOLATION_GVA_IS_VALID is not set for:\n1. load the guest PDPTEs as part of the execution of the MOV CR instruction.\n2. trace-address pre-translation (TAPT).\n\nBoth of these two cases operates with GPA rather than GLA.\n\nFor the case#1, SDM 5.7 Page-Faults Exceptions mentioned \"Page-fault exceptions occur only due to an attempt to use a linear address. Failures to load the PDPTE registers with PAE paging (see Section 5.4.1) cause general-protection exceptions (#GP(0)) and not page-fault exceptions.\", so GP makes more sense.\n\nFor the case#2, TAPT is to translate the guest physical address used as the output buffer for Intel PT, e.g., programmed in IA32_RTIT_OUTPUT_BASE MSR. SDM 36.2.8.7 IA32_RTIT_OUTPUT_BASE MSR mentioned \"WRMSR and XRSTORS will fault if any of bits 63:M would be set to 1; they allow setting bits M–1:MAXPHYADDR; however, if any of those bits are set outside SEAM, trace output may fail in a model-specific manner.\" So how to deal with such failure can be model-specific, so we can also choose to inject #GP for such kind of failure.\n\nFor the other kinds of EPT violation failures, i.e., accessing protected range with valid GLA and failed to map the physical MMIO in the host EPT, we can inject #PF. WDYT?",
+      "parentUuid": "7438a2ce_4a02f00a",
+      "revId": "f1734cc1f96f0774946220f7c1c3e5377060df43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
