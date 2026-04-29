@@ -712,6 +712,13 @@ EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_clear_reclaimed_folio);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_evict_folios_bypass);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_add_lru);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_add_lru_folio_activate);
+<<<<<<< HEAD   (249a2b45146e09c172d0cad103645847a3cd95d4 UPSTREAM: nfc: llcp: add missing return after LLCP_CLOSED ch)
+||||||| BASE   (9f3038e9502c128a8ca2914419d75c8b95d31e46 ANDROID: GKI: update symbol list for xiaomi)
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_end_writeback);
+=======
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_end_writeback);
+EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_start_writeback);
+>>>>>>> CHANGE (441c1615e4689e68962c398c5137bdc8bee002df ANDROID: mm: add android_vh_folio_start_writeback hook)
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_fault_pre_folio_locked);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_filemap_folio_mapped);
 EXPORT_TRACEPOINT_SYMBOL_GPL(android_vh_folio_remove_rmap_ptes);

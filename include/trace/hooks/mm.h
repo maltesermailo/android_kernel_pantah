@@ -755,6 +755,19 @@ DECLARE_HOOK(android_vh_mm_split_huge_page_bypass,
 DECLARE_HOOK(android_vh_mm_try_split_folio_bypass,
 	TP_PROTO(struct folio *folio, bool *bypass),
 	TP_ARGS(folio, bypass));
+<<<<<<< HEAD   (249a2b45146e09c172d0cad103645847a3cd95d4 UPSTREAM: nfc: llcp: add missing return after LLCP_CLOSED ch)
+||||||| BASE   (9f3038e9502c128a8ca2914419d75c8b95d31e46 ANDROID: GKI: update symbol list for xiaomi)
+DECLARE_HOOK(android_vh_folio_end_writeback,
+	TP_PROTO(struct folio *folio),
+	TP_ARGS(folio));
+=======
+DECLARE_HOOK(android_vh_folio_end_writeback,
+	TP_PROTO(struct folio *folio),
+	TP_ARGS(folio));
+DECLARE_HOOK(android_vh_folio_start_writeback,
+	TP_PROTO(struct folio *folio),
+	TP_ARGS(folio));
+>>>>>>> CHANGE (441c1615e4689e68962c398c5137bdc8bee002df ANDROID: mm: add android_vh_folio_start_writeback hook)
 #endif /* _TRACE_HOOK_MM_H */
 
 /* This part must be outside protection */
