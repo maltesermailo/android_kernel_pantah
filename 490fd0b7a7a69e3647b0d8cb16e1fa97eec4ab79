@@ -108,6 +108,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a8e2166_c9e4378e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-04-29T00:19:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bba70e8a_643a82b5",
+      "revId": "490fd0b7a7a69e3647b0d8cb16e1fa97eec4ab79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6eadfd64_65cdaf00",
@@ -139,6 +157,24 @@
       "side": 1,
       "message": "I did some checking - looks like we can convert USB_NET_SMSC95XX to vendor module without any new additions to the KMI.\nI combined all vendor abi symbol lists to generate a \"master\" abi symbol list and compared against that.\nLet\u0027s discuss further and based on your decision I can push an updated patchset with changes based on our discussions.",
       "parentUuid": "6eadfd64_65cdaf00",
+      "revId": "490fd0b7a7a69e3647b0d8cb16e1fa97eec4ab79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdb0f0e7_05fefcc8",
+        "filename": "BUILD.bazel",
+        "patchSetId": 3
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-04-29T00:19:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6832202f_0edd9949",
       "revId": "490fd0b7a7a69e3647b0d8cb16e1fa97eec4ab79",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -228,6 +264,24 @@
       "side": 1,
       "message": "Yes, without this config being selected CONFIG_SND_HDA_CODEC_HDMI is not defined in the Kconfig and can\u0027t be built as a module, meaning that \"sound/pci/hda/snd-hda-codec-hdmi.ko\", can\u0027t be built as a protected gki module. \nI left this module in based on the suggestion to remove the modules under drivers/ while leaving the modules under the other paths. \n\nI believe this module only does require one new symbol though, so if you\u0027d prefer I can remove it from gki modules and ship it as a vendor module instead just with that addition to abi symbol list",
       "parentUuid": "cd62f57f_44284bbc",
+      "revId": "490fd0b7a7a69e3647b0d8cb16e1fa97eec4ab79",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "065fa963_00427619",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-04-29T00:19:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d36cd79d_7d6ccfbb",
       "revId": "490fd0b7a7a69e3647b0d8cb16e1fa97eec4ab79",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
