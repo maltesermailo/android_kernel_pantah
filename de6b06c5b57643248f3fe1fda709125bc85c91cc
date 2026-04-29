@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b3e892a_ad1274fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1069543
+      },
+      "writtenOn": "2026-04-29T21:32:56Z",
+      "side": 1,
+      "message": "We have a bunch of build-breaks due to missing modules. Do they need to be enabled in x86, or moved the ARM64-only part of modules.bzl?\n```\nERROR: Unable to find fs/efivarfs/efivarfs.ko in any of the following directories:\n  bazel-out/k8-fastbuild/bin/common/kernel_x86_64/staging/lib/modules/6.12.77-android16-6-g11317c77efe2-abP122758193/kernel\nUnable to find fs/pstore/pstore_blk.ko in any of the following directories:\n  bazel-out/k8-fastbuild/bin/common/kernel_x86_64/staging/lib/modules/6.12.77-android16-6-g11317c77efe2-abP122758193/kernel\nUnable to find fs/pstore/pstore_zone.ko in any of the following directories:\n  bazel-out/k8-fastbuild/bin/common/kernel_x86_64/staging/lib/modules/6.12.77-android16-6-g11317c77efe2-abP122758193/kernel\nUnable to find sound/pci/hda/snd-hda-codec-hdmi.ko in any of the following directories:\n  bazel-out/k8-fastbuild/bin/common/kernel_x86_64/staging/lib/modules/6.12.77-android16-6-g11317c77efe2-abP122758193/kernel\nUnable to find sound/soc/generic/snd-soc-audio-graph-card.ko in any of the following directories:\n  bazel-out/k8-fastbuild/bin/common/kernel_x86_64/staging/lib/modules/6.12.77-android16-6-g11317c77efe2-abP122758193/kernel\nUnable to find sound/soc/generic/snd-soc-simple-card-utils.ko in any of the following directories:\n  bazel-out/k8-fastbuild/bin/common/kernel_x86_64/staging/lib/modules/6.12.77-android16-6-g11317c77efe2-abP122758193/kernel\n```",
+      "revId": "de6b06c5b57643248f3fe1fda709125bc85c91cc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
