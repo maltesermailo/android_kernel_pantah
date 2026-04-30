@@ -385,6 +385,24 @@
       "parentUuid": "9a8809a0_c5a96492",
       "revId": "f1734cc1f96f0774946220f7c1c3e5377060df43",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80b50d1b_296fe2d6",
+        "filename": "arch/x86/kvm/pkvm/vmx/ept.c",
+        "patchSetId": 1
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-04-30T15:02:54Z",
+      "side": 1,
+      "message": "Just to follow up on the discussion about letting the host kernel distinguish pKVM-injected faults:\n\nSo, it turns out that in pKVM-ARM the basic support for protected VMs has recently already been merged upstream [1], even though it still hasn\u0027t switched to guest_memfd (it is still using GUP-pinned anonymous memory instead).\n\nThere are known problems with the GUP-pin approach which prevented upstreaming it (namely: host userspace is able to crash host kernel by tricking the kernel to access protected memory, in various ways).\n\nSo, how this [1] series prevents those problems: when the host kernel accesses a protected page and gets a page fault, the host kernel\u0027s arm64 page fault handler detects that the page fault is injected by pKVM (and also detects that it is a pVM page), and in such case, it doesn\u0027t panic or oops. Instead, the host kernel and the hypervisor together ensure the following (implemented in patches 25-27 and briefly documented in patch 32 in the series):\n\n```\n+* If a system call accesses pVM memory that has not been shared back\n+  then it will either return ``-EFAULT`` or forcefully reclaim the\n+  memory pages. Reclaimed memory is zeroed by the hypervisor and a\n+  subsequent attempt to access it in the pVM will return ``-EFAULT``\n+  from the ``VCPU_RUN`` ioctl().\n```\n\nSo, what\u0027s important here is that this critically relies on the ability of the host kernel to distinguish pKVM-injected faults from regular ones.\n\n[1] https://lore.kernel.org/kvmarm/20260330144841.26181-1-will@kernel.org/",
+      "parentUuid": "a644578d_8fb64ca9",
+      "revId": "f1734cc1f96f0774946220f7c1c3e5377060df43",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
