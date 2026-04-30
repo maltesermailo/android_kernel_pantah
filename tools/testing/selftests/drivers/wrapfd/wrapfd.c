@@ -425,8 +425,24 @@ static void test_load(struct __test_metadata *_metadata,
 	ASSERT_EQ(__test_load(_metadata, self, wrapfd, 0, 0, self->page_size / 2), 0);
 	ASSERT_EQ(__test_load(_metadata, self, wrapfd, self->page_size, self->page_size,
 			      self->size - self->page_size), 0);
+	ASSERT_EQ(__test_load(_metadata, self, wrapfd, self->page_size / 2, 0,
+			      self->page_size / 2), 0);
+	/* Test tiny read at random offsets. */
+	ASSERT_EQ(__test_load(_metadata, self, wrapfd, 100, 0, 50), 0);
+	/* Cross a page boundary in the file and then in the buffer. */
+	ASSERT_EQ(__test_load(_metadata, self, wrapfd, self->page_size - 1, 0, self->page_size), 0);
+	ASSERT_EQ(__test_load(_metadata, self, wrapfd, 0, self->page_size - 1, self->page_size), 0);
+	/*
+	 * Start bounce buffer, large O_DIRECT read and memmove() logic along with end bounce
+	 * buffer.
+	 */
+	ASSERT_EQ(__test_load(_metadata, self, wrapfd, self->page_size / 2, self->page_size / 4,
+			      self->page_size * 3), 0);
+	/* Test logic for fitting everything within the first bounce page. */
+	ASSERT_EQ(__test_load(_metadata, self, wrapfd, self->page_size / 2, self->page_size / 2,
+			      self->page_size / 2), 0);
+	/* Save this one for last since subsequent tests run comparisons on the entire buffer. */
 	ASSERT_EQ(__test_load(_metadata, self, wrapfd, 0, 0, self->size), 0);
-	/* TODO: test more load offsets */
 
 	ASSERT_EQ(wrapfd_release_ownership(wrapfd), 0);
 	close(wrapfd);
