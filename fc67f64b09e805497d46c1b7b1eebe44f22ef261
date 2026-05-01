@@ -249,6 +249,24 @@
       "parentUuid": "cb660717_25833684",
       "revId": "fc67f64b09e805497d46c1b7b1eebe44f22ef261",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5575f611_b9cbcc88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-01T09:51:38Z",
+      "side": 1,
+      "message": "Great, thanks for confirming.\n\nSo IIUC the conclusion is: unmapping protected memory from the host stage-1 MMU (in particular, unmapping pKVM reserved memory done by this patch) is not a functional requirement, although this patch may be still useful as a defense-in-depth mitigation against Spectre-like attacks similarly to https://lore.kernel.org/all/20260410151746.61150-1-kalyazin@amazon.com/\n\nAlthough unfortunately I\u0027m too ignorant in that topic to clearly understand how it exactly it would help with that (in particular, given that a malicious (compromised) host may easily map these pages in its stage-1 MMU again...)",
+      "parentUuid": "c37fb058_07f4a4ff",
+      "revId": "fc67f64b09e805497d46c1b7b1eebe44f22ef261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
