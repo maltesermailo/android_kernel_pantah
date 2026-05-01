@@ -278,7 +278,13 @@ static void esp_output_done(struct crypto_async_request *base, int err)
 		    x->encap && x->encap->encap_type == TCP_ENCAP_ESPINTCP)
 			esp_output_tail_tcp(x, skb);
 		else
+<<<<<<< HEAD   (7ae299a5827ae907825706c33e93f124c678e853 Revert "wifi: libertas: fix use-after-free in lbs_free_adapt)
 			xfrm_output_resume(skb, err);
+||||||| BASE   (638fd789646249ae97dc385d780954a20f2572ed net: bcmgenet: increase WoL poll timeout)
+			xfrm_output_resume(skb->sk, skb, err);
+=======
+			xfrm_output_resume(skb_to_full_sk(skb), skb, err);
+>>>>>>> BRANCH (09815d6df7bf8b095fd56cd7a83b6e0b758976fc xfrm: Fix the usage of skb->sk)
 	}
 }
 
