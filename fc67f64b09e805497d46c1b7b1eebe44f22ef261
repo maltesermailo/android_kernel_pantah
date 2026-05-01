@@ -231,6 +231,24 @@
       "parentUuid": "29e4b1e2_0ed67f30",
       "revId": "fc67f64b09e805497d46c1b7b1eebe44f22ef261",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c37fb058_07f4a4ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-01T08:31:49Z",
+      "side": 1,
+      "message": "I got reply from Intel architecture. His understanding is that, the hardware prefetchers are microarchitectural optimizations, and they shouldn’t have any software-visible impact (beyond improving performance). And the prefetch instructions will not cause a memory-based faulting condition (e.g., page fault or EPT violation) while speculative. If speculative execution encounters such a fault, that path will suspend execution until it is confirmed that the execution is not speculative (if it is speculative, the fault will be discarded and never delivered); only at that point will the fault or VM exit be delivered. And besides the case of trigger #PF or EPT violation, the page-modification logging feature will not generate a log entry for an access that is speculative.\n\nSo keeping these donated memory mapped in the host MMU won\u0027t cause any unexpected EPT violations.",
+      "parentUuid": "cb660717_25833684",
+      "revId": "fc67f64b09e805497d46c1b7b1eebe44f22ef261",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
