@@ -1727,10 +1727,9 @@ continue_unlock:
 	return last_folio;
 }
 
-static bool __write_node_folio(struct folio *folio, bool atomic, bool do_fsync,
-				bool *submitted, struct writeback_control *wbc,
-				bool do_balance, enum iostat_type io_type,
-				unsigned int *seq_id)
+static bool __write_node_folio(struct folio *folio, bool atomic, bool *submitted,
+				struct writeback_control *wbc, bool do_balance,
+				enum iostat_type io_type, unsigned int *seq_id)
 {
 	struct f2fs_sb_info *sbi = F2FS_F_SB(folio);
 	nid_t nid;
@@ -1803,8 +1802,6 @@ static bool __write_node_folio(struct folio *folio, bool atomic, bool do_fsync,
 	if (atomic && !test_opt(sbi, NOBARRIER))
 		fio.op_flags |= REQ_PREFLUSH | REQ_FUA;
 
-	set_dentry_mark(folio, false);
-	set_fsync_mark(folio, do_fsync);
 	if (IS_INODE(folio) && (atomic || is_fsync_dnode(folio)))
 		set_dentry_mark(folio,
 				f2fs_need_dentry_mark(sbi, ino_of_node(folio)));
@@ -1871,7 +1868,7 @@ static int f2fs_write_single_node_folio(struct folio *node_folio, int sync_mode,
 		goto out_folio;
 	}
 
-	if (!__write_node_folio(node_folio, false, false, NULL,
+	if (!__write_node_folio(node_folio, false, NULL,
 				&wbc, false, FS_GC_NODE_IO, NULL))
 		err = -EAGAIN;
 	goto release_folio;
@@ -1918,7 +1915,6 @@ retry:
 		for (i = 0; i < nr_folios; i++) {
 			struct folio *folio = fbatch.folios[i];
 			bool submitted = false;
-			bool do_fsync = false;
 
 			if (unlikely(f2fs_cp_error(sbi))) {
 				f2fs_folio_put(last_folio, false);
@@ -1949,8 +1945,11 @@ continue_unlock:
 
 			f2fs_folio_wait_writeback(folio, NODE, true, true);
 
+			set_fsync_mark(folio, 0);
+			set_dentry_mark(folio, 0);
+
 			if (!atomic || folio == last_folio) {
-				do_fsync = true;
+				set_fsync_mark(folio, 1);
 				percpu_counter_inc(&sbi->rf_node_block_count);
 				if (IS_INODE(folio)) {
 					if (is_inode_flag_set(inode,
@@ -1967,9 +1966,8 @@ continue_unlock:
 
 			if (!__write_node_folio(folio, atomic &&
 						folio == last_folio,
-						do_fsync, &submitted,
-						wbc, true, FS_NODE_IO,
-						seq_id)) {
+						&submitted, wbc, true,
+						FS_NODE_IO, seq_id)) {
 				f2fs_folio_put(last_folio, false);
 				folio_batch_release(&fbatch);
 				ret = -EIO;
@@ -2169,7 +2167,10 @@ write_node:
 			if (!folio_clear_dirty_for_io(folio))
 				goto continue_unlock;
 
-			if (!__write_node_folio(folio, false, false, &submitted,
+			set_fsync_mark(folio, 0);
+			set_dentry_mark(folio, 0);
+
+			if (!__write_node_folio(folio, false, &submitted,
 					wbc, do_balance, io_type, NULL)) {
 				folio_batch_release(&fbatch);
 				ret = -EIO;
