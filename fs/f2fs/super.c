@@ -340,12 +340,9 @@ static const struct fs_parameter_spec f2fs_param_specs[] = {
 	fsparam_flag("usrquota", Opt_usrquota),
 	fsparam_flag("grpquota", Opt_grpquota),
 	fsparam_flag("prjquota", Opt_prjquota),
-	fsparam_string("usrjquota", Opt_usrjquota),
-	fsparam_flag("usrjquota", Opt_usrjquota),
-	fsparam_string("grpjquota", Opt_grpjquota),
-	fsparam_flag("grpjquota", Opt_grpjquota),
-	fsparam_string("prjjquota", Opt_prjjquota),
-	fsparam_flag("prjjquota", Opt_prjjquota),
+	fsparam_string_empty("usrjquota", Opt_usrjquota),
+	fsparam_string_empty("grpjquota", Opt_grpjquota),
+	fsparam_string_empty("prjjquota", Opt_prjjquota),
 	fsparam_flag("nat_bits", Opt_nat_bits),
 	fsparam_enum("jqfmt", Opt_jqfmt, f2fs_param_jqfmt),
 	fsparam_enum("alloc_mode", Opt_alloc, f2fs_param_alloc_mode),
@@ -988,26 +985,26 @@ static int f2fs_parse_param(struct fs_context *fc, struct fs_parameter *param)
 		ctx_set_opt(ctx, F2FS_MOUNT_PRJQUOTA);
 		break;
 	case Opt_usrjquota:
-		if (param->type == fs_value_is_string && *param->string)
-			ret = f2fs_note_qf_name(fc, USRQUOTA, param);
-		else
+		if (!*param->string)
 			ret = f2fs_unnote_qf_name(fc, USRQUOTA);
+		else
+			ret = f2fs_note_qf_name(fc, USRQUOTA, param);
 		if (ret)
 			return ret;
 		break;
 	case Opt_grpjquota:
-		if (param->type == fs_value_is_string && *param->string)
-			ret = f2fs_note_qf_name(fc, GRPQUOTA, param);
-		else
+		if (!*param->string)
 			ret = f2fs_unnote_qf_name(fc, GRPQUOTA);
+		else
+			ret = f2fs_note_qf_name(fc, GRPQUOTA, param);
 		if (ret)
 			return ret;
 		break;
 	case Opt_prjjquota:
-		if (param->type == fs_value_is_string && *param->string)
-			ret = f2fs_note_qf_name(fc, PRJQUOTA, param);
-		else
+		if (!*param->string)
 			ret = f2fs_unnote_qf_name(fc, PRJQUOTA);
+		else
+			ret = f2fs_note_qf_name(fc, PRJQUOTA, param);
 		if (ret)
 			return ret;
 		break;
