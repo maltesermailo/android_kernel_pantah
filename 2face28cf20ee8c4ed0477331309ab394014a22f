@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2db4334d_487bc793",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-04T16:55:23Z",
+      "side": 1,
+      "message": "PERFCFGOFF, PERFCNTROFF, PERFOVFOFF are \"offset registers\", i.e. the host doesn\u0027t just read these registers themselves, it reads a whole bunch of other registers pointed to by these registers? E.g. I see this in perfmon.c:\n\n```\nstatic inline void __iomem *\niommu_event_base(struct iommu_pmu *iommu_pmu, int idx)\n{\n\treturn iommu_pmu-\u003ecntr_reg + idx * iommu_pmu-\u003ecntr_stride;\n}\n\nstatic inline void __iomem *\niommu_config_base(struct iommu_pmu *iommu_pmu, int idx)\n{\n\treturn iommu_pmu-\u003ecfg_reg + idx * IOMMU_PMU_CFG_OFFSET;\n}\n```",
+      "revId": "2face28cf20ee8c4ed0477331309ab394014a22f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24a7210a_417493f1",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 7
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-04T16:55:23Z",
+      "side": 1,
+      "message": "Similarly, PERFEVNTCAP points in turn to many other registers that are also read by the host? I see this in `alloc_iommu_pmu()`:\n\n```\n\t/* Parse event group capabilities */\n\tfor (i \u003d 0; i \u003c iommu_pmu-\u003enum_eg; i++) {\n\t\tu64 pcap;\n\n\t\tpcap \u003d dmar_readq(iommu-\u003ereg + DMAR_PERFEVNTCAP_REG +\n\t\t\t\t  i * IOMMU_PMU_CAP_REGS_STEP);\n\t\tiommu_pmu-\u003eevcap[i] \u003d pecap_es(pcap);\n\t}\n```",
+      "revId": "2face28cf20ee8c4ed0477331309ab394014a22f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
