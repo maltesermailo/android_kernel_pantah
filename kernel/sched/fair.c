@@ -7409,11 +7409,14 @@ out:
  */
 static bool dequeue_task_fair(struct rq *rq, struct task_struct *p, int flags)
 {
+	int ret;
+
 	if (!p->se.sched_delayed)
 		util_est_dequeue(&rq->cfs, p);
 
+	ret = dequeue_entities(rq, &p->se, flags);
 	util_est_update(&rq->cfs, p, flags & DEQUEUE_SLEEP);
-	if (dequeue_entities(rq, &p->se, flags) < 0)
+	if (ret < 0)
 		return false;
 
 	/*
