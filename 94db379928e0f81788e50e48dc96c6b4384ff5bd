@@ -1,0 +1,143 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8aaacb45_8d18e6c9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-04T13:54:33Z",
+      "side": 1,
+      "message": "\u003e a non-zero upper address (FEUADDR), is rejected with\n-EPERM.\n\nIt is not?\n\nBTW, according to VT-d spec (about the address in FEUADDR): \"Hardware implementations not supporting Extended Interrupt Mode may treat this field as RsvdZ.\" - so we should check ecap_eim_support() before allowing non-zero values of FEUADDR?\n\nOr alternatively, since pKVM requires x2APIC, we could just require ecap_eim_support\u003d1 in pkvm_host_prepare_iommu() during initialization, to not need to check it at runtime?",
+      "range": {
+        "startLine": 23,
+        "startChar": 15,
+        "endLine": 24,
+        "endChar": 7
+      },
+      "revId": "94db379928e0f81788e50e48dc96c6b4384ff5bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74f63d61_2758cb16",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-04T13:54:33Z",
+      "side": 1,
+      "message": "According to VT-d spec section 5.1.6, bits 11:4 are also reserved?",
+      "revId": "94db379928e0f81788e50e48dc96c6b4384ff5bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c8a110e_45f97426",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-04T13:54:33Z",
+      "side": 1,
+      "message": "nit: maybe EINVAL (since it\u0027s not just that the host is not permitted to set such values, it\u0027s that such values are simply invalid according to VT-d spec)?\n\nAny similarly in other such places.",
+      "fixSuggestions": [
+        {
+          "fixId": "fdd87505_9216fd66",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 520,
+                "startChar": 0,
+                "endLine": 521,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tret \u003d -EINVAL;\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 550,
+                "startChar": 0,
+                "endLine": 551,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tret \u003d -EINVAL;\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 568,
+                "startChar": 0,
+                "endLine": 569,
+                "endChar": 0
+              },
+              "replacement": "\t\t\tret \u003d -EINVAL;\n"
+            },
+            {
+              "path": "drivers/iommu/intel/pkvm/iommu.c",
+              "range": {
+                "startLine": 582,
+                "startChar": 0,
+                "endLine": 583,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\tret \u003d -EINVAL;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "94db379928e0f81788e50e48dc96c6b4384ff5bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9bfe9dc_5b1dd8be",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-04T13:54:33Z",
+      "side": 1,
+      "message": "Just realized: FEADDR is a 32-bit register, right? While we are just allowing the host to pass len\u003d8? So, what happens then? It may just overwrite the next 32-bit register, i.e. FEUADDR in this case? (And of course similarly, FEDATA would overwrite FEADDR, and so on?)\n\nSo we should validate `len` (per register) whenever using iommu_direct_mmio_write() or iommu_direct_mmio_read() for the given register?\n\nMaybe that would even obliterate the need for those iommu_direct_mmio_write() and iommu_direct_mmio_read() wrappers as such, since basically all they do is validate that `len` is either 4 or 8 (but allowing both), while we need to allow either 4 only or 8 only, per register, so upon that validation we could just directly use writel()/writeq()/readl()/readq() here instead.",
+      "revId": "94db379928e0f81788e50e48dc96c6b4384ff5bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "758376a2_c3b9cdef",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-04T13:54:33Z",
+      "side": 1,
+      "message": "nit: in Linux kernel it seems more common to do it this way:\n\n```\n\tcase DMAR_FECTL_REG: {\n\t\t...\n\t\tbreak;\n\t}\n```\n\nand thus save an extra level of indentation?",
+      "revId": "94db379928e0f81788e50e48dc96c6b4384ff5bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
