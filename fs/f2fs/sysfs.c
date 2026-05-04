@@ -1997,26 +1997,24 @@ int __init f2fs_init_sysfs(void)
 	ret = kobject_init_and_add(&f2fs_feat, &f2fs_feat_ktype,
 				   NULL, "features");
 	if (ret)
-		goto unregister_kset;
+		goto put_kobject;
 
 	ret = kobject_init_and_add(&f2fs_tune, &f2fs_tune_ktype,
 				   NULL, "tuning");
 	if (ret)
-		goto put_feat;
+		goto put_kobject;
 
 	f2fs_proc_root = proc_mkdir("fs/f2fs", NULL);
 	if (!f2fs_proc_root) {
 		ret = -ENOMEM;
-		goto put_tune;
+		goto put_kobject;
 	}
 
 	return 0;
 
-put_tune:
+put_kobject:
 	kobject_put(&f2fs_tune);
-put_feat:
 	kobject_put(&f2fs_feat);
-unregister_kset:
 	kset_unregister(&f2fs_kset);
 	return ret;
 }
