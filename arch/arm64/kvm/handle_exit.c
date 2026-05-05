@@ -236,6 +236,43 @@ static exit_handle_fn kvm_get_exit_handler(struct kvm_vcpu *vcpu)
  * KVM_EXIT_DEBUG, otherwise userspace needs to complete its
  * emulation first.
  */
+static int handle_hyp_req_mem(struct kvm_vcpu *vcpu,
+			      struct kvm_hyp_req *req)
+{
+	switch (req->mem.dest) {
+	case REQ_MEM_DEST_VCPU_MEMCACHE:
+		return topup_hyp_memcache(vcpu);
+	}
+
+	pr_warn("Unknown kvm_hyp_req mem dest: %d\n", req->mem.dest);
+
+	return -EINVAL;
+}
+
+static int handle_hyp_req(struct kvm_vcpu *vcpu)
+{
+	struct kvm_hyp_req *hyp_req = vcpu->arch.hyp_reqs;
+	int i, ret;
+
+	for (i = 0; i < KVM_HYP_REQ_MAX; i++, hyp_req++) {
+		if (hyp_req->type == KVM_HYP_LAST_REQ)
+			break;
+
+		switch (hyp_req->type) {
+		case KVM_HYP_REQ_TYPE_MEM:
+			ret = handle_hyp_req_mem(vcpu, hyp_req);
+			if (ret)
+				return ret;
+			break;
+		default:
+			pr_warn("Unknown kvm_hyp_req type: %d\n", hyp_req->type);
+			return -EINVAL;
+		}
+	}
+
+	return 1;
+}
+
 static int handle_trap_exceptions(struct kvm_vcpu *vcpu)
 {
 	int handled;
@@ -297,6 +334,8 @@ int handle_exit(struct kvm_vcpu *vcpu, int exception_index)
 		return 1;
 	case ARM_EXCEPTION_TRAP:
 		return handle_trap_exceptions(vcpu);
+	case ARM_EXCEPTION_HYP_REQ:
+		return handle_hyp_req(vcpu);
 	case ARM_EXCEPTION_HYP_GONE:
 		/*
 		 * EL2 has been reset to the hyp-stub. This happens when a guest
