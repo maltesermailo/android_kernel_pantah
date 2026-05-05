@@ -67,9 +67,9 @@ struct pkvm_hyp_vm {
 
 	/*
 	 * The number of vcpus initialized and ready to run.
-	 * Modifying this is protected by 'vm_table_lock'.
 	 */
 	unsigned int nr_vcpus;
+	hyp_spinlock_t vcpus_lock;
 
 	/*
 	 * True when the guest is being torn down. When in this state, the
