@@ -27,6 +27,7 @@ unsigned long __icache_flags;
 unsigned int kvm_arm_vmid_bits;
 
 unsigned int kvm_host_sve_max_vl;
+unsigned int kvm_sve_max_vl;
 
 /*
  * The currently loaded hyp vCPU for each physical CPU. Used only when
