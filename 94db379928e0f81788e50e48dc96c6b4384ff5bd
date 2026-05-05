@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5ab0cd98_a4752b6a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-05T14:05:38Z",
+      "side": 1,
+      "message": "Implemented enforcing EIM and IR: aosp/4060772",
+      "parentUuid": "8aaacb45_8d18e6c9",
+      "range": {
+        "startLine": 23,
+        "startChar": 15,
+        "endLine": 24,
+        "endChar": 7
+      },
+      "revId": "94db379928e0f81788e50e48dc96c6b4384ff5bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "74f63d61_2758cb16",
         "filename": "drivers/iommu/intel/pkvm/iommu.c",
         "patchSetId": 12
@@ -55,6 +79,24 @@
       "side": 1,
       "message": "Indeed, missed this. will fix",
       "parentUuid": "74f63d61_2758cb16",
+      "revId": "94db379928e0f81788e50e48dc96c6b4384ff5bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e32a705_35cf52d0",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-05T14:05:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e005600_6c6cf99a",
       "revId": "94db379928e0f81788e50e48dc96c6b4384ff5bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -142,6 +184,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0657cf41_d04093d6",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-05T14:05:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95dcd885_24e58e54",
+      "revId": "94db379928e0f81788e50e48dc96c6b4384ff5bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9bfe9dc_5b1dd8be",
@@ -173,6 +233,24 @@
       "side": 1,
       "message": "\u003e Just realized: FEADDR is a 32-bit register, right? While we are just allowing the host to pass len\u003d8? So, what happens then? It may just overwrite the next 32-bit register, i.e. FEUADDR in this case? (And of course similarly, FEDATA would overwrite FEADDR, and so on?)\n\nGood catch, malicious host can pass 8 for u32 regs and may overwrite registers. Just did a quick test and IOMMU does write to adjacent registers.\n\n\u003e Maybe that would even obliterate the need for those iommu_direct_mmio_write() and iommu_direct_mmio_read() wrappers as such, since basically all they do is validate that len is either 4 or 8 (but allowing both), while we need to allow either 4 only or 8 only, per register, so upon that validation we could just directly use writel()/writeq()/readl()/readq() here instead.\n\nNice idea, will rework and get the wrappers removed",
       "parentUuid": "d9bfe9dc_5b1dd8be",
+      "revId": "94db379928e0f81788e50e48dc96c6b4384ff5bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaa631c8_cbd39022",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-05T14:05:38Z",
+      "side": 1,
+      "message": "Added checks for size in register access: aosp/4060773",
+      "parentUuid": "1c27f637_c3f40674",
       "revId": "94db379928e0f81788e50e48dc96c6b4384ff5bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
@@ -212,6 +290,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48639f1e_3870ebbc",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-05T14:05:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "107992da_a9f33ebb",
+      "revId": "94db379928e0f81788e50e48dc96c6b4384ff5bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "758376a2_c3b9cdef",
@@ -243,6 +339,24 @@
       "side": 1,
       "message": "Thanks for noting, will do.",
       "parentUuid": "758376a2_c3b9cdef",
+      "revId": "94db379928e0f81788e50e48dc96c6b4384ff5bd",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a32f6bd_94728dd0",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 12
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-05T14:05:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "504fdf01_e55f6055",
       "revId": "94db379928e0f81788e50e48dc96c6b4384ff5bd",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
