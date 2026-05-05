@@ -33,6 +33,24 @@
       "message": "Why \"imply\" instead of \"select\"? If the dependencies for SND_HDA aren\u0027t met, wouldn\u0027t it better to know that then to silently omit SND_HDA and break your drivers? Please add the rationale for \"imply\" to the commit message.",
       "revId": "dcceb564cf11d2f168903bb0e794e85e5fd98795",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "447657a3_9da0cabb",
+        "filename": "init/Kconfig.gki",
+        "patchSetId": 9
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 3386406
+      },
+      "writtenOn": "2026-05-05T17:14:40Z",
+      "side": 1,
+      "message": "Chose to go with imply to resolve the build error taking place in allmodconfig builds, where SND and SOUND (the dependencies for SND_HDA) were m, making \"select SND_HDA\" from the hidden snd gki configs an illegal state.\nBy setting it to imply we can have SND_HDA set to y in builds where its dependencies are y, and set to m in cases where its dependency is m.\n\nNot quite sure if there\u0027s a different method that I\u0027m unaware of that we can employ to resolve the allmodconfig build breaks.",
+      "parentUuid": "31a81270_c1be6c23",
+      "revId": "dcceb564cf11d2f168903bb0e794e85e5fd98795",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
