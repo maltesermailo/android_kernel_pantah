@@ -424,6 +424,22 @@ struct vcpu_reset_state {
 	bool		reset;
 };
 
+struct kvm_hyp_req {
+#define KVM_HYP_LAST_REQ	0
+#define KVM_HYP_REQ_TYPE_MEM	1
+	u8 type;
+	union {
+		struct {
+#define REQ_MEM_DEST_HYP_ALLOC		1
+#define REQ_MEM_DEST_VCPU_MEMCACHE	2
+			u8	dest;
+			int	nr_pages;
+		} mem;
+	};
+};
+
+#define KVM_HYP_REQ_MAX (PAGE_SIZE / sizeof(struct kvm_hyp_req))
+
 struct kvm_vcpu_arch {
 	struct kvm_cpu_context ctxt;
 
@@ -547,6 +563,9 @@ struct kvm_vcpu_arch {
 		u64 last_steal;
 		gpa_t base;
 	} steal;
+
+	/* PAGE_SIZE bound list of requests from the hypervisor to the host. */
+	struct kvm_hyp_req *hyp_reqs;
 };
 
 /*

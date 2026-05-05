@@ -310,9 +310,30 @@ static int __pkvm_create_hyp_vm(struct kvm *host_kvm)
 			goto destroy_vm;
 		}
 
+		host_vcpu->arch.hyp_reqs =
+			(struct kvm_hyp_req *)__get_free_page(GFP_KERNEL_ACCOUNT);
+		if (!host_vcpu->arch.hyp_reqs) {
+			free_pages_exact(hyp_vcpu, hyp_vcpu_sz);
+			ret = -ENOMEM;
+			goto destroy_vm;
+		}
+
+		ret = kvm_share_hyp(host_vcpu->arch.hyp_reqs,
+				    host_vcpu->arch.hyp_reqs + 1);
+		if (ret) {
+			free_page((unsigned long)host_vcpu->arch.hyp_reqs);
+			host_vcpu->arch.hyp_reqs = NULL;
+			free_pages_exact(hyp_vcpu, hyp_vcpu_sz);
+			goto destroy_vm;
+		}
+
 		ret = kvm_call_hyp_nvhe(__pkvm_init_vcpu, handle, host_vcpu,
 					hyp_vcpu);
 		if (ret) {
+			kvm_unshare_hyp(host_vcpu->arch.hyp_reqs,
+					host_vcpu->arch.hyp_reqs + 1);
+			free_page((unsigned long)host_vcpu->arch.hyp_reqs);
+			host_vcpu->arch.hyp_reqs = NULL;
 			free_pages_exact(hyp_vcpu, hyp_vcpu_sz);
 			goto destroy_vm;
 		}
@@ -374,6 +395,20 @@ void pkvm_destroy_hyp_vm(struct kvm *host_kvm)
 	}
 
 	WARN_ON(kvm_call_hyp_nvhe(__pkvm_finalize_teardown_vm, host_kvm->arch.pkvm.handle));
+
+	{
+		struct kvm_vcpu *host_vcpu;
+		unsigned long idx;
+
+		kvm_for_each_vcpu(idx, host_vcpu, host_kvm) {
+			if (!host_vcpu->arch.hyp_reqs)
+				continue;
+			kvm_unshare_hyp(host_vcpu->arch.hyp_reqs,
+					host_vcpu->arch.hyp_reqs + 1);
+			free_page((unsigned long)host_vcpu->arch.hyp_reqs);
+			host_vcpu->arch.hyp_reqs = NULL;
+		}
+	}
 
 out_free:
 	host_kvm->arch.pkvm.handle = 0;

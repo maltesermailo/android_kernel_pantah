@@ -470,10 +470,15 @@ static int pkvm_vcpu_init_psci(struct pkvm_hyp_vcpu *hyp_vcpu)
 	return 0;
 }
 
-static void unpin_host_vcpu(struct kvm_vcpu *host_vcpu)
+static void unpin_host_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu)
 {
+	struct kvm_vcpu *host_vcpu = hyp_vcpu->host_vcpu;
+	void *hyp_reqs = hyp_vcpu->vcpu.arch.hyp_reqs;
+
 	if (host_vcpu)
 		hyp_unpin_shared_mem(host_vcpu, host_vcpu + 1);
+	if (hyp_reqs)
+		hyp_unpin_shared_mem(hyp_reqs, hyp_reqs + 1);
 }
 
 static void unpin_host_sve_state(struct pkvm_hyp_vcpu *hyp_vcpu)
@@ -496,7 +501,7 @@ static void unpin_host_vcpus(struct pkvm_hyp_vcpu *hyp_vcpus[],
 	for (i = 0; i < nr_vcpus; i++) {
 		struct pkvm_hyp_vcpu *hyp_vcpu = hyp_vcpus[i];
 
-		unpin_host_vcpu(hyp_vcpu->host_vcpu);
+		unpin_host_vcpu(hyp_vcpu);
 		unpin_host_sve_state(hyp_vcpu);
 	}
 }
@@ -529,10 +534,24 @@ static int init_pkvm_hyp_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu,
 			      struct kvm_vcpu *host_vcpu,
 			      unsigned int vcpu_idx)
 {
+	struct kvm_hyp_req *hyp_reqs;
 	int ret = 0;
 
 	if (hyp_pin_shared_mem(host_vcpu, host_vcpu + 1))
 		return -EBUSY;
+
+	hyp_reqs = READ_ONCE(host_vcpu->arch.hyp_reqs);
+	if (!PAGE_ALIGNED(hyp_reqs)) {
+		hyp_unpin_shared_mem(host_vcpu, host_vcpu + 1);
+		return -EINVAL;
+	}
+
+	hyp_vcpu->vcpu.arch.hyp_reqs = kern_hyp_va(hyp_reqs);
+	if (hyp_pin_shared_mem(hyp_vcpu->vcpu.arch.hyp_reqs,
+			       hyp_vcpu->vcpu.arch.hyp_reqs + 1)) {
+		hyp_unpin_shared_mem(host_vcpu, host_vcpu + 1);
+		return -EBUSY;
+	}
 
 	if (host_vcpu->vcpu_idx != vcpu_idx) {
 		ret = -EINVAL;
@@ -549,6 +568,7 @@ static int init_pkvm_hyp_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu,
 	hyp_vcpu->vcpu.arch.cflags = READ_ONCE(host_vcpu->arch.cflags);
 	hyp_vcpu->vcpu.arch.mp_state.mp_state = KVM_MP_STATE_STOPPED;
 	hyp_vcpu->vcpu.arch.debug_ptr = &host_vcpu->arch.vcpu_debug_state;
+	hyp_vcpu->vcpu.arch.hyp_reqs->type = KVM_HYP_LAST_REQ;
 
 	pkvm_vcpu_init_features_from_host(hyp_vcpu);
 
@@ -584,7 +604,7 @@ static int init_pkvm_hyp_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu,
 	kvm_reset_pvm_sys_regs(&hyp_vcpu->vcpu);
 done:
 	if (ret)
-		unpin_host_vcpu(host_vcpu);
+		unpin_host_vcpu(hyp_vcpu);
 	return ret;
 }
 
@@ -1041,6 +1061,32 @@ void pkvm_reset_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu)
 	WRITE_ONCE(hyp_vcpu->power_state, PSCI_0_2_AFFINITY_LEVEL_ON);
 }
 
+struct kvm_hyp_req *pkvm_hyp_req_reserve(struct pkvm_hyp_vcpu *hyp_vcpu, u8 type)
+{
+	struct kvm_hyp_req *next, *hyp_req = hyp_vcpu->vcpu.arch.hyp_reqs;
+	int i;
+
+	for (i = 0; i < KVM_HYP_REQ_MAX; i++) {
+		if (hyp_req->type == KVM_HYP_LAST_REQ)
+			break;
+		hyp_req++;
+	}
+
+	/* The last entry of the page _must_ be a LAST_REQ */
+	WARN_ON(i >= KVM_HYP_REQ_MAX);
+
+	/* We need at least one empty slot to write LAST_REQ */
+	if (i + 1 >= KVM_HYP_REQ_MAX)
+		return NULL;
+
+	hyp_req->type = type;
+
+	next = hyp_req + 1;
+	next->type = KVM_HYP_LAST_REQ;
+
+	return hyp_req;
+}
+
 struct pkvm_hyp_vcpu *pkvm_mpidr_to_hyp_vcpu(struct pkvm_hyp_vm *hyp_vm,
 					     u64 mpidr)
 {
@@ -1315,6 +1361,25 @@ static u64 __pkvm_memshare_page_req(struct pkvm_hyp_vcpu *hyp_vcpu, u64 ipa)
 	return ARM_EXCEPTION_TRAP;
 }
 
+static int pkvm_handle_empty_memcache(struct pkvm_hyp_vcpu *hyp_vcpu,
+				      u64 *exit_code)
+{
+	struct kvm_hyp_req *req;
+
+	req = pkvm_hyp_req_reserve(hyp_vcpu, KVM_HYP_REQ_TYPE_MEM);
+	if (!req)
+		return -ENOMEM;
+
+	req->mem.dest = REQ_MEM_DEST_VCPU_MEMCACHE;
+	req->mem.nr_pages = kvm_mmu_cache_min_pages(hyp_vcpu->vcpu.kvm);
+
+	write_sysreg_el2(read_sysreg_el2(SYS_ELR) - 4, SYS_ELR);
+
+	*exit_code = ARM_EXCEPTION_HYP_REQ;
+
+	return 0;
+}
+
 static bool pkvm_memshare_call(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
 {
 	struct kvm_vcpu *vcpu = &hyp_vcpu->vcpu;
@@ -1338,6 +1403,10 @@ static bool pkvm_memshare_call(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_code)
 		 */
 		*exit_code = __pkvm_memshare_page_req(hyp_vcpu, ipa);
 		goto out_host;
+	case -ENOMEM:
+		if (!pkvm_handle_empty_memcache(hyp_vcpu, exit_code))
+			goto out_host;
+		break;
 	}
 
 out_guest_err:
@@ -1425,16 +1494,8 @@ static bool pkvm_install_ioguard_page(struct pkvm_hyp_vcpu *hyp_vcpu, u64 *exit_
 	int ret;
 
 	ret = __pkvm_install_ioguard_page(hyp_vcpu, ipa);
-	if (ret == -ENOMEM) {
-		/*
-		 * We ran out of memcache, let's ask for more. Cancel
-		 * the effects of the HVC that took us here, and
-		 * forward the hypercall to the host for page donation
-		 * purposes.
-		 */
-		write_sysreg_el2(read_sysreg_el2(SYS_ELR) - 4, SYS_ELR);
+	if (ret == -ENOMEM && !pkvm_handle_empty_memcache(hyp_vcpu, exit_code))
 		return false;
-	}
 
 	if (ret)
 		retval = SMCCC_RET_INVALID_PARAMETER;

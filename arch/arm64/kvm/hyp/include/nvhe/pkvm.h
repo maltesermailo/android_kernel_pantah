@@ -106,6 +106,9 @@ extern phys_addr_t pvmfw_size;
 
 void pkvm_hyp_vm_table_init(void *tbl);
 
+struct kvm_hyp_req *
+pkvm_hyp_req_reserve(struct pkvm_hyp_vcpu *hyp_vcpu, u8 type);
+
 int __pkvm_init_vm(struct kvm *host_kvm, unsigned long vm_hva,
 		   unsigned long pgd_hva, unsigned long last_ran_hva);
 int __pkvm_init_vcpu(pkvm_handle_t handle, struct kvm_vcpu *host_vcpu,
