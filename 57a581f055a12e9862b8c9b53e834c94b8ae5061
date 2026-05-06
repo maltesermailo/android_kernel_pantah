@@ -36,6 +36,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83d086ad_4c002a89",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-06T12:15:40Z",
+      "side": 1,
+      "message": "Ah, ok.",
+      "parentUuid": "0e65b7d5_4b2dc0ae",
+      "revId": "57a581f055a12e9862b8c9b53e834c94b8ae5061",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c9c8ab1_ddf41689",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "\u003e What about Fault Recording registers (whose offset and count are specified in bits 33:24 and 47:40 of the CAP register)?\n\nThanks for noting. I noticed this yesterday while sweeping the whole register again. Will fix this. I think there are more cases like this and will find all occurences which needs handling before sending the next iteration.\n\n\u003e So if there are no security implications of reading any of those registers, maybe we should just allow reading them all?\n\nI agree. Just confirming if you are meaning to switch to allow read by default? While looking at reading path yesterday, read of most of the registers seem to be safe and we already have special handling cases taken care of.",
       "parentUuid": "2c9c8ab1_ddf41689",
+      "revId": "57a581f055a12e9862b8c9b53e834c94b8ae5061",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1fb54e7_cf56e9bc",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-06T12:15:40Z",
+      "side": 1,
+      "message": "No, I meant explicitly listing here all those registers from iommu_regs_32 and iommu_regs_64 in debugfs.c (after some brief audit of their descriptions in the VT-d spec, to make sure there are indeed no security implications). It still seems a good idea to deny all other (i.e. mostly undocumented/non-existent) registers, since nothing guarantees that even reading them will not have any unwanted side effects?",
+      "parentUuid": "0fd884cd_5efbbe22",
       "revId": "57a581f055a12e9862b8c9b53e834c94b8ae5061",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
