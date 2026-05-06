@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0e65b7d5_4b2dc0ae",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-06T11:30:24Z",
+      "side": 1,
+      "message": "Yeah true. This is fixed by @chuanxiao.dong@intel.corp-partner.google.com\u0027s CL: aosp/4043299. So thought of not touching it in this series",
+      "parentUuid": "270893e1_bdf68fe5",
+      "revId": "57a581f055a12e9862b8c9b53e834c94b8ae5061",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2c9c8ab1_ddf41689",
         "filename": "drivers/iommu/intel/pkvm/iommu.c",
         "patchSetId": 8
@@ -31,6 +49,24 @@
       "writtenOn": "2026-05-06T11:14:31Z",
       "side": 1,
       "message": "1. What about Fault Recording registers (whose offset and count are specified in bits 33:24 and 47:40 of the CAP register)?\n\nIn `dmar_fault()`:\n```\n\treg \u003d cap_fault_reg_offset(iommu-\u003ecap);\n\t...\n\t\tdata \u003d dmar_readl(iommu, reg +\n\t\t\t\tfault_index * PRIMARY_FAULT_REG_LEN + 12);\n\t\tif (!(data \u0026 DMA_FRCD_F))\n\t\t\tbreak;\n```\n\nand so on.\n\nSo I guess DMAR fault logging is not workable with these patches?\n\n2. What about various registers that can be read via debugfs, in `iommu_regset_show()`? I guess with these patches we get a bunch of \"iommu_mmio_read failed\" logs in dmesg whenever we read `/sys/kernel/debug/iommu/intel/iommu_regset`, and we get some random values dumped instead of the actual register values?\n\nSo if there are no security implications of _reading_ any of those registers, maybe we should just allow reading them all?",
+      "revId": "57a581f055a12e9862b8c9b53e834c94b8ae5061",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fd884cd_5efbbe22",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 3702829
+      },
+      "writtenOn": "2026-05-06T11:30:24Z",
+      "side": 1,
+      "message": "\u003e What about Fault Recording registers (whose offset and count are specified in bits 33:24 and 47:40 of the CAP register)?\n\nThanks for noting. I noticed this yesterday while sweeping the whole register again. Will fix this. I think there are more cases like this and will find all occurences which needs handling before sending the next iteration.\n\n\u003e So if there are no security implications of reading any of those registers, maybe we should just allow reading them all?\n\nI agree. Just confirming if you are meaning to switch to allow read by default? While looking at reading path yesterday, read of most of the registers seem to be safe and we already have special handling cases taken care of.",
+      "parentUuid": "2c9c8ab1_ddf41689",
       "revId": "57a581f055a12e9862b8c9b53e834c94b8ae5061",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
