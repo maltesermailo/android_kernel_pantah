@@ -50,6 +50,30 @@
       ],
       "revId": "9d8b5efa290833993c1369cea8b2266f7fd80af8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50ee0893_4e2b8d8e",
+        "filename": "include/linux/pagemap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 4118894
+      },
+      "writtenOn": "2026-05-06T09:22:37Z",
+      "side": 1,
+      "message": "Before submitting this change, I had already tried the include method you suggested.\nThis modification results in another compilation error: \"out/bazel/output_user_root/97accb943b4455a9a25ba370108929c4/sandbox/linux-sandbox/586/execroot/_main/common/include/linux/pagemap.h:667:2: error: call to undeclared function \u0027trace_android_vh_filemap_alloc_folio\u0027; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]\n667 | trace_android_vh_filemap_alloc_folio(gfp, order, \u0026alloc_fail);\".\n\nAnother modification is:\n\"+ #undef CREATE_TRACE_POINTS\n + #include \u003ctrace/hooks/mm.h\u003e\",\nwhich results error: \"undefined symbol: __traceiter_dwc3_readl\n\u003e\u003e\u003e referenced by trace.h:58 (/proc/self/cwd/common/drivers/usb/dwc3/trace.h:58)\n\u003e\u003e\u003e drivers/usb/dwc3/drd.o:(dwc3_otg_init) in archive vmlinux.a\n\u003e\u003e\u003e referenced by trace.h:58 (/proc/self/cwd/common/drivers/usb/dwc3/trace.h:58)\n\u003e\u003e\u003e drivers/usb/dwc3/core.o:(dwc3_enable_susphy) in archive vmlinux.a\n\u003e\u003e\u003e referenced by trace.h:58 (/proc/self/cwd/common/drivers/usb/dwc3/trace.h:58)\n\u003e\u003e\u003e The compilation error \"drivers/usb/dwc3/gadget.o:(dwc3_gadget_set_test_mode) in archive vmlinux.a\n\u003e\u003e\u003e referenced 131 more times\"\n\nI have tried various modifications, the only one that does not produce a compilation error is:\n\"+ #ifdef CREATE_TRACE_POINTS\n + #undef CREATE_TRACE_POINTS\n + #include \u003ctrace/hooks/mm.h\u003e\n + #define CREATE_TRACE_POINTS\n + #else\n + #include \u003ctrace/hooks/mm.h\u003e\n + #endif\"\nHowever, it causes ABI DIFFERENCES:\n\"function symbol \u0027struct block_device* I_BDEV(struct inode*)\u0027 changed\nCRC changed from 0x11c402a8 to 0xe9019eba\n\nfunction symbol \u0027int __amba_driver_register(struct amba_driver*, struct module*)\u0027 The CRC has changed from 0xf6b8d914 to 0x9aad3645. The function symbol \u0027ssize_t __blockdev_direct_IO(struct kiocb*, struct inode*, struct block_device*, struct iov_iter*, get_block_t*, dio_iodone_t*, int)\u0027 has changed. The CRC has changed from 0xfde801c7 to 0x7a2e7568. ... 674 symbols have been omitted; 677 symbols have only CRC changes.\"\n\nIn summary, I haven\u0027t modified the previous commit. Do you have any better suggestions or should I keep the current changes?",
+      "parentUuid": "d0726e2e_29f0e507",
+      "range": {
+        "startLine": 660,
+        "startChar": 0,
+        "endLine": 662,
+        "endChar": 0
+      },
+      "revId": "9d8b5efa290833993c1369cea8b2266f7fd80af8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
