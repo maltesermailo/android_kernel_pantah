@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1843d1ca_ab8af2cb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-07T18:02:45Z",
+      "side": 1,
+      "message": "Hmm, but the host kernel\u0027s `pte_mkold()` clears it non-atomically?\n\n```\nstatic inline pte_t pte_mkold(pte_t pte)\n{\n\treturn pte_clear_flags(pte, _PAGE_ACCESSED);\n}\n```\n```\nstatic inline pte_t pte_clear_flags(pte_t pte, pteval_t clear)\n{\n\tpteval_t v \u003d native_pte_val(pte);\n\n\treturn native_make_pte(v \u0026 ~clear);\n}\n```\n\n(Although that is for MMU, not for EPT, but that shouldn\u0027t be fundamentally different?)\n\nI see KVM\u0027s TDP MMU does clear it atomically (in `kvm_tdp_mmu_age_spte()`), but the reason for that is just to be able to do that without locking kvm-\u003emmu_lock: https://lore.kernel.org/all/20250204004038.1680123-5-jthoughton@google.com/ (looks like before that patch it was clearing it non-atomically)?\n\nIt seems to me that if hardware sets this bit between the read and the write-back, the only \"bad\" thing that happens is that the write-back unintentionally clears this freshly set bit; but it would clear it anyway if the hardware set it slightly earlier, before the read? So what\u0027s the actual problem?\n\nWhy would it lead to a data corruption?",
+      "revId": "4d39346dee7059bcc8dc59684e16a6a7906390b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
