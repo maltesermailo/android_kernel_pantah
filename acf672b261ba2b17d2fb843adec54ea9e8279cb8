@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "de251f03_a7ead17a",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-07T09:53:40Z",
+      "side": 1,
+      "message": "So as confirmed by Kevin offline, my interpretation is the right one (0x100_FEE00000 is _not_ a part of APIC MMIO space [*], MSI at this address will _not_ write memory at this address, and BIOS has no reason to mark it as reserved), so we should remove these msi_addr_targets_memory() checks?\n\nThough preferably we should still add validation that there is a CPU with the given APIC ID, since otherwise the behavior is generally undefined. (But msi_addr_targets_memory() is _not_ a working way to validate that.)\n\n[*] Furthermore, even those lower 20 bits in 0xFEExxxxx have nothing to do with APIC MMIO, just the 0xFEE prefix tells the root complex HW that this is an MSI rather than a memory write (and this prefix just coincides with the default address 0xFEE00000 of the APIC MMIO range). I hadn\u0027t realized that, but that\u0027s actually quite obvious: the format of those lower 20 bits (containing APIC ID, Destination Mode, Redirection Hint) indeed has nothing to do with the offsets of APIC registers e.g. APIC_EOI, APIC_ISR and so on.",
+      "parentUuid": "c2ce7ed4_92a18019",
+      "revId": "acf672b261ba2b17d2fb843adec54ea9e8279cb8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e1f0fe03_049b6522",
         "filename": "drivers/iommu/intel/pkvm/iommu.c",
         "patchSetId": 11
