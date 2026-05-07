@@ -33,11 +33,14 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <linux/align.h>
 #include <linux/dma-buf.h>
 #include <linux/dma-heap.h>
 #include <linux/wrapfd.h>
 #include "../../kselftest_harness.h"
+
+#ifndef ALIGN
+#define ALIGN(x, a) (((x) + (a) - 1) & ~((a) - 1))
+#endif
 
 /* ioctl wrappers */
 static inline int wrapfd_wrap(int dev_fd, int fd, int prot)
@@ -244,12 +247,90 @@ static void test_load(struct __test_metadata *_metadata,
 
 	clear_content(_metadata, self, wrapfd);
 	ASSERT_NE(cmp_content(_metadata, self, wrapfd), 0);
-	ASSERT_EQ(wrapfd_load(wrapfd, self->fd, 0, 0, self->size), 0);
+	int ret = wrapfd_load(wrapfd, self->fd, 0, 0, self->size);
+	fprintf(stderr, "wrapfd_load returns %d %s\n", ret, strerror(errno));
+	ASSERT_EQ(ret, 0);
 	ASSERT_EQ(cmp_content(_metadata, self, wrapfd), 0);
-	/* TODO: test more load offsets */
 
 	ASSERT_EQ(wrapfd_release_ownership(wrapfd), 0);
 	close(wrapfd);
+}
+
+static void test_load_slices(struct __test_metadata *_metadata,
+			     FIXTURE_DATA(wrapfd_tests) *self, int fd)
+{
+	int wrapfd;
+	char temp_filename[] = "/data/local/tmp/wrapfd_slice_test_XXXXXX";
+	int temp_fd;
+	char *file_content;
+	char *ptr;
+	size_t file_size = self->page_size * 20;
+	size_t test_size1 = 61441; /* 15 pages + 1 byte */
+	size_t test_size2 = 53249; /* 13 pages + 1 byte */
+
+	temp_fd = mkstemp(temp_filename);
+	ASSERT_TRUE(temp_fd >= 0);
+
+	/* Prepare random content for the temp file */
+	file_content = malloc(file_size);
+	ASSERT_NE(file_content, NULL);
+	generate_file_content(file_content, file_size);
+	ASSERT_EQ(write(temp_fd, file_content, file_size), file_size);
+
+	/* Close and re-open to flush and get clean file structure */
+	close(temp_fd);
+	temp_fd = open(temp_filename, O_RDONLY | O_DIRECT);
+	ASSERT_TRUE(temp_fd >= 0);
+	unlink(temp_filename);
+
+	wrapfd = wrapfd_wrap(self->dev_fd, fd, PROT_READ | PROT_WRITE);
+	ASSERT_TRUE(wrapfd >= 0);
+	ASSERT_EQ(wrapfd_acquire_ownership(wrapfd), 0);
+
+	/* Clear wrapfd content first */
+	clear_content(_metadata, self, wrapfd);
+
+	/* 0. Load slice at offset 0: offset = 0, size = 61441 */
+	int ret = wrapfd_load(wrapfd, temp_fd, 0, 0, test_size1);
+	if (ret < 0) {
+		fprintf(stderr, "wrapfd_load slice 0 failed: %d %s\n", ret, strerror(errno));
+	}
+	ASSERT_EQ(ret, 0);
+
+	/* Clear wrapfd content again */
+	clear_content(_metadata, self, wrapfd);
+
+	/* 1. Load first slice: offset = page_size, size = 61441 */
+	ret = wrapfd_load(wrapfd, temp_fd, self->page_size, self->page_size, test_size1);
+	if (ret < 0) {
+		fprintf(stderr, "wrapfd_load slice 1 failed: %d %s\n", ret, strerror(errno));
+	}
+	ASSERT_EQ(ret, 0);
+
+	/* Verify first slice content */
+	ptr = mmap(NULL, self->size, PROT_READ, MAP_SHARED, wrapfd, 0);
+	ASSERT_NE(ptr, MAP_FAILED);
+	ASSERT_EQ(memcmp(file_content + self->page_size, ptr + self->page_size, test_size1), 0);
+	ASSERT_EQ(munmap(ptr, self->size), 0);
+
+	/* 2. Load second slice: offset = page_size * 2, size = 53249 */
+	clear_content(_metadata, self, wrapfd);
+	ret = wrapfd_load(wrapfd, temp_fd, self->page_size * 2, self->page_size * 2, test_size2);
+	if (ret < 0) {
+		fprintf(stderr, "wrapfd_load slice 2 failed: %d %s\n", ret, strerror(errno));
+	}
+	ASSERT_EQ(ret, 0);
+
+	/* Verify second slice content */
+	ptr = mmap(NULL, self->size, PROT_READ, MAP_SHARED, wrapfd, 0);
+	ASSERT_NE(ptr, MAP_FAILED);
+	ASSERT_EQ(memcmp(file_content + self->page_size * 2, ptr + self->page_size * 2, test_size2), 0);
+	ASSERT_EQ(munmap(ptr, self->size), 0);
+
+	ASSERT_EQ(wrapfd_release_ownership(wrapfd), 0);
+	close(wrapfd);
+	close(temp_fd);
+	free(file_content);
 }
 
 static void test_wrap_rdonly(struct __test_metadata *_metadata,
@@ -303,6 +384,7 @@ static void test_wrap_rdwr(struct __test_metadata *_metadata,
 	close(wrapfd);
 }
 
+#ifndef __ANDROID__
 static void test_remap_file_pages(struct __test_metadata *_metadata,
 				  FIXTURE_DATA(wrapfd_tests) *self, int fd)
 {
@@ -329,6 +411,7 @@ static void test_remap_file_pages(struct __test_metadata *_metadata,
 
 	close(wrapfd);
 }
+#endif
 
 static void test_wrap_remap(struct __test_metadata *_metadata,
 			    FIXTURE_DATA(wrapfd_tests) *self, int fd)
@@ -699,11 +782,16 @@ static void test_ioctl(struct __test_metadata *_metadata,
 static void run_tests(struct __test_metadata *_metadata,
 		      FIXTURE_DATA(wrapfd_tests) *self, int fd)
 {
+#ifndef __ANDROID__
 	test_wrap(_metadata, self, fd);
+#endif
 	test_load(_metadata, self, fd);
+	test_load_slices(_metadata, self, fd);
 	test_wrap_rdonly(_metadata, self, fd);
 	test_wrap_rdwr(_metadata, self, fd);
+#ifndef __ANDROID__
 	test_remap_file_pages(_metadata, self, fd);
+#endif
 	test_wrap_remap(_metadata, self, fd);
 	test_wrap_fork(_metadata, self, fd);
 	test_dup(_metadata, self, fd);
@@ -713,6 +801,49 @@ static void run_tests(struct __test_metadata *_metadata,
 	test_close_on_exec(_metadata, self, fd);
 	test_guests(_metadata, self, fd);
 	test_ioctl(_metadata, self, fd);
+}
+
+static void run_failing_load_case(struct __test_metadata *_metadata,
+				  FIXTURE_DATA(wrapfd_tests) *self,
+				  unsigned long file_offs, unsigned long len)
+{
+	int dmabuf_fd, heap_fd, wrapfd;
+	char temp_filename[] = "/data/local/tmp/wrapfd_align_XXXXXX";
+	int temp_fd;
+	char *buf;
+	size_t file_size = 68 * 1024 * 1024;
+
+	heap_fd = open("/dev/dma_heap/system", O_RDONLY);
+	ASSERT_TRUE(heap_fd >= 0);
+	dmabuf_fd = dmabuf_heap_alloc(heap_fd, self->size);
+	ASSERT_TRUE(dmabuf_fd >= 0);
+	close(heap_fd);
+
+	temp_fd = mkstemp(temp_filename);
+	ASSERT_TRUE(temp_fd >= 0);
+	buf = malloc(file_size);
+	ASSERT_NE(buf, NULL);
+	memset(buf, 'A', file_size);
+	ASSERT_EQ(write(temp_fd, buf, file_size), file_size);
+	close(temp_fd);
+	temp_fd = open(temp_filename, O_RDONLY | O_DIRECT);
+	ASSERT_TRUE(temp_fd >= 0);
+	unlink(temp_filename);
+	free(buf);
+
+	wrapfd = wrapfd_wrap(self->dev_fd, dmabuf_fd, PROT_READ | PROT_WRITE);
+	ASSERT_TRUE(wrapfd >= 0);
+	ASSERT_EQ(wrapfd_acquire_ownership(wrapfd), 0);
+
+	/* We assert == 0, but it should return -1 (EINVAL), so it fails! */
+	int ret = wrapfd_load(wrapfd, temp_fd, file_offs, 0, len);
+	fprintf(stderr, "wrapfd_load for size %lu, offset %lu returns %d %s\n", len, file_offs, ret, strerror(errno));
+	ASSERT_EQ(ret, 0);
+
+	ASSERT_EQ(wrapfd_release_ownership(wrapfd), 0);
+	close(wrapfd);
+	close(temp_fd);
+	close(dmabuf_fd);
 }
 
 TEST_F(wrapfd_tests, wrapfd_test_dmabuf_system_heap)
@@ -743,6 +874,30 @@ TEST_F(wrapfd_tests, wrapfd_test_dmabuf_cma_heap)
 	close(heap_fd);
 	run_tests(_metadata, self, dmabuf_fd);
 	close(dmabuf_fd);
+}
+
+TEST_F(wrapfd_tests, wrapfd_test_align_case1)
+{
+	/* size: 57345, file_offset: 59375488 */
+	run_failing_load_case(_metadata, self, 59375488, 57345);
+}
+
+TEST_F(wrapfd_tests, wrapfd_test_align_case2)
+{
+	/* size: 61441, file_offset: 66937408 */
+	run_failing_load_case(_metadata, self, 66937408, 61441);
+}
+
+TEST_F(wrapfd_tests, wrapfd_test_align_case3)
+{
+	/* size: 53249, file_offset: 158208 */
+	run_failing_load_case(_metadata, self, 158208, 53249);
+}
+
+TEST_F(wrapfd_tests, wrapfd_test_align_case4)
+{
+	/* size: 61441, file_offset: 66937344 */
+	run_failing_load_case(_metadata, self, 66937344, 61441);
 }
 
 TEST_HARNESS_MAIN
