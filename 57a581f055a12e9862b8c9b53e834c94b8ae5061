@@ -123,6 +123,24 @@
       "parentUuid": "a1fb54e7_cf56e9bc",
       "revId": "57a581f055a12e9862b8c9b53e834c94b8ae5061",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4480cc7_3535c54d",
+        "filename": "drivers/iommu/intel/pkvm/iommu.c",
+        "patchSetId": 8
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-07T14:51:34Z",
+      "side": 1,
+      "message": "\u003e So I guess DMAR fault logging is not workable with these patches?\n\nFWIW, indeed:\n\n```\n\u003c3\u003e[  116.940937][    C2] DMAR: DRHD: handling fault status reg 3\n\u003c3\u003e[  116.947507][    C2] DMAR: pkvm_readl: iommu_mmio_read(reg_phys: fed91000, off: 40c) failed(err\u003d-1)\n```\n\n(used the hack aosp/3887221 to force DMA e.g. at pvmfw address, with `iommu.passthrough\u003d1`, in order to trigger a DMAR fault due to pKVM\u0027s memory protection enforcement).\n\n\u003e I guess with these patches we get a bunch of \"iommu_mmio_read failed\" logs in dmesg whenever we read /sys/kernel/debug/iommu/intel/iommu_regset\n\nFWIW, indeed we do.",
+      "parentUuid": "1b9cfae2_e5f6fc14",
+      "revId": "57a581f055a12e9862b8c9b53e834c94b8ae5061",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
