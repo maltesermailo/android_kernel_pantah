@@ -36199,6 +36199,11 @@ pointer_reference {
   pointee_type_id: 0xdf1898b4
 }
 pointer_reference {
+  id: 0x3d5ad63a
+  kind: POINTER
+  pointee_type_id: 0xdf2bbe76
+}
+pointer_reference {
   id: 0x3d5b22db
   kind: POINTER
   pointee_type_id: 0xdf2c6df1
@@ -94940,6 +94945,18 @@ member {
   name: "debug_wait"
   type_id: 0x03913382
   offset: 62464
+}
+member {
+  id: 0x1c1a24b4
+  name: "debugfs"
+  type_id: 0x3d5ad63a
+  offset: 11392
+}
+member {
+  id: 0x1c1a24be
+  name: "debugfs"
+  type_id: 0x3d5ad63a
+  offset: 8448
 }
 member {
   id: 0x1c1beca1
@@ -245521,10 +245538,10 @@ member {
   offset: 192
 }
 member {
-  id: 0x027df567
+  id: 0x027dfc42
   name: "trips"
   type_id: 0xfcfb4a2b
-  offset: 11520
+  offset: 11584
 }
 member {
   id: 0x8e789fb7
@@ -253915,10 +253932,10 @@ member {
   offset: 2496
 }
 member {
-  id: 0x99b9a7d5
+  id: 0x99b9afe7
   name: "user_thresholds"
   type_id: 0xd3c80119
-  offset: 11392
+  offset: 11456
 }
 member {
   id: 0x5be84f8f
@@ -343032,7 +343049,7 @@ struct_union {
   kind: STRUCT
   name: "thermal_cooling_device"
   definition {
-    bytesize: 1064
+    bytesize: 1072
     member_id: 0xcc480c42
     member_id: 0x5c68c12a
     member_id: 0x9cc8d274
@@ -343045,7 +343062,8 @@ struct_union {
     member_id: 0x2d4b31e5
     member_id: 0x67e842ab
     member_id: 0x0fa6c117
-    member_id: 0x415b0583
+    member_id: 0x1c1a24be
+    member_id: 0x415b05a2
   }
 }
 struct_union {
@@ -343062,6 +343080,11 @@ struct_union {
     member_id: 0x880932d0
     member_id: 0x415b0d2e
   }
+}
+struct_union {
+  id: 0xdf2bbe76
+  kind: STRUCT
+  name: "thermal_debugfs"
 }
 struct_union {
   id: 0x5cea4e71
@@ -343121,7 +343144,7 @@ struct_union {
   kind: STRUCT
   name: "thermal_zone_device"
   definition {
-    bytesize: 1440
+    bytesize: 1448
     member_id: 0xcc480c42
     member_id: 0x5c4f16c5
     member_id: 0xea11030f
@@ -343151,8 +343174,9 @@ struct_union {
     member_id: 0xa4317ed4
     member_id: 0x9b6d26cf
     member_id: 0x72daa81c
-    member_id: 0x99b9a7d5
-    member_id: 0x027df567
+    member_id: 0x1c1a24b4
+    member_id: 0x99b9afe7
+    member_id: 0x027dfc42
   }
 }
 struct_union {
@@ -437859,7 +437883,7 @@ elf_symbol {
   name: "__cpufreq_driver_target"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf9c56fc4
+  crc: 0x2d41482a
   type_id: 0x9ce01ea2
   full_name: "__cpufreq_driver_target"
 }
@@ -448715,7 +448739,7 @@ elf_symbol {
   name: "__traceiter_cpu_frequency_limits"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x0265cc31
+  crc: 0x9c29de71
   type_id: 0x9ba9c2f7
   full_name: "__traceiter_cpu_frequency_limits"
 }
@@ -464582,7 +464606,7 @@ elf_symbol {
   name: "cpufreq_cooling_register"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x223e5dd5
+  crc: 0xfb06946f
   type_id: 0x48d77e8c
   full_name: "cpufreq_cooling_register"
 }
@@ -464591,7 +464615,7 @@ elf_symbol {
   name: "cpufreq_cooling_unregister"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x5cb40908
+  crc: 0xd92b1138
   type_id: 0x11aaf502
   full_name: "cpufreq_cooling_unregister"
 }
@@ -464600,7 +464624,7 @@ elf_symbol {
   name: "cpufreq_cpu_get"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x27635a3c
+  crc: 0xf741e13e
   type_id: 0x906b787e
   full_name: "cpufreq_cpu_get"
 }
@@ -464609,7 +464633,7 @@ elf_symbol {
   name: "cpufreq_cpu_get_raw"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x27635a3c
+  crc: 0xf741e13e
   type_id: 0x906b787e
   full_name: "cpufreq_cpu_get_raw"
 }
@@ -464618,7 +464642,7 @@ elf_symbol {
   name: "cpufreq_cpu_put"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe9f20ed5
+  crc: 0x759f9ff8
   type_id: 0x10ffd8df
   full_name: "cpufreq_cpu_put"
 }
@@ -464672,7 +464696,7 @@ elf_symbol {
   name: "cpufreq_disable_fast_switch"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe9f20ed5
+  crc: 0x759f9ff8
   type_id: 0x10ffd8df
   full_name: "cpufreq_disable_fast_switch"
 }
@@ -464681,7 +464705,7 @@ elf_symbol {
   name: "cpufreq_driver_fast_switch"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xcf426274
+  crc: 0xabf797a2
   type_id: 0xcfaae22f
   full_name: "cpufreq_driver_fast_switch"
 }
@@ -464690,7 +464714,7 @@ elf_symbol {
   name: "cpufreq_driver_resolve_freq"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xcf426274
+  crc: 0xabf797a2
   type_id: 0xcfaae22f
   full_name: "cpufreq_driver_resolve_freq"
 }
@@ -464699,7 +464723,7 @@ elf_symbol {
   name: "cpufreq_driver_target"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf9c56fc4
+  crc: 0x2d41482a
   type_id: 0x9ce01ea2
   full_name: "cpufreq_driver_target"
 }
@@ -464717,7 +464741,7 @@ elf_symbol {
   name: "cpufreq_enable_fast_switch"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe9f20ed5
+  crc: 0x759f9ff8
   type_id: 0x10ffd8df
   full_name: "cpufreq_enable_fast_switch"
 }
@@ -464744,7 +464768,7 @@ elf_symbol {
   name: "cpufreq_freq_transition_begin"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x83e7afed
+  crc: 0x492ba9f0
   type_id: 0x10e0ceea
   full_name: "cpufreq_freq_transition_begin"
 }
@@ -464753,7 +464777,7 @@ elf_symbol {
   name: "cpufreq_freq_transition_end"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x00d81acb
+  crc: 0xd2704688
   type_id: 0x10f906de
   full_name: "cpufreq_freq_transition_end"
 }
@@ -464807,7 +464831,7 @@ elf_symbol {
   name: "cpufreq_generic_suspend"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x3db35dd3
+  crc: 0x9699d8d1
   type_id: 0x9de76a63
   full_name: "cpufreq_generic_suspend"
 }
@@ -464844,7 +464868,7 @@ elf_symbol {
   name: "cpufreq_get_policy"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x7d61446d
+  crc: 0xedb0c59f
   type_id: 0x9cf17ffb
   full_name: "cpufreq_get_policy"
 }
@@ -464853,7 +464877,7 @@ elf_symbol {
   name: "cpufreq_policy_transition_delay_us"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x8203f10c
+  crc: 0xaf38d5cb
   type_id: 0xcebcf7b7
   full_name: "cpufreq_policy_transition_delay_us"
 }
@@ -464880,7 +464904,7 @@ elf_symbol {
   name: "cpufreq_register_driver"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xc0d1ff36
+  crc: 0x0ba5515b
   type_id: 0x927602ff
   full_name: "cpufreq_register_driver"
 }
@@ -464889,7 +464913,7 @@ elf_symbol {
   name: "cpufreq_register_governor"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x5586ef97
+  crc: 0x38ce10cb
   type_id: 0x9ce68106
   full_name: "cpufreq_register_governor"
 }
@@ -464934,7 +464958,7 @@ elf_symbol {
   name: "cpufreq_unregister_driver"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x986352f3
+  crc: 0x08b48a2d
   type_id: 0x1f6eb043
   full_name: "cpufreq_unregister_driver"
 }
@@ -464943,7 +464967,7 @@ elf_symbol {
   name: "cpufreq_unregister_governor"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x0f08ad21
+  crc: 0xe7666dfa
   type_id: 0x11fe33ba
   full_name: "cpufreq_unregister_governor"
 }
@@ -468140,7 +468164,7 @@ elf_symbol {
   name: "devfreq_add_device"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xaa8661e7
+  crc: 0x9d1af5ff
   type_id: 0xda80c39b
   full_name: "devfreq_add_device"
 }
@@ -468149,7 +468173,7 @@ elf_symbol {
   name: "devfreq_add_governor"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xdf999645
+  crc: 0x908826d1
   type_id: 0x91cab466
   full_name: "devfreq_add_governor"
 }
@@ -468158,7 +468182,7 @@ elf_symbol {
   name: "devfreq_cooling_em_register"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x31159048
+  crc: 0xaa341ce9
   type_id: 0x4132c986
   full_name: "devfreq_cooling_em_register"
 }
@@ -468167,7 +468191,7 @@ elf_symbol {
   name: "devfreq_cooling_unregister"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x5cb40908
+  crc: 0xd92b1138
   type_id: 0x11aaf502
   full_name: "devfreq_cooling_unregister"
 }
@@ -468221,7 +468245,7 @@ elf_symbol {
   name: "devfreq_get_devfreq_by_node"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe3662a44
+  crc: 0x78971c44
   type_id: 0xd7754407
   full_name: "devfreq_get_devfreq_by_node"
 }
@@ -468230,7 +468254,7 @@ elf_symbol {
   name: "devfreq_get_devfreq_by_phandle"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x824636ff
+  crc: 0xff9b8c89
   type_id: 0xda1e3051
   full_name: "devfreq_get_devfreq_by_phandle"
 }
@@ -468239,7 +468263,7 @@ elf_symbol {
   name: "devfreq_get_freq_range"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x2bdd4cb6
+  crc: 0xbf8358b1
   type_id: 0x195a7297
   full_name: "devfreq_get_freq_range"
 }
@@ -468248,7 +468272,7 @@ elf_symbol {
   name: "devfreq_monitor_resume"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x8fbe6dcd
+  crc: 0xba82eb24
   type_id: 0x1942d44d
   full_name: "devfreq_monitor_resume"
 }
@@ -468257,7 +468281,7 @@ elf_symbol {
   name: "devfreq_monitor_start"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x8fbe6dcd
+  crc: 0xba82eb24
   type_id: 0x1942d44d
   full_name: "devfreq_monitor_start"
 }
@@ -468266,7 +468290,7 @@ elf_symbol {
   name: "devfreq_monitor_stop"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x8fbe6dcd
+  crc: 0xba82eb24
   type_id: 0x1942d44d
   full_name: "devfreq_monitor_stop"
 }
@@ -468275,7 +468299,7 @@ elf_symbol {
   name: "devfreq_monitor_suspend"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x8fbe6dcd
+  crc: 0xba82eb24
   type_id: 0x1942d44d
   full_name: "devfreq_monitor_suspend"
 }
@@ -468293,7 +468317,7 @@ elf_symbol {
   name: "devfreq_register_opp_notifier"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xc5a2d1c0
+  crc: 0x0b1ca737
   type_id: 0x9d8b7529
   full_name: "devfreq_register_opp_notifier"
 }
@@ -468302,7 +468326,7 @@ elf_symbol {
   name: "devfreq_remove_device"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x5ba7c9ed
+  crc: 0xeee7fc58
   type_id: 0x945a66f1
   full_name: "devfreq_remove_device"
 }
@@ -468311,7 +468335,7 @@ elf_symbol {
   name: "devfreq_remove_governor"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xdf999645
+  crc: 0x908826d1
   type_id: 0x91cab466
   full_name: "devfreq_remove_governor"
 }
@@ -468320,7 +468344,7 @@ elf_symbol {
   name: "devfreq_resume_device"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x5ba7c9ed
+  crc: 0xeee7fc58
   type_id: 0x945a66f1
   full_name: "devfreq_resume_device"
 }
@@ -468329,7 +468353,7 @@ elf_symbol {
   name: "devfreq_suspend_device"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x5ba7c9ed
+  crc: 0xeee7fc58
   type_id: 0x945a66f1
   full_name: "devfreq_suspend_device"
 }
@@ -468338,7 +468362,7 @@ elf_symbol {
   name: "devfreq_unregister_opp_notifier"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xc5a2d1c0
+  crc: 0x0b1ca737
   type_id: 0x9d8b7529
   full_name: "devfreq_unregister_opp_notifier"
 }
@@ -468347,7 +468371,7 @@ elf_symbol {
   name: "devfreq_update_interval"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x9413b3a7
+  crc: 0x7e69f0cd
   type_id: 0x192d11cd
   full_name: "devfreq_update_interval"
 }
@@ -468356,7 +468380,7 @@ elf_symbol {
   name: "devfreq_update_status"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x4725d0f4
+  crc: 0xeb8fe2af
   type_id: 0x9497b363
   full_name: "devfreq_update_status"
 }
@@ -468365,7 +468389,7 @@ elf_symbol {
   name: "devfreq_update_target"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x4725d0f4
+  crc: 0xeb8fe2af
   type_id: 0x9497b363
   full_name: "devfreq_update_target"
 }
@@ -469328,7 +469352,7 @@ elf_symbol {
   name: "devm_devfreq_add_device"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xaa8661e7
+  crc: 0x9d1af5ff
   type_id: 0xda80c39b
   full_name: "devm_devfreq_add_device"
 }
@@ -469346,7 +469370,7 @@ elf_symbol {
   name: "devm_devfreq_register_notifier"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x94086378
+  crc: 0x6d46151e
   type_id: 0x9d8c8e95
   full_name: "devm_devfreq_register_notifier"
 }
@@ -469355,7 +469379,7 @@ elf_symbol {
   name: "devm_devfreq_register_opp_notifier"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xc5a2d1c0
+  crc: 0x0b1ca737
   type_id: 0x9d8b7529
   full_name: "devm_devfreq_register_opp_notifier"
 }
@@ -469364,7 +469388,7 @@ elf_symbol {
   name: "devm_devfreq_remove_device"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xb14cd033
+  crc: 0x66cf6525
   type_id: 0x1093c795
   full_name: "devm_devfreq_remove_device"
 }
@@ -469373,7 +469397,7 @@ elf_symbol {
   name: "devm_devfreq_unregister_notifier"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x73d43ed0
+  crc: 0x1f11b2b6
   type_id: 0x10943c29
   full_name: "devm_devfreq_unregister_notifier"
 }
@@ -469382,7 +469406,7 @@ elf_symbol {
   name: "devm_devfreq_unregister_opp_notifier"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xb14cd033
+  crc: 0x66cf6525
   type_id: 0x1093c795
   full_name: "devm_devfreq_unregister_opp_notifier"
 }
@@ -470310,7 +470334,7 @@ elf_symbol {
   name: "devm_power_supply_get_by_phandle"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x77c1e15f
+  crc: 0xab2bbb80
   type_id: 0x3b90ab8c
   full_name: "devm_power_supply_get_by_phandle"
 }
@@ -470319,7 +470343,7 @@ elf_symbol {
   name: "devm_power_supply_register"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf9abe3cf
+  crc: 0x29e39b1d
   type_id: 0x3bb8868a
   full_name: "devm_power_supply_register"
 }
@@ -470328,7 +470352,7 @@ elf_symbol {
   name: "devm_power_supply_register_no_ws"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf9abe3cf
+  crc: 0x29e39b1d
   type_id: 0x3bb8868a
   full_name: "devm_power_supply_register_no_ws"
 }
@@ -470762,7 +470786,7 @@ elf_symbol {
   name: "devm_thermal_of_cooling_device_register"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x22680423
+  crc: 0x926deb3d
   type_id: 0x48f8ec98
   full_name: "devm_thermal_of_cooling_device_register"
 }
@@ -470771,7 +470795,7 @@ elf_symbol {
   name: "devm_thermal_of_zone_register"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x86d639a8
+  crc: 0xe9965046
   type_id: 0xfc59f36a
   full_name: "devm_thermal_of_zone_register"
 }
@@ -470780,7 +470804,7 @@ elf_symbol {
   name: "devm_thermal_of_zone_unregister"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x8c4e0f51
+  crc: 0x240a9205
   type_id: 0x1095fa8e
   full_name: "devm_thermal_of_zone_unregister"
 }
@@ -479641,7 +479665,7 @@ elf_symbol {
   name: "for_each_thermal_trip"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xb3dd631b
+  crc: 0x9e4cf07c
   type_id: 0x948ae948
   full_name: "for_each_thermal_trip"
 }
@@ -481642,7 +481666,7 @@ elf_symbol {
   name: "get_governor_parent_kobj"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x9555127a
+  crc: 0x03ead812
   type_id: 0x3e5176fa
   full_name: "get_governor_parent_kobj"
 }
@@ -496672,7 +496696,7 @@ elf_symbol {
   name: "of_cpufreq_cooling_register"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x223e5dd5
+  crc: 0xfb06946f
   type_id: 0x48d77e8c
   full_name: "of_cpufreq_cooling_register"
 }
@@ -496690,7 +496714,7 @@ elf_symbol {
   name: "of_devfreq_cooling_register"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xfa17d0f9
+  crc: 0xa0329ca5
   type_id: 0x45319f70
   full_name: "of_devfreq_cooling_register"
 }
@@ -496699,7 +496723,7 @@ elf_symbol {
   name: "of_devfreq_cooling_register_power"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe5c20896
+  crc: 0x394594e0
   type_id: 0x453414c9
   full_name: "of_devfreq_cooling_register_power"
 }
@@ -503131,7 +503155,7 @@ elf_symbol {
   name: "power_supply_am_i_supplied"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe1699cf1
+  crc: 0x3b004f24
   type_id: 0x9b85a048
   full_name: "power_supply_am_i_supplied"
 }
@@ -503140,7 +503164,7 @@ elf_symbol {
   name: "power_supply_changed"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x0b380f7c
+  crc: 0xf3a48a93
   type_id: 0x169d12f4
   full_name: "power_supply_changed"
 }
@@ -503158,7 +503182,7 @@ elf_symbol {
   name: "power_supply_get_battery_info"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x0640f3c3
+  crc: 0x0210a955
   type_id: 0x9b9f45c1
   full_name: "power_supply_get_battery_info"
 }
@@ -503167,7 +503191,7 @@ elf_symbol {
   name: "power_supply_get_by_name"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x24d7ec04
+  crc: 0x90e24ff4
   type_id: 0x347afa45
   full_name: "power_supply_get_by_name"
 }
@@ -503176,7 +503200,7 @@ elf_symbol {
   name: "power_supply_get_by_phandle"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x82e9d8b2
+  crc: 0xab82174d
   type_id: 0x361a553a
   full_name: "power_supply_get_by_phandle"
 }
@@ -503185,7 +503209,7 @@ elf_symbol {
   name: "power_supply_get_by_phandle_array"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x1565e9cf
+  crc: 0x874f148f
   type_id: 0x9064137a
   full_name: "power_supply_get_by_phandle_array"
 }
@@ -503194,7 +503218,7 @@ elf_symbol {
   name: "power_supply_get_drvdata"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x5778895d
+  crc: 0x6b62920d
   type_id: 0x5093f296
   full_name: "power_supply_get_drvdata"
 }
@@ -503203,7 +503227,7 @@ elf_symbol {
   name: "power_supply_get_property"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x094fa0fa
+  crc: 0xc22211c7
   type_id: 0x9ba3144f
   full_name: "power_supply_get_property"
 }
@@ -503212,7 +503236,7 @@ elf_symbol {
   name: "power_supply_get_property_from_supplier"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x094fa0fa
+  crc: 0xc22211c7
   type_id: 0x9ba3144f
   full_name: "power_supply_get_property_from_supplier"
 }
@@ -503230,7 +503254,7 @@ elf_symbol {
   name: "power_supply_powers"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xab4ca127
+  crc: 0x6e84ebee
   type_id: 0x9b8cc3ad
   full_name: "power_supply_powers"
 }
@@ -503239,7 +503263,7 @@ elf_symbol {
   name: "power_supply_put"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x0b380f7c
+  crc: 0xf3a48a93
   type_id: 0x169d12f4
   full_name: "power_supply_put"
 }
@@ -503248,7 +503272,7 @@ elf_symbol {
   name: "power_supply_put_battery_info"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x18a55d20
+  crc: 0x68848894
   type_id: 0x165f874a
   full_name: "power_supply_put_battery_info"
 }
@@ -503266,7 +503290,7 @@ elf_symbol {
   name: "power_supply_register"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf9abe3cf
+  crc: 0x29e39b1d
   type_id: 0x3bb8868a
   full_name: "power_supply_register"
 }
@@ -503275,7 +503299,7 @@ elf_symbol {
   name: "power_supply_set_property"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x3e4bf8c1
+  crc: 0xd3a1a702
   type_id: 0x9bad5a77
   full_name: "power_supply_set_property"
 }
@@ -503293,7 +503317,7 @@ elf_symbol {
   name: "power_supply_unregister"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x0b380f7c
+  crc: 0xf3a48a93
   type_id: 0x169d12f4
   full_name: "power_supply_unregister"
 }
@@ -505370,7 +505394,7 @@ elf_symbol {
   name: "refresh_frequency_limits"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe9f20ed5
+  crc: 0x759f9ff8
   type_id: 0x10ffd8df
   full_name: "refresh_frequency_limits"
 }
@@ -517867,7 +517891,7 @@ elf_symbol {
   name: "thermal_cdev_update"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x5cb40908
+  crc: 0xd92b1138
   type_id: 0x11aaf502
   full_name: "thermal_cdev_update"
 }
@@ -517876,7 +517900,7 @@ elf_symbol {
   name: "thermal_cooling_device_register"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xe42ad356
+  crc: 0x1e7dd98b
   type_id: 0x4759fa3a
   full_name: "thermal_cooling_device_register"
 }
@@ -517885,7 +517909,7 @@ elf_symbol {
   name: "thermal_cooling_device_unregister"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x754ad465
+  crc: 0x31c6afbd
   type_id: 0x11aaf502
   full_name: "thermal_cooling_device_unregister"
 }
@@ -517894,7 +517918,7 @@ elf_symbol {
   name: "thermal_cooling_device_update"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x754ad465
+  crc: 0x31c6afbd
   type_id: 0x11aaf502
   full_name: "thermal_cooling_device_update"
 }
@@ -517903,7 +517927,7 @@ elf_symbol {
   name: "thermal_of_cooling_device_register"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x499cd82f
+  crc: 0xb50b9020
   type_id: 0x4552a7f2
   full_name: "thermal_of_cooling_device_register"
 }
@@ -517912,7 +517936,7 @@ elf_symbol {
   name: "thermal_trip_is_bound_to_cdev"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x30d62e8c
+  crc: 0x32365277
   type_id: 0xf7ebb24c
   full_name: "thermal_trip_is_bound_to_cdev"
 }
@@ -517921,7 +517945,7 @@ elf_symbol {
   name: "thermal_tripless_zone_device_register"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x1420c4fc
+  crc: 0xdac9ce6e
   type_id: 0xf2bed21d
   full_name: "thermal_tripless_zone_device_register"
 }
@@ -517930,7 +517954,7 @@ elf_symbol {
   name: "thermal_zone_device_critical"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf8bc90b6
+  crc: 0x06153783
   type_id: 0x192105f2
   full_name: "thermal_zone_device_critical"
 }
@@ -517939,7 +517963,7 @@ elf_symbol {
   name: "thermal_zone_device_disable"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x8ff0bb71
+  crc: 0x390e1d02
   type_id: 0x9439b74e
   full_name: "thermal_zone_device_disable"
 }
@@ -517948,7 +517972,7 @@ elf_symbol {
   name: "thermal_zone_device_enable"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x8ff0bb71
+  crc: 0x390e1d02
   type_id: 0x9439b74e
   full_name: "thermal_zone_device_enable"
 }
@@ -517957,7 +517981,7 @@ elf_symbol {
   name: "thermal_zone_device_id"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xad6c07ad
+  crc: 0x64d6d98d
   type_id: 0x9439b74e
   full_name: "thermal_zone_device_id"
 }
@@ -517966,7 +517990,7 @@ elf_symbol {
   name: "thermal_zone_device_priv"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xaecdcf04
+  crc: 0xbe7e65a7
   type_id: 0x5f2fe590
   full_name: "thermal_zone_device_priv"
 }
@@ -517975,7 +517999,7 @@ elf_symbol {
   name: "thermal_zone_device_register_with_trips"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x9d28ffb2
+  crc: 0x6187eea5
   type_id: 0xf23fb0f7
   full_name: "thermal_zone_device_register_with_trips"
 }
@@ -517984,7 +518008,7 @@ elf_symbol {
   name: "thermal_zone_device_type"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x582993fd
+  crc: 0xa80483bb
   type_id: 0x9bfd43c2
   full_name: "thermal_zone_device_type"
 }
@@ -517993,7 +518017,7 @@ elf_symbol {
   name: "thermal_zone_device_unregister"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xf8bc90b6
+  crc: 0x06153783
   type_id: 0x192105f2
   full_name: "thermal_zone_device_unregister"
 }
@@ -518002,7 +518026,7 @@ elf_symbol {
   name: "thermal_zone_device_update"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x561798a5
+  crc: 0x3a086fa6
   type_id: 0x18a3b8d2
   full_name: "thermal_zone_device_update"
 }
@@ -518011,7 +518035,7 @@ elf_symbol {
   name: "thermal_zone_for_each_trip"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xb3dd631b
+  crc: 0x9e4cf07c
   type_id: 0x948ae948
   full_name: "thermal_zone_for_each_trip"
 }
@@ -518020,7 +518044,7 @@ elf_symbol {
   name: "thermal_zone_get_crit_temp"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x3dbfa43a
+  crc: 0x0a8a7907
   type_id: 0x9474d77b
   full_name: "thermal_zone_get_crit_temp"
 }
@@ -518029,7 +518053,7 @@ elf_symbol {
   name: "thermal_zone_get_temp"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x38ee097d
+  crc: 0xa180a509
   type_id: 0x9474d77b
   full_name: "thermal_zone_get_temp"
 }
@@ -518038,7 +518062,7 @@ elf_symbol {
   name: "thermal_zone_get_zone_by_name"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x30ab3c55
+  crc: 0xe6b5a653
   type_id: 0xf2d19814
   full_name: "thermal_zone_get_zone_by_name"
 }
@@ -518047,7 +518071,7 @@ elf_symbol {
   name: "thermal_zone_set_trip_temp"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0xa1a5f02c
+  crc: 0x1fcb772a
   type_id: 0x1915f739
   full_name: "thermal_zone_set_trip_temp"
 }
@@ -521586,7 +521610,7 @@ elf_symbol {
   name: "update_devfreq"
   is_defined: true
   symbol_type: FUNCTION
-  crc: 0x5ba7c9ed
+  crc: 0xeee7fc58
   type_id: 0x945a66f1
   full_name: "update_devfreq"
 }
