@@ -18,6 +18,24 @@
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7ad0cc1_8bf83051",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 4118894
+      },
+      "writtenOn": "2026-05-07T01:42:47Z",
+      "side": 1,
+      "message": "Our .ko file doesn\u0027t need these header files to maintain stability. If the kernel is upgraded and changes occur, problems can be easily detected through compilation errors, and the corresponding .ko code can be updated. Therefore, it doesn\u0027t need to be added to the gki list. Similarly, since it directly uses inline functions from header files and doesn\u0027t directly access structs from header files, it\u0027s fine that structs aren\u0027t added to the gki list.",
+      "parentUuid": "f9e94cfb_235151fe",
+      "revId": "fc067ad152c5bee3ec1cb1c4b7a4304c75728a05",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5a13648_6871fb34",
