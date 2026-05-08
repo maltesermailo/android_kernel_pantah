@@ -132,7 +132,7 @@ static int dmabuf_content_load(struct wrap_content *content, struct file *file,
 	iov.iov_base = (u8 *)map.vaddr + buf_offs;
 	init_sync_kiocb(&kiocb, file);
 	kiocb.ki_pos = file_offs;
-	kiocb.ki_flags |= IOCB_DIRECT;
+	kiocb.ki_flags |= PAGE_ALIGNED(file_offs | buf_offs) ? IOCB_DIRECT : 0;
 
 	while (len > 0) {
 		loff_t count = min_t(loff_t, MAX_RW_COUNT, PAGE_ALIGN(len));
@@ -715,12 +715,6 @@ static int wrap_file_load(struct wrap_ctx *ctx,
 	len = wrapfd_load.len;
 
 	if (file_offs < 0 || buf_offs < 0 || len < 0)
-		return -EINVAL;
-
-	if (!PAGE_ALIGNED(file_offs))
-		return -EINVAL;
-
-	if (!PAGE_ALIGNED(buf_offs))
 		return -EINVAL;
 
 	if (wrapfd_load.reserved || wrapfd_load.pad)
