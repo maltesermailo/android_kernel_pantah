@@ -1342,7 +1342,9 @@ void pkvm_reset_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu)
 
 	hyp_vcpu->exit_code = 0;
 
-	WARN_ON(hyp_vcpu->power_state != PSCI_0_2_AFFINITY_LEVEL_ON_PENDING);
+	/* OFF is also valid here when handle_pvm_entry_psci() raced. */
+	WARN_ON(hyp_vcpu->power_state != PSCI_0_2_AFFINITY_LEVEL_ON_PENDING &&
+		hyp_vcpu->power_state != PSCI_0_2_AFFINITY_LEVEL_OFF);
 	WRITE_ONCE(hyp_vcpu->power_state, PSCI_0_2_AFFINITY_LEVEL_ON);
 }
 
