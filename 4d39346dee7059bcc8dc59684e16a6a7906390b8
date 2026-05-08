@@ -34,6 +34,24 @@
       "parentUuid": "1843d1ca_ab8af2cb",
       "revId": "4d39346dee7059bcc8dc59684e16a6a7906390b8",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83f2fc76_dbd80aaf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-08T17:52:16Z",
+      "side": 1,
+      "message": "Ah, I missed that it is about the dirty bit, not just the access bit.\n\nSo, yeah, now I get it: software may rely on the dirty bit to know if the page contents may have changed or not, so if this bit is unexpectedly cleared, it may cause bugs.\n\nBut in our case \"software\" means the pKVM hypervisor, and the pKVM hypervisor doesn\u0027t seem to actually use the dirty bit in EPT PTEs? So basically we don\u0027t need to care if we clobber it?\n\nAs for the host kernel, I imagine it may actually rely on the dirty bit in MMU PTEs. And yet, pte_mkold() is implemented non-atomically. Is it because no one has ever noticed this issue in Linux kernel through all these years, or perhaps kernel doesn\u0027t actually rely on the dirty bit in such a way that this would cause any serious issues? I\u0027m not a MM expert...",
+      "parentUuid": "f94a1f84_94f507a7",
+      "revId": "4d39346dee7059bcc8dc59684e16a6a7906390b8",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
