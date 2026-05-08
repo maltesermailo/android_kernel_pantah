@@ -52,6 +52,24 @@
       "parentUuid": "c12180cb_70f11abf",
       "revId": "f393bebdd3097b25b477075b23e06795659a2efc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c92773b9_57b4bc22",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1645,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-08T12:19:46Z",
+      "side": 1,
+      "message": "\u003e I\u0027m not sure what you mean. The reason for enforcing guest mmu loading is not to ensure that the guest will boot successfully from 64-bit mode (that is the host\u0027s concern, not pKVM\u0027s) but to ensure that if a vCPU runs, it always runs with the correct EPT loaded (so pKVM\u0027s memory protection is always correctly enforced).\n\nAs you pointed out \"Actually I think KVM-high always makes sure to call kvm_mmu_load() -\u003e kvm_mmu_load_pgd() -\u003e pkvm_load_mmu_pgd() before running a vCPU first time, even if it doesn\u0027t need to set CR3 (e.g. even if it doesn\u0027t boot the VM directly from 64-bit mode)?\", so the MMU is already loaded via PV interface before we reach here, and we don\u0027t have to load mmu again right here, right?\n\nAnd if we don\u0027t enforce mmu loading at here, and the host is maliciously not using PV interface to load mmu, then the guest\u0027s EPTP is not programmed, so the guest is not able to run.\n\nThat is why I asked what is the advantage of enforce guest mmu loading. I didn\u0027t understand your point that, \"ensure that if a vCPU runs, it always runs with the correct EPT loaded (so pKVM\u0027s memory protection is always correctly enforced).\", as my understanding is that a guest should not be able to run with EPTP not programmed.",
+      "parentUuid": "e7ac2b8e_0f4ef3d5",
+      "revId": "f393bebdd3097b25b477075b23e06795659a2efc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
