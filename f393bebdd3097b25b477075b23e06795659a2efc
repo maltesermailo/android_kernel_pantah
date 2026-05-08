@@ -88,6 +88,24 @@
       "parentUuid": "c92773b9_57b4bc22",
       "revId": "f393bebdd3097b25b477075b23e06795659a2efc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14c4902b_5fcda3ce",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1645,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-08T13:00:52Z",
+      "side": 1,
+      "message": "The EPTP will be checked before enter guest, SDM mentioned:\n```\nIf the “enable EPT” VM-execution control is 1, the EPTP VM-execution control field (see Table 26-9 in Section\n26.6.11) must satisfy the following checks:\n— The EPT memory type (bits 2:0) must be a value supported by the processor as indicated in the\nIA32_VMX_EPT_VPID_CAP MSR (see Appendix A.10).\n— Bits 5:3 must contain a value 1 less than an EPT page-walk length supported by the processor as indicated\nin the IA32_VMX_EPT_VPID_CAP MSR (see Section 30.3.2 and Appendix A.10).\n— Bit 6 (enable bit for accessed and dirty flags for EPT) must be 0 if bit 21 of the IA32_VMX_EPT_VPID_CAP\nMSR (see Appendix A.10) is read as 0, indicating that the processor does not support accessed and dirty\nflags for EPT.\n— Reserved bits 11:7 and 63:N (where N is the processor’s physical-address width) must all be 0.\n```\n\nBit5:3 should be 1 less than the actual EPT page table level, so it should be 3 or 4. If we don\u0027t program EPTP, it is 0, which should be failed for the above check.",
+      "parentUuid": "addc69eb_0e60733c",
+      "revId": "f393bebdd3097b25b477075b23e06795659a2efc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
