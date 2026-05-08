@@ -16,6 +16,24 @@
       "message": "can this be a module? (GKI or vendor)",
       "revId": "efa12e0488b0271bfe22e1804241575d6e150c4d",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2ce73ae_69e1f73c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3386406
+      },
+      "writtenOn": "2026-05-08T19:25:08Z",
+      "side": 1,
+      "message": "I\u0027ll have to ask our linux folks and we can take a look into it.\n\nThe way things are now though this change doesn\u0027t impact it\u0027s status as built-in or module, since we\u0027re not enabling CONFIG_ARCH_TEGRA_264_SOC . It\u0027s kernel integration status is set by the already enabled CONFIG_ARCH_TEGRA_234_SOC.\n\nRegardless though, I see what you mean and the idea that we should have an arch specific tegra emc config for the tegra186-emc.o driver, similar to how we do for tegra124-emc.o and older drivers.",
+      "parentUuid": "5f41b769_30df2526",
+      "revId": "efa12e0488b0271bfe22e1804241575d6e150c4d",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
