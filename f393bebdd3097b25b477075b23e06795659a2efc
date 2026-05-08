@@ -106,6 +106,24 @@
       "parentUuid": "addc69eb_0e60733c",
       "revId": "f393bebdd3097b25b477075b23e06795659a2efc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fbc7988_f119f5db",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1645,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-08T13:10:31Z",
+      "side": 1,
+      "message": "\u003e If we don\u0027t program EPTP, it is 0\n\nIs that guaranteed?\n\nBTW is that guaranteed for all other VMCS fields as well (i.e. are they all zero-initialized by HW)?",
+      "parentUuid": "14c4902b_5fcda3ce",
+      "revId": "f393bebdd3097b25b477075b23e06795659a2efc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
