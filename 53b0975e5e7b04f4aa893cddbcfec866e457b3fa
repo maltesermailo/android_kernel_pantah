@@ -16,6 +16,24 @@
       "message": "can this be converted to vendor module? (same question for all drivers in the series).",
       "revId": "53b0975e5e7b04f4aa893cddbcfec866e457b3fa",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d058d3a_0114866b",
+        "filename": "drivers/soc/tegra/Kconfig",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 3386406
+      },
+      "writtenOn": "2026-05-08T16:33:05Z",
+      "side": 1,
+      "message": "We\u0027ve discussed with our Tegra Linux engineers before but they\u0027re not in favor of converting our arch configs to module at all and prefer to keep them as built-ins.\n\nThis config isn\u0027t actually enabling any new explicit driver/module in GKI. It is being used currently to enable additional file compilation for certain drivers like MC t238 in https://android-review.googlesource.com/c/kernel/common/+/4064501/2?usp\u003drelated-change\nSince Tegra MC driver is already built-in it\u0027s just baking in some additional support for t238 which is our current platform.\nAs for the drivers it selects, these are already enabled in GKI hence no actual additional drivers being built-in from those.",
+      "parentUuid": "e6716817_e2e8b1b0",
+      "revId": "53b0975e5e7b04f4aa893cddbcfec866e457b3fa",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
