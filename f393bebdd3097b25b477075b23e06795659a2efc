@@ -70,6 +70,24 @@
       "parentUuid": "e7ac2b8e_0f4ef3d5",
       "revId": "f393bebdd3097b25b477075b23e06795659a2efc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "addc69eb_0e60733c",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1645,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-08T12:38:15Z",
+      "side": 1,
+      "message": "Ah ok, if it is indeed guaranteed that the guest will not run if EPTP is not programmed, maybe we don\u0027t need to enforce it...\n\nDoes the SDM guarantee that? What exactly happens when we execute VMLAUNCH/VMRESUME without programming EPT_POINTER before that?\n\nI was thinking what happens is: the HW uses some initial (undefined?) value of EPT_POINTER, and then, _maybe_ most likely it will fail since this value will be malformed, but it is not guaranteed (i.e. it may be accidentally a valid EPTP value)?",
+      "parentUuid": "c92773b9_57b4bc22",
+      "revId": "f393bebdd3097b25b477075b23e06795659a2efc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
