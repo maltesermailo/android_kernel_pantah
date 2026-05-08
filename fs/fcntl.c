@@ -40,7 +40,8 @@
 
 #define SETFL_MASK (O_APPEND | O_NONBLOCK | O_NDELAY | O_DIRECT | O_NOATIME)
 
-static long fcntl_dropbehind_enable(struct file *filp, unsigned long arg)
+int file_dropbehind_enable(struct file *filp, u32 keep_tail, u32 batch_bytes,
+			   u32 state_flags, u32 policy_rule_id)
 {
 	struct inode *inode = file_inode(filp);
 
@@ -50,18 +51,29 @@ static long fcntl_dropbehind_enable(struct file *filp, unsigned long arg)
 		return -EOPNOTSUPP;
 	if (IS_DAX(inode))
 		return -EOPNOTSUPP;
+	if (!keep_tail)
+		keep_tail = 128 * 1024;
+	if (!batch_bytes)
+		batch_bytes = 256 * 1024;
 
 	spin_lock(&filp->f_lock);
 	filp->f_iocb_flags |= IOCB_DONTCACHE;
-	filp->f_dropbehind_state |= FILE_DROPBEHIND_ENABLED;
+	filp->f_dropbehind_state |= FILE_DROPBEHIND_ENABLED | state_flags;
 	filp->f_dropbehind_state &= ~FILE_DROPBEHIND_DISABLED_BY_BACKWARD;
-	filp->f_dropbehind_keep_tail = 128 * 1024;
-	filp->f_dropbehind_batch_bytes = 256 * 1024;
+	filp->f_dropbehind_keep_tail = keep_tail;
+	filp->f_dropbehind_batch_bytes = batch_bytes;
 	filp->f_dropbehind_dropped_upto = 0;
 	filp->f_dropbehind_max_seen_pos = 0;
+	filp->f_dropbehind_policy_rule_id = policy_rule_id;
 	spin_unlock(&filp->f_lock);
+
 	trace_android_vh_dropbehind_enable(filp, 0);
 	return 0;
+}
+
+static long fcntl_dropbehind_enable(struct file *filp, unsigned long arg)
+{
+	return file_dropbehind_enable(filp, 128 * 1024, 256 * 1024, 0, 0);
 }
 
 static long fcntl_dropbehind_disable(struct file *filp, unsigned long arg)
@@ -69,6 +81,8 @@ static long fcntl_dropbehind_disable(struct file *filp, unsigned long arg)
 	spin_lock(&filp->f_lock);
 	filp->f_iocb_flags &= ~IOCB_DONTCACHE;
 	filp->f_dropbehind_state &= ~FILE_DROPBEHIND_ENABLED;
+	filp->f_dropbehind_state &= ~FILE_DROPBEHIND_FINAL_DROP;
+	filp->f_dropbehind_policy_rule_id = 0;
 	spin_unlock(&filp->f_lock);
 	trace_android_vh_dropbehind_disable(filp, 0);
 	return 0;

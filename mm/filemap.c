@@ -26,6 +26,7 @@
 #include <linux/mman.h>
 #include <linux/pagemap.h>
 #include <linux/file.h>
+#include <linux/dropbehind_policy.h>
 #include <linux/uio.h>
 #include <linux/error-injection.h>
 #include <linux/hash.h>
@@ -2650,23 +2651,24 @@ static void file_dropbehind_disable_locked(struct file *file, u32 reason)
 	file->f_dropbehind_state |= reason;
 }
 
-static void filemap_dropbehind_range(struct file *file,
-				     struct address_space *mapping,
-				     loff_t start, loff_t end)
+static u64 filemap_dropbehind_range(struct file *file,
+				    struct address_space *mapping,
+				    loff_t start, loff_t end)
 {
 	loff_t aligned_start, aligned_end;
 
 	if (end <= start)
-		return;
+		return 0;
 
 	aligned_start = ALIGN(start, PAGE_SIZE);
 	aligned_end = round_down(end, PAGE_SIZE);
 	if (aligned_end <= aligned_start)
-		return;
+		return 0;
 
 	trace_android_vh_dropbehind_invalidate(file, aligned_start, aligned_end);
 	invalidate_inode_pages2_range(mapping, aligned_start >> PAGE_SHIFT,
 				      (aligned_end - 1) >> PAGE_SHIFT);
+	return aligned_end - aligned_start;
 }
 
 static void filemap_dropbehind_after_read(struct kiocb *iocb,
@@ -2676,6 +2678,7 @@ static void filemap_dropbehind_after_read(struct kiocb *iocb,
 	struct file *file = iocb->ki_filp;
 	struct address_space *mapping = file->f_mapping;
 	loff_t safe_drop_end, drop_start, drop_end;
+	u64 dropped;
 	u32 keep_tail, batch_bytes;
 
 	if (!file_dropbehind_enabled(file))
@@ -2719,7 +2722,40 @@ static void filemap_dropbehind_after_read(struct kiocb *iocb,
 	file->f_dropbehind_dropped_upto = safe_drop_end;
 	spin_unlock(&file->f_lock);
 
-	filemap_dropbehind_range(file, mapping, drop_start, drop_end);
+	dropped = filemap_dropbehind_range(file, mapping, drop_start, drop_end);
+	dropbehind_policy_account_drop(file, dropped, false);
+}
+
+static void filemap_dropbehind_finish_read(struct kiocb *iocb)
+{
+	struct file *file = iocb->ki_filp;
+	struct address_space *mapping = file->f_mapping;
+	loff_t drop_start, drop_end;
+	u64 dropped;
+	u32 state;
+
+	if (!file_dropbehind_enabled(file))
+		return;
+
+	spin_lock(&file->f_lock);
+	state = file->f_dropbehind_state;
+	if (!(state & FILE_DROPBEHIND_FINAL_DROP) ||
+	    (state & FILE_DROPBEHIND_DISABLED_BY_BACKWARD)) {
+		spin_unlock(&file->f_lock);
+		return;
+	}
+
+	drop_start = file->f_dropbehind_dropped_upto;
+	drop_end = file->f_dropbehind_max_seen_pos;
+	if (drop_end <= drop_start) {
+		spin_unlock(&file->f_lock);
+		return;
+	}
+	file->f_dropbehind_dropped_upto = drop_end;
+	spin_unlock(&file->f_lock);
+
+	dropped = filemap_dropbehind_range(file, mapping, drop_start, drop_end);
+	dropbehind_policy_account_drop(file, dropped, true);
 }
 
 /**
@@ -2842,6 +2878,9 @@ put_folios:
 			folio_put(fbatch.folios[i]);
 		folio_batch_init(&fbatch);
 	} while (iov_iter_count(iter) && iocb->ki_pos < isize && !error);
+
+	if (already_read && iocb->ki_pos >= i_size_read(inode))
+		filemap_dropbehind_finish_read(iocb);
 
 	file_accessed(filp);
 	ra->prev_pos = last_pos;

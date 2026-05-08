@@ -1046,6 +1046,7 @@ struct file {
 	u32				f_dropbehind_batch_bytes;
 	loff_t				f_dropbehind_dropped_upto;
 	loff_t				f_dropbehind_max_seen_pos;
+	u32				f_dropbehind_policy_rule_id;
 	const struct cred		*f_cred;
 	/* --- cacheline 1 boundary (64 bytes) --- */
 	struct path			f_path;
@@ -2144,6 +2145,7 @@ struct file_operations {
 
 #define FILE_DROPBEHIND_ENABLED			(1U << 0)
 #define FILE_DROPBEHIND_DISABLED_BY_BACKWARD	(1U << 1)
+#define FILE_DROPBEHIND_FINAL_DROP		(1U << 2)
 
 /* Wrap a directory iterator that needs exclusive inode access */
 int wrap_directory_iterator(struct file *, struct dir_context *,
@@ -2202,6 +2204,8 @@ static inline int call_mmap(struct file *file, struct vm_area_struct *vma)
 
 extern ssize_t vfs_read(struct file *, char __user *, size_t, loff_t *);
 extern ssize_t vfs_write(struct file *, const char __user *, size_t, loff_t *);
+int file_dropbehind_enable(struct file *filp, u32 keep_tail, u32 batch_bytes,
+			   u32 state_flags, u32 policy_rule_id);
 extern ssize_t vfs_copy_file_range(struct file *, loff_t , struct file *,
 				   loff_t, size_t, unsigned int);
 int remap_verify_area(struct file *file, loff_t pos, loff_t len, bool write);

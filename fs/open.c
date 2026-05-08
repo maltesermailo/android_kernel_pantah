@@ -33,6 +33,7 @@
 #include <linux/compat.h>
 #include <linux/mnt_idmapping.h>
 #include <linux/filelock.h>
+#include <linux/dropbehind_policy.h>
 
 #include "internal.h"
 #include <trace/events/dropbehind.h>
@@ -1460,6 +1461,7 @@ static long do_sys_openat2(int dfd, const char __user *filename,
 			put_unused_fd(fd);
 			fd = PTR_ERR(f);
 		} else {
+			dropbehind_policy_maybe_enable(f);
 			android_dropbehind_trace_open_observe(f, fd);
 			fd_install(fd, f);
 		}
