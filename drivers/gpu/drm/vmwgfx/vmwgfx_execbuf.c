@@ -4248,7 +4248,11 @@ int vmw_execbuf_process(struct drm_file *file_priv,
 			put_unused_fd(out_fence_fd);
 		} else {
 			struct seqno_waiter_rm_context *ctx;
+<<<<<<< HEAD   (5feb5545d40a606710dea0c26c732f3050ee29cd Merge 0f37d1e65c6d ("Bluetooth: MGMT: validate LTK enc_size )
 
+||||||| BASE   (0f37d1e65c6d71ad94ccfb5c602163c525db789d Bluetooth: MGMT: validate LTK enc_size on load)
+=======
+>>>>>>> BRANCH (e808462dc45abd96e520dec5dd449e69620ac26b usb: ehci-brcm: fix sleep during atomic)
 			/* Link the fence with the FD created earlier */
 			fd_install(out_fence_fd, sync_file->file);
 			ctx = kmalloc(sizeof(*ctx), GFP_KERNEL);
