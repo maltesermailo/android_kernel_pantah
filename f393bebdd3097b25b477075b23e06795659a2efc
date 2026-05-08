@@ -16,6 +16,24 @@
       "message": "This early return will allow the host to trigger executing `pkvm_vcpu_pvmfw_entry_init()` or `pkvm_vcpu_ap_entry_init()` more than once (since `kvm_vcpu_has_run()` is still false)? Although it _seems_ that wouldn\u0027t be harmful, since currently both `pkvm_vcpu_pvmfw_entry_init()` or `pkvm_vcpu_ap_entry_init()` implementations are \"idempotent\". But still it seems cleaner, and potentially safer, to avoid allowing that?\n\nFurthermore, we don\u0027t really need the CR3/PDPTR setup here, we only need to load the EPT?\n\nSo maybe we\u0027d better just call `kvm_x86_call(load_mmu_pgd)()` instead of `pkvm_load_mmu_pgd()` here?",
       "revId": "f393bebdd3097b25b477075b23e06795659a2efc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c12180cb_70f11abf",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1645,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-08T03:14:22Z",
+      "side": 1,
+      "message": "For the case booting with pvmfw, we don\u0027t need CR3/PDPTR. For the case without pvmfw, it at least still needs CR3 to directly booting from 64bit paging mode. But as pkvm_load_mmu_pgd is exposed to the host, the host can call this before running the vCPU to setup CR3/PDPTR for pVM without pvmfw.\n\nConsidering this, if the host doesn\u0027t use this PV interface, and the pKVM doesn\u0027t load the guest mmu before running cpu, the guest will not be able to run. However there are many ways for the host to block the guest to run, e.g., refuse to map in guest mmu. If we prefer to enforce the guest mmu loading, we can just do as you suggested to simplify.  so what is the advantage of having this code to enforce guest mmu loading?\n\nIf we prefer to enforce the guest mmu loading for some reason, maybe we just need to enforce this for pVM (either w/ pvmfw or w/o pvmfw) only?\n```\n                                pkvm_vcpu_pvmfw_entry_init(vcpu);\n                        else if (!kvm_vcpu_is_reset_bsp(vcpu))\n                                pkvm_vcpu_ap_entry_init(vcpu);\n+\n+                       kvm_x86_call(load_mmu_pgd)(vcpu, vcpu-\u003earch.mmu-\u003eroot.hpa,\n+                                                  vcpu-\u003earch.mmu-\u003eroot_role.level);\n                }\n        }\n\n-       if (unlikely(!kvm_vcpu_has_run(vcpu)))\n-               pkvm_load_mmu_pgd(vcpu);\n-\n```",
+      "parentUuid": "31b42710_6d98737e",
+      "revId": "f393bebdd3097b25b477075b23e06795659a2efc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
