@@ -34,6 +34,24 @@
       "parentUuid": "31b42710_6d98737e",
       "revId": "f393bebdd3097b25b477075b23e06795659a2efc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7ac2b8e_0f4ef3d5",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1645,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-08T11:27:00Z",
+      "side": 1,
+      "message": "\u003e Considering this, if the host doesn\u0027t use this PV interface, and the pKVM doesn\u0027t load the guest mmu before running cpu, the guest will not be able to run.\n\nIf the host wants CR3 to be set, the host needs to make the load_mmu_pgd call anyway? If it doesn\u0027t, it is a host\u0027s bug, not a pKVM\u0027s problem? Or am I missing something?\n\nActually I think KVM-high always makes sure to call kvm_mmu_load() -\u003e kvm_mmu_load_pgd() -\u003e pkvm_load_mmu_pgd() before running a vCPU first time, even if it doesn\u0027t need to set CR3 (e.g. even if it doesn\u0027t boot the VM directly from 64-bit mode)?\n\n\u003e If we prefer to enforce the guest mmu loading, we can just do as you suggested to simplify. so what is the advantage of having this code to enforce guest mmu loading?\n\nI\u0027m not sure what you mean. The reason for enforcing guest mmu loading is not to ensure that the guest will boot successfully from 64-bit mode (that is the host\u0027s concern, not pKVM\u0027s) but to ensure that if a vCPU runs, it always runs with the correct EPT loaded (so pKVM\u0027s memory protection is always correctly enforced).\n\n(Side note: all this is a bit confusing due to the fact that this KVM\u0027s load_mmu_pgd API is responsible for both EPT setup and CR3/PDPTR setup, which are quite different things; in particular in the pKVM case, the EPT setup is strictly for pKVM\u0027s needs, while the CR3/PDPTR setup is strictly for the host\u0027s needs.)\n\n\u003e If we prefer to enforce the guest mmu loading for some reason, maybe we just need to enforce this for pVM (either w/ pvmfw or w/o pvmfw) only?\n\nWe need to enforce loading correct EPT for npVM as well, otherwise pKVM has no control over which pages a npVM has access to?",
+      "parentUuid": "c12180cb_70f11abf",
+      "revId": "f393bebdd3097b25b477075b23e06795659a2efc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
