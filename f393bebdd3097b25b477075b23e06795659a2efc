@@ -160,6 +160,24 @@
       "parentUuid": "fc72bcb7_6706547d",
       "revId": "f393bebdd3097b25b477075b23e06795659a2efc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a8f92eb_c00f3ec0",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1645,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-09T09:30:35Z",
+      "side": 1,
+      "message": "\u003e Ah, so the HW guarantees that the initial values of VMCS fields will be the values stored in the VMCS memory page at the moment of the VMPTRLD instruction? If so, it makes sense, but do you know if there is an explicit statement in the SDM about that?\n\nAnd if so, do we need to clflush the VMCS page before the first VMPTRLD if we want to rely on that? :)",
+      "parentUuid": "5157eb11_de39b8bb",
+      "revId": "f393bebdd3097b25b477075b23e06795659a2efc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
