@@ -124,6 +124,24 @@
       "parentUuid": "14c4902b_5fcda3ce",
       "revId": "f393bebdd3097b25b477075b23e06795659a2efc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc72bcb7_6706547d",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1645,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-09T01:14:47Z",
+      "side": 1,
+      "message": "We donate the VMCS memory page from the host to the pKVM via `if (pkvm_host_donate_hyp(__pkvm_pa(loaded_vmcs-\u003evmcs), PAGE_SIZE, true))` in vmx.c when creating vcpu with passing true to clear the entire page. So the EPTP field should be zero if we never program it.\n\nAn experiment I do is not to write EPTP VMCS field. And the guest is failed to run. the VMCS reading of EPTP shows it is 0.\n\nNow I got your point about the purpose of the enforcement, to make sure not to leave EPTP with some unexpected value. So I agree this is useful, which can prevent some potential issue caused by programming EPTP unexpected with some meaningful value. So yeah, if we want to enforce mmu loading, then we should enforce for both npVM and pVM. In this case, we can directly call `kvm_x86_call(load_mmu_pgd)` rather than `pkvm_load_mmu_pgd`",
+      "parentUuid": "4fbc7988_f119f5db",
+      "revId": "f393bebdd3097b25b477075b23e06795659a2efc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
