@@ -178,6 +178,24 @@
       "parentUuid": "5157eb11_de39b8bb",
       "revId": "f393bebdd3097b25b477075b23e06795659a2efc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48758e5c_56de6fa6",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1645,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-09T09:58:36Z",
+      "side": 1,
+      "message": "Actually according to SDM, no VMWRITE to required VMCS field will result in unpredictable behaviors, which implicitly mean this is determined by the microarchitecture implementations.",
+      "parentUuid": "3a8f92eb_c00f3ec0",
+      "revId": "f393bebdd3097b25b477075b23e06795659a2efc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
