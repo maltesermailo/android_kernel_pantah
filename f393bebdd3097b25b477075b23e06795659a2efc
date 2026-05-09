@@ -214,6 +214,24 @@
       "parentUuid": "48758e5c_56de6fa6",
       "revId": "f393bebdd3097b25b477075b23e06795659a2efc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e35561b_4375c040",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1645,
+      "author": {
+        "id": 4085392
+      },
+      "writtenOn": "2026-05-09T10:34:02Z",
+      "side": 1,
+      "message": "You probably need an up-to-date SDM. Mine is 2026 Feb. Vol 3C, section 27.11.3 Initializing a VMCS\n```\nSoftware should initialize fields in a VMCS (using VMWRITE) before using the VMCS for VM entry. Failure to do so\nmay result in unpredictable behavior; for example, a VM entry may fail for unexplained reasons, or a successful\ntransition (VM entry or VM exit) may load processor state with unexpected values.\n```",
+      "parentUuid": "2b498279_998e3f68",
+      "revId": "f393bebdd3097b25b477075b23e06795659a2efc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
