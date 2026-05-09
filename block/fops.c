@@ -87,6 +87,7 @@ static ssize_t __blkdev_direct_IO_simple(struct kiocb *iocb,
 	if (iocb->ki_flags & IOCB_NOWAIT)
 		bio.bi_opf |= REQ_NOWAIT;
 
+	blk_dpas_prepare_bio(&bio, iocb);
 	submit_bio_wait(&bio);
 
 	bio_release_pages(&bio, should_dirty);
@@ -238,6 +239,7 @@ static ssize_t __blkdev_direct_IO(struct kiocb *iocb, struct iov_iter *iter,
 		}
 		dio->size += bio->bi_iter.bi_size;
 		pos += bio->bi_iter.bi_size;
+		blk_dpas_prepare_bio(bio, iocb);
 
 		nr_pages = bio_iov_vecs_to_alloc(iter, BIO_MAX_VECS);
 		if (!nr_pages) {
@@ -352,8 +354,8 @@ static ssize_t __blkdev_direct_IO_async(struct kiocb *iocb,
 	if (iocb->ki_flags & IOCB_NOWAIT)
 		bio->bi_opf |= REQ_NOWAIT;
 
-	if (iocb->ki_flags & IOCB_HIPRI) {
-		bio->bi_opf |= REQ_POLLED;
+	blk_dpas_prepare_bio(bio, iocb);
+	if (bio->bi_opf & REQ_POLLED) {
 		submit_bio(bio);
 		WRITE_ONCE(iocb->private, bio);
 	} else {

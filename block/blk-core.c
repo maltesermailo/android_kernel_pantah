@@ -51,6 +51,13 @@
 #include "blk-throttle.h"
 #include "blk-ioprio.h"
 
+struct blk_dpas_buffered_poll_wait {
+	struct completion done;
+	bio_end_io_t *end_io;
+	void *private;
+	struct request_queue *q;
+};
+
 struct dentry *blk_debugfs_root;
 
 EXPORT_TRACEPOINT_SYMBOL_GPL(block_bio_remap);
@@ -896,6 +903,53 @@ end_io:
 }
 EXPORT_SYMBOL(submit_bio_noacct);
 
+static void blk_dpas_buffered_poll_endio(struct bio *bio)
+{
+	struct blk_dpas_buffered_poll_wait *wait = bio->bi_private;
+	bio_end_io_t *end_io = wait->end_io;
+	void *private = wait->private;
+	struct request_queue *q = wait->q;
+
+	bio->bi_end_io = end_io;
+	bio->bi_private = private;
+	atomic64_inc(&q->buffered_poll_completed);
+	if (end_io)
+		end_io(bio);
+	complete(&wait->done);
+}
+
+static void blk_dpas_submit_bio_polled(struct bio *bio)
+{
+	struct blk_dpas_buffered_poll_wait wait;
+	struct request_queue *q = bdev_get_queue(bio->bi_bdev);
+	unsigned int loops = 0;
+
+	init_completion(&wait.done);
+	wait.end_io = bio->bi_end_io;
+	wait.private = bio->bi_private;
+	wait.q = q;
+	bio->bi_private = &wait;
+	bio->bi_end_io = blk_dpas_buffered_poll_endio;
+
+	bio_get(bio);
+	submit_bio_noacct(bio);
+	blk_flush_plug(current->plug, false);
+	if (READ_ONCE(bio->bi_cookie) == BLK_QC_T_NONE) {
+		atomic64_inc(&q->buffered_poll_timeout);
+		blk_wait_io(&wait.done);
+		goto done;
+	}
+	while (!completion_done(&wait.done)) {
+		bio_poll(bio, NULL, 0);
+		loops++;
+		if (!(loops & 0xf))
+			cond_resched();
+	}
+	atomic64_add(loops, &q->buffered_poll_loops);
+done:
+	bio_put(bio);
+}
+
 #ifdef CONFIG_BLK_DEV_ZONED
 /**
  * blk_bio_is_seq_zoned_write() - Check if @bio requires write serialization.
@@ -960,7 +1014,10 @@ void submit_bio(struct bio *bio)
 	}
 
 	bio_set_ioprio(bio);
-	submit_bio_noacct(bio);
+	if (blk_dpas_prepare_buffered_bio(bio))
+		blk_dpas_submit_bio_polled(bio);
+	else
+		submit_bio_noacct(bio);
 }
 EXPORT_SYMBOL(submit_bio);
 
@@ -1051,7 +1108,7 @@ int iocb_bio_iopoll(struct kiocb *kiocb, struct io_comp_batch *iob,
 	rcu_read_lock();
 	bio = READ_ONCE(kiocb->private);
 	if (bio)
-		ret = bio_poll(bio, iob, flags);
+		ret = bio_poll(bio, iob, flags | BLK_POLL_NOSLEEP);
 	rcu_read_unlock();
 
 	return ret;

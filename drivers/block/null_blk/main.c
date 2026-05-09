@@ -1524,12 +1524,18 @@ static int null_poll(struct blk_mq_hw_ctx *hctx, struct io_comp_batch *iob)
 	struct nullb_queue *nq = hctx->driver_data;
 	LIST_HEAD(list);
 	int nr = 0;
-	struct request *rq;
+	struct request *rq, *tmp;
+	ktime_t now = ktime_get();
 
 	spin_lock(&nq->poll_lock);
-	list_splice_init(&nq->poll_list, &list);
-	list_for_each_entry(rq, &list, queuelist)
+	list_for_each_entry_safe(rq, tmp, &nq->poll_list, queuelist) {
+		struct nullb_cmd *cmd = blk_mq_rq_to_pdu(rq);
+
+		if (ktime_before(now, cmd->poll_complete_time))
+			continue;
+		list_move_tail(&rq->queuelist, &list);
 		blk_mq_set_request_complete(rq);
+	}
 	spin_unlock(&nq->poll_lock);
 
 	while (!list_empty(&list)) {
@@ -1626,6 +1632,8 @@ static blk_status_t null_queue_rq(struct blk_mq_hw_ctx *hctx,
 	blk_mq_start_request(rq);
 
 	if (is_poll) {
+		cmd->poll_complete_time = ktime_add_ns(ktime_get(),
+						       nq->dev->completion_nsec);
 		spin_lock(&nq->poll_lock);
 		list_add_tail(&rq->queuelist, &nq->poll_list);
 		spin_unlock(&nq->poll_lock);

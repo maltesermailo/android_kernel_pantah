@@ -24,11 +24,13 @@
 #include <linux/sched/topology.h>
 #include <linux/sched/signal.h>
 #include <linux/delay.h>
+#include <linux/hrtimer.h>
 #include <linux/crash_dump.h>
 #include <linux/prefetch.h>
 #include <linux/blk-crypto.h>
 #include <linux/part_stat.h>
 #include <linux/sched/isolation.h>
+#include <linux/string.h>
 
 #include <trace/events/block.h>
 
@@ -46,6 +48,18 @@
 static DEFINE_PER_CPU(struct llist_head, blk_cpu_done);
 static DEFINE_PER_CPU(call_single_data_t, blk_cpu_csd);
 static DEFINE_MUTEX(blk_mq_cpuhp_lock);
+struct blk_switch __percpu *irq_poll_switch;
+EXPORT_SYMBOL(irq_poll_switch);
+
+unsigned int benefit_ratio = 10;
+unsigned long ctx_time = 1487;
+unsigned long isr_time = 1076;
+
+#define _INT 0
+#define _CP 1
+#define _PAS 2
+#define _OL 3
+#define _EHP 4
 
 static void blk_mq_insert_request(struct request *rq, blk_insert_t flags);
 static void blk_mq_request_bypass_insert(struct request *rq,
@@ -53,7 +67,10 @@ static void blk_mq_request_bypass_insert(struct request *rq,
 static void blk_mq_try_issue_list_directly(struct blk_mq_hw_ctx *hctx,
 		struct list_head *list);
 static int blk_hctx_poll(struct request_queue *q, struct blk_mq_hw_ctx *hctx,
-			 struct io_comp_batch *iob, unsigned int flags);
+			 struct io_comp_batch *iob, unsigned int flags,
+			 struct request *rq);
+static bool blk_mq_poll_hybrid(struct request_queue *q, blk_qc_t cookie);
+static void blk_mq_poll_stats_fn(struct blk_stat_callback *cb);
 
 /*
  * Check if any of the ctx, dispatch list or elevator
@@ -90,6 +107,393 @@ struct mq_inflight {
 	struct block_device *part;
 	unsigned int inflight[2];
 };
+
+static void init_pas_stat(struct blk_rq_pas_stat *stat, u32 dur,
+			  long long adj, long long up, long long dn)
+{
+	stat->dur = dur;
+	stat->adj = adj;
+	stat->up = up;
+	stat->dn = dn;
+	stat->sr_pnlt = 0;
+	stat->sr_last = 1;
+	stat->update_req = 0;
+	stat->dur_cnt = 1;
+	stat->dur_cnt_checked = 0;
+}
+
+static int blk_mq_poll_stats_bkt(const struct request *rq)
+{
+	int ddir = rq_data_dir(rq);
+	int sectors = blk_rq_stats_sectors(rq);
+	int bucket;
+
+	if (sectors <= 0)
+		return -1;
+
+	bucket = ddir + 2 * ilog2(sectors);
+	if (bucket < 0)
+		return -1;
+	if (bucket >= BLK_MQ_POLL_STATS_BKTS)
+		return BLK_MQ_POLL_STATS_BKTS - 1;
+	return bucket;
+}
+
+static int blk_dpas_bio_bucket(struct bio *bio)
+{
+	int sectors = bio_sectors(bio);
+	int ddir = bio_data_dir(bio);
+	int bucket;
+
+	if (sectors <= 0)
+		return -1;
+
+	bucket = ddir + 2 * ilog2(sectors);
+	if (bucket < 0)
+		return -1;
+	if (bucket >= BLK_MQ_POLL_STATS_BKTS)
+		return ddir + BLK_MQ_POLL_STATS_BKTS - 2;
+	return bucket;
+}
+
+void blk_dpas_prepare_bio(struct bio *bio, struct kiocb *iocb)
+{
+	struct request_queue *q;
+	struct blk_switch *sc;
+	int bucket;
+
+	if (!(iocb->ki_flags & IOCB_HIPRI))
+		return;
+
+	bio_set_polled(bio, iocb);
+	q = bdev_get_queue(bio->bi_bdev);
+	if (!queue_is_mq(q) || !irq_poll_switch)
+		return;
+
+	sc = per_cpu_ptr(irq_poll_switch, raw_smp_processor_id());
+	sc->ioctr++;
+
+	if (q->switch_enabled)
+		sc->enabled = q->switch_enabled;
+
+	if (!q->switch_enabled && !q->ehp_enabled && !q->pas_enabled)
+		return;
+
+	if (q->ehp_enabled)
+		sc->mode = _EHP;
+
+	if (sc->mode) {
+		switch (sc->mode) {
+		case _CP:
+			sc->cp_cnt++;
+			sc->cp_tot++;
+			break;
+		case _PAS:
+			sc->pas_cnt++;
+			sc->pas_tot++;
+			break;
+		case _OL:
+			sc->ol_cnt++;
+			sc->ol_tot++;
+			break;
+		case _EHP:
+			bucket = blk_dpas_bio_bucket(bio);
+			if (bucket >= 0 && sc->ehpmode[bucket] != _EHP) {
+				iocb->ki_flags &= ~IOCB_HIPRI;
+				bio_clear_polled(bio);
+				sc->int_cnt++;
+				sc->int_tot++;
+			}
+			break;
+		default:
+			break;
+		}
+		return;
+	}
+
+	iocb->ki_flags &= ~IOCB_HIPRI;
+	bio_clear_polled(bio);
+	sc->int_cnt++;
+	sc->int_tot++;
+	if (sc->int_cnt >= sc->param7) {
+		sc->mode = _OL;
+		sc->ol_cnt = 0;
+		sc->qd_sum = 0;
+		sc->tf = 0;
+		sc->N_PAS = 1;
+	}
+}
+EXPORT_SYMBOL_GPL(blk_dpas_prepare_bio);
+
+static bool blk_dpas_buffered_can_poll(struct request_queue *q,
+				       struct bio *bio)
+{
+	struct gendisk *disk;
+
+	if (queue_is_mq(q))
+		return blk_mq_can_poll(q);
+
+	disk = bio->bi_bdev->bd_disk;
+	return (q->limits.features & BLK_FEAT_POLL) && disk &&
+		disk->fops->poll_bio;
+}
+
+bool blk_dpas_prepare_buffered_bio(struct bio *bio)
+{
+	struct request_queue *q;
+	struct blk_switch *sc;
+	char comm[TASK_COMM_LEN];
+	int bucket;
+
+	if (bio_op(bio) != REQ_OP_READ)
+		return false;
+	if (bio->bi_opf & REQ_POLLED)
+		return false;
+	if (!bio->bi_pool)
+		return false;
+
+	q = bdev_get_queue(bio->bi_bdev);
+	if (!q->buffered_poll_enabled)
+		return false;
+	if (bio->bi_opf & REQ_RAHEAD) {
+		if (!q->buffered_poll_readahead) {
+			atomic64_inc(&q->buffered_poll_ra_skip);
+			atomic64_inc(&q->buffered_poll_skip);
+			return false;
+		}
+		bio->bi_opf &= ~REQ_RAHEAD;
+	}
+	if (!blk_dpas_buffered_can_poll(q, bio) || !irq_poll_switch) {
+		atomic64_inc(&q->buffered_poll_skip);
+		return false;
+	}
+	if (q->buffered_poll_comm[0]) {
+		get_task_comm(comm, current);
+		if (strncmp(comm, q->buffered_poll_comm, TASK_COMM_LEN)) {
+			atomic64_inc(&q->buffered_poll_skip);
+			return false;
+		}
+	}
+	if (current->bio_list) {
+		atomic64_inc(&q->buffered_poll_skip);
+		return false;
+	}
+
+	bio->bi_opf |= REQ_POLLED | REQ_SYNC | REQ_NOMERGE;
+	sc = per_cpu_ptr(irq_poll_switch, raw_smp_processor_id());
+	sc->ioctr++;
+
+	if (q->switch_enabled)
+		sc->enabled = q->switch_enabled;
+
+	if (!q->switch_enabled && !q->ehp_enabled && !q->pas_enabled) {
+		atomic64_inc(&q->buffered_poll_selected);
+		return true;
+	}
+
+	if (q->ehp_enabled)
+		sc->mode = _EHP;
+
+	if (sc->mode) {
+		switch (sc->mode) {
+		case _CP:
+			sc->cp_cnt++;
+			sc->cp_tot++;
+			break;
+		case _PAS:
+			sc->pas_cnt++;
+			sc->pas_tot++;
+			break;
+		case _OL:
+			sc->ol_cnt++;
+			sc->ol_tot++;
+			break;
+		case _EHP:
+			bucket = blk_dpas_bio_bucket(bio);
+			if (bucket >= 0 && sc->ehpmode[bucket] != _EHP) {
+				bio_clear_polled(bio);
+				sc->int_cnt++;
+				sc->int_tot++;
+			}
+			break;
+		default:
+			break;
+		}
+		atomic64_inc(&q->buffered_poll_selected);
+		return bio->bi_opf & REQ_POLLED;
+	}
+
+	bio_clear_polled(bio);
+	sc->int_cnt++;
+	sc->int_tot++;
+	if (sc->int_cnt >= sc->param7) {
+		sc->mode = _OL;
+		sc->ol_cnt = 0;
+		sc->qd_sum = 0;
+		sc->tf = 0;
+		sc->N_PAS = 1;
+	}
+	atomic64_inc(&q->buffered_poll_skip);
+	return false;
+}
+EXPORT_SYMBOL_GPL(blk_dpas_prepare_buffered_bio);
+
+#define BLK_QC_T_SHIFT		16
+#define BLK_QC_T_INTERNAL	(1U << 31)
+#define BLK_QC_T_REQUEST	(1U << 30)
+
+static inline struct blk_mq_hw_ctx *blk_qc_to_hctx(struct request_queue *q,
+						   blk_qc_t qc)
+{
+	if (qc == BLK_QC_T_NONE)
+		return NULL;
+
+	if (qc & BLK_QC_T_REQUEST)
+		return xa_load(&q->hctx_table,
+			       (qc & ~(BLK_QC_T_REQUEST | BLK_QC_T_INTERNAL)) >>
+			       BLK_QC_T_SHIFT);
+	return xa_load(&q->hctx_table, qc);
+}
+
+static inline struct request *blk_qc_to_rq(struct blk_mq_hw_ctx *hctx,
+					   blk_qc_t qc)
+{
+	struct blk_mq_tags *tags;
+	unsigned int tag = qc & ((1U << BLK_QC_T_SHIFT) - 1);
+
+	if (!hctx || !(qc & BLK_QC_T_REQUEST))
+		return NULL;
+
+	tags = (qc & BLK_QC_T_INTERNAL) ? hctx->sched_tags : hctx->tags;
+	if (!tags)
+		return NULL;
+	return blk_mq_tag_to_rq(tags, tag);
+}
+
+static inline blk_qc_t blk_rq_to_qc(struct request *rq)
+{
+	return BLK_QC_T_REQUEST | (rq->mq_hctx->queue_num << BLK_QC_T_SHIFT) |
+		(rq->tag != BLK_MQ_NO_TAG ?
+		 rq->tag : (rq->internal_tag | BLK_QC_T_INTERNAL));
+}
+
+static void blk_mq_poll_stats_start(struct request_queue *q)
+{
+	if (!q->poll_cb || blk_stat_is_active(q->poll_cb))
+		return;
+
+	blk_stat_activate_msecs(q->poll_cb, q->ehp_enabled ? 10 : 100);
+}
+
+static void blk_mq_poll_stats_fn(struct blk_stat_callback *cb)
+{
+	struct request_queue *q = cb->data;
+	int bucket;
+
+	for (bucket = 0; bucket < BLK_MQ_POLL_STATS_BKTS; bucket++) {
+		int cpu = smp_processor_id();
+		struct blk_rq_stat *percpu_stat;
+		struct blk_switch *sc;
+
+		percpu_stat = per_cpu_ptr(cb->percpu_stat, cpu);
+		if (irq_poll_switch && q->ehp_enabled &&
+		    percpu_stat[bucket].nr_samples) {
+			sc = per_cpu_ptr(irq_poll_switch, cpu);
+			sc->mode = _EHP;
+			if ((ctx_time * 2 + isr_time) * benefit_ratio >
+			    percpu_stat[bucket].min)
+				sc->ehpmode[bucket] = _EHP;
+			else
+				sc->ehpmode[bucket] = _INT;
+			percpu_stat[bucket].busy_state = 0;
+		}
+		if (cb->stat[bucket].nr_samples)
+			q->poll_stat[bucket] = cb->stat[bucket];
+	}
+}
+
+static int blk_mq_init_dpas_state(struct request_queue *q)
+{
+	struct blk_rq_pas_stat *stat;
+	int bucket;
+	int cpu;
+
+	q->poll_cb = blk_stat_alloc_callback(blk_mq_poll_stats_fn,
+					     blk_mq_poll_stats_bkt,
+					     BLK_MQ_POLL_STATS_BKTS, q);
+	if (!q->poll_cb)
+		return -ENOMEM;
+	q->poll_stat = kcalloc(BLK_MQ_POLL_STATS_BKTS,
+			       sizeof(*q->poll_stat), GFP_KERNEL);
+	if (!q->poll_stat) {
+		blk_stat_free_callback(q->poll_cb);
+		q->poll_cb = NULL;
+		return -ENOMEM;
+	}
+
+	q->poll_nsec = BLK_MQ_POLL_CLASSIC;
+	q->max_no_lock = 100;
+	q->poll_threshold = 0;
+	q->div = 1000000;
+	q->d_init = 100;
+	q->up_init = 10000;
+	q->dn_init = 100000;
+	q->heat_up = 50000;
+	q->cool_dn = 100000;
+	q->min_dn = 10000;
+	q->max_dn = 100000;
+	q->updn_ratio = 10;
+	q->switch_param1 = 0;
+	q->switch_param2 = 10;
+	q->switch_param3 = 10;
+	q->switch_param4 = 1;
+	q->switch_param5 = 100;
+	q->switch_param6 = 1000;
+	q->switch_param7 = 10000;
+	q->buffered_poll_enabled = 0;
+	q->buffered_poll_readahead = 0;
+	memset(q->buffered_poll_comm, 0, sizeof(q->buffered_poll_comm));
+	atomic64_set(&q->buffered_poll_selected, 0);
+	atomic64_set(&q->buffered_poll_completed, 0);
+	atomic64_set(&q->buffered_poll_loops, 0);
+	atomic64_set(&q->buffered_poll_timeout, 0);
+	atomic64_set(&q->buffered_poll_ra_skip, 0);
+	atomic64_set(&q->buffered_poll_skip, 0);
+
+	q->pas_stat = __alloc_percpu(BLK_MQ_POLL_STATS_BKTS *
+				     sizeof(struct blk_rq_pas_stat),
+				     __alignof__(struct blk_rq_pas_stat));
+	if (!q->pas_stat) {
+		kfree(q->poll_stat);
+		q->poll_stat = NULL;
+		blk_stat_free_callback(q->poll_cb);
+		q->poll_cb = NULL;
+		return -ENOMEM;
+	}
+
+	for_each_possible_cpu(cpu) {
+		stat = per_cpu_ptr(q->pas_stat, cpu);
+		for (bucket = 0; bucket < BLK_MQ_POLL_STATS_BKTS; bucket++)
+			init_pas_stat(&stat[bucket], q->d_init, q->div,
+				      q->up_init, q->dn_init);
+	}
+	blk_stat_add_callback(q, q->poll_cb);
+
+	return 0;
+}
+
+static void blk_mq_exit_dpas_state(struct request_queue *q)
+{
+	if (q->poll_cb) {
+		blk_stat_remove_callback(q, q->poll_cb);
+		blk_stat_free_callback(q->poll_cb);
+		q->poll_cb = NULL;
+	}
+	free_percpu(q->pas_stat);
+	q->pas_stat = NULL;
+	kfree(q->poll_stat);
+	q->poll_stat = NULL;
+}
 
 static bool blk_mq_check_inflight(struct request *rq, void *priv)
 {
@@ -1354,7 +1758,7 @@ void blk_mq_start_request(struct request *rq)
 		blk_integrity_prepare(rq);
 
 	if (rq->bio && rq->bio->bi_opf & REQ_POLLED)
-	        WRITE_ONCE(rq->bio->bi_cookie, rq->mq_hctx->queue_num);
+		WRITE_ONCE(rq->bio->bi_cookie, blk_rq_to_qc(rq));
 }
 EXPORT_SYMBOL(blk_mq_start_request);
 
@@ -1454,7 +1858,7 @@ EXPORT_SYMBOL_GPL(blk_rq_is_poll);
 static void blk_rq_poll_completion(struct request *rq, struct completion *wait)
 {
 	do {
-		blk_hctx_poll(rq->q, rq->mq_hctx, NULL, 0);
+		blk_hctx_poll(rq->q, rq->mq_hctx, NULL, 0, rq);
 		cond_resched();
 	} while (!completion_done(wait));
 }
@@ -4547,8 +4951,11 @@ int blk_mq_init_allocated_queue(struct blk_mq_tag_set *set,
 	 */
 	q->tag_set = set;
 
-	if (blk_mq_alloc_ctxs(q))
+	if (blk_mq_init_dpas_state(q))
 		goto err_exit;
+
+	if (blk_mq_alloc_ctxs(q))
+		goto err_dpas;
 
 	/* init q->mq_kobj and sw queues' kobjects */
 	blk_mq_sysfs_init(q);
@@ -4581,6 +4988,10 @@ int blk_mq_init_allocated_queue(struct blk_mq_tag_set *set,
 
 err_hctxs:
 	blk_mq_release(q);
+	q->mq_ops = NULL;
+	return -ENOMEM;
+err_dpas:
+	blk_mq_exit_dpas_state(q);
 err_exit:
 	q->mq_ops = NULL;
 	return -ENOMEM;
@@ -4591,6 +5002,8 @@ EXPORT_SYMBOL(blk_mq_init_allocated_queue);
 void blk_mq_exit_queue(struct request_queue *q)
 {
 	struct blk_mq_tag_set *set = q->tag_set;
+
+	blk_mq_exit_dpas_state(q);
 
 	/* Checks hctx->flags & BLK_MQ_F_TAG_QUEUE_SHARED. */
 	blk_mq_exit_hw_queues(q, set, set->nr_hw_queues);
@@ -5095,14 +5508,70 @@ void blk_mq_update_nr_hw_queues(struct blk_mq_tag_set *set, int nr_hw_queues)
 EXPORT_SYMBOL_GPL(blk_mq_update_nr_hw_queues);
 
 static int blk_hctx_poll(struct request_queue *q, struct blk_mq_hw_ctx *hctx,
-			 struct io_comp_batch *iob, unsigned int flags)
+			 struct io_comp_batch *iob, unsigned int flags,
+			 struct request *rq)
 {
 	long state = get_current_state();
 	int ret;
+	int poll_count = 0;
 
 	do {
 		ret = q->mq_ops->poll(hctx, iob);
 		if (ret > 0) {
+			if (rq && q->pas_enabled && q->pas_stat) {
+				struct blk_rq_pas_stat *stat = NULL;
+				struct blk_switch *sc = NULL;
+				unsigned long irqflags;
+				int cpu_num = blk_mq_rq_cpu(rq);
+				int bucket = blk_mq_poll_stats_bkt(rq);
+
+				if (bucket >= 0 && rq->cpu_num == cpu_num) {
+					stat = per_cpu_ptr(q->pas_stat, cpu_num);
+					if (rq->dur_cnt == stat[bucket].dur_cnt &&
+					    stat[bucket].dur_cnt !=
+					    stat[bucket].dur_cnt_checked) {
+						stat[bucket].dur_cnt_checked =
+							stat[bucket].dur_cnt;
+						stat[bucket].sr_pnlt =
+							stat[bucket].sr_last;
+						stat[bucket].sr_last =
+							poll_count <= q->poll_threshold ?
+							0 : 1;
+						stat[bucket].update_req = 1;
+					}
+				}
+				if (irq_poll_switch) {
+					sc = per_cpu_ptr(irq_poll_switch, cpu_num);
+					if (sc->enabled && sc->mode != _CP) {
+						spin_lock_irqsave(&sc->qd_lock,
+								  irqflags);
+						if (sc->qd > 0)
+							sc->qd -= ret;
+						spin_unlock_irqrestore(&sc->qd_lock,
+								       irqflags);
+					}
+					switch (sc->mode) {
+					case _CP:
+						sc->cp_cnt += ret;
+						sc->cp_tot += ret;
+						break;
+					case _PAS:
+						sc->pas_cnt += ret;
+						sc->pas_tot += ret;
+						break;
+					case _OL:
+						sc->ol_cnt += ret;
+						sc->ol_tot += ret;
+						break;
+					case _INT:
+						sc->int_cnt += ret;
+						sc->int_tot += ret;
+						break;
+					default:
+						break;
+					}
+				}
+			}
 			__set_current_state(TASK_RUNNING);
 			return ret;
 		}
@@ -5114,6 +5583,7 @@ static int blk_hctx_poll(struct request_queue *q, struct blk_mq_hw_ctx *hctx,
 
 		if (ret < 0 || (flags & BLK_POLL_ONESHOT))
 			break;
+		poll_count++;
 		cpu_relax();
 	} while (!need_resched());
 
@@ -5121,12 +5591,265 @@ static int blk_hctx_poll(struct request_queue *q, struct blk_mq_hw_ctx *hctx,
 	return 0;
 }
 
+static unsigned long blk_mq_poll_nsecs(struct request_queue *q,
+				       struct request *rq)
+{
+	unsigned long ret = 0;
+	int bucket;
+
+	blk_mq_poll_stats_start(q);
+
+	if (!q->poll_stat)
+		return 0;
+
+	bucket = blk_mq_poll_stats_bkt(rq);
+	if (bucket < 0)
+		return 0;
+
+	if (q->poll_stat[bucket].nr_samples)
+		ret = (q->poll_stat[bucket].mean + 1) / 2;
+
+	return ret;
+}
+
+static unsigned long blk_mq_poll_ehp_nsecs(struct request_queue *q,
+					   struct request *rq)
+{
+	struct blk_stat_callback *cb = q->poll_cb;
+	struct blk_rq_stat *percpu_stat;
+	unsigned long ret = 0;
+	int bucket;
+
+	blk_mq_poll_stats_start(q);
+	if (!cb)
+		return 0;
+
+	bucket = blk_mq_poll_stats_bkt(rq);
+	if (bucket < 0)
+		return 0;
+
+	percpu_stat = per_cpu_ptr(cb->percpu_stat, raw_smp_processor_id());
+	if (percpu_stat[bucket].nr_samples) {
+		if (percpu_stat[bucket].busy_state)
+			ret = U32_MAX;
+		else if (percpu_stat[bucket].min > (ctx_time * 2 + isr_time))
+			ret = percpu_stat[bucket].min - ctx_time * 2 - isr_time;
+	}
+
+	return ret;
+}
+
+static unsigned long blk_mq_poll_pas_nsecs(struct request_queue *q,
+					   struct request *rq, int cpu_num)
+{
+	struct blk_rq_pas_stat *stat;
+	struct blk_switch *sc;
+	unsigned long flags;
+	unsigned long ret;
+	int average_qd;
+	int bucket;
+	int cur_case;
+
+	if (!irq_poll_switch || !q->pas_stat)
+		return 0;
+
+	bucket = blk_mq_poll_stats_bkt(rq);
+	if (bucket < 0)
+		return 0;
+
+	stat = per_cpu_ptr(q->pas_stat, cpu_num);
+	sc = per_cpu_ptr(irq_poll_switch, cpu_num);
+
+	if (sc->enabled && sc->mode != _CP) {
+		spin_lock_irqsave(&sc->qd_lock, flags);
+		sc->qd++;
+		sc->qd_sum += sc->qd;
+		spin_unlock_irqrestore(&sc->qd_lock, flags);
+	}
+
+	if (sc->enabled && !atomic_xchg(&sc->lock, 1)) {
+		if (sc->mode == _CP && sc->cp_cnt >= sc->param6) {
+			stat[bucket].update_req = 1;
+			sc->mode = _PAS;
+			sc->pas_cnt = 0;
+			sc->tf = 0;
+			sc->qd_sum = 0;
+		} else if (sc->mode == _PAS && sc->pas_cnt >= sc->param5) {
+			average_qd = sc->pas_cnt ? sc->qd_sum * 10 / sc->pas_cnt : 0;
+			if (sc->tf > sc->param1) {
+				sc->mode = _OL;
+				sc->ol_cnt = 0;
+			} else if (sc->param4 >= 1 && average_qd == 10) {
+				sc->mode = _CP;
+				sc->cp_cnt = 0;
+			} else {
+				sc->pas_cnt = 0;
+			}
+			sc->qd_sum = 0;
+			sc->tf = 0;
+		} else if (sc->mode == _OL && sc->ol_cnt >= sc->param5) {
+			average_qd = sc->ol_cnt ? sc->qd_sum * 10 / sc->ol_cnt : 0;
+			if (average_qd <= sc->param2) {
+				sc->mode = _PAS;
+				sc->pas_cnt = 0;
+			} else if (average_qd > sc->param3) {
+				sc->mode = _INT;
+				sc->int_cnt = 0;
+			} else {
+				sc->ol_cnt = 0;
+			}
+			sc->qd_sum = 0;
+			sc->tf = 0;
+		}
+		atomic_set(&sc->lock, 0);
+	}
+
+	if (sc->enabled && sc->mode == _INT)
+		return 0;
+
+	if (sc->enabled && sc->mode == _CP)
+		return 0;
+
+	if (stat[bucket].update_req == 0) {
+		rq->cpu_num = cpu_num;
+		rq->dur_cnt = stat[bucket].dur_cnt;
+		rq->dur = stat[bucket].dur;
+		return stat[bucket].dur;
+	}
+
+	stat[bucket].update_req = 0;
+	cur_case = stat[bucket].sr_pnlt * 2 + stat[bucket].sr_last;
+	switch (cur_case) {
+	case 0:
+		stat[bucket].adj -= stat[bucket].dn;
+		break;
+	case 1:
+		stat[bucket].adj = q->div + stat[bucket].up;
+		break;
+	case 2:
+		stat[bucket].adj = q->div - stat[bucket].dn;
+		break;
+	case 3:
+		stat[bucket].adj += stat[bucket].up;
+		break;
+	default:
+		stat[bucket].adj = q->div;
+		break;
+	}
+	if (stat[bucket].adj <= 0)
+		stat[bucket].adj = q->div;
+
+	stat[bucket].dur = stat[bucket].dur * stat[bucket].adj / q->div;
+	if (stat[bucket].dur < q->d_init) {
+		stat[bucket].dur = q->d_init;
+		if (sc->enabled)
+			sc->tf++;
+	}
+	stat[bucket].dur_cnt++;
+
+	if (q->pas_adaptive_enabled) {
+		if (cur_case == 0 || cur_case == 3) {
+			if (q->pas_adaptive_enabled == 1) {
+				stat[bucket].dn = stat[bucket].dn *
+					(q->div + q->heat_up) / q->div;
+				if (stat[bucket].dn > q->max_dn)
+					stat[bucket].dn = q->max_dn;
+				stat[bucket].up = stat[bucket].dn / q->updn_ratio;
+			} else if (q->pas_adaptive_enabled == 2) {
+				stat[bucket].up = stat[bucket].up *
+					(q->div + q->heat_up) / q->div;
+				if (stat[bucket].up > q->div / 10)
+					stat[bucket].up = q->div / 10;
+			}
+		} else {
+			stat[bucket].up = stat[bucket].up *
+				(q->div - q->cool_dn) / q->div;
+			if (q->pas_adaptive_enabled == 1) {
+				if (stat[bucket].up < q->min_dn / q->updn_ratio)
+					stat[bucket].up = q->min_dn / q->updn_ratio;
+				stat[bucket].dn = stat[bucket].up * q->updn_ratio;
+			} else if (q->pas_adaptive_enabled == 2 &&
+				   stat[bucket].up < q->div / 10000) {
+				stat[bucket].up = q->div / 10000;
+			}
+		}
+	}
+
+	ret = stat[bucket].dur;
+	rq->cpu_num = cpu_num;
+	rq->dur_cnt = stat[bucket].dur_cnt;
+	rq->dur = ret;
+	return ret;
+}
+
+static bool blk_mq_poll_hybrid(struct request_queue *q, blk_qc_t cookie)
+{
+	struct blk_mq_hw_ctx *hctx = blk_qc_to_hctx(q, cookie);
+	struct request *rq = blk_qc_to_rq(hctx, cookie);
+	struct hrtimer_sleeper hs;
+	enum hrtimer_mode mode = HRTIMER_MODE_REL;
+	unsigned int nsecs;
+	ktime_t kt;
+	u64 sleep_start_ns;
+	int cpu_num;
+
+	if (!rq || rq->rq_flags & RQF_MQ_POLL_SLEPT)
+		return false;
+
+	if (q->poll_nsec > 0)
+		nsecs = q->poll_nsec;
+	else if (q->ehp_enabled)
+		nsecs = blk_mq_poll_ehp_nsecs(q, rq);
+	else if (q->pas_enabled) {
+		cpu_num = blk_mq_rq_cpu(rq);
+		nsecs = blk_mq_poll_pas_nsecs(q, rq, cpu_num);
+	} else
+		nsecs = blk_mq_poll_nsecs(q, rq);
+
+	if (!nsecs)
+		return false;
+
+	rq->rq_flags |= RQF_MQ_POLL_SLEPT;
+	kt = nsecs;
+	sleep_start_ns = ktime_get_ns();
+	hrtimer_init_sleeper_on_stack(&hs, CLOCK_MONOTONIC, mode);
+	hrtimer_set_expires(&hs.timer, kt);
+	do {
+		if (blk_mq_rq_state(rq) == MQ_RQ_COMPLETE)
+			break;
+		set_current_state(TASK_UNINTERRUPTIBLE);
+		hrtimer_sleeper_start_expires(&hs, mode);
+		if (hs.task)
+			io_schedule();
+		hrtimer_cancel(&hs.timer);
+		mode = HRTIMER_MODE_ABS;
+	} while (hs.task && !signal_pending(current));
+	__set_current_state(TASK_RUNNING);
+	destroy_hrtimer_on_stack(&hs.timer);
+	rq->log_real_sleep_time = ktime_get_ns() - sleep_start_ns;
+	return true;
+}
+
 int blk_mq_poll(struct request_queue *q, blk_qc_t cookie,
 		struct io_comp_batch *iob, unsigned int flags)
 {
+	struct blk_mq_hw_ctx *hctx;
+	struct request *rq;
+
 	if (!blk_mq_can_poll(q))
 		return 0;
-	return blk_hctx_poll(q, xa_load(&q->hctx_table, cookie), iob, flags);
+
+	if (!(flags & BLK_POLL_NOSLEEP) &&
+	    q->poll_nsec != BLK_MQ_POLL_CLASSIC) {
+		if (blk_mq_poll_hybrid(q, cookie))
+			return 1;
+	}
+
+	hctx = blk_qc_to_hctx(q, cookie);
+	if (!hctx)
+		return 0;
+	rq = blk_qc_to_rq(hctx, cookie);
+	return blk_hctx_poll(q, hctx, iob, flags, rq);
 }
 
 int blk_rq_poll(struct request *rq, struct io_comp_batch *iob,
@@ -5140,7 +5863,7 @@ int blk_rq_poll(struct request *rq, struct io_comp_batch *iob,
 	if (!percpu_ref_tryget(&q->q_usage_counter))
 		return 0;
 
-	ret = blk_hctx_poll(q, rq->mq_hctx, iob, poll_flags);
+	ret = blk_hctx_poll(q, rq->mq_hctx, iob, poll_flags, rq);
 	blk_queue_exit(q);
 
 	return ret;
@@ -5166,13 +5889,49 @@ void blk_mq_cancel_work_sync(struct request_queue *q)
 
 static int __init blk_mq_init(void)
 {
-	int i;
+	int i, k;
+
+	irq_poll_switch = __alloc_percpu(sizeof(struct blk_switch),
+					 __alignof__(struct blk_switch));
+	if (!irq_poll_switch)
+		return -ENOMEM;
 
 	for_each_possible_cpu(i)
 		init_llist_head(&per_cpu(blk_cpu_done, i));
-	for_each_possible_cpu(i)
+	for_each_possible_cpu(i) {
+		struct blk_switch *sc = per_cpu_ptr(irq_poll_switch, i);
+
 		INIT_CSD(&per_cpu(blk_cpu_csd, i),
 			 __blk_mq_complete_request_remote, NULL);
+		sc->enabled = 0;
+		sc->mode = _PAS;
+		sc->cp_cnt = 0;
+		sc->pas_cnt = 0;
+		sc->ol_cnt = 0;
+		sc->int_cnt = 0;
+		sc->cp_tot = 0;
+		sc->pas_tot = 0;
+		sc->ol_tot = 0;
+		sc->int_tot = 0;
+		sc->N_POLL = 0;
+		sc->N_INT = 10000;
+		sc->N_PAS = 0;
+		sc->param1 = 0;
+		sc->param2 = 10;
+		sc->param3 = 10;
+		sc->param4 = 1;
+		sc->param5 = 100;
+		sc->param6 = 1000;
+		sc->param7 = 10000;
+		sc->ioctr = 0;
+		sc->qd = 0;
+		sc->qd_sum = 0;
+		sc->tf = 0;
+		for (k = 0; k < 17; k++)
+			sc->ehpmode[k] = 4;
+		spin_lock_init(&sc->qd_lock);
+		atomic_set(&sc->lock, 0);
+	}
 	open_softirq(BLOCK_SOFTIRQ, blk_done_softirq);
 
 	cpuhp_setup_state_nocalls(CPUHP_BLOCK_SOFTIRQ_DEAD,

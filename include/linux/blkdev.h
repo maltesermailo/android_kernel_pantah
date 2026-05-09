@@ -44,6 +44,9 @@ struct blk_queue_stats;
 struct blk_stat_callback;
 struct blk_crypto_profile;
 
+#define BLK_MQ_POLL_STATS_BKTS 16
+#define BLK_MQ_POLL_CLASSIC -1
+
 extern const struct device_type disk_type;
 extern const struct device_type part_type;
 extern const struct class block_class;
@@ -532,6 +535,51 @@ struct request_queue {
 	 * queue settings
 	 */
 	unsigned long		nr_requests;	/* Max # of requests */
+	int			poll_nsec;
+
+	struct blk_stat_callback	*poll_cb;
+	struct blk_rq_stat	*poll_stat;
+	struct blk_rq_pas_stat __percpu *pas_stat;
+	int			last_poll_count;
+
+	int			pas_enabled;
+	int			pas_adaptive_enabled;
+	int			ehp_enabled;
+	int			max_no_lock;
+	int			poll_threshold;
+	int			logging_enabled;
+	int			switch_enabled;
+	int			switch_param1;
+	int			switch_param2;
+	int			switch_param3;
+	int			switch_param4;
+	int			switch_param5;
+	int			switch_param6;
+	int			switch_param7;
+	u64			div;
+	u32			d_init;
+	long long		up_init;
+	long long		dn_init;
+	long long		heat_up;
+	long long		cool_dn;
+	long long		min_dn;
+	long long		max_dn;
+	int			updn_ratio;
+
+	unsigned long long	cnt_rel_hybrid_poll;
+	unsigned long long	cnt_rel_fops;
+	unsigned long long	cnt_rel_comp_before_sleep;
+	unsigned long long	cnt_lock_d_c_separate;
+
+	int			buffered_poll_enabled;
+	int			buffered_poll_readahead;
+	char			buffered_poll_comm[TASK_COMM_LEN];
+	atomic64_t		buffered_poll_selected;
+	atomic64_t		buffered_poll_completed;
+	atomic64_t		buffered_poll_loops;
+	atomic64_t		buffered_poll_timeout;
+	atomic64_t		buffered_poll_ra_skip;
+	atomic64_t		buffered_poll_skip;
 
 #ifdef CONFIG_BLK_INLINE_ENCRYPTION
 	struct blk_crypto_profile *crypto_profile;
@@ -912,9 +960,13 @@ const char *blk_status_to_str(blk_status_t status);
 
 /* only poll the hardware once, don't continue until a completion was found */
 #define BLK_POLL_ONESHOT		(1 << 0)
+/* callers that cannot sleep, such as iocb_bio_iopoll() under RCU */
+#define BLK_POLL_NOSLEEP		(1 << 1)
 int bio_poll(struct bio *bio, struct io_comp_batch *iob, unsigned int flags);
 int iocb_bio_iopoll(struct kiocb *kiocb, struct io_comp_batch *iob,
 			unsigned int flags);
+void blk_dpas_prepare_bio(struct bio *bio, struct kiocb *iocb);
+bool blk_dpas_prepare_buffered_bio(struct bio *bio);
 
 static inline struct request_queue *bdev_get_queue(struct block_device *bdev)
 {

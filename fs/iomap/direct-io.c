@@ -11,6 +11,7 @@
 #include <linux/iomap.h>
 #include <linux/backing-dev.h>
 #include <linux/uio.h>
+#include <linux/blkdev.h>
 #include <linux/task_io_accounting_ops.h>
 #include <trace/hooks/mm.h>
 #include "trace.h"
@@ -51,6 +52,7 @@ struct iomap_dio {
 		struct {
 			struct iov_iter		*iter;
 			struct task_struct	*waiter;
+			struct bio		*poll_bio;
 		} submit;
 
 		/* used for aio completion: */
@@ -76,10 +78,14 @@ static void iomap_dio_submit_bio(const struct iomap_iter *iter,
 
 	atomic_inc(&dio->ref);
 
-	/* Sync dio can't be polled reliably */
-	if ((iocb->ki_flags & IOCB_HIPRI) && !is_sync_kiocb(iocb)) {
-		bio_set_polled(bio, iocb);
+	blk_dpas_prepare_bio(bio, iocb);
+	if ((bio->bi_opf & REQ_POLLED) &&
+	    (!dio->wait_for_completion || !READ_ONCE(dio->submit.poll_bio))) {
 		WRITE_ONCE(iocb->private, bio);
+		if (dio->wait_for_completion) {
+			bio_get(bio);
+			WRITE_ONCE(dio->submit.poll_bio, bio);
+		}
 	}
 
 	if (dio->dops && dio->dops->submit_io)
@@ -183,6 +189,8 @@ void iomap_dio_bio_end_io(struct bio *bio)
 		struct task_struct *waiter = dio->submit.waiter;
 
 		WRITE_ONCE(dio->submit.waiter, NULL);
+		if (bio->bi_opf & REQ_POLLED)
+			WRITE_ONCE(iocb->private, NULL);
 		blk_wake_io_task(waiter);
 		goto release_bio;
 	}
@@ -594,9 +602,11 @@ __iomap_dio_rw(struct kiocb *iocb, struct iov_iter *iter,
 	dio->error = 0;
 	dio->flags = 0;
 	dio->done_before = done_before;
+	dio->wait_for_completion = wait_for_completion;
 
 	dio->submit.iter = iter;
 	dio->submit.waiter = current;
+	dio->submit.poll_bio = NULL;
 
 	if (iocb->ki_flags & IOCB_NOWAIT)
 		iomi.flags |= IOMAP_NOWAIT;
@@ -681,9 +691,10 @@ __iomap_dio_rw(struct kiocb *iocb, struct iov_iter *iter,
 		iomi.processed = iomap_dio_iter(&iomi, dio);
 
 		/*
-		 * We can only poll for single bio I/Os.
+		 * We can only poll for single-extent I/Os.
 		 */
-		iocb->ki_flags &= ~IOCB_HIPRI;
+		if (iomi.processed > 0 && iomi.processed < iomi.len)
+			iocb->ki_flags &= ~IOCB_HIPRI;
 	}
 
 	blk_finish_plug(&plug);
@@ -733,7 +744,6 @@ __iomap_dio_rw(struct kiocb *iocb, struct iov_iter *iter,
 	 *	of the final reference, and we will complete and free it here
 	 *	after we got woken by the I/O completion handler.
 	 */
-	dio->wait_for_completion = wait_for_completion;
 	if (!atomic_dec_and_test(&dio->ref)) {
 		if (!wait_for_completion) {
 			trace_iomap_dio_rw_queued(inode, iomi.pos, iomi.len);
@@ -745,9 +755,29 @@ __iomap_dio_rw(struct kiocb *iocb, struct iov_iter *iter,
 			if (!READ_ONCE(dio->submit.waiter))
 				break;
 
+			if (READ_ONCE(dio->submit.poll_bio)) {
+				struct bio *poll_bio = dio->submit.poll_bio;
+
+				/*
+				 * This is the submitting task, so bio_poll()
+				 * does not need iocb_bio_iopoll()'s RCU wrapper.
+				 */
+				if (bio_poll(poll_bio, NULL, 0))
+					continue;
+			}
 			blk_io_schedule();
 		}
 		__set_current_state(TASK_RUNNING);
+	}
+
+	if (wait_for_completion) {
+		struct bio *poll_bio = READ_ONCE(dio->submit.poll_bio);
+
+		if (poll_bio) {
+			WRITE_ONCE(iocb->private, NULL);
+			WRITE_ONCE(dio->submit.poll_bio, NULL);
+			bio_put(poll_bio);
+		}
 	}
 
 	return dio;

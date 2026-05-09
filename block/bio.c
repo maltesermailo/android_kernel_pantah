@@ -1295,7 +1295,15 @@ int submit_bio_wait(struct bio *bio)
 	bio->bi_end_io = submit_bio_wait_endio;
 	bio->bi_opf |= REQ_SYNC;
 	submit_bio(bio);
-	blk_wait_io(&done);
+
+	if (bio->bi_opf & REQ_POLLED) {
+		do {
+			bio_poll(bio, NULL, 0);
+			cond_resched();
+		} while (!completion_done(&done));
+	} else {
+		blk_wait_io(&done);
+	}
 
 	return blk_status_to_errno(bio->bi_status);
 }

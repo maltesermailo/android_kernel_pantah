@@ -503,6 +503,7 @@ struct blk_rq_stat {
 	u64 max;
 	u32 nr_samples;
 	u64 batch;
+	bool busy_state;
 };
 
 #endif /* __LINUX_BLK_TYPES_H */

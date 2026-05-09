@@ -10,6 +10,7 @@
 #include <linux/backing-dev.h>
 #include <linux/blktrace_api.h>
 #include <linux/debugfs.h>
+#include <linux/string.h>
 
 #include "blk.h"
 #include "blk-mq.h"
@@ -152,7 +153,19 @@ static ssize_t queue_##_name##_show(struct gendisk *disk, char *page)	\
 /* deprecated fields */
 QUEUE_SYSFS_SHOW_CONST(discard_zeroes_data, 0)
 QUEUE_SYSFS_SHOW_CONST(write_same_max, 0)
-QUEUE_SYSFS_SHOW_CONST(poll_delay, -1)
+
+static ssize_t queue_poll_delay_show(struct gendisk *disk, char *page)
+{
+	struct request_queue *q = disk->queue;
+	long val;
+
+	if (q->poll_nsec == BLK_MQ_POLL_CLASSIC)
+		val = BLK_MQ_POLL_CLASSIC;
+	else
+		val = q->poll_nsec / 1000;
+
+	return sysfs_emit(page, "%ld\n", val);
+}
 
 static int queue_max_discard_sectors_store(struct gendisk *disk,
 		const char *page, size_t count, struct queue_limits *lim)
@@ -327,7 +340,453 @@ queue_rq_affinity_store(struct gendisk *disk, const char *page, size_t count)
 static ssize_t queue_poll_delay_store(struct gendisk *disk, const char *page,
 				size_t count)
 {
+	struct request_queue *q = disk->queue;
+	long val;
+	int ret;
+
+	ret = kstrtol(page, 10, &val);
+	if (ret < 0)
+		return ret;
+
+	if (val == -1)
+		q->poll_nsec = BLK_MQ_POLL_CLASSIC;
+	else if (val >= 0)
+		q->poll_nsec = val * 1000;
+	else
+		return -EINVAL;
+
 	return count;
+}
+
+static ssize_t queue_dpas_int_show(char *page, int val)
+{
+	return sysfs_emit(page, "%d\n", val);
+}
+
+static ssize_t queue_dpas_ll_show(char *page, long long val)
+{
+	return sysfs_emit(page, "%lld\n", val);
+}
+
+static ssize_t queue_dpas_u32_show(char *page, u32 val)
+{
+	return sysfs_emit(page, "%u\n", val);
+}
+
+static ssize_t queue_dpas_int_store(const char *page, size_t count, int *field)
+{
+	int val;
+	int ret;
+
+	ret = kstrtoint(page, 10, &val);
+	if (ret < 0)
+		return ret;
+	*field = val;
+	return count;
+}
+
+static ssize_t queue_dpas_ll_store(const char *page, size_t count,
+				   long long *field)
+{
+	long long val;
+	int ret;
+
+	ret = kstrtoll(page, 10, &val);
+	if (ret < 0)
+		return ret;
+	*field = val;
+	return count;
+}
+
+static void queue_dpas_reinit_pas_stat(struct blk_rq_pas_stat *stat, u32 dur,
+				       long long adj, long long up,
+				       long long dn)
+{
+	stat->dur = dur;
+	stat->adj = adj;
+	stat->up = up;
+	stat->dn = dn;
+	stat->sr_pnlt = 0;
+	stat->sr_last = 1;
+	stat->update_req = 0;
+	stat->dur_cnt = 1;
+	stat->dur_cnt_checked = 0;
+}
+
+static void queue_dpas_reinit_pas_stats(struct request_queue *q, long long adj)
+{
+	int bucket;
+	int cpu;
+
+	if (!q->pas_stat)
+		return;
+
+	for_each_possible_cpu(cpu) {
+		struct blk_rq_pas_stat *stat = per_cpu_ptr(q->pas_stat, cpu);
+
+		for (bucket = 0; bucket < BLK_MQ_POLL_STATS_BKTS; bucket++)
+			queue_dpas_reinit_pas_stat(&stat[bucket], q->d_init,
+						   adj, q->up_init,
+						   q->dn_init);
+	}
+}
+
+static void queue_dpas_sync_switch_params(struct request_queue *q)
+{
+	int cpu;
+
+	if (!irq_poll_switch)
+		return;
+
+	for_each_possible_cpu(cpu) {
+		struct blk_switch *sc = per_cpu_ptr(irq_poll_switch, cpu);
+
+		sc->enabled = q->switch_enabled;
+		sc->param1 = q->switch_param1;
+		sc->param2 = q->switch_param2;
+		sc->param3 = q->switch_param3;
+		sc->param4 = q->switch_param4;
+		sc->param5 = q->switch_param5;
+		sc->param6 = q->switch_param6;
+		sc->param7 = q->switch_param7;
+	}
+}
+
+static void queue_dpas_reset_switch_state(struct request_queue *q)
+{
+	int cpu;
+
+	if (!irq_poll_switch)
+		return;
+
+	for_each_possible_cpu(cpu) {
+		struct blk_switch *sc = per_cpu_ptr(irq_poll_switch, cpu);
+
+		sc->enabled = q->switch_enabled;
+		/* Keep reset semantics aligned with blk-mq.c init: 2 == _PAS. */
+		sc->mode = 2;
+		sc->cp_cnt = 0;
+		sc->pas_cnt = 0;
+		sc->ol_cnt = 0;
+		sc->int_cnt = 0;
+		sc->cp_tot = 0;
+		sc->pas_tot = 0;
+		sc->ol_tot = 0;
+		sc->int_tot = 0;
+		sc->N_POLL = 0;
+		sc->N_INT = 10000;
+		sc->N_PAS = 0;
+		sc->ioctr = 0;
+		sc->qd = 0;
+		sc->qd_sum = 0;
+		sc->tf = 0;
+		sc->param1 = q->switch_param1;
+		sc->param2 = q->switch_param2;
+		sc->param3 = q->switch_param3;
+		sc->param4 = q->switch_param4;
+		sc->param5 = q->switch_param5;
+		sc->param6 = q->switch_param6;
+		sc->param7 = q->switch_param7;
+	}
+	queue_dpas_reinit_pas_stats(q, q->div);
+}
+
+static ssize_t queue_dpas_switch_store(struct gendisk *disk, const char *page,
+				       size_t count, int *field)
+{
+	struct request_queue *q = disk->queue;
+	int val;
+	int ret;
+
+	ret = kstrtoint(page, 10, &val);
+	if (ret < 0)
+		return ret;
+	if (val < -1)
+		return -EINVAL;
+
+	*field = val;
+	queue_dpas_sync_switch_params(q);
+	return count;
+}
+
+#define QUEUE_DPAS_INT_ATTR(_name, _field)				\
+static ssize_t queue_##_name##_show(struct gendisk *disk, char *page)	\
+{									\
+	return queue_dpas_int_show(page, disk->queue->_field);		\
+}									\
+static ssize_t queue_##_name##_store(struct gendisk *disk,		\
+				     const char *page, size_t count)	\
+{									\
+	return queue_dpas_int_store(page, count, &disk->queue->_field);	\
+}
+
+#define QUEUE_DPAS_LL_ATTR(_name, _field)				\
+static ssize_t queue_##_name##_show(struct gendisk *disk, char *page)	\
+{									\
+	return queue_dpas_ll_show(page, disk->queue->_field);		\
+}									\
+static ssize_t queue_##_name##_store(struct gendisk *disk,		\
+				     const char *page, size_t count)	\
+{									\
+	return queue_dpas_ll_store(page, count, &disk->queue->_field);	\
+}
+
+#define QUEUE_DPAS_SWITCH_ATTR(_name, _field)					\
+static ssize_t queue_##_name##_show(struct gendisk *disk, char *page)		\
+{										\
+	return queue_dpas_int_show(page, disk->queue->_field);			\
+}										\
+static ssize_t queue_##_name##_store(struct gendisk *disk,			\
+				     const char *page, size_t count)		\
+{										\
+	return queue_dpas_switch_store(disk, page, count,			\
+				       &disk->queue->_field);			\
+}
+
+QUEUE_DPAS_INT_ATTR(pas_enabled, pas_enabled);
+QUEUE_DPAS_INT_ATTR(pas_adaptive_enabled, pas_adaptive_enabled);
+QUEUE_DPAS_INT_ATTR(ehp_enabled, ehp_enabled);
+QUEUE_DPAS_INT_ATTR(max_no_lock, max_no_lock);
+QUEUE_DPAS_INT_ATTR(poll_threshold, poll_threshold);
+QUEUE_DPAS_INT_ATTR(logging_enabled, logging_enabled);
+QUEUE_DPAS_INT_ATTR(buffered_poll_enabled, buffered_poll_enabled);
+QUEUE_DPAS_INT_ATTR(buffered_poll_readahead, buffered_poll_readahead);
+QUEUE_DPAS_SWITCH_ATTR(switch_enabled, switch_enabled);
+QUEUE_DPAS_SWITCH_ATTR(switch_param1, switch_param1);
+QUEUE_DPAS_SWITCH_ATTR(switch_param2, switch_param2);
+QUEUE_DPAS_SWITCH_ATTR(switch_param3, switch_param3);
+QUEUE_DPAS_SWITCH_ATTR(switch_param4, switch_param4);
+QUEUE_DPAS_SWITCH_ATTR(switch_param5, switch_param5);
+QUEUE_DPAS_SWITCH_ATTR(switch_param6, switch_param6);
+QUEUE_DPAS_SWITCH_ATTR(switch_param7, switch_param7);
+QUEUE_DPAS_LL_ATTR(heat_up, heat_up);
+QUEUE_DPAS_LL_ATTR(cool_dn, cool_dn);
+QUEUE_DPAS_LL_ATTR(min_dn, min_dn);
+QUEUE_DPAS_LL_ATTR(max_dn, max_dn);
+
+static ssize_t queue_d_init_show(struct gendisk *disk, char *page)
+{
+	return queue_dpas_u32_show(page, disk->queue->d_init);
+}
+
+static ssize_t queue_d_init_store(struct gendisk *disk, const char *page,
+				  size_t count)
+{
+	struct request_queue *q = disk->queue;
+	u32 val;
+	int ret;
+
+	ret = kstrtou32(page, 10, &val);
+	if (ret < 0)
+		return ret;
+	if (val < 100 || val > 99000)
+		return -EINVAL;
+
+	q->d_init = val;
+	queue_dpas_reinit_pas_stats(q, q->div);
+	return count;
+}
+
+static ssize_t queue_up_init_show(struct gendisk *disk, char *page)
+{
+	return queue_dpas_ll_show(page, disk->queue->up_init);
+}
+
+static ssize_t queue_up_init_store(struct gendisk *disk, const char *page,
+				   size_t count)
+{
+	struct request_queue *q = disk->queue;
+	long long val;
+	int ret;
+
+	ret = kstrtoll(page, 10, &val);
+	if (ret < 0)
+		return ret;
+	if (val < 100 || val > 99000)
+		return -EINVAL;
+
+	q->up_init = val;
+	if (q->pas_adaptive_enabled == 1) {
+		q->dn_init = q->up_init * q->updn_ratio;
+		if (q->dn_init > q->max_dn) {
+			q->dn_init = q->max_dn;
+			q->up_init = q->dn_init / q->updn_ratio;
+		} else if (q->dn_init < q->min_dn) {
+			q->dn_init = q->min_dn;
+			q->up_init = q->dn_init / q->updn_ratio;
+		}
+	}
+	queue_dpas_reinit_pas_stats(q, q->div + q->up_init);
+	return count;
+}
+
+static ssize_t queue_dn_init_show(struct gendisk *disk, char *page)
+{
+	return queue_dpas_ll_show(page, disk->queue->dn_init);
+}
+
+static ssize_t queue_dn_init_store(struct gendisk *disk, const char *page,
+				   size_t count)
+{
+	struct request_queue *q = disk->queue;
+	long long val;
+	int ret;
+
+	ret = kstrtoll(page, 10, &val);
+	if (ret < 0)
+		return ret;
+	if (val < 10000 || val > 990000)
+		return -EINVAL;
+
+	q->dn_init = val;
+	if (q->pas_adaptive_enabled == 1) {
+		if (q->dn_init > q->max_dn) {
+			q->dn_init = q->max_dn;
+			q->up_init = q->dn_init / q->updn_ratio;
+		} else if (q->dn_init < q->min_dn) {
+			q->dn_init = q->min_dn;
+			q->up_init = q->dn_init / q->updn_ratio;
+		}
+	}
+	queue_dpas_reinit_pas_stats(q, q->div + q->up_init);
+	return count;
+}
+
+static ssize_t queue_pas_exception_show(struct gendisk *disk, char *page)
+{
+	struct request_queue *q = disk->queue;
+
+	return sysfs_emit(page,
+			  "hybrid_poll=%llu fops=%llu comp_before_sleep=%llu lock_d_c_separate=%llu\n",
+			  q->cnt_rel_hybrid_poll, q->cnt_rel_fops,
+			  q->cnt_rel_comp_before_sleep,
+			  q->cnt_lock_d_c_separate);
+}
+
+static ssize_t queue_pas_exception_store(struct gendisk *disk,
+					 const char *page, size_t count)
+{
+	struct request_queue *q = disk->queue;
+	unsigned int val;
+	int ret;
+
+	ret = kstrtouint(page, 10, &val);
+	if (ret < 0)
+		return ret;
+	if (val) {
+		q->cnt_rel_hybrid_poll = 0;
+		q->cnt_rel_fops = 0;
+		q->cnt_rel_comp_before_sleep = 0;
+		q->cnt_lock_d_c_separate = 0;
+	}
+	return count;
+}
+
+static ssize_t queue_buffered_poll_comm_show(struct gendisk *disk, char *page)
+{
+	return sysfs_emit(page, "%s\n", disk->queue->buffered_poll_comm);
+}
+
+static ssize_t queue_buffered_poll_comm_store(struct gendisk *disk,
+					      const char *page, size_t count)
+{
+	struct request_queue *q = disk->queue;
+	size_t len = strnlen(page, count);
+
+	if (len && page[len - 1] == '\n')
+		len--;
+	if (len >= TASK_COMM_LEN)
+		return -EINVAL;
+
+	memset(q->buffered_poll_comm, 0, sizeof(q->buffered_poll_comm));
+	memcpy(q->buffered_poll_comm, page, len);
+	return count;
+}
+
+static ssize_t queue_buffered_poll_stat_show(struct gendisk *disk, char *page)
+{
+	struct request_queue *q = disk->queue;
+
+	return sysfs_emit(page,
+			  "enabled=%d readahead=%d comm=%s selected=%lld completed=%lld loops=%lld timeout=%lld ra_skip=%lld skip=%lld\n",
+			  q->buffered_poll_enabled, q->buffered_poll_readahead,
+			  q->buffered_poll_comm,
+			  atomic64_read(&q->buffered_poll_selected),
+			  atomic64_read(&q->buffered_poll_completed),
+			  atomic64_read(&q->buffered_poll_loops),
+			  atomic64_read(&q->buffered_poll_timeout),
+			  atomic64_read(&q->buffered_poll_ra_skip),
+			  atomic64_read(&q->buffered_poll_skip));
+}
+
+static ssize_t queue_buffered_poll_reset_show(struct gendisk *disk, char *page)
+{
+	return sysfs_emit(page, "0\n");
+}
+
+static ssize_t queue_buffered_poll_reset_store(struct gendisk *disk,
+					       const char *page, size_t count)
+{
+	struct request_queue *q = disk->queue;
+	unsigned int val;
+	int ret;
+
+	ret = kstrtouint(page, 10, &val);
+	if (ret < 0)
+		return ret;
+	if (!val)
+		return count;
+
+	atomic64_set(&q->buffered_poll_selected, 0);
+	atomic64_set(&q->buffered_poll_completed, 0);
+	atomic64_set(&q->buffered_poll_loops, 0);
+	atomic64_set(&q->buffered_poll_timeout, 0);
+	atomic64_set(&q->buffered_poll_ra_skip, 0);
+	atomic64_set(&q->buffered_poll_skip, 0);
+	return count;
+}
+
+static ssize_t queue_switch_reset_show(struct gendisk *disk, char *page)
+{
+	return sysfs_emit(page, "0\n");
+}
+
+static ssize_t queue_switch_reset_store(struct gendisk *disk,
+					const char *page, size_t count)
+{
+	unsigned int val;
+	int ret;
+
+	ret = kstrtouint(page, 10, &val);
+	if (ret < 0)
+		return ret;
+	if (!val)
+		return count;
+
+	queue_dpas_reset_switch_state(disk->queue);
+	return count;
+}
+
+static ssize_t queue_switch_stat_show(struct gendisk *disk, char *page)
+{
+	int cpu;
+	ssize_t len = 0;
+
+	if (!irq_poll_switch)
+		return sysfs_emit(page, "irq_poll_switch=uninitialized\n");
+
+	for_each_possible_cpu(cpu) {
+		struct blk_switch *sc = per_cpu_ptr(irq_poll_switch, cpu);
+
+		len += sysfs_emit_at(page, len,
+				     "cpu=%d enabled=%d mode=%d param1=%d param2=%d param3=%d param4=%d param5=%d param6=%d param7=%d cp=%llu pas=%llu ol=%llu int=%llu qd=%d\n",
+				     cpu, sc->enabled, sc->mode, sc->param1,
+				     sc->param2, sc->param3, sc->param4,
+				     sc->param5, sc->param6, sc->param7,
+				     sc->cp_tot, sc->pas_tot, sc->ol_tot,
+				     sc->int_tot, sc->qd);
+	}
+	return len;
 }
 
 static ssize_t queue_poll_store(struct gendisk *disk, const char *page,
@@ -457,6 +916,35 @@ QUEUE_RW_ENTRY(queue_nomerges, "nomerges");
 QUEUE_RW_ENTRY(queue_rq_affinity, "rq_affinity");
 QUEUE_RW_ENTRY(queue_poll, "io_poll");
 QUEUE_RW_ENTRY(queue_poll_delay, "io_poll_delay");
+QUEUE_RW_ENTRY(queue_pas_enabled, "pas_enabled");
+QUEUE_RW_ENTRY(queue_pas_adaptive_enabled, "pas_adaptive_enabled");
+QUEUE_RO_ENTRY(queue_switch_stat, "switch_stat");
+QUEUE_RW_ENTRY(queue_switch_reset, "switch_reset");
+QUEUE_RW_ENTRY(queue_switch_param1, "switch_param1");
+QUEUE_RW_ENTRY(queue_switch_param2, "switch_param2");
+QUEUE_RW_ENTRY(queue_switch_param3, "switch_param3");
+QUEUE_RW_ENTRY(queue_switch_param4, "switch_param4");
+QUEUE_RW_ENTRY(queue_switch_param5, "switch_param5");
+QUEUE_RW_ENTRY(queue_switch_param6, "switch_param6");
+QUEUE_RW_ENTRY(queue_switch_param7, "switch_param7");
+QUEUE_RW_ENTRY(queue_switch_enabled, "switch_enabled");
+QUEUE_RW_ENTRY(queue_ehp_enabled, "ehp_enabled");
+QUEUE_RW_ENTRY(queue_max_no_lock, "pas_max_no_lock");
+QUEUE_RW_ENTRY(queue_poll_threshold, "pas_poll_threshold");
+QUEUE_RW_ENTRY(queue_pas_exception, "pas_exception");
+QUEUE_RW_ENTRY(queue_d_init, "pas_d_init");
+QUEUE_RW_ENTRY(queue_up_init, "pas_up_init");
+QUEUE_RW_ENTRY(queue_dn_init, "pas_dn_init");
+QUEUE_RW_ENTRY(queue_heat_up, "pas_heat_up");
+QUEUE_RW_ENTRY(queue_cool_dn, "pas_cool_dn");
+QUEUE_RW_ENTRY(queue_min_dn, "pas_min_dn");
+QUEUE_RW_ENTRY(queue_max_dn, "pas_max_dn");
+QUEUE_RW_ENTRY(queue_logging_enabled, "logging_enabled");
+QUEUE_RW_ENTRY(queue_buffered_poll_enabled, "buffered_poll_enabled");
+QUEUE_RW_ENTRY(queue_buffered_poll_readahead, "buffered_poll_readahead");
+QUEUE_RW_ENTRY(queue_buffered_poll_comm, "buffered_poll_comm");
+QUEUE_RO_ENTRY(queue_buffered_poll_stat, "buffered_poll_stat");
+QUEUE_RW_ENTRY(queue_buffered_poll_reset, "buffered_poll_reset");
 QUEUE_LIM_RW_ENTRY(queue_wc, "write_cache");
 QUEUE_RO_ENTRY(queue_fua, "fua");
 QUEUE_RO_ENTRY(queue_dax, "dax");
@@ -588,6 +1076,35 @@ static struct attribute *queue_attrs[] = {
 	&queue_fua_entry.attr,
 	&queue_dax_entry.attr,
 	&queue_poll_delay_entry.attr,
+	&queue_pas_enabled_entry.attr,
+	&queue_pas_adaptive_enabled_entry.attr,
+	&queue_switch_stat_entry.attr,
+	&queue_switch_reset_entry.attr,
+	&queue_switch_param1_entry.attr,
+	&queue_switch_param2_entry.attr,
+	&queue_switch_param3_entry.attr,
+	&queue_switch_param4_entry.attr,
+	&queue_switch_param5_entry.attr,
+	&queue_switch_param6_entry.attr,
+	&queue_switch_param7_entry.attr,
+	&queue_switch_enabled_entry.attr,
+	&queue_ehp_enabled_entry.attr,
+	&queue_max_no_lock_entry.attr,
+	&queue_poll_threshold_entry.attr,
+	&queue_pas_exception_entry.attr,
+	&queue_d_init_entry.attr,
+	&queue_up_init_entry.attr,
+	&queue_dn_init_entry.attr,
+	&queue_heat_up_entry.attr,
+	&queue_cool_dn_entry.attr,
+	&queue_min_dn_entry.attr,
+	&queue_max_dn_entry.attr,
+	&queue_logging_enabled_entry.attr,
+	&queue_buffered_poll_enabled_entry.attr,
+	&queue_buffered_poll_readahead_entry.attr,
+	&queue_buffered_poll_comm_entry.attr,
+	&queue_buffered_poll_stat_entry.attr,
+	&queue_buffered_poll_reset_entry.attr,
 	&queue_virt_boundary_mask_entry.attr,
 	&queue_dma_alignment_entry.attr,
 	NULL,

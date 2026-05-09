@@ -20,6 +20,7 @@ struct nullb_cmd {
 	bool fake_timeout;
 	struct nullb_queue *nq;
 	struct hrtimer timer;
+	ktime_t poll_complete_time;
 };
 
 struct nullb_queue {

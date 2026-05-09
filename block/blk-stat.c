@@ -22,6 +22,7 @@ void blk_rq_stat_init(struct blk_rq_stat *stat)
 	stat->min = -1ULL;
 	stat->max = stat->nr_samples = stat->mean = 0;
 	stat->batch = 0;
+	stat->busy_state = false;
 }
 
 /* src is a per-cpu stat, mean isn't initialized */
@@ -85,9 +86,20 @@ static void blk_stat_timer_fn(struct timer_list *t)
 
 	for_each_online_cpu(cpu) {
 		struct blk_rq_stat *cpu_stat;
+		struct blk_rq_stat *percpu_stat;
 
 		cpu_stat = per_cpu_ptr(cb->cpu_stat, cpu);
+		percpu_stat = per_cpu_ptr(cb->percpu_stat, cpu);
 		for (bucket = 0; bucket < cb->buckets; bucket++) {
+			if (cpu_stat[bucket].nr_samples) {
+				percpu_stat[bucket].nr_samples =
+					cpu_stat[bucket].nr_samples;
+				percpu_stat[bucket].min = cpu_stat[bucket].min;
+				percpu_stat[bucket].max = cpu_stat[bucket].max;
+				percpu_stat[bucket].mean =
+					div_u64(cpu_stat[bucket].batch,
+						cpu_stat[bucket].nr_samples);
+			}
 			blk_rq_stat_sum(&cb->stat[bucket], &cpu_stat[bucket]);
 			blk_rq_stat_init(&cpu_stat[bucket]);
 		}
@@ -120,6 +132,14 @@ blk_stat_alloc_callback(void (*timer_fn)(struct blk_stat_callback *),
 		kfree(cb);
 		return NULL;
 	}
+	cb->percpu_stat = __alloc_percpu(buckets * sizeof(struct blk_rq_stat),
+					 __alignof__(struct blk_rq_stat));
+	if (!cb->percpu_stat) {
+		free_percpu(cb->cpu_stat);
+		kfree(cb->stat);
+		kfree(cb);
+		return NULL;
+	}
 
 	cb->timer_fn = timer_fn;
 	cb->bucket_fn = bucket_fn;
@@ -139,10 +159,14 @@ void blk_stat_add_callback(struct request_queue *q,
 
 	for_each_possible_cpu(cpu) {
 		struct blk_rq_stat *cpu_stat;
+		struct blk_rq_stat *percpu_stat;
 
 		cpu_stat = per_cpu_ptr(cb->cpu_stat, cpu);
-		for (bucket = 0; bucket < cb->buckets; bucket++)
+		percpu_stat = per_cpu_ptr(cb->percpu_stat, cpu);
+		for (bucket = 0; bucket < cb->buckets; bucket++) {
 			blk_rq_stat_init(&cpu_stat[bucket]);
+			blk_rq_stat_init(&percpu_stat[bucket]);
+		}
 	}
 
 	spin_lock_irqsave(&q->stats->lock, flags);
@@ -171,6 +195,7 @@ static void blk_stat_free_callback_rcu(struct rcu_head *head)
 
 	cb = container_of(head, struct blk_stat_callback, rcu);
 	free_percpu(cb->cpu_stat);
+	free_percpu(cb->percpu_stat);
 	kfree(cb->stat);
 	kfree(cb);
 }

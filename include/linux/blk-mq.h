@@ -83,6 +83,8 @@ enum {
 			((__force req_flags_t)(1 << __RQF_ZONE_WRITE_PLUGGING))
 #define RQF_TIMED_OUT		((__force req_flags_t)(1 << __RQF_TIMED_OUT))
 #define RQF_RESV		((__force req_flags_t)(1 << __RQF_RESV))
+/* already slept for hybrid poll */
+#define RQF_MQ_POLL_SLEPT	((__force req_flags_t)(1 << 20))
 
 /* flags that prevent us from merging requests: */
 #define RQF_NOMERGE_FLAGS \
@@ -210,9 +212,61 @@ struct request {
 	rq_end_io_fn *end_io;
 	void *end_io_data;
 
+	int cpu_num;
+	u8 dur_cnt;
+	u64 dur;
+	u64 log_real_sleep_time;
+
 	ANDROID_KABI_RESERVE(1);
 	ANDROID_OEM_DATA(1);
 };
+
+struct blk_rq_pas_stat {
+	u64 dur;
+	long long adj;
+	long long up;
+	long long dn;
+	u8 sr_pnlt;
+	u8 sr_last;
+	u8 update_req;
+	u8 dur_cnt;
+	u8 dur_cnt_checked;
+};
+
+struct blk_switch {
+	int enabled;
+	int mode;
+	int ehpmode[17];
+	int cp_cnt;
+	int pas_cnt;
+	int ol_cnt;
+	int int_cnt;
+	int N_POLL;
+	int N_INT;
+	int N_PAS;
+	int param1;
+	int param2;
+	int param3;
+	int param4;
+	int param5;
+	int param6;
+	int param7;
+	int ioctr;
+
+	int qd;
+	int qd_sum;
+	int tf;
+
+	spinlock_t qd_lock;
+	atomic_t lock;
+
+	u64 cp_tot;
+	u64 pas_tot;
+	u64 ol_tot;
+	u64 int_tot;
+};
+
+extern struct blk_switch __percpu *irq_poll_switch;
 
 static inline enum req_op req_op(const struct request *req)
 {

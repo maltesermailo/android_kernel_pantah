@@ -33,6 +33,11 @@ struct blk_stat_callback {
 	struct blk_rq_stat __percpu *cpu_stat;
 
 	/**
+	 * @percpu_stat: Snapshot of the latest per-cpu statistics window.
+	 */
+	struct blk_rq_stat __percpu *percpu_stat;
+
+	/**
 	 * @bucket_fn: Given a request, returns which statistics bucket it
 	 * should be accounted under. Return -1 for no bucket for this
 	 * request.
