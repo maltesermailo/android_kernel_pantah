@@ -196,6 +196,24 @@
       "parentUuid": "3a8f92eb_c00f3ec0",
       "revId": "f393bebdd3097b25b477075b23e06795659a2efc",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b498279_998e3f68",
+        "filename": "arch/x86/kvm/pkvm/pkvm.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1645,
+      "author": {
+        "id": 2022314
+      },
+      "writtenOn": "2026-05-09T10:09:28Z",
+      "side": 1,
+      "message": "I see. So seems like we indeed should enforce load_mmu_pgd here. (Or alternatively we could check if the host has loaded it via the PV call, and return an error otherwise. The \"advantage\" would be that we spare the extra redundant VMWRITE for setting EPTP before running the vCPU first time, but the disadvantage would be more complicated logic.)\n\nBTW could you point at where is that statement that no VMWRITE to required VMCS field will result in unpredictable behavior? (I find it not easy to navigate in the SDM. :))",
+      "parentUuid": "48758e5c_56de6fa6",
+      "revId": "f393bebdd3097b25b477075b23e06795659a2efc",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
