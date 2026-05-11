@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e453a64_5d0a51d9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-11T22:34:43Z",
+      "side": 1,
+      "message": "Please fix this WARNING reported by KernelCommit: Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesour...\n\nCherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/d53adc244fbf965d7efeefb278ff8f2664bbe20e) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003dd53adc244fbf965d7efeefb278ff8f2664bbe20e).\n\n```\n--- Original: https://android.googlesource.com/kernel/common/+/d53adc244fbf965d7efeefb278ff8f2664bbe20e\n+++ Cherry Pick: https://android.googlesource.com/kernel/common/+/bcbdb2166f6a37513c96b959627faeb1744ef889\n@@ -23,7 +23,7 @@\n --- a/drivers/gpu/drm/ttm/ttm_pool.c\n +++ b/drivers/gpu/drm/ttm/ttm_pool.c\n @@  @@\n- #include \u003cdrm/ttm/ttm_bo.h\u003e\n+ ANDROID_KABI_DECLONLY(trace_eval_map);\n  \n  #include \"ttm_module.h\"\n +#include \"ttm_pool_internal.h\"\n@@ -31,8 +31,8 @@\n  #ifdef CONFIG_FAULT_INJECTION\n  #include \u003clinux/fault-inject.h\u003e\n @@  @@ static struct page *ttm_pool_alloc_page(struct ttm_pool *pool, gfp_t gfp_flags,\n- \t\tgfp_flags |\u003d __GFP_NOMEMALLOC | __GFP_NORETRY | __GFP_NOWARN |\n- \t\t\t__GFP_THISNODE;\n+ \n+ \ttrace_android_vh_ttm_pool_alloc_page_flags(order, \u0026gfp_flags);\n  \n -\tif (!pool-\u003euse_dma_alloc) {\n +\tif (!ttm_pool_uses_dma_alloc(pool)) {\n```\n\nDifference between automated attempt and current commit.\n\n```\ndiff --git a/drivers/gpu/drm/ttm/ttm_pool.c b/drivers/gpu/drm/ttm/ttm_pool.c\n--- a/drivers/gpu/drm/ttm/ttm_pool.c\n+++ b/drivers/gpu/drm/ttm/ttm_pool.c\n@@  @@ static struct page *ttm_pool_alloc_page(struct ttm_pool *pool, gfp_t gfp_flags,\n \t\tgfp_flags |\u003d __GFP_NOMEMALLOC | __GFP_NORETRY | __GFP_NOWARN |\n \t\t\t__GFP_THISNODE;\n \n-\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD\n \ttrace_android_vh_ttm_pool_alloc_page_flags(order, \u0026gfp_flags);\n \n-\tif (!pool-\u003euse_dma_alloc) {\n-\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n \tif (!ttm_pool_uses_dma_alloc(pool)) {\n-\u003e\u003e\u003e\u003e\u003e\u003e\u003e d53adc244 (drm/ttm: Add getter for some pool properties)\n \t\tp \u003d alloc_pages_node(pool-\u003enid, gfp_flags, order);\n \t\tif (p)\n \t\t\tp-\u003eprivate \u003d order;\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
+      "revId": "bcbdb2166f6a37513c96b959627faeb1744ef889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d837a8ea_5a39627d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1869395
+      },
+      "writtenOn": "2026-05-11T22:34:43Z",
+      "side": 1,
+      "message": "This should be tagged as a BACKPORT since it required mechanical conflict resolution.",
+      "revId": "bcbdb2166f6a37513c96b959627faeb1744ef889",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
