@@ -61,6 +61,9 @@ struct pkvm_hyp_vm;
 int kvm_iommu_force_free_domain(pkvm_handle_t domain_id, struct pkvm_hyp_vm *vm);
 int kvm_iommu_id_to_token(pkvm_handle_t smmu_id, u64 *out_token);
 
+struct kvm_hyp_iommu_domain *kvm_iommu_domain_get(pkvm_handle_t id);
+void kvm_iommu_domain_put(pkvm_handle_t id);
+
 struct kvm_iommu_ops {
 	int (*init)(void);
 	int (*alloc_domain)(struct kvm_hyp_iommu_domain *domain, int type);

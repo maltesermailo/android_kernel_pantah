@@ -359,6 +359,8 @@ const struct pkvm_module_ops module_ops = {
 	.device_register_power_lock = pkvm_device_register_power_lock,
 	.register_guest_trng_ops = __register_guest_trng_ops,
 	.request_hyp_alloc = kvm_iommu_request_hyp_alloc,
+	.iommu_domain_get = kvm_iommu_domain_get,
+	.iommu_domain_put = kvm_iommu_domain_put,
 };
 
 static void *pkvm_module_hyp_va(struct pkvm_el2_module *mod, void *kern_va)

@@ -323,8 +323,8 @@ struct pkvm_module_ops {
 	ANDROID_KABI_USE(4, int (*request_hyp_alloc)(void));
 	ANDROID_KABI_USE(5, int (*device_register_power_lock)(u64 phys, void *cookie,
 					     int(*cb)(void *cookie, bool lock)));
-	ANDROID_KABI_RESERVE(6);
-	ANDROID_KABI_RESERVE(7);
+	ANDROID_KABI_USE(6, struct kvm_hyp_iommu_domain *(*iommu_domain_get)(pkvm_handle_t id));
+	ANDROID_KABI_USE(7, void (*iommu_domain_put)(pkvm_handle_t id));
 	ANDROID_KABI_RESERVE(8);
 	ANDROID_KABI_RESERVE(9);
 	ANDROID_KABI_RESERVE(10);

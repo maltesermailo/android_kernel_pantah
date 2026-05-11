@@ -437,6 +437,26 @@ static void domain_put(struct kvm_hyp_iommu_domain *domain)
 	WARN_ON(hyp_vcpu && (domain->vm != pkvm_hyp_vcpu_to_hyp_vm(hyp_vcpu)));
 }
 
+struct kvm_hyp_iommu_domain *kvm_iommu_domain_get(pkvm_handle_t id)
+{
+	struct kvm_hyp_iommu_domain *domain = handle_to_domain(id);
+
+	if (!domain || domain_get(domain))
+		return NULL;
+
+	return domain;
+}
+
+void kvm_iommu_domain_put(pkvm_handle_t id)
+{
+	struct kvm_hyp_iommu_domain *domain = handle_to_domain(id);
+
+	if (!domain)
+		return;
+
+	domain_put(domain);
+}
+
 static int kvm_iommu_init_atomic_pool(struct kvm_hyp_memcache *atomic_mc)
 {
 	int ret;
