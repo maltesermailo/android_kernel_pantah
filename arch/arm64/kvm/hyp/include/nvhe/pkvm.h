@@ -101,6 +101,25 @@ pkvm_hyp_vcpu_to_hyp_vm(struct pkvm_hyp_vcpu *hyp_vcpu)
 	return container_of(hyp_vcpu->vcpu.kvm, struct pkvm_hyp_vm, kvm);
 }
 
+/*
+ * Return any registered hyp vCPU of @hyp_vm, or NULL if none exists yet.
+ * Useful for teardown paths that need a vCPU only as a vehicle for
+ * VM-level state.
+ */
+static inline struct pkvm_hyp_vcpu *
+pkvm_any_hyp_vcpu(struct pkvm_hyp_vm *hyp_vm)
+{
+	unsigned int i;
+
+	for (i = 0; i < hyp_vm->kvm.created_vcpus; i++) {
+		struct pkvm_hyp_vcpu *hyp_vcpu = READ_ONCE(hyp_vm->vcpus[i]);
+
+		if (hyp_vcpu)
+			return hyp_vcpu;
+	}
+	return NULL;
+}
+
 static inline bool pkvm_hyp_vcpu_is_protected(struct pkvm_hyp_vcpu *hyp_vcpu)
 {
 	return vcpu_is_protected(&hyp_vcpu->vcpu);
