@@ -490,7 +490,8 @@ int kvm_iommu_force_free_domain(pkvm_handle_t domain_id, struct pkvm_hyp_vm *vm)
 	int ret = 0;
 
 	BUG_ON(!domain);
-	cur_context = vm->vcpus[0];
+	cur_context = pkvm_any_hyp_vcpu(vm);
+	WARN_ON(!cur_context);
 
 	hyp_spin_lock(&kvm_iommu_domain_lock);
 	kvm_iommu_ops = domain->driver;
