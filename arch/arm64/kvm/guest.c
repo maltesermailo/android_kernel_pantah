@@ -29,10 +29,18 @@
 
 #include "trace.h"
 
+<<<<<<< HEAD   (9c2d90161b452accd157e6f399c544c791c2dede Merge 6.12.82 into android16-6.12-lts)
 const struct _kvm_stats_desc kvm_vm_stats_desc[] = {
 	KVM_GENERIC_VM_STATS(),
 	STATS_DESC_ICOUNTER(VM, protected_hyp_mem),
 	STATS_DESC_ICOUNTER(VM, protected_shared_mem),
+||||||| BASE   (d75ae3350fe8a29588a3f489952d06928cb85675 Linux 6.12.82)
+const struct _kvm_stats_desc kvm_vm_stats_desc[] = {
+	KVM_GENERIC_VM_STATS()
+=======
+const struct kvm_stats_desc kvm_vm_stats_desc[] = {
+	KVM_GENERIC_VM_STATS()
+>>>>>>> BRANCH (eefc95626b5cb02ea6268d1ae58237768004a60d Linux 6.12.83)
 };
 
 const struct kvm_stats_header kvm_vm_stats_header = {
@@ -44,7 +52,7 @@ const struct kvm_stats_header kvm_vm_stats_header = {
 		       sizeof(kvm_vm_stats_desc),
 };
 
-const struct _kvm_stats_desc kvm_vcpu_stats_desc[] = {
+const struct kvm_stats_desc kvm_vcpu_stats_desc[] = {
 	KVM_GENERIC_VCPU_STATS(),
 	STATS_DESC_COUNTER(VCPU, hvc_exit_stat),
 	STATS_DESC_COUNTER(VCPU, wfe_exit_stat),
