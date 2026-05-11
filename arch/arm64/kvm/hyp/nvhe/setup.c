@@ -41,6 +41,11 @@ static void *ffa_proxy_pages;
 static struct kvm_pgtable_mm_ops pkvm_pgtable_mm_ops;
 static struct hyp_pool hpool;
 
+u64 pkvm_pgt_available(void)
+{
+	return hyp_pool_free_pages(&hpool);
+}
+
 static int divide_memory_pool(void *virt, unsigned long size)
 {
 	unsigned long nr_pages;
