@@ -747,6 +747,21 @@ static __latent_entropy int dup_mmap(struct mm_struct *mm,
 		} else if (anon_vma_fork(tmp, mpnt))
 			goto fail_nomem_anon_vma_fork;
 		vm_flags_clear(tmp, VM_LOCKED_MASK);
+		/*
+		 * Copy/update hugetlb private vma information.
+		 */
+		if (is_vm_hugetlb_page(tmp))
+			hugetlb_dup_vma_private(tmp);
+
+		/* Link the vma into the MT */
+		if (vma_iter_bulk_store(&vmi, tmp))
+			goto fail_nomem_vmi_store;
+
+		mm->map_count++;
+
+		if (tmp->vm_ops && tmp->vm_ops->open)
+			tmp->vm_ops->open(tmp);
+
 		file = tmp->vm_file;
 		if (file) {
 			struct address_space *mapping = file->f_mapping;
@@ -763,6 +778,7 @@ static __latent_entropy int dup_mmap(struct mm_struct *mm,
 			i_mmap_unlock_write(mapping);
 		}
 
+<<<<<<< HEAD   (da1e270dc88334bbfdb8364a0ceb69a43f8c3fc4 Merge 6.6.133 into android15-6.6-lts)
 		/*
 		 * Copy/update hugetlb private vma information.
 		 */
@@ -775,14 +791,37 @@ static __latent_entropy int dup_mmap(struct mm_struct *mm,
 		vma_iter_bulk_store(&vmi, tmp);
 
 		mm->map_count++;
+||||||| BASE   (80de0a9581338406f591d505f9545244c7a99b68 Linux 6.6.133)
+		/*
+		 * Copy/update hugetlb private vma information.
+		 */
+		if (is_vm_hugetlb_page(tmp))
+			hugetlb_dup_vma_private(tmp);
+
+		/* Link the vma into the MT */
+		if (vma_iter_bulk_store(&vmi, tmp))
+			goto fail_nomem_vmi_store;
+
+		mm->map_count++;
+=======
+>>>>>>> BRANCH (8cee53b8eaeb5d1f7c97b7f2381653ed00ffc26b Linux 6.6.134)
 		if (!(tmp->vm_flags & VM_WIPEONFORK))
 			retval = copy_page_range(tmp, mpnt);
 
+<<<<<<< HEAD   (da1e270dc88334bbfdb8364a0ceb69a43f8c3fc4 Merge 6.6.133 into android15-6.6-lts)
 		if (tmp->vm_ops && tmp->vm_ops->open)
 			tmp->vm_ops->open(tmp);
 
 		if (retval) {
 			mpnt = vma_next(&vmi);
+||||||| BASE   (80de0a9581338406f591d505f9545244c7a99b68 Linux 6.6.133)
+		if (tmp->vm_ops && tmp->vm_ops->open)
+			tmp->vm_ops->open(tmp);
+
+		if (retval)
+=======
+		if (retval)
+>>>>>>> BRANCH (8cee53b8eaeb5d1f7c97b7f2381653ed00ffc26b Linux 6.6.134)
 			goto loop_out;
 		}
 	}
