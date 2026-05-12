@@ -16,7 +16,7 @@
  *
  */
 
-/* #define DEBUG */
+#define DEBUG
 /* #define VERBOSE_DEBUG */
 
 #include <linux/module.h>
@@ -395,6 +395,9 @@ static void acc_complete_in(struct usb_ep *ep, struct usb_request *req)
 		pr_debug("acc_complete_in set disconnected");
 		acc_set_disconnected(dev);
 	}
+
+	if (req->zero)
+		pr_debug("acc_complete_in: ZLP sent\n");
 
 	req_put(dev, &dev->tx_idle, req);
 
@@ -824,6 +827,8 @@ static ssize_t acc_write(struct file *fp, const char __user *buf,
 			 * maxpacket size then send a zero length packet(ZLP).
 			*/
 			req->zero = ((xfer % dev->ep_in->maxpacket) == 0);
+			if (req->zero)
+				pr_debug("acc_write: queuing ZLP for xfer %u\n", (unsigned)xfer);
 		}
 		if (copy_from_user(req->buf, buf, xfer)) {
 			r = -EFAULT;
