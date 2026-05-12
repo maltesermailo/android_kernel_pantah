@@ -629,6 +629,15 @@ struct io_kiocb {
 
 		/* stores selected buf, valid IFF REQ_F_BUFFER_SELECTED is set */
 		struct io_buffer	*kbuf;
+
+		/*
+		 * ANDROID
+		 * This buf_list variable was removed in 6.12.81, but needs to remain to keep
+		 * gendwarfsyms from crashing.
+		 * DO NOT TOUCH OR USE!
+		 * See Bug 512370883 for more details if you are curious.
+		 */
+		struct io_buffer_list   *buf_list;
 	};
 
 	union {
