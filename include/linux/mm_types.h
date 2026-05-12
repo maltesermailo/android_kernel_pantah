@@ -795,6 +795,7 @@ struct mm_struct {
 #endif /* CONFIG_LRU_GEN */
 
 		ANDROID_KABI_USE(1, struct mm_struct_abi_extend *abi_extend);
+		ANDROID_KABI_RESERVE(2);
 	} __randomize_layout;
 
 	/*
