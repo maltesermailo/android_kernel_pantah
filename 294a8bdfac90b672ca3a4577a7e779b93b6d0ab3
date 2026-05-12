@@ -16,6 +16,24 @@
       "message": "Please fix this WARNING reported by KernelCommit: Cherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesour...\n\nCherry pick is not clean. Checked against UPSTREAM.\nUPSTREAM commit: [googlesource](https://android.googlesource.com/kernel/common/+/402b3a865090578f9245115e17ee230e01daf60e) [kernel.org](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id\u003d402b3a865090578f9245115e17ee230e01daf60e).\n\n```\n--- Original: https://android.googlesource.com/kernel/common/+/402b3a865090578f9245115e17ee230e01daf60e\n+++ Cherry Pick: https://android.googlesource.com/kernel/common/+/294a8bdfac90b672ca3a4577a7e779b93b6d0ab3\n@@ -2,9 +2,9 @@\n --- a/drivers/gpu/drm/ttm/ttm_bo.c\n +++ b/drivers/gpu/drm/ttm/ttm_bo.c\n @@  @@\n+ \n  #define pr_fmt(fmt) \"[TTM] \" fmt\n  \n- #include \u003cdrm/drm_print.h\u003e\n +#include \u003cdrm/ttm/ttm_allocation.h\u003e\n  #include \u003cdrm/ttm/ttm_bo.h\u003e\n  #include \u003cdrm/ttm/ttm_placement.h\u003e\n```\n\nDifference between automated attempt and current commit.\n\n```\ndiff --git a/drivers/gpu/drm/ttm/ttm_bo.c b/drivers/gpu/drm/ttm/ttm_bo.c\n--- a/drivers/gpu/drm/ttm/ttm_bo.c\n+++ b/drivers/gpu/drm/ttm/ttm_bo.c\n@@  @@\n \n #define pr_fmt(fmt) \"[TTM] \" fmt\n \n-\u003c\u003c\u003c\u003c\u003c\u003c\u003c HEAD\n-\u003d\u003d\u003d\u003d\u003d\u003d\u003d\n-#include \u003cdrm/drm_print.h\u003e\n #include \u003cdrm/ttm/ttm_allocation.h\u003e\n-\u003e\u003e\u003e\u003e\u003e\u003e\u003e 402b3a865 (drm/ttm: Add an allocation flag to propagate -ENOSPC on OOM)\n #include \u003cdrm/ttm/ttm_bo.h\u003e\n #include \u003cdrm/ttm/ttm_placement.h\u003e\n #include \u003cdrm/ttm/ttm_tt.h\u003e\n```\n\nPlease refer to the contribution guidelines for details:\nhttps://android.googlesource.com/kernel/common/+/refs/heads/android-mainline/README.md",
       "revId": "294a8bdfac90b672ca3a4577a7e779b93b6d0ab3",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4542d2e0_e81922ab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3953550
+      },
+      "writtenOn": "2026-05-12T04:24:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "592ff5d5_c20a6632",
+      "revId": "294a8bdfac90b672ca3a4577a7e779b93b6d0ab3",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
