@@ -252,8 +252,14 @@ int libbpf_ensure_mem(void **data, size_t *cap_cnt, size_t elem_sz, size_t need_
 
 static void *btf_add_type_offs_mem(struct btf *btf, size_t add_cnt)
 {
-	return libbpf_add_mem((void **)&btf->type_offs, &btf->type_offs_cap, sizeof(__u32),
-			      btf->nr_types, BTF_MAX_NR_TYPES, add_cnt);
+	void *temp = btf->type_offs;
+	void *p;
+
+	p = libbpf_add_mem(&temp, &btf->type_offs_cap, sizeof(__u32),
+			   btf->nr_types, BTF_MAX_NR_TYPES, add_cnt);
+	if (p)
+		btf->type_offs = temp;
+	return p;
 }
 
 static int btf_add_type_idx_entry(struct btf *btf, __u32 type_off)
