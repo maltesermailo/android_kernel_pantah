@@ -3,7 +3,7 @@
 
 . "$(cd "$(dirname "$0")" && pwd)"/test_common.sh
 
-TID="generic_02"
+TID="generic_01"
 ERR_CODE=0
 
 if ! _have_program bpftrace; then
@@ -14,9 +14,9 @@ if ! _have_program fio; then
 	exit "$UBLK_SKIP_CODE"
 fi
 
-_prep_test "null" "sequential io order for MQ"
+_prep_test "null" "sequential io order"
 
-dev_id=$(_add_ublk_dev -t null -q 2)
+dev_id=$(_add_ublk_dev -t null)
 _check_add_dev $TID $?
 
 dev_t=$(_get_disk_dev_t "$dev_id")
