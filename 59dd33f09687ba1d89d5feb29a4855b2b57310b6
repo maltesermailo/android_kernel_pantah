@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ee04314_7881c77d",
+        "filename": "mm/compaction.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1217,
+      "author": {
+        "id": 1275554
+      },
+      "writtenOn": "2026-05-12T18:38:18Z",
+      "side": 1,
+      "message": "Do you keep using the page instead of folio?\n\nMaybe, folio_test_anon and folio_nr_pages?",
+      "range": {
+        "startLine": 1217,
+        "startChar": 7,
+        "endLine": 1217,
+        "endChar": 15
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ee799708_de25dfe5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/compaction.c",
+              "range": {
+                "startLine": 1217,
+                "startChar": 0,
+                "endLine": 1218,
+                "endChar": 0
+              },
+              "replacement": "\t\tif (!folio_test_anon(folio))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "59dd33f09687ba1d89d5feb29a4855b2b57310b6",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
