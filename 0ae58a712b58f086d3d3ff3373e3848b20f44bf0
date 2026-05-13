@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2b9cb56_74f96520",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 1811,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-05-13T12:59:10Z",
+      "side": 1,
+      "message": "Ha, what is the guest supposed to do about this?",
+      "range": {
+        "startLine": 1811,
+        "startChar": 8,
+        "endLine": 1811,
+        "endChar": 21
+      },
+      "revId": "0ae58a712b58f086d3d3ff3373e3848b20f44bf0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dfa9110_47e28644",
+        "filename": "arch/arm64/kvm/hyp/nvhe/pkvm.c",
+        "patchSetId": 3
+      },
+      "lineNbr": 2060,
+      "author": {
+        "id": 1572468
+      },
+      "writtenOn": "2026-05-13T12:59:10Z",
+      "side": 1,
+      "message": "Hmm, this will adjust the guest ELR in an attempt to re-issue the call but I\u0027m not sure that\u0027s correct for a trapped SMC (compared to an HVC) where I think ELR will point at the SMC instruction already.",
+      "range": {
+        "startLine": 2060,
+        "startChar": 6,
+        "endLine": 2060,
+        "endChar": 26
+      },
+      "revId": "0ae58a712b58f086d3d3ff3373e3848b20f44bf0",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
