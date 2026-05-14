@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa099da5_f13c2a53",
+        "filename": "mm/filemap.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2590,
+      "author": {
+        "id": 1157738
+      },
+      "writtenOn": "2026-05-14T04:36:27Z",
+      "side": 1,
+      "message": "You need to add `EXPORT_SYMBOL_GPL(_trace_android_vh_filemap_alloc_folio);`, otherwise the build is failing because modules can\u0027t find this symbol.\n\nAlso you need to add `_trace_android_vh_filemap_alloc_folio` symbol into your symbols list in the last patch.",
+      "fixSuggestions": [
+        {
+          "fixId": "320cb8bc_a306a236",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "mm/filemap.c",
+              "range": {
+                "startLine": 1,
+                "startChar": 0,
+                "endLine": 1,
+                "endChar": 0
+              },
+              "replacement": "EXPORT_SYMBOL_GPL(_trace_android_vh_filemap_alloc_folio);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "b9c29f468f03055fed3b0c8e92923147553e1f67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
