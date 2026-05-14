@@ -52,6 +52,24 @@
       "parentUuid": "fa099da5_f13c2a53",
       "revId": "b9c29f468f03055fed3b0c8e92923147553e1f67",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d12424f1_e26a63d5",
+        "filename": "mm/filemap.c",
+        "patchSetId": 9
+      },
+      "lineNbr": 2590,
+      "author": {
+        "id": 4118894
+      },
+      "writtenOn": "2026-05-14T07:26:22Z",
+      "side": 1,
+      "message": "Since I don\u0027t have permission to access login.corp.google.com, I can only guess that the Presubmit test failure is related to _trace_android_vh_filemap_alloc_folio.\nHowever, not exporting this function symbol shouldn\u0027t cause the Presubmit test to fail. The only possible reason is that I didn\u0027t put its implementation in the #else branch of #ifdef CONFIG_NUMA (this is how the function is declared in the header file).\nI have corrected this. Please help me re-vote and trigger the Presubmit test.",
+      "parentUuid": "500daadb_e1b72af6",
+      "revId": "b9c29f468f03055fed3b0c8e92923147553e1f67",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
