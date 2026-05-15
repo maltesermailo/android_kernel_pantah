@@ -1,5 +1,5 @@
 DEFCONFIG=gki_defconfig
-POST_DEFCONFIG_CMDS="check_defconfig && update_kprobes_config"
+POST_DEFCONFIG_CMDS="update_kprobes_config"
 function update_kprobes_config() {
     ${KERNEL_DIR}/scripts/config --file ${OUT_DIR}/.config \
          -d LTO \
